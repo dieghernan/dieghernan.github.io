@@ -1,9 +1,9 @@
 ---
-title: TextWatch Clima <i class="far fa-star"></i>
-subtitle: A Pebble (RIP) project
+title: TextWatch Clima
+subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 date: 2017-02-16
 tags: [project,pebble,watchface,javascript,C]
-header-img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
+header_img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
 project_links:
     - url: https://github.com/dieghernan/TextWatchClima
       icon: fab fa-github
@@ -11,15 +11,19 @@ project_links:
 permalink: /TextWatchClima/
 ---
 
+**Project discontinued** due to the shutdown of Pebble.
+{: .alert .alert-danger .p-3 .mx-2 mb-3}
+
 **TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
 
 ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
 
 **Available for all the Classic, Time and Pebble 2 models**
 
-#### [Download from Pebble Appstore](https://apps.getpebble.com/en_US/application/58a94da90dfc32d35b0002f8)
+#### [Download from Rebble Appstore](https://apps.rebble.io/en_US/application/58a94da90dfc32d35b0002f8?section=watchfaces)
 
 ## Features
+
 * Exact hour in natural language
 * Autofit to screen
 
@@ -46,13 +50,11 @@ permalink: /TextWatchClima/
  * Battery bar display
  * Weather: Current conditions on °c or °f.
  * Night theme displayed between sunset and sunrise
- * On Bluetooth disconnected displays ![BTDis](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/BTDisconnectIcon.png)
- * On GPS requested but disconnected displays ![GPSDis](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/GPSDisconnectIcon.png)
  * Choose your weather provider:
-    * [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API Key required (at this moment)_
-    * [Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)
-    * [OpenWeatherMap](https://openweathermap.org/)
- * Implementation of [pmkey.xyz](https://www.pmkey.xyz)
+    * **Yahoo** _No API Key required (at this moment)_
+    * **Wunderground*](https://www.wunderground.com/?apiref=fb6856330e74c168)**
+    * **OpenWeatherMap*](https://openweathermap.org/)**
+ * **Implementation of [pmkey.xyz](https://www.pmkey.xyz)**
  
  ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
  
@@ -67,16 +69,8 @@ permalink: /TextWatchClima/
 ### Fonts: 
  * [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to regular alphabet, instead of Unicode values.
  * Custom font for icons created via [Fontastic](http://fontastic.me/).
- * [Gotham Fonts](http://fontsgeek.com/search?q=gotham) downloaded from [fontsgeek.com](http://fontsgeek.com)
+ * Gotham Fonts downloaded from [fontsgeek.com](http://fontsgeek.com)
   
-### Weather providers  
-
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png"></a>
-
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" ></a>
-
-[OpenWeatherMap.org](https://openweathermap.org/)
-
 ### Others
 
 * [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
