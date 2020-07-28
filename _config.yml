@@ -24,7 +24,8 @@ algolia:
   files_to_exclude:       
     - _layouts/*.html
     - _includes/*.html
-    - oldcontent/*
+    - oldcontent/*.html
+    - oldcontent/*.md
   extensions_to_index:     
     - html
     - md
@@ -185,6 +186,7 @@ exclude:
   - README.md
   - Gemfile
   - vendor
+  - oldcontent
 
 include:
  - _pages
