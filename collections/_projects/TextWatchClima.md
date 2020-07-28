@@ -20,7 +20,8 @@ permalink: /TextWatchClima/
 
 **Available for all the Classic, Time and Pebble 2 models**
 
-#### [Download from Rebble Appstore](https://apps.rebble.io/en_US/application/58a94da90dfc32d35b0002f8?section=watchfaces)
+[Download from Rebble Appstore](https://apps.rebble.io/en_US/application/58a94da90dfc32d35b0002f8?section=watchfaces)
+{: .btn .btn-primary .text-center }
 
 ## Features
 
@@ -84,4 +85,4 @@ permalink: /TextWatchClima/
 Developed under license [MIT](https://github.com/dieghernan/TextWatchES_Weather/blob/master/MIT%20License).
 
 
-#### Made in Madrid, Spain
+#### Made in Madrid, Spain ❤️
