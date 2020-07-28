@@ -63,11 +63,11 @@ permalink: /TextWatchClima/
  ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
  
 ## Next developments
--  [x] Fuzzy time
--  [x] Battery
--  [x] Option for animations
--  [x] Option for non pmkey users
--  [x] More languages (Swedish, Esperanto...) 
+-  [x]  Fuzzy time
+-  [x]  Battery
+-  [x]  Option for animations
+-  [x]  Option for non pmkey users
+-  [x]  More languages (Swedish, Esperanto...) 
 
 ## Attributions
 
