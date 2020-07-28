@@ -1,15 +1,14 @@
 ---
-layout: project
-title: TextWatch Clima 
+title: TextWatch Clima <i class="far fa-star"></i>
 subtitle: A Pebble (RIP) project
-featured: true
 date: 2017-02-16
 tags: [project,pebble,watchface,javascript,C]
-donate: true
-share-img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
-githuburl: https://github.com/dieghernan/TextWatchClima
+header-img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
+project_links:
+    - url: https://github.com/dieghernan/TextWatchClima
+      icon: fab fa-github
+      label: See on Github
 permalink: /TextWatchClima/
-output: github_document
 ---
 
 **TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 

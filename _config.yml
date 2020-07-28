@@ -113,12 +113,11 @@ paginate_path: "/blog/page:num/"
 paginator_maxnum: 3  #default[3] Custom: max of number to be displayed on the paginator
 
 # Collections https://jekyllrb.com/docs/step-by-step/09-collections/
+collections_dir     : collections
 collections:
-  cheatsheet:
+  projects:
     output: true
-    permalink: /cheatsheets/:name
-collections_dir     : 
-permalink           : /:year:month:day_:title/
+    permalink: /projects/:name/
 
 
 # Defaults https://jekyllrb.com/docs/configuration/front-matter-defaults/
@@ -154,7 +153,7 @@ defaults:
   -
     scope:
       path: ""
-      type: "cheatsheet"
+      type: "projects"
     values:
       header_type       : "hero"
       show_bottomnavs   : true
@@ -162,8 +161,8 @@ defaults:
       include_on_search : true
       show_breadcrumb   : true
       breadcrumb_list   :
-        - label: Cheatsheets
-          url: /cheatsheets
+        - label: Projects
+          url: /projects
 
 
 # XX. Other settings - no need to modify

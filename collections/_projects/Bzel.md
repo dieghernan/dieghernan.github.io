@@ -1,34 +1,31 @@
 ---
-layout: project
-title: Sfera 
+title: Bzel 
 subtitle: A Pebble (RIP) project
-share-img: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png
-date: 2017-03-14
-permalink: /Sfera/
+share-img: https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png
+date: 2017-05-25
 donate: true
 tags: [project,pebble,watchface,javascript,C]
-githuburl: https://github.com/dieghernan/Sfera
+permalink: /Bzel/
+githuburl: https://github.com/dieghernan/Bzel
 output: github_document
----                                                                  
+---
 
-**Sfera** for Pebble Time Round is a highly customizable watchface that gets the most of the smartwatch capabilities. Set your preferences and enjoy this beautifully designed watchface.
+**Bzel** intregates the bezel into your watchface. Display minutes as digits, as a moving dot or as a fill in the bezel.
 
-![Banner](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
+![Banner](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png)
 
-#### [Download from Pebble Appstore](https://apps.getpebble.com/applications/58c2f7110dfc32a52a00081f)
+#### [Download from Pebble Appstore](https://apps.getpebble.com/applications/59280895b67f9f43f80004c9)
 
 ## Features
 * Clock mode:
-   * Analog: Classic analog watchface
-   * Digital: Centered hour and minute display based on analog movement
-   * Dual: Analog and Digital all in one
-   * Mix: Digital Hour and Analogic Minute
+   * Digital: Minute display based on analog movement
+   * Dot: Moving dot as minute marker
+   * Bezel: A bar moving around the bezel as minute marker
 * Autodetection of 12h/24h based on your watch settings
 
 ## Take your pick
+ * Pebble Health: Display daily steps.
  * Date - Get the weekday based on the language set on your Pebble.
- * Dots as minute markers - choose your color
- * Battery level displayed beautifully as an arc near the bezel. Choose your color and below 20% it turns red!
  * Weather: Current conditions on °c or °f.
  * Choose your weather provider:
     * [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API Key required (at this moment)_
@@ -50,13 +47,16 @@ Autotranslating of weekday supported for:
 * Italian
 
 ## Future developments
-- [x] 12/24h mode
-- [x] Night theme
-- [x] Several weather providers available
-- [x] [pmkey.xyz](https://www.pmkey.xyz) implemented for easy managing your API keys
+- [x] Location for weather and loc
+- [x] Square support
+- [x] New Minute Mode: Bezel
+- [x] Steps
+- [ ] More Health Metrics
 
-## Screenshots
-![GIF](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif)
+# Screenshots
+![GIF](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPTR.gif)
+![GIF](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPT.gif)
+![GIF](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelBW.gif)
 
 ## Attributions
 ### Fonts: 
@@ -77,7 +77,7 @@ Autotranslating of weekday supported for:
 [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
 
 ## License
-Developed under license [MIT](https://raw.githubusercontent.com/dieghernan/Sfera/master/LICENSE).
+Developed under license [MIT](https://raw.githubusercontent.com/dieghernan/Bzel/master/LICENSE).
 
 
 #### Made in Madrid, Spain

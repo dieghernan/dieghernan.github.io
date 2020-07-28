@@ -1,5 +1,4 @@
 ---
-layout: project
 title: COVID19 Microsite
 subtitle: Tracking the outbreak in Spain by region
 share-img: https://raw.githubusercontent.com/dieghernan/COVID19/master/figs/FallecidosAct.png
