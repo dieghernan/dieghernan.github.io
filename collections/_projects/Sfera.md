@@ -72,7 +72,7 @@ Autotranslating of weekday supported for:
 ### Fonts: 
 
  * [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to regular alphabet, instead of Unicode values.
- * Custom font for icons created via [Fontastic] downloaded from [fontsgeek.com](http://fontsgeek.com)
+ * Custom font for icons created via **Fontastic** downloaded from [fontsgeek.com](http://fontsgeek.com)
   
 ### Weather providers  
 
