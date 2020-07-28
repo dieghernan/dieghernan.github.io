@@ -31,19 +31,19 @@ Main `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-Intern
 
 Field | Description | Source |Notes 
 --- | --------- | -----|-----
-ISO_3166_1|ISO 3166-1 numeric |Wikipedia
-ISO_3166_2|ISO 3166-1 alpha-2 |Wikipedia
-ISO_3166_3|ISO 3166-1 alpha-3 |Wikipedia
-FIPS_GEC|Geopolitical Entities and Codes (GEC)| CIA World Factbook|[Formerly FIPS 1PUB 10-4](https://www.cia.gov/library/publications/the-world-factbook/appendix/appendix-d.html)
-STANAG|STANAG 1059 Country Codes| CIA World Factbook|  Used by NATO
-M49|UN Country Code| UN Stats
-NUTS|NUTS 0 code |Wikipedia |Used by EU
-geonameId|geonameId|geonames
-continentcode|geonames Continent Code|geonames
-regioncode|UN Regional Code|UN Stats
-interregioncode|Interregional Code|UN Stats
-subregioncode|Subregion Code|UN Stats
-ISO_3166_3.sov|Sovereign code |Wikipedia, Statoids | If non-independent
+`ISO_3166_1`|ISO 3166-1 numeric |Wikipedia
+`ISO_3166_2`|ISO 3166-1 alpha-2 |Wikipedia
+`ISO_3166_3`|ISO 3166-1 alpha-3 |Wikipedia
+`FIPS_GEC`|Geopolitical Entities and Codes (GEC)| CIA World Factbook|[Formerly FIPS 1PUB 10-4](https://www.cia.gov/library/publications/the-world-factbook/appendix/appendix-d.html)
+`STANAG`|STANAG 1059 Country Codes| CIA World Factbook|  Used by NATO
+`M49`|UN Country Code| UN Stats
+`NUTS`|NUTS 0 code |Wikipedia |Used by EU
+`geonameId`|geonameId|geonames
+`continentcode`|geonames Continent Code|geonames
+`regioncode`|UN Regional Code|UN Stats
+`interregioncode`|Interregional Code|UN Stats
+`subregioncode`|Subregion Code|UN Stats
+`ISO_3166_3.sov`|Sovereign code |Wikipedia, Statoids | If non-independent
 
 ### Other information included
 
@@ -59,13 +59,13 @@ A single `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-In
 
 Field | Description
 --- | ---------
-ISO_3166_2| Matches with Countrycodes `.csv`
-ISO_3166_3| Matches with Countrycodes `.csv`
-NAME.EN| Matches with Countrycodes `.csv`
-source| Main data source
-org_name| Name of the organization
-org_id | Abbreviation or internal ID
-org_member | Membership status
+`ISO_3166_2`| Matches with Countrycodes `.csv`
+`ISO_3166_3`| Matches with Countrycodes `.csv`
+`NAME.EN`| Matches with Countrycodes `.csv`
+`source`| Main data source
+`org_name`| Name of the organization
+`org_id` | Abbreviation or internal ID
+`org_member` | Membership status
 
 ## C. Full json file `.json`
 

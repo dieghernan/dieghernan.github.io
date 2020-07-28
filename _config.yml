@@ -55,23 +55,18 @@ navbar:
   expand    : xl
   brand:
     title   :  Home # Title in navbar
-    url     :  # default["url/baseurl"]
     img     :  # An small image, try 30x30px
   nav:
   - title   : Blog # Label
     url     : /blog/ # url	
   - title   : Projects
     url     : /projects
-  - title   : Extras
+  - title   : Archives
     child   :
-      - title : Tags
-        url   : /tags
-      - title : Categories
-        url   : /categories
-      - title : Archive
+      - title : By date
         url   : /archive
-      - title : Current skin
-        url   : /current-skin
+      - title : By tags
+        url   : /tags
   - title   : '<i class="fab fa-github" aria-hidden="true"></i> Github repo'
     url     : https://github.com/dieghernan/dieghernan.github.io
 footer:
@@ -99,12 +94,18 @@ footer:
 googlefonts:
   - url : 'https://fonts.googleapis.com/css2?family=Roboto&display=swap'
 chulapa-skin: 
-  highlight     :  
+  highlight     :  manni
   skin          :  
   autothemer    : true
   vars          :    
     primary     : teal
     font-family-base : "Roboto, sans-serif"
+    navbar-chulapa-toggler-border-color: transparent
+    border-width: 3px
+    border-radius:  1.35rem
+    border-radius-lg:  10rem
+    border-radius-sm:  1rem 
+    
     
 # D. Jekyll Defaults and collections: see https://jekyllrb.com/
 
