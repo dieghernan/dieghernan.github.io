@@ -5,8 +5,14 @@ header_img: https://dieghernan.github.io/COVID19/assets/img/header.png
 tags: [project,R,maps,sf,cartography]
 permalink: /COVID19-project
 date: 2020-04-04
-redirect_to: https://dieghernan.github.io/COVID19
 ---
-Visit the microsite [Spanish]
+
+Visit the microsite with maps and official data on the impact of COVID19 in Spain. 
 
 <https://dieghernan.github.io/COVID19>
+[In Spanish]
+
+![FallecidosEvo](https://dieghernan.github.io/COVID19/assets/Fallecidos.gif)
+
+Deceases in Spain by COVID19
+{: .caption }
