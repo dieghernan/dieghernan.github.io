@@ -78,13 +78,17 @@ permalink: /TextWatchClima/
  * Gotham Fonts downloaded from [fontsgeek.com](http://fontsgeek.com)
  
 ### Weather providers  
-
+<div class="row">
+<div class="col">
 <a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png"></a>
-
+</div>
+<div class="col">
 <a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" ></a>
-
+</div>
+<div class="col">
 <a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" ></a>
-  
+</div>
+</div>
 ### Others
 
 * [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
