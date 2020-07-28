@@ -78,6 +78,7 @@ permalink: /TextWatchClima/
  * Gotham Fonts downloaded from [fontsgeek.com](http://fontsgeek.com)
  
 ### Weather providers  
+
 <div class="row">
 <div class="col">
 <a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png"></a>
@@ -89,6 +90,7 @@ permalink: /TextWatchClima/
 <a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" ></a>
 </div>
 </div>
+
 ### Others
 
 * [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
@@ -97,13 +99,13 @@ permalink: /TextWatchClima/
 ## Screenshots
 
 <div class="row">
-<div class="col">
+<div class="col-sm">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif">
 </div>
-<div class="col">
+<div class="col-sm">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif">
 </div>
-<div class="col">
+<div class="col-sm">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif">
 </div>
 </div>
