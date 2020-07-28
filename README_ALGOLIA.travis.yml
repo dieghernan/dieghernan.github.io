@@ -1,0 +1,18 @@
+# If you want to use Algolia as search engine deployed with Travis CI:
+# 1. Read Chulapa Docs: https://dieghernan.github.io/chulapa/docs/02-config#search-engines
+# 2. Read jekyll-algolia Docs: https://community.algolia.com/jekyll-algolia/github-pages.html
+# 3. Rename this file to .travis.yml
+# 4. Deploy on Travis CI: https://travis-ci.com/
+# If you dont use Algolia, you can delete this file
+# This file should be at the root of your project
+language: ruby
+cache: bundler
+before_install:
+  - gem install bundler
+script:
+  - bundle exec jekyll algolia
+branches:
+  only:
+    - master
+rvm:
+ - 2.4
