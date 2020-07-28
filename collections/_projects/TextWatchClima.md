@@ -9,12 +9,14 @@ project_links:
       icon: fab fa-github
       label: See on Github
 permalink: /TextWatchClima/
+excerpt: TextWatch Clima upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
 ---
-
-**TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
 
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 mb-3}
+
+
+**TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
 
 ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
 
@@ -81,13 +83,13 @@ permalink: /TextWatchClima/
 
 <div class="row">
 <div class="col">
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png"></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp"></a>
 </div>
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" ></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp"></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" ></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp"></a>
 </div>
 </div>
 
@@ -100,13 +102,13 @@ permalink: /TextWatchClima/
 
 <div class="row">
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif" alt="gif">
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif" alt="gif">
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif" alt="gif">
 </div>
 </div>
 
@@ -115,4 +117,4 @@ permalink: /TextWatchClima/
 Developed under license [MIT](https://github.com/dieghernan/TextWatchES_Weather/blob/master/MIT%20License).
 
 
-#### Made in Madrid, Spain ❤️
+**Made in Madrid, Spain ❤️**
