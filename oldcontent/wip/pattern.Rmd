@@ -1,0 +1,232 @@
+---
+layout: post
+title: "Beautiful Maps with R (III): Patterns"
+subtitle: "A solution for b/w and academic maps."
+tags: [R,beautiful_maps, maps, sf]
+date: 2019-06-02
+share-img: https://dieghernan.github.io/assets/figs/20190602_imgpost-1.png
+img-to-head: true
+linktormd: true
+output: github_document
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(global.par = TRUE)
+rm(list = ls())
+
+
+```
+
+On this post I would introduce a couple of functions that may be useful for improving your maps. The goal is to produce different filling patterns that could be added over your shapefiles. 
+
+At this point, I would like to suggest you (if you haven't done it yet) to install the `cartography`package ([vignette](https://cran.r-project.org/web/packages/cartography/vignettes/cartography.html)), as it presents a good bunch of interesting features, and fully compatible with the `sf` environment. In fact, I took some pieces of the base code in order to develop my own `legendPattern` function.
+
+### Required R packages
+
+```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
+library(sf)
+library(rnaturalearth)
+library(dplyr)
+library(RColorBrewer)
+```
+
+### Grid approach
+
+I already worked with the `st_make_grid` on a previous [post](https://dieghernan.github.io/201906_Beautiful1/), and this time I have applied the same approach. Some examples here on how the grid can be used to create patterns:
+
+#### Dots
+
+```{r 20190602_dotex, fig.align='center', message=FALSE, warning=FALSE, dpi=90, fig.width=200/90, fig.height=350/90,  paged.print=FALSE, tidy='styler', results='hide'}
+DE  <- ne_countries(50,
+                    type = "countries",
+                    country = "Germany",
+                    returnclass = "sf") %>%
+  st_transform(3035)
+
+grid = st_make_grid(DE,
+                    what = "corners",
+                    square = F)
+
+# To avoid dots close to the edge
+negbuff = st_buffer(DE, dist = -15 * 1000)
+grid2 = grid[st_contains(negbuff, grid, sparse = F)]
+par(mar = c(0, 0, 0, 0))
+plot(st_geometry(DE))
+plot(st_geometry(grid2), col = "red", add = T)
+```
+
+#### Grid
+
+```{r 20190602_gridex, fig.align='center', message=FALSE, warning=FALSE, dpi=90,fig.width=200/90, fig.height=350/90, paged.print=FALSE, tidy='styler', results='hide'}
+# Grid
+grid = st_make_grid(DE,
+                    what = "polygons",
+                    square = T) %>%
+  st_cast("LINESTRING") %>%
+  st_intersection(DE)
+
+# Clean and keep lines only
+grid2 = grid[st_geometry_type(grid) %in% c("LINESTRING", "MULTILINESTRING")]
+
+par(mar = c(0, 0, 0, 0))
+plot(st_geometry(DE))
+plot(st_geometry(grid2), col = "red", add = T)
+```
+
+Easy, right? Let's move to the next level!
+
+#### Horizontal line
+
+```{r 20190602_horex1, warning=FALSE, message=FALSE, tidy='styler', fig.width=200/90, fig.height=350/90, dpi=90, fig.align='center'}
+# Horizontal
+grid = st_make_grid(DE,
+                    what = "polygons",
+                    square = T)
+
+par(mar = c(0, 0, 0, 0))
+plot(grid)
+plot(grid[55], add = T, col = "blue")
+plot(
+  st_point(st_coordinates(grid[55])[1, 1:2]),
+  col = "red",
+  add = T,
+  pch = 16
+)
+
+plot(
+  st_point(st_coordinates(grid[55])[2, 1:2]),
+  col = "orange",
+  add = T,
+  pch = 16
+)
+plot(
+  st_point(st_coordinates(grid[55])[3, 1:2]),
+  col = "pink",
+  add = T,
+  pch = 16
+)
+plot(
+  st_point(st_coordinates(grid[55])[4, 1:2]),
+  col = "black",
+  add = T,
+  pch = 16
+)
+```
+
+As it can be seen, we can extract specific points of each grid. Once that I identified them it is just a matter of connecting points using the `st_linestring` function.
+
+
+```{r 20190602_horex2, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=200/90, dpi=90, fig.align='center'}
+
+# Select horizontal only
+grid_int = lapply(1:length(grid),
+                  function(j)
+                    st_linestring(st_coordinates(grid[j])[c(1, 2), 1:2])) %>%
+  st_sfc(crs = st_crs(DE)) %>%
+  st_intersection(DE)
+
+# Clean and keep lines only
+grid2 = grid_int[st_geometry_type(grid_int) %in% c("LINESTRING", "MULTILINESTRING")]
+
+par(mar = c(0, 0, 0, 0))
+plot(st_geometry(DE))
+plot(st_geometry(grid2), col = "red", add = T)
+```
+
+### The `patternLayer` function
+
+I put all that together on a function named `patternLayer` **PUT LINK HERE**. The main inputs are:
+
+* `x`: `sf` object. It must be a `POLYGON` or a `MULTIPOLYGON`.
+* `pattern`: fillings availables are `c("dot", "text", "diamond", "grid", "hexagon", "horizontal", "vertical", "zigzag", "left2right", "right2left")`.
+* `density` of the grid. By default the function uses a grid with a minimum of 10 cells on the shortest dimension of the bounding box. Additionally it is possible to pass a `cellsize` value that would feed the `st_make_grid` underlying function.
+* `txt` for the `text` pattern, that should be a character.
+* Different graphical parameters can be also passed, as `add`, `cex`, `lty`, `pch`, etc. Basically three modes are allowed: points, lines and texts.
+
+Let's see how it works.
+```{r 20190602_showfun, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=500/90, dpi=90, fig.align='center'}
+
+# Load function
+source("patternfun.R")
+
+
+par(mfrow = c(2, 5),
+    mar = c(1, 1, 1, 1),
+    cex = 0.5)
+patternLayer(DE, "dot")
+title("dot")
+patternLayer(DE, "text", txt = "Y")
+title("text")
+patternLayer(DE, "diamond", density = 0.5)
+title("diamond")
+patternLayer(DE, "grid", lwd = 1.5)
+title("grid")
+patternLayer(DE, "hexagon", col = "blue")
+title("hexagon")
+patternLayer(DE, "horizontal", lty = 5)
+title("horizontal")
+patternLayer(DE, "vertical")
+title("vertical")
+patternLayer(DE, "left2right")
+title("left2right")
+patternLayer(DE, "right2left")
+title("right2left")
+patternLayer(DE, "zigzag")
+title("zigzag")
+```
+
+Let's play a little bit more with some of the additional features of the function:
+
+```{r 20190602_playing, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=500/90, dpi=90, fig.align='center'}
+
+
+par(mar = c(1, 1, 1, 1), mfrow = c(2, 3))
+plot(st_geometry(DE))
+patternLayer(
+  DE,
+  "dot",
+  pch = 10,
+  density = 0.5,
+  cex = 2,
+  col = "darkblue",
+  add = T
+)
+plot(st_geometry(DE))
+patternLayer(
+  DE,
+  "dot",
+  pch = 21,
+  col = "red",
+  bg = "green",
+  cex = 1.25,
+  add = T
+)
+plot(st_geometry(DE), col = "grey")
+patternLayer(
+  DE,
+  "text",
+  txt = "DE",
+  density = 1.1,
+  col = "white",
+  add = T
+)
+plot(st_geometry(DE), col = "blue")
+patternLayer(
+  DE,
+  "horizontal",
+  lty = 3,
+  cellsize = 150 * 1000,
+  add = T
+)
+patternLayer(DE, "zigzag", lwd = 2, col = "red")
+plot(st_geometry(DE), border =  "orange", lwd=2)
+patternLayer(DE,
+             "left2right",
+             density = 2,
+             col = "orange",
+             add = T)
+``` 

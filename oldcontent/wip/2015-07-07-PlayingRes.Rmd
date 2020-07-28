@@ -1,0 +1,65 @@
+---
+layout: post
+title: Exploring resolutions with leaflet
+subtitle: aaaaa.
+tags: [R,sf,maps,vignette]
+linktormd: true
+leafletmap: true
+output: github_document
+always_allow_html: yes
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(global.par = TRUE)
+rm(list = ls())
+library("knitr")
+library("rmarkdown")
+```
+
+## Reading the data
+The first step consists on reading the database provided (in this example the `json` file) and extracting one international organization. In this example we will plot the [Commonwealth of Nations](https://en.wikipedia.org/wiki/Commonwealth_of_Nations).
+
+
+```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
+library(leaflet)
+
+map <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
+  addTiles(options = list(detectRetina = TRUE,
+                                  noWrap = TRUE)) %>%
+  setView(-3.56948,  40.49181, zoom = 3) %>%
+  setMaxBounds(-180,-90, 180, 90)
+
+map  # Print the map
+```
+
+
+ # new one
+
+
+```{r libs2, warning=FALSE, message=FALSE, tidy='styler'}
+library(leaflet)
+
+map2 <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
+  addTiles(options = list(detectRetina = TRUE,
+                                  noWrap = TRUE)) %>%
+  setView(-3.56948,  40.49181, zoom = 3) %>%
+  setMaxBounds(-180,-90, 180, 90)
+
+map2  # Print the map
+```
+
+And last
+
+```{r libs3, warning=FALSE, message=FALSE, tidy='styler'}
+map3 <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
+  addTiles(options = list(detectRetina = TRUE,
+                                  noWrap = TRUE)) %>%
+  setView(-3.56948,  40.49181, zoom = 3) %>%
+  setMaxBounds(-180,-90, 180, 90)
+
+map3  # Print the map
+```
+

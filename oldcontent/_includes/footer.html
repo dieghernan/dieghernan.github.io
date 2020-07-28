@@ -1,0 +1,66 @@
+<footer>
+	<div class="container beautiful-jekyll-footer">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<ul class="list-inline text-center footer-links">
+					{% if site.social-network-links.rss %}
+					<li><a href="/rss.xml" title="RSS">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">RSS</span>
+						</a></li>
+					{% endif %}
+					{% if site.social-network-links.stackoverflow %}
+					<li><a href="https://stackoverflow.com/users/{{ site.social-network-links.stackoverflow }}" title="StackOverflow">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">StackOverflow</span>
+						</a></li>
+					{% endif %}
+					{% if site.social-network-links.wikicommons %}
+					<li><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user={{ site.social-network-links.wikicommons }}" title="Wikipedia Commons">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">WikipediaCommons</span>
+						</a></li>
+					{% endif %}
+					{% if site.social-network-links.github %}
+					<li><a href="https://github.com/{{ site.social-network-links.github }}" title="GitHub">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">GitHub</span>					
+						</a></li>
+					{% endif %}
+					{% if site.social-network-links.carto %}
+					<li><a href="https:///{{ site.social-network-links.carto }}.carto.com" title="Carto">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-dot-circle-o fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">Carto</span>
+						</a></li>
+					{% endif %}
+					{% if site.social-network-links.reddit %}
+					<li><a href="https://reddit.com/u/{{ site.social-network-links.reddit }}" title="Reddit">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-reddit fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">Reddit</span>
+						</a></li>
+					{% endif %}
+					{% if site.social-network-links.rpubs %}
+					<li><a href="https://rpubs.com/{{ site.social-network-links.rpubs }}" title="RPubs">
+						<span class="fa-stack fa-lg" aria-hidden="true">
+							<i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-leanpub fa-stack-1x fa-inverse"></i>
+						</span><span class="sr-only">RPubs</span>
+						</a></li>
+					{% endif %}
+				</ul>
+				<p class="copyright text-muted">
+					{{ site.author.name }} &nbsp;&bull;&nbsp; {{ site.time | date: '%Y' }}					
+				</p>
+				<!-- Please don't remove this, keep my open source work credited :) -->
+				<p class="theme-by text-muted">
+					Theme by <a href="https://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,70 @@
+---
+layout: page
+title: 'Archive'
+subtitle: 'All the posts of my blog'
+permalink: /archive/
+---
+<h1 id="page-title" class="linked-section" tabindex="-1" style="outline: none;text-align: center;">Posts by year</h1>
+<ul style="display: grid;
+           grid-column-gap: 2em;
+           grid-template-columns: repeat(2, 1fr);
+           margin: 1.414em 0;
+           padding: 0;
+           font-size: 0.75em;
+           list-style: none;">
+           {% assign postsInYear = site.documents | where_exp: "item", "item.includeonfeed == true" | group_by_exp: 'documents', 'documents.date | date: "%Y"' %}
+           {% for year in postsInYear %}
+           <li> 
+                      <a href="#{{ year.name }}" style="display: flex;
+                                                        padding: 0.25em 0;
+                                                        -webkit-box-pack: justify;
+                                                        justify-content: space-between;
+                                                        color: inherit;
+                                                        text-decoration: none;
+                                                        border-bottom: 1px solid  {{ site.navbar-col }};">
+                                 <strong>{{ year.name }}</strong> <span style="color: {{ site.navbar-col }};">{{ year.items | size }}</span>
+                      </a>
+           </li>
+           {% endfor %}
+</ul>
+{% assign postsByYear = site.documents | sort: 'date' | reverse | group_by_exp: 'documents', 'documents.date | date: "%Y"' %}
+{% for year in postsByYear %}
+<section id="{{ year.name }}"  style="font-size: 25px;">
+           <h2 class="linked-section" style="border-bottom: 2px solid {{ site.navbar-col }};">{{ year.name }}</h2>
+           <div>
+           {% for document in year.items %}
+           {%- assign words = document.content | strip_html | number_of_words -%}   
+           {%- assign minutes = words | divided_by: site.wordspermin | ceil -%}
+           <div>
+                      <article class="tag-entry"  style="padding: 0 0 25px;">
+                                 <h3><a href="{{ document.url | prepend: site.baseurl }}" >{{ document.title }}</a></h3>	
+                                 {% if document.subtitle %}
+                                 <h4>{{ document.subtitle }}</h4>
+                                 {% endif %}
+                                 <p style="font-size: 15px;
+                                           margin: 10px 0;
+                                           font-style: italic;
+                                           color: #808080;">
+                                            Posted on {{ document.date | date_to_string }}	
+                                            <span style="float: right;">
+                                                       <i class="fa fa-clock-o"></i> {{ minutes }} min read
+                                            </span>
+                                 </p>  
+                                 <div style="padding: 5px 0 10px;
+                                             font-size: 15px;
+                                             border-bottom: 2px double {{ site.background-light-col }};">
+                                            {{ document.content | strip_html|  truncatewords: 20 }}                                                         
+                                 </div>
+                      </article>
+           </div>
+           {% endfor %}
+           </div>
+           <a href="#page-title" style="display: block;
+                                        font-size: 0.6em;
+                                        text-transform: uppercase;
+                                        text-align: right;
+                                        text-decoration: none;">
+                      Back to Top &uarr;
+           </a>
+</section>
+{% endfor %}

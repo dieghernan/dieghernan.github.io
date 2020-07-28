@@ -1,0 +1,167 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+
+## Including Code
+
+You can include R code in the document as follows:
+
+```{r cars}
+summary(cars)#0. Cleaning and set-up R----
+rm(list = ls())
+
+GEONAMES_USER = "dieghernan"
+library(pacman)
+p_load(dplyr,
+       jsonlite)
+
+library(readxl)
+
+#Find airports----
+myflights <- read_excel("flights.xlsx")
+tosearch=data.frame(toloc=(sort(append(myflights$start,myflights$end))),
+                    stringsAsFactors = F) 
+tosearch = tosearch %>% count(toloc) %>% arrange(desc(n)) %>% as.data.frame()
+tosearch$tofun = gsub(" ", "+", tosearch$toloc)
+tosearch$tofun=ifelse(tosearch$toloc=="San Sebastian",
+                      "san+sebastian+es",
+                      tosearch$tofun)
+
+airports <- function(place, n = 1, lang = "en") {
+  url = paste(
+    "http://api.geonames.org/searchJSON?formatted=true&username=",
+    GEONAMES_USER,
+    "&style=medium&fcode=AIRP&lang=",
+    lang,
+    "&maxRows=",
+    paste(n),
+    "&q=",
+    place,
+    sep = ""
+  )
+  geonames = fromJSON(url)
+  geonames = data.frame(geonames[["geonames"]])
+  geonames$search = place
+  geonames = geonames %>% select(
+    tofun=search,
+    toponymName,
+    countryCode,
+    long=lng,
+    lat
+  )
+  return(geonames)
+}
+
+
+#Return
+for (i in 1:nrow(tosearch)) {
+  res = airports(tosearch[i, c("tofun")])
+  
+  row.names(res) <- i
+  
+  if (i == 1) {
+    final = res
+  } else {
+    final = rbind(final, res)
+  }
+  rm(res)
+}
+rm(i)
+final$long=as.numeric(final$long)
+final$lat=as.numeric(final$lat)
+#Some statistics----
+#Number times per city----
+ndots=left_join(tosearch,final) %>% 
+  select(
+    name=toloc,
+    countryCode,
+    Airport=toponymName,
+    n,
+    long,
+    lat
+)
+
+
+# Leaflet-----
+library(leaflet)
+
+map <- leaflet( options = leafletOptions(minZoom = 2)) %>%
+  addProviderTiles(providers$CartoDB.DarkMatter,
+                   options = list(detectRetina = TRUE,
+                                  noWrap = TRUE)) %>%
+  setView(-3.56948,  40.49181, zoom = 3) %>%
+  setMaxBounds(-180,-90,180,90) %>%
+  addCircles(
+    data=ndots,
+    lng = ~ long,
+    lat = ~ lat,
+    weight = 5,
+    radius =  1000,
+    popup = ~ name,
+    color = "green"
+  )
+map
+#Connecting Routes
+connect=myflights %>% count(start,end) %>% arrange(desc(n))
+connect=left_join(connect,
+                  ndots %>%
+                    select(
+                      start=name,
+                      long_init=long,
+                      lat_init=lat
+                    ))
+connect=left_join(connect,
+                  ndots %>%
+                    select(
+                      end=name,
+                      long_end=long,
+                      lat_end=lat
+                    ))
+
+library(geosphere)
+connectflights = gcIntermediate(
+  connect[, c("long_init", "lat_init")],
+  connect[, c("long_end", "lat_end")],
+  n = 1000,
+  breakAtDateLine = T,
+  sp = T
+)
+connect$n/(2*max(connect$n))
+
+map3 <-  addPolylines(map,weight=2*sqrt(connect$n),data = connectflights, opacity = sqrt(connect$n)/5,
+                    col="green" ,group = "Flights")
+
+map4 <-   addEasyButton(map3,easyButton(
+  icon="fa-globe", title="Zoom to Level 1",
+  onClick=JS("function(btn, map){ map.setZoom(1); }")))
+map4 <-   addLayersControl(map3,
+    overlayGroups = c("Flights"),
+    options = layersControlOptions(collapsed = FALSE)
+  )
+map4
+
+library(leaflet.extras)
+map5 <- addHeatmap(map,data = ndots, intensity = ~ n,
+                   radius = 40,max=10, blur=40 )
+map5
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+map3
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

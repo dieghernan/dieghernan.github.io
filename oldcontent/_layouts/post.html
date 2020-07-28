@@ -1,0 +1,125 @@
+---
+layout: base
+---
+<header class="header-section">
+   <div class="intro-header" style="margin-bottom: 0">
+      {% if page.img-to-head %}
+      <div class="post-head--overlay"
+           style=" background-image: url('{{ page.share-img }}');">
+      </div>
+      {% endif %}
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+               <div class="post-heading">
+                  <h1>{{ page.title }}<br/>
+                  </h1>
+                  <h2 class="post-subheading">
+                     {{ page.subtitle }}
+                  </h2>
+                  <div class="post-heading" style="font-size: 90%;">
+                     <span style="color: #808080;
+                                  font-style: italic;
+                                  text-align: right;">
+                        Posted on {{ page.date | date_to_string }}
+                     </span>
+                     {% if page.linktormd %}
+                     <span style="float:right;">
+                        <a href="{{ page.path | prepend: site.github_repo | replace:'/_posts/','/blob/master/_codes/' | replace:'.md','.Rmd' }}">
+                           <i class="fa fa-fw fa-github"></i> Source code
+                        </a>
+                     </span>
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</header>
+<div class="container">
+   <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+         <article role="main" class="blog-post"
+                  style="margin: 0;
+                         padding-bottom: 10px;
+                         border-top: 0.5px solid  {{ site.navbar-col }};
+                         border-bottom: 3px solid {{ site.navbar-col }};">
+            {{ content }}
+         </article>
+         <div style="background-color: {{ site.background-light-col }};
+                     margin-top: 0;
+                     margin-bottom: -20px;
+                     padding: 10px 5px">
+           {% if page.tags.size > 0 %}
+<!--- Tags -->
+            <div class="blog-tags" style="margin-top: 0; margin-bottom: 10px;">
+               Tags:
+               {% if site.link-tags %}
+               {% for tag in page.tags %}
+               <a href="{{ site.baseurl }}/tags#{{- tag -}}">{{- tag -}}</a>
+               {% endfor %}
+               {% else %}
+               {{ page.tags | join: ", " }}
+               {% endif %}
+            </div>
+           {% endif %}
+<!--- Pager -->
+            <ul class="pager blog-pager" style="margin: 0 0 20px;">
+               {% if page.previous.url %}
+               <li class="previous">
+                  <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+               </li>
+               {% endif %}
+               {% if page.next.url %}
+               <li class="next">
+                  <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+               </li>
+               {% endif %}
+            </ul>
+<!--- Social Share -->
+            <section id = "social-share-section" >
+            	<span class="sr-only">Share: </span>
+            	<!--- Share on Twitter -->
+                <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}+{{ site.url }}{{ page.url }}"
+            		class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+            		<span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+            		<span class="sr-only">Twitter</span>
+                </a>
+            	<!--- Share on Facebook -->
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}"
+            		class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+            		<span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+            		<span class="sr-only">Facebook</span>
+                </a>
+              <!--- Share on LinkedIn -->
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ page.url }}"
+                class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+            		<span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+            		<span class="sr-only">LinkedIn</span>
+            	</a>
+            </section>
+<!--- Disqus Comments -->
+            <div class="disqus-comments">
+               <div id="disqus_thread"></div>
+               <script>
+               var disqus_config = function () {
+                  this.page.url = '{{ page.url | prepend: site.url }}';;  
+                  this.page.identifier = '{{ page.id }}'; 
+                  };
+                  (function() { // DON'T EDIT BELOW THIS LINE
+                  var d = document, s = d.createElement('script');
+                  s.src = 'https://https-dieghernan-github-io.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+                  })();
+               </script>
+               <noscript>
+                  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">
+                     comments powered by Disqu.</a>
+               </noscript>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

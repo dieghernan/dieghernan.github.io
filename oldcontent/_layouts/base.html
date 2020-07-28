@@ -1,0 +1,24 @@
+---
+common-css:
+  - "/css/bootstrap.min.css"
+  - "/css/bootstrap-social.css"
+  - "/css/main.css"
+common-ext-css:
+  - "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+common-googlefonts:
+  - "Roboto:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  {% include head.html %}
+  <body>
+    {% include nav.html %}
+    {{ content }}
+    {% include footer.html %}
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

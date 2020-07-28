@@ -1,0 +1,77 @@
+---
+layout: post
+title: test
+leafletmap: true
+always_allow_html: yes
+output: 
+  html_document: 
+    self_contained: no
+---
+
+
+This is a very personal post, where I just show the map of all the places I have traveled by plain
+
+
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(global.par = TRUE)
+rm(list = ls())
+library(rmarkdown)
+library(htmlwidgets)
+```
+
+aaabbccdd
+
+
+```{r ,message=FALSE, warning=FALSE}
+library(leaflet)
+map <- leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%
+  addTiles() %>%
+  setMaxBounds(-200, -90, 200, 90) %>%
+  setView(-3.56948,  40.49181, zoom = 3) %>%
+  addEasyButton(easyButton(
+    icon = "fa-globe",
+    title = "World view",
+    onClick = JS("function(btn, map){ map.setZoom(1.25); }")
+  )) %>%
+  addEasyButton(easyButton(
+    icon = "fa-crosshairs",
+    title = "Locate Me",
+    onClick = JS("function(btn, map){ map.locate({setView: true}); }")
+  ))
+```
+
+
+Noe that the object is created fixed:
+
+```{r echo=FALSE}
+map
+```
+
+fixed2
+
+```{r echo=FALSE}
+map
+```
+
+
+myfav
+
+```{r echo=FALSE}
+#Relative height 70% of width
+map
+```
+
+
+16:9
+```{r echo=FALSE}
+#16:9
+map
+```
+
+4:3
+```{r echo=FALSE}
+#16:9
+map
+```

@@ -1,0 +1,103 @@
+---
+layout: page
+title: "One World"
+subtitle: "Blog & Projects"
+use-site-title: true
+bigimg:
+- "https://dieghernan.github.io/assets/img/headerblog.png" 
+---
+<div style="padding-bottom: 25px;
+	    border-top: solid {{ site.navbar-col }};">
+	<h1 style="font-size: 50px" > Recent posts </h1>
+	<div style="background-color: {{ site.background-light-col }};
+				padding: 0 10px 10px;
+				border-radius: 10px;
+				-moz-border-radius: 10px">
+		<div class="posts-list">
+			{% for post in site.posts limit:3 %} 
+			<article class="post-preview">
+				{% if post.img-to-head %}
+				<div style="width: 100%;display: table;">
+					<div style="display: table-cell;
+								vertical-align: middle;
+								padding-right: 5px;">
+				{% endif %}
+						<h3 class="post-title">
+							<a href="{{ post.url | prepend: site.baseurl }}" >{{ post.title }}</a>
+						</h3>	
+						{% if post.subtitle %}
+						<h4 class="post-subtitle">
+							{{ post.subtitle }}
+						</h4>
+						{% endif %}			
+						<p class="post-meta">
+							Posted on {{ post.date | date_to_string }}		    
+						</p>
+						{% if post.tags.size > 0 %}
+						<div class="blog-tags">
+							Tags:
+							{% if site.link-tags %}
+							{% for tag in post.tags %}
+							<a href="{{ site.baseurl }}/tags#{{- tag -}}">{{- tag -}}</a>
+							{% endfor %}
+							{% else %}
+							{{ post.tags | join: ", " }}
+							{% endif %}
+						</div>
+						{% endif %}
+					{% if post.img-to-head %}
+					</div>
+					<a class="post-head--overlay" 
+					   href="{{ post.url | prepend: site.baseurl }}"
+					   style="display: table-cell;
+							  padding: 30px;
+							  border-radius: 100px;
+							  width:  65px;
+							  background-image: url('{{ post.share-img }}');
+							  background-size: cover;
+							  border: 0.5px solid {{ site.navbar-col }};">
+					</a>
+				</div>
+					{% endif %}
+			</article>
+			{% endfor %}
+		</div>
+		<ul class="pager main-pager" style="margin-right: 5px" >
+			<li class="next">
+				<a href="{{ 'blog' | prepend: site.baseurl }}">All posts &rarr;</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div style="padding-bottom: 25px;
+			border-top: solid {{ site.navbar-col }};
+			margin-top: 35px;">
+	<h1 style="font-size: 50px"> Featured Projects </h1>
+	<div style="background-color: {{ site.background-light-col }};
+				padding: 0 10px	10px;
+				border-radius: 10px;
+				-moz-border-radius: 10px">
+		<div class="posts-list">
+			{% assign feat = site.projects | sort: 'date' | reverse  %}
+			{% for projects in feat %}
+				{% if projects.featured  %}
+				<article class="post-preview">
+					<h3 class="post-title">
+						<a href="{{ projects.url }}">{{ projects.title }}</a>
+					</h3 >
+					<h4 class="post-subtitle">{{ projects.subtitle }}</h4>
+					<p class="post-entry" style="margin-bottom: 0px;">
+						{{ projects.content | strip_html |  truncatewords: 30 }}
+						<a href="{{ projects.url }}">[more]</a>
+					</p>
+				</article>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<ul class="pager main-pager">
+			<li class="next" style="margin-right: 5px">
+				<a href="{{ 'projects' | prepend: site.baseurl }}">All my projects &rarr;</a>
+			</li>
+		</ul>
+	</div>
+</div>
