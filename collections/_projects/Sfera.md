@@ -1,7 +1,7 @@
 ---
 title: Sfera 
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
-share-img: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png
+header_img: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png
 date: 2017-03-14
 permalink: /Sfera/
 tags: [project,pebble,watchface,javascript,C]

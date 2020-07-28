@@ -59,8 +59,8 @@ navbar:
   nav:
   - title   : Blog # Label
     url     : /blog/ # url	
-  - title   : Cheatsheets
-    url     : /cheatsheets
+  - title   : Projects
+    url     : /projects
   - title   : Extras
     child   :
       - title : Tags
@@ -71,10 +71,8 @@ navbar:
         url   : /archive
       - title : Current skin
         url   : /current-skin
-  - title   : Docs
-    url     : https://dieghernan.github.io/chulapa/docs/01-install
-  - title   : Use this template
-    url     : https://github.com/dieghernan/chulapa-101/generate
+  - title   : "<i class="fab fa-github" aria-hidden="true"></i> See on Github"
+    url     : https://github.com/dieghernan/dieghernan.github.io
 footer:
   links:
     - label: "RSS"
@@ -163,6 +161,7 @@ defaults:
       include_on_search : true
       show_tags         : true
       show_breadcrumb   : true
+      include_on_feed   : true
       breadcrumb_list   :
         - label: Projects
           url: /projects
