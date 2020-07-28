@@ -15,19 +15,20 @@ author:
       icon: fab fa-github
 gtag_id                 :  
 search:
-  provider              : lunr 
+  provider              : algolia 
   algolia_logo          : true 
 algolia:                                                                   
-  application_id        : 
-  index_name            : 
-  search_only_api_key   : 
-  files_to_exclude:         #Optional
+  application_id        : "KOIKA5PDQO"
+  index_name            : "blog"
+  search_only_api_key   : "7f1fe42bef3f03458cb3a911ebc7e0ac"
+  files_to_exclude:       
     - _layouts/*.html
     - _includes/*.html
-  extensions_to_index:      #Optional
+    - oldcontent/*
+  extensions_to_index:     
     - html
     - md
-  searchableAttributes:     #Optional                                                    
+  searchableAttributes:                                                    
     - title                                                                    
     - headings                                                                 
     - unordered(content)                                                       
