@@ -75,8 +75,7 @@ comments:
 #   "brand" options would be set on the left side of your navbar
 #   "nav" would be set on the right side. Two-level nav links available
 navbar:
-  style     :  #default is the classical top navbar, set "fab" for a floating action button navbar
-  expand    :  # At which device size expand the navbar menu. default[md] https://getbootstrap.com/docs/4.5/layout/overview/
+  style     :  dual
   brand:
     title   :  Home # Title in navbar
     url     :  # default["url/baseurl"]
@@ -117,17 +116,15 @@ footer:
       url:  "./atom.xml"
   
 # C. Theme Settings
-# Google Fonts https://fonts.google.com/, add as many as you need
 googlefonts:
- # - url : # 'https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap'
-
-# Theme and colors
+  - url : 'https://fonts.googleapis.com/css2?family=Roboto&display=swap'
 chulapa-skin: 
-  highlight     :  # default["default"]
-  skin         :  # Optional predefined skins
-  autothemer    :  true # Bool: Use autotheming
+  highlight     :  
+  skin          :  
+  autothemer    : true
   vars          :    
-    primary     : teal #default ["#007bff"] - Bootstrap blue
+    primary     : teal
+    font-family-base : "Roboto, sans-serif"
     
 # D. Jekyll Defaults and collections: see https://jekyllrb.com/
 
