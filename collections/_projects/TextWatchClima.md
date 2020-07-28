@@ -99,13 +99,13 @@ permalink: /TextWatchClima/
 ## Screenshots
 
 <div class="row">
-<div class="col-sm">
+<div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif">
 </div>
-<div class="col-sm">
+<div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif">
 </div>
-<div class="col-sm">
+<div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif">
 </div>
 </div>
