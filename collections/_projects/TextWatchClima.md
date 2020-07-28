@@ -11,10 +11,10 @@ project_links:
 permalink: /TextWatchClima/
 ---
 
+**TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
+
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 mb-3}
-
-**TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
 
 ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
 
