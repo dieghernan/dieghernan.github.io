@@ -21,7 +21,7 @@ permalink: /TextWatchClima/
 **Available for all the Classic, Time and Pebble 2 models**
 
 <div class="text-center">
-<a class="btn btn-lg btn-primary my-3 text-light" href="https://apps.rebble.io/en_US/application/58a94da90dfc32d35b0002f8?section=watchfaces" role="button">Download from Rebble Appstore</a>
+<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58a94da90dfc32d35b0002f8?section=watchfaces" role="button">Download from Rebble Appstore</a>
 </div>
 
 
