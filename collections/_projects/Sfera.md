@@ -69,7 +69,8 @@ Autotranslating of weekday supported for:
 
 <a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" ></a>
 
-[OpenWeatherMap.org](https://openweathermap.org/)
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png width="60" ></a>
+
 
 ### Others
 
