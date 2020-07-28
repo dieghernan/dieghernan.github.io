@@ -13,7 +13,7 @@ excerpt: TextWatch Clima upgrades the classic TextWatch watchface adding a bunch
 ---
 
 **Project discontinued** due to the shutdown of Pebble.
-{: .alert .alert-danger .p-3 .mx-2 mb-3}
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 
 **TextWatch Clima** upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
