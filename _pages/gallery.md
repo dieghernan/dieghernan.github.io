@@ -27,6 +27,6 @@ Uploaded files on [Wikipedia](https://commons.wikimedia.org/wiki/Special:ListFil
 
 ## Blog
 
-Plots used on my posts
+Plots used on my posts.
 
 {% include_cached snippets/masonry.html internal="imgblog" index_sort="basename" %}
