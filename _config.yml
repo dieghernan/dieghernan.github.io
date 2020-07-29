@@ -1,6 +1,5 @@
 remote_theme: dieghernan/chulapa
 
-
 title                   : One world    
 subtitle                : Projects, maps and coding
 description             : Personal blog of dieghernan
@@ -102,24 +101,20 @@ chulapa-skin:
     border-width: 2px
     btn-border-radius: 1.35rem
     landingpage-chulapa-bg-color: "#dbe9e9"
+    navbar-chulapa-toggler-border-color: transparent
     
     
 # D. Jekyll Defaults and collections: see https://jekyllrb.com/
 
-# Blog pagination: on this site /blog/index.html. https://jekyllrb.com/docs/pagination/
 paginate: 4
 paginate_path: "/blog/page:num/"
-paginator_maxnum: 3  #default[3] Custom: max of number to be displayed on the paginator
-
-# Collections https://jekyllrb.com/docs/step-by-step/09-collections/
+paginator_maxnum: 3  
 collections_dir     : collections
 collections:
   projects:
     output: true
     permalink: /projects/:name/
 permalink: /:year:month_:title/
-
-# Defaults https://jekyllrb.com/docs/configuration/front-matter-defaults/
 defaults:
   -
     scope:
@@ -128,8 +123,8 @@ defaults:
       layout: "default"
       header_type: "base"
       include_on_search   : false
-      cloudtag_url        : /tags #This is where the link on tags would redirect
-      cloudcategory_url   : /categories #This is where the link on categories would redirect
+      cloudtag_url        : /tags 
+      cloudcategory_url   : /categories 
   -
     scope:
       path: ""
@@ -166,8 +161,6 @@ defaults:
           url: /projects
 
 # XX. Other settings - no need to modify
-# HTML Compression
-# - https://jch.penibelst.de/
 compress_html:
   clippings: all
   blanklines: true
