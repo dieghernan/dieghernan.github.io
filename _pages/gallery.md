@@ -1,46 +1,14 @@
 ---
-layout: page
 title: 'Gallery'
 subtitle: 'Pieces of work at a glance'
 permalink: /gallery
 ---
 
-<style>
-	/* The Masonry Container */
-	.masonry {
-		margin: 0;
-		max-width: 768px;
-		column-gap: 0.2em;
-	}
-	/* The Masonry Brick */
-	.item {
-		border-radius: 0.5em;
-		padding: 0;
-		margin: 0 0 0.2em;
-	}
-/* Masonry on large screens */
-	@media only screen and (min-width: 1024px) {
-		.masonry {
-			column-count: 3;
-		}
-	}
-	/* Masonry on medium-sized screens */
-	@media only screen and (max-width: 1023px) and (min-width: 768px) {
-		.masonry {
-			column-count: 2;
-		}
-	}
-	/* Masonry on small screens */
-	@media only screen and (max-width: 767px) and (min-width: 300px) {
-		.masonry {
-			column-count: 2;
-		}
-	}
-</style>
-<h2 class="linked-section" style="border-bottom: 2px solid {{ site.navbar-col }};">
-	<a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84">Wikimedia Commons</a>
-	<p style="margin-bottom: 0;margin-top: auto;font-size: 20px;font-style: normal;">Uploaded files on Wikipedia</p>
-</h2>
+
+## Wikimedia
+
+Uploaded files on [Wikipedia](https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84).
+
 <div class="masonry">
 	<img class="item" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/DO_Rueda_locator_map.svg/800px-DO_Rueda_locator_map.svg.png">
 	<img class="item" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/DO_Rioja_locator_map.svg/800px-DO_Rioja_locator_map.svg.png">
