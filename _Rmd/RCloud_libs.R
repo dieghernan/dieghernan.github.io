@@ -46,3 +46,4 @@ alreadyInst=as.data.frame(installed.packages(),stringsAsFactors = FALSE)
 alPack=list(alreadyInst$Package) %>% unlist() %>% unique() %>% sort()
 diff=subset(Toinstall,!Toinstall %in% alPack)
 install.packages(diff,dependencies = TRUE)
+

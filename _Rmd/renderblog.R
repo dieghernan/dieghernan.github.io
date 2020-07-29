@@ -25,11 +25,12 @@ diegpost <- function(file) {
 #diegpost("2019-11-07-QuickR")
 
 ezknit(
-  "/cloud/project/blog/newfeatures.Rmd",
+  "/cloud/project/_Rmd/2019-04-27-Using-CountryCodes.Rmd",
   wd="/cloud/project/assets",
-  out_dir = "../blog",
-  fig_dir = "../assets/figs",
+  out_dir = "../collections/_posts",
+  fig_dir = "../../assets/img/blog",
   keep_html = FALSE,
   chunk_opts = list(dev='svg'),
   verbose = T
 )
+

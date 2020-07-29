@@ -1,10 +1,10 @@
 ---
-layout: post
 title: Using CountryCodes database and sf package
 subtitle: vignette of the CountryCodes project
 tags: [R,sf,maps,vignette]
-linktormd: true
-output: github_document
+output: 
+  md_document:
+    preserve_yaml: true
 ---
 
 
@@ -104,13 +104,8 @@ tiny$C=coalesce(tiny$C,tiny$C_sov)
 
 ## Plotting map: Wikipedia style
 Now we would try to plot a map resembling the one presented in the [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the Commonwealth.
-```{r download, include=FALSE}
-#not really needed
-library(rsvg)
-wiki <- rsvg("https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg")
-png::writePNG(wiki, "20190427_wiki.png")
-```
-![Wiki](../figs/20190427_wiki.png)
+
+![Wiki](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
 
 The map we will generate is presented under a Robinson projection and the color palette will be based in the [Wikipedia convention for Orthographic Maps](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Orthographic_maps), since it is the one used in the example.
 
