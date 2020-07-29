@@ -1,10 +1,10 @@
 ---
-layout: post
 title: Cast a line to subsegments in R
 subtitle: User-defined function using sf package
 tags: [R,sf,function]
-linktormd: true
-output: github_document
+output: 
+  md_document:
+    preserve_yaml: true
 ---
 
 
@@ -29,7 +29,7 @@ library(dplyr)
 
 The `sf`package includes [`st_cast`](https://r-spatial.github.io/sf/reference/st_cast.html), a very powerful function that transforms geometries into other different types of geometries (i.e. `LINESTRING`to `POLYGON`, etc.). 
 
-```{r 20190505_italycast, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=500/90, fig.height=500/90, dpi=90, fig.align='center'}
+```{r 20190505_italycast, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=500/90, fig.height=500/90, dpi=90 }
 italy = ne_countries(country = "italy", returnclass = "sf")
 italy_pol=italy %>% st_cast("POLYGON")
 italy_lin=italy_pol %>% st_cast("LINESTRING")
@@ -44,10 +44,10 @@ plot(st_geometry(italy_pt),col=c("red","yellow","blue"), main="POINT")
 
 What I missed when using `st_cast`is the possibility to "break" the `LINESTRING`objects into sub-segments:
 
-```{r 20190505_italycastsub,warning=FALSE, tidy='styler', echo=FALSE,dev="png",fig.width=250/90, fig.height=250/90, dpi=90, fig.align='center'}
+```{r 20190505_italycastsub,warning=FALSE, tidy='styler', echo=FALSE,dev="png",fig.width=250/90, fig.height=250/90, dpi=90 }
 
 par(mfrow=c(1,1),mar=c(1,1,1,1))
-source("../functions/stdh_cast_substring.R")
+source("./functions/stdh_cast_substring.R")
 italy_sub=stdh_cast_substring(italy_lin,"LINESTRING")
 plot(st_geometry(italy_sub),col=c("red","yellow","blue"), main="SUBSEGMENT")
 
@@ -57,7 +57,7 @@ plot(st_geometry(italy_sub),col=c("red","yellow","blue"), main="SUBSEGMENT")
 
 So one possible solution could be to create `LINESTRING` objects for each consecutive pair of `POINT`objects across the original geometry. Let's check it:
 
-```{r 20190505_testspain, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=500/90, fig.height=250/90, dpi=90, fig.align='center'}
+```{r 20190505_testspain, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=500/90, fig.height=250/90, dpi=90 }
 par(mfrow=c(1,2),mar=c(1,1,1,1))
 test = ne_countries(country = "spain", returnclass = "sf") %>%
   st_cast("POLYGON") %>% st_cast("LINESTRING")
@@ -125,7 +125,7 @@ stdh_cast_substring = function(x, to = "MULTILINESTRING") {
 ```
  The function could be improved in terms of performance. Given that it works at a coordinate level, for high-resolution objects it has some degree of delay
  
-```{r 20190505_benchmarkfunction, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=400/90, fig.height=500/90, dpi=90, fig.align='center'}
+```{r 20190505_benchmarkfunction, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=400/90, fig.height=500/90, dpi=90 }
 test100=ne_countries(continent = "south america",
                      returnclass = "sf") %>% 
   st_cast("POLYGON")
@@ -157,5 +157,3 @@ plot(st_geometry(t2), col = c("red", "yellow", "blue"),add=T, lwd=0.5)
 ```
  
 It can be seen a difference in terms of performance, noting that `test100` has `r length(st_geometry(test100))` polygons decomposed in `r format(length(st_geometry(t1)), nsmall=1, big.mark=",")` sub-strings while `test50` has `r length(st_geometry(test50))` polygons to `r format(length(st_geometry(t2)), nsmall=1, big.mark=",")` sub-strings. In that sense, the original `st_cast`is much faster, although this solution may work well in most cases.
-
-A collection of my user-defined functions can be checked [here](https://github.com/dieghernan/dieghernan.github.io/blob/master/functions)

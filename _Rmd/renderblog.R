@@ -25,7 +25,7 @@ diegpost <- function(file) {
 #diegpost("2019-11-07-QuickR")
 
 ezknit(
-  "/cloud/project/_Rmd/2019-04-27-Using-CountryCodes.Rmd",
+  "/cloud/project/_Rmd/2019-05-05-Cast to subsegments.Rmd",
   wd="/cloud/project/assets",
   out_dir = "../collections/_posts",
   fig_dir = "../../assets/img/blog",
