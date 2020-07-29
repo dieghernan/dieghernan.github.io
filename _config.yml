@@ -1,5 +1,6 @@
 remote_theme: dieghernan/chulapa
 
+
 title                   : One world    
 subtitle                : Projects, maps and coding
 description             : Personal blog of dieghernan
@@ -49,30 +50,24 @@ comments:
   
 # B. Navigation
 navbar:
-  style     :  dual
+  style     : dual
+  expand    : xl
   brand:
     title   :  Home # Title in navbar
-    url     :  # default["url/baseurl"]
     img     :  # An small image, try 30x30px
   nav:
   - title   : Blog # Label
     url     : /blog/ # url	
-  - title   : Cheatsheets
-    url     : /cheatsheets
-  - title   : Extras
+  - title   : Projects
+    url     : /projects
+  - title   : Archives
     child   :
-      - title : Tags
-        url   : /tags
-      - title : Categories
-        url   : /categories
-      - title : Archive
+      - title : By date
         url   : /archive
-      - title : Current skin
-        url   : /current-skin
-  - title   : Docs
-    url     : https://dieghernan.github.io/chulapa/docs/01-install
-  - title   : Use this template
-    url     : https://github.com/dieghernan/chulapa-101/generate
+      - title : By tags
+        url   : /tags
+  - title   : '<i class="fab fa-github" aria-hidden="true"></i> Github repo'
+    url     : https://github.com/dieghernan/dieghernan.github.io
 footer:
   links:
     - label: "RSS"
@@ -96,14 +91,14 @@ footer:
     
 # C. Theme Settings
 googlefonts:
-  - url : 'https://fonts.googleapis.com/css2?family=Roboto&display=swap'
+#  - url : 'https://fonts.googleapis.com/css2?family=Roboto&display=swap'
 chulapa-skin: 
-  highlight     :  
-  skin          :  
+  highlight     : manni
+  skin          : pear
   autothemer    : true
   vars          :    
     primary     : teal
-    font-family-base : "Roboto, sans-serif"
+    
     
 # D. Jekyll Defaults and collections: see https://jekyllrb.com/
 
@@ -111,7 +106,6 @@ chulapa-skin:
 paginate: 4
 paginate_path: "/blog/page:num/"
 paginator_maxnum: 3  #default[3] Custom: max of number to be displayed on the paginator
-permalink: /:year:month_:title/
 
 # Collections https://jekyllrb.com/docs/step-by-step/09-collections/
 collections_dir     : collections
@@ -119,7 +113,7 @@ collections:
   projects:
     output: true
     permalink: /projects/:name/
-
+permalink: /:year:month_:title/
 
 # Defaults https://jekyllrb.com/docs/configuration/front-matter-defaults/
 defaults:
@@ -160,7 +154,9 @@ defaults:
       show_bottomnavs   : true
       show_sociallinks  : true
       include_on_search : true
+      show_tags         : true
       show_breadcrumb   : true
+      include_on_feed   : true
       breadcrumb_list   :
         - label: Projects
           url: /projects
@@ -178,6 +174,7 @@ plugins:
   - jekyll-paginate
   - jekyll-include-cache
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 
 # Exclude these files from production site
@@ -214,4 +211,3 @@ kramdown:
 sass:
   sass_dir: _sass
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
-
