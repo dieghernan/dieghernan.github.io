@@ -65,6 +65,8 @@ navbar:
         url   : /archive
       - title : By tags
         url   : /tags
+  - title   : Gallery
+    url     : /gallery
   - title   : '<i class="fab fa-github" aria-hidden="true"></i> Github repo'
     url     : https://github.com/dieghernan/dieghernan.github.io
 footer:
@@ -159,6 +161,11 @@ defaults:
       breadcrumb_list   :
         - label: Projects
           url: /projects
+  -
+    scope:
+      path: "assets/img/blog"
+    values:
+      image_col         : imgblog
 
 # XX. Other settings - no need to modify
 compress_html:

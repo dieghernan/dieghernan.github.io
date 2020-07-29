@@ -2,7 +2,7 @@
 layout: page
 title: 'Gallery'
 subtitle: 'Pieces of work at a glance'
-permalink: /gallery/
+permalink: /gallery
 ---
 
 <style>
@@ -55,13 +55,10 @@ permalink: /gallery/
 	<img class="item" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Population_by_municipality_in_Spain_%282018%29.svg/1000px-Population_by_municipality_in_Spain_%282018%29.svg.png">  
 	<img class="item" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Meat_consumption_rate_%28kg%29_per_capita_by_country_gradient_map_%282009%29.svg/1000px-Meat_consumption_rate_%28kg%29_per_capita_by_country_gradient_map_%282009%29.svg.png">
 </div>
-<h2 class="linked-section" style="border-bottom: 2px solid {{ site.navbar-col }};"><a href="https://dieghernan.github.io/archive/">Blog</a>
-	<p style="margin-bottom: 0;margin-top: auto;font-size: 20px;font-style: normal;">Plots used on my posts</p>
-</h2>
-<div class="masonry">
-	{% assign image_files = site.static_files | where: "image", true | sort: 'basename' | reverse | where_exp:"item",
-"item.extname contains 'g'" }} %}
-	{% for myimage in image_files %}
-	 <img class="item" src="{{ myimage.path | prepend: site.baseurl }}">
-	{% endfor %}	
-</div>
+
+
+## Blog
+
+Plots used on my posts
+
+{% include_cached snippets/masonry.html internal="imgblog" index_sort="basename" %}
