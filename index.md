@@ -13,5 +13,5 @@ header_img: /assets/img/site/banner.png
 {% include_cached components/indexcards.html cacheddocs=site.posts cachedlimit=3 %}
 
 <div class="text-right">
-		<a href="./blog/" class="btn btn-outline-dark">Blog <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Top</span></a>
+		<a href="./blog/" class="btn btn-outline-dark">Blog <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Blog</span></a>
 </div>
