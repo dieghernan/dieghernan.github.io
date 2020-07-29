@@ -24,7 +24,7 @@ header_img: /assets/img/site/banner.png
 {: .display-3 .mb-5 }
 
 {%- assign alldocs = site.documents | 
-                          where_exp: "item", "item.collection == projects" | sort: date | reverse -%}
+                          where_exp: "item", "item.collection == 'projects'" | sort: date | reverse -%}
 
 {% include_cached components/indexcards.html cacheddocs=alldocs cachedlimit=3 %}
 
