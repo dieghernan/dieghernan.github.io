@@ -24,7 +24,7 @@ library(dplyr)
 
 ## The problem
 
-The `sf`package includes [`st_cast`](https://r-spatial.github.io/sf/reference/st_cast.html), a very powerful function that transforms geometries into other different types of geometries (i.e. `LINESTRING`to `POLYGON`, etc.). 
+The `sf` package includes [`st_cast`](https://r-spatial.github.io/sf/reference/st_cast.html), a very powerful function that transforms geometries into other different types of geometries (i.e. `LINESTRING`to `POLYGON`, etc.). 
 
 
 ```r
@@ -41,18 +41,13 @@ plot(st_geometry(italy_pt), col = c("red", "yellow", "blue"), main = "POINT")
 
 ![plot of chunk 20190505_italycast]({{ './assets/img/blog//20190505_italycast-1.png' | absolute_url }})
 
-What I missed when using `st_cast`is the possibility to "break" the `LINESTRING`objects into sub-segments:
-
-
-```
-## Error in file(filename, "r", encoding = encoding): cannot open the connection
-```
+What I missed when using `st_cast` is the possibility to "break" the `LINESTRING`objects into sub-segments:
 
 ![plot of chunk 20190505_italycastsub]({{ './assets/img/blog/20190505_italycastsub-1.png' | absolute_url }})
 
 ## An approach
 
-So one possible solution could be to create `LINESTRING` objects for each consecutive pair of `POINT`objects across the original geometry. Let's check it:
+So one possible solution could be to create `LINESTRING` objects for each consecutive pair of `POINT` objects across the original geometry. Let's check it:
 
 
 ```r
@@ -83,11 +78,11 @@ plot(st_geometry(geom), col = c("red", "yellow", "blue"), main = "AFTER FUNCTION
 
 Finally, I wrapped the solution into a function and extended it a little bit:
 
-* When the input is not a `LINESTRING` or a `POLYGON`returns an error and stops.
+* When the input is not a `LINESTRING` or a `POLYGON` returns an error and stops.
 
 * The function accepts `sf` with several rows or `sfc` objects with several geometries, and returns the same class of input. In the case of `sf` objects, the input `data.frame` is added.
 
-* By default, the output is a `MULTILINESTRING` geometry. This has the benefit that output has the same number of geometries than the input. This can be modified setting the parameter `to` as `LINESTRING`, that in fact only casts the `MULTILINESTRING`object into `LINESTRING`.
+* By default, the output is a `MULTILINESTRING` geometry. This has the benefit that output has the same number of geometries than the input. This can be modified setting the parameter `to` as `LINESTRING`, that in fact only casts the `MULTILINESTRING` object into `LINESTRING`.
 
 
 ```r
