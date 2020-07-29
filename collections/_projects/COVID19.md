@@ -3,7 +3,7 @@ title: COVID19 Microsite
 subtitle: Tracking the outbreak in Spain by region
 header_img: https://dieghernan.github.io/COVID19/assets/img/header.png
 tags: [project,R,maps,sf,cartography]
-permalink: /COVID19project
+permalink: /COVID19-project
 date: 2020-04-04
 ---
 
@@ -14,5 +14,5 @@ Visit the microsite with maps and official data on the impact of COVID19 in Spai
 
 ![FallecidosEvo](https://dieghernan.github.io/COVID19/assets/Fallecidos.gif)
 
-Deceases in Spain by COVID19
+Overall deceases in Spain by COVID19 - Evolution
 {: .caption }

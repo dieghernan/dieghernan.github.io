@@ -134,9 +134,9 @@ ISO_memcol = function(df, #Input dataframe
 * Wikipedia, the free encyclopedia
   * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
   * [NUTS](https://es.wikipedia.org/wiki/Nomenclatura_de_las_Unidades_Territoriales_Estad%C3%ADsticas)
-* The World Factbook - CIA: [https://www.cia.gov/library/publications/the-world-factbook/index.html](https://www.cia.gov/library/publications/the-world-factbook/index.html) 
+* [The World Factbook](https://www.cia.gov/library/publications/the-world-factbook/index.html) - CIA
 * [United Nations Statistical Division](https://unstats.un.org/unsd/methodology/m49/overview/)
 * [geonames](https://www.geonames.org/)
 * [REST COUNTRIES](https://restcountries.eu/)
 * [Unicode Common Locale Data Repository (CLDR) Project](https://github.com/unicode-cldr)
-* [http://www.statoids.com/](http://www.statoids.com/)
+* <http://www.statoids.com/>
