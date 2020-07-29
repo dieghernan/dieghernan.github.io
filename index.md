@@ -17,7 +17,7 @@ header_img: /assets/img/site/banner.png
 </div>
 
 * * *
-{: .my-3 }
+{: .my-5 .bg-primary }
 
 
 ## Projects
