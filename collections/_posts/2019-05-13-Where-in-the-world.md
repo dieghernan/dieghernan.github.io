@@ -1,12 +1,9 @@
 ---
-layout: post
 title: Where in the world?
 subtitle: A leaflet map with the places I have flown
 tags: [R,maps,leaflet]
-linktormd: true
-share-img: https://dieghernan.github.io/assets/figs/20190513_imgpost.png
+header_img: https://dieghernan.github.io/assets/figs/20190513_imgpost.png
 date: 2019-05-13
-img-to-head: true
 leafletmap: true
 always_allow_html: yes
 output: github_document
