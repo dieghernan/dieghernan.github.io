@@ -13,7 +13,7 @@ header_img: /assets/img/site/banner.png
 {% include_cached components/indexcards.html cacheddocs=site.posts cachedlimit=3 %}
 
 <div class="text-right mx-3">
-		<a href="./blog/" class="btn text-primary">Blog &raquo;</a>
+		<a href="./blog/" class="btn text-primary">Blog &rsaquo;</a>
 </div>
 
 * * *
@@ -29,5 +29,5 @@ header_img: /assets/img/site/banner.png
 {% include_cached components/indexcards.html cacheddocs=alldocs cachedlimit=3 %}
 
 <div class="text-right mx-3">
-		<a href="./projects" class="btn text-primary">More projects &raquo;</a>
+		<a href="./projects" class="btn text-primary">More projects &rsaquo;</a>
 </div>
