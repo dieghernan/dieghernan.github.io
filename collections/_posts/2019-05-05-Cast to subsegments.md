@@ -1,6 +1,6 @@
 ---
-title: Cast a line to subsegments in R
-subtitle: User-defined function using sf package
+title: Cast a line to subsegments in <strong>R</strong>
+subtitle: User-defined function using <code>sf</code> package
 header_img: ./assets/img/blog//20190505_benchmarkfunction-1.png
 tags: [R,sf,function]
 output: 
@@ -41,12 +41,12 @@ plot(st_geometry(italy_lin),col=c("red","yellow","blue"), main="LINE")
 plot(st_geometry(italy_pt),col=c("red","yellow","blue"), main="POINT")
 ```
 
-![plot of chunk 20190505_italycast]({{ './assets/img/blog//20190505_italycast-1.png' | absolute_url }})
+![plot of chunk 20190505_italycast](../assets/img/blog/20190505_italycast-1.png)
 
 What I missed when using `st_cast` is the possibility to “break” the
 `LINESTRING` objects into sub-segments:
 
-![plot of chunk 20190505_italycastsub]({{ './assets/img/blog/20190505_italycastsub-1.png' | absolute_url }})
+![plot of chunk 20190505_italycastsub](../assets/img/blog/20190505_italycastsub-1.png)
 
 An approach
 -----------
@@ -73,7 +73,7 @@ geom = lapply(1:(length(st_coordinates(test)[, 1]) - 1),
 plot(st_geometry(geom), col = c("red", "yellow", "blue"),main="AFTER FUNCTION")
 ```
 
-![plot of chunk 20190505_testspain]({{ './assets/img/blog/20190505_testspain-1.png' | absolute_url }})
+![plot of chunk 20190505_testspain](../assets/img/blog/20190505_testspain-1.png' | absolute_url)
 
 The function `stdh_cast_substring`
 ----------------------------------
@@ -175,7 +175,7 @@ plot(st_geometry(test50),col="#FEFEE9",border="#646464",add=T)
 plot(st_geometry(t2), col = c("red", "yellow", "blue"),add=T, lwd=0.5)
 ```
 
-![plot of chunk 20190505_benchmarkfunction]({{ './assets/img/blog/20190505_benchmarkfunction-1.png' | absolute_url }})
+![plot of chunk 20190505_benchmarkfunction](../assets/img/blog/20190505_benchmarkfunction-1.png)
 
 It can be seen a difference in terms of performance, noting that
 `test100` has 15 polygons decomposed in 914 sub-strings while `test50`

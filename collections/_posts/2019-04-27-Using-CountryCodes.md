@@ -1,5 +1,5 @@
 ---
-title: Using CountryCodes database and sf package
+title: Using CountryCodes database and <code>sf</code> package
 subtitle: vignette of the CountryCodes project
 header_img: ./assets/img/blog/20190427_mapfin-1.png
 tags: [R,sf,maps,vignette]
@@ -228,4 +228,4 @@ plot(bbox,
 )
 ```
 
-![plot of chunk 20190427_mapfin]({{ './assets/img/blog/20190427_mapfin-1.png' | absolute_url }})
+![plot of chunk 20190427_mapfin](../assets/img/blog/20190427_mapfin-1.png)
