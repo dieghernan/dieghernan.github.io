@@ -73,7 +73,7 @@ geom = lapply(1:(length(st_coordinates(test)[, 1]) - 1),
 plot(st_geometry(geom), col = c("red", "yellow", "blue"),main="AFTER FUNCTION")
 ```
 
-![plot of chunk 20190505_testspain](../assets/img/blog/20190505_testspain-1.png' | absolute_url)
+![plot of chunk 20190505_testspain](../assets/img/blog/20190505_testspain-1.png)
 
 The function `stdh_cast_substring`
 ----------------------------------
