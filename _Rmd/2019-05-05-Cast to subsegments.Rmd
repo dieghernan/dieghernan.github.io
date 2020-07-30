@@ -157,4 +157,4 @@ plot(st_geometry(t2), col = c("red", "yellow", "blue"),add=T, lwd=0.5)
 
 ```
  
-It can be seen a difference in terms of performance, noting that `test100` has `r length(st_geometry(test100))` polygons decomposed in `r format(length(st_geometry(t1)), nsmall=1, big.mark=",")` sub-strings while `test50` has `r length(st_geometry(test50))` polygons to `r format(length(st_geometry(t2)), nsmall=1, big.mark=",")` sub-strings. In that sense, the original `st_cast`is much faster, although this solution may work well in most cases.
+It can be seen a difference in terms of performance, noting that `test100` has `r length(st_geometry(test100))` polygons decomposed in `r format(length(st_geometry(t1)), nsmall=1, big.mark=",")` sub-strings while `test50` has `r length(st_geometry(test50))` polygons to `r format(length(st_geometry(t2)), nsmall=1, big.mark=",")` sub-strings. In that sense, the original `st_cast` is much faster, although this solution may work well in most cases.
