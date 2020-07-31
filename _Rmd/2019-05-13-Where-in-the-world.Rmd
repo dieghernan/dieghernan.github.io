@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Where in the world?
 subtitle: A leaflet map with the places I have flown
 tags: [R,maps,leaflet]
