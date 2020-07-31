@@ -27,6 +27,7 @@ places I have traveled by plain
 
 
 **✈️ 227,765.7 kms. flown so far.**
+{: .alert .alert-info .p-3 .mx-2 .my-3 .lead}
 
 ## Top Cities
 
