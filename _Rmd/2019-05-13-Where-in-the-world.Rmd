@@ -140,7 +140,6 @@ connectflights = gcIntermediate(
                      options = list(noWrap = TRUE,
                                     detectRetina = TRUE)) %>%
     setView(-3.56948,  40.49181, zoom = 3) %>%
-    setMaxBounds(-180, -90, 180, 90) %>%
     addCircleMarkers(
       data = ndots,
       radius = ndots$n ^ (1 / 5) * 5,
