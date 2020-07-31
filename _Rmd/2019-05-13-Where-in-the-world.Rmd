@@ -3,10 +3,13 @@ layout: post
 title: Where in the world?
 subtitle: A leaflet map with the places I have flown
 tags: [R,maps,leaflet]
-linktormd: true
+header_img: /assets/img/blog/201905_Where-in-the-world.png
 leafletmap: true
 always_allow_html: yes
-output: github_document
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
 ---
 
 
@@ -25,7 +28,7 @@ rm(list = ls())
 library(pacman)
 rm(list = ls())
 
-source("../pass.R")
+source("../../pass.R")
 
 library(pacman)
 p_load(dplyr,
@@ -38,7 +41,7 @@ p_load(dplyr,
 
 
 # Find airports----
-myflights <- read_excel("../assets/flights.xlsx")
+myflights <- read_excel("../assets/data/flights.xlsx")
 tosearch = data.frame(toloc = 
                         (sort(append(
                           myflights$start, 
@@ -198,7 +201,7 @@ connectflights = gcIntermediate(
 
 
 
-## `r format(kms, nsmall=1, big.mark=",")` kms. flown so far.
+**✈️ `r format(kms, nsmall=1, big.mark=",")` kms. flown so far.**
 
 
 
