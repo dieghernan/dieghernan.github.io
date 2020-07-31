@@ -135,10 +135,9 @@ connectflights = gcIntermediate(
   kms = sum((as.numeric(st_length(data)) * data$n) / 1000)
   outline <- ndots[chull(ndots$long, ndots$lat), ]
   # Leaflet-----
-  map <- leaflet(options = leafletOptions(minZoom = 1.25)) %>%
+  map <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
     addProviderTiles(providers$CartoDB.DarkMatter,
-                     options = list(noWrap = TRUE,
-                                    detectRetina = TRUE)) %>%
+                     options = list(detectRetina = TRUE)) %>%
     setView(-3.56948,  40.49181, zoom = 3) %>%
     addCircleMarkers(
       data = ndots,
