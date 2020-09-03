@@ -103,7 +103,7 @@ Puzzle = left_join(Puzzlegeom %>% select(index_target),
   select(-index_target)
 
 # Plot
-par(mfrow = c(1, 2), mar = c(1, 1, 1, 1))
+par(mfrow = c(1, 2), mar = c(1, 1, 1, 1), bg=NA)
 plot(st_geometry(Fishnet), col = mypal(4), main = "Fishnet")
 plot(st_geometry(Puzzle), col = mypal(4), main = "Puzzle")
 
@@ -159,7 +159,7 @@ Hexbin=left_join(Hexbingeom %>%
   select(-index_target)
 
 #Plot
-par(mfrow=c(1,2),mar=c(1,1,1,1))
+par(mfrow=c(1,2),mar=c(1,1,1,1), bg=NA)
 plot(st_geometry(Honeycomb),col=mypal(4), main="Honeycomb")
 plot(st_geometry(Hexbin),col=mypal(4), main="Hexbin")
 ```
@@ -194,7 +194,7 @@ Pixel=left_join(Pixelgeom %>%
   select(-index_target)
 
 #Plot
-par(mfrow=c(1,1),mar=c(1,1,1,1))
+par(mfrow=c(1,1),mar=c(1,1,1,1), bg=NA)
 plot(st_geometry(Pixel),col=mypal(4), main="Pixel")
 ```
 
@@ -289,7 +289,7 @@ pix=stdh_gridpol(GB,to="pixel",gridsize = 50*1000)
 ```
 
 ```{r 20190602_functionex, echo=FALSE,  dev.args=list(bg = NA), fig.height=2*350/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, tidy='styler'}
-par(mfrow=c(2,3),mar=c(1,1,1,1))
+par(mfrow=c(2,3),mar=c(1,1,1,1), bg=NA)
 plot(st_geometry(GB),col=mypal(4), main="Initial")
 plot(st_geometry(fish),col=mypal(4), main="Fishnet")
 plot(st_geometry(puzz),col=mypal(4), main="Puzzle")
