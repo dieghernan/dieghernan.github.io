@@ -1,24 +1,19 @@
 ---
-layout: post
-title: "Beautiful Maps with R (I): Fishnets, Honeycombs and Pixels"
+title: "Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels"
 subtitle: "Awesome simplified maps with R"
 tags: [R,beautiful_maps, maps, sf]
-date: 2019-06-02
-share-img: https://dieghernan.github.io/assets/figs/20190602_imgpost-1.png
-img-to-head: true
-linktormd: true
-output: github_document
+header_img: https://dieghernan.github.io/assets/figs/20190602_imgpost-1.png
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
 ---
-
-
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
-
-
 ```
 
 Sometimes you want to produce maps with special layouts. I specially like maps with modified geometries, e.g. simplifiying the original shapes to squares or dots. When doing a little search over the web I found the fantastic post [Fishnets and Honeycomb: Square vs. Hexagonal Spatial Grids](http://strimas.com/spatial/hexagonal-grids/) by [Matt Strimas-Mackey](http://strimas.com/about/) that was a huge inspiration (by the way, don't miss [his blog](http://strimas.com/#posts), full of very interesting pieces of work). 
@@ -36,7 +31,7 @@ The approach is similar (using grids over a map and work with that) but using [`
 | **Pixel** | Dot | No
 
 
-### Required R packages
+## Required R packages
 
 ```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
 library(sf)
@@ -45,11 +40,11 @@ library(dplyr)
 library(RColorBrewer)
 ```
 
-### Working with square grids
+## Working with square grids
 
 Let's use the `square` option of `st_make_grid` and play a bit with it.
 
-```{r 20190602_preparing, fig.align='center', message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+```{r 20190602_preparing,  dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
 GB  <- ne_download(50,
                    type = "map_subunits",
                    returnclass = "sf",
@@ -67,10 +62,9 @@ target = st_geometry(initial)
 mypal = colorRampPalette(c("#F3F8F8", "#008080"))
 ```
 
-{: .box-warning}
-<i class="fa fa-exclamation-triangle"></i> **Warning:** The `cellsize` should be established in the same unit that the projection (in this case is meters). Pay special attention on this, given that if the parameter is too small (meaning that the grid is too dense) **R** could crash easily.
+<i class="fas fa-exclamation-triangle"></i> **Warning:** The `cellsize` should be established in the same unit that the projection (in this case is meters). Pay special attention on this, given that if the parameter is too small (meaning that the grid is too dense) **R** could crash easily.{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
-```{r 20190602_squares, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90, fig.align='center'}
+```{r 20190602_squares, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90, dev.args=list(bg = NA)}
 grid = st_make_grid(target,
                     50 * 1000,
                     # Kms
@@ -115,11 +109,11 @@ plot(st_geometry(Puzzle), col = mypal(4), main = "Puzzle")
 
 ```
 
-### Going hex
+## Going hex
 
 Extremely easy. We just need to change the `square` parameter of `st_make_grid` from `TRUE` to `FALSE`
 
-```{r 20190602_hex, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90, fig.align='center'}
+```{r 20190602_hex, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90,  dev.args=list(bg = NA)}
 
 
 grid = st_make_grid(target,
@@ -171,10 +165,10 @@ plot(st_geometry(Hexbin),col=mypal(4), main="Hexbin")
 ```
 
 
-### Pixel it!
+## Pixel it!
 
 Also quite easy, just a couple of tweaks more, always using `st_make_grid`.
-```{r 20190602_pix, warning=FALSE, message=FALSE, tidy='styler',fig.width=250/90, fig.height=350/90, dpi=90, fig.align='center'}
+```{r 20190602_pix, warning=FALSE, message=FALSE, tidy='styler',fig.width=250/90, fig.height=350/90, dpi=90,  dev.args=list(bg = NA)}
 grid = st_make_grid(target,
                     50*1000, # Kms
                     crs = st_crs(initial),
@@ -205,9 +199,10 @@ plot(st_geometry(Pixel),col=mypal(4), main="Pixel")
 ```
 
 
-### Wrap up
- So finally I wrapped all that in a function (see the code in [my repo](https://github.com/dieghernan/dieghernan.github.io/tree/master/assets/functions)), that I named `stdh_gridpol`:
-```{r 20190602_function, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=3*350/90, dpi=90, fig.align='center'}
+## Wrap up
+
+So finally I wrapped all that in a function (see the code in [my repo](https://github.com/dieghernan/dieghernan.github.io/tree/master/assets/functions)), that I named `stdh_gridpol`:
+```{r 20190602_function, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=3*350/90, dpi=90,  dev.args=list(bg = NA)}
 stdh_gridpol = function(sf,
                         to = "fishnet",
                         gridsize = as.integer(
@@ -293,7 +288,7 @@ hex=stdh_gridpol(GB,to="hexbin",gridsize = 50*1000)
 pix=stdh_gridpol(GB,to="pixel",gridsize = 50*1000)
 ```
 
-```{r 20190602_functionex, echo=FALSE, fig.align='center', fig.height=2*350/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, tidy='styler'}
+```{r 20190602_functionex, echo=FALSE,  dev.args=list(bg = NA), fig.height=2*350/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, tidy='styler'}
 par(mfrow=c(2,3),mar=c(1,1,1,1))
 plot(st_geometry(GB),col=mypal(4), main="Initial")
 plot(st_geometry(fish),col=mypal(4), main="Fishnet")
