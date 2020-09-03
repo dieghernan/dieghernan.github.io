@@ -62,7 +62,8 @@ target = st_geometry(initial)
 mypal = colorRampPalette(c("#F3F8F8", "#008080"))
 ```
 
-<i class="fas fa-exclamation-triangle"></i> **Warning:** The `cellsize` should be established in the same unit that the projection (in this case is meters). Pay special attention on this, given that if the parameter is too small (meaning that the grid is too dense) **R** could crash easily.{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+<i class="fas fa-exclamation-triangle"></i> **Warning:** The `cellsize` should be established in the same unit that the projection (in this case is meters). Pay special attention on this, given that if the parameter is too small (meaning that the grid is too dense) **R** could crash easily.
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 ```{r 20190602_squares, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90, dev.args=list(bg = NA)}
 grid = st_make_grid(target,
