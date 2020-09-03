@@ -1,12 +1,16 @@
 ---
-layout: post
-title: Leaflet, R, Markdown, Jekyll and GitHub
+title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
 subtitle: Make it work in 6 steps - a short tutorial
 tags: [R,leaflet,Jekyll, html, maps]
+header_img: https://dieghernan.github.io/assets/figs/20190520_imgpost.png
 linktormd: true
 leafletmap: true
 always_allow_html: yes
-output: github_document
+last_modified_at: 2020-09-03
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
 ---
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
@@ -23,19 +27,7 @@ Recently I have been struggling when trying to embed a [leaflet](https://rstudio
 
 **Index**
 
-1. [What to include](#step1)
-
-2. [Where to include](#step2)
-
-3. [Creating the leaflet map](#step3)
-
-4. [Set up the YAML front matter](#step4)
-
-5. [Modifying the `.md`file](#step5)
-
-6. [Publish your post](#step6)
-
-**[Gallery: Size of a leaflet map](#extra)**
+{:toc}
 
 Ready? Let's go!
  
