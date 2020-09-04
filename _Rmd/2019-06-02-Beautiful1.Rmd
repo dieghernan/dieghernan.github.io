@@ -301,3 +301,12 @@ plot(st_geometry(pix),col=mypal(4), main="Pixel")
 ```
 
 And that's it! The function `stdh_gridpol` has some alert mechanisms, as accepting only `POLYGON` or `MULTIPOLYGON`, and the default value of `gridsize` is computed in a way that the shortest dimension would have 40 cells.
+
+```{r 20190602_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
+world <- ne_countries(returnclass = "sf")
+world <- st_transform(world,"+proj=robin")
+world2 <- stdh_gridpol(world,"pixel", gridsize = 300000)
+par(bg=NA, mar=c(0,0,0,0), mfrow=c(1,1))
+plot(st_geometry(world2), bg="#505050", border="#505050", col="#1fc2ff")
+
+```
