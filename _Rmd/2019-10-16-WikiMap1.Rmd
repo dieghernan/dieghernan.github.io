@@ -1,26 +1,24 @@
 ---
-layout: post
 title: "Wikipedia Maps (I): Organ donor rates"
-subtitle: "A choropleth map with R"
+subtitle: "A choropleth map with <strong>R</strong>"
 tags: [R, Wikipedia, sf,cartography, svg, maps]
-date: 2019-10-16
-share-img: https://dieghernan.github.io/assets/figs/20191016_DonorRate.png
-img-to-head: true
-linktormd: true
-output: github_document
+header_img: ./assets/img/blog/20191016_imgpost.png
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, tidy = 'styler')
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
-par(mar = c(0, 0, 0, 0))
 ```
-This is a quick post on how to create a map as per the [Wikipedia conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps). In this case I have chosen to plot the [international organ donor rates](https://en.wikipedia.org/wiki/International_organ_donor_rates), retrieved on 2019-02-10m although the data refers to 2017 (Source: [IRODaT](http://www.irodat.org/?p=database)).
+This is a quick post on how to create a map as per the [Wikipedia conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps). In this case I have chosen to plot the [international organ donor rates](https://en.wikipedia.org/wiki/International_organ_donor_rates), retrieved on 2019-02-10 although the data refers to 2017 (Source: [IRODaT](http://www.irodat.org/?p=database)).
 
-### Webscrapping
+## Webscrapping
 
-First step is to webscrap Wikipedia in order to get the final table. For doing so, I will use the `rvest` library. You can get the *xpaht* you want to webscrap as explained [here](https://stackoverflow.com/a/57972054/7877917).
+First step is to webscrap Wikipedia in order to get the final table. For doing so, I will use the `rvest` library. You can get the `xpath` you want to webscrap as explained [here](https://stackoverflow.com/a/57972054/7877917).
 
 ```{r 20191016_libs, warning=FALSE, message=FALSE}
 library(rvest)
@@ -63,7 +61,7 @@ WorldMap <- left_join(WorldMap, df)
 ```
 
 
-### Merging all together
+## Merging all together
 
 Now let's join and have a look to see what is going on:
 
@@ -117,17 +115,17 @@ MapDonorRate = left_join(WorldMap, dfclean) %>%
 ```
 
 
-### Make the `.svg` file
+## Make the `.svg` file
 
 As already explained, I would like to follow the Wikipedia conventions, so some things to bear in mind:
 
-* Obviously the colors. Wikipedia already provides a good guidance for this. I would make use of the `RColorBrewer`library, which implements [ColorBrewer](http://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9) in **R**.
+* Obviously the colors. Wikipedia already provides a good guidance for this. I would make use of the `RColorBrewer` library, which implements [ColorBrewer](http://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9) in **R**.
 * In terms of projection, Wikipedia recommends the [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection) but, as in their own sample of a gradient map, I would choose to use the [Robinson projection](https://en.wikipedia.org/wiki/Robinson_projection).
 * I should produce an `.svg` file following also the naming convention.
 
 Some libraries then to use: `RColorBrewer`, `rsvg` and specially onw of my favourites, `cartography`:
 
-```{r 20191016_final, echo=TRUE, fig.align='center', message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
+```{r 20191016_final, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide' }
 library(RColorBrewer)
 library(cartography)
 library(rsvg)
@@ -176,11 +174,14 @@ dev.off()
 
 ```
 
-And that's all. Our `.svg` file is ready to be included in Wikipedia. I will update this post once it's done.
+And that's all. Our `.svg` file is ready to be included in Wikipedia.
 
 
+**Update**: The map is already part of the Wikipedia article [[link](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary).
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 }]
 
-```{r 20191016_finalpng, fig.align='center', message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
+```{r 20191016_imgpost, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
 rsvg_png("Organ donor rate per million by country gradient map (2017).svg",
-         "20191016_DonorRate.png")
+         "20191016_imgpost.png")
 ```
+![imgpost](../assets/img/blog/20191016_imgpost.png)
