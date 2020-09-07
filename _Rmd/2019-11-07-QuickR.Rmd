@@ -1,15 +1,14 @@
 ---
-layout: post
 title: "Quick R: Inset maps"
 subtitle: "An alternative using plot()"
 tags: [R, maps, flags,sf]
 date: 2019-11-07
-share-img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png
-img-to-head: true
-linktormd: true
-output: github_document
+header_img: https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
 ---
-
 
 
 
@@ -18,17 +17,16 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 
-
 ```
 
 
-How to place an inset map in **R**? There are many solutions out there using the `ggplot2` package (see [Drawing beautiful maps programmatically with R, sf and ggplot2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html) by Mel Moreno and Mathieu Basille). However, I like the old reliable `plot` function, so the question is: is there another way?
+How to place an inset map in **R**? There are many solutions out there using the `ggplot2` package (see [Drawing beautiful maps programmatically with **R**, `sf` and `ggplot2`](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html) by Mel Moreno and Mathieu Basille). However, I like the old reliable `plot` function, so the question is: is there another way?
 
 
 There is. I found inspiration [here](https://www.statmethods.net/advgraphs/layout.html) and I just applied it to a map.
 
 
-### Required R packages
+## Required R packages
 
 ```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
 library(sf)
@@ -36,11 +34,11 @@ library(dplyr)
 library(rnaturalearth)
 ```
 
-### Mimicking Moreno & Basille
+## Mimicking Moreno & Basille
 
 I would present here an alternative version of [Drawing beautiful maps programmatically with R, sf and ggplot2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html), so the bulk of the detail can be found there. I would focus only in the `plot()`side.
 
-```{r 20191108_main, fig.align='center', message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
+```{r 20191108_main, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
 world <- ne_countries(scale = 'medium', returnclass = 'sf')
 USA <- subset(world, admin == "United States of America")
 
@@ -64,7 +62,7 @@ plot(
 
 ```
 
-```{r 20191108_Alaska, fig.align='center', message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
+```{r 20191108_Alaska, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
 # Plot Alaska----
 plot(
   st_geometry(world %>%
@@ -83,7 +81,7 @@ plot(
 )
 ```
 
-```{r 20191108_Hawaii, fig.align='center', message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
+```{r 20191108_Hawaii, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
 # Plot Hawaii----
 plot(
   st_geometry(world %>%
@@ -103,7 +101,7 @@ plot(
 
 ```
 
-### Insetting
+## Insetting
 
 From now on, I just focus on the inset part, using the `fig()` option on `par()`. Quoting [statmethods](https://www.statmethods.net/advgraphs/layout.html):
 
@@ -112,7 +110,7 @@ From now on, I just focus on the inset part, using the `fig()` option on `par()`
 
 So being `x1` and `y1` the starting points and `x2`, `y2` the final points, we just can set up those parameters and adjust the final placement of the insets. Additionally I added a box around the insets using `bbox()`. I didn't mimic Moreno & Basille here and I just worked it by myself.
 
-```{r 20191108_inset, fig.align='center', message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=900/90, fig.height=650/90}
+```{r 20191108_inset, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=900/90, fig.height=650/90}
 par(mar = c(0, 0, 0, 0))
 plot(
   st_geometry(world %>%
