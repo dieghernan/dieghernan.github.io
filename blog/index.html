@@ -35,13 +35,13 @@ og_image: /assets/img/site/banner-blog.png
 	{%- if paginator.page == 1 -%}
 		{%- assign prevclass = "invisible" -%}
 		{%- assign firstclass = "invisible" -%}
+	{%- elsif paginator.page == paginator.total_pages -%}
+		{%- assign nextclass = "invisible" -%}
+		{%- assign lastclass ="invisible" -%}
 	{%- elsif paginator.page == 2 -%}
 			{%- assign firstclass = "invisible" -%}
 	{%- elsif paginator.page == prelast -%}
 			{%- assign lastclass ="invisible" -%}
-	{%- elsif paginator.page == paginator.total_pages -%}
-		{%- assign nextclass = "invisible" -%}
-		{%- assign lastclass ="invisible" -%}
   {%- else -%}
 	{%- endif -%}
 	            <nav aria-label="Page navigation example" class="container-lg mt-4 chulapa-pagination text-center">
