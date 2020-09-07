@@ -123,7 +123,7 @@ As already explained, I would like to follow the Wikipedia conventions, so some 
 * In terms of projection, Wikipedia recommends the [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection) but, as in their own sample of a gradient map, I would choose to use the [Robinson projection](https://en.wikipedia.org/wiki/Robinson_projection).
 * I should produce an `.svg` file following also the naming convention.
 
-Some libraries then to use: `RColorBrewer`, `rsvg` and specially onw of my favourites, `cartography`:
+Some libraries then to use: `RColorBrewer`, `rsvg` and specially one of my favourites, `cartography`:
 
 ```{r 20191016_final, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide' }
 library(RColorBrewer)
@@ -177,11 +177,12 @@ dev.off()
 And that's all. Our `.svg` file is ready to be included in Wikipedia.
 
 
-**Update**: The map is already part of the Wikipedia article [[link](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary).
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 }]
-
 ```{r 20191016_imgpost, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
 rsvg_png("Organ donor rate per million by country gradient map (2017).svg",
          "20191016_imgpost.png")
 ```
 ![imgpost](../assets/img/blog/20191016_imgpost.png)
+
+
+**Update**: The map is already part of the [Wikipedia article](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary).
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 }
