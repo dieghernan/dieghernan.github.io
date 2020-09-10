@@ -137,7 +137,7 @@ layoutLayer(
 )
 ```
 
-![](../assets/img/misc/20201702_hatched-min-1.png)<!-- -->
+![](../../assets/img/misc/20201702_hatched-min-1.png)<!-- -->
 
 ## Example 2
 
@@ -227,7 +227,7 @@ layoutLayer(
 ) 
 ```
 
-![](../assets/img/misc/20201702_hatched-1.png)<!-- -->
+![](../../assets/img/misc/20201702_hatched-1.png)<!-- -->
 
 `legendHatched` honors the order on the parameters. In this case, two
 `dot` patterns are presents, so `pch = c(4,15)` takes care of that. Note
@@ -336,7 +336,7 @@ layoutLayer(
 )
 ```
 
-![](../assets/img/misc/20201702_hatched-adv-1.png)<!-- -->
+![](../../assets/img/misc/20201702_hatched-adv-1.png)<!-- -->
 
 # png Layer
 
@@ -389,7 +389,7 @@ layoutLayer(
 ) 
 ```
 
-![](../assets/img/misc/20201702_pnglayer-1.png)<!-- -->
+![](../../assets/img/misc/20201702_pnglayer-1.png)<!-- -->
 
 ## Example 2
 
@@ -416,7 +416,7 @@ UKpng=getPngLayer(UK,urluk)
 pngLayer(UKpng, add=TRUE)
 ```
 
-![](../assets/img/misc/20201702_png-adv-1.png)<!-- -->
+![](../../assets/img/misc/20201702_png-adv-1.png)<!-- -->
 
 # wordcloudLayer
 
@@ -452,7 +452,7 @@ layoutLayer(
 ) 
 ```
 
-![](../assets/img/misc/20201702_wordcloud1-1.png)<!-- -->
+![](../../assets/img/misc/20201702_wordcloud1-1.png)<!-- -->
 
 ## Example 2
 
@@ -504,4 +504,4 @@ layoutLayer(title="Most frequent genres on US",
             theme="orange.pal")
 ```
 
-![](../assets/img/misc/20201702_wordcloud2-1.png)<!-- -->
+![](../../assets/img/misc/20201702_wordcloud2-1.png)<!-- -->
