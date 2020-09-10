@@ -1,15 +1,14 @@
 ---
-layout: post
 title: "New features on cartography package"
 subtitle: "Vignette of the package expansion"
 tags: [R,beautiful_maps, maps, sf, cartography, vignette]
 date: 2020-02-17
-permalink: /cartographyvignette/
-output: github_document
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
 ---
 
-  
-  
 ```{r echo=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 rm(list = ls())
@@ -22,26 +21,23 @@ knitr::knit_hooks$set(margin = function(before, options, envir){
 
 # Introduction
 
-The aim of this document is to describe the new features added to `cartography` by
-[dieghernan](https://github.com/dieghernan/), basically:
+The aim of this document is to describe the new features added to `cartography` on version `2.4.0` by
+[dieghernan](https://github.com/dieghernan/) and already available on **CRAN**.
+
+Those new features are:
   
 * `hatchedLayer` and `legendHatched` functions.
 * `pngLayer` and `getPngLayer` functions.
 * `wordcloudLayer` function.
-* An image can be now found on /inst/img/, for testing purposes.
-* An image can be now found on `/inst/img/`, for testing purposes.
+
 
 These functions don't handle `sp` objects on purpose, favoring `sf` instead.
 
 # Installation
 ```{r install, message=FALSE, warning=FALSE}
-library(devtools)
-devtools::install_github("riatelab/cartography")
-
-
+#install.packages("cartography")
 library(cartography)
 packageVersion("cartography")
-
 ```
 
 
@@ -51,13 +47,13 @@ Version of typology/choropleth maps using a hatched filling. This is particularl
 
 ## Example 1
 
-```{r hatched-min, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20201702_hatched-min, fig.height=7, fig.width=7, margin=TRUE}
 library(sf)
 library(jsonlite)
 library(dplyr)
 
 #Shape
-cntries = st_read("https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson",
+cntries = st_read("https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson",
                   stringsAsFactors = FALSE)
 
 # Include trade blocks
@@ -88,8 +84,11 @@ library(cartography)
 
 #Limits EU
 #Plot base map
-ghostLayer(st_transform(st_as_sf(nuts0.spdf),3857))
-plot(st_geometry(cntries), add = TRUE)
+plot(
+  st_geometry(cntries),
+  xlim = c(2200000, 7150000),
+  ylim = c(1380000, 5500000),
+)
 plot(st_geometry(cntries), add = TRUE)
 plot(st_geometry(cntries[!is.na(cntries$EU),]), col = "grey60", add = TRUE)
 plot(st_geometry(cntries[!is.na(cntries$EFTA),]), col = "black", add = TRUE)
@@ -132,14 +131,17 @@ layoutLayer(
 
 ## Example 2
 
-```{r hatched, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20201702_hatched, fig.height=7, fig.width=7, margin=TRUE}
 library(sf)
 library(cartography)
 
-ghostLayer(st_transform(st_as_sf(nuts0.spdf),3857))
-
 # Plot World
-plot(cntries$geometry, col = "white", add = TRUE)
+plot(
+  cntries$geometry,
+  col = "white",
+  xlim = c(2200000, 7150000),
+  ylim = c(1380000, 5500000),
+)
 #Add layers for non european area - left2right
 NOEUR = subset(cntries, CONTINENT.EN != "Europe" | is.na(CONTINENT.EN))
 hatchedLayer(
@@ -221,7 +223,7 @@ layoutLayer(
 
 `hatchedLayer` also could be useful for plotting several dimensions on the same map, in combination with another functions of the package.
 
-```{r hatched-adv, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20201702_hatched-adv, fig.height=7, fig.width=7, margin=TRUE}
 
 library(sf)
 library(cartography)
@@ -250,7 +252,11 @@ cntries$flag <- flag
 
 
 #Plot lims
-ghostLayer(st_transform(st_as_sf(nuts0.spdf),3857))
+plot(
+  st_geometry(cntries),
+  xlim = c(2200000, 7150000),
+  ylim = c(1380000, 5500000)
+)
 
 
 #Combine with typoLayer
@@ -325,7 +331,7 @@ For high-quality png maps, **it is recommended to plot your map on a `.svg` devi
 
 ## Example 1
 
-```{r pnglayer, fig.height=7, fig.width=5, margin=TRUE, dev="svg"}
+```{r 20201702_pnglayer, fig.height=7, fig.width=5, margin=TRUE}
 library(sf)
 library(cartography)
 
@@ -336,7 +342,7 @@ africa=subset(cntries, CONTINENT.EN =="Africa") %>%
 
 #Get bigger countries
 
-ghostLayer(africa[1:20,], bg="lightblue")
+plot(st_geometry(africa[1:20,]), bg="lightblue")
 
 
 plot(st_geometry(cntries), col="grey90", add=TRUE)
@@ -367,17 +373,19 @@ layoutLayer(
 
 ## Example 2
 
-```{r png-adv, fig.height=5, fig.width=7, margin=TRUE, dev="svg"}
+```{r 20201702_png-adv, fig.height=5, fig.width=7, margin=TRUE}
 
 library(sf)
 library(cartography)
 
-x=st_transform(st_as_sf(nuts0.spdf),3857)
-UK = x %>% filter(id == "UK")
+box <- c(xmin=2200000, xmax=7150000,ymin=1380000, ymax=5500000)
+nuts0 <-  st_crop(cntries, box)
+
+UK = nuts0 %>% filter(id == "UK")
 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"
 
 
-EU=getPngLayer(x,url, mask=FALSE)
+EU=getPngLayer(nuts0,url, mask=FALSE)
 pngLayer(EU, alpha=100)
 urluk=flagrepo = "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/gb.png"
 
@@ -395,7 +403,7 @@ Wordcloud layers fitted into a map shape provide a good trade-off between physic
 
 ## Example 1
 
-```{r wordcloud1, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20201702_wordcloud1, fig.height=7, fig.width=7, margin=TRUE}
 
 eu$dens=eu$pop/eu$area_km2
 
@@ -418,15 +426,17 @@ layoutLayer(
 ```
 
 ## Example 2
-```{r wordcloud2, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20201702_wordcloud2, fig.height=7, fig.width=7, margin=TRUE}
 
 # Genres from MB--
 #Import genres
-collected = read.csv("../assets/US_MB.csv", stringsAsFactors = F)
+collected = read.csv("../assets/data/US_MB.csv", stringsAsFactors = F)
 collected=collected[-1,] %>% arrange(desc(n))
 
-shape = cntries[cntries$ISO_3166_2 == "US", ]
+set.seed(1234)
 
+library(rnaturalearth)
+shape = ne_countries(country="united states of america", returnclass = "sf") %>% st_transform(3857)
 #Get main polygon
 shape = shape %>% st_union %>% st_cast("POLYGON")
 areas = st_area(shape)

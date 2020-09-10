@@ -116,6 +116,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:name/
+  vignettes:
+    output: true
+    permalink: /vignettes/:name/
 permalink: /:year:month_:title/
 defaults:
   -
@@ -161,6 +164,21 @@ defaults:
       breadcrumb_list   :
         - label: Projects
           url: /projects
+  -
+    scope:
+      path: ""
+      type: "vignettes"
+    values:
+      header_type       : "splash"
+      show_bottomnavs   : true
+      show_sociallinks  : true
+      include_on_search : true
+      show_tags         : true
+      show_breadcrumb   : true
+      include_on_feed   : true
+      breadcrumb_list   :
+        - label: Vignettes
+          url: /vignettes
   -
     scope:
       path: "assets/img/blog"
