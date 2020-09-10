@@ -10,7 +10,7 @@ output:
     preserve_yaml: true
 ---
 
-# Introduction
+## Introduction
 
 The aim of this document is to describe the new features added to
 `cartography` on version `2.4.0` by
@@ -26,7 +26,7 @@ Those new features are:
 These functions don’t handle `sp` objects on purpose, favoring `sf`
 instead.
 
-# Installation
+## Installation
 
 ``` r
 #install.packages("cartography")
@@ -35,14 +35,14 @@ packageVersion("cartography")
 ## [1] '2.4.2'
 ```
 
-# Hatched Map
+## Hatched Map
 
 Version of typology/choropleth maps using a hatched filling. This is
 particularly useful for those maps that needs to be printed on black and
-white, as academic papers. This maps also are useful for representing
-overlapping dimensions on a map.
+white, as academic papers. These maps also are useful for representing
+overlapping dimensions.
 
-## Example 1
+### Example 1
 
 ``` r
 library(sf)
@@ -139,7 +139,7 @@ layoutLayer(
 
 ![](../../assets/img/misc/20201702_hatched-min-1.png)<!-- -->
 
-## Example 2
+### Example 2
 
 ``` r
 library(sf)
@@ -234,7 +234,7 @@ layoutLayer(
 that three line-type patterns are also plotted, as and in the previous
 case, `lty = c(1, 1, 3)` respect that order.
 
-## Example 3
+### Example 3
 
 `hatchedLayer` also could be useful for plotting several dimensions on
 the same map, in combination with another functions of the package.
@@ -338,7 +338,7 @@ layoutLayer(
 
 ![](../../assets/img/misc/20201702_hatched-adv-1.png)<!-- -->
 
-# png Layer
+## `png` Layer
 
 This new capability geotags a `.png` file, effectively converting the
 image into a tile. This allows the user to create visual maps by masking
@@ -347,14 +347,28 @@ an image to the shape of a `POLYGON/MULTIPOLYGON`.
 For high-quality png maps, **it is recommended to plot your map on a
 `.svg` device**.
 
-## Example 1
+### Example 1
 
 ``` r
 library(sf)
 library(cartography)
 
+cntries2 = st_read("https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson",
+                  stringsAsFactors = FALSE)
+## Reading layer `CNTR_RG_20M_2016_3857' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson' using driver `GeoJSON'
+## Simple feature collection with 257 features and 6 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -20037510 ymin: -30240970 xmax: 20037510 ymax: 18446790
+## CRS:            3857
 
-africa=subset(cntries, CONTINENT.EN =="Africa") %>%
+cntries2 = merge(cntries2,
+                df,
+                by.x = "ISO3_CODE",
+                by.y = "ISO_3166_3",
+                all.x = TRUE)
+
+africa=subset(cntries2, CONTINENT.EN =="Africa") %>%
   arrange(desc(area_km2))
 
 
@@ -363,10 +377,10 @@ africa=subset(cntries, CONTINENT.EN =="Africa") %>%
 plot(st_geometry(africa[1:20,]), bg="lightblue")
 
 
-plot(st_geometry(cntries), col="grey90", add=TRUE)
+plot(st_geometry(cntries2), col="grey90", add=TRUE)
 
 #Iterate for Africa
-#Get flags from repo - low qualityn to speed up the vignette
+#Get flags from repo - low quality to speed up the vignette
 flagrepo = "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"
 
 
@@ -377,7 +391,7 @@ for (i in 1:nrow(africa)) {
   pngLayer(a, add = TRUE)
 }
 #Add borders
-plot(st_geometry(cntries), add = TRUE, col = NA, lwd=0.4)
+plot(st_geometry(cntries2), add = TRUE, col = NA, lwd=0.4)
 
 layoutLayer(
   title = "Flags of Africa",
@@ -391,7 +405,7 @@ layoutLayer(
 
 ![](../../assets/img/misc/20201702_pnglayer-1.png)<!-- -->
 
-## Example 2
+### Example 2
 
 ``` r
 
@@ -418,7 +432,7 @@ pngLayer(UKpng, add=TRUE)
 
 ![](../../assets/img/misc/20201702_png-adv-1.png)<!-- -->
 
-# wordcloudLayer
+## wordcloudLayer
 
 A word cloud (or tag cloud) is a visual representation of text data. On
 a mapping context, this representation is useful for including several
@@ -429,7 +443,7 @@ between physical location, scale and labels. Size and colors of the
 words are also based on the frequency of the factor to be plotted,
 highlighting the most frequent terms over the rest.
 
-## Example 1
+### Example 1
 
 ``` r
 
@@ -454,7 +468,7 @@ layoutLayer(
 
 ![](../../assets/img/misc/20201702_wordcloud1-1.png)<!-- -->
 
-## Example 2
+### Example 2
 
 ``` r
 
