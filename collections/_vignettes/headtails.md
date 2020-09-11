@@ -94,7 +94,7 @@ legend(
 )
 ```
 
-![]../../assets/img/misc/20200405_charheavytail-1.png)<!-- -->
+![](../../assets/img/misc/20200405_charheavytail-1.png)<!-- -->
 
 ``` r
 hist(
