@@ -368,30 +368,78 @@ library(colorspace)
 
 opar <- par()
 
-par(mfrow=c(2,2), mar=c(1,1,1,1))
-
+par(mfrow = c(2, 2),
+    mar = c(1, 1, 1, 1),
+    bg = "white")
 africa <- ne_countries(continent = "africa", returnclass = "sf")
-afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
+
+
+#Fix coordinates from Somalia
+point <-
+  st_coordinates(st_sample(africa[africa$admin == "Somalia", ], 1))
+
+afcon.clean1 <- afcon[afcon$name == "SOMALIA", ]
+afcon.clean2 <- afcon[afcon$name != "SOMALIA", ]
+afcon.clean1[1, 1:2] <- point
+
+afcon.end <- rbind(afcon.clean1, afcon.clean2)
+
+afcon.sf <- st_as_sf(afcon.end, crs = 4326, coords = c("x", "y"))
 afcon.sf <- st_transform(afcon.sf, st_crs(africa))
 afcon.sf <- st_join(africa[, "admin"], afcon.sf)
-afcon.sf <- afcon.sf[order(afcon.sf$totcon),]
-
-typoLayer(afcon.sf,var="quantile_break", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=nclass )), colNA = "grey80",  border=NA)
-title(main="Quantile")
-
-typoLayer(afcon.sf,var="fisher_breaks", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=nclass )), colNA = "grey80",  border=NA)
-title(main="Fisher")
+afcon.sf <- afcon.sf[order(afcon.sf$totcon), ]
 
 
-typoLayer(afcon.sf,var="ht_breaks", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=nclass )), colNA = "grey80", border=NA)
-title(main="Head/tails")
+typoLayer(
+  afcon.sf,
+  var = "quantile_break",
+  col = rev(sequential_hcl(
+    palette = "inferno", alpha = 0.7, n = nclass
+  )),
+  colNA = "grey75",
+  border = NA
+)
+title(main = "Quantile")
+
+typoLayer(
+  afcon.sf,
+  var = "fisher_breaks",
+  col = rev(sequential_hcl(
+    palette = "inferno", alpha = 0.7, n = nclass
+  )),
+  colNA = "grey75",
+  border = NA
+)
+title(main = "Fisher")
+
+
+typoLayer(
+  afcon.sf,
+  var = "ht_breaks",
+  col = rev(sequential_hcl(
+    palette = "inferno", alpha = 0.7, n = nclass
+  )),
+  colNA = "grey75",
+  border = NA
+)
+title(main = "Head/tails")
 
 #High-granularity map
-br <- classIntervals(afcon$totcon, style = "pretty",  n=25)
-
-choroLayer(afcon.sf, var="totcon", breaks = br$brks, border=NA,
-           colNA = "grey80", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=length(br$brks))), legend.pos = NA )
-title(main="High granularity map")
+br <- classIntervals(afcon$totcon, style = "pretty",  n = 20)
+choroLayer(
+  afcon.sf,
+  var = "totcon",
+  breaks = br$brks,
+  border = NA,
+  colNA = "grey75",
+  col = rev(sequential_hcl(
+    palette = "inferno",
+    alpha = 0.7,
+    n = length(br$brks)
+  )),
+  legend.pos = NA
+)
+title(main = "High granularity map")
 par(opar)
 ```
 
