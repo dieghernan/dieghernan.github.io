@@ -120,10 +120,13 @@ The method itself consists on a four-step process performed recursively until a 
 
 
 1. Compute $$\mu = \sum_{i=1}^{n} a_i $$.
-2. Break $$v$$ into the $$ tail = \{ a_x \in v | a_x \lt \mu \} $$ and the $$ head = \{ a_x \in v | a_x \gt \mu \} $$.
+2. Break $$v$$ into the $$tail$$ and the $$head$$:
+$$tail = \{ a_x \in v | a_x \lt \mu \} $$ 
+$$head = \{ a_x \in v | a_x \gt \mu \} $$.
+
 3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold:
 
-$$ \frac{|head|}{|v|} \le thresold  $$
+$$\frac{|head|}{|v|} \le thresold  $$
 
 4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
 
