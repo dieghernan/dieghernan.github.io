@@ -1,8 +1,8 @@
 ---
 title: "Head/Tails breaks on the `classInt` package."
-date: 2020-04-05
 tags: [R,classInt, cartography, vignette]
-header_img: ./assets/img/misc/20200405_finalplot%20-1.png
+header_img: ./assets/img/blog/20200405_finalplot%20-1.png
+header_type: "splash"
 show_toc: true
 mathjax: true
 output: 
@@ -107,7 +107,7 @@ hist(
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_charheavytail-1.png)![](../../assets/img/misc/20200405_charheavytail-2.png)
+![](../../assets/img/blog/20200405_charheavytail-1.png)![](../../assets/img/blog/20200405_charheavytail-2.png)
 
 ## Breaking method
 
@@ -208,7 +208,7 @@ for (i in 1:10) {
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_stepbystep-1.png)![](../../assets/img/misc/20200405_stepbystep-2.png)![](../../assets/img/misc/20200405_stepbystep-3.png)![](../../assets/img/misc/20200405_stepbystep-4.png)
+![](../../assets/img/blog/20200405_stepbystep-1.png)![](../../assets/img/blog/20200405_stepbystep-2.png)![](../../assets/img/blog/20200405_stepbystep-3.png)![](../../assets/img/blog/20200405_stepbystep-4.png)
 
 As it can be seen, in each iteration the resulting head gradually loses
 the high-tail property, until the stopping condition is met.
@@ -279,7 +279,7 @@ plot(
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_examplesimp-1.png)![](../../assets/img/misc/20200405_examplesimp-2.png)![](../../assets/img/misc/20200405_examplesimp-3.png)![](../../assets/img/misc/20200405_examplesimp-4.png)
+![](../../assets/img/blog/20200405_examplesimp-1.png)![](../../assets/img/blog/20200405_examplesimp-2.png)![](../../assets/img/blog/20200405_examplesimp-3.png)![](../../assets/img/blog/20200405_examplesimp-4.png)
 
 The method always returns at least one break, corresponding to
 `mean(var)`.
@@ -325,7 +325,7 @@ plot(
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_summspdata-1.png)![](../../assets/img/misc/20200405_summspdata-2.png)
+![](../../assets/img/blog/20200405_summspdata-1.png)![](../../assets/img/blog/20200405_summspdata-2.png)
 
 The data shows that EG and SU data present a clear hierarchy over the
 rest of values. As per the histogram, we can confirm a heavy-tailed
@@ -366,7 +366,7 @@ plot(brks_quantile, pal = pal1, main = "quantile")
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_breaksample-1.png)![](../../assets/img/misc/20200405_breaksample-2.png)![](../../assets/img/misc/20200405_breaksample-3.png)
+![](../../assets/img/blog/20200405_breaksample-1.png)![](../../assets/img/blog/20200405_breaksample-2.png)![](../../assets/img/blog/20200405_breaksample-3.png)
 
 It is observed that the top three classes of `headtails` enclose 5
 observations, whereas `fisher` includes 13 observations. In terms of
@@ -434,7 +434,7 @@ legend("topright",
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_benchmarkbreaks-1.png)<!-- -->
+![](../../assets/img/blog/20200405_benchmarkbreaks-1.png)<!-- -->
 
 It can be observed that the distribution of `headtails` breaks is also
 heavy-tailed, and closer to the original distribution. On the other
@@ -532,7 +532,7 @@ title(main = "High granularity map")
 par(opar)
 ```
 
-![](../../assets/img/misc/20200405_finalplot%20-1.png)<!-- -->
+![](../../assets/img/blog/20200405_finalplot%20-1.png)<!-- -->
 
 As per the results, `headtails` seems to provide a better understanding
 of the most extreme values when the result is compared against the
