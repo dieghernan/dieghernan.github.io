@@ -2,6 +2,7 @@
 title: "Head/Tails breaks on the `classInt` package."
 date: 2020-04-05
 tags: [R,classInt, cartography, vignette]
+header_img: ./assets/img/misc/20200405_finalplot%20-1.png
 show_toc: true
 mathjax: true
 output: 
