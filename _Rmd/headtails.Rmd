@@ -37,8 +37,7 @@ Heavy-tailed distributions are heavily right skewed, with a minority of large va
 Heavy tailed distributions are commonly characterized by a power law, a lognormal or an exponential function. Nature, society, finance (Vasicek (2002)) and our daily lives are full of rare and extreme events,
 which are termed "black swan events" (Taleb (2008)). This line of thinking provides a good reason to reverse our thinking by focusing on low-frequency events.
 
-
-```{r 20200405_charheavytail, dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+```{r 20200405_charheavytail, dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.show='hold'}
 library(classInt)
 
 #1. Characterization of heavy-tail distributions----
@@ -92,11 +91,8 @@ The method itself consists on a four-step process performed recursively until a 
 2. Break $$v$$ into the $$tail$$ and the $$head$$:
 $$tail = \{ a_x \in v | a_x \lt \mu \} $$ 
 $$head = \{ a_x \in v | a_x \gt \mu \} $$.
-
 3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold:
-
 $$\frac{|head|}{|v|} \le thresold  $$
-
 4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
 
 It is important to note that, at the beginning of a new iteration, `var` is replaced by `head`. The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced.
@@ -108,9 +104,9 @@ The final breaks are the vector of consecutive $$\mu$$:
 $$ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) $$
 
 
-# Step by step example
+## Step by step example
 
-We reproduce here the pseudo-code^[The method implemented on `classInt` corresponds to head/tails 1.0 as named on this article.] as per Jiang (2019):
+We reproduce here the pseudo-code[^1] as per Jiang (2019):
 ```
 Recursive function Head/tail Breaks:
  Rank the input data from the largest to the smallest
@@ -124,7 +120,7 @@ End Function
 
 A step-by-step example in **R** (for illustrative purposes) has been developed:
 
-```{r 20200405_stepbystep,dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+```{r 20200405_stepbystep,dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.show='hold'}
 
 opar <- par(no.readonly = TRUE)
 par(mar = c(2, 2, 3, 1), cex = 0.8)
@@ -191,22 +187,73 @@ sum_table$prop <- paste0(round(100*sum_table$prop,2),"%")
 knitr::kable(sum_table[!is.na(sum_table$mu),], row.names = FALSE)
 ```
 
-The resulting breaks are then defined as `breaks = c(min(var), mu(iter=1), ..., mu(iter=last), max(var))`.
+The resulting breaks are then defined as `breaks = c(min(var), mu1, mu2, ..., mu_n, max(var))`.
 
+## Implementation on `classInt` package
+
+The implementation in the `classIntervals` function should replicate the results:
+```{r checkmethod}
+ht_sample_par <- classIntervals(sample_par, style = "headtails")
+brks == ht_sample_par$brks
+```
+
+As stated in Jiang (2013), the number  of breaks is naturally determined, however the `thr` parameter could help to adjust the final number. A lower value on `thr` would provide less breaks while a larger `thr` would increase the number, if the underlying distribution follows the *"far more small things than large things"* principle.
+```{r 20200405_examplesimp, fig.show='hold', fig.asp=.7}
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 1), cex = 0.8)
+
+pal1 <- c("wheat1", "wheat2", "red3")
+# Minimum: single break
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 0)$brks-1)))
+plot(
+  classIntervals(sample_par, style = "headtails", thr = 0),
+  pal = pal1,
+  main = "thr = 0"
+)
+
+# Two breaks
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 0.2)$brks-1)))
+plot(
+  classIntervals(sample_par, style = "headtails", thr = 0.2),
+  pal = pal1,
+  main = "thr = 0.2"
+)
+
+# Default breaks: 0.4
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails")$brks-1)))
+plot(classIntervals(sample_par, style = "headtails"),
+     pal = pal1,
+     main = "thr = Default")
+
+# Maximum breaks
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 1)$brks-1)))
+plot(
+  classIntervals(sample_par, style = "headtails", thr = 1),
+  pal = pal1,
+  main = "thr = 1"
+)
+par(opar)
+```
+
+The method always returns at least one break, corresponding to `mean(var)`.
+
+## Case study
 
 
 ## References
 
-Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution." *The Professional Geographer* 65 (3): 482–94. [DOI](https://doi.org/10.1080/00330124.2012.700499).
+Jiang, Bin. 2013. \"Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution.\" *The Professional Geographer* 65 (3): 482–94. [DOI](https://doi.org/10.1080/00330124.2012.700499).
 
 
-———. 2019. "A Recursive Definition of Goodness of Space for Bridging the Concepts of Space and Place for Sustainability." *Sustainability* 11 (15): 4091. [DOI](https://doi.org/10.3390/su11154091).
+———. 2019. \"A Recursive Definition of Goodness of Space for Bridging the Concepts of Space and Place for Sustainability.\" *Sustainability* 11 (15): 4091. [DOI](https://doi.org/10.3390/su11154091).
 
+Jiang, Bin, Xintao Liu, and Tao Jia. 2013. \"Scaling of Geographic Space as a Universal Rule for Map Generalization.\" *Annals of the Association of American Geographers* 103 (4): 844–55. [DOI](https://doi.org/10.1080/00045608.2013.765773).
 
-Jiang, Bin, and Junjun Yin. 2013. "Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features." *Annals of the Association of American Geographers* 104 (3): 530–40. [DOI](https://doi.org/10.1080/00045608.2013.834239).
+Jiang, Bin, and Junjun Yin. 2013. \"Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features.\" *Annals of the Association of American Geographers* 104 (3): 530–40. [DOI](https://doi.org/10.1080/00045608.2013.834239).
 
 Taleb, Nassim Nicholas. 2008. *The Black Swan: The Impact of the Highly Improbable.* 1st ed. London: Random House.
 
 
-Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December, 160–62.
+Vasicek, Oldrich. 2002. \"Loan Portfolio Value.\" *Risk*, December, 160–62.
 
+[^1]: The method implemented on `classInt` corresponds to head/tails 1.0 as named on this article.

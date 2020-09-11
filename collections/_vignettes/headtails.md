@@ -92,11 +92,7 @@ legend(
   lty = 2,
   cex = 0.8
 )
-```
 
-![](../../assets/img/misc20200405_charheavytail-1.png)<!-- -->
-
-``` r
 hist(
   sample_par,
   n = 100,
@@ -106,13 +102,10 @@ hist(
   border = NA,
   probability = TRUE
 )
-```
-
-![](../../assets/img/misc20200405_charheavytail-2.png)<!-- -->
-
-``` r
 par(opar)
 ```
+
+![](headtails_files/figure-gfm/20200405_charheavytail-1.png)![](headtails_files/figure-gfm/20200405_charheavytail-2.png)
 
 ## Breaking method
 
@@ -123,11 +116,8 @@ The method itself consists on a four-step process performed recursively until a 
 2. Break $$v$$ into the $$tail$$ and the $$head$$:
 $$tail = \{ a_x \in v | a_x \lt \mu \} $$ 
 $$head = \{ a_x \in v | a_x \gt \mu \} $$.
-
 3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold:
-
 $$\frac{|head|}{|v|} \le thresold  $$
-
 4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
 
 It is important to note that, at the beginning of a new iteration, `var` is replaced by `head`. The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced.
@@ -138,9 +128,10 @@ The final breaks are the vector of consecutive $$\mu$$:
 
 $$ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) $$
 
-# Step by step example
 
-We reproduce here the pseudo-code^[The method implemented on `classInt` corresponds to head/tails 1.0 as named on this article.] as per Jiang (2019):
+## Step by step example
+
+We reproduce here the pseudo-code[^1] as per Jiang (2019):
 
     Recursive function Head/tail Breaks:
      Rank the input data from the largest to the smallest
@@ -212,13 +203,10 @@ for (i in 1:10) {
   }
   var <- head
 }
-```
-
-![](../../assets/img/misc20200405_stepbystep-1.png)<!-- -->![](../../assets/img/misc20200405_stepbystep-2.png)<!-- -->![](../../assets/img/misc20200405_stepbystep-3.png)<!-- -->![](../../assets/img/misc20200405_stepbystep-4.png)<!-- -->
-
-``` r
 par(opar)
 ```
+
+![](headtails_files/figure-gfm/20200405_stepbystep-1.png)![](headtails_files/figure-gfm/20200405_stepbystep-2.png)![](headtails_files/figure-gfm/20200405_stepbystep-3.png)![](headtails_files/figure-gfm/20200405_stepbystep-4.png)
 
 As it can be seen, in each iteration the resulting head gradually loses
 the high-tail property, until the stopping condition is met.
@@ -230,26 +218,115 @@ the high-tail property, until the stopping condition is met.
 |    3 |  85.1766 | 19.35% |     31 |       6 |
 |    4 | 264.7126 | 50%    |      6 |       3 |
 
-The resulting breaks are then defined as `breaks = c(min(var),
-mu(iter=1), ..., mu(iter=last), max(var))`.
+The resulting breaks are then defined as `breaks = c(min(var), mu1, mu2,
+..., mu_n, max(var))`.
+
+## Implementation on `classInt` package
+
+The implementation in the `classIntervals` function should replicate the
+results:
+
+``` r
+ht_sample_par <- classIntervals(sample_par, style = "headtails")
+brks == ht_sample_par$brks
+```
+
+    ## [1] TRUE TRUE TRUE TRUE TRUE TRUE
+
+As stated in Jiang (2013), the number of breaks is naturally determined,
+however the `thr` parameter could help to adjust the final number. A
+lower value on `thr` would provide less breaks while a larger `thr`
+would increase the number, if the underlying distribution follows the
+*“far more small things than large things”* principle.
+
+``` r
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 1), cex = 0.8)
+
+pal1 <- c("wheat1", "wheat2", "red3")
+# Minimum: single break
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 0)$brks-1)))
+```
+
+    ## [1] "number of breaks 3"
+
+``` r
+plot(
+  classIntervals(sample_par, style = "headtails", thr = 0),
+  pal = pal1,
+  main = "thr = 0"
+)
+
+# Two breaks
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 0.2)$brks-1)))
+```
+
+    ## [1] "number of breaks 4"
+
+``` r
+plot(
+  classIntervals(sample_par, style = "headtails", thr = 0.2),
+  pal = pal1,
+  main = "thr = 0.2"
+)
+
+# Default breaks: 0.4
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails")$brks-1)))
+```
+
+    ## [1] "number of breaks 6"
+
+``` r
+plot(classIntervals(sample_par, style = "headtails"),
+     pal = pal1,
+     main = "thr = Default")
+
+# Maximum breaks
+print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 1)$brks-1)))
+```
+
+    ## [1] "number of breaks 7"
+
+``` r
+plot(
+  classIntervals(sample_par, style = "headtails", thr = 1),
+  pal = pal1,
+  main = "thr = 1"
+)
+par(opar)
+```
+
+![](headtails_files/figure-gfm/20200405_examplesimp-1.png)![](headtails_files/figure-gfm/20200405_examplesimp-2.png)![](headtails_files/figure-gfm/20200405_examplesimp-3.png)![](headtails_files/figure-gfm/20200405_examplesimp-4.png)
+
+The method always returns at least one break, corresponding to
+`mean(var)`.
+
+## Case study
 
 ## References
 
-Jiang, Bin. 2013. “Head/Tail Breaks: A New Classification Scheme for
-Data with a Heavy-Tailed Distribution.” *The Professional Geographer* 65
+Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for
+Data with a Heavy-Tailed Distribution." *The Professional Geographer* 65
 (3): 482–94. [DOI](https://doi.org/10.1080/00330124.2012.700499).
 
-———. 2019. “A Recursive Definition of Goodness of Space for Bridging the
-Concepts of Space and Place for Sustainability.” *Sustainability* 11
+———. 2019. "A Recursive Definition of Goodness of Space for Bridging the
+Concepts of Space and Place for Sustainability." *Sustainability* 11
 (15): 4091. [DOI](https://doi.org/10.3390/su11154091).
 
-Jiang, Bin, and Junjun Yin. 2013. “Ht-Index for Quantifying the Fractal
-or Scaling Structure of Geographic Features.” *Annals of the Association
+Jiang, Bin, Xintao Liu, and Tao Jia. 2013. "Scaling of Geographic Space
+as a Universal Rule for Map Generalization." *Annals of the Association
+of American Geographers* 103 (4): 844–55.
+[DOI](https://doi.org/10.1080/00045608.2013.765773).
+
+Jiang, Bin, and Junjun Yin. 2013. "Ht-Index for Quantifying the Fractal
+or Scaling Structure of Geographic Features." *Annals of the Association
 of American Geographers* 104 (3): 530–40.
 [DOI](https://doi.org/10.1080/00045608.2013.834239).
 
 Taleb, Nassim Nicholas. 2008. *The Black Swan: The Impact of the Highly
 Improbable.* 1st ed. London: Random House.
 
-Vasicek, Oldrich. 2002. “Loan Portfolio Value.” *Risk*, December,
+Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December,
 160–62.
+
+[^1]: The method implemented on `classInt` corresponds to head/tails 1.0 as named on this article.
