@@ -122,7 +122,7 @@ $$head = \{ a_x \in v | a_x \gt \mu \} $$.
 $$\frac{|head|}{|v|} \le thresold  $$
 4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
 
-It is important to note that, at the beginning of a new iteration, $$v$$ is replaced by $$head$$. The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced.
+It is important to note that, at the beginning of a new iteration, $$v$$ is replaced by $$head$$. The underlying hypothesis is to create partitions until the $$head$$ and the $$tail$$ are balanced in terms of distribution. So the stopping criteria is satisfied when the last $$head$$ and the last $$tail$$ are evenly balanced.
 
 In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good approximation, meaning that if the $$head$$ contains more than 40% of the observations the distribution is not considered heavy-tailed.
 
@@ -133,7 +133,7 @@ $$ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) $$
 
 ## Step by step example
 
-We reproduce here the pseudo-code\[1\] as per Jiang (2019):
+We reproduce here the pseudo-code[^1] as per Jiang (2019):
 
     Recursive function Head/tail Breaks:
      Rank the input data from the largest to the smallest
