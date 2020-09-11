@@ -128,7 +128,10 @@ It is important to note that, at the beginning of a new iteration, `var` is repl
 
 ## References
 
-[^1]: Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution." *The Professional Geographer* 65 (3): 482–94. [https://doi.org/10.1080/00330124.2012.700499](DOI).
+[^1]: Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution."
+  [I'm an inline-style link](https://www.google.com)
+  *The Professional Geographer* 65 (3): 482–94.
+  [https://doi.org/10.1080/00330124.2012.700499](DOI).
 [^2]: Jiang, Bin, and Junjun Yin. 2013. "Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features." *Annals of the Association of American Geographers* 104 (3): 530–40. [https://doi.org/10.1080/00045608.2013.834239](DOI).
 [^3]: Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December, 160–62.
 [^4]: Taleb, Nassim Nicholas. 2008. *The Black Swan: The Impact of the Highly Improbable.* 1st ed. London: Random House.
