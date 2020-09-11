@@ -11,7 +11,7 @@ output:
 
 <blockquote class="blockquote">
 
-<p>
+<p class="small font-italic">
 
 There are far more ordinary people (say, 80 percent) than extraordinary
 people (say, 20 percent); this is often characterized by the 80/20
@@ -118,13 +118,16 @@ par(opar)
 
 The method itself consists on a four-step process performed recursively until a stopping condition is satisfied. Given a vector of values $$v = (a_1, a_2, ..., a_n) $$ the process can be described as follows:
 
+
 1. Compute $$\mu = \sum_{i=1}^{n} a_i $$.
-2. Break $$v$$ into the $$tail$$ (as $$a_i \lt \mu$$) and the $$head$$ (as $$ a_1 \gt \mu $$).
-3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold (i.e. `length(head)/length(var) <= thr`)
-4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. `head` has less than two elements expressed as `length(head) < 2`). 
+2. Break $$v$$ into the $$ tail = \{ a_x \in v | a_x \lt \mu \} $$ and the $$ head = \{ a_x \in v | a_x \gt \mu \} $$.
+3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold:
+
+$$ \frac{|head|}{|v|} \le thresold  $$
+
+4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
 
 It is important to note that, at the beginning of a new iteration, `var` is replaced by `head`. The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced. 
-
 
 ## References
 
