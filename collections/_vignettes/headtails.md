@@ -23,9 +23,9 @@ with the heavy-tailed distribution?
 
 </p>
 
-<footer class="blockquote-footer" markdown="1">
+<footer class="blockquote-footer">
 
-Jiang (2013)[^1]
+Jiang (2013)
 
 </footer>
 
@@ -34,17 +34,17 @@ Jiang (2013)[^1]
 ## Abstract
 
 This vignette discusses the implementation of the “Head/tail breaks”
-style (Jiang (2013)[^1]) on the `classIntervals` function of the
-`classInt` package. A step-by-step example is presented in order to
-clarify the method. A case study using `spData::afcon` is also included,
-making use of other additional packages as `sf`.
+style (Jiang (2013)) on the `classIntervals` function of the `classInt`
+package. A step-by-step example is presented in order to clarify the
+method. A case study using `spData::afcon` is also included, making use
+of other additional packages as `sf`.
 
 ## Introduction
 
 The **Head/tail breaks**, sometimes referred as **ht-index** (Jiang and
-Yin (2013)[^2]), is a classification scheme introduced by Jiang
-(2013)[^1] in order to find groupings or hierarchy for data with a
-heavy-tailed distribution.
+Yin (2013)), is a classification scheme introduced by Jiang (2013) in
+order to find groupings or hierarchy for data with a heavy-tailed
+distribution.
 
 Heavy-tailed distributions are heavily right skewed, with a minority of
 large values in the head and a majority of small values in the tail.
@@ -54,9 +54,9 @@ large things”*.
 
 Heavy tailed distributions are commonly characterized by a power law, a
 lognormal or an exponential function. Nature, society, finance (Vasicek
-(2002)[^3]) and our daily lives are full of rare and extreme events,
-which are termed “black swan events” (Taleb (2008)[^4]). This line of
-thinking provides a good reason to reverse our thinking by focusing on
+(2002)) and our daily lives are full of rare and extreme events, which
+are termed “black swan events” (Taleb (2008)). This line of thinking
+provides a good reason to reverse our thinking by focusing on
 low-frequency events.
 
 ``` r
@@ -94,7 +94,7 @@ legend(
 )
 ```
 
-![](../../assets/img/misc/20200405_charheavytail-1.png)<!-- -->
+![](../../assets/img/misc20200405_charheavytail-1.png)<!-- -->
 
 ``` r
 hist(
@@ -108,40 +108,18 @@ hist(
 )
 ```
 
-![](../../assets/img/misc/20200405_charheavytail-2.png)<!-- -->
+![](../../assets/img/misc20200405_charheavytail-2.png)<!-- -->
 
 ``` r
 par(opar)
 ```
-
-[I'm an inline-style link](https://www.google.com)
-
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
-
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or <http://www.example.com> and sometimes 
-example.com (but not on Github, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
 
 ## Breaking method
 
 The method itself consists on a four-step process performed recursively until a stopping condition is satisfied. Given a vector of values $$v = (a_1, a_2, ..., a_n) $$ the process can be described as follows:
 
 
-1. Compute $$\mu = \sum_{i=1}^{n} a_i $$.
+1. On each iteration, compute $$\mu = \sum_{i=1}^{n} a_i $$.
 2. Break $$v$$ into the $$tail$$ and the $$head$$:
 $$tail = \{ a_x \in v | a_x \lt \mu \} $$ 
 $$head = \{ a_x \in v | a_x \gt \mu \} $$.
@@ -152,11 +130,126 @@ $$\frac{|head|}{|v|} \le thresold  $$
 
 4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
 
-It is important to note that, at the beginning of a new iteration, `var` is replaced by `head`. The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced. 
+It is important to note that, at the beginning of a new iteration, `var` is replaced by `head`. The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced.
+
+In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good approximation, meaning that if the $$head$$ contains more than 40% of the observations the distribution is not considered heavy-tailed.
+
+The final breaks are the vector of consecutive $$\mu$$:
+
+$$ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) $$
+
+# Step by step example
+
+We reproduce here the pseudo-code^[The method implemented on `classInt` corresponds to head/tails 1.0 as named on this article.] as per Jiang (2019):
+
+    Recursive function Head/tail Breaks:
+     Rank the input data from the largest to the smallest
+     Break the data into the head and the tail around the mean;
+     // the head for those above the mean
+     // the tail for those below the mean
+     While (head <= 40%):
+     Head/tail Breaks (head);
+    End Function
+
+A step-by-step example in **R** (for illustrative purposes) has been
+developed:
+
+``` r
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 3, 1), cex = 0.8)
+var <- sample_par
+thr <- .4
+brks <- c(min(var), max(var)) # Initialise with min and max
+
+sum_table <- data.frame(
+  iter = 0,
+  mu = NA,
+  prop = NA,
+  n_var = NA,
+  n_head = NA
+)
+# Pars for chart
+limchart <- brks
+# Iteration
+for (i in 1:10) {
+  mu <- mean(var)
+  brks <- sort(c(brks, mu))
+  head <- var[var > mu]
+  prop <- length(head) / length(var)
+  stopit <- prop < thr & length(head) > 1
+  sum_table <- rbind(
+    sum_table,
+    c(i, mu, prop, length(var), length(head))
+  )
+  hist(
+    var,
+    main = paste0("Iter ", i),
+    breaks = 50,
+    col = "grey50",
+    border = NA,
+    xlab = "",
+    xlim = limchart
+  )
+  abline(v = mu, col = "red3", lty = 2)
+  ylabel <- max(hist(var, breaks = 50, plot = FALSE)$counts)
+  labelplot <- paste0("PropHead: ", round(prop * 100, 2), "%")
+  text(
+    x = mu,
+    y = ylabel,
+    labels = labelplot,
+    cex = 0.8,
+    pos = 4
+  )
+  legend(
+    "right",
+    legend = paste0("mu", i),
+    col = c("red3"),
+    lty = 2,
+    cex = 0.8
+  )
+  if (isFALSE(stopit)) {
+    break
+  }
+  var <- head
+}
+```
+
+![](../../assets/img/misc20200405_stepbystep-1.png)<!-- -->![](../../assets/img/misc20200405_stepbystep-2.png)<!-- -->![](../../assets/img/misc20200405_stepbystep-3.png)<!-- -->![](../../assets/img/misc20200405_stepbystep-4.png)<!-- -->
+
+``` r
+par(opar)
+```
+
+As it can be seen, in each iteration the resulting head gradually loses
+the high-tail property, until the stopping condition is met.
+
+| iter |       mu | prop   | n\_var | n\_head |
+| ---: | -------: | :----- | -----: | ------: |
+|    1 |   5.6755 | 14.5%  |   1000 |     145 |
+|    2 |  27.2369 | 21.38% |    145 |      31 |
+|    3 |  85.1766 | 19.35% |     31 |       6 |
+|    4 | 264.7126 | 50%    |      6 |       3 |
+
+The resulting breaks are then defined as `breaks = c(min(var),
+mu(iter=1), ..., mu(iter=last), max(var))`.
 
 ## References
 
-[^1]: Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution." *The Professional Geographer* 65 (3): 482–94. [DOI](https://doi.org/10.1080/00330124.2012.700499).
-[^2]: Jiang, Bin, and Junjun Yin. 2013. "Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features." *Annals of the Association of American Geographers* 104 (3): 530–40. [DOI](https://doi.org/10.1080/00045608.2013.834239).
-[^3]: Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December, 160–62.
-[^4]: Taleb, Nassim Nicholas. 2008. *The Black Swan: The Impact of the Highly Improbable.* 1st ed. London: Random House.
+Jiang, Bin. 2013. “Head/Tail Breaks: A New Classification Scheme for
+Data with a Heavy-Tailed Distribution.” *The Professional Geographer* 65
+(3): 482–94. [DOI](https://doi.org/10.1080/00330124.2012.700499).
+
+———. 2019. “A Recursive Definition of Goodness of Space for Bridging the
+Concepts of Space and Place for Sustainability.” *Sustainability* 11
+(15): 4091. [DOI](https://doi.org/10.3390/su11154091).
+
+Jiang, Bin, and Junjun Yin. 2013. “Ht-Index for Quantifying the Fractal
+or Scaling Structure of Geographic Features.” *Annals of the Association
+of American Geographers* 104 (3): 530–40.
+[DOI](https://doi.org/10.1080/00045608.2013.834239).
+
+Taleb, Nassim Nicholas. 2008. *The Black Swan: The Impact of the Highly
+Improbable.* 1st ed. London: Random House.
+
+Vasicek, Oldrich. 2002. “Loan Portfolio Value.” *Risk*, December,
+160–62.
