@@ -105,7 +105,7 @@ hist(
 par(opar)
 ```
 
-![](headtails_files/figure-gfm/20200405_charheavytail-1.png)![](headtails_files/figure-gfm/20200405_charheavytail-2.png)
+![](../../assets/img/misc/20200405_charheavytail-1.png)![](../../assets/img/misc/20200405_charheavytail-2.png)
 
 ## Breaking method
 
@@ -206,7 +206,7 @@ for (i in 1:10) {
 par(opar)
 ```
 
-![](headtails_files/figure-gfm/20200405_stepbystep-1.png)![](headtails_files/figure-gfm/20200405_stepbystep-2.png)![](headtails_files/figure-gfm/20200405_stepbystep-3.png)![](headtails_files/figure-gfm/20200405_stepbystep-4.png)
+![](../../assets/img/misc/20200405_stepbystep-1.png)![](../../assets/img/misc/20200405_stepbystep-2.png)![](../../assets/img/misc/20200405_stepbystep-3.png)![](../../assets/img/misc/20200405_stepbystep-4.png)
 
 As it can be seen, in each iteration the resulting head gradually loses
 the high-tail property, until the stopping condition is met.
@@ -296,7 +296,7 @@ plot(
 par(opar)
 ```
 
-![](headtails_files/figure-gfm/20200405_examplesimp-1.png)![](headtails_files/figure-gfm/20200405_examplesimp-2.png)![](headtails_files/figure-gfm/20200405_examplesimp-3.png)![](headtails_files/figure-gfm/20200405_examplesimp-4.png)
+![](../../assets/img/misc/20200405_examplesimp-1.png)![](../../assets/img/misc/20200405_examplesimp-2.png)![](../../assets/img/misc/20200405_examplesimp-3.png)![](../../assets/img/misc/20200405_examplesimp-4.png)
 
 The method always returns at least one break, corresponding to
 `mean(var)`.
