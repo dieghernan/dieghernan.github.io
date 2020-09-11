@@ -1,7 +1,8 @@
 ---
 title: "Head/Tails breaks on the `classInt` package."
 date: 2020-04-05
-tags: [R,sf, cartography, vignette]
+tags: [R,classInt, cartography, vignette]
+show_toc: true
 mathjax: true
 output: 
   md_document:
@@ -198,7 +199,7 @@ brks == ht_sample_par$brks
 ```
 
 As stated in Jiang (2013), the number  of breaks is naturally determined, however the `thr` parameter could help to adjust the final number. A lower value on `thr` would provide less breaks while a larger `thr` would increase the number, if the underlying distribution follows the *"far more small things than large things"* principle.
-```{r 20200405_examplesimp, fig.show='hold', fig.asp=.7}
+```{r 20200405_examplesimp, fig.show='hold', fig.asp=.7, dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
 opar <- par(no.readonly = TRUE)
 par(mar = c(2, 2, 2, 1), cex = 0.8)
 
@@ -238,6 +239,166 @@ par(opar)
 The method always returns at least one break, corresponding to `mean(var)`.
 
 ## Case study
+
+Jiang (2013) states that *\"the new classification scheme is more natural than the natural breaks in finding the groupings or hierarchy for data with a heavy-tailed distribution.\"* (p. 482), referring to Jenks' natural breaks method. In this case study we would compare `headtails` vs. `fisher`, that is the alias for the Fisher-Jenks algorithm and it is always preferred to the `jenks` style (see `?classIntervals`). For this example we will use the `afcon` dataset from `spData` package, plus some additional spatial information in order to create the data visualization.
+
+```{r 20200405_loadspdata, message=FALSE}
+library(spData)
+data(afcon, package = "spData")
+```
+
+Let's have a look to the Top 10 values and the distribution of the variable `totcon` (index of total conflict 1966-78):
+
+```{r 20200405_summspdata, fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+
+# Top10
+knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE),c("name","totcon")],10))
+
+opar <- par(no.readonly = TRUE)
+par(mar = c(4, 4, 3, 1), cex = 0.8)
+hist(afcon$totcon,
+     n = 20,
+     main = "Histogram",
+     xlab = "totcon",
+     col = "grey50",
+     border = NA, )
+plot(
+  density(afcon$totcon),
+  main = "Distribution",
+  xlab = "totcon",
+)
+par(opar)
+
+```
+
+The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the *"far more small things than large things"* principle.  
+
+As a testing proof, on top of `headtails` and `fisher` we  would use also `quantile` to have a broader view on the different breaking styles. As `quantile` is a position-based metric, it doesn't account for the magnitude of F(x) (hierarchy), so the breaks are solely defined by the position of x on the distribution.
+
+Applying the three aforementioned methods to break the data:
+
+```{r 20200405_breaksample,fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+brks_ht <- classIntervals(afcon$totcon, style = "headtails")
+print(brks_ht)
+#Same number of classes for "fisher"
+nclass <- length(brks_ht$brks) - 1
+brks_fisher <-  classIntervals(afcon$totcon, style = "fisher",
+                               n = nclass)
+print(brks_fisher)
+
+brks_quantile <- classIntervals(afcon$totcon, style = "quantile",
+                                n = nclass)
+print(brks_quantile)
+
+pal1 <- c("wheat1", "wheat2", "red3")
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 1), cex = 0.8)
+plot(brks_ht, pal = pal1, main = "headtails")
+plot(brks_fisher, pal = pal1, main = "fisher")
+plot(brks_quantile, pal = pal1, main = "quantile")
+par(opar)
+```
+
+It is observed that the top three classes of `headtails` enclose 5 observations, whereas `fisher` includes 13 observations. In terms of classification, `headtails` breaks focuses more on extreme values.
+
+The next plot compares a continuous distribution of `totcon` re-escalated to a range of `[1,nclass]` versus the distribution across breaks for each style. The continuous distribution has been offset by -0.5 in order to align the continuous and the discrete distributions.
+```{r 20200405_benchmarkbreaks, fig.show='hold', fig.width=7,dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+#Helper function to reescale values
+help_reescale <- function(x, min = 1, max = 10) {
+  r <- (x - min(x)) / (max(x) - min(x))
+  r <- r * (max - min) + min
+  return(r)
+}
+afcon$ecdf_class <- help_reescale(afcon$totcon,
+                                  min = 1 - 0.5,
+                                  max = nclass - 0.5)
+afcon$ht_breaks <-  cut(afcon$totcon,
+                        brks_ht$brks,
+                        labels = FALSE,
+                        include.lowest = TRUE)
+
+afcon$fisher_breaks <-  cut(afcon$totcon,
+                            brks_fisher$brks,
+                            labels = FALSE,
+                            include.lowest = TRUE)
+
+afcon$quantile_break <-  cut(afcon$totcon,
+                             brks_quantile$brks,
+                             labels = FALSE,
+                             include.lowest = TRUE)
+
+opar <- par(no.readonly = TRUE)
+par(mar = c(4, 4, 1, 1), cex = 0.8)
+plot(
+  density(afcon$ecdf_class),
+  ylim = c(0, 0.8),
+  lwd = 2,
+  main = "",
+  xlab = "class"
+)
+lines(density(afcon$ht_breaks), col = "darkblue", lty = 2)
+lines(density(afcon$fisher_breaks), col = "limegreen", lty = 2)
+lines(density(afcon$quantile_break),
+      col = "red3",
+      lty = 2)
+legend("topright",
+       legend = c("Continuous", "headtails",
+                  "fisher", "quantile"),
+  col = c("black", "darkblue", "limegreen", "red3"),
+  lwd = c(2, 1, 1, 1),
+  lty = c(1, 2, 2, 2),
+  cex = 0.8
+)
+par(opar)
+```
+
+It can be observed that the distribution of `headtails` breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, "quantile" provides a quasi-uniform distribution, ignoring the `totcon` hierarchy
+
+In terms of data visualization, we compare here the final map using the techniques mentioned above. On this plotting exercise, a choropleth map would be created.
+
+Additionally, a high-granularity choropleth map is created with a greater number of classes, in order to compare and contrast the actual grouping options against a more granular approach.
+
+```{r 20200405_finalplot , fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.asp=1}
+
+library(sf)
+library(rnaturalearth)
+library(cartography)
+library(colorspace)
+
+opar <- par()
+
+par(mfrow=c(2,2), mar=c(1,1,1,1))
+
+africa <- ne_countries(continent = "africa", returnclass = "sf")
+afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
+afcon.sf <- st_transform(afcon.sf, st_crs(africa))
+afcon.sf <- st_join(africa[, "admin"], afcon.sf)
+afcon.sf <- afcon.sf[order(afcon.sf$totcon),]
+
+typoLayer(afcon.sf,var="quantile_break", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=nclass )), colNA = "grey80",  border=NA)
+title(main="Quantile")
+
+typoLayer(afcon.sf,var="fisher_breaks", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=nclass )), colNA = "grey80",  border=NA)
+title(main="Fisher")
+
+
+typoLayer(afcon.sf,var="ht_breaks", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=nclass )), colNA = "grey80", border=NA)
+title(main="Head/tails")
+
+#High-granularity map
+br <- classIntervals(afcon$totcon, style = "pretty",  n=25)
+
+choroLayer(afcon.sf, var="totcon", breaks = br$brks, border=NA,
+           colNA = "grey80", col=rev(sequential_hcl(palette = "inferno", alpha=0.75, n=length(br$brks))), legend.pos = NA )
+title(main="High granularity map")
+par(opar)
+```
+
+
+As per the results, `headtails` seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The `quantile` style, as expected, just provides a clustering without taking into account the real hierarchy. The `fisher` plot is in-between of these two interpretations. 
+
+It is also important to note that `headtails` and `fisher` reveal different information that can be useful depending of the context. While `headtails` highlights the outliers, it fails on providing a good clustering on the tail, while `fisher` seems to reflect better these patterns. This can be observed on the values of Western Africa and the Niger River Basin, where `headtails` doesn't highlight any special cluster of conflicts, `fisher` suggests a potential cluster, aligned with the high-granularity plot. This can be confirmed on the histogram generated previously, where a concentration of `totcon` around 1,000 is visible.
+
 
 
 ## References
