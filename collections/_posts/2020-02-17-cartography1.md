@@ -4,6 +4,7 @@ subtitle: "Vignette of the package expansion"
 header_img: ./assets/img/blog/20201702_wordcloud1-1.png
 tags: [R,beautiful_maps, maps, sf, cartography, vignette]
 header_type: "splash"
+show_toc: true
 output: 
   md_document:
     variant: gfm
