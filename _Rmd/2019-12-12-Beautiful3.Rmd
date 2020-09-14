@@ -304,3 +304,30 @@ legendPattern(
 
 I hope that you find this functions useful. Enjoy and nice mapping!
 
+```{r 20191212_imgpost, echo=FALSE, fig.align='center', fig.height=500/90, fig.width=474/90, warning=FALSE, dpi=90, results='hide', tidy='styler'}
+library(cartography)
+
+mtq <-  st_read(system.file("gpkg/mtq.gpkg", package = "cartography"))
+typoLayer(mtq,  var = "STATUS",  legend.pos = "n",
+          legend.values.order = c("Prefecture","Sub-prefecture",
+                                  "Simple municipality"),
+          col = c("grey10", "grey50", "grey80"),border = NA)
+mtq$Patts = cut(mtq$MED,c(-Inf,15700,Inf), labels=FALSE)
+hatchedLayer(mtq[mtq$Patts == 1,],"left2right",
+             density = 2,  col = "white",  add = TRUE,  pch = 3,  cex = 0.6)
+hatchedLayer(mtq[mtq$Patts == 2, ],"left2right",
+             density = 4, col = "white", add = TRUE)
+legendHatched(pos = "bottomleft",
+              cex = 1.5,
+              values.cex = 0.8,
+              title.txt = "Median Income\n(in thousand of euros)",
+              categ = c("11.9 - 15.7","14.7 - 21.8",
+                        "Prefecture", "Sub-prefecture",
+                        "Simple municipality"),
+              patterns = c("left2right"), density = c(1, 2),
+              col = c(rep("black", 2), "grey10", "grey50", "grey80"),
+              ptrn.bg = c(rep("white", 2), "grey10", "grey50", "grey80"),
+              pch = 3)
+plot(st_geometry(st_union(mtq)), add = TRUE)
+
+```
