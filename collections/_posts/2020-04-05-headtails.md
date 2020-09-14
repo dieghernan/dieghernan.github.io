@@ -585,5 +585,5 @@ Improbable.* 1st ed. London: Random House.
 Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December,
 160–62.
 
-[^1]:.  The method implemented on `classInt` corresponds to head/tails 1.0
+[^1]: The method implemented on `classInt` corresponds to head/tails 1.0
     as named on this article.
