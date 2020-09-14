@@ -197,19 +197,15 @@ patternLayer = function(x,
     endsf =  sf::st_intersection(lp, x)
   } else if (pattern %in% c("dot", "text")) {
     # 2. dot and text #
-    polys = sf::st_union(x) 
-    polys = sf::st_cast(polys,"POLYGON")
-    cntrd = sf::st_geometry(sf::st_centroid(polys))
-    polys = sf::st_geometry(polys)
-    polyred = (polys - cntrd)  * 0.95 + cntrd
-    sf::st_crs(polyred) <- sf::st_crs(x)
-    polyred = sf::st_union(polyred)
-    endsf = fillgrid[sf::st_contains(polyred,
-                                     fillgrid, 
-                                     sparse = F
+    # Buffering around the shp
+    x = sf::st_union(x)
+    d = as.double(
+      sf::st_distance(
+        fillgrid,
+        sf::st_cast(x,"MULTILINESTRING")
+      )
     )
-    ]
-    
+    endsf = fillgrid[d > (dist / 4)]
     if (pattern == "text") {
       endsf = sf::st_sf(txt = txt, geometry = endsf)
     } else {
