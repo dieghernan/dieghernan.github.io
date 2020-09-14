@@ -302,7 +302,8 @@ variable `totcon` (index of total conflict 1966-78):
 # Top10
 knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")], 10))
 ```
-|   |name         | totcon|
+
+|id |name         | totcon|
 |:--|:------------|------:|
 |EG |EGYPT        |   5246|
 |SU |SUDAN        |   4751|
@@ -314,6 +315,7 @@ knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totco
 |SO |SOMALIA      |   2122|
 |ET |ETHIOPIA     |   1878|
 |SF |SOUTH AFRICA |   1875|
+
 
 ```r
 opar <- par(no.readonly = TRUE)
