@@ -301,7 +301,21 @@ variable `totcon` (index of total conflict 1966-78):
 ``` r
 # Top10
 knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")], 10))
+```
+|   |name         | totcon|
+|:--|:------------|------:|
+|EG |EGYPT        |   5246|
+|SU |SUDAN        |   4751|
+|UG |UGANDA       |   3134|
+|CG |ZAIRE        |   3087|
+|TZ |TANZANIA     |   2881|
+|LY |LIBYA        |   2355|
+|KE |KENYA        |   2273|
+|SO |SOMALIA      |   2122|
+|ET |ETHIOPIA     |   1878|
+|SF |SOUTH AFRICA |   1875|
 
+```r
 opar <- par(no.readonly = TRUE)
 par(mar = c(4, 4, 3, 1), cex = 0.8)
 hist(afcon$totcon,
@@ -571,5 +585,5 @@ Improbable.* 1st ed. London: Random House.
 Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December,
 160–62.
 
-1.  The method implemented on `classInt` corresponds to head/tails 1.0
+[^1]:.  The method implemented on `classInt` corresponds to head/tails 1.0
     as named on this article.
