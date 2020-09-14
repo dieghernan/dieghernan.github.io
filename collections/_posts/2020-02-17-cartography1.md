@@ -4,6 +4,7 @@ subtitle: "Vignette of the package expansion"
 header_img: ./assets/img/blog/20201702_wordcloud1-1.png
 tags: [R,beautiful_maps, maps, sf, cartography, vignette]
 header_type: "splash"
+excerpt: The aim of this document is to describe the new features added to <code>cartography</code> on version <code>2.4.0</code>.
 show_toc: true
 output: 
   md_document:

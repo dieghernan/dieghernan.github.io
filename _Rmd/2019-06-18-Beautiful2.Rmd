@@ -1,9 +1,7 @@
 ---
-layout: post
 title: "Beautiful Maps with R (II): Fun with flags"
 subtitle: "Put a picture on your map"
 tags: [R,beautiful_maps, maps, raster,flags,sf,function]
-date: 2019-06-18
 share-img: https://dieghernan.github.io/assets/figs/20190618_imgpost-1.png
 img-to-head: true
 linktormd: true
@@ -35,6 +33,7 @@ library(cartography)
 library(raster)
 library(sf)
 library(dplyr)
+library(eurostat)
 ```
 
 ### Choosing a good source for our shape
@@ -43,17 +42,14 @@ In this post I am going to plot a map of Spain with its [autonomous communities 
 
 The first step is to choose a good map source for my plot. I really like the geodata available in [**Eurostat**](https://ec.europa.eu/eurostat), with information of countries in several formats (`*.geojson`,`*.shp`, etc. ), projections (EPSG [4326](https://epsg.io/4326), [3035](https://epsg.io/3035) and [3857](https://epsg.io/3857)) and resolutions (01M, 03M, 10M, 20M and 60M), accesible via [API](https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/countries-2016-files.html). 
 
-The map I wanted to work with corresponds to [NUTS level 2 for Spain](https://en.wikipedia.org/wiki/NUTS_statistical_regions_of_Spain), that matches the autonomous regions of Spain. This shape is also available in **Eurostat** via [API](https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/nuts/nuts-2016-files.html).
+The map I wanted to work with corresponds to [NUTS level 2 for Spain](https://en.wikipedia.org/wiki/NUTS_statistical_regions_of_Spain), that matches the autonomous regions of Spain. This shape is also available in **Eurostat** via [API](https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/nuts/nuts-2016-files.html). The package `eurostat` provides an easy access to those datasets:
 
 <sup>*Note: [NUTS](https://en.wikipedia.org/wiki/Nomenclature_of_Territorial_Units_for_Statistics) (Nomenclature of Territorial Units for Statistics) is the european model for geopolitical subdivisions.*</sup>
 
 ```{r 20190618_preparing, fig.align='center', message=FALSE, warning=FALSE,  fig.width=700/90,fig.height=750/90,dpi=90, paged.print=FALSE, results='hide'}
 
-SPAIN = st_read(
-  "https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/nuts/geojson/NUTS_RG_03M_2016_3857_LEVL_2.geojson",
-  stringsAsFactors = FALSE
-) %>%
-  subset(CNTR_CODE == "ES")
+SPAIN = get_eurostat_geospatial(resolution = "03", nuts_level = "2") %>%
+  subset(CNTR_CODE == "ES") %>% st_transform(3857)
 
 WORLD = st_read(
   "https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_03M_2016_3857.geojson",
@@ -148,9 +144,11 @@ curl_download(url, dirfile)
 flag = brick(readPNG(dirfile) * 255)
 #Geotagging the raster
 #Adding proj4string
-projection(flag) <- CRS(st_crs(shp)[["proj4string"]])
+projection(flag) <- CRS(st_crs(shp)$proj4string)
 #Now cover with the flag the whole extent of the shape
 ratioflag = dim(flag)[2] / dim(flag)[1]
+
+
 
 #Middle point
 extshp = extent(shp)
@@ -214,7 +212,7 @@ stdh_png2map <- function(sf, png, align = "center") {
   }
   #Geotagging the raster
   #Adding proj4string
-  projection(flag) <- CRS(st_crs(shp)[["proj4string"]])
+  projection(flag) <- CRS(st_crs(shp)$proj4string)
   #Now cover with the flag the whole extent of the shape
   ratioflag = dim(flag)[2] / dim(flag)[1]
   
@@ -561,7 +559,6 @@ We are done now. If you have suggestion ~~(or you know how to get rid of the ann
 ```{r 20190618_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=FALSE}
 
 library(jsonlite)
-source("/cloud/project/assets/functions/stdh_png2map.R")
 
 df = fromJSON("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json")
 ISO_memcol = function(df,
@@ -595,7 +592,7 @@ flagcut=stdh_png2map(
   NUTS1_Clean,
   url
 )
-
+NUTS1_Clean
 
 dirfile = paste(tempdir(), "flag.png", sep = "/")
 curl_download(url, dirfile)

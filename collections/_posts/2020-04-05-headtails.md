@@ -4,6 +4,7 @@ tags: [R,classInt, cartography, vignette]
 header_img: ./assets/img/blog/20200405_finalplot%20-1.png
 header_type: "splash"
 show_toc: true
+excerpt: This vignette discusses the implementation of the “Head/tail breaks” style (Jiang (2013)) on the <code>classIntervals</code> function of the <code>classInt</code> package
 mathjax: true
 output: 
   md_document:
