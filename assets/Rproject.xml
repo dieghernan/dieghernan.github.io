@@ -30,7 +30,7 @@ permalink: ./Rproject.xml
 	{%- assign  alldocs = 	site.documents |
 	            where_exp: "item", "item.include_on_feed == true" |
 							where_exp: "item", "item.date != nil" | 
-							where_exp: "item", "item.tag contains 'R'" |
+							where_exp: "item", "item.tags contains 'R'" |
 							sort: 'date' | reverse -%}
 	{%- for document in alldocs  -%}
 	{%- assign entryimg =  document.og_image | default: document.header_img | absolute_url -%}
