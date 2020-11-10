@@ -1,10 +1,9 @@
 ---
 title: "Head/Tails breaks on the <code>classInt</code> package."
-tags: [R,classInt, cartography, vignette]
-header_img: ./assets/img/blog/20200405_finalplot%20-1.png
 header_type: "splash"
+header_img: ./assets/img/misc/20200405_finalplot%20-1.png
+tags: [R,classInt, cartography, vignette]
 show_toc: true
-excerpt: This vignette discusses the implementation of the “Head/tail breaks” style (Jiang (2013)) on the <code>classIntervals</code> function of the <code>classInt</code> package
 mathjax: true
 output: 
   md_document:
@@ -25,7 +24,13 @@ reveal a right-skewed or heavy-tailed distribution. How to map the data
 with the heavy-tailed distribution?
 
 </p>
-<footer class="blockquote-footer text-right">Jiang (2013)</footer>
+
+<footer class="blockquote-footer text-right">
+
+Jiang (2013)
+
+</footer>
+
 </blockquote>
 
 ## Abstract
@@ -102,33 +107,42 @@ hist(
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_charheavytail-1.png)![](./assets/img/blog/20200405_charheavytail-2.png)
+![](2020-04-05-headtails_files/figure-gfm/20200405_charheavytail-1.png)![](2020-04-05-headtails_files/figure-gfm/20200405_charheavytail-2.png)
 
 ## Breaking method
 
-The method itself consists on a four-step process performed recursively until a stopping condition is satisfied. Given a vector of values $$v = (a_1, a_2, ..., a_n) $$ the process can be described as follows:
+The method itself consists on a four-step process performed recursively
+until a stopping condition is satisfied. Given a vector of values
+\[v = (a_1, a_2, ..., a_n) \] the process can be described as follows:
 
+1.  On each iteration, compute
+    \[\mu = \sum_{i=1}^{n} a_i \:\:\: \forall \: a_i \in v\].
+2.  Break \[v\] into the \[tail\] and the \[head\]:
+    \[tail = \{ a_x \in v | a_x \lt \mu \} \]
+    \[head = \{ a_x \in v | a_x \gt \mu \} \].
+3.  Assess if the proportion of \[head\] over \[v\] is lower or equal
+    than a given threshold: \[\frac{|head|}{|v|} \le thresold  \]
+4.  If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no
+    more partitions are possible (i.e. \[head\] has less than two
+    elements).
 
-1. On each iteration, compute $$\mu = \sum_{i=1}^{n} a_i \:\:\: \forall \: a_i \in v$$.
-2. Break $$v$$ into the $$tail$$ and the $$head$$:
-$$tail = \{ a_x \in v | a_x \lt \mu \} $$ 
-$$head = \{ a_x \in v | a_x \gt \mu \} $$.
-3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold:
-$$\frac{|head|}{|v|} \le thresold  $$
-4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements). 
+It is important to note that, at the beginning of a new iteration, \[v\]
+is replaced by \[head\]. The underlying hypothesis is to create
+partitions until the head and the tail are balanced in terms of
+distribution.So the stopping criteria is satisfied when the last head
+and the last tail are evenly balanced.
 
-It is important to note that, at the beginning of a new iteration, $$v$$ is replaced by $$head$$. The underlying hypothesis is to create partitions until the $$head$$ and the $$tail$$ are balanced in terms of distribution. So the stopping criteria is satisfied when the last $$head$$ and the last $$tail$$ are evenly balanced.
+In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good
+approximation, meaning that if the \[head\] contains more than 40% of
+the observations the distribution is not considered heavy-tailed.
 
-In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good approximation, meaning that if the $$head$$ contains more than 40% of the observations the distribution is not considered heavy-tailed.
+The final breaks are the vector of consecutive \[\mu\]:
 
-The final breaks are the vector of consecutive $$\mu$$:
-
-$$ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) $$
-
+\[ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) \]
 
 ## Step by step example
 
-We reproduce here the pseudo-code[^1] as per Jiang (2019):
+We reproduce here the pseudo-code\[1\] as per Jiang (2019):
 
     Recursive function Head/tail Breaks:
      Rank the input data from the largest to the smallest
@@ -203,7 +217,7 @@ for (i in 1:10) {
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_stepbystep-1.png)![](./assets/img/blog/20200405_stepbystep-2.png)![](./assets/img/blog/20200405_stepbystep-3.png)![](./assets/img/blog/20200405_stepbystep-4.png)
+![](2020-04-05-headtails_files/figure-gfm/20200405_stepbystep-1.png)![](2020-04-05-headtails_files/figure-gfm/20200405_stepbystep-2.png)![](2020-04-05-headtails_files/figure-gfm/20200405_stepbystep-3.png)![](2020-04-05-headtails_files/figure-gfm/20200405_stepbystep-4.png)
 
 As it can be seen, in each iteration the resulting head gradually loses
 the high-tail property, until the stopping condition is met.
@@ -274,7 +288,7 @@ plot(
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_examplesimp-1.png)![](./assets/img/blog/20200405_examplesimp-2.png)![](./assets/img/blog/20200405_examplesimp-3.png)![](./assets/img/blog/20200405_examplesimp-4.png)
+![](2020-04-05-headtails_files/figure-gfm/20200405_examplesimp-1.png)![](2020-04-05-headtails_files/figure-gfm/20200405_examplesimp-2.png)![](2020-04-05-headtails_files/figure-gfm/20200405_examplesimp-3.png)![](2020-04-05-headtails_files/figure-gfm/20200405_examplesimp-4.png)
 
 The method always returns at least one break, corresponding to
 `mean(var)`.
@@ -302,23 +316,7 @@ variable `totcon` (index of total conflict 1966-78):
 ``` r
 # Top10
 knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")], 10))
-```
 
-|id |name         | totcon|
-|:--|:------------|------:|
-|EG |EGYPT        |   5246|
-|SU |SUDAN        |   4751|
-|UG |UGANDA       |   3134|
-|CG |ZAIRE        |   3087|
-|TZ |TANZANIA     |   2881|
-|LY |LIBYA        |   2355|
-|KE |KENYA        |   2273|
-|SO |SOMALIA      |   2122|
-|ET |ETHIOPIA     |   1878|
-|SF |SOUTH AFRICA |   1875|
-
-
-```r
 opar <- par(no.readonly = TRUE)
 par(mar = c(4, 4, 3, 1), cex = 0.8)
 hist(afcon$totcon,
@@ -336,7 +334,7 @@ plot(
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_summspdata-1.png)![](./assets/img/blog/20200405_summspdata-2.png)
+![](2020-04-05-headtails_files/figure-gfm/20200405_summspdata-1.png)![](2020-04-05-headtails_files/figure-gfm/20200405_summspdata-2.png)
 
 The data shows that EG and SU data present a clear hierarchy over the
 rest of values. As per the histogram, we can confirm a heavy-tailed
@@ -377,7 +375,7 @@ plot(brks_quantile, pal = pal1, main = "quantile")
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_breaksample-1.png)![](./assets/img/blog/20200405_breaksample-2.png)![](./assets/img/blog/20200405_breaksample-3.png)
+![](2020-04-05-headtails_files/figure-gfm/20200405_breaksample-1.png)![](2020-04-05-headtails_files/figure-gfm/20200405_breaksample-2.png)![](2020-04-05-headtails_files/figure-gfm/20200405_breaksample-3.png)
 
 It is observed that the top three classes of `headtails` enclose 5
 observations, whereas `fisher` includes 13 observations. In terms of
@@ -445,7 +443,7 @@ legend("topright",
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_benchmarkbreaks-1.png)<!-- -->
+![](2020-04-05-headtails_files/figure-gfm/20200405_benchmarkbreaks-1.png)<!-- -->
 
 It can be observed that the distribution of `headtails` breaks is also
 heavy-tailed, and closer to the original distribution. On the other
@@ -464,86 +462,84 @@ grouping options against a more granular approach.
 library(sf)
 library(rnaturalearth)
 library(cartography)
-library(colorspace)
 
-opar <- par()
+opar <- par(no.readonly = TRUE)
 
-par(mfrow = c(2, 2),
-    mar = c(1, 1, 1, 1),
-    bg = "white")
+par(
+  mfrow = c(2, 2),
+  mar = c(1, 1, 1, 1),
+  bg = "white"
+)
 africa <- ne_countries(continent = "africa", returnclass = "sf")
+africa <- st_transform(africa, 3857)
 
 
-#Fix coordinates from Somalia
-point <-
-  st_coordinates(st_sample(africa[africa$admin == "Somalia", ], 1))
-
-afcon.clean1 <- afcon[afcon$name == "SOMALIA", ]
-afcon.clean2 <- afcon[afcon$name != "SOMALIA", ]
-afcon.clean1[1, 1:2] <- point
-
-afcon.end <- rbind(afcon.clean1, afcon.clean2)
-
-afcon.sf <- st_as_sf(afcon.end, crs = 4326, coords = c("x", "y"))
+afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
 afcon.sf <- st_transform(afcon.sf, st_crs(africa))
-afcon.sf <- st_join(africa[, "admin"], afcon.sf)
+# afcon.sf <- st_join(africa[, "admin"], afcon.sf)
 afcon.sf <- afcon.sf[order(afcon.sf$totcon), ]
 
 
-typoLayer(
+
+# High granularity map
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsLayer(
   afcon.sf,
-  var = "quantile_break",
-  col = rev(sequential_hcl(
-    palette = "inferno", alpha = 0.7, n = nclass
-  )),
-  colNA = "grey75",
+  var = "totcon",
+  inches = 0.2,
+  col = adjustcolor("grey10", alpha.f = 0.5),
   border = NA
+)
+title(main = "High granularity map")
+
+# Quantile
+
+pal <- hcl.colors(5, palette = "inferno", alpha = 0.6)
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsTypoLayer(
+  afcon.sf,
+  var = "totcon",
+  inches = 0.2,
+  col = pal,
+  border = NA,
+  legend.var.pos = "n",
+  legend.var2.pos = "bottomleft",
+  var2 = "quantile_break"
 )
 title(main = "Quantile")
 
-typoLayer(
+
+# Fisher
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsTypoLayer(
   afcon.sf,
-  var = "fisher_breaks",
-  col = rev(sequential_hcl(
-    palette = "inferno", alpha = 0.7, n = nclass
-  )),
-  colNA = "grey75",
-  border = NA
+  var = "totcon",
+  inches = 0.2,
+  col = pal,
+  border = NA,
+  legend.var.pos = "n",
+  legend.var2.pos = "bottomleft",
+  var2 = "fisher_breaks"
 )
 title(main = "Fisher")
 
-
-typoLayer(
-  afcon.sf,
-  var = "ht_breaks",
-  col = rev(sequential_hcl(
-    palette = "inferno", alpha = 0.7, n = nclass
-  )),
-  colNA = "grey75",
-  border = NA
-)
-title(main = "Head/tails")
-
-#High-granularity map
-br <- classIntervals(afcon$totcon, style = "pretty",  n = 20)
-choroLayer(
+# Head Tails
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsTypoLayer(
   afcon.sf,
   var = "totcon",
-  breaks = br$brks,
+  inches = 0.2,
+  col = pal,
   border = NA,
-  colNA = "grey75",
-  col = rev(sequential_hcl(
-    palette = "inferno",
-    alpha = 0.7,
-    n = length(br$brks)
-  )),
-  legend.pos = NA
+  legend.var.pos = "n",
+  legend.var2.pos = "bottomleft",
+  var2 = "ht_breaks"
 )
-title(main = "High granularity map")
+title(main = "Head Tails")
 par(opar)
 ```
 
-![](./assets/img/blog/20200405_finalplot%20-1.png)<!-- -->
+![](2020-04-05-headtails_files/figure-gfm/20200405_finalplot%20-1.png)<!-- -->
 
 As per the results, `headtails` seems to provide a better understanding
 of the most extreme values when the result is compared against the
@@ -588,5 +584,5 @@ Improbable.* 1st ed. London: Random House.
 Vasicek, Oldrich. 2002. "Loan Portfolio Value." *Risk*, December,
 160–62.
 
-[^1]: The method implemented on `classInt` corresponds to head/tails 1.0
+1.  The method implemented on `classInt` corresponds to head/tails 1.0
     as named on this article.

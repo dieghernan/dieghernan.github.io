@@ -361,86 +361,84 @@ Additionally, a high-granularity choropleth map is created with a greater number
 
 ```{r 20200405_finalplot , fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.asp=1}
 
+
 library(sf)
 library(rnaturalearth)
 library(cartography)
-library(colorspace)
 
-opar <- par()
+opar <- par(no.readonly = TRUE)
 
 par(mfrow = c(2, 2),
     mar = c(1, 1, 1, 1),
     bg = "white")
 africa <- ne_countries(continent = "africa", returnclass = "sf")
+africa <- st_transform(africa, 3857)
 
 
-#Fix coordinates from Somalia
-point <-
-  st_coordinates(st_sample(africa[africa$admin == "Somalia", ], 1))
-
-afcon.clean1 <- afcon[afcon$name == "SOMALIA", ]
-afcon.clean2 <- afcon[afcon$name != "SOMALIA", ]
-afcon.clean1[1, 1:2] <- point
-
-afcon.end <- rbind(afcon.clean1, afcon.clean2)
-
-afcon.sf <- st_as_sf(afcon.end, crs = 4326, coords = c("x", "y"))
+afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
 afcon.sf <- st_transform(afcon.sf, st_crs(africa))
-afcon.sf <- st_join(africa[, "admin"], afcon.sf)
-afcon.sf <- afcon.sf[order(afcon.sf$totcon), ]
+# afcon.sf <- st_join(africa[, "admin"], afcon.sf)
+afcon.sf <- afcon.sf[order(afcon.sf$totcon),]
 
 
-typoLayer(
+
+# High granularity map
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsLayer(
   afcon.sf,
-  var = "quantile_break",
-  col = rev(sequential_hcl(
-    palette = "inferno", alpha = 0.7, n = nclass
-  )),
-  colNA = "grey75",
+  var = "totcon",
+  inches = 0.2,
+  col = adjustcolor("grey10", alpha.f = 0.5),
   border = NA
+)
+title(main = "High granularity map")
+
+# Quantile
+
+pal <- hcl.colors(5, palette = "inferno", alpha = 0.6)
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsTypoLayer(
+  afcon.sf,
+  var = "totcon",
+  inches = 0.2,
+  col = pal,
+  border = NA,
+  legend.var.pos = "n",
+  legend.var2.pos = "bottomleft",
+  var2 = "quantile_break"
 )
 title(main = "Quantile")
 
-typoLayer(
+
+# Fisher
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsTypoLayer(
   afcon.sf,
-  var = "fisher_breaks",
-  col = rev(sequential_hcl(
-    palette = "inferno", alpha = 0.7, n = nclass
-  )),
-  colNA = "grey75",
-  border = NA
+  var = "totcon",
+  inches = 0.2,
+  col = pal,
+  border = NA,
+  legend.var.pos = "n",
+  legend.var2.pos = "bottomleft",
+  var2 = "fisher_breaks"
 )
 title(main = "Fisher")
 
-
-typoLayer(
-  afcon.sf,
-  var = "ht_breaks",
-  col = rev(sequential_hcl(
-    palette = "inferno", alpha = 0.7, n = nclass
-  )),
-  colNA = "grey75",
-  border = NA
-)
-title(main = "Head/tails")
-
-#High-granularity map
-br <- classIntervals(afcon$totcon, style = "pretty",  n = 20)
-choroLayer(
+# Head Tails
+plot(st_geometry(africa), col = "grey80", border = NA)
+propSymbolsTypoLayer(
   afcon.sf,
   var = "totcon",
-  breaks = br$brks,
+  inches = 0.2,
+  col = pal,
   border = NA,
-  colNA = "grey75",
-  col = rev(sequential_hcl(
-    palette = "inferno",
-    alpha = 0.7,
-    n = length(br$brks)
-  )),
-  legend.pos = NA
+  legend.var.pos = "n",
+  legend.var2.pos = "bottomleft",
+  var2 = "ht_breaks"
 )
-title(main = "High granularity map")
+title(main = "Head Tails")
 par(opar)
+
 ```
 
 

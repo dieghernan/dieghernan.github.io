@@ -27,7 +27,7 @@ diegpost("2019-05-13-Where-in-the-world")
 #diegpost("2019-11-07-QuickR")
 
 ezknit(
-  "/cloud/project/_Rmd/2019-05-05-Cast to subsegments.Rmd",
+  "/cloud/project/_Rmd/2019-04-05-Cast to subsegments.Rmd",
   wd="/cloud/project/assets",
   out_dir = "../collections/_posts",
   fig_dir = "../../assets/img/blog",
