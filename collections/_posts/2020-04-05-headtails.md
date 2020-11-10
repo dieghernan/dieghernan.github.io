@@ -102,7 +102,7 @@ hist(
 par(opar)
 ```
 
-![](../assets/img/blog/20200405_charheavytail-1.png)![](./assets/img/blog/20200405_charheavytail-2.png)
+![](../assets/img/blog/20200405_charheavytail-1.png)![](../assets/img/blog/20200405_charheavytail-2.png)
 
 ## Breaking method
 
