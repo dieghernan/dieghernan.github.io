@@ -2,6 +2,8 @@
 title: 'Gallery'
 subtitle: 'Pieces of work at a glance'
 permalink: /gallery
+header_type: hero
+header_img: /assets/img/site/banner.png
 ---
 
 
