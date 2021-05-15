@@ -10,11 +10,10 @@ diegpost <- function(file) {
     paste("~/R/Projects/b/_Rmd/",file,".Rmd",sep = ""),
     out_dir = "./collections/_posts",
     fig_dir = "../assets/img/blog",
-    keep_html = FALSE,
-    verbose = TRUE
+    keep_html = FALSE
   )
   
-  # Move images
+  # # Move images
   current_folder <- "./collections/assets/img/blog"
   new_folder <- "./assets/img/blog"
   list_of_files <- list.files(current_folder)
@@ -37,6 +36,9 @@ diegpost("2019-06-18-Beautiful2")
 diegpost("2019-10-16-WikiMap1")
 diegpost("2019-11-07-QuickR")
 diegpost("2019-12-12-Beautiful3")
+diegpost("2020-02-06-Brexit")
+
+
 
 # ezknit(
 #   "/cloud/project/_Rmd/2019-04-05-Cast to subsegments.Rmd",

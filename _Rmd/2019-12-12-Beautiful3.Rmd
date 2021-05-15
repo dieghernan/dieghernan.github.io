@@ -10,9 +10,8 @@ output:
     preserve_yaml: true
 ---
 
-**Updated 17 february 2020**: All these pieces of work are already available on `cartography >v.2.4.0` on functions [`hatchedLayer](http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html) and [`legendHatched`](https://riatelab.github.io/cartography/docs/reference/legendHatched.html). Just install it via `install.packages("cartography")`. A dedicated blog post with examples on this [link](../202002_cartography1).
+**Updated 17 february 2020**: All these pieces of work are already available on `cartography >v.2.4.0` on functions [`hatchedLayer`](http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html) and [`legendHatched`](https://riatelab.github.io/cartography/docs/reference/legendHatched.html). Just install it via `install.packages("cartography")`. A dedicated blog post with examples on this [link](../202002_cartography1). 
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
@@ -22,7 +21,7 @@ rm(list = ls())
 
 ```
 
-On this post I would introduce a couple of functions that may be useful for improving your maps. The goal is to produce different filling patterns that could be added over your shapefiles. 
+On this post I would introduce a couple of functions that may be useful for improving your maps. The goal is to produce different filling patterns that could be added over your shapefiles.
 
 At this point, I would like to suggest you (if you haven't done it yet) to install the `cartography`package ([vignette](https://cran.r-project.org/web/packages/cartography/vignettes/cartography.html)), as it presents a good bunch of interesting features, and fully compatible with the `sf` environment. In fact, I took some pieces of the base code in order to develop my own `legendPattern` function.
 
@@ -120,7 +119,6 @@ plot(
 
 As it can be seen, we can extract specific points of each grid. Once that I identified them it is just a matter of connecting points using the `st_linestring` function.
 
-
 ```{r 20191212_horex2, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=200/90, dpi=90 }
 
 # Select horizontal only
@@ -140,19 +138,20 @@ plot(st_geometry(grid2), col = "red", add = T)
 
 ## The `patternLayer` function
 
-I put all that together on a function named `patternLayer` ([link](https://raw.githubusercontent.com/dieghernan/dieghernan.github.io/master/assets/functions/patternfun.R)). The main inputs are:
+I put all that together on a function named `patternLayer` ([link](https://raw.githubusercontent.com/dieghernan/dieghernan.github.io/master/assets/functions/patternfun.R). The main inputs are:
 
-* `x`: `sf` object. It must be a `POLYGON` or a `MULTIPOLYGON`.
-* `pattern`: fillings available are `c("dot", "text", "diamond", "grid", "hexagon", "horizontal", "vertical", "zigzag", "left2right", "right2left", "circle")`.
-* `density` of the grid. By default the function uses a grid with a minimum of 10 cells on the shortest dimension of the bounding box. Additionally it is possible to pass a `cellsize` value that would feed the `st_make_grid` underlying function.
-* `txt` for the `text` pattern, that should be a character.
-* Different graphical parameters can be also passed, as `add`, `cex`, `lty`, `pch`, etc. Basically three modes are allowed: points, lines and texts.
+-   `x`: `sf` object. It must be a `POLYGON` or a `MULTIPOLYGON`.
+-   `pattern`: fillings available are `c("dot", "text", "diamond", "grid", "hexagon", "horizontal", "vertical", "zigzag", "left2right", "right2left", "circle")`.
+-   `density` of the grid. By default the function uses a grid with a minimum of 10 cells on the shortest dimension of the bounding box. Additionally it is possible to pass a `cellsize` value that would feed the `st_make_grid` underlying function.
+-   `txt` for the `text` pattern, that should be a character.
+-   Different graphical parameters can be also passed, as `add`, `cex`, `lty`, `pch`, etc. Basically three modes are allowed: points, lines and texts.
 
 Let's see how it works.
+
 ```{r 20191212_showfun, warning=FALSE, message=FALSE, tidy='styler', fig.height=500/90,fig.width=500/90, dpi=90 }
 
 # Load function
-source("../assets/functions/patternfun.R")
+source("./assets/functions/patternfun.R")
 
 
 par(mfrow = c(3, 4),
@@ -232,21 +231,21 @@ patternLayer(DE,
              density = 2,
              col = "orange",
              add = T)
-``` 
+```
 
-## Adding legends: the  `legendPattern` function
+## Adding legends: the `legendPattern` function
 
-As a complementary function, I created also the `legendPattern` function, heavily based on the `legends.R` script developed by *@riatelab* for the `cartography` package ([source code](https://github.com/riatelab/cartography/blob/master/R/legends.R)).
+As a complementary function, I created also the `legendPattern` function, heavily based on the `legends.R` script developed by @riatelab for the `cartography` package ([source code](https://github.com/riatelab/cartography/blob/master/R/legends.R)).
 
 Main parameters are:
 
-* `pos`, `title.txt`, `title.cex`, `values.cex`,`categ`, `cex` and `frame`: See `?cartography::legendTypo`.
-* `patterns`: vector of patterns to be created for each element on `categ`.
-* `ptrn.bg`: Background of the legend box for each `categ`.
-* `ptrn.text`: Text to be used for each `categ="text"`, as a single value or a vector.
-* `dot.cex`: `cex` of each `categ="dot"`, as a single value or a vector. 
-* `text.cex`: text size of each `categ="text"`, as a single value or a vector.
-* As in the case of the `patternLayer`function, different graphical parameters can be passed (`lty`, `lwd`, `pch`, `bg` on points). 
+-   `pos`, `title.txt`, `title.cex`, `values.cex`,`categ`, `cex` and `frame`: See `?cartography::legendTypo`.
+-   `patterns`: vector of patterns to be created for each element on `categ`.
+-   `ptrn.bg`: Background of the legend box for each `categ`.
+-   `ptrn.text`: Text to be used for each `categ="text"`, as a single value or a vector.
+-   `dot.cex`: `cex` of each `categ="dot"`, as a single value or a vector.
+-   `text.cex`: text size of each `categ="text"`, as a single value or a vector.
+-   As in the case of the `patternLayer`function, different graphical parameters can be passed (`lty`, `lwd`, `pch`, `bg` on points).
 
 Note that is also possible to create solid legends, by setting `col` and `ptrn.bg` to the same color. Parameters would respect the order of the `categ` variable.
 
@@ -300,7 +299,7 @@ legendPattern(
 
 I hope that you find this functions useful. Enjoy and nice mapping!
 
-```{r 20191212_imgpost, echo=FALSE, fig.align='center', fig.height=500/90, fig.width=474/90, warning=FALSE, dpi=90, results='hide', tidy='styler'}
+```{r 20191212_imgpost, echo=FALSE, fig.align='center', fig.height=500/90, fig.width=474/90, warning=FALSE, dpi=90, results='hide', tidy='styler', message=FALSE}
 library(cartography)
 
 mtq <-  st_read(system.file("gpkg/mtq.gpkg", package = "cartography"))

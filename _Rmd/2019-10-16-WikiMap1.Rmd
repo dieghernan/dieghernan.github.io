@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = 'styler', dev = "ragg_png")
+knitr::opts_chunk$set(echo = TRUE, tidy = 'styler')
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
@@ -60,7 +60,7 @@ library(countrycode)
 Base$ISO_3166_3 <- countrycode(Base$Country, origin = "country.name", destination = "iso3c")
 
 
-DonorRate = inner_join(WorldMap,
+DonorRate = left_join(WorldMap,
                        Base) %>%
   select(Country,
          ISO_3166_3,
@@ -78,7 +78,7 @@ As already explained, I would like to follow the Wikipedia conventions, so some 
 
 Some libraries then to use: `RColorBrewer`, `rsvg` and specially one of my favourites, `cartography`:
 
-```{r 20191016_final, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide' }
+```{r 20191016_final, echo=TRUE, message=FALSE, warning=FALSE, eval=FALSE, paged.print=FALSE}
 library(RColorBrewer)
 library(cartography)
 library(rsvg)
@@ -129,11 +129,12 @@ dev.off()
 
 And that's all. Our `.svg` file is ready to be included in Wikipedia.
 
-```{r 20191016_imgpost, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
+```{r 20191016_imgpost, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
 rsvg_png("Organ donor rate per million by country gradient map (2017).svg",
          "20191016_imgpost.png")
 ```
 
-![imgpost](../assets/img/blog/20191016_imgpost.png)
+![img](../assets/img/blog/20191016_imgpost.png)
 
-**Update**: The map is already part of the [Wikipedia article](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary). {: .alert .alert-info .p-3 .mx-2 .mb-3 }
+**Update**: The map is already part of the [Wikipedia article](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary).
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
