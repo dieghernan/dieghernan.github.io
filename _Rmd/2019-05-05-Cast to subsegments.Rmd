@@ -13,7 +13,8 @@ output:
 This post introduces a used-defined function used for casting `sf` objects of `class` `LINESTRING` or `POLYGON` into sub-strings.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 library(knitr)
 rm(list = ls())

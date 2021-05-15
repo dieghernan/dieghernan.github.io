@@ -164,7 +164,7 @@ kable(end - init, format = "markdown")
 
 |x              |
 |:--------------|
-|0.1531079 secs |
+|0.1054971 secs |
 
 ```r
 init <- Sys.time()
@@ -177,7 +177,7 @@ kable(end - init, format = "markdown")
 
 |x             |
 |:-------------|
-|1.392702 secs |
+|1.416168 secs |
 
 ```r
 par(mfrow = c(1, 1), mar = c(0, 0, 0, 0))

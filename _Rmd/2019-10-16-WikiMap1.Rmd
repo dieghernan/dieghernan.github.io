@@ -10,10 +10,11 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = 'styler')
+knitr::opts_chunk$set(echo = TRUE, tidy = 'styler', dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
+
 This is a quick post on how to create a map as per the [Wikipedia conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps). In this case I have chosen to plot the [international organ donor rates](https://en.wikipedia.org/wiki/International_organ_donor_rates), retrieved on 2019-02-10 although the data refers to 2017 (Source: [IRODaT](http://www.irodat.org/?p=database)).
 
 ## Webscrapping
@@ -36,92 +37,44 @@ Base <-
 knitr::kable(head(Base, 10), format = 'markdown')
 ```
 
-Now we need to choose a [good source of maps](https://dieghernan.github.io/201906_Beautiful2/) and a bit of my [Country Code database](https://dieghernan.github.io/201904_Using-CountryCodes/), already discussed on previous posts, so here we go:
+Now we need to choose a [good source of maps](https://dieghernan.github.io/201906_Beautiful2/):
 
 ```{r 20191016_getmap, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
 library(sf)
+library(giscoR)
 
 # Map import from Eurostat
-WorldMap <-
-  st_read(
-    "https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_10M_2016_3857.geojson",
-    stringsAsFactors = FALSE
-  ) %>%
+WorldMap <- gisco_get_countries(resolution = 3, epsg = 3857) %>%
   select(ISO_3166_3 = ISO3_CODE)
 
-# CountryCode import
-df = read.csv(
-  "https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodes.csv",
-  na.strings = "",
-  stringsAsFactors = FALSE,
-  fileEncoding = "utf8"
-)
-
-WorldMap <- left_join(WorldMap, df)
 ```
-
 
 ## Merging all together
 
-Now let's join and have a look to see what is going on:
+Now let's join and have a look to see what is going on. We use the `countrycode` package to retrieve the ISO3 codes of our scrapped dataset:
 
 ```{r 20191016_joining, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+library(countrycode)
+
+Base$ISO_3166_3 <- countrycode(Base$Country, origin = "country.name", destination = "iso3c")
+
+
 DonorRate = inner_join(WorldMap,
-                       Base,
-                       by = c("NAME.EN" = "Country")) %>%
-  select(NAME.EN,
+                       Base) %>%
+  select(Country,
          ISO_3166_3,
          RateDonperMill)
 
-nrowcomp = cbind(nrow(Base), nrow(DonorRate)) %>%
-  as.data.frame()
-names(nrowcomp) <- c("Initial", "After join")
-knitr::kable(nrowcomp, format = 'markdown')
 ```
-
-Oops! Joining by name (just the string) doesn't work for 6 cases. Not too bad but let's try to fix it.
-
-```{r 20191016_missed, message=FALSE, warning=FALSE, paged.print=FALSE}
-nameex = anti_join(Base, DonorRate, by = c("Country" = "NAME.EN"))
-
-knitr::kable(nameex, format = "markdown")
-```
-
-```{r 20191016_missed2, message=FALSE, warning=FALSE, paged.print=FALSE}
-nameex$ISO_3166_3 = c("BIH",
-                      "CZE",
-                      "HKG",
-                      "MKD",
-                      "SVK",
-                      "TWN")
-
-dfclean = DonorRate %>%
-  st_drop_geometry() %>%
-  select(Country = NAME.EN,
-         ISO_3166_3,
-         RateDonperMill) %>%
-  rbind(nameex)
-
-#Cleanup
-rm(Base, df, nameex, DonorRate)
-
-#Join to map
-MapDonorRate = left_join(WorldMap, dfclean) %>%
-  select(ISO_3166_3,
-         NAME.EN,
-         RateDonperMill,
-         area_km2)
-
-```
-
 
 ## Make the `.svg` file
 
 As already explained, I would like to follow the Wikipedia conventions, so some things to bear in mind:
 
-* Obviously the colors. Wikipedia already provides a good guidance for this. I would make use of the `RColorBrewer` library, which implements [ColorBrewer](http://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9) in **R**.
-* In terms of projection, Wikipedia recommends the [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection) but, as in their own sample of a gradient map, I would choose to use the [Robinson projection](https://en.wikipedia.org/wiki/Robinson_projection).
-* I should produce an `.svg` file following also the naming convention.
+-   Obviously the colors. Wikipedia already provides a good guidance for this. I would make use of the `RColorBrewer` library, which implements [ColorBrewer](http://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9) in **R**.
+-   In terms of projection, Wikipedia recommends the [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection) but, as in their own sample of a gradient map, I would choose to use the [Robinson projection](https://en.wikipedia.org/wiki/Robinson_projection).
+-   I should produce an `.svg` file following also the naming convention.
 
 Some libraries then to use: `RColorBrewer`, `rsvg` and specially one of my favourites, `cartography`:
 
@@ -151,7 +104,7 @@ svg(
 
 par(mar = c(0.5, 0, 0, 0))
 choroLayer(
-  MapDonorRate %>% filter(area_km2 > 400) %>% st_transform("+proj=robin") ,
+  DonorRate %>% st_transform("+proj=robin") ,
   var = "RateDonperMill",
   breaks = c(0, 5, 10, 20, 30, 40, 50),
   col = brewer.pal(6, "PuBu"),
@@ -176,13 +129,11 @@ dev.off()
 
 And that's all. Our `.svg` file is ready to be included in Wikipedia.
 
-
 ```{r 20191016_imgpost, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
 rsvg_png("Organ donor rate per million by country gradient map (2017).svg",
          "20191016_imgpost.png")
 ```
+
 ![imgpost](../assets/img/blog/20191016_imgpost.png)
 
-
-**Update**: The map is already part of the [Wikipedia article](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary).
-{: .alert .alert-info .p-3 .mx-2 .mb-3 }
+**Update**: The map is already part of the [Wikipedia article](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary). {: .alert .alert-info .p-3 .mx-2 .mb-3 }

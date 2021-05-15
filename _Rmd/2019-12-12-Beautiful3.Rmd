@@ -15,7 +15,7 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 
@@ -31,7 +31,7 @@ At this point, I would like to suggest you (if you haven't done it yet) to insta
 ```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
 library(sf)
 library(dplyr)
-library(rnaturalearth)
+library(giscoR)
 ```
 
 ## Grid approach
@@ -41,11 +41,7 @@ I already worked with the `st_make_grid` on a previous [post](https://dieghernan
 ### Dots
 
 ```{r 20191212_dotex, message=FALSE, warning=FALSE, dpi=90, fig.width=200/90, fig.height=350/90,  paged.print=FALSE, tidy='styler', results='hide'}
-DE  <- ne_countries(50,
-                    type = "countries",
-                    country = "Germany",
-                    returnclass = "sf") %>%
-  st_transform(3035)
+DE  <- gisco_get_countries(country = "Germany", epsg=3857)
 
 grid = st_make_grid(DE,
                     what = "corners",

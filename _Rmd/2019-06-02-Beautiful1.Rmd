@@ -11,7 +11,8 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
