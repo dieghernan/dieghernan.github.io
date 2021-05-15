@@ -2,6 +2,7 @@
 title: Using CountryCodes database and sf package
 subtitle: vignette of the CountryCodes project
 tags: [R,sf,maps,vignette]
+header_img: ./assets/img/blog/20190427_mapfin-1.png
 output: 
   md_document:
     preserve_yaml: true
@@ -14,7 +15,10 @@ This vignette is an example of use of the database provided in the Github projec
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 
