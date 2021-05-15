@@ -1,9 +1,11 @@
 ---
 title: "New features on cartography package"
 subtitle: "Vignette of the package expansion"
-header_img: ./assets/img/misc/20201702_wordcloud1-1.png
+header_img: ./assets/img/blog/20201702_wordcloud2-1.png
 tags: [R,beautiful_maps, maps, sf, cartography, vignette]
 header_type : "splash"
+redirect_from:
+  - /cartographyvignette
 output: 
   md_document:
     variant: gfm
@@ -11,7 +13,8 @@ output:
 ---
 
 ```{r echo=FALSE}
-knitr::opts_chunk$set(collapse = TRUE)
+knitr::opts_chunk$set(collapse = TRUE,
+                      dev = "ragg_png")
 rm(list = ls())
 knitr::knit_hooks$set(margin = function(before, options, envir){
   if (before){
@@ -439,7 +442,7 @@ layoutLayer(
 
 # Genres from MB--
 #Import genres
-collected = read.csv("../assets/data/US_MB.csv", stringsAsFactors = F)
+collected = read.csv("./assets/data/US_MB.csv", stringsAsFactors = F)
 collected=collected[-1,] %>% arrange(desc(n))
 
 set.seed(1234)

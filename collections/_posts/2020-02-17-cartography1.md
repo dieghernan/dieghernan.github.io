@@ -1,74 +1,64 @@
 ---
 title: "New features on cartography package"
 subtitle: "Vignette of the package expansion"
-header_img: ./assets/img/blog/20201702_wordcloud1-1.png
+header_img: ./assets/img/blog/20201702_wordcloud2-1.png
 tags: [R,beautiful_maps, maps, sf, cartography, vignette]
-header_type: "splash"
-excerpt: The aim of this document is to describe the new features added to <code>cartography</code> on version <code>2.4.0</code>.
-show_toc: true
+header_type : "splash"
+redirect_from:
+  - /cartographyvignette
 output: 
   md_document:
     variant: gfm
     preserve_yaml: true
 ---
 
+
+
 ## Introduction
 
-The aim of this document is to describe the new features added to
-`cartography` on version `2.4.0` by
-[dieghernan](https://github.com/dieghernan/) and already available on
-**CRAN**.
+The aim of this document is to describe the new features added to `cartography` on version `2.4.0` by
+[dieghernan](https://github.com/dieghernan/) and already available on **CRAN**.
 
 Those new features are:
+  
+* `hatchedLayer` and `legendHatched` functions.
+* `pngLayer` and `getPngLayer` functions.
+* `wordcloudLayer` function.
 
-  - `hatchedLayer` and `legendHatched` functions.
-  - `pngLayer` and `getPngLayer` functions.
-  - `wordcloudLayer` function.
 
-These functions don’t handle `sp` objects on purpose, favoring `sf`
-instead.
+These functions don't handle `sp` objects on purpose, favoring `sf` instead.
 
 ## Installation
 
-``` r
+```r
 #install.packages("cartography")
 library(cartography)
 packageVersion("cartography")
-## [1] '2.4.2'
+## [1] '3.0.0'
 ```
+
 
 ## Hatched Map
 
-Version of typology/choropleth maps using a hatched filling. This is
-particularly useful for those maps that needs to be printed on black and
-white, as academic papers. These maps also are useful for representing
-overlapping dimensions.
+Version of typology/choropleth maps using a hatched filling. This is particularly useful for those maps that needs to be printed on black and white, as academic papers. These maps also are useful for representing overlapping dimensions.
 
 ### Example 1
 
-``` r
+
+```r
 library(sf)
-## Linking to GEOS 3.5.1, GDAL 2.2.2, PROJ 4.9.2
 library(jsonlite)
 library(dplyr)
-## 
-## Attaching package: 'dplyr'
-## The following objects are masked from 'package:stats':
-## 
-##     filter, lag
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
 
 #Shape
 cntries = st_read("https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson",
                   stringsAsFactors = FALSE)
 ## Reading layer `CNTR_RG_20M_2016_3035' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson' using driver `GeoJSON'
 ## Simple feature collection with 257 features and 6 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -7142317 ymin: -9160665 xmax: 16932290 ymax: 15428010
-## CRS:            3035
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -7142317 ymin: -9160665 xmax: 16932290 ymax: 15428010
+## Projected CRS: ETRS89-extended / LAEA Europe
 
 # Include trade blocks
 df <- fromJSON("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json")
@@ -139,11 +129,15 @@ layoutLayer(
 )
 ```
 
-![](../assets/img/blog/20201702_hatched-min-1.png)<!-- -->
+![plot of chunk 20201702_hatched-min](../assets/img/blog/20201702_hatched-min-1.png)
+
+
+
 
 ### Example 2
 
-``` r
+
+```r
 library(sf)
 library(cartography)
 
@@ -229,19 +223,16 @@ layoutLayer(
 ) 
 ```
 
-![](../assets/img/blog/20201702_hatched-1.png)<!-- -->
+![plot of chunk 20201702_hatched](../assets/img/blog/20201702_hatched-1.png)
 
-`legendHatched` honors the order on the parameters. In this case, two
-`dot` patterns are presents, so `pch = c(4,15)` takes care of that. Note
-that three line-type patterns are also plotted, as and in the previous
-case, `lty = c(1, 1, 3)` respect that order.
+`legendHatched` honors the order on the parameters. In this case, two `dot` patterns are presents, so `pch = c(4,15)` takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, `lty = c(1, 1, 3)` respect that order.
 
 ### Example 3
 
-`hatchedLayer` also could be useful for plotting several dimensions on
-the same map, in combination with another functions of the package.
+`hatchedLayer` also could be useful for plotting several dimensions on the same map, in combination with another functions of the package.
 
-``` r
+
+```r
 
 library(sf)
 library(cartography)
@@ -338,20 +329,20 @@ layoutLayer(
 )
 ```
 
-![](../assets/img/blog/20201702_hatched-adv-1.png)<!-- -->
+![plot of chunk 20201702_hatched-adv](../assets/img/blog/20201702_hatched-adv-1.png)
+
 
 ## `png` Layer
 
-This new capability geotags a `.png` file, effectively converting the
-image into a tile. This allows the user to create visual maps by masking
-an image to the shape of a `POLYGON/MULTIPOLYGON`.
+This new capability geotags a `.png` file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a `POLYGON/MULTIPOLYGON`.
 
-For high-quality png maps, **it is recommended to plot your map on a
-`.svg` device**.
+For high-quality png maps, **it is recommended to plot your map on a `.svg` device**.
+
 
 ### Example 1
 
-``` r
+
+```r
 library(sf)
 library(cartography)
 
@@ -359,10 +350,10 @@ cntries2 = st_read("https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/co
                   stringsAsFactors = FALSE)
 ## Reading layer `CNTR_RG_20M_2016_3857' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson' using driver `GeoJSON'
 ## Simple feature collection with 257 features and 6 fields
-## geometry type:  MULTIPOLYGON
-## dimension:      XY
-## bbox:           xmin: -20037510 ymin: -30240970 xmax: 20037510 ymax: 18446790
-## CRS:            3857
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -20037510 ymin: -30240970 xmax: 20037510 ymax: 18446790
+## Projected CRS: WGS 84 / Pseudo-Mercator
 
 cntries2 = merge(cntries2,
                 df,
@@ -392,6 +383,846 @@ for (i in 1:nrow(africa)) {
                   paste(flagrepo, tolower(cntry), ".png", sep = ""))
   pngLayer(a, add = TRUE)
 }
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded ellps WGS 84 in Proj4 definition: +proj=merc +a=6378137 +b=6378137
+## +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs +type=crs
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum World Geodetic System 1984 in Proj4 definition
 #Add borders
 plot(st_geometry(cntries2), add = TRUE, col = NA, lwd=0.4)
 
@@ -405,49 +1236,53 @@ layoutLayer(
 ) 
 ```
 
-![](../assets/img/blog/20201702_pnglayer-1.png)<!-- -->
+![plot of chunk 20201702_pnglayer](../assets/img/blog/20201702_pnglayer-1.png)
 
 ### Example 2
 
-``` r
+
+```r
 
 library(sf)
 library(cartography)
 
 box <- c(xmin=2200000, xmax=7150000,ymin=1380000, ymax=5500000)
 nuts0 <-  st_crop(cntries, box)
-## Warning: attribute variables are assumed to be spatially constant throughout all
-## geometries
+## Warning: attribute variables are assumed to be spatially constant throughout all geometries
 
 UK = nuts0 %>% filter(id == "UK")
 url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"
 
 
 EU=getPngLayer(nuts0,url, mask=FALSE)
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in Proj4 definition
 pngLayer(EU, alpha=100)
 urluk=flagrepo = "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/gb.png"
 
 UKpng=getPngLayer(UK,urluk)
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in Proj4 definition
+## Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum Unknown based on GRS80 ellipsoid in Proj4 definition
+## Warning in showSRID(SRS_string, format = "PROJ", multiline = "NO", prefer_proj =
+## prefer_proj): Discarded datum European Terrestrial Reference System 1989 in Proj4 definition
 
 pngLayer(UKpng, add=TRUE)
 ```
 
-![](../assets/img/blog/20201702_png-adv-1.png)<!-- -->
+![plot of chunk 20201702_png-adv](../assets/img/blog/20201702_png-adv-1.png)
 
 ## wordcloudLayer
 
-A word cloud (or tag cloud) is a visual representation of text data. On
-a mapping context, this representation is useful for including several
-information at a glance.
+A word cloud (or tag cloud) is a visual representation of text data. On a mapping context, this representation is useful for including several information at a glance. 
 
-Wordcloud layers fitted into a map shape provide a good trade-off
-between physical location, scale and labels. Size and colors of the
-words are also based on the frequency of the factor to be plotted,
-highlighting the most frequent terms over the rest.
+Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.
 
 ### Example 1
 
-``` r
+
+```r
 
 eu$dens=eu$pop/eu$area_km2
 
@@ -468,15 +1303,15 @@ layoutLayer(
 ) 
 ```
 
-![](../assets/img/blog/20201702_wordcloud1-1.png)<!-- -->
+![plot of chunk 20201702_wordcloud1](../assets/img/blog/20201702_wordcloud1-1.png)
 
 ### Example 2
 
-``` r
+```r
 
 # Genres from MB--
 #Import genres
-collected = read.csv("../assets/data/US_MB.csv", stringsAsFactors = F)
+collected = read.csv("./assets/data/US_MB.csv", stringsAsFactors = F)
 collected=collected[-1,] %>% arrange(desc(n))
 
 set.seed(1234)
@@ -520,4 +1355,4 @@ layoutLayer(title="Most frequent genres on US",
             theme="orange.pal")
 ```
 
-![](../assets/img/blog/20201702_wordcloud2-1.png)<!-- -->
+![plot of chunk 20201702_wordcloud2](../assets/img/blog/20201702_wordcloud2-1.png)

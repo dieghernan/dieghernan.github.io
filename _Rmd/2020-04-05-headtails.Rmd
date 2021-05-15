@@ -23,7 +23,7 @@ This vignette discusses the implementation of the "Head/tail breaks" style (Jian
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
@@ -363,7 +363,7 @@ Additionally, a high-granularity choropleth map is created with a greater number
 
 
 library(sf)
-library(rnaturalearth)
+library(giscoR)
 library(cartography)
 
 opar <- par(no.readonly = TRUE)
@@ -371,9 +371,7 @@ opar <- par(no.readonly = TRUE)
 par(mfrow = c(2, 2),
     mar = c(1, 1, 1, 1),
     bg = "white")
-africa <- ne_countries(continent = "africa", returnclass = "sf")
-africa <- st_transform(africa, 3857)
-
+africa <- gisco_get_countries(resolution = 60, region = "Africa", epsg = 3857)
 
 afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
 afcon.sf <- st_transform(afcon.sf, st_crs(africa))
