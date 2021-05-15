@@ -1,5 +1,4 @@
 ---
-layout: landingpage
 title: "One World"
 subtitle: "Blog & Projects"
 header_type: hero
