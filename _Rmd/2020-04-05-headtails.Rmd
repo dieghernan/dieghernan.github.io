@@ -1,7 +1,7 @@
 ---
 title: "Head/Tails breaks on the <code>classInt</code> package."
 header_type: "splash"
-header_img: ./assets/img/misc/20200405_finalplot-1.png
+header_img: ./assets/img/blog/20200405_finalplot-1.png
 tags: [R,classInt, cartography, vignette]
 show_toc: true
 mathjax: true

@@ -37,8 +37,8 @@ diegpost("2019-06-18-Beautiful2")
 diegpost("2019-11-07-QuickR")
 diegpost("2019-12-12-Beautiful3")
 diegpost("2020-02-06-Brexit")
-
-
+diegpost("2020-02-17-cartography1")
+diegpost("2020-04-05-headtails")
 
 # ezknit(
 #   "/cloud/project/_Rmd/2019-04-05-Cast to subsegments.Rmd",
