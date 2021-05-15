@@ -33,11 +33,6 @@ library(giscoR)
 library(cartography)
 ```
 
-## Grid approach
-
-I already worked with the `st_make_grid` on a previous [post](https://dieghernan.github.io/201906_Beautiful1/), and this time I have applied the same approach. Some examples here on how the grid can be used to create patterns:
-
-### Dots
 
 ```{r 20191212_dotex, message=FALSE, warning=FALSE, dpi=90, fig.width=200/90, fig.height=350/90,  paged.print=FALSE, tidy='styler', results='hide'}
 DE  <- gisco_get_countries(country = "Germany", epsg=3857)

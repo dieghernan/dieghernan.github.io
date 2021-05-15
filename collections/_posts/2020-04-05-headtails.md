@@ -1,7 +1,7 @@
 ---
 title: "Head/Tails breaks on the <code>classInt</code> package."
 header_type: "splash"
-header_img: ./assets/img/misc/20200405_finalplot%20-1.png
+header_img: ./assets/img/misc/20200405_finalplot-1.png
 tags: [R,classInt, cartography, vignette]
 show_toc: true
 mathjax: true
@@ -477,7 +477,7 @@ title(main = "Head Tails")
 par(opar)
 ```
 
-![plot of chunk 20200405_finalplot ](../assets/img/blog/20200405_finalplot -1.png)
+![plot of chunk 20200405_finalplot](../assets/img/blog/20200405_finalplot-1.png)
 
 
 As per the results, `headtails` seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The `quantile` style, as expected, just provides a clustering without taking into account the real hierarchy. The `fisher` plot is in-between of these two interpretations. 

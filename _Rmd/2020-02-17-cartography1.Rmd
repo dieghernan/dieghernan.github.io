@@ -1,11 +1,9 @@
 ---
 title: "New features on cartography package"
 subtitle: "Vignette of the package expansion"
-header_img: ./assets/img/blog/20201702_wordcloud2-1.png
+header_img: ./assets/img/blog/20200217_wordcloud2-1.png
 tags: [R,beautiful_maps, maps, sf, cartography, vignette]
 header_type : "splash"
-redirect_from:
-  - /cartographyvignette
 output: 
   md_document:
     variant: gfm
@@ -14,6 +12,8 @@ output:
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(collapse = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
                       dev = "ragg_png")
 rm(list = ls())
 knitr::knit_hooks$set(margin = function(before, options, envir){
@@ -51,7 +51,7 @@ Version of typology/choropleth maps using a hatched filling. This is particularl
 
 ### Example 1
 
-```{r 20201702_hatched-min, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20200217_hatched-min, fig.height=7, fig.width=7, margin=TRUE}
 library(sf)
 library(jsonlite)
 library(dplyr)
@@ -135,7 +135,7 @@ layoutLayer(
 
 ### Example 2
 
-```{r 20201702_hatched, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20200217_hatched, fig.height=7, fig.width=7, margin=TRUE}
 library(sf)
 library(cartography)
 
@@ -227,7 +227,7 @@ layoutLayer(
 
 `hatchedLayer` also could be useful for plotting several dimensions on the same map, in combination with another functions of the package.
 
-```{r 20201702_hatched-adv, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20200217_hatched-adv, fig.height=7, fig.width=7, margin=TRUE}
 
 library(sf)
 library(cartography)
@@ -335,7 +335,7 @@ For high-quality png maps, **it is recommended to plot your map on a `.svg` devi
 
 ### Example 1
 
-```{r 20201702_pnglayer, fig.height=7, fig.width=5, margin=TRUE}
+```{r 20200217_pnglayer, fig.height=7, fig.width=5, margin=TRUE}
 library(sf)
 library(cartography)
 
@@ -385,7 +385,7 @@ layoutLayer(
 
 ### Example 2
 
-```{r 20201702_png-adv, fig.height=5, fig.width=7, margin=TRUE}
+```{r 20200217_png-adv, fig.height=5, fig.width=7, margin=TRUE}
 
 library(sf)
 library(cartography)
@@ -415,7 +415,7 @@ Wordcloud layers fitted into a map shape provide a good trade-off between physic
 
 ### Example 1
 
-```{r 20201702_wordcloud1, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20200217_wordcloud1, fig.height=7, fig.width=7, margin=TRUE}
 
 eu$dens=eu$pop/eu$area_km2
 
@@ -438,7 +438,7 @@ layoutLayer(
 ```
 
 ### Example 2
-```{r 20201702_wordcloud2, fig.height=7, fig.width=7, margin=TRUE}
+```{r 20200217_wordcloud2, fig.height=7, fig.width=7, margin=TRUE}
 
 # Genres from MB--
 #Import genres
