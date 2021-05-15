@@ -228,4 +228,4 @@ plot(bbox,
 )
 ```
 
-![plot of chunk 20190427_mapfin](./assets/img/blog/20190427_mapfin-1.png)
+![plot of chunk 20190427_mapfin](../assets/img/blog/20190427_mapfin-1.png)

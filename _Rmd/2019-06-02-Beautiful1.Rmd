@@ -2,7 +2,7 @@
 title: "Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels"
 subtitle: "Awesome simplified maps with R"
 tags: [R,beautiful_maps, maps, sf]
-header_img: https://dieghernan.github.io/assets/figs/20190602_imgpost-1.png
+header_img: ./assets/img/blog/20190602_imgpost-1.png
 output: 
   md_document:
     variant: gfm
@@ -35,7 +35,7 @@ The approach is similar (using grids over a map and work with that) but using [`
 
 ```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
 library(sf)
-library(rnaturalearth)
+library(giscoR)
 library(dplyr)
 library(RColorBrewer)
 ```
