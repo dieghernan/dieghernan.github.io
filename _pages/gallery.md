@@ -24,7 +24,8 @@ https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Meat_consumption_rate_
 https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Organ_donor_rate_per_million_by_country_gradient_map_%282017%29.svg/1000px-Organ_donor_rate_per_million_by_country_gradient_map_%282017%29.svg.png,
 https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Population_by_municipality_in_Spain_%282018%29.svg/1000px-Population_by_municipality_in_Spain_%282018%29.svg.png" %}
 
-{% include_cached snippets/masonry.html external=externalgallery %}
+{% include_cached snippets/carousel.html external=externalgallery  random="true" controls="true" indicators="true" %}
+
 
 ## Blog
 
