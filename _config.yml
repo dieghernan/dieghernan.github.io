@@ -1,0 +1,220 @@
+remote_theme: dieghernan/chulapa
+
+url: https://dieghernan.github.io
+baseurl: /b
+repository: dieghernan/b
+
+
+title                   : One world    
+subtitle                : Projects, maps and coding
+description             : Personal blog of dieghernan
+timezone                : "Europe/Madrid"
+# SEO
+og_image                : ./assets/img/site/banner.png
+author:
+  name                  :  dieghernan
+  avatar                :   ./assets/img/site/avatar.png
+  location              :  "Madrid, Spain"
+  links:                
+    - url:  https://github.com/dieghernan/
+      icon: fab fa-github
+gtag_id                 :  
+search:
+  provider              : algolia 
+  algolia_logo          : true 
+algolia:                                                                   
+  application_id        : "KOIKA5PDQO"
+  index_name            : "blog"
+  search_only_api_key   : "7f1fe42bef3f03458cb3a911ebc7e0ac"
+  files_to_exclude:       
+    - _layouts/*.html
+    - _includes/*.html
+    - oldcontent/*.html
+    - oldcontent/*.md
+  extensions_to_index:     
+    - html
+    - md
+  searchableAttributes:                                                    
+    - title                                                                    
+    - headings                                                                 
+    - unordered(content)                                                       
+    - unordered(subtitle)                                                      
+    - unordered(categories)                                                    
+    - unordered(collection)                                                    
+    - unordered(tags) 
+  customRanking:            #Optional
+    - desc(include_on_search)
+    - desc(title)
+    - desc(content) 
+    - desc(subtitle)
+    
+comments:
+  provider:         
+  disqus_shortname:
+  
+# B. Navigation
+navbar:
+  style     : dual
+  expand    : xl
+  brand:
+    title   :  Home # Title in navbar
+    img     :  # An small image, try 30x30px
+  nav:
+  - title   : Blog # Label
+    url     : /blog/ # url	
+  - title   : Projects
+    url     : /projects
+  - title   : Archives
+    child   :
+      - title : By date
+        url   : /archive
+      - title : By tags
+        url   : /tags
+  - title   : Gallery
+    url     : /gallery
+  - title   : '<i class="fab fa-github" aria-hidden="true"></i> Github repo'
+    url     : https://github.com/dieghernan/dieghernan.github.io
+footer:
+  links:
+    - label: "RSS"
+      icon: "fa fa-rss"
+      url:  "./atom.xml"
+    - label: Stack Overflow
+      icon: fab fa-stack-overflow
+      url: https://stackoverflow.com/users/7877917/dieghernan
+    - label: WikiCommons
+      icon: fab fa-wikipedia-w
+      url: https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84
+    - label: Github
+      icon: fab fa-github
+      url: https://github.com/dieghernan/
+    - label: Carto
+      icon: far fa-dot-circle
+      url: https://dieghernan.carto.com/
+    - label: "RPubs"
+      icon: "fab fa-r-project"
+      url: "https://rpubs.com/dieghernan"
+    
+# C. Theme Settings
+googlefonts:
+  - url : 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap'
+  
+chulapa-skin: 
+  highlight     : perldoc
+  skin: lux
+  vars          :    
+    enable-responsive-font-sizes: true
+    body-color: black
+  
+    
+    
+# D. Jekyll Defaults and collections: see https://jekyllrb.com/
+
+paginate: 5
+paginate_path: "/blog/page:num/"
+paginator_maxnum: 3  
+collections_dir     : collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+permalink: /:year:month_:title/
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+      header_type: "base"
+      include_on_search   : false
+      cloudtag_url        : /tags 
+      cloudcategory_url   : /categories 
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      header_type       : "post"
+      include_on_search : true
+      include_on_feed   : true
+      show_date         : true
+      show_bottomnavs   : true
+      show_sociallinks  : true
+      show_comments     : true
+      show_tags         : true
+      show_categories   : true
+      show_author       : true
+      show_breadcrumb   : true
+      breadcrumb_list   :
+        - label: Blog
+          url: /blog/
+  -
+    scope:
+      path: ""
+      type: "projects"
+    values:
+      header_type       : "hero"
+      show_bottomnavs   : true
+      show_sociallinks  : true
+      include_on_search : true
+      show_tags         : true
+      show_breadcrumb   : true
+      include_on_feed   : true
+      breadcrumb_list   :
+        - label: Projects
+          url: /projects
+  -
+    scope:
+      path: "assets/img/blog"
+    values:
+      image_col         : imgblog
+
+# XX. Other settings - no need to modify
+compress_html:
+  clippings: all
+  blanklines: true
+
+plugins:
+  - jekyll-github-metadata
+  - jekyll-paginate
+  - jekyll-include-cache
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+
+# Exclude these files from production site
+exclude:
+  - LICENSE
+  - README.md
+  - Gemfile
+  - vendor
+  - oldcontent
+
+include:
+ - _pages
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  footnote_backlink: '&uarr;'
+  entity_output: as_char
+  toc_levels: 2..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+
+# Sass/SCSS
+sass:
+  sass_dir: _sass
+  style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style

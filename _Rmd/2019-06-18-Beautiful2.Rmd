@@ -1,0 +1,345 @@
+---
+title: "Beautiful Maps with R (II): Fun with flags"
+subtitle: "Put a picture on your map"
+tags: [R,beautiful_maps, maps, raster,flags,sf,function]
+last_modified_at: 2020-12-29
+header_img: ./assets/img/blog/20190618_imgpost-1.png
+excerpt: Want to use a flag (or any *.png file) as a background of your map? You are in the right post.
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy = 'styler',
+                      dev = "ragg_png")
+knitr::opts_knit$set(global.par = TRUE)
+
+rm(list = ls())
+par(mar = c(0, 0, 0, 0))
+options(gisco_cache_dir = "~/R/mapslib/GISCO/")
+```
+
+**Updated 29 december 2020**: All these pieces of work are already available on `cartography >v.2.4.0` on functions [`getPngLayer`](http://riatelab.github.io/cartography/docs/reference/getPngLayer.html). Just install it via `install.packages("cartography")`. A dedicated blog post with examples on this [link](../202002_cartography1).
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
+
+Want to use a flag (or any `*.png` file) as a background of your map? You are in the right post. I am aware that there are some **R** packages out [there](https://github.com/RobertMyles/flagfillr), but we focus here in the option provided by `cartography::getPngLayer()`, that basically converts your image into a raster (see also this article of [Paul Murrell](https://www.stat.auckland.ac.nz/people/pmur002), **"Raster Images in R Graphics"** [(*The R Journal, Volume 3/1, June 2011*)](https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf)). 
+
+
+## Required R packages
+
+```{r libs, warning=FALSE, message=FALSE}
+library(dplyr)
+library(sf)
+library(cartography)
+library(mapSpain)
+library(giscoR)
+
+
+```
+
+## Choosing a good source for our shape
+
+In this post I am going to plot a map of Spain with its [autonomous communities (plus 2 autonomous cities)](https://en.wikipedia.org/wiki/Autonomous_communities_of_Spain), that is the first-level administrative division of the country. [Wikipedia](https://en.wikipedia.org/wiki/Autonomous_communities_of_Spain) shows an initial map identifying also the flag of each territory.
+
+For that, I will use `mapSpain`, that uses information from `giscoR`, whose source is the geodata available in [**Eurostat**](https://ec.europa.eu/eurostat). I would also use `giscoR` to get the world around Spain.
+
+
+```{r 20190618_preparing,  message=FALSE, warning=FALSE,  fig.height=550/90, fig.width=750/90,dpi=90, paged.print=FALSE, results='hide'}
+
+Spain <- esp_get_ccaa(epsg = 3857, res = 3)
+
+World <- gisco_get_countries(epsg = 3857, res = 3)
+
+bboxcan <- esp_get_can_box(epsg = 3857)
+
+#Plot
+par(mar = c(0, 0, 0, 0))
+plot(st_geometry(Spain),
+     col = NA,
+     border = NA,
+     bg = "#C6ECFF")
+plot(st_geometry(World),
+     col = "#E0E0E0",
+     bg = "#C6ECFF",
+     add = T)
+plot(st_geometry(Spain), col = "#FEFEE9", add = T)
+layoutLayer(
+  title = "",
+  frame = FALSE ,
+  scale = 500,
+  sources = gisco_attributions(),
+  author = "dieghernan, 2019",
+)
+plot(bboxcan, add = TRUE)
+
+```
+
+
+
+Now we have it! A nice map of Spain with a layout based on the [Wikipedia convention for location maps](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps).
+
+## Loading the flag
+
+As a first example, I chose [Asturias](https://en.wikipedia.org/wiki/Asturias) to build my code. So the goal here is to create a `RasterBrick` from the desired `*.png` file, add the necessary geographical information and use the shape of Asturias to crop the flag.
+
+```{r 20190618_Asturias,  message=FALSE, warning=FALSE,  fig.width=1000/90,fig.height=(500/2)/90,dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+
+
+#1.Shape---
+shp <- Spain %>% filter(ccaa.shortname.es == "Asturias")
+
+#2.Get flag---
+
+# Masked
+url <- "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_Asturias.svg/800px-Flag_of_Asturias.svg.png"
+
+flagnomask <- getPngLayer(shp,url, mask = FALSE)
+
+flagmask <- getPngLayer(shp,url, mask = TRUE)
+
+opar <- par(no.readonly = TRUE)
+par(mar = c(1, 1, 1, 1), mfrow = c(1, 2))
+pngLayer(flagnomask)
+plot(st_geometry(Spain), add = T)
+
+#4.Mask---
+pngLayer(flagmask)
+plot(st_geometry(Spain), add = T)
+par(opar)
+
+```
+
+
+
+<i class="fa fa-star"></i> **Pro tip:** Use high-quality `*.png`, otherwise the plot would look quite poor. Here I show an extreme example.
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
+
+```{r 20190618_svg,  message=FALSE, warning=FALSE, dev='png', fig.width=800/(90),fig.height=550/(90),dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+
+
+MURshp <- Spain %>% filter(ccaa.shortname.es == "Murcia")
+MURLow <-  getPngLayer(
+  MURshp,
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/100px-Flag_of_the_Region_of_Murcia.svg.png"
+)
+MURHigh <-  getPngLayer(
+  MURshp,
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/1200px-Flag_of_the_Region_of_Murcia.svg.png"
+)
+
+
+#Plot and compare
+opar <- par(no.readonly = TRUE)
+par(mfrow = c(1, 2), mar = c(1, 1, 1, 1))
+plot_sf(MURshp, main = "Low")
+pngLayer(MURLow, add = TRUE)
+
+plot_sf(MURshp, main = "High")
+pngLayer(MURHigh, add = TRUE)
+
+par(opar)
+
+```
+
+
+Now, we are ready to have [fun with flags](https://the-big-bang-theory.com/fun_with_flags/). It's time to make the flag map of the autonomous communities of Spain.
+
+
+```{r 20190618_finalmap, tidy='styler', eval=FALSE}
+
+par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
+plot(Spain %>%
+       st_geometry(),
+     col = NA,
+     border = NA,
+     bg = "#C6ECFF")
+plot(st_geometry(World),
+     col = "#E0E0E0",
+     add = T)
+plot(st_geometry(bboxcan),
+     add = T)
+layoutLayer(
+  title = "",
+  frame = FALSE ,
+  sources = "© EuroGeographics for the administrative boundaries",
+  author = "dieghernan, 2019",
+)
+#Andalucia
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bandera_de_Andalucia.svg/1000px-Bandera_de_Andalucia.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Andalucía")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# ...more flags
+# Go to the source code of this post on GitHub for the full code
+
+plot(st_geometry(Spain),
+     col = NA,
+     lwd = 2,
+     add = T)
+
+```
+
+```{r 20190618_allCCAA, echo=FALSE,  fig.height=550/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, results='hide', eval=TRUE}
+
+par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
+plot(Spain %>%
+       st_geometry(),
+     col = NA,
+     border = NA,
+     bg = "#C6ECFF")
+plot(st_geometry(World),
+     col = "#E0E0E0",
+     add = T)
+plot(st_geometry(bboxcan),
+     add = T)
+layoutLayer(
+  title = "",
+  frame = FALSE ,
+  sources = "© EuroGeographics for the administrative boundaries",
+  author = "dieghernan, 2019",
+)
+#Andalucia
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bandera_de_Andalucia.svg/1000px-Bandera_de_Andalucia.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Andalucía")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+
+#Aragon
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Flag_of_Aragon.svg/1200px-Flag_of_Aragon.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Aragón")
+pngLayer(getPngLayer(shp, flag, align = "left"), add = TRUE)
+
+#Asturias
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_Asturias.svg/1200px-Flag_of_Asturias.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Asturias")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+
+# Cantabria
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Flag_of_Cantabria.svg/1200px-Flag_of_Cantabria.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Cantabria")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Castilla La Mancha
+
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Castile-La_Mancha.svg/1200px-Flag_of_Castile-La_Mancha.svg.png"
+shp <- Spain[Spain$iso2.ccaa.code == "ES-CM", ]
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Castilla y León
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Flag_of_Castile_and_Le%C3%B3n.svg/1200px-Flag_of_Castile_and_Le%C3%B3n.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-CL")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Cataluña
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/1200px-Flag_of_Catalonia.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Cataluña")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Madrid
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_the_Community_of_Madrid.svg/1200px-Flag_of_the_Community_of_Madrid.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Madrid")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+
+# Navarra
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Bandera_de_Navarra.svg/1200px-Bandera_de_Navarra.svg.png"
+shp <- Spain %>% filter(ccaa.shortname.es == "Navarra")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Comunidad Valenciana
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Flag_of_the_Land_of_Valencia_%28official%29.svg/1200px-Flag_of_the_Land_of_Valencia_%28official%29.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-VC")
+pngLayer(getPngLayer(shp, flag, align = "left"), add = TRUE)
+
+# Extremadura
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Flag_of_Extremadura_%28with_coat_of_arms%29.svg/1200px-Flag_of_Extremadura_%28with_coat_of_arms%29.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-EX")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Galicia
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Flag_of_Galicia.svg/1200px-Flag_of_Galicia.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-GA")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+
+# Baleares
+
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Flag_of_the_Balearic_Islands.svg/1200px-Flag_of_the_Balearic_Islands.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-IB")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# La Rioja
+
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Flag_of_La_Rioja_%28with_coat_of_arms%29.svg/1200px-Flag_of_La_Rioja_%28with_coat_of_arms%29.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-RI")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Basque Country
+
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Flag_of_the_Basque_Country.svg/1200px-Flag_of_the_Basque_Country.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-PV")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Murcia
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/1200px-Flag_of_the_Region_of_Murcia.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-MC")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+# Canarias
+
+flag <-
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Flag_of_the_Canary_Islands.svg/1200px-Flag_of_the_Canary_Islands.svg.png"
+shp <- Spain %>% filter(iso2.ccaa.code == "ES-CN")
+pngLayer(getPngLayer(shp, flag), add = TRUE)
+
+
+plot(st_geometry(Spain),
+     col = NA,
+     lwd = 1,
+     add = T)
+
+```
+
+We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.
+
+```{r 20190618_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
+
+nuts1 <- gisco_get_nuts(nuts_level = "1", epsg = 3035, res=3)
+
+
+noplot=c("FRY","ES7","PT2","PT3")
+NUTS1_Clean <- nuts1 %>% filter(CNTR_CODE %in% eurostat::eu_countries$code) %>% filter(!NUTS_ID %in% noplot) %>% 
+  group_by(CNTR_CODE) %>% summarise(drop=n())
+
+url="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/1200px-Flag_of_Europe.svg.png"
+
+flag <- getPngLayer(NUTS1_Clean,url, mask = FALSE)
+flagcut <- getPngLayer(NUTS1_Clean,url, mask = TRUE)
+par(mar=c(0,0,0,0))
+pngLayer(flag,alpha=150)
+pngLayer(flagcut,bgalpha=0,add=T)
+```
+

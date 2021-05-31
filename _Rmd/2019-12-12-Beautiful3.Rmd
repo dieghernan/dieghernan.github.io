@@ -1,0 +1,217 @@
+---
+title: "Beautiful Maps with R (III): Patterns and hatched maps"
+subtitle: "A solution for b/w and academic maps."
+tags: [R,beautiful_maps,maps,sf,vignette,function,cartography]
+last_modified_at: 2020-02-17
+header_img: ./assets/img/blog/20191212_imgpost-1.png
+output: 
+  md_document:
+    variant: gfm
+    preserve_yaml: true
+---
+
+**Updated 17 february 2020**: All these pieces of work are already available on `cartography >v.2.4.0` on functions [`hatchedLayer`](http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html) and [`legendHatched`](https://riatelab.github.io/cartography/docs/reference/legendHatched.html). Just install it via `install.packages("cartography")`. A dedicated blog post with examples on this [link](../202002_cartography1). 
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
+knitr::opts_knit$set(global.par = TRUE)
+rm(list = ls())
+
+
+```
+
+On this post I would show how to produce different filling patterns that could be added over your shapefiles with the `cartography` package.
+
+
+## Required R packages
+
+```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
+library(sf)
+library(dplyr)
+library(giscoR)
+library(cartography)
+```
+
+
+```{r 20191212_dotex, message=FALSE, warning=FALSE, dpi=90, fig.width=200/90, fig.height=350/90,  paged.print=FALSE, tidy='styler', results='hide'}
+DE  <- gisco_get_countries(country = "Germany", epsg=3857)
+
+```
+
+
+Let's see how it works.
+
+```{r 20191212_showfun, warning=FALSE, message=FALSE, tidy='styler', fig.height=500/90,fig.width=500/90, dpi=90 }
+
+
+par(mfrow = c(3, 4),
+    mar = c(1, 1, 1, 1),
+    cex = 0.5)
+hatchedLayer(DE, "dot")
+title("dot")
+hatchedLayer(DE, "text", txt = "Y")
+title("text")
+hatchedLayer(DE, "diamond", density = 0.5)
+title("diamond")
+hatchedLayer(DE, "grid", lwd = 1.5)
+title("grid")
+hatchedLayer(DE, "hexagon", col = "blue")
+title("hexagon")
+hatchedLayer(DE, "horizontal", lty = 5)
+title("horizontal")
+hatchedLayer(DE, "vertical")
+title("vertical")
+hatchedLayer(DE, "left2right")
+title("left2right")
+hatchedLayer(DE, "right2left")
+title("right2left")
+hatchedLayer(DE, "zigzag")
+title("zigzag")
+hatchedLayer(DE, "circle")
+title("circle")
+```
+
+Let's play a little bit more with some of the additional features of the function:
+
+```{r 20191212_playing, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=500/90, dpi=90 }
+
+
+par(mar = c(1, 1, 1, 1), mfrow = c(2, 3))
+plot(st_geometry(DE))
+hatchedLayer(
+  DE,
+  "dot",
+  pch = 10,
+  density = 0.5,
+  cex = 2,
+  col = "darkblue",
+  add = T
+)
+plot(st_geometry(DE))
+hatchedLayer(
+  DE,
+  "dot",
+  pch = 21,
+  col = "red",
+  bg = "green",
+  cex = 1.25,
+  add = T
+)
+plot(st_geometry(DE), col = "grey")
+hatchedLayer(
+  DE,
+  "text",
+  txt = "DE",
+  density = 1.1,
+  col = "white",
+  add = T
+)
+plot(st_geometry(DE), col = "blue")
+hatchedLayer(
+  DE,
+  "horizontal",
+  lty = 3,
+  cellsize = 150 * 1000,
+  add = T
+)
+hatchedLayer(DE, "zigzag", lwd = 2, col = "red")
+plot(st_geometry(DE), border =  "orange", lwd=2)
+hatchedLayer(DE,
+             "left2right",
+             density = 2,
+             col = "orange",
+             add = T)
+```
+
+## Adding legends: the `legendHatched` function
+
+As a complementary function, there is also the `legendHatched`. Main parameters are:
+
+-   `pos`, `title.txt`, `title.cex`, `values.cex`,`categ`, `cex` and `frame`: See `?cartography::legendTypo`.
+-   `patterns`: vector of patterns to be created for each element on `categ`.
+-   `ptrn.bg`: Background of the legend box for each `categ`.
+-   `ptrn.text`: Text to be used for each `categ="text"`, as a single value or a vector.
+-   `dot.cex`: `cex` of each `categ="dot"`, as a single value or a vector.
+-   `text.cex`: text size of each `categ="text"`, as a single value or a vector.
+-   As in the case of the `hatchedLayer`function, different graphical parameters can be passed (`lty`, `lwd`, `pch`, `bg` on points).
+
+Note that is also possible to create solid legends, by setting `col` and `ptrn.bg` to the same color. Parameters would respect the order of the `categ` variable.
+
+```{r 20191212_playinglegend, warning=FALSE, message=FALSE,dpi=90, fig.width=500/90, fig.height=500/90,  tidy='styler'}
+
+
+par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
+plot(st_geometry(DE)) #Null geometry
+legendHatched(
+  title.txt = "Example 1",
+  categ = c("a", "b"),
+  patterns = "dot",
+  pch = c(16, 23),
+  frame = T
+)
+legendHatched(
+  pos = "left",
+  title.txt = "Example 2",
+  categ = c("c", "d", "other text"),
+  patterns = c("text", "zigzag"),
+  ptrn.text = c("s", "pp"),
+  ptrn.bg = "grey80",
+  col = c("red", "blue")
+)
+
+legendHatched(
+  pos = "topright",
+  title.txt = "Example 3",
+  categ = c("e", "f", "solid"),
+  patterns = c("circle", "left2right"),
+  ptrn.bg = c("orange", "yellow", "green"),
+  col = c("white", "white", "green"),
+  lty = c(2, 4),
+  lwd = c(1, 3)
+)
+
+
+legendHatched(
+  pos = "bottomright",
+  title.txt = "Example 4",
+  values.cex = 1.2,
+  categ = c("h", "i", "j", "k"),
+  patterns = c("grid", "diamond", "horizontal", "dot"),
+  cex = 2,
+  pch = 22,
+  col = "white",
+  ptrn.bg = "black",
+  bg = "pink"
+)
+```
+
+I hope that you find this functions useful. Enjoy and nice mapping!
+
+```{r 20191212_imgpost, echo=FALSE, fig.align='center', fig.height=500/90, fig.width=474/90, warning=FALSE, dpi=90, results='hide', tidy='styler', message=FALSE}
+library(cartography)
+
+mtq <-  st_read(system.file("gpkg/mtq.gpkg", package = "cartography"))
+typoLayer(mtq,  var = "STATUS",  legend.pos = "n",
+          legend.values.order = c("Prefecture","Sub-prefecture",
+                                  "Simple municipality"),
+          col = c("grey10", "grey50", "grey80"),border = NA)
+mtq$Patts = cut(mtq$MED,c(-Inf,15700,Inf), labels=FALSE)
+hatchedLayer(mtq[mtq$Patts == 1,],"left2right",
+             density = 2,  col = "white",  add = TRUE,  pch = 3,  cex = 0.6)
+hatchedLayer(mtq[mtq$Patts == 2, ],"left2right",
+             density = 4, col = "white", add = TRUE)
+legendHatched(pos = "bottomleft",
+              cex = 1.5,
+              values.cex = 0.8,
+              title.txt = "Median Income\n(in thousand of euros)",
+              categ = c("11.9 - 15.7","14.7 - 21.8",
+                        "Prefecture", "Sub-prefecture",
+                        "Simple municipality"),
+              patterns = c("left2right"), density = c(1, 2),
+              col = c(rep("black", 2), "grey10", "grey50", "grey80"),
+              ptrn.bg = c(rep("white", 2), "grey10", "grey50", "grey80"),
+              pch = 3)
+plot(st_geometry(st_union(mtq)), add = TRUE)
+
+```
