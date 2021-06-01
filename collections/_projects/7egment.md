@@ -4,7 +4,7 @@ subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 header_img: https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png
 date: 2017-05-17
 tags: [project,pebble,watchface,javascript,C]
-permalink: /7egment/
+permalink: /projects/7egment/
 project_links:
     - url: https://github.com/dieghernan/7egment
       icon: fab fa-github

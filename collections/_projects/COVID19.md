@@ -3,7 +3,7 @@ title: COVID19 Microsite
 subtitle: Tracking the outbreak in Spain by region
 header_img: https://dieghernan.github.io/COVID19/assets/img/header.png
 tags: [project,R,maps,sf,cartography]
-permalink: /COVID19-project
+permalink: /projects/COVID19
 date: 2020-04-04
 ---
 

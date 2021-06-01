@@ -4,7 +4,7 @@ subtitle: Interactive map of the international COVID-19 risk areas as designated
 header_img: "https://corona-atlas.de/assets/img/og_corona_atlas.png"
 date: 2021-04-30
 tags: [project,R,maps,leaflet,python]
-permalink: /corona-atlas/
+permalink: /projects/corona-atlas/
 project_links:
     - url: https://corona-atlas.de/
       icon: fas fa-external-link-alt
