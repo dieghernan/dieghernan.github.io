@@ -6,10 +6,12 @@ excerpt: Latest news
 og_image: /assets/img/site/banner.png
 header_type: hero
 header_img: /assets/img/site/banner.png
+show_breadcrumb   : true
 ---
 <!-- Chulapa template for pagination -->
 {%- include components/headers.html headertype= page.header_type imghero=page.header_img -%}
 <main class="container-lg pb-3 flex-fill">
+  {%- include components/breadcrumbdatesocial.html -%}
   <div class="row pt-2 mt-3">
     <section class="col-md-8 offset-md-2">
     {% include_cached components/indexcards.html cacheddocs=paginator.posts  cachedlimit=site.paginate %}

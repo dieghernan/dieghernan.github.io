@@ -1,7 +1,7 @@
 ---
 layout: indexcategory
-title: 'My projects'
-subtitle: 'Some pieces of work'
+title: 'Projects'
+subtitle: 'Some random pieces of work'
 permalink: /projects
 include_collection: projects
 index_sort: date
