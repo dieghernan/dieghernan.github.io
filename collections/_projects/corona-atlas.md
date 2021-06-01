@@ -19,7 +19,7 @@ Visit https://corona-atlas.de/
 
 Interactive map of the international COVID-19 risk areas as designated by the German authorities.
 
-The data is updated periodically from the website of the [Robert Koch Institute][rki].
+The data is updated periodically from the website of the [Robert Koch Institute](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Risikogebiete_neu.html).
 
 Data scraping is performed on **Python** with
 [**scrapy**](https://scrapy.org/).
