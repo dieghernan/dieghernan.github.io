@@ -1,6 +1,6 @@
 ---
 title: Leaflet-providersESP
-subtitle: Plugin for Leaflte.js
+subtitle: Plugin for Leaflet.js
 date: 2020-10-26
 header_img: ./assets/img/misc/leaflet-providersesp.png
 tags: [project,maps,leaflet]
