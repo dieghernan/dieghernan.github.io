@@ -5,7 +5,7 @@ header_type: hero
 header_img: /assets/img/site/banner.png
 ---
 
-## [Recent posts](./blog/)
+## <a href="./blog" class="text-dark">Recent posts</a>
 {: .display-3 .mb-5 }
 
 
@@ -19,7 +19,7 @@ header_img: /assets/img/site/banner.png
 {: .my-5 .bg-primary }
 
 
-## [Projects](./projects)
+## <a href="./projects" class="text-dark">Projects</a>
 {: .display-3 .mb-5 }
 
 {%- assign alldocs = site.documents | 
