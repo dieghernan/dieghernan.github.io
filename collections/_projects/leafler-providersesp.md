@@ -67,3 +67,12 @@ This code would generate a leaflet map with a layer provided by Leaflet-provider
   <iframe class="embed-responsive-item" src="https://dieghernan.github.io/leaflet-providersESP/demo/minimal" allowfullscreen loading="lazy"></iframe>
 </div>
 
+
+## All providers
+
+<div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary">
+  <iframe class="embed-responsive-item" src="https://dieghernan.github.io/leaflet-providersESP/allproviders/" allowfullscreen loading="lazy"></iframe>
+</div>
+
+	
+
