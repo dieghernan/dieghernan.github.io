@@ -30,6 +30,23 @@ extr_cens <- ggplot(shp_cens) +
 
 ggsave("./assets/img/wiki/PorcExtMadrid2020.svg", width = 7, height = 7)
 
+
+extr_barr <- ggplot(shp_barrio) +
+  geom_sf(aes(fill=Proporci_3), color=NA) +
+  geom_sf(data=shp_dist, fill=NA, color="grey5", size=0.1)+
+  scale_fill_gradientn(colours = hcl.colors(10,"Lajolla"),
+                       labels = function(x) paste0(x,"%"),
+                       name="",
+                       breaks= seq(0,35,5),
+                       guide = guide_colorsteps(barheight=10,
+                                                barwidth=0.6)
+  ) +
+  theme_void()
+
+extr_barr
+ggsave("./assets/img/wiki/PorcExtMadrid2020Barrio.svg", width = 7, height = 7)
+
+
 extr_dist <- ggplot(shp_dist) +
   geom_sf(aes(fill=Proporci_3), color=NA) +
   geom_sf(data=shp_dist, fill=NA, color="grey5", size=0.1)+
