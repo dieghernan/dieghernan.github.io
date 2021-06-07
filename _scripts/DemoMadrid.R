@@ -38,13 +38,15 @@ extr_barr <- ggplot(shp_barrio) +
                        labels = function(x) paste0(x,"%"),
                        name="",
                        breaks= seq(0,35,5),
-                       guide = guide_colorsteps(barheight=10,
+                       guide = guide_colorsteps(barheight=25,
                                                 barwidth=0.6)
   ) +
-  theme_void()
+  theme_void() +
+  theme(legend.text = element_text(size=20))
 
 extr_barr
 ggsave("./assets/img/wiki/PorcExtMadrid2020Barrio.svg", width = 7, height = 7)
+ggsave("./assets/img/wiki/PorcExtMadrid2020Barrio.png", width = 7, height = 7)
 
 
 extr_dist <- ggplot(shp_dist) +
