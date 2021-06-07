@@ -45,17 +45,9 @@ plot(st_geometry(italy_pt), col = c("red", "yellow", "blue"), main = "POINT")
 What I missed when using `st_cast` is the possibility to "break" the `LINESTRING` objects into sub-segments:
 
 
-```
-## Error in file(filename, "r", encoding = encoding): no se puede abrir la conexión
-```
 
-```
-## Error in stdh_cast_substring(italy_lin, "LINESTRING"): no se pudo encontrar la función "stdh_cast_substring"
-```
 
-```
-## Error in st_geometry(italy_sub): objeto 'italy_sub' no encontrado
-```
+![plot of chunk 20190505_italycastsub](../assets/img/blog/20190505_italycastsub-1.png)
 
 ## An approach
 
@@ -162,9 +154,9 @@ kable(end - init, format = "markdown")
 
 
 
-|x             |
-|:-------------|
-|0.120388 secs |
+|x              |
+|:--------------|
+|0.1729319 secs |
 
 ```r
 init <- Sys.time()
@@ -177,7 +169,7 @@ kable(end - init, format = "markdown")
 
 |x             |
 |:-------------|
-|1.607273 secs |
+|2.288558 secs |
 
 ```r
 par(mfrow = c(1, 1), mar = c(0, 0, 0, 0))
