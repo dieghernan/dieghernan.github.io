@@ -14,7 +14,7 @@ excerpt: Interactive map of the international COVID-19 risk areas as designated 
 
 ![corona-logo](https://corona-atlas.de/assets/img/corona-atlas-icon.png)
 
-Visit https://corona-atlas.de/
+Visit <https://corona-atlas.de/>
 
 
 Interactive map of the international COVID-19 risk areas as designated by the German authorities.
