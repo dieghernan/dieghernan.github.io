@@ -6,5 +6,5 @@ header_type: none
 redirect_to:
   - https://ropengov.github.io/giscoR/
 excerpt: Page not found
-permalink: /giscoR/
+permalink: /giscoR/delete
 ---
