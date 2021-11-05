@@ -1,7 +1,7 @@
 ---
 title: Where in the world?
 subtitle: A leaflet map with the places I have flown
-tags: [R,maps,leaflet]
+tags: [rstats,rspatial,maps,leaflet]
 header_img: /assets/img/blog/201905_Where-in-the-world.png
 leafletmap: true
 always_allow_html: yes

@@ -2,7 +2,7 @@
 title: "New features on cartography package"
 subtitle: "Vignette of the package expansion"
 header_img: ./assets/img/blog/20200217_wordcloud2-1.png
-tags: [R,beautiful_maps, maps, sf, cartography, vignette]
+tags: [rstats,rspatial,beautiful_maps, maps, sf, cartography, vignette]
 header_type : "splash"
 show_toc: true
 output: 

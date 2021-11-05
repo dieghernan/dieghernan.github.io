@@ -1,7 +1,7 @@
 ---
 title: Using CountryCodes database and sf package
 subtitle: vignette of the CountryCodes project
-tags: [R,sf,maps,vignette]
+tags: [rstats,rspatial,sf,maps,vignette]
 header_img: ./assets/img/blog/20190427_mapfin-1.png
 output: 
   md_document:
