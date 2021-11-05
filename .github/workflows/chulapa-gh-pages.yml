@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - main
+  workflow_dispatch:
 
 jobs:
   build-chulapa-gh-pages:
@@ -13,12 +14,12 @@ jobs:
     - uses: actions/checkout@v2
 
     # Use GitHub Actions' cache to shorten build times and decrease load on servers
-    - uses: actions/cache@v2.1.6
+    - uses: actions/cache@v2
       with:
         path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+        key: ${{ runner.os }}-gems2-${{ hashFiles('**/Gemfile') }}
         restore-keys: |
-          ${{ runner.os }}-gems-
+          ${{ runner.os }}-gems2-
  
     # Specify the target branch (optional)
     - uses: helaili/jekyll-action@2.2.0
@@ -26,3 +27,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         target_branch: 'gh-pages'
         jekyll_src: '.'
+        keep_history: true
