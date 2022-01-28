@@ -7,7 +7,7 @@ p_load(styler)
 diegpost <- function(file) {
   getwd()
   ezknit(
-    paste("~/R/Projects/b/_Rmd/",file,".Rmd",sep = ""),
+    paste("~/R/Projects/dieghernan.github.io/_Rmd/",file,".Rmd",sep = ""),
     out_dir = "./collections/_posts",
     fig_dir = "../assets/img/blog",
     keep_html = FALSE
@@ -39,6 +39,9 @@ diegpost("2019-12-12-Beautiful3")
 diegpost("2020-02-06-Brexit")
 diegpost("2020-02-17-cartography1")
 diegpost("2020-04-05-headtails")
+diegpost("2021-01-28-maps-flags")
+
+
 
 # ezknit(
 #   "/cloud/project/_Rmd/2019-04-05-Cast to subsegments.Rmd",
