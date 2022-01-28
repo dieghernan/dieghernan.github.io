@@ -27,19 +27,19 @@ diegpost <- function(file) {
 #Render 2019-04-27-Using-CountryCodes ----
 
 #diegpost("2019-04-27-Using-CountryCodes")
-diegpost("2019-05-05-Cast to subsegments")
-
-#diegpost("2019-05-13-Where-in-the-world")
-#diegpost("2019-05-20-Leaflet_R_Jekyll")
-diegpost("2019-06-02-Beautiful1")
-diegpost("2019-06-18-Beautiful2")
-#diegpost("2019-10-16-WikiMap1")
-diegpost("2019-11-07-QuickR")
-diegpost("2019-12-12-Beautiful3")
-diegpost("2020-02-06-Brexit")
-diegpost("2020-02-17-cartography1")
-diegpost("2020-04-05-headtails")
-diegpost("2021-01-28-maps-flags")
+# diegpost("2019-05-05-Cast to subsegments")
+# 
+# #diegpost("2019-05-13-Where-in-the-world")
+# #diegpost("2019-05-20-Leaflet_R_Jekyll")
+# diegpost("2019-06-02-Beautiful1")
+# diegpost("2019-06-18-Beautiful2")
+# #diegpost("2019-10-16-WikiMap1")
+# diegpost("2019-11-07-QuickR")
+# diegpost("2019-12-12-Beautiful3")
+# diegpost("2020-02-06-Brexit")
+# diegpost("2020-02-17-cartography1")
+# diegpost("2020-04-05-headtails")
+diegpost("2022-01-28-maps-flags")
 
 
 
