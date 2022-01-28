@@ -1,5 +1,5 @@
 ---
-title: "Beautiful Maps with R (III): Fun with flags revisited"
+title: "Beautiful Maps with R (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
 tags: [rstats,rspatial,beautiful_maps, maps, terra,flags,sf,rasterpic, giscoR]
 header_img: ./assets/img/blog/20210128_flag-1.png
