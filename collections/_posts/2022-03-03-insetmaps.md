@@ -1,7 +1,8 @@
 ---
-title: "Insets with ggplot2 and tmap"
+title: "Insets with ggplot2 and tmap - and mapsf!"
 subtitle: "A map on a map"
-tags: [rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain]
+last_modified_at: 2022-03-03
+tags: [rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain, mapsf]
 header_img: ./assets/img/blog/20220303_inset.png
 excerpt: A common challenge when creating maps is how to include an inset map on 
   your visualization. An inset map is a smaller map usually included on a corner 
@@ -235,3 +236,23 @@ ggdraw() +
 ```
 
 <img src="../assets/img/blog/20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" />
+
+## Update: On `mapsf`
+
+[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA
+[\@rgeomatic](https://twitter.com/rgeomatic)), the developer of `mapsf`, shared
+also how to create inset maps using that package:
+
+
+```r
+
+library(mapsf)
+
+mf_map(main)
+mf_inset_on(island, pos = "bottomright", cex = .3)
+mf_map(island)
+box(lwd = .5)
+mf_inset_off()
+```
+
+<img src="../assets/img/blog/20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" />
