@@ -12,7 +12,7 @@ project_links:
 excerpt: Interactive map of the international COVID-19 risk areas as designated by the German authorities. The data is updated periodically from the website of the Robert Koch Institute.
 ---
 
-![corona-logo](https://corona-atlas.de/assets/img/corona-atlas-icon.png)
+<img src="https://corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" style="width: 25%;">
 
 Visit <https://corona-atlas.de/>
 
