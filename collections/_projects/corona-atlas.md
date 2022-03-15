@@ -27,4 +27,7 @@ The scraper also uses
 [**pandas**](https://pandas.pydata.org/) and
 [**pycountry**](https://pypi.org/project/pycountry/).
 
-Map visualization is created with **R** and generates a map via [{rmarkdown}](https://rmarkdown.rstudio.com/). The map is created using [{leaflet}](http://rstudio.github.io/leaflet/), [{giscoR}](https://dieghernan.github.io/giscoR/) and some packages included on the [tidyverse](https://www.tidyverse.org/).
+For the prototype version, map visualization was created with **R** and generated a map via [{rmarkdown}](https://rmarkdown.rstudio.com/) using [{leaflet}](http://rstudio.github.io/leaflet/), [{giscoR}](https://dieghernan.github.io/giscoR/) and some packages included on the [tidyverse](https://www.tidyverse.org/).
+For the deployment, map logic has moved to Javascript to scalate with multiple languages.
+
+[Read more in this post](/202203_Corona-timelapse)
