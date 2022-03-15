@@ -1,7 +1,7 @@
 ---
 title: Corona timelapse 
 subtitle: Travel restrictions amidst the COVID crisis across time - A German perspective
-header_img: "https://corona-atlas.de/assets/img/corona_atlas_timelapse.gif"
+header_img: "https://corona-atlas.de/timelapse/frames/D2021-04-16.png"
 date: 2022-03-14
 tags: [project,R,maps,leaflet,python]
 project_links:
@@ -48,7 +48,7 @@ German bureaucracy.
 After all, we hope that [corona-atlas] remains boring and that our world map remains green. Now it is finally time for quite some **Wanderlust**!
 
 ## Links
-* [Read more on this site](projects/corona-atlas)
+* [Read more on this site](../projects/corona-atlas)
 * [Project's Website][corona-atlas]
 * [Project's Repository](https://github.com/dieghernan/RKI-Corona-Atlas)
 
