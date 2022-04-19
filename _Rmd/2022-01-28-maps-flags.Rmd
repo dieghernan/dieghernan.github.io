@@ -1,7 +1,7 @@
 ---
 title: "Beautiful Maps with R (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
-tags: [rstats,rspatial,beautiful_maps, maps, terra,flags,sf,rasterpic, giscoR]
+tags: [r_bloggers,rstats,rspatial,beautiful_maps, maps, terra,flags,sf,rasterpic, giscoR]
 header_img: ./assets/img/blog/20220128_flag-1.png
 excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package allows to geotag images, using an spatial object (from sf or terra) as a geographic reference.
 redirect_from:

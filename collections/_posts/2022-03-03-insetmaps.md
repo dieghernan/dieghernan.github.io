@@ -2,7 +2,7 @@
 title: "Insets with ggplot2 and tmap - and mapsf!"
 subtitle: "A map on a map"
 last_modified_at: 2022-03-03
-tags: [rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain, mapsf]
+tags: [r_bloggers,rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain, mapsf]
 header_img: ./assets/img/blog/20220303_inset.png
 excerpt: A common challenge when creating maps is how to include an inset map on 
   your visualization. An inset map is a smaller map usually included on a corner 

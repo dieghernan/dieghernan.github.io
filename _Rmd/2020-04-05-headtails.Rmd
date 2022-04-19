@@ -2,7 +2,7 @@
 title: "Head/Tails breaks on the <code>classInt</code> package."
 header_type: "splash"
 header_img: ./assets/img/blog/20200405_finalplot-1.png
-tags: [rstats,rspatial,classInt, cartography, vignette]
+tags: [r_bloggers,rstats,rspatial,classInt, cartography, vignette]
 show_toc: true
 mathjax: true
 output: 

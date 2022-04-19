@@ -1,6 +1,6 @@
 ---
 layout: null
-permalink: ./Rproject.xml
+permalink: ./rbloggers.xml
 ---
 {%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url | absolute_url -%}
 <?xml version="1.0" encoding="utf-8"?>
@@ -30,7 +30,7 @@ permalink: ./Rproject.xml
 	{%- assign  alldocs = 	site.documents |
 	            where_exp: "item", "item.include_on_feed == true" |
 							where_exp: "item", "item.date != nil" | 
-							where_exp: "item", "item.tags contains 'R'" |
+							where_exp: "item", "item.tags contains 'r_bloggers'" |
 							sort: 'date' | reverse -%}
 	{%- for document in alldocs  -%}
 	{%- assign entryimg =  document.og_image | default: document.header_img | absolute_url -%}
