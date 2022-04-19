@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-04-19 09:31:52 +0200 -->
+    <!-- Page build 2022-04-19 10:27:46 +0200 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -157,7 +157,7 @@
 				</li><li class="nav-item my-0 py-1">
 					<a class="nav-link px-3 py-1" href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> Github repo</a>
 				</li><li class="nav-item my-0 py-1">
-					<a class="nav-link px-3 py-1" href="https://www.r-bloggers.com/">R-bloggers <i class="fas fa-external-link" aria-hidden="true"></i></a>
+					<a class="nav-link px-3 py-1" href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
 				</li><li class="nav-item my-0 py-1">
 					<a class="nav-link px-3 py-1 " href="https://dieghernan.github.io/search">Search</a>
 				</li></ul>
@@ -176,7 +176,7 @@
 					</li><li class="nav-item mx-2">
 						<a class="nav-link text-uppercase font-weight-light " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> Github repo</a>
 					</li><li class="nav-item mx-2">
-						<a class="nav-link text-uppercase font-weight-light " href="https://www.r-bloggers.com/">R-bloggers <i class="fas fa-external-link" aria-hidden="true"></i></a>
+						<a class="nav-link text-uppercase font-weight-light " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
 					</li><li class="nav-item mx-2">
 						<a class="nav-link text-uppercase font-weight-light " href="https://dieghernan.github.io/search">
 							<i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
@@ -246,9 +246,9 @@
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_lin</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LINE"</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190505_italycast-1.png" alt="plot of chunk 20190505_italycast" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.png" alt="plot of chunk 20190505_italycast" /></p>
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> is the possibility to “break” the <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into sub-segments:</p>
-<p><img src="../assets/img/blog/20190505_italycastsub-1.png" alt="plot of chunk 20190505_italycastsub" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.png" alt="plot of chunk 20190505_italycastsub" /></p>
 <h2 id="an-approach">An approach</h2>
 <p>So one possible solution could be to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects across the original geometry. Let’s check it:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
@@ -271,7 +271,7 @@
   </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"AFTER FUNCTION"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190505_testspain-1.png" alt="plot of chunk 20190505_testspain" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.png" alt="plot of chunk 20190505_testspain" /></p>
 <h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></h2>
 <p>Finally, I wrapped the solution into a function and extended it a little bit:</p>
 <ul>
@@ -378,7 +378,7 @@
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">test50</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190505_benchmarkfunction-1.png" alt="plot of chunk 20190505_benchmarkfunction" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.png" alt="plot of chunk 20190505_benchmarkfunction" /></p>
 <p>It can be seen a difference in terms of performance, noting that <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed in 914 sub-strings while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons to 8,414 sub-strings. In that sense, the original <code class="language-plaintext highlighter-rouge">st_cast</code> is much faster, although this solution may work well in most cases.</p>
 </article>
 		</div>

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-04-19 09:31:52 +0200 -->
+    <!-- Page build 2022-04-19 10:27:46 +0200 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -157,7 +157,7 @@
 				</li><li class="nav-item my-0 py-1">
 					<a class="nav-link px-3 py-1" href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> Github repo</a>
 				</li><li class="nav-item my-0 py-1">
-					<a class="nav-link px-3 py-1" href="https://www.r-bloggers.com/">R-bloggers <i class="fas fa-external-link" aria-hidden="true"></i></a>
+					<a class="nav-link px-3 py-1" href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
 				</li><li class="nav-item my-0 py-1">
 					<a class="nav-link px-3 py-1 " href="https://dieghernan.github.io/search">Search</a>
 				</li></ul>
@@ -176,7 +176,7 @@
 					</li><li class="nav-item mx-2">
 						<a class="nav-link text-uppercase font-weight-light " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> Github repo</a>
 					</li><li class="nav-item mx-2">
-						<a class="nav-link text-uppercase font-weight-light " href="https://www.r-bloggers.com/">R-bloggers <i class="fas fa-external-link" aria-hidden="true"></i></a>
+						<a class="nav-link text-uppercase font-weight-light " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
 					</li><li class="nav-item mx-2">
 						<a class="nav-link text-uppercase font-weight-light " href="https://dieghernan.github.io/search">
 							<i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
@@ -341,7 +341,7 @@
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Fishnet</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fishnet"</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Puzzle</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Puzzle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190602_squares-1.png" alt="plot of chunk 20190602_squares" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_squares-1.png" alt="plot of chunk 20190602_squares" /></p>
 <h2 id="going-hex">Going hex</h2>
 <p>Extremely easy. We just need to change the <code class="language-plaintext highlighter-rouge">square</code> parameter of <code class="language-plaintext highlighter-rouge">st_make_grid</code> from <code class="language-plaintext highlighter-rouge">TRUE</code> to <code class="language-plaintext highlighter-rouge">FALSE</code></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_make_grid</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w">
@@ -395,7 +395,7 @@
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Honeycomb</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Honeycomb"</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Hexbin</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hexbin"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190602_hex-1.png" alt="plot of chunk 20190602_hex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.png" alt="plot of chunk 20190602_hex" /></p>
 <h2 id="pixel-it">Pixel it!</h2>
 <p>Also quite easy, just a couple of tweaks more, always using <code class="language-plaintext highlighter-rouge">st_make_grid</code>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_make_grid</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w">
@@ -429,7 +429,7 @@
 </span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Pixel</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Pixel"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190602_pix-1.png" alt="plot of chunk 20190602_pix" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_pix-1.png" alt="plot of chunk 20190602_pix" /></p>
 <h2 id="wrap-up">Wrap up</h2>
 <p>So finally I wrapped all that in a function (see the code in <a href="https://github.com/dieghernan/dieghernan.github.io/tree/master/assets/functions">my repo</a>), that I named <code class="language-plaintext highlighter-rouge">stdh_gridpol</code>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stdh_gridpol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span><span class="w">
@@ -522,7 +522,7 @@
 </span><span class="n">hex</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_gridpol</span><span class="p">(</span><span class="n">GB</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"hexbin"</span><span class="p">,</span><span class="w"> </span><span class="n">gridsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w">
 </span><span class="n">pix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_gridpol</span><span class="p">(</span><span class="n">GB</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"pixel"</span><span class="p">,</span><span class="w"> </span><span class="n">gridsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20190602_functionex-1.png" alt="plot of chunk 20190602_functionex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.png" alt="plot of chunk 20190602_functionex" /></p>
 <p>And that’s it! The function <code class="language-plaintext highlighter-rouge">stdh_gridpol</code> has some alert mechanisms, as accepting only <code class="language-plaintext highlighter-rouge">POLYGON</code> or <code class="language-plaintext highlighter-rouge">MULTIPOLYGON</code>, and the default value of <code class="language-plaintext highlighter-rouge">gridsize</code> is computed in a way that the shortest dimension would have 40 cells.</p>
 </article>
 		</div>

@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Tue, 19 Apr 2022 09:31:52 +0200</pubDate>
-		<lastBuildDate>Tue, 19 Apr 2022 09:31:52 +0200</lastBuildDate>
+		<pubDate>Tue, 19 Apr 2022 10:27:46 +0200</pubDate>
+		<lastBuildDate>Tue, 19 Apr 2022 10:27:46 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -62,30 +62,19 @@ German bureaucracy.</p>
  				<h3><p>A map on a map</p>
 </h3>
     		<p>3 min.</p>
-				<div><p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>,
-AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
+				<div><p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>, AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
 
-<p>A common challenge when creating maps is how to include an inset map on your
-visualization. An inset map is nothing more than a smaller map usually included
-on a corner that may provide additional context to the overall map. It is also
-useful for representing spatial units that may form part of a country but its
-geographical location would imply an imperfect visualization, or even to include
-small units that otherwise won’t be shown on the map.</p>
+<p>A common challenge when creating maps is how to include an inset map on your visualization. An inset map is nothing more than a smaller map usually included on a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but its geographical location would imply an imperfect visualization, or even to include small units that otherwise won’t be shown on the map.</p>
 
-<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code>
-function</a>, but this time I would
-show how to produce these insets using the <code class="language-plaintext highlighter-rouge">ggplot2</code> and the <code class="language-plaintext highlighter-rouge">tmap</code> packages. In
-short: <strong>use <code class="language-plaintext highlighter-rouge">cowplot</code> package</strong>.</p>
+<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>, but this time I would show how to produce these insets using the <code class="language-plaintext highlighter-rouge">ggplot2</code> and the <code class="language-plaintext highlighter-rouge">tmap</code> packages. In short: <strong>use <code class="language-plaintext highlighter-rouge">cowplot</code> package</strong>.</p>
 
 <h2 id="test-case-canary-island-as-an-inset">Test case: Canary Island as an inset</h2>
 
-<p>On this example, I would create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and creating an
-inset for the Canary Islands.</p>
+<p>On this example, I would create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and creating an inset for the Canary Islands.</p>
 
 <p>The “true” map of Spain is:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
@@ -96,15 +85,11 @@ inset for the Canary Islands.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_truemap-1.png" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.png" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
 
-<p>I would use a different CRS for each part of Spain. In the case of mainland
-Spain I would use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for
-the Canary Islands I would use REGCAN95 / UTM 28N
-(<a href="https://epsg.io/4083">EPSG:4083</a>)</p>
+<p>I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary Islands I would use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>)</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">25830</span><span class="p">)</span><span class="w">
 
@@ -112,11 +97,9 @@ the Canary Islands I would use REGCAN95 / UTM 28N
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_mainsub-1.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-
-</span><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4083</span><span class="p">)</span><span class="w">
 
@@ -124,28 +107,24 @@ the Canary Islands I would use REGCAN95 / UTM 28N
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_mainsub-2.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
 
-<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and
-matching!</p>
+<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and matching!</p>
 
 <h2 id="on-ggplot2">On <code class="language-plaintext highlighter-rouge">ggplot2</code></h2>
 
-<p>We have already created two quick maps on <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map
-with insets we would:</p>
+<p>We have already created two quick maps on <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map with insets we would:</p>
 
 <ol>
   <li>
-    <p>Produce two plots: The main plot and the sub plot providing a minimal style.
-We would store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+    <p>Produce two plots: The main plot and the sub plot providing a minimal style. We would store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
   </li>
   <li>
     <p>We would combine both objects with <code class="language-plaintext highlighter-rouge">cowplot</code>.</p>
   </li>
 </ol>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Main plot</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Main plot</span><span class="w">
 </span><span class="n">main_gg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -167,13 +146,9 @@ We would store them as <code class="language-plaintext highlighter-rouge">ggplot
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code>
-we can combine both maps on a single one. You may need to play a bit with the
-parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the sub plot to improve the
-placement:</p>
+<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code> we can combine both maps on a single one. You may need to play a bit with the parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the sub plot to improve the placement:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">main_gg</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -184,10 +159,9 @@ placement:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_insetggplot-1.png" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.png" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
 
-<p>Note also that this approach is valid not only for maps, but for all type of
-plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</code>, since this package is not specific for map objects:</p>
+<p>Note also that this approach is valid not only for maps, but for all type of plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</code>, since this package is not specific for map objects:</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Combining non-spatial plots</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">palmerpenguins</span><span class="p">)</span><span class="w">
@@ -230,14 +204,11 @@ plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</cod
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_insetggplot_nonsense-1.png" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.png" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
 
 <h2 id="on-tmap">On <code class="language-plaintext highlighter-rouge">tmap</code></h2>
 
-<p>We can follow a similar approach on <code class="language-plaintext highlighter-rouge">tmap</code>. On versions v3.x.x (there is a new
-<a href="https://github.com/r-tmap/tmap/issues/599">revamped version on development</a>) we
-can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert
-the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <code class="language-plaintext highlighter-rouge">cowplot</code> can handle.</p>
+<p>We can follow a similar approach on <code class="language-plaintext highlighter-rouge">tmap</code>. On versions v3.x.x (there is a new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version on development</a>) we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <code class="language-plaintext highlighter-rouge">cowplot</code> can handle.</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tmap</span><span class="p">)</span><span class="w">
 
@@ -257,11 +228,9 @@ the <code class="language-plaintext highlighter-rouge">tmap</code> objects to th
 </span><span class="n">sub_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tmap_grob</span><span class="p">(</span><span class="n">sub_tmap</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p>Once that we have these new “grobs”, we can use the same approach than we
-applied to <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+<p>Once that we have these new “grobs”, we can use the same approach than we applied to <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">main_tmap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">sub_tmap</span><span class="p">,</span><span class="w">
     </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w">
@@ -269,16 +238,13 @@ applied to <code class="language-plaintext highlighter-rouge">ggplot2</code> obj
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
 
 <h2 id="update-on-mapsf">Update: On <code class="language-plaintext highlighter-rouge">mapsf</code></h2>
 
-<p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA
-<a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, shared
-also how to create inset maps using that package:</p>
+<p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA <a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, shared also how to create inset maps using that package:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">mapsf</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapsf</span><span class="p">)</span><span class="w">
 
 </span><span class="n">mf_map</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w">
 </span><span class="n">mf_inset_on</span><span class="p">(</span><span class="n">island</span><span class="p">,</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomright"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.3</span><span class="p">)</span><span class="w">
@@ -287,7 +253,7 @@ also how to create inset maps using that package:</p>
 </span><span class="n">mf_inset_off</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -367,7 +333,7 @@ be extracted from the GitHub repository
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220128_africa-1.png" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.png" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" /></p>
 
 <p>Now, let’s add the flags with a loop:</p>
 
@@ -400,7 +366,7 @@ be extracted from the GitHub repository
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20220128_flag-1.png" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -624,7 +590,7 @@ which are termed “black swan events” (Taleb (2008)). This line of thinking p
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_charheavytail-1.png" alt="plot of chunk 20200405_charheavytail" /><img src="../assets/img/blog/20200405_charheavytail-2.png" alt="plot of chunk 20200405_charheavytail" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.png" alt="plot of chunk 20200405_charheavytail" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.png" alt="plot of chunk 20200405_charheavytail" /></p>
 
 <h2 id="breaking-method">Breaking method</h2>
 
@@ -723,7 +689,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_stepbystep-1.png" alt="plot of chunk 20200405_stepbystep" /><img src="../assets/img/blog/20200405_stepbystep-2.png" alt="plot of chunk 20200405_stepbystep" /><img src="../assets/img/blog/20200405_stepbystep-3.png" alt="plot of chunk 20200405_stepbystep" /><img src="../assets/img/blog/20200405_stepbystep-4.png" alt="plot of chunk 20200405_stepbystep" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.png" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.png" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.png" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.png" alt="plot of chunk 20200405_stepbystep" /></p>
 
 <p>As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.</p>
 
@@ -821,7 +787,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_examplesimp-1.png" alt="plot of chunk 20200405_examplesimp" /><img src="../assets/img/blog/20200405_examplesimp-2.png" alt="plot of chunk 20200405_examplesimp" /><img src="../assets/img/blog/20200405_examplesimp-3.png" alt="plot of chunk 20200405_examplesimp" /><img src="../assets/img/blog/20200405_examplesimp-4.png" alt="plot of chunk 20200405_examplesimp" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.png" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.png" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.png" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.png" alt="plot of chunk 20200405_examplesimp" /></p>
 
 <p>The method always returns at least one break, corresponding to <code class="language-plaintext highlighter-rouge">mean(var)</code>.</p>
 
@@ -855,7 +821,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_summspdata-1.png" alt="plot of chunk 20200405_summspdata" /><img src="../assets/img/blog/20200405_summspdata-2.png" alt="plot of chunk 20200405_summspdata" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.png" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.png" alt="plot of chunk 20200405_summspdata" /></p>
 
 <p>The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the <em>“far more small things than large things”</em> principle.</p>
 
@@ -888,7 +854,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_breaksample-1.png" alt="plot of chunk 20200405_breaksample" /><img src="../assets/img/blog/20200405_breaksample-2.png" alt="plot of chunk 20200405_breaksample" /><img src="../assets/img/blog/20200405_breaksample-3.png" alt="plot of chunk 20200405_breaksample" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.png" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.png" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.png" alt="plot of chunk 20200405_breaksample" /></p>
 
 <p>It is observed that the top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> enclose 5 observations, whereas <code class="language-plaintext highlighter-rouge">fisher</code> includes 13 observations. In terms of classification, <code class="language-plaintext highlighter-rouge">headtails</code> breaks focuses more on extreme values.</p>
 
@@ -950,7 +916,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_benchmarkbreaks-1.png" alt="plot of chunk 20200405_benchmarkbreaks" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.png" alt="plot of chunk 20200405_benchmarkbreaks" /></p>
 
 <p>It can be observed that the distribution of <code class="language-plaintext highlighter-rouge">headtails</code> breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, “quantile” provides a quasi-uniform distribution, ignoring the <code class="language-plaintext highlighter-rouge">totcon</code> hierarchy</p>
 
@@ -1036,7 +1002,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200405_finalplot-1.png" alt="plot of chunk 20200405_finalplot" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png" alt="plot of chunk 20200405_finalplot" /></p>
 
 <p>As per the results, <code class="language-plaintext highlighter-rouge">headtails</code> seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The <code class="language-plaintext highlighter-rouge">quantile</code> style, as expected, just provides a clustering without taking into account the real hierarchy. The <code class="language-plaintext highlighter-rouge">fisher</code> plot is in-between of these two interpretations.</p>
 
@@ -1215,7 +1181,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_hatched-min-1.png" alt="plot of chunk 20200217_hatched-min" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.png" alt="plot of chunk 20200217_hatched-min" /></p>
 
 <h3 id="example-2">Example 2</h3>
 
@@ -1304,7 +1270,7 @@ End Function
 </span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_hatched-1.png" alt="plot of chunk 20200217_hatched" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.png" alt="plot of chunk 20200217_hatched" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order on the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code> patterns are presents, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, <code class="language-plaintext highlighter-rouge">lty = c(1, 1, 3)</code> respect that order.</p>
 
@@ -1408,7 +1374,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_hatched-adv-1.png" alt="plot of chunk 20200217_hatched-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.png" alt="plot of chunk 20200217_hatched-adv" /></p>
 
 <h2 id="png-layer"><code class="language-plaintext highlighter-rouge">png</code> Layer</h2>
 
@@ -1471,7 +1437,7 @@ End Function
 </span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_pnglayer-1.png" alt="plot of chunk 20200217_pnglayer" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.png" alt="plot of chunk 20200217_pnglayer" /></p>
 
 <h3 id="example-2-1">Example 2</h3>
 
@@ -1495,7 +1461,7 @@ End Function
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_png-adv-1.png" alt="plot of chunk 20200217_png-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.png" alt="plot of chunk 20200217_png-adv" /></p>
 
 <h2 id="wordcloudlayer">wordcloudLayer</h2>
 
@@ -1525,7 +1491,7 @@ End Function
 </span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_wordcloud1-1.png" alt="plot of chunk 20200217_wordcloud1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.png" alt="plot of chunk 20200217_wordcloud1" /></p>
 
 <h3 id="example-2-2">Example 2</h3>
 
@@ -1576,7 +1542,7 @@ End Function
             </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200217_wordcloud2-1.png" alt="plot of chunk 20200217_wordcloud2" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png" alt="plot of chunk 20200217_wordcloud2" /></p>
 </div>
 				]]>
 			</description>
@@ -1635,7 +1601,7 @@ End Function
      </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20200602_imgpost-1.png" alt="plot of chunk 20200602_imgpost" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.png" alt="plot of chunk 20200602_imgpost" /></p>
 
 </div>
 				]]>
@@ -1699,7 +1665,7 @@ End Function
 </span><span class="n">title</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191212_showfun-1.png" alt="plot of chunk 20191212_showfun" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_showfun-1.png" alt="plot of chunk 20191212_showfun" /></p>
 
 <p>Let’s play a little bit more with some of the additional features of the function:</p>
 
@@ -1751,7 +1717,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191212_playing-1.png" alt="plot of chunk 20191212_playing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playing-1.png" alt="plot of chunk 20191212_playing" /></p>
 
 <h2 id="adding-legends-the-legendhatched-function">Adding legends: the <code class="language-plaintext highlighter-rouge">legendHatched</code> function</h2>
 
@@ -1814,11 +1780,11 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191212_playinglegend-1.png" alt="plot of chunk 20191212_playinglegend" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playinglegend-1.png" alt="plot of chunk 20191212_playinglegend" /></p>
 
 <p>I hope that you find this functions useful. Enjoy and nice mapping!</p>
 
-<p><img src="../assets/img/blog/20191212_imgpost-1.png" title="plot of chunk 20191212_imgpost" alt="plot of chunk 20191212_imgpost" style="display: block; margin: auto;" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.png" title="plot of chunk 20191212_imgpost" alt="plot of chunk 20191212_imgpost" style="display: block; margin: auto;" /></p>
 </div>
 				]]>
 			</description>
@@ -1872,7 +1838,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191108_main-1.png" alt="plot of chunk 20191108_main" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_main-1.png" alt="plot of chunk 20191108_main" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Alaska----</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
@@ -1892,7 +1858,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191108_Alaska-1.png" alt="plot of chunk 20191108_Alaska" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.png" alt="plot of chunk 20191108_Alaska" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Hawaii----</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
@@ -1912,7 +1878,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191108_Hawaii-1.png" alt="plot of chunk 20191108_Hawaii" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.png" alt="plot of chunk 20191108_Hawaii" /></p>
 
 <h2 id="insetting">Insetting</h2>
 
@@ -1987,7 +1953,7 @@ End Function
 </span><span class="n">box</span><span class="p">(</span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"figure"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20191108_inset-1.png" alt="plot of chunk 20191108_inset" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.png" alt="plot of chunk 20191108_inset" /></p>
 
 <p>Results may vary depending of the size of the original plot (Mainland USA) and your plotting device and output. However with a bit of trial-and-error it is quite easy to adjust the final result.</p>
 
@@ -2179,7 +2145,7 @@ End Function
 
 <p>And that’s all. Our <code class="language-plaintext highlighter-rouge">.svg</code> file is ready to be included in Wikipedia.</p>
 
-<p><img src="../assets/img/blog/20191016_imgpost.png" alt="img" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png" alt="img" /></p>
 
 <p class="alert alert-info p-3 mx-2 mb-3"><strong>Update</strong>: The map is already part of the <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary">Wikipedia article</a>.</p>
 </div>
@@ -2246,7 +2212,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">bboxcan</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190618_preparing-1.png" alt="plot of chunk 20190618_preparing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.png" alt="plot of chunk 20190618_preparing" /></p>
 
 <p>Now we have it! A nice map of Spain with a layout based on the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps">Wikipedia convention for location maps</a>.</p>
 
@@ -2276,7 +2242,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Spain</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190618_Asturias-1.png" alt="plot of chunk 20190618_Asturias" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.png" alt="plot of chunk 20190618_Asturias" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -2304,7 +2270,7 @@ End Function
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">MURHigh</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190618_svg-1.png" alt="plot of chunk 20190618_svg" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.png" alt="plot of chunk 20190618_svg" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -2347,7 +2313,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190618_allCCAA-1.png" alt="plot of chunk 20190618_allCCAA" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.png" alt="plot of chunk 20190618_allCCAA" /></p>
 
 <p>We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.</p>
 
@@ -2491,7 +2457,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Puzzle</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Puzzle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190602_squares-1.png" alt="plot of chunk 20190602_squares" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_squares-1.png" alt="plot of chunk 20190602_squares" /></p>
 
 <h2 id="going-hex">Going hex</h2>
 
@@ -2549,7 +2515,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Hexbin</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hexbin"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190602_hex-1.png" alt="plot of chunk 20190602_hex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.png" alt="plot of chunk 20190602_hex" /></p>
 
 <h2 id="pixel-it">Pixel it!</h2>
 
@@ -2587,7 +2553,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Pixel</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Pixel"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190602_pix-1.png" alt="plot of chunk 20190602_pix" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_pix-1.png" alt="plot of chunk 20190602_pix" /></p>
 
 <h2 id="wrap-up">Wrap up</h2>
 
@@ -2684,7 +2650,7 @@ End Function
 </span><span class="n">pix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_gridpol</span><span class="p">(</span><span class="n">GB</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"pixel"</span><span class="p">,</span><span class="w"> </span><span class="n">gridsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190602_functionex-1.png" alt="plot of chunk 20190602_functionex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.png" alt="plot of chunk 20190602_functionex" /></p>
 
 <p>And that’s it! The function <code class="language-plaintext highlighter-rouge">stdh_gridpol</code> has some alert mechanisms, as accepting only <code class="language-plaintext highlighter-rouge">POLYGON</code> or <code class="language-plaintext highlighter-rouge">MULTIPOLYGON</code>, and the default value of <code class="language-plaintext highlighter-rouge">gridsize</code> is computed in a way that the shortest dimension would have 40 cells.</p>
 
@@ -3187,11 +3153,11 @@ places I have traveled by plain</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190505_italycast-1.png" alt="plot of chunk 20190505_italycast" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.png" alt="plot of chunk 20190505_italycast" /></p>
 
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> is the possibility to “break” the <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into sub-segments:</p>
 
-<p><img src="../assets/img/blog/20190505_italycastsub-1.png" alt="plot of chunk 20190505_italycastsub" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.png" alt="plot of chunk 20190505_italycastsub" /></p>
 
 <h2 id="an-approach">An approach</h2>
 
@@ -3218,7 +3184,7 @@ places I have traveled by plain</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"AFTER FUNCTION"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190505_testspain-1.png" alt="plot of chunk 20190505_testspain" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.png" alt="plot of chunk 20190505_testspain" /></p>
 
 <h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></h2>
 
@@ -3335,7 +3301,7 @@ places I have traveled by plain</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190505_benchmarkfunction-1.png" alt="plot of chunk 20190505_benchmarkfunction" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.png" alt="plot of chunk 20190505_benchmarkfunction" /></p>
 
 <p>It can be seen a difference in terms of performance, noting that <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed in 914 sub-strings while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons to 8,414 sub-strings. In that sense, the original <code class="language-plaintext highlighter-rouge">st_cast</code> is much faster, although this solution may work well in most cases.</p>
 </div>
@@ -3628,7 +3594,7 @@ and replacing the <code class="language-plaintext highlighter-rouge">dataframe</
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../assets/img/blog/20190427_mapfin-1.png" alt="plot of chunk 20190427_mapfin" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png" alt="plot of chunk 20190427_mapfin" /></p>
 </div>
 				]]>
 			</description>

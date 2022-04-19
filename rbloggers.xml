@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/rbloggers.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2022-04-19T09:31:52+02:00</updated>
+	<updated>2022-04-19T10:27:46+02:00</updated>
 	<id>https://dieghernan.github.io/rbloggers.xml</id>
 	<title>One world | Projects, maps and coding - R Project</title>
 	<subtitle>Projects, maps and coding</subtitle>
@@ -28,30 +28,19 @@
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/20220303_inset.png&#39; &gt;
 			
 	&lt;p&gt;3 min.&lt;/p&gt;
-			&lt;p&gt;&lt;em&gt;This post is dedicated to &lt;a href=&quot;https://dominicroye.github.io/en/&quot;&gt;Dominic Royé&lt;/a&gt;,
-AKA &lt;a href=&quot;https://twitter.com/dr_xeo&quot;&gt;\@dr_xeo&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+			&lt;p&gt;&lt;em&gt;This post is dedicated to &lt;a href=&quot;https://dominicroye.github.io/en/&quot;&gt;Dominic Royé&lt;/a&gt;, AKA &lt;a href=&quot;https://twitter.com/dr_xeo&quot;&gt;\@dr_xeo&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;A common challenge when creating maps is how to include an inset map on your
-visualization. An inset map is nothing more than a smaller map usually included
-on a corner that may provide additional context to the overall map. It is also
-useful for representing spatial units that may form part of a country but its
-geographical location would imply an imperfect visualization, or even to include
-small units that otherwise won’t be shown on the map.&lt;/p&gt;
+&lt;p&gt;A common challenge when creating maps is how to include an inset map on your visualization. An inset map is nothing more than a smaller map usually included on a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but its geographical location would imply an imperfect visualization, or even to include small units that otherwise won’t be shown on the map.&lt;/p&gt;
 
-&lt;p&gt;I have already covered this &lt;a href=&quot;https://dieghernan.github.io//201911_QuickR/&quot;&gt;using the base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot()&lt;/code&gt;
-function&lt;/a&gt;, but this time I would
-show how to produce these insets using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt; packages. In
-short: &lt;strong&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt; package&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;I have already covered this &lt;a href=&quot;https://dieghernan.github.io//201911_QuickR/&quot;&gt;using the base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot()&lt;/code&gt; function&lt;/a&gt;, but this time I would show how to produce these insets using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; and the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt; packages. In short: &lt;strong&gt;use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt; package&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;test-case-canary-island-as-an-inset&quot;&gt;Test case: Canary Island as an inset&lt;/h2&gt;
 
-&lt;p&gt;On this example, I would create a map of Spain using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapSpain&lt;/code&gt; and creating an
-inset for the Canary Islands.&lt;/p&gt;
+&lt;p&gt;On this example, I would create a map of Spain using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapSpain&lt;/code&gt; and creating an inset for the Canary Islands.&lt;/p&gt;
 
 &lt;p&gt;The “true” map of Spain is:&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mapSpain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mapSpain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -62,15 +51,11 @@ inset for the Canary Islands.&lt;/p&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_truemap-1.png&quot; title=&quot;plot of chunk 20220303_truemap&quot; alt=&quot;plot of chunk 20220303_truemap&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.png&quot; title=&quot;plot of chunk 20220303_truemap&quot; alt=&quot;plot of chunk 20220303_truemap&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;I would use a different CRS for each part of Spain. In the case of mainland
-Spain I would use ETRS89 / UTM 30N (&lt;a href=&quot;https://epsg.io/25830&quot;&gt;EPSG:25830&lt;/a&gt;) and for
-the Canary Islands I would use REGCAN95 / UTM 28N
-(&lt;a href=&quot;https://epsg.io/4083&quot;&gt;EPSG:4083&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N (&lt;a href=&quot;https://epsg.io/25830&quot;&gt;EPSG:25830&lt;/a&gt;) and for the Canary Islands I would use REGCAN95 / UTM 28N (&lt;a href=&quot;https://epsg.io/4083&quot;&gt;EPSG:4083&lt;/a&gt;)&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;regions&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;regions&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ccaa.shortname.es&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Canarias&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;25830&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -78,11 +63,9 @@ the Canary Islands I would use REGCAN95 / UTM 28N
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_mainsub-1.png&quot; title=&quot;plot of chunk 20220303_mainsub&quot; alt=&quot;plot of chunk 20220303_mainsub&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.png&quot; title=&quot;plot of chunk 20220303_mainsub&quot; alt=&quot;plot of chunk 20220303_mainsub&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;island&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;regions&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;island&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;regions&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ccaa.shortname.es&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Canarias&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4083&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -90,28 +73,24 @@ the Canary Islands I would use REGCAN95 / UTM 28N
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_mainsub-2.png&quot; title=&quot;plot of chunk 20220303_mainsub&quot; alt=&quot;plot of chunk 20220303_mainsub&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.png&quot; title=&quot;plot of chunk 20220303_mainsub&quot; alt=&quot;plot of chunk 20220303_mainsub&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So that was easy! Just a couple of maps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;. Let’s start mixing and
-matching!&lt;/p&gt;
+&lt;p&gt;So that was easy! Just a couple of maps using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;. Let’s start mixing and matching!&lt;/p&gt;
 
 &lt;h2 id=&quot;on-ggplot2&quot;&gt;On &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;We have already created two quick maps on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;. Now, to produce our map
-with insets we would:&lt;/p&gt;
+&lt;p&gt;We have already created two quick maps on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;. Now, to produce our map with insets we would:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
-    &lt;p&gt;Produce two plots: The main plot and the sub plot providing a minimal style.
-We would store them as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; objects.&lt;/p&gt;
+    &lt;p&gt;Produce two plots: The main plot and the sub plot providing a minimal style. We would store them as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; objects.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;We would combine both objects with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt;.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Main plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Main plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main_gg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme_void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -133,13 +112,9 @@ We would store them as &lt;code class=&quot;language-plaintext highlighter-rouge
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We have our objects in place, and now is when the magic happens! With &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt;
-we can combine both maps on a single one. You may need to play a bit with the
-parameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hjust&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vjust&lt;/code&gt; of the sub plot to improve the
-placement:&lt;/p&gt;
+&lt;p&gt;We have our objects in place, and now is when the magic happens! With &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt; we can combine both maps on a single one. You may need to play a bit with the parameters &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;x&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hjust&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vjust&lt;/code&gt; of the sub plot to improve the placement:&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cowplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cowplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggdraw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw_plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main_gg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -150,10 +125,9 @@ placement:&lt;/p&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_insetggplot-1.png&quot; title=&quot;plot of chunk 20220303_insetggplot&quot; alt=&quot;plot of chunk 20220303_insetggplot&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.png&quot; title=&quot;plot of chunk 20220303_insetggplot&quot; alt=&quot;plot of chunk 20220303_insetggplot&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Note also that this approach is valid not only for maps, but for all type of
-plot produced by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;, since this package is not specific for map objects:&lt;/p&gt;
+&lt;p&gt;Note also that this approach is valid not only for maps, but for all type of plot produced by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;, since this package is not specific for map objects:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Combining non-spatial plots&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;palmerpenguins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -196,14 +170,11 @@ plot produced by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_insetggplot_nonsense-1.png&quot; title=&quot;plot of chunk 20220303_insetggplot_nonsense&quot; alt=&quot;plot of chunk 20220303_insetggplot_nonsense&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.png&quot; title=&quot;plot of chunk 20220303_insetggplot_nonsense&quot; alt=&quot;plot of chunk 20220303_insetggplot_nonsense&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;on-tmap&quot;&gt;On &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;We can follow a similar approach on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt;. On versions v3.x.x (there is a new
-&lt;a href=&quot;https://github.com/r-tmap/tmap/issues/599&quot;&gt;revamped version on development&lt;/a&gt;) we
-can use &lt;a href=&quot;https://github.com/r-tmap/tmap/issues/541&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap_grob()&lt;/code&gt;&lt;/a&gt; to convert
-the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt; objects to the objects that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt; can handle.&lt;/p&gt;
+&lt;p&gt;We can follow a similar approach on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt;. On versions v3.x.x (there is a new &lt;a href=&quot;https://github.com/r-tmap/tmap/issues/599&quot;&gt;revamped version on development&lt;/a&gt;) we can use &lt;a href=&quot;https://github.com/r-tmap/tmap/issues/541&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap_grob()&lt;/code&gt;&lt;/a&gt; to convert the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt; objects to the objects that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cowplot&lt;/code&gt; can handle.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -223,11 +194,9 @@ the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub_tmap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmap_grob&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub_tmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Once that we have these new “grobs”, we can use the same approach than we
-applied to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; objects.&lt;/p&gt;
+&lt;p&gt;Once that we have these new “grobs”, we can use the same approach than we applied to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; objects.&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggdraw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ggdraw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw_plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main_tmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw_plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub_tmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -235,16 +204,13 @@ applied to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gg
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_insettmap-1.png&quot; title=&quot;plot of chunk 20220303_insettmap&quot; alt=&quot;plot of chunk 20220303_insettmap&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.png&quot; title=&quot;plot of chunk 20220303_insettmap&quot; alt=&quot;plot of chunk 20220303_insettmap&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;update-on-mapsf&quot;&gt;Update: On &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapsf&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://rgeomatic.hypotheses.org/&quot;&gt;Timotheé Giraud&lt;/a&gt; (AKA
-&lt;a href=&quot;https://twitter.com/rgeomatic&quot;&gt;\@rgeomatic&lt;/a&gt;), the developer of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapsf&lt;/code&gt;, shared
-also how to create inset maps using that package:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://rgeomatic.hypotheses.org/&quot;&gt;Timotheé Giraud&lt;/a&gt; (AKA &lt;a href=&quot;https://twitter.com/rgeomatic&quot;&gt;\@rgeomatic&lt;/a&gt;), the developer of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mapsf&lt;/code&gt;, shared also how to create inset maps using that package:&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mapsf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mapsf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mf_map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mf_inset_on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;island&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;bottomright&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cex&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -253,7 +219,7 @@ also how to create inset maps using that package:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mf_inset_off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220303_insetmapsf-1.png&quot; title=&quot;plot of chunk 20220303_insetmapsf&quot; alt=&quot;plot of chunk 20220303_insetmapsf&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.png&quot; title=&quot;plot of chunk 20220303_insetmapsf&quot; alt=&quot;plot of chunk 20220303_insetmapsf&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 		</content>
 		
@@ -340,7 +306,7 @@ be extracted from the GitHub repository
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220128_africa-1.png&quot; title=&quot;plot of chunk 20220128_africa&quot; alt=&quot;plot of chunk 20220128_africa&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220128_africa-1.png&quot; title=&quot;plot of chunk 20220128_africa&quot; alt=&quot;plot of chunk 20220128_africa&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now, let’s add the flags with a loop:&lt;/p&gt;
 
@@ -373,7 +339,7 @@ be extracted from the GitHub repository
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20220128_flag-1.png&quot; title=&quot;plot of chunk 20220128_flag&quot; alt=&quot;plot of chunk 20220128_flag&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png&quot; title=&quot;plot of chunk 20220128_flag&quot; alt=&quot;plot of chunk 20220128_flag&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 		</content>
 		
@@ -457,7 +423,7 @@ which are termed “black swan events” (Taleb (2008)). This line of thinking p
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_charheavytail-1.png&quot; alt=&quot;plot of chunk 20200405_charheavytail&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_charheavytail-2.png&quot; alt=&quot;plot of chunk 20200405_charheavytail&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.png&quot; alt=&quot;plot of chunk 20200405_charheavytail&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.png&quot; alt=&quot;plot of chunk 20200405_charheavytail&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;breaking-method&quot;&gt;Breaking method&lt;/h2&gt;
 
@@ -556,7 +522,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_stepbystep-1.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_stepbystep-2.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_stepbystep-3.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_stepbystep-4.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.png&quot; alt=&quot;plot of chunk 20200405_stepbystep&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.&lt;/p&gt;
 
@@ -654,7 +620,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_examplesimp-1.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_examplesimp-2.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_examplesimp-3.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_examplesimp-4.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.png&quot; alt=&quot;plot of chunk 20200405_examplesimp&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The method always returns at least one break, corresponding to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mean(var)&lt;/code&gt;.&lt;/p&gt;
 
@@ -688,7 +654,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_summspdata-1.png&quot; alt=&quot;plot of chunk 20200405_summspdata&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_summspdata-2.png&quot; alt=&quot;plot of chunk 20200405_summspdata&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.png&quot; alt=&quot;plot of chunk 20200405_summspdata&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.png&quot; alt=&quot;plot of chunk 20200405_summspdata&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the &lt;em&gt;“far more small things than large things”&lt;/em&gt; principle.&lt;/p&gt;
 
@@ -721,7 +687,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_breaksample-1.png&quot; alt=&quot;plot of chunk 20200405_breaksample&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_breaksample-2.png&quot; alt=&quot;plot of chunk 20200405_breaksample&quot; /&gt;&lt;img src=&quot;../assets/img/blog/20200405_breaksample-3.png&quot; alt=&quot;plot of chunk 20200405_breaksample&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.png&quot; alt=&quot;plot of chunk 20200405_breaksample&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.png&quot; alt=&quot;plot of chunk 20200405_breaksample&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.png&quot; alt=&quot;plot of chunk 20200405_breaksample&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It is observed that the top three classes of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;headtails&lt;/code&gt; enclose 5 observations, whereas &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fisher&lt;/code&gt; includes 13 observations. In terms of classification, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;headtails&lt;/code&gt; breaks focuses more on extreme values.&lt;/p&gt;
 
@@ -783,7 +749,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_benchmarkbreaks-1.png&quot; alt=&quot;plot of chunk 20200405_benchmarkbreaks&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.png&quot; alt=&quot;plot of chunk 20200405_benchmarkbreaks&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It can be observed that the distribution of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;headtails&lt;/code&gt; breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, “quantile” provides a quasi-uniform distribution, ignoring the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;totcon&lt;/code&gt; hierarchy&lt;/p&gt;
 
@@ -869,7 +835,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200405_finalplot-1.png&quot; alt=&quot;plot of chunk 20200405_finalplot&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png&quot; alt=&quot;plot of chunk 20200405_finalplot&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As per the results, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;headtails&lt;/code&gt; seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quantile&lt;/code&gt; style, as expected, just provides a clustering without taking into account the real hierarchy. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fisher&lt;/code&gt; plot is in-between of these two interpretations.&lt;/p&gt;
 
@@ -1036,7 +1002,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_hatched-min-1.png&quot; alt=&quot;plot of chunk 20200217_hatched-min&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.png&quot; alt=&quot;plot of chunk 20200217_hatched-min&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;example-2&quot;&gt;Example 2&lt;/h3&gt;
 
@@ -1125,7 +1091,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_hatched-1.png&quot; alt=&quot;plot of chunk 20200217_hatched&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.png&quot; alt=&quot;plot of chunk 20200217_hatched&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;legendHatched&lt;/code&gt; honors the order on the parameters. In this case, two &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dot&lt;/code&gt; patterns are presents, so &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pch = c(4,15)&lt;/code&gt; takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lty = c(1, 1, 3)&lt;/code&gt; respect that order.&lt;/p&gt;
 
@@ -1229,7 +1195,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_hatched-adv-1.png&quot; alt=&quot;plot of chunk 20200217_hatched-adv&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.png&quot; alt=&quot;plot of chunk 20200217_hatched-adv&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;png-layer&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png&lt;/code&gt; Layer&lt;/h2&gt;
 
@@ -1292,7 +1258,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_pnglayer-1.png&quot; alt=&quot;plot of chunk 20200217_pnglayer&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.png&quot; alt=&quot;plot of chunk 20200217_pnglayer&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;example-2-1&quot;&gt;Example 2&lt;/h3&gt;
 
@@ -1316,7 +1282,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pngLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UKpng&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_png-adv-1.png&quot; alt=&quot;plot of chunk 20200217_png-adv&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.png&quot; alt=&quot;plot of chunk 20200217_png-adv&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;wordcloudlayer&quot;&gt;wordcloudLayer&lt;/h2&gt;
 
@@ -1346,7 +1312,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_wordcloud1-1.png&quot; alt=&quot;plot of chunk 20200217_wordcloud1&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.png&quot; alt=&quot;plot of chunk 20200217_wordcloud1&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;example-2-2&quot;&gt;Example 2&lt;/h3&gt;
 
@@ -1397,7 +1363,7 @@ End Function
             &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;orange.pal&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20200217_wordcloud2-1.png&quot; alt=&quot;plot of chunk 20200217_wordcloud2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png&quot; alt=&quot;plot of chunk 20200217_wordcloud2&quot; /&gt;&lt;/p&gt;
 
 		</content>
 		
@@ -1460,7 +1426,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20191108_main-1.png&quot; alt=&quot;plot of chunk 20191108_main&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191108_main-1.png&quot; alt=&quot;plot of chunk 20191108_main&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Plot Alaska----&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1480,7 +1446,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20191108_Alaska-1.png&quot; alt=&quot;plot of chunk 20191108_Alaska&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.png&quot; alt=&quot;plot of chunk 20191108_Alaska&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Plot Hawaii----&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1500,7 +1466,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20191108_Hawaii-1.png&quot; alt=&quot;plot of chunk 20191108_Hawaii&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.png&quot; alt=&quot;plot of chunk 20191108_Hawaii&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;insetting&quot;&gt;Insetting&lt;/h2&gt;
 
@@ -1575,7 +1541,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;which&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;figure&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lwd&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20191108_inset-1.png&quot; alt=&quot;plot of chunk 20191108_inset&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191108_inset-1.png&quot; alt=&quot;plot of chunk 20191108_inset&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Results may vary depending of the size of the original plot (Mainland USA) and your plotting device and output. However with a bit of trial-and-error it is quite easy to adjust the final result.&lt;/p&gt;
 
@@ -1776,7 +1742,7 @@ End Function
 
 &lt;p&gt;And that’s all. Our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.svg&lt;/code&gt; file is ready to be included in Wikipedia.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20191016_imgpost.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
 
 &lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Update&lt;/strong&gt;: The map is already part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary&quot;&gt;Wikipedia article&lt;/a&gt;.&lt;/p&gt;
 
@@ -1852,7 +1818,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bboxcan&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190618_preparing-1.png&quot; alt=&quot;plot of chunk 20190618_preparing&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.png&quot; alt=&quot;plot of chunk 20190618_preparing&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now we have it! A nice map of Spain with a layout based on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps&quot;&gt;Wikipedia convention for location maps&lt;/a&gt;.&lt;/p&gt;
 
@@ -1882,7 +1848,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Spain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190618_Asturias-1.png&quot; alt=&quot;plot of chunk 20190618_Asturias&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.png&quot; alt=&quot;plot of chunk 20190618_Asturias&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1910,7 +1876,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pngLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MURHigh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190618_svg-1.png&quot; alt=&quot;plot of chunk 20190618_svg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190618_svg-1.png&quot; alt=&quot;plot of chunk 20190618_svg&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1953,7 +1919,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190618_allCCAA-1.png&quot; alt=&quot;plot of chunk 20190618_allCCAA&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.png&quot; alt=&quot;plot of chunk 20190618_allCCAA&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.&lt;/p&gt;
 
@@ -2104,7 +2070,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Puzzle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mypal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Puzzle&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190602_squares-1.png&quot; alt=&quot;plot of chunk 20190602_squares&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190602_squares-1.png&quot; alt=&quot;plot of chunk 20190602_squares&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;going-hex&quot;&gt;Going hex&lt;/h2&gt;
 
@@ -2162,7 +2128,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Hexbin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mypal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Hexbin&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190602_hex-1.png&quot; alt=&quot;plot of chunk 20190602_hex&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190602_hex-1.png&quot; alt=&quot;plot of chunk 20190602_hex&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;pixel-it&quot;&gt;Pixel it!&lt;/h2&gt;
 
@@ -2200,7 +2166,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Pixel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mypal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Pixel&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190602_pix-1.png&quot; alt=&quot;plot of chunk 20190602_pix&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190602_pix-1.png&quot; alt=&quot;plot of chunk 20190602_pix&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;wrap-up&quot;&gt;Wrap up&lt;/h2&gt;
 
@@ -2297,7 +2263,7 @@ End Function
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pix&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdh_gridpol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pixel&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gridsize&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190602_functionex-1.png&quot; alt=&quot;plot of chunk 20190602_functionex&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.png&quot; alt=&quot;plot of chunk 20190602_functionex&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And that’s it! The function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdh_gridpol&lt;/code&gt; has some alert mechanisms, as accepting only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POLYGON&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MULTIPOLYGON&lt;/code&gt;, and the default value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gridsize&lt;/code&gt; is computed in a way that the shortest dimension would have 40 cells.&lt;/p&gt;
 
@@ -2654,11 +2620,11 @@ remote theme created by myself.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;italy_pt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POINT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190505_italycast-1.png&quot; alt=&quot;plot of chunk 20190505_italycast&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.png&quot; alt=&quot;plot of chunk 20190505_italycast&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;What I missed when using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;st_cast&lt;/code&gt; is the possibility to “break” the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt; objects into sub-segments:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190505_italycastsub-1.png&quot; alt=&quot;plot of chunk 20190505_italycastsub&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.png&quot; alt=&quot;plot of chunk 20190505_italycastsub&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;an-approach&quot;&gt;An approach&lt;/h2&gt;
 
@@ -2685,7 +2651,7 @@ remote theme created by myself.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;AFTER FUNCTION&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190505_testspain-1.png&quot; alt=&quot;plot of chunk 20190505_testspain&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.png&quot; alt=&quot;plot of chunk 20190505_testspain&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;the-function-stdh_cast_substring&quot;&gt;The function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stdh_cast_substring&lt;/code&gt;&lt;/h2&gt;
 
@@ -2802,7 +2768,7 @@ remote theme created by myself.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;yellow&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lwd&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190505_benchmarkfunction-1.png&quot; alt=&quot;plot of chunk 20190505_benchmarkfunction&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.png&quot; alt=&quot;plot of chunk 20190505_benchmarkfunction&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It can be seen a difference in terms of performance, noting that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test100&lt;/code&gt; has 15 polygons decomposed in 914 sub-strings while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test50&lt;/code&gt; has 80 polygons to 8,414 sub-strings. In that sense, the original &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;st_cast&lt;/code&gt; is much faster, although this solution may work well in most cases.&lt;/p&gt;
 
@@ -3104,7 +3070,7 @@ and replacing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/img/blog/20190427_mapfin-1.png&quot; alt=&quot;plot of chunk 20190427_mapfin&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png&quot; alt=&quot;plot of chunk 20190427_mapfin&quot; /&gt;&lt;/p&gt;
 
 		</content>
 		

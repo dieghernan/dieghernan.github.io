@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-04-19 09:31:52 +0200 -->
+    <!-- Page build 2022-04-19 10:27:46 +0200 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -156,7 +156,7 @@
 				</li><li class="nav-item my-0 py-1">
 					<a class="nav-link px-3 py-1" href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> Github repo</a>
 				</li><li class="nav-item my-0 py-1">
-					<a class="nav-link px-3 py-1" href="https://www.r-bloggers.com/">R-bloggers <i class="fas fa-external-link" aria-hidden="true"></i></a>
+					<a class="nav-link px-3 py-1" href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
 				</li><li class="nav-item my-0 py-1">
 					<a class="nav-link px-3 py-1 " href="https://dieghernan.github.io/search">Search</a>
 				</li></ul>
@@ -175,7 +175,7 @@
 					</li><li class="nav-item mx-2">
 						<a class="nav-link text-uppercase font-weight-light " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> Github repo</a>
 					</li><li class="nav-item mx-2">
-						<a class="nav-link text-uppercase font-weight-light " href="https://www.r-bloggers.com/">R-bloggers <i class="fas fa-external-link" aria-hidden="true"></i></a>
+						<a class="nav-link text-uppercase font-weight-light " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
 					</li><li class="nav-item mx-2">
 						<a class="nav-link text-uppercase font-weight-light " href="https://dieghernan.github.io/search">
 							<i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
@@ -230,24 +230,13 @@
 				</div>
 </aside>
 			<article class="col-lg-8 mt-3">
-			<p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>,
-AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
-<p>A common challenge when creating maps is how to include an inset map on your
-visualization. An inset map is nothing more than a smaller map usually included
-on a corner that may provide additional context to the overall map. It is also
-useful for representing spatial units that may form part of a country but its
-geographical location would imply an imperfect visualization, or even to include
-small units that otherwise won’t be shown on the map.</p>
-<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code>
-function</a>, but this time I would
-show how to produce these insets using the <code class="language-plaintext highlighter-rouge">ggplot2</code> and the <code class="language-plaintext highlighter-rouge">tmap</code> packages. In
-short: <strong>use <code class="language-plaintext highlighter-rouge">cowplot</code> package</strong>.</p>
+			<p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>, AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
+<p>A common challenge when creating maps is how to include an inset map on your visualization. An inset map is nothing more than a smaller map usually included on a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but its geographical location would imply an imperfect visualization, or even to include small units that otherwise won’t be shown on the map.</p>
+<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>, but this time I would show how to produce these insets using the <code class="language-plaintext highlighter-rouge">ggplot2</code> and the <code class="language-plaintext highlighter-rouge">tmap</code> packages. In short: <strong>use <code class="language-plaintext highlighter-rouge">cowplot</code> package</strong>.</p>
 <h2 id="test-case-canary-island-as-an-inset">Test case: Canary Island as an inset</h2>
-<p>On this example, I would create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and creating an
-inset for the Canary Islands.</p>
+<p>On this example, I would create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and creating an inset for the Canary Islands.</p>
 <p>The “true” map of Spain is:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
@@ -257,46 +246,36 @@ inset for the Canary Islands.</p>
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_truemap-1.png" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
-<p>I would use a different CRS for each part of Spain. In the case of mainland
-Spain I would use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for
-the Canary Islands I would use REGCAN95 / UTM 28N
-(<a href="https://epsg.io/4083">EPSG:4083</a>)</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.png" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
+<p>I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary Islands I would use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>)</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">25830</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_mainsub-1.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-
-</span><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4083</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">island</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_mainsub-2.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
-<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and
-matching!</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and matching!</p>
 <h2 id="on-ggplot2">On <code class="language-plaintext highlighter-rouge">ggplot2</code></h2>
-<p>We have already created two quick maps on <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map
-with insets we would:</p>
+<p>We have already created two quick maps on <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map with insets we would:</p>
 <ol>
  <li>
-   <p>Produce two plots: The main plot and the sub plot providing a minimal style.
-We would store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+   <p>Produce two plots: The main plot and the sub plot providing a minimal style. We would store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
  </li>
  <li>
    <p>We would combine both objects with <code class="language-plaintext highlighter-rouge">cowplot</code>.</p>
  </li>
 </ol>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Main plot</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Main plot</span><span class="w">
 </span><span class="n">main_gg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -317,12 +296,8 @@ We would store them as <code class="language-plaintext highlighter-rouge">ggplot
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey95"</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code>
-we can combine both maps on a single one. You may need to play a bit with the
-parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the sub plot to improve the
-placement:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
+<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code> we can combine both maps on a single one. You may need to play a bit with the parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the sub plot to improve the placement:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">main_gg</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -332,9 +307,8 @@ placement:</p>
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.08</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_insetggplot-1.png" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
-<p>Note also that this approach is valid not only for maps, but for all type of
-plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</code>, since this package is not specific for map objects:</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.png" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
+<p>Note also that this approach is valid not only for maps, but for all type of plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</code>, since this package is not specific for map objects:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Combining non-spatial plots</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">palmerpenguins</span><span class="p">)</span><span class="w">
 
@@ -375,12 +349,9 @@ plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</cod
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-0.2</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_insetggplot_nonsense-1.png" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.png" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
 <h2 id="on-tmap">On <code class="language-plaintext highlighter-rouge">tmap</code></h2>
-<p>We can follow a similar approach on <code class="language-plaintext highlighter-rouge">tmap</code>. On versions v3.x.x (there is a new
-<a href="https://github.com/r-tmap/tmap/issues/599">revamped version on development</a>) we
-can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert
-the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <code class="language-plaintext highlighter-rouge">cowplot</code> can handle.</p>
+<p>We can follow a similar approach on <code class="language-plaintext highlighter-rouge">tmap</code>. On versions v3.x.x (there is a new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version on development</a>) we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <code class="language-plaintext highlighter-rouge">cowplot</code> can handle.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tmap</span><span class="p">)</span><span class="w">
 
 </span><span class="n">main_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tm_shape</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -398,23 +369,18 @@ the <code class="language-plaintext highlighter-rouge">tmap</code> objects to th
 
 </span><span class="n">sub_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tmap_grob</span><span class="p">(</span><span class="n">sub_tmap</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Once that we have these new “grobs”, we can use the same approach than we
-applied to <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+<p>Once that we have these new “grobs”, we can use the same approach than we applied to <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">main_tmap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">sub_tmap</span><span class="p">,</span><span class="w">
     </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w">
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-0.2</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
 <h2 id="update-on-mapsf">Update: On <code class="language-plaintext highlighter-rouge">mapsf</code></h2>
-<p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA
-<a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, shared
-also how to create inset maps using that package:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">mapsf</span><span class="p">)</span><span class="w">
+<p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA <a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, shared also how to create inset maps using that package:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapsf</span><span class="p">)</span><span class="w">
 
 </span><span class="n">mf_map</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w">
 </span><span class="n">mf_inset_on</span><span class="p">(</span><span class="n">island</span><span class="p">,</span><span class="w"> </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomright"</span><span class="p">,</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.3</span><span class="p">)</span><span class="w">
@@ -422,7 +388,7 @@ also how to create inset maps using that package:</p>
 </span><span class="n">box</span><span class="p">(</span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span><span class="p">)</span><span class="w">
 </span><span class="n">mf_inset_off</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="../assets/img/blog/20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
 </article>
 		</div>
 	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
