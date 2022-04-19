@@ -1,0 +1,136 @@
+---
+title: "Unknown pleasures with R"
+subtitle: "Elevation maps with ggridges and terra"
+tags: [r_bloggers,rstats,rspatial, maps,sf,ggplot2, ggridges, terra]
+header_img: ./assets/img/blog/20220303_inset.png
+excerpt: Create ridgelines (AKA joyplots) of territories using  elevation data
+  with R, sf, terra and ggridges.
+output:
+  html_document:
+  md_document:
+    variant: gfm
+    preserve_yaml: true
+---
+
+
+
+On 1970, Harold D. Craft Jr. published his Ph.D thesis *"Radio observations of
+the pulse profiles and dispersion measures of twelve pulsars".* The thesis (337
+pages) includes on pages 214 to 216 the following depictions of successive
+pulses of some pulsars:
+
+![img-pulsars](https://static.scientificamerican.com/blogs/assets/sa-visual/Image/pulsar_trio.jpg)
+
+From "Radio Observations of the Pulse Profiles and
+Dispersion Measures of Twelve Pulsars" by Harold D. Craft, Jr. (September 1970).
+Original source: <https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/>
+{: .caption}
+
+
+Nine years later, Peter Saville designed the cover of the debut studio album of
+Joy Division, *"Unknown Pleasures"*, based on a version of the very same picture
+(specifically the corresponding to pulsar CP 1919) appeared on *The Cambridge
+Encyclopaedia of Astronomy* (1977 edition), that reaches an iconic status in the
+'80s:
+
+![Joy Division - Unknown pleasure cover](https://upload.wikimedia.org/wikipedia/en/7/70/Unknown_Pleasures_Joy_Division_LP_sleeve.jpg)
+
+If you are interested on knowing more about this fascinating history of science
+and design you can find it on [Pop Culture Pulsar: Origin Story of Joy
+Division's Unknown Pleasures Album
+Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/)
+by [Jen
+Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
+
+On this post, I would produce "joyplots" for specific regions of the world using
+the elevation data for creating the ridges.
+
+## Creating ridgeline maps with **R**
+
+This topic has already been covered by other authors, as [Daniel
+Redondo](https://danielredondo.com/blog/2020-01-25-joy_division/) (Spanish) and
+[Travis M.
+White](https://cartographicperspectives.org/index.php/journal/article/view/1536/1726).
+However, they both use QGIS, while on this post I would work completely on
+**R**.
+
+
+```r
+
+# Libraries
+
+# Spatial
+library(sf)
+library(terra)
+library(giscoR) # Shapes
+library(elevatr)
+library(units)
+
+# Data viz and wrangling
+library(ggplot2)
+library(dplyr)
+library(ggridges)
+```
+
+The first step consists on selecting our region of interest and extracting the
+elevation data. We can achieve that with `giscoR` and `elevatr`:
+
+
+```r
+
+# Select a Spanish Region: Andalucia
+region <- gisco_get_nuts(nuts_id = "ES61") %>%
+  # And project data
+  st_transform(25830)
+
+# Units of projection
+st_crs(region)$units
+#> [1] "m"
+```
+
+On this post I would use `geom_ridgline()` instead of `geom_density_ridges()`.
+For that reason, it is needed that both the coordinates and the elevation are
+set in the same units:
+
+> Plots the sum of the `y` and `height` aesthetics versus `x`, filling the area
+> between `y` and `y + height` with a color. Thus, the data mapped onto `y` and
+> onto `height` must be in the same units. If you want relative scaling of the
+> heights, you can use `geom_density_ridges` with `stat = "identity"`.
+>
+> From <https://wilkelab.org/ggridges/reference/geom_ridgeline.html>
+
+Well, know we need to extract the elevation on the same units, We can use
+`elevatr` adjusting the zoom level as needed:
+
+
+```r
+
+dem <- get_elev_raster(region, z = 7, clip = "bbox", expand = 10000) %>%
+  # And convert to terra
+  rast() %>%
+  # Mask to the shape
+  mask(vect(region))
+
+
+nrow(dem)
+#> [1] 698
+
+terra::plot(dem)
+```
+
+<img src="./img///unnamed-chunk-2-1.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="100%" />
+
+## References
+
+Craft Jr, H. D. (1970). *Radio observations of the pulse profiles and dispersion
+measures of twelve pulsars.* Cornell University.
+
+Mitton, Simon (1977). *The Cambridge encyclopaedia of astronomy.* Prentice-Hall
+of Canada.
+
+White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division's
+Unknown Pleasures Album Art. *Cartographic Perspectives*, (92), 65--78.
+<https://doi.org/10.14714/CP92.1536>
+
+Redondo, Daniel (2020, January 25). "Mapas estilo Joy Division con QGIS y R."
+<https://danielredondo.com/blog/2020-01-25-joy_division/>

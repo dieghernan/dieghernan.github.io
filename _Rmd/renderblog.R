@@ -95,3 +95,10 @@ for (newfile in allmds){
 #   verbose = T
 # )
 
+
+ezknit(
+  paste0(getwd(),"/_Rmd/",draft,".Rmd"),
+  out_dir = "./_drafts",
+  fig_dir = "./img/",
+  keep_html = FALSE
+)
