@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Mon, 14 Mar 2022 19:52:00 +0100</pubDate>
-		<lastBuildDate>Mon, 14 Mar 2022 19:52:00 +0100</lastBuildDate>
+		<pubDate>Tue, 19 Apr 2022 09:31:52 +0200</pubDate>
+		<lastBuildDate>Tue, 19 Apr 2022 09:31:52 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -41,7 +41,7 @@ German bureaucracy.</p>
 
 <h2 id="links">Links</h2>
 <ul>
-  <li><a href="projects/corona-atlas">Read more on this site</a></li>
+  <li><a href="../projects/corona-atlas">Read more on this site</a></li>
   <li><a href="https://corona-atlas.de/en">Project’s Website</a></li>
   <li><a href="https://github.com/dieghernan/RKI-Corona-Atlas">Project’s Repository</a></li>
 </ul>
@@ -52,8 +52,8 @@ German bureaucracy.</p>
 			<link>https://dieghernan.github.io/202203_Corona-timelapse/</link>
 			<category>posts</category>
 		    <category>R</category><category>leaflet</category><category>maps</category><category>project</category><category>python</category><media:title type="html"><![CDATA[Corona timelapse ]]></media:title>
-      <media:content url="https://corona-atlas.de/assets/img/corona_atlas_timelapse.gif" medium="image"/>
-      <media:thumbnail url="https://corona-atlas.de/assets/img/corona_atlas_timelapse.gif" /><guid isPermaLink="true">https://dieghernan.github.io/202203_Corona-timelapse/</guid>
+      <media:content url="https://corona-atlas.de/timelapse/frames/D2021-04-16.png" medium="image"/>
+      <media:thumbnail url="https://corona-atlas.de/timelapse/frames/D2021-04-16.png" /><guid isPermaLink="true">https://dieghernan.github.io/202203_Corona-timelapse/</guid>
       <pubDate>Mon, 14 Mar 2022 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Insets with ggplot2 and tmap - and mapsf!</title>
@@ -293,7 +293,7 @@ also how to create inset maps using that package:</p>
 			</description>
 			<link>https://dieghernan.github.io/202203_insetmaps/</link>
 			<category>posts</category>
-		    <category>ggplot2</category><category>mapSpain</category><category>maps</category><category>mapsf</category><category>rspatial</category><category>rstats</category><category>sf</category><category>tmap</category><media:title type="html"><![CDATA[Insets with ggplot2 and tmap - and mapsf! ]]></media:title>
+		    <category>ggplot2</category><category>mapSpain</category><category>maps</category><category>mapsf</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>tmap</category><media:title type="html"><![CDATA[Insets with ggplot2 and tmap - and mapsf! ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20220303_inset.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220303_inset.png" /><guid isPermaLink="true">https://dieghernan.github.io/202203_insetmaps/</guid>
       <pubDate>Thu, 03 Mar 2022 00:00:00 +0100</pubDate>
@@ -406,7 +406,7 @@ be extracted from the GitHub repository
 			</description>
 			<link>https://dieghernan.github.io/202201_maps-flags/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>flags</category><category>giscoR</category><category>maps</category><category>rasterpic</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><media:title type="html"><![CDATA[Beautiful Maps with R (IV): Fun with flags revisited ]]></media:title>
+		    <category>beautiful_maps</category><category>flags</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rasterpic</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><media:title type="html"><![CDATA[Beautiful Maps with R (IV): Fun with flags revisited ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202201_maps-flags/</guid>
       <pubDate>Fri, 28 Jan 2022 00:00:00 +0100</pubDate>
@@ -417,7 +417,7 @@ be extracted from the GitHub repository
  				<h3><p>Interactive map of the international COVID-19 risk areas as designated by the German authorities.</p>
 </h3>
     		<p>1 min.</p>
-				<div><p><img src="https://corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" /></p>
+				<div><p><img src="https://corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" style="width: 25%;" /></p>
 
 <p>Visit <a href="https://corona-atlas.de/">https://corona-atlas.de/</a></p>
 
@@ -431,7 +431,10 @@ The scraper also uses
 <a href="https://pandas.pydata.org/"><strong>pandas</strong></a> and
 <a href="https://pypi.org/project/pycountry/"><strong>pycountry</strong></a>.</p>
 
-<p>Map visualization is created with <strong>R</strong> and generates a map via <a href="https://rmarkdown.rstudio.com/">{rmarkdown}</a>. The map is created using <a href="http://rstudio.github.io/leaflet/">{leaflet}</a>, <a href="https://dieghernan.github.io/giscoR/">{giscoR}</a> and some packages included on the <a href="https://www.tidyverse.org/">tidyverse</a>.</p>
+<p>For the prototype version, map visualization was created with <strong>R</strong> and generated a map via <a href="https://rmarkdown.rstudio.com/">{rmarkdown}</a> using <a href="http://rstudio.github.io/leaflet/">{leaflet}</a>, <a href="https://dieghernan.github.io/giscoR/">{giscoR}</a> and some packages included on the <a href="https://www.tidyverse.org/">tidyverse</a>.
+For the deployment, map logic has moved to Javascript to escalate with multiple languages.</p>
+
+<p><a href="/202203_Corona-timelapse">Read more on this post</a></p>
 </div>
 				]]>
 			</description>
@@ -1065,7 +1068,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/202004_headtails/</link>
 			<category>posts</category>
-		    <category>cartography</category><category>classInt</category><category>rspatial</category><category>rstats</category><category>vignette</category><media:title type="html"><![CDATA[Head/Tails breaks on the <code>classInt</code> package. ]]></media:title>
+		    <category>cartography</category><category>classInt</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>vignette</category><media:title type="html"><![CDATA[Head/Tails breaks on the <code>classInt</code> package. ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202004_headtails/</guid>
       <pubDate>Sun, 05 Apr 2020 00:00:00 +0200</pubDate>
@@ -1579,7 +1582,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/202002_cartography1/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>cartography</category><category>maps</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[New features on cartography package ]]></media:title>
+		    <category>beautiful_maps</category><category>cartography</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[New features on cartography package ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202002_cartography1/</guid>
       <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
@@ -1997,7 +2000,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/201911_QuickR/</link>
 			<category>posts</category>
-		    <category>flags</category><category>maps</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Quick R: Inset maps ]]></media:title>
+		    <category>flags</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Quick R: Inset maps ]]></media:title>
       <media:content url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" medium="image"/>
       <media:thumbnail url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /><guid isPermaLink="true">https://dieghernan.github.io/201911_QuickR/</guid>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0100</pubDate>
@@ -2184,7 +2187,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/201910_WikiMap1/</link>
 			<category>posts</category>
-		    <category>Wikipedia</category><category>cartography</category><category>maps</category><category>rspatial</category><category>rstats</category><category>sf</category><category>svg</category><media:title type="html"><![CDATA[Wikipedia Maps (I): Organ donor rates ]]></media:title>
+		    <category>Wikipedia</category><category>cartography</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>svg</category><media:title type="html"><![CDATA[Wikipedia Maps (I): Organ donor rates ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png" /><guid isPermaLink="true">https://dieghernan.github.io/201910_WikiMap1/</guid>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0200</pubDate>
@@ -2353,7 +2356,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/201906_Beautiful2/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>flags</category><category>function</category><category>maps</category><category>raster</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful Maps with R (II): Fun with flags ]]></media:title>
+		    <category>beautiful_maps</category><category>flags</category><category>function</category><category>maps</category><category>r_bloggers</category><category>raster</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful Maps with R (II): Fun with flags ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful2/</guid>
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0200</pubDate>
@@ -2690,7 +2693,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/201906_Beautiful1/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>maps</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels ]]></media:title>
+		    <category>beautiful_maps</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful1/</guid>
       <pubDate>Sun, 02 Jun 2019 00:00:00 +0200</pubDate>
@@ -2979,7 +2982,7 @@ screen, no matter what device you are using.</p>
 			</description>
 			<link>https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</link>
 			<category>posts</category>
-		    <category>Jekyll</category><category>html</category><category>leaflet</category><category>maps</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub ]]></media:title>
+		    <category>Jekyll</category><category>html</category><category>leaflet</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.png" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</guid>
       <pubDate>Mon, 20 May 2019 00:00:00 +0200</pubDate>
@@ -3340,7 +3343,7 @@ places I have traveled by plain</p>
 			</description>
 			<link>https://dieghernan.github.io/201905_Cast-to-subsegments/</link>
 			<category>posts</category>
-		    <category>function</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Cast a line to subsegments in R ]]></media:title>
+		    <category>function</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Cast a line to subsegments in R ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Cast-to-subsegments/</guid>
       <pubDate>Sun, 05 May 2019 00:00:00 +0200</pubDate>
@@ -3631,7 +3634,7 @@ and replacing the <code class="language-plaintext highlighter-rouge">dataframe</
 			</description>
 			<link>https://dieghernan.github.io/201904_Using-CountryCodes/</link>
 			<category>posts</category>
-		    <category>maps</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[Using CountryCodes database and sf package ]]></media:title>
+		    <category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[Using CountryCodes database and sf package ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201904_Using-CountryCodes/</guid>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0200</pubDate>
