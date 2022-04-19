@@ -82,7 +82,7 @@ hist(
 par(opar)
 ```
 
-![plot of chunk 20200405_charheavytail](../assets/img/blog/20200405_charheavytail-1.png)![plot of chunk 20200405_charheavytail](../assets/img/blog/20200405_charheavytail-2.png)
+![plot of chunk 20200405_charheavytail](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.png)![plot of chunk 20200405_charheavytail](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.png)
 
 
 
@@ -186,7 +186,7 @@ for (i in 1:10) {
 par(opar)
 ```
 
-![plot of chunk 20200405_stepbystep](../assets/img/blog/20200405_stepbystep-1.png)![plot of chunk 20200405_stepbystep](../assets/img/blog/20200405_stepbystep-2.png)![plot of chunk 20200405_stepbystep](../assets/img/blog/20200405_stepbystep-3.png)![plot of chunk 20200405_stepbystep](../assets/img/blog/20200405_stepbystep-4.png)
+![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.png)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.png)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.png)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.png)
 
 As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.  
 
@@ -253,7 +253,7 @@ plot(
 par(opar)
 ```
 
-![plot of chunk 20200405_examplesimp](../assets/img/blog/20200405_examplesimp-1.png)![plot of chunk 20200405_examplesimp](../assets/img/blog/20200405_examplesimp-2.png)![plot of chunk 20200405_examplesimp](../assets/img/blog/20200405_examplesimp-3.png)![plot of chunk 20200405_examplesimp](../assets/img/blog/20200405_examplesimp-4.png)
+![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.png)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.png)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.png)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.png)
 
 The method always returns at least one break, corresponding to `mean(var)`.
 
@@ -291,7 +291,7 @@ plot(
 par(opar)
 ```
 
-![plot of chunk 20200405_summspdata](../assets/img/blog/20200405_summspdata-1.png)![plot of chunk 20200405_summspdata](../assets/img/blog/20200405_summspdata-2.png)
+![plot of chunk 20200405_summspdata](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.png)![plot of chunk 20200405_summspdata](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.png)
 
 The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the *"far more small things than large things"* principle.  
 
@@ -326,7 +326,7 @@ plot(brks_quantile, pal = pal1, main = "quantile")
 par(opar)
 ```
 
-![plot of chunk 20200405_breaksample](../assets/img/blog/20200405_breaksample-1.png)![plot of chunk 20200405_breaksample](../assets/img/blog/20200405_breaksample-2.png)![plot of chunk 20200405_breaksample](../assets/img/blog/20200405_breaksample-3.png)
+![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.png)![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.png)![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.png)
 
 It is observed that the top three classes of `headtails` enclose 5 observations, whereas `fisher` includes 13 observations. In terms of classification, `headtails` breaks focuses more on extreme values.
 
@@ -389,7 +389,7 @@ legend("topright",
 par(opar)
 ```
 
-![plot of chunk 20200405_benchmarkbreaks](../assets/img/blog/20200405_benchmarkbreaks-1.png)
+![plot of chunk 20200405_benchmarkbreaks](https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.png)
 
 It can be observed that the distribution of `headtails` breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, "quantile" provides a quasi-uniform distribution, ignoring the `totcon` hierarchy
 
@@ -477,7 +477,7 @@ title(main = "Head Tails")
 par(opar)
 ```
 
-![plot of chunk 20200405_finalplot](../assets/img/blog/20200405_finalplot-1.png)
+![plot of chunk 20200405_finalplot](https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png)
 
 
 As per the results, `headtails` seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The `quantile` style, as expected, just provides a clustering without taking into account the real hierarchy. The `fisher` plot is in-between of these two interpretations. 

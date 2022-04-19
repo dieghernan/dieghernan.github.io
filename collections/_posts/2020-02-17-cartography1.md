@@ -128,7 +128,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_hatched-min](../assets/img/blog/20200217_hatched-min-1.png)
+![plot of chunk 20200217_hatched-min](https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.png)
 
 
 
@@ -222,7 +222,7 @@ layoutLayer(
 ) 
 ```
 
-![plot of chunk 20200217_hatched](../assets/img/blog/20200217_hatched-1.png)
+![plot of chunk 20200217_hatched](https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.png)
 
 `legendHatched` honors the order on the parameters. In this case, two `dot` patterns are presents, so `pch = c(4,15)` takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, `lty = c(1, 1, 3)` respect that order.
 
@@ -328,7 +328,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_hatched-adv](../assets/img/blog/20200217_hatched-adv-1.png)
+![plot of chunk 20200217_hatched-adv](https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.png)
 
 
 ## `png` Layer
@@ -395,7 +395,7 @@ layoutLayer(
 ) 
 ```
 
-![plot of chunk 20200217_pnglayer](../assets/img/blog/20200217_pnglayer-1.png)
+![plot of chunk 20200217_pnglayer](https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.png)
 
 ### Example 2
 
@@ -421,7 +421,7 @@ UKpng=getPngLayer(UK,urluk)
 pngLayer(UKpng, add=TRUE)
 ```
 
-![plot of chunk 20200217_png-adv](../assets/img/blog/20200217_png-adv-1.png)
+![plot of chunk 20200217_png-adv](https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.png)
 
 ## wordcloudLayer
 
@@ -453,7 +453,7 @@ layoutLayer(
 ) 
 ```
 
-![plot of chunk 20200217_wordcloud1](../assets/img/blog/20200217_wordcloud1-1.png)
+![plot of chunk 20200217_wordcloud1](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.png)
 
 ### Example 2
 
@@ -505,4 +505,4 @@ layoutLayer(title="Most frequent genres on US",
             theme="orange.pal")
 ```
 
-![plot of chunk 20200217_wordcloud2](../assets/img/blog/20200217_wordcloud2-1.png)
+![plot of chunk 20200217_wordcloud2](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png)

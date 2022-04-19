@@ -4,10 +4,14 @@ library(pacman)
 p_load(ezknitr)
 p_load(styler)
 
+path.expand("./_Rmd")
+
+file.path(getwd())
+
 diegpost <- function(file) {
   getwd()
   ezknit(
-    paste("~/R/Projects/dieghernan.github.io/_Rmd/",file,".Rmd",sep = ""),
+    paste0(getwd(),"/_Rmd/",file,".Rmd"),
     out_dir = "./collections/_posts",
     fig_dir = "../assets/img/blog",
     keep_html = FALSE
@@ -21,6 +25,19 @@ diegpost <- function(file) {
   unlink("./collections/assets",
          recursive = TRUE,
          force = TRUE)
+  
+  # Fix img links
+  newfile <- paste0("./collections/_posts", "/", file, ".md")
+  
+  lines <- readLines(newfile)
+  newlines <- gsub('<img src="../assets/img',
+                   '<img src="https://dieghernan.github.io/assets/img', lines)
+  newlines <- gsub('(../assets/img',
+                   '(https://dieghernan.github.io/assets/img',
+                   newlines, fixed = TRUE)
+  
+  writeLines(newlines, newfile)
+  
 }
 
 
@@ -39,7 +56,32 @@ diegpost <- function(file) {
 # diegpost("2020-02-06-Brexit")
 # diegpost("2020-02-17-cartography1")
 # diegpost("2020-04-05-headtails")
-diegpost("2022-01-28-maps-flags")
+diegpost("2022-03-03-insetmaps")
+
+file="2022-03-03-insetmaps"
+
+# Fix img url
+
+allmds <- list.files("./collections/", recursive = TRUE, pattern = ".md$", full.names = TRUE)
+
+for (newfile in allmds){
+  message(newfile, "\n")
+  
+  lines <- readLines(newfile)
+  newlines <- gsub('<img src="../assets/img',
+                   '<img src="https://dieghernan.github.io/assets/img', lines)
+  newlines <- gsub('(../assets/img',
+                   '(https://dieghernan.github.io/assets/img',
+                   newlines, fixed = TRUE)
+  
+  
+  writeLines(newlines, newfile)
+}
+
+
+
+
+
 
 
 
