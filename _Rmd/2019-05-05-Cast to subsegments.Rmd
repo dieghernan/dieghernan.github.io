@@ -2,7 +2,7 @@
 title: Cast a line to subsegments in R
 subtitle: User-defined function using sf package
 header_img: ./assets/img/blog//20190505_benchmarkfunction-1.png
-tags: [rstats,rspatial,sf,function]
+tags: [r_bloggers,rstats,rspatial,sf,function]
 output: 
   md_document:
     variant: markdown_github

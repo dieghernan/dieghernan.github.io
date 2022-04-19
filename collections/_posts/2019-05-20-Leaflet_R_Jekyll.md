@@ -1,7 +1,7 @@
 ---
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
 subtitle: Make it work in 6 steps - a short tutorial
-tags: [rstats,rspatial,leaflet,Jekyll, html, maps]
+tags: [r_bloggers,rstats,rspatial,leaflet,Jekyll, html, maps]
 header_img: ./assets/img/blog/20190520_imgpost.png
 leafletmap: true
 always_allow_html: yes
