@@ -96,9 +96,13 @@ for (newfile in allmds){
 # )
 
 
+draft <- "Unknown-pleasures-R"
+
+unlink(".collections", recursive = TRUE)
+
 ezknit(
   paste0(getwd(),"/_Rmd/",draft,".Rmd"),
-  out_dir = "./_drafts",
+  out_dir = "./collections/_drafts",
   fig_dir = "./img/",
   keep_html = FALSE
 )
