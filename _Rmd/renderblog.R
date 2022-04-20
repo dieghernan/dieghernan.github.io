@@ -98,7 +98,7 @@ for (newfile in allmds){
 
 draft <- "Unknown-pleasures-R"
 
-unlink(".collections", recursive = TRUE)
+# unlink(".collections", recursive = TRUE)
 
 ezknit(
   paste0(getwd(),"/_Rmd/",draft,".Rmd"),
