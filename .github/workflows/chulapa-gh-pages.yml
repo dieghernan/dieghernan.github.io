@@ -21,9 +21,10 @@ jobs:
           ${{ runner.os }}-gems2-
  
     # Specify the target branch (optional)
-    - uses: helaili/jekyll-action@2.2.0
+    - uses: helaili/jekyll-action@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         target_branch: 'gh-pages'
         jekyll_src: '.'
         keep_history: true
+        jekyll_build_options: '--drafts'
