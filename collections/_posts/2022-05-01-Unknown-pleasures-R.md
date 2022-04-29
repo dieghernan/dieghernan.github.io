@@ -1,6 +1,6 @@
 ---
 title: "Unknown pleasures with R"
-subtitle: Elevation maps with ggridges and terra
+subtitle: Joyplot elevation maps with ggridges and terra
 tags:
 - r_bloggers
 - rstats
@@ -18,28 +18,18 @@ output:
     preserve_yaml: yes
 excerpt: Create ridgelines (AKA joyplots) of territories using  elevation data with
   R, sf, terra and ggridges.
-header_img: ./assets/img/blog/20220303_inset.png
+header_img: ./assets/img/blog/20220501_joyplots.png
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  warning = FALSE,
-  message = FALSE,
-  dpi = 300,
-  tidy = "styler",
-  out.width = "100%"
-)
-rm(list = ls())
-```
+
 
 On 1970, Harold D. Craft Jr. published his Ph.D thesis *"Radio observations of
 the pulse profiles and dispersion measures of twelve pulsars".* The thesis (337
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:
 
-![Craft Pulsars](https://static.scientificamerican.com/blogs/assets/sa-visual/Image/pulsar_trio.jpg)
+![Craft
+Pulsars](https://static.scientificamerican.com/blogs/assets/sa-visual/Image/pulsar_trio.jpg)
 
 From "Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
@@ -71,8 +61,10 @@ Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-
 by [Jen
 Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
 
-On this post, I would produce "joyplots" for specific regions of the world using
-the elevation data for creating the ridges.
+Since then, this kind of plots have become very popular, being known as **ridge
+plots** or **joyplots**, in honor of Joy Division. On this post, I would produce
+"joyplots" with R for specific regions of the world using the elevation data for
+creating the ridges.
 
 ## Creating joyplot maps with **R**
 
@@ -100,7 +92,8 @@ Some initial considerations we may need to bear in mind:
 
 Now, let's start with the required libraries:
 
-```{r}
+
+```r
 
 # Libraries
 
@@ -123,7 +116,8 @@ In this post I would create a joyplot of
 creating just a visualization, the resolution of the sf object is not very
 relevant.
 
-```{r}
+
+```r
 
 # Select a Spanish Region: Andalucia
 region <- gisco_get_nuts(nuts_id = "ES61") %>%
@@ -135,7 +129,8 @@ Now we need to extract the elevation using `elevatr`. We can also adjust the
 zoom level as needed. You can find a good guidance on the zoom levels on the
 [OpenStreetMaps wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
 
-```{r}
+
+```r
 
 dem <- get_elev_raster(region, z = 7, clip = "bbox", expand = 10000) %>%
   # And convert to terra
@@ -147,9 +142,12 @@ dem <- get_elev_raster(region, z = 7, clip = "bbox", expand = 10000) %>%
 names(dem) <- "elev"
 
 nrow(dem)
+#> [1] 698
 
 terra::plot(dem)
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.png" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" />
 
 We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
@@ -157,16 +155,20 @@ reduce the number of cells or increasing the size of the cells) using a scaling
 factor that would reduce the number of rows to our desired target (in this case
 90 rows):
 
-```{r}
+
+```r
 # Approx
 factor <- round(nrow(dem) / 90)
 
 dem_agg <- aggregate(dem, factor)
 
 nrow(dem_agg)
+#> [1] 88
 
 terra::plot(dem_agg)
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.png" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" />
 
 We can check how the number of rows have decreased. Also, the plot shows that we
 have now less cells.
@@ -183,7 +185,8 @@ raster:
 After that, we would create a data frame with the information needed for
 creating the joyplot.
 
-```{r}
+
+```r
 
 dem_agg[dem_agg < 0] <- 0
 dem_agg[is.na(dem_agg)] <- 0
@@ -191,13 +194,28 @@ dem_agg[is.na(dem_agg)] <- 0
 dem_df <- as.data.frame(dem_agg, xy = TRUE, na.rm = FALSE)
 
 as_tibble(dem_df)
+#> # A tibble: 12,848 x 3
+#>          x        y  elev
+#>      <dbl>    <dbl> <dbl>
+#>  1  77184. 4306315.     0
+#>  2  81049. 4306315.     0
+#>  3  84914. 4306315.     0
+#>  4  88779. 4306315.     0
+#>  5  92644. 4306315.     0
+#>  6  96510. 4306315.     0
+#>  7 100375. 4306315.     0
+#>  8 104240. 4306315.     0
+#>  9 108105. 4306315.     0
+#> 10 111970. 4306315.     0
+#> # ... with 12,838 more rows
 ```
 
 Now is a good moment to adjust the units of the coordinates and the elevation if
 needed. In this case both are in meters, but I would show you how to perform
 those adjustment with the `units` package:
 
-```{r}
+
+```r
 
 library(units)
 
@@ -205,6 +223,7 @@ library(units)
 units_crs <- st_crs(dem_agg)$units
 
 units_crs
+#> [1] "m"
 
 # Example, convert to miles
 # Adjust as needed
@@ -220,6 +239,20 @@ dem_miles <- dem_df %>%
   )
 
 as_tibble(dem_miles)
+#> # A tibble: 12,848 x 6
+#>          x        y elev x_mile y_mile elev_mile
+#>        [m]      [m]  [m]   [mi]   [mi]      [mi]
+#>  1  77184. 4306315.    0   48.0  2676.         0
+#>  2  81049. 4306315.    0   50.4  2676.         0
+#>  3  84914. 4306315.    0   52.8  2676.         0
+#>  4  88779. 4306315.    0   55.2  2676.         0
+#>  5  92644. 4306315.    0   57.6  2676.         0
+#>  6  96510. 4306315.    0   60.0  2676.         0
+#>  7 100375. 4306315.    0   62.4  2676.         0
+#>  8 104240. 4306315.    0   64.8  2676.         0
+#>  9 108105. 4306315.    0   67.2  2676.         0
+#> 10 111970. 4306315.    0   69.6  2676.         0
+#> # ... with 12,838 more rows
 ```
 
 Finally, we can create our joyplot. Note that we can "train" the scales of our
@@ -227,7 +260,8 @@ Finally, we can create our joyplot. Note that we can "train" the scales of our
 the plot. The relative height of the ridges is controlled via the `scale`
 parameter:
 
-```{r}
+
+```r
 
 ggplot() +
   # Just for the scales, pass with NA arguments so it is not shown
@@ -243,9 +277,12 @@ ggplot() +
   theme_ridges()
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.png" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" />
+
 The last step is to provide a black theme, resembling the cover of the album:
 
-```{r}
+
+```r
 
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
@@ -264,6 +301,8 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.png" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" />
+
 ## Variations
 
 We can produce some variations of the same map using several parameters and
@@ -274,7 +313,8 @@ other artifacts.
 We can use `geom_density_ridges()` with `stat="identity"` instead of
 `geom_ridgeline()` for creating a similar map:
 
-```{r}
+
+```r
 
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
@@ -294,6 +334,8 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.png" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" />
+
 ### Land only
 
 If we use `geom_ridgeline()` it is quite easy to remove some parts of the lines,
@@ -305,7 +347,8 @@ maximum height.
 This is the main reason why we replaced the `NA` values with zeros, so those
 parts of the string can be easily removed.
 
-```{r}
+
+```r
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_ridgeline(
@@ -324,12 +367,15 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.png" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" />
+
 ### With colors
 
 We can apply different colors to the plot. Note that `ggridges` only accepts
 different `aes` by row, and not by column:
 
-```{r}
+
+```r
 
 # Classify on three different bands
 
@@ -362,11 +408,14 @@ ggplot() +
   ))
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.png" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" />
+
 ### Combine with another objects
 
 Like using a `sf` object:
 
-```{r}
+
+```r
 
 highres <- gisco_get_nuts(
   nuts_id = "ES61",
@@ -394,9 +443,12 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.png" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" />
+
 Or maybe adding a frame to the plot
 
-```{r}
+
+```r
 
 frame <- as.polygons(dem_agg, extent = TRUE) %>%
   st_as_sf()
@@ -417,6 +469,8 @@ ggplot() +
   theme_void() +
   theme(plot.background = element_rect(fill = "black"))
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.png" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" />
 
 ## References
 
