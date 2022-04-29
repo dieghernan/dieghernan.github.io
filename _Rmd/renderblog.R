@@ -36,6 +36,13 @@ diegpost <- function(file) {
                    '(https://dieghernan.github.io/assets/img',
                    newlines, fixed = TRUE)
   
+  # Fix double slashes
+  newlines <- gsub("https://dieghernan.github.io/assets/img//",
+                   "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
+  
+  newlines <- gsub("https://dieghernan.github.io/assets/img//",
+                   "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
+  
   writeLines(newlines, newfile)
   
 }
@@ -56,7 +63,10 @@ diegpost <- function(file) {
 # diegpost("2020-02-06-Brexit")
 # diegpost("2020-02-17-cartography1")
 # diegpost("2020-04-05-headtails")
-diegpost("2022-03-03-insetmaps")
+# diegpost("2022-03-03-insetmaps")
+
+diegpost("2022-05-01-Unknown-pleasures-R")
+
 
 file="2022-03-03-insetmaps"
 
@@ -95,3 +105,14 @@ for (newfile in allmds){
 #   verbose = T
 # )
 
+
+draft <- "Unknown-pleasures-R"
+
+# unlink(".collections", recursive = TRUE)
+
+ezknit(
+  paste0(getwd(),"/_Rmd/",draft,".Rmd"),
+  out_dir = "./collections/_drafts",
+  fig_dir = "./img/",
+  keep_html = FALSE
+)
