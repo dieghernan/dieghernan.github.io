@@ -112,7 +112,8 @@ volcano_rast <- rast(volcano)
 terra::plot(volcano_rast)
 
 # Wait, it is flipped!
-volcano_rast_ok <- rast(volcano[seq(nrow(volcano), 1, -1), ])
+volcano_rast_ok <- rast(volcano[seq(nrow(volcano), 1, -1), 
+                                seq(ncol(volcano), 1, -1) ])
 
 # Much better!
 terra::plot(volcano_rast_ok)
@@ -185,7 +186,8 @@ to load it and check the plotting `tidyterra` possibilities:
 
 # Load out Easter Egg
 
-volcano2_easter <- rast(system.file("extdata/volcano2.tif", package = "tidyterra"))
+volcano2_easter <- rast(system.file("extdata/volcano2.tif",
+                                    package = "tidyterra"))
 
 volcano2_easter
 terra::plot(volcano2_easter)
@@ -193,7 +195,8 @@ terra::plot(volcano2_easter)
 
 # Only altitudes of more than 130m
 
-volcano_filter <- volcano2_easter %>% filter(elevation > 130)
+volcano_filter <- volcano2_easter %>% 
+  filter(elevation > 130)
 
 
 ggtile +
