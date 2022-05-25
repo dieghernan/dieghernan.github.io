@@ -1,0 +1,290 @@
+---
+title: "Introducing tidyterra"
+subtitle: Easily work and ggplot SpatRasters
+excerpt: tidyterra provides tidyverse methods for terra objects and geom
+  functions for plotting with ggplot2.
+tags:
+- r_bloggers
+- rstats
+- rspatial
+- maps
+- sf
+- ggplot2
+- tidyterra
+- terra
+output:
+  html_document:
+    df_print: paged
+  md_document:
+    variant: gfm
+    preserve_yaml: yes
+header_img: ./assets/img/blog/20220525_easteregg-2.png
+---
+
+
+
+If you have been playing around with **R** for a while, probably you are
+familiarized with the `volcano` dataset:
+
+
+```r
+
+data("volcano")
+image(volcano, col = terrain.colors(256, rev = TRUE))
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano-1.png" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" />
+
+This represents the topographic information of one of the volcanoes of Auckland
+(New Zealand), specifically [Maungawhau / Mount
+Eden](https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden). But **do you know
+that this map is flipped?**
+
+On this post I introduce the [tidyterra
+package](https://github.com/dieghernan/tidyterra), recently added to
+[CRAN](https://CRAN.R-project.org/package=tidyterra) and I would show you how to
+geotag the `volcano` dataset. We would produce also ggplot2 maps using the
+functions of `tidyterra`.
+
+
+```r
+# Libraries
+library(terra)
+library(ggplot2)
+library(tidyterra)
+library(maptiles)
+library(sf)
+```
+
+## Wait, `volcano` is flipped?
+
+Let's check it out. Thanks to the package `maptiles` we can have a glimpse of
+the location of Maungawhau using map tiles (as Google Maps uses). We would use
+`tidyterra` for displaying the map tile:
+
+
+```r
+
+# location of Maungawhau
+
+box <- c(
+  174.7611552780,
+  -36.8799200525,
+  174.7682380109,
+  -36.8719519780
+)
+class(box) <- "bbox"
+box <- st_as_sfc(box)
+st_crs(box) <- 4326
+
+box <- box %>%
+  # To crs for NZGD49
+  st_transform(27200)
+
+tile <- get_tiles(box, crop = TRUE, zoom = 16)
+
+
+ggtile <- ggplot() +
+  geom_spatraster_rgb(data = tile)
+
+ggtile
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_tile-1.png" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" />
+
+So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
+question is, how to match the `volcano` dataset (a matrix) with this tile (a
+geo-tagged map tile)? Let's check it out
+
+## Working with SpatRasters
+
+Thanks to the `terra` package we can start converting `volcano` into a
+SpatRaster:
+
+
+```r
+
+volcano_rast <- rast(volcano)
+
+terra::plot(volcano_rast)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano_raster-1.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" />
+
+```r
+
+# Wait, it is flipped!
+volcano_rast_ok <- rast(volcano[seq(nrow(volcano), 1, -1), ])
+
+# Much better!
+terra::plot(volcano_rast_ok)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano_raster-2.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" />
+
+```r
+
+volcano_rast_ok
+#> class       : SpatRaster 
+#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> resolution  : 1, 1  (x, y)
+#> extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)
+#> coord. ref. :  
+#> source      : memory 
+#> name        : lyr.1 
+#> min value   :    94 
+#> max value   :   195
+```
+
+Nice! Now we have a raster of `volcano`, but still without geotagged
+information. Thanks to this article of Tomislav Hengl
+([\@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
+parameters of `volcano` (see [Volcano
+Maungawhau](https://geomorphometry.org/volcano-maungawhau/)), that are:
+
+-   **CRS**: EPSG:27200
+-   **xllcorner**: 2667400
+-   **yllcorner**: 6478700
+-   **cellsize**: 10 m
+-   **ncols**: 61
+-   **nrows**: 87
+
+And we can translate that easily to an empty SpatRaster:
+
+
+```r
+
+# Extra length for proper handling extent
+xrange <- range(seq(from = 2667400, length.out = 62, by = 10))
+yrange <- range(seq(from = 6478700, length.out = 88, by = 10))
+
+template <- rast(
+  crs = "EPSG:27200",
+  xmin = xrange[1],
+  xmax = xrange[2],
+  ymin = yrange[1],
+  ymax = yrange[2],
+  resolution = 10
+)
+template
+#> class       : SpatRaster 
+#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> resolution  : 10, 10  (x, y)
+#> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
+#> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)
+```
+
+So now we only need to transfer the values from `volcano_rast_ok` to our
+template:
+
+
+```r
+
+# Use tidyterra for pull the values of one raster
+# and create a new layer
+
+volcano2 <- template %>%
+  mutate(elevation = pull(volcano_rast_ok, lyr.1)) %>%
+  select(elevation)
+
+volcano2
+#> class       : SpatRaster 
+#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> resolution  : 10, 10  (x, y)
+#> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
+#> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) 
+#> source      : memory 
+#> name        : elevation 
+#> min value   :        94 
+#> max value   :       195
+
+terra::plot(volcano2)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_create_volcano2-1.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" />
+
+```r
+
+# And plot it
+ggtile +
+  geom_spatraster(data = volcano2) +
+  scale_fill_terrain_c(alpha = 0.75)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_create_volcano2-2.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" />
+
+## An Easter egg
+
+The `volcano` dataset may not be completely up to date. As a compliment,
+`tidyterra` includes a `.tif` file with the same dimensions that our `volcano2`
+raster, but with the topographic values extracted using `elevatr`. See here how
+to load it and check the plotting `tidyterra` possibilities:
+
+
+```r
+
+# Load out Easter Egg
+
+volcano2_easter <- rast(system.file("extdata/volcano2.tif", package = "tidyterra"))
+
+volcano2_easter
+#> class       : SpatRaster 
+#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> resolution  : 10, 10  (x, y)
+#> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
+#> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) 
+#> source      : volcano2.tif 
+#> name        : elevation 
+#> min value   :  81.07246 
+#> max value   :  187.2323
+terra::plot(volcano2_easter)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-1.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+
+```r
+
+
+# Only altitudes of more than 130m
+
+volcano_filter <- volcano2_easter %>% filter(elevation > 130)
+
+
+ggtile +
+  geom_spatraster(data = volcano_filter) +
+  scale_fill_viridis_c(na.value = NA, alpha = 0.7) +
+  labs(fill = "Elevation (m)")
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-2.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+
+```r
+
+
+# Contour lines
+
+ggtile +
+  geom_spatraster_contour(data = volcano2_easter, binwidth = 10)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-3.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+
+```r
+
+
+# Contour lines + contour polygons
+
+ggtile +
+  geom_spatraster_contour_filled(
+    data = volcano2_easter,
+    breaks = seq(80, 200, 10),
+    alpha = 0.5
+  ) +
+  geom_spatraster_contour(
+    data = volcano2_easter, binwidth = 2.5,
+    alpha = 0.7, size = .2, color = "black"
+  ) +
+  coord_sf(expand = FALSE)
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-4.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />

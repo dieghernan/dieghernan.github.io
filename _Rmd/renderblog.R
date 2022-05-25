@@ -65,7 +65,7 @@ diegpost <- function(file) {
 # diegpost("2020-04-05-headtails")
 # diegpost("2022-03-03-insetmaps")
 
-diegpost("2022-05-01-Unknown-pleasures-R")
+diegpost("2022-05-25-tidyterra")
 
 
 file="2022-03-03-insetmaps"
