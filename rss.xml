@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Tue, 24 May 2022 07:47:58 +0200</pubDate>
-		<lastBuildDate>Tue, 24 May 2022 07:47:58 +0200</lastBuildDate>
+		<pubDate>Wed, 25 May 2022 16:16:49 +0200</pubDate>
+		<lastBuildDate>Wed, 25 May 2022 16:16:49 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -18,6 +18,269 @@
 			<link>https://dieghernan.github.io/</link>
 			<description>Personal blog of dieghernan</description>
 		</image><item>
+			<title>Introducing tidyterra</title>
+			<description>
+				<![CDATA[	
+ 				<h3><p>Easily work and ggplot SpatRasters</p>
+</h3>
+    		<p>3 min.</p>
+				<div><p>If you have been playing around with <strong>R</strong> for a while, probably you are
+familiarized with the <code class="language-plaintext highlighter-rouge">volcano</code> dataset:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
+</span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano-1.png" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
+
+<p>This represents the topographic information of one of the volcanoes of Auckland
+(New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
+Eden</a>. But <strong>do you know
+that this map is flipped?</strong></p>
+
+<p>On this post I introduce the <a href="https://github.com/dieghernan/tidyterra">tidyterra
+package</a>, recently added to
+<a href="https://CRAN.R-project.org/package=tidyterra">CRAN</a> and I would show you how to
+geotag the <code class="language-plaintext highlighter-rouge">volcano</code> dataset. We would produce also ggplot2 maps using the
+functions of <code class="language-plaintext highlighter-rouge">tidyterra</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyterra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">maptiles</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="wait-volcano-is-flipped">Wait, <code class="language-plaintext highlighter-rouge">volcano</code> is flipped?</h2>
+
+<p>Let’s check it out. Thanks to the package <code class="language-plaintext highlighter-rouge">maptiles</code> we can have a glimpse of
+the location of Maungawhau using map tiles (as Google Maps uses). We would use
+<code class="language-plaintext highlighter-rouge">tidyterra</code> for displaying the map tile:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># location of Maungawhau</span><span class="w">
+
+</span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+  </span><span class="m">174.7611552780</span><span class="p">,</span><span class="w">
+  </span><span class="m">-36.8799200525</span><span class="p">,</span><span class="w">
+  </span><span class="m">174.7682380109</span><span class="p">,</span><span class="w">
+  </span><span class="m">-36.8719519780</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="nf">class</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"bbox"</span><span class="w">
+</span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sfc</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w">
+</span><span class="n">st_crs</span><span class="p">(</span><span class="n">box</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">4326</span><span class="w">
+
+</span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">box</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># To crs for NZGD49</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="m">27200</span><span class="p">)</span><span class="w">
+
+</span><span class="n">tile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_tiles</span><span class="p">(</span><span class="n">box</span><span class="p">,</span><span class="w"> </span><span class="n">crop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggtile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster_rgb</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tile</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggtile</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_tile-1.png" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
+
+<p>So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
+question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
+geo-tagged map tile)? Let’s check it out</p>
+
+<h2 id="working-with-spatrasters">Working with SpatRasters</h2>
+
+<p>Thanks to the <code class="language-plaintext highlighter-rouge">terra</code> package we can start converting <code class="language-plaintext highlighter-rouge">volcano</code> into a
+SpatRaster:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">volcano_rast</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">)</span><span class="w">
+
+</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano_raster-1.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Wait, it is flipped!</span><span class="w">
+</span><span class="n">volcano_rast_ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">[</span><span class="n">seq</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">volcano</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">),</span><span class="w"> </span><span class="p">])</span><span class="w">
+
+</span><span class="c1"># Much better!</span><span class="w">
+</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano_raster-2.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">volcano_rast_ok</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 1, 1  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. :  </span><span class="w">
+</span><span class="c1">#&gt; source      : memory </span><span class="w">
+</span><span class="c1">#&gt; name        : lyr.1 </span><span class="w">
+</span><span class="c1">#&gt; min value   :    94 </span><span class="w">
+</span><span class="c1">#&gt; max value   :   195</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Nice! Now we have a raster of <code class="language-plaintext highlighter-rouge">volcano</code>, but still without geotagged
+information. Thanks to this article of Tomislav Hengl
+(<a href="https://twitter.com/tom_hengl">\@tom_hengl</a>) we can check the basic geographic
+parameters of <code class="language-plaintext highlighter-rouge">volcano</code> (see <a href="https://geomorphometry.org/volcano-maungawhau/">Volcano
+Maungawhau</a>), that are:</p>
+
+<ul>
+  <li><strong>CRS</strong>: EPSG:27200</li>
+  <li><strong>xllcorner</strong>: 2667400</li>
+  <li><strong>yllcorner</strong>: 6478700</li>
+  <li><strong>cellsize</strong>: 10 m</li>
+  <li><strong>ncols</strong>: 61</li>
+  <li><strong>nrows</strong>: 87</li>
+</ul>
+
+<p>And we can translate that easily to an empty SpatRaster:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Extra length for proper handling extent</span><span class="w">
+</span><span class="n">xrange</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2667400</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">62</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
+</span><span class="n">yrange</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6478700</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">88</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
+
+</span><span class="n">template</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="w">
+  </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"EPSG:27200"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xrange</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w">
+  </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xrange</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w">
+  </span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yrange</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w">
+  </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yrange</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w">
+  </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">template</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>So now we only need to transfer the values from <code class="language-plaintext highlighter-rouge">volcano_rast_ok</code> to our
+template:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Use tidyterra for pull the values of one raster</span><span class="w">
+</span><span class="c1"># and create a new layer</span><span class="w">
+
+</span><span class="n">volcano2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">elevation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pull</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">,</span><span class="w"> </span><span class="n">lyr.1</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">elevation</span><span class="p">)</span><span class="w">
+
+</span><span class="n">volcano2</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) </span><span class="w">
+</span><span class="c1">#&gt; source      : memory </span><span class="w">
+</span><span class="c1">#&gt; name        : elevation </span><span class="w">
+</span><span class="c1">#&gt; min value   :        94 </span><span class="w">
+</span><span class="c1">#&gt; max value   :       195</span><span class="w">
+
+</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_create_volcano2-1.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># And plot it</span><span class="w">
+</span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_terrain_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_create_volcano2-2.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+
+<h2 id="an-easter-egg">An Easter egg</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">volcano</code> dataset may not be completely up to date. As a compliment,
+<code class="language-plaintext highlighter-rouge">tidyterra</code> includes a <code class="language-plaintext highlighter-rouge">.tif</code> file with the same dimensions that our <code class="language-plaintext highlighter-rouge">volcano2</code>
+raster, but with the topographic values extracted using <code class="language-plaintext highlighter-rouge">elevatr</code>. See here how
+to load it and check the plotting <code class="language-plaintext highlighter-rouge">tidyterra</code> possibilities:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Load out Easter Egg</span><span class="w">
+
+</span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"extdata/volcano2.tif"</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tidyterra"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">volcano2_easter</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) </span><span class="w">
+</span><span class="c1">#&gt; source      : volcano2.tif </span><span class="w">
+</span><span class="c1">#&gt; name        : elevation </span><span class="w">
+</span><span class="c1">#&gt; min value   :  81.07246 </span><span class="w">
+</span><span class="c1">#&gt; max value   :  187.2323</span><span class="w">
+</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-1.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="c1"># Only altitudes of more than 130m</span><span class="w">
+
+</span><span class="n">volcano_filter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">elevation</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">130</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano_filter</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation (m)"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-2.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="c1"># Contour lines</span><span class="w">
+
+</span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-3.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="c1"># Contour lines + contour polygons</span><span class="w">
+
+</span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster_contour_filled</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-4.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/202205_tidyterra/</link>
+			<category>posts</category>
+		    <category>ggplot2</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Introducing tidyterra ]]></media:title>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" /><guid isPermaLink="true">https://dieghernan.github.io/202205_tidyterra/</guid>
+      <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
+		</item><item>
 			<title>Unknown pleasures with R</title>
 			<description>
 				<![CDATA[	
