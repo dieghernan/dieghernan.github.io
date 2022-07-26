@@ -234,14 +234,14 @@ volcano2_easter <- rast(system.file("extdata/volcano2.tif",
 
 volcano2_easter
 #> class       : SpatRaster 
-#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
-#> resolution  : 10, 10  (x, y)
-#> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
-#> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) 
+#> dimensions  : 174, 122, 1  (nrow, ncol, nlyr)
+#> resolution  : 5, 5  (x, y)
+#> extent      : 1756969, 1757579, 5917003, 5917873  (xmin, xmax, ymin, ymax)
+#> coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193) 
 #> source      : volcano2.tif 
 #> name        : elevation 
-#> min value   :  81.07246 
-#> max value   :  187.2323
+#> min value   :  76.26222 
+#> max value   :  195.5542
 terra::plot(volcano2_easter)
 ```
 

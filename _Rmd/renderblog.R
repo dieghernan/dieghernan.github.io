@@ -40,12 +40,13 @@ diegpost <- function(file) {
   newlines <- gsub("https://dieghernan.github.io/assets/img//",
                    "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
   
-  newlines <- gsub("https://dieghernan.github.io/assets/img//",
-                   "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
+  newlines <- gsub("https://dieghernan.github.io/assets/img/blog//",
+                   "https://dieghernan.github.io/assets/img/blog/", newlines, fixed = TRUE)
   
   writeLines(newlines, newfile)
   
 }
+
 
 
 #Render 2019-04-27-Using-CountryCodes ----
