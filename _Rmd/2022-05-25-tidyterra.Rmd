@@ -179,8 +179,10 @@ ggtile +
 
 The `volcano` dataset may not be completely up to date. As a compliment,
 `tidyterra` includes a `.tif` file with the same dimensions that our `volcano2`
-raster, but with the topographic values extracted using `elevatr`. See here how
-to load it and check the plotting `tidyterra` possibilities:
+raster, but with the topographic values extracted from [Auckland LiDAR 1m DEM
+(2013)](https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/) and
+resampled to a resolution of 5x5 meters, for package size optimization. See here
+how to load it and check the plotting `tidyterra` possibilities:
 
 ```{r 20220525_easteregg}
 
@@ -216,12 +218,12 @@ ggtile +
 ggtile +
   geom_spatraster_contour_filled(
     data = volcano2_easter,
-    breaks = seq(80, 200, 10),
-    alpha = 0.5
+    breaks = seq(70, 210, 20),
+    alpha = 0.7
   ) +
   geom_spatraster_contour(
     data = volcano2_easter, binwidth = 2.5,
-    alpha = 0.7, size = .2, color = "black"
+    alpha = 0.7, size = .2, color = "grey10"
   ) +
   coord_sf(expand = FALSE)
 ```
