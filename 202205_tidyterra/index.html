@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-10-15 22:46:09 +0200 -->
+    <!-- Page build 2022-10-15 23:00:46 +0200 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -233,7 +233,7 @@ familiarized with the <code class="language-plaintext highlighter-rouge">volcano
 </span><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
 </span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano-1.png" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.png" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
 <p>This represents the topographic information of one of the volcanoes of Auckland
 (New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
 Eden</a>. But <strong>do you know
@@ -279,7 +279,7 @@ the location of Maungawhau using map tiles (as Google Maps uses). We would use
 
 </span><span class="n">ggtile</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_tile-1.png" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.png" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
 <p>So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
 question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
 geo-tagged map tile)? Let’s check it out</p>
@@ -291,15 +291,18 @@ SpatRaster:</p>
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano_raster-1.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Wait, it is flipped!</span><span class="w">
-</span><span class="n">volcano_rast_ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">[</span><span class="n">seq</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">volcano</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">),</span><span class="w"> </span><span class="p">])</span><span class="w">
+</span><span class="n">volcano_rast_ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">[</span><span class="w">
+  </span><span class="n">seq</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">volcano</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">),</span><span class="w">
+  </span><span class="n">seq</span><span class="p">(</span><span class="n">ncol</span><span class="p">(</span><span class="n">volcano</span><span class="p">),</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">-1</span><span class="p">)</span><span class="w">
+</span><span class="p">])</span><span class="w">
 
 </span><span class="c1"># Much better!</span><span class="w">
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_volcano_raster-2.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">volcano_rast_ok</span><span class="w">
 </span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
@@ -369,42 +372,47 @@ template:</p>
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_create_volcano2-1.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># And plot it</span><span class="w">
 </span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_terrain_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_create_volcano2-2.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
 <h2 id="an-easter-egg">An Easter egg</h2>
 <p>The <code class="language-plaintext highlighter-rouge">volcano</code> dataset may not be completely up to date. As a compliment,
 <code class="language-plaintext highlighter-rouge">tidyterra</code> includes a <code class="language-plaintext highlighter-rouge">.tif</code> file with the same dimensions that our <code class="language-plaintext highlighter-rouge">volcano2</code>
-raster, but with the topographic values extracted using <code class="language-plaintext highlighter-rouge">elevatr</code>. See here how
-to load it and check the plotting <code class="language-plaintext highlighter-rouge">tidyterra</code> possibilities:</p>
+raster, but with the topographic values extracted from <a href="https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/">Auckland LiDAR 1m DEM
+(2013)</a> and
+resampled to a resolution of 5x5 meters, for package size optimization. See here
+how to load it and check the plotting <code class="language-plaintext highlighter-rouge">tidyterra</code> possibilities:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Load out Easter Egg</span><span class="w">
 
-</span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"extdata/volcano2.tif"</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tidyterra"</span><span class="p">))</span><span class="w">
+</span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"extdata/volcano2.tif"</span><span class="p">,</span><span class="w">
+  </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tidyterra"</span><span class="w">
+</span><span class="p">))</span><span class="w">
 
 </span><span class="n">volcano2_easter</span><span class="w">
 </span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
-</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
-</span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
-</span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 174, 122, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 5, 5  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 1756969, 1757579, 5917003, 5917873  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193) </span><span class="w">
 </span><span class="c1">#&gt; source      : volcano2.tif </span><span class="w">
 </span><span class="c1">#&gt; name        : elevation </span><span class="w">
-</span><span class="c1">#&gt; min value   :  81.07246 </span><span class="w">
-</span><span class="c1">#&gt; max value   :  187.2323</span><span class="w">
+</span><span class="c1">#&gt; min value   :  76.26222 </span><span class="w">
+</span><span class="c1">#&gt; max value   :  195.5542</span><span class="w">
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-1.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
 </span><span class="c1"># Only altitudes of more than 130m</span><span class="w">
 
-</span><span class="n">volcano_filter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">elevation</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">130</span><span class="p">)</span><span class="w">
+</span><span class="n">volcano_filter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">elevation</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">130</span><span class="p">)</span><span class="w">
 
 
 </span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -412,7 +420,7 @@ to load it and check the plotting <code class="language-plaintext highlighter-ro
   </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation (m)"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-2.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
 </span><span class="c1"># Contour lines</span><span class="w">
@@ -420,7 +428,7 @@ to load it and check the plotting <code class="language-plaintext highlighter-ro
 </span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-3.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
 </span><span class="c1"># Contour lines + contour polygons</span><span class="w">
@@ -428,16 +436,16 @@ to load it and check the plotting <code class="language-plaintext highlighter-ro
 </span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster_contour_filled</span><span class="p">(</span><span class="w">
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w">
-    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
-    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">70</span><span class="p">,</span><span class="w"> </span><span class="m">210</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="w">
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w">
-    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.2</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey10"</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220525_easteregg-4.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 </article>
 		</div>
 	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
