@@ -17,8 +17,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
-
-
 ```
 
 
@@ -34,36 +32,43 @@ library(sf)
 library(giscoR)
 
 
-#EU
+# EU
 eu <- giscoR::gisco_countrycode %>% filter(eu)
 
 # Download maps
 NUTS1 <- gisco_get_nuts(epsg = 3035, country = eu$ISO3_CODE, nuts_level = 1)
 
 
-UK <- gisco_get_countries(country =  "GBR", epsg = 3035)
+UK <- gisco_get_countries(country = "GBR", epsg = 3035)
 
-noplot = c("FRY", "ES7", "PT2", "PT3")
-NUTS1_Clean = NUTS1 %>% subset(!NUTS_ID %in% noplot) %>%
-  group_by(CNTR_CODE) %>% summarise(a=dplyr::n())
+noplot <- c("FRY", "ES7", "PT2", "PT3")
+NUTS1_Clean <- NUTS1 %>%
+  subset(!NUTS_ID %in% noplot) %>%
+  group_by(CNTR_CODE) %>%
+  summarise(a = dplyr::n())
 
 # Flag image
-url = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"
+url <- "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"
 
-#Mask UK
-flagcut = getPngLayer(NUTS1_Clean,
-                       url)
+# Mask UK
+flagcut <- getPngLayer(
+  NUTS1_Clean,
+  url
+)
 # Full extent
-flag = getPngLayer(NUTS1_Clean,
-                       url, mask = FALSE)
+flag <- getPngLayer(NUTS1_Clean,
+  url,
+  mask = FALSE
+)
 
 
 par(mar = c(0, 0, 0, 0))
 tilesLayer(flag, alpha = 150)
 tilesLayer(flagcut, bgalpha = 0, add = T)
 plot(st_geometry(UK),
-     col = "white",
-     border = NA,
-     add = TRUE)
+  col = "white",
+  border = NA,
+  add = TRUE
+)
 ```
 
