@@ -15,8 +15,10 @@ output:
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = 'styler',
-                      dev = "ragg_png")
+knitr::opts_chunk$set(
+  echo = TRUE, tidy = "styler",
+  dev = "ragg_png"
+)
 knitr::opts_knit$set(global.par = TRUE)
 
 rm(list = ls())
@@ -38,8 +40,6 @@ library(sf)
 library(cartography)
 library(mapSpain)
 library(giscoR)
-
-
 ```
 
 ## Choosing a good source for our shape
@@ -57,26 +57,27 @@ World <- gisco_get_countries(epsg = 3857, res = 3)
 
 bboxcan <- esp_get_can_box(epsg = 3857)
 
-#Plot
+# Plot
 par(mar = c(0, 0, 0, 0))
 plot(st_geometry(Spain),
-     col = NA,
-     border = NA,
-     bg = "#C6ECFF")
+  col = NA,
+  border = NA,
+  bg = "#C6ECFF"
+)
 plot(st_geometry(World),
-     col = "#E0E0E0",
-     bg = "#C6ECFF",
-     add = T)
+  col = "#E0E0E0",
+  bg = "#C6ECFF",
+  add = T
+)
 plot(st_geometry(Spain), col = "#FEFEE9", add = T)
 layoutLayer(
   title = "",
-  frame = FALSE ,
+  frame = FALSE,
   scale = 500,
   sources = gisco_attributions(),
   author = "dieghernan, 2019",
 )
 plot(bboxcan, add = TRUE)
-
 ```
 
 
@@ -90,28 +91,27 @@ As a first example, I chose [Asturias](https://en.wikipedia.org/wiki/Asturias) t
 ```{r 20190618_Asturias,  message=FALSE, warning=FALSE,  fig.width=1000/90,fig.height=(500/2)/90,dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
 
 
-#1.Shape---
+# 1.Shape---
 shp <- Spain %>% filter(ccaa.shortname.es == "Asturias")
 
-#2.Get flag---
+# 2.Get flag---
 
 # Masked
 url <- "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_Asturias.svg/800px-Flag_of_Asturias.svg.png"
 
-flagnomask <- getPngLayer(shp,url, mask = FALSE)
+flagnomask <- getPngLayer(shp, url, mask = FALSE)
 
-flagmask <- getPngLayer(shp,url, mask = TRUE)
+flagmask <- getPngLayer(shp, url, mask = TRUE)
 
 opar <- par(no.readonly = TRUE)
 par(mar = c(1, 1, 1, 1), mfrow = c(1, 2))
 pngLayer(flagnomask)
 plot(st_geometry(Spain), add = T)
 
-#4.Mask---
+# 4.Mask---
 pngLayer(flagmask)
 plot(st_geometry(Spain), add = T)
 par(opar)
-
 ```
 
 
@@ -123,17 +123,17 @@ par(opar)
 
 
 MURshp <- Spain %>% filter(ccaa.shortname.es == "Murcia")
-MURLow <-  getPngLayer(
+MURLow <- getPngLayer(
   MURshp,
   "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/100px-Flag_of_the_Region_of_Murcia.svg.png"
 )
-MURHigh <-  getPngLayer(
+MURHigh <- getPngLayer(
   MURshp,
   "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/1200px-Flag_of_the_Region_of_Murcia.svg.png"
 )
 
 
-#Plot and compare
+# Plot and compare
 opar <- par(no.readonly = TRUE)
 par(mfrow = c(1, 2), mar = c(1, 1, 1, 1))
 plot_sf(MURshp, main = "Low")
@@ -143,7 +143,6 @@ plot_sf(MURshp, main = "High")
 pngLayer(MURHigh, add = TRUE)
 
 par(opar)
-
 ```
 
 
@@ -154,22 +153,25 @@ Now, we are ready to have [fun with flags](https://the-big-bang-theory.com/fun_w
 
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
 plot(Spain %>%
-       st_geometry(),
-     col = NA,
-     border = NA,
-     bg = "#C6ECFF")
+  st_geometry(),
+col = NA,
+border = NA,
+bg = "#C6ECFF"
+)
 plot(st_geometry(World),
-     col = "#E0E0E0",
-     add = T)
+  col = "#E0E0E0",
+  add = T
+)
 plot(st_geometry(bboxcan),
-     add = T)
+  add = T
+)
 layoutLayer(
   title = "",
-  frame = FALSE ,
+  frame = FALSE,
   sources = "© EuroGeographics for the administrative boundaries",
   author = "dieghernan, 2019",
 )
-#Andalucia
+# Andalucia
 flag <-
   "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bandera_de_Andalucia.svg/1000px-Bandera_de_Andalucia.svg.png"
 shp <- Spain %>% filter(ccaa.shortname.es == "Andalucía")
@@ -179,45 +181,48 @@ pngLayer(getPngLayer(shp, flag), add = TRUE)
 # Go to the source code of this post on GitHub for the full code
 
 plot(st_geometry(Spain),
-     col = NA,
-     lwd = 2,
-     add = T)
-
+  col = NA,
+  lwd = 2,
+  add = T
+)
 ```
 
 ```{r 20190618_allCCAA, echo=FALSE,  fig.height=550/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, results='hide', eval=TRUE}
 
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
 plot(Spain %>%
-       st_geometry(),
-     col = NA,
-     border = NA,
-     bg = "#C6ECFF")
+  st_geometry(),
+col = NA,
+border = NA,
+bg = "#C6ECFF"
+)
 plot(st_geometry(World),
-     col = "#E0E0E0",
-     add = T)
+  col = "#E0E0E0",
+  add = T
+)
 plot(st_geometry(bboxcan),
-     add = T)
+  add = T
+)
 layoutLayer(
   title = "",
-  frame = FALSE ,
+  frame = FALSE,
   sources = "© EuroGeographics for the administrative boundaries",
   author = "dieghernan, 2019",
 )
-#Andalucia
+# Andalucia
 flag <-
   "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bandera_de_Andalucia.svg/1000px-Bandera_de_Andalucia.svg.png"
 shp <- Spain %>% filter(ccaa.shortname.es == "Andalucía")
 pngLayer(getPngLayer(shp, flag), add = TRUE)
 
 
-#Aragon
+# Aragon
 flag <-
   "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Flag_of_Aragon.svg/1200px-Flag_of_Aragon.svg.png"
 shp <- Spain %>% filter(ccaa.shortname.es == "Aragón")
 pngLayer(getPngLayer(shp, flag, align = "left"), add = TRUE)
 
-#Asturias
+# Asturias
 flag <-
   "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_Asturias.svg/1200px-Flag_of_Asturias.svg.png"
 shp <- Spain %>% filter(ccaa.shortname.es == "Asturias")
@@ -317,29 +322,32 @@ pngLayer(getPngLayer(shp, flag), add = TRUE)
 
 
 plot(st_geometry(Spain),
-     col = NA,
-     lwd = 1,
-     add = T)
-
+  col = NA,
+  lwd = 1,
+  add = T
+)
 ```
 
 We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.
 
 ```{r 20190618_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
 
-nuts1 <- gisco_get_nuts(nuts_level = "1", epsg = 3035, res=3)
+nuts1 <- gisco_get_nuts(nuts_level = "1", epsg = 3035, res = 3)
 
 
-noplot=c("FRY","ES7","PT2","PT3")
-NUTS1_Clean <- nuts1 %>% filter(CNTR_CODE %in% eurostat::eu_countries$code) %>% filter(!NUTS_ID %in% noplot) %>% 
-  group_by(CNTR_CODE) %>% summarise(drop=n())
+noplot <- c("FRY", "ES7", "PT2", "PT3")
+NUTS1_Clean <- nuts1 %>%
+  filter(CNTR_CODE %in% eurostat::eu_countries$code) %>%
+  filter(!NUTS_ID %in% noplot) %>%
+  group_by(CNTR_CODE) %>%
+  summarise(drop = n())
 
-url="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/1200px-Flag_of_Europe.svg.png"
+url <- "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/1200px-Flag_of_Europe.svg.png"
 
-flag <- getPngLayer(NUTS1_Clean,url, mask = FALSE)
-flagcut <- getPngLayer(NUTS1_Clean,url, mask = TRUE)
-par(mar=c(0,0,0,0))
-pngLayer(flag,alpha=150)
-pngLayer(flagcut,bgalpha=0,add=T)
+flag <- getPngLayer(NUTS1_Clean, url, mask = FALSE)
+flagcut <- getPngLayer(NUTS1_Clean, url, mask = TRUE)
+par(mar = c(0, 0, 0, 0))
+pngLayer(flag, alpha = 150)
+pngLayer(flagcut, bgalpha = 0, add = T)
 ```
 

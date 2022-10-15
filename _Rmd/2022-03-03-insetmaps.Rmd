@@ -60,7 +60,6 @@ regions <- esp_get_ccaa(moveCAN = FALSE)
 
 ggplot(regions) +
   geom_sf()
-
 ```
 
 I would use a different CRS for each part of Spain. In the case of mainland
@@ -84,7 +83,6 @@ island <- regions %>%
 
 ggplot(island) +
   geom_sf()
-
 ```
 
 So that was easy! Just a couple of maps using `ggplot2`. Let's start mixing and
@@ -185,7 +183,6 @@ ggdraw() +
     y = 0.3,
     x = -0.2
   )
-
 ```
 
 ## On `tmap`
@@ -259,7 +256,7 @@ also how to create inset maps using that package:
 library(mapsf)
 
 mf_map(main)
-mf_inset_on(island, pos = "bottomright", cex=.3)
+mf_inset_on(island, pos = "bottomright", cex = .3)
 mf_map(island)
 box(lwd = .5)
 mf_inset_off()
