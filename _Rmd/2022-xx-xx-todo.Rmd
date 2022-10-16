@@ -54,14 +54,17 @@ library(geodata)
 # I use to save this data on my local machine to speed up the code
 
 mycachedir <- "~/R/mapslib/misc"
-r <- elevation_30s("COL", path = mycachedir)
+r <- elevation_30s("BOL", path = mycachedir)
 
 # For better handling we set here the names
 names(r) <- "alt"
 
+# r <- terra::spatSample(r, 50000, method ="regular", as.raster = TRUE)
+
 # Quick look
 autoplot(r) +
   theme_minimal()
+
 ```
 
 ## Hillshading
@@ -112,20 +115,17 @@ hill <- ggplot() +
 hill
 ```
 
-## A note on colors
+## Selecting colors
 
-```{r, fig.show='hold', out.width="50%"}
+```{r fig.show='hold', out.width="50%"}
 
 # Try some options, but we need to be aware of the values of our raster
 
-r_limits <- minmax(r) %>%
-  # Add some extra values to max
-  as.vector() %>%
-  # Minimum on 0
-  pmax(0)
+r_limits <- minmax(r) %>%  as.vector()
 
-# Rounded to closest 500
-r_limits <- ceiling(r_limits / 500) * 500
+# Rounded to lower and upper 500
+r_limits <- c(floor(r_limits[1]/500), ceiling(r_limits[2]/500)) *500
+r_limits <- pmax(r_limits, 0)
 
 # Compare
 minmax(r) %>% as.vector()
@@ -155,4 +155,42 @@ plot_pal_test("colombia_hypso")
 plot_pal_test("pakistan")
 plot_pal_test("utah_1")
 plot_pal_test("wiki-2.0_hypso")
+```
+
+## Final plot
+
+```{r}
+
+library(showtext)
+font_add_google("Lobster", "lobster")
+
+showtext_auto()
+
+b_size = 50
+
+# Theming
+hill +
+  geom_spatraster(data = r, maxcell = Inf) +
+  scale_fill_hypso_tint_c(
+    limits = r_limits,
+    palette = "dem_poster",
+    alpha = 0.4,
+    labels = label_comma(suffix = " m."),
+    # For the legend
+    breaks = c(seq(0, 2000, 250), seq(3000, r_limits[2], 1000))
+  ) +
+  guides(fill=guide_legend(reverse = TRUE, title = "", ncol = 1,
+                           keyheight = 0.8,
+                           override.aes = list(alpha = 0.75))) +
+  labs(title = "Elevation of Bolivia",
+       caption = "Data: Shuttle Radar Topography Mission (SRTM)") +
+  theme_minimal(base_size = b_size,
+                base_family = "lobster",
+                base_line_size = 11/22,
+                base_rect_size = 11/22) +
+  theme(plot.title = element_text(size = b_size*1.5),
+        plot.background = element_rect(fill = "grey98"),
+        legend.key = element_rect(color = "grey50"),
+        legend.text = element_text(size=b_size*.8))
+
 ```
