@@ -448,15 +448,11 @@ base_plot +
 ## References
 
 Patterson T, Jenny B (2011). "The Development and Rationale of Cross-blended
-Hypsometric Tints." *Cartographic Perspectives*, 31--46. <doi:10.14714/CP69.20>
-<https://doi.org/10.14714/CP69.20>,
-<https://cartographicperspectives.org/index.php/journal/article/view/cp69-patterson-jenny>.
+Hypsometric Tints." *Cartographic Perspectives*, 31--46. <https://doi.org/10.14714/CP69.20>
 
 Grossenbacher T (2016). "Beautiful thematic maps with ggplot2 (only)."
 <https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/>.
 
-Royé D (2020). "Climate animation of maximum temperatures."
-<https://dominicroye.github.io/en/2020/climate-animation-of-maximum-temperatures/>.
 
 Royé D (2022). "Hillshade effects."
 <https://dominicroye.github.io/en/2022/hillshade-effects/>.
