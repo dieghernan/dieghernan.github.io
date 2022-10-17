@@ -21,18 +21,7 @@ output:
 header_img: ./assets/img/blog/20221017-6-finalplot-1.png
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  warning = FALSE,
-  message = FALSE,
-  dpi = 300,
-  tidy = "styler",
-  out.width = "100%"
-)
-rm(list = ls())
-```
+
 
 *This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a Hillshade background. Next post would show how to add marginal plots
@@ -63,7 +52,8 @@ palette for this kind of maps.
 
 I would use the following libraries:
 
-```{r}
+
+```r
 
 ## Libraries
 
@@ -84,7 +74,8 @@ simplicity, but you can use as well `elevatr` that is much more complete.
 However `elevatr` produces the result as `RasterLayers`, so you would need to
 convert the object to `SpatRaster` with `terra::rast()`.
 
-```{r }
+
+```r
 
 # Cache map data
 mydir <- "~/R/mapslib/misc"
@@ -92,6 +83,15 @@ mydir <- "~/R/mapslib/misc"
 r_init <- elevation_30s("ROU", path = mydir)
 
 r_init
+#> class       : SpatRaster 
+#> dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)
+#> resolution  : 0.008333333, 0.008333333  (x, y)
+#> extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+#> source      : ROU_elv_msk.tif 
+#> name        : ROU_elv_msk 
+#> min value   :          -4 
+#> max value   :        2481
 
 # For better handling we set here the names
 names(r_init) <- "alt"
@@ -101,18 +101,27 @@ r <- r_init %>%
   mutate(alt = pmax(0, alt))
 
 r
-
+#> class       : SpatRaster 
+#> dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)
+#> resolution  : 0.008333333, 0.008333333  (x, y)
+#> extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+#> source      : memory 
+#> name        :  alt 
+#> min value   :    0 
+#> max value   : 2481
 ```
 
 We can now have a quick look to the plot with `tidyterra::autoplot()`:
 
-```{r 20221017-1-autoplot}
+
+```r
 # Quick look
 autoplot(r) +
   theme_minimal()
-
-
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.png" alt="plot of chunk 20221017-1-autoplot" width="100%" />
 
 ## Hillshading
 
@@ -123,7 +132,8 @@ approximates the potential "texture" of the surface based on the elevation and
 the sun position. This is straightforward with `terra::terrain()` and
 `terra::shade()` functions:
 
-```{r 20221017-2-hillroye, message=TRUE}
+
+```r
 
 ## Create hillshade effect
 
@@ -140,7 +150,10 @@ pal_greys <- hcl.colors(1000, "Grays")
 ggplot() +
   geom_spatraster(data = hill) +
   scale_fill_gradientn(colors = pal_greys, na.value = NA)
+#> SpatRaster resampled to ncells = 501501
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.png" alt="plot of chunk 20221017-2-hillroye" width="100%" />
 
 We can also do the following hack to avoid the use of a `scale_fill_*` (via
 `ggplot2` or via `ggnewscale::new_scale_fill()`):
@@ -160,7 +173,8 @@ using `maxcell = Inf`. On this approach for using `fill` the value `maxcell`
 needs to be effectively set to `Inf` to ensure that the number of color values
 and the number of cells is the same.
 
-```{r 20221017-3-hillalt}
+
+```r
 
 # Use a vector of colors
 
@@ -178,11 +192,15 @@ vector_cols <- pal_greys[index]
 # and dont use aes
 
 hill_plot <- ggplot() +
-  geom_spatraster(data = hill, fill = vector_cols, maxcell = Inf,
-                  alpha = 1)
+  geom_spatraster(
+    data = hill, fill = vector_cols, maxcell = Inf,
+    alpha = 1
+  )
 
 hill_plot
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.png" alt="plot of chunk 20221017-3-hillalt" width="100%" />
 
 ## Selecting colors
 
@@ -202,20 +220,23 @@ There is an additional point to take into account when designing color palettes
 for maps. A regular gradient would just interpolate colors assuming that the
 distance among colors is the same:
 
-```{r 20221017-regular-gradient}
+
+```r
 
 # Regular gradient
 grad <- hypso.colors(10, "dem_poster")
 
 autoplot(r) +
   scale_fill_gradientn(colours = grad, na.value = NA)
-
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.png" alt="plot of chunk 20221017-regular-gradient" width="100%" />
 
 For that reason, tidyterra provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
 
-```{r 20221017-hypso-gradient}
+
+```r
 
 # Hypso gradient
 grad_hypso <- hypso.colors2(10, "dem_poster")
@@ -223,9 +244,9 @@ grad_hypso <- hypso.colors2(10, "dem_poster")
 
 autoplot(r) +
   scale_fill_gradientn(colours = grad_hypso, na.value = NA)
-
-
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.png" alt="plot of chunk 20221017-hypso-gradient" width="100%" />
 
 Can you notice the difference? In the first map greens are the dominant color.
 However greens are representing a wide range of elevations (0-750 meters) that
@@ -246,7 +267,8 @@ argument of the functions to make `ggplot2` aware of the limits of the value of
 the raster. This is easily achieved with `terra::minmax()` but I added an extra
 touch rounding up and down the range of values to the nearest 500.
 
-```{r 20221017-4-explorepals, fig.show='hold', out.width="50%"}
+
+```r
 
 # Try some options, but we need to be aware of the values of our raster
 
@@ -260,7 +282,9 @@ r_limits <- pmax(r_limits, 0)
 
 # Compare
 minmax(r) %>% as.vector()
+#> [1]    0 2481
 r_limits
+#> [1]    0 2500
 
 
 # Now lets have some fun with scales from tidyterra
@@ -288,6 +312,8 @@ plot_pal_test("utah_1")
 plot_pal_test("wiki-2.0_hypso")
 ```
 
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.png" alt="plot of chunk 20221017-4-explorepals" width="50%" />
+
 I finally selected for my plot the `"dem_poster"` palette, but this is
 completely a personal choice. You should select the palette you feel more
 comfortable with. See the full range of color palettes provided by `tidyterra`
@@ -298,7 +324,8 @@ comfortable with. See the full range of color palettes provided by `tidyterra`
 So now it is time to blend both the hillshade layer and the altitude layer using
 some level of `alpha` on the upper layer.
 
-```{r 20221017-5-blend}
+
+```r
 
 base_plot <- hill_plot +
   # Avoid resampling with maxcell
@@ -317,16 +344,16 @@ base_plot <- hill_plot +
   )
 
 base_plot
-
-
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.png" alt="plot of chunk 20221017-5-blend" width="100%" />
 
 And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:
 
-```{r}
+
+```r
 myload_fonts <- function(fontname, family, fontdir = tempdir()) {
-  
   fontname_url <- utils::URLencode(fontname)
   fontzip <- tempfile(fileext = ".zip")
   download.file(paste0("https://fonts.google.com/download?family=", fontname_url),
@@ -363,19 +390,19 @@ myload_fonts <- function(fontname, family, fontdir = tempdir()) {
 
   return(invisible())
 }
-
-
 ```
 
 And now we theme it:
 
-```{r 20221017-6-finalplot}
+
+```r
 # Theming
 myload_fonts("Noto Serif", "notoserif")
+#> Error in unzip(fontzip, exdir = fontdir, junkpaths = TRUE): cannot open file 'C:/Users/diego/AppData/Local/Temp/RtmpANUdRh/NotoSerif-Regular.ttf': Invalid argument
 showtext::showtext_auto()
 
 # Adjust text size
-base_text_size = 30
+base_text_size <- 30
 
 base_plot +
   # Change guide
@@ -402,9 +429,11 @@ base_plot +
     plot.background = element_rect("grey97", colour = NA),
     plot.margin = margin(20, 20, 20, 20),
     plot.caption = element_text(size = base_text_size * 0.5),
-    plot.title = element_text(face = "bold", size = base_text_size*1.4),
-    plot.subtitle = element_text(margin = margin(b = 10), 
-                                 size = base_text_size),
+    plot.title = element_text(face = "bold", size = base_text_size * 1.4),
+    plot.subtitle = element_text(
+      margin = margin(b = 10),
+      size = base_text_size
+    ),
     axis.text = element_text(size = base_text_size * 0.7),
     legend.position = "bottom",
     legend.title = element_text(size = base_text_size * 0.8),
@@ -412,9 +441,9 @@ base_plot +
     legend.key = element_rect("grey50"),
     legend.spacing.x = unit(0, "pt")
   )
-
-
 ```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" alt="plot of chunk 20221017-6-finalplot" width="100%" />
 
 ## References
 
