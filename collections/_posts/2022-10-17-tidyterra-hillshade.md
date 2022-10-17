@@ -352,7 +352,8 @@ a font from Google with a custom function:
 
 
 ```r
-myload_fonts <- function(fontname, family, fontdir = tempdir()) {
+myload_fonts <- function(fontname, family,
+                         fontdir = tempdir()) {
   fontname_url <- utils::URLencode(fontname)
   fontzip <- tempfile(fileext = ".zip")
   download.file(paste0("https://fonts.google.com/download?family=", fontname_url),
@@ -375,8 +376,11 @@ myload_fonts <- function(fontname, family, fontdir = tempdir()) {
 
 
   namefile <- gsub(" ", "", fontname)
-  paths_end <- paste(namefile, paths, sep = "-") %>%
-    file.path(fontdir, .)
+  paths_end <- file.path(
+    fontdir,
+    paste(namefile, paths, sep = "-")
+  )
+
 
   names(paths_end) <- names(paths)
 
@@ -396,8 +400,7 @@ And now we theme it:
 
 ```r
 # Theming
-myload_fonts("Noto Serif", "notoserif")
-#> Error in unzip(fontzip, exdir = fontdir, junkpaths = TRUE): cannot open file 'C:/Users/diego/AppData/Local/Temp/RtmpANUdRh/NotoSerif-Regular.ttf': Invalid argument
+myload_fonts("Noto Serif", "notoserif", "~/R/googlefonts")
 showtext::showtext_auto()
 
 # Adjust text size
@@ -444,6 +447,7 @@ base_plot +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" alt="plot of chunk 20221017-6-finalplot" width="100%" />
 
+
 ## References
 
 Patterson T, Jenny B (2011). "The Development and Rationale of Cross-blended
@@ -458,4 +462,4 @@ Royé D (2022). "Hillshade effects."
 
 Hernangómez D (2022). *tidyterra: tidyverse Methods and ggplot2 Helpers for
 terra Objects*. <doi:10.5281/zenodo.6572471>
-<https://doi.org/10.5281/zenodo.6572471>,
+<https://doi.org/10.5281/zenodo.6572471>.
