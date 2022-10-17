@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Mon, 17 Oct 2022 14:33:22 +0200</pubDate>
-		<lastBuildDate>Mon, 17 Oct 2022 14:33:22 +0200</lastBuildDate>
+		<pubDate>Mon, 17 Oct 2022 15:11:18 +0200</pubDate>
+		<lastBuildDate>Mon, 17 Oct 2022 15:11:18 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -18,6 +18,443 @@
 			<link>https://dieghernan.github.io/</link>
 			<description>Personal blog of dieghernan</description>
 		</image><item>
+			<title>Hillshade, colors and marginal plots with tidyterra (I)</title>
+			<description>
+				<![CDATA[	
+ 				<h3><p>How to overlay SpatRasters</p>
+</h3>
+    		<p>8 min.</p>
+				<div><p><em>This is the first post of a series of two, showing how to overlay a SpatRaster
+on top of a Hillshade background. Next post would show how to add marginal plots
+including information of the values of the raster by longitude and latitude. See
+more posts on <a href="https://dieghernan.github.io/tags#tidyterra">tidyterra</a></em></p>
+
+<p>Using shadow effects on relief mappings is a very common technique, that allows
+to produce informative yet beautiful maps. If you are interested on this topic
+and you work with <strong>R</strong>, you would have probably seen this map:</p>
+
+<p><img src="https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.png" alt="swissmap" /></p>
+
+<p>The production of this map by <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">Timo
+Grossenbacher</a>
+has been a reference for years. However, last developments on the <strong>R</strong> package
+ecosystem (<code class="language-plaintext highlighter-rouge">terra</code>, <code class="language-plaintext highlighter-rouge">sf</code> and support of both classes on <code class="language-plaintext highlighter-rouge">ggplot2</code>, development
+of <code class="language-plaintext highlighter-rouge">ggnewscale</code>, etc.) can make even easier the task of producing such type of
+maps.</p>
+
+<p>In fact, Dominic Royé recently wrote a very detailed
+<a href="https://dominicroye.github.io/en/2022/hillshade-effects/">post</a> on creating
+shadow effects on map reliefs. On this first post of the series I would
+replicate that technique with a slight variation (e.g. not making use of
+<code class="language-plaintext highlighter-rouge">ggnewscale</code>) and I would discuss a bit on the potential choice of a color
+palette for this kind of maps.</p>
+
+<h2 id="libraries">Libraries</h2>
+
+<p>I would use the following libraries:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1">## Libraries</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyterra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Get the data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">geodata</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="get-the-data">Get the data</h2>
+
+<p>First step is to get the altitude data. I use here the package <code class="language-plaintext highlighter-rouge">geodata</code> for
+simplicity, but you can use as well <code class="language-plaintext highlighter-rouge">elevatr</code> that is much more complete.
+However <code class="language-plaintext highlighter-rouge">elevatr</code> produces the result as <code class="language-plaintext highlighter-rouge">RasterLayers</code>, so you would need to
+convert the object to <code class="language-plaintext highlighter-rouge">SpatRaster</code> with <code class="language-plaintext highlighter-rouge">terra::rast()</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Cache map data</span><span class="w">
+</span><span class="n">mydir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"~/R/mapslib/misc"</span><span class="w">
+
+</span><span class="n">r_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">elevation_30s</span><span class="p">(</span><span class="s2">"ROU"</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w">
+
+</span><span class="n">r_init</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
+</span><span class="c1">#&gt; source      : ROU_elv_msk.tif </span><span class="w">
+</span><span class="c1">#&gt; name        : ROU_elv_msk </span><span class="w">
+</span><span class="c1">#&gt; min value   :          -4 </span><span class="w">
+</span><span class="c1">#&gt; max value   :        2481</span><span class="w">
+
+</span><span class="c1"># For better handling we set here the names</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">r_init</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"alt"</span><span class="w">
+
+</span><span class="c1"># We don't want values lower than 0</span><span class="w">
+</span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r_init</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">alt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pmax</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">alt</span><span class="p">))</span><span class="w">
+
+</span><span class="n">r</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
+</span><span class="c1">#&gt; source      : memory </span><span class="w">
+</span><span class="c1">#&gt; name        :  alt </span><span class="w">
+</span><span class="c1">#&gt; min value   :    0 </span><span class="w">
+</span><span class="c1">#&gt; max value   : 2481</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We can now have a quick look to the plot with <code class="language-plaintext highlighter-rouge">tidyterra::autoplot()</code>:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Quick look</span><span class="w">
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.png" alt="plot of chunk 20221017-1-autoplot" width="100%" /></p>
+
+<h2 id="hillshading">Hillshading</h2>
+
+<p>Next step is to calculate the hillshade. Royé has a very detailed discussion
+<a href="https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade">here</a>,
+so I would not go into details. Basically what we want to create is a layer that
+approximates the potential “texture” of the surface based on the elevation and
+the sun position. This is straightforward with <code class="language-plaintext highlighter-rouge">terra::terrain()</code> and
+<code class="language-plaintext highlighter-rouge">terra::shade()</code> functions:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1">## Create hillshade effect</span><span class="w">
+
+</span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"slope"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
+</span><span class="n">aspect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"aspect"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
+</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">270</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># normalize names</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"shades"</span><span class="w">
+
+</span><span class="c1"># Hillshading, but we need a palette</span><span class="w">
+</span><span class="n">pal_greys</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="s2">"Grays"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; SpatRaster resampled to ncells = 501501</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.png" alt="plot of chunk 20221017-2-hillroye" width="100%" /></p>
+
+<p>We can also do the following hack to avoid the use of a <code class="language-plaintext highlighter-rouge">scale_fill_*</code> (via
+<code class="language-plaintext highlighter-rouge">ggplot2</code> or via <code class="language-plaintext highlighter-rouge">ggnewscale::new_scale_fill()</code>):</p>
+
+<ul>
+  <li>Select a vector of colors (in this post <code class="language-plaintext highlighter-rouge">pal_greys</code>).</li>
+  <li>Extract the values of the raster and reescale them to the length of the
+palette (<code class="language-plaintext highlighter-rouge">c(1, 1000)</code>).</li>
+  <li>Round those rescaled values to the nearest integer. So we would have a index
+indicating which value of <code class="language-plaintext highlighter-rouge">pal_greys</code> should be mapped to each cell.</li>
+  <li>Now use the parameter <code class="language-plaintext highlighter-rouge">fill</code> on the <code class="language-plaintext highlighter-rouge">geom_</code> instead of using the scale.</li>
+</ul>
+
+<p>An additional note is that <code class="language-plaintext highlighter-rouge">geom_spatraster()</code> has a parameter <code class="language-plaintext highlighter-rouge">maxcell</code> that
+would perform a spatial resampling if the raster has more cells than <code class="language-plaintext highlighter-rouge">maxcell</code>.
+This is for optimization (note that <code class="language-plaintext highlighter-rouge">terra::plot()</code> has the same setup and that
+the users often forgot about it), but we can force to plot all the cells by
+using <code class="language-plaintext highlighter-rouge">maxcell = Inf</code>. On this approach for using <code class="language-plaintext highlighter-rouge">fill</code> the value <code class="language-plaintext highlighter-rouge">maxcell</code>
+needs to be effectively set to <code class="language-plaintext highlighter-rouge">Inf</code> to ensure that the number of color values
+and the number of cells is the same.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Use a vector of colors</span><span class="w">
+
+
+</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rescale</span><span class="p">(</span><span class="n">shades</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">pal_greys</span><span class="p">))))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">index_col</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">pull</span><span class="p">(</span><span class="n">index_col</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Get cols</span><span class="w">
+</span><span class="n">vector_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
+
+</span><span class="c1"># Need to avoid resampling</span><span class="w">
+</span><span class="c1"># and dont use aes</span><span class="w">
+
+</span><span class="n">hill_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_cols</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">hill_plot</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.png" alt="plot of chunk 20221017-3-hillalt" width="100%" /></p>
+
+<h2 id="selecting-colors">Selecting colors</h2>
+
+<p>The selection of colors for elevation maps is a key aspect when designing this
+kind of visualization since colors can be confused with environmental phenomena
+(Patterson and Jenny, 2011). For example, by convention green colors are
+associated to low elevations while orange, browns and whites are associared to
+high elevations on some of the most common elevation palettes (aka hypsometric
+tints). See for example the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps">Wikipedia Topographic maps
+conventions</a>.</p>
+
+<p>This is not ideal, since greens can be confused with forests, for example, so an
+elevation map of desertic areas would not be appropiated with a
+green-brown-white color scheme.</p>
+
+<p>There is an additional point to take into account when designing color palettes
+for maps. A regular gradient would just interpolate colors assuming that the
+distance among colors is the same:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Regular gradient</span><span class="w">
+</span><span class="n">grad</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hypso.colors</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="s2">"dem_poster"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.png" alt="plot of chunk 20221017-regular-gradient" width="100%" /></p>
+
+<p>For that reason, tidyterra provides additional gradients whose colors are placed
+unevenly with the goal of providing a better understanding of the maps:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Hypso gradient</span><span class="w">
+</span><span class="n">grad_hypso</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hypso.colors2</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="s2">"dem_poster"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_hypso</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.png" alt="plot of chunk 20221017-hypso-gradient" width="100%" /></p>
+
+<p>Can you notice the difference? In the first map greens are the dominant color.
+However greens are representing a wide range of elevations (0-750 meters) that
+correspond with most of the territory. In terms of perception, we won’t be
+clearly spotting elevation differences in the center of the country, while with
+the uneven gradient greens only correspond to the range (0 - 250 meters) and the
+overall perception of elevation improves. Note that the only difference between
+plots is exclusively the color palette.</p>
+
+<p>For producing our map we are going to assess visually the result of a selection
+of palettes provided by <code class="language-plaintext highlighter-rouge">tidyterra</code>. We use here the version
+<code class="language-plaintext highlighter-rouge">tidyterra::scale_fill_hypso_tint_c()</code> instead of
+<code class="language-plaintext highlighter-rouge">tidyterra::scale_fill_hypso_c()</code> for taking advantage of the uneven color
+gradients.</p>
+
+<p>A downside of using this scales is that we need also to adjust the <code class="language-plaintext highlighter-rouge">limits</code>
+argument of the functions to make <code class="language-plaintext highlighter-rouge">ggplot2</code> aware of the limits of the value of
+the raster. This is easily achieved with <code class="language-plaintext highlighter-rouge">terra::minmax()</code> but I added an extra
+touch rounding up and down the range of values to the nearest 500.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Try some options, but we need to be aware of the values of our raster</span><span class="w">
+
+</span><span class="n">r_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">minmax</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">as.vector</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Rounded to lower and upper 500</span><span class="w">
+</span><span class="n">r_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">floor</span><span class="p">(</span><span class="n">r_limits</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">500</span><span class="p">),</span><span class="w"> </span><span class="nf">ceiling</span><span class="p">(</span><span class="n">r_limits</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">500</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">500</span><span class="w">
+
+</span><span class="c1"># And making min value to 0.</span><span class="w">
+</span><span class="n">r_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pmax</span><span class="p">(</span><span class="n">r_limits</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Compare</span><span class="w">
+</span><span class="n">minmax</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">as.vector</span><span class="p">()</span><span class="w">
+</span><span class="c1">#&gt; [1]    0 2481</span><span class="w">
+</span><span class="n">r_limits</span><span class="w">
+</span><span class="c1">#&gt; [1]    0 2500</span><span class="w">
+
+
+</span><span class="c1"># Now lets have some fun with scales from tidyterra</span><span class="w">
+
+</span><span class="n">elevt_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Create a helper function</span><span class="w">
+
+</span><span class="n">plot_pal_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">pal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">elevt_test</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">scale_fill_hypso_tint_c</span><span class="p">(</span><span class="w">
+      </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r_limits</span><span class="p">,</span><span class="w">
+      </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="w">
+    </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">ggtitle</span><span class="p">(</span><span class="n">pal</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"etopo1_hypso"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"dem_poster"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"spain"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"pakistan"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"utah_1"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"wiki-2.0_hypso"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /></p>
+
+<p>I finally selected for my plot the <code class="language-plaintext highlighter-rouge">"dem_poster"</code> palette, but this is
+completely a personal choice. You should select the palette you feel more
+comfortable with. See the full range of color palettes provided by <code class="language-plaintext highlighter-rouge">tidyterra</code>
+<a href="https://dieghernan.github.io/tidyterra/articles/palettes.html">here</a>.</p>
+
+<h2 id="final-plot">Final plot</h2>
+
+<p>So now it is time to blend both the hillshade layer and the altitude layer using
+some level of <code class="language-plaintext highlighter-rouge">alpha</code> on the upper layer.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">base_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Avoid resampling with maxcell</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_hypso_tint_c</span><span class="p">(</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r_limits</span><span class="p">,</span><span class="w">
+    </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dem_poster"</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
+    </span><span class="c1"># For the legend I use custom breaks</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+      </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">),</span><span class="w">
+      </span><span class="n">seq</span><span class="p">(</span><span class="m">750</span><span class="p">,</span><span class="w"> </span><span class="m">1500</span><span class="p">,</span><span class="w"> </span><span class="m">250</span><span class="p">),</span><span class="w">
+      </span><span class="m">2000</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">base_plot</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.png" alt="plot of chunk 20221017-5-blend" width="100%" /></p>
+
+<p>And with a bit of trickery and theming we can have our final map. First we load
+a font from Google with a custom function:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myload_fonts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">fontname</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="p">,</span><span class="w"> </span><span class="n">fontdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">fontname_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">URLencode</span><span class="p">(</span><span class="n">fontname</span><span class="p">)</span><span class="w">
+  </span><span class="n">fontzip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tempfile</span><span class="p">(</span><span class="n">fileext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".zip"</span><span class="p">)</span><span class="w">
+  </span><span class="n">download.file</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"https://fonts.google.com/download?family="</span><span class="p">,</span><span class="w"> </span><span class="n">fontname_url</span><span class="p">),</span><span class="w">
+    </span><span class="n">fontzip</span><span class="p">,</span><span class="w">
+    </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+    </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">unzip</span><span class="p">(</span><span class="n">fontzip</span><span class="p">,</span><span class="w">
+    </span><span class="n">exdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fontdir</span><span class="p">,</span><span class="w">
+    </span><span class="n">junkpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># Load fonts</span><span class="w">
+  </span><span class="n">paths</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="w">
+    </span><span class="n">regular</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regular.ttf"</span><span class="p">,</span><span class="w">
+    </span><span class="n">bold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Bold.ttf"</span><span class="p">,</span><span class="w">
+    </span><span class="n">italic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Italic.ttf"</span><span class="p">,</span><span class="w">
+    </span><span class="n">bolditalic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BoldItalic.ttf"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+
+  </span><span class="n">namefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">fontname</span><span class="p">)</span><span class="w">
+  </span><span class="n">paths_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="n">namefile</span><span class="p">,</span><span class="w"> </span><span class="n">paths</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"-"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">file.path</span><span class="p">(</span><span class="n">fontdir</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w">
+
+  </span><span class="nf">names</span><span class="p">(</span><span class="n">paths_end</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add</span><span class="p">(</span><span class="n">family</span><span class="p">,</span><span class="w">
+    </span><span class="n">regular</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paths_end</span><span class="p">[</span><span class="s2">"regular"</span><span class="p">],</span><span class="w">
+    </span><span class="n">bold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paths_end</span><span class="p">[</span><span class="s2">"bold"</span><span class="p">],</span><span class="w">
+    </span><span class="n">italic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paths_end</span><span class="p">[</span><span class="s2">"italic"</span><span class="p">],</span><span class="w">
+    </span><span class="n">bolditalic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paths_end</span><span class="p">[</span><span class="s2">"bolditalic"</span><span class="p">]</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="nf">invisible</span><span class="p">())</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>And now we theme it:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Theming</span><span class="w">
+</span><span class="n">myload_fonts</span><span class="p">(</span><span class="s2">"Noto Serif"</span><span class="p">,</span><span class="w"> </span><span class="s2">"notoserif"</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; Error in unzip(fontzip, exdir = fontdir, junkpaths = TRUE): cannot open file 'C:/Users/diego/AppData/Local/Temp/RtmpANUdRh/NotoSerif-Regular.ttf': Invalid argument</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Adjust text size</span><span class="w">
+</span><span class="n">base_text_size</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">30</span><span class="w">
+
+</span><span class="n">base_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Change guide</span><span class="w">
+  </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">guide_legend</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"   m."</span><span class="p">,</span><span class="w">
+    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"horizontal"</span><span class="p">,</span><span class="w">
+    </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+    </span><span class="n">keywidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.75</span><span class="p">,</span><span class="w">
+    </span><span class="n">keyheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w">
+    </span><span class="n">label.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+    </span><span class="n">override.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+  </span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation of Romania"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hillshade and hypsometric tint blend"</span><span class="p">,</span><span class="w">
+    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="w">
+      </span><span class="s2">"@dhernangomez using tidyterra, ggplot2, geodata R packages."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">" Data: Shuttle Radar Topography Mission (SRTM)"</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"notoserif"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="s2">"grey97"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
+    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.8</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.8</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.spacing.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unit</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"pt"</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" alt="plot of chunk 20221017-6-finalplot" width="100%" /></p>
+
+<h2 id="references">References</h2>
+
+<p>Patterson T, Jenny B (2011). “The Development and Rationale of Cross-blended
+Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. &lt;doi:10.14714/CP69.20&gt;
+<a href="https://doi.org/10.14714/CP69.20">https://doi.org/10.14714/CP69.20</a>,
+<a href="https://cartographicperspectives.org/index.php/journal/article/view/cp69-patterson-jenny">https://cartographicperspectives.org/index.php/journal/article/view/cp69-patterson-jenny</a>.</p>
+
+<p>Grossenbacher T (2016). “Beautiful thematic maps with ggplot2 (only).”
+<a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/</a>.</p>
+
+<p>Royé D (2020). “Climate animation of maximum temperatures.”
+<a href="https://dominicroye.github.io/en/2020/climate-animation-of-maximum-temperatures/">https://dominicroye.github.io/en/2020/climate-animation-of-maximum-temperatures/</a>.</p>
+
+<p>Royé D (2022). “Hillshade effects.”
+<a href="https://dominicroye.github.io/en/2022/hillshade-effects/">https://dominicroye.github.io/en/2022/hillshade-effects/</a>.</p>
+
+<p>Hernangómez D (2022). <em>tidyterra: tidyverse Methods and ggplot2 Helpers for
+terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
+<a href="https://doi.org/10.5281/zenodo.6572471">https://doi.org/10.5281/zenodo.6572471</a>,</p>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/202210_tidyterra-hillshade/</link>
+			<category>posts</category>
+		    <category>ggplot2</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Hillshade, colors and marginal plots with tidyterra (I) ]]></media:title>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202210_tidyterra-hillshade/</guid>
+      <pubDate>Mon, 17 Oct 2022 00:00:00 +0200</pubDate>
+		</item><item>
 			<title>Introducing tidyterra</title>
 			<description>
 				<![CDATA[	
