@@ -10,7 +10,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy = 'styler')
+knitr::opts_chunk$set(echo = TRUE, tidy = "styler")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
@@ -29,12 +29,15 @@ Base <-
   read_html("https://en.wikipedia.org/wiki/International_organ_donor_rates") %>%
   html_nodes(xpath = '//*[@id="mw-content-text"]/div/table[3]') %>%
   html_table() %>%
-  as.data.frame(stringsAsFactors = F,
-                fix.empty.names = F) %>%
+  as.data.frame(
+    stringsAsFactors = F,
+    fix.empty.names = F
+  ) %>%
   select(Country,
-         RateDonperMill = Number.of.deceased.donors..per.million.of.population)
+    RateDonperMill = Number.of.deceased.donors..per.million.of.population
+  )
 
-knitr::kable(head(Base, 10), format = 'markdown')
+knitr::kable(head(Base, 10), format = "markdown")
 ```
 
 Now we need to choose a [good source of maps](https://dieghernan.github.io/201906_Beautiful2/):
@@ -46,7 +49,6 @@ library(giscoR)
 # Map import from Eurostat
 WorldMap <- gisco_get_countries(resolution = 3, epsg = 3857) %>%
   select(ISO_3166_3 = ISO3_CODE)
-
 ```
 
 ## Merging all together
@@ -60,12 +62,15 @@ library(countrycode)
 Base$ISO_3166_3 <- countrycode(Base$Country, origin = "country.name", destination = "iso3c")
 
 
-DonorRate = left_join(WorldMap,
-                       Base) %>%
-  select(Country,
-         ISO_3166_3,
-         RateDonperMill)
-
+DonorRate <- left_join(
+  WorldMap,
+  Base
+) %>%
+  select(
+    Country,
+    ISO_3166_3,
+    RateDonperMill
+  )
 ```
 
 ## Make the `.svg` file
@@ -84,11 +89,13 @@ library(cartography)
 library(rsvg)
 
 # Create bbox of the world
-bbox <- st_linestring(rbind(c(-180, 90),
-                            c(180, 90),
-                            c(180, -90),
-                            c(-180, -90),
-                            c(-180, 90))) %>%
+bbox <- st_linestring(rbind(
+  c(-180, 90),
+  c(180, 90),
+  c(180, -90),
+  c(-180, -90),
+  c(-180, 90)
+)) %>%
   st_segmentize(5) %>%
   st_cast("POLYGON") %>%
   st_sfc(crs = 4326) %>%
@@ -104,7 +111,7 @@ svg(
 
 par(mar = c(0.5, 0, 0, 0))
 choroLayer(
-  DonorRate %>% st_transform("+proj=robin") ,
+  DonorRate %>% st_transform("+proj=robin"),
   var = "RateDonperMill",
   breaks = c(0, 5, 10, 20, 30, 40, 50),
   col = brewer.pal(6, "PuBu"),
@@ -118,20 +125,21 @@ choroLayer(
 
 # Bounding box
 plot(bbox,
-     add = T,
-     border = "#646464",
-     lwd = 0.2)
+  add = T,
+  border = "#646464",
+  lwd = 0.2
+)
 
 dev.off()
-
-
 ```
 
 And that's all. Our `.svg` file is ready to be included in Wikipedia.
 
 ```{r 20191016_imgpost, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
-rsvg_png("Organ donor rate per million by country gradient map (2017).svg",
-         "20191016_imgpost.png")
+rsvg_png(
+  "Organ donor rate per million by country gradient map (2017).svg",
+  "20191016_imgpost.png"
+)
 ```
 
 ![img](../assets/img/blog/20191016_imgpost.png)

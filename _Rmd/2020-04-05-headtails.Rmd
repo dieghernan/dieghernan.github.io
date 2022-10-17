@@ -42,10 +42,10 @@ which are termed "black swan events" (Taleb (2008)). This line of thinking provi
 ```{r 20200405_charheavytail, dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.show='hold'}
 library(classInt)
 
-#1. Characterization of heavy-tail distributions----
+# 1. Characterization of heavy-tail distributions----
 set.seed(1234)
-#Pareto distribution a=1 b=1.161 n=1000
-sample_par <- 1 / (1 - runif(1000)) ^ (1 / 1.161)
+# Pareto distribution a=1 b=1.161 n=1000
+sample_par <- 1 / (1 - runif(1000))^(1 / 1.161)
 opar <- par(no.readonly = TRUE)
 par(mar = c(2, 4, 3, 1), cex = 0.8)
 plot(
@@ -55,12 +55,16 @@ plot(
   xlab = "",
   main = "80/20 principle"
 )
-abline(h = quantile(sample_par, .8) ,
-       lty = 2,
-       col = "red3")
-abline(v = 0.2*length(sample_par) ,
-       lty = 2,
-       col = "darkblue")
+abline(
+  h = quantile(sample_par, .8),
+  lty = 2,
+  col = "red3"
+)
+abline(
+  v = 0.2 * length(sample_par),
+  lty = 2,
+  col = "darkblue"
+)
 legend(
   "topleft",
   legend = c("F(x): p80", "x: Top 20%"),
@@ -75,11 +79,10 @@ hist(
   xlab = "",
   main = "Histogram",
   col = "grey50",
-  border = NA, 
+  border = NA,
   probability = TRUE
 )
 par(opar)
-
 ```
 
 
@@ -128,7 +131,7 @@ opar <- par(no.readonly = TRUE)
 par(mar = c(2, 2, 3, 1), cex = 0.8)
 var <- sample_par
 thr <- .4
-brks <- c(min(var), max(var))  #Initialise with min and max
+brks <- c(min(var), max(var)) # Initialise with min and max
 
 sum_table <- data.frame(
   iter = 0,
@@ -137,17 +140,19 @@ sum_table <- data.frame(
   n_var = NA,
   n_head = NA
 )
-#Pars for chart
+# Pars for chart
 limchart <- brks
-#Iteration
+# Iteration
 for (i in 1:10) {
   mu <- mean(var)
   brks <- sort(c(brks, mu))
   head <- var[var > mu]
   prop <- length(head) / length(var)
   stopit <- prop < thr & length(head) > 1
-  sum_table = rbind(sum_table,
-                    c(i, mu, prop, length(var), length(head)))
+  sum_table <- rbind(
+    sum_table,
+    c(i, mu, prop, length(var), length(head))
+  )
   hist(
     var,
     main = paste0("Iter ", i),
@@ -174,8 +179,9 @@ for (i in 1:10) {
     lty = 2,
     cex = 0.8
   )
-  if (isFALSE(stopit))
+  if (isFALSE(stopit)) {
     break
+  }
   var <- head
 }
 par(opar)
@@ -184,9 +190,9 @@ par(opar)
 As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.  
 
 ```{r hiddtable, echo=FALSE}
-sum_table$mu <- round(sum_table$mu,4)
-sum_table$prop <- paste0(round(100*sum_table$prop,2),"%")
-knitr::kable(sum_table[!is.na(sum_table$mu),], row.names = FALSE)
+sum_table$mu <- round(sum_table$mu, 4)
+sum_table$prop <- paste0(round(100 * sum_table$prop, 2), "%")
+knitr::kable(sum_table[!is.na(sum_table$mu), ], row.names = FALSE)
 ```
 
 The resulting breaks are then defined as `breaks = c(min(var), mu1, mu2, ..., mu_n, max(var))`.
@@ -206,7 +212,7 @@ par(mar = c(2, 2, 2, 1), cex = 0.8)
 
 pal1 <- c("wheat1", "wheat2", "red3")
 # Minimum: single break
-print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 0)$brks-1)))
+print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails", thr = 0)$brks - 1)))
 plot(
   classIntervals(sample_par, style = "headtails", thr = 0),
   pal = pal1,
@@ -214,7 +220,7 @@ plot(
 )
 
 # Two breaks
-print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 0.2)$brks-1)))
+print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails", thr = 0.2)$brks - 1)))
 plot(
   classIntervals(sample_par, style = "headtails", thr = 0.2),
   pal = pal1,
@@ -222,13 +228,14 @@ plot(
 )
 
 # Default breaks: 0.4
-print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails")$brks-1)))
+print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails")$brks - 1)))
 plot(classIntervals(sample_par, style = "headtails"),
-     pal = pal1,
-     main = "thr = Default")
+  pal = pal1,
+  main = "thr = Default"
+)
 
 # Maximum breaks
-print(paste("number of breaks",length(classIntervals(sample_par, style = "headtails", thr = 1)$brks-1)))
+print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails", thr = 1)$brks - 1)))
 plot(
   classIntervals(sample_par, style = "headtails", thr = 1),
   pal = pal1,
@@ -253,23 +260,23 @@ Let's have a look to the Top 10 values and the distribution of the variable `tot
 ```{r 20200405_summspdata, fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
 
 # Top10
-knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE),c("name","totcon")],10))
+knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")], 10))
 
 opar <- par(no.readonly = TRUE)
 par(mar = c(4, 4, 3, 1), cex = 0.8)
 hist(afcon$totcon,
-     n = 20,
-     main = "Histogram",
-     xlab = "totcon",
-     col = "grey50",
-     border = NA, )
+  n = 20,
+  main = "Histogram",
+  xlab = "totcon",
+  col = "grey50",
+  border = NA,
+)
 plot(
   density(afcon$totcon),
   main = "Distribution",
   xlab = "totcon",
 )
 par(opar)
-
 ```
 
 The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the *"far more small things than large things"* principle.  
@@ -281,14 +288,18 @@ Applying the three aforementioned methods to break the data:
 ```{r 20200405_breaksample,fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
 brks_ht <- classIntervals(afcon$totcon, style = "headtails")
 print(brks_ht)
-#Same number of classes for "fisher"
+# Same number of classes for "fisher"
 nclass <- length(brks_ht$brks) - 1
-brks_fisher <-  classIntervals(afcon$totcon, style = "fisher",
-                               n = nclass)
+brks_fisher <- classIntervals(afcon$totcon,
+  style = "fisher",
+  n = nclass
+)
 print(brks_fisher)
 
-brks_quantile <- classIntervals(afcon$totcon, style = "quantile",
-                                n = nclass)
+brks_quantile <- classIntervals(afcon$totcon,
+  style = "quantile",
+  n = nclass
+)
 print(brks_quantile)
 
 pal1 <- c("wheat1", "wheat2", "red3")
@@ -304,29 +315,33 @@ It is observed that the top three classes of `headtails` enclose 5 observations,
 
 The next plot compares a continuous distribution of `totcon` re-escalated to a range of `[1,nclass]` versus the distribution across breaks for each style. The continuous distribution has been offset by -0.5 in order to align the continuous and the discrete distributions.
 ```{r 20200405_benchmarkbreaks, fig.show='hold', fig.width=7,dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
-#Helper function to reescale values
+# Helper function to reescale values
 help_reescale <- function(x, min = 1, max = 10) {
   r <- (x - min(x)) / (max(x) - min(x))
   r <- r * (max - min) + min
   return(r)
 }
 afcon$ecdf_class <- help_reescale(afcon$totcon,
-                                  min = 1 - 0.5,
-                                  max = nclass - 0.5)
-afcon$ht_breaks <-  cut(afcon$totcon,
-                        brks_ht$brks,
-                        labels = FALSE,
-                        include.lowest = TRUE)
+  min = 1 - 0.5,
+  max = nclass - 0.5
+)
+afcon$ht_breaks <- cut(afcon$totcon,
+  brks_ht$brks,
+  labels = FALSE,
+  include.lowest = TRUE
+)
 
-afcon$fisher_breaks <-  cut(afcon$totcon,
-                            brks_fisher$brks,
-                            labels = FALSE,
-                            include.lowest = TRUE)
+afcon$fisher_breaks <- cut(afcon$totcon,
+  brks_fisher$brks,
+  labels = FALSE,
+  include.lowest = TRUE
+)
 
-afcon$quantile_break <-  cut(afcon$totcon,
-                             brks_quantile$brks,
-                             labels = FALSE,
-                             include.lowest = TRUE)
+afcon$quantile_break <- cut(afcon$totcon,
+  brks_quantile$brks,
+  labels = FALSE,
+  include.lowest = TRUE
+)
 
 opar <- par(no.readonly = TRUE)
 par(mar = c(4, 4, 1, 1), cex = 0.8)
@@ -340,11 +355,14 @@ plot(
 lines(density(afcon$ht_breaks), col = "darkblue", lty = 2)
 lines(density(afcon$fisher_breaks), col = "limegreen", lty = 2)
 lines(density(afcon$quantile_break),
-      col = "red3",
-      lty = 2)
+  col = "red3",
+  lty = 2
+)
 legend("topright",
-       legend = c("Continuous", "headtails",
-                  "fisher", "quantile"),
+  legend = c(
+    "Continuous", "headtails",
+    "fisher", "quantile"
+  ),
   col = c("black", "darkblue", "limegreen", "red3"),
   lwd = c(2, 1, 1, 1),
   lty = c(1, 2, 2, 2),
@@ -368,15 +386,17 @@ library(cartography)
 
 opar <- par(no.readonly = TRUE)
 
-par(mfrow = c(2, 2),
-    mar = c(1, 1, 1, 1),
-    bg = "white")
+par(
+  mfrow = c(2, 2),
+  mar = c(1, 1, 1, 1),
+  bg = "white"
+)
 africa <- gisco_get_countries(resolution = 60, region = "Africa", epsg = 3857)
 
 afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
 afcon.sf <- st_transform(afcon.sf, st_crs(africa))
 # afcon.sf <- st_join(africa[, "admin"], afcon.sf)
-afcon.sf <- afcon.sf[order(afcon.sf$totcon),]
+afcon.sf <- afcon.sf[order(afcon.sf$totcon), ]
 
 
 
@@ -436,7 +456,6 @@ propSymbolsTypoLayer(
 )
 title(main = "Head Tails")
 par(opar)
-
 ```
 
 

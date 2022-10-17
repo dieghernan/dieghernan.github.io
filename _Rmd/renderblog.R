@@ -49,6 +49,7 @@ diegpost <- function(file) {
 
 
 
+
 #Render 2019-04-27-Using-CountryCodes ----
 
 #diegpost("2019-04-27-Using-CountryCodes")
@@ -66,8 +67,10 @@ diegpost <- function(file) {
 # diegpost("2020-04-05-headtails")
 # diegpost("2022-03-03-insetmaps")
 
-diegpost("2022-05-25-tidyterra")
+# diegpost("2022-05-25-tidyterra")
+diegpost("2022-10-17-tidyterra-hillshade")
 
+knitr::plot_crop("./assets/img/blog/20221017-6-finalplot-1.png")
 
 file="2022-03-03-insetmaps"
 

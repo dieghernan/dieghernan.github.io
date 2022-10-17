@@ -17,8 +17,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
-
-
 ```
 
 On this post I would show how to produce different filling patterns that could be added over your shapefiles with the `cartography` package.
@@ -35,8 +33,7 @@ library(cartography)
 
 
 ```{r 20191212_dotex, message=FALSE, warning=FALSE, dpi=90, fig.width=200/90, fig.height=350/90,  paged.print=FALSE, tidy='styler', results='hide'}
-DE  <- gisco_get_countries(country = "Germany", epsg=3857)
-
+DE <- gisco_get_countries(country = "Germany", epsg = 3857)
 ```
 
 
@@ -45,9 +42,11 @@ Let's see how it works.
 ```{r 20191212_showfun, warning=FALSE, message=FALSE, tidy='styler', fig.height=500/90,fig.width=500/90, dpi=90 }
 
 
-par(mfrow = c(3, 4),
-    mar = c(1, 1, 1, 1),
-    cex = 0.5)
+par(
+  mfrow = c(3, 4),
+  mar = c(1, 1, 1, 1),
+  cex = 0.5
+)
 hatchedLayer(DE, "dot")
 title("dot")
 hatchedLayer(DE, "text", txt = "Y")
@@ -116,12 +115,13 @@ hatchedLayer(
   add = T
 )
 hatchedLayer(DE, "zigzag", lwd = 2, col = "red")
-plot(st_geometry(DE), border =  "orange", lwd=2)
+plot(st_geometry(DE), border = "orange", lwd = 2)
 hatchedLayer(DE,
-             "left2right",
-             density = 2,
-             col = "orange",
-             add = T)
+  "left2right",
+  density = 2,
+  col = "orange",
+  add = T
+)
 ```
 
 ## Adding legends: the `legendHatched` function
@@ -142,7 +142,7 @@ Note that is also possible to create solid legends, by setting `col` and `ptrn.b
 
 
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
-plot(st_geometry(DE)) #Null geometry
+plot(st_geometry(DE)) # Null geometry
 legendHatched(
   title.txt = "Example 1",
   categ = c("a", "b"),
@@ -191,27 +191,36 @@ I hope that you find this functions useful. Enjoy and nice mapping!
 ```{r 20191212_imgpost, echo=FALSE, fig.align='center', fig.height=500/90, fig.width=474/90, warning=FALSE, dpi=90, results='hide', tidy='styler', message=FALSE}
 library(cartography)
 
-mtq <-  st_read(system.file("gpkg/mtq.gpkg", package = "cartography"))
-typoLayer(mtq,  var = "STATUS",  legend.pos = "n",
-          legend.values.order = c("Prefecture","Sub-prefecture",
-                                  "Simple municipality"),
-          col = c("grey10", "grey50", "grey80"),border = NA)
-mtq$Patts = cut(mtq$MED,c(-Inf,15700,Inf), labels=FALSE)
-hatchedLayer(mtq[mtq$Patts == 1,],"left2right",
-             density = 2,  col = "white",  add = TRUE,  pch = 3,  cex = 0.6)
-hatchedLayer(mtq[mtq$Patts == 2, ],"left2right",
-             density = 4, col = "white", add = TRUE)
-legendHatched(pos = "bottomleft",
-              cex = 1.5,
-              values.cex = 0.8,
-              title.txt = "Median Income\n(in thousand of euros)",
-              categ = c("11.9 - 15.7","14.7 - 21.8",
-                        "Prefecture", "Sub-prefecture",
-                        "Simple municipality"),
-              patterns = c("left2right"), density = c(1, 2),
-              col = c(rep("black", 2), "grey10", "grey50", "grey80"),
-              ptrn.bg = c(rep("white", 2), "grey10", "grey50", "grey80"),
-              pch = 3)
+mtq <- st_read(system.file("gpkg/mtq.gpkg", package = "cartography"))
+typoLayer(mtq,
+  var = "STATUS", legend.pos = "n",
+  legend.values.order = c(
+    "Prefecture", "Sub-prefecture",
+    "Simple municipality"
+  ),
+  col = c("grey10", "grey50", "grey80"), border = NA
+)
+mtq$Patts <- cut(mtq$MED, c(-Inf, 15700, Inf), labels = FALSE)
+hatchedLayer(mtq[mtq$Patts == 1, ], "left2right",
+  density = 2, col = "white", add = TRUE, pch = 3, cex = 0.6
+)
+hatchedLayer(mtq[mtq$Patts == 2, ], "left2right",
+  density = 4, col = "white", add = TRUE
+)
+legendHatched(
+  pos = "bottomleft",
+  cex = 1.5,
+  values.cex = 0.8,
+  title.txt = "Median Income\n(in thousand of euros)",
+  categ = c(
+    "11.9 - 15.7", "14.7 - 21.8",
+    "Prefecture", "Sub-prefecture",
+    "Simple municipality"
+  ),
+  patterns = c("left2right"), density = c(1, 2),
+  col = c(rep("black", 2), "grey10", "grey50", "grey80"),
+  ptrn.bg = c(rep("white", 2), "grey10", "grey50", "grey80"),
+  pch = 3
+)
 plot(st_geometry(st_union(mtq)), add = TRUE)
-
 ```

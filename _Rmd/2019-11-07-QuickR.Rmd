@@ -16,7 +16,6 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
-
 ```
 
 
@@ -39,14 +38,14 @@ library(rnaturalearth)
 I would present here an alternative version of [Drawing beautiful maps programmatically with R, sf and ggplot2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html), so the bulk of the detail can be found there. I would focus only in the `plot()`side.
 
 ```{r 20191108_main, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
-world <- ne_countries(scale = 'medium', returnclass = 'sf')
+world <- ne_countries(scale = "medium", returnclass = "sf")
 USA <- subset(world, admin == "United States of America")
 
 # Plot mainland USA----
 par(mar = c(0, 0, 0, 0))
 plot(
   st_geometry(world %>%
-                st_transform(2163)),
+    st_transform(2163)),
   xlim = c(-2500000, 2500000),
   ylim = c(-2300000, 730000),
   col = "#F6E1B9",
@@ -59,20 +58,19 @@ plot(
   border = "black",
   add = T
 )
-
 ```
 
 ```{r 20191108_Alaska, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
 # Plot Alaska----
 plot(
   st_geometry(world %>%
-                st_transform(3467)),
+    st_transform(3467)),
   xlim = c(-2400000, 1600000),
   ylim = c(200000, 2500000),
   col = "#F6E1B9",
   border = "#646464",
   bg = "#C6ECFF"
-  )
+)
 plot(
   st_geometry(USA) %>% st_transform(3467),
   col = "#FEFEE9",
@@ -85,20 +83,19 @@ plot(
 # Plot Hawaii----
 plot(
   st_geometry(world %>%
-                st_transform(4135)),
+    st_transform(4135)),
   xlim = c(-161, -154),
   ylim = c(18, 23),
   col = "#F6E1B9",
   border = "#646464",
   bg = "#C6ECFF"
-  )
+)
 plot(
   st_geometry(USA) %>% st_transform(4135),
   col = "#FEFEE9",
   border = "black",
   add = T
 )
-
 ```
 
 ## Insetting
@@ -114,7 +111,7 @@ So being `x1` and `y1` the starting points and `x2`, `y2` the final points, we j
 par(mar = c(0, 0, 0, 0))
 plot(
   st_geometry(world %>%
-                st_transform(2163)),
+    st_transform(2163)),
   xlim = c(-2500000, 2500000),
   ylim = c(-2300000, 730000),
   col = "#F6E1B9",
@@ -128,11 +125,13 @@ plot(
   add = T
 )
 # Alaska
-par(fig = c(0.01, 0.28, 0.01, 0.33),
-    new = TRUE)
+par(
+  fig = c(0.01, 0.28, 0.01, 0.33),
+  new = TRUE
+)
 plot(
   st_geometry(world %>%
-                st_transform(3467)),
+    st_transform(3467)),
   xlim = c(-2400000, 1600000),
   ylim = c(200000, 2500000),
   col = "#F6E1B9",
@@ -148,12 +147,14 @@ plot(
 box(which = "figure", lwd = 1)
 
 # Hawaii
-par(fig = c(0.29, 0.45, 0.01, 0.15),
-    new = TRUE)
+par(
+  fig = c(0.29, 0.45, 0.01, 0.15),
+  new = TRUE
+)
 plot(
   st_geometry(world %>%
-                st_transform(4135)),
-  xlim = c(-161,-154),
+    st_transform(4135)),
+  xlim = c(-161, -154),
   ylim = c(18, 23),
   col = "#F6E1B9",
   border = "#646464",
