@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Mon, 17 Oct 2022 15:11:18 +0200</pubDate>
-		<lastBuildDate>Mon, 17 Oct 2022 15:11:18 +0200</lastBuildDate>
+		<pubDate>Mon, 24 Oct 2022 16:53:23 +0200</pubDate>
+		<lastBuildDate>Mon, 24 Oct 2022 16:53:23 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -336,7 +336,8 @@ some level of <code class="language-plaintext highlighter-rouge">alpha</code> on
 <p>And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myload_fonts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">fontname</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="p">,</span><span class="w"> </span><span class="n">fontdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myload_fonts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">fontname</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="p">,</span><span class="w">
+                         </span><span class="n">fontdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="n">fontname_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">utils</span><span class="o">::</span><span class="n">URLencode</span><span class="p">(</span><span class="n">fontname</span><span class="p">)</span><span class="w">
   </span><span class="n">fontzip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tempfile</span><span class="p">(</span><span class="n">fileext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".zip"</span><span class="p">)</span><span class="w">
   </span><span class="n">download.file</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"https://fonts.google.com/download?family="</span><span class="p">,</span><span class="w"> </span><span class="n">fontname_url</span><span class="p">),</span><span class="w">
@@ -359,8 +360,11 @@ a font from Google with a custom function:</p>
 
 
   </span><span class="n">namefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">fontname</span><span class="p">)</span><span class="w">
-  </span><span class="n">paths_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="n">namefile</span><span class="p">,</span><span class="w"> </span><span class="n">paths</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"-"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-    </span><span class="n">file.path</span><span class="p">(</span><span class="n">fontdir</span><span class="p">,</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w">
+  </span><span class="n">paths_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="w">
+    </span><span class="n">fontdir</span><span class="p">,</span><span class="w">
+    </span><span class="n">paste</span><span class="p">(</span><span class="n">namefile</span><span class="p">,</span><span class="w"> </span><span class="n">paths</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"-"</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
 
   </span><span class="nf">names</span><span class="p">(</span><span class="n">paths_end</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span><span class="w">
 
@@ -378,8 +382,7 @@ a font from Google with a custom function:</p>
 <p>And now we theme it:</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Theming</span><span class="w">
-</span><span class="n">myload_fonts</span><span class="p">(</span><span class="s2">"Noto Serif"</span><span class="p">,</span><span class="w"> </span><span class="s2">"notoserif"</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt; Error in unzip(fontzip, exdir = fontdir, junkpaths = TRUE): cannot open file 'C:/Users/diego/AppData/Local/Temp/RtmpANUdRh/NotoSerif-Regular.ttf': Invalid argument</span><span class="w">
+</span><span class="n">myload_fonts</span><span class="p">(</span><span class="s2">"Noto Serif"</span><span class="p">,</span><span class="w"> </span><span class="s2">"notoserif"</span><span class="p">,</span><span class="w"> </span><span class="s2">"~/R/googlefonts"</span><span class="p">)</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
 
 </span><span class="c1"># Adjust text size</span><span class="w">
@@ -429,28 +432,23 @@ a font from Google with a custom function:</p>
 <h2 id="references">References</h2>
 
 <p>Patterson T, Jenny B (2011). “The Development and Rationale of Cross-blended
-Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. &lt;doi:10.14714/CP69.20&gt;
-<a href="https://doi.org/10.14714/CP69.20">https://doi.org/10.14714/CP69.20</a>,
-<a href="https://cartographicperspectives.org/index.php/journal/article/view/cp69-patterson-jenny">https://cartographicperspectives.org/index.php/journal/article/view/cp69-patterson-jenny</a>.</p>
+Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. <a href="https://doi.org/10.14714/CP69.20">https://doi.org/10.14714/CP69.20</a></p>
 
 <p>Grossenbacher T (2016). “Beautiful thematic maps with ggplot2 (only).”
 <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/</a>.</p>
-
-<p>Royé D (2020). “Climate animation of maximum temperatures.”
-<a href="https://dominicroye.github.io/en/2020/climate-animation-of-maximum-temperatures/">https://dominicroye.github.io/en/2020/climate-animation-of-maximum-temperatures/</a>.</p>
 
 <p>Royé D (2022). “Hillshade effects.”
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/">https://dominicroye.github.io/en/2022/hillshade-effects/</a>.</p>
 
 <p>Hernangómez D (2022). <em>tidyterra: tidyverse Methods and ggplot2 Helpers for
 terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
-<a href="https://doi.org/10.5281/zenodo.6572471">https://doi.org/10.5281/zenodo.6572471</a>,</p>
+<a href="https://doi.org/10.5281/zenodo.6572471">https://doi.org/10.5281/zenodo.6572471</a>.</p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/202210_tidyterra-hillshade/</link>
 			<category>posts</category>
-		    <category>ggplot2</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Hillshade, colors and marginal plots with tidyterra (I) ]]></media:title>
+		    <category>ggplot2</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Hillshade, colors and marginal plots with tidyterra (I) ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202210_tidyterra-hillshade/</guid>
       <pubDate>Mon, 17 Oct 2022 00:00:00 +0200</pubDate>
@@ -757,7 +755,7 @@ Image" /></p>
 iconic status in the ’80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/en/7/70/Unknown_Pleasures_Joy_Division_LP_sleeve.jpg" alt="Joy Division - Unknown pleasure
+<p><img src="https://upload.wikimedia.org/wikipedia/en/3/33/Unknown_Pleasures_Spotify.jpg" alt="Joy Division - Unknown pleasure
 cover" /></p>
 
 <p>If you are interested on knowing more about this fascinating history of science
