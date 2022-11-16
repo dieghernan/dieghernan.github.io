@@ -3,6 +3,7 @@ name: build-chulapa-gh-pages
 on:
   push:
     branches:
+      - master
       - dev
   workflow_dispatch:
 
@@ -10,7 +11,7 @@ jobs:
   build-chulapa-gh-pages:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     # Use GitHub Actions' cache to shorten build times and decrease load on servers
     - uses: actions/cache@v2
