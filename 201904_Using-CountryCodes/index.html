@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-11-20 15:58:43 +0100 -->
+    <!-- Page build 2022-11-23 23:32:56 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -125,6 +125,8 @@
   <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" />
     <!-- Custom css -->
   <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" />
+    <!-- Chulape Deferred (lazy) loading of YouTube videos, to improve page speed -->
+    <script src="https://dieghernan.github.io/assets/js/ch_ytdefer/ch_ytdefer.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
 <script>
@@ -579,6 +581,8 @@ s.setAttribute('data-timestamp', +new Date());
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 	<script src="https://dieghernan.github.io/assets/js/clipboardrouge.js"></script>
+	<!-- Chulape Deferred (lazy) loading of YouTube videos, to improve page speed -->
+	<script>window.addEventListener('load', ch_ytdefer_setup);</script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <!-- end custom bottom scripts -->
 	</body>
