@@ -1,7 +1,7 @@
 ---
 title: spain-munic-bot 
 subtitle: A twitter bot written in R.
-header_img: "https://dieghernan.github.io/spain-munic-bot/assets/img/munic-streets.png"
+header_img: "https://dieghernan.github.io/spain-munic-bot/assets/img/sample.png"
 date: 2021-01-29
 tags: [project,R,maps,twitter]
 permalink: /projects/spain-munic-bot/
