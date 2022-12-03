@@ -7,7 +7,7 @@ header_img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/s
 project_links:
     - url: https://github.com/dieghernan/TextWatchClima
       icon: fab fa-github
-      label: See on Github
+      label: See on GitHub
 permalink: /projects/TextWatchClima/
 excerpt: TextWatch Clima upgrades the classic TextWatch watchface adding a bunch of new capabilities. 
 ---

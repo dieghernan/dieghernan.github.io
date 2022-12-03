@@ -8,7 +8,7 @@ tags: [project,pebble,watchface,javascript,C]
 project_links:
     - url: https://github.com/dieghernan/Sfera
       icon: fab fa-github
-      label: See on Github
+      label: See on GitHub
 excerpt: Sfera for Pebble Time Round is a highly customizable watchface that gets the most of the smartwatch capabilities. Set your preferences and enjoy this beautifully designed watchface.
 ---                                                                 
 

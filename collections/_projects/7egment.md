@@ -8,7 +8,7 @@ permalink: /projects/7egment/
 project_links:
     - url: https://github.com/dieghernan/7egment
       icon: fab fa-github
-      label: See on Github
+      label: See on GitHub
 excerpt: 7egment is a customizable watchface based on the classic 7-segment display that adds your location and the current weather information in the language used on your watch and smartphone.
 ---
 

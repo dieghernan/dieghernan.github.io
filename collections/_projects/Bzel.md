@@ -8,7 +8,7 @@ permalink: /projects/Bzel/
 project_links:
     - url: https://github.com/dieghernan/Bzel
       icon: fab fa-github
-      label: See on Github
+      label: See on GitHub
 excerpt: Bzel intregates the bezel into your watchface. Display minutes as digits, as a moving dot or as a fill in the bezel
 ---
 

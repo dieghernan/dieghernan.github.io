@@ -8,7 +8,7 @@ date: 2019-04-11
 project_links:
     - url: https://github.com/dieghernan/Country-Codes-and-International-Organizations
       icon: fab fa-github
-      label: See on Github
+      label: See on GitHub
 show_toc: true
 ---
 
