@@ -6,7 +6,7 @@ header_img: /assets/img/site/banner.png
 ---
 
 ## <a href="./blog" class="text-dark">Recent posts</a>
-{: .display-3 .mb-5 }
+{: .mb-5 }
 
 
 {% include_cached components/indexcards.html cacheddocs=site.posts cachedlimit=3 %}
@@ -20,7 +20,7 @@ header_img: /assets/img/site/banner.png
 
 
 ## <a href="./projects" class="text-dark">Projects</a>
-{: .display-3 .mb-5 }
+{: .mb-5 }
 
 {%- assign alldocs = site.documents | 
                           where_exp: "item", "item.collection == 'projects'" | sort: date | reverse -%}
