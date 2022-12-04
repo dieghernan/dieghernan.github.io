@@ -124,8 +124,11 @@ collections_dir     : collections
 collections:
   projects:
     output: true
-    permalink: /projects/:name/
-permalink: /:year:month_:title/
+    permalink: /projects/:name:output_ext
+  posts: 
+    output: true
+    permalink: /:year:month_:title/
+permalink: /:title:output_ext
 defaults:
   -
     scope:
