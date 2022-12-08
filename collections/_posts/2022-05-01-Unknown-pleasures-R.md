@@ -6,7 +6,6 @@ tags:
 - rstats
 - rspatial
 - maps
-- sf
 - ggplot2
 - ggridges
 - terra
