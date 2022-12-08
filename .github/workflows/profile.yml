@@ -7,7 +7,7 @@ on:
 
 name: jekyll-profile
 jobs:
-  algolia-search:
+  jekyll-profile:
     runs-on: ubuntu-latest
     env:
       JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,9 +25,12 @@ jobs:
         echo "::group::Jekyll folder"
         echo "Building Jekyll from: $PWD"
         echo "::endgroup::"
-        # Updating Algolia Index
-        echo "::group::Profiling Algolia Index"
+        # Updating Bundle
+        echo "::group::Bundle Update"
         bundle update
-        bundle exec jekyll build --profile
+        echo "::endgroup::"
+        # Jekyll Profile
+        echo "::group::Jekyll Profile"
+        bundle exec jekyll build --profile >> $GITHUB_STEP_SUMMARY
         echo "::endgroup::"
       shell: bash
