@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch: 
+
+name: jekyll-profile
+jobs:
+  algolia-search:
+    runs-on: ubuntu-latest
+    env:
+      JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        
+    - name: Run jekyll-profile
+      run: |
+        # Run Jekyll Profile
+        # Bundle install
+        echo "::group::Jekyll folder"
+        echo "Building Jekyll from: $PWD"
+        echo "::endgroup::"
+        # Updating Algolia Index
+        echo "::group::Profiling Algolia Index"
+        bundle update
+        bundle exec jekyll build --profile
+        echo "::endgroup::"
+      shell: bash
