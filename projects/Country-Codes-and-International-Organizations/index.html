@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-09 13:57:02 +0100 -->
+    <!-- Page build 2022-12-09 21:36:33 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -27,6 +27,8 @@
              "https://fosstodon.org/@dhernangomez"
             ,
              "https://github.com/dieghernan/"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
             ,
              "https://stackoverflow.com/users/7877917/dieghernan"
             ]
@@ -85,6 +87,7 @@
   "https://twitter.com/dhernangomez",
   "https://fosstodon.org/@dhernangomez",
   "https://github.com/dieghernan/",
+  "https://orcid.org/0000-0001-8457-4658",
   "https://stackoverflow.com/users/7877917/dieghernan"
   ]
 }
@@ -151,7 +154,7 @@
 <meta name="theme-color" content="#000000">
 <!-- end custom head snippets --></head>
 <body class="d-flex flex-column">
-	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa">
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-labelledby="primary-navigation">
 	<div class="container-fluid mx-md-2">
 			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -209,7 +212,9 @@
 		<div class="row pt-2">
 			<aside class="col-lg-2 mt-lg-3 small"></aside>
 			<article id="maincontent" class="col-lg-8 mt-3">
+            <nav aria-labelledby="table-of-contents">
 			<ul class="chulapa-toc-wrapper list-group mb-5 mx-3 mx-lg-5" id="toc"><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#a-country-codes-csv">A. Country Codes <code class="language-plaintext highlighter-rouge">.csv</code></a><ul><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#codes-included">Codes included</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#other-information-included">Other information included</a></li></ul></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#b-international-organizations-csv">B. International Organizations <code class="language-plaintext highlighter-rouge">.csv</code></a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#c-full-json-file-json">C. Full json file <code class="language-plaintext highlighter-rouge">.json</code></a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#d-data-sources">D. Data sources</a></li></ul>
+			</nav>
 			 <p>Complete database of countries and territories, their different country codes under common standards (ISO-3166, GEC <em>(Formerly FIPS</em>), M49 (<em>UN</em>), STANAG (<em>NATO</em>), NUTS (<em>EU</em>), etc.) and their membership in different international organizations.</p>
 <p><sup><em>Note that blanks are presented as</em> <code class="language-plaintext highlighter-rouge">""</code> <em>instead of</em> <code class="language-plaintext highlighter-rouge">NA</code> <em>since ISO-3166-ALPHA 2 for Namibia is</em> <strong>NA</strong>.</sup></p>
 <p><strong><a href="https://dieghernan.github.io/201904_Using-CountryCodes/">vignette: Using Country Codes</a></strong></p>
@@ -437,7 +442,7 @@
    <div class="col-lg-8 offset-lg-2">
      <hr>
      <h5><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></h5>
-     <div class="card-group">
+     <nav class="card-group" aria-labelledby="related-articles">
         <article class="card  border chulapa-related">
          <div class="card-body">
          <h6 class="card-title"><a href="https://dieghernan.github.io/projects/corona-atlas/" class="chulapa-text-body-color">Corona Atlas</a></h6>
@@ -461,7 +466,7 @@
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2020-04-04T00:00:00+02:00">april 04, 2020</time></small>
    </div>
- </article></div>
+ </article></nav>
    </div>
  </div>
 </div><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
