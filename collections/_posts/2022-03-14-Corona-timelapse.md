@@ -26,6 +26,8 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/rodrihgh"
+    - url: https://orcid.org/0000-0002-1284-4951
+      icon: fa-brands fa-orcid
 output: 
   md_document:
   variant: gfm
