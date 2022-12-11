@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-10 00:08:27 +0100 -->
+    <!-- Page build 2022-12-11 16:30:29 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -124,8 +124,11 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <!-- Theme css (Bootstrap included) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Mona-Sans/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Hubot-Sans/Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js" as="script" />
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
   <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
@@ -152,8 +155,8 @@
 <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#000000">
 <!-- end custom head snippets --></head>
-<body class="d-flex flex-column">
-	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-labelledby="primary-navigation">
+<body class="d-flex flex-column" id="body">
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
 			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -224,6 +227,19 @@
 				</div>
 </aside>
 			<article id="maincontent" class="col-lg-8 mt-3">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar d-none chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="navbar-brand" href="#">Hillshade, colors and marginal plots with tidyterra (I)</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#libraries" class="nav-link">Libraries</a></li><li class="nav-item nav d-block"><a href="#get-the-data" class="nav-link">Get the data</a></li><li class="nav-item nav d-block"><a href="#hillshading" class="nav-link">Hillshading</a></li><li class="nav-item nav d-block"><a href="#selecting-colors" class="nav-link">Selecting colors</a></li><li class="nav-item nav d-block"><a href="#final-plot" class="nav-link">Final plot</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+		</nav>   
+	</div>
 			<p><em>This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a Hillshade background. Next post would show how to add marginal plots
 including information of the values of the raster by longitude and latitude. See
@@ -600,31 +616,31 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
    <div class="col-lg-8 offset-lg-2">
      <hr>
      <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
-     <nav class="card-group" aria-labelledby="related-articles">
-        <article class="card  border chulapa-related">
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">Introducing tidyterra</a></p>
          <p class="card-text"><small>Easily work and ggplot SpatRasters</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-05-25T00:00:00+02:00">may 25, 2022</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" class="chulapa-text-body-color">Unknown pleasures with R</a></p>
          <p class="card-text"><small>Joyplot elevation maps with ggridges and terra</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-05-01T00:00:00+02:00">may 01, 2022</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202201_maps-flags/" class="chulapa-text-body-color">Beautiful Maps with R (IV): Fun with flags revisited</a></p>
          <p class="card-text"><small>Any picture as a basemap</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-01-28T00:00:00+01:00">january 28, 2022</time></small>
    </div>
- </article></nav>
+ </div></nav>
    </div>
  </div>
 </div><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
@@ -650,7 +666,7 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
 	   <p class="page-link chulapa-label"></p>
 	 </li>
    <li class="page-item text-right ml-0 invisible">
-      <a class="page-link border-0 px-4" href="">
+      <a class="page-link border-0 px-4" href="#">
 	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
    </li>
  </ul>
@@ -723,7 +739,7 @@ s.setAttribute('data-timestamp', +new Date());
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <!-- end custom bottom scripts -->
 	</body>

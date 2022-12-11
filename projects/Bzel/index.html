@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-10 00:08:27 +0100 -->
+    <!-- Page build 2022-12-11 16:30:29 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -124,8 +124,11 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <!-- Theme css (Bootstrap included) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Mona-Sans/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Hubot-Sans/Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js" as="script" />
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
   <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
@@ -152,8 +155,8 @@
 <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#000000">
 <!-- end custom head snippets --></head>
-<body class="d-flex flex-column">
-	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-labelledby="primary-navigation">
+<body class="d-flex flex-column" id="body">
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
 			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -306,31 +309,31 @@
    <div class="col-lg-8 offset-lg-2">
      <hr>
      <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
-     <nav class="card-group" aria-labelledby="related-articles">
-        <article class="card  border chulapa-related">
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/projects/Sfera/" class="chulapa-text-body-color">Sfera</a></p>
          <p class="card-text"><small>A Pebble <i class="fas fa-skull-crossbones"></i> project</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2017-03-14T00:00:00+01:00">march 14, 2017</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/projects/TextWatchClima/" class="chulapa-text-body-color">TextWatch Clima</a></p>
          <p class="card-text"><small>A Pebble <i class="fas fa-skull-crossbones"></i> project</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2017-02-16T00:00:00+01:00">february 16, 2017</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/projects/7egment/" class="chulapa-text-body-color">7egment</a></p>
          <p class="card-text"><small>A Pebble <i class="fas fa-skull-crossbones"></i> project</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2017-05-17T00:00:00+02:00">may 17, 2017</time></small>
    </div>
- </article></nav>
+ </div></nav>
    </div>
  </div>
 </div><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
@@ -409,7 +412,7 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <!-- end custom bottom scripts -->
 	</body>

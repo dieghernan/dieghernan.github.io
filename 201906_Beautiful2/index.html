@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-10 00:08:27 +0100 -->
+    <!-- Page build 2022-12-11 16:30:29 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -124,8 +124,11 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <!-- Theme css (Bootstrap included) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Mona-Sans/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Hubot-Sans/Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js" as="script" />
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
   <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
@@ -152,8 +155,8 @@
 <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#000000">
 <!-- end custom head snippets --></head>
-<body class="d-flex flex-column">
-	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-labelledby="primary-navigation">
+<body class="d-flex flex-column" id="body">
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
 			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -227,6 +230,19 @@
 				</div>
 </aside>
 			<article id="maincontent" class="col-lg-8 mt-3">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar d-none chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="navbar-brand" href="#">Beautiful Maps with R (II): Fun with flags</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required R packages</a></li><li class="nav-item nav d-block"><a href="#choosing-a-good-source-for-our-shape" class="nav-link">Choosing a good source for our shape</a></li><li class="nav-item nav d-block"><a href="#loading-the-flag" class="nav-link">Loading the flag</a></li></ul>
+		</nav>   
+	</div>
 			<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 29 december 2020</strong>: All these pieces of work are already available on <code class="language-plaintext highlighter-rouge">cartography &gt;v.2.4.0</code> on functions <a href="http://riatelab.github.io/cartography/docs/reference/getPngLayer.html"><code class="language-plaintext highlighter-rouge">getPngLayer</code></a>. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated blog post with examples on this <a href="../202002_cartography1">link</a>.</p>
 <p>Want to use a flag (or any <code class="language-plaintext highlighter-rouge">*.png</code> file) as a background of your map? You are in the right post. I am aware that there are some <strong>R</strong> packages out <a href="https://github.com/RobertMyles/flagfillr">there</a>, but we focus here in the option provided by <code class="language-plaintext highlighter-rouge">cartography::getPngLayer()</code>, that basically converts your image into a raster (see also this article of <a href="https://www.stat.auckland.ac.nz/people/pmur002">Paul Murrell</a>, <strong>“Raster Images in R Graphics”</strong> <a href="https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf">(<em>The R Journal, Volume 3/1, June 2011</em>)</a>).</p>
 <h2 id="required-r-packages">Required R packages</h2>
@@ -365,31 +381,31 @@
    <div class="col-lg-8 offset-lg-2">
      <hr>
      <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
-     <nav class="card-group" aria-labelledby="related-articles">
-        <article class="card  border chulapa-related">
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202201_maps-flags/" class="chulapa-text-body-color">Beautiful Maps with R (IV): Fun with flags revisited</a></p>
          <p class="card-text"><small>Any picture as a basemap</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-01-28T00:00:00+01:00">january 28, 2022</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">Beautiful Maps with R (III): Patterns and hatched maps</a></p>
          <p class="card-text"><small>A solution for b/w and academic maps.</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-12-12T00:00:00+01:00">december 12, 2019</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful1/" class="chulapa-text-body-color">Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels</a></p>
          <p class="card-text"><small>Awesome simplified maps with R</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-02T00:00:00+02:00">june 02, 2019</time></small>
    </div>
- </article></nav>
+ </div></nav>
    </div>
  </div>
 </div><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
@@ -489,7 +505,7 @@ s.setAttribute('data-timestamp', +new Date());
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <!-- end custom bottom scripts -->
 	</body>

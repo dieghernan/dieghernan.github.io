@@ -1,20 +1,17 @@
-
-
 // Add anchors for headings
 // Adapted from Minimal Mistakes, (c) Michael Rose
 $('#maincontent').find('h1, h2, h3, h4, h5, h6').each(function() {
-    var id = $(this).attr('id');
-    if (id) {
-        var anchor = document.createElement("a");
-        
-        anchor.classList.add('chulapa-header-link', 'ml-2', 'chulapaDateSocial');
-        anchor.href = '#' + id;
-        anchor.innerHTML = '<span class=\"sr-only\">Permalink</span><i class=\"fas fa-link fa-2xs align-middle\"></i>';
-        anchor.title = "Permalink";
-        $(this).append(anchor);
-    }
-});
+  var id = $(this).attr('id');
+  if (id) {
+    var anchor = document.createElement("a");
 
+    anchor.classList.add('chulapa-header-link', 'ml-2', 'chulapaDateSocial');
+    anchor.href = '#' + id;
+    anchor.innerHTML = '<span class=\"sr-only\">Permalink</span><i class=\"fas fa-link fa-2xs align-middle\"></i>';
+    anchor.title = "Permalink";
+    $(this).append(anchor);
+  }
+});
 
 // Start Copy Clipboard
 
@@ -52,7 +49,6 @@ async function setTooltip(btn, tooltip, style) {
 }
 
 // End helpers tooltip
-
 
 // Insert buttons 
 function ch_clipboard_setup() {
@@ -120,12 +116,63 @@ function ch_copy_cliboard(i) {
   }
 }
 // stripHtml safely
-function stripHtml(html){
-   let tmp = document.createElement('DIV');
-   tmp.innerHTML = html;
-   return tmp.textContent || tmp.innerText || '';
+function stripHtml(html) {
+  let tmp = document.createElement('DIV');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
 }
 
 window.addEventListener('load', ch_clipboard_setup);
 
 // End CopyClipboard
+
+// SideBar ToC
+
+function setupSideBar() {
+  var sT = document.getElementById("sidetoc");
+  var btn = document.getElementById("demo");
+  var body = document.getElementById("body");
+  // Create hidden overlay
+  var iDiv = document.createElement("div");
+  if (sT) {
+    btn.classList.remove("d-none");
+    btn.classList.add("has-toc");
+    body.classList.add("bs-canvas-anim");
+    iDiv.classList.add("bs-canvas-overlay", "bg-dark", "position-fixed",
+      "w-100", "h-100");
+    iDiv.setAttribute("id", "sideBarOverlay");
+    iDiv.setAttribute("onclick", "closeSideBar()");
+    body.prepend(iDiv);
+  } else {
+    document.getElementById("sideBar")
+      .remove();
+  }
+}
+window.addEventListener("load", setupSideBar);
+
+function openSideBar() {
+  var btn = document.getElementById("demo");
+  var body = document.getElementById("body");
+  btn.classList.add("d-none");
+  btn.setAttribute("aria-expanded", "true");
+  document.getElementById("sideBarOverlay")
+    .classList.add("show");
+  body.style.overflowX = "hidden";
+  body.style.marginLeft = "300px";
+  body.style.marginRight = "-300px";
+  document.getElementById("sideBar")
+    .style.marginLeft = "0";
+}
+
+function closeSideBar() {
+  var btn = document.getElementById("demo");
+  document.getElementById("sideBar")
+    .removeAttribute("style");
+  document.getElementById("sideBarOverlay")
+    .classList.remove("show");
+  document.getElementById("body")
+    .removeAttribute("style");
+  btn.classList.remove("d-none");
+  btn.setAttribute("aria-expanded", "false");
+}
+

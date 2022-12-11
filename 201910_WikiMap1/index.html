@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-10 00:08:27 +0100 -->
+    <!-- Page build 2022-12-11 16:30:29 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -125,8 +125,11 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <!-- Theme css (Bootstrap included) -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Mona-Sans/Mona-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Hubot-Sans/Hubot-Sans.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js" as="script" />
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
   <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
@@ -153,8 +156,8 @@
 <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#000000">
 <!-- end custom head snippets --></head>
-<body class="d-flex flex-column">
-	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-labelledby="primary-navigation">
+<body class="d-flex flex-column" id="body">
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
 			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -225,6 +228,19 @@
 				</div>
 </aside>
 			<article id="maincontent" class="col-lg-8 mt-3">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar d-none chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="navbar-brand" href="#">Wikipedia Maps (I): Organ donor rates</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#webscrapping" class="nav-link">Webscrapping</a></li><li class="nav-item nav d-block"><a href="#merging-all-together" class="nav-link">Merging all together</a></li><li class="nav-item nav d-block"><a href="#make-the-svg-file" class="nav-link">Make the <code class="language-plaintext highlighter-rouge">.svg</code> file</a></li></ul>
+		</nav>   
+	</div>
 			<p>This is a quick post on how to create a map as per the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps">Wikipedia conventions</a>. In this case I have chosen to plot the <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates">international organ donor rates</a>, retrieved on 2019-02-10 although the data refers to 2017 (Source: <a href="http://www.irodat.org/?p=database">IRODaT</a>).</p>
 <h2 id="webscrapping">Webscrapping</h2>
 <p>First step is to webscrap Wikipedia in order to get the final table. For doing so, I will use the <code class="language-plaintext highlighter-rouge">rvest</code> library. You can get the <code class="language-plaintext highlighter-rouge">xpath</code> you want to webscrap as explained <a href="https://stackoverflow.com/a/57972054/7877917">here</a>.</p>
@@ -387,31 +403,31 @@
    <div class="col-lg-8 offset-lg-2">
      <hr>
      <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
-     <nav class="card-group" aria-labelledby="related-articles">
-        <article class="card  border chulapa-related">
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202002_cartography1/" class="chulapa-text-body-color">New features on cartography package</a></p>
          <p class="card-text"><small>Vignette of the package expansion</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2020-02-17T00:00:00+01:00">february 17, 2020</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">Beautiful Maps with R (III): Patterns and hatched maps</a></p>
          <p class="card-text"><small>A solution for b/w and academic maps.</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-12-12T00:00:00+01:00">december 12, 2019</time></small>
    </div>
- </article>
-        <article class="card ml-sm-1 border chulapa-related">
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
          <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">Using CountryCodes database and sf package</a></p>
          <p class="card-text"><small>vignette of the CountryCodes project</small></p></div>
    <div class="card-footer bg-transparent">
       <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-04-27T00:00:00+02:00">april 27, 2019</time></small>
    </div>
- </article></nav>
+ </div></nav>
    </div>
  </div>
 </div><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
@@ -511,7 +527,7 @@ s.setAttribute('data-timestamp', +new Date());
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <!-- end custom bottom scripts -->
 	</body>
