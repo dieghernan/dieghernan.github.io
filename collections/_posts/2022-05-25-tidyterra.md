@@ -11,6 +11,7 @@ tags:
 - ggplot2
 - tidyterra
 - terra
+- maptiles
 output:
   html_document:
     df_print: paged

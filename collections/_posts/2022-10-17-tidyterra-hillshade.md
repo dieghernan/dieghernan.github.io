@@ -25,7 +25,7 @@ header_img: ./assets/img/blog/20221017-6-finalplot-1.png
 *This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a Hillshade background. Next post would show how to add marginal plots
 including information of the values of the raster by longitude and latitude. See
-the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/)*
+the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/).*
 
 Using shadow effects on relief mappings is a very common technique, that allows
 to produce informative yet beautiful maps. If you are interested on this topic

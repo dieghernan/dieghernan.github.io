@@ -11,6 +11,7 @@ tags:
 - tidyterra
 - terra
 - inset
+- mapSpain
 output:
   md_document:
     variant: gfm
