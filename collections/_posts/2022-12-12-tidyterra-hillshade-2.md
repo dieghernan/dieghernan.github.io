@@ -21,7 +21,7 @@ header_img: ./assets/img/blog/20221212_finalplot-1.png
 
 
 
-*This is the second post of a series of the series "Hillshade, colors and
+*This is the second post of the series "Hillshade, colors and
 marginal plots with tidyterra". In this post I would explore an approach for
 annotating marginal plots to a ggplot2 map of a SpatRaster, including
 information of the values by longitude and latitude. See the first post of the
