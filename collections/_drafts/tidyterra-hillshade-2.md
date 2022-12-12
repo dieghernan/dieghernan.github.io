@@ -41,7 +41,10 @@ you may recognize the following lyrics:
 >
 > The rain in Spain stays mainly in the plain!
 
-{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" %}
+
+
+{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" video_res = "sddefault" %}
+
 
 This hard statement is made on [*My Fair Lady
 (1964)*](https://en.wikipedia.org/wiki/My_Fair_Lady_(film)) by Audrey Hepburn,
@@ -782,7 +785,7 @@ precip_end <- sum(precip) %>%
 
 p_range <- as.vector(minmax(precip_end))
 
-mypal <- hcl.colors(13, "Purple-Green", rev = TRUE)
+mypal <- hcl.colors(13, "Purple-Green", rev = TRUE, alpha = 0.7)
 
 base_plot <- hill_plot +
   geom_spatraster(data = precip_end, maxcell = Inf) +
