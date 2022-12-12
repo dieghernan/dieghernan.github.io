@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-12 15:27:11 +0100 -->
+    <!-- Page build 2022-12-12 17:48:20 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -16,9 +16,9 @@
         "@id": "https://dieghernan.github.io/202212_tidyterra-hillshade-2/"
       },
       "headline": "Hillshade, colors and marginal plots with tidyterra (II)",
-      "image": "https://dieghernan.github.io/20221212.png",
-      "datePublished": "2022-12-12T15:26:55+01:00",
-      "dateModified": "2022-12-12T15:26:55+01:00",
+      "image": "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png",
+      "datePublished": "2022-12-12T00:00:00+01:00",
+      "dateModified": "2022-12-12T00:00:00+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -102,7 +102,7 @@
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
    <meta name="description" content="The rain in Spain does not stay mainly in the plain - Add marginal plots to a SpatRaster map on ggplot2">
-   <meta name="thumbnail" content="https://dieghernan.github.io/20221212.png" >
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="blog,chulapa,maps,r-language">
     <!-- OpenGraph -->
    <meta property="og:title" content="Hillshade, colors and marginal plots with tidyterra (II) | One world" >
@@ -111,7 +111,7 @@
    <meta property="og:type" content="website" >
    <meta property="og:description" content="The rain in Spain does not stay mainly in the plain - Add marginal plots to a SpatRaster map on..." >
    <meta property="og:locale" content="en-US" >
-   <meta property="og:image" content="https://dieghernan.github.io/20221212.png" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" >
     <!-- Twitter Cards -->
    <meta name="twitter:card" content="summary_large_image">
    <meta name="twitter:site" content="@dhernangomez" >
@@ -180,7 +180,7 @@
 						</a>
 					</li></ul>
 			</div></div>
-</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/20221212.png')">
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png')">
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
@@ -206,7 +206,7 @@
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2022-12-12T15:26:55+01:00">12 dec 2022</time>
+            <time datetime="2022-12-12T00:00:00+01:00">12 dec 2022</time>
         </div></div><div class="col-lg-2 col-sm-4 col-3 text-right lead chulapaDateSocial">
             <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202212_tidyterra-hillshade-2/&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28II%29&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,tidyterra,terra,inset" title="Share on Twitter"><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></a>
             <a href="https://toot.kytta.dev/?text=Hillshade,%20colors%20and%20marginal%20plots%20with%20tidyterra%20(II)%20https://dieghernan.github.io/202212_tidyterra-hillshade-2/" title="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
@@ -359,7 +359,7 @@ data to get a rough shape.</p>
 
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r_plain</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_plan_alt-1.png" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.png" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
 <p>We can create a now plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
 post</a> to identify the
 plain. In first place I create a base layer with a representation of the
@@ -399,7 +399,7 @@ hillshade, that we would reuse later:</p>
 
 </span><span class="n">hill_plot</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_hill-1.png" alt="plot of chunk 20221212_hill" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.png" alt="plot of chunk 20221212_hill" width="100%" /></p>
 <p>And finally we overlay the altitude and the outline of the plain in Spain.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Overlaying and theming</span><span class="w">
 
@@ -467,7 +467,7 @@ hillshade, that we would reuse later:</p>
 
 </span><span class="n">plot_esp</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_hill_overlay-1.png" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.png" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
 <h2 id="the-rain-in-spain">The rain in Spain</h2>
 <p>Let’s check now wheter the rain falls mainly in the plain or not. We use here
 <code class="language-plaintext highlighter-rouge">geodata::worldclim_country()</code> to get the average precipitation by month from
@@ -523,7 +523,7 @@ need to normalize the SpatRaster to the projection, extent and resolution of our
 
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_prepare_precip-1.png" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.png" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
 <h3 id="creating-a-modified-palette">Creating a modified palette</h3>
 <p>We can now start representing our precipitation map. I chose here to create a
 custom palette with <code class="language-plaintext highlighter-rouge">colorspace</code>  to better highlight the differences:</p>
@@ -538,7 +538,7 @@ custom palette with <code class="language-plaintext highlighter-rouge">colorspac
 
 </span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_mypal-1.png" alt="plot of chunk 20221212_mypal" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.png" alt="plot of chunk 20221212_mypal" width="100%" /></p>
 <p>And now we can create the final map showing if <em>the rain in Spain stays mainly
 in the plain</em>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Precipitation limits, rounded to 100</span><span class="w">
@@ -596,7 +596,7 @@ in the plain</em>:</p>
 
 </span><span class="n">meteo_plot</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_precip_end-1.png" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.png" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
 <p>We can now check that the rain in Spain falls mainly in the Atlantic coast
 (North of Spain) and specifically in Galicia. That’s why in Spanish the lyrics
 <em>The rain in Spain stays mainly in the plain</em> were translated into:</p>
@@ -642,7 +642,7 @@ can insert those marginal plots easily on our main plot:</p>
 
 </span><span class="n">plot_main</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_precip_for_margin-1.png" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.png" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
 <h3 id="profiling-marginal-plots">Profiling marginal plots</h3>
 <p>On the following code, I am just drafting how the marginal plots would look
 like, so we can have a preview of the final result:</p>
@@ -704,7 +704,7 @@ like, so we can have a preview of the final result:</p>
     </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="w">
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_profile_marg-1.png" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.png" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
@@ -736,7 +736,7 @@ like, so we can have a preview of the final result:</p>
     </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="w">
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_profile_marg-2.png" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.png" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
 <h3 id="putting-all-the-pieces-together">Putting all the pieces together</h3>
 <p>Finally, we would use <code class="language-plaintext highlighter-rouge">cowplot::axis_canvas()</code> to create the marginal plots as
 we want:</p>
@@ -778,7 +778,7 @@ we want:</p>
 
 </span><span class="n">plot_x</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_prepare_axis-1.png" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.png" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">plot_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="n">coord_flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
@@ -815,7 +815,7 @@ we want:</p>
   </span><span class="p">))</span><span class="w">
 </span><span class="n">plot_y</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_prepare_axis-2.png" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.png" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
 <p>And insert everything in the main plot. See the final result:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Combine all plots into one</span><span class="w">
@@ -833,7 +833,7 @@ we want:</p>
 </span><span class="n">gg_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggdraw</span><span class="p">(</span><span class="n">plot_final</span><span class="p">)</span><span class="w">
 </span><span class="n">gg_final</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_finalplot-1.png" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
 <p>And with a bit of effort we got it.</p>
 <h2 id="recap">Recap</h2>
 <p>Much of the code we have created relates with the theming and labels of the
@@ -980,7 +980,7 @@ plot. Here you can find a simplified version:</p>
 </span><span class="n">gg_final_simp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggdraw</span><span class="p">(</span><span class="n">plot_final_simp</span><span class="p">)</span><span class="w">
 </span><span class="n">gg_final_simp</span><span class="w">
 </span></code></pre></div></div>
- <p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_simplified-1.png" alt="plot of chunk 20221212_simplified" width="100%" /></p>
+ <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.png" alt="plot of chunk 20221212_simplified" width="100%" /></p>
 </details>
 </article>
 		</div>
@@ -1019,28 +1019,28 @@ plot. Here you can find a simplified version:</p>
  </div>
 </div><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
  <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
-   <li class="page-item text-left mr-0 invisible">
-      <a class="page-link border-0 px-4" href="#" tabindex="-1">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202210_tidyterra-hillshade/" tabindex="-1">
 	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
 	  </a>
    </li>
-   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline invisible">
-     <p class="page-link chulapa-label"></p>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Hillshade, colors and margi...</p>
    </li>
-   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none invisible">
-     <p class="page-link chulapa-label"></p>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Hillshade, col...</p>
    </li>
 	 <li class="page-item disabled mx-auto invisible">
 	  <p class="page-link">|</p>
 	 </li>	
-	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
-	   <p class="page-link chulapa-label">Using CountryC...</p>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none invisible">
+	   <p class="page-link chulapa-label"></p>
 	 </li>
-	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
-	   <p class="page-link chulapa-label">Using CountryCodes database...</p>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline invisible">
+	   <p class="page-link chulapa-label"></p>
 	 </li>
-   <li class="page-item text-right ml-0 ">
-      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/201904_Using-CountryCodes/">
+   <li class="page-item text-right ml-0 invisible">
+      <a class="page-link border-0 px-4" href="#">
 	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
    </li>
  </ul>
