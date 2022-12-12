@@ -16,7 +16,7 @@ diegpost <- function(file) {
     fig_dir = "../assets/img/blog",
     keep_html = FALSE
   )
-  
+
   # # Move images
   current_folder <- "./collections/assets/img/blog"
   new_folder <- "./assets/img/blog"
@@ -25,28 +25,77 @@ diegpost <- function(file) {
   unlink("./collections/assets",
          recursive = TRUE,
          force = TRUE)
-  
+
   # Fix img links
   newfile <- paste0("./collections/_posts", "/", file, ".md")
-  
+
   lines <- readLines(newfile)
   newlines <- gsub('<img src="../assets/img',
                    '<img src="https://dieghernan.github.io/assets/img', lines)
   newlines <- gsub('(../assets/img',
                    '(https://dieghernan.github.io/assets/img',
                    newlines, fixed = TRUE)
-  
+
   # Fix double slashes
   newlines <- gsub("https://dieghernan.github.io/assets/img//",
                    "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
-  
+
   newlines <- gsub("https://dieghernan.github.io/assets/img/blog//",
                    "https://dieghernan.github.io/assets/img/blog/", newlines, fixed = TRUE)
-  
+
   writeLines(newlines, newfile)
-  
+
 }
 
+file.exists(paste0(getwd(),"/_Rmd/",file,".Rmd"))
+
+diegpost_draft <- function(file) {
+  getwd()
+  ezknit(
+    paste0(getwd(),"/_Rmd/",file,".Rmd"),
+    out_dir = "./collections/_drafts",
+    fig_dir = "../assets/img/drafts",
+    keep_html = FALSE
+  )
+
+  # # Move images
+  current_folder <- "./collections/assets/img/drafts"
+  new_folder <- "./assets/img/drafts/"
+  list_of_files <- list.files(current_folder)
+
+  file.copy(file.path(current_folder,list_of_files), new_folder, overwrite = TRUE, recursive = TRUE)
+
+  unlink("./collections/assets",
+         recursive = TRUE,
+         force = TRUE)
+
+  # Fix img links
+  newfile <- paste0("./collections/_drafts", "/", file, ".md")
+
+  lines <- readLines(newfile)
+  newlines <- gsub('<img src="../assets/img',
+                   '<img src="https://dieghernan.github.io/assets/img', lines)
+  newlines <- gsub('(../assets/img',
+                   '(https://dieghernan.github.io/assets/img',
+                   newlines, fixed = TRUE)
+
+  # Fix double slashes
+  newlines <- gsub("https://dieghernan.github.io/assets/img//",
+                   "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
+
+  newlines <- gsub("https://dieghernan.github.io/assets/img/drafts//",
+                   "https://dieghernan.github.io/assets/img/drafts/", newlines, fixed = TRUE)
+
+  writeLines(newlines, newfile)
+
+}
+
+
+file <- "tidyterra-hillshade-2"
+diegpost_draft(file)
+
+
+rm(list = ls())
 
 
 
@@ -54,7 +103,7 @@ diegpost <- function(file) {
 
 #diegpost("2019-04-27-Using-CountryCodes")
 # diegpost("2019-05-05-Cast to subsegments")
-# 
+#
 # #diegpost("2019-05-13-Where-in-the-world")
 # #diegpost("2019-05-20-Leaflet_R_Jekyll")
 # diegpost("2019-06-02-Beautiful1")
@@ -80,15 +129,15 @@ allmds <- list.files("./collections/", recursive = TRUE, pattern = ".md$", full.
 
 for (newfile in allmds){
   message(newfile, "\n")
-  
+
   lines <- readLines(newfile)
   newlines <- gsub('<img src="../assets/img',
                    '<img src="https://dieghernan.github.io/assets/img', lines)
   newlines <- gsub('(../assets/img',
                    '(https://dieghernan.github.io/assets/img',
                    newlines, fixed = TRUE)
-  
-  
+
+
   writeLines(newlines, newfile)
 }
 

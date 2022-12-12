@@ -348,18 +348,18 @@ autoplot(precip_avg_mask)
 ### Creating a modified palette
 
 We can now start representing our precipitation map. I chose here to create a
-custom palette to better highlight the differences:
+custom palette with `colorspace`  to better highlight the differences:
 
 
 ```r
 
-mypal <- diverging_hcl(13, "Purple-Green", rev = TRUE)
-
-# Use colorspace for adjusting colors
-mypal <- mypal[-1]
-last <- darken(mypal[length(mypal)], amount = 0.9)
-
-mypal <- c(mypal, last)
+mypal <- sequential_hcl(
+  n = 16,
+  h = c(320, 80),
+  c = c(60, 65, 20),
+  l = c(30, 95), power = c(0.7, 1.3),
+  rev = TRUE
+)
 
 show_col(mypal)
 ```
@@ -402,33 +402,24 @@ meteo_plot <- hill_plot +
   )) +
   labs(
     title = "Average yearly precipitation of Spain",
-    subtitle = "The rain in Spain does not stay mainly in the plain",
-    caption = paste0(
-      "By @dhernangomez. ",
-      " Data: WordClim https://www.worldclim.org/"
-    )
+    subtitle = "The rain in Spain does not stay mainly in the plain"
   ) +
   theme_minimal(base_family = "serif") +
   theme(
     plot.background = element_rect(fill = "white", color = "white"),
     plot.title = element_text(
-      face = "bold", size = base_text_size,
+      face = "bold", size = base_text_size * 1.5,
       hjust = 0.5
     ),
     plot.subtitle = element_text(
-      size = base_text_size * 0.8,
+      size = base_text_size,
       hjust = 0.5
     ),
-    plot.caption = element_text(
-      lineheight = base_text_size,
-      face = "italic",
-      size = base_text_size * 0.6
-    ),
-    axis.text = element_text(size = base_text_size * 0.5, face = "italic"),
+    axis.text = element_text(size = base_text_size * 0.7, face = "italic"),
     legend.key = element_rect("grey50"),
     legend.position = "bottom",
-    legend.title = element_text(size = base_text_size * .6),
-    legend.text = element_text(size = base_text_size * .6),
+    legend.title = element_text(size = base_text_size * .7),
+    legend.text = element_text(size = base_text_size * .7),
     legend.spacing.x = unit(0, "pt")
   )
 
@@ -475,7 +466,7 @@ plot_main <- meteo_plot +
   theme(
     axis.title.x = element_text(
       margin = margin(t = base_text_size),
-      size = base_text_size * 0.6, face = "italic"
+      size = base_text_size * 0.9, face = "italic"
     ),
     axis.title.y = element_text(
       angle = 270,
@@ -483,7 +474,7 @@ plot_main <- meteo_plot +
         l = base_text_size,
         t = base_text_size
       ),
-      size = base_text_size * 0.6, face = "italic"
+      size = base_text_size * 0.9, face = "italic"
     )
   )
 
@@ -527,10 +518,6 @@ labs <- data.frame(labs = paste(
 labs$for_x <- max(marg_x$x) - diff(range(marg_x$x)) * 0.05
 labs$for_y <- min(marg_y$y) + diff(range(marg_y$y)) * 0.05
 labs$y <- br_4marginal
-labs
-#>        labs    for_x    for_y    y
-#> 1 1 000 mm. 3.609583 36.28875 1000
-#> 2 2 000 mm. 3.609583 36.28875 2000
 
 # Profiling
 ggplot() +
@@ -546,7 +533,7 @@ ggplot() +
     size = 3
   ) +
   scale_fill_gradientn(
-    colours = mypal,
+    colours = alpha(mypal, 0.9),
     na.value = NA,
     labels = label_comma(),
     limits = prec_limits
@@ -580,7 +567,7 @@ ggplot() +
     size = 3
   ) +
   scale_fill_gradientn(
-    colours = mypal,
+    colours = alpha(mypal, 0.9),
     na.value = NA,
     labels = label_comma(),
     limits = prec_limits
@@ -626,7 +613,7 @@ plot_x <- axis_canvas(plot_main, axis = "x") +
     size = base_text_size * 0.2
   ) +
   scale_fill_gradientn(
-    colours = mypal,
+    colours = alpha(mypal, 0.9),
     na.value = NA,
     labels = label_comma(),
     limits = prec_limits
@@ -667,7 +654,7 @@ plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
   ) +
   scale_fill_gradientn(
     limits = prec_limits,
-    colours = mypal,
+    colours = alpha(mypal, 0.9),
     na.value = NA,
     labels = label_comma()
   ) +
@@ -736,6 +723,7 @@ library(geodata)
 library(ggplot2)
 library(scales)
 library(cowplot)
+library(colorspace)
 
 # Get the data
 mydir <- "~/R/mapslib/misc"
@@ -785,12 +773,19 @@ precip_end <- sum(precip) %>%
 
 p_range <- as.vector(minmax(precip_end))
 
-mypal <- hcl.colors(13, "Purple-Green", rev = TRUE, alpha = 0.7)
+mypal <- sequential_hcl(
+  n = 16,
+  h = c(320, 80),
+  c = c(60, 65, 20),
+  l = c(30, 95), power = c(0.7, 1.3),
+  rev = TRUE
+)
+
 
 base_plot <- hill_plot +
   geom_spatraster(data = precip_end, maxcell = Inf) +
   scale_fill_gradientn(
-    colors = mypal, na.value = NA,
+    colors = alpha(mypal, 0.7), na.value = NA,
     limits = p_range
   )
 
@@ -818,7 +813,8 @@ plot_x <- axis_canvas(base_plot, axis = "x") +
     show.legend = FALSE
   ) +
   scale_fill_gradientn(
-    colors = mypal, na.value = NA,
+    colours = alpha(mypal, 0.9),
+    na.value = NA,
     limits = p_range
   ) +
   theme_void()
@@ -831,7 +827,8 @@ plot_y <- axis_canvas(base_plot, axis = "y", coord_flip = TRUE) +
     show.legend = FALSE
   ) +
   scale_fill_gradientn(
-    colors = mypal, na.value = NA,
+    colours = alpha(mypal, 0.9),
+    na.value = NA,
     limits = p_range
   ) +
   theme_void() +
