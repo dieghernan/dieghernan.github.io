@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-12 14:26:45 +0100 -->
+    <!-- Page build 2022-12-12 15:27:11 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -17,8 +17,8 @@
       },
       "headline": "Hillshade, colors and marginal plots with tidyterra (II)",
       "image": "https://dieghernan.github.io/20221212.png",
-      "datePublished": "2022-12-12T14:26:23+01:00",
-      "dateModified": "2022-12-12T14:26:23+01:00",
+      "datePublished": "2022-12-12T15:26:55+01:00",
+      "dateModified": "2022-12-12T15:26:55+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -206,7 +206,7 @@
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2022-12-12T14:26:23+01:00">12 dec 2022</time>
+            <time datetime="2022-12-12T15:26:55+01:00">12 dec 2022</time>
         </div></div><div class="col-lg-2 col-sm-4 col-3 text-right lead chulapaDateSocial">
             <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202212_tidyterra-hillshade-2/&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28II%29&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,tidyterra,terra,inset" title="Share on Twitter"><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></a>
             <a href="https://toot.kytta.dev/?text=Hillshade,%20colors%20and%20marginal%20plots%20with%20tidyterra%20(II)%20https://dieghernan.github.io/202212_tidyterra-hillshade-2/" title="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
@@ -526,15 +526,15 @@ need to normalize the SpatRaster to the projection, extent and resolution of our
 <p><img src="https://dieghernan.github.io/assets/img/drafts/20221212_prepare_precip-1.png" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
 <h3 id="creating-a-modified-palette">Creating a modified palette</h3>
 <p>We can now start representing our precipitation map. I chose here to create a
-custom palette to better highlight the differences:</p>
+custom palette with <code class="language-plaintext highlighter-rouge">colorspace</code>  to better highlight the differences:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">diverging_hcl</span><span class="p">(</span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="s2">"Purple-Green"</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># Use colorspace for adjusting colors</span><span class="w">
-</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mypal</span><span class="p">[</span><span class="m">-1</span><span class="p">]</span><span class="w">
-</span><span class="n">last</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">darken</span><span class="p">(</span><span class="n">mypal</span><span class="p">[</span><span class="nf">length</span><span class="p">(</span><span class="n">mypal</span><span class="p">)],</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span><span class="w">
-
-</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">)</span><span class="w">
+</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sequential_hcl</span><span class="p">(</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">320</span><span class="p">,</span><span class="w"> </span><span class="m">80</span><span class="p">),</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+  </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">95</span><span class="p">),</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.3</span><span class="p">),</span><span class="w">
+  </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
 
 </span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -572,33 +572,24 @@ in the plain</em>:</p>
   </span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
     </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average yearly precipitation of Spain"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The rain in Spain does not stay mainly in the plain"</span><span class="p">,</span><span class="w">
-    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="w">
-      </span><span class="s2">"By @dhernangomez. "</span><span class="p">,</span><span class="w">
-      </span><span class="s2">" Data: WordClim https://www.worldclim.org/"</span><span class="w">
-    </span><span class="p">)</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The rain in Spain does not stay mainly in the plain"</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_minimal</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
+      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
       </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
     </span><span class="p">),</span><span class="w">
     </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
       </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
     </span><span class="p">),</span><span class="w">
-    </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">lineheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
-      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
-      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.6</span><span class="w">
-    </span><span class="p">),</span><span class="w">
-    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">),</span><span class="w">
     </span><span class="n">legend.key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
     </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
-    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">.6</span><span class="p">),</span><span class="w">
-    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">.6</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">.7</span><span class="p">),</span><span class="w">
     </span><span class="n">legend.spacing.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unit</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"pt"</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 
@@ -637,7 +628,7 @@ can insert those marginal plots easily on our main plot:</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
     </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
       </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">),</span><span class="w">
-      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
     </span><span class="p">),</span><span class="w">
     </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
       </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
@@ -645,7 +636,7 @@ can insert those marginal plots easily on our main plot:</p>
         </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
         </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w">
       </span><span class="p">),</span><span class="w">
-      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.6</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 
@@ -683,10 +674,6 @@ like, so we can have a preview of the final result:</p>
 </span><span class="n">labs</span><span class="o">$</span><span class="n">for_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">marg_x</span><span class="o">$</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">marg_x</span><span class="o">$</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.05</span><span class="w">
 </span><span class="n">labs</span><span class="o">$</span><span class="n">for_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">marg_y</span><span class="o">$</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">marg_y</span><span class="o">$</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.05</span><span class="w">
 </span><span class="n">labs</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">br_4marginal</span><span class="w">
-</span><span class="n">labs</span><span class="w">
-</span><span class="c1">#&gt;        labs    for_x    for_y    y</span><span class="w">
-</span><span class="c1">#&gt; 1 1 000 mm. 3.609583 36.28875 1000</span><span class="w">
-</span><span class="c1">#&gt; 2 2 000 mm. 3.609583 36.28875 2000</span><span class="w">
 
 </span><span class="c1"># Profiling</span><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -702,7 +689,7 @@ like, so we can have a preview of the final result:</p>
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
-    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
     </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="w">
@@ -733,7 +720,7 @@ like, so we can have a preview of the final result:</p>
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
-    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
     </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="w">
@@ -773,7 +760,7 @@ we want:</p>
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
-    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
     </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="w">
@@ -811,7 +798,7 @@ we want:</p>
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="p">,</span><span class="w">
-    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
     </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">()</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -867,6 +854,7 @@ plot. Here you can find a simplified version:</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">colorspace</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Get the data</span><span class="w">
 </span><span class="n">mydir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"~/R/mapslib/misc"</span><span class="w">
@@ -916,12 +904,19 @@ plot. Here you can find a simplified version:</p>
 
 </span><span class="n">p_range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">minmax</span><span class="p">(</span><span class="n">precip_end</span><span class="p">))</span><span class="w">
 
-</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="s2">"Purple-Green"</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w">
+</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sequential_hcl</span><span class="p">(</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">320</span><span class="p">,</span><span class="w"> </span><span class="m">80</span><span class="p">),</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+  </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">95</span><span class="p">),</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.3</span><span class="p">),</span><span class="w">
+  </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
 
 </span><span class="n">base_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precip_end</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
-    </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
   </span><span class="p">)</span><span class="w">
 
@@ -949,7 +944,8 @@ plot. Here you can find a simplified version:</p>
     </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
-    </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w">
@@ -962,7 +958,8 @@ plot. Here you can find a simplified version:</p>
     </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
-    </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
     </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
