@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Mon, 12 Dec 2022 14:16:50 +0100</pubDate>
-		<lastBuildDate>Mon, 12 Dec 2022 14:16:50 +0100</lastBuildDate>
+		<pubDate>Mon, 12 Dec 2022 14:19:28 +0100</pubDate>
+		<lastBuildDate>Mon, 12 Dec 2022 14:19:28 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -49,7 +49,7 @@ you may recognize the following lyrics:</p>
 
 <!-- Thanks to alfurka,groupboard -->
 <!-- Based on https://github.com/alfurka/jekyll-embed-youtube-lazy-load -->
-<div data-src="uVmU3iANbgk" class="ch_ytdefer embed-responsive embed-responsive-16by9 my-2 chulapa-rounded-lg" style="background-image: url(https://img.youtube.com/vi/uVmU3iANbgk/maxresdefault.jpg); background-position: center; background-size: cover;"> 
+<div data-src="uVmU3iANbgk" class="ch_ytdefer embed-responsive embed-responsive-16by9 my-2 chulapa-rounded-lg" style="background-image: url(https://img.youtube.com/vi/uVmU3iANbgk/sddefault.jpg); background-position: center; background-size: cover;"> 
 	<button class="ch_ytdefer_btn" aria-label="Play" style="background-image: url(&quot;data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEwMCUiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmlld0JveD0iMCAwIDY4IDQ4IiB3aWR0aD0iMTAwJSI+PHBhdGggY2xhc3M9Inl0cC1sYXJnZS1wbGF5LWJ1dHRvbi1iZyIgZD0iTTY2LjUyLDcuNzRjLTAuNzgtMi45My0yLjQ5LTUuNDEtNS40Mi02LjE5QzU1Ljc5LC4xMywzNCwwLDM0LDBTMTIuMjEsLjEzLDYuOSwxLjU1IEMzLjk3LDIuMzMsMi4yNyw0LjgxLDEuNDgsNy43NEMwLjA2LDEzLjA1LDAsMjQsMCwyNHMwLjA2LDEwLjk1LDEuNDgsMTYuMjZjMC43OCwyLjkzLDIuNDksNS40MSw1LjQyLDYuMTkgQzEyLjIxLDQ3Ljg3LDM0LDQ4LDM0LDQ4czIxLjc5LTAuMTMsMjcuMS0xLjU1YzIuOTMtMC43OCw0LjY0LTMuMjYsNS40Mi02LjE5QzY3Ljk0LDM0Ljk1LDY4LDI0LDY4LDI0UzY3Ljk0LDEzLjA1LDY2LjUyLDcuNzR6IiBmaWxsPSIjMjEyMTIxIiBmaWxsLW9wYWNpdHk9IjAuOCI+PC9wYXRoPjxwYXRoIGQ9Ik0gNDUsMjQgMjcsMTQgMjcsMzQiIGZpbGw9IiNmZmYiPjwvcGF0aD48L3N2Zz4=&quot;); position: absolute; border: 0px; background-color: transparent; left: calc(50% - 73px/2); top: calc(50% - 52px/2); width: 73px; height: 52px; pointer-events: none;"></button>
 </div>
 <!-- Load script only if needed -->
@@ -770,7 +770,7 @@ plot. Here you can find a simplified version:</p>
 
 </span><span class="n">p_range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">minmax</span><span class="p">(</span><span class="n">precip_end</span><span class="p">))</span><span class="w">
 
-</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="s2">"Purple-Green"</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="s2">"Purple-Green"</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">)</span><span class="w">
 
 </span><span class="n">base_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precip_end</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -849,7 +849,7 @@ plot. Here you can find a simplified version:</p>
 		    <category>ggplot2</category><category>inset</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Hillshade, colors and marginal plots with tidyterra (II) ]]></media:title>
       <media:content url="https://dieghernan.github.io/20221212.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/20221212.png" /><guid isPermaLink="true">https://dieghernan.github.io/202212_tidyterra-hillshade-2/</guid>
-      <pubDate>Mon, 12 Dec 2022 14:16:34 +0100</pubDate>
+      <pubDate>Mon, 12 Dec 2022 14:19:11 +0100</pubDate>
 		</item><item>
 			<title>Hillshade, colors and marginal plots with tidyterra (I)</title>
 			<description>
