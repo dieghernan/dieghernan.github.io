@@ -41,7 +41,7 @@ you may recognize the following lyrics:
 >
 > The rain in Spain stays mainly in the plain!
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5Es8H8ki3xo66ftNz6rPnC?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" %}
 
 This hard statement is made on [*My Fair Lady
 (1964)*](https://en.wikipedia.org/wiki/My_Fair_Lady_(film)) by Audrey Hepburn,
@@ -714,8 +714,7 @@ And with a bit of effort we got it.
 Much of the code we have created relates with the theming and labels of the
 plot. Here you can find a simplified version:
 
-<details>
-
+<details markdown="1">
 <summary>Simplified version</summary>
 
 
