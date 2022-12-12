@@ -43,7 +43,7 @@ you may recognize the following lyrics:
 
 
 
-{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" video_res = "sddefault" %}
+{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" nolazy="true" %}
 
 
 This hard statement is made on [*My Fair Lady
