@@ -31,7 +31,7 @@ Using shadow effects on relief mappings is a very common technique, that allows
 to produce informative yet beautiful maps. If you are interested on this topic
 and you work with **R**, you would have probably seen this map:
 
-![swissmap](https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.webp)
+![swissmap](https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.png)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/)
