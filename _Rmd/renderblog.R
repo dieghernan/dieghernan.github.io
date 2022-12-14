@@ -169,3 +169,49 @@ ezknit(
   fig_dir = "./img/",
   keep_html = FALSE
 )
+
+
+# Try converting to webp
+
+im <- list.files("assets/img/blog", full.names = TRUE)
+
+x <- im[1]
+
+a <- lapply(im, function(x){
+  
+f <- png::readPNG(x)  
+out <- gsub("blog", "blogwebp", x)
+out <- gsub(".png$", ".webp", out)
+
+aa <- try(webp::write_webp(f, out), silent = TRUE)  
+
+if (class(aa) == "try-error"){
+  file.copy(x, "assets/img/blognoconv")
+  
+}
+  
+})
+
+webp::write_webp(f, "a.webp")
+
+x <- im[1]
+
+x <- "assets/img/blog/20191212_imgpost-1.png"
+
+img <- magick::image_read(x)
+img2 <- magick::image_convert(img,  colorspace = "sRGB")
+
+aa <- magick::image_data(img, "rgba")
+
+arr <- as.raster(img2)
+
+magick::colorspace_types()
+
+install.packages("ggpattern")
+
+
+posts <- list.files("collections/_posts", full.names = TRUE)
+
+i = 19
+
+file.edit(posts[i])

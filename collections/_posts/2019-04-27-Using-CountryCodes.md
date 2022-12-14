@@ -2,7 +2,7 @@
 title: Using CountryCodes database and sf package
 subtitle: vignette of the CountryCodes project
 tags: [r_bloggers,rstats,rspatial,sf,maps,vignette, rnaturalearth]
-header_img: ./assets/img/blog/20190427_mapfin-1.png
+header_img: ./assets/img/blog/20190427_mapfin-1webp
 output: 
   md_document:
     preserve_yaml: true
@@ -228,4 +228,4 @@ plot(bbox,
 )
 ```
 
-![plot of chunk 20190427_mapfin](https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png)
+![plot of chunk 20190427_mapfin](https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1webp)

@@ -18,7 +18,7 @@ output:
     preserve_yaml: yes
 excerpt: Create ridgelines (AKA joyplots) of territories using  elevation data with
   R, sf, terra and ggridges.
-header_img: ./assets/img/blog/20220501_joyplots.png
+header_img: ./assets/img/blog/20220501_joyplots.webp
 ---
 
 
@@ -147,7 +147,7 @@ nrow(dem)
 terra::plot(dem)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.png" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" />
 
 We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
@@ -168,7 +168,7 @@ nrow(dem_agg)
 terra::plot(dem_agg)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.png" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" />
 
 We can check how the number of rows have decreased. Also, the plot shows that we
 have now less cells.
@@ -277,7 +277,7 @@ ggplot() +
   theme_ridges()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.png" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" />
 
 The last step is to provide a black theme, resembling the cover of the album:
 
@@ -301,7 +301,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.png" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" />
 
 ## Variations
 
@@ -334,7 +334,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.png" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" />
 
 ### Land only
 
@@ -367,7 +367,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.png" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" />
 
 ### With colors
 
@@ -408,7 +408,7 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.png" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" />
 
 ### Combine with another objects
 
@@ -443,7 +443,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.png" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" />
 
 Or maybe adding a frame to the plot
 
@@ -470,7 +470,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.png" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" />
 
 ## References
 

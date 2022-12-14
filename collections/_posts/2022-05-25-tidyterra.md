@@ -18,7 +18,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20220525_easteregg-2.png
+header_img: ./assets/img/blog/20220525_easteregg-2.webp
 ---
 
 
@@ -33,7 +33,7 @@ data("volcano")
 image(volcano, col = terrain.colors(256, rev = TRUE))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.png" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" />
 
 This represents the topographic information of one of the volcanoes of Auckland
 (New Zealand), specifically [Maungawhau / Mount
@@ -90,7 +90,7 @@ ggtile <- ggplot() +
 ggtile
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.png" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" />
 
 So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
 question is, how to match the `volcano` dataset (a matrix) with this tile (a
@@ -109,7 +109,7 @@ volcano_rast <- rast(volcano)
 terra::plot(volcano_rast)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" />
 
 ```r
 
@@ -123,7 +123,7 @@ volcano_rast_ok <- rast(volcano[
 terra::plot(volcano_rast_ok)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" />
 
 ```r
 
@@ -204,7 +204,7 @@ volcano2
 terra::plot(volcano2)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" />
 
 ```r
 
@@ -214,7 +214,7 @@ ggtile +
   scale_fill_terrain_c(alpha = 0.75)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" />
 
 ## An Easter egg
 
@@ -247,7 +247,7 @@ volcano2_easter
 terra::plot(volcano2_easter)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
 
 ```r
 
@@ -264,7 +264,7 @@ ggtile +
   labs(fill = "Elevation (m)")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
 
 ```r
 
@@ -275,7 +275,7 @@ ggtile +
   geom_spatraster_contour(data = volcano2_easter, binwidth = 10)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
 
 ```r
 
@@ -295,4 +295,4 @@ ggtile +
   coord_sf(expand = FALSE)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" />

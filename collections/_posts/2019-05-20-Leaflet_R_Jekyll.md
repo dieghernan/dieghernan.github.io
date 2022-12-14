@@ -2,7 +2,7 @@
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
 subtitle: Make it work in 6 steps - a short tutorial
 tags: [r_bloggers,rstats,rspatial,leaflet,Jekyll, html, maps]
-header_img: ./assets/img/blog/20190520_imgpost.png
+header_img: ./assets/img/blog/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30
@@ -133,7 +133,7 @@ created with the front matter:
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
 subtitle: Make it work in 6 steps - a short tutorial
 tags: [R,leaflet,Jekyll, html, maps]
-header_img: https://dieghernan.github.io/assets/figs/20190520_imgpost.png
+header_img: https://dieghernan.github.io/assets/figs/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30

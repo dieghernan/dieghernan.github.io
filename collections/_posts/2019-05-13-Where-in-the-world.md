@@ -2,7 +2,7 @@
 title: Where in the world?
 subtitle: A leaflet map with the places I have flown
 tags: [rstats,rspatial,maps,leaflet]
-header_img: /assets/img/blog/201905_Where-in-the-world.png
+header_img: /assets/img/blog/201905_Where-in-the-world.webp
 leafletmap: true
 always_allow_html: yes
 output: 

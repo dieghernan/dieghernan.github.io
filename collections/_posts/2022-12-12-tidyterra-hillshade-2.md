@@ -16,7 +16,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20221212_finalplot-1.png
+header_img: ./assets/img/blog/20221212_finalplot-1.webp
 ---
 
 
@@ -160,7 +160,7 @@ r_plain <- exploded %>%
 autoplot(r_plain)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.png" alt="plot of chunk 20221212_plan_alt" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" />
 
 We can create a now plot similar to the one produced in the [previous
 post](https://dieghernan.github.io/202210_tidyterra-hillshade/) to identify the
@@ -205,7 +205,7 @@ hill_plot <- ggplot() +
 hill_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.png" alt="plot of chunk 20221212_hill" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="plot of chunk 20221212_hill" width="100%" />
 
 And finally we overlay the altitude and the outline of the plain in Spain.
 
@@ -278,7 +278,7 @@ plot_esp <- hill_plot +
 plot_esp
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.png" alt="plot of chunk 20221212_hill_overlay" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.webp" alt="plot of chunk 20221212_hill_overlay" width="100%" />
 
 ## The rain in Spain
 
@@ -344,7 +344,7 @@ compare_spatrasters(precip_avg_mask, hill)
 autoplot(precip_avg_mask)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.png" alt="plot of chunk 20221212_prepare_precip" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="plot of chunk 20221212_prepare_precip" width="100%" />
 
 ### Creating a modified palette
 
@@ -365,7 +365,7 @@ mypal <- sequential_hcl(
 show_col(mypal)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.png" alt="plot of chunk 20221212_mypal" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="plot of chunk 20221212_mypal" width="100%" />
 
 And now we can create the final map showing if *the rain in Spain stays mainly
 in the plain*:
@@ -428,7 +428,7 @@ meteo_plot <- hill_plot +
 meteo_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.png" alt="plot of chunk 20221212_precip_end" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="plot of chunk 20221212_precip_end" width="100%" />
 
 We can now check that the rain in Spain falls mainly in the Atlantic coast
 (North of Spain) and specifically in Galicia. That's why in Spanish the lyrics
@@ -482,7 +482,7 @@ plot_main <- meteo_plot +
 plot_main
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.png" alt="plot of chunk 20221212_precip_for_margin" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="plot of chunk 20221212_precip_for_margin" width="100%" />
 
 ### Profiling marginal plots
 
@@ -550,7 +550,7 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.png" alt="plot of chunk 20221212_profile_marg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="plot of chunk 20221212_profile_marg" width="100%" />
 
 ```r
 
@@ -585,7 +585,7 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.png" alt="plot of chunk 20221212_profile_marg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="plot of chunk 20221212_profile_marg" width="100%" />
 
 ### Putting all the pieces together
 
@@ -633,7 +633,7 @@ plot_x <- axis_canvas(plot_main, axis = "x") +
 plot_x
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.png" alt="plot of chunk 20221212_prepare_axis" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" />
 
 ```r
 
@@ -673,7 +673,7 @@ plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
 plot_y
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.png" alt="plot of chunk 20221212_prepare_axis" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" />
 
 And insert everything in the main plot. See the final result:
 
@@ -696,7 +696,7 @@ gg_final <- ggdraw(plot_final)
 gg_final
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" alt="plot of chunk 20221212_finalplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="plot of chunk 20221212_finalplot" width="100%" />
 
 And with a bit of effort we got it.
 
@@ -851,6 +851,6 @@ gg_final_simp <- ggdraw(plot_final_simp)
 gg_final_simp
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.png" alt="plot of chunk 20221212_simplified" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.webp" alt="plot of chunk 20221212_simplified" width="100%" />
 
 </details>

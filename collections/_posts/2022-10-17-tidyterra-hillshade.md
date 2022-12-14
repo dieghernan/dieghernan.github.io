@@ -17,7 +17,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20221017-6-finalplot-1.png
+header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
 ---
 
 
@@ -31,7 +31,7 @@ Using shadow effects on relief mappings is a very common technique, that allows
 to produce informative yet beautiful maps. If you are interested on this topic
 and you work with **R**, you would have probably seen this map:
 
-![swissmap](https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.png)
+![swissmap](https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.webp)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/)
@@ -120,7 +120,7 @@ autoplot(r) +
   theme_minimal()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.png" alt="plot of chunk 20221017-1-autoplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="plot of chunk 20221017-1-autoplot" width="100%" />
 
 ## Hillshading
 
@@ -152,7 +152,7 @@ ggplot() +
 #> SpatRaster resampled to ncells = 501501
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.png" alt="plot of chunk 20221017-2-hillroye" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" />
 
 We can also do the following hack to avoid the use of a `scale_fill_*` (via
 `ggplot2` or via `ggnewscale::new_scale_fill()`):
@@ -199,7 +199,7 @@ hill_plot <- ggplot() +
 hill_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.png" alt="plot of chunk 20221017-3-hillalt" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="plot of chunk 20221017-3-hillalt" width="100%" />
 
 ## Selecting colors
 
@@ -229,7 +229,7 @@ autoplot(r) +
   scale_fill_gradientn(colours = grad, na.value = NA)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.png" alt="plot of chunk 20221017-regular-gradient" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" />
 
 For that reason, tidyterra provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
@@ -245,7 +245,7 @@ autoplot(r) +
   scale_fill_gradientn(colours = grad_hypso, na.value = NA)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.png" alt="plot of chunk 20221017-hypso-gradient" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="plot of chunk 20221017-hypso-gradient" width="100%" />
 
 Can you notice the difference? In the first map greens are the dominant color.
 However greens are representing a wide range of elevations (0-750 meters) that
@@ -311,7 +311,7 @@ plot_pal_test("utah_1")
 plot_pal_test("wiki-2.0_hypso")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.png" alt="plot of chunk 20221017-4-explorepals" width="50%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" />
 
 I finally selected for my plot the `"dem_poster"` palette, but this is
 completely a personal choice. You should select the palette you feel more
@@ -345,7 +345,7 @@ base_plot <- hill_plot +
 base_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.png" alt="plot of chunk 20221017-5-blend" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="plot of chunk 20221017-5-blend" width="100%" />
 
 And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:
@@ -445,7 +445,7 @@ base_plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" alt="plot of chunk 20221017-6-finalplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="plot of chunk 20221017-6-finalplot" width="100%" />
 
 
 ## References

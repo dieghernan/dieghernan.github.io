@@ -3,7 +3,7 @@ title: "Insets with ggplot2 and tmap - and mapsf!"
 subtitle: "A map on a map"
 last_modified_at: 2022-03-03
 tags: [r_bloggers,rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain, mapsf, inset]
-header_img: ./assets/img/blog/20220303_inset.png
+header_img: ./assets/img/blog/20220303_inset.webp
 excerpt: A common challenge when creating maps is how to include an inset map on 
   your visualization. An inset map is a smaller map usually included on a corner 
   that may provide additional context to the overall map, or may include map 
@@ -38,7 +38,7 @@ ggplot(regions) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.png" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%"/>
 
 I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary Islands I would use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083))
 
@@ -51,7 +51,7 @@ ggplot(main) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
 
 ``` r
 island <- regions %>%
@@ -62,7 +62,7 @@ ggplot(island) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
 
 So that was easy! Just a couple of maps using `ggplot2`. Let's start mixing and matching!
 
@@ -111,7 +111,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.png" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%"/>
 
 Note also that this approach is valid not only for maps, but for all type of plot produced by `ggplot2`, since this package is not specific for map objects:
 
@@ -157,7 +157,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.png" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%"/>
 
 ## On `tmap`
 
@@ -193,7 +193,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%"/>
 
 ## Update: On `mapsf`
 
@@ -209,4 +209,4 @@ box(lwd = .5)
 mf_inset_off()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%"/>

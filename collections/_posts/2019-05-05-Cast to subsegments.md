@@ -1,7 +1,7 @@
 ---
 title: Cast a line to subsegments in R
 subtitle: User-defined function using sf package
-header_img: ./assets/img/blog//20190505_benchmarkfunction-1.png
+header_img: ./assets/img/blog//20190505_benchmarkfunction-1.webp
 tags: [r_bloggers,rstats,rspatial,sf,function, rnaturalearth]
 output: 
   md_document:
@@ -40,14 +40,14 @@ plot(st_geometry(italy_lin), col = c("red", "yellow", "blue"), main = "LINE")
 plot(st_geometry(italy_pt), col = c("red", "yellow", "blue"), main = "POINT")
 ```
 
-![plot of chunk 20190505_italycast](https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.png)
+![plot of chunk 20190505_italycast](https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp)
 
 What I missed when using `st_cast` is the possibility to "break" the `LINESTRING` objects into sub-segments:
 
 
 
 
-![plot of chunk 20190505_italycastsub](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.png)
+![plot of chunk 20190505_italycastsub](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
 
 ## An approach
 
@@ -76,7 +76,7 @@ geom <- lapply(
 plot(st_geometry(geom), col = c("red", "yellow", "blue"), main = "AFTER FUNCTION")
 ```
 
-![plot of chunk 20190505_testspain](https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.png)
+![plot of chunk 20190505_testspain](https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp)
 
 ## The function `stdh_cast_substring`
 
@@ -179,6 +179,6 @@ plot(st_geometry(test50), col = "#FEFEE9", border = "#646464", add = T)
 plot(st_geometry(t2), col = c("red", "yellow", "blue"), add = T, lwd = 0.5)
 ```
 
-![plot of chunk 20190505_benchmarkfunction](https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.png)
+![plot of chunk 20190505_benchmarkfunction](https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp)
  
 It can be seen a difference in terms of performance, noting that `test100` has 15 polygons decomposed in 914 sub-strings while `test50` has 80 polygons to 8,414 sub-strings. In that sense, the original `st_cast` is much faster, although this solution may work well in most cases.

@@ -2,7 +2,7 @@
 title: "Beautiful Maps with R (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
 tags: [r_bloggers,rstats,rspatial,beautiful_maps, maps, terra,flags,rasterpic, giscoR]
-header_img: ./assets/img/blog/20220128_flag-1.png
+header_img: ./assets/img/blog/20220128_flag-1.webp
 excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package allows to geotag images, using an spatial object (from sf or terra) as a geographic reference.
 redirect_from:
   - /202101_maps-flags/
@@ -79,7 +79,7 @@ plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.png" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" />
 
 Now, let's add the flags with a loop:
 
@@ -114,4 +114,4 @@ plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" />
