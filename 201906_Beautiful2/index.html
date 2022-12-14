@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-14 13:31:30 +0100 -->
+    <!-- Page build 2022-12-14 14:11:31 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -16,7 +16,7 @@
         "@id": "https://dieghernan.github.io/201906_Beautiful2/"
       },
       "headline": "Beautiful Maps with R (II): Fun with flags",
-      "image": "https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png",
+      "image": "https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp",
       "datePublished": "2019-06-18T00:00:00+02:00",
       "dateModified": "2020-12-29T00:00:00+01:00",
       "author": {
@@ -102,7 +102,7 @@
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
    <meta name="description" content="Put a picture on your map - Want to use a flag (or any *.png file) as a background of your map? You are in the right post.">
-   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png" >
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="blog,chulapa,maps,r-language">
     <!-- OpenGraph -->
    <meta property="og:title" content="Beautiful Maps with R (II): Fun with flags | One world" >
@@ -111,7 +111,7 @@
    <meta property="og:type" content="website" >
    <meta property="og:description" content="Put a picture on your map - Want to use a flag (or any *.png file) as a background of..." >
    <meta property="og:locale" content="en-US" >
-   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp" >
     <!-- Twitter Cards -->
    <meta name="twitter:card" content="summary_large_image">
    <meta name="twitter:site" content="@dhernangomez" >
@@ -180,7 +180,7 @@
 						</a>
 					</li></ul>
 			</div></div>
-</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png')">
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp')">
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
@@ -283,7 +283,7 @@
 </span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">bboxcan</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.png" alt="plot of chunk 20190618_preparing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.webp" alt="plot of chunk 20190618_preparing" /></p>
 <p>Now we have it! A nice map of Spain with a layout based on the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps">Wikipedia convention for location maps</a>.</p>
 <h2 id="loading-the-flag">Loading the flag</h2>
 <p>As a first example, I chose <a href="https://en.wikipedia.org/wiki/Asturias">Asturias</a> to build my code. So the goal here is to create a <code class="language-plaintext highlighter-rouge">RasterBrick</code> from the desired <code class="language-plaintext highlighter-rouge">*.png</code> file, add the necessary geographical information and use the shape of Asturias to crop the flag.</p>
@@ -308,7 +308,7 @@
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">flagmask</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Spain</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.png" alt="plot of chunk 20190618_Asturias" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="plot of chunk 20190618_Asturias" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p class="alert alert-info p-3 mx-2 mb-3"><i class="fa fa-star"></i> <strong>Pro tip:</strong> Use high-quality <code class="language-plaintext highlighter-rouge">*.png</code>, otherwise the plot would look quite poor. Here I show an extreme example.</p>
@@ -332,7 +332,7 @@
 </span><span class="n">plot_sf</span><span class="p">(</span><span class="n">MURshp</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"High"</span><span class="p">)</span><span class="w">
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">MURHigh</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.png" alt="plot of chunk 20190618_svg" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.webp" alt="plot of chunk 20190618_svg" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p>Now, we are ready to have <a href="https://the-big-bang-theory.com/fun_with_flags/">fun with flags</a>. It’s time to make the flag map of the autonomous communities of Spain.</p>
@@ -371,7 +371,7 @@
   </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.png" alt="plot of chunk 20190618_allCCAA" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="plot of chunk 20190618_allCCAA" /></p>
 <p>We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.</p>
 </article>
 		</div>

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-14 13:31:30 +0100 -->
+    <!-- Page build 2022-12-14 14:11:31 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -16,7 +16,7 @@
         "@id": "https://dieghernan.github.io/202205_Unknown-pleasures-R/"
       },
       "headline": "Unknown pleasures with R",
-      "image": "https://dieghernan.github.io/assets/img/blog/20220501_joyplots.png",
+      "image": "https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp",
       "datePublished": "2022-05-01T00:00:00+02:00",
       "dateModified": "2022-05-01T00:00:00+02:00",
       "author": {
@@ -102,7 +102,7 @@
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
    <meta name="description" content="Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using  elevation data with R, sf, terra and ggridges.">
-   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.png" >
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="blog,chulapa,maps,r-language">
     <!-- OpenGraph -->
    <meta property="og:title" content="Unknown pleasures with R | One world" >
@@ -111,7 +111,7 @@
    <meta property="og:type" content="website" >
    <meta property="og:description" content="Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using elevation data with R, sf,..." >
    <meta property="og:locale" content="en-US" >
-   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.png" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" >
     <!-- Twitter Cards -->
    <meta name="twitter:card" content="summary_large_image">
    <meta name="twitter:site" content="@dhernangomez" >
@@ -180,7 +180,7 @@
 						</a>
 					</li></ul>
 			</div></div>
-</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220501_joyplots.png')">
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp')">
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
@@ -341,7 +341,7 @@ zoom level as needed. You can find a good guidance on the zoom levels on the
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.png" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
 <p>We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
 reduce the number of cells or increasing the size of the cells) using a scaling
@@ -357,7 +357,7 @@ factor that would reduce the number of rows to our desired target (in this case
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.png" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
 <p>We can check how the number of rows have decreased. Also, the plot shows that we
 have now less cells.</p>
 <p>Now, we may need to perform additional manipulations on the values of the
@@ -455,7 +455,7 @@ parameter:</p>
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_ridges</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.png" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
 <p>The last step is to provide a black theme, resembling the cover of the album:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -474,7 +474,7 @@ parameter:</p>
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.png" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
 <h2 id="variations">Variations</h2>
 <p>We can produce some variations of the same map using several parameters and
 other artifacts.</p>
@@ -499,7 +499,7 @@ other artifacts.</p>
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.png" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
 <h3 id="land-only">Land only</h3>
 <p>If we use <code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> it is quite easy to remove some parts of the lines,
 as the parameter <code class="language-plaintext highlighter-rouge">min_height</code> allow us to control the minimum height to be
@@ -525,7 +525,7 @@ parts of the string can be easily removed.</p>
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.png" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
 <h3 id="with-colors">With colors</h3>
 <p>We can apply different colors to the plot. Note that <code class="language-plaintext highlighter-rouge">ggridges</code> only accepts
 different <code class="language-plaintext highlighter-rouge">aes</code> by row, and not by column:</p>
@@ -560,7 +560,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
     </span><span class="m">.95</span><span class="w">
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.png" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
 <h3 id="combine-with-another-objects">Combine with another objects</h3>
 <p>Like using a <code class="language-plaintext highlighter-rouge">sf</code> object:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -589,7 +589,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.png" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
 <p>Or maybe adding a frame to the plot</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">frame</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.polygons</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">,</span><span class="w"> </span><span class="n">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -611,7 +611,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.png" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
 <h2 id="references">References</h2>
 <p>Craft Jr, H. D. (1970). <em>Radio observations of the pulse profiles and dispersion
 measures of twelve pulsars.</em> Cornell University.</p>
