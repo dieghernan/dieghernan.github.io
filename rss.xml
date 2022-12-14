@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2022, dieghernan</copyright>	
-		<pubDate>Wed, 14 Dec 2022 12:58:07 +0100</pubDate>
-		<lastBuildDate>Wed, 14 Dec 2022 12:58:07 +0100</lastBuildDate>
+		<pubDate>Wed, 14 Dec 2022 13:31:30 +0100</pubDate>
+		<lastBuildDate>Wed, 14 Dec 2022 13:31:30 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -163,7 +163,7 @@ data to get a rough shape.</p>
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r_plain</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.png" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
 
 <p>We can create a now plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
 post</a> to identify the
@@ -206,7 +206,7 @@ hillshade, that we would reuse later:</p>
 </span><span class="n">hill_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="plot of chunk 20221212_hill" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.png" alt="plot of chunk 20221212_hill" width="100%" /></p>
 
 <p>And finally we overlay the altitude and the outline of the plain in Spain.</p>
 
@@ -277,7 +277,7 @@ hillshade, that we would reuse later:</p>
 </span><span class="n">plot_esp</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.webp" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.png" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
 
 <h2 id="the-rain-in-spain">The rain in Spain</h2>
 
@@ -339,7 +339,7 @@ need to normalize the SpatRaster to the projection, extent and resolution of our
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.png" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
 
 <h3 id="creating-a-modified-palette">Creating a modified palette</h3>
 
@@ -358,7 +358,7 @@ custom palette with <code class="language-plaintext highlighter-rouge">colorspac
 </span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="plot of chunk 20221212_mypal" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.png" alt="plot of chunk 20221212_mypal" width="100%" /></p>
 
 <p>And now we can create the final map showing if <em>the rain in Spain stays mainly
 in the plain</em>:</p>
@@ -419,7 +419,7 @@ in the plain</em>:</p>
 </span><span class="n">meteo_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.png" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
 
 <p>We can now check that the rain in Spain falls mainly in the Atlantic coast
 (North of Spain) and specifically in Galicia. That’s why in Spanish the lyrics
@@ -473,7 +473,7 @@ can insert those marginal plots easily on our main plot:</p>
 </span><span class="n">plot_main</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.png" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
 
 <h3 id="profiling-marginal-plots">Profiling marginal plots</h3>
 
@@ -539,7 +539,7 @@ like, so we can have a preview of the final result:</p>
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.png" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -573,7 +573,7 @@ like, so we can have a preview of the final result:</p>
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.png" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
 
 <h3 id="putting-all-the-pieces-together">Putting all the pieces together</h3>
 
@@ -619,7 +619,7 @@ we want:</p>
 </span><span class="n">plot_x</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.png" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">plot_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="n">coord_flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -658,7 +658,7 @@ we want:</p>
 </span><span class="n">plot_y</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.png" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
 
 <p>And insert everything in the main plot. See the final result:</p>
 
@@ -679,7 +679,7 @@ we want:</p>
 </span><span class="n">gg_final</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
 
 <p>And with a bit of effort we got it.</p>
 
@@ -832,7 +832,7 @@ plot. Here you can find a simplified version:</p>
 </span><span class="n">gg_final_simp</span><span class="w">
 </span></code></pre></div>  </div>
 
-  <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.webp" alt="plot of chunk 20221212_simplified" width="100%" /></p>
+  <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.png" alt="plot of chunk 20221212_simplified" width="100%" /></p>
 
 </details>
 </div>
@@ -841,8 +841,8 @@ plot. Here you can find a simplified version:</p>
 			<link>https://dieghernan.github.io/202212_tidyterra-hillshade-2/</link>
 			<category>posts</category>
 		    <category>ggplot2</category><category>inset</category><category>mapSpain</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Hillshade, colors and marginal plots with tidyterra (II) ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202212_tidyterra-hillshade-2/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202212_tidyterra-hillshade-2/</guid>
       <pubDate>Mon, 12 Dec 2022 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Hillshade, colors and marginal plots with tidyterra (I)</title>
@@ -860,7 +860,7 @@ the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade
 to produce informative yet beautiful maps. If you are interested on this topic
 and you work with <strong>R</strong>, you would have probably seen this map:</p>
 
-<p><img src="https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.webp" alt="swissmap" /></p>
+<p><img src="https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.png" alt="swissmap" /></p>
 
 <p>The production of this map by <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">Timo
 Grossenbacher</a>
@@ -943,7 +943,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
   </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="plot of chunk 20221017-1-autoplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.png" alt="plot of chunk 20221017-1-autoplot" width="100%" /></p>
 
 <h2 id="hillshading">Hillshading</h2>
 
@@ -973,7 +973,7 @@ the sun position. This is straightforward with <code class="language-plaintext h
 </span><span class="c1">#&gt; SpatRaster resampled to ncells = 501501</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.png" alt="plot of chunk 20221017-2-hillroye" width="100%" /></p>
 
 <p>We can also do the following hack to avoid the use of a <code class="language-plaintext highlighter-rouge">scale_fill_*</code> (via
 <code class="language-plaintext highlighter-rouge">ggplot2</code> or via <code class="language-plaintext highlighter-rouge">ggnewscale::new_scale_fill()</code>):</p>
@@ -1020,7 +1020,7 @@ and the number of cells is the same.</p>
 </span><span class="n">hill_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="plot of chunk 20221017-3-hillalt" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.png" alt="plot of chunk 20221017-3-hillalt" width="100%" /></p>
 
 <h2 id="selecting-colors">Selecting colors</h2>
 
@@ -1048,7 +1048,7 @@ distance among colors is the same:</p>
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.png" alt="plot of chunk 20221017-regular-gradient" width="100%" /></p>
 
 <p>For that reason, tidyterra provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:</p>
@@ -1062,7 +1062,7 @@ unevenly with the goal of providing a better understanding of the maps:</p>
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_hypso</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="plot of chunk 20221017-hypso-gradient" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.png" alt="plot of chunk 20221017-hypso-gradient" width="100%" /></p>
 
 <p>Can you notice the difference? In the first map greens are the dominant color.
 However greens are representing a wide range of elevations (0-750 meters) that
@@ -1126,7 +1126,7 @@ touch rounding up and down the range of values to the nearest 500.</p>
 </span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"wiki-2.0_hypso"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.png" alt="plot of chunk 20221017-4-explorepals" width="50%" /></p>
 
 <p>I finally selected for my plot the <code class="language-plaintext highlighter-rouge">"dem_poster"</code> palette, but this is
 completely a personal choice. You should select the palette you feel more
@@ -1158,7 +1158,7 @@ some level of <code class="language-plaintext highlighter-rouge">alpha</code> on
 </span><span class="n">base_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="plot of chunk 20221017-5-blend" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.png" alt="plot of chunk 20221017-5-blend" width="100%" /></p>
 
 <p>And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:</p>
@@ -1254,7 +1254,7 @@ a font from Google with a custom function:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="plot of chunk 20221017-6-finalplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" alt="plot of chunk 20221017-6-finalplot" width="100%" /></p>
 
 <h2 id="references">References</h2>
 
@@ -1276,8 +1276,8 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
 			<link>https://dieghernan.github.io/202210_tidyterra-hillshade/</link>
 			<category>posts</category>
 		    <category>ggplot2</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Hillshade, colors and marginal plots with tidyterra (I) ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202210_tidyterra-hillshade/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202210_tidyterra-hillshade/</guid>
       <pubDate>Mon, 17 Oct 2022 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Introducing tidyterra</title>
@@ -1294,7 +1294,7 @@ familiarized with the <code class="language-plaintext highlighter-rouge">volcano
 </span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.png" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
 
 <p>This represents the topographic information of one of the volcanoes of Auckland
 (New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
@@ -1347,7 +1347,7 @@ the location of Maungawhau using map tiles (as Google Maps uses). We would use
 </span><span class="n">ggtile</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.png" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
 
 <p>So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
 question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
@@ -1364,7 +1364,7 @@ SpatRaster:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Wait, it is flipped!</span><span class="w">
@@ -1377,7 +1377,7 @@ SpatRaster:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.png" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">volcano_rast_ok</span><span class="w">
@@ -1455,7 +1455,7 @@ template:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># And plot it</span><span class="w">
@@ -1464,7 +1464,7 @@ template:</p>
   </span><span class="n">scale_fill_terrain_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.png" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
 
 <h2 id="an-easter-egg">An Easter egg</h2>
 
@@ -1495,7 +1495,7 @@ how to load it and check the plotting <code class="language-plaintext highlighte
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -1511,7 +1511,7 @@ how to load it and check the plotting <code class="language-plaintext highlighte
   </span><span class="n">labs</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation (m)"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -1521,7 +1521,7 @@ how to load it and check the plotting <code class="language-plaintext highlighte
   </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -1540,15 +1540,15 @@ how to load it and check the plotting <code class="language-plaintext highlighte
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.png" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/202205_tidyterra/</link>
 			<category>posts</category>
 		    <category>ggplot2</category><category>maps</category><category>maptiles</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Introducing tidyterra ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202205_tidyterra/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.png" /><guid isPermaLink="true">https://dieghernan.github.io/202205_tidyterra/</guid>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Unknown pleasures with R</title>
@@ -1677,7 +1677,7 @@ zoom level as needed. You can find a good guidance on the zoom levels on the
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.png" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
 
 <p>We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
@@ -1696,7 +1696,7 @@ factor that would reduce the number of rows to our desired target (in this case
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.png" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
 
 <p>We can check how the number of rows have decreased. Also, the plot shows that we
 have now less cells.</p>
@@ -1804,7 +1804,7 @@ parameter:</p>
   </span><span class="n">theme_ridges</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.png" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
 
 <p>The last step is to provide a black theme, resembling the cover of the album:</p>
 
@@ -1826,7 +1826,7 @@ parameter:</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.png" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
 
 <h2 id="variations">Variations</h2>
 
@@ -1857,7 +1857,7 @@ other artifacts.</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.png" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
 
 <h3 id="land-only">Land only</h3>
 
@@ -1888,7 +1888,7 @@ parts of the string can be easily removed.</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.png" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
 
 <h3 id="with-colors">With colors</h3>
 
@@ -1927,7 +1927,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.png" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
 
 <h3 id="combine-with-another-objects">Combine with another objects</h3>
 
@@ -1960,7 +1960,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.png" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
 
 <p>Or maybe adding a frame to the plot</p>
 
@@ -1985,7 +1985,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.png" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
 
 <h2 id="references">References</h2>
 
@@ -2018,8 +2018,8 @@ Unknown Pleasures Album Art. <em>Cartographic Perspectives</em>, (92), 65–78.
 			<link>https://dieghernan.github.io/202205_Unknown-pleasures-R/</link>
 			<category>posts</category>
 		    <category>ggplot2</category><category>ggridges</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><media:title type="html"><![CDATA[Unknown pleasures with R ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202205_Unknown-pleasures-R/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.png" /><guid isPermaLink="true">https://dieghernan.github.io/202205_Unknown-pleasures-R/</guid>
       <pubDate>Sun, 01 May 2022 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Corona timelapse</title>
@@ -2056,8 +2056,8 @@ German bureaucracy.</p>
 			<link>https://dieghernan.github.io/202203_Corona-timelapse/</link>
 			<category>posts</category>
 		    <category>R</category><category>guest-author</category><category>leaflet</category><category>maps</category><category>project</category><category>python</category><media:title type="html"><![CDATA[Corona timelapse ]]></media:title>
-      <media:content url="https://corona-atlas.de/timelapse/frames/D2021-04-16.webp" medium="image"/>
-      <media:thumbnail url="https://corona-atlas.de/timelapse/frames/D2021-04-16.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202203_Corona-timelapse/</guid>
+      <media:content url="https://corona-atlas.de/timelapse/frames/D2021-04-16.png" medium="image"/>
+      <media:thumbnail url="https://corona-atlas.de/timelapse/frames/D2021-04-16.png" /><guid isPermaLink="true">https://dieghernan.github.io/202203_Corona-timelapse/</guid>
       <pubDate>Mon, 14 Mar 2022 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Insets with ggplot2 and tmap - and mapsf!</title>
@@ -2089,7 +2089,7 @@ German bureaucracy.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.png" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
 
 <p>I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary Islands I would use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>)</p>
 
@@ -2101,7 +2101,7 @@ German bureaucracy.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -2111,7 +2111,7 @@ German bureaucracy.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.png" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
 
 <p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and matching!</p>
 
@@ -2163,7 +2163,7 @@ German bureaucracy.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.png" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
 
 <p>Note also that this approach is valid not only for maps, but for all type of plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</code>, since this package is not specific for map objects:</p>
 
@@ -2208,7 +2208,7 @@ German bureaucracy.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.png" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
 
 <h2 id="on-tmap">On <code class="language-plaintext highlighter-rouge">tmap</code></h2>
 
@@ -2242,7 +2242,7 @@ German bureaucracy.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.png" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
 
 <h2 id="update-on-mapsf">Update: On <code class="language-plaintext highlighter-rouge">mapsf</code></h2>
 
@@ -2257,15 +2257,15 @@ German bureaucracy.</p>
 </span><span class="n">mf_inset_off</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.png" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/202203_insetmaps/</link>
 			<category>posts</category>
 		    <category>ggplot2</category><category>inset</category><category>mapSpain</category><category>maps</category><category>mapsf</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>tmap</category><media:title type="html"><![CDATA[Insets with ggplot2 and tmap - and mapsf! ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20220303_inset.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220303_inset.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202203_insetmaps/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20220303_inset.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220303_inset.png" /><guid isPermaLink="true">https://dieghernan.github.io/202203_insetmaps/</guid>
       <pubDate>Thu, 03 Mar 2022 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Beautiful Maps with R (IV): Fun with flags revisited</title>
@@ -2282,7 +2282,7 @@ geographic reference.</p>
 <p>I tweeted about that, and it seems to have a good feedback from the
 <a href="https://twitter.com/hashtag/rspatial">#rspatial</a> community:</p>
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {rasterpic} 📦 is now on CRAN, and we can convert our.webps to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {rasterpic} 📦 is now on CRAN, and we can convert our pngs to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <p>I received also an interesting reply to this from <strong>Hefin Ioan Rhys</strong>
@@ -2291,7 +2291,7 @@ geographic reference.</p>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ooh I think a map with countries filled with their own flag would be poppin&#39;.</p>&mdash; Hefin Ioan Rhys (@HRJ21) <a href="https://twitter.com/HRJ21/status/1486976368936116225?ref_src=twsrc%5Etfw">January 28, 2022</a></blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-<p>That remembers me to a <a href="https://dieghernan.github.io/202002_cartography1/.webp-layer">previous
+<p>That remembers me to a <a href="https://dieghernan.github.io/202002_cartography1/#png-layer">previous
 post</a> that I wrote
 when I added some new functions to the <strong>cartography</strong> package, now replaced by
 the <a href="https://cran.r-project.org/package=mapsf"><strong>mapsf</strong></a> package.</p>
@@ -2337,7 +2337,7 @@ be extracted from the GitHub repository
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.png" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" /></p>
 
 <p>Now, let’s add the flags with a loop:</p>
 
@@ -2346,13 +2346,13 @@ be extracted from the GitHub repository
 </span><span class="n">africa</span><span class="o">$</span><span class="n">iso2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">countrycode</span><span class="p">(</span><span class="n">africa</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="p">,</span><span class="w"> </span><span class="s2">"iso3c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"iso2c"</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Get flags from repo - low quality to speed up the code</span><span class="w">
-</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master.webp250px/"</span><span class="w">
+</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"</span><span class="w">
 
 </span><span class="c1"># Loop and add</span><span class="w">
 </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">iso</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">africa</span><span class="o">$</span><span class="n">iso2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="c1"># Download pic and plot</span><span class="w">
-  </span><span class="n">imgurl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">iso</span><span class="p">),</span><span class="w"> </span><span class="s2">".webp"</span><span class="p">)</span><span class="w">
-  </span><span class="n">tmpfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tempfile</span><span class="p">(</span><span class="n">fileext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".webp"</span><span class="p">)</span><span class="w">
+  </span><span class="n">imgurl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">iso</span><span class="p">),</span><span class="w"> </span><span class="s2">".png"</span><span class="p">)</span><span class="w">
+  </span><span class="n">tmpfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tempfile</span><span class="p">(</span><span class="n">fileext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".png"</span><span class="p">)</span><span class="w">
   </span><span class="n">download.file</span><span class="p">(</span><span class="n">imgurl</span><span class="p">,</span><span class="w"> </span><span class="n">tmpfile</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">)</span><span class="w">
 
   </span><span class="c1"># Raster</span><span class="w">
@@ -2370,15 +2370,15 @@ be extracted from the GitHub repository
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" /></p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/202201_maps-flags/</link>
 			<category>posts</category>
 		    <category>beautiful_maps</category><category>flags</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rasterpic</category><category>rspatial</category><category>rstats</category><category>terra</category><media:title type="html"><![CDATA[Beautiful Maps with R (IV): Fun with flags revisited ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202201_maps-flags/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202201_maps-flags/</guid>
       <pubDate>Fri, 28 Jan 2022 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Corona Atlas</title>
@@ -2594,7 +2594,7 @@ which are termed “black swan events” (Taleb (2008)). This line of thinking p
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="plot of chunk 20200405_charheavytail" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="plot of chunk 20200405_charheavytail" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.png" alt="plot of chunk 20200405_charheavytail" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.png" alt="plot of chunk 20200405_charheavytail" /></p>
 
 <h2 id="breaking-method">Breaking method</h2>
 
@@ -2693,7 +2693,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp" alt="plot of chunk 20200405_stepbystep" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.png" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.png" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.png" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.png" alt="plot of chunk 20200405_stepbystep" /></p>
 
 <p>As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.</p>
 
@@ -2791,7 +2791,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp" alt="plot of chunk 20200405_examplesimp" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.png" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.png" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.png" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.png" alt="plot of chunk 20200405_examplesimp" /></p>
 
 <p>The method always returns at least one break, corresponding to <code class="language-plaintext highlighter-rouge">mean(var)</code>.</p>
 
@@ -2825,7 +2825,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="plot of chunk 20200405_summspdata" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.png" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.png" alt="plot of chunk 20200405_summspdata" /></p>
 
 <p>The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the <em>“far more small things than large things”</em> principle.</p>
 
@@ -2858,7 +2858,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp" alt="plot of chunk 20200405_breaksample" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.png" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.png" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.png" alt="plot of chunk 20200405_breaksample" /></p>
 
 <p>It is observed that the top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> enclose 5 observations, whereas <code class="language-plaintext highlighter-rouge">fisher</code> includes 13 observations. In terms of classification, <code class="language-plaintext highlighter-rouge">headtails</code> breaks focuses more on extreme values.</p>
 
@@ -2920,7 +2920,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp" alt="plot of chunk 20200405_benchmarkbreaks" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.png" alt="plot of chunk 20200405_benchmarkbreaks" /></p>
 
 <p>It can be observed that the distribution of <code class="language-plaintext highlighter-rouge">headtails</code> breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, “quantile” provides a quasi-uniform distribution, ignoring the <code class="language-plaintext highlighter-rouge">totcon</code> hierarchy</p>
 
@@ -3006,7 +3006,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="plot of chunk 20200405_finalplot" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png" alt="plot of chunk 20200405_finalplot" /></p>
 
 <p>As per the results, <code class="language-plaintext highlighter-rouge">headtails</code> seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The <code class="language-plaintext highlighter-rouge">quantile</code> style, as expected, just provides a clustering without taking into account the real hierarchy. The <code class="language-plaintext highlighter-rouge">fisher</code> plot is in-between of these two interpretations.</p>
 
@@ -3039,8 +3039,8 @@ End Function
 			<link>https://dieghernan.github.io/202004_headtails/</link>
 			<category>posts</category>
 		    <category>classInt</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>vignette</category><media:title type="html"><![CDATA[Head/Tails breaks on the <code>classInt</code> package. ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202004_headtails/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202004_headtails/</guid>
       <pubDate>Sun, 05 Apr 2020 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>COVID19 Microsite</title>
@@ -3082,7 +3082,7 @@ End Function
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">hatchedLayer</code> and <code class="language-plaintext highlighter-rouge">legendHatched</code> functions.</li>
-  <li>.webpLayer<code class="language-plaintext highlighter-rouge"> and </code>getPngLayer` functions.</li>
+  <li><code class="language-plaintext highlighter-rouge">pngLayer</code> and <code class="language-plaintext highlighter-rouge">getPngLayer</code> functions.</li>
   <li><code class="language-plaintext highlighter-rouge">wordcloudLayer</code> function.</li>
 </ul>
 
@@ -3185,7 +3185,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="plot of chunk 20200217_hatched-min" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.png" alt="plot of chunk 20200217_hatched-min" /></p>
 
 <h3 id="example-2">Example 2</h3>
 
@@ -3274,7 +3274,7 @@ End Function
 </span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="plot of chunk 20200217_hatched" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.png" alt="plot of chunk 20200217_hatched" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order on the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code> patterns are presents, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, <code class="language-plaintext highlighter-rouge">lty = c(1, 1, 3)</code> respect that order.</p>
 
@@ -3378,13 +3378,13 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="plot of chunk 20200217_hatched-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.png" alt="plot of chunk 20200217_hatched-adv" /></p>
 
-<h2 id="webp-layer">.webp` Layer</h2>
+<h2 id="png-layer"><code class="language-plaintext highlighter-rouge">png</code> Layer</h2>
 
-<p>This new capability geotags a <code class="language-plaintext highlighter-rouge">.webp</code> file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a <code class="language-plaintext highlighter-rouge">POLYGON/MULTIPOLYGON</code>.</p>
+<p>This new capability geotags a <code class="language-plaintext highlighter-rouge">.png</code> file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a <code class="language-plaintext highlighter-rouge">POLYGON/MULTIPOLYGON</code>.</p>
 
-<p>For high-quality.webp maps, <strong>it is recommended to plot your map on a <code class="language-plaintext highlighter-rouge">.svg</code> device</strong>.</p>
+<p>For high-quality png maps, <strong>it is recommended to plot your map on a <code class="language-plaintext highlighter-rouge">.svg</code> device</strong>.</p>
 
 <h3 id="example-1-1">Example 1</h3>
 
@@ -3419,14 +3419,14 @@ End Function
 
 </span><span class="c1">#Iterate for Africa</span><span class="w">
 </span><span class="c1">#Get flags from repo - low quality to speed up the vignette</span><span class="w">
-</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master.webp250px/"</span><span class="w">
+</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"</span><span class="w">
 
 
 </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="n">cntry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s2">"ISO_3166_2"</span><span class="p">]))</span><span class="w">
   </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,],</span><span class="w">
-                  </span><span class="n">paste</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">cntry</span><span class="p">),</span><span class="w"> </span><span class="s2">".webp"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">))</span><span class="w">
- </span><span class="n">.webpLayer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+                  </span><span class="n">paste</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">cntry</span><span class="p">),</span><span class="w"> </span><span class="s2">".png"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">))</span><span class="w">
+  </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span><span class="c1">#Add borders</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">0.4</span><span class="p">)</span><span class="w">
@@ -3441,7 +3441,7 @@ End Function
 </span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217.webplayer-1.webp" alt="plot of chunk 20200217.webplayer" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.png" alt="plot of chunk 20200217_pnglayer" /></p>
 
 <h3 id="example-2-1">Example 2</h3>
 
@@ -3453,19 +3453,19 @@ End Function
 </span><span class="n">nuts0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">st_crop</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">box</span><span class="p">)</span><span class="w">
 
 </span><span class="n">UK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuts0</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">)</span><span class="w">
-</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.webp"</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"</span><span class="w">
 
 
 </span><span class="n">EU</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">nuts0</span><span class="p">,</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">EU</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w">
-</span><span class="n">urluk</span><span class="o">=</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master.webp250px/gb.webp"</span><span class="w">
+</span><span class="n">urluk</span><span class="o">=</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/gb.png"</span><span class="w">
 
-</span><span class="n">U.webp</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">UK</span><span class="p">,</span><span class="n">urluk</span><span class="p">)</span><span class="w">
+</span><span class="n">UKpng</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">UK</span><span class="p">,</span><span class="n">urluk</span><span class="p">)</span><span class="w">
 
-</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">U.webp</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217.webp-adv-1.webp" alt="plot of chunk 20200217.webp-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.png" alt="plot of chunk 20200217_png-adv" /></p>
 
 <h2 id="wordcloudlayer">wordcloudLayer</h2>
 
@@ -3495,7 +3495,7 @@ End Function
 </span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="plot of chunk 20200217_wordcloud1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.png" alt="plot of chunk 20200217_wordcloud1" /></p>
 
 <h3 id="example-2-2">Example 2</h3>
 
@@ -3546,15 +3546,15 @@ End Function
             </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="plot of chunk 20200217_wordcloud2" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png" alt="plot of chunk 20200217_wordcloud2" /></p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/202002_cartography1/</link>
 			<category>posts</category>
 		    <category>beautiful_maps</category><category>cartography</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[New features on cartography package ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202002_cartography1/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202002_cartography1/</guid>
       <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>We&#39;ll miss you, UK</title>
@@ -3586,7 +3586,7 @@ End Function
   </span><span class="n">group_by</span><span class="p">(</span><span class="n">CNTR_CODE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">summarise</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">dplyr</span><span class="o">::</span><span class="n">n</span><span class="p">())</span><span class="w">
 
 </span><span class="c1"># Flag image</span><span class="w">
-</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.webp"</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"</span><span class="w">
 
 </span><span class="c1">#Mask UK</span><span class="w">
 </span><span class="n">flagcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">NUTS1_Clean</span><span class="p">,</span><span class="w">
@@ -3605,7 +3605,7 @@ End Function
      </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp" alt="plot of chunk 20200602_imgpost" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.png" alt="plot of chunk 20200602_imgpost" /></p>
 
 </div>
 				]]>
@@ -3613,8 +3613,8 @@ End Function
 			<link>https://dieghernan.github.io/202002_Brexit/</link>
 			<category>posts</category>
 		    <category>flags</category><category>giscoR</category><category>maps</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[We'll miss you, UK ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202002_Brexit/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/202002_Brexit/</guid>
       <pubDate>Thu, 06 Feb 2020 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Beautiful Maps with R (III): Patterns and hatched maps</title>
@@ -3669,7 +3669,7 @@ End Function
 </span><span class="n">title</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_showfun-1.webp" alt="plot of chunk 20191212_showfun" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_showfun-1.png" alt="plot of chunk 20191212_showfun" /></p>
 
 <p>Let’s play a little bit more with some of the additional features of the function:</p>
 
@@ -3721,7 +3721,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playing-1.webp" alt="plot of chunk 20191212_playing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playing-1.png" alt="plot of chunk 20191212_playing" /></p>
 
 <h2 id="adding-legends-the-legendhatched-function">Adding legends: the <code class="language-plaintext highlighter-rouge">legendHatched</code> function</h2>
 
@@ -3784,19 +3784,19 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playinglegend-1.webp" alt="plot of chunk 20191212_playinglegend" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playinglegend-1.png" alt="plot of chunk 20191212_playinglegend" /></p>
 
 <p>I hope that you find this functions useful. Enjoy and nice mapping!</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" title="plot of chunk 20191212_imgpost" alt="plot of chunk 20191212_imgpost" style="display: block; margin: auto;" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.png" title="plot of chunk 20191212_imgpost" alt="plot of chunk 20191212_imgpost" style="display: block; margin: auto;" /></p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/201912_Beautiful3/</link>
 			<category>posts</category>
 		    <category>beautiful_maps</category><category>cartography</category><category>function</category><category>giscoR</category><category>maps</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[Beautiful Maps with R (III): Patterns and hatched maps ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201912_Beautiful3/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201912_Beautiful3/</guid>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Quick R: Inset maps</title>
@@ -3842,7 +3842,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_main-1.webp" alt="plot of chunk 20191108_main" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_main-1.png" alt="plot of chunk 20191108_main" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Alaska----</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
@@ -3862,7 +3862,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.webp" alt="plot of chunk 20191108_Alaska" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.png" alt="plot of chunk 20191108_Alaska" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Hawaii----</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
@@ -3882,7 +3882,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.webp" alt="plot of chunk 20191108_Hawaii" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.png" alt="plot of chunk 20191108_Hawaii" /></p>
 
 <h2 id="insetting">Insetting</h2>
 
@@ -3957,13 +3957,13 @@ End Function
 </span><span class="n">box</span><span class="p">(</span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"figure"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.webp" alt="plot of chunk 20191108_inset" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.png" alt="plot of chunk 20191108_inset" /></p>
 
 <p>Results may vary depending of the size of the original plot (Mainland USA) and your plotting device and output. However with a bit of trial-and-error it is quite easy to adjust the final result.</p>
 
 <p>As an example, see one of my contributions to <strong>Wikimedia Commons</strong> that represents a map of the NUTS3 regions of the European Union. Several countries (France, Portugal, Spain) have overseas territories so I made a few insets on the right side.</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.webp" /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /></p>
 
 </div>
 				]]>
@@ -3971,8 +3971,8 @@ End Function
 			<link>https://dieghernan.github.io/201911_QuickR/</link>
 			<category>posts</category>
 		    <category>flags</category><category>inset</category><category>maps</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Quick R: Inset maps ]]></media:title>
-      <media:content url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.webp" medium="image"/>
-      <media:thumbnail url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201911_QuickR/</guid>
+      <media:content url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" medium="image"/>
+      <media:thumbnail url="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /><guid isPermaLink="true">https://dieghernan.github.io/201911_QuickR/</guid>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>Wikipedia Maps (I): Organ donor rates</title>
@@ -4149,7 +4149,7 @@ End Function
 
 <p>And that’s all. Our <code class="language-plaintext highlighter-rouge">.svg</code> file is ready to be included in Wikipedia.</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" alt="img" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png" alt="img" /></p>
 
 <p class="alert alert-info p-3 mx-2 mb-3"><strong>Update</strong>: The map is already part of the <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary">Wikipedia article</a>.</p>
 </div>
@@ -4158,8 +4158,8 @@ End Function
 			<link>https://dieghernan.github.io/201910_WikiMap1/</link>
 			<category>posts</category>
 		    <category>Wikipedia</category><category>cartography</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>svg</category><media:title type="html"><![CDATA[Wikipedia Maps (I): Organ donor rates ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201910_WikiMap1/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.png" /><guid isPermaLink="true">https://dieghernan.github.io/201910_WikiMap1/</guid>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Beautiful Maps with R (II): Fun with flags</title>
@@ -4170,7 +4170,7 @@ End Function
     		<p>3 min.</p>
 				<div><p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 29 december 2020</strong>: All these pieces of work are already available on <code class="language-plaintext highlighter-rouge">cartography &gt;v.2.4.0</code> on functions <a href="http://riatelab.github.io/cartography/docs/reference/getPngLayer.html"><code class="language-plaintext highlighter-rouge">getPngLayer</code></a>. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated blog post with examples on this <a href="../202002_cartography1">link</a>.</p>
 
-<p>Want to use a flag (or any <code class="language-plaintext highlighter-rouge">*.webp</code> file) as a background of your map? You are in the right post. I am aware that there are some <strong>R</strong> packages out <a href="https://github.com/RobertMyles/flagfillr">there</a>, but we focus here in the option provided by <code class="language-plaintext highlighter-rouge">cartography::getPngLayer()</code>, that basically converts your image into a raster (see also this article of <a href="https://www.stat.auckland.ac.nz/people/pmur002">Paul Murrell</a>, <strong>“Raster Images in R Graphics”</strong> <a href="https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf">(<em>The R Journal, Volume 3/1, June 2011</em>)</a>).</p>
+<p>Want to use a flag (or any <code class="language-plaintext highlighter-rouge">*.png</code> file) as a background of your map? You are in the right post. I am aware that there are some <strong>R</strong> packages out <a href="https://github.com/RobertMyles/flagfillr">there</a>, but we focus here in the option provided by <code class="language-plaintext highlighter-rouge">cartography::getPngLayer()</code>, that basically converts your image into a raster (see also this article of <a href="https://www.stat.auckland.ac.nz/people/pmur002">Paul Murrell</a>, <strong>“Raster Images in R Graphics”</strong> <a href="https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf">(<em>The R Journal, Volume 3/1, June 2011</em>)</a>).</p>
 
 <h2 id="required-r-packages">Required R packages</h2>
 
@@ -4216,13 +4216,13 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">bboxcan</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.webp" alt="plot of chunk 20190618_preparing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.png" alt="plot of chunk 20190618_preparing" /></p>
 
 <p>Now we have it! A nice map of Spain with a layout based on the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps">Wikipedia convention for location maps</a>.</p>
 
 <h2 id="loading-the-flag">Loading the flag</h2>
 
-<p>As a first example, I chose <a href="https://en.wikipedia.org/wiki/Asturias">Asturias</a> to build my code. So the goal here is to create a <code class="language-plaintext highlighter-rouge">RasterBrick</code> from the desired <code class="language-plaintext highlighter-rouge">*.webp</code> file, add the necessary geographical information and use the shape of Asturias to crop the flag.</p>
+<p>As a first example, I chose <a href="https://en.wikipedia.org/wiki/Asturias">Asturias</a> to build my code. So the goal here is to create a <code class="language-plaintext highlighter-rouge">RasterBrick</code> from the desired <code class="language-plaintext highlighter-rouge">*.png</code> file, add the necessary geographical information and use the shape of Asturias to crop the flag.</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 1.Shape---</span><span class="w">
 </span><span class="n">shp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Spain</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Asturias"</span><span class="p">)</span><span class="w">
@@ -4230,7 +4230,7 @@ End Function
 </span><span class="c1"># 2.Get flag---</span><span class="w">
 
 </span><span class="c1"># Masked</span><span class="w">
-</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_Asturias.svg/800px-Flag_of_Asturias.svg.webp"</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Flag_of_Asturias.svg/800px-Flag_of_Asturias.svg.png"</span><span class="w">
 
 </span><span class="n">flagnomask</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">shp</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 
@@ -4246,21 +4246,21 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Spain</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="plot of chunk 20190618_Asturias" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.png" alt="plot of chunk 20190618_Asturias" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p class="alert alert-info p-3 mx-2 mb-3"><i class="fa fa-star"></i> <strong>Pro tip:</strong> Use high-quality <code class="language-plaintext highlighter-rouge">*.webp</code>, otherwise the plot would look quite poor. Here I show an extreme example.</p>
+<p class="alert alert-info p-3 mx-2 mb-3"><i class="fa fa-star"></i> <strong>Pro tip:</strong> Use high-quality <code class="language-plaintext highlighter-rouge">*.png</code>, otherwise the plot would look quite poor. Here I show an extreme example.</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MURshp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Spain</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Murcia"</span><span class="p">)</span><span class="w">
 </span><span class="n">MURLow</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="w">
   </span><span class="n">MURshp</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/100px-Flag_of_the_Region_of_Murcia.svg.webp"</span><span class="w">
+  </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/100px-Flag_of_the_Region_of_Murcia.svg.png"</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span><span class="n">MURHigh</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="w">
   </span><span class="n">MURshp</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/1200px-Flag_of_the_Region_of_Murcia.svg.webp"</span><span class="w">
+  </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_Region_of_Murcia.svg/1200px-Flag_of_the_Region_of_Murcia.svg.png"</span><span class="w">
 </span><span class="p">)</span><span class="w">
 
 
@@ -4274,7 +4274,7 @@ End Function
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">MURHigh</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.webp" alt="plot of chunk 20190618_svg" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.png" alt="plot of chunk 20190618_svg" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -4303,7 +4303,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span><span class="c1"># Andalucia</span><span class="w">
 </span><span class="n">flag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">
-  </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bandera_de_Andalucia.svg/1000px-Bandera_de_Andalucia.svg.webp"</span><span class="w">
+  </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Bandera_de_Andalucia.svg/1000px-Bandera_de_Andalucia.svg.png"</span><span class="w">
 </span><span class="n">shp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Spain</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Andalucía"</span><span class="p">)</span><span class="w">
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">shp</span><span class="p">,</span><span class="w"> </span><span class="n">flag</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 
@@ -4317,7 +4317,7 @@ End Function
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="plot of chunk 20190618_allCCAA" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.png" alt="plot of chunk 20190618_allCCAA" /></p>
 
 <p>We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.</p>
 
@@ -4327,8 +4327,8 @@ End Function
 			<link>https://dieghernan.github.io/201906_Beautiful2/</link>
 			<category>posts</category>
 		    <category>beautiful_maps</category><category>flags</category><category>function</category><category>giscoR</category><category>mapSpain</category><category>maps</category><category>r_bloggers</category><category>raster</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Beautiful Maps with R (II): Fun with flags ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful2/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful2/</guid>
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Beautiful Maps with R (I): Fishnets, Honeycombs and Pixels</title>
@@ -4461,7 +4461,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Puzzle</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Puzzle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_squares-1.webp" alt="plot of chunk 20190602_squares" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_squares-1.png" alt="plot of chunk 20190602_squares" /></p>
 
 <h2 id="going-hex">Going hex</h2>
 
@@ -4519,7 +4519,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Hexbin</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hexbin"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.webp" alt="plot of chunk 20190602_hex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.png" alt="plot of chunk 20190602_hex" /></p>
 
 <h2 id="pixel-it">Pixel it!</h2>
 
@@ -4557,7 +4557,7 @@ End Function
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Pixel</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Pixel"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_pix-1.webp" alt="plot of chunk 20190602_pix" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_pix-1.png" alt="plot of chunk 20190602_pix" /></p>
 
 <h2 id="wrap-up">Wrap up</h2>
 
@@ -4654,7 +4654,7 @@ End Function
 </span><span class="n">pix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_gridpol</span><span class="p">(</span><span class="n">GB</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"pixel"</span><span class="p">,</span><span class="w"> </span><span class="n">gridsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.webp" alt="plot of chunk 20190602_functionex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.png" alt="plot of chunk 20190602_functionex" /></p>
 
 <p>And that’s it! The function <code class="language-plaintext highlighter-rouge">stdh_gridpol</code> has some alert mechanisms, as accepting only <code class="language-plaintext highlighter-rouge">POLYGON</code> or <code class="language-plaintext highlighter-rouge">MULTIPOLYGON</code>, and the default value of <code class="language-plaintext highlighter-rouge">gridsize</code> is computed in a way that the shortest dimension would have 40 cells.</p>
 
@@ -4664,8 +4664,8 @@ End Function
 			<link>https://dieghernan.github.io/201906_Beautiful1/</link>
 			<category>posts</category>
 		    <category>beautiful_maps</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful1/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful1/</guid>
       <pubDate>Sun, 02 Jun 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Leaflet, R, Markdown, Jekyll and GitHub</title>
@@ -4816,7 +4816,7 @@ created with the front matter:</p>
 <span class="na">title</span><span class="pi">:</span> <span class="s">Leaflet, &lt;strong&gt;R&lt;/strong&gt;, Markdown, Jekyll and GitHub</span>
 <span class="na">subtitle</span><span class="pi">:</span> <span class="s">Make it work in 6 steps - a short tutorial</span>
 <span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">R</span><span class="pi">,</span><span class="nv">leaflet</span><span class="pi">,</span><span class="nv">Jekyll</span><span class="pi">,</span> <span class="nv">html</span><span class="pi">,</span> <span class="nv">maps</span><span class="pi">]</span>
-<span class="na">header_img</span><span class="pi">:</span> <span class="s">https://dieghernan.github.io/assets/figs/20190520_imgpost.webp</span>
+<span class="na">header_img</span><span class="pi">:</span> <span class="s">https://dieghernan.github.io/assets/figs/20190520_imgpost.png</span>
 <span class="na">leafletmap</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">always_allow_html</span><span class="pi">:</span> <span class="s">yes</span>
 <span class="na">last_modified_at</span><span class="pi">:</span> <span class="s">2021-05-30</span>
@@ -4878,7 +4878,7 @@ properly set, when Jekyll builds your post it would include the
 libraries in the header and make the magic happens, just like this:</p>
 
 <div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 
 <p class="alert alert-warning p-3 mx-2 my-3"><i class="fa fa-exclamation-triangle"></i> <strong>Warning:</strong> Have you checked
 the YAML front matter of your <code class="language-plaintext highlighter-rouge">.md</code> file? Have another look, specially
@@ -4910,7 +4910,7 @@ wouldn’t look as nice in laptops, etc. and vice versa.</p>
 </span></code></pre></div></div>
 
 <div id="htmlwidget-0e60ff221279290607a4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0e60ff221279290607a4">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-0e60ff221279290607a4">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
 
 <h5 id="example-2-200x300px">Example 2: 200x300px</h5>
 
@@ -4926,7 +4926,7 @@ wouldn’t look as nice in laptops, etc. and vice versa.</p>
 </span></code></pre></div></div>
 
 <div id="htmlwidget-fb456eae6cf883f81850" style="width:200px;height:300px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fb456eae6cf883f81850">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-fb456eae6cf883f81850">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
 
 <h4 id="responsive-size">Responsive size</h4>
 
@@ -4945,7 +4945,7 @@ screen, no matter what device you are using.</p>
 </span></code></pre></div></div>
 
 <div id="htmlwidget-d72518ef7cb92abb839a" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d72518ef7cb92abb839a">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-d72518ef7cb92abb839a">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
 
 </div>
 				]]>
@@ -4953,8 +4953,8 @@ screen, no matter what device you are using.</p>
 			<link>https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</link>
 			<category>posts</category>
 		    <category>Jekyll</category><category>html</category><category>leaflet</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.png" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</guid>
       <pubDate>Mon, 20 May 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Where in the world?</title>
@@ -5123,8 +5123,8 @@ places I have traveled by plain</p>
 			<link>https://dieghernan.github.io/201905_Where-in-the-world/</link>
 			<category>posts</category>
 		    <category>leaflet</category><category>maps</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Where in the world? ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Where-in-the-world/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.png" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Where-in-the-world/</guid>
       <pubDate>Mon, 13 May 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Cast a line to subsegments in R</title>
@@ -5157,11 +5157,11 @@ places I have traveled by plain</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp" alt="plot of chunk 20190505_italycast" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.png" alt="plot of chunk 20190505_italycast" /></p>
 
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> is the possibility to “break” the <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into sub-segments:</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="plot of chunk 20190505_italycastsub" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.png" alt="plot of chunk 20190505_italycastsub" /></p>
 
 <h2 id="an-approach">An approach</h2>
 
@@ -5188,7 +5188,7 @@ places I have traveled by plain</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"AFTER FUNCTION"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp" alt="plot of chunk 20190505_testspain" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.png" alt="plot of chunk 20190505_testspain" /></p>
 
 <h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></h2>
 
@@ -5305,7 +5305,7 @@ places I have traveled by plain</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="plot of chunk 20190505_benchmarkfunction" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.png" alt="plot of chunk 20190505_benchmarkfunction" /></p>
 
 <p>It can be seen a difference in terms of performance, noting that <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed in 914 sub-strings while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons to 8,414 sub-strings. In that sense, the original <code class="language-plaintext highlighter-rouge">st_cast</code> is much faster, although this solution may work well in most cases.</p>
 </div>
@@ -5314,8 +5314,8 @@ places I have traveled by plain</p>
 			<link>https://dieghernan.github.io/201905_Cast-to-subsegments/</link>
 			<category>posts</category>
 		    <category>function</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Cast a line to subsegments in R ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Cast-to-subsegments/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Cast-to-subsegments/</guid>
       <pubDate>Sun, 05 May 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Using CountryCodes database and sf package</title>
@@ -5598,15 +5598,15 @@ and replacing the <code class="language-plaintext highlighter-rouge">dataframe</
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" alt="plot of chunk 20190427_mapfin" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png" alt="plot of chunk 20190427_mapfin" /></p>
 </div>
 				]]>
 			</description>
 			<link>https://dieghernan.github.io/201904_Using-CountryCodes/</link>
 			<category>posts</category>
 		    <category>maps</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[Using CountryCodes database and sf package ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201904_Using-CountryCodes/</guid>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.png" /><guid isPermaLink="true">https://dieghernan.github.io/201904_Using-CountryCodes/</guid>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0200</pubDate>
 		</item><item>
 			<title>Country Codes &amp; Organizations</title>
