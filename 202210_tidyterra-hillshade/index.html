@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-16 11:02:47 +0100 -->
+    <!-- Page build 2022-12-16 11:08:06 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -688,7 +688,7 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
 <div class="container my-3 pb-2">
  <div class="row">
    <div class="col-lg-8 offset-lg-2">
-   <div id="welcomments__container" class="welcomments__container"><h3 id="welcomments__comment-count-title" class="welcomments__comments-title">4 comments</h3><section id="welcomments__comment-container" class="welcomments__comment-container"><article
+   <div id="welcomments__container" class="welcomments__container"><h3 id="welcomments__comment-count-title" class="welcomments__comments-title">5 comments</h3><section id="welcomments__comment-container" class="welcomments__comment-container"><article
   id="welcomments__comment-01GMD56ZF6XWNN5EXAW2QT87RZ"
   class="welcomments__comment"
   data-comment-id="01GMD56ZF6XWNN5EXAW2QT87RZ"
@@ -766,6 +766,46 @@ mydir &lt;- "~/R/mapslib/misc" "
   <a class="welcomments__comment-reply-link"
      href="https://welcomments.io/api/websites/ZA8ne8kiZoF0Xocf8P9AEOWIq/comments/01GMD63ZV5G6VRKN25J3CCYXPQ/reply">
     Reply to dieghernan 
+  </a>
+</article>
+<article
+  id="welcomments__comment-01GMD6DKT63Z8BSARYKQJKNZ2Y"
+  class="welcomments__comment welcomments__nesting-level-2"
+  data-comment-id="01GMD6DKT63Z8BSARYKQJKNZ2Y"
+  data-author-name="Jim D"
+  data-nesting-level="2"
+  itemprop="comment" itemscope itemtype="https://schema.org/Comment">
+ <div class="welcomments__comment-header">
+   <div class="welcomments__author-avatar">
+      <img class="welcomments__author-avatar-img" src="https://eu.ui-avatars.com/api/?background=random&name=Jim D" alt="Jim D"/>
+   </div>
+   <div class="welcomments__author-information">
+     <div class="welcomments__author-name-and-time">
+       <h3 class="welcomments__author-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Jim D</span></h3>
+       <p class="welcomments__comment-time">
+          <a href="#welcomments__comment-01GMD6DKT63Z8BSARYKQJKNZ2Y" itemprop="url">
+            <time datetime="2022-12-16T11:07:03+01:00" itemprop="datePublished">December 16, 2022</time>
+          </a>
+       </p>
+     </div>
+   </div>
+ </div>
+ <div itemprop="text" class="welcomments__comment-message"><p>Thanks for the quick response.</p>
+<p>I was finally able to get geodata off the github page using:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># install.packages("remotes")</span><span class="w">
+</span><span class="n">remotes</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"rspatial/geodata"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Could not get it from repository. Still likes geoData as name.</p>
+<p>I realized that:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Cache map data
+mydir &lt;- "~/R/mapslib/misc"
+</code></pre></div></div>
+<p>was you setting YOUR path. I normally use a Project setup so I misinterperted your misc as the final stored data file. I see now that the “elevation_30s” function in geodata actually loads the data and you need a place to store it. MY BAD!</p>
+<p>Ok I’ll keep on going to see if I can run the whole code. Thanks for a real nice sample. I may change it a little for <a href="https://github.com/tjukanovt/30DayMapChallenge">the 30DayMapChallenge</a> . It’s coming up in November. I will certainly cite you as the creator. Thanks…JD</p>
+</div>
+  <a class="welcomments__comment-reply-link"
+     href="https://welcomments.io/api/websites/ZA8ne8kiZoF0Xocf8P9AEOWIq/comments/01GMD6DKT63Z8BSARYKQJKNZ2Y/reply">
+    Reply to Jim D
   </a>
 </article>
 <article
