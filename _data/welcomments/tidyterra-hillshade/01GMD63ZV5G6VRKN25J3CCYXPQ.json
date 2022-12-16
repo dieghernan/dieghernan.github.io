@@ -1,0 +1,11 @@
+{
+  "author": {
+    "name": "dieghernan ",
+    "website": "https://dieghernan.github.io/"
+  },
+  "date": "2022-12-16T10:01:48Z",
+  "id": "01GMD63ZV5G6VRKN25J3CCYXPQ",
+  "message": "Hi Jim, thanks for your comments:\n\n1. The library name is `geodata`, it is on [CRAN](https://cran.r-project.org/web/packages/geodata/index.html). You should be able to install it with\n2. `install.packages(\"geodata\")`.\n3. The \"mapslib\" folder is a working folder on my computer where I stored data to avoid re-downloading files. You probably don't have it, so you can use a custom folder as (some examples):\n\n```r\nmydir <- \".\" # Data downloaded on your working folder, see getwd()\n```\n\nOr\n\n```r\n# Temporary folder\nmydir <- tempdir() \n\n```\n\nHope this helps.",
+  "message_html": "<p>Hi Jim, thanks for your comments:</p><ol><li><p>The library name is <code class=\"inline\">geodata</code>, it is on <a href=\"https://cran.r-project.org/web/packages/geodata/index.html\" rel=\"external nofollow\" target=\"_blank\">CRAN</a>. You should be able to install it with<br /><code class=\"inline\">install.packages(&quot;geodata&quot;)</code>.</p></li><li><p>The “mapslib” folder is a working folder on my computer where I stored data to avoid re-downloading files. You probably don’t have it, so you can use a custom folder as (some examples):</p></li></ol><pre><code class=\"r\">mydir &lt;- &quot;.&quot; # Data downloaded on your working folder, see getwd()</code></pre><p>Or</p><pre><code class=\"r\"># Temporary folder\nmydir &lt;- tempdir() \n</code></pre><p>Hope this helps.</p>",
+  "replying_to": "01GMD56ZF6XWNN5EXAW2QT87RZ"
+}
