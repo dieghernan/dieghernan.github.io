@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-16 12:47:35 +0100 -->
+    <!-- Page build 2022-12-16 13:14:22 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -839,7 +839,8 @@ End Function
    </div>
    <div class="welcomments__author-information">
      <div class="welcomments__author-name-and-time">
-       <h3 class="welcomments__author-name" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><a href="${comment.author.website}">${comment.author.name}</a></span></h3>
+       <h3 class="welcomments__author-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span itemprop="name">${comment.author.name}</span><a href="${comment.author.website}" class="mx-2" title="${comment.author.name} url"><span class="sr-only">${comment.author.name} url</span><i class="fas fa-link fa-xs" aria-hidden="true"></i></a></h3>
        <p class="welcomments__comment-time">
           <a href="#welcomments__comment-${comment.id}" itemprop="url">
             <time datetime="" itemprop="datePublished">${month} ${day}, ${year}</time>
@@ -854,7 +855,7 @@ End Function
     Reply to ${comment.author.name}
   </a>
 </article>
-`;
+<a href="#gallery-size-of-a-leaflet-map-" class="mx-2" title="Permalink"><span class="sr-only">Permalink</span><i class="fas fa-link fa-xs" aria-hidden="true"></i></a>`;
     },
   };
 </script>
