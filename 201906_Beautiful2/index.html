@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2022-12-20 20:40:55 +0100 -->
+    <!-- Page build 2022-12-22 13:12:15 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -124,7 +124,9 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" />
+<link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css">
+  <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
+<link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
@@ -371,7 +373,8 @@
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="plot of chunk 20190618_allCCAA" /></p>
 <p>We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.</p>
-</article>
+			<div class="mb-2 mt-5 text-center"><applause-button id="applause" class="mx-auto" style="width: 40px; height: 40px;" url="https://dieghernan.github.io/201906_Beautiful2/"></applause-button></div>
+			</article>
 		</div>
 	</main>
 <div class="container-lg mt-1 mb-2">
@@ -457,9 +460,9 @@
  <div class="row">
    <div class="col-lg-8 offset-lg-2">
    <div id="welcomments__container" class="welcomments__container"><h3 id="welcomments__comment-count-title" class="welcomments__comments-title">No comments yet!</h3><section id="welcomments__comment-container" class="welcomments__comment-container"></section><form id="welcomments__form" class="welcomments__comment-form" autocomplete="on" action="https://welcomments.io/api/comments" method="post">
-  <input type="hidden" name="website-id" id="website-id" value="ZA8ne8kiZoF0Xocf8P9AEOWIq"/>
-  <input type="hidden" name="replying-to" id="replying-to"/>
-  <input type="hidden" name="permalink" id="permalink" value="https://dieghernan.github.io/201906_Beautiful2/"/>
+  <input type="hidden" name="website-id" id="website-id" value="ZA8ne8kiZoF0Xocf8P9AEOWIq" >
+  <input type="hidden" name="replying-to" id="replying-to" >
+  <input type="hidden" name="permalink" id="permalink" value="https://dieghernan.github.io/201906_Beautiful2/" >
   <input type="hidden" name="page-slug" id="page-slug" value="Beautiful2"/>
  <div class="welcomments__form-group">
     <textarea rows="10" name="message" id="message" required spellcheck="true" placeholder="Type here..."></textarea>
@@ -467,16 +470,16 @@
  </div>
  <div class="welcomments__form-group">
     <label for="author-name">Name</label>
-    <input type="text" id="author-name" name="author-name" required spellcheck="false" placeholder="Your name"/>
+    <input type="text" id="author-name" name="author-name" required spellcheck="false" placeholder="Your name">
  </div>
  <div class="welcomments__form-group welcomments__flex">
    <div class="welcomments__column-left">
       <label for="author-url">Website <span class="welcomments__optional-notice">(optional)</span></label>
-      <input type="url" id="author-url" name="author-url" placeholder="https://example.com"/>
+      <input type="url" id="author-url" name="author-url" placeholder="https://example.com" >
    </div>
    <div class="welcomments__column-right">
       <label for="author-email">Email <span class="welcomments__optional-notice">(optional)</span></label>
-      <input type="email" id="author-email" name="author-email" placeholder="johndoe@example.com"/>
+      <input type="email" id="author-email" name="author-email" placeholder="johndoe@example.com" >
    </div>
  </div>
  <p class="welcomments__email-notice">Fill in your email address if you want to get notified when someone replies to your comment. Your email address is safely stored with strong 256-bit AES encryption. You can unsubscribe from notification emails any time by following a link on the bottom of a reply notification email. Check also your spam folder</p>
@@ -498,7 +501,7 @@
   It's gzipped and weighs just about 2.1kB. If you want, you can just delete this line
   and your comment form works just fine but is a bit less interactive! :-)
                                                                                -->
-<script defer id="welcomments__script" src="https://cdn.welcomments.io/welcomments.js" type="text/javascript"></script>
+<script defer id="welcomments__script" src="https://cdn.welcomments.io/welcomments.js" ></script>
 <script type="text/javascript">
   welcomments = {
     apiUrl: "https://welcomments.io/api",
@@ -530,7 +533,7 @@
   itemprop="comment" itemscope itemtype="https://schema.org/Comment">
  <div class="welcomments__comment-header">
    <div class="welcomments__author-avatar">
-      <img class="welcomments__author-avatar-img" src="${avatarUrl}" alt="${comment.author.name}"/>
+      <img class="welcomments__author-avatar-img" src="${avatarUrl}" alt="${comment.author.name}">
    </div>
    <div class="welcomments__author-information">
      <div class="welcomments__author-name-and-time">
