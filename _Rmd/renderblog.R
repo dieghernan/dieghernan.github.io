@@ -91,7 +91,7 @@ diegpost_draft <- function(file) {
 }
 
 
-file <- "tidyterra-hillshade-2"
+file <- "star-map-R"
 diegpost_draft(file)
 
 
