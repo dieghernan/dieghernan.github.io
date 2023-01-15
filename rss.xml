@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2023, dieghernan</copyright>	
-		<pubDate>Sat, 14 Jan 2023 20:40:54 +0100</pubDate>
-		<lastBuildDate>Sat, 14 Jan 2023 20:40:54 +0100</lastBuildDate>
+		<pubDate>Sun, 15 Jan 2023 10:48:30 +0100</pubDate>
+		<lastBuildDate>Sun, 15 Jan 2023 10:48:30 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -18,6 +18,442 @@
 			<link>https://dieghernan.github.io/</link>
 			<description>Personal blog of dieghernan</description>
 		</image><item>
+			<title>Star Map with R</title>
+			<description>
+				<![CDATA[	
+ 				<h3><p>Creating Star Map Visualizations Based on Location and Date</p>
+</h3>
+    		<p>5 min.</p>
+				<div><p>Intro…</p>
+
+<h2 id="libraries">Libraries</h2>
+
+<p>On this post we would use the following libraries:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Libraries</span><span class="w">
+
+</span><span class="c1"># Spatial manipulation</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">nominatimlite</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Wrange data and dates</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">lutz</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Visualization</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggfx</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggshadow</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="helper-funs">Helper funs</h2>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">autoplot_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">...</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1"># Derive rotation degrees of the projection given a date and a longitude</span><span class="w">
+</span><span class="n">mst_rot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">datetime</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Convert datetime to UTC datetime using Meeus</span><span class="w">
+  </span><span class="c1"># See https://squarewidget.com/julian-day/</span><span class="w">
+  </span><span class="n">desired_date_utc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">with_tz</span><span class="p">(</span><span class="n">datetime</span><span class="p">,</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+
+
+  </span><span class="n">yr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">year</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">mo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">month</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">day</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hour</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">minute</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">second</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">mo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">mo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">yr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">yr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w">
+    </span><span class="n">mo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">12</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="c1"># Adjust times before Gregorian Calendar</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">as_date</span><span class="p">(</span><span class="n">datetime</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">as.Date</span><span class="p">(</span><span class="s2">"1582-10-14"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">yr</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w">
+    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="m">365.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yr</span><span class="p">)</span><span class="w">
+  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="m">30.6001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">mo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+
+
+  </span><span class="c1"># days since J2000.0</span><span class="w">
+  </span><span class="n">jd_r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">730550.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">3600.0</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">24.0</span><span class="w">
+  </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">jd_r</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">36525</span><span class="w">
+
+  </span><span class="c1"># Rotation</span><span class="w">
+  </span><span class="n">mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">280.46061837</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">360.98564736629</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">jd_r</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="m">0.000387933</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t</span><span class="o">^</span><span class="m">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">38710000.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lon</span><span class="w">
+
+  </span><span class="c1"># Modulo 360 degrees</span><span class="w">
+  </span><span class="n">lon_prj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mst</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">360</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">lon_prj</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1"># Cut a sf object with a buffer using spherical s2 geoms</span><span class="w">
+</span><span class="c1"># Optionally, project and flip</span><span class="w">
+
+</span><span class="n">sf_spherical_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Keep df</span><span class="w">
+  </span><span class="n">the_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">the_geom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_geom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_as_s2</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">s2_intersection</span><span class="p">(</span><span class="n">the_buff</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_as_sfc</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_sf</span><span class="p">(</span><span class="n">the_df</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">.</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the_crs</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">.</span><span class="p">))</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">flip</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">mutate</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">flip</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">st_set_crs</span><span class="p">(</span><span class="n">the_crs</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">the_cut</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="inputs">Inputs</h2>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">desired_place</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Madrid, Spain"</span><span class="w">
+</span><span class="n">desired_date</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">make_datetime</span><span class="p">(</span><span class="w">
+  </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2019</span><span class="p">,</span><span class="w">
+  </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w">
+  </span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+  </span><span class="n">hour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w">
+  </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">38</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Geocode place</span><span class="w">
+</span><span class="n">desired_place_geo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geo_lite</span><span class="p">(</span><span class="n">desired_place</span><span class="p">,</span><span class="w"> </span><span class="n">full_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">desired_place_geo</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; # A tibble: 1 × 3</span><span class="w">
+</span><span class="c1">#&gt;   address                                                                                    lat   lon</span><span class="w">
+</span><span class="c1">#&gt;   &lt;chr&gt;                                                                                    &lt;dbl&gt; &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">#&gt; 1 Madrid, Área metropolitana de Madrid y Corredor del Henares, Comunidad de Madrid, España  40.4 -3.70</span><span class="w">
+
+</span><span class="c1"># And get the coordinates</span><span class="w">
+</span><span class="n">desired_loc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">desired_place_geo</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">unlist</span><span class="p">()</span><span class="w">
+
+</span><span class="n">desired_loc</span><span class="w">
+</span><span class="c1">#&gt;       lat       lon </span><span class="w">
+</span><span class="c1">#&gt; 40.416705 -3.703582</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Get tz</span><span class="w">
+</span><span class="n">get_tz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tz_lookup_coords</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">warn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">get_tz</span><span class="w">
+</span><span class="c1">#&gt; [1] "Europe/Madrid"</span><span class="w">
+
+</span><span class="c1"># Force it to be local time</span><span class="w">
+</span><span class="n">desired_date_tz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">force_tz</span><span class="p">(</span><span class="n">desired_date</span><span class="p">,</span><span class="w"> </span><span class="n">get_tz</span><span class="p">)</span><span class="w">
+
+</span><span class="n">desired_date_tz</span><span class="w">
+</span><span class="c1">#&gt; [1] "2019-06-01 20:38:00 CEST"</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get the rotation and prepare buffer and projection</span><span class="w">
+
+</span><span class="n">lon_prj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mst_rot</span><span class="p">(</span><span class="n">desired_date_tz</span><span class="p">,</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">])</span><span class="w">
+</span><span class="n">lat_prj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+
+</span><span class="nf">c</span><span class="p">(</span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt;      lon      lat </span><span class="w">
+</span><span class="c1">#&gt; 165.7549  40.4167</span><span class="w">
+
+</span><span class="c1"># Create proj4string w/ Airy projection</span><span class="w">
+
+</span><span class="n">target_crs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"+proj=airy +x_0=0 +y_0=0 +lon_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">" +lat_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># We need to flip celestial objects</span><span class="w">
+</span><span class="c1"># Flip matrix</span><span class="w">
+</span><span class="n">flip_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># And create an s2 buffer of the visible hemisphere on the given location</span><span class="w">
+</span><span class="n">hemisphere_s2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">s2_buffer_cells</span><span class="p">(</span><span class="n">as_s2_geography</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"POINT("</span><span class="p">,</span><span class="w"> </span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">")"</span><span class="p">)),</span><span class="w">
+  </span><span class="m">9800000</span><span class="p">,</span><span class="w">
+  </span><span class="n">max_cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># This one is for plotting</span><span class="w">
+</span><span class="n">hemisphere_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="celestial-data">Celestial data</h2>
+
+<h3 id="constellations">Constellations</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/ofrohn/d3-celestial/master/data/constellations.lines.json"</span><span class="w">
+</span><span class="n">basefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w">
+
+</span><span class="n">local_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">here</span><span class="o">::</span><span class="n">here</span><span class="p">(</span><span class="s2">"assets"</span><span class="p">,</span><span class="w"> </span><span class="s2">"data"</span><span class="p">,</span><span class="w"> </span><span class="n">basefile</span><span class="p">)</span><span class="w">
+
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file.exists</span><span class="p">(</span><span class="n">local_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span><span class="n">const_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Cut to buffer</span><span class="w">
+</span><span class="n">const_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">const_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">const_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">const_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">const_init</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">const_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">const_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/drafts/xxx_constellations-1.png" alt="plot of chunk xxx_constellations" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_constellations-2.png" alt="plot of chunk xxx_constellations" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_constellations-3.png" alt="plot of chunk xxx_constellations" width="33%" /></p>
+
+<h3 id="stars">Stars</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/ofrohn/d3-celestial/master/data/stars.6.json"</span><span class="w">
+</span><span class="n">basefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w">
+
+</span><span class="n">local_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">here</span><span class="o">::</span><span class="n">here</span><span class="p">(</span><span class="s2">"assets"</span><span class="p">,</span><span class="w"> </span><span class="s2">"data"</span><span class="p">,</span><span class="w"> </span><span class="n">basefile</span><span class="p">)</span><span class="w">
+
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file.exists</span><span class="p">(</span><span class="n">local_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span><span class="n">stars_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Adjust Brightness relative to mag = 0</span><span class="w">
+</span><span class="n">stars_init</span><span class="o">$</span><span class="n">rel_bright</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="m">100</span><span class="o">^</span><span class="p">(</span><span class="m">-1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">stars_init</span><span class="o">$</span><span class="n">mag</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">5</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Cut to buffer</span><span class="w">
+</span><span class="n">stars_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">stars_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">stars_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">stars_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">stars_init</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">stars_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">stars_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/drafts/xxx_stars-1.png" alt="plot of chunk xxx_stars" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_stars-2.png" alt="plot of chunk xxx_stars" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_stars-3.png" alt="plot of chunk xxx_stars" width="33%" /></p>
+
+<h3 id="the-milky-way">The Milky Way</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/dieghernan/dieghernan.github.io/master/assets/data/milkyway_R.json"</span><span class="w">
+</span><span class="n">basefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w">
+
+</span><span class="n">local_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">here</span><span class="o">::</span><span class="n">here</span><span class="p">(</span><span class="s2">"assets"</span><span class="p">,</span><span class="w"> </span><span class="s2">"data"</span><span class="p">,</span><span class="w"> </span><span class="n">basefile</span><span class="p">)</span><span class="w">
+
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file.exists</span><span class="p">(</span><span class="n">local_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span><span class="n">mw_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add colors to MW to use on fill</span><span class="w">
+</span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">))(</span><span class="m">5</span><span class="p">)</span><span class="w">
+</span><span class="n">mw_init</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cols</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Cut to buffer</span><span class="w">
+</span><span class="n">mw_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">mw_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">mw_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">mw_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">mw_init</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">mw_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">mw_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/drafts/xxx_mw-1.png" alt="plot of chunk xxx_mw" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_mw-2.png" alt="plot of chunk xxx_mw" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_mw-3.png" alt="plot of chunk xxx_mw" width="33%" /></p>
+
+<h3 id="graticules">Graticules</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">grat_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_graticule</span><span class="p">(</span><span class="w">
+  </span><span class="n">ndiscr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000</span><span class="p">,</span><span class="w">
+  </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
+  </span><span class="n">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Cut to buffer, we dont flip this one (it is not an object of the space)</span><span class="w">
+</span><span class="n">grat_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">grat_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">grat_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">grat_init</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">grat_init</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">grat_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_wrap_dateline</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"WRAPDATELINE=YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATELINEOFFSET=180"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">grat_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">autoplot_sf</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/drafts/xxx_grat-1.png" alt="plot of chunk xxx_grat" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_grat-2.png" alt="plot of chunk xxx_grat" width="33%" /><img src="https://dieghernan.github.io/assets/img/drafts/xxx_grat-3.png" alt="plot of chunk xxx_grat" width="33%" /></p>
+
+<h2 id="final-plot-with-special-effects">Final plot (with special effects)</h2>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="n">const_end_lines</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">const_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTILINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_coordinates</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.data.frame</span><span class="p">()</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat_end</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">with_blur</span><span class="p">(</span><span class="w">
+    </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+      </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mw_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w">
+      </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+      </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_glowpoint</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stars_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel_bright</span><span class="p">,</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel_bright</span><span class="p">,</span><span class="w">
+      </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geometry</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+    </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf_coordinates"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">const_end</span><span class="p">,</span><span class="w">
+    </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_glowpath</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">const_end_lines</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interaction</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="w"> </span><span class="n">L2</span><span class="p">)</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.001</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linejoin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="p">,</span><span class="w">
+    </span><span class="n">lineend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_sf</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Scales</span><span class="w">
+  </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.75</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># scale_sha</span><span class="w">
+  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/drafts/xxx_final-1.png" alt="plot of chunk xxx_final" width="100%" /></p>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/202301_star-map-R/</link>
+			<category>posts</category>
+		    <category>astronomy</category><category>ggplot2</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>s2</category><media:title type="html"><![CDATA[Star Map with R ]]></media:title>
+      <media:content url="https://dieghernan.github.io/xxx.png" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/xxx.png" /><guid isPermaLink="true">https://dieghernan.github.io/202301_star-map-R/</guid>
+      <pubDate>Sun, 15 Jan 2023 10:48:16 +0100</pubDate>
+		</item><item>
 			<title>Hillshade, colors and marginal plots with tidyterra (II)</title>
 			<description>
 				<![CDATA[	
