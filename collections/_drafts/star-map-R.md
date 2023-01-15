@@ -133,11 +133,11 @@ sf_spherical_cut <- function(x, the_buff, the_crs = st_crs(x), flip = NULL) {
 
 desired_place <- "Madrid, Spain"
 desired_date <- make_datetime(
-  year = 2019,
-  month = 6,
-  day = 1,
-  hour = 20,
-  min = 38
+  year = 2015,
+  month = 9,
+  day = 22,
+  hour = 3,
+  min = 45
 )
 
 
@@ -174,7 +174,7 @@ get_tz
 desired_date_tz <- force_tz(desired_date, get_tz)
 
 desired_date_tz
-#> [1] "2019-06-01 20:38:00 CEST"
+#> [1] "2015-09-22 03:45:00 CEST"
 ```
 
 
@@ -186,7 +186,7 @@ lat_prj <- desired_loc[1]
 
 c(lon_prj, lat_prj)
 #>      lon      lat 
-#> 165.7549  40.4167
+#> 23.15892 40.41670
 
 # Create proj4string w/ Airy projection
 
@@ -405,7 +405,10 @@ const_end_lines <- const_end %>%
 
 
 ggplot() +
-  geom_sf(data = grat_end, color = "grey60", linewidth = 0.25) +
+  geom_sf(
+    data = grat_end, color = "grey60", linewidth = 0.25,
+    alpha = 0.3
+  ) +
   with_blur(
     geom_sf(
       data = mw_end, aes(fill = fill),
@@ -424,17 +427,13 @@ ggplot() +
     color = "white", show.legend = FALSE,
     stat = "sf_coordinates"
   ) +
-  geom_sf(
-    data = const_end,
-    linewidth = 0.5, color = "white"
-  ) +
   geom_glowpath(
     data = const_end_lines, aes(X, Y,
       group = interaction(L1, L2)
     ),
     color = "white",
-    size = 0.01,
-    alpha = 0.001,
+    size = 0.5,
+    alpha = 0.1,
     shadowsize = 0.4,
     shadowalpha = 0.01,
     shadowcolor = "white",
@@ -443,7 +442,7 @@ ggplot() +
   ) +
   geom_sf(
     data = hemisphere_sf,
-    color = "white", linewidth = 1
+    color = "white", linewidth = 1.25
   ) +
   # Scales
   scale_size_continuous(range = c(0.05, 0.75)) +
@@ -459,3 +458,90 @@ ggplot() +
 ```
 
 <img src="https://dieghernan.github.io/assets/img/drafts/xxx_final-1.png" alt="plot of chunk xxx_final" width="100%" />
+
+## Extra (Chinese constelations)
+
+
+```r
+url <- "https://raw.githubusercontent.com/ofrohn/d3-celestial/master/data/constellations.lines.cn.json"
+basefile <- basename(url)
+
+local_path <- here::here("assets", "data", basefile)
+
+if (!file.exists(local_path)) {
+  download.file(url, local_path, mode = "wb", quiet = TRUE)
+}
+
+
+const_init_cn <- st_read(local_path, quiet = TRUE) %>%
+  st_make_valid()
+
+const_end_cn <- sf_spherical_cut(const_init_cn,
+  the_buff = hemisphere_s2,
+  # Change the crs
+  the_crs = target_crs,
+  flip = flip_matrix
+)
+
+
+const_end_cn_lines <- const_end_cn %>%
+  st_cast("MULTILINESTRING") %>%
+  st_coordinates() %>%
+  as.data.frame()
+
+
+
+ggplot() +
+  geom_sf(
+    data = grat_end, color = "grey60", linewidth = 0.25,
+    alpha = 0.3
+  ) +
+  with_blur(
+    geom_sf(
+      data = mw_end, aes(fill = fill),
+      alpha = 0.1, color = NA,
+      show.legend = FALSE
+    ),
+    sigma = 8
+  ) +
+  scale_fill_identity() +
+  geom_glowpoint(
+    data = stars_end, aes(
+      alpha = rel_bright,
+      size = rel_bright,
+      geometry = geometry
+    ),
+    color = "white", show.legend = FALSE,
+    stat = "sf_coordinates"
+  ) +
+  geom_glowpath(
+    data = const_end_cn_lines, aes(X, Y,
+      group = interaction(L1, L2)
+    ),
+    color = "white",
+    size = 0.5,
+    alpha = 0.1,
+    shadowsize = 0.4,
+    shadowalpha = 0.01,
+    shadowcolor = "white",
+    linejoin = "round",
+    lineend = "round"
+  ) +
+  geom_sf(
+    data = hemisphere_sf,
+    color = "white", linewidth = 1.25
+  ) +
+  # Scales
+  scale_size_continuous(range = c(0.05, 0.75)) +
+  # scale_sha
+  scale_alpha_continuous(range = c(0.1, 0.5)) +
+  theme_void() +
+  theme(
+    text = element_text(colour = "white"),
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = "#191d29", color = "#191d29"),
+    plot.margin = margin(20, 20, 20, 20)
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/drafts/xxx_final_cn-1.png" alt="plot of chunk xxx_final_cn" width="100%" />
