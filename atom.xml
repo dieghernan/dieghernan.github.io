@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2023-01-20T21:08:59+01:00</updated>
+	<updated>2023-01-23T23:15:32+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One world | Projects, maps and coding</title>
 	<subtitle>Projects, maps and coding</subtitle>
@@ -16,8 +16,8 @@
 	<logo>https://dieghernan.github.io/assets/img/site/banner.png</logo><entry>
 		<title>Star Map with R</title>
 		<link href="https://dieghernan.github.io/202301_star-map-R/" rel="alternate" type="text/html" title="Star Map with R"/>
-		<published>2023-01-20T21:08:46+01:00</published>
-		<updated>2023-01-20T21:08:46+01:00</updated>
+		<published>2023-01-23T23:15:12+01:00</published>
+		<updated>2023-01-23T23:15:12+01:00</updated>
 		<id>https://dieghernan.github.io/202301_star-map-R/</id>
 		<content type="html" xml:base="https://dieghernan.github.io/202301_star-map-R/">
 		
@@ -542,6 +542,191 @@
 </summary>
 		<category term="posts"/>
 		<category term="astronomy"/><category term="ggplot2"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="s2"/>
+	</entry><entry>
+		<title>Celestial Data</title>
+		<link href="https://dieghernan.github.io/projects/celestial-data/" rel="alternate" type="text/html" title="Celestial Data"/>
+		<published>2023-01-23T00:00:00+01:00</published>
+		<updated>2023-01-23T00:00:00+01:00</updated>
+		<id>https://dieghernan.github.io/projects/celestial-data/</id>
+		<content type="html" xml:base="https://dieghernan.github.io/projects/celestial-data/">
+		
+		&lt;h3&gt;A compilation of celestial data files&lt;/h3&gt;
+		
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp&#39; &gt;
+			
+	&lt;p&gt;1 min.&lt;/p&gt;
+			&lt;p&gt;&lt;a href=&quot;https://doi.org/10.5281/zenodo.7561601&quot;&gt;&lt;img src=&quot;https://img.shields.io/badge/DOI-10.5281/zenodo.7561601-blue&quot; alt=&quot;DOI&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This project provides several datasets in GeoJSON and GeoPackage
+format of celestial objects as of J2000 epoch.&lt;/p&gt;
+
+&lt;p&gt;The original files were provided on the 
+&lt;a href=&quot;https://github.com/ofrohn/d3-celestial/&quot;&gt;d3-celestial plugin&lt;/a&gt; 
+(&lt;a href=&quot;#ref-frohn2015&quot;&gt;Frohn 2015&lt;/a&gt;) under 
+&lt;a href=&quot;https://opensource.org/licenses/BSD-3-Clause&quot;&gt;BSD 3-Clause&lt;/a&gt;. The datasets 
+produced on this project consists on the same data provided on 
+&lt;a href=&quot;https://github.com/ofrohn/d3-celestial/&quot;&gt;d3-celestial plugin&lt;/a&gt; processed with 
+the &lt;strong&gt;R&lt;/strong&gt; package &lt;strong&gt;sf&lt;/strong&gt; (&lt;a href=&quot;#ref-pebesma2018&quot;&gt;Pebesma 2018&lt;/a&gt;) to ensure its
+validity:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The spatial data objects are bounded to \([-180, -90, 180, 90]\).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Date is provided on WGS84 - World Geodetic System 1984 
+(&lt;a href=&quot;https://epsg.io/4326&quot;&gt;EPSG:4326&lt;/a&gt;).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;All geometries valid as per 
+&lt;a href=&quot;https://postgis.net/docs/ST_IsValid.html&quot;&gt;ST_IsValid&lt;/a&gt; (GEOS &lt;strong&gt;3.9.3&lt;/strong&gt;).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;distribution&quot;&gt;Distribution&lt;/h2&gt;
+
+&lt;p&gt;The data can be accessed from several API endpoints:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- From GitHub --&amp;gt;&lt;/span&gt;
+https://raw.githubusercontent.com/dieghernan/celestial_data/main/data/mw.min.geojson
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- From the Website --&amp;gt;&lt;/span&gt;
+https://dieghernan.github.io/celestial_data/data/mw.min.geojson
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- From jsDelivr --&amp;gt;&lt;/span&gt;
+https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/mw.min.geojson
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;data&quot;&gt;Data&lt;/h2&gt;
+
+&lt;p&gt;Data is provided in GeoJSON (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.geojson&lt;/code&gt;) and GeoPackage (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.gpkg&lt;/code&gt;) format.
+Additionally, for GeoJSON formats a minified version (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.min.geojson&lt;/code&gt;) is
+also provided.&lt;/p&gt;
+
+&lt;p&gt;The data source can be found on the corresponding &lt;a href=&quot;https://github.com/dieghernan/celestial_data/tree/main/data&quot;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;details class=&quot;my-2&quot;&gt;
+  &lt;summary&gt;
+List of files provided
+&lt;/summary&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;asterisms.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;asterisms.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;asterisms.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.cn.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.cn.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.cn.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.borders.min.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.bounds.cn.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.bounds.cn.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.bounds.cn.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.bounds.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.bounds.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.bounds.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.cn.csv&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.cn.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.cn.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.cn.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.csv&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.lines.cn.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.lines.cn.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.lines.cn.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.lines.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.lines.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.lines.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;constellations.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsonames.cn.csv&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsonames.csv&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.14.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.14.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.14.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.20.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.20.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.20.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.6.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.6.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.6.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.bright.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.bright.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dsos.bright.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lg.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lg.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lg.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;messier.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;messier.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;messier.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mw.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mw.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mw.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;starnames.cn.csv&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;starnames.csv&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.14.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.14.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.14.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.6.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.6.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.6.min.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.8.geojson&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.8.gpkg&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stars.8.min.geojson&lt;/code&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;See additional details on &lt;a href=&quot;https://dieghernan.github.io/celestial_data/data&quot;&gt;Deta Description&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;citation&quot;&gt;Citation&lt;/h2&gt;
+
+&lt;p&gt;Please cite these datasets as:&lt;/p&gt;
+
+&lt;p&gt;Frohn, O., &amp;amp; Hernangómez, D. (2023). Celestial Data [Data set].
+&lt;a href=&quot;https://doi.org/10.5281/zenodo.7561601&quot;&gt;https://doi.org/10.5281/zenodo.7561601&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;A BibTeX entry:&lt;/p&gt;
+
+&lt;div class=&quot;language-bibtex highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nc&quot;&gt;@misc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;frohnhernangomez:2023&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;{Celestial Data}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;{Olaf Frohn and Diego Hernangómez}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;year&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2023&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;doi&lt;/span&gt;          &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;{10.5281/zenodo.7561601}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;          &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;{https://dieghernan.github.io/celestial_data/}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div id=&quot;ref-frohn2015&quot; class=&quot;csl-entry&quot;&gt;
+
+  &lt;p&gt;Frohn, Olaf. 2015. “d3-celestial” &lt;a href=&quot;https://github.com/ofrohn/d3-celestial/&quot;&gt;https://github.com/ofrohn/d3-celestial/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;div id=&quot;ref-pebesma2018&quot; class=&quot;csl-entry&quot;&gt;
+
+  &lt;p&gt;Pebesma, Edzer. 2018. “Simple Features for R: Standardized Support for
+Spatial Vector Data.” &lt;em&gt;The R Journal&lt;/em&gt; 10 (1): 439446.
+&lt;a href=&quot;https://doi.org/10.32614/RJ-2018-009&quot;&gt;https://doi.org/10.32614/RJ-2018-009&lt;/a&gt;.&lt;/p&gt;
+
+&lt;/div&gt;
+
+		</content>
+		
+		<author>
+			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+		<summary type="html">This project provides several datasets in GeoJSON and GeoPackage format of celestial objects as of J2000 epoch.</summary>
+		<category term="projects"/>
+		<category term="celestial"/><category term="dataset"/><category term="maps"/><category term="project"/>
 	</entry><entry>
 		<title>Hillshade, colors and marginal plots with tidyterra (II)</title>
 		<link href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" rel="alternate" type="text/html" title="Hillshade, colors and marginal plots with tidyterra (II)"/>
@@ -6590,7 +6775,7 @@ and replacing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot
 
 </summary>
 		<category term="projects"/>
-		<category term="R"/><category term="project"/><category term="webscrapping"/>
+		<category term="R"/><category term="dataset"/><category term="project"/><category term="webscrapping"/>
 	</entry><entry>
 		<title>Bzel</title>
 		<link href="https://dieghernan.github.io/projects/Bzel/" rel="alternate" type="text/html" title="Bzel"/>
