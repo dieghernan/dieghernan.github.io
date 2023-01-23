@@ -2,7 +2,7 @@
 title: Country Codes & Organizations
 subtitle: A database with geocodes
 header_img: ./assets/img/misc/countrycodes.png
-tags: [project,R,webscrapping]
+tags: [project,R,webscrapping,dataset]
 permalink: /projects/Country-Codes-and-International-Organizations/
 date: 2019-04-11
 project_links:
