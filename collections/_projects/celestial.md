@@ -3,7 +3,7 @@ title: Celestial Data
 subtitle: A compilation of celestial data files
 header_img: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
 date: 2023-01-23
-tags: [project,maps,celestial,dataset]
+tags: [project,maps,astronomy,celestial,dataset,csv,geojson, gpkg]
 permalink: /projects/celestial-data/
 mathjax: true
 excerpt: This project provides several datasets in GeoJSON 

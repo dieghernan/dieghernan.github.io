@@ -7,8 +7,12 @@ tags:
 - rspatial
 - maps
 - ggplot2
+- sf
 - s2
 - astronomy
+- celestial
+- geojson
+- gpkg
 output:
   html_document:
   md_document:
@@ -49,7 +53,11 @@ on the same topic. He is preparing a **R** package named
 [`starBliss`](https://github.com/benyamindsmith/starBliss) and hopefully this
 post would be of some help.
 
-## Firsts things first: The data
+I have very little knowledge on this topic, so if you find errors or
+have any suggestions please let me know in the **Comments** section below
+{: .alert .alert-info .p-3 .mx-2 .mb-3}
+
+## First things first: The data
 
 The initial data source of all these projects (Kim, Benjamin and myself) is the
 same, and it is provided on the D3 plugin
@@ -109,7 +117,7 @@ Now we prepare some helper functions:
     improve performance but in any case the underlying data source is the GitHub
     repo.
 
-<details class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show <code>load_celestial</code> and
 <code>pretty_lonlat()</code></summary>
@@ -185,7 +193,7 @@ result is an alternative longitude that we would use to adjust the projection of
 our Star Map. This would provide the rotation observed on **d3-celestial
 plugin**.
 
-<details class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show <code>get_mst()</code></summary>
 
@@ -245,7 +253,7 @@ This also includes some refinements to avoid empty/non-valid geometries as well
 as `GEOMETRYCOLLECTION` handling. The function `sf_spherical_cut()` would do
 that for us.
 
-<details class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show <code>sf_spherical_cut()</code></summary>
 
@@ -302,9 +310,11 @@ sf_spherical_cut <- function(x, the_buff, the_crs = sf::st_crs(x), flip = NULL) 
 
 ### Inputs
 
-Now we are ready to start creating our visualization. We need only two inputs: -
-A desired location, that we would geocode with `nominatimlite`. - A specific
-moment of time.
+Now we are ready to start creating our visualization. We need only two inputs:
+
+-   A desired location, that we would geocode with `nominatimlite`.
+
+-   A specific moment of time.
 
 ```{r}
 # Inputs
@@ -742,3 +752,13 @@ ggplot() +
 -   Frohn O, Hernangómez D (2023). "Celestial Data." [doi:
     10.5281/zenodo.7561601](https://doi.org/10.5281/zenodo.7561601),
     <https://dieghernan.github.io/celestial_data/>.
+
+- Frohn O (2015). "d3-celestial." <https://github.com/ofrohn/d3-celestial/>.
+
+- Fitter K (2019). "Celestial Maps." <https://kimnewzealand.github.io/2019/02/21/celestial-maps/>.
+
+- Still J (2020). "Astronomical Calculations: Sidereal Time." <https://squarewidget.com/astronomical-calculations-sidereal-time/>.
+
+- Pebesma E, Dunnington D (2020). "In r-spatial, the Earth is no longer flat." <https://r-spatial.org/r/2020/06/17/s2.html>.
+
+- Royé D (2020). "Firefly Cartography." <https://dominicroye.github.io/en/2021/firefly-cartography/>.

@@ -96,8 +96,10 @@ diegpost_draft(file)
 
 
 
-l <- list.files(".")
+plots <- list.files("./assets/img/drafts", full.names = TRUE)
 file
+
+lapply(plots, knitr::plot_crop)
 
 knitr::plot_crop("./assets/img/drafts/xxx_celestial_map_cn-1.png")
 
