@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2023-01-25 18:35:21 +0100 -->
+    <!-- Page build 2023-01-25 18:51:32 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -246,8 +246,7 @@
 		</nav>   
 	</div>
 			<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 29 december 2020</strong>: All these pieces of work are already available on <code class="language-plaintext highlighter-rouge">cartography &gt;v.2.4.0</code> on functions <a href="http://riatelab.github.io/cartography/docs/reference/getPngLayer.html"><code class="language-plaintext highlighter-rouge">getPngLayer</code></a>. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated blog post with examples on this <a href="../202002_cartography1">link</a>.</p>
-<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 25 January 2023</strong> <code class="language-plaintext highlighter-rouge">cartography</code> is in maintenance mode. You can use <code class="language-plaintext highlighter-rouge">rasterpic</code> + <code class="language-plaintext highlighter-rouge">tidyterra</code> to achieve the same result, see<br />
-<a href="https://dieghernan.github.io/202201_maps-flags/">link1</a> and <a href="https://dieghernan.github.io/202205_tidyterra/">link2</a>.</p>
+<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 25 January 2023</strong> <code class="language-plaintext highlighter-rouge">cartography</code> is in maintenance mode. You can use <code class="language-plaintext highlighter-rouge">rasterpic</code> + <code class="language-plaintext highlighter-rouge">tidyterra</code> to achieve the same result, see <a href="https://dieghernan.github.io/202201_maps-flags/">link1</a> and <a href="https://dieghernan.github.io/202205_tidyterra/">link2</a>.</p>
 <p>Want to use a flag (or any <code class="language-plaintext highlighter-rouge">*.png</code> file) as a background of your map? You are in the right post. I am aware that there are some <strong>R</strong> packages out <a href="https://github.com/RobertMyles/flagfillr">there</a>, but we focus here in the option provided by <code class="language-plaintext highlighter-rouge">cartography::getPngLayer()</code>, that basically converts your image into a raster (see also this article of <a href="https://www.stat.auckland.ac.nz/people/pmur002">Paul Murrell</a>, <strong>“Raster Images in R Graphics”</strong> <a href="https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf">(<em>The R Journal, Volume 3/1, June 2011</em>)</a>).</p>
 <h2 id="required-r-packages">Required R packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
