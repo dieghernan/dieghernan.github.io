@@ -18,7 +18,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: xxx.png
+header_img: ./assets/img/blog/20230125_celestial_map-1.webp
 ---
 
 ```{r setup, include=FALSE}
@@ -447,7 +447,7 @@ represent the Milky Way, Constellation Lines and Stars.
 We also add some additional variables that would help us to improve the
 visualization.
 
-```{r xxx_mw}
+```{r 20230125_mw}
 mw <- load_celestial("mw.min.geojson")
 
 # Add colors to MW to use on fill
@@ -476,7 +476,7 @@ ggplot(mw_end) +
 
 Now it is the turn of the constellations:
 
-```{r xxx_const}
+```{r 20230125_const}
 const <- load_celestial("constellations.lines.min.geojson")
 
 ggplot(const) +
@@ -500,7 +500,7 @@ ggplot(const_end) +
 
 And finally the stars:
 
-```{r xxx_stars}
+```{r 20230125_stars}
 stars <- load_celestial("stars.6.min.geojson")
 
 ggplot(stars) +
@@ -532,7 +532,7 @@ We are going also to include graticules, so the Earth poles can be quickly
 spotted. In this case we don't apply any affine transformation, so the `flip`
 parameter of `sf_spherical_cut()` needs to be set as `NULL`.
 
-```{r xxx_grat}
+```{r 20230125_grat}
 grat <- st_graticule(
   ndiscr = 5000,
   lat = seq(-90, 90, 10),
@@ -612,7 +612,7 @@ We can enhance the visualization by applying some interesting effects:
 
 So we are ready now to create the final visualization:
 
-```{r xxx_celestial_map }
+```{r 20230125_celestial_map }
 # Prepare MULTILINESTRING
 
 const_end_lines <- const_end %>%
@@ -680,7 +680,7 @@ calculations on Javascript and everything seems to be up and running.
 data for traditional Chinese constellations, so we can create a similar map with
 this whole different set of geometries:
 
-```{r xxx_celestial_map_cn}
+```{r 20230125_celestial_map_cn}
 const_cn <- load_celestial("constellations.lines.cn.min.geojson")
 
 # Cut and prepare for geom_glowpath() on a single step

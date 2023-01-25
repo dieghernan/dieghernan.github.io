@@ -91,12 +91,12 @@ diegpost_draft <- function(file) {
 }
 
 
-file <- "star-map-R"
-diegpost_draft(file)
+file <- "2023-01-25-star-map-R"
+diegpost(file)
 
 
 
-plots <- list.files("./assets/img/drafts", full.names = TRUE)
+plots <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
 file
 
 lapply(plots, knitr::plot_crop)
@@ -183,13 +183,22 @@ ezknit(
 
 im <- list.files("assets/img/blog", full.names = TRUE)
 
+im <- plots
+
+lapply(im, function(x){
+  
+  file.copy(x, "./assets/img/towebp")
+  unlink(x)
+  
+})
+
 x <- im[1]
 
 a <- lapply(im, function(x){
   
 f <- png::readPNG(x)  
-out <- gsub("blog", "blogwebp", x)
-out <- gsub(".png$", ".webp", out)
+
+out <- gsub(".png$", ".webp", x)
 
 aa <- try(webp::write_webp(f, out), silent = TRUE)  
 
