@@ -95,6 +95,12 @@ file <- "star-map-R"
 diegpost_draft(file)
 
 
+
+l <- list.files(".")
+file
+
+knitr::plot_crop("./assets/img/drafts/xxx_celestial_map_cn-1.png")
+
 rm(list = ls())
 
 
