@@ -58,6 +58,16 @@ header_img: /assets/img/site/banner.png
 	</div>
 </div>
 
+<!-- Verification -->
+
+<a href="https://github.com/dieghernan" rel="me" class="d-none">github.com/dieghernan</a>
+<a rel="me" href="https://fosstodon.org/@dhernangomez" class="d-none">Mastodon Verification</a>
+
+
+
+
+
+
 
 
 
