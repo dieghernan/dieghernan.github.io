@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2023-01-25 14:52:56 +0100 -->
+    <!-- Page build 2023-01-25 15:26:54 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -17,8 +17,8 @@
       },
       "headline": "Star Map with R",
       "image": "https://dieghernan.github.io/xxx.png",
-      "datePublished": "2023-01-25T14:52:31+01:00",
-      "dateModified": "2023-01-25T14:52:31+01:00",
+      "datePublished": "2023-01-25T15:26:18+01:00",
+      "dateModified": "2023-01-25T15:26:18+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -216,10 +216,10 @@ question by Be...">
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2023-01-25T14:52:31+01:00">25 jan 2023</time>
+            <time datetime="2023-01-25T15:26:18+01:00">25 jan 2023</time>
         </div></div><div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
-            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202301_star-map-R/&text=Star+Map+with+R&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,s2,astronomy" title="Share on Twitter" aria-label="Share on Twitter" ><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></a>
-            <a href="https://toot.kytta.dev/?text=Star%20Map%20with%20R%20https://dieghernan.github.io/202301_star-map-R/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23s2%20%23astronomy" title="Share on Mastodon" aria-label="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202301_star-map-R/&text=Star+Map+with+R&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,sf,s2,astronomy,celestial,geojson,gpkg" title="Share on Twitter" aria-label="Share on Twitter" ><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></a>
+            <a href="https://toot.kytta.dev/?text=Star%20Map%20with%20R%20https://dieghernan.github.io/202301_star-map-R/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23sf%20%23s2%20%23astronomy%20%23celestial%20%23geojson%20%23gpkg" title="Share on Mastodon" aria-label="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
             <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202301_star-map-R/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
              <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Star+Map+with+R%20https://dieghernan.github.io/202301_star-map-R/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
          <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202301_star-map-R/&title=Star+Map+with+R" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
@@ -247,7 +247,7 @@ question by Be...">
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Star Map with R</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#firsts-things-first-the-data" class="nav-link">Firsts things first: The data</a></li><li class="nav-item nav d-block"><a href="#creating-a-star-map-with-r" class="nav-link">Creating a Star Map with R</a><ul><li class="nav-item nav d-block"><a href="#helper-funs" class="nav-link">Helper funs</a></li><li class="nav-item nav d-block"><a href="#inputs" class="nav-link">Inputs</a><ul><li class="nav-item nav d-block"><a href="#about-time-zones" class="nav-link">About time zones</a></li></ul></li><li class="nav-item nav d-block"><a href="#setup" class="nav-link">Setup</a></li><li class="nav-item nav d-block"><a href="#celestial-data" class="nav-link">Celestial Data</a></li><li class="nav-item nav d-block"><a href="#graticules" class="nav-link">Graticules</a></li></ul></li><li class="nav-item nav d-block"><a href="#visualization-with-ggplot2" class="nav-link">Visualization with <code class="language-plaintext highlighter-rouge">ggplot2</code></a></li><li class="nav-item nav d-block"><a href="#extra-chinese-constellations" class="nav-link">Extra: Chinese constellations</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#first-things-first-the-data" class="nav-link">First things first: The data</a></li><li class="nav-item nav d-block"><a href="#creating-a-star-map-with-r" class="nav-link">Creating a Star Map with R</a><ul><li class="nav-item nav d-block"><a href="#helper-funs" class="nav-link">Helper funs</a></li><li class="nav-item nav d-block"><a href="#inputs" class="nav-link">Inputs</a><ul><li class="nav-item nav d-block"><a href="#about-time-zones" class="nav-link">About time zones</a></li></ul></li><li class="nav-item nav d-block"><a href="#setup" class="nav-link">Setup</a></li><li class="nav-item nav d-block"><a href="#celestial-data" class="nav-link">Celestial Data</a></li><li class="nav-item nav d-block"><a href="#graticules" class="nav-link">Graticules</a></li></ul></li><li class="nav-item nav d-block"><a href="#visualization-with-ggplot2" class="nav-link">Visualization with <code class="language-plaintext highlighter-rouge">ggplot2</code></a></li><li class="nav-item nav d-block"><a href="#extra-chinese-constellations" class="nav-link">Extra: Chinese constellations</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
 		</nav>   
 	</div>
 			<p>A couple of weeks ago I was doing my daily check on
@@ -265,7 +265,9 @@ to put some work on this.</p>
 on the same topic. He is preparing a <strong>R</strong> package named
 <a href="https://github.com/benyamindsmith/starBliss"><code class="language-plaintext highlighter-rouge">starBliss</code></a> and hopefully this
 post would be of some help.</p>
-<h2 id="firsts-things-first-the-data">Firsts things first: The data</h2>
+<p class="alert alert-info p-3 mx-2 mb-3">I have very little knowledge on this topic, so if you find errors or
+have any suggestions please let me know in the <strong>Comments</strong> section below</p>
+<h2 id="first-things-first-the-data">First things first: The data</h2>
 <p>The initial data source of all these projects (Kim, Benjamin and myself) is the
 same, and it is provided on the D3 plugin
 <a href="https://github.com/ofrohn/d3-celestial/tree/master/data">d3-celestial</a> by <a href="http://armchairastronautics.blogspot.com/">Olaf
@@ -315,47 +317,56 @@ coordinate in the format degrees/minutes/seconds (e.g a <strong>latitude
  </li>
 </ul>
 <details class="my-4">
-<summary>Show <code>load_celestial</code> and
+  <summary>Show <code>load_celestial</code> and
 <code>pretty_lonlat()</code></summary>
-```r
-load_celestial &lt;- function(filename,
-                           url = "https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/",
-                           cachedir = tempdir()) {
-  if (!dir.exists(cachedir)) {
-    stop(
-      "Please create ",
-      path.expand(cachedir),
-      " directory",
-      "first"
-    )
-  }
-  url &lt;- file.path(url, filename)
-  local_path &lt;- file.path(cachedir, filename)
-  if (!file.exists(local_path)) {
-    download.file(url, local_path, mode = "wb", quiet = TRUE)
-  }
-  celestial &lt;- sf::st_read(local_path, quiet = TRUE)
-  return(celestial)
-}
-pretty_lonlat &lt;- function(x, type, accuracy = 2) {
-  positive &lt;- x &gt;= 0
-  # Decompose
-  x &lt;- abs(x)
-  D &lt;- as.integer(x)
-  m &lt;- (x - D) * 60
-  M &lt;- as.integer(m)
-  S &lt;- round((m - M) * 60, accuracy)
-  # Get label
-  if (type == "lon") {
-    lab &lt;- ifelse(positive &gt; 0, "E", "W")
-  } else {
-    lab &lt;- ifelse(positive &gt; 0, "N", "S")
-  }
-  # Compose
-  label &lt;- paste0(D, "\u00b0 ", M, "' ", S, '\" ', lab)
-  return(label)
-}
-```
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">load_celestial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w">
+                           </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/"</span><span class="p">,</span><span class="w">
+                           </span><span class="n">cachedir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dir.exists</span><span class="p">(</span><span class="n">cachedir</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">stop</span><span class="p">(</span><span class="w">
+      </span><span class="s2">"Please create "</span><span class="p">,</span><span class="w">
+      </span><span class="n">path.expand</span><span class="p">(</span><span class="n">cachedir</span><span class="p">),</span><span class="w">
+      </span><span class="s2">" directory"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first"</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w">
+  </span><span class="n">local_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="n">cachedir</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w">
+
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file.exists</span><span class="p">(</span><span class="n">local_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">celestial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_read</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">celestial</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">pretty_lonlat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">positive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="w">
+
+  </span><span class="c1"># Decompose</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="w">
+  </span><span class="n">M</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w">
+  </span><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">((</span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># Get label</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"lon"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">positive</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w"> </span><span class="s2">"W"</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">positive</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"N"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+
+  </span><span class="c1"># Compose</span><span class="w">
+  </span><span class="n">label</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="s2">"\u00b0 "</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="s2">"' "</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="s1">'\" '</span><span class="p">,</span><span class="w"> </span><span class="n">lab</span><span class="p">)</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 </details>
 <p>Additionally, you may notice that on this <a href="https://ofrohn.github.io/celestial-demo/location.html">d3-celestial
 demo</a> there is some
@@ -375,42 +386,49 @@ result is an alternative longitude that we would use to adjust the projection of
 our Star Map. This would provide the rotation observed on <strong>d3-celestial
 plugin</strong>.</p>
 <details class="my-4">
-<summary>Show <code>get_mst()</code></summary>
-```r
-# Derive rotation degrees of the projection given a date and a longitude
-get_mst &lt;- function(dt, lng) {
-  desired_date_utc &lt;- lubridate::with_tz(dt, "UTC")
-  yr &lt;- lubridate::year(desired_date_utc)
-  mo &lt;- lubridate::month(desired_date_utc)
-  dy &lt;- lubridate::day(desired_date_utc)
-  h &lt;- lubridate::hour(desired_date_utc)
-  m &lt;- lubridate::minute(desired_date_utc)
-  s &lt;- lubridate::second(desired_date_utc)
-  if ((mo == 1) || (mo == 2)) {
-    yr &lt;- yr - 1
-    mo &lt;- mo + 12
-  }
-  # Adjust times before Gregorian Calendar
-  # See https://squarewidget.com/julian-day/
-  if (lubridate::as_date(dt) &gt; as.Date("1582-10-14")) {
-    a &lt;- floor(yr / 100)
-    b &lt;- 2 - a + floor(a / 4)
-  } else {
-    b &lt;- 0
-  }
-  c &lt;- floor(365.25 * yr)
-  d &lt;- floor(30.6001 * (mo + 1))
-  # days since J2000.0
-  jd &lt;- b + c + d - 730550.5 + dy + (h + m / 60 + s / 3600) / 24
-  jt &lt;- jd / 36525
-  # Rotation
-  mst &lt;- 280.46061837 + 360.98564736629 * jd +
-    0.000387933 * jt^2 - jt^3 / 38710000.0 + lng
-  # Modulo 360 degrees
-  mst &lt;- mst %% 360
-  return(mst)
-}
-```
+  <summary>Show <code>get_mst()</code></summary>
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Derive rotation degrees of the projection given a date and a longitude</span><span class="w">
+</span><span class="n">get_mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">lng</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">desired_date_utc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">with_tz</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+
+
+  </span><span class="n">yr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">year</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">mo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">month</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">day</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">hour</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">minute</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">second</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">mo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">mo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">yr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">yr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w">
+    </span><span class="n">mo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">12</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="c1"># Adjust times before Gregorian Calendar</span><span class="w">
+  </span><span class="c1"># See https://squarewidget.com/julian-day/</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lubridate</span><span class="o">::</span><span class="n">as_date</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">as.Date</span><span class="p">(</span><span class="s2">"1582-10-14"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">yr</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w">
+    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="m">365.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yr</span><span class="p">)</span><span class="w">
+  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="m">30.6001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">mo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+
+  </span><span class="c1"># days since J2000.0</span><span class="w">
+  </span><span class="n">jd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">730550.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">3600</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">24</span><span class="w">
+  </span><span class="n">jt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">jd</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">36525</span><span class="w">
+
+  </span><span class="c1"># Rotation</span><span class="w">
+  </span><span class="n">mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">280.46061837</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">360.98564736629</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">jd</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="m">0.000387933</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">jt</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">jt</span><span class="o">^</span><span class="m">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">38710000.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lng</span><span class="w">
+
+  </span><span class="c1"># Modulo 360 degrees</span><span class="w">
+  </span><span class="n">mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mst</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">360</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">mst</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 </details>
 <p>The final result would have an spherical outline. That means that we would need
 to perform an spherical cut. Did you know that <a href="https://r-spatial.org/r/2020/06/17/s2.html">in r-spatial the Earth is no
@@ -422,53 +440,65 @@ This also includes some refinements to avoid empty/non-valid geometries as well
 as <code class="language-plaintext highlighter-rouge">GEOMETRYCOLLECTION</code> handling. The function <code class="language-plaintext highlighter-rouge">sf_spherical_cut()</code> would do
 that for us.</p>
 <details class="my-4">
-<summary>Show <code>sf_spherical_cut()</code></summary>
-```r
-# Cut a sf object with a buffer using spherical s2 geoms
-# Optionally, project and flip
-sf_spherical_cut &lt;- function(x, the_buff, the_crs = sf::st_crs(x), flip = NULL) {
-  # Get geometry type
-  geomtype &lt;- unique(gsub("MULTI", "", sf::st_geometry_type(x)))[1]
-  # Keep the data frame, s2 drops it
-  the_df &lt;- sf::st_drop_geometry(x)
-  the_geom &lt;- sf::st_geometry(x)
-  # Convert to s2 if needed
-  if (!inherits(the_buff, "s2_geography")) {
-    the_buff &lt;- sf::st_as_s2(the_buff)
-  }
-  the_cut &lt;- the_geom %&gt;%
-    # Cut with s2
-    sf::st_as_s2() %&gt;%
-    s2::s2_intersection(the_buff) %&gt;%
-    # Back to sf and add the df
-    sf::st_as_sfc() %&gt;%
-    sf::st_sf(the_df, geometry = .) %&gt;%
-    dplyr::filter(!sf::st_is_empty(.)) %&gt;%
-    sf::st_transform(crs = the_crs)
-  # If it is not POINT filter by valid and non-empty
-  # This if for performance
-  if (!geomtype == "POINT") {
-    # If any is GEOMETRYCOLLECTION extract the right value
-    if (any(sf::st_geometry_type(the_cut) == "GEOMETRYCOLLECTION")) {
-      the_cut &lt;- the_cut %&gt;%
-        sf::st_collection_extract(type = geomtype, warn = FALSE)
-    }
-    the_cut &lt;- the_cut %&gt;%
-      dplyr::filter(!is.na(sf::st_is_valid(.)))
-  }
-  if (!is.null(flip)) {
-    the_cut &lt;- the_cut %&gt;%
-      dplyr::mutate(geometry = geometry * flip) %&gt;%
-      sf::st_set_crs(the_crs)
-  }
-  return(the_cut)
-}
-```
+  <summary>Show <code>sf_spherical_cut()</code></summary>
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut a sf object with a buffer using spherical s2 geoms</span><span class="w">
+</span><span class="c1"># Optionally, project and flip</span><span class="w">
+
+</span><span class="n">sf_spherical_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Get geometry type</span><span class="w">
+  </span><span class="n">geomtype</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"MULTI"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">x</span><span class="p">)))[</span><span class="m">1</span><span class="p">]</span><span class="w">
+
+  </span><span class="c1"># Keep the data frame, s2 drops it</span><span class="w">
+  </span><span class="n">the_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">the_geom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="c1"># Convert to s2 if needed</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">inherits</span><span class="p">(</span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="s2">"s2_geography"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">the_buff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_as_s2</span><span class="p">(</span><span class="n">the_buff</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_geom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="c1"># Cut with s2</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_as_s2</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">s2</span><span class="o">::</span><span class="n">s2_intersection</span><span class="p">(</span><span class="n">the_buff</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="c1"># Back to sf and add the df</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_as_sfc</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_sf</span><span class="p">(</span><span class="n">the_df</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">dplyr</span><span class="o">::</span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">sf</span><span class="o">::</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">.</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the_crs</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># If it is not POINT filter by valid and non-empty</span><span class="w">
+  </span><span class="c1"># This if for performance</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">geomtype</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="c1"># If any is GEOMETRYCOLLECTION extract the right value</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">any</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">the_cut</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"GEOMETRYCOLLECTION"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+        </span><span class="n">sf</span><span class="o">::</span><span class="n">st_collection_extract</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geomtype</span><span class="p">,</span><span class="w"> </span><span class="n">warn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+    </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">dplyr</span><span class="o">::</span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">st_is_valid</span><span class="p">(</span><span class="n">.</span><span class="p">)))</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">flip</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">dplyr</span><span class="o">::</span><span class="n">mutate</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">flip</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">sf</span><span class="o">::</span><span class="n">st_set_crs</span><span class="p">(</span><span class="n">the_crs</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">the_cut</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 </details>
 <h3 id="inputs">Inputs</h3>
-<p>Now we are ready to start creating our visualization. We need only two inputs: -
-A desired location, that we would geocode with <code class="language-plaintext highlighter-rouge">nominatimlite</code>. - A specific
-moment of time.</p>
+<p>Now we are ready to start creating our visualization. We need only two inputs:</p>
+<ul>
+ <li>
+   <p>A desired location, that we would geocode with <code class="language-plaintext highlighter-rouge">nominatimlite</code>.</p>
+ </li>
+ <li>
+   <p>A specific moment of time.</p>
+ </li>
+</ul>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Inputs</span><span class="w">
 </span><span class="n">desired_place</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Madrid, Spain"</span><span class="w">
 
@@ -903,6 +933,21 @@ Richmond, Va. ISBN 9780943396613.</p>
 10.5281/zenodo.7561601</a>,
 <a href="https://dieghernan.github.io/celestial_data/">https://dieghernan.github.io/celestial_data/</a>.</p>
  </li>
+ <li>
+   <p>Frohn O (2015). “d3-celestial.” <a href="https://github.com/ofrohn/d3-celestial/">https://github.com/ofrohn/d3-celestial/</a>.</p>
+ </li>
+ <li>
+   <p>Fitter K (2019). “Celestial Maps.” <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">https://kimnewzealand.github.io/2019/02/21/celestial-maps/</a>.</p>
+ </li>
+ <li>
+   <p>Still J (2020). “Astronomical Calculations: Sidereal Time.” <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">https://squarewidget.com/astronomical-calculations-sidereal-time/</a>.</p>
+ </li>
+ <li>
+   <p>Pebesma E, Dunnington D (2020). “In r-spatial, the Earth is no longer flat.” <a href="https://r-spatial.org/r/2020/06/17/s2.html">https://r-spatial.org/r/2020/06/17/s2.html</a>.</p>
+ </li>
+ <li>
+   <p>Royé D (2020). “Firefly Cartography.” <a href="https://dominicroye.github.io/en/2021/firefly-cartography/">https://dominicroye.github.io/en/2021/firefly-cartography/</a>.</p>
+ </li>
 </ul>
 <div class="footnotes" role="doc-endnotes">
  <ol>
@@ -958,8 +1003,12 @@ repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a>
       <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary">rspatial</a>
       <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary">maps</a>
       <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary">ggplot2</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary">sf</a>
       <a href="https://dieghernan.github.io/tags#s2" class="badge chulapa-pill-bg-primary">s2</a>
       <a href="https://dieghernan.github.io/tags#astronomy" class="badge chulapa-pill-bg-primary">astronomy</a>
+      <a href="https://dieghernan.github.io/tags#celestial" class="badge chulapa-pill-bg-primary">celestial</a>
+      <a href="https://dieghernan.github.io/tags#geojson" class="badge chulapa-pill-bg-primary">geojson</a>
+      <a href="https://dieghernan.github.io/tags#gpkg" class="badge chulapa-pill-bg-primary">gpkg</a>
      </div>
    </div>
 </div>
@@ -971,26 +1020,26 @@ repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a>
      <nav class="card-group" aria-label="related-articles">
         <div class="card  border chulapa-related">
          <div class="card-body">
-         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" class="chulapa-text-body-color">Hillshade, colors and marginal plots with tidyterra (II)</a></p>
-         <p class="card-text"><small>The rain in Spain does not stay mainly in the plain</small></p></div>
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202203_insetmaps/" class="chulapa-text-body-color">Insets with ggplot2 and tmap - and mapsf!</a></p>
+         <p class="card-text"><small>A map on a map</small></p></div>
    <div class="card-footer bg-transparent">
-      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-12-12T00:00:00+01:00">december 12, 2022</time></small>
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-03-03T00:00:00+01:00">march 03, 2022</time></small>
    </div>
  </div>
         <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
-         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202210_tidyterra-hillshade/" class="chulapa-text-body-color">Hillshade, colors and marginal plots with tidyterra (I)</a></p>
-         <p class="card-text"><small>How to overlay SpatRasters</small></p></div>
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">Using CountryCodes database and sf package</a></p>
+         <p class="card-text"><small>vignette of the CountryCodes project</small></p></div>
    <div class="card-footer bg-transparent">
-      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-10-17T00:00:00+02:00">october 17, 2022</time></small>
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-04-27T00:00:00+02:00">april 27, 2019</time></small>
    </div>
  </div>
         <div class="card ml-sm-1 border chulapa-related">
          <div class="card-body">
-         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" class="chulapa-text-body-color">Unknown pleasures with R</a></p>
-         <p class="card-text"><small>Joyplot elevation maps with ggridges and terra</small></p></div>
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful1/" class="chulapa-text-body-color">Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels</a></p>
+         <p class="card-text"><small>Awesome simplified maps with R</small></p></div>
    <div class="card-footer bg-transparent">
-      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-05-01T00:00:00+02:00">may 01, 2022</time></small>
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-02T00:00:00+02:00">june 02, 2019</time></small>
    </div>
  </div></nav>
    </div>
