@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2023-01-25 21:45:47 +0100 -->
+    <!-- Page build 2023-01-26 22:33:20 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -160,7 +160,8 @@
 <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#000000">
 <!-- end custom head snippets --></head>
-<body class="d-flex flex-column" id="body">
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202002_cartography1/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
 			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
@@ -186,8 +187,8 @@
 					</li></ul>
 			</div></div>
 </nav>	<header class="d-flex align-items-center splash-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp')"><div class="container-lg">
-   <h1>New features on cartography package</h1><hr class="my-3">
-   <p class="chulapa-subtitle">Vignette of the package expansion</p>
+   <h1 class="p-name" >New features on cartography package</h1><hr class="my-3">
+   <p class="chulapa-subtitle p-summary">Vignette of the package expansion</p>
  </div>
 </header>
 	<main class="container-lg pb-3 flex-fill">
@@ -206,7 +207,7 @@
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2020-02-17T00:00:00+01:00">17 feb 2020</time>
+            <time datetime="2020-02-17T00:00:00+01:00" class="dt-published" >17 feb 2020</time>
         </div></div><div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
             <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202002_cartography1/&text=New+features+on+cartography+package&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,beautiful_maps,maps,sf,cartography,vignette" title="Share on Twitter" aria-label="Share on Twitter" ><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></a>
             <a href="https://toot.kytta.dev/?text=New%20features%20on%20cartography%20package%20https://dieghernan.github.io/202002_cartography1/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23beautiful_maps%20%23maps%20%23sf%20%23cartography%20%23vignette" title="Share on Mastodon" aria-label="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
@@ -215,18 +216,20 @@
          <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202002_cartography1/&title=New+features+on+cartography+package" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
          </div></div>
 		<div class="row pt-2">
-			<aside class="col-lg-2 mt-lg-3 small"><div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size"><div class="col-9 col-lg-12 text-lg-center">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
 						dieghernan
 					</div>
 				</div>
 				<div class="row mb-2 mb-lg-0">
 					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
-						  <a class="pr-lg-0" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
 						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
-						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1" href="https://twitter.com/dhernangomez" title="My Twitter" aria-label="My Twitter" ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://twitter.com/dhernangomez" title="My Twitter" aria-label="My Twitter" ><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
 				</div>
 </aside>
-			<article id="maincontent" class="col-lg-8 mt-3">
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
 	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
 		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
 	</button>
@@ -718,14 +721,14 @@
  <div class="row">
    <div class="col-lg-8 offset-lg-2 col">
       <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
-      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary">r_bloggers</a>
-      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary">rstats</a>
-      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary">rspatial</a>
-      <a href="https://dieghernan.github.io/tags#beautiful_maps" class="badge chulapa-pill-bg-primary">beautiful_maps</a>
-      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary">maps</a>
-      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary">sf</a>
-      <a href="https://dieghernan.github.io/tags#cartography" class="badge chulapa-pill-bg-primary">cartography</a>
-      <a href="https://dieghernan.github.io/tags#vignette" class="badge chulapa-pill-bg-primary">vignette</a>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category">r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category">rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category">rspatial</a>
+      <a href="https://dieghernan.github.io/tags#beautiful_maps" class="badge chulapa-pill-bg-primary p-category">beautiful_maps</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category">maps</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category">sf</a>
+      <a href="https://dieghernan.github.io/tags#cartography" class="badge chulapa-pill-bg-primary p-category">cartography</a>
+      <a href="https://dieghernan.github.io/tags#vignette" class="badge chulapa-pill-bg-primary p-category">vignette</a>
      </div>
    </div>
 </div>
