@@ -1,0 +1,9 @@
+{
+  "author": {
+    "name": "Zekai Meng "
+  },
+  "date": "2023-05-10T04:06:54Z",
+  "id": "01H01XEBTTMA3BA8WT5FHV0S1D",
+  "message": "Big thanks to author, but an error ocurred to me when select biggest polygon , I don't know if it is due to different version of packages. \nthe error is below :\n  error in evaluating the argument 'x' in selecting a method for function 'as.lines': Problem with `mutate()` column `area`.\nℹ `area = expanse(exploded)`.\nℹ `area` must be size 0 or 1, not 759.\nCaused by error in `abort_glue()`:\n\nBut it works to me with modifying original code like this:\nexploded$area = expanse(exploded)\nr_plain <-exploded %>% filter(area > 50000**2) %>%\n  # And convert to lines\n  as.lines()\n\nBig thanks again!",
+  "message_html": "<p>Big thanks to author, but an error ocurred to me when select biggest polygon , I don’t know if it is due to different version of packages.<br />the error is below :<br />  error in evaluating the argument ‘x’ in selecting a method for function ‘as.lines’: Problem with <code class=\"inline\">mutate()</code> column <code class=\"inline\">area</code>.<br />ℹ <code class=\"inline\">area = expanse(exploded)</code>.<br />ℹ <code class=\"inline\">area</code> must be size 0 or 1, not 759.<br />Caused by error in <code class=\"inline\">abort_glue()</code>:</p><p>But it works to me with modifying original code like this:<br />exploded$area = expanse(exploded)<br />r_plain &lt;-exploded %&gt;% filter(area &gt; 50000**2) %&gt;%<br />  # And convert to lines<br />  as.lines()</p><p>Big thanks again!</p>"
+}
