@@ -63,6 +63,11 @@ header_img: /assets/img/site/banner.png
 <a href="https://github.com/dieghernan" rel="me" class="d-none">github.com/dieghernan</a>
 <a rel="me" href="https://fosstodon.org/@dhernangomez" class="d-none">Mastodon Verification</a>
 
+<span class="h-card d-none">
+  <a rel="me" href="https://dieghernan.github.io">dieghernan</a>
+  <img class="u-photo" src="https://dieghernan.github.io/assets/img/site/avatar.png" />
+  <img class="u-featured" src="https://dieghernan.github.io/assets/img/site/banner.png" />
+</span>
 
 
 
