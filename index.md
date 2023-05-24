@@ -64,9 +64,10 @@ header_img: /assets/img/site/banner.png
 <a rel="me" href="https://fosstodon.org/@dhernangomez" class="d-none">Mastodon Verification</a>
 
 <span class="h-card d-none">
-  <a rel="me" href="https://dieghernan.github.io">dieghernan</a>
+  <a rel="me" href="https://dieghernan.github.io" class="u-url u-uid" >dieghernan</a>
   <img class="u-photo" src="https://dieghernan.github.io/assets/img/site/avatar.png" />
   <img class="u-featured" src="https://dieghernan.github.io/assets/img/site/banner.png" />
+  <span class="p-note">I just love maps.</span>
 </span>
 
 
