@@ -47,7 +47,6 @@ diegpost <- function(file) {
 
 }
 
-file.exists(paste0(getwd(),"/_Rmd/",file,".Rmd"))
 
 diegpost_draft <- function(file) {
   getwd()
@@ -91,8 +90,8 @@ diegpost_draft <- function(file) {
 }
 
 
-file <- "2023-01-25-star-map-R"
-diegpost(file)
+file <- "test"
+diegpost_draft(file)
 
 
 

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jekyll-redirect-from'
 gem 'github-pages', group: :jekyll_plugins	
+gem 'tzinfo-data'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'
@@ -9,3 +10,5 @@ group :jekyll_plugins do
   gem 'jekyll-sitemap'
   gem 'jekyll-include-cache'
 end
+
+gem "webrick", "~> 1.8"
