@@ -31,10 +31,10 @@ Using shadow effects on relief mappings is a very common technique, that allows
 to produce informative yet beautiful maps. If you are interested on this topic
 and you work with **R**, you would have probably seen this map:
 
-![swissmap](https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.png)
+![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
 The production of this map by [Timo
-Grossenbacher](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/)
+Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)
 has been a reference for years. However, last developments on the **R** package
 ecosystem (`terra`, `sf` and support of both classes on `ggplot2`, development
 of `ggnewscale`, etc.) can make even easier the task of producing such type of
@@ -454,7 +454,7 @@ Patterson T, Jenny B (2011). "The Development and Rationale of Cross-blended
 Hypsometric Tints." *Cartographic Perspectives*, 31--46. <https://doi.org/10.14714/CP69.20>
 
 Grossenbacher T (2016). "Beautiful thematic maps with ggplot2 (only)."
-<https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/>.
+<https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>.
 
 
 Royé D (2022). "Hillshade effects."
