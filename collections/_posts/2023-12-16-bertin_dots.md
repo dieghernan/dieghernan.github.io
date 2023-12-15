@@ -17,7 +17,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/202312_finalmap.webp
+header_img: ./assets/img/blog/202312_finalmap_hex.png
 mathjax: true
 bibliography: bertin.bib
 nocite: '@*'
