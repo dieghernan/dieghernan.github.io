@@ -9,7 +9,6 @@ tags:
 - maps
 - ggplot2
 - sf
-- s2
 - terra
 - tidyterra
 - giscoR
@@ -18,13 +17,11 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/202312_hexgrid_base-1.webp
+header_img: ./assets/img/blog/202312_finalmap.webp
 mathjax: true
 bibliography: bertin.bib
 nocite: '@*'
 ---
-
-
 
 Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a
 new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
@@ -43,8 +40,7 @@ one.
 I would use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
-
-```r
+``` r
 # Base spatial packages
 library(terra)
 library(sf)
@@ -71,8 +67,7 @@ Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
 would use the global file with a resolution of 1 km on Mollweide projection
 (ESRI:54009).
 
-
-```r
+``` r
 # Create observation window based the Iberian Peninsula and surroundings
 # We create a buffered circle
 owin <- gisco_get_countries(
@@ -106,7 +101,7 @@ base_gg <- ggplot() +
 base_gg
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_basemap" />
+<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_basemap"/>
 
 That would be our base map. Now we download programmatically the GHSL data and
 we would check that everything is correct. At this point, it is interesting to
@@ -114,8 +109,7 @@ use the `win` argument when reading the raster with `terra::rast()`, as this
 would allow us to load only the desired area with the subsequent improvement in
 terms of performance.
 
-
-```r
+``` r
 # Download data
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
@@ -154,7 +148,8 @@ base_gg +
   geom_spatraster(data = pop_init, maxcell = 50000) +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
-<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_base_raster-1" />
+
+<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_base_raster-1"/>
 
 ## Data wrangling
 
@@ -168,8 +163,7 @@ density.
 Instead of using the numeric range of densities, we would use categories for the
 final map, so we would classify the density into different groups:
 
-
-```r
+``` r
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
 nrow(pop_init)
@@ -212,8 +206,7 @@ pop_points <- pop_agg %>%
 And finally the map. In this case I would save it as a high resolution square
 map.
 
-
-```r
+``` r
 # Final plot
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
@@ -266,7 +259,7 @@ final_plot <- base_gg +
 ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="plot of chunk 202312_base_raster-1" />
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="plot of chunk 202312_base_raster-1"/>
 
 ## Alternative hexagonal grid
 
@@ -293,11 +286,10 @@ $$
 A = \frac{\sqrt{3}}{2}d^{2}
 $$
 
-So we can extract $d$ from the previous expresion knowing the area $A$ of the
-aggregated cells:
+So we can extract $$d$$ from the previous expression knowing the area $$A$$ of
+the aggregated cells:
 
-
-```r
+``` r
 # Hex grid with sf ----
 
 # Avg size of the cells on the aggregated grid
@@ -328,8 +320,7 @@ pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
 
 Now, we use `exact_extract()` to extract the population on each hexagonal grid.
 
-
-```r
+``` r
 # Extract aggregated population by hex cell
 pop_agg_sf$population <- exact_extract(pop_init,
   y = pop_agg_sf,
@@ -346,12 +337,11 @@ base_gg +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1" />
+<img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1"/>
 
 Finally we just compute densities, create categories and finally the map:
 
-
-```r
+``` r
 # Mask and categorize
 pop_sf_points <- pop_agg_sf %>%
   # Compute density by cell
@@ -370,20 +360,6 @@ pop_sf_points <- pop_agg_sf %>%
     dens < 1500 ~ "F",
     TRUE ~ "G"
   ))
-
-
-pop_sf_points %>%
-  st_drop_geometry() %>%
-  count(cat)
-#>   cat    n
-#> 1   A 2085
-#> 2   B  571
-#> 3   C  430
-#> 4   D  451
-#> 5   E  153
-#> 6   F   92
-#> 7   G   42
-
 
 # Final plot
 final_plot_hex <- base_gg +
@@ -435,8 +411,33 @@ final_plot_hex <- base_gg +
 ggsave("202312_finalmap_hex.png", dpi = 300, width = 8, height = 8)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="plot of chunk 202312_finalmap_hex" />
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="plot of chunk 202312_finalmap_hex"/>
 
 And that's it! Which one do you like the most? Let me know in the comments.
 
+
+<div class="row">
+
+<div class="col-lg-6 col-md-6 col-xs-6 thumb">
+    <a class="thumbnail" href="#">
+        <img class="img-responsive" src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="">
+    </a>
+</div>
+<div class="col-lg-6 col-md-6 col-xs-6 thumb">
+    <a class="thumbnail" href="#">
+        <img class="img-responsive" src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="">
+    </a>
+</div>
+
 ## References
+
+-   Bertin J (1967). *Sémiologie graphique. Les diagrammes. Les réseaux. Les
+    cartes*. Gauthier-Villars, Paris.
+-   European Commission. Joint Research Centre. (2023). *GHSL data package
+    2023.*. Publications Office, LU <https://doi.org/10.2760/098587>
+-   Hernangómez D (2023). "Using the tidyverse with terra objects: the tidyterra
+    package *Journal of Open Source Software*, *8*(91), 5751. ISSN 2475-9066
+    <https://doi.org/10.21105/joss.05751>
+-   Pesaresi M, Politis P (2023). "GHS-BUILT-C R2023A - GHS Settlement
+    Characteristics, derived from Sentinel2 composite (2018) and other GHS
+    R2023A data." <https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30>
