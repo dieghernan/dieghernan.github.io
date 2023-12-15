@@ -415,20 +415,6 @@ ggsave("202312_finalmap_hex.png", dpi = 300, width = 8, height = 8)
 
 And that's it! Which one do you like the most? Let me know in the comments.
 
-
-<div class="row">
-
-<div class="col-lg-6 col-md-6 col-xs-6 thumb">
-    <a class="thumbnail" href="#">
-        <img class="img-responsive" src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="">
-    </a>
-</div>
-<div class="col-lg-6 col-md-6 col-xs-6 thumb">
-    <a class="thumbnail" href="#">
-        <img class="img-responsive" src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="">
-    </a>
-</div>
-
 ## References
 
 -   Bertin J (1967). *Sémiologie graphique. Les diagrammes. Les réseaux. Les
