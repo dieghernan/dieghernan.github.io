@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2023-12-15T23:48:16+01:00</updated>
+	<updated>2023-12-16T00:19:36+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One world | Projects, maps and coding</title>
 	<subtitle>Projects, maps and coding</subtitle>
@@ -16,8 +16,8 @@
 	<logo>https://dieghernan.github.io/assets/img/site/banner.png</logo><entry>
 		<title>Beautiful Maps with R (V): Point densities</title>
 		<link href="https://dieghernan.github.io/202312_bertin_dots/" rel="alternate" type="text/html" title="Beautiful Maps with R (V): Point densities"/>
-		<published>2023-12-15T23:47:59+01:00</published>
-		<updated>2023-12-15T23:47:59+01:00</updated>
+		<published>2023-12-16T00:19:20+01:00</published>
+		<updated>2023-12-16T00:19:20+01:00</updated>
 		<id>https://dieghernan.github.io/202312_bertin_dots/</id>
 		<content type="html" xml:base="https://dieghernan.github.io/202312_bertin_dots/">
 		
@@ -25,7 +25,7 @@
 		
 		
   		
-			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp&#39; &gt;
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp&#39; &gt;
 			
 	&lt;p&gt;8 min.&lt;/p&gt;
 			&lt;p&gt;Recently the &lt;a href=&quot;https://r-graph-gallery.com/&quot;&gt;R Graph Gallery&lt;/a&gt; has incorporated a
@@ -150,6 +150,7 @@ terms of performance.&lt;/p&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_spatraster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxcell&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale_fill_viridis_c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;na.value&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;transparent&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp&quot; alt=&quot;plot of chunk 202312_base_raster-1&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;data-wrangling&quot;&gt;Data wrangling&lt;/h2&gt;
@@ -285,8 +286,8 @@ infer this value since the area of a hexagon is&lt;/p&gt;
 
 &lt;p&gt;[A = \frac{\sqrt{3}}{2}d^{2}]&lt;/p&gt;
 
-&lt;p&gt;So we can extract $d$ from the previous expresion knowing the area $A$ of the
-aggregated cells:&lt;/p&gt;
+&lt;p&gt;So we can extract \(d\) from the previous expression knowing the area \(A\) of
+the aggregated cells:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Hex grid with sf ----&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -357,20 +358,6 @@ aggregated cells:&lt;/p&gt;
     &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;G&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop_sf_points&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_drop_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt;   cat    n&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 1   A 2085&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 2   B  571&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 3   C  430&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 4   D  451&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 5   E  153&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 6   F   92&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 7   G   42&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-
-
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Final plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;final_plot_hex&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_gg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Layer, this object is a sf object&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -421,11 +408,36 @@ aggregated cells:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggsave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;202312_finalmap_hex.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dpi&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp&quot; alt=&quot;plot of chunk 202312_finalmap_hex&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp&quot; alt=&quot;plot of chunk 202312_finalmap_hex&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;And that’s it! Which one do you like the most? Let me know in the comments.&lt;/p&gt;
 
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;div class=&quot;row&quot;&gt;
+
+&lt;div class=&quot;col-lg-6 col-md-6 col-xs-6 thumb&quot;&gt;
+    &lt;a class=&quot;thumbnail&quot; href=&quot;#&quot;&gt;
+        &lt;img class=&quot;img-responsive&quot; src=&quot;https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp&quot; alt=&quot;&quot; /&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;div class=&quot;col-lg-6 col-md-6 col-xs-6 thumb&quot;&gt;
+    &lt;a class=&quot;thumbnail&quot; href=&quot;#&quot;&gt;
+        &lt;img class=&quot;img-responsive&quot; src=&quot;https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp&quot; alt=&quot;&quot; /&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+
+## References
+
+-   Bertin J (1967). *Sémiologie graphique. Les diagrammes. Les réseaux. Les
+    cartes*. Gauthier-Villars, Paris.
+-   European Commission. Joint Research Centre. (2023). *GHSL data package
+    2023.*. Publications Office, LU &amp;lt;https://doi.org/10.2760/098587&amp;gt;
+-   Hernangómez D (2023). &quot;Using the tidyverse with terra objects: the tidyterra
+    package *Journal of Open Source Software*, *8*(91), 5751. ISSN 2475-9066
+    &amp;lt;https://doi.org/10.21105/joss.05751&amp;gt;
+-   Pesaresi M, Politis P (2023). &quot;GHS-BUILT-C R2023A - GHS Settlement
+    Characteristics, derived from Sentinel2 composite (2018) and other GHS
+    R2023A data.&quot; &amp;lt;https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30&amp;gt;
+&lt;/div&gt;
 
 		</content>
 		
@@ -438,7 +450,7 @@ Bertin&lt;/a&gt; (1918 - 2010):&lt;/p&gt;
 
 </summary>
 		<category term="posts"/>
-		<category term="beautiful_maps"/><category term="ggplot2"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="s2"/><category term="sf"/><category term="terra"/><category term="tidyterra"/>
+		<category term="beautiful_maps"/><category term="ggplot2"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="terra"/><category term="tidyterra"/>
 	</entry><entry>
 		<title>Star Map with R</title>
 		<link href="https://dieghernan.github.io/202301_star-map-R/" rel="alternate" type="text/html" title="Star Map with R"/>
