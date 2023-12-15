@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en-US"><head>
    <meta charset="utf-8">
-    <!-- Chulapa Jekyll Theme - v1.0.1.dev -->
+    <!-- Chulapa Jekyll Theme -  -->
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2023-12-13 19:32:50 +0100 -->
+    <!-- Page build 2023-12-15 21:26:46 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -112,13 +112,13 @@
    <meta property="og:description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, that allows to produce..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" >
-    <!-- Twitter Cards -->
+    <!-- Twitter/X Cards -->
    <meta name="twitter:card" content="summary_large_image">
    <meta name="twitter:site" content="@dhernangomez" >
    <meta name="twitter:creator" content="@dhernangomez" >
     	<!-- CSS -->
     <!-- Preconnect with Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <!-- Fontawesome-->
@@ -210,8 +210,9 @@
  </nav>
  <div class="chulapaDateSocial">
             <time datetime="2022-10-17T00:00:00+02:00" class="dt-published" >17 oct 2022</time>
-        </div></div><div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
-            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202210_tidyterra-hillshade/&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28I%29&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,tidyterra,terra" title="Share on Twitter" aria-label="Share on Twitter" ><i class="fab fa-twitter-square fa-lg" aria-hidden="true"></i></a>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202210_tidyterra-hillshade/&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28I%29&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,tidyterra,terra" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
             <a href="https://toot.kytta.dev/?text=Hillshade,%20colors%20and%20marginal%20plots%20with%20tidyterra%20(I)%20https://dieghernan.github.io/202210_tidyterra-hillshade/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23tidyterra%20%23terra" title="Share on Mastodon" aria-label="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
             <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202210_tidyterra-hillshade/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
              <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28I%29%20https://dieghernan.github.io/202210_tidyterra-hillshade/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
@@ -252,8 +253,8 @@ the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade
 <p>Using shadow effects on relief mappings is a very common technique, that allows
 to produce informative yet beautiful maps. If you are interested on this topic
 and you work with <strong>R</strong>, you would have probably seen this map:</p>
-<p><img src="https://timogrossenbacher.ch/wp-content/uploads/2016/12/tm-final-map-1-1-1024x768.png" alt="swissmap" /></p>
-<p>The production of this map by <a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">Timo
+<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="swissmap" /></p>
+<p>The production of this map by <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">Timo
 Grossenbacher</a>
 has been a reference for years. However, last developments on the <strong>R</strong> package
 ecosystem (<code class="language-plaintext highlighter-rouge">terra</code>, <code class="language-plaintext highlighter-rouge">sf</code> and support of both classes on <code class="language-plaintext highlighter-rouge">ggplot2</code>, development
@@ -607,7 +608,7 @@ a font from Google with a custom function:</p>
 <p>Patterson T, Jenny B (2011). “The Development and Rationale of Cross-blended
 Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. <a href="https://doi.org/10.14714/CP69.20">https://doi.org/10.14714/CP69.20</a></p>
 <p>Grossenbacher T (2016). “Beautiful thematic maps with ggplot2 (only).”
-<a href="https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/">https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/</a>.</p>
+<a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/</a>.</p>
 <p>Royé D (2022). “Hillshade effects.”
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/">https://dominicroye.github.io/en/2022/hillshade-effects/</a>.</p>
 <p>Hernangómez D (2022). <em>tidyterra: tidyverse Methods and ggplot2 Helpers for
