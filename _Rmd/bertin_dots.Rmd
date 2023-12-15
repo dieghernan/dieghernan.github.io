@@ -19,10 +19,13 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: xxx.png
-bibliography: references.bib
+mathjax: true
+bibliography: bertin.bib
+nocite: '@*'
 ---
 
-```{knitr::opts_chunk$set(}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   warning = FALSE,
@@ -35,7 +38,24 @@ bibliography: references.bib
 rm(list = ls())
 ```
 
-```{r mapcode}
+Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a
+new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
+a dot density map based on the work of the french cartographer [Jacques
+Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
+
+![Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
+(1967)](https://dieghernan.github.io/assets/img/misc/bertin.png)
+
+In this post I would create a similar map for Iberia, and additionally I would
+show how to create a variation using a hexagonal grid instead of a rectangular
+one.
+
+## Libraries
+
+I would use the following libraries for loading, manipulating and plotting
+spatial data (both raster and vector):
+
+```{r libraries}
 
 # Base spatial packages
 library(terra)
@@ -46,23 +66,37 @@ library(giscoR)
 library(tidyverse)
 library(tidyterra)
 library(ggtext)
-# Supporting for units and brige raster to polygon
+# Additional for hex grids
+# Supporting for units and bridge raster to polygon
 library(units)
 library(exactextractr)
+```
 
+## Get the data
 
+The first step is always to get the data we need. My final map would use as a
+base a circular layout with Iberia in the middle (that would be our observation
+window), so we can get the corresponding shapes and create a buffer around it.
 
+After that, we would extract the population spatial distribution from [GHSL -
+Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
+would use the global file with a resolution of 1 km on Mollweide projection
+(ESRI:54009).
+
+```{r 202312_basemap}
 
 # Create observation window based the Iberian Peninsula and surroundings
 # We create a buffered circle
 owin <- gisco_get_countries(
   country = c("ES", "PT"),
+  # We buffer in 3035 since I want my final map on this projection
   epsg = 3035,
   resolution = 60) %>%
   st_geometry() %>%
   st_union() %>%
   st_centroid(of_largest_polygon = TRUE) %>%
   st_buffer(750000) %>%
+  # But for extracting raster data we need this in Mollweide so far
   st_transform(crs = "ESRI:54009")
 
 # Get additional shapes and cut them to the owin
@@ -81,12 +115,20 @@ base_gg <- ggplot() +
   geom_sf(data = owin, fill = NA, linewidth = 0.75, color = "black")
 
 base_gg
+```
 
+That would be our base map. Now we download programmatically the GHSL data and
+we would check that everything is correct. At this point, it is interesting to
+use the `win` argument when reading the raster with `terra::rast()`, as this
+would allow us to load only the desired area with the subsequent improvement in
+terms of performance.
 
+```{r 202312_base_raster}
 # Download data
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
 
+# This is where I would store the file, you would need to modify the folder
 fname <- file.path("~/R/mapslib/GHS",  basename(url))
 if(!file.exists(fname)){
   download.file(url, fname)
@@ -94,40 +136,64 @@ if(!file.exists(fname)){
 zip_content <- unzip(fname, list = TRUE)
 zip_content
 
+# Unzip
 unzip(fname, exdir = "~/R/mapslib/GHS", junkpaths = TRUE, overwrite = FALSE)
+
+# Create the path to the file
 global_tiff <- zip_content$Name[grepl("tif$", zip_content$Name)]
 global_tiff_path <- file.path("~/R/mapslib/GHS", global_tiff)
 
-
-# That we read cropping to our owin
+# And read cropping to our owin
 pop_init <- rast(global_tiff_path, win = as_spatvector(owin))
+
+# Consistent naming of the layer
 names(pop_init) <- "population"
 
+ncell(pop_init)
+
+# And check with tidyterra
 base_gg +
   geom_spatraster(data = pop_init, maxcell = 50000) +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
+
+
+```
+
+## Data wrangling
+
+The GHSL information contains the estimated population on each grid. However the
+file has a high resolution (more than 2 millions of cells) so for plotting
+purposes we are going to reduce (i.e. aggregate) the number of cells so we can
+have a better dot visualization. Once that we aggregate, we would compute the
+area of each new aggregated cell and compute the corresponding population
+density.
+
+Instead of using the numeric range of densities, we would use categories for the
+final map, so we would classify the density into different groups:
+
+```{r}
 
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
 nrow(pop_init)
 factor <- round(nrow(pop_init) / 100)
 
-# Each cell contains the sum of population
-pop_agg <- terra::aggregate(pop_init, fact = factor, fun = "sum", na.rm = TRUE)
+# Each new cell would contain the sum of population of the aggregated cells
+pop_agg <- terra::aggregate(pop_init, fact = factor, fun = "sum", 
+                            na.rm = TRUE)
 
 
-# Compute areas to do calculations
+# Compute area of each new cell
 pop_agg$area_km2 <- cellSize(pop_agg, unit = "km")
 
-head(unique(pull(pop_agg, area_km2)))
-
-# Raster to points and get the intersecting points with the countries
+# Compute densities, mask to owin, convert to points and create categories
 pop_points <- pop_agg %>%
   # Compute density by cell
   mutate(dens = population / area_km2) %>%
   select(dens) %>%
   # Mask to the countries shapes
   mask(as_spatvector(countries), touches = FALSE) %>%
+  # SpatVector as points
   as.points() %>%
   # Categorize
   mutate(cat = case_when(
@@ -140,14 +206,18 @@ pop_points <- pop_agg %>%
     TRUE ~ "G"
   ))
 
-pop_points %>%
-  as_tibble() %>%
-  count(cat)
+```
 
+## Final plot
+
+And finally the map. In this case I would save it as a high resolution square
+map.
+
+```{r 202312_finalmap}
 
 
 # Final plot
-base_gg +
+final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
   geom_spatvector(
     pop_points,
@@ -159,7 +229,7 @@ base_gg +
     values = c(0.3, 1, 1.25, 1.5, 2, 2.5, 3.5),
     labels = c(
       "< 25", "[25, 50)", "[50, 100)", "[100, 250)",
-      "[250, 500)", "[500, 1500)", "= 1500"
+      "[250, 500)", "[500, 1500)", "≥ 1500"
     ),
     guide = guide_legend(
       nrow = 1,
@@ -195,12 +265,46 @@ base_gg +
 
 
 
-ggsave("iberia_bert.png", dpi = 300, width = 8, height = 8)
+ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 
 
+
+```
+
+![](202312_finalmap.png)
+
+## Alternative hexagonal grid
+
+The previous plot is based on the centroids of each cell of the raster, that is,
+by definition, a rectangular grid. I would like also to experiment with
+hexagonal grids (i.e. grid of hexagons) since I have the feeling that looks more
+"natural" than the rectangular ones, that presents a regularity hardly seen in
+the wild.
+
+The issue here is that `terra` does not produce this type of grids, however it
+is possible to create them with `sf::st_make_grid()`, so the workflow for this
+altenative is:
+
+1.  Create a hexagonal grid, where each hexagon represents a similar area than
+    each cell on the aggregated raster.
+2.  Extract the values of the raster to the new grid.
+3.  Finally, follow the same steps on data wrangling and plotting.
+
+When working with `sf::st_make_grid(square = FALSE)`, the parameter `cellsize`
+should be the "diameter" of the hexagon instead of the area. Luckly, we can
+infer this value since the area of a hexagon is
+
+$$
+A = \frac{\sqrt{3}}{2}d^{2}
+$$
+
+So we can extract $d$ from the previous expresion knowing the area $A$ of the
+aggregated cells:
+
+```{r}
 # Hex grid with sf ----
 
-# Need the avg size of the cells on the aggregated grid
+# Avg size of the cells on the aggregated grid
 target_area <- cellSize(pop_agg, unit = "km") %>%
   pull() %>%
   mean() %>%
@@ -208,8 +312,9 @@ target_area <- cellSize(pop_agg, unit = "km") %>%
 
 target_area
 
+# Infer diam hex
 diam_hex <- sqrt(2 * target_area / sqrt(3))
-
+# Create hexagonal grid
 pop_agg_sf <- st_make_grid(owin, cellsize = diam_hex, square = FALSE)
 
 length(pop_agg_sf)
@@ -220,10 +325,15 @@ area_km2 <- st_area(pop_agg_sf) %>%
   as.double()
 
 pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
+```
 
+Now, we use `exact_extract()` to extract the population on each hexagonal grid.
+
+```{r 202312_hexgrid_base}
 # Extract aggregated population by hex cell
 pop_agg_sf$population <- exact_extract(pop_init,
                                        y = pop_agg_sf,
+                                       progress = FALSE,
                                        fun = "sum"
 )
 
@@ -235,9 +345,11 @@ base_gg +
   ) +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 
+```
 
-head(unique(pull(pop_agg_sf, area_km2)))
+Finally we just compute densities, create categories and finally the map:
 
+```{r 202312_finalmap_hex}
 
 # Mask and categorize
 pop_sf_points <- pop_agg_sf %>%
@@ -265,7 +377,7 @@ pop_sf_points %>%
 
 
 # Final plot
-base_gg +
+final_plot_hex <- base_gg +
   # Layer, this object is a sf object
   geom_sf(
     pop_sf_points,
@@ -277,7 +389,7 @@ base_gg +
     values = c(0.3, 1, 1.25, 1.5, 2, 2.5, 3.5),
     labels = c(
       "< 25", "[25, 50)", "[50, 100)", "[100, 250)",
-      "[250, 500)", "[500, 1500)", "= 1500"
+      "[250, 500)", "[500, 1500)", "≥ 1500"
     ),
     guide = guide_legend(
       nrow = 1,
@@ -311,10 +423,11 @@ base_gg +
     )
   )
 
-ggsave("iberia_bert_hex.png", dpi = 300, width = 8, height = 8)
-
-
-
+ggsave("202312_finalmap_hex.png", dpi = 300, width = 8, height = 8)
 ```
+
+![](202312_finalmap_hex.png)
+
+And that's it! Which one do you like the most? Let me know in the comments.
 
 ## References

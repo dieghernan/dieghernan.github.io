@@ -90,7 +90,7 @@ diegpost_draft <- function(file) {
 }
 
 
-file <- "test"
+file <- "bertin_dots"
 diegpost_draft(file)
 
 
@@ -180,7 +180,7 @@ ezknit(
 
 # Try converting to webp
 
-im <- list.files("assets/img/blog", full.names = TRUE)
+im <- list.files("assets/img/towebp", full.names = TRUE)
 
 im <- plots
 
