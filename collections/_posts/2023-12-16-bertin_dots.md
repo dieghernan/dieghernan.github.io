@@ -150,7 +150,7 @@ base_gg +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_base_raster-1"/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="plot of chunk 202312_base_raster-1"/>
 
 ## Data wrangling
 
