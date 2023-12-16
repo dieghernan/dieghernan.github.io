@@ -1,6 +1,7 @@
 ---
 title: "Beautiful Maps with R (V): Point densities"
 subtitle: "Bertin's dot density maps with R and GHSL"
+excerpt: Another way to represent demographics on a map.
 tags:
 - r_bloggers
 - beautiful_maps
@@ -18,7 +19,6 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: ./assets/img/blog/202312_finalmap.webp
-og_image: ./assets/img/blog/202312_dots_hex_og.webp
 mathjax: true
 bibliography: bertin.bib
 nocite: '@*'
