@@ -34,7 +34,8 @@ Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 
 In this post I would create a similar map for Iberia, and additionally I would
 show how to create a variation using a hexagonal grid instead of a rectangular
-one.
+one. This is the first issue of the series 
+[Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
 
