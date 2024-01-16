@@ -29,7 +29,7 @@ pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:
 
 ![Craft
-Pulsars](https://static.scientificamerican.com/blogs/assets/sa-visual/Image/pulsar_trio.jpg)
+Pulsars](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)
 
 From "Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
@@ -52,7 +52,7 @@ iconic status in the '80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:
 
 ![Joy Division - Unknown pleasure
-cover](https://upload.wikimedia.org/wikipedia/en/3/33/Unknown_Pleasures_Spotify.jpg)
+cover](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
 If you are interested on knowing more about this fascinating history of science
 and design you can find it on [Pop Culture Pulsar: Origin Story of Joy
