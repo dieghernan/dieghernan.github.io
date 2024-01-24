@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2024-01-24 16:21:52 +0100 -->
+    <!-- Page build 2024-01-24 16:32:00 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -696,7 +696,7 @@ R2023A data.” <a href="https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0ED
 <div class="container my-3 pb-2">
  <div class="row">
    <div class="col-lg-8 offset-lg-2">
-   <div id="welcomments__container" class="welcomments__container"><h3 id="welcomments__comment-count-title" class="welcomments__comments-title">2 comments</h3><section id="welcomments__comment-container" class="welcomments__comment-container"><article
+   <div id="welcomments__container" class="welcomments__container"><h3 id="welcomments__comment-count-title" class="welcomments__comments-title">3 comments</h3><section id="welcomments__comment-container" class="welcomments__comment-container"><article
   id="welcomments__comment-01HJ0FK05JYWTZ5A6XGT85RVS6"
   class="welcomments__comment"
   data-comment-id="01HJ0FK05JYWTZ5A6XGT85RVS6"
@@ -756,6 +756,68 @@ R2023A data.” <a href="https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0ED
   <a class="welcomments__comment-reply-link"
      href="https://welcomments.io/api/websites/ZA8ne8kiZoF0Xocf8P9AEOWIq/comments/01HJ0G9YN5Y4B74DE067EDD1SF/reply">
     Reply to hyunchu,kimhyunchu,kim url
+  </a>
+</article>
+<article
+  id="welcomments__comment-01HMY1HQQ8FQA31523ZKN4RWV6"
+  class="welcomments__comment welcomments__nesting-level-1"
+  data-comment-id="01HMY1HQQ8FQA31523ZKN4RWV6"
+  data-author-name="dieghernan "
+  data-nesting-level="1"
+  itemprop="comment" itemscope itemtype="https://schema.org/Comment">
+ <div class="welcomments__comment-header">
+   <div class="welcomments__author-avatar">
+      <img class="welcomments__author-avatar-img" src="https://eu.ui-avatars.com/api/?background=random&name=dieghernan " alt="dieghernan ">
+   </div>
+   <div class="welcomments__author-information">
+     <div class="welcomments__author-name-and-time">
+       <h3 class="welcomments__author-name" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span itemprop="name">dieghernan </span><a href="https://dieghernan.github.io/" class="mx-2" title="dieghernan  url"><span class="sr-only">dieghernan  url</span><i class="fas fa-link fa-xs" aria-hidden="true"></i></a></h3>
+       <p class="welcomments__comment-time">
+          <a href="#welcomments__comment-01HMY1HQQ8FQA31523ZKN4RWV6" itemprop="url">
+            <time datetime="2024-01-24T16:31:19+01:00" itemprop="datePublished">January 24, 2024</time>
+          </a>
+       </p>
+     </div>
+   </div>
+ </div>
+ <div itemprop="text" class="welcomments__comment-message"><p>So <code class="language-plaintext highlighter-rouge">pop_init &lt;- rast(global_tiff_path, win = as_spatvector(owin))</code> reads a raster but only in the region delimited by the object passed in <code class="language-plaintext highlighter-rouge">win</code>. As raster files tend to be quite large this saves a lot of resources by limiting the load process to a specific zone.</p>
+<p>Maybe you have skipped previous steps (i.e. the creation of <code class="language-plaintext highlighter-rouge">owin</code> or failed to load tidyterra or terra)? I created a minimal example and its work fine:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; terra 1.7.65</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyterra</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Create an owin</span><span class="w">
+</span><span class="n">owin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LU"</span><span class="p">,</span><span class="w"> </span><span class="n">spatialtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LB"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_buffer</span><span class="p">(</span><span class="m">10000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4326</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Read with owin, will zoom to where we expect</span><span class="w">
+</span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">system.file</span><span class="p">(</span><span class="s2">"ex/elev.tif"</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"terra"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">win</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tidyterra</span><span class="o">::</span><span class="n">as_spatvector</span><span class="p">(</span><span class="n">owin</span><span class="p">))</span><span class="w">
+
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">owin</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://i.imgur.com/SEcSmql.png" alt="" /><!-- --></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># no owin</span><span class="w">
+
+</span><span class="n">r2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w">
+
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">r2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">owin</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://i.imgur.com/kuyvZ0M.png" alt="" /><!-- --></p>
+</div>
+  <a class="welcomments__comment-reply-link"
+     href="https://welcomments.io/api/websites/ZA8ne8kiZoF0Xocf8P9AEOWIq/comments/01HMY1HQQ8FQA31523ZKN4RWV6/reply">
+    Reply to dieghernan 
   </a>
 </article>
 </section><form id="welcomments__form" class="welcomments__comment-form" autocomplete="on" action="https://welcomments.io/api/comments" method="post">
