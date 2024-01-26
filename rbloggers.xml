@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/rbloggers.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2024-01-25T16:33:50+01:00</updated>
+	<updated>2024-01-26T13:44:49+01:00</updated>
 	<id>https://dieghernan.github.io/rbloggers.xml</id>
 	<title>One world | Projects, maps and coding - R Project</title>
 	<subtitle>Projects, maps and coding</subtitle>
@@ -14,6 +14,259 @@
 	<rights>(c) 2024, dieghernan</rights>
 	<icon>https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png</icon>
 	<logo>https://dieghernan.github.io/assets/img/site/banner.png</logo><entry>
+		<title>Optimize your images with R and reSmush.it</title>
+		<link href="https://dieghernan.github.io/202401_optimize-images-r/" rel="alternate" type="text/html" title="Optimize your images with R and reSmush.it"/>
+		<published>2024-01-26T13:44:33+01:00</published>
+		<updated>2024-01-26T13:44:33+01:00</updated>
+		<id>https://dieghernan.github.io/202401_optimize-images-r/</id>
+		<content type="html" xml:base="https://dieghernan.github.io/202401_optimize-images-r/">
+		
+		&lt;h3&gt;Introducing the resmush package&lt;/h3&gt;
+		
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/misc/compress-img.png&#39; &gt;
+			
+	&lt;p&gt;1 min.&lt;/p&gt;
+			&lt;p&gt;Intro TODO&lt;/p&gt;
+
+&lt;h2 id=&quot;working-with-resmush&quot;&gt;Working with resmush&lt;/h2&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;h2 id=&quot;alternatives&quot;&gt;Alternatives&lt;/h2&gt;
+
+&lt;p&gt;There are other alternatives for optimizing images for &lt;strong&gt;R&lt;/strong&gt;, but first…&lt;/p&gt;
+
+&lt;div class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;
+   &lt;p&gt;&lt;a href=&quot;https://yihui.org/&quot;&gt;Yihui Xie&lt;/a&gt;, one of the most prominent figures in the &lt;strong&gt;R&lt;/strong&gt; community, has recently been laid off from his 
+      position at Posit PBC (formerly RStudio) (&lt;a href=&quot;https://yihui.org/en/2024/01/bye-rstudio/&quot;&gt;more info&lt;/a&gt;).
+   &lt;/p&gt;
+   &lt;p&gt;Yihui is the developer of &lt;code&gt;knitr&lt;/code&gt;, &lt;code&gt;markdown&lt;/code&gt;, &lt;code&gt;blogdown&lt;/code&gt;, and &lt;code&gt;bookdown&lt;/code&gt;, among others, and he has been one of the 
+      key contributors (if not the most) to reproducible research space with &lt;strong&gt;R&lt;/strong&gt; his libraries.
+   &lt;/p&gt;
+   &lt;p&gt;If you have ever used and enjoyed his packages consider sponsor him.&lt;/p&gt;
+   &lt;div class=&quot;text-center my-3&quot;&gt;
+      &lt;a class=&quot;btn btn-light border border-dark&quot; role=&quot;button&quot; aria-label=&quot;Sponsor @yihui&quot; target=&quot;_top&quot; href=&quot;https://github.com/sponsors/yihui?o=esb&quot;&gt;
+      &lt;i class=&quot;fa-regular fa-heart fa-lg mr-2&quot; aria-hidden=&quot;true&quot; style=&quot;color: #bf3989;&quot;&gt;&lt;/i&gt;&lt;span class=&quot;font-weight-bold&quot;&gt;Sponsor Yihui Xie&lt;/span&gt;
+      &lt;/a&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cran.r-project.org/package=xfun&quot;&gt;&lt;strong&gt;xfun&lt;/strong&gt;&lt;/a&gt; package by Yihui Xie has
+the following functions that optimize image files:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::tinify()&lt;/code&gt; is similar to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resmush_file()&lt;/code&gt; but uses
+&lt;a href=&quot;https://tinypng.com/&quot;&gt;TinyPNG&lt;/a&gt;. API key required.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::optipng()&lt;/code&gt; compress local files with OptiPNG (that needs to be
+installed locally).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://jmablog.github.io/tinieR/&quot;&gt;&lt;strong&gt;tinieR&lt;/strong&gt;&lt;/a&gt; package by
+&lt;a href=&quot;https://jmablog.com/&quot;&gt;jmablog&lt;/a&gt;. &lt;strong&gt;R&lt;/strong&gt; package that provides a full
+interface with &lt;a href=&quot;https://tinypng.com/&quot;&gt;TinyPNG&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/coolbutuseless/optout&quot;&gt;&lt;strong&gt;optout&lt;/strong&gt;&lt;/a&gt; package by
+&lt;a href=&quot;https://coolbutuseless.github.io/&quot;&gt;@coolbutuseless&lt;/a&gt;. Similar to
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::optipng()&lt;/code&gt; with additional options. Needs additional software
+installed locally.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;tool&lt;/th&gt;
+      &lt;th&gt;CRAN&lt;/th&gt;
+      &lt;th&gt;Formats&lt;/th&gt;
+      &lt;th&gt;Additional software?&lt;/th&gt;
+      &lt;th&gt;Need online?&lt;/th&gt;
+      &lt;th&gt;API Key?&lt;/th&gt;
+      &lt;th&gt;Limits?&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::tinify()&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpg, webp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;500 files/month (Free tier)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::optipng()&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;tinieR&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpg, webp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;500 files/month (Free tier)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;optout&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpeg, pdf&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;resmush&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpeg, gif, bmp, tiff, webp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Max size 5Mb&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Additionally, if you host your projects in GitHub, you can try
+&lt;a href=&quot;https://imgbot.net/&quot;&gt;Imgbot&lt;/a&gt; that is free for open-source projects. Imgbot
+provides automatic optimization for files in your repos and the optimized files
+would be included in specific PR before merging in your work.&lt;/p&gt;
+
+		</content>
+		
+		<author>
+			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+		<summary type="html">&lt;p&gt;Intro TODO&lt;/p&gt;
+
+&lt;h2 id=&quot;working-with-resmush&quot;&gt;Working with resmush&lt;/h2&gt;
+
+&lt;p&gt;TODO&lt;/p&gt;
+
+&lt;h2 id=&quot;alternatives&quot;&gt;Alternatives&lt;/h2&gt;
+
+&lt;p&gt;There are other alternatives for optimizing images for &lt;strong&gt;R&lt;/strong&gt;, but first…&lt;/p&gt;
+
+&lt;div class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;
+   &lt;p&gt;&lt;a href=&quot;https://yihui.org/&quot;&gt;Yihui Xie&lt;/a&gt;, one of the most prominent figures in the &lt;strong&gt;R&lt;/strong&gt; community, has recently been laid off from his 
+      position at Posit PBC (formerly RStudio) (&lt;a href=&quot;https://yihui.org/en/2024/01/bye-rstudio/&quot;&gt;more info&lt;/a&gt;).
+   &lt;/p&gt;
+   &lt;p&gt;Yihui is the developer of &lt;code&gt;knitr&lt;/code&gt;, &lt;code&gt;markdown&lt;/code&gt;, &lt;code&gt;blogdown&lt;/code&gt;, and &lt;code&gt;bookdown&lt;/code&gt;, among others, and he has been one of the 
+      key contributors (if not the most) to reproducible research space with &lt;strong&gt;R&lt;/strong&gt; his libraries.
+   &lt;/p&gt;
+   &lt;p&gt;If you have ever used and enjoyed his packages consider sponsor him.&lt;/p&gt;
+   &lt;div class=&quot;text-center my-3&quot;&gt;
+      &lt;a class=&quot;btn btn-light border border-dark&quot; role=&quot;button&quot; aria-label=&quot;Sponsor @yihui&quot; target=&quot;_top&quot; href=&quot;https://github.com/sponsors/yihui?o=esb&quot;&gt;
+      &lt;i class=&quot;fa-regular fa-heart fa-lg mr-2&quot; aria-hidden=&quot;true&quot; style=&quot;color: #bf3989;&quot;&gt;&lt;/i&gt;&lt;span class=&quot;font-weight-bold&quot;&gt;Sponsor Yihui Xie&lt;/span&gt;
+      &lt;/a&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://cran.r-project.org/package=xfun&quot;&gt;&lt;strong&gt;xfun&lt;/strong&gt;&lt;/a&gt; package by Yihui Xie has
+the following functions that optimize image files:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::tinify()&lt;/code&gt; is similar to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resmush_file()&lt;/code&gt; but uses
+&lt;a href=&quot;https://tinypng.com/&quot;&gt;TinyPNG&lt;/a&gt;. API key required.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::optipng()&lt;/code&gt; compress local files with OptiPNG (that needs to be
+installed locally).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://jmablog.github.io/tinieR/&quot;&gt;&lt;strong&gt;tinieR&lt;/strong&gt;&lt;/a&gt; package by
+&lt;a href=&quot;https://jmablog.com/&quot;&gt;jmablog&lt;/a&gt;. &lt;strong&gt;R&lt;/strong&gt; package that provides a full
+interface with &lt;a href=&quot;https://tinypng.com/&quot;&gt;TinyPNG&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/coolbutuseless/optout&quot;&gt;&lt;strong&gt;optout&lt;/strong&gt;&lt;/a&gt; package by
+&lt;a href=&quot;https://coolbutuseless.github.io/&quot;&gt;@coolbutuseless&lt;/a&gt;. Similar to
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::optipng()&lt;/code&gt; with additional options. Needs additional software
+installed locally.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;tool&lt;/th&gt;
+      &lt;th&gt;CRAN&lt;/th&gt;
+      &lt;th&gt;Formats&lt;/th&gt;
+      &lt;th&gt;Additional software?&lt;/th&gt;
+      &lt;th&gt;Need online?&lt;/th&gt;
+      &lt;th&gt;API Key?&lt;/th&gt;
+      &lt;th&gt;Limits?&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::tinify()&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpg, webp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;500 files/month (Free tier)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xfun::optipng()&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;tinieR&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpg, webp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;500 files/month (Free tier)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;optout&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpeg, pdf&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;resmush&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;png, jpeg, gif, bmp, tiff, webp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Yes&lt;/td&gt;
+      &lt;td&gt;No&lt;/td&gt;
+      &lt;td&gt;Max size 5Mb&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Additionally, if you host your projects in GitHub, you can try
+&lt;a href=&quot;https://imgbot.net/&quot;&gt;Imgbot&lt;/a&gt; that is free for open-source projects. Imgbot
+provides automatic optimization for files in your repos and the optimized files
+would be included in specific PR before merging in your work.&lt;/p&gt;
+</summary>
+		<category term="posts"/>
+		<category term="r_bloggers"/><category term="r_package"/><category term="resmush"/>
+	</entry><entry>
 		<title>Beautiful Maps with R (V): Point densities</title>
 		<link href="https://dieghernan.github.io/202312_bertin_dots/" rel="alternate" type="text/html" title="Beautiful Maps with R (V): Point densities"/>
 		<published>2023-12-16T00:00:00+01:00</published>
