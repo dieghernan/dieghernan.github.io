@@ -29,7 +29,7 @@ There are other alternatives for optimizing images for **R**, but first...
       position at Posit PBC (formerly RStudio) (<a href="https://yihui.org/en/2024/01/bye-rstudio/">more info</a>).
    </p>
    <p>Yihui is the developer of <code>knitr</code>, <code>markdown</code>, <code>blogdown</code>, and <code>bookdown</code>, among others, and he has been one of the 
-      key contributors (if not the most) to reproducible research space with <strong>R</strong> his libraries.
+      key contributors (if not the most) to reproducible research space with <strong>R</strong> through his libraries.
    </p>
    <p>If you have ever used and enjoyed his packages consider sponsor him.</p>
    <div class="text-center my-3">
@@ -61,8 +61,8 @@ There are other alternatives for optimizing images for **R**, but first...
 | `xfun::tinify()`  | Yes  | `png, jpg, webp`                  | No                   | Yes          | Yes      | 500 files/month (Free tier) |
 | `xfun::optipng()` | Yes  | `png`                             | Yes                  | No           | No       | No                          |
 | **tinieR**        | No   | `png, jpg, webp`                  | No                   | Yes          | Yes      | 500 files/month (Free tier) |
-| **optout**        | No   | `png, jpeg, pdf`                  | Yes                  | No           | No       | No                          |
-| **resmush**       | Yes  | `png, jpeg, gif, bmp, tiff, webp` | No                   | Yes          | No       | Max size 5Mb                |
+| **optout**        | No   | `png, jpg, pdf`                  | Yes                  | No           | No       | No                          |
+| **resmush**       | Yes  | `png, jpg, gif, bmp, tiff, webp` | No                   | Yes          | No       | Max size 5Mb                |
 
 Additionally, if you host your projects in GitHub, you can try
 [Imgbot](https://imgbot.net/) that is free for open-source projects. Imgbot
