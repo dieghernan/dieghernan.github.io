@@ -38,7 +38,7 @@ features of reSmush.it are:
   - [**OptiPNG**](https://optipng.sourceforge.net/): `png` reducer that
     is used by several online optimizers.
 
-## Why resmush package?
+## Why the resmush package?
 
 One of the main reasons I developed **resmush** is because I use to
 ship [precomputed
@@ -66,7 +66,7 @@ There are other alternatives that I would discuss [at the end of this
 post](#other-alternatives), but in one line, reSmush.it API performs fast with
 minimal configuration for a wide range of formats without an API key.
 
-## Using resmush package
+## Using the resmush package
 
 ### With local files
 
