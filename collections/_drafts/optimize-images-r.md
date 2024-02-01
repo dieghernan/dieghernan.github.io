@@ -37,6 +37,15 @@ include:
   - [**OptiPNG**](https://optipng.sourceforge.net/): `png` reducer
     used by several online optimizers.
 
+**reSmush.it** is free of charge, but its team is planning to offer more 
+serves as well as extend the service to support other types of image files. If 
+you enjoy this API (as I do), you can consider supporting them.
+
+<div class="text-center my-3">
+<a title="Support reSmush.it on ko-fi.com" class="kofi-button" style="background-color:#ff5e5b;" href="https://ko-fi.com/E1E51PW00" target="_blank">
+<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi reSmush.it donations" class="kofiimg">Support reSmush.it on Ko-fi</span></a>
+</div>
+
 ## Why the resmush package?
 
 One of the main reasons I developed **resmush** is because I usually
