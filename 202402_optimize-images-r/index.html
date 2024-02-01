@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2024-02-01 12:41:43 +0100 -->
+    <!-- Page build 2024-02-01 13:02:04 +0100 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -17,8 +17,8 @@
       },
       "headline": "Optimize your images with R and reSmush.it",
       "image": "https://dieghernan.github.io/assets/img/misc/compress-img.png",
-      "datePublished": "2024-02-01T12:41:24+01:00",
-      "dateModified": "2024-02-01T12:41:24+01:00",
+      "datePublished": "2024-02-01T13:01:47+01:00",
+      "dateModified": "2024-02-01T13:01:47+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -209,7 +209,7 @@
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2024-02-01T12:41:24+01:00" class="dt-published" >01 feb 2024</time>
+            <time datetime="2024-02-01T13:01:47+01:00" class="dt-published" >01 feb 2024</time>
         </div></div>
          <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
             <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202402_optimize-images-r/&text=Optimize+your+images+with+R+and+reSmush.it&via=dhernangomez&hashtags=r_bloggers,r_package,resmush" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
@@ -369,27 +369,29 @@ the image.</p>
 </span><span class="n">dim_dest</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">png</span><span class="o">::</span><span class="n">readPNG</span><span class="p">(</span><span class="s2">"cyl_resmush.png"</span><span class="p">))[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
-  </span><span class="n">size_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size_src</span><span class="p">,</span><span class="w">
-  </span><span class="n">size_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size_dest</span><span class="p">,</span><span class="w">
-  </span><span class="n">dimensions_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim_src</span><span class="p">,</span><span class="w">
-  </span><span class="n">dimensions_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim_dest</span><span class="w">
+  </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"original file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"compressed file"</span><span class="p">),</span><span class="w">
+  </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">size_src</span><span class="p">,</span><span class="w"> </span><span class="n">size_dest</span><span class="p">),</span><span class="w">
+  </span><span class="n">dimensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">dim_src</span><span class="p">,</span><span class="w"> </span><span class="n">dim_dest</span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 <table>
 <thead>
    <tr>
-     <th style="text-align: left">size_source</th>
-     <th style="text-align: left">size_dest</th>
-     <th style="text-align: left">dimensions_source</th>
-     <th style="text-align: left">dimensions_dest</th>
+     <th style="text-align: left">source</th>
+     <th style="text-align: left">size</th>
+     <th style="text-align: left">dimensions</th>
    </tr>
  </thead>
  <tbody>
    <tr>
+     <td style="text-align: left">original file</td>
      <td style="text-align: left">1.7 Mb</td>
-     <td style="text-align: left">762.2 Kb</td>
      <td style="text-align: left">1050x1500</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">compressed file</td>
+     <td style="text-align: left">762.2 Kb</td>
      <td style="text-align: left">1050x1500</td>
    </tr>
  </tbody>

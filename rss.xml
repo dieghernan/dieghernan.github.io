@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2024, dieghernan</copyright>	
-		<pubDate>Thu, 01 Feb 2024 12:41:43 +0100</pubDate>
-		<lastBuildDate>Thu, 01 Feb 2024 12:41:43 +0100</lastBuildDate>
+		<pubDate>Thu, 01 Feb 2024 13:02:04 +0100</pubDate>
+		<lastBuildDate>Thu, 01 Feb 2024 13:02:04 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -23,7 +23,7 @@
 				<![CDATA[	
  				<h3><p>Introducing the resmush package</p>
 </h3>
-    		<p>4 min.</p>
+    		<p>5 min.</p>
 				<div><p><strong>resmush</strong> package has recently hit
 <a href="https://cran.r-project.org/package=resmush">CRAN</a>! This is one tiny
 utility package that allows to optimize (i.e. compress the size) of
@@ -173,10 +173,9 @@ the image.</p>
 </span><span class="n">dim_dest</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">png</span><span class="o">::</span><span class="n">readPNG</span><span class="p">(</span><span class="s2">"cyl_resmush.png"</span><span class="p">))[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">collapse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
-  </span><span class="n">size_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size_src</span><span class="p">,</span><span class="w">
-  </span><span class="n">size_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size_dest</span><span class="p">,</span><span class="w">
-  </span><span class="n">dimensions_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim_src</span><span class="p">,</span><span class="w">
-  </span><span class="n">dimensions_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dim_dest</span><span class="w">
+  </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"original file"</span><span class="p">,</span><span class="w"> </span><span class="s2">"compressed file"</span><span class="p">),</span><span class="w">
+  </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">size_src</span><span class="p">,</span><span class="w"> </span><span class="n">size_dest</span><span class="p">),</span><span class="w">
+  </span><span class="n">dimensions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">dim_src</span><span class="p">,</span><span class="w"> </span><span class="n">dim_dest</span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
@@ -184,17 +183,20 @@ the image.</p>
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">size_source</th>
-      <th style="text-align: left">size_dest</th>
-      <th style="text-align: left">dimensions_source</th>
-      <th style="text-align: left">dimensions_dest</th>
+      <th style="text-align: left">source</th>
+      <th style="text-align: left">size</th>
+      <th style="text-align: left">dimensions</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">original file</td>
       <td style="text-align: left">1.7 Mb</td>
-      <td style="text-align: left">762.2 Kb</td>
       <td style="text-align: left">1050x1500</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">compressed file</td>
+      <td style="text-align: left">762.2 Kb</td>
       <td style="text-align: left">1050x1500</td>
     </tr>
   </tbody>
@@ -453,7 +455,7 @@ work.</p>
 		    <category>r_bloggers</category><category>r_package</category><category>resmush</category><media:title type="html"><![CDATA[Optimize your images with R and reSmush.it ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/misc/compress-img.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/misc/compress-img.png" /><guid isPermaLink="true">https://dieghernan.github.io/202402_optimize-images-r/</guid>
-      <pubDate>Thu, 01 Feb 2024 12:41:24 +0100</pubDate>
+      <pubDate>Thu, 01 Feb 2024 13:01:47 +0100</pubDate>
 		</item><item>
 			<title>Beautiful Maps with R (V): Point densities</title>
 			<description>
