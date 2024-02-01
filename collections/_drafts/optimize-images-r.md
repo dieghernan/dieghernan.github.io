@@ -1,6 +1,7 @@
 ---
 title: "Optimize your images with R and reSmush.it"
 subtitle: "Introducing the resmush package"
+excerpt: Compress the size of your images with R, resmush and reSmush.it
 tags:
 - r_bloggers
 - r_package
@@ -39,7 +40,7 @@ features of reSmush.it are:
 
 ## Why resmush package?
 
-One of the main reasons I developed **resmush** is because I used to
+One of the main reasons I developed **resmush** is because I use to
 ship [precomputed
 vignettes](https://ropensci.org/blog/2019/12/08/precompute-vignettes/)
 with my packages (see
@@ -62,7 +63,7 @@ the images on this blog using `resmush_dir()`, which is a shorthand for
 optimizing all files in a specific folder.
 
 There are other alternatives that I would discuss [at the end of this
-post](#altern), but in one line, reSmush.it API performs fast with
+post](#other-alternatives), but in one line, reSmush.it API performs fast with
 minimal configuration for a wide range of formats without an API key.
 
 ## Using resmush package
@@ -129,22 +130,21 @@ Optimized file
 
 By default `resmush_file()/resmush_dir()` do not overwrite the original
 file, altough this may be modified with the parameter `overwrite = TRUE`
-Now the resmushed file (“cyl_resmush.png”) has a size of 762.2 Kb.
+Now the resmushed file (<code>"cyl_resmush.png"</code>) has a size of 762.2 Kb.
 
-Let’s compare them size-by-side:
+Let’s compare them side-by-side:
 
-<div class="figure">
-
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original online figure" />
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized figure" />
-
+<div class="figure row no-gutters">
+<a href="https://dieghernan.github.io/assets/img/samples/cyl.png" class="col-sm-6 p-1">
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original online figure">
+</a>
+<a href="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" class="col-sm-6 p-1">
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized figure">
+</a>
 <p class="caption">
-
-Original picture (top) 1.7 Mb and optimized picture (bottom) 762.2 Kb
-(Compression 55.46%)
-
+Original picture (left/top) 1.7 Mb and optimized picture (right/bottom) 762.2 Kb
+(Compression 55.46%). Click in the images to enlarge.
 </p>
-
 </div>
 
 We can chech the reduction of size without reducing the dimensions of
@@ -196,17 +196,16 @@ knitr::kable(dm)
 |:-------------------------------------------------------------------|:---------------------|:---------|:----------|:---------------|:------|----------:|-----------:|
 | <https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg> | sample_optimized.jpg | 1.3 Mb   | 985 Kb    | 26.63%         | OK    |   1374693 |    1008593 |
 
-<div class="figure">
+<div class="figure row no-gutters">
 
 <img
-src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg"
-alt="Original online figure" />
-<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Optimized online figure" />
+src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Original online figure" class="col-sm-6 p-1">
+<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Optimized online figure" class="col-sm-6 p-1">
 
 <p class="caption">
 
-Original picture (top) 1.3 Mb and optimized picture (bottom) 985 Kb
-(Compression 26.63%)
+Original picture (left/top) 1.3 Mb and optimized picture (right/bottom) 985 Kb
+(Compression 26.63%). Click in the images to enlarge.
 
 </p>
 
@@ -262,26 +261,130 @@ If you have ever used and enjoyed his packages consider sponsor him.
   `xfun::optipng()` with additional options. Needs additional software
   installed locally.
 
-| tool               | CRAN | Additional software? | Need online? | API Key? | Limits?                     |
-|--------------------|------|----------------------|--------------|----------|-----------------------------|
-| `xfu n::tinify()`  | Yes  | No                   | Yes          | Yes      | 500 files/month (Free tier) |
-| `xfun ::optipng()` | Yes  | Yes                  | No           | No       | No                          |
-| **tinieR**         | No   | No                   | Yes          | Yes      | 500 files/month (Free tier) |
-| **optout**         | No   | Yes                  | No           | No       | No                          |
-| **resmush**        | Yes  | No                   | Yes          | No       | Max size 5Mb                |
+<table class="table table-sm table-striped">
+    <caption>Table 1: <strong>R</strong> packages: Comparison of alternatives for optimizing
+images.</caption>
+<thead class="text-center">
+   <tr>
+     <th class="align-middle">tool</th>
+     <th class="align-middle">CRAN</th>
+     <th class="align-middle">Additional software?</th>
+     <th class="align-middle">Online?</th>
+     <th class="align-middle">API Key?</th>
+     <th class="align-middle">Limits?</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td><code class="language-plaintext highlighter-rouge">xfun::tinify()</code></td>
+     <td>Yes</td>
+     <td>No</td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>500 files/month (Free tier)</td>
+   </tr>
+   <tr>
+     <td><code class="language-plaintext highlighter-rouge">xfun::optipng()</code></td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>No</td>
+     <td>No</td>
+     <td>No</td>
+   </tr>
+   <tr>
+     <td><strong>tinieR</strong></td>
+     <td>No</td>
+     <td>No</td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>500 files/month (Free tier)</td>
+   </tr>
+   <tr>
+     <td><strong>optout</strong></td>
+     <td>No</td>
+     <td>Yes</td>
+     <td>No</td>
+     <td>No</td>
+     <td>No</td>
+   </tr>
+   <tr>
+     <td><strong>resmush</strong></td>
+     <td>Yes</td>
+     <td>No</td>
+     <td>Yes</td>
+     <td>No</td>
+     <td>Max size 5Mb</td>
+   </tr>
+ </tbody>
+</table>
 
-Table 1: **R** packages: Comparison of alternatives for optimizing
-images.
-
-| tool              | png | jpg | gif | bmp | tiff | webp | pdf |
-|-------------------|-----|-----|-----|-----|------|------|-----|
-| `xfun::tinify()`  | Yes | Yes |     |     |      | Yes  |     |
-| `xfun::optipng()` | Yes |     |     |     |      |      |     |
-| **tinieR**        | Yes | Yes |     |     |      | Yes  |     |
-| **optout**        | Yes | Yes |     |     |      |      | Yes |
-| **resmush**       | Yes | Yes | Yes | Yes | Yes  | Yes  |     |
-
-Table 2: **R** packages: Formats admitted.
+<table class="table table-striped">
+<caption>Table 2: <strong>R</strong> packages: Formats admitted.</caption>
+    <thead>
+   <tr>
+     <th class="align-middle">tool</th>
+     <th class="align-middle">png</th>
+     <th class="align-middle">jpg</th>
+     <th class="align-middle">gif</th>
+     <th class="align-middle">bmp</th>
+     <th class="align-middle">tiff</th>
+     <th class="align-middle">webp</th>
+     <th class="align-middle">pdf</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td><code class="language-plaintext highlighter-rouge">xfun::tinify()</code></td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+   </tr>
+   <tr>
+     <td><code class="language-plaintext highlighter-rouge">xfun::optipng()</code></td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+   </tr>
+   <tr>
+     <td><strong>tinieR</strong></td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+   </tr>
+   <tr>
+     <td><strong>optout</strong></td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>Yes</td>
+   </tr>
+   <tr>
+     <td><strong>resmush</strong></td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>Yes</td>
+     <td>&nbsp;</td>
+   </tr>
+ </tbody>
+</table>
 
 Additionally, if you host your projects in GitHub, you can try
 [Imgbot](https://imgbot.net/) that is free for open-source projects.
