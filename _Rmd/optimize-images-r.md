@@ -161,17 +161,17 @@ dim_src <- dim(png::readPNG("cyl.png"))[1:2] %>% paste0(collapse = "x")
 dim_dest <- dim(png::readPNG("cyl_resmush.png"))[1:2] %>% paste0(collapse = "x")
 
 data.frame(
-  size_source = size_src,
-  size_dest = size_dest,
-  dimensions_source = dim_src,
-  dimensions_dest = dim_dest
+  source = c("original file", "compressed file"),
+  size = c(size_src, size_dest),
+  dimensions = c(dim_src, dim_dest)
 ) %>%
   knitr::kable()
 ```
 
-| size_source | size_dest | dimensions_source | dimensions_dest |
-|:------------|:----------|:------------------|:----------------|
-| 1.7 Mb      | 762.2 Kb  | 1050x1500         | 1050x1500       |
+| source          | size     | dimensions |
+|:----------------|:---------|:-----------|
+| original file   | 1.7 Mb   | 1050x1500  |
+| compressed file | 762.2 Kb | 1050x1500  |
 
 ### With online files
 
@@ -191,9 +191,9 @@ dm <- resmush_url(url, "sample_optimized.jpg", report = FALSE)
 knitr::kable(dm)
 ```
 
-| src_img                                                            | dest_img             | src_size | dest_size | compress_ratio | notes | src_bytes | dest_bytes |
-|:-------------------------------------------------------------------|:---------------------|:---------|:----------|:---------------|:------|----------:|-----------:|
-| <https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg> | sample_optimized.jpg | 1.3 Mb   | 985 Kb    | 26.63%         | OK    |   1374693 |    1008593 |
+| src_img                                                            | dest_img                | src_size | dest_size | compress_ratio | notes | src_bytes | dest_bytes |
+|:-------------------------------------------------------------------|:------------------------|:---------|:----------|:---------------|:------|----------:|-----------:|
+| <https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg> | sample_optimized_01.jpg | 1.3 Mb   | 985 Kb    | 26.63%         | OK    |   1374693 |    1008593 |
 
 <div class="figure">
 

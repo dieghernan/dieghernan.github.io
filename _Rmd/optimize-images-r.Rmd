@@ -158,12 +158,12 @@ dim_src <- dim(png::readPNG("cyl.png"))[1:2] %>% paste0(collapse = "x")
 dim_dest <- dim(png::readPNG("cyl_resmush.png"))[1:2] %>% paste0(collapse = "x")
 
 data.frame(
-  size_source = size_src,
-  size_dest = size_dest,
-  dimensions_source = dim_src,
-  dimensions_dest = dim_dest
+  source = c("original file", "compressed file"),
+  size = c(size_src, size_dest),
+  dimensions = c(dim_src,dim_dest)
 ) %>%
   knitr::kable()
+
 ```
 
 ### With online files
@@ -241,7 +241,7 @@ with <strong>R</strong> through his libraries.</p>
     installed locally.
 
 | tool               | CRAN | Additional software? | Need online? | API Key? | Limits?                     |
-|--------------------|------|----------------------|--------------|----------|-----------------------------|
+|--------------|--------------|--------------|--------------|--------------|--------------|
 | `xfu n::tinify()`  | Yes  | No                   | Yes          | Yes      | 500 files/month (Free tier) |
 | `xfun ::optipng()` | Yes  | Yes                  | No           | No       | No                          |
 | **tinieR**         | No   | No                   | Yes          | Yes      | 500 files/month (Free tier) |

@@ -162,17 +162,17 @@ dim_src <- dim(png::readPNG("cyl.png"))[1:2] %>% paste0(collapse = "x")
 dim_dest <- dim(png::readPNG("cyl_resmush.png"))[1:2] %>% paste0(collapse = "x")
 
 data.frame(
-  size_source = size_src,
-  size_dest = size_dest,
-  dimensions_source = dim_src,
-  dimensions_dest = dim_dest
+  source = c("original file", "compressed file"),
+  size = c(size_src, size_dest),
+  dimensions = c(dim_src, dim_dest)
 ) %>%
   knitr::kable()
 ```
 
-| size_source | size_dest | dimensions_source | dimensions_dest |
-|:------------|:----------|:------------------|:----------------|
-| 1.7 Mb      | 762.2 Kb  | 1050x1500         | 1050x1500       |
+| source          | size     | dimensions |
+|:----------------|:---------|:-----------|
+| original file   | 1.7 Mb   | 1050x1500  |
+| compressed file | 762.2 Kb | 1050x1500  |
 
 ### With online files
 
