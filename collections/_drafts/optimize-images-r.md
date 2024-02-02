@@ -19,6 +19,13 @@ The **resmush** package has recently been released
 allows for the optimization (i.e., compression) of local and online images 
 using [reSmush.it](https://resmush.it/).
 
+You can install **resmush** from
+[**CRAN**](https://CRAN.R-project.org/package=resmush) with:
+
+``` r
+install.packages(“resmush”)
+```
+
 ## What is reSmush.it?
 
 reSmush.it is a **free online API** that provides image optimization and has 
