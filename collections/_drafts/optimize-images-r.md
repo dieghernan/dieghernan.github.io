@@ -235,8 +235,8 @@ There are other alternatives for optimizing images with **R**, but first…
   (<a href="https://yihui.org/en/2024/01/bye-rstudio/">more info here</a>).
 </p>
 <p>
-  Yihui is the developer of <code>knitr</code>, <code>markdown</code>, 
-  <code>blogdown</code>, and <code>bookdown</code>, among others, and he 
+  Yihui is the developer of <strong>knitr</strong>, <strong>markdown</strong>, 
+  <strong>blogdown</strong>, and <strong>bookdown</strong>, among others, and he 
   has been one of the key contributors (if not the most) to the reproducible 
   research space with <strong>R</strong> through his libraries.
 </p>
@@ -345,53 +345,53 @@ images.</caption>
  <tbody>
    <tr>
      <td><code class="language-plaintext highlighter-rouge">xfun::tinify()</code></td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>✅</td>
+     <td>❌</td>
    </tr>
    <tr>
      <td><code class="language-plaintext highlighter-rouge">xfun::optipng()</code></td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
+     <td>✅</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
    </tr>
    <tr>
      <td><strong>tinieR</strong></td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>✅</td>
+     <td>❌</td>
    </tr>
    <tr>
      <td><strong>optout</strong></td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>Yes</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>❌</td>
+     <td>✅</td>
    </tr>
    <tr>
      <td><strong>resmush</strong></td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>Yes</td>
-     <td>&nbsp;</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>✅</td>
+     <td>❌</td>
    </tr>
  </tbody>
 </table>
