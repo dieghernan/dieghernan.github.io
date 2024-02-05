@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2024, dieghernan</copyright>	
-		<pubDate>Mon, 05 Feb 2024 22:52:18 +0100</pubDate>
-		<lastBuildDate>Mon, 05 Feb 2024 22:52:18 +0100</lastBuildDate>
+		<pubDate>Mon, 05 Feb 2024 22:55:44 +0100</pubDate>
+		<lastBuildDate>Mon, 05 Feb 2024 22:55:44 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -18,495 +18,6 @@
 			<link>https://dieghernan.github.io/</link>
 			<description>Personal blog of dieghernan</description>
 		</image><item>
-			<title></title>
-			<description>
-				<![CDATA[	
- 				
-    		<p>6 min.</p>
-				<div><h2 id="introduction">Introduction</h2>
-
-<p>The aim of this document is to describe the new features added to <code class="language-plaintext highlighter-rouge">cartography</code> on version <code class="language-plaintext highlighter-rouge">2.4.0</code> by
-<a href="https://github.com/dieghernan/">dieghernan</a> and already available on <strong>CRAN</strong>.</p>
-
-<p>Those new features are:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">hatchedLayer</code> and <code class="language-plaintext highlighter-rouge">legendHatched</code> functions.</li>
-  <li><code class="language-plaintext highlighter-rouge">pngLayer</code> and <code class="language-plaintext highlighter-rouge">getPngLayer</code> functions.</li>
-  <li><code class="language-plaintext highlighter-rouge">wordcloudLayer</code> function.</li>
-</ul>
-
-<p>These functions don’t handle <code class="language-plaintext highlighter-rouge">sp</code> objects on purpose, favoring <code class="language-plaintext highlighter-rouge">sf</code> instead.</p>
-
-<h2 id="installation">Installation</h2>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#install.packages("cartography")</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
-</span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## [1] '3.0.0'</span><span class="w">
-</span></code></pre></div></div>
-
-<h2 id="hatched-map">Hatched Map</h2>
-
-<p>Version of typology/choropleth maps using a hatched filling. This is particularly useful for those maps that needs to be printed on black and white, as academic papers. These maps also are useful for representing overlapping dimensions.</p>
-
-<h3 id="example-1">Example 1</h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">jsonlite</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#Shape</span><span class="w">
-</span><span class="n">cntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="s2">"https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson"</span><span class="p">,</span><span class="w">
-                  </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
-</span><span class="c1">## Reading layer `CNTR_RG_20M_2016_3035' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson' using driver `GeoJSON'</span><span class="w">
-</span><span class="c1">## Simple feature collection with 257 features and 6 fields</span><span class="w">
-</span><span class="c1">## Geometry type: MULTIPOLYGON</span><span class="w">
-</span><span class="c1">## Dimension:     XY</span><span class="w">
-</span><span class="c1">## Bounding box:  xmin: -7142317 ymin: -9160665 xmax: 16932290 ymax: 15428010</span><span class="w">
-</span><span class="c1">## Projected CRS: ETRS89-extended / LAEA Europe</span><span class="w">
-
-</span><span class="c1"># Include trade blocks</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fromJSON</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json"</span><span class="p">)</span><span class="w">
-</span><span class="n">ISO_memcol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w">
-                       </span><span class="n">orgtosearch</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">match</span><span class="p">(</span><span class="n">orgtosearch</span><span class="p">,</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"org_id"</span><span class="p">]))</span><span class="w">
-  </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">df</span><span class="p">),</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-    </span><span class="n">unlist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s2">"org_member"</span><span class="p">])[</span><span class="n">ind</span><span class="p">])</span><span class="w">
-  </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">or</span><span class="p">)),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
-  </span><span class="nf">names</span><span class="p">(</span><span class="n">or</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">orgtosearch</span><span class="w">
-  </span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">))</span><span class="w">
-  </span><span class="nf">return</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EU"</span><span class="p">)</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EFTA"</span><span class="p">)</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EuroArea"</span><span class="p">)</span><span class="w">
-
-
-</span><span class="n">cntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w">
-                </span><span class="n">df</span><span class="p">,</span><span class="w">
-                </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO3_CODE"</span><span class="p">,</span><span class="w">
-                </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO_3166_3"</span><span class="p">,</span><span class="w">
-                </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
-
-
-</span><span class="c1">#Limits EU</span><span class="w">
-</span><span class="c1">#Plot base map</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="w">
-  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w">
-  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
-  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">),</span><span class="w">
-</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EU</span><span class="p">),]),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EFTA</span><span class="p">),]),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="c1">#Add hatching</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EuroArea</span><span class="p">),],</span><span class="w">
-  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right2left"</span><span class="p">,</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
-  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
-  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-</span><span class="n">legendTypo</span><span class="p">(</span><span class="w">
-  </span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
-  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"EU"</span><span class="p">,</span><span class="w"> </span><span class="s2">"EFTA"</span><span class="p">),</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="s2">"black"</span><span class="p">),</span><span class="w">
-  </span><span class="n">nodata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
-  </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
-  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Within EU"</span><span class="p">,</span><span class="w">
-  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Euro\nArea"</span><span class="p">,</span><span class="w">
-  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right2left"</span><span class="p">,</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"European Trade Blocks"</span><span class="p">,</span><span class="w">
-  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey.pal"</span><span class="p">,</span><span class="w">
-  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
-  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
-  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="plot of chunk 20200217_hatched-min" /></p>
-
-<h3 id="example-2">Example 2</h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># Plot World</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="w">
-  </span><span class="n">cntries</span><span class="o">$</span><span class="n">geometry</span><span class="p">,</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
-  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
-  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">),</span><span class="w">
-</span><span class="p">)</span><span class="w">
-</span><span class="c1">#Add layers for non european area - left2right</span><span class="w">
-</span><span class="n">NOEUR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Europe"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">CONTINENT.EN</span><span class="p">))</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">NOEUR</span><span class="p">,</span><span class="w">
-  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left2right"</span><span class="p">,</span><span class="w">
-  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-  </span><span class="c1">#Basic usage</span><span class="w">
-  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
-  </span><span class="c1">#Densify default grid</span><span class="w">
-  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
-  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="w">
-</span><span class="p">)</span><span class="w">            </span><span class="c1">#Formatting</span><span class="w">
-
-</span><span class="c1">#Extract Europe Regions</span><span class="w">
-</span><span class="n">EUR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Europe"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Western Asia"</span><span class="p">)[,</span><span class="w"> </span><span class="s2">"SUBREGION.EN"</span><span class="p">]</span><span class="w">
-</span><span class="n">levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="p">))</span><span class="w">
-
-
-</span><span class="c1">#Plot Regions</span><span class="w">
-</span><span class="c1"># First element with zigzag</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
-             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w">
-             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zigzag"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#dot with parms</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
-  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w">
-  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w">
-  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#vertical</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
-             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
-             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#another dot</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">4</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
-             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
-             </span><span class="n">pch</span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w">
-             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#create legend</span><span class="w">
-</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
-  </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
-  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="n">title.cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w">
-  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">levels</span><span class="p">,</span><span class="w"> </span><span class="s2">"Others"</span><span class="p">),</span><span class="w">
-  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"zigzag"</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
-               </span><span class="s2">"left2right"</span><span class="p">),</span><span class="w">
-  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">15</span><span class="p">),</span><span class="w">
-  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">levels</span><span class="p">)),</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regions of Europe (United Nations)"</span><span class="p">,</span><span class="w">
-  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey.pal"</span><span class="p">,</span><span class="w">
-  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
-  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
-  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="plot of chunk 20200217_hatched" /></p>
-
-<p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order on the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code> patterns are presents, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, <code class="language-plaintext highlighter-rouge">lty = c(1, 1, 3)</code> respect that order.</p>
-
-<h3 id="example-3">Example 3</h3>
-
-<p><code class="language-plaintext highlighter-rouge">hatchedLayer</code> also could be useful for plotting several dimensions on the same map, in combination with another functions of the package.</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
-
-
-
-</span><span class="c1">#Warsaw Pact - roughly mapped via UN Region</span><span class="w">
-</span><span class="n">wp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Eastern Europe"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#European Union - after Brexit</span><span class="w">
-</span><span class="n">eu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">EU</span><span class="p">))</span><span class="w">
-
-</span><span class="c1">#Euro Area</span><span class="w">
-</span><span class="n">ea</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">EuroArea</span><span class="p">))</span><span class="w">
-
-</span><span class="c1">#Flags for plotting</span><span class="w">
-</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">eu</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
-              </span><span class="n">cntries</span><span class="o">$</span><span class="n">CONTINENT.EN</span><span class="p">)</span><span class="w">
-
-
-</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Europe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"European Union"</span><span class="p">),</span><span class="w"> </span><span class="s2">"Other"</span><span class="p">,</span><span class="w">
-              </span><span class="n">flag</span><span class="p">)</span><span class="w">
-</span><span class="n">cntries</span><span class="o">$</span><span class="n">flag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">flag</span><span class="w">
-
-
-
-</span><span class="c1">#Plot lims</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="w">
-  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w">
-  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
-  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">)</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-
-</span><span class="c1">#Combine with typoLayer</span><span class="w">
-</span><span class="n">typoLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cntries</span><span class="p">,</span><span class="w">
-  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"flag"</span><span class="p">,</span><span class="w">
-  </span><span class="n">legend.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
-  </span><span class="n">legend.values.order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
-                          </span><span class="s2">"Europe"</span><span class="p">,</span><span class="w">
-                          </span><span class="s2">"Other"</span><span class="p">),</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
-  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#hatching</span><span class="w">
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ea</span><span class="p">,</span><span class="w">
-  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left2right"</span><span class="p">,</span><span class="w">
-  </span><span class="n">cellsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100000</span><span class="p">,</span><span class="w">
-  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wp</span><span class="p">,</span><span class="w">
-  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
-  </span><span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span><span class="w">
-  </span><span class="n">cellsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">75000</span><span class="p">,</span><span class="w">
-  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#Legend</span><span class="w">
-</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
-  </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
-  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Economic Region"</span><span class="p">,</span><span class="w">
-  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
-    </span><span class="s2">"Euro Area"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Former \nWarsaw Pact"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Europe"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Other"</span><span class="w">
-  </span><span class="p">),</span><span class="w">
-  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"left2right"</span><span class="p">,</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">),</span><span class="w">
-  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
-  </span><span class="n">ptrn.bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-
-</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"European Countries - Blocks"</span><span class="p">,</span><span class="w">
-  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="w">
-  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
-  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
-  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="plot of chunk 20200217_hatched-adv" /></p>
-
-<h2 id="png-layer"><code class="language-plaintext highlighter-rouge">png</code> Layer</h2>
-
-<p>This new capability geotags a <code class="language-plaintext highlighter-rouge">.png</code> file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a <code class="language-plaintext highlighter-rouge">POLYGON/MULTIPOLYGON</code>.</p>
-
-<p>For high-quality png maps, <strong>it is recommended to plot your map on a <code class="language-plaintext highlighter-rouge">.svg</code> device</strong>.</p>
-
-<h3 id="example-1-1">Example 1</h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
-
-</span><span class="n">cntries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="s2">"https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson"</span><span class="p">,</span><span class="w">
-                  </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
-</span><span class="c1">## Reading layer `CNTR_RG_20M_2016_3857' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson' using driver `GeoJSON'</span><span class="w">
-</span><span class="c1">## Simple feature collection with 257 features and 6 fields</span><span class="w">
-</span><span class="c1">## Geometry type: MULTIPOLYGON</span><span class="w">
-</span><span class="c1">## Dimension:     XY</span><span class="w">
-</span><span class="c1">## Bounding box:  xmin: -20037510 ymin: -30240970 xmax: 20037510 ymax: 18446790</span><span class="w">
-</span><span class="c1">## Projected CRS: WGS 84 / Pseudo-Mercator</span><span class="w">
-
-</span><span class="n">cntries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">cntries2</span><span class="p">,</span><span class="w">
-                </span><span class="n">df</span><span class="p">,</span><span class="w">
-                </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO3_CODE"</span><span class="p">,</span><span class="w">
-                </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO_3166_3"</span><span class="p">,</span><span class="w">
-                </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span><span class="n">africa</span><span class="o">=</span><span class="n">subset</span><span class="p">(</span><span class="n">cntries2</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">==</span><span class="s2">"Africa"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">area_km2</span><span class="p">))</span><span class="w">
-
-
-</span><span class="c1">#Get bigger countries</span><span class="w">
-
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,]),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
-
-
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"grey90"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#Iterate for Africa</span><span class="w">
-</span><span class="c1">#Get flags from repo - low quality to speed up the vignette</span><span class="w">
-</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"</span><span class="w">
-
-
-</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="n">cntry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s2">"ISO_3166_2"</span><span class="p">]))</span><span class="w">
-  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,],</span><span class="w">
-                  </span><span class="n">paste</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">cntry</span><span class="p">),</span><span class="w"> </span><span class="s2">".png"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">))</span><span class="w">
-  </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span><span class="c1">#Add borders</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">0.4</span><span class="p">)</span><span class="w">
-
-</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Flags of Africa"</span><span class="p">,</span><span class="w">
-  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green.pal"</span><span class="p">,</span><span class="w">
-  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
-  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
-  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="plot of chunk 20200217_pnglayer" /></p>
-
-<h3 id="example-2-1">Example 2</h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
-
-</span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="m">7150000</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="o">=</span><span class="m">5500000</span><span class="p">)</span><span class="w">
-</span><span class="n">nuts0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">st_crop</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">box</span><span class="p">)</span><span class="w">
-
-</span><span class="n">UK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuts0</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">)</span><span class="w">
-</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"</span><span class="w">
-
-
-</span><span class="n">EU</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">nuts0</span><span class="p">,</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
-</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">EU</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w">
-</span><span class="n">urluk</span><span class="o">=</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/gb.png"</span><span class="w">
-
-</span><span class="n">UKpng</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">UK</span><span class="p">,</span><span class="n">urluk</span><span class="p">)</span><span class="w">
-
-</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="plot of chunk 20200217_png-adv" /></p>
-
-<h2 id="wordcloudlayer">wordcloudLayer</h2>
-
-<p>A word cloud (or tag cloud) is a visual representation of text data. On a mapping context, this representation is useful for including several information at a glance.</p>
-
-<p>Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.</p>
-
-<h3 id="example-1-2">Example 1</h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">eu</span><span class="o">$</span><span class="n">dens</span><span class="o">=</span><span class="n">eu</span><span class="o">$</span><span class="n">pop</span><span class="o">/</span><span class="n">eu</span><span class="o">$</span><span class="n">area_km2</span><span class="w">
-
-</span><span class="n">wordcloudLayer</span><span class="p">(</span><span class="n">eu</span><span class="p">,</span><span class="n">txt</span><span class="o">=</span><span class="s2">"NAME.EN"</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s2">"dens"</span><span class="p">,</span><span class="w">
-               </span><span class="n">fittopol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-               </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w">
-               </span><span class="n">cex.maxmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">
-</span><span class="n">br</span><span class="o">=</span><span class="n">getBreaks</span><span class="p">(</span><span class="n">eu</span><span class="o">$</span><span class="n">dens</span><span class="p">,</span><span class="w"> </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">)</span><span class="w">
-
-</span><span class="n">legendChoro</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">title.txt</span><span class="o">=</span><span class="s2">"Pop Density"</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="n">carto.pal</span><span class="p">(</span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="m">7</span><span class="p">))</span><span class="w">
-</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
-  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Population Density in Europe"</span><span class="p">,</span><span class="w">
-  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="w">
-  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
-  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
-  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
-  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
-</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="plot of chunk 20200217_wordcloud1" /></p>
-
-<h3 id="example-2-2">Example 2</h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Genres from MB--</span><span class="w">
-</span><span class="c1">#Import genres</span><span class="w">
-</span><span class="n">collected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"./assets/data/US_MB.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
-</span><span class="n">collected</span><span class="o">=</span><span class="n">collected</span><span class="p">[</span><span class="m">-1</span><span class="p">,]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="w">
-
-</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
-
-</span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
-</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s2">"united states of america"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3857</span><span class="p">)</span><span class="w">
-</span><span class="c1">#Get main polygon</span><span class="w">
-</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_union</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
-</span><span class="n">areas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="w">
-</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="p">[</span><span class="n">areas</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">areas</span><span class="p">)]</span><span class="w">
-
-</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
-</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="w">
-</span><span class="c1">#Sample regular</span><span class="w">
-</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">points</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"regular"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">#Center points</span><span class="w">
-
-</span><span class="n">centr</span><span class="o">=</span><span class="n">st_centroid</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">of_largest_polygon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="n">f</span><span class="o">=</span><span class="n">st_distance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">centr</span><span class="p">)</span><span class="w">
-</span><span class="n">dfpoints</span><span class="o">=</span><span class="n">st_sf</span><span class="p">(</span><span class="n">dist</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="w">
-               </span><span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-  </span><span class="n">arrange</span><span class="p">((</span><span class="n">dist</span><span class="p">))</span><span class="w">
-
-
-</span><span class="c1">#Create df</span><span class="w">
-</span><span class="n">points</span><span class="o">=</span><span class="n">st_sf</span><span class="p">(</span><span class="n">collected</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,],</span><span class="w">
-             </span><span class="n">geometry</span><span class="o">=</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">dfpoints</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">])</span><span class="w">
-
-</span><span class="n">plot</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"grey95"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
-</span><span class="n">wordcloudLayer</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w">
-               </span><span class="n">txt</span><span class="o">=</span><span class="s2">"genre"</span><span class="p">,</span><span class="w">
-               </span><span class="n">freq</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span><span class="w">
-               </span><span class="n">cex.maxmin</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">),</span><span class="w">
-               </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ba478f"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#eb743b"</span><span class="p">),</span><span class="w">
-               </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w">
-               </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="n">layoutLayer</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Most frequent genres on US"</span><span class="p">,</span><span class="w">
-            </span><span class="n">sources</span><span class="o">=</span><span class="s2">"Musicbrainz"</span><span class="p">,</span><span class="w">
-              </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
-            </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="plot of chunk 20200217_wordcloud2" /></p>
-</div>
-				]]>
-			</description>
-			<link>https://dieghernan.github.io/202402_2020-02-17-cartography1/</link>
-			<category>posts</category>
-		    <media:title type="html"><![CDATA[ ]]></media:title>
-      <media:content url="https://dieghernan.github.io/assets/img/site/banner.png" medium="image"/>
-      <media:thumbnail url="https://dieghernan.github.io/assets/img/site/banner.png" /><guid isPermaLink="true">https://dieghernan.github.io/202402_2020-02-17-cartography1/</guid>
-      <pubDate>Mon, 05 Feb 2024 22:52:18 +0100</pubDate>
-		</item><item>
 			<title>Optimize your images with R and reSmush.it</title>
 			<description>
 				<![CDATA[	
@@ -3877,7 +3388,7 @@ how to load it and check the plotting <code class="language-plaintext highlighte
 			</description>
 			<link>https://dieghernan.github.io/202205_tidyterra/</link>
 			<category>posts</category>
-		    <category>ggplot2</category><category>maps</category><category>maptiles</category><category>r_bloggers</category><category>r_package</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Introducing tidyterra ]]></media:title>
+		    <category>ggplot2</category><category>maps</category><category>maptiles</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Introducing tidyterra ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202205_tidyterra/</guid>
       <pubDate>Wed, 25 May 2022 00:00:00 +0200</pubDate>
@@ -5369,7 +4880,7 @@ End Function
 			</description>
 			<link>https://dieghernan.github.io/202004_headtails/</link>
 			<category>posts</category>
-		    <category>classInt</category><category>r_bloggers</category><category>r_package</category><category>rspatial</category><category>rstats</category><category>vignette</category><media:title type="html"><![CDATA[Head/Tails breaks on the <code>classInt</code> package. ]]></media:title>
+		    <category>classInt</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>vignette</category><media:title type="html"><![CDATA[Head/Tails breaks on the <code>classInt</code> package. ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202004_headtails/</guid>
       <pubDate>Sun, 05 Apr 2020 00:00:00 +0200</pubDate>
@@ -5397,6 +4908,496 @@ End Function
       <media:content url="https://dieghernan.github.io/COVID19/assets/img/header.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/COVID19/assets/img/header.png" /><guid isPermaLink="true">https://dieghernan.github.io/projects/COVID19</guid>
       <pubDate>Sat, 04 Apr 2020 00:00:00 +0200</pubDate>
+		</item><item>
+			<title>New features on cartography package</title>
+			<description>
+				<![CDATA[	
+ 				<h3><p>Vignette of the package expansion</p>
+</h3>
+    		<p>6 min.</p>
+				<div><h2 id="introduction">Introduction</h2>
+
+<p>The aim of this document is to describe the new features added to <code class="language-plaintext highlighter-rouge">cartography</code> on version <code class="language-plaintext highlighter-rouge">2.4.0</code> by
+<a href="https://github.com/dieghernan/">dieghernan</a> and already available on <strong>CRAN</strong>.</p>
+
+<p>Those new features are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">hatchedLayer</code> and <code class="language-plaintext highlighter-rouge">legendHatched</code> functions.</li>
+  <li><code class="language-plaintext highlighter-rouge">pngLayer</code> and <code class="language-plaintext highlighter-rouge">getPngLayer</code> functions.</li>
+  <li><code class="language-plaintext highlighter-rouge">wordcloudLayer</code> function.</li>
+</ul>
+
+<p>These functions don’t handle <code class="language-plaintext highlighter-rouge">sp</code> objects on purpose, favoring <code class="language-plaintext highlighter-rouge">sf</code> instead.</p>
+
+<h2 id="installation">Installation</h2>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#install.packages("cartography")</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+</span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## [1] '3.0.0'</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="hatched-map">Hatched Map</h2>
+
+<p>Version of typology/choropleth maps using a hatched filling. This is particularly useful for those maps that needs to be printed on black and white, as academic papers. These maps also are useful for representing overlapping dimensions.</p>
+
+<h3 id="example-1">Example 1</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">jsonlite</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Shape</span><span class="w">
+</span><span class="n">cntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="s2">"https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson"</span><span class="p">,</span><span class="w">
+                  </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="c1">## Reading layer `CNTR_RG_20M_2016_3035' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson' using driver `GeoJSON'</span><span class="w">
+</span><span class="c1">## Simple feature collection with 257 features and 6 fields</span><span class="w">
+</span><span class="c1">## Geometry type: MULTIPOLYGON</span><span class="w">
+</span><span class="c1">## Dimension:     XY</span><span class="w">
+</span><span class="c1">## Bounding box:  xmin: -7142317 ymin: -9160665 xmax: 16932290 ymax: 15428010</span><span class="w">
+</span><span class="c1">## Projected CRS: ETRS89-extended / LAEA Europe</span><span class="w">
+
+</span><span class="c1"># Include trade blocks</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fromJSON</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json"</span><span class="p">)</span><span class="w">
+</span><span class="n">ISO_memcol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w">
+                       </span><span class="n">orgtosearch</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">match</span><span class="p">(</span><span class="n">orgtosearch</span><span class="p">,</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"org_id"</span><span class="p">]))</span><span class="w">
+  </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">df</span><span class="p">),</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+    </span><span class="n">unlist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s2">"org_member"</span><span class="p">])[</span><span class="n">ind</span><span class="p">])</span><span class="w">
+  </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">or</span><span class="p">)),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
+  </span><span class="nf">names</span><span class="p">(</span><span class="n">or</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">orgtosearch</span><span class="w">
+  </span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">))</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EU"</span><span class="p">)</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EFTA"</span><span class="p">)</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EuroArea"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">cntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w">
+                </span><span class="n">df</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO3_CODE"</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO_3166_3"</span><span class="p">,</span><span class="w">
+                </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">#Limits EU</span><span class="w">
+</span><span class="c1">#Plot base map</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">),</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EU</span><span class="p">),]),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EFTA</span><span class="p">),]),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="c1">#Add hatching</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EuroArea</span><span class="p">),],</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right2left"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">legendTypo</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"EU"</span><span class="p">,</span><span class="w"> </span><span class="s2">"EFTA"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="s2">"black"</span><span class="p">),</span><span class="w">
+  </span><span class="n">nodata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Within EU"</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Euro\nArea"</span><span class="p">,</span><span class="w">
+  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right2left"</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"European Trade Blocks"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="plot of chunk 20200217_hatched-min" /></p>
+
+<h3 id="example-2">Example 2</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plot World</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">cntries</span><span class="o">$</span><span class="n">geometry</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">),</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="c1">#Add layers for non european area - left2right</span><span class="w">
+</span><span class="n">NOEUR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Europe"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">CONTINENT.EN</span><span class="p">))</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">NOEUR</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left2right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+  </span><span class="c1">#Basic usage</span><span class="w">
+  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="c1">#Densify default grid</span><span class="w">
+  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="w">
+</span><span class="p">)</span><span class="w">            </span><span class="c1">#Formatting</span><span class="w">
+
+</span><span class="c1">#Extract Europe Regions</span><span class="w">
+</span><span class="n">EUR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Europe"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Western Asia"</span><span class="p">)[,</span><span class="w"> </span><span class="s2">"SUBREGION.EN"</span><span class="p">]</span><span class="w">
+</span><span class="n">levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#Plot Regions</span><span class="w">
+</span><span class="c1"># First element with zigzag</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w">
+             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zigzag"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#dot with parms</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w">
+  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w">
+  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#vertical</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
+             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#another dot</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">4</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+             </span><span class="n">pch</span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w">
+             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#create legend</span><span class="w">
+</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
+  </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">levels</span><span class="p">,</span><span class="w"> </span><span class="s2">"Others"</span><span class="p">),</span><span class="w">
+  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"zigzag"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"left2right"</span><span class="p">),</span><span class="w">
+  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">15</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">levels</span><span class="p">)),</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regions of Europe (United Nations)"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="plot of chunk 20200217_hatched" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order on the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code> patterns are presents, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, <code class="language-plaintext highlighter-rouge">lty = c(1, 1, 3)</code> respect that order.</p>
+
+<h3 id="example-3">Example 3</h3>
+
+<p><code class="language-plaintext highlighter-rouge">hatchedLayer</code> also could be useful for plotting several dimensions on the same map, in combination with another functions of the package.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+
+
+</span><span class="c1">#Warsaw Pact - roughly mapped via UN Region</span><span class="w">
+</span><span class="n">wp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Eastern Europe"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#European Union - after Brexit</span><span class="w">
+</span><span class="n">eu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">EU</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#Euro Area</span><span class="w">
+</span><span class="n">ea</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">EuroArea</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#Flags for plotting</span><span class="w">
+</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">eu</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
+              </span><span class="n">cntries</span><span class="o">$</span><span class="n">CONTINENT.EN</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Europe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"European Union"</span><span class="p">),</span><span class="w"> </span><span class="s2">"Other"</span><span class="p">,</span><span class="w">
+              </span><span class="n">flag</span><span class="p">)</span><span class="w">
+</span><span class="n">cntries</span><span class="o">$</span><span class="n">flag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">flag</span><span class="w">
+
+
+
+</span><span class="c1">#Plot lims</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">#Combine with typoLayer</span><span class="w">
+</span><span class="n">typoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cntries</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"flag"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.values.order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
+                          </span><span class="s2">"Europe"</span><span class="p">,</span><span class="w">
+                          </span><span class="s2">"Other"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#hatching</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ea</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left2right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">cellsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100000</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wp</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span><span class="w">
+  </span><span class="n">cellsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">75000</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Legend</span><span class="w">
+</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
+  </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Economic Region"</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Euro Area"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Former \nWarsaw Pact"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Europe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Other"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"left2right"</span><span class="p">,</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
+  </span><span class="n">ptrn.bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"European Countries - Blocks"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="plot of chunk 20200217_hatched-adv" /></p>
+
+<h2 id="png-layer"><code class="language-plaintext highlighter-rouge">png</code> Layer</h2>
+
+<p>This new capability geotags a <code class="language-plaintext highlighter-rouge">.png</code> file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a <code class="language-plaintext highlighter-rouge">POLYGON/MULTIPOLYGON</code>.</p>
+
+<p>For high-quality png maps, <strong>it is recommended to plot your map on a <code class="language-plaintext highlighter-rouge">.svg</code> device</strong>.</p>
+
+<h3 id="example-1-1">Example 1</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="n">cntries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="s2">"https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson"</span><span class="p">,</span><span class="w">
+                  </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="c1">## Reading layer `CNTR_RG_20M_2016_3857' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson' using driver `GeoJSON'</span><span class="w">
+</span><span class="c1">## Simple feature collection with 257 features and 6 fields</span><span class="w">
+</span><span class="c1">## Geometry type: MULTIPOLYGON</span><span class="w">
+</span><span class="c1">## Dimension:     XY</span><span class="w">
+</span><span class="c1">## Bounding box:  xmin: -20037510 ymin: -30240970 xmax: 20037510 ymax: 18446790</span><span class="w">
+</span><span class="c1">## Projected CRS: WGS 84 / Pseudo-Mercator</span><span class="w">
+
+</span><span class="n">cntries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">cntries2</span><span class="p">,</span><span class="w">
+                </span><span class="n">df</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO3_CODE"</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO_3166_3"</span><span class="p">,</span><span class="w">
+                </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">africa</span><span class="o">=</span><span class="n">subset</span><span class="p">(</span><span class="n">cntries2</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">==</span><span class="s2">"Africa"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">area_km2</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#Get bigger countries</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,]),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"grey90"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Iterate for Africa</span><span class="w">
+</span><span class="c1">#Get flags from repo - low quality to speed up the vignette</span><span class="w">
+</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"</span><span class="w">
+
+
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">cntry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s2">"ISO_3166_2"</span><span class="p">]))</span><span class="w">
+  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,],</span><span class="w">
+                  </span><span class="n">paste</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">cntry</span><span class="p">),</span><span class="w"> </span><span class="s2">".png"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">))</span><span class="w">
+  </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="c1">#Add borders</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">0.4</span><span class="p">)</span><span class="w">
+
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Flags of Africa"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="plot of chunk 20200217_pnglayer" /></p>
+
+<h3 id="example-2-1">Example 2</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="m">7150000</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="o">=</span><span class="m">5500000</span><span class="p">)</span><span class="w">
+</span><span class="n">nuts0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">st_crop</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">box</span><span class="p">)</span><span class="w">
+
+</span><span class="n">UK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuts0</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">)</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"</span><span class="w">
+
+
+</span><span class="n">EU</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">nuts0</span><span class="p">,</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">EU</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">urluk</span><span class="o">=</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/gb.png"</span><span class="w">
+
+</span><span class="n">UKpng</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">UK</span><span class="p">,</span><span class="n">urluk</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="plot of chunk 20200217_png-adv" /></p>
+
+<h2 id="wordcloudlayer">wordcloudLayer</h2>
+
+<p>A word cloud (or tag cloud) is a visual representation of text data. On a mapping context, this representation is useful for including several information at a glance.</p>
+
+<p>Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.</p>
+
+<h3 id="example-1-2">Example 1</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">eu</span><span class="o">$</span><span class="n">dens</span><span class="o">=</span><span class="n">eu</span><span class="o">$</span><span class="n">pop</span><span class="o">/</span><span class="n">eu</span><span class="o">$</span><span class="n">area_km2</span><span class="w">
+
+</span><span class="n">wordcloudLayer</span><span class="p">(</span><span class="n">eu</span><span class="p">,</span><span class="n">txt</span><span class="o">=</span><span class="s2">"NAME.EN"</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s2">"dens"</span><span class="p">,</span><span class="w">
+               </span><span class="n">fittopol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+               </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w">
+               </span><span class="n">cex.maxmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">br</span><span class="o">=</span><span class="n">getBreaks</span><span class="p">(</span><span class="n">eu</span><span class="o">$</span><span class="n">dens</span><span class="p">,</span><span class="w"> </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legendChoro</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">title.txt</span><span class="o">=</span><span class="s2">"Pop Density"</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="n">carto.pal</span><span class="p">(</span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="m">7</span><span class="p">))</span><span class="w">
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Population Density in Europe"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="plot of chunk 20200217_wordcloud1" /></p>
+
+<h3 id="example-2-2">Example 2</h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Genres from MB--</span><span class="w">
+</span><span class="c1">#Import genres</span><span class="w">
+</span><span class="n">collected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"./assets/data/US_MB.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
+</span><span class="n">collected</span><span class="o">=</span><span class="n">collected</span><span class="p">[</span><span class="m">-1</span><span class="p">,]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
+</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s2">"united states of america"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3857</span><span class="p">)</span><span class="w">
+</span><span class="c1">#Get main polygon</span><span class="w">
+</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_union</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
+</span><span class="n">areas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="w">
+</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="p">[</span><span class="n">areas</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">areas</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
+</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span><span class="c1">#Sample regular</span><span class="w">
+</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">points</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"regular"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Center points</span><span class="w">
+
+</span><span class="n">centr</span><span class="o">=</span><span class="n">st_centroid</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">of_largest_polygon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">f</span><span class="o">=</span><span class="n">st_distance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">centr</span><span class="p">)</span><span class="w">
+</span><span class="n">dfpoints</span><span class="o">=</span><span class="n">st_sf</span><span class="p">(</span><span class="n">dist</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="w">
+               </span><span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">((</span><span class="n">dist</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#Create df</span><span class="w">
+</span><span class="n">points</span><span class="o">=</span><span class="n">st_sf</span><span class="p">(</span><span class="n">collected</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,],</span><span class="w">
+             </span><span class="n">geometry</span><span class="o">=</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">dfpoints</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">])</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"grey95"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">wordcloudLayer</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w">
+               </span><span class="n">txt</span><span class="o">=</span><span class="s2">"genre"</span><span class="p">,</span><span class="w">
+               </span><span class="n">freq</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+               </span><span class="n">cex.maxmin</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">),</span><span class="w">
+               </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ba478f"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#eb743b"</span><span class="p">),</span><span class="w">
+               </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w">
+               </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Most frequent genres on US"</span><span class="p">,</span><span class="w">
+            </span><span class="n">sources</span><span class="o">=</span><span class="s2">"Musicbrainz"</span><span class="p">,</span><span class="w">
+              </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+            </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="plot of chunk 20200217_wordcloud2" /></p>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/202002_cartography1/</link>
+			<category>posts</category>
+		    <category>beautiful_maps</category><category>cartography</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>vignette</category><media:title type="html"><![CDATA[New features on cartography package ]]></media:title>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202002_cartography1/</guid>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
 		</item><item>
 			<title>We&#39;ll miss you, UK</title>
 			<description>
