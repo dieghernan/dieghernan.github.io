@@ -14,7 +14,7 @@ output:
 header_img: https://dieghernan.github.io/assets/img/misc/compress-img.png
 ---
 
-The **resmush** package has recently been released
+The **resmush** package has recently been accepted on
 [CRAN](https://cran.r-project.org/package=resmush)! This small utility package 
 allows for the optimization (i.e., compression) of local and online images 
 using [reSmush.it](https://resmush.it/).
@@ -23,7 +23,7 @@ You can install **resmush** from
 [**CRAN**](https://CRAN.R-project.org/package=resmush) with:
 
 ``` r
-install.packages(“resmush”)
+install.packages("resmush")
 ```
 
 ## What is reSmush.it?
