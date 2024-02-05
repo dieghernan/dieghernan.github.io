@@ -12,6 +12,7 @@ tags:
 - tidyterra
 - terra
 - maptiles
+- r_package
 output:
   html_document:
     df_print: paged
