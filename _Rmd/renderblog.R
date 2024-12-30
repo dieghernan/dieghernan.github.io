@@ -124,7 +124,7 @@ rm(list = ls())
 # diegpost("2022-03-03-insetmaps")
 
 # diegpost("2022-05-25-tidyterra")
-diegpost("2022-10-17-tidyterra-hillshade")
+diegpost("2019-05-13-Where-in-the-world")
 
 knitr::plot_crop("./assets/img/blog/20221017-6-finalplot-1.png")
 
