@@ -40,6 +40,10 @@ tosearch$tofun <- ifelse(tosearch$toloc == "San Sebastian",
                          "san+sebastian+es",
                          tosearch$tofun
 )
+tosearch$tofun <- ifelse(tosearch$toloc == "Lyon",
+                         "Lyon+fr",
+                         tosearch$tofun
+)
 
 airports <- function(place, n = 1, lang = "en") {
   url <- paste(
@@ -65,6 +69,7 @@ airports <- function(place, n = 1, lang = "en") {
   )
   return(geonames)
 }
+
 # Return
 for (i in 1:nrow(tosearch)) {
   res <- airports(tosearch[i, c("tofun")])
