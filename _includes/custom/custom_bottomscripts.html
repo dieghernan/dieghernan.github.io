@@ -1,8 +1,20 @@
 <!-- start custom scripts to be placed at the bottom of the page -->
 <script>
-  for (const a of document.querySelectorAll(".badge")) {
-    if (a.textContent.includes("discontinued")) {
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
         a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
     }
 }
 </script>
