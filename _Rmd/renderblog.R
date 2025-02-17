@@ -191,7 +191,7 @@ lapply(im, function(x){
   
 })
 
-x <- im[1]
+x <- "bonne_proj.png"
 
 a <- lapply(im, function(x){
   
