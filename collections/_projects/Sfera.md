@@ -4,7 +4,7 @@ subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 header_img: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png
 date: 2017-03-14
 permalink: /projects/Sfera/
-tags: [project,pebble,watchface,javascript,C]
+tags: [discontinued, project,pebble,watchface,javascript,C]
 project_links:
     - url: https://github.com/dieghernan/Sfera
       icon: fab fa-github

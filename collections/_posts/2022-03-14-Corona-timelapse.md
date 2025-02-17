@@ -3,7 +3,8 @@ title: Corona timelapse
 subtitle: Travel restrictions amidst the COVID crisis across time - A German perspective
 header_img: "https://dieghernan.github.io/corona-atlas.de/timelapse/frames/D2021-04-16.png"
 date: 2022-03-14
-tags: [project,R,maps,leaflet,python, guest-author]
+last_modified_at: 2025-02-17
+tags: [discontinued, project,R,maps,leaflet,python, guest-author]
 project_links:
   - url: https://dieghernan.github.io/corona-atlas.de/en
     icon: fas fa-external-link-alt
@@ -35,7 +36,7 @@ output:
 ---
 
 <i class="fas fa-skull-crossbones"></i> **Project discontinued**
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 ![corona-timelapse](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)
 

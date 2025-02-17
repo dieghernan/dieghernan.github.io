@@ -1,3 +1,11 @@
 <!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+  for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.includes("leaflet")) {
+        a.classList.add("bg-danger");
+        console.log(a.textContent)
+    }
+}
+</script>
 
 <!-- end custom bottom scripts -->

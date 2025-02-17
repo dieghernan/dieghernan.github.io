@@ -2,7 +2,7 @@
 title: TextWatch Clima
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 date: 2017-02-16
-tags: [project,pebble,watchface,javascript,C]
+tags: [discontinued, project,pebble,watchface,javascript,C]
 header_img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
 project_links:
     - url: https://github.com/dieghernan/TextWatchClima

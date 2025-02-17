@@ -3,7 +3,7 @@ title: Bzel
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 header_img: https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png
 date: 2017-05-25
-tags: [project,pebble,watchface,javascript,C]
+tags: [discontinued, project,pebble,watchface,javascript,C]
 permalink: /projects/Bzel/
 project_links:
     - url: https://github.com/dieghernan/Bzel
