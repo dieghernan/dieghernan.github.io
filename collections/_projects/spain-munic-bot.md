@@ -3,7 +3,7 @@ title: spain-munic-bot
 subtitle: A twitter bot written in R.
 header_img: "https://dieghernan.github.io/spain-munic-bot/assets/img/sample.png"
 date: 2021-01-29
-tags: [project,R,maps,twitter]
+tags: [discontinued, project,R,maps,twitter]
 permalink: /projects/spain-munic-bot/
 project_links:
     - url: https://dieghernan.github.io/spain-munic-bot/
@@ -11,6 +11,9 @@ project_links:
       label: Visit the website
 excerpt: Twitter bot - random municipalities of Spain with {mapSpain} posted with {rtweet} via a GitHub Action
 ---
+
+<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 ## 🤖 Twitter bot: random municipalities of Spain 🇪🇸 with {mapSpain} posted with {rtweet} via a GitHub Action
 
