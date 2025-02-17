@@ -10,6 +10,8 @@ tags:
 - ggplot2
 - sf
 - giscoR
+redirect_from:
+  - /202402_st_valentine/
 output:
   md_document:
     variant: gfm
