@@ -1,20 +1,23 @@
 ---
 title: Corona Atlas 
 subtitle: Interactive map of the international COVID-19 risk areas as designated by the German authorities.
-header_img: "https://corona-atlas.de/assets/img/og_corona_atlas.png"
+header_img: "https://dieghernan.github.io/corona-atlas.de/assets/img/og_corona_atlas.png"
 date: 2021-04-30
 tags: [project,R,maps,leaflet,python]
 permalink: /projects/corona-atlas/
 project_links:
-    - url: https://corona-atlas.de/
+    - url: https://dieghernan.github.io/corona-atlas.de/
       icon: fas fa-external-link-alt
       label: Visit the website
 excerpt: Interactive map of the international COVID-19 risk areas as designated by the German authorities. The data is updated periodically from the website of the Robert Koch Institute.
 ---
 
-<img src="https://corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" style="width: 25%;">
+<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
-Visit <https://corona-atlas.de/>
+<img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" style="width: 25%;">
+
+Visit <https://dieghernan.github.io/corona-atlas.de/>
 
 
 Interactive map of the international COVID-19 risk areas as designated by the German authorities.

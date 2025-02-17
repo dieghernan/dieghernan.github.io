@@ -1,11 +1,11 @@
 ---
 title: Corona timelapse 
 subtitle: Travel restrictions amidst the COVID crisis across time - A German perspective
-header_img: "https://corona-atlas.de/timelapse/frames/D2021-04-16.png"
+header_img: "https://dieghernan.github.io/corona-atlas.de/timelapse/frames/D2021-04-16.png"
 date: 2022-03-14
 tags: [project,R,maps,leaflet,python, guest-author]
 project_links:
-  - url: https://corona-atlas.de/en
+  - url: https://dieghernan.github.io/corona-atlas.de/en
     icon: fas fa-external-link-alt
     label: Visit the website
 author:
@@ -34,7 +34,10 @@ output:
   preserve_yaml: true
 ---
 
-![corona-timelapse](https://corona-atlas.de/assets/img/corona_atlas_timelapse.gif)
+<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+
+![corona-timelapse](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)
 
 In April 2021, my brother Diego and I saw
 the need for a friendly and automated interface to the meticulous and ever-changing restrictions that the German authorities imposed to travels abroad amid the COVID crisis.
@@ -52,6 +55,6 @@ After all, we hope that [corona-atlas] remains boring and that our world map rem
 ## Links
 * [Read more on this site](../projects/corona-atlas)
 * [Project's Website][corona-atlas]
-* [Project's Repository](https://github.com/dieghernan/RKI-Corona-Atlas)
+* [Project's Repository](https://github.com/dieghernan/corona-atlas.de)
 
-[corona-atlas]: https://corona-atlas.de/en
+[corona-atlas]: https://dieghernan.github.io/corona-atlas.de/en
