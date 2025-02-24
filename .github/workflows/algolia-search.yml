@@ -3,7 +3,6 @@ on:
     branches:
       - master
       - main
-  workflow_dispatch: 
 
 name: algolia-search
 jobs:
@@ -14,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Algolia Jekyll Action
-        uses: dieghernan/algolia-jekyll-action@main
+        uses: dieghernan/algolia-jekyll-action@dev
         with:
+          ruby-version: 3.1
           APIKEY: '${{ secrets.ALGOLIA_API_KEY }}'
-          cache-version: 2
