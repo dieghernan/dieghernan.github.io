@@ -1,3 +1,5 @@
+github: [metadata]
+
 remote_theme: dieghernan/chulapa
 
 repository: dieghernan/dieghernan.github.io
@@ -205,6 +207,8 @@ plugins:
   - jekyll-include-cache
   - jekyll-sitemap
   - jekyll-redirect-from
+  - jekyll-remote-theme
+
 
 
 # Exclude these files from production site
@@ -244,3 +248,5 @@ kramdown:
 sass:
   sass_dir: _sass
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+  quiet_deps: true
+  

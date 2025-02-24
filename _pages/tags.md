@@ -1,5 +1,5 @@
 ---
-layout: cloudtag
+layout: cloudtag2
 title: Tags
 permalink: /tags
 excerpt: Tags on this theme
