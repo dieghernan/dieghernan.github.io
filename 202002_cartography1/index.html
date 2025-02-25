@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en-US"><head>
    <meta charset="utf-8">
-    <!-- Chulapa Jekyll Theme -  -->
+    <!-- Chulapa Jekyll Theme - 2.0.0 -->
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2024-05-07 13:05:46 +0200 -->
+    <!-- Page build 2025-02-25 19:11:59 +0100 -->
+     <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -22,9 +23,11 @@
       "author": {
         "@type": "Person",
         "name": "dieghernan"
-        , "url": "https://twitter.com/dhernangomez"
+        , "url": "https://x.com/dhernangomez"
         ,  "sameAs" : [
              "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
             ,
              "https://github.com/dieghernan/"
             ,
@@ -84,8 +87,9 @@
   "name" : "dieghernan",
   "url" : "https://dieghernan.github.io/"
   ,  "sameAs" : [
-  "https://twitter.com/dhernangomez",
+  "https://x.com/dhernangomez",
   "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
   "https://github.com/dieghernan/",
   "https://stackoverflow.com/users/7877917/dieghernan",
   "https://orcid.org/0000-0001-8457-4658"
@@ -105,7 +109,7 @@
    <meta name="description" content="Vignette of the package expansion - Introduction
 ">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" >
-   <meta name="robots" content="index, follow"><meta name="keywords" content="blog,chulapa,maps,r-language">
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
    <meta property="og:title" content="New features on cartography package | One world" >
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
@@ -118,7 +122,6 @@
     <!-- Twitter/X Cards -->
    <meta name="twitter:card" content="summary_large_image">
    <meta name="twitter:site" content="@dhernangomez" >
-   <meta name="twitter:creator" content="@dhernangomez" >
     	<!-- CSS -->
     <!-- Preconnect with Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,6 +151,8 @@
 <!-- start custom head snippets -->
 <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
 <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
@@ -211,7 +216,7 @@
         </div></div>
          <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
             <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202002_cartography1/&text=New+features+on+cartography+package&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,beautiful_maps,maps,sf,cartography,r_package" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
-            <a href="https://toot.kytta.dev/?text=New%20features%20on%20cartography%20package%20https://dieghernan.github.io/202002_cartography1/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23beautiful_maps%20%23maps%20%23sf%20%23cartography%20%23r_package" title="Share on Mastodon" aria-label="Share on Mastodon"><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=New%20features%20on%20cartography%20package%20https://dieghernan.github.io/202002_cartography1/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23beautiful_maps%20%23maps%20%23sf%20%23cartography%20%23r_package" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
             <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202002_cartography1/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
              <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=New+features+on+cartography+package%20https://dieghernan.github.io/202002_cartography1/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
          <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202002_cartography1/&title=New+features+on+cartography+package" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
@@ -226,7 +231,7 @@
 					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
 						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
 						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
-						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://twitter.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
 				</div>
 				</div>
 </aside>
@@ -733,39 +738,7 @@
      </div>
    </div>
 </div>
-<div class="container-lg mt-1 mb-2">
- <div class="row">
-   <div class="col-lg-8 offset-lg-2">
-     <hr>
-     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
-     <nav class="card-group" aria-label="related-articles">
-        <div class="card  border chulapa-related">
-         <div class="card-body">
-         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">Beautiful Maps with R (III): Patterns and hatched maps</a></p>
-         <p class="card-text"><small>A solution for b/w and academic maps.</small></p></div>
-   <div class="card-footer bg-transparent">
-      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-12-12T00:00:00+01:00">december 12, 2019</time></small>
-   </div>
- </div>
-        <div class="card ml-sm-1 border chulapa-related">
-         <div class="card-body">
-         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful1/" class="chulapa-text-body-color">Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels</a></p>
-         <p class="card-text"><small>Awesome simplified maps with R</small></p></div>
-   <div class="card-footer bg-transparent">
-      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-02T00:00:00+02:00">june 02, 2019</time></small>
-   </div>
- </div>
-        <div class="card ml-sm-1 border chulapa-related">
-         <div class="card-body">
-         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202312_bertin_dots/" class="chulapa-text-body-color">Beautiful Maps with R (V): Point densities</a></p>
-         <p class="card-text"><small>Bertin's dot density maps with R and GHSL</small></p></div>
-   <div class="card-footer bg-transparent">
-      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2023-12-16T00:00:00+01:00">december 16, 2023</time></small>
-   </div>
- </div></nav>
-   </div>
- </div>
-</div><!-- Footer -->
+<!-- Footer -->
  <footer class="footer-chulapa text-center mt-0 pt-3">
    <div class="container">
          <div class="row">
@@ -785,7 +758,7 @@
         data-loading="lazy"
         crossorigin="anonymous"
         async>
-</script>  
+</script>
            </div>
         </div>
       </div>
@@ -811,7 +784,7 @@
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
               </span><span class="sr-only">RPubs</span>
-            </a></div><p class="mt-2 mb-3">&copy; 2024 dieghernan</p>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
           <!-- Do not remove this in order to give  attributions -->
          <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
           <!-- End  attributions -->
@@ -826,6 +799,24 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
 <!-- end custom bottom scripts -->
 	</body>
 </html>

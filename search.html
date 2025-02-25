@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="en-US"><head>
     <meta charset="utf-8">
-    <!-- Chulapa Jekyll Theme -  -->
+    <!-- Chulapa Jekyll Theme - 2.0.0 -->
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2024-05-07 13:05:46 +0200 -->
+    <!-- Page build 2025-02-25 19:11:59 +0100 -->
+     <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
         {
@@ -19,15 +20,15 @@
       },
       "headline": "Search",
       "image": "https://dieghernan.github.io/assets/img/site/banner.png",
-      "datePublished": "2024-05-07T13:05:46+02:00",
-      "dateModified": "2024-05-07T13:05:46+02:00",
+      "datePublished": "2025-02-25T19:11:59+01:00",
+      "dateModified": "2025-02-25T19:11:59+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
         
           
             
-        , "url": "https://twitter.com/dhernangomez"
+        , "url": "https://x.com/dhernangomez"
             
          
             
@@ -35,6 +36,13 @@
         ,  "sameAs" : [
               
              "https://fosstodon.org/@dhernangomez"
+            ,
+              
+           
+         
+            
+              
+             "https://bsky.app/profile/dieghernan.bsky.social"
             ,
               
            
@@ -119,9 +127,11 @@
   
   ,  "sameAs" : [
   
-  "https://twitter.com/dhernangomez",
+  "https://x.com/dhernangomez",
   
   "https://fosstodon.org/@dhernangomez",
+  
+  "https://bsky.app/profile/dieghernan.bsky.social",
   
   "https://github.com/dieghernan/",
   
@@ -146,7 +156,7 @@
     <meta name="copyright" content="dieghernan" >
     <meta name="description" content="">
     <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/site/banner.png" >
-    <meta name="robots" content="index, follow"><meta name="keywords" content="blog,chulapa,maps,r-language">
+    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     
     <!-- OpenGraph -->
     <meta property="og:title" content="Search | One world" >
@@ -159,8 +169,6 @@
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@dhernangomez" >
-    
-    <meta name="twitter:creator" content="@dhernangomez" >
     	<!-- CSS -->
   
     <!-- Preconnect with Google Fonts -->
@@ -193,6 +201,9 @@
 
 <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
 <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->
 
@@ -274,7 +285,7 @@
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
               </span><span class="sr-only">RPubs</span>
-            </a></div><p class="mt-2 mb-3">&copy; 2024 dieghernan</p>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
           <!-- Do not remove this in order to give  attributions -->
           <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
           <!-- End  attributions -->
@@ -290,6 +301,25 @@
 <script src="https://dieghernan.github.io/assets/js/algolia/algolia-search.js"></script>
 
 <!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
 
 <!-- end custom bottom scripts -->
 </body>

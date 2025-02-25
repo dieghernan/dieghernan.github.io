@@ -3,17 +3,95 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/rbloggers.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2024-05-07T13:05:46+02:00</updated>
+	<updated>2025-02-25T19:11:59+01:00</updated>
 	<id>https://dieghernan.github.io/rbloggers.xml</id>
 	<title>One world | Projects, maps and coding - R Project</title>
 	<subtitle>Projects, maps and coding</subtitle>
 	<author>
 		<name>dieghernan</name>
-		<uri>https://twitter.com/dhernangomez</uri>			
+		<uri>https://x.com/dhernangomez</uri>			
 	</author>
-	<rights>(c) 2024, dieghernan</rights>
+	<rights>(c) 2025, dieghernan</rights>
 	<icon>https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png</icon>
 	<logo>https://dieghernan.github.io/assets/img/site/banner.png</logo><entry>
+		<title>Happy Valentine&#39;s Day</title>
+		<link href="https://dieghernan.github.io/202502_st_valentine/" rel="alternate" type="text/html" title="Happy Valentine&#39;s Day"/>
+		<published>2025-02-17T00:00:00+01:00</published>
+		<updated>2025-02-17T00:00:00+01:00</updated>
+		<id>https://dieghernan.github.io/202502_st_valentine/</id>
+		<content type="html" xml:base="https://dieghernan.github.io/202502_st_valentine/">
+		
+		&lt;h3&gt;Do you know the Bonne projection?&lt;/h3&gt;
+		
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp&#39; &gt;
+			
+	&lt;p&gt;1 min.&lt;/p&gt;
+			&lt;p&gt;Do you know the &lt;a href=&quot;https://en.wikipedia.org/wiki/Bonne_projection&quot;&gt;Bonne
+Projection&lt;/a&gt;? This is a very
+special one, as used on whole world’s mapping produces this result. Happy
+Valentine’s Day!&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;giscoR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showtext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gisco_get_countries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Shaped ocean&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_earth&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Fine grid&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_make_grid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Bonne projection&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ESRI:54024&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# To sf object (data-frame like)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;couple&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someval&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# And finally&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;font_add_google&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Emilys Candy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;family&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;emilys&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;showtext_auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h_earth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#f9b7bb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#f9b7bb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#d24658&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#d24658&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme_void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Happy Valentine&#39;s Day&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;caption&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Bonne Projection (ESRI:54024)&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot.background&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element_rect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#faddcf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;transparent&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;family&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;emilys&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colour&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#d24658&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot.title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hjust&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot.caption&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hjust&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp&quot; alt=&quot;Happy Valentine&#39;s Day&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+		</content>
+		
+		<author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
+		<summary type="html">&lt;p&gt;Do you know the &lt;a href=&quot;https://en.wikipedia.org/wiki/Bonne_projection&quot;&gt;Bonne
+Projection&lt;/a&gt;? This is a very
+special one, as used on whole world’s mapping produces this result. Happy
+Valentine’s Day!&lt;/p&gt;
+</summary>
+		<category term="posts"/>
+		<category term="beautiful_maps"/><category term="ggplot2"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
+	</entry><entry>
 		<title>Optimize your images with R and reSmush.it</title>
 		<link href="https://dieghernan.github.io/202402_optimize-images-r/" rel="alternate" type="text/html" title="Optimize your images with R and reSmush.it"/>
 		<published>2024-02-05T00:00:00+01:00</published>
@@ -467,7 +545,7 @@ your work.&lt;/p&gt;
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">Compress the size of your images with R, resmush and reSmush.it</summary>
 		<category term="posts"/>
 		<category term="r_bloggers"/><category term="r_package"/><category term="resmush"/>
@@ -889,7 +967,7 @@ R2023A data.” &lt;a href=&quot;https://doi.org/10.2905/3C60DDF6-0586-4190-854B
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">Another way to represent demographics on a map.</summary>
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="ggplot2"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="terra"/><category term="tidyterra"/>
@@ -977,7 +1055,7 @@ task:&lt;/p&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;load_celestial()&lt;/code&gt; just downloads the corresponding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.geojson&lt;/code&gt; from the
 &lt;a href=&quot;https://github.com/dieghernan/celestial_data/tree/main/data&quot;&gt;Celestial Data
-repo&lt;/a&gt;&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to a
+repo&lt;/a&gt;&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to a
 specific directory &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cachedir&lt;/code&gt; and loads it with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf::st_read()&lt;/code&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -1681,7 +1759,7 @@ Richmond, Va. ISBN 9780943396613.&lt;/p&gt;
 (&lt;a href=&quot;https://dominicroye.github.io/en/2021/firefly-cartography/&quot;&gt;link&lt;/a&gt;).&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
       &lt;p&gt;In fact, the download is performed via the
 &lt;a href=&quot;https://www.jsdelivr.com/&quot;&gt;jsDelivr&lt;/a&gt;, that distribute files hosted on
 &lt;a href=&quot;https://www.jsdelivr.com/github&quot;&gt;GitHub via CDN.&lt;/a&gt; This is supposed to
@@ -1694,14 +1772,13 @@ repo. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&q
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;A couple of weeks ago I was doing my daily check on
 &lt;a href=&quot;https://stackoverflow.com/questions/tagged/sf&quot;&gt;StackOverflow&lt;/a&gt; when I found a
 question by &lt;a href=&quot;https://bensstats.wordpress.com/&quot;&gt;Benjamin Smith&lt;/a&gt; that blew my
 mind: &lt;a href=&quot;https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date&quot;&gt;Creating Star Map Visualizations Based on Location and
 Date&lt;/a&gt;
 !!&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="astronomy"/><category term="celestial"/><category term="geojson"/><category term="ggplot2"/><category term="gpkg"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="s2"/><category term="sf"/>
@@ -2535,7 +2612,7 @@ plot. Here you can find a simplified version:&lt;/p&gt;
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">Add marginal plots to a SpatRaster map on ggplot2</summary>
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="inset"/><category term="mapSpain"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="terra"/><category term="tidyterra"/>
@@ -2977,7 +3054,7 @@ terra Objects&lt;/em&gt;. &amp;lt;doi:10.5281/zenodo.6572471&amp;gt;
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">Using shadow effects on relief mappings is a very common technique, that allows to produce informative yet beautiful maps.</summary>
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="terra"/><category term="tidyterra"/>
@@ -3255,7 +3332,7 @@ how to load it and check the plotting &lt;code class=&quot;language-plaintext hi
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2.</summary>
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="maps"/><category term="maptiles"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/><category term="terra"/><category term="tidyterra"/>
@@ -3289,7 +3366,7 @@ Pulsars” by Harold D. Craft, Jr. (September 1970). Original source:
 &lt;p&gt;Nine years later, a young graphic designer named Peter Saville had a new
 project. He had to design the cover of the debut album of a young British rock
 band, named Joy Division. At some point of the process Bernand Summer (lead
-guitar of Joy Division)&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, found the following image on &lt;em&gt;The Cambridge
+guitar of Joy Division)&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;, found the following image on &lt;em&gt;The Cambridge
 Encyclopaedia of Astronomy&lt;/em&gt; (1977 edition):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg&quot; alt=&quot;Cambridge: CP 1919 Pulsar
@@ -3724,7 +3801,7 @@ Unknown Pleasures Album Art. &lt;em&gt;Cartographic Perspectives&lt;/em&gt;, (92
 &lt;a href=&quot;https://danielredondo.com/blog/2020-01-25-joy_division/&quot;&gt;https://danielredondo.com/blog/2020-01-25-joy_division/&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
       &lt;p&gt;Other versions of the story credit drummer Stephen Morris for finding it. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;uarr;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
@@ -3733,7 +3810,7 @@ Unknown Pleasures Album Art. &lt;em&gt;Cartographic Perspectives&lt;/em&gt;, (92
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">Create ridgelines (AKA joyplots) of territories using  elevation data with R, sf, terra and ggridges.</summary>
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="ggridges"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="terra"/>
@@ -3948,7 +4025,7 @@ Unknown Pleasures Album Art. &lt;em&gt;Cartographic Perspectives&lt;/em&gt;, (92
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">A common challenge when creating maps is how to include an inset map on your visualization. An inset map is a smaller map usually included on a corner that may provide additional context to the overall map, or may include map units than won&#39;t be usually represented properly.</summary>
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="inset"/><category term="mapSpain"/><category term="maps"/><category term="mapsf"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="tmap"/>
@@ -4068,7 +4145,7 @@ be extracted from the GitHub repository
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package allows to geotag images, using an spatial object (from sf or terra) as a geographic reference.</summary>
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="flags"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rasterpic"/><category term="rspatial"/><category term="rstats"/><category term="terra"/>
@@ -4173,7 +4250,7 @@ which are termed “black swan events” (Taleb (2008)). This line of thinking p
 
 &lt;h2 id=&quot;step-by-step-example&quot;&gt;Step by step example&lt;/h2&gt;
 
-&lt;p&gt;We reproduce here the pseudo-code&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; as per Jiang (2019):&lt;/p&gt;
+&lt;p&gt;We reproduce here the pseudo-code&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot; role=&quot;doc-noteref&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; as per Jiang (2019):&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Recursive function Head/tail Breaks:
  Rank the input data from the largest to the smallest
  Break the data into the head and the tail around the mean;
@@ -4581,7 +4658,7 @@ End Function
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
       &lt;p&gt;The method implemented on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;classInt&lt;/code&gt; corresponds to head/tails 1.0 as named on this article. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;uarr;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
@@ -4590,12 +4667,11 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;blockquote class=&quot;blockquote&quot;&gt;
   &lt;p class=&quot;small font-italic&quot;&gt;There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?&lt;/p&gt;
   &lt;footer class=&quot;blockquote-footer text-right&quot;&gt;Jiang (2013)&lt;/footer&gt;
 &lt;/blockquote&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="classInt"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/>
@@ -5092,9 +5168,8 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="cartography"/><category term="maps"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
@@ -5283,9 +5358,8 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated 17 february 2020&lt;/strong&gt;: All these pieces of work are already available on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cartography &amp;gt;v.2.4.0&lt;/code&gt; on functions &lt;a href=&quot;http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hatchedLayer&lt;/code&gt;&lt;/a&gt; and &lt;a href=&quot;https://riatelab.github.io/cartography/docs/reference/legendHatched.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;legendHatched&lt;/code&gt;&lt;/a&gt;. Just install it via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install.packages(&quot;cartography&quot;)&lt;/code&gt;. A dedicated blog post with examples on this &lt;a href=&quot;../202002_cartography1&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="cartography"/><category term="function"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
@@ -5468,9 +5542,8 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;How to place an inset map in &lt;strong&gt;R&lt;/strong&gt;? There are many solutions out there using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt; package (see &lt;a href=&quot;https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html&quot;&gt;Drawing beautiful maps programmatically with &lt;strong&gt;R&lt;/strong&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;&lt;/a&gt; by Mel Moreno and Mathieu Basille). However, I like the old reliable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot&lt;/code&gt; function, so the question is: is there another way?&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="flags"/><category term="inset"/><category term="maps"/><category term="r_bloggers"/><category term="rnaturalearth"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
@@ -5664,9 +5737,8 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;This is a quick post on how to create a map as per the &lt;a href=&quot;https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps&quot;&gt;Wikipedia conventions&lt;/a&gt;. In this case I have chosen to plot the &lt;a href=&quot;https://en.wikipedia.org/wiki/International_organ_donor_rates&quot;&gt;international organ donor rates&lt;/a&gt;, retrieved on 2019-02-10 although the data refers to 2017 (Source: &lt;a href=&quot;http://www.irodat.org/?p=database&quot;&gt;IRODaT&lt;/a&gt;).&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="Wikipedia"/><category term="cartography"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="svg"/>
@@ -5844,7 +5916,7 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">Want to use a flag (or any *.png file) as a background of your map? You are in the right post.</summary>
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="flags"/><category term="function"/><category term="giscoR"/><category term="mapSpain"/><category term="maps"/><category term="r_bloggers"/><category term="raster"/><category term="rspatial"/><category term="rstats"/>
@@ -6188,9 +6260,8 @@ End Function
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;Sometimes you want to produce maps with special layouts. I specially like maps with modified geometries, e.g. simplifiying the original shapes to squares or dots. When doing a little search over the web I found the fantastic post &lt;a href=&quot;https://strimas.com/post/hexagonal-grids/&quot;&gt;Fishnets and Honeycomb: Square vs. Hexagonal Spatial Grids&lt;/a&gt; by &lt;a href=&quot;https://strimas.com/#about&quot;&gt;Matt Strimas-Mackey&lt;/a&gt; that was a huge inspiration (by the way, don’t miss &lt;a href=&quot;http://strimas.com/#posts&quot;&gt;his blog&lt;/a&gt;, full of very interesting pieces of work).&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
@@ -6352,13 +6423,13 @@ created with the front matter:&lt;/p&gt;
 &lt;span class=&quot;na&quot;&gt;subtitle&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Make it work in 6 steps - a short tutorial&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;leaflet&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Jekyll&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;maps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;header_img&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://dieghernan.github.io/assets/figs/20190520_imgpost.webp&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;leafletmap&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;leafletmap&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;always_allow_html&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;yes&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;last_modified_at&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;2021-05-30&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
   &lt;span class=&quot;na&quot;&gt;md_document&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;variant&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;gfm&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;preserve_yaml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;preserve_yaml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
 &lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -6486,7 +6557,7 @@ screen, no matter what device you are using.&lt;/p&gt;
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;Recently I have been struggling when trying to embed a
 &lt;a href=&quot;https://rstudio.github.io/leaflet&quot;&gt;leaflet&lt;/a&gt; map created with
 &lt;strong&gt;RStudio&lt;/strong&gt; on my blog, hosted in GitHub via
@@ -6494,7 +6565,6 @@ screen, no matter what device you are using.&lt;/p&gt;
 &lt;i class=&quot;fa fa-thumbs-up&quot;&gt;&lt;/i&gt;&lt;/a&gt;).
 In my case, I use the &lt;a href=&quot;https://dieghernan.github.io/chulapa/&quot;&gt;&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;&lt;/a&gt;
 remote theme created by myself.&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="Jekyll"/><category term="html"/><category term="leaflet"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/>
@@ -6692,9 +6762,8 @@ remote theme created by myself.&lt;/p&gt;
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;This post introduces a used-defined function used for casting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; objects of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;class&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POLYGON&lt;/code&gt; into sub-strings.&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="function"/><category term="r_bloggers"/><category term="rnaturalearth"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
@@ -6992,10 +7061,9 @@ and replacing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot
 		</content>
 		
 		<author>
-			<name>dieghernan</name><uri>https://twitter.com/dhernangomez</uri></author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
 		<summary type="html">&lt;p&gt;This vignette is an example of use of the database provided in the Github project &lt;a href=&quot;https://dieghernan.github.io/projects/countrycodes/&quot;&gt;Country Codes and International Organizations &amp;amp; Groups&lt;/a&gt;
   by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; package in R.&lt;/p&gt;
-
 </summary>
 		<category term="posts"/>
 		<category term="maps"/><category term="r_bloggers"/><category term="rnaturalearth"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="vignette"/>
