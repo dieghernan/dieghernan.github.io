@@ -1,0 +1,42 @@
+on:
+    push:
+      branches:
+        - master
+        - main
+    workflow_dispatch:
+  
+  name: jekyll-profile
+  jobs:
+    jekyll-profile:
+      runs-on: ubuntu-latest
+      env:
+        JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+          bundler-cache: true
+         
+      - name: Run jekyll-profile
+        run: |
+          # Run Jekyll Profile
+          # Bundle install
+          echo "::group::Jekyll folder"
+          echo "Building Jekyll from: $PWD"
+          echo "::endgroup::"
+          # Updating Bundle
+          echo "::group::Bundle Update"
+          bundle update
+          echo "::endgroup::"
+          # Jekyll Profile
+          echo "::group::Jekyll Profile"
+          bundle exec jekyll build --incremental --profile >> $GITHUB_STEP_SUMMARY
+          # Nice formatting
+          sed -i 's/+-/|/g' $GITHUB_STEP_SUMMARY
+                  sed -i 's/-+/|/g' $GITHUB_STEP_SUMMARY
+          sed -i 's/Build Process Summary/## Build Process Summary/g' $GITHUB_STEP_SUMMARY
+          sed -i 's/Site Render Stats/## Site Render Stats/g' $GITHUB_STEP_SUMMARY
+          echo "::endgroup::"
+        shell: bash
+        
