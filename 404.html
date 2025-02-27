@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2025-02-26 23:08:44 +0100 -->
+    <!-- Page build 2025-02-27 12:24:20 +0100 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -18,8 +18,8 @@
       },
       "headline": "404",
       "image": "https://dieghernan.github.io/assets/img/site/banner.png",
-      "datePublished": "2025-02-26T23:08:44+01:00",
-      "dateModified": "2025-02-26T23:08:44+01:00",
+      "datePublished": "2025-02-27T12:24:20+01:00",
+      "dateModified": "2025-02-27T12:24:20+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -185,24 +185,38 @@
 					</li></ul>
 			</div></div>
 </nav><div class="my-auto text-center">
-  <h1 class="display-1 font-weight-bold">4<i class="fa fa-times-circle"></i>4</h1>
+  <h1>4<i class="fa fa-times-circle"></i>4</h1>
   <h2>Page not found</h2>
 </div>
+<main class="container-lg pt-2 pb-5 flex-fill">
 <!-- (c) Ben Balter https://ben.balter.com/2022/06/30/helpful-404s-for-jekyll-and-github-pages/ -->
-<div class="container pb-3 flex-fill">
-<div class="row pt-2">
-<aside class="col-md-2 my-3"></aside>
-<div class="col-md-8 my-3 alert alert-info text-center" role="alert">
-  The page you are trying to view does not exist. <br />
-  <strong>Perhaps you're looking for <span id="four-oh-four-suggestion"></span>?</strong>
-  <p class="pt-2">You can try also on <a class="alert-link" href="https://dieghernan.github.io/search">Search <i class="fa fa-search" aria-hidden="true"></i></a></p>
-</div>
-</div>
-</div>
+	<div class="row">
+	  	<div class="col-md-8 offset-md-2 my-0 text-center">
+			<div class="alert alert-warning text-center" role="alert">
+			<p class="font-weight-bold my-0 py-1">Perhaps you're looking for <span id="four-oh-four-suggestion"></span>?</p>
+			</div>
+		</div>	
+	</div>
+	<div class="row">
+	       <div class="col-lg-8 offset-lg-2 my-auto text-center">
+	       <p class="lead font-weight-bold">Search <i class="fa fa-search" aria-hidden="true"></i></p><div id="searchbox"></div>
+<div id="powered-by" class="text-right mt-2"></div>
+<div id="hits" class="mt-3 text-left"></div></div>
+	</div>
+</main>
 <script>
-	 // Based in https://ben.balter.com/2022/06/30/helpful-404s-for-jekyll-and-github-pages/
-		const div = document.getElementById('four-oh-four-suggestion');
-		// Single levestein dist
+		// Get root
+		// Vars
+		let homeUrl = "https://dieghernan.github.io/";
+		// with no trailing '/'
+		homeUrl = homeUrl.replace(/\/+$/, "");
+		let currentUrl = window.location.href;
+		let sitemap = "https://dieghernan.github.io/sitemap.xml"
+		// Based in https://ben.balter.com/2022/06/30/helpful-404s-for-jekyll-and-github-pages/
+		// A: Function definition...
+		// Own version of closest from 'fastest-levenshtein')
+		// Single levestein dist https://stackoverflow.com/questions/18516942
+		// Later implemented as js-levenshtein
 		const levenshteinDistance = (s, t) => {
 		    if (!s.length) return t.length;
 		    if (!t.length) return s.length;
@@ -222,35 +236,47 @@
 		    }
 		    return arr[t.length][s.length];
 		};
-		const xhr = new XMLHttpRequest();
-		xhr.onload = () => {
-		    if (xhr.status === 200) {
-		        const xml = xhr.responseXML;
-		        const urls = Array.from(xml.querySelectorAll('urlset > url > loc')).map((el) => el.textContent);
-		        var arrayLength = urls.length;
-		        var closest = []; // store their names within a local array
-		        for (var i = 0; i < arrayLength; i++) {
-		            closest.push(levenshteinDistance(window.location.href, urls[i]));
-		        }
-		        let min = closest[0];
-		        let url = urls[0];
-		        for (var i = 0; i < arrayLength; i++) {
-		            if (closest[i] > 0) {
-		                if (closest[i] < min) {
-		                    min = closest[i];
-		                    url = urls[i];
-		                }
+		const closest = (str, urls) => {
+		    var arrayLength = urls.length;
+		    var closest = []; // store their names within a local array
+		    // Iterate over the distance
+		    for (var i = 0; i < arrayLength; i++) {
+		        closest.push(levenshteinDistance(str, urls[i]));
+		    }
+		    let min = closest[0];
+		    let url = urls[0];
+		    for (var i = 0; i < arrayLength; i++) {
+		        if (closest[i] > 0) {
+		            if (closest[i] < min) {
+		                min = closest[i];
+		                url = urls[i];
 		            }
 		        }
-		        const relurl = new URL(url);
-		        div.innerHTML = `<a class="alert-link" href="${relurl.href}">${relurl.href.replace("https://dieghernan.github.io/", "")}</a>`;
-		    } else {
-		        div.innerHTML = '<a href="/">/</a>';
 		    }
+		    return url;
 		};
-		xhr.open('GET', `https://dieghernan.github.io/sitemap.xml`);
-		xhr.send();
-	 </script>
+		// END A: Function definition...
+		//  https://ben.balter.com/2022/06/30/helpful-404s-for-jekyll-and-github-pages/
+		const div = document.getElementById('four-oh-four-suggestion');
+		if (div) {
+		    const xhr = new XMLHttpRequest();
+		    xhr.onload = () => {
+		        if (xhr.status === 200) {
+		            const xml = xhr.responseXML;
+		            const urls = Array.from(xml.querySelectorAll('urlset > url > loc')).map((el) => el.textContent);
+		            const relurl = new URL(closest(currentUrl, urls));
+		            div.innerHTML = `<a class="alert-link font-weight-bolder" href="${relurl.href}">${relurl.href.replace(homeUrl, "")}</a>`;
+		        } else {
+		            div.innerHTML = '<a href="/">/</a>';
+		        }
+		    };
+		    xhr.open('GET', `${sitemap}`);
+		    xhr.send();
+		}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+<script src="https://dieghernan.github.io/assets/js/algolia/algolia-search.js"></script>
 <!-- Footer -->
  <footer class="footer-chulapa text-center mt-0 pt-3">
    <div class="container">
