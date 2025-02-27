@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2025-02-27T23:58:31+01:00</updated>
+	<updated>2025-02-28T00:50:06+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One world | Projects, maps and coding</title>
 	<subtitle>Projects, maps and coding</subtitle>
@@ -14,6 +14,636 @@
 	<rights>(c) 2025, dieghernan</rights>
 	<icon>https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png</icon>
 	<logo>https://dieghernan.github.io/assets/img/site/banner.png</logo><entry>
+		<title>Implementing group_by count in Liquid</title>
+		<link href="https://dieghernan.github.io/202502_liquid-group-by/" rel="alternate" type="text/html" title="Implementing group_by count in Liquid"/>
+		<published>2025-02-28T00:00:00+01:00</published>
+		<updated>2025-02-28T00:00:00+01:00</updated>
+		<id>https://dieghernan.github.io/202502_liquid-group-by/</id>
+		<content type="html" xml:base="https://dieghernan.github.io/202502_liquid-group-by/">
+		
+		&lt;h3&gt;See the magic happening&lt;/h3&gt;
+		
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/og_jekyll.webp&#39; &gt;
+			
+	&lt;p&gt;5 min.&lt;/p&gt;
+			&lt;p&gt;&lt;a href=&quot;https://shopify.github.io/liquid/&quot;&gt;Liquid&lt;/a&gt; is an open-source template 
+language created by Shopify back in 2006 and written in Ruby. It is widely 
+used by several frameworks, with &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; being one of 
+the most famous.&lt;/p&gt;
+
+&lt;p&gt;This website is created using Jekyll, specifically my Jekyll template 
+&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt; 
+(&lt;a href=&quot;https://dieghernan.github.io/chulapa&quot;&gt;link&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Some time ago, &lt;a href=&quot;https://github.com/cargocultprogramming&quot;&gt;@cargocultprogramming&lt;/a&gt; 
+opened &lt;a href=&quot;https://github.com/dieghernan/chulapa/issues/29&quot;&gt;dieghernan/chulapa#29&lt;/a&gt; 
+because one of the components of the theme was broken in Jekyll &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;=&amp;gt;4.1.0&lt;/code&gt;. 
+Digging a bit, I saw 
+&lt;a href=&quot;https://github.com/jekyll/jekyll/issues/8214&quot;&gt;jekyll/jekyll#8214&lt;/a&gt;, exposing 
+the same issue. What seemed to be a feature was indeed a bug that some 
+developers were exploiting.&lt;/p&gt;
+
+&lt;p&gt;The change is that when applying the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group_by&lt;/code&gt; Liquid filter on an array, it 
+used to produce a “grouped” version of the array, while on Jekyll &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;=&amp;gt;4.1.0&lt;/code&gt; 
+it produces a different result that can’t be used in the same way.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+
+{% assign alldocs = site.exercises %}
+{% assign grouptag = alldocs | map: &#39;tags&#39; | join: &#39;,&#39; | split: &#39;,&#39; | group_by: tag %}
+
+{{ grouptag }}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Jekyll &amp;lt; 4.1.0 result --&amp;gt;&lt;/span&gt;
+{&quot;name&quot;=&amp;gt;&quot;tag A&quot;, &quot;items&quot;=&amp;gt;[&quot;tag A&quot;], &quot;size&quot;=&amp;gt;1}{&quot;name&quot;=&amp;gt;&quot;Tag B&quot;, &quot;items&quot;=&amp;gt;[&quot;Tag B&quot;], &quot;size&quot;=&amp;gt;1}{&quot;name&quot;=&amp;gt;&quot;Virtualbox&quot;, &quot;items&quot;=&amp;gt;[&quot;Virtualbox&quot;], &quot;size&quot;=&amp;gt;1}{&quot;name&quot;=&amp;gt;&quot;netcat&quot;, &quot;items&quot;=&amp;gt;[&quot;netcat&quot;], &quot;size&quot;=&amp;gt;1}{&quot;name&quot;=&amp;gt;&quot;whois&quot;, &quot;items&quot;=&amp;gt;[&quot;whois&quot;], &quot;size&quot;=&amp;gt;1}{&quot;name&quot;=&amp;gt;&quot;dig&quot;, &quot;items&quot;=&amp;gt;[&quot;dig&quot;], &quot;size&quot;=&amp;gt;1} ... {&quot;name&quot;=&amp;gt;&quot;Hydra&quot;, &quot;items&quot;=&amp;gt;[&quot;Hydra&quot;], &quot;size&quot;=&amp;gt;1}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Jekyll &amp;gt;= 4.1.0 result --&amp;gt;&lt;/span&gt;
+{&quot;name&quot;=&amp;gt;&quot;&quot;, &quot;items&quot;=&amp;gt;[&quot;tag A&quot;, &quot;Tag B&quot;, &quot;Virtualbox&quot;, &quot;netcat&quot;, &quot;whois&quot;, &quot;dig&quot;, ... , &quot;Hydra&quot;], &quot;size&quot;=&amp;gt;26}
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So basically, counting items was not easy anymore. I developed a solution in 
+pure Liquid (which happens to be a quite verbose language out of the predefined
+filters) that is compatible with any Jekyll version.&lt;/p&gt;
+
+&lt;p&gt;The algorithm is now implemented in &lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;. You
+can check the results on my &lt;a href=&quot;https://dieghernan.github.io/tags&quot;&gt;/tags&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;p&gt;Note that the tables produced in the example are taken from my live site,
+hence they may change as I add more posts. The results of the table should
+be the same as the order and number of tags displayed on the 
+&lt;a href=&quot;https://dieghernan.github.io/tags&quot;&gt;/tags&lt;/a&gt; page.&lt;/p&gt;
+
+&lt;h2 id=&quot;alternative-group_by-with-liquid&quot;&gt;Alternative &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;group_by&lt;/code&gt; with Liquid&lt;/h2&gt;
+
+&lt;p&gt;First, we define an array of all the tags included in the documents of my site:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+{% assign alldocs = site.documents %}
+{% assign alltags = alldocs | map: &#39;tags&#39; | join: &#39;,&#39; | split: &#39;,&#39; %}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div&gt;
+
+&lt;p&gt;Cool! Now we can count the number of unique elements in 
+&lt;code&gt;alltags&lt;/code&gt; by counting the occurrences of unique tags in the 
+array:&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Allocating array to group_by: replacement --&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Unique values --&amp;gt;&lt;/span&gt;
+{% assign single_tags = alltags | uniq %}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Arrays to populate --&amp;gt;&lt;/span&gt;
+{% assign count_tags = &#39;&#39; | split: &#39;,&#39; %}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Iterator 0 to number of unique tags - 1 (size = number of unique tags) --&amp;gt;&lt;/span&gt;
+{% assign n_tags = single_tags | size | minus: 1 %}
+
+{% for i in (0..n_tags) %}
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Populate --&amp;gt;&lt;/span&gt;
+  {% assign count_this_tag = alltags | where_exp:&quot;item&quot;, &quot;item == single_tags[i]&quot; | size %}
+  {% assign count_tags = count_tags | push: count_this_tag %}
+{% endfor %}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Display single_tags and count_tags as a table --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;table&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;caption&amp;gt;&lt;/span&gt;Display count of tags on this site &lt;span class=&quot;nt&quot;&gt;&amp;lt;/caption&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;th&amp;gt;&lt;/span&gt;Tag&lt;span class=&quot;nt&quot;&gt;&amp;lt;/th&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;th&amp;gt;&lt;/span&gt;Count&lt;span class=&quot;nt&quot;&gt;&amp;lt;/th&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+  {% for i in (0..n_tags) %}
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;{{ single_tags[i] }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;{{ count_tags[i] }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+  {% endfor %}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/table&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;See results&lt;/summary&gt;
+&lt;table&gt;
+  &lt;caption&gt;Display count of tags on this site &lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Tag&lt;/th&gt;
+    &lt;th&gt;Count&lt;/th&gt;
+  &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;r_bloggers&lt;/td&gt;
+      &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rstats&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rspatial&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sf&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;maps&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vignette&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rnaturalearth&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;function&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;leaflet&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;jekyll&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;html&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;beautiful_maps&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;giscoR&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;raster&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;flags&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;mapSpain&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Wikipedia&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cartography&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;svg&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;inset&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;r_package&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;classInt&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;terra&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rasterpic&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ggplot2&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tmap&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;mapsf&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;discontinued&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;project&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;R&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;python&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;guest-author&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ggridges&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tidyterra&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;maptiles&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;s2&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;astronomy&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;celestial&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;geojson&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;gpkg&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;resmush&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;chulapa&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pebble&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;watchface&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;javascript&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;C&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;webscrapping&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dataset&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;csv&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;json&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;twitter&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;&lt;/table&gt;
+
+&lt;/details&gt;
+
+&lt;h2 id=&quot;sorting&quot;&gt;Sorting&lt;/h2&gt;
+
+&lt;p&gt;How to rank the tags by the number of occurrences? We can set the maximum 
+number of occurrences and loop in reverse order. The ranked array would be 
+populated if a tag presents the number of occurrences in the main loop:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Used in https://github.com/mmistakes/minimal-mistakes/blob/master/_includes/posts-taxonomy.html --&amp;gt;&lt;/span&gt;
+
+{% assign items_max = count_tags | sort | last %}
+{% assign sorted_tags = &#39;&#39; | split: &#39;,&#39; %}
+{% assign sorted_count_tags = &#39;&#39; | split: &#39;,&#39; %}
+
+{% for i in (1..items_max) reversed %}
+  {% for j in (0..n_tags) %}
+    {% if count_tags[j] == i %}
+     {% assign sorted_tags = sorted_tags | push: single_tags[j] %}
+     {% assign sorted_count_tags = sorted_count_tags | push: i %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% assign sorted_tags = sorted_tags | uniq %}
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;table&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;caption&amp;gt;&lt;/span&gt;Display sorted count of tags on this site &lt;span class=&quot;nt&quot;&gt;&amp;lt;/caption&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;th&amp;gt;&lt;/span&gt;Tag&lt;span class=&quot;nt&quot;&gt;&amp;lt;/th&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;th&amp;gt;&lt;/span&gt;Count (desc sorted)&lt;span class=&quot;nt&quot;&gt;&amp;lt;/th&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+  {%- for i in (0..n_tags) %}
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;{{ sorted_tags[i] }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;{{ sorted_count_tags[i] }}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+  {%- endfor -%}
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/table&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;See results&lt;/summary&gt;
+
+&lt;table&gt;
+  &lt;caption&gt;Display sorted count of tags on this site &lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Tag&lt;/th&gt;
+    &lt;th&gt;Count (desc sorted)&lt;/th&gt;
+  &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;maps&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rstats&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rspatial&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;r_bloggers&lt;/td&gt;
+      &lt;td&gt;20&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sf&lt;/td&gt;
+      &lt;td&gt;12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;project&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;giscoR&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ggplot2&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;beautiful_maps&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;discontinued&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;terra&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;leaflet&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;r_package&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;R&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;function&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;flags&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;cartography&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tidyterra&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;pebble&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;watchface&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;javascript&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;C&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rnaturalearth&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;mapSpain&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;inset&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;jekyll&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;html&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;python&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;astronomy&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;celestial&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;geojson&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;gpkg&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;dataset&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;csv&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;vignette&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;raster&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Wikipedia&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;svg&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;classInt&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rasterpic&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;tmap&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;mapsf&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;guest-author&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ggridges&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;maptiles&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;s2&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;resmush&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;chulapa&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;webscrapping&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;json&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;twitter&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;&lt;/table&gt;
+
+&lt;/details&gt;
+
+&lt;h2 id=&quot;bottom-line&quot;&gt;Bottom line&lt;/h2&gt;
+
+&lt;p&gt;Done! Here you have a clean version of the algorithm:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+{% assign alldocs = site.documents %}
+{% assign alltags = alldocs | map: &#39;tags&#39; | join: &#39;,&#39; | split: &#39;,&#39; %}
+{% assign single_tags = alltags | uniq %}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Counting --&amp;gt;&lt;/span&gt;
+{% assign count_tags = &#39;&#39; | split: &#39;,&#39; %}
+{% assign n_tags = single_tags | size | minus: 1 %}
+{% for i in (0..n_tags) %}
+  {% assign count_this_tag = alltags | where_exp:&quot;item&quot;, &quot;item == single_tags[i]&quot; | size %}
+  {% assign count_tags = count_tags | push: count_this_tag %}
+{% endfor %}
+
+&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Extra: sort --&amp;gt;&lt;/span&gt;
+{% assign items_max = count_tags | sort | last %}
+{% assign sorted_tags = &#39;&#39; | split: &#39;,&#39; %}
+{% assign sorted_count_tags = &#39;&#39; | split: &#39;,&#39; %}
+
+{% for i in (1..items_max) reversed %}
+  {% for j in (0..n_tags) %}
+    {% if count_tags[j] == i %}
+     {% assign sorted_tags = sorted_tags | push: single_tags[j] %}
+     {% assign sorted_count_tags = sorted_count_tags | push: i %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% assign sorted_tags = sorted_tags | uniq %}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+		</content>
+		
+		<author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
+		<summary type="html">This post explains implementing group_by count in Liquid for Jekyll, 
+addressing issues with Jekyll 4.1.0 and providing a solution.
+</summary>
+		<category term="posts"/>
+		<category term="chulapa"/><category term="function"/><category term="html"/><category term="jekyll"/>
+	</entry><entry>
 		<title>Happy Valentine&#39;s Day</title>
 		<link href="https://dieghernan.github.io/202502_st_valentine/" rel="alternate" type="text/html" title="Happy Valentine&#39;s Day"/>
 		<published>2025-02-17T00:00:00+01:00</published>
@@ -7070,7 +7700,7 @@ In my case, I use the &lt;a href=&quot;https://dieghernan.github.io/chulapa/&quo
 remote theme created by myself.&lt;/p&gt;
 </summary>
 		<category term="posts"/>
-		<category term="Jekyll"/><category term="html"/><category term="leaflet"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/>
+		<category term="html"/><category term="jekyll"/><category term="leaflet"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/>
 	</entry><entry>
 		<title>Where in the world?</title>
 		<link href="https://dieghernan.github.io/201905_Where-in-the-world/" rel="alternate" type="text/html" title="Where in the world?"/>
