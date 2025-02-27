@@ -5,6 +5,7 @@ excerpt: |
   This post explains implementing group_by count in Liquid for Jekyll, 
   addressing issues with Jekyll 4.1.0 and providing a solution.
 tags:
+  - liquid
   - jekyll
   - html
   - function
