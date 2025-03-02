@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202201_maps-flags/"
+      },
+      "headline": "Beautiful Maps with R (IV): Fun with flags revisited",
+      "image": "https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp",
+      "datePublished": "2022-01-28T00:00:00+01:00",
+      "dateModified": "2022-01-28T00:00:00+01:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Beautiful Maps with R (IV): Fun with flags revisited"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Beautiful Maps with R (IV): Fun with flags revisited",
+    "description": "Any picture as a basemap - On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package allows to geotag images, using an spatial object (from sf or terra) as a geographic reference."
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Beautiful Maps with R (IV): Fun with flags revisited | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/202201_maps-flags/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="Any picture as a basemap - On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package allows to geotag images, using an spatial objec...">
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Beautiful Maps with R (IV): Fun with flags revisited | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/202201_maps-flags/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="Any picture as a basemap - On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202201_maps-flags/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Beautiful Maps with R (IV): Fun with flags revisited</h1><p class="lead chulapa-subtitle p-summary">Any picture as a basemap</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Beautiful Maps with R (IV): Fun with flags revisited</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2022-01-28T00:00:00+01:00" class="dt-published" >28 jan 2022</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202201_maps-flags/&text=Beautiful+Maps+with+R+%28IV%29%3A+Fun+with+flags+revisited&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,beautiful_maps,maps,terra,flags,rasterpic,giscoR" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Beautiful%20Maps%20with%20R%20(IV):%20Fun%20with%20flags%20revisited%20https://dieghernan.github.io/202201_maps-flags/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23beautiful_maps%20%23maps%20%23terra%20%23flags%20%23rasterpic%20%23giscoR" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202201_maps-flags/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Beautiful+Maps+with+R+%28IV%29%3A+Fun+with+flags+revisited%20https://dieghernan.github.io/202201_maps-flags/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202201_maps-flags/&title=Beautiful+Maps+with+R+%28IV%29%3A+Fun+with+flags+revisited" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Beautiful Maps with R (IV): Fun with flags revisited</a></p>		
+		</nav>   
+	</div>
+			<p>On 27 Jan. 2022 my package <strong>rasterpic</strong> was accepted on
+<a href="https://cran.r-project.org/package=rasterpic">CRAN</a> (Hooray!!). This package
+allows to geotag images, using an spatial object (from <strong>sf</strong> or <strong>terra</strong>) as a
+geographic reference.</p>
+<p>I tweeted about that, and it seems to have a good feedback from the
+<a href="https://twitter.com/hashtag/rspatial">#rspatial</a> community:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {rasterpic} 📦 is now on CRAN, and we can convert our pngs to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>I received also an interesting reply to this from <strong>Hefin Ioan Rhys</strong>
+<a href="https://twitter.com/HRJ21">@HRJ21</a>:</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ooh I think a map with countries filled with their own flag would be poppin&#39;.</p>&mdash; Hefin Ioan Rhys (@HRJ21) <a href="https://twitter.com/HRJ21/status/1486976368936116225?ref_src=twsrc%5Etfw">January 28, 2022</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>That remembers me to a <a href="https://dieghernan.github.io/202002_cartography1/#png-layer">previous
+post</a> that I wrote
+when I added some new functions to the <strong>cartography</strong> package, now replaced by
+the <a href="https://cran.r-project.org/package=mapsf"><strong>mapsf</strong></a> package.</p>
+<p>With rasterpic we have now an alternative tool for creating maps using images,
+and this quick post would show you how to do it.</p>
+<p>I would replicate the Africa map presented on my previous plot, but this time I
+would use newer packages, as
+<a href="https://cran.r-project.org/package=giscoR"><strong>giscoR</strong></a> package, and the
+development version of
+<a href="https://github.com/paleolimbot/ggspatial/pull/92"><strong>ggspatial</strong></a> (not released
+yet), that adds support to <code class="language-plaintext highlighter-rouge">SpatRaster</code> object on <strong>ggplot2</strong>. The flags would
+be extracted from the GitHub repository
+<a href="https://github.com/hampusborgos/country-flags">https://github.com/hampusborgos/country-flags</a>.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Development version of ggspatial</span><span class="w">
+</span><span class="c1"># devtools::install_github("paleolimbot/ggspatial")</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggspatial</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rasterpic</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># For country names</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">countrycode</span><span class="p">)</span><span class="w">
+
+</span><span class="n">world</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3857</span><span class="p">)</span><span class="w">
+</span><span class="n">africa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Africa"</span><span class="p">,</span><span class="w"> </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3857</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Base map of Africa</span><span class="w">
+</span><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">world</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey90"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Zoom on Africa</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2000000</span><span class="p">,</span><span class="w"> </span><span class="m">6000000</span><span class="p">),</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-4000000</span><span class="p">,</span><span class="w"> </span><span class="m">5000000</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" /></p>
+<p>Now, let’s add the flags with a loop:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># We paste the ISO2 code to each african country</span><span class="w">
+</span><span class="n">africa</span><span class="o">$</span><span class="n">iso2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">countrycode</span><span class="p">(</span><span class="n">africa</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="p">,</span><span class="w"> </span><span class="s2">"iso3c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"iso2c"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Get flags from repo - low quality to speed up the code</span><span class="w">
+</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"</span><span class="w">
+
+</span><span class="c1"># Loop and add</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">iso</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">africa</span><span class="o">$</span><span class="n">iso2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Download pic and plot</span><span class="w">
+  </span><span class="n">imgurl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">iso</span><span class="p">),</span><span class="w"> </span><span class="s2">".png"</span><span class="p">)</span><span class="w">
+  </span><span class="n">tmpfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tempfile</span><span class="p">(</span><span class="n">fileext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".png"</span><span class="p">)</span><span class="w">
+  </span><span class="n">download.file</span><span class="p">(</span><span class="n">imgurl</span><span class="p">,</span><span class="w"> </span><span class="n">tmpfile</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># Raster</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">africa</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">iso2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">iso</span><span class="p">)</span><span class="w">
+  </span><span class="n">x_rast</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rasterpic_img</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">tmpfile</span><span class="p">,</span><span class="w"> </span><span class="n">crop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  </span><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">layer_spatial</span><span class="p">(</span><span class="n">x_rast</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">africa</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Zoom on Africa</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2000000</span><span class="p">,</span><span class="w"> </span><span class="m">6000000</span><span class="p">),</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-4000000</span><span class="p">,</span><span class="w"> </span><span class="m">5000000</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" /></p>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202004_headtails/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Head/Tails breaks on the cl...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Head/Tails bre...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Insets with gg...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Insets with ggplot2 and tma...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202203_insetmaps/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#beautiful_maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >beautiful_maps</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#terra" class="badge chulapa-pill-bg-primary p-category" rel="tag" >terra</a>
+      <a href="https://dieghernan.github.io/tags#flags" class="badge chulapa-pill-bg-primary p-category" rel="tag" >flags</a>
+      <a href="https://dieghernan.github.io/tags#rasterpic" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rasterpic</a>
+      <a href="https://dieghernan.github.io/tags#giscoR" class="badge chulapa-pill-bg-primary p-category" rel="tag" >giscoR</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful2/" class="chulapa-text-body-color">Beautiful Maps with R (II): Fun with flags</a></p>
+         <p class="card-text"><small>Put a picture on your map</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-18T00:00:00+02:00">june 18, 2019</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202312_bertin_dots/" class="chulapa-text-body-color">Beautiful Maps with R (V): Point densities</a></p>
+         <p class="card-text"><small>Bertin's dot density maps with R and GHSL</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2023-12-16T00:00:00+01:00">december 16, 2023</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful1/" class="chulapa-text-body-color">Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels</a></p>
+         <p class="card-text"><small>Awesome simplified maps with R</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-02T00:00:00+02:00">june 02, 2019</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

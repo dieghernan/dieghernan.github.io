@@ -1,0 +1,1157 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202212_tidyterra-hillshade-2/"
+      },
+      "headline": "Hillshade, colors and marginal plots with tidyterra (II)",
+      "image": "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp",
+      "datePublished": "2022-12-12T00:00:00+01:00",
+      "dateModified": "2022-12-12T00:00:00+01:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Hillshade, colors and marginal plots with tidyterra (II)"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Hillshade, colors and marginal plots with tidyterra (II)",
+    "description": "The rain in Spain does not stay mainly in the plain - Add marginal plots to a SpatRaster map on ggplot2"
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Hillshade, colors and marginal plots with tidyterra (II) | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="The rain in Spain does not stay mainly in the plain - Add marginal plots to a SpatRaster map on ggplot2">
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Hillshade, colors and marginal plots with tidyterra (II) | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="The rain in Spain does not stay mainly in the plain - Add marginal plots to a SpatRaster map on..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Hillshade, colors and marginal plots with tidyterra (II)</h1><p class="lead chulapa-subtitle p-summary">The rain in Spain does not stay mainly in the plain</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Hillshade, colors and marginal plots with tidyterra (II)</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2022-12-12T00:00:00+01:00" class="dt-published" >12 dec 2022</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202212_tidyterra-hillshade-2/&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28II%29&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,tidyterra,terra,inset,mapSpain" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Hillshade,%20colors%20and%20marginal%20plots%20with%20tidyterra%20(II)%20https://dieghernan.github.io/202212_tidyterra-hillshade-2/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23tidyterra%20%23terra%20%23inset%20%23mapSpain" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202212_tidyterra-hillshade-2/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28II%29%20https://dieghernan.github.io/202212_tidyterra-hillshade-2/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202212_tidyterra-hillshade-2/&title=Hillshade%2C+colors+and+marginal+plots+with+tidyterra+%28II%29" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Hillshade, colors and marginal plots with tidyterra (II)</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#libraries" class="nav-link">Libraries</a></li><li class="nav-item nav d-block"><a href="#the-plain-in-spain" class="nav-link">The plain in Spain</a></li><li class="nav-item nav d-block"><a href="#the-rain-in-spain" class="nav-link">The rain in Spain</a><ul><li class="nav-item nav d-block"><a href="#creating-a-modified-palette" class="nav-link">Creating a modified palette</a></li></ul></li><li class="nav-item nav d-block"><a href="#marginal-plots-finally" class="nav-link">Marginal plots (finally)</a><ul><li class="nav-item nav d-block"><a href="#profiling-marginal-plots" class="nav-link">Profiling marginal plots</a></li><li class="nav-item nav d-block"><a href="#putting-all-the-pieces-together" class="nav-link">Putting all the pieces together</a></li></ul></li><li class="nav-item nav d-block"><a href="#recap" class="nav-link">Recap</a></li></ul>
+		</nav>   
+	</div>
+			<p><em>This is the second post of the series “Hillshade, colors and
+marginal plots with tidyterra”. In this post I would explore an approach for
+annotating marginal plots to a ggplot2 map of a SpatRaster, including
+information of the values by longitude and latitude. See the first post of the
+series <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">here</a>.</em></p>
+<p>If you love watching classic movies, specially from the Hollywood’s Golden Age,
+you may recognize the following lyrics:</p>
+<blockquote>
+ <p>The rain in Spain stays mainly in the plain!</p>
+ <p>By George, she’s got it! By George, she’s got it!</p>
+ <p>Now, once again where does it rain? On the plain! On the plain!</p>
+ <p>And where’s that soggy plain? In Spain! In Spain!</p>
+ <p>The rain in Spain stays mainly in the plain!</p>
+ <p>The rain in Spain stays mainly in the plain!</p>
+</blockquote>
+<!-- Thanks to Minimal Mistakes -->
+<p><!-- https://embedresponsively.com/ --></p>
+<div class="embed-responsive embed-responsive-16by9 my-2 chulapa-rounded-lg" itemscope="" itemprop="VideoObject" itemtype="https://schema.org/VideoObject">
+      <iframe loading="lazy" title="Video from YouTube" class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/uVmU3iANbgk" allowfullscreen="" itemprop="embedUrl"></iframe>
+ </div>
+<p>This hard statement is made on <a href="https://en.wikipedia.org/wiki/My_Fair_Lady_(film)"><em>My Fair Lady
+(1964)</em></a> by Audrey Hepburn,
+Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
+<strong>completely false</strong>.</p>
+<p>The rain in Spain stays mainly in the north, most notably in Galicia. And I can
+prove it!</p>
+<p>On this post I would overlay a SpatRaster showing average precipitation data
+with an extra set of plots on the margin to identify where the rain in Spain
+stays (mainly).</p>
+<h2 id="libraries">Libraries</h2>
+<p>On this post we would use the following libraries:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Libraries</span><span class="w">
+
+</span><span class="c1"># Data manipulation</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyterra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Get the data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">geodata</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plotting</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">colorspace</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="the-plain-in-spain">The plain in Spain</h2>
+<p>Well, the plain (or as we name it <em>La Meseta Central</em>) covers a large area of
+the inner land of Spain, with an average altitude of 650 meters over the sea
+level.</p>
+<p>I didn’t find any accurate spatial data file with the bounds of the plain, so
+for this case I would approximate it using a mixture of political borders
+(historically the <em>Meseta</em> is associated to Castile and Madrid) and elevation
+data to get a rough shape.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Using mapSpain</span><span class="w">
+</span><span class="n">the_plain</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">esp_get_prov</span><span class="p">(</span><span class="w">
+  </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Madrid"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Castilla-La Mancha"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Extremadura"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Castilla y Leon"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Teruel"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">the_plain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">the_plain</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Combine</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># To terra, until this step was sf</span><span class="w">
+  </span><span class="n">vect</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Get altitude</span><span class="w">
+
+</span><span class="c1"># I use here a local directory to cache downloaded files on my PC.</span><span class="w">
+</span><span class="c1"># Modify this to your likes, e.g. using</span><span class="w">
+</span><span class="c1"># mydir &lt;- tempdir()</span><span class="w">
+
+</span><span class="n">mydir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"~/R/mapslib/misc"</span><span class="w">
+
+
+</span><span class="n">r_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">elevation_30s</span><span class="p">(</span><span class="s2">"ESP"</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># For better handling we set here the names</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">r_init</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"alt"</span><span class="w">
+
+</span><span class="c1"># We don't want values lower than 0 on the raster</span><span class="w">
+</span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r_init</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">alt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pmax</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">alt</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1"># Now intersect the raster and the vector and filter by range</span><span class="w">
+
+</span><span class="n">exploded</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">crop</span><span class="p">(</span><span class="n">the_plain</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Let's define here a range of elevations</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">alt</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">600</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">alt</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">1100</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.polygons</span><span class="p">(</span><span class="n">dissolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Aggregate first</span><span class="w">
+  </span><span class="n">aggregate</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Explode vectors</span><span class="w">
+  </span><span class="n">disagg</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># And fill holes</span><span class="w">
+  </span><span class="n">fillHoles</span><span class="p">()</span><span class="w">
+
+
+
+</span><span class="c1"># Select biggest polygons (area bigger than 50 kms 2)</span><span class="w">
+</span><span class="n">r_plain</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">exploded</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Add area</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">expanse</span><span class="p">(</span><span class="n">exploded</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">area</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">50000</span><span class="o">**</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># And convert to lines</span><span class="w">
+  </span><span class="n">as.lines</span><span class="p">()</span><span class="w">
+
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">r_plain</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
+<p>We can create a now plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
+post</a> to identify the
+plain. In first place I create a base layer with a representation of the
+hillshade, that we would reuse later:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Creating hillshade</span><span class="w">
+
+</span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"slope"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
+</span><span class="n">aspect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"aspect"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
+</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># normalize names</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"shades"</span><span class="w">
+
+</span><span class="c1"># Hillshading palette</span><span class="w">
+</span><span class="n">pal_greys</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="s2">"Grays"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Index of color by cell</span><span class="w">
+</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rescale</span><span class="p">(</span><span class="n">shades</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">pal_greys</span><span class="p">))))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">index_col</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">pull</span><span class="p">(</span><span class="n">index_col</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Get cols</span><span class="w">
+</span><span class="n">vector_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
+
+</span><span class="c1"># Need to avoid resampling</span><span class="w">
+</span><span class="c1"># and dont use aes</span><span class="w">
+
+</span><span class="c1"># Base hill plot</span><span class="w">
+</span><span class="n">hill_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_cols</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">hill_plot</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="plot of chunk 20221212_hill" width="100%" /></p>
+<p>And finally we overlay the altitude and the outline of the plain in Spain.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Overlaying and theming</span><span class="w">
+
+</span><span class="c1"># Aware of limits of the raster</span><span class="w">
+
+</span><span class="n">alt_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">minmax</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">as.vector</span><span class="p">()</span><span class="w">
+</span><span class="c1"># Round to lower and higher 500 integer with a min of 0</span><span class="w">
+</span><span class="n">alt_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pmax</span><span class="p">(</span><span class="w">
+  </span><span class="nf">c</span><span class="p">(</span><span class="nf">floor</span><span class="p">(</span><span class="n">alt_limits</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">500</span><span class="p">),</span><span class="w"> </span><span class="nf">ceiling</span><span class="p">(</span><span class="n">alt_limits</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">500</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="m">0</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">alt_limits</span><span class="w">
+</span><span class="c1">#&gt; [1]    0 3500</span><span class="w">
+
+
+</span><span class="n">base_text_size</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9</span><span class="w">
+
+
+</span><span class="n">plot_esp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Overlay the_plain</span><span class="w">
+  </span><span class="n">geom_spatvector</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r_plain</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.15</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_hypso_tint_c</span><span class="p">(</span><span class="w">
+    </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wiki-schwarzwald-cont"</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alt_limits</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">3500</span><span class="p">,</span><span class="w"> </span><span class="m">250</span><span class="p">),</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">guide_legend</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"   m."</span><span class="p">,</span><span class="w">
+    </span><span class="n">title.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"top"</span><span class="p">,</span><span class="w">
+    </span><span class="n">keywidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span><span class="p">,</span><span class="w">
+    </span><span class="n">reverse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+    </span><span class="n">override.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+  </span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation of Spain"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The plain represented with black line"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
+      </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w">
+      </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w">
+      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot_esp</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.webp" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
+<h2 id="the-rain-in-spain">The rain in Spain</h2>
+<p>Let’s check now wheter the rain falls mainly in the plain or not. We use here
+<code class="language-plaintext highlighter-rouge">geodata::worldclim_country()</code> to get the average precipitation by month from
+<a href="https://www.worldclim.org/">WordClim</a>:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Precipitation of Spain</span><span class="w">
+
+</span><span class="c1"># Get precip data</span><span class="w">
+</span><span class="n">precip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geodata</span><span class="o">::</span><span class="n">worldclim_country</span><span class="p">(</span><span class="s2">"ESP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"prec"</span><span class="p">,</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w">
+
+</span><span class="n">precip</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 1980, 2760, 12  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
+</span><span class="c1">#&gt; source      : ESP_wc2.1_30s_prec.tif </span><span class="w">
+</span><span class="c1">#&gt; names       : ESP_w~rec_1, ESP_w~rec_2, ESP_w~rec_3, ESP_w~rec_4, ESP_w~rec_5, ESP_w~rec_6, ... </span><span class="w">
+</span><span class="c1">#&gt; min values  :           0,           1,           1,           0,           0,           0, ... </span><span class="w">
+</span><span class="c1">#&gt; max values  :         296,         255,         199,         166,         181,         140, ...</span><span class="w">
+</span></code></pre></div></div>
+<p>We have now a SpatRaster with 12 layers representing the value of each month. So
+we now just add the values by cell to get the annual average. Note that we also
+need to normalize the SpatRaster to the projection, extent and resolution of our
+<code class="language-plaintext highlighter-rouge">hill</code> object:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Sum all layers</span><span class="w">
+</span><span class="n">precip_avg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">precip</span><span class="p">)</span><span class="w">
+
+</span><span class="n">precip_avg</span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; dimensions  : 1980, 2760, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
+</span><span class="c1">#&gt; extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)</span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
+</span><span class="c1">#&gt; source(s)   : memory</span><span class="w">
+</span><span class="c1">#&gt; name        :  sum </span><span class="w">
+</span><span class="c1">#&gt; min value   :    8 </span><span class="w">
+</span><span class="c1">#&gt; max value   : 2055</span><span class="w">
+
+
+</span><span class="n">compare_spatrasters</span><span class="p">(</span><span class="n">precip_avg</span><span class="p">,</span><span class="w"> </span><span class="n">hill</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Align raster using hill</span><span class="w">
+
+</span><span class="n">precip_avg_mask</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_avg</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">project</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">crop</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mask</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Normalize</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"prec"</span><span class="w">
+
+</span><span class="n">compare_spatrasters</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">,</span><span class="w"> </span><span class="n">hill</span><span class="p">)</span><span class="w">
+
+</span><span class="n">autoplot</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
+<h3 id="creating-a-modified-palette">Creating a modified palette</h3>
+<p>We can now start representing our precipitation map. I chose here to create a
+custom palette with <code class="language-plaintext highlighter-rouge">colorspace</code>  to better highlight the differences:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sequential_hcl</span><span class="p">(</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">320</span><span class="p">,</span><span class="w"> </span><span class="m">80</span><span class="p">),</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+  </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">95</span><span class="p">),</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.3</span><span class="p">),</span><span class="w">
+  </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="plot of chunk 20221212_mypal" width="100%" /></p>
+<p>And now we can create the final map showing if <em>the rain in Spain stays mainly
+in the plain</em>:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Precipitation limits, rounded to 100</span><span class="w">
+</span><span class="n">prec_limits</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">as.vector</span><span class="p">(</span><span class="n">minmax</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">meteo_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precip_avg_mask</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Overlay the_plain</span><span class="w">
+  </span><span class="n">geom_spatvector</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r_plain</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># This part is theming only</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">prec_limits</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="m">250</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">guide_legend</span><span class="p">(</span><span class="w">
+    </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"horizontal"</span><span class="p">,</span><span class="w">
+    </span><span class="n">keyheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span><span class="p">,</span><span class="w">
+    </span><span class="n">keywidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+    </span><span class="n">title.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+    </span><span class="n">label.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
+    </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" mm."</span><span class="p">,</span><span class="w">
+    </span><span class="n">override.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.9</span><span class="p">)</span><span class="w">
+  </span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Average yearly precipitation of Spain"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The rain in Spain does not stay mainly in the plain"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
+      </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
+      </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
+    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">.7</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.spacing.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unit</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"pt"</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">meteo_plot</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
+<p>We can now check that the rain in Spain falls mainly in the Atlantic coast
+(North of Spain) and specifically in Galicia. That’s why in Spanish the lyrics
+<em>The rain in Spain stays mainly in the plain</em> were translated into:</p>
+<blockquote>
+ <p>La lluvia en Sevilla es una pura maravilla.</p>
+</blockquote>
+<p>That can be translated as <em>“The rain in Seville is a true marvel”</em>. And it is,
+indeed. Seville (located in the south on the <a href="https://goo.gl/maps/V8ZrDjrA74CTknYb7">Guadalquivir
+Valley</a> has circa 50 rainy days per year,
+featuring very hot and dry summers.</p>
+<h2 id="marginal-plots-finally">Marginal plots (finally)</h2>
+<p>We can now start profiling our final plot. The idea is to create two bar charts,
+representing the value to be plotted (in this case, average annual
+precipitation) by longitude and latitude.</p>
+<p>But first we add some additional margins and title axes to the main plot, so we
+can insert those marginal plots easily on our main plot:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Now we can add titles on the secondary axis</span><span class="w">
+
+</span><span class="n">plot_main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">meteo_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">xlab</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ylab</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># titles on secondary axis, for later</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">sec.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dup_axis</span><span class="p">(</span><span class="w">
+    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"avg. precipitation by longitude"</span><span class="w">
+  </span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">sec.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dup_axis</span><span class="p">(</span><span class="w">
+    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"avg. precipitation by latitude"</span><span class="w">
+  </span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">),</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
+      </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="w">
+        </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
+        </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w">
+      </span><span class="p">),</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.9</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot_main</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
+<h3 id="profiling-marginal-plots">Profiling marginal plots</h3>
+<p>On the following code, I am just drafting how the marginal plots would look
+like, so we can have a preview of the final result:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Profiling marginal plots</span><span class="w">
+
+</span><span class="c1"># Getting averages by x,y</span><span class="w">
+</span><span class="n">marg_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_avg_mask</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+
+</span><span class="n">marg_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_avg_mask</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1"># Cowplot would delete axis, we create an axis at 1000 and 2000</span><span class="w">
+</span><span class="n">br_4marginal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="m">2000</span><span class="p">)</span><span class="w">
+
+</span><span class="n">labs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">labs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="w">
+  </span><span class="n">prettyNum</span><span class="p">(</span><span class="n">br_4marginal</span><span class="p">,</span><span class="w"> </span><span class="n">big.mark</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" "</span><span class="p">),</span><span class="w">
+  </span><span class="s2">"mm."</span><span class="w">
+</span><span class="p">))</span><span class="w">
+
+</span><span class="n">labs</span><span class="o">$</span><span class="n">for_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">marg_x</span><span class="o">$</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">marg_x</span><span class="o">$</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.05</span><span class="w">
+</span><span class="n">labs</span><span class="o">$</span><span class="n">for_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">marg_y</span><span class="o">$</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="n">marg_y</span><span class="o">$</span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.05</span><span class="w">
+</span><span class="n">labs</span><span class="o">$</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">br_4marginal</span><span class="w">
+
+</span><span class="c1"># Profiling</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marg_x</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">avg</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
+    </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br_4marginal</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">br_4marginal</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">panel.grid.major.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_line</span><span class="p">(</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="w">
+  </span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marg_y</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">avg</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_y</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
+    </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
+    </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br_4marginal</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">br_4marginal</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.2</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">panel.grid.major.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_line</span><span class="p">(</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="w">
+  </span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<h3 id="putting-all-the-pieces-together">Putting all the pieces together</h3>
+<p>Finally, we would use <code class="language-plaintext highlighter-rouge">cowplot::axis_canvas()</code> to create the marginal plots as
+we want:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Last step: We combine plots</span><span class="w">
+
+</span><span class="c1"># Marginal plots</span><span class="w">
+</span><span class="n">plot_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marg_x</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">avg</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
+    </span><span class="c1"># Adjust the position of the labels</span><span class="w">
+    </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">,</span><span class="w">
+    </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(),</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br_4marginal</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">br_4marginal</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">panel.grid.major.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_line</span><span class="p">(</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="w">
+  </span><span class="p">))</span><span class="w">
+
+</span><span class="n">plot_x</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">plot_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="n">coord_flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marg_y</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">avg</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_y</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
+    </span><span class="c1"># Adjust the position of the labels</span><span class="w">
+    </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w">
+    </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">,</span><span class="w">
+    </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prec_limits</span><span class="p">,</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br_4marginal</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">br_4marginal</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">panel.grid.major.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_line</span><span class="p">(</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linetype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dashed"</span><span class="p">,</span><span class="w">
+    </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="w">
+  </span><span class="p">))</span><span class="w">
+</span><span class="n">plot_y</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p>And insert everything in the main plot. See the final result:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Combine all plots into one</span><span class="w">
+</span><span class="n">sizes_axis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grid</span><span class="o">::</span><span class="n">unit</span><span class="p">(</span><span class="m">.3</span><span class="p">,</span><span class="w"> </span><span class="s2">"null"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">insert_xaxis_grob</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">plot_x</span><span class="p">,</span><span class="w">
+  </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"top"</span><span class="p">,</span><span class="w">
+  </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sizes_axis</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">insert_yaxis_grob</span><span class="p">(</span><span class="n">plot_final</span><span class="p">,</span><span class="w"> </span><span class="n">plot_y</span><span class="p">,</span><span class="w">
+  </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sizes_axis</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.25</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">gg_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggdraw</span><span class="p">(</span><span class="n">plot_final</span><span class="p">)</span><span class="w">
+</span><span class="n">gg_final</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
+<p>And with a bit of effort we got it.</p>
+<h2 id="recap">Recap</h2>
+<p>Much of the code we have created relates with the theming and labels of the
+plot. Here you can find a simplified version:</p>
+<details>
+  <summary>Simplified version</summary>
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Libraries</span><span class="w">
+</span><span class="c1"># Data manipulation</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyterra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Get the data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">geodata</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plotting</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">colorspace</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Get the data</span><span class="w">
+</span><span class="n">mydir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"~/R/mapslib/misc"</span><span class="w">
+
+</span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">elevation_30s</span><span class="p">(</span><span class="s2">"ESP"</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rename</span><span class="p">(</span><span class="n">alt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">alt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pmax</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">alt</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Creating hillshade</span><span class="w">
+
+</span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"slope"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
+</span><span class="n">aspect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"aspect"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
+</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># normalize names</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"shades"</span><span class="w">
+
+</span><span class="c1"># Hillshading palette</span><span class="w">
+</span><span class="n">pal_greys</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="s2">"Grays"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Index of color by cell</span><span class="w">
+</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rescale</span><span class="p">(</span><span class="n">shades</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">pal_greys</span><span class="p">))))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">index_col</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">pull</span><span class="p">(</span><span class="n">index_col</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Get cols</span><span class="w">
+</span><span class="n">vector_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
+
+
+</span><span class="c1"># Base hill plot</span><span class="w">
+</span><span class="n">hill_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_cols</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Overlay</span><span class="w">
+</span><span class="n">precip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geodata</span><span class="o">::</span><span class="n">worldclim_country</span><span class="p">(</span><span class="s2">"ESP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"prec"</span><span class="p">,</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w">
+</span><span class="n">precip_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">precip</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">project</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">crop</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mask</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rename</span><span class="p">(</span><span class="n">prec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+
+</span><span class="n">p_range</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.vector</span><span class="p">(</span><span class="n">minmax</span><span class="p">(</span><span class="n">precip_end</span><span class="p">))</span><span class="w">
+
+</span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sequential_hcl</span><span class="p">(</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">320</span><span class="p">,</span><span class="w"> </span><span class="m">80</span><span class="p">),</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="m">65</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+  </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">95</span><span class="p">),</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">1.3</span><span class="p">),</span><span class="w">
+  </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">base_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precip_end</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.7</span><span class="p">),</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Marginal plots</span><span class="w">
+</span><span class="c1"># Data</span><span class="w">
+</span><span class="n">marg_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+
+</span><span class="n">marg_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Adding marginal plots</span><span class="w">
+
+</span><span class="n">plot_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">base_plot</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"x"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marg_x</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">avg</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w">
+
+</span><span class="n">plot_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">base_plot</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="n">coord_flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">marg_y</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">avg</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="w">
+    </span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="n">mypal</span><span class="p">,</span><span class="w"> </span><span class="m">0.9</span><span class="p">),</span><span class="w">
+    </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_flip</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># All pieces together</span><span class="w">
+</span><span class="n">sizes_axis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grid</span><span class="o">::</span><span class="n">unit</span><span class="p">(</span><span class="m">.3</span><span class="p">,</span><span class="w"> </span><span class="s2">"null"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot_final_simp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">insert_xaxis_grob</span><span class="p">(</span><span class="n">base_plot</span><span class="p">,</span><span class="w"> </span><span class="n">plot_x</span><span class="p">,</span><span class="w">
+  </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"top"</span><span class="p">,</span><span class="w">
+  </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sizes_axis</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot_final_simp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">insert_yaxis_grob</span><span class="p">(</span><span class="n">plot_final_simp</span><span class="p">,</span><span class="w"> </span><span class="n">plot_y</span><span class="p">,</span><span class="w">
+  </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sizes_axis</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.25</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">gg_final_simp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggdraw</span><span class="p">(</span><span class="n">plot_final_simp</span><span class="p">)</span><span class="w">
+</span><span class="n">gg_final_simp</span><span class="w">
+</span></code></pre></div></div>
+ <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.webp" alt="plot of chunk 20221212_simplified" width="100%" /></p>
+</details>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202210_tidyterra-hillshade/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Hillshade, colors and margi...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Hillshade, col...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Star Map with R</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Star Map with R</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202301_star-map-R/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggplot2</a>
+      <a href="https://dieghernan.github.io/tags#tidyterra" class="badge chulapa-pill-bg-primary p-category" rel="tag" >tidyterra</a>
+      <a href="https://dieghernan.github.io/tags#terra" class="badge chulapa-pill-bg-primary p-category" rel="tag" >terra</a>
+      <a href="https://dieghernan.github.io/tags#inset" class="badge chulapa-pill-bg-primary p-category" rel="tag" >inset</a>
+      <a href="https://dieghernan.github.io/tags#mapSpain" class="badge chulapa-pill-bg-primary p-category" rel="tag" >mapSpain</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202203_insetmaps/" class="chulapa-text-body-color">Insets with ggplot2 and tmap - and mapsf!</a></p>
+         <p class="card-text"><small>A map on a map</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-03-03T00:00:00+01:00">march 03, 2022</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">Introducing tidyterra</a></p>
+         <p class="card-text"><small>Easily work and ggplot SpatRasters</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-05-25T00:00:00+02:00">may 25, 2022</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202210_tidyterra-hillshade/" class="chulapa-text-body-color">Hillshade, colors and marginal plots with tidyterra (I)</a></p>
+         <p class="card-text"><small>How to overlay SpatRasters</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-10-17T00:00:00+02:00">october 17, 2022</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

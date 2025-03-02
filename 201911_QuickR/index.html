@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/201911_QuickR/"
+      },
+      "headline": "Quick R: Inset maps",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png",
+      "datePublished": "2019-11-07T00:00:00+01:00",
+      "dateModified": "2019-11-07T00:00:00+01:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Quick R: Inset maps"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Quick R: Inset maps",
+    "description": "An alternative using plot() - How to place an inset map in R? There are many solutions out there using the ggplot2 package (see Drawing beautiful maps programmatically with R, sf and ggplot2 by Mel Moreno and Mathieu Basille). However, I like the old reliable plot function, so the question is: is there another way?
+"
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Quick R: Inset maps | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/201911_QuickR/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="An alternative using plot() - How to place an inset map in R? There are many solutions out there using the ggplot2 package (see Drawing beautiful maps progra...">
+   <meta name="thumbnail" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Quick R: Inset maps | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/201911_QuickR/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="An alternative using plot() - How to place an inset map in R? There are many solutions out there using..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/201911_QuickR/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Quick R: Inset maps</h1><p class="lead chulapa-subtitle p-summary">An alternative using plot()</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Quick R: Inset maps</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2019-11-07T00:00:00+01:00" class="dt-published" >07 nov 2019</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/201911_QuickR/&text=Quick+R%3A+Inset+maps&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,flags,sf,inset,rnaturalearth" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Quick%20R:%20Inset%20maps%20https://dieghernan.github.io/201911_QuickR/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23flags%20%23sf%20%23inset%20%23rnaturalearth" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/201911_QuickR/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Quick+R%3A+Inset+maps%20https://dieghernan.github.io/201911_QuickR/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/201911_QuickR/&title=Quick+R%3A+Inset+maps" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Quick R: Inset maps</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required R packages</a></li><li class="nav-item nav d-block"><a href="#mimicking-moreno--basille" class="nav-link">Mimicking Moreno &amp; Basille</a></li><li class="nav-item nav d-block"><a href="#insetting" class="nav-link">Insetting</a></li></ul>
+		</nav>   
+	</div>
+			<p>How to place an inset map in <strong>R</strong>? There are many solutions out there using the <code class="language-plaintext highlighter-rouge">ggplot2</code> package (see <a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html">Drawing beautiful maps programmatically with <strong>R</strong>, <code class="language-plaintext highlighter-rouge">sf</code> and <code class="language-plaintext highlighter-rouge">ggplot2</code></a> by Mel Moreno and Mathieu Basille). However, I like the old reliable <code class="language-plaintext highlighter-rouge">plot</code> function, so the question is: is there another way?</p>
+<p>There is. I found inspiration <a href="https://www.statmethods.net/advgraphs/layout.html">here</a> and I just applied it to a map.</p>
+<h2 id="required-r-packages">Required R packages</h2>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="mimicking-moreno--basille">Mimicking Moreno &amp; Basille</h2>
+<p>I would present here an alternative version of <a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html">Drawing beautiful maps programmatically with R, sf and ggplot2</a>, so the bulk of the detail can be found there. I would focus only in the <code class="language-plaintext highlighter-rouge">plot()</code>side.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">world</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w">
+</span><span class="n">USA</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">world</span><span class="p">,</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plot mainland USA----</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="m">2163</span><span class="p">)),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2500000</span><span class="p">,</span><span class="w"> </span><span class="m">2500000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2300000</span><span class="p">,</span><span class="w"> </span><span class="m">730000</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">USA</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">2163</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_main-1.webp" alt="plot of chunk 20191108_main" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Alaska----</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3467</span><span class="p">)),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2400000</span><span class="p">,</span><span class="w"> </span><span class="m">1600000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">200000</span><span class="p">,</span><span class="w"> </span><span class="m">2500000</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">USA</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3467</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.webp" alt="plot of chunk 20191108_Alaska" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Hawaii----</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4135</span><span class="p">)),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-161</span><span class="p">,</span><span class="w"> </span><span class="m">-154</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="m">23</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">USA</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4135</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.webp" alt="plot of chunk 20191108_Hawaii" /></p>
+<h2 id="insetting">Insetting</h2>
+<p>From now on, I just focus on the inset part, using the <code class="language-plaintext highlighter-rouge">fig()</code> option on <code class="language-plaintext highlighter-rouge">par()</code>. Quoting <a href="https://www.statmethods.net/advgraphs/layout.html">statmethods</a>:</p>
+<blockquote>
+ <p><em>(…) think of the full graph area as going from <code class="language-plaintext highlighter-rouge">(0,0)</code> in the lower left corner to <code class="language-plaintext highlighter-rouge">(1,1)</code> in the upper right corner. The format of the <code class="language-plaintext highlighter-rouge">fig=</code> parameter is a numerical vector of the form <code class="language-plaintext highlighter-rouge">c(x1, x2, y1, y2)</code>(…)
+<code class="language-plaintext highlighter-rouge">fig=</code> starts a new plot, so to add to an existing plot use <code class="language-plaintext highlighter-rouge">new=TRUE</code>.</em></p>
+</blockquote>
+<p>So being <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">y1</code> the starting points and <code class="language-plaintext highlighter-rouge">x2</code>, <code class="language-plaintext highlighter-rouge">y2</code> the final points, we just can set up those parameters and adjust the final placement of the insets. Additionally I added a box around the insets using <code class="language-plaintext highlighter-rouge">bbox()</code>. I didn’t mimic Moreno &amp; Basille here and I just worked it by myself.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="m">2163</span><span class="p">)),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2500000</span><span class="p">,</span><span class="w"> </span><span class="m">2500000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2300000</span><span class="p">,</span><span class="w"> </span><span class="m">730000</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">USA</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">2163</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Alaska</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="w">
+  </span><span class="n">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="m">0.28</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="m">0.33</span><span class="p">),</span><span class="w">
+  </span><span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3467</span><span class="p">)),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-2400000</span><span class="p">,</span><span class="w"> </span><span class="m">1600000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">200000</span><span class="p">,</span><span class="w"> </span><span class="m">2500000</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">USA</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3467</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">box</span><span class="p">(</span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"figure"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Hawaii</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="w">
+  </span><span class="n">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.29</span><span class="p">,</span><span class="w"> </span><span class="m">0.45</span><span class="p">,</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="m">0.15</span><span class="p">),</span><span class="w">
+  </span><span class="n">new</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4135</span><span class="p">)),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-161</span><span class="p">,</span><span class="w"> </span><span class="m">-154</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="m">23</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">USA</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4135</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">box</span><span class="p">(</span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"figure"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.webp" alt="plot of chunk 20191108_inset" /></p>
+<p>Results may vary depending of the size of the original plot (Mainland USA) and your plotting device and output. However with a bit of trial-and-error it is quite easy to adjust the final result.</p>
+<p>As an example, see one of my contributions to <strong>Wikimedia Commons</strong> that represents a map of the NUTS3 regions of the European Union. Several countries (France, Portugal, Spain) have overseas territories so I made a few insets on the right side.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /></p>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/201910_WikiMap1/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Wikipedia Maps (I): Organ d...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Wikipedia Maps...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Beautiful Maps...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Beautiful Maps with R (III)...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/201912_Beautiful3/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#flags" class="badge chulapa-pill-bg-primary p-category" rel="tag" >flags</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category" rel="tag" >sf</a>
+      <a href="https://dieghernan.github.io/tags#inset" class="badge chulapa-pill-bg-primary p-category" rel="tag" >inset</a>
+      <a href="https://dieghernan.github.io/tags#rnaturalearth" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rnaturalearth</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">Using CountryCodes database and sf package</a></p>
+         <p class="card-text"><small>vignette of the CountryCodes project</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-04-27T00:00:00+02:00">april 27, 2019</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202203_insetmaps/" class="chulapa-text-body-color">Insets with ggplot2 and tmap - and mapsf!</a></p>
+         <p class="card-text"><small>A map on a map</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-03-03T00:00:00+01:00">march 03, 2022</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201905_Cast-to-subsegments/" class="chulapa-text-body-color">Cast a line to subsegments in R</a></p>
+         <p class="card-text"><small>User-defined function using sf package</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-05-05T00:00:00+02:00">may 05, 2019</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

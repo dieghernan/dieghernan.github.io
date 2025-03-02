@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/201905_Leaflet_R_Jekyll/"
+      },
+      "headline": "Leaflet, R, Markdown, Jekyll and GitHub",
+      "image": "https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp",
+      "datePublished": "2019-05-20T00:00:00+02:00",
+      "dateModified": "2021-05-30T00:00:00+02:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Leaflet, R, Markdown, Jekyll and GitHub"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Leaflet, R, Markdown, Jekyll and GitHub",
+    "description": "Make it work in 6 steps - a short tutorial - Recently I have been struggling when trying to embed a
+leaflet map created with
+RStudio on my blog, hosted in GitHub via
+Jekyll (Spoiler: I succeeded
+).
+In my case, I use the Chulapa
+remote theme created by myself.
+"
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Leaflet, R, Markdown, Jekyll and GitHub | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="Make it work in 6 steps - a short tutorial - Recently I have been struggling when trying to embed a
+leaflet map created with
+RStudio on my blog, hosted in Gi...">
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Leaflet, R, Markdown, Jekyll and GitHub | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="Make it work in 6 steps - a short tutorial - Recently I have been struggling when trying to embed..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+	<!-- Require Leaflet -->
+	<!-- Load leaflet for R-->
+<link href="https://dieghernan.github.io/assets/js/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="https://dieghernan.github.io/assets/js/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="https://dieghernan.github.io/assets/js/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="https://dieghernan.github.io/assets/js/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="https://dieghernan.github.io/assets/js/leaflet-1.3.1/leaflet.js"></script>
+<link href="https://dieghernan.github.io/assets/js/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="https://dieghernan.github.io/assets/js/proj4-2.6.2/proj4.min.js"></script>
+<script src="https://dieghernan.github.io/assets/js/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="https://dieghernan.github.io/assets/js/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="https://dieghernan.github.io/assets/js/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="https://dieghernan.github.io/assets/js/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="https://dieghernan.github.io/assets/js/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<link href="https://dieghernan.github.io/assets/js/leaflet-easybutton-1.3.1/easy-button.css" rel="stylesheet" />
+<script src="https://dieghernan.github.io/assets/js/leaflet-easybutton-1.3.1/easy-button.js"></script>
+<script src="https://dieghernan.github.io/assets/js/leaflet-easybutton-1.3.1/EasyButton-binding.js"></script>
+<link href="https://dieghernan.github.io/assets/js/fontawesome-4.7.0/font-awesome.min.css" rel="stylesheet" />
+<!-- leaflet.extras package / check https://github.com/bhaskarvk/leaflet.extras/tree/master/inst/htmlwidgets/build-->
+<!-- You may need to include new refs -->
+<!-- leaflet.extras package / heatmap -->
+<script src="https://dieghernan.github.io/assets/js/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
+<script src="https://dieghernan.github.io/assets/js/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
+	<!-- End Leaflet -->
+	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</h1><p class="lead chulapa-subtitle p-summary">Make it work in 6 steps - a short tutorial</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time class="dt-updated" datetime="2021-05-30T00:00:00+02:00">30 may 2021</time> 
+            <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
+            <br>
+            <span class="font-weight-light chulapa-text-line-through">20 may 2019</span>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/201905_Leaflet_R_Jekyll/&text=Leaflet%2C+R%2C+Markdown%2C+Jekyll+and+GitHub&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,leaflet,jekyll,html,maps" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Leaflet,%20R,%20Markdown,%20Jekyll%20and%20GitHub%20https://dieghernan.github.io/201905_Leaflet_R_Jekyll/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23leaflet%20%23jekyll%20%23html%20%23maps" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Leaflet%2C+R%2C+Markdown%2C+Jekyll+and+GitHub%20https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/201905_Leaflet_R_Jekyll/&title=Leaflet%2C+R%2C+Markdown%2C+Jekyll+and+GitHub" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#the-githubjekyll-part" class="nav-link">The GitHub/Jekyll part</a><ul><li class="nav-item nav d-block"><a href="#1-what-to-include" class="nav-link">1. What to include</a></li><li class="nav-item nav d-block"><a href="#2where-to-include" class="nav-link">2.Where to include</a></li></ul></li><li class="nav-item nav d-block"><a href="#the-rstudio-part" class="nav-link">The RStudio part</a><ul><li class="nav-item nav d-block"><a href="#3-creating-the-leaflet-map" class="nav-link">3. Creating the leaflet map</a></li><li class="nav-item nav d-block"><a href="#4-set-up-the-yaml-front-matter-" class="nav-link">4. Set up the YAML front matter <a name="step4"></a></a></li></ul></li><li class="nav-item nav d-block"><a href="#the-markdown-part" class="nav-link">The Markdown part</a><ul><li class="nav-item nav d-block"><a href="#5-modifying-the-md-file" class="nav-link"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></a></li><li class="nav-item nav d-block"><a href="#6-publish-your-post" class="nav-link">6. Publish your post</a></li></ul></li><li class="nav-item nav d-block"><a href="#gallery-size-of-a-leaflet-map-" class="nav-link">Gallery: Size of a leaflet map <a name="extra"></a></a><ul><li class="nav-item nav d-block"><a href="#fixed-size" class="nav-link">Fixed size</a></li><li class="nav-item nav d-block"><a href="#responsive-size" class="nav-link">Responsive size</a></li></ul></li></ul>
+		</nav>   
+	</div>
+			<p>Recently I have been struggling when trying to embed a
+<a href="https://rstudio.github.io/leaflet">leaflet</a> map created with
+<strong>RStudio</strong> on my blog, hosted in GitHub via
+<a href="https://jekyllrb.com">Jekyll</a> (<strong>Spoiler</strong>: <a href="https://dieghernan.github.io/201905_Where-in-the-world/">I succeeded
+<i class="fa fa-thumbs-up"></i></a>).
+In my case, I use the <a href="https://dieghernan.github.io/chulapa/"><span class="chulapa">Chulapa</span></a>
+remote theme created by myself.</p>
+<p><strong>Index</strong></p>
+<ol id="markdown-toc">
+ <li><a href="#the-githubjekyll-part" id="markdown-toc-the-githubjekyll-part">The GitHub/Jekyll part</a>   <ol>
+     <li><a href="#1-what-to-include" id="markdown-toc-1-what-to-include">1. What to include</a></li>
+     <li><a href="#2where-to-include" id="markdown-toc-2where-to-include">2.Where to include</a></li>
+   </ol>
+ </li>
+ <li><a href="#the-rstudio-part" id="markdown-toc-the-rstudio-part">The RStudio part</a>   <ol>
+     <li><a href="#3-creating-the-leaflet-map" id="markdown-toc-3-creating-the-leaflet-map">3. Creating the leaflet map</a></li>
+     <li><a href="#4-set-up-the-yaml-front-matter-" id="markdown-toc-4-set-up-the-yaml-front-matter-">4. Set up the YAML front matter <a name="step4"></a></a></li>
+   </ol>
+ </li>
+ <li><a href="#the-markdown-part" id="markdown-toc-the-markdown-part">The Markdown part</a>   <ol>
+     <li><a href="#5-modifying-the-md-file" id="markdown-toc-5-modifying-the-md-file"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></a></li>
+     <li><a href="#6-publish-your-post" id="markdown-toc-6-publish-your-post">6. Publish your post</a></li>
+   </ol>
+ </li>
+ <li><a href="#gallery-size-of-a-leaflet-map-" id="markdown-toc-gallery-size-of-a-leaflet-map-">Gallery: Size of a leaflet map <a name="extra"></a></a>   <ol>
+     <li><a href="#fixed-size" id="markdown-toc-fixed-size">Fixed size</a>       <ol>
+         <li><a href="#example-1-672x480px" id="markdown-toc-example-1-672x480px">Example 1: 672x480px</a></li>
+         <li><a href="#example-2-200x300px" id="markdown-toc-example-2-200x300px">Example 2: 200x300px</a></li>
+       </ol>
+     </li>
+     <li><a href="#responsive-size" id="markdown-toc-responsive-size">Responsive size</a>       <ol>
+         <li><a href="#example-3-100-width" id="markdown-toc-example-3-100-width">Example 3: 100% width</a></li>
+       </ol>
+     </li>
+   </ol>
+ </li>
+</ol>
+<p>Ready? Let’s go!</p>
+<h3 id="the-githubjekyll-part">The GitHub/Jekyll part</h3>
+<p>The first step is to install the requested libraries in your GitHub
+page. As Jekyll basically transforms <code class="language-plaintext highlighter-rouge">markdown</code> into <code class="language-plaintext highlighter-rouge">html</code>, this step
+is a matter of <strong>what to include</strong> and <strong>where</strong> in your own repository.</p>
+<h4 id="1-what-to-include">1. What to include</h4>
+<p>This part is not really hard. When having a look to the source code of
+<a href="https://rstudio.github.io/leaflet/">Leaflet for R</a> site it can be seen
+this chunk:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
+  <span class="c">&lt;!--code--&gt;</span>
+  
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/jquery/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"libs/bootstrap/css/flatly.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/bootstrap/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/bootstrap/shim/html5shiv.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  
+  ...
+  <span class="c">&lt;!--more libraries--&gt;</span>
+  ...
+  
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"libs/rstudio_leaflet/rstudio_leaflet.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/leaflet-binding/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  
+  <span class="c">&lt;!--code--&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+</code></pre></div></div>
+<p>So now we have it! The only thing to remember is that we need <strong>to load
+the libraries from the leaflet server
+(<code class="language-plaintext highlighter-rouge">https://rstudio.github.io/leaflet</code>)</strong>, meaning that we have to prepend
+that url to the libraries in our installation:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://rstudio.github.io/leaflet/libs/bootstrap/css/flatly.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
+  
+  ...
+  <span class="c">&lt;!--more libraries--&gt;</span>
+  ...
+  
+  <span class="nt">&lt;link</span>     <span class="na">href=</span><span class="s">"https://rstudio.github.io/leaflet/libs/rstudio_leaflet/rstudio_leaflet.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src= </span><span class="s">"https://rstudio.github.io/leaflet/libs/leaflet-binding/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+<p>You can have a look of my implementation on
+<a href="https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/leaflet.html"><code class="language-plaintext highlighter-rouge">./_includes/leaflet.html</code></a>.</p>
+<h4 id="2where-to-include">2.Where to include</h4>
+<p>This a little bit more complicated, depending on the structure of your
+Jekyll template. The code chunk should be included in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>
+section of your page, so you would need to find where to put it. In the
+case of <span class="chulapa">Chulapa</span> it is on
+<a href="https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/custom/custom_head_before_css.html"><code class="language-plaintext highlighter-rouge">./_includes/custom/custom_head_before_css.html</code></a>.</p>
+<p>So now you just have to paste in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> the code that you got on
+step 1.</p>
+<p class="alert alert-info p-3 mx-2 mb-3"><i class="fa fa-star"></i> <strong>Pro tip:</strong> For a better performance of the
+site, include these libraries only when you need it. In my case, I added
+a custom variable in my YAML front matter for those posts with a leaflet
+map, <code class="language-plaintext highlighter-rouge">leafletmap: true</code>. Go to step 4 for a working example.</p>
+<h3 id="the-rstudio-part">The RStudio part</h3>
+<h4 id="3-creating-the-leaflet-map">3. Creating the leaflet map</h4>
+<p>Now it’s time to create a leaflet map with <strong>RStudio</strong>. I just keep it
+simple for this post, so I took the first example provided in <a href="https://rstudio.github.io/leaflet/">Leaflet
+for R - Introduction</a></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">leaflet</span><span class="p">)</span><span class="w">
+
+</span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">leaflet</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">addTiles</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">  </span><span class="c1"># Add default OpenStreetMap map tiles</span><span class="w">
+  </span><span class="n">addMarkers</span><span class="p">(</span><span class="n">lng</span><span class="o">=</span><span class="m">174.768</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">=</span><span class="m">-36.852</span><span class="p">,</span><span class="w"> </span><span class="n">popup</span><span class="o">=</span><span class="s2">"The birthplace of R"</span><span class="p">)</span><span class="w">
+</span><span class="n">m</span><span class="w">  </span><span class="c1"># Print the map</span><span class="w">
+</span></code></pre></div></div>
+<p>It is assumed that you are <a href="https://rmarkdown.rstudio.com/authoring_quick_tour.html#rendering_output">creating a post with
+<strong>RStudio</strong></a>,
+so the code presented above should be embedded in an <code class="language-plaintext highlighter-rouge">.Rmd</code> file.</p>
+<h4 id="4-set-up-the-yaml-front-matter-">4. Set up the YAML front matter <a name="step4"></a></h4>
+<p>Before knitting your <code class="language-plaintext highlighter-rouge">.Rmd</code>, you have to set up the <a href="https://bookdown.org/yihui/rmarkdown/markdown-document.html">YAML front
+matter</a>.
+Here it is <strong>essential</strong> to set up the option <code class="language-plaintext highlighter-rouge">always_allow_html: yes</code>,
+as well as <code class="language-plaintext highlighter-rouge">output: github_document</code>. As an example, this post was
+created with the front matter:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Leaflet, &lt;strong&gt;R&lt;/strong&gt;, Markdown, Jekyll and GitHub</span>
+<span class="na">subtitle</span><span class="pi">:</span> <span class="s">Make it work in 6 steps - a short tutorial</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">R</span><span class="pi">,</span><span class="nv">leaflet</span><span class="pi">,</span><span class="nv">Jekyll</span><span class="pi">,</span> <span class="nv">html</span><span class="pi">,</span> <span class="nv">maps</span><span class="pi">]</span>
+<span class="na">header_img</span><span class="pi">:</span> <span class="s">https://dieghernan.github.io/assets/figs/20190520_imgpost.webp</span>
+<span class="na">leafletmap</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="na">always_allow_html</span><span class="pi">:</span> <span class="s">yes</span>
+<span class="na">last_modified_at</span><span class="pi">:</span> <span class="s">2021-05-30</span>
+<span class="na">output</span><span class="pi">:</span> 
+  <span class="na">md_document</span><span class="pi">:</span>
+    <span class="na">variant</span><span class="pi">:</span> <span class="s">gfm</span>
+    <span class="na">preserve_yaml</span><span class="pi">:</span> <span class="kc">true</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+<p>We are almost there! Now “Knit” your code and get the corresponding
+<code class="language-plaintext highlighter-rouge">.md</code>file.</p>
+<h3 id="the-markdown-part">The Markdown part</h3>
+<h4 id="5-modifying-the-md-file"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></h4>
+<p><strong>Update: This is not needed any more! I still leave it here for info.
+You can skip to the next section.</strong></p>
+<p>Have a look to the <code class="language-plaintext highlighter-rouge">.md</code> code that you have just created. Although not
+displayed in the preview, you can see in the file itself a chunk that
+looks like this:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/json"</span><span class="na">data-for=</span><span class="s">"7ab57412f7b1df4d5773"</span><span class="nt">&gt;</span>
+    <span class="p">{</span><span class="dl">"</span><span class="s2">x</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">options</span><span class="dl">"</span><span class="p">:</span>
+      <span class="p">...</span>
+      <span class="dl">"</span><span class="s2">jsHooks</span><span class="dl">"</span><span class="p">:[]}</span>
+  <span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+<p>Actually that chunk is your leaflet map, created with <strong>RStudio</strong>. You
+can’t see it now because you are previewing a <code class="language-plaintext highlighter-rouge">markdown</code> file in your
+local PC, and the libraries installed in step 1 are installed on GitHub,
+but we would solve it later.</p>
+<p>Now you just need to paste this piece of code before that chunk:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--html_preserve--&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"htmlwidget-7ab57412f7b1df4d5773"</span> <span class="na">style=</span><span class="s">"width:100%;height:216px;"</span> <span class="na">class=</span><span class="s">"leaflet html-widget"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/json"</span><span class="na">data-for=</span><span class="s">"htmlwidget-7ab57412f7b1df4d5773"</span><span class="nt">&gt;</span>
+  <span class="p">...</span>
+</code></pre></div></div>
+<p class="alert alert-warning p-3 mx-2 my-3"><i class="fa fa-exclamation-triangle"></i> <strong>Warning:</strong> Be sure that the
+widget id (<code class="language-plaintext highlighter-rouge">7ab57412f7b1df4d5773</code> in the example) is the same in the
+<code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> and in the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> part. If not your map would not load.</p>
+<p>The <code class="language-plaintext highlighter-rouge">style="width:100%; height:216px;</code> part controls the actual size of
+the leaflet widget. In this case, the map would adapt to the width of
+the page with a fixed height of 216px. I put <a href="#extra">some examples</a> at
+the end of the post of different size options so you can have a look and
+see which one is more suitable for your needs.</p>
+<h4 id="6-publish-your-post">6. Publish your post</h4>
+<p>Now you just have to publish your post as usual!! If everything has been
+properly set, when Jekyll builds your post it would include the
+libraries in the header and make the magic happens, just like this:</p>
+<div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
+<p class="alert alert-warning p-3 mx-2 my-3"><i class="fa fa-exclamation-triangle"></i> <strong>Warning:</strong> Have you checked
+the YAML front matter of your <code class="language-plaintext highlighter-rouge">.md</code> file? Have another look, specially
+if you have followed my Pro tip.</p>
+<h3 id="gallery-size-of-a-leaflet-map-">Gallery: Size of a leaflet map <a name="extra"></a></h3>
+<p><strong>A note:</strong> For a complete understanding of this section it is
+recommended to access it on multiple devices, so you can see the
+different behavior on different screens. Google Chrome allows you to
+simulate different devices <a href="https://developers.google.com/web/tools/chrome-devtools/device-mode/">(more info
+here)</a>.</p>
+<h4 id="fixed-size">Fixed size</h4>
+<p>With these examples you can see how to control the absolute size of the
+leaflet map. The disadvantage of this method is that the size would be
+fixed for all the devices, so maps sized for smartphones or tables
+wouldn’t look as nice in laptops, etc. and vice versa.</p>
+<h5 id="example-1-672x480px">Example 1: 672x480px</h5>
+<p>Fixed size in pixels. By default in my machine:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">leaflet</span><span class="p">(</span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leafletOptions</span><span class="p">(</span><span class="n">minZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">maxZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">addTiles</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">setMaxBounds</span><span class="p">(</span><span class="m">-200</span><span class="p">,</span><span class="w"> </span><span class="m">-90</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">setView</span><span class="p">(</span><span class="m">-3.56948</span><span class="p">,</span><span class="w"> </span><span class="m">40.49181</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<div id="htmlwidget-0e60ff221279290607a4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0e60ff221279290607a4">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
+<h5 id="example-2-200x300px">Example 2: 200x300px</h5>
+<p>Let’s go narrow and long with <code class="language-plaintext highlighter-rouge">html "width:200px;height:300px;"</code>:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">leaflet</span><span class="p">(</span><span class="w">
+  </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leafletOptions</span><span class="p">(</span><span class="n">minZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">maxZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">),</span><span class="w">
+  </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"200px"</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"300px"</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">addTiles</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">setMaxBounds</span><span class="p">(</span><span class="m">-200</span><span class="p">,</span><span class="w"> </span><span class="m">-90</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">setView</span><span class="p">(</span><span class="m">-3.56948</span><span class="p">,</span><span class="w"> </span><span class="m">40.49181</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<div id="htmlwidget-fb456eae6cf883f81850" style="width:200px;height:300px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fb456eae6cf883f81850">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
+<h4 id="responsive-size">Responsive size</h4>
+<p><strong>Recommended option.</strong> These maps would adapt to the width of your
+screen, no matter what device you are using.</p>
+<h5 id="example-3-100-width">Example 3: 100% width</h5>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">leaflet</span><span class="p">(</span><span class="w">
+  </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leafletOptions</span><span class="p">(</span><span class="n">minZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">,</span><span class="w"> </span><span class="n">maxZoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">),</span><span class="w">
+  </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"100%"</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">addTiles</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">setMaxBounds</span><span class="p">(</span><span class="m">-200</span><span class="p">,</span><span class="w"> </span><span class="m">-90</span><span class="p">,</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">setView</span><span class="p">(</span><span class="m">-3.56948</span><span class="p">,</span><span class="w"> </span><span class="m">40.49181</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<div id="htmlwidget-d72518ef7cb92abb839a" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d72518ef7cb92abb839a">{"x":{"options":{"minZoom":1.25,"maxZoom":8,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"setMaxBounds","args":[-90,-200,90,200]}],"setView":[[40.49181,-3.56948],3,[]]},"evals":[],"jsHooks":[]}</script>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/201905_Where-in-the-world/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Where in the world?</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Where in the w...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Beautiful Maps...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Beautiful Maps with R (I): ...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/201906_Beautiful1/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#leaflet" class="badge chulapa-pill-bg-primary p-category" rel="tag" >leaflet</a>
+      <a href="https://dieghernan.github.io/tags#jekyll" class="badge chulapa-pill-bg-primary p-category" rel="tag" >jekyll</a>
+      <a href="https://dieghernan.github.io/tags#html" class="badge chulapa-pill-bg-primary p-category" rel="tag" >html</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">Using CountryCodes database and sf package</a></p>
+         <p class="card-text"><small>vignette of the CountryCodes project</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-04-27T00:00:00+02:00">april 27, 2019</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful1/" class="chulapa-text-body-color">Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels</a></p>
+         <p class="card-text"><small>Awesome simplified maps with R</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-02T00:00:00+02:00">june 02, 2019</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201906_Beautiful2/" class="chulapa-text-body-color">Beautiful Maps with R (II): Fun with flags</a></p>
+         <p class="card-text"><small>Put a picture on your map</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-06-18T00:00:00+02:00">june 18, 2019</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

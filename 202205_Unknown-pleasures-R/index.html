@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202205_Unknown-pleasures-R/"
+      },
+      "headline": "Unknown pleasures with R",
+      "image": "https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp",
+      "datePublished": "2022-05-01T00:00:00+02:00",
+      "dateModified": "2022-05-01T00:00:00+02:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Unknown pleasures with R"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Unknown pleasures with R",
+    "description": "Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using  elevation data with R, sf, terra and ggridges."
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Unknown pleasures with R | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/202205_Unknown-pleasures-R/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using  elevation data with R, sf, terra and ggridges.">
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Unknown pleasures with R | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/202205_Unknown-pleasures-R/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using elevation data with R, sf,..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202205_Unknown-pleasures-R/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Unknown pleasures with R</h1><p class="lead chulapa-subtitle p-summary">Joyplot elevation maps with ggridges and terra</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Unknown pleasures with R</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2022-05-01T00:00:00+02:00" class="dt-published" >01 may 2022</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202205_Unknown-pleasures-R/&text=Unknown+pleasures+with+R&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,ggridges,terra,giscoR" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Unknown%20pleasures%20with%20R%20https://dieghernan.github.io/202205_Unknown-pleasures-R/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23ggridges%20%23terra%20%23giscoR" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202205_Unknown-pleasures-R/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Unknown+pleasures+with+R%20https://dieghernan.github.io/202205_Unknown-pleasures-R/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202205_Unknown-pleasures-R/&title=Unknown+pleasures+with+R" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Unknown pleasures with R</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#creating-joyplot-maps-with-r" class="nav-link">Creating joyplot maps with <strong>R</strong></a></li><li class="nav-item nav d-block"><a href="#variations" class="nav-link">Variations</a><ul><li class="nav-item nav d-block"><a href="#using-geom_density_ridges" class="nav-link">Using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code></a></li><li class="nav-item nav d-block"><a href="#land-only" class="nav-link">Land only</a></li><li class="nav-item nav d-block"><a href="#with-colors" class="nav-link">With colors</a></li><li class="nav-item nav d-block"><a href="#combine-with-another-objects" class="nav-link">Combine with another objects</a></li></ul></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+		</nav>   
+	</div>
+			<p>On 1970, Harold D. Craft Jr. published his Ph.D thesis <em>“Radio observations of
+the pulse profiles and dispersion measures of twelve pulsars”.</em> The thesis (337
+pages) includes on pages 214 to 216 the following depictions of successive
+pulses of some pulsars:</p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp" alt="Craft
+Pulsars" /></p>
+<p class="caption">From “Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
+Pulsars” by Harold D. Craft, Jr. (September 1970). Original source:
+<a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/</a></p>
+<p>Nine years later, a young graphic designer named Peter Saville had a new
+project. He had to design the cover of the debut album of a young British rock
+band, named Joy Division. At some point of the process Bernand Summer (lead
+guitar of Joy Division)<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, found the following image on <em>The Cambridge
+Encyclopaedia of Astronomy</em> (1977 edition):</p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Cambridge: CP 1919 Pulsar
+Image" /></p>
+<p>Saville presented a black and white version, producing a cover that reaches an
+iconic status in the ’80s. This cover has been reproduced in the form of
+tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Joy Division - Unknown pleasure
+cover" /></p>
+<p>If you are interested on knowing more about this fascinating history of science
+and design you can find it on <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">Pop Culture Pulsar: Origin Story of Joy
+Division’s Unknown Pleasures Album
+Cover</a>
+by <a href="https://www.scientificamerican.com/author/jen-christiansen/">Jen
+Christiansen</a>.</p>
+<p>Since then, this kind of plots have become very popular, being known as <strong>ridge
+plots</strong> or <strong>joyplots</strong>, in honor of Joy Division. On this post, I would produce
+“joyplots” with R for specific regions of the world using the elevation data for
+creating the ridges.</p>
+<h2 id="creating-joyplot-maps-with-r">Creating joyplot maps with <strong>R</strong></h2>
+<p>This topic has already been covered by other authors, as <a href="https://danielredondo.com/blog/2020-01-25-joy_division/">Daniel
+Redondo</a> (Spanish) and
+<a href="https://cartographicperspectives.org/index.php/journal/article/view/1536/1726">Travis M.
+White</a>.
+However, they both use QGIS, while on this post I would work completely on
+<strong>R</strong>.</p>
+<p>Some initial considerations we may need to bear in mind:</p>
+<ul>
+ <li>
+   <p>On this post I will use <code class="language-plaintext highlighter-rouge">geom_ridgline()</code> instead of
+<code class="language-plaintext highlighter-rouge">geom_density_ridges()</code>. This would provide us with more control on the
+final plot, but it has a point of attention: <strong>both the coordinates and the
+elevation should be in the same unit</strong> (<a href="https://wilkelab.org/ggridges/reference/geom_ridgeline.html">See
+why</a> ).
+Therefore we should project both the raster and the base <code class="language-plaintext highlighter-rouge">sf</code> object on a
+suitable CRS defined in meters (in this case).</p>
+ </li>
+ <li>
+   <p>Joyplots are much cooler when only a few lines are displayed. This is
+directly related with the number of rows of our raster. A very detailed
+raster (e.g. lots of rows) would produce a much detailed plot but it may not
+suit our needs.</p>
+ </li>
+</ul>
+<p>Now, let’s start with the required libraries:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Libraries</span><span class="w">
+
+</span><span class="c1"># Spatial</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w"> </span><span class="c1"># Shapes</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">elevatr</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Data viz and wrangling</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggridges</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>The first step consists on selecting our region of interest (<code class="language-plaintext highlighter-rouge">sf</code> object) and
+extracting the elevation data. We can achieve that with <code class="language-plaintext highlighter-rouge">giscoR</code> and <code class="language-plaintext highlighter-rouge">elevatr</code>.
+In this post I would create a joyplot of
+<a href="https://en.wikipedia.org/wiki/Andalusia">Andalusia</a>. Note that, given we are
+creating just a visualization, the resolution of the sf object is not very
+relevant.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Select a Spanish Region: Andalucia</span><span class="w">
+</span><span class="n">region</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_nuts</span><span class="p">(</span><span class="n">nuts_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ES61"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># And project data</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="m">25830</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Now we need to extract the elevation using <code class="language-plaintext highlighter-rouge">elevatr</code>. We can also adjust the
+zoom level as needed. You can find a good guidance on the zoom levels on the
+<a href="https://wiki.openstreetmap.org/wiki/Zoom_levels">OpenStreetMaps wiki</a>.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">dem</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_elev_raster</span><span class="p">(</span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">clip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bbox"</span><span class="p">,</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># And convert to terra</span><span class="w">
+  </span><span class="n">rast</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># Mask to the shape</span><span class="w">
+  </span><span class="n">mask</span><span class="p">(</span><span class="n">vect</span><span class="p">(</span><span class="n">region</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># Rename layer for further manipulation</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"elev"</span><span class="w">
+
+</span><span class="n">nrow</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] 698</span><span class="w">
+
+</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
+<p>We already have our elevation raster. Now the next step is to adjust the number
+of rows of our raster to a lower number. We can then aggregate the raster (i.e.
+reduce the number of cells or increasing the size of the cells) using a scaling
+factor that would reduce the number of rows to our desired target (in this case
+90 rows):</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Approx</span><span class="w">
+</span><span class="n">factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">90</span><span class="p">)</span><span class="w">
+
+</span><span class="n">dem_agg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">aggregate</span><span class="p">(</span><span class="n">dem</span><span class="p">,</span><span class="w"> </span><span class="n">factor</span><span class="p">)</span><span class="w">
+
+</span><span class="n">nrow</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] 88</span><span class="w">
+
+</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
+<p>We can check how the number of rows have decreased. Also, the plot shows that we
+have now less cells.</p>
+<p>Now, we may need to perform additional manipulations on the values of the
+raster:</p>
+<ul>
+ <li>
+   <p>We need to ensure that all the valid values are equal or greater than zero.</p>
+ </li>
+ <li>
+   <p>We would replace the <code class="language-plaintext highlighter-rouge">NAs</code> produced when masking the raster to zero. We
+would use this later to decide whether to remove or not some parts of the
+plot.</p>
+ </li>
+</ul>
+<p>After that, we would create a data frame with the information needed for
+creating the joyplot.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">dem_agg</span><span class="p">[</span><span class="n">dem_agg</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="n">dem_agg</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+
+</span><span class="n">dem_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">,</span><span class="w"> </span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">as_tibble</span><span class="p">(</span><span class="n">dem_df</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; # A tibble: 12,848 x 3</span><span class="w">
+</span><span class="c1">#&gt;          x        y  elev</span><span class="w">
+</span><span class="c1">#&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">#&gt;  1  77184. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  2  81049. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  3  84914. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  4  88779. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  5  92644. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  6  96510. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  7 100375. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  8 104240. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt;  9 108105. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt; 10 111970. 4306315.     0</span><span class="w">
+</span><span class="c1">#&gt; # ... with 12,838 more rows</span><span class="w">
+</span></code></pre></div></div>
+<p>Now is a good moment to adjust the units of the coordinates and the elevation if
+needed. In this case both are in meters, but I would show you how to perform
+those adjustment with the <code class="language-plaintext highlighter-rouge">units</code> package:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Units of DEM projection</span><span class="w">
+</span><span class="n">units_crs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="o">$</span><span class="n">units</span><span class="w">
+
+</span><span class="n">units_crs</span><span class="w">
+</span><span class="c1">#&gt; [1] "m"</span><span class="w">
+
+</span><span class="c1"># Example, convert to miles</span><span class="w">
+</span><span class="c1"># Adjust as needed</span><span class="w">
+
+</span><span class="n">dem_miles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dem_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="w">
+    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_units</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">),</span><span class="w">
+    </span><span class="n">x_mile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_units</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s2">"mi"</span><span class="p">),</span><span class="w">
+    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_units</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">),</span><span class="w">
+    </span><span class="n">y_mile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_units</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="s2">"mi"</span><span class="p">),</span><span class="w">
+    </span><span class="n">elev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_units</span><span class="p">(</span><span class="n">elev</span><span class="p">,</span><span class="w"> </span><span class="s2">"m"</span><span class="p">),</span><span class="w">
+    </span><span class="n">elev_mile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">set_units</span><span class="p">(</span><span class="n">elev</span><span class="p">,</span><span class="w"> </span><span class="s2">"mi"</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">as_tibble</span><span class="p">(</span><span class="n">dem_miles</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; # A tibble: 12,848 x 6</span><span class="w">
+</span><span class="c1">#&gt;          x        y elev x_mile y_mile elev_mile</span><span class="w">
+</span><span class="c1">#&gt;        [m]      [m]  [m]   [mi]   [mi]      [mi]</span><span class="w">
+</span><span class="c1">#&gt;  1  77184. 4306315.    0   48.0  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  2  81049. 4306315.    0   50.4  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  3  84914. 4306315.    0   52.8  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  4  88779. 4306315.    0   55.2  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  5  92644. 4306315.    0   57.6  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  6  96510. 4306315.    0   60.0  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  7 100375. 4306315.    0   62.4  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  8 104240. 4306315.    0   64.8  2676.         0</span><span class="w">
+</span><span class="c1">#&gt;  9 108105. 4306315.    0   67.2  2676.         0</span><span class="w">
+</span><span class="c1">#&gt; 10 111970. 4306315.    0   69.6  2676.         0</span><span class="w">
+</span><span class="c1">#&gt; # ... with 12,838 more rows</span><span class="w">
+</span></code></pre></div></div>
+<p>Finally, we can create our joyplot. Note that we can “train” the scales of our
+<code class="language-plaintext highlighter-rouge">ggplot</code> to an spatial object automatically if we pass our <code class="language-plaintext highlighter-rouge">region</code> object into
+the plot. The relative height of the ridges is controlled via the <code class="language-plaintext highlighter-rouge">scale</code>
+parameter:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Just for the scales, pass with NA arguments so it is not shown</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_ridges</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
+<p>The last step is to provide a black theme, resembling the cover of the album:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.25</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
+<h2 id="variations">Variations</h2>
+<p>We can produce some variations of the same map using several parameters and
+other artifacts.</p>
+<h3 id="using-geom_density_ridges">Using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code></h3>
+<p>We can use <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code> with <code class="language-plaintext highlighter-rouge">stat="identity"</code> instead of
+<code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> for creating a similar map:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_density_ridges</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"identity"</span><span class="p">,</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.25</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
+<h3 id="land-only">Land only</h3>
+<p>If we use <code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> it is quite easy to remove some parts of the lines,
+as the parameter <code class="language-plaintext highlighter-rouge">min_height</code> allow us to control the minimum height to be
+plotted. I found this much more difficult when using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code>,
+where the equivalent parameter <code class="language-plaintext highlighter-rouge">rel_min_height</code> is relative to the overall
+maximum height.</p>
+<p>This is the main reason why we replaced the <code class="language-plaintext highlighter-rouge">NA</code> values with zeros, so those
+parts of the string can be easily removed.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.25</span><span class="p">,</span><span class="w">
+    </span><span class="n">min_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
+<h3 id="with-colors">With colors</h3>
+<p>We can apply different colors to the plot. Note that <code class="language-plaintext highlighter-rouge">ggridges</code> only accepts
+different <code class="language-plaintext highlighter-rouge">aes</code> by row, and not by column:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Classify on three different bands</span><span class="w">
+
+</span><span class="n">dem_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dem_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cut_number</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">))</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="p">,</span><span class="w">
+      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">class</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.5</span><span class="p">,</span><span class="w">
+    </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpha</span><span class="p">(</span><span class="w">
+    </span><span class="nf">c</span><span class="p">(</span><span class="w">
+      </span><span class="s2">"#007A33"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"#007A33"</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="m">.95</span><span class="w">
+  </span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
+<h3 id="combine-with-another-objects">Combine with another objects</h3>
+<p>Like using a <code class="language-plaintext highlighter-rouge">sf</code> object:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">highres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_nuts</span><span class="p">(</span><span class="w">
+  </span><span class="n">nuts_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ES61"</span><span class="p">,</span><span class="w">
+  </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># And project data</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="m">25830</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_buffer</span><span class="p">(</span><span class="m">-5000</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">highres</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#007A33"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.95</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.25</span><span class="p">,</span><span class="w">
+    </span><span class="n">min_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
+<p>Or maybe adding a frame to the plot</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">frame</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.polygons</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">,</span><span class="w"> </span><span class="n">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">frame</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dem_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w">
+      </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">elev</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.25</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
+<h2 id="references">References</h2>
+<p>Craft Jr, H. D. (1970). <em>Radio observations of the pulse profiles and dispersion
+measures of twelve pulsars.</em> Cornell University.</p>
+<p>Mitton, Simon (1977). <em>The Cambridge encyclopaedia of astronomy.</em> Prentice-Hall
+of Canada.</p>
+<p>Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures`’ image
+went from underground album cover to a piece of cultural ubiquity” <em>The
+Washington Post</em>. <a href="https://wapo.st/3K6Chsc">https://wapo.st/3K6Chsc</a></p>
+<p>White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division’s
+Unknown Pleasures Album Art. <em>Cartographic Perspectives</em>, (92), 65–78.
+<a href="https://doi.org/10.14714/CP92.1536">https://doi.org/10.14714/CP92.1536</a></p>
+<p>Redondo, Daniel (2020, January 25). “Mapas estilo Joy Division con QGIS y R.”
+<a href="https://danielredondo.com/blog/2020-01-25-joy_division/">https://danielredondo.com/blog/2020-01-25-joy_division/</a></p>
+<div class="footnotes" role="doc-endnotes">
+ <ol>
+   <li id="fn:1">
+     <p>Other versions of the story credit drummer Stephen Morris for finding it. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+   </li>
+ </ol>
+</div>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202203_Corona-timelapse/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Corona timelapse</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Corona timelapse</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Introducing ti...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Introducing tidyterra</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202205_tidyterra/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggplot2</a>
+      <a href="https://dieghernan.github.io/tags#ggridges" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggridges</a>
+      <a href="https://dieghernan.github.io/tags#terra" class="badge chulapa-pill-bg-primary p-category" rel="tag" >terra</a>
+      <a href="https://dieghernan.github.io/tags#giscoR" class="badge chulapa-pill-bg-primary p-category" rel="tag" >giscoR</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202312_bertin_dots/" class="chulapa-text-body-color">Beautiful Maps with R (V): Point densities</a></p>
+         <p class="card-text"><small>Bertin's dot density maps with R and GHSL</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2023-12-16T00:00:00+01:00">december 16, 2023</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202201_maps-flags/" class="chulapa-text-body-color">Beautiful Maps with R (IV): Fun with flags revisited</a></p>
+         <p class="card-text"><small>Any picture as a basemap</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-01-28T00:00:00+01:00">january 28, 2022</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">Introducing tidyterra</a></p>
+         <p class="card-text"><small>Easily work and ggplot SpatRasters</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-05-25T00:00:00+02:00">may 25, 2022</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

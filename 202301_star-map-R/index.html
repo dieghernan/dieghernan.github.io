@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202301_star-map-R/"
+      },
+      "headline": "Star Map with R",
+      "image": "https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp",
+      "datePublished": "2023-01-25T00:00:00+01:00",
+      "dateModified": "2023-01-25T00:00:00+01:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Star Map with R"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Star Map with R",
+    "description": "Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily check on
+StackOverflow when I found a
+question by Benjamin Smith that blew my
+mind: Creating Star Map Visualizations Based on Location and
+Date
+!!
+"
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Star Map with R | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/202301_star-map-R/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily check on
+StackOverflow when I found a
+question by Be...">
+   <meta name="thumbnail" content="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Star Map with R | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/202301_star-map-R/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202301_star-map-R/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Star Map with R</h1><p class="lead chulapa-subtitle p-summary">Creating Star Map Visualizations Based on Location and Date</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Star Map with R</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2023-01-25T00:00:00+01:00" class="dt-published" >25 jan 2023</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202301_star-map-R/&text=Star+Map+with+R&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,sf,s2,astronomy,celestial,geojson,gpkg" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Star%20Map%20with%20R%20https://dieghernan.github.io/202301_star-map-R/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23sf%20%23s2%20%23astronomy%20%23celestial%20%23geojson%20%23gpkg" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202301_star-map-R/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Star+Map+with+R%20https://dieghernan.github.io/202301_star-map-R/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202301_star-map-R/&title=Star+Map+with+R" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Star Map with R</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#first-things-first-the-data" class="nav-link">First things first: The data</a></li><li class="nav-item nav d-block"><a href="#creating-a-star-map-with-r" class="nav-link">Creating a Star Map with R</a><ul><li class="nav-item nav d-block"><a href="#helper-funs" class="nav-link">Helper funs</a></li><li class="nav-item nav d-block"><a href="#inputs" class="nav-link">Inputs</a><ul><li class="nav-item nav d-block"><a href="#about-time-zones" class="nav-link">About time zones</a></li></ul></li><li class="nav-item nav d-block"><a href="#setup" class="nav-link">Setup</a></li><li class="nav-item nav d-block"><a href="#celestial-data" class="nav-link">Celestial Data</a></li><li class="nav-item nav d-block"><a href="#graticules" class="nav-link">Graticules</a></li></ul></li><li class="nav-item nav d-block"><a href="#visualization-with-ggplot2" class="nav-link">Visualization with <code class="language-plaintext highlighter-rouge">ggplot2</code></a></li><li class="nav-item nav d-block"><a href="#extra-chinese-constellations" class="nav-link">Extra: Chinese constellations</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+		</nav>   
+	</div>
+			<p>A couple of weeks ago I was doing my daily check on
+<a href="https://stackoverflow.com/questions/tagged/sf">StackOverflow</a> when I found a
+question by <a href="https://bensstats.wordpress.com/">Benjamin Smith</a> that blew my
+mind: <a href="https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date">Creating Star Map Visualizations Based on Location and
+Date</a>
+!!</p>
+<p>Oh my! Can we do this with <strong>R</strong>? Answer is: Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
+Fitter</a> already worked on this two years ago,
+see his <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial
+Maps</a>. So I decided
+to put some work on this.</p>
+<p>Since then, I also learnt that Benjamin and myself have been working on parallel
+on the same topic. He is preparing a <strong>R</strong> package named
+<a href="https://github.com/benyamindsmith/starBliss"><code class="language-plaintext highlighter-rouge">starBliss</code></a> and hopefully this
+post would be of some help.</p>
+<p class="alert alert-info p-3 mx-2 mb-3">I have very little knowledge on this topic, so if you find errors or
+have any suggestions please let me know in the <strong>Comments</strong> section below</p>
+<h2 id="first-things-first-the-data">First things first: The data</h2>
+<p>The initial data source of all these projects (Kim, Benjamin and myself) is the
+same, and it is provided on the D3 plugin
+<a href="https://github.com/ofrohn/d3-celestial/tree/master/data">d3-celestial</a> by <a href="http://armchairastronautics.blogspot.com/">Olaf
+Frohn</a>. As Kim Fitter pointed out on
+<a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">his post</a>, these
+data files present the problem (experienced by <a href="https://stackoverflow.com/search?q=%5Bsf%5D+dateline">almost any <code class="language-plaintext highlighter-rouge">sf</code>
+user</a>) of lines crossing
+the international date line (longitude 180º). I also found that some files are
+not valid as per <code class="language-plaintext highlighter-rouge">sf::st_make_valid()</code>.</p>
+<p>Solution? I processed and fixed almost every file (some of them as the
+corresponding to the Milky Way or the lines for Chinese constellations manually)
+to provide a set of files. That is the origin of my project <a href="https://dieghernan.github.io/celestial_data/">Celestial
+Data</a>, that provides all these
+files on several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
+repo</a> to know more about it.</p>
+<h2 id="creating-a-star-map-with-r">Creating a Star Map with R</h2>
+<p>The first step is loading a bunch of libraries that would help us on this cosmic
+task:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Spatial manipulation</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">nominatimlite</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Wrange data and dates</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">lutz</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">## Visualization</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggfx</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggshadow</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="helper-funs">Helper funs</h3>
+<p>Now we prepare some helper functions:</p>
+<ul>
+ <li>
+   <p><code class="language-plaintext highlighter-rouge">load_celestial()</code> just downloads the corresponding <code class="language-plaintext highlighter-rouge">.geojson</code> from the
+<a href="https://github.com/dieghernan/celestial_data/tree/main/data">Celestial Data
+repo</a><sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> to a
+specific directory <code class="language-plaintext highlighter-rouge">cachedir</code> and loads it with <code class="language-plaintext highlighter-rouge">sf::st_read()</code>.</p>
+ </li>
+ <li>
+   <p><code class="language-plaintext highlighter-rouge">pretty_lonlat()</code> is a labeller that returns a decimal longitude or latitude
+coordinate in the format degrees/minutes/seconds (e.g a <strong>latitude
+34.72782</strong> would be converted into <strong>34° 43’ 40.15” N</strong>).</p>
+ </li>
+</ul>
+<details class="my-4">
+  <summary>Show <code>load_celestial</code> and
+<code>pretty_lonlat()</code></summary>
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">load_celestial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w">
+                           </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/"</span><span class="p">,</span><span class="w">
+                           </span><span class="n">cachedir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dir.exists</span><span class="p">(</span><span class="n">cachedir</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">stop</span><span class="p">(</span><span class="w">
+      </span><span class="s2">"Please create "</span><span class="p">,</span><span class="w">
+      </span><span class="n">path.expand</span><span class="p">(</span><span class="n">cachedir</span><span class="p">),</span><span class="w">
+      </span><span class="s2">" directory"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"first"</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w">
+  </span><span class="n">local_path</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">file.path</span><span class="p">(</span><span class="n">cachedir</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span><span class="w">
+
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">file.exists</span><span class="p">(</span><span class="n">local_path</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">download.file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"wb"</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">celestial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_read</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span><span class="w"> </span><span class="n">quiet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">celestial</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">pretty_lonlat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">positive</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="w">
+
+  </span><span class="c1"># Decompose</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">D</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="w">
+  </span><span class="n">M</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.integer</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w">
+  </span><span class="n">S</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">((</span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">M</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="n">accuracy</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># Get label</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"lon"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">positive</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w"> </span><span class="s2">"W"</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">positive</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"N"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+
+  </span><span class="c1"># Compose</span><span class="w">
+  </span><span class="n">label</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="s2">"\u00b0 "</span><span class="p">,</span><span class="w"> </span><span class="n">M</span><span class="p">,</span><span class="w"> </span><span class="s2">"' "</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="s1">'\" '</span><span class="p">,</span><span class="w"> </span><span class="n">lab</span><span class="p">)</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+</details>
+<p>Additionally, you may notice that on this <a href="https://ofrohn.github.io/celestial-demo/location.html">d3-celestial
+demo</a> there is some
+degree of rotation depending on the location and the time. I found how this is
+done on the <strong>d3-celestial plugin</strong> and I found the function
+<a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250"><code class="language-plaintext highlighter-rouge">getMST(dt, lng)</code></a>,
+that I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). As per some of the research that I did
+this function computes the <a href="https://en.wikipedia.org/wiki/Sidereal_time">Mean Sidereal
+Time</a> (MST) given a specific
+longitude (maybe then is more accurate Local Sidereal Time? Just wondering)
+expressed in degrees, following the formulas provided by Meeus (1998). If you
+want to know more on this I recommend <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
+post</a> by
+<a href="https://squarewidget.com/">James Still</a>.</p>
+<p>So basically the input is a <code class="language-plaintext highlighter-rouge">POSIXct</code> date time and a given longitude and the
+result is an alternative longitude that we would use to adjust the projection of
+our Star Map. This would provide the rotation observed on <strong>d3-celestial
+plugin</strong>.</p>
+<details class="my-4">
+  <summary>Show <code>get_mst()</code></summary>
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Derive rotation degrees of the projection given a date and a longitude</span><span class="w">
+</span><span class="n">get_mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">lng</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">desired_date_utc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">with_tz</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+
+
+  </span><span class="n">yr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">year</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">mo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">month</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">dy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">day</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">hour</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">minute</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+  </span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lubridate</span><span class="o">::</span><span class="n">second</span><span class="p">(</span><span class="n">desired_date_utc</span><span class="p">)</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">mo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">mo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">yr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">yr</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w">
+    </span><span class="n">mo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">12</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="c1"># Adjust times before Gregorian Calendar</span><span class="w">
+  </span><span class="c1"># See https://squarewidget.com/julian-day/</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">lubridate</span><span class="o">::</span><span class="n">as_date</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">as.Date</span><span class="p">(</span><span class="s2">"1582-10-14"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">yr</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">100</span><span class="p">)</span><span class="w">
+    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="m">365.25</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yr</span><span class="p">)</span><span class="w">
+  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">floor</span><span class="p">(</span><span class="m">30.6001</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">mo</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+
+  </span><span class="c1"># days since J2000.0</span><span class="w">
+  </span><span class="n">jd</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">730550.5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">3600</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">24</span><span class="w">
+  </span><span class="n">jt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">jd</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">36525</span><span class="w">
+
+  </span><span class="c1"># Rotation</span><span class="w">
+  </span><span class="n">mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">280.46061837</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">360.98564736629</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">jd</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="m">0.000387933</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">jt</span><span class="o">^</span><span class="m">2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">jt</span><span class="o">^</span><span class="m">3</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">38710000.0</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lng</span><span class="w">
+
+  </span><span class="c1"># Modulo 360 degrees</span><span class="w">
+  </span><span class="n">mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mst</span><span class="w"> </span><span class="o">%%</span><span class="w"> </span><span class="m">360</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">mst</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+</details>
+<p>The final result would have an spherical outline. That means that we would need
+to perform an spherical cut. Did you know that <a href="https://r-spatial.org/r/2020/06/17/s2.html">in r-spatial the Earth is no
+longer flat</a>? Thanks to <code class="language-plaintext highlighter-rouge">s2</code> we can
+overcome this issue. Additionally, we would get rid of <a href="https://stackoverflow.com/questions/75205747/how-to-remove-random-diagonal-lines-from-star-map-vizualizations-produced-by-geo/75212722#75212722">artifacts derived from
+the changes on the
+projection</a>.
+This also includes some refinements to avoid empty/non-valid geometries as well
+as <code class="language-plaintext highlighter-rouge">GEOMETRYCOLLECTION</code> handling. The function <code class="language-plaintext highlighter-rouge">sf_spherical_cut()</code> would do
+that for us.</p>
+<details class="my-4">
+  <summary>Show <code>sf_spherical_cut()</code></summary>
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut a sf object with a buffer using spherical s2 geoms</span><span class="w">
+</span><span class="c1"># Optionally, project and flip</span><span class="w">
+
+</span><span class="n">sf_spherical_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="c1"># Get geometry type</span><span class="w">
+  </span><span class="n">geomtype</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"MULTI"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">x</span><span class="p">)))[</span><span class="m">1</span><span class="p">]</span><span class="w">
+
+  </span><span class="c1"># Keep the data frame, s2 drops it</span><span class="w">
+  </span><span class="n">the_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">the_geom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="c1"># Convert to s2 if needed</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">inherits</span><span class="p">(</span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="s2">"s2_geography"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">the_buff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_as_s2</span><span class="p">(</span><span class="n">the_buff</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_geom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="c1"># Cut with s2</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_as_s2</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">s2</span><span class="o">::</span><span class="n">s2_intersection</span><span class="p">(</span><span class="n">the_buff</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="c1"># Back to sf and add the df</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_as_sfc</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_sf</span><span class="p">(</span><span class="n">the_df</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">dplyr</span><span class="o">::</span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">sf</span><span class="o">::</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">.</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the_crs</span><span class="p">)</span><span class="w">
+
+  </span><span class="c1"># If it is not POINT filter by valid and non-empty</span><span class="w">
+  </span><span class="c1"># This if for performance</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">geomtype</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="c1"># If any is GEOMETRYCOLLECTION extract the right value</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">any</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">the_cut</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"GEOMETRYCOLLECTION"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+        </span><span class="n">sf</span><span class="o">::</span><span class="n">st_collection_extract</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geomtype</span><span class="p">,</span><span class="w"> </span><span class="n">warn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+    </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">dplyr</span><span class="o">::</span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">st_is_valid</span><span class="p">(</span><span class="n">.</span><span class="p">)))</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">is.null</span><span class="p">(</span><span class="n">flip</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">the_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">the_cut</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">dplyr</span><span class="o">::</span><span class="n">mutate</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">flip</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+      </span><span class="n">sf</span><span class="o">::</span><span class="n">st_set_crs</span><span class="p">(</span><span class="n">the_crs</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">the_cut</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+</details>
+<h3 id="inputs">Inputs</h3>
+<p>Now we are ready to start creating our visualization. We need only two inputs:</p>
+<ul>
+ <li>
+   <p>A desired location, that we would geocode with <code class="language-plaintext highlighter-rouge">nominatimlite</code>.</p>
+ </li>
+ <li>
+   <p>A specific moment of time.</p>
+ </li>
+</ul>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Inputs</span><span class="w">
+</span><span class="n">desired_place</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Madrid, Spain"</span><span class="w">
+
+</span><span class="c1"># We are not using yet the timezone</span><span class="w">
+</span><span class="n">desired_date</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">make_datetime</span><span class="p">(</span><span class="w">
+  </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2015</span><span class="p">,</span><span class="w">
+  </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9</span><span class="p">,</span><span class="w">
+  </span><span class="n">day</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22</span><span class="p">,</span><span class="w">
+  </span><span class="n">hour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+  </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">45</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Geocode place with nominatimlite</span><span class="w">
+</span><span class="n">desired_place_geo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geo_lite</span><span class="p">(</span><span class="n">desired_place</span><span class="p">,</span><span class="w"> </span><span class="n">full_results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">desired_place_geo</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">address</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; # A tibble: 1 × 3</span><span class="w">
+</span><span class="c1">#&gt;   address                                                                                    lat   lon</span><span class="w">
+</span><span class="c1">#&gt;   &lt;chr&gt;                                                                                    &lt;dbl&gt; &lt;dbl&gt;</span><span class="w">
+</span><span class="c1">#&gt; 1 Madrid, Área metropolitana de Madrid y Corredor del Henares, Comunidad de Madrid, España  40.4 -3.70</span><span class="w">
+
+</span><span class="c1"># And get the coordinates</span><span class="w">
+</span><span class="n">desired_loc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">desired_place_geo</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">unlist</span><span class="p">()</span><span class="w">
+
+</span><span class="n">desired_loc</span><span class="w">
+</span><span class="c1">#&gt;       lat       lon </span><span class="w">
+</span><span class="c1">#&gt; 40.416705 -3.703582</span><span class="w">
+</span></code></pre></div></div>
+<p>With respect to our object <code class="language-plaintext highlighter-rouge">desired_date</code>, it is quite relevant for accurate
+plotting to specify the correct time zone. Since we already now the latitude and
+longitude of our desired location, we can easily get that with the <code class="language-plaintext highlighter-rouge">lutz</code>
+package:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">desired_date</span><span class="w">
+</span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 UTC"</span><span class="w">
+
+</span><span class="c1"># Get tz</span><span class="w">
+</span><span class="n">get_tz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tz_lookup_coords</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">warn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">get_tz</span><span class="w">
+</span><span class="c1">#&gt; [1] "Europe/Madrid"</span><span class="w">
+
+</span><span class="c1"># Force it to be local time</span><span class="w">
+</span><span class="n">desired_date_tz</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">force_tz</span><span class="p">(</span><span class="n">desired_date</span><span class="p">,</span><span class="w"> </span><span class="n">get_tz</span><span class="p">)</span><span class="w">
+
+</span><span class="n">desired_date_tz</span><span class="w">
+</span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 CEST"</span><span class="w">
+</span></code></pre></div></div>
+<h4 id="about-time-zones">About time zones</h4>
+<p>Some online shops that creates this kind of maps (I won’t post links) includes
+this script:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>... 
+
+'selectedHour': '22',
+'selectedMinute': '00',
+
+...
+</code></pre></div></div>
+<p>This means that those shops are really creating the map at
+<code class="language-plaintext highlighter-rouge">YYYY-MM-DD 22:00:00 UTC</code>. If you want to exactly replicate that (even though
+that night sky is not accurate, think that in New Zealand the local time at that
+moment would be 10:00 hence no stars are visible) you would need to adjust
+<code class="language-plaintext highlighter-rouge">desired_date_tz</code> as:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">as_datetime</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">as.Date</span><span class="p">(</span><span class="n">desired_date_tz</span><span class="p">),</span><span class="w"> </span><span class="s2">"22:00:00"</span><span class="p">),</span><span class="w"> </span><span class="n">tz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] "2015-09-22 22:00:00 UTC"</span><span class="w">
+
+</span><span class="c1"># That would really correspond to 10:00</span><span class="w">
+</span><span class="n">as_datetime</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">as.Date</span><span class="p">(</span><span class="n">desired_date_tz</span><span class="p">),</span><span class="w"> </span><span class="s2">"22:00:00"</span><span class="p">),</span><span class="w"> </span><span class="n">tz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">with_tz</span><span class="p">(</span><span class="s2">"Pacific/Auckland"</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] "2015-09-23 10:00:00 NZST"</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="setup">Setup</h3>
+<p>Now we can start creating our buffers and projections, that would help us to
+crop the celestial data objects.</p>
+<p>I noticed also that the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
+demo</a> of
+<strong>d3-celestial.js</strong> uses <a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/demo/location.html#L17-L22">Airy
+projection</a>,
+so we are going to replicate that as well:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get the rotation and prepare buffer and projection</span><span class="w">
+
+</span><span class="c1"># Get right degrees</span><span class="w">
+</span><span class="n">lon_prj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_mst</span><span class="p">(</span><span class="n">desired_date_tz</span><span class="p">,</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">])</span><span class="w">
+</span><span class="n">lat_prj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+
+</span><span class="nf">c</span><span class="p">(</span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt;      lon      lat </span><span class="w">
+</span><span class="c1">#&gt; 23.15892 40.41670</span><span class="w">
+
+</span><span class="c1"># Create proj4string w/ Airy projection</span><span class="w">
+
+</span><span class="n">target_crs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"+proj=airy +x_0=0 +y_0=0 +lon_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">" +lat_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">target_crs</span><span class="w">
+</span><span class="c1">#&gt; [1] "+proj=airy +x_0=0 +y_0=0 +lon_0=23.1589164999314 +lat_0=40.4167047"</span><span class="w">
+
+</span><span class="c1"># We need to flip celestial objects to get the impression of see from the Earth</span><span class="w">
+</span><span class="c1"># to the sky, instead of from the sky to the Earth</span><span class="w">
+</span><span class="c1"># https://stackoverflow.com/a/75064359/7877917</span><span class="w">
+</span><span class="c1"># Flip matrix for affine transformation</span><span class="w">
+
+</span><span class="n">flip_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># And create an s2 buffer of the visible hemisphere at the given location</span><span class="w">
+</span><span class="n">hemisphere_s2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">s2_buffer_cells</span><span class="p">(</span><span class="w">
+  </span><span class="n">as_s2_geography</span><span class="p">(</span><span class="w">
+    </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"POINT("</span><span class="p">,</span><span class="w"> </span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">")"</span><span class="p">)</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="m">9800000</span><span class="p">,</span><span class="w">
+  </span><span class="n">max_cells</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># This one is for plotting</span><span class="w">
+</span><span class="n">hemisphere_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="celestial-data">Celestial Data</h3>
+<p>Now, we can load the data of our choice. In this case I have selected to
+represent the Milky Way, Constellation Lines and Stars.</p>
+<p>We also add some additional variables that would help us to improve the
+visualization.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"mw.min.geojson"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Add colors to MW to use on fill</span><span class="w">
+</span><span class="n">cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">))(</span><span class="m">5</span><span class="p">)</span><span class="w">
+</span><span class="n">mw</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cols</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mw</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-1.webp" alt="plot of chunk 20230125_mw" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># And process it</span><span class="w">
+
+</span><span class="c1"># Cut to buffer</span><span class="w">
+</span><span class="n">mw_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">mw</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">mw_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="plot of chunk 20230125_mw" width="100%" /></p>
+<p>Now it is the turn of the constellations:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">const</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"constellations.lines.min.geojson"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">const</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-1.webp" alt="plot of chunk 20230125_const" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Cut to buffer</span><span class="w">
+
+</span><span class="n">const_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">const</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">const_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="plot of chunk 20230125_const" width="100%" /></p>
+<p>And finally the stars:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"stars.6.min.geojson"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">stars</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># We use relative brightness (br) as aes</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-1.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Cut to buffer</span><span class="w">
+
+</span><span class="n">stars_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">stars</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">stars_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># We use relative brightness (br) as aes</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
+<h3 id="graticules">Graticules</h3>
+<p>We are going also to include graticules, so the Earth poles can be quickly
+spotted. In this case we don’t apply any affine transformation, so the <code class="language-plaintext highlighter-rouge">flip</code>
+parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut()</code> needs to be set as <code class="language-plaintext highlighter-rouge">NULL</code>.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_graticule</span><span class="p">(</span><span class="w">
+  </span><span class="n">ndiscr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5000</span><span class="p">,</span><span class="w">
+  </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-90</span><span class="p">,</span><span class="w"> </span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
+  </span><span class="n">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">grat</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Cut to buffer, we dont flip this one (it is not an object of the space)</span><span class="w">
+</span><span class="n">grat_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">grat_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
+<h2 id="visualization-with-ggplot2">Visualization with <code class="language-plaintext highlighter-rouge">ggplot2</code></h2>
+<p>We are almost set! For preparing the final map, first we are going to create the
+corresponding labels, that would be included as <code class="language-plaintext highlighter-rouge">caption</code> on the <code class="language-plaintext highlighter-rouge">ggplot2</code> map:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lat_lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pretty_lonlat</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lat"</span><span class="p">)</span><span class="w">
+</span><span class="n">lon_lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pretty_lonlat</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lon"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pretty_labs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="n">lat_lab</span><span class="p">,</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w"> </span><span class="n">lon_lab</span><span class="p">)</span><span class="w">
+
+</span><span class="n">cat</span><span class="p">(</span><span class="n">pretty_labs</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; 40° 25' 0.14" N / 3° 42' 12.9" W</span><span class="w">
+
+</span><span class="c1"># Create final caption to put on bottom</span><span class="w">
+
+</span><span class="n">pretty_time</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="w">
+  </span><span class="c1"># Pretty Day</span><span class="w">
+  </span><span class="n">scales</span><span class="o">::</span><span class="n">label_date</span><span class="p">(</span><span class="w">
+    </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"%d %b %Y"</span><span class="p">,</span><span class="w">
+    </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"en"</span><span class="w">
+  </span><span class="p">)(</span><span class="n">desired_date_tz</span><span class="p">),</span><span class="w">
+  </span><span class="c1"># Pretty Hour</span><span class="w">
+  </span><span class="n">format</span><span class="p">(</span><span class="n">desired_date_tz</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"%H:%M"</span><span class="p">,</span><span class="w"> </span><span class="n">usetz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">cat</span><span class="p">(</span><span class="n">pretty_time</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; 22 Sep 2015 03:45 CEST</span><span class="w">
+
+</span><span class="c1"># Our final caption</span><span class="w">
+</span><span class="n">caption</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">toupper</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"Star Map\n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">desired_place</span><span class="p">,</span><span class="w"> </span><span class="s2">"\n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">pretty_time</span><span class="p">,</span><span class="w"> </span><span class="s2">"\n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">pretty_labs</span><span class="w">
+</span><span class="p">))</span><span class="w">
+
+
+</span><span class="n">cat</span><span class="p">(</span><span class="n">caption</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; STAR MAP</span><span class="w">
+</span><span class="c1">#&gt; MADRID, SPAIN</span><span class="w">
+</span><span class="c1">#&gt; 22 SEP 2015 03:45 CEST</span><span class="w">
+</span><span class="c1">#&gt; 40° 25' 0.14" N / 3° 42' 12.9" W</span><span class="w">
+</span></code></pre></div></div>
+<p>We can enhance the visualization by applying some interesting effects:</p>
+<ul>
+ <li>
+   <p>We want the Milky Way to appear a bit blurry instead of as a Well-Known
+geometry. With this effect we can mimic how we really see it from the Earth.
+So we can use <code class="language-plaintext highlighter-rouge">ggfx::with_blur()</code> to get this effect.</p>
+ </li>
+ <li>
+   <p>We can also add a glowing effect to our stars and constellations (have a
+look to Dominic Royé’s post <a href="https://dominicroye.github.io/en/2021/firefly-cartography/">Firefly
+Cartography</a> to
+know more about this). The only drawback is that I was not able to use
+<code class="language-plaintext highlighter-rouge">ggshadow</code> with <code class="language-plaintext highlighter-rouge">LINESTRING</code> (Dominic shows how to do it with <code class="language-plaintext highlighter-rouge">POINT</code>), so
+instead I converted my lines (the constellations) to coordinates and applied
+<code class="language-plaintext highlighter-rouge">ggshadow::geom_glowpath()</code></p>
+ </li>
+</ul>
+<p>So we are ready now to create the final visualization:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Prepare MULTILINESTRING</span><span class="w">
+
+</span><span class="n">const_end_lines</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">const_end</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTILINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_coordinates</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.data.frame</span><span class="p">()</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Graticules</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat_end</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># A blurry Milky Way</span><span class="w">
+  </span><span class="n">with_blur</span><span class="p">(</span><span class="w">
+    </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+      </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mw_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+      </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Glowing stars</span><span class="w">
+  </span><span class="n">geom_glowpoint</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stars_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w">
+        </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geometry</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf_coordinates"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.75</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Glowing constellations</span><span class="w">
+  </span><span class="n">geom_glowpath</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">const_end_lines</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interaction</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="w"> </span><span class="n">L2</span><span class="p">)),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linejoin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="p">,</span><span class="w"> </span><span class="n">lineend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Border of the sphere</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_sf</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Caption</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">caption</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># And end with theming</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w">
+      </span><span class="n">lineheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1.2</span><span class="p">),</span><span class="w">
+      </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp" alt="plot of chunk 20230125_celestial_map" width="100%" /></p>
+<p>Voilà! I checked several times the results with the results provided by
+d3-celestial.js on the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
+demo</a> and the underlying
+calculations on Javascript and everything seems to be up and running.</p>
+<h2 id="extra-chinese-constellations">Extra: Chinese constellations</h2>
+<p><a href="https://dieghernan.github.io/celestial_data/">Celestial Data</a> also provides
+data for traditional Chinese constellations, so we can create a similar map with
+this whole different set of geometries:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">const_cn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"constellations.lines.cn.min.geojson"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Cut and prepare for geom_glowpath() on a single step</span><span class="w">
+</span><span class="n">const_cn_end_lines</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="n">const_cn</span><span class="p">,</span><span class="w">
+  </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
+  </span><span class="c1"># Change the crs</span><span class="w">
+  </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">,</span><span class="w">
+  </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">flip_matrix</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="c1"># To paths</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTILINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_coordinates</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.data.frame</span><span class="p">()</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Graticules</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat_end</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># A blurry Milky Way</span><span class="w">
+  </span><span class="n">with_blur</span><span class="p">(</span><span class="w">
+    </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+      </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mw_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+      </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Glowing stars</span><span class="w">
+  </span><span class="n">geom_glowpoint</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stars_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w">
+        </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geometry</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf_coordinates"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.75</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Glowing constellations</span><span class="w">
+  </span><span class="n">geom_glowpath</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">const_cn_end_lines</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interaction</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="w"> </span><span class="n">L2</span><span class="p">)),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linejoin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="p">,</span><span class="w"> </span><span class="n">lineend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Border of the sphere</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_sf</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.25</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># Caption</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">caption</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># And end with theming</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+      </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1</span><span class="p">),</span><span class="w">
+      </span><span class="n">lineheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1.2</span><span class="p">),</span><span class="w">
+      </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">40</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map_cn-1.webp" alt="plot of chunk 20230125_celestial_map_cn" width="100%" /></p>
+<h2 id="references">References</h2>
+<p>Meeus J (1998). <em>Astronomical algorithms</em>, 2nd edition. Willmann-Bell,
+Richmond, Va. ISBN 9780943396613.</p>
+<p>Frohn O, Hernangómez D (2023). “Celestial Data.” 
+<a href="https://doi.org/10.5281/zenodo.7561601">doi:10.5281/zenodo.7561601</a>,
+<a href="https://dieghernan.github.io/celestial_data/">https://dieghernan.github.io/celestial_data/</a>.</p>
+<p>Frohn O (2015). “d3-celestial.” <a href="https://github.com/ofrohn/d3-celestial/">https://github.com/ofrohn/d3-celestial/</a>.</p>
+<p>Fitter K (2019). “Celestial Maps.” (<a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">link</a>).</p>
+<p>Still J (2020). “Astronomical Calculations: Sidereal Time.” <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">https://squarewidget.com/astronomical-calculations-sidereal-time/</a>.</p>
+<p>Pebesma E, Dunnington D (2020). “In r-spatial, the Earth is no longer flat.” 
+(<a href="https://r-spatial.org/r/2020/06/17/s2.html">link</a>).</p>
+<p>Royé D (2020). “Firefly Cartography.” 
+(<a href="https://dominicroye.github.io/en/2021/firefly-cartography/">link</a>).</p>
+<div class="footnotes" role="doc-endnotes">
+ <ol>
+   <li id="fn:1">
+     <p>In fact, the download is performed via the
+<a href="https://www.jsdelivr.com/">jsDelivr</a>, that distribute files hosted on
+<a href="https://www.jsdelivr.com/github">GitHub via CDN.</a> This is supposed to
+improve performance but in any case the underlying data source is the GitHub
+repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+   </li>
+ </ol>
+</div>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Hillshade, colors and margi...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Hillshade, col...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Beautiful Maps...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Beautiful Maps with R (V): ...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202312_bertin_dots/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggplot2</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category" rel="tag" >sf</a>
+      <a href="https://dieghernan.github.io/tags#s2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >s2</a>
+      <a href="https://dieghernan.github.io/tags#astronomy" class="badge chulapa-pill-bg-primary p-category" rel="tag" >astronomy</a>
+      <a href="https://dieghernan.github.io/tags#celestial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >celestial</a>
+      <a href="https://dieghernan.github.io/tags#geojson" class="badge chulapa-pill-bg-primary p-category" rel="tag" >geojson</a>
+      <a href="https://dieghernan.github.io/tags#gpkg" class="badge chulapa-pill-bg-primary p-category" rel="tag" >gpkg</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202203_insetmaps/" class="chulapa-text-body-color">Insets with ggplot2 and tmap - and mapsf!</a></p>
+         <p class="card-text"><small>A map on a map</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-03-03T00:00:00+01:00">march 03, 2022</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202312_bertin_dots/" class="chulapa-text-body-color">Beautiful Maps with R (V): Point densities</a></p>
+         <p class="card-text"><small>Bertin's dot density maps with R and GHSL</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2023-12-16T00:00:00+01:00">december 16, 2023</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202502_st_valentine/" class="chulapa-text-body-color">Happy Valentine's Day</a></p>
+         <p class="card-text"><small>Do you know the Bonne projection?</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2025-02-17T00:00:00+01:00">february 17, 2025</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

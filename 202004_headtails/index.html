@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-03-02 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202004_headtails/"
+      },
+      "headline": "Head/Tails breaks on the classInt package.",
+      "image": "https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp",
+      "datePublished": "2020-04-05T00:00:00+02:00",
+      "dateModified": "2020-04-05T00:00:00+02:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Head/Tails breaks on the classInt package."
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Head/Tails breaks on the classInt package.",
+    "description": "
+  There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?
+  Jiang (2013)
+"
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Head/Tails breaks on the classInt package. | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/202004_headtails/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="
+  There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, base...">
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Head/Tails breaks on the classInt package. | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/202004_headtails/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202004_headtails/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">Home</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="d-flex align-items-center splash-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp')"><div class="container-lg">
+   <h1 class="p-name" >Head/Tails breaks on the <code>classInt</code> package.</h1>
+ </div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Head/Tails breaks on the <code>classInt</code> package.</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2020-04-05T00:00:00+02:00" class="dt-published" >05 apr 2020</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202004_headtails/&text=Head%2FTails+breaks+on+the+classInt+package.&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,classInt,r_package" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Head/Tails%20breaks%20on%20the%20classInt%20package.%20https://dieghernan.github.io/202004_headtails/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23classInt%20%23r_package" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202004_headtails/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Head%2FTails+breaks+on+the+classInt+package.%20https://dieghernan.github.io/202004_headtails/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202004_headtails/&title=Head%2FTails+breaks+on+the+classInt+package." title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Head/Tails breaks on the <code>classInt</code> package.</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#abstract" class="nav-link">Abstract</a></li><li class="nav-item nav d-block"><a href="#introduction" class="nav-link">Introduction</a></li><li class="nav-item nav d-block"><a href="#breaking-method" class="nav-link">Breaking method</a></li><li class="nav-item nav d-block"><a href="#step-by-step-example" class="nav-link">Step by step example</a></li><li class="nav-item nav d-block"><a href="#implementation-on-classint-package" class="nav-link">Implementation on <code class="language-plaintext highlighter-rouge">classInt</code> package</a></li><li class="nav-item nav d-block"><a href="#case-study" class="nav-link">Case study</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+		</nav>   
+	</div>
+            <nav aria-label="table-of-contents">
+			<ul class="chulapa-toc-wrapper list-group mb-5 mx-3 mx-lg-5" id="toc"><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#abstract">Abstract</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#introduction">Introduction</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#breaking-method">Breaking method</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#step-by-step-example">Step by step example</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#implementation-on-classint-package">Implementation on <code class="language-plaintext highlighter-rouge">classInt</code> package</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#case-study">Case study</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#references">References</a></li></ul>
+			</nav>
+			 <blockquote class="blockquote">
+ <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
+ <footer class="blockquote-footer text-right">Jiang (2013)</footer>
+</blockquote>
+<h2 id="abstract">Abstract</h2>
+<p>This vignette discusses the implementation of the “Head/tail breaks” style (Jiang (2013)) on the <code class="language-plaintext highlighter-rouge">classIntervals</code> function of the <code class="language-plaintext highlighter-rouge">classInt</code> package. A step-by-step example is presented in order to clarify the method. A case study using <code class="language-plaintext highlighter-rouge">spData::afcon</code> is also included, making use of other additional packages as <code class="language-plaintext highlighter-rouge">sf</code>.</p>
+<h2 id="introduction">Introduction</h2>
+<p>The <strong>Head/tail breaks</strong>, sometimes referred as <strong>ht-index</strong> (Jiang and Yin (2013)), is a classification scheme introduced by Jiang (2013) in order to find groupings or hierarchy for data with a heavy-tailed distribution.</p>
+<p>Heavy-tailed distributions are heavily right skewed, with a minority of large values in the head and a majority of small values in the tail. This imbalance between the head and tail, or between many small values and a few large values, can be expressed as <em>“far more small things than large things”</em>.</p>
+<p>Heavy tailed distributions are commonly characterized by a power law, a lognormal or an exponential function. Nature, society, finance (Vasicek (2002)) and our daily lives are full of rare and extreme events,
+which are termed “black swan events” (Taleb (2008)). This line of thinking provides a good reason to reverse our thinking by focusing on low-frequency events.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">classInt</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 1. Characterization of heavy-tail distributions----</span><span class="w">
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Pareto distribution a=1 b=1.161 n=1000</span><span class="w">
+</span><span class="n">sample_par</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">runif</span><span class="p">(</span><span class="m">1000</span><span class="p">))</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1.161</span><span class="p">)</span><span class="w">
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">sort</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
+  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"F(x)"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"80/20 principle"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="m">.8</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red3"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">sample_par</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"topleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"F(x): p80"</span><span class="p">,</span><span class="w"> </span><span class="s2">"x: Top 20%"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">hist</span><span class="p">(</span><span class="w">
+  </span><span class="n">sample_par</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">probability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="plot of chunk 20200405_charheavytail" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="plot of chunk 20200405_charheavytail" /></p>
+<h2 id="breaking-method">Breaking method</h2>
+<p>The method itself consists on a four-step process performed recursively until a stopping condition is satisfied. Given a vector of values \(v = (a_1, a_2, ..., a_n)\) the process can be described as follows:</p>
+<ol>
+ <li>On each iteration, compute \(\mu = \sum_{i=1}^{n} a_i \:\:\: \forall \: a_i \in v\).</li>
+ <li>Break \(v\) into the \(tail\) and the \(head\):
+\(tail = \{ a_x \in v | a_x \lt \mu \}\) 
+\(head = \{ a_x \in v | a_x \gt \mu \}\).</li>
+ <li>Assess if the proportion of \(head\) over \(v\) is lower or equal than a given threshold:
+\(\frac{|head|}{|v|} \le thresold\)</li>
+ <li>If 3 is <code class="language-plaintext highlighter-rouge">TRUE</code>, repeat 1 to 3 until the condition is <code class="language-plaintext highlighter-rouge">FALSE</code> or no more partitions are possible (i.e. \(head\) has less than two elements).</li>
+</ol>
+<p>It is important to note that, at the beginning of a new iteration, \(v\) is replaced by \(head\). The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced.</p>
+<p>In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good approximation, meaning that if the \(head\) contains more than 40% of the observations the distribution is not considered heavy-tailed.</p>
+<p>The final breaks are the vector of consecutive \(\mu\):</p>
+\[breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n )\]
+<h2 id="step-by-step-example">Step by step example</h2>
+<p>We reproduce here the pseudo-code<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> as per Jiang (2019):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Recursive function Head/tail Breaks:
+ Rank the input data from the largest to the smallest
+ Break the data into the head and the tail around the mean;
+ // the head for those above the mean
+ // the tail for those below the mean
+ While (head &lt;= 40%):
+ Head/tail Breaks (head);
+End Function
+</code></pre></div></div>
+<p>A step-by-step example in <strong>R</strong> (for illustrative purposes) has been developed:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">var</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample_par</span><span class="w">
+</span><span class="n">thr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">.4</span><span class="w">
+</span><span class="n">brks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">var</span><span class="p">),</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">var</span><span class="p">))</span><span class="w"> </span><span class="c1"># Initialise with min and max</span><span class="w">
+
+</span><span class="n">sum_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w">
+  </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">n_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">n_head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Pars for chart</span><span class="w">
+</span><span class="n">limchart</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">brks</span><span class="w">
+</span><span class="c1"># Iteration</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">mu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="w">
+  </span><span class="n">brks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">brks</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="p">))</span><span class="w">
+  </span><span class="n">head</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var</span><span class="p">[</span><span class="n">var</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">mu</span><span class="p">]</span><span class="w">
+  </span><span class="n">prop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="w">
+  </span><span class="n">stopit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="n">sum_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rbind</span><span class="p">(</span><span class="w">
+    </span><span class="n">sum_table</span><span class="p">,</span><span class="w">
+    </span><span class="nf">c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">prop</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">var</span><span class="p">),</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">))</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">hist</span><span class="p">(</span><span class="w">
+    </span><span class="n">var</span><span class="p">,</span><span class="w">
+    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"Iter "</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w">
+    </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+    </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">limchart</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+  </span><span class="n">ylabel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">hist</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="o">$</span><span class="n">counts</span><span class="p">)</span><span class="w">
+  </span><span class="n">labelplot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"PropHead: "</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s2">"%"</span><span class="p">)</span><span class="w">
+  </span><span class="n">text</span><span class="p">(</span><span class="w">
+    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w">
+    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylabel</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labelplot</span><span class="p">,</span><span class="w">
+    </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">legend</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+    </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w">
+    </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red3"</span><span class="p">),</span><span class="w">
+    </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+    </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isFALSE</span><span class="p">(</span><span class="n">stopit</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="k">break</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">head</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp" alt="plot of chunk 20200405_stepbystep" /></p>
+<p>As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.</p>
+<table>
+<thead>
+   <tr>
+     <th style="text-align: right">iter</th>
+     <th style="text-align: right">mu</th>
+     <th style="text-align: left">prop</th>
+     <th style="text-align: right">n_var</th>
+     <th style="text-align: right">n_head</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td style="text-align: right">1</td>
+     <td style="text-align: right">5.6755</td>
+     <td style="text-align: left">14.5%</td>
+     <td style="text-align: right">1000</td>
+     <td style="text-align: right">145</td>
+   </tr>
+   <tr>
+     <td style="text-align: right">2</td>
+     <td style="text-align: right">27.2369</td>
+     <td style="text-align: left">21.38%</td>
+     <td style="text-align: right">145</td>
+     <td style="text-align: right">31</td>
+   </tr>
+   <tr>
+     <td style="text-align: right">3</td>
+     <td style="text-align: right">85.1766</td>
+     <td style="text-align: left">19.35%</td>
+     <td style="text-align: right">31</td>
+     <td style="text-align: right">6</td>
+   </tr>
+   <tr>
+     <td style="text-align: right">4</td>
+     <td style="text-align: right">264.7126</td>
+     <td style="text-align: left">50%</td>
+     <td style="text-align: right">6</td>
+     <td style="text-align: right">3</td>
+   </tr>
+ </tbody>
+</table>
+<p>The resulting breaks are then defined as <code class="language-plaintext highlighter-rouge">breaks = c(min(var), mu1, mu2, ..., mu_n, max(var))</code>.</p>
+<h2 id="implementation-on-classint-package">Implementation on <code class="language-plaintext highlighter-rouge">classInt</code> package</h2>
+<p>The implementation in the <code class="language-plaintext highlighter-rouge">classIntervals</code> function should replicate the results:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ht_sample_par</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
+</span><span class="n">brks</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ht_sample_par</span><span class="o">$</span><span class="n">brks</span><span class="w">
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE
+</code></pre></div></div>
+<p>As stated in Jiang (2013), the number  of breaks is naturally determined, however the <code class="language-plaintext highlighter-rouge">thr</code> parameter could help to adjust the final number. A lower value on <code class="language-plaintext highlighter-rouge">thr</code> would provide less breaks while a larger <code class="language-plaintext highlighter-rouge">thr</code> would increase the number, if the underlying distribution follows the <em>“far more small things than large things”</em> principle.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pal1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"wheat1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"wheat2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Minimum: single break</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = 0"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Two breaks</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = 0.2"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Default breaks: 0.4</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = Default"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Maximum breaks</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = 1"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp" alt="plot of chunk 20200405_examplesimp" /></p>
+<p>The method always returns at least one break, corresponding to <code class="language-plaintext highlighter-rouge">mean(var)</code>.</p>
+<h2 id="case-study">Case study</h2>
+<p>Jiang (2013) states that <em>"the new classification scheme is more natural than the natural breaks in finding the groupings or hierarchy for data with a heavy-tailed distribution."</em> (p. 482), referring to Jenks’ natural breaks method. In this case study we would compare <code class="language-plaintext highlighter-rouge">headtails</code> vs. <code class="language-plaintext highlighter-rouge">fisher</code>, that is the alias for the Fisher-Jenks algorithm and it is always preferred to the <code class="language-plaintext highlighter-rouge">jenks</code> style (see <code class="language-plaintext highlighter-rouge">?classIntervals</code>). For this example we will use the <code class="language-plaintext highlighter-rouge">afcon</code> dataset from <code class="language-plaintext highlighter-rouge">spData</code> package, plus some additional spatial information in order to create the data visualization.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">spData</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spData"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Let’s have a look to the Top 10 values and the distribution of the variable <code class="language-plaintext highlighter-rouge">totcon</code> (index of total conflict 1966-78):</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Top10</span><span class="w">
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">afcon</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">)],</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
+
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">hist</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">),</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Distribution"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="plot of chunk 20200405_summspdata" /></p>
+<p>The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the <em>“far more small things than large things”</em> principle.</p>
+<p>As a testing proof, on top of <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> we  would use also <code class="language-plaintext highlighter-rouge">quantile</code> to have a broader view on the different breaking styles. As <code class="language-plaintext highlighter-rouge">quantile</code> is a position-based metric, it doesn’t account for the magnitude of F(x) (hierarchy), so the breaks are solely defined by the position of x on the distribution.</p>
+<p>Applying the three aforementioned methods to break the data:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">brks_ht</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">brks_ht</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Same number of classes for "fisher"</span><span class="w">
+</span><span class="n">nclass</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">brks_ht</span><span class="o">$</span><span class="n">brks</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="n">brks_fisher</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fisher"</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">brks_fisher</span><span class="p">)</span><span class="w">
+
+</span><span class="n">brks_quantile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile"</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">brks_quantile</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pal1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"wheat1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"wheat2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">)</span><span class="w">
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">brks_ht</span><span class="p">,</span><span class="w"> </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">brks_fisher</span><span class="p">,</span><span class="w"> </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fisher"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">brks_quantile</span><span class="p">,</span><span class="w"> </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile"</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp" alt="plot of chunk 20200405_breaksample" /></p>
+<p>It is observed that the top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> enclose 5 observations, whereas <code class="language-plaintext highlighter-rouge">fisher</code> includes 13 observations. In terms of classification, <code class="language-plaintext highlighter-rouge">headtails</code> breaks focuses more on extreme values.</p>
+<p>The next plot compares a continuous distribution of <code class="language-plaintext highlighter-rouge">totcon</code> re-escalated to a range of <code class="language-plaintext highlighter-rouge">[1,nclass]</code> versus the distribution across breaks for each style. The continuous distribution has been offset by -0.5 in order to align the continuous and the discrete distributions.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Helper function to reescale values</span><span class="w">
+</span><span class="n">help_reescale</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">
+  </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">min</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">min</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">ecdf_class</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">help_reescale</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w">
+  </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">ht_breaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">brks_ht</span><span class="o">$</span><span class="n">brks</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+  </span><span class="n">include.lowest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">fisher_breaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">brks_fisher</span><span class="o">$</span><span class="n">brks</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+  </span><span class="n">include.lowest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile_break</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">brks_quantile</span><span class="o">$</span><span class="n">brks</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+  </span><span class="n">include.lowest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">ecdf_class</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">),</span><span class="w">
+  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"class"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">ht_breaks</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">fisher_breaks</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"limegreen"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile_break</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">,</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Continuous"</span><span class="p">,</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fisher"</span><span class="p">,</span><span class="w"> </span><span class="s2">"quantile"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"limegreen"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">),</span><span class="w">
+  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w">
+  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp" alt="plot of chunk 20200405_benchmarkbreaks" /></p>
+<p>It can be observed that the distribution of <code class="language-plaintext highlighter-rouge">headtails</code> breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, “quantile” provides a quasi-uniform distribution, ignoring the <code class="language-plaintext highlighter-rouge">totcon</code> hierarchy</p>
+<p>In terms of data visualization, we compare here the final map using the techniques mentioned above. On this plotting exercise, a choropleth map would be created.</p>
+<p>Additionally, a high-granularity choropleth map is created with a greater number of classes, in order to compare and contrast the actual grouping options against a more granular approach.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">par</span><span class="p">(</span><span class="w">
+  </span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w">
+  </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">africa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Africa"</span><span class="p">,</span><span class="w"> </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3857</span><span class="p">)</span><span class="w">
+
+</span><span class="n">afcon.sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sf</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">))</span><span class="w">
+</span><span class="n">afcon.sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="n">afcon.sf</span><span class="p">,</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w">
+</span><span class="c1"># afcon.sf &lt;- st_join(africa[, "admin"], afcon.sf)</span><span class="w">
+</span><span class="n">afcon.sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">afcon.sf</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">afcon.sf</span><span class="o">$</span><span class="n">totcon</span><span class="p">),</span><span class="w"> </span><span class="p">]</span><span class="w">
+
+
+
+</span><span class="c1"># High granularity map</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adjustcolor</span><span class="p">(</span><span class="s2">"grey10"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"High granularity map"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Quantile</span><span class="w">
+
+</span><span class="n">pal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"inferno"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsTypoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var2.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">var2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile_break"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Quantile"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Fisher</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsTypoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var2.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">var2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fisher_breaks"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fisher"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Head Tails</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsTypoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var2.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">var2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ht_breaks"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head Tails"</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="plot of chunk 20200405_finalplot" /></p>
+<p>As per the results, <code class="language-plaintext highlighter-rouge">headtails</code> seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The <code class="language-plaintext highlighter-rouge">quantile</code> style, as expected, just provides a clustering without taking into account the real hierarchy. The <code class="language-plaintext highlighter-rouge">fisher</code> plot is in-between of these two interpretations.</p>
+<p>It is also important to note that <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> reveal different information that can be useful depending of the context. While <code class="language-plaintext highlighter-rouge">headtails</code> highlights the outliers, it fails on providing a good clustering on the tail, while <code class="language-plaintext highlighter-rouge">fisher</code> seems to reflect better these patterns. This can be observed on the values of Western Africa and the Niger River Basin, where <code class="language-plaintext highlighter-rouge">headtails</code> doesn’t highlight any special cluster of conflicts, <code class="language-plaintext highlighter-rouge">fisher</code> suggests a potential cluster, aligned with the high-granularity plot. This can be confirmed on the histogram generated previously, where a concentration of <code class="language-plaintext highlighter-rouge">totcon</code> around 1,000 is visible.</p>
+<h2 id="references">References</h2>
+<p>Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution." <em>The Professional Geographer</em> 65 (3): 482–94. <a href="https://doi.org/10.1080/00330124.2012.700499">DOI</a>.</p>
+<p>———. 2019. "A Recursive Definition of Goodness of Space for Bridging the Concepts of Space and Place for Sustainability." <em>Sustainability</em> 11 (15): 4091. <a href="https://doi.org/10.3390/su11154091">DOI</a>.</p>
+<p>Jiang, Bin, Xintao Liu, and Tao Jia. 2013. "Scaling of Geographic Space as a Universal Rule for Map Generalization." <em>Annals of the Association of American Geographers</em> 103 (4): 844–55. <a href="https://doi.org/10.1080/00045608.2013.765773">DOI</a>.</p>
+<p>Jiang, Bin, and Junjun Yin. 2013. "Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features." <em>Annals of the Association of American Geographers</em> 104 (3): 530–40. <a href="https://doi.org/10.1080/00045608.2013.834239">DOI</a>.</p>
+<p>Taleb, Nassim Nicholas. 2008. <em>The Black Swan: The Impact of the Highly Improbable.</em> 1st ed. London: Random House.</p>
+<p>Vasicek, Oldrich. 2002. "Loan Portfolio Value." <em>Risk</em>, December, 160–62.</p>
+<div class="footnotes" role="doc-endnotes">
+ <ol>
+   <li id="fn:1">
+     <p>The method implemented on <code class="language-plaintext highlighter-rouge">classInt</code> corresponds to head/tails 1.0 as named on this article. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+   </li>
+ </ol>
+</div>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202002_cartography1/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">New features on cartography...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">New features o...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Beautiful Maps...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Beautiful Maps with R (IV):...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202201_maps-flags/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#classInt" class="badge chulapa-pill-bg-primary p-category" rel="tag" >classInt</a>
+      <a href="https://dieghernan.github.io/tags#r_package" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_package</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+<div class="container-lg mt-1 mb-2">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2">
+     <hr>
+     <p><i class="fa-solid fa-shuffle fa-xl"></i><span class="sr-only">Related</span></p>
+     <nav class="card-group" aria-label="related-articles">
+        <div class="card  border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">Beautiful Maps with R (III): Patterns and hatched maps</a></p>
+         <p class="card-text"><small>A solution for b/w and academic maps.</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2019-12-12T00:00:00+01:00">december 12, 2019</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202002_cartography1/" class="chulapa-text-body-color">New features on cartography package</a></p>
+         <p class="card-text"><small>Vignette of the package expansion</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2020-02-17T00:00:00+01:00">february 17, 2020</time></small>
+   </div>
+ </div>
+        <div class="card ml-sm-1 border chulapa-related">
+         <div class="card-body">
+         <p class="card-title chulapa-headingfont"><a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">Introducing tidyterra</a></p>
+         <p class="card-text"><small>Easily work and ggplot SpatRasters</small></p></div>
+   <div class="card-footer bg-transparent">
+      <small><i class="far fa-calendar" aria-hidden="true"></i> <time datetime="2022-05-25T00:00:00+02:00">may 25, 2022</time></small>
+   </div>
+ </div></nav>
+   </div>
+ </div>
+</div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>
