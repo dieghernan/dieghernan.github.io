@@ -4,7 +4,7 @@ subtitle: Travel restrictions amidst the COVID crisis across time - A German per
 header_img: "https://dieghernan.github.io/corona-atlas.de/timelapse/frames/D2021-04-16.png"
 date: 2022-03-14
 last_modified_at: 2025-02-17
-tags: [discontinued, project,R,maps,leaflet,python, guest-author]
+tags: [discontinued, project,R,maps,leaflet,python, guest-author,COVID19]
 project_links:
   - url: https://dieghernan.github.io/corona-atlas.de/en
     icon: fas fa-external-link-alt

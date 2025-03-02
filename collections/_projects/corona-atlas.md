@@ -4,7 +4,7 @@ subtitle: Interactive map of the international COVID-19 risk areas as designated
 header_img: "https://dieghernan.github.io/corona-atlas.de/assets/img/og_corona_atlas.png"
 date: 2021-04-30
 last_modified_at: 2025-02-17
-tags: [discontinued, project,R,maps,leaflet,python]
+tags: [discontinued, project,R,maps,leaflet,python,COVID19]
 permalink: /projects/corona-atlas/
 project_links:
     - url: https://dieghernan.github.io/corona-atlas.de/
