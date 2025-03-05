@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2025-03-03 -->
+    <!-- Page build 2025-03-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -20,8 +20,8 @@
       },
       "headline": "Search",
       "image": "https://dieghernan.github.io/assets/img/site/banner.png",
-      "datePublished": "2025-03-03T15:59:45+01:00",
-      "dateModified": "2025-03-03T15:59:45+01:00",
+      "datePublished": "2025-03-05T19:09:45+01:00",
+      "dateModified": "2025-03-05T19:09:45+01:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -179,7 +179,8 @@
     <!-- v6 -->
     
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+    
+      <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
     <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
     <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
@@ -256,32 +257,9 @@
 </header>
 <main class="container-lg pt-2 pb-5 flex-fill">
     <div class="row">
-        <div class="col-lg-8 offset-lg-2 my-auto text-center"><style>
-    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap');
-    
-    .fuse {
-        font-family: "Source Sans 3", serif;
-        font-weight: 400;
-        }
-      
-    .fuse-logo {
-        color: #9b59b6;
-        font-weight: bolder;
-        --fa-animation-iteration-count:1;
-        --fa-animation-duration: 0.5s;
-        --fa-animation-delay: 0.5s;
-        }
-        
-</style>
-
-<form class="input-group">
-    <label class="sr-only" for="search"> Search </label>
-    <input type="search" id="search" class="form-control rounded-right" placeholder="Search...">
-</form>
-<p class="text-right small mt-1"> Powered by <a href="https://www.fusejs.io/"><i class="fa-solid fa-asterisk fa-lg fa-spin fuse-logo"></i> Fuse.js</a></p>
-<div id="resultscount"></div>
-<div id="results" class="mt-3 text-left"></div>
-</div>
+        <div class="col-lg-8 offset-lg-2 my-auto text-center"><div id="searchbox"></div>
+<div id="powered-by" class="text-right mt-2"></div>
+<div id="hits" class="mt-3 text-left"></div></div>
     </div>
 </main><!-- Footer -->
   <footer class="footer-chulapa text-center mt-0 pt-3">
@@ -319,9 +297,9 @@
 <!-- Footer -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
-<script src="https://dieghernan.github.io/assets/js/fusejs/fusejs-store.js"></script>
-<script src="https://dieghernan.github.io/assets/js/fusejs/fusejs-search.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script> 
+<script src="https://dieghernan.github.io/assets/js/algolia/algolia-search.js"></script>
 
 <!-- start custom scripts to be placed at the bottom of the page -->
 <script>
