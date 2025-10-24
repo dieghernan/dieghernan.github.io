@@ -90,14 +90,12 @@ diegpost_draft <- function(file) {
 }
 
 
-file <- "bertin_dots"
-diegpost_draft(file)
+# file <- "bertin_dots"
+# diegpost_draft(file)
 
 
 
 plots <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
-file
-
 lapply(plots, knitr::plot_crop)
 
 knitr::plot_crop("./assets/img/drafts/xxx_celestial_map_cn-1.png")
@@ -124,7 +122,8 @@ rm(list = ls())
 # diegpost("2022-03-03-insetmaps")
 
 # diegpost("2022-05-25-tidyterra")
-diegpost("2019-05-13-Where-in-the-world")
+# diegpost("2019-05-13-Where-in-the-world")
+diegpost("2025-10-24-mapping-antarctica")
 
 knitr::plot_crop("./assets/img/blog/20221017-6-finalplot-1.png")
 
@@ -180,9 +179,8 @@ ezknit(
 
 # Try converting to webp
 
-im <- list.files("assets/img/towebp", full.names = TRUE)
+im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
 
-im <- plots
 
 lapply(im, function(x){
   
@@ -191,19 +189,24 @@ lapply(im, function(x){
   
 })
 
-x <- "bonne_proj.png"
+im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
+
+x <- im[3]
 
 a <- lapply(im, function(x){
   
 f <- png::readPNG(x)  
 
 out <- gsub(".png$", ".webp", x)
-
+dim(f)
 aa <- try(webp::write_webp(f, out), silent = TRUE)  
 
 if (class(aa) == "try-error"){
   file.copy(x, "assets/img/blognoconv")
+  unlink(x)
   
+} else {
+  file.copy(out, "assets/img/blog")
 }
   
 })
