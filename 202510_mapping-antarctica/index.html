@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en-US"><head>
+   <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.0.1.0001 -->
+    <!--  MIT License-->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2025-10-25 -->
+     <!-- Jekyll Version 4.4.1 -->
+    <!--Google Structured Data-->
+    <script type="application/ld+json">
+        {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202510_mapping-antarctica/"
+      },
+      "headline": "Mapping Antarctica",
+      "image": "https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp",
+      "datePublished": "2025-10-25T00:00:00+02:00",
+      "dateModified": "2025-10-25T00:00:00+02:00",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan"
+        , "url": "https://x.com/dhernangomez"
+        ,  "sameAs" : [
+             "https://fosstodon.org/@dhernangomez"
+            ,
+             "https://bsky.app/profile/dieghernan.bsky.social"
+            ,
+             "https://github.com/dieghernan/"
+            ,
+             "https://stackoverflow.com/users/7877917/dieghernan"
+            ,
+             "https://orcid.org/0000-0001-8457-4658"
+            ]
+      },
+       "publisher": {
+        "@type": "Organization",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://dieghernan.github.io/assets/img/site/banner.png"
+        }
+      }
+    }
+    </script>
+        <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Blog",
+        "item": "https://dieghernan.github.io/blog/"
+      },
+    {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Mapping Antarctica"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "name": "Mapping Antarctica",
+    "description": "Cool maps from the South Pole - Creating maps with R is usually straightforward, but representations thatcross the International DateLine or that use polarprojections can be tricky."
+    }
+}
+</script><script type="application/ld+json">
+{
+  "@context" : "https://schema.org",
+  "@type" : "Person",
+  "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+  "homeLocation": {
+    "@type": "Place",
+    "name": "Madrid, Spain"
+    },
+  "description": "Publisher",
+  "name" : "dieghernan",
+  "url" : "https://dieghernan.github.io/"
+  ,  "sameAs" : [
+  "https://x.com/dhernangomez",
+  "https://fosstodon.org/@dhernangomez",
+  "https://bsky.app/profile/dieghernan.bsky.social",
+  "https://github.com/dieghernan/",
+  "https://stackoverflow.com/users/7877917/dieghernan",
+  "https://orcid.org/0000-0001-8457-4658"
+  ]
+}
+</script>
+   <title>Mapping Antarctica | One world</title>
+  <link rel="canonical" href="https://dieghernan.github.io/202510_mapping-antarctica/">
+    <!-- Atom feed -->
+  <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One world" >
+    <!-- RSS 2.0 feed -->
+  <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One world" >
+    <!-- Meta tags -->
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="author" content="dieghernan" >
+   <meta name="copyright" content="dieghernan" >
+   <meta name="description" content="Cool maps from the South Pole - Creating maps with R is usually straightforward, but representations thatcross the International DateLine or that use polarpr...">
+   <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" >
+   <meta name="robots" content="index, follow"><meta name="keywords" content="">
+    <!-- OpenGraph -->
+   <meta property="og:title" content="Mapping Antarctica | One world" >
+   <meta property="og:site_name" content="One world | Projects, maps and coding" >
+   <meta property="og:url" content="https://dieghernan.github.io/202510_mapping-antarctica/" >
+   <meta property="og:type" content="website" >
+   <meta property="og:description" content="Cool maps from the South Pole - Creating maps with R is usually straightforward, but representations thatcross the International DateLine..." >
+   <meta property="og:locale" content="en-US" >
+   <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" >
+    <!-- Twitter/X Cards -->
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@dhernangomez" >
+    	<!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+  <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+  <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+  <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FWXW2HLTVZ');
+</script>
+<!-- start custom head snippets -->
+<link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention" />
+<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
+<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
+<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+<meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#000000">
+<!-- end custom head snippets --></head>
+<body class="d-flex flex-column h-entry" id="body">
+	<a class="u-url d-none" href="https://dieghernan.github.io/202510_mapping-antarctica/">Invisible link to canonical for Microformats</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>	<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Mapping Antarctica</h1><p class="lead chulapa-subtitle p-summary">Cool maps from the South Pole</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+	<main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem">
+        <span itemprop="name">Mapping Antarctica</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2025-10-25T00:00:00+02:00" class="dt-published" >25 oct 2025</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202510_mapping-antarctica/&text=Mapping+Antarctica&via=dhernangomez&hashtags=r_bloggers,beautiful_maps,rstats,rspatial,maps,ggplot2,sf,giscoR" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Mapping%20Antarctica%20https://dieghernan.github.io/202510_mapping-antarctica/%20%23r_bloggers%20%23beautiful_maps%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23sf%20%23giscoR" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202510_mapping-antarctica/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Mapping+Antarctica%20https://dieghernan.github.io/202510_mapping-antarctica/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202510_mapping-antarctica/&title=Mapping+Antarctica" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+		<div class="row pt-2">
+			<aside class="col-lg-2 mt-lg-3 small"><div rel="author" class="h-card p-author">
+				<div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+			<article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Mapping Antarctica</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#fixing-the-geometry" class="nav-link">Fixing the geometry</a></li><li class="nav-item nav d-block"><a href="#plotting-examples" class="nav-link">Plotting examples</a><ul><li class="nav-item nav d-block"><a href="#graham-bartrams-proposal-1996" class="nav-link">Graham Bartram’s proposal (1996)</a></li><li class="nav-item nav d-block"><a href="#emblem-of-the-antarctic-treaty" class="nav-link">Emblem of the Antarctic Treaty</a></li><li class="nav-item nav d-block"><a href="#antarctica-flag-redesigned" class="nav-link">Antarctica Flag Redesigned</a></li></ul></li></ul>
+		</nav>   
+	</div>
+			<p>Creating maps with <strong>R</strong> is usually straightforward, but representations that
+cross the <a href="https://en.wikipedia.org/wiki/International_Date_Line">International Date
+Line</a> or that use polar
+projections can be tricky.</p>
+<p>Different spatial-data providers use different conventions: some break
+geometries at certain longitudes (for example, cutting the Chukchi Peninsula),
+while others omit portions of the data. These inconsistencies can produce
+awkward artifacts near the poles.</p>
+<p>In this post I fix the <a href="https://ec.europa.eu/eurostat/web/gisco">GISCO (European
+Commission)</a> shapefile for Antarctica
+and produce clean orthographic maps. I walk through the manual corrections and
+then create a few example maps.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rmapshaper</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="fixing-the-geometry">Fixing the geometry</h2>
+<p>First, we obtain the GISCO Antarctica polygon and transform it to an
+orthographic projection centered on the South Pole.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">antarct</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ATA"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NAME_ENGL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="c1"># Ortho proj centered in the South Pole</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+proj=ortho +lat_0=-90 +lon_0=0"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarct</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" width="100%" /></p>
+<p>The shapefile contains a visible “lollipop” cut that looks unnatural in an
+orthographic projection. I correct it manually by:</p>
+<ol>
+ <li>Identify the polygon that represents the main Antarctic landmass.</li>
+ <li>Convert that polygon to a sequence of coordinates (points).</li>
+ <li>Remove the small sequence of points that create the artifact.</li>
+ <li>Rebuild the polygon from the cleaned coordinates and replace the broken
+geometry with the corrected one.</li>
+</ol>
+<p>We convert polygons to point coordinates and inspect them to find the offending
+sequence:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Identify the max</span><span class="w">
+</span><span class="n">ant_explode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">antarct</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">nrow</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] 778</span><span class="w">
+
+</span><span class="c1"># Max polygon</span><span class="w">
+
+</span><span class="n">ant_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ant_explode</span><span class="p">[</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
+
+</span><span class="n">coords</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">ant_max</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as_tibble</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="c1"># Add id for points</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_equal</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" width="100%" /></p>
+<p>From the plotted indices, we can see the problematic points fall roughly in the
+range 8200–9200. We inspect that interval in detail to select the exact indices
+to remove.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8200</span><span class="p">,</span><span class="w"> </span><span class="m">9200</span><span class="p">))</span><span class="w">
+
+</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" width="100%" /></p>
+<div class="alert alert-warning p-3 mx-2 mb-3">
+Note: This cleaning is tailored to this specific shapefile and may need to be
+repeated for other shapefiles. The approach is straightforward but depends on
+the particular geometry and projection.
+</div>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Final solution after some iterations...</span><span class="w">
+
+</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"To remove"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"To keep"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<div class="figure row no-gutters">
+<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" width="50%" />
+After removing the offending points, we rebuild the polygon and reconstitute the
+full Antarctica shape from the corrected piece plus the remaining polygons.
+</div>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># From coordinates to polygon</span><span class="w">
+</span><span class="n">newpol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="c1"># Removing offending points</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as.matrix</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="nf">list</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_polygon</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_sfc</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_set_crs</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">ant_max</span><span class="p">))</span><span class="w">
+
+</span><span class="n">ant_max_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">ant_max</span><span class="p">),</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newpol</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Regenerate initial shape</span><span class="w">
+</span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
+  </span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w">
+  </span><span class="n">ant_explode</span><span class="p">[</span><span class="o">-</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">NAME</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+
+</span><span class="n">antarctica_fixed</span><span class="w">
+</span><span class="c1">#&gt; Simple feature collection with 1 feature and 1 field</span><span class="w">
+</span><span class="c1">#&gt; Geometry type: MULTIPOLYGON</span><span class="w">
+</span><span class="c1">#&gt; Dimension:     XY</span><span class="w">
+</span><span class="c1">#&gt; Bounding box:  xmin: -2583099 ymin: -2458296 xmax: 2690846 ymax: 2233395</span><span class="w">
+</span><span class="c1">#&gt; Projected CRS: +proj=ortho +lat_0=-90 +lon_0=0</span><span class="w">
+</span><span class="c1">#&gt; # A tibble: 1 × 2</span><span class="w">
+</span><span class="c1">#&gt;   NAME                                                                     geometry</span><span class="w">
+</span><span class="c1">#&gt; * &lt;chr&gt;                                                          &lt;MULTIPOLYGON [m]&gt;</span><span class="w">
+</span><span class="c1">#&gt; 1 Antarctica (((-2456385 1179033, -2456141 1178965, -2456464 1178341, -2456563 117…</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" width="100%" /></p>
+<h2 id="plotting-examples">Plotting examples</h2>
+<p>With the corrected shape we can produce maps. Below are a few examples based on
+proposed Antarctic flag designs.</p>
+<h3 id="graham-bartrams-proposal-1996">Graham Bartram’s proposal (1996)</h3>
+<p>A simple rendition of Bartram’s original concept:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bbox</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">)</span><span class="w"> </span><span class="c1"># For limits on the panel</span><span class="w">
+
+</span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#009fdc"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Graham Bartram's proposal"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_bartram-1.webp" width="100%" /></p>
+<h3 id="emblem-of-the-antarctic-treaty">Emblem of the Antarctic Treaty</h3>
+<p>This example uses graticules to create a concentric “bullseye” pattern around
+Antarctica. Generating such graticules and merging meridians requires a few
+extra steps to avoid small gaps near the pole.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Need graticules</span><span class="w">
+</span><span class="n">grats</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">giscoR</span><span class="o">::</span><span class="n">gisco_get_countries</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="c1"># Specify the cuts of the graticules</span><span class="w">
+  </span><span class="n">st_graticule</span><span class="p">(</span><span class="w">
+    </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">-70</span><span class="p">,</span><span class="w"> </span><span class="m">-60</span><span class="p">),</span><span class="w">
+    </span><span class="n">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">),</span><span class="w">
+    </span><span class="n">ndiscr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w">
+    </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.000001</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">grats</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" width="100%" /></p>
+<p>We merge meridians so the area around the South Pole is filled. <code class="language-plaintext highlighter-rouge">st_graticule()</code>
+can leave a tiny hole at the pole; we fix this by joining complementary
+meridians.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Merge meridians</span><span class="w">
+</span><span class="n">merid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">),</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grats</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"E"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">180</span><span class="p">))</span><span class="w">
+
+  </span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_geometry</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTIPOINT"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">sf_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
+    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+    </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span><span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">()</span><span class="w">
+
+
+</span><span class="n">grats_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">merid</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">grats</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"E"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<p>We then cut and color the resulting graticules so they form the emblem-like
+pattern.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut since some grats should be colored differently</span><span class="w">
+
+</span><span class="n">antarctica_simp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rmapshaper</span><span class="o">::</span><span class="n">ms_simplify</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.005</span><span class="p">)</span><span class="w">
+</span><span class="n">grats_yes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_intersection</span><span class="p">(</span><span class="n">grats_end</span><span class="p">,</span><span class="w"> </span><span class="n">antarctica_simp</span><span class="p">)</span><span class="w">
+</span><span class="n">grats_no</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_difference</span><span class="p">(</span><span class="n">grats_end</span><span class="p">,</span><span class="w"> </span><span class="n">antarctica_simp</span><span class="p">)</span><span class="w">
+
+</span><span class="n">antarctica_simp</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#072b5f"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grats_yes</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#072b5f"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grats_no</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Emblem of the Antarctic Treaty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" width="100%" /></p>
+<h3 id="antarctica-flag-redesigned">Antarctica Flag Redesigned</h3>
+<p>In 2024, Graham Bartram presented a refreshed version of his flag that preserves
+the white Antarctic outline but fills the blue field with many tiny, colorful
+dots representing microplastics - even in remote regions.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" /></p>
+<p>Because the design relies on randomness, we approximate it using the following
+procedure:</p>
+<ol>
+ <li>Sample random points across the Antarctic polygon.</li>
+ <li>Build Voronoi polygons from those points, then apply a small negative buffer
+to create gaps.</li>
+ <li>Randomly sample the resulting polygons to increase visual noise.</li>
+ <li>Color polygons so larger areas remain white while smaller polygons use
+magenta/pink tones.</li>
+</ol>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Maximum chunk of Antarctica, the one that we fixed</span><span class="w">
+
+</span><span class="n">ant_max_fixed</span><span class="w">
+</span><span class="c1">#&gt; Simple feature collection with 1 feature and 1 field</span><span class="w">
+</span><span class="c1">#&gt; Geometry type: POLYGON</span><span class="w">
+</span><span class="c1">#&gt; Dimension:     XY</span><span class="w">
+</span><span class="c1">#&gt; Bounding box:  xmin: -2447764 ymin: -2125910 xmax: 2690846 ymax: 2233395</span><span class="w">
+</span><span class="c1">#&gt; Projected CRS: +proj=ortho +lat_0=-90 +lon_0=0</span><span class="w">
+</span><span class="c1">#&gt;         NAME                       geometry</span><span class="w">
+</span><span class="c1">#&gt; 1 Antarctica POLYGON ((-2423737 1557908,...</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Sample, Voronoi and negative buffer</span><span class="w">
+</span><span class="n">plastics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">3000</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_collection_extract</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-10000</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Keep only those properly included in the outline</span><span class="w">
+
+</span><span class="n">toinc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_contains_properly</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">plastics</span><span class="p">,</span><span class="w"> </span><span class="n">sparse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as.vector</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Select random chunks</span><span class="w">
+</span><span class="n">plastic_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plastics</span><span class="p">[</span><span class="n">toinc</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">slice_sample</span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" width="100%" /></p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="c1"># Random coloring</span><span class="w">
+
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">as.double</span><span class="p">()</span><span class="w">
+
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ff00ec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#9e00ec"</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">),</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">),</span><span class="w">
+  </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+  </span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bbox2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plastic_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#009fdc"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"New redesign"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox2</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.8</span><span class="p">),</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox2</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" width="100%" /></p>
+			<div class="mt-5 pt-3 mb-3 text-center">
+			<script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script> 
+			</div>
+			</article>
+		</div>
+	</main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202502_liquid-group-by/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Implementing group_by count...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Implementing g...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none invisible">
+	   <p class="page-link chulapa-label"></p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline invisible">
+	   <p class="page-link chulapa-label"></p>
+	 </li>
+   <li class="page-item text-right ml-0 invisible">
+      <a class="page-link border-0 px-4" href="#">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#beautiful_maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >beautiful_maps</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggplot2</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category" rel="tag" >sf</a>
+      <a href="https://dieghernan.github.io/tags#giscoR" class="badge chulapa-pill-bg-primary p-category" rel="tag" >giscoR</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+       <div class="container-lg mt-1 mb-2">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+             <hr>
+               <h5>Related posts</h5>
+             <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202502_st_valentine/" class="chulapa-text-body-color">
+              Happy Valentine’s Day
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Do you know the Bonne projection?</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-17T00:00:00+01:00">
+                february 17, 2025
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202312_bertin_dots/" class="chulapa-text-body-color">
+              Beautiful Maps with R (V): Point densities
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Bertin’s dot density maps with R and GHSL</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-12-16T00:00:00+01:00">
+                december 16, 2023
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">
+              Beautiful Maps with R (III): Patterns and hatched maps
+            </a>
+         </p>
+           <p class="card-text">
+              <small>A solution for b/w and academic maps.</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-12-12T00:00:00+01:00">
+                december 12, 2019
+              </time>
+            </small>
+       </div>
+     </div></nav>
+           </div>
+         </div>
+       </div><!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+        data-repo="dieghernan/dieghernan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
+        data-category="Blog"
+        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="1"
+        data-input-position="top"
+        data-theme="dark_high_contrast"
+        data-lang="es"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2025 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

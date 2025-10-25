@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2025, dieghernan</copyright>	
-		<pubDate>Fri, 24 Oct 2025 20:41:13 +0200</pubDate>
-		<lastBuildDate>Fri, 24 Oct 2025 20:41:13 +0200</lastBuildDate>
+		<pubDate>Sat, 25 Oct 2025 10:00:06 +0200</pubDate>
+		<lastBuildDate>Sat, 25 Oct 2025 10:00:06 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -18,6 +18,382 @@
 			<link>https://dieghernan.github.io/</link>
 			<description>Personal blog of dieghernan</description>
 		</image><item>
+			<title>Mapping Antarctica</title>
+			<description>
+				<![CDATA[	
+ 				<h3>Cool maps from the South Pole</h3>
+    		<p>6 min.</p>
+				<div><p>Creating maps with <strong>R</strong> is usually straightforward, but representations that
+cross the <a href="https://en.wikipedia.org/wiki/International_Date_Line">International Date
+Line</a> or that use polar
+projections can be tricky.</p>
+
+<p>Different spatial-data providers use different conventions: some break
+geometries at certain longitudes (for example, cutting the Chukchi Peninsula),
+while others omit portions of the data. These inconsistencies can produce
+awkward artifacts near the poles.</p>
+
+<p>In this post I fix the <a href="https://ec.europa.eu/eurostat/web/gisco">GISCO (European
+Commission)</a> shapefile for Antarctica
+and produce clean orthographic maps. I walk through the manual corrections and
+then create a few example maps.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rmapshaper</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="fixing-the-geometry">Fixing the geometry</h2>
+
+<p>First, we obtain the GISCO Antarctica polygon and transform it to an
+orthographic projection centered on the South Pole.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">antarct</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ATA"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NAME_ENGL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="c1"># Ortho proj centered in the South Pole</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+proj=ortho +lat_0=-90 +lon_0=0"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarct</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" width="100%" /></p>
+
+<p>The shapefile contains a visible “lollipop” cut that looks unnatural in an
+orthographic projection. I correct it manually by:</p>
+
+<ol>
+  <li>Identify the polygon that represents the main Antarctic landmass.</li>
+  <li>Convert that polygon to a sequence of coordinates (points).</li>
+  <li>Remove the small sequence of points that create the artifact.</li>
+  <li>Rebuild the polygon from the cleaned coordinates and replace the broken
+geometry with the corrected one.</li>
+</ol>
+
+<p>We convert polygons to point coordinates and inspect them to find the offending
+sequence:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Identify the max</span><span class="w">
+</span><span class="n">ant_explode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">antarct</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">nrow</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)</span><span class="w">
+</span><span class="c1">#&gt; [1] 778</span><span class="w">
+
+</span><span class="c1"># Max polygon</span><span class="w">
+
+</span><span class="n">ant_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ant_explode</span><span class="p">[</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
+
+</span><span class="n">coords</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">ant_max</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as_tibble</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="c1"># Add id for points</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_equal</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" width="100%" /></p>
+
+<p>From the plotted indices, we can see the problematic points fall roughly in the
+range 8200–9200. We inspect that interval in detail to select the exact indices
+to remove.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8200</span><span class="p">,</span><span class="w"> </span><span class="m">9200</span><span class="p">))</span><span class="w">
+
+</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" width="100%" /></p>
+
+<div class="alert alert-warning p-3 mx-2 mb-3">
+
+Note: This cleaning is tailored to this specific shapefile and may need to be
+repeated for other shapefiles. The approach is straightforward but depends on
+the particular geometry and projection.
+
+</div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Final solution after some iterations...</span><span class="w">
+
+</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"To remove"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"To keep"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="figure row no-gutters">
+<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" width="50%" />
+
+After removing the offending points, we rebuild the polygon and reconstitute the
+full Antarctica shape from the corrected piece plus the remaining polygons.
+</div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># From coordinates to polygon</span><span class="w">
+</span><span class="n">newpol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="c1"># Removing offending points</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as.matrix</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="nf">list</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_polygon</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_sfc</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_set_crs</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">ant_max</span><span class="p">))</span><span class="w">
+
+</span><span class="n">ant_max_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">ant_max</span><span class="p">),</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newpol</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Regenerate initial shape</span><span class="w">
+</span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
+  </span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w">
+  </span><span class="n">ant_explode</span><span class="p">[</span><span class="o">-</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">NAME</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+
+</span><span class="n">antarctica_fixed</span><span class="w">
+</span><span class="c1">#&gt; Simple feature collection with 1 feature and 1 field</span><span class="w">
+</span><span class="c1">#&gt; Geometry type: MULTIPOLYGON</span><span class="w">
+</span><span class="c1">#&gt; Dimension:     XY</span><span class="w">
+</span><span class="c1">#&gt; Bounding box:  xmin: -2583099 ymin: -2458296 xmax: 2690846 ymax: 2233395</span><span class="w">
+</span><span class="c1">#&gt; Projected CRS: +proj=ortho +lat_0=-90 +lon_0=0</span><span class="w">
+</span><span class="c1">#&gt; # A tibble: 1 × 2</span><span class="w">
+</span><span class="c1">#&gt;   NAME                                                                     geometry</span><span class="w">
+</span><span class="c1">#&gt; * &lt;chr&gt;                                                          &lt;MULTIPOLYGON [m]&gt;</span><span class="w">
+</span><span class="c1">#&gt; 1 Antarctica (((-2456385 1179033, -2456141 1178965, -2456464 1178341, -2456563 117…</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" width="100%" /></p>
+
+<h2 id="plotting-examples">Plotting examples</h2>
+
+<p>With the corrected shape we can produce maps. Below are a few examples based on
+proposed Antarctic flag designs.</p>
+
+<h3 id="graham-bartrams-proposal-1996">Graham Bartram’s proposal (1996)</h3>
+
+<p>A simple rendition of Bartram’s original concept:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bbox</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">)</span><span class="w"> </span><span class="c1"># For limits on the panel</span><span class="w">
+
+</span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#009fdc"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Graham Bartram's proposal"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_bartram-1.webp" width="100%" /></p>
+
+<h3 id="emblem-of-the-antarctic-treaty">Emblem of the Antarctic Treaty</h3>
+
+<p>This example uses graticules to create a concentric “bullseye” pattern around
+Antarctica. Generating such graticules and merging meridians requires a few
+extra steps to avoid small gaps near the pole.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Need graticules</span><span class="w">
+</span><span class="n">grats</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">giscoR</span><span class="o">::</span><span class="n">gisco_get_countries</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_transform</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="c1"># Specify the cuts of the graticules</span><span class="w">
+  </span><span class="n">st_graticule</span><span class="p">(</span><span class="w">
+    </span><span class="n">lat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-80</span><span class="p">,</span><span class="w"> </span><span class="m">-70</span><span class="p">,</span><span class="w"> </span><span class="m">-60</span><span class="p">),</span><span class="w">
+    </span><span class="n">lon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">),</span><span class="w">
+    </span><span class="n">ndiscr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w">
+    </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.000001</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">grats</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" width="100%" /></p>
+
+<p>We merge meridians so the area around the South Pole is filled. <code class="language-plaintext highlighter-rouge">st_graticule()</code>
+can leave a tiny hole at the pole; we fix this by joining complementary
+meridians.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Merge meridians</span><span class="w">
+</span><span class="n">merid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="m">-180</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">),</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grats</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"E"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">180</span><span class="p">))</span><span class="w">
+
+  </span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_geometry</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTIPOINT"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">sf_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
+    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"E"</span><span class="p">,</span><span class="w">
+    </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df2</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span><span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">()</span><span class="w">
+
+
+</span><span class="n">grats_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">merid</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">grats</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">filter</span><span class="p">(</span><span class="n">type</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"E"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We then cut and color the resulting graticules so they form the emblem-like
+pattern.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut since some grats should be colored differently</span><span class="w">
+
+</span><span class="n">antarctica_simp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rmapshaper</span><span class="o">::</span><span class="n">ms_simplify</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.005</span><span class="p">)</span><span class="w">
+</span><span class="n">grats_yes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_intersection</span><span class="p">(</span><span class="n">grats_end</span><span class="p">,</span><span class="w"> </span><span class="n">antarctica_simp</span><span class="p">)</span><span class="w">
+</span><span class="n">grats_no</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_difference</span><span class="p">(</span><span class="n">grats_end</span><span class="p">,</span><span class="w"> </span><span class="n">antarctica_simp</span><span class="p">)</span><span class="w">
+
+</span><span class="n">antarctica_simp</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#072b5f"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grats_yes</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#072b5f"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grats_no</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Emblem of the Antarctic Treaty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" width="100%" /></p>
+
+<h3 id="antarctica-flag-redesigned">Antarctica Flag Redesigned</h3>
+
+<p>In 2024, Graham Bartram presented a refreshed version of his flag that preserves
+the white Antarctic outline but fills the blue field with many tiny, colorful
+dots representing microplastics - even in remote regions.</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" /></p>
+
+<p>Because the design relies on randomness, we approximate it using the following
+procedure:</p>
+
+<ol>
+  <li>Sample random points across the Antarctic polygon.</li>
+  <li>Build Voronoi polygons from those points, then apply a small negative buffer
+to create gaps.</li>
+  <li>Randomly sample the resulting polygons to increase visual noise.</li>
+  <li>Color polygons so larger areas remain white while smaller polygons use
+magenta/pink tones.</li>
+</ol>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Maximum chunk of Antarctica, the one that we fixed</span><span class="w">
+
+</span><span class="n">ant_max_fixed</span><span class="w">
+</span><span class="c1">#&gt; Simple feature collection with 1 feature and 1 field</span><span class="w">
+</span><span class="c1">#&gt; Geometry type: POLYGON</span><span class="w">
+</span><span class="c1">#&gt; Dimension:     XY</span><span class="w">
+</span><span class="c1">#&gt; Bounding box:  xmin: -2447764 ymin: -2125910 xmax: 2690846 ymax: 2233395</span><span class="w">
+</span><span class="c1">#&gt; Projected CRS: +proj=ortho +lat_0=-90 +lon_0=0</span><span class="w">
+</span><span class="c1">#&gt;         NAME                       geometry</span><span class="w">
+</span><span class="c1">#&gt; 1 Antarctica POLYGON ((-2423737 1557908,...</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Sample, Voronoi and negative buffer</span><span class="w">
+</span><span class="n">plastics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">3000</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_collection_extract</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-10000</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Keep only those properly included in the outline</span><span class="w">
+
+</span><span class="n">toinc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_contains_properly</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">plastics</span><span class="p">,</span><span class="w"> </span><span class="n">sparse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">as.vector</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Select random chunks</span><span class="w">
+</span><span class="n">plastic_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plastics</span><span class="p">[</span><span class="n">toinc</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">slice_sample</span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" width="100%" /></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="c1"># Random coloring</span><span class="w">
+
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">as.double</span><span class="p">()</span><span class="w">
+
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ff00ec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#9e00ec"</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">),</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">),</span><span class="w">
+  </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+  </span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bbox2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plastic_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#009fdc"</span><span class="p">),</span><span class="w">
+    </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+    </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"New redesign"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox2</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.8</span><span class="p">),</span><span class="w">
+    </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">bbox2</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)])</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.4</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" width="100%" /></p>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/202510_mapping-antarctica/</link>
+			<category>posts</category>
+		    <category>beautiful_maps</category><category>ggplot2</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Mapping Antarctica ]]></media:title>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202510_mapping-antarctica/</guid>
+      <pubDate>Sat, 25 Oct 2025 00:00:00 +0200</pubDate>
+		</item><item>
 			<title>Implementing group_by count in Liquid</title>
 			<description>
 				<![CDATA[	
@@ -134,23 +510,23 @@ array:</p>
   </tr>
     <tr>
       <td>r_bloggers</td>
-      <td>20</td>
+      <td>21</td>
     </tr>
     <tr>
       <td>rstats</td>
-      <td>21</td>
+      <td>22</td>
     </tr>
     <tr>
       <td>rspatial</td>
-      <td>21</td>
+      <td>22</td>
     </tr>
     <tr>
       <td>sf</td>
-      <td>12</td>
+      <td>13</td>
     </tr>
     <tr>
       <td>maps</td>
-      <td>25</td>
+      <td>26</td>
     </tr>
     <tr>
       <td>vignette</td>
@@ -178,11 +554,11 @@ array:</p>
     </tr>
     <tr>
       <td>beautiful_maps</td>
-      <td>7</td>
+      <td>8</td>
     </tr>
     <tr>
       <td>giscoR</td>
-      <td>9</td>
+      <td>10</td>
     </tr>
     <tr>
       <td>raster</td>
@@ -230,7 +606,7 @@ array:</p>
     </tr>
     <tr>
       <td>ggplot2</td>
-      <td>8</td>
+      <td>9</td>
     </tr>
     <tr>
       <td>tmap</td>
@@ -397,23 +773,23 @@ populated if a tag presents the number of occurrences in the main loop:</p>
   </tr>
     <tr>
       <td>maps</td>
-      <td>25</td>
+      <td>26</td>
     </tr>
     <tr>
       <td>rstats</td>
-      <td>21</td>
+      <td>22</td>
     </tr>
     <tr>
       <td>rspatial</td>
-      <td>21</td>
+      <td>22</td>
     </tr>
     <tr>
       <td>r_bloggers</td>
-      <td>20</td>
+      <td>21</td>
     </tr>
     <tr>
       <td>sf</td>
-      <td>12</td>
+      <td>13</td>
     </tr>
     <tr>
       <td>project</td>
@@ -421,19 +797,19 @@ populated if a tag presents the number of occurrences in the main loop:</p>
     </tr>
     <tr>
       <td>giscoR</td>
-      <td>9</td>
+      <td>10</td>
     </tr>
     <tr>
       <td>ggplot2</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>beautiful_maps</td>
       <td>8</td>
     </tr>
     <tr>
       <td>discontinued</td>
       <td>8</td>
-    </tr>
-    <tr>
-      <td>beautiful_maps</td>
-      <td>7</td>
     </tr>
     <tr>
       <td>terra</td>
