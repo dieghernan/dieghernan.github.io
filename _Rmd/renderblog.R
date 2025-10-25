@@ -93,17 +93,6 @@ diegpost_draft <- function(file) {
 # file <- "bertin_dots"
 # diegpost_draft(file)
 
-
-
-plots <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
-lapply(plots, knitr::plot_crop)
-
-knitr::plot_crop("./assets/img/drafts/xxx_celestial_map_cn-1.png")
-
-rm(list = ls())
-
-
-
 #Render 2019-04-27-Using-CountryCodes ----
 
 #diegpost("2019-04-27-Using-CountryCodes")
@@ -123,7 +112,83 @@ rm(list = ls())
 
 # diegpost("2022-05-25-tidyterra")
 # diegpost("2019-05-13-Where-in-the-world")
-diegpost("2025-10-24-mapping-antarctica")
+diegpost("2025-10-25-mapping-antarctica")
+
+
+
+im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
+
+
+lapply(im, function(x){
+  
+  file.copy(x, "./assets/img/towebp/")
+  unlink(x)
+  
+})
+
+
+plots <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
+lapply(plots, knitr::plot_crop)
+
+
+
+# Try converting to webp
+
+
+im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
+
+x <- im[3]
+
+a <- lapply(im, function(x){
+  
+  f <- png::readPNG(x)  
+  
+  out <- gsub(".png$", ".webp", x)
+  dim(f)
+  aa <- try(webp::write_webp(f, out), silent = TRUE)  
+  
+  if (class(aa) == "try-error"){
+    file.copy(x, "assets/img/blognoconv")
+    unlink(x)
+    
+  } else {
+    file.copy(out, "assets/img/blog")
+    unlink(out)
+    unlink(x)
+  }
+  
+})
+
+
+# Fix img url
+
+allmds <- list.files("./collections/", recursive = TRUE, pattern = ".md$", full.names = TRUE)
+
+for (newfile in allmds){
+  message(newfile, "\n")
+  
+  lines <- readLines(newfile)
+  newlines <- gsub('<img src="../assets/img',
+                   '<img src="https://dieghernan.github.io/assets/img', lines)
+  newlines <- gsub('(../assets/img',
+                   '(https://dieghernan.github.io/assets/img',
+                   newlines, fixed = TRUE)
+  
+  
+  writeLines(newlines, newfile)
+}
+
+
+
+
+
+
+
+
+knitr::plot_crop("./assets/img/drafts/xxx_celestial_map_cn-1.png")
+
+rm(list = ls())
+
 
 knitr::plot_crop("./assets/img/blog/20221017-6-finalplot-1.png")
 
