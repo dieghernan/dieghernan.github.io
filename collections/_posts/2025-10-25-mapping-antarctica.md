@@ -314,9 +314,13 @@ antarctica_simp |>
 
 ### Antarctica Flag Redesigned
 
-In 2024, Graham Bartram presented a refreshed version of his flag that preserves
-the white Antarctic outline but fills the blue field with many tiny, colorful
-dots representing microplastics - even in remote regions. 
+In 2024, Graham Bartram revealed a new version of his original flag as part of 
+a global campaign to raise awareness about the growing problem of microplastic 
+pollution. The new design keeps the familiar white outline of Antarctica but 
+swaps the plain blue background for one filled with countless tiny, colorful 
+dots. These dots represent the microscopic bits of plastic that have been 
+discovered even in the planet’s most untouched places - including the Antarctic 
+ice and its surrounding oceans.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" />
 
