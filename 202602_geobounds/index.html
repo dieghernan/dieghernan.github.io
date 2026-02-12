@@ -254,7 +254,7 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Introducing geoboundaries</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#installation" class="nav-link">Installation</a></li><li class="nav-item nav d-block"><a href="#getting-administrative-levels-adm" class="nav-link">Getting administrative levels (ADM)</a></li><li class="nav-item nav d-block"><a href="#global-composite-boundaries-cgaz" class="nav-link">Global Composite Boundaries (CGAZ)</a></li><li class="nav-item nav d-block"><a href="#understanding-the-data" class="nav-link">Understanding the data</a></li><li class="nav-item nav d-block"><a href="#caching" class="nav-link">Caching</a></li><li class="nav-item nav d-block"><a href="#when-should-you-use-geobounds" class="nav-link">When should you use geobounds?</a></li><li class="nav-item nav d-block"><a href="#related-packages" class="nav-link">Related Packages</a><ul><li class="nav-item nav d-block"><a href="#rnaturalearth" class="nav-link">rnaturalearth</a></li><li class="nav-item nav d-block"><a href="#giscor" class="nav-link">giscoR</a></li><li class="nav-item nav d-block"><a href="#osmdata" class="nav-link">osmdata</a></li></ul></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#installation" class="nav-link">Installation</a></li><li class="nav-item nav d-block"><a href="#getting-administrative-levels-adm" class="nav-link">Getting administrative levels (ADM)</a></li><li class="nav-item nav d-block"><a href="#global-composite-boundaries-cgaz" class="nav-link">Global Composite Boundaries (CGAZ)</a></li><li class="nav-item nav d-block"><a href="#understanding-the-data" class="nav-link">Understanding the data</a></li><li class="nav-item nav d-block"><a href="#caching" class="nav-link">Caching</a></li><li class="nav-item nav d-block"><a href="#when-should-you-use-geobounds" class="nav-link">When should you use geobounds?</a></li><li class="nav-item nav d-block"><a href="#related-packages" class="nav-link">Related Packages</a><ul><li class="nav-item nav d-block"><a href="#rnaturalearth" class="nav-link">rnaturalearth</a></li><li class="nav-item nav d-block"><a href="#giscor" class="nav-link">giscoR</a></li><li class="nav-item nav d-block"><a href="#osmdata" class="nav-link">osmdata</a></li></ul></li><li class="nav-item nav d-block"><a href="#bottom-line" class="nav-link">Bottom line</a></li></ul>
 		</nav>   
 	</div>
 			<p>If you’ve ever worked with spatial data in R, this may ring a bell…</p>
@@ -271,7 +271,7 @@
 <a href="https://www.geoboundaries.org/">geoBoundaries</a> database. However, accessing the
 data can be tedious since it’s provided as zipped shapefiles, and as any GIS
 professional knows, <a href="http://switchfromshapefile.org/">shapefiles should die!</a></p>
-<p>Previously, the <strong>rgeoboundaries</strong> package was on CRAN, but it was archived. So
+<p>Previously, the <strong>rgeoboundaries</strong> package was on CRAN and allowed to access the geoBoundaries API, but it was archived. So
 I decided to create my own version, and <strong>geobounds</strong> was born.</p>
 <ul>
  <li>Source code: <a href="https://github.com/dieghernan/geobounds">https://github.com/dieghernan/geobounds</a></li>
@@ -319,8 +319,12 @@ shapefile messing.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="" width="100%" /></p>
 <h2 id="global-composite-boundaries-cgaz">Global Composite Boundaries (CGAZ)</h2>
 <p>When you download individual country files, each country reflects its own view
-of borders. This results in: - Overlapping boundaries - Geographic gaps -
-Disputed territories</p>
+of borders. This results in:</p>
+<ul>
+ <li>Overlapping boundaries</li>
+ <li>Geographic gaps</li>
+ <li>Disputed territories</li>
+</ul>
 <p>For clean global visualizations, geoBoundaries provides a Composite Global
 Administrative Zones (CGAZ) dataset that can be accessed with <code class="language-plaintext highlighter-rouge">gb_get_world()</code>.</p>
 <p>Here’s an example with country-level files:</p>
@@ -355,7 +359,7 @@ Administrative Zones (CGAZ) dataset that can be accessed with <code class="langu
 <p>The geoBoundaries database undergoes rigorous quality assurance, including
 manual review and hand-digitization of physical maps. This ensures the highest
 level of spatial accuracy for scientific and academic research.</p>
-<p>This precision comes at a cost—some files can be large and take longer to
+<p>This precision comes at a cost: some files can be large and take longer to
 download. For visualization and general mapping, we recommend using simplified
 datasets by setting <code class="language-plaintext highlighter-rouge">simplified = TRUE</code>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Different resolutions</span><span class="w">
@@ -413,9 +417,9 @@ boundaries.</p>
 <p>When administrative boundaries are not enough and you need OpenStreetMap
 features (roads, POIs, land use, etc.), <strong>osmdata</strong> gives you powerful querying
 capabilities.</p>
-<p>I built <strong>geobounds</strong> to provide direct access to geoBoundaries products. It’s a
-welcome addition to the R-GIS ecosystem.</p>
-<p>Enjoy!</p>
+<h2 id="bottom-line">Bottom line</h2>
+<p>I built <strong>geobounds</strong> to provide direct access to geoBoundaries products. I hope this package would help you in your GIS joruney.</p>
+<p>Happy mapping!</p>
 			<div class="mt-5 pt-3 mb-3 text-center">
 				<script type='text/javascript'
 					src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
