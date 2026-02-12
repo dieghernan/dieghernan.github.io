@@ -112,7 +112,7 @@ diegpost_draft <- function(file) {
 
 # diegpost("2022-05-25-tidyterra")
 # diegpost("2019-05-13-Where-in-the-world")
-diegpost("2025-10-25-mapping-antarctica")
+diegpost("2026-02-15-geobounds")
 
 
 
@@ -120,10 +120,10 @@ im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
 
 
 lapply(im, function(x){
-  
+
   file.copy(x, "./assets/img/towebp/")
   unlink(x)
-  
+
 })
 
 
@@ -140,23 +140,23 @@ im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
 x <- im[3]
 
 a <- lapply(im, function(x){
-  
-  f <- png::readPNG(x)  
-  
+
+  f <- png::readPNG(x)
+
   out <- gsub(".png$", ".webp", x)
   dim(f)
-  aa <- try(webp::write_webp(f, out), silent = TRUE)  
-  
+  aa <- try(webp::write_webp(f, out), silent = TRUE)
+
   if (class(aa) == "try-error"){
     file.copy(x, "assets/img/blognoconv")
     unlink(x)
-    
+
   } else {
     file.copy(out, "assets/img/blog")
     unlink(out)
     unlink(x)
   }
-  
+
 })
 
 
@@ -166,15 +166,15 @@ allmds <- list.files("./collections/", recursive = TRUE, pattern = ".md$", full.
 
 for (newfile in allmds){
   message(newfile, "\n")
-  
+
   lines <- readLines(newfile)
   newlines <- gsub('<img src="../assets/img',
                    '<img src="https://dieghernan.github.io/assets/img', lines)
   newlines <- gsub('(../assets/img',
                    '(https://dieghernan.github.io/assets/img',
                    newlines, fixed = TRUE)
-  
-  
+
+
   writeLines(newlines, newfile)
 }
 
@@ -248,10 +248,10 @@ im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
 
 
 lapply(im, function(x){
-  
+
   file.copy(x, "./assets/img/towebp")
   unlink(x)
-  
+
 })
 
 im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
@@ -259,21 +259,21 @@ im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
 x <- im[3]
 
 a <- lapply(im, function(x){
-  
-f <- png::readPNG(x)  
+
+f <- png::readPNG(x)
 
 out <- gsub(".png$", ".webp", x)
 dim(f)
-aa <- try(webp::write_webp(f, out), silent = TRUE)  
+aa <- try(webp::write_webp(f, out), silent = TRUE)
 
 if (class(aa) == "try-error"){
   file.copy(x, "assets/img/blognoconv")
   unlink(x)
-  
+
 } else {
   file.copy(out, "assets/img/blog")
 }
-  
+
 })
 
 webp::write_webp(f, "a.webp")
