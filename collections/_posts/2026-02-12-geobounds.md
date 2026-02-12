@@ -31,7 +31,7 @@ While searching for new data sources, I found the excellent
 data can be tedious since it's provided as zipped shapefiles, and as any GIS
 professional knows, [shapefiles should die!](http://switchfromshapefile.org/)
 
-Previously, the **rgeoboundaries** package was on CRAN, but it was archived. So
+Previously, the **rgeoboundaries** package was on CRAN and allowed to access the geoBoundaries API, but it was archived. So
 I decided to create my own version, and **geobounds** was born.
 
 - Source code: <https://github.com/dieghernan/geobounds>
@@ -98,8 +98,11 @@ gb_get(country = "Panama", adm_lvl = "all", simplified = TRUE) |>
 ## Global Composite Boundaries (CGAZ)
 
 When you download individual country files, each country reflects its own view
-of borders. This results in: - Overlapping boundaries - Geographic gaps -
-Disputed territories
+of borders. This results in:
+
+- Overlapping boundaries
+- Geographic gaps
+- Disputed territories
 
 For clean global visualizations, geoBoundaries provides a Composite Global
 Administrative Zones (CGAZ) dataset that can be accessed with `gb_get_world()`.
@@ -146,7 +149,7 @@ The geoBoundaries database undergoes rigorous quality assurance, including
 manual review and hand-digitization of physical maps. This ensures the highest
 level of spatial accuracy for scientific and academic research.
 
-This precision comes at a cost—some files can be large and take longer to
+This precision comes at a cost: some files can be large and take longer to
 download. For visualization and general mapping, we recommend using simplified
 datasets by setting `simplified = TRUE`.
 
@@ -222,7 +225,8 @@ When administrative boundaries are not enough and you need OpenStreetMap
 features (roads, POIs, land use, etc.), **osmdata** gives you powerful querying
 capabilities.
 
-I built **geobounds** to provide direct access to geoBoundaries products. It's a
-welcome addition to the R-GIS ecosystem.
+## Bottom line
 
-Enjoy!
+I built **geobounds** to provide direct access to geoBoundaries products. I hope this package would help you in your GIS joruney.
+
+Happy mapping!
