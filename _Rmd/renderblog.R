@@ -11,7 +11,7 @@ file.path(getwd())
 diegpost <- function(file) {
   getwd()
   ezknit(
-    paste0(getwd(),"/_Rmd/",file,".Rmd"),
+    paste0(getwd(), "/_Rmd/", file, ".Rmd"),
     out_dir = "./collections/_posts",
     fig_dir = "../assets/img/blog",
     keep_html = FALSE
@@ -21,37 +21,53 @@ diegpost <- function(file) {
   current_folder <- "./collections/assets/img/blog"
   new_folder <- "./assets/img/blog"
   list_of_files <- list.files(current_folder)
-  file.copy(file.path(current_folder,list_of_files), new_folder, overwrite = TRUE, recursive = TRUE)
-  unlink("./collections/assets",
-         recursive = TRUE,
-         force = TRUE)
+  file.copy(
+    file.path(current_folder, list_of_files),
+    new_folder,
+    overwrite = TRUE,
+    recursive = TRUE
+  )
+  unlink("./collections/assets", recursive = TRUE, force = TRUE)
 
   # Fix img links
   newfile <- paste0("./collections/_posts", "/", file, ".md")
 
   lines <- readLines(newfile)
-  newlines <- gsub('<img src="../assets/img',
-                   '<img src="https://dieghernan.github.io/assets/img', lines)
-  newlines <- gsub('(../assets/img',
-                   '(https://dieghernan.github.io/assets/img',
-                   newlines, fixed = TRUE)
+  newlines <- gsub(
+    '<img src="../assets/img',
+    '<img src="https://dieghernan.github.io/assets/img',
+    lines
+  )
+  newlines <- gsub(
+    '(../assets/img',
+    '(https://dieghernan.github.io/assets/img',
+    newlines,
+    fixed = TRUE
+  )
 
   # Fix double slashes
-  newlines <- gsub("https://dieghernan.github.io/assets/img//",
-                   "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
+  newlines <- gsub(
+    "https://dieghernan.github.io/assets/img//",
+    "https://dieghernan.github.io/assets/img/",
+    newlines,
+    fixed = TRUE
+  )
 
-  newlines <- gsub("https://dieghernan.github.io/assets/img/blog//",
-                   "https://dieghernan.github.io/assets/img/blog/", newlines, fixed = TRUE)
+  newlines <- gsub(
+    "https://dieghernan.github.io/assets/img/blog//",
+    "https://dieghernan.github.io/assets/img/blog/",
+    newlines,
+    fixed = TRUE
+  )
 
   writeLines(newlines, newfile)
-
 }
 
 
 diegpost_draft <- function(file) {
   getwd()
   ezknit(
-    paste0(getwd(),"/_Rmd/",file,".Rmd"),
+    paste0(getwd(), "/_Rmd/", file, ".Rmd"),
     out_dir = "./collections/_drafts",
     fig_dir = "../assets/img/drafts",
     keep_html = FALSE
@@ -62,31 +78,47 @@ diegpost_draft <- function(file) {
   new_folder <- "./assets/img/drafts/"
   list_of_files <- list.files(current_folder)
 
-  file.copy(file.path(current_folder,list_of_files), new_folder, overwrite = TRUE, recursive = TRUE)
+  file.copy(
+    file.path(current_folder, list_of_files),
+    new_folder,
+    overwrite = TRUE,
+    recursive = TRUE
+  )
 
-  unlink("./collections/assets",
-         recursive = TRUE,
-         force = TRUE)
+  unlink("./collections/assets", recursive = TRUE, force = TRUE)
 
   # Fix img links
   newfile <- paste0("./collections/_drafts", "/", file, ".md")
 
   lines <- readLines(newfile)
-  newlines <- gsub('<img src="../assets/img',
-                   '<img src="https://dieghernan.github.io/assets/img', lines)
-  newlines <- gsub('(../assets/img',
-                   '(https://dieghernan.github.io/assets/img',
-                   newlines, fixed = TRUE)
+  newlines <- gsub(
+    '<img src="../assets/img',
+    '<img src="https://dieghernan.github.io/assets/img',
+    lines
+  )
+  newlines <- gsub(
+    '(../assets/img',
+    '(https://dieghernan.github.io/assets/img',
+    newlines,
+    fixed = TRUE
+  )
 
   # Fix double slashes
-  newlines <- gsub("https://dieghernan.github.io/assets/img//",
-                   "https://dieghernan.github.io/assets/img/", newlines, fixed = TRUE)
+  newlines <- gsub(
+    "https://dieghernan.github.io/assets/img//",
+    "https://dieghernan.github.io/assets/img/",
+    newlines,
+    fixed = TRUE
+  )
 
-  newlines <- gsub("https://dieghernan.github.io/assets/img/drafts//",
-                   "https://dieghernan.github.io/assets/img/drafts/", newlines, fixed = TRUE)
+  newlines <- gsub(
+    "https://dieghernan.github.io/assets/img/drafts//",
+    "https://dieghernan.github.io/assets/img/drafts/",
+    newlines,
+    fixed = TRUE
+  )
 
   writeLines(newlines, newfile)
-
 }
 
 
@@ -112,18 +144,15 @@ diegpost_draft <- function(file) {
 
 # diegpost("2022-05-25-tidyterra")
 # diegpost("2019-05-13-Where-in-the-world")
-diegpost("2026-02-15-geobounds")
-
+diegpost("2026-02-12-geobounds")
 
 
 im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
 
 
-lapply(im, function(x){
-
+lapply(im, function(x) {
   file.copy(x, "./assets/img/towebp/")
   unlink(x)
-
 })
 
 
@@ -131,92 +160,61 @@ plots <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
 lapply(plots, knitr::plot_crop)
 
 
-
 # Try converting to webp
-
 
 im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
 
 x <- im[3]
 
-a <- lapply(im, function(x){
-
+a <- lapply(im, function(x) {
   f <- png::readPNG(x)
 
   out <- gsub(".png$", ".webp", x)
   dim(f)
   aa <- try(webp::write_webp(f, out), silent = TRUE)
 
-  if (class(aa) == "try-error"){
+  if (class(aa) == "try-error") {
     file.copy(x, "assets/img/blognoconv")
     unlink(x)
-
   } else {
     file.copy(out, "assets/img/blog")
     unlink(out)
     unlink(x)
   }
-
 })
 
 
 # Fix img url
 
-allmds <- list.files("./collections/", recursive = TRUE, pattern = ".md$", full.names = TRUE)
+post <- "geobounds"
 
-for (newfile in allmds){
+
+allmds <- list.files(
+  "./collections/",
+  recursive = TRUE,
+  pattern = post,
+  full.names = TRUE
+)
+
+
+for (newfile in allmds) {
   message(newfile, "\n")
 
   lines <- readLines(newfile)
-  newlines <- gsub('<img src="../assets/img',
-                   '<img src="https://dieghernan.github.io/assets/img', lines)
-  newlines <- gsub('(../assets/img',
-                   '(https://dieghernan.github.io/assets/img',
-                   newlines, fixed = TRUE)
-
-
-  writeLines(newlines, newfile)
-}
-
-
-
-
-
-
-
-
-knitr::plot_crop("./assets/img/drafts/xxx_celestial_map_cn-1.png")
-
-rm(list = ls())
-
-
-knitr::plot_crop("./assets/img/blog/20221017-6-finalplot-1.png")
-
-file="2022-03-03-insetmaps"
-
-# Fix img url
-
-allmds <- list.files("./collections/", recursive = TRUE, pattern = ".md$", full.names = TRUE)
-
-for (newfile in allmds){
-  message(newfile, "\n")
-
-  lines <- readLines(newfile)
-  newlines <- gsub('<img src="../assets/img',
-                   '<img src="https://dieghernan.github.io/assets/img', lines)
-  newlines <- gsub('(../assets/img',
-                   '(https://dieghernan.github.io/assets/img',
-                   newlines, fixed = TRUE)
-
+  newlines <- gsub(
+    '<img src="../assets/img',
+    '<img src="https://dieghernan.github.io/assets/img',
+    lines
+  )
+  newlines <- gsub(
+    '(../assets/img',
+    '(https://dieghernan.github.io/assets/img',
+    newlines,
+    fixed = TRUE
+  )
 
   writeLines(newlines, newfile)
 }
-
-
-
-
-
-
 
 
 # ezknit(
@@ -229,13 +227,12 @@ for (newfile in allmds){
 #   verbose = T
 # )
 
-
 draft <- "Unknown-pleasures-R"
 
 # unlink(".collections", recursive = TRUE)
 
 ezknit(
-  paste0(getwd(),"/_Rmd/",draft,".Rmd"),
+  paste0(getwd(), "/_Rmd/", draft, ".Rmd"),
   out_dir = "./collections/_drafts",
   fig_dir = "./img/",
   keep_html = FALSE
@@ -247,33 +244,28 @@ ezknit(
 im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
 
 
-lapply(im, function(x){
-
+lapply(im, function(x) {
   file.copy(x, "./assets/img/towebp")
   unlink(x)
-
 })
 
 im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
 
 x <- im[3]
 
-a <- lapply(im, function(x){
+a <- lapply(im, function(x) {
+  f <- png::readPNG(x)
 
-f <- png::readPNG(x)
+  out <- gsub(".png$", ".webp", x)
+  dim(f)
+  aa <- try(webp::write_webp(f, out), silent = TRUE)
 
-out <- gsub(".png$", ".webp", x)
-dim(f)
-aa <- try(webp::write_webp(f, out), silent = TRUE)
-
-if (class(aa) == "try-error"){
-  file.copy(x, "assets/img/blognoconv")
-  unlink(x)
-
-} else {
-  file.copy(out, "assets/img/blog")
-}
-
+  if (class(aa) == "try-error") {
+    file.copy(x, "assets/img/blognoconv")
+    unlink(x)
+  } else {
+    file.copy(out, "assets/img/blog")
+  }
 })
 
 webp::write_webp(f, "a.webp")
@@ -283,7 +275,7 @@ x <- im[1]
 x <- "assets/img/blog/20191212_imgpost-1.png"
 
 img <- magick::image_read(x)
-img2 <- magick::image_convert(img,  colorspace = "sRGB")
+img2 <- magick::image_convert(img, colorspace = "sRGB")
 
 aa <- magick::image_data(img, "rgba")
 
