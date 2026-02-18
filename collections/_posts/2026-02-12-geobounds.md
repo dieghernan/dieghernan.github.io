@@ -1,5 +1,5 @@
 ---
-title: "Introducing geoboundaries"
+title: "Introducing geobounds"
 description: "A simple way to retrieve datasets from geoBoundaries."
 tags:
   - r_bloggers
