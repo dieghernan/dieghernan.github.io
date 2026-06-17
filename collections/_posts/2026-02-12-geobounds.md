@@ -8,6 +8,7 @@ tags:
   - maps
   - ggplot2
   - sf
+  - geobounds
 output:
   html_document:
   md_document:
