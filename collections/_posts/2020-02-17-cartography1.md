@@ -1,25 +1,23 @@
 ---
 title: "New features on cartography package"
 subtitle: "Vignette of the package expansion"
-header_img: ./assets/img/blog/20200217_wordcloud2-1.webp
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- beautiful_maps
-- maps
-- sf
-- cartography
-- r_package
-header_type : "splash"
+  - r_bloggers
+  - rstats
+  - rspatial
+  - beautiful_maps
+  - maps
+  - sf
+  - cartography
+  - r_package
+header_img: ./assets/img/blog/20200217_wordcloud2-1.webp
+header_type: "splash"
 show_toc: true
-output: 
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
 ---
-
-
 
 ## Introduction
 
@@ -27,11 +25,10 @@ The aim of this document is to describe the new features added to `cartography` 
 [dieghernan](https://github.com/dieghernan/) and already available on **CRAN**.
 
 Those new features are:
-  
-* `hatchedLayer` and `legendHatched` functions.
-* `pngLayer` and `getPngLayer` functions.
-* `wordcloudLayer` function.
 
+- `hatchedLayer` and `legendHatched` functions.
+- `pngLayer` and `getPngLayer` functions.
+- `wordcloudLayer` function.
 
 These functions don't handle `sp` objects on purpose, favoring `sf` instead.
 
@@ -44,13 +41,14 @@ packageVersion("cartography")
 ## [1] '3.0.0'
 ```
 
-
 ## Hatched Map
 
-Version of typology/choropleth maps using a hatched filling. This is particularly useful for those maps that needs to be printed on black and white, as academic papers. These maps also are useful for representing overlapping dimensions.
+Version of typology/choropleth maps using a hatched filling. This is
+particularly useful for maps that need to be printed in black and white, such
+as academic papers. These maps are also useful for representing overlapping
+dimensions.
 
 ### Example 1
-
 
 ```r
 library(sf)
@@ -138,11 +136,7 @@ layoutLayer(
 
 ![plot of chunk 20200217_hatched-min](https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp)
 
-
-
-
 ### Example 2
-
 
 ```r
 library(sf)
@@ -227,17 +221,19 @@ layoutLayer(
   author =  paste0("cartography ", packageVersion("cartography")),
   scale = 500,
   frame = TRUE
-) 
+)
 ```
 
 ![plot of chunk 20200217_hatched](https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp)
 
-`legendHatched` honors the order on the parameters. In this case, two `dot` patterns are presents, so `pch = c(4,15)` takes care of that. Note that three line-type patterns are also plotted, as and in the previous case, `lty = c(1, 1, 3)` respect that order.
+`legendHatched` honors the order of the parameters. In this case, two `dot`
+patterns are present, so `pch = c(4,15)` takes care of that. Note that three
+line-type patterns are also plotted, as in the previous case, and `lty = c(1,
+1, 3)` respects that order.
 
 ### Example 3
 
-`hatchedLayer` also could be useful for plotting several dimensions on the same map, in combination with another functions of the package.
-
+`hatchedLayer` could also be useful for plotting several dimensions on the same map, in combination with another function of the package.
 
 ```r
 
@@ -338,16 +334,13 @@ layoutLayer(
 
 ![plot of chunk 20200217_hatched-adv](https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp)
 
-
 ## `png` Layer
 
 This new capability geotags a `.png` file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a `POLYGON/MULTIPOLYGON`.
 
 For high-quality png maps, **it is recommended to plot your map on a `.svg` device**.
 
-
 ### Example 1
-
 
 ```r
 library(sf)
@@ -400,13 +393,12 @@ layoutLayer(
   author =  paste0("cartography ", packageVersion("cartography")),
   scale = 500,
   frame = TRUE
-) 
+)
 ```
 
 ![plot of chunk 20200217_pnglayer](https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp)
 
 ### Example 2
-
 
 ```r
 
@@ -433,12 +425,11 @@ pngLayer(UKpng, add=TRUE)
 
 ## wordcloudLayer
 
-A word cloud (or tag cloud) is a visual representation of text data. On a mapping context, this representation is useful for including several information at a glance. 
+A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.
 
 Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.
 
 ### Example 1
-
 
 ```r
 
@@ -458,7 +449,7 @@ layoutLayer(
   author =  paste0("cartography ", packageVersion("cartography")),
   scale = 500,
   frame = TRUE
-) 
+)
 ```
 
 ![plot of chunk 20200217_wordcloud1](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp)

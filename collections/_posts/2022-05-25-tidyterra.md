@@ -4,15 +4,15 @@ subtitle: Easily work and ggplot SpatRasters
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- maps
-- ggplot2
-- tidyterra
-- terra
-- maptiles
-- r_package
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - tidyterra
+  - terra
+  - maptiles
+  - r_package
 output:
   html_document:
     df_print: paged
@@ -22,11 +22,8 @@ output:
 header_img: ./assets/img/blog/20220525_easteregg-2.webp
 ---
 
-
-
 If you have been playing around with **R** for a while, probably you are
-familiarized with the `volcano` dataset:
-
+familiar with the `volcano` dataset:
 
 ```r
 
@@ -36,7 +33,7 @@ image(volcano, col = terrain.colors(256, rev = TRUE))
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" />
 
-This represents the topographic information of one of the volcanoes of Auckland
+This represents the topographic information about one of the volcanoes of Auckland
 (New Zealand), specifically [Maungawhau / Mount
 Eden](https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden). But **do you know
 that this map is flipped?**
@@ -44,9 +41,8 @@ that this map is flipped?**
 On this post I introduce the [tidyterra
 package](https://github.com/dieghernan/tidyterra), recently added to
 [CRAN](https://CRAN.R-project.org/package=tidyterra) and I would show you how to
-geotag the `volcano` dataset. We would produce also ggplot2 maps using the
-functions of `tidyterra`.
-
+geotag the `volcano` dataset. We would also produce **ggplot2** maps using the
+functions of **tidyterra**.
 
 ```r
 # Libraries
@@ -61,8 +57,7 @@ library(sf)
 
 Let's check it out. Thanks to the package `maptiles` we can have a glimpse of
 the location of Maungawhau using map tiles (as Google Maps uses). We would use
-`tidyterra` for displaying the map tile:
-
+**tidyterra** for displaying the map tile:
 
 ```r
 
@@ -99,9 +94,8 @@ geo-tagged map tile)? Let's check it out
 
 ## Working with SpatRasters
 
-Thanks to the `terra` package we can start converting `volcano` into a
+Thanks to the **terra** package we can start converting `volcano` into a
 SpatRaster:
-
 
 ```r
 
@@ -129,14 +123,14 @@ terra::plot(volcano_rast_ok)
 ```r
 
 volcano_rast_ok
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 1, 1  (x, y)
 #> extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)
-#> coord. ref. :  
-#> source      : memory 
-#> name        : lyr.1 
-#> min value   :    94 
+#> coord. ref. :
+#> source      : memory
+#> name        : lyr.1
+#> min value   :    94
 #> max value   :   195
 ```
 
@@ -146,15 +140,14 @@ information. Thanks to this article of Tomislav Hengl
 parameters of `volcano` (see [Volcano
 Maungawhau](https://geomorphometry.org/volcano-maungawhau/)), that are:
 
--   **CRS**: EPSG:27200
--   **xllcorner**: 2667400
--   **yllcorner**: 6478700
--   **cellsize**: 10 m
--   **ncols**: 61
--   **nrows**: 87
+- **CRS**: EPSG:27200
+- **xllcorner**: 2667400
+- **yllcorner**: 6478700
+- **cellsize**: 10 m
+- **ncols**: 61
+- **nrows**: 87
 
 And we can translate that easily to an empty SpatRaster:
-
 
 ```r
 
@@ -171,7 +164,7 @@ template <- rast(
   resolution = 10
 )
 template
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 10, 10  (x, y)
 #> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
@@ -181,10 +174,9 @@ template
 So now we only need to transfer the values from `volcano_rast_ok` to our
 template:
 
-
 ```r
 
-# Use tidyterra for pull the values of one raster
+# Use tidyterra to pull the values of one raster
 # and create a new layer
 
 volcano2 <- template %>%
@@ -192,14 +184,14 @@ volcano2 <- template %>%
   select(elevation)
 
 volcano2
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 10, 10  (x, y)
 #> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
-#> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) 
-#> source      : memory 
-#> name        : elevation 
-#> min value   :        94 
+#> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)
+#> source      : memory
+#> name        : elevation
+#> min value   :        94
 #> max value   :       195
 
 terra::plot(volcano2)
@@ -219,13 +211,12 @@ ggtile +
 
 ## An Easter egg
 
-The `volcano` dataset may not be completely up to date. As a compliment,
-`tidyterra` includes a `.tif` file with the same dimensions that our `volcano2`
+The `volcano` dataset may not be completely up to date. As a complement,
+**tidyterra** includes a `.tif` file with the same dimensions that our `volcano2`
 raster, but with the topographic values extracted from [Auckland LiDAR 1m DEM
 (2013)](https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/) and
 resampled to a resolution of 5x5 meters, for package size optimization. See here
-how to load it and check the plotting `tidyterra` possibilities:
-
+how to load it and check the plotting possibilities of **tidyterra**:
 
 ```r
 
@@ -236,14 +227,14 @@ volcano2_easter <- rast(system.file("extdata/volcano2.tif",
 ))
 
 volcano2_easter
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 174, 122, 1  (nrow, ncol, nlyr)
 #> resolution  : 5, 5  (x, y)
 #> extent      : 1756969, 1757579, 5917003, 5917873  (xmin, xmax, ymin, ymax)
-#> coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193) 
-#> source      : volcano2.tif 
-#> name        : elevation 
-#> min value   :  76.26222 
+#> coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193)
+#> source      : volcano2.tif
+#> name        : elevation
+#> min value   :  76.26222
 #> max value   :  195.5542
 terra::plot(volcano2_easter)
 ```

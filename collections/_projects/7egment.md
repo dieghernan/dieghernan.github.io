@@ -1,22 +1,27 @@
 ---
-title: 7egment 
+title: 7egment
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
+excerpt: 7egment is a customizable watchface based on the classic 7-segment display that adds your location and the current weather information in the language used on your watch and smartphone.
+tags:
+  - discontinued
+  - project
+  - pebble
+  - watchface
+  - javascript
+  - C
 header_img: https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png
 date: 2017-05-17
-tags: [discontinued, project,pebble,watchface,javascript,C]
 permalink: /projects/7egment/
 project_links:
-    - url: https://github.com/dieghernan/7egment
-      icon: fab fa-github
-      label: See on GitHub
-excerpt: 7egment is a customizable watchface based on the classic 7-segment display that adds your location and the current weather information in the language used on your watch and smartphone.
+  - url: https://github.com/dieghernan/7egment
+    icon: fab fa-github
+    label: See on GitHub
 ---
 
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 **7egment** is a customizable watchface based on the classic 7-segment display that adds your location and the current weather information in the language used on your watch and smartphone.
-
 
 ![Banner](https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png)
 
@@ -26,27 +31,28 @@ excerpt: 7egment is a customizable watchface based on the classic 7-segment disp
 
 ## Features
 
-* Autodetection of 12h/24h based on your watch settings
-* Internationalization: Autotranslating of weekday supported for:
-  * English 
-  * Spanish
-  * German
-  * French
-  * Portuguese
-  * Italian
+- Autodetection of 12h/24h based on your watch settings
+- Internationalization: Automatic weekday translation is supported for:
+  - English
+  - Spanish
+  - German
+  - French
+  - Portuguese
+  - Italian
 
 ## Options
- * Choose background colors, frame and text
- * 3 Bands design. Make it match your tie!
- * Weather: Current conditions on °c or °f.
- * Choose your weather provider:
-    * [Wunderground](https://www.wunderground.com)
-    * [OpenWeatherMap](https://openweathermap.org/)
- * Implementation of [pmkey.xyz](https://www.pmkey.xyz)    
- * Location, based on your selected weather provider
- * Bluetooth and GPS warnings
- * Night theme displayed between sunset and sunrise
- 
+
+- Choose background colors, frame and text
+- 3 Bands design. Make it match your tie!
+- Weather: Current conditions in °C or °F.
+- Choose your weather provider:
+  - [Wunderground](https://www.wunderground.com)
+  - [OpenWeatherMap](https://openweathermap.org/)
+- Implementation of [pmkey.xyz](https://www.pmkey.xyz)
+- Location based on your selected weather provider
+- Bluetooth and GPS warnings
+- Night theme displayed between sunset and sunrise
+
 ## Screenshots
 
 <div class="row">
@@ -63,11 +69,12 @@ excerpt: 7egment is a customizable watchface based on the classic 7-segment disp
 
 ## Attributions
 
-### Fonts: 
- * [DSEG7Modern-Bold](http://www.keshikan.net/fonts-e.html) by  Keshikan けしかん.
- * [Digital7-Regular](https://fontsgeek.com/fonts/Digital7-Regular) downloaded from [fontsgeek.com](http://fontsgeek.com)
-  
-### Weather providers  
+### Fonts:
+
+- [DSEG7Modern-Bold](http://www.keshikan.net/fonts-e.html) by Keshikan けしかん.
+- [Digital7-Regular](https://fontsgeek.com/fonts/Digital7-Regular) downloaded from [fontsgeek.com](http://fontsgeek.com)
+
+### Weather providers
 
 <div class="row">
 <div class="col">
@@ -85,6 +92,5 @@ excerpt: 7egment is a customizable watchface based on the classic 7-segment disp
 ## License
 
 Developed under license [MIT](https://raw.githubusercontent.com/dieghernan/7egment/master/LICENSE).
-
 
 **Made in Madrid, Spain ❤️**

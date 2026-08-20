@@ -7,198 +7,195 @@ repository: dieghernan/dieghernan.github.io
 url: https://dieghernan.github.io
 baseurl: ""
 
-title                   : One world    
-subtitle                : Projects, maps and coding
-description             : Personal blog of dieghernan
-timezone                : "Europe/Madrid"
+title: One world
+subtitle: Projects, maps and coding
+description: Personal blog of dieghernan
+timezone: "Europe/Madrid"
 # SEO
-og_image                : ./assets/img/site/banner.png
-twitter_site            : dhernangomez
-fa5_kit_code            : afe0d1dec9
+og_image: ./assets/img/site/banner.png
+twitter_site: dhernangomez
+fa5_kit_code: afe0d1dec9
 author:
-  name                  :  dieghernan
-  avatar                :   ./assets/img/site/avatar.png
-  location              :  "Madrid, Spain"
-  links:                
-    - url: https://x.com/dhernangomez
-      icon: fab fa-square-x-twitter    
-      label: My Twitter/X
-    - url:  https://fosstodon.org/@dhernangomez
-      icon: fa-brands fa-mastodon
-      label: My Mastodon
-    - url:  https://bsky.app/profile/dieghernan.bsky.social
-      icon: fa-brands fa-square-bluesky
-      label: My Bluesky
-    - url:  https://github.com/dieghernan/
-      icon: fab fa-github
-      label: My GitHub
-    - url: https://stackoverflow.com/users/7877917/dieghernan
-      icon: fab fa-stack-overflow 
-      label: On StackOverflow
-    - url: https://orcid.org/0000-0001-8457-4658
-      icon: fa-brands fa-orcid
-      label: My Orcid
-      
-gtag_id                 : "G-FWXW2HLTVZ"
+  name: dieghernan
+  avatar: ./assets/img/site/avatar.png
+  location: "Madrid, Spain"
+  links:
+  - url: https://x.com/dhernangomez
+    icon: fab fa-square-x-twitter
+    label: My Twitter/X
+  - url: https://fosstodon.org/@dhernangomez
+    icon: fa-brands fa-mastodon
+    label: My Mastodon
+  - url: https://bsky.app/profile/dieghernan.bsky.social
+    icon: fa-brands fa-square-bluesky
+    label: My Bluesky
+  - url: https://github.com/dieghernan/
+    icon: fab fa-github
+    label: My GitHub
+  - url: https://stackoverflow.com/users/7877917/dieghernan
+    icon: fab fa-stack-overflow
+    label: On StackOverflow
+  - url: https://orcid.org/0000-0001-8457-4658
+    icon: fa-brands fa-orcid
+    label: My Orcid
+
+gtag_id: "G-FWXW2HLTVZ"
 search:
-  provider              : algolia 
-  fusejs_maxwords       : 500
-  algolia_logo          : true 
-algolia:                                                                   
-  application_id        : "KOIKA5PDQO"
-  index_name            : "blog"
-  search_only_api_key   : "7f1fe42bef3f03458cb3a911ebc7e0ac"
-  files_to_exclude:       
-    - _layouts/*.html
-    - _includes/*.html
-    - oldcontent/*.html
-    - oldcontent/*.md
-  extensions_to_index:     
-    - html
-    - md
-  searchableAttributes:                                                    
-    - title                                                                    
-    - headings                                                                 
-    - unordered(content)                                                       
-    - unordered(subtitle)                                                      
-    - unordered(categories)                                                    
-    - unordered(collection)                                                    
-    - unordered(tags) 
-  customRanking:            #Optional
-    - desc(include_on_search)
-    - desc(title)
-    - desc(content) 
-    - desc(subtitle)
-    
+  provider: algolia
+  fusejs_maxwords: 500
+  algolia_logo: true
+algolia:
+  application_id: "KOIKA5PDQO"
+  index_name: "blog"
+  search_only_api_key: "7f1fe42bef3f03458cb3a911ebc7e0ac"
+  files_to_exclude:
+  - _layouts/*.html
+  - _includes/*.html
+  - oldcontent/*.html
+  - oldcontent/*.md
+  extensions_to_index:
+  - html
+  - md
+  searchableAttributes:
+  - title
+  - headings
+  - unordered(content)
+  - unordered(subtitle)
+  - unordered(categories)
+  - unordered(collection)
+  - unordered(tags)
+  customRanking:
+  #Optional
+  - desc(include_on_search)
+  - desc(title)
+  - desc(content)
+  - desc(subtitle)
+
 comments:
-  provider: giscus         
-  
+  provider: giscus
+
 # B. Navigation
 navbar:
-  style     : 
-  expand    : xl
+  style:
+  expand: xl
   brand:
-    title   :  One World # Title in navbar
-    img     :  https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png # An small image, try 30x30px 
+    title: One World # Title in navbar
+    img: https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png # An small image, try 30x30px
   nav:
-  - title   : Blog # Label
-    url     : /blog/ # url	
-  - title   : Projects
-    url     : /projects
-  - title   : Archives
-    child   :
-      - title : By date
-        url   : /archive
-      - title : By tags
-        url   : /tags
-  - title   : Gallery
-    url     : /gallery
-  - title   : '<i class="fab fa-github" aria-hidden="true"></i> GitHub repo'
-    url     : https://github.com/dieghernan/dieghernan.github.io
-  - title   : '<i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers'
-    url     : https://www.r-bloggers.com/
+  - title: Blog # Label
+    url: /blog/ # url
+  - title: Projects
+    url: /projects
+  - title: Archives
+    child:
+    - title: By date
+      url: /archive
+    - title: By tags
+      url: /tags
+  - title: Gallery
+    url: /gallery
+  - title: '<i class="fab fa-github" aria-hidden="true"></i> GitHub repo'
+    url: https://github.com/dieghernan/dieghernan.github.io
+  - title: '<i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers'
+    url: https://www.r-bloggers.com/
 footer:
   links:
-    - label: "RSS"
-      icon: "fa fa-rss"
-      url:  "./atom.xml"
-    - label: Stack Overflow
-      icon: fab fa-stack-overflow
-      url: https://stackoverflow.com/users/7877917/dieghernan
-    - label: WikiCommons
-      icon: fab fa-wikipedia-w
-      url: https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84
-    - label: GitHub
-      icon: fab fa-github
-      url: https://github.com/dieghernan/
-    - label: "RPubs"
-      icon: "fab fa-r-project"
-      url: "https://rpubs.com/dieghernan"
-    
+  - label: "RSS"
+    icon: "fa fa-rss"
+    url: "./atom.xml"
+  - label: Stack Overflow
+    icon: fab fa-stack-overflow
+    url: https://stackoverflow.com/users/7877917/dieghernan
+  - label: WikiCommons
+    icon: fab fa-wikipedia-w
+    url: https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84
+  - label: GitHub
+    icon: fab fa-github
+    url: https://github.com/dieghernan/
+  - label: "RPubs"
+    icon: "fab fa-r-project"
+    url: "https://rpubs.com/dieghernan"
+
 # C. Theme Settings
 googlefonts:
-  - url : 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap'
-  - url: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap'
-  
-chulapa-skin: 
-  highlight     : cran
-  skin          : gitdev
-  vars          :    
+- url: 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap'
+- url: 'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap'
+
+chulapa-skin:
+  highlight: cran
+  skin: gitdev
+  vars:
     font-family-monospace: 'Fira Code'
-    
-    
-  
-    
-    
+
 # D. Jekyll Defaults and collections: see https://jekyllrb.com/
 
 paginate: 5
 paginate_path: "/blog/page:num/"
-paginator_maxnum: 3  
-collections_dir     : collections
+paginator_maxnum: 3
+collections_dir: collections
 collections:
   projects:
     output: true
     permalink: /projects/:title
-  posts: 
+  posts:
     output: true
     permalink: /:year:month_:title/
 permalink: /:title
 defaults:
-  -
-    scope:
-      path: ""
-    values:
-      layout: "default"
-      header_type: "base"
-      include_on_search   : false
-      cloudtag_url        : /tags 
-      cloudcategory_url   : /categories 
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      header_type       : "post"
-      include_on_search : true
-      include_on_feed   : true
-      show_date         : true
-      show_related      : true
-      related_label     : '<h5>Related posts</h5>'
-      show_bottomnavs   : true
-      show_sociallinks  : true
-      show_comments     : true
-      show_tags         : true
-      show_sidetoc: true
-      show_categories   : true
-      show_author       : true
-      show_breadcrumb   : true
-      show_kofi         : true
-      breadcrumb_list   :
-        - label: Blog
-          url: /blog/
-  -
-    scope:
-      path: ""
-      type: "projects"
-    values:
-      header_type       : "hero"
-      show_random       : true
-      random_label      : '<h5>You may also enjoy...</h5>'
-      show_bottomnavs   : true
-      show_sociallinks  : true
-      include_on_search : true
-      show_tags         : true
-      show_breadcrumb   : true
-      include_on_feed   : true
-      breadcrumb_list   :
-        - label: Projects
-          url: /projects
-  -
-    scope:
-      path: "assets/img/blog"
-    values:
-      image_col         : imgblog
+
+- scope:
+    path: ""
+  values:
+    layout: "default"
+    header_type: "base"
+    include_on_search: false
+    cloudtag_url: /tags
+    cloudcategory_url: /categories
+
+- scope:
+    path: ""
+    type: "posts"
+  values:
+    header_type: "post"
+    include_on_search: true
+    include_on_feed: true
+    show_date: true
+    show_related: true
+    related_label: '<h5>Related posts</h5>'
+    show_bottomnavs: true
+    show_sociallinks: true
+    show_comments: true
+    show_tags: true
+    show_sidetoc: true
+    show_categories: true
+    show_author: true
+    show_breadcrumb: true
+    show_kofi: true
+    breadcrumb_list:
+    - label: Blog
+      url: /blog/
+
+- scope:
+    path: ""
+    type: "projects"
+  values:
+    header_type: "hero"
+    show_random: true
+    random_label: '<h5>You may also enjoy...</h5>'
+    show_bottomnavs: true
+    show_sociallinks: true
+    include_on_search: true
+    show_tags: true
+    show_breadcrumb: true
+    include_on_feed: true
+    breadcrumb_list:
+    - label: Projects
+      url: /projects
+
+- scope:
+    path: "assets/img/blog"
+  values:
+    image_col: imgblog
 
 # XX. Other settings - no need to modify
 compress_html:
@@ -206,26 +203,24 @@ compress_html:
   blanklines: true
 
 plugins:
-  - jekyll-github-metadata
-  - jekyll-paginate
-  - jekyll-include-cache
-  - jekyll-sitemap
-  - jekyll-redirect-from
-  - jekyll-remote-theme
-
-
+- jekyll-github-metadata
+- jekyll-paginate
+- jekyll-include-cache
+- jekyll-sitemap
+- jekyll-redirect-from
+- jekyll-remote-theme
 
 # Exclude these files from production site
 exclude:
-  - LICENSE
-  - README.md
-  - Gemfile
-  - vendor
-  - oldcontent
-  - .gitattributes
+- LICENSE
+- README.md
+- Gemfile
+- vendor
+- oldcontent
+- .gitattributes
 
 include:
- - _pages
+- _pages
 
 # Conversion
 markdown: kramdown
@@ -233,7 +228,6 @@ highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: true
-
 
 # Markdown Processing
 kramdown:
@@ -247,10 +241,8 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
-
 # Sass/SCSS
 sass:
   sass_dir: _sass
   style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
   quiet_deps: true
-  

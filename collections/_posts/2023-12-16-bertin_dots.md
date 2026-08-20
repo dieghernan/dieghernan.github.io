@@ -3,16 +3,16 @@ title: "Beautiful Maps with R (V): Point densities"
 subtitle: "Bertin's dot density maps with R and GHSL"
 excerpt: Another way to represent demographics on a map.
 tags:
-- r_bloggers
-- beautiful_maps
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- terra
-- tidyterra
-- giscoR
+  - r_bloggers
+  - beautiful_maps
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - terra
+  - tidyterra
+  - giscoR
 output:
   html_document:
   md_document:
@@ -21,12 +21,12 @@ output:
 header_img: ./assets/img/blog/202312_finalmap.webp
 mathjax: true
 bibliography: bertin.bib
-nocite: '@*'
+nocite: "@*"
 ---
 
 Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a
 new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
-a dot density map based on the work of the french cartographer [Jacques
+a dot density map based on the work of the French cartographer [Jacques
 Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 
 ![Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
@@ -34,7 +34,7 @@ Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 
 In this post I would create a similar map for Iberia, and additionally I would
 show how to create a variation using a hexagonal grid instead of a rectangular
-one. This is the first issue of the series 
+one. This is the first issue of the series
 [Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
@@ -42,7 +42,7 @@ one. This is the first issue of the series
 I would use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
-``` r
+```r
 # Base spatial packages
 library(terra)
 library(sf)
@@ -69,8 +69,8 @@ Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
 would use the global file with a resolution of 1 km on Mollweide projection
 (ESRI:54009).
 
-``` r
-# Create observation window based the Iberian Peninsula and surroundings
+```r
+# Create observation window based on the Iberian Peninsula and surroundings
 # We create a buffered circle
 owin <- gisco_get_countries(
   country = c("ES", "PT"),
@@ -111,7 +111,7 @@ use the `win` argument when reading the raster with `terra::rast()`, as this
 would allow us to load only the desired area with the subsequent improvement in
 terms of performance.
 
-``` r
+```r
 # Download data
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
@@ -165,7 +165,7 @@ density.
 Instead of using the numeric range of densities, we would use categories for the
 final map, so we would classify the density into different groups:
 
-``` r
+```r
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
 nrow(pop_init)
@@ -208,7 +208,7 @@ pop_points <- pop_agg %>%
 And finally the map. In this case I would save it as a high resolution square
 map.
 
-``` r
+```r
 # Final plot
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
@@ -267,21 +267,22 @@ ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 
 The previous plot is based on the centroids of each cell of the raster, that is,
 by definition, a rectangular grid. I would like also to experiment with
-hexagonal grids (i.e. grid of hexagons) since I have the feeling that looks more
-"natural" than the rectangular ones, that presents a regularity hardly seen in
+hexagonal grids (i.e. a grid of hexagons) since I have the feeling that they
+look more "natural" than the rectangular ones, which present a regularity
+hardly seen in
 the wild.
 
 The issue here is that `terra` does not produce this type of grids, however it
 is possible to create them with `sf::st_make_grid()`, so the workflow for this
-altenative is:
+alternative is:
 
-1.  Create a hexagonal grid, where each hexagon represents a similar area than
-    each cell on the aggregated raster.
+1.  Create a hexagonal grid, where each hexagon represents a similar area to
+    each cell in the aggregated raster.
 2.  Extract the values of the raster to the new grid.
 3.  Finally, follow the same steps on data wrangling and plotting.
 
 When working with `sf::st_make_grid(square = FALSE)`, the parameter `cellsize`
-should be the "diameter" of the hexagon instead of the area. Luckly, we can
+should be the "diameter" of the hexagon instead of the area. Luckily, we can
 infer this value since the area of a hexagon is
 
 $$
@@ -291,7 +292,7 @@ $$
 So we can extract $$d$$ from the previous expression knowing the area $$A$$ of
 the aggregated cells:
 
-``` r
+```r
 # Hex grid with sf ----
 
 # Avg size of the cells on the aggregated grid
@@ -322,7 +323,7 @@ pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
 
 Now, we use `exact_extract()` to extract the population on each hexagonal grid.
 
-``` r
+```r
 # Extract aggregated population by hex cell
 pop_agg_sf$population <- exact_extract(pop_init,
   y = pop_agg_sf,
@@ -343,7 +344,7 @@ base_gg +
 
 Finally we just compute densities, create categories and finally the map:
 
-``` r
+```r
 # Mask and categorize
 pop_sf_points <- pop_agg_sf %>%
   # Compute density by cell
@@ -419,13 +420,12 @@ And that's it! Which one do you like the most? Let me know in the comments.
 
 ## References
 
--   Bertin J (1967). *Sémiologie graphique. Les diagrammes. Les réseaux. Les
-    cartes*. Gauthier-Villars, Paris.
--   European Commission. Joint Research Centre. (2023). *GHSL data package
-    2023.*. Publications Office, LU <https://doi.org/10.2760/098587>
--   Hernangómez D (2023). "Using the tidyverse with terra objects: the tidyterra
-    package *Journal of Open Source Software*, *8*(91), 5751. ISSN 2475-9066
-    <https://doi.org/10.21105/joss.05751>
--   Pesaresi M, Politis P (2023). "GHS-BUILT-C R2023A - GHS Settlement
-    Characteristics, derived from Sentinel2 composite (2018) and other GHS
-    R2023A data." <https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30>
+- Bertin J (1967). _Sémiologie graphique. Les diagrammes. Les réseaux. Les
+  cartes_. Gauthier-Villars, Paris.
+- European Commission. Joint Research Centre. (2023). _GHSL data package 2023._. Publications Office, LU <https://doi.org/10.2760/098587>
+- Hernangómez D (2023). "Using the tidyverse with terra objects: the tidyterra
+  package _Journal of Open Source Software_, _8_(91), 5751. ISSN 2475-9066
+  <https://doi.org/10.21105/joss.05751>
+- Pesaresi M, Politis P (2023). "GHS-BUILT-C R2023A - GHS Settlement
+  Characteristics, derived from Sentinel2 composite (2018) and other GHS
+  R2023A data." <https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30>

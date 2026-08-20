@@ -1,24 +1,39 @@
 ---
 title: "Insets with ggplot2 and tmap - and mapsf!"
 subtitle: "A map on a map"
-last_modified_at: 2022-03-03
-tags: [r_bloggers,rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain, mapsf, inset]
-header_img: ./assets/img/blog/20220303_inset.webp
-excerpt: A common challenge when creating maps is how to include an inset map on 
-  your visualization. An inset map is a smaller map usually included on a corner 
-  that may provide additional context to the overall map, or may include map 
+excerpt: A common challenge when creating maps is how to include an inset map on
+  your visualization. An inset map is a smaller map usually included on a corner
+  that may provide additional context to the overall map, or may include map
   units than won't be usually represented properly.
-output: 
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - sf
+  - ggplot2
+  - tmap
+  - mapSpain
+  - mapsf
+  - inset
+last_modified_at: 2022-03-03
+header_img: ./assets/img/blog/20220303_inset.webp
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
 ---
 
-*This post is dedicated to [Dominic Royé](https://dominicroye.github.io/en/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)*
+_This post is dedicated to [Dominic Royé](https://dominicroye.github.io/en/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)_
 
-A common challenge when creating maps is how to include an inset map on your visualization. An inset map is nothing more than a smaller map usually included on a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but its geographical location would imply an imperfect visualization, or even to include small units that otherwise won't be shown on the map.
+A common challenge when creating maps is how to include an inset map in your
+visualization. An inset map is nothing more than a smaller map usually included
+in a corner that may provide additional context to the overall map. It is also
+useful for representing spatial units that may form part of a country but whose
+geographical location would result in an imperfect visualization, or for
+including small units that would otherwise not be shown on the map.
 
-I have already covered this [using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/), but this time I would show how to produce these insets using the `ggplot2` and the `tmap` packages. In short: **use `cowplot` package**.
+I have already covered this [using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/), but this time I would show how to produce these insets using the **ggplot2** and **tmap** packages. In short: use the **cowplot** package.
 
 ## Test case: Canary Island as an inset
 
@@ -26,7 +41,7 @@ On this example, I would create a map of Spain using `mapSpain` and creating an 
 
 The "true" map of Spain is:
 
-``` r
+```r
 library(mapSpain)
 library(sf)
 library(ggplot2)
@@ -42,7 +57,7 @@ ggplot(regions) +
 
 I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary Islands I would use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083))
 
-``` r
+```r
 main <- regions %>%
   filter(ccaa.shortname.es != "Canarias") %>%
   st_transform(25830)
@@ -53,7 +68,7 @@ ggplot(main) +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
 
-``` r
+```r
 island <- regions %>%
   filter(ccaa.shortname.es == "Canarias") %>%
   st_transform(4083)
@@ -74,7 +89,7 @@ We have already created two quick maps on `ggplot2`. Now, to produce our map wit
 
 2.  We would combine both objects with `cowplot`.
 
-``` r
+```r
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
@@ -99,7 +114,7 @@ sub_gg <- ggplot(island) +
 
 We have our objects in place, and now is when the magic happens! With `cowplot` we can combine both maps on a single one. You may need to play a bit with the parameters `x`, `y` `hjust` and `vjust` of the sub plot to improve the placement:
 
-``` r
+```r
 library(cowplot)
 
 ggdraw() +
@@ -113,9 +128,11 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%"/>
 
-Note also that this approach is valid not only for maps, but for all type of plot produced by `ggplot2`, since this package is not specific for map objects:
+Note also that this approach is valid not only for maps, but for all types of
+plots produced by **ggplot2**, since this package is not specific to map
+objects:
 
-``` r
+```r
 # Combining non-spatial plots
 library(palmerpenguins)
 
@@ -161,9 +178,9 @@ ggdraw() +
 
 ## On `tmap`
 
-We can follow a similar approach on `tmap`. On versions v3.x.x (there is a new [revamped version on development](https://github.com/r-tmap/tmap/issues/599)) we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap` objects to the objects that `cowplot` can handle.
+We can follow a similar approach with **tmap**. In version 3.x.x (there is a new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)), we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap` objects to the objects that **cowplot** can handle.
 
-``` r
+```r
 library(tmap)
 
 main_tmap <- tm_shape(main) +
@@ -182,9 +199,10 @@ sub_tmap <- tm_shape(island) +
 sub_tmap <- tmap_grob(sub_tmap)
 ```
 
-Once that we have these new "grobs", we can use the same approach than we applied to `ggplot2` objects.
+Once we have these new "grobs", we can use the same approach as the one we
+applied to **ggplot2** objects.
 
-``` r
+```r
 ggdraw() +
   draw_plot(main_tmap) +
   draw_plot(sub_tmap,
@@ -199,7 +217,7 @@ ggdraw() +
 
 [Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of `mapsf`, shared also how to create inset maps using that package:
 
-``` r
+```r
 library(mapsf)
 
 mf_map(main)

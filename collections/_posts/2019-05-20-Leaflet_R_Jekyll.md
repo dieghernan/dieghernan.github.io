@@ -1,12 +1,19 @@
 ---
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
 subtitle: Make it work in 6 steps - a short tutorial
-tags: [r_bloggers,rstats,rspatial,leaflet,jekyll, html, maps]
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - leaflet
+  - jekyll
+  - html
+  - maps
 header_img: ./assets/img/blog/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30
-output: 
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
@@ -24,7 +31,7 @@ remote theme created by myself.
 **Index**
 
 1. The generated Toc will be an ordered list
-{:toc}
+   {:toc}
 
 Ready? Let’s go!
 
@@ -40,51 +47,57 @@ This part is not really hard. When having a look to the source code of
 [Leaflet for R](https://rstudio.github.io/leaflet/) site it can be seen
 this chunk:
 
-``` html
+```html
 <head>
   <!--code-->
-  
+
   <script src="libs/jquery/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="libs/bootstrap/css/flatly.min.css" rel="stylesheet" />
   <script src="libs/bootstrap/js/bootstrap.min.js"></script>
   <script src="libs/bootstrap/shim/html5shiv.min.js"></script>
-  
+
   ...
   <!--more libraries-->
   ...
-  
+
   <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
   <script src="libs/leaflet-binding/leaflet.js"></script>
-  
+
   <!--code-->
 </head>
 ```
 
 So now we have it! The only thing to remember is that we need **to load
-the libraries from the leaflet server
+the libraries from the **leaflet** server
 (`https://rstudio.github.io/leaflet`)**, meaning that we have to prepend
 that url to the libraries in our installation:
 
-``` html
-  <script src="https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://rstudio.github.io/leaflet/libs/bootstrap/css/flatly.min.css" rel="stylesheet" />
-  
-  ...
-  <!--more libraries-->
-  ...
-  
-  <link     href="https://rstudio.github.io/leaflet/libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
-  <script src= "https://rstudio.github.io/leaflet/libs/leaflet-binding/leaflet.js"></script>
+```html
+<script src="https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link
+  href="https://rstudio.github.io/leaflet/libs/bootstrap/css/flatly.min.css"
+  rel="stylesheet"
+/>
+
+...
+<!--more libraries-->
+...
+
+<link
+  href="https://rstudio.github.io/leaflet/libs/rstudio_leaflet/rstudio_leaflet.css"
+  rel="stylesheet"
+/>
+<script src="https://rstudio.github.io/leaflet/libs/leaflet-binding/leaflet.js"></script>
 ```
 
-You can have a look of my implementation on
+You can have a look at my implementation in
 [`./_includes/leaflet.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/leaflet.html).
 
-#### 2.Where to include
+#### 2. Where to include
 
-This a little bit more complicated, depending on the structure of your
+This is a little more complicated, depending on the structure of your
 Jekyll template. The code chunk should be included in the `<head>`
 section of your page, so you would need to find where to put it. In the
 case of <span class="chulapa">Chulapa</span> it is on
@@ -96,7 +109,7 @@ step 1.
 <i class="fa fa-star"></i> **Pro tip:** For a better performance of the
 site, include these libraries only when you need it. In my case, I added
 a custom variable in my YAML front matter for those posts with a leaflet
-map, `leafletmap: true`. Go to step 4 for a working example. 
+map, `leafletmap: true`. Go to step 4 for a working example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 ### The RStudio part
@@ -107,7 +120,7 @@ Now it’s time to create a leaflet map with **RStudio**. I just keep it
 simple for this post, so I took the first example provided in [Leaflet
 for R - Introduction](https://rstudio.github.io/leaflet/)
 
-``` r
+```r
 library(leaflet)
 
 m <- leaflet() %>%
@@ -128,16 +141,16 @@ Here it is **essential** to set up the option `always_allow_html: yes`,
 as well as `output: github_document`. As an example, this post was
 created with the front matter:
 
-``` yaml
+```yaml
 ---
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
 subtitle: Make it work in 6 steps - a short tutorial
-tags: [R,leaflet,Jekyll, html, maps]
+tags: [R, leaflet, Jekyll, html, maps]
 header_img: https://dieghernan.github.io/assets/figs/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30
-output: 
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
@@ -145,7 +158,7 @@ output:
 ```
 
 We are almost there! Now “Knit” your code and get the corresponding
-`.md`file.
+`.md` file.
 
 ### The Markdown part
 
@@ -158,12 +171,12 @@ Have a look to the `.md` code that you have just created. Although not
 displayed in the preview, you can see in the file itself a chunk that
 looks like this:
 
-``` html
-  <script type="application/json"data-for="7ab57412f7b1df4d5773">
-    {"x":{"options":
-      ...
-      "jsHooks":[]}
-  </script>
+```html
+<script type="application/json" data-for="7ab57412f7b1df4d5773">
+  {"x":{"options":
+    ...
+    "jsHooks":[]}
+</script>
 ```
 
 Actually that chunk is your leaflet map, created with **RStudio**. You
@@ -173,7 +186,7 @@ but we would solve it later.
 
 Now you just need to paste this piece of code before that chunk:
 
-``` html
+```html
 <!--html_preserve-->
 <div id="htmlwidget-7ab57412f7b1df4d5773" style="width:100%;height:216px;" class="leaflet html-widget"></div>
   <script type="application/json"data-for="htmlwidget-7ab57412f7b1df4d5773">
@@ -182,7 +195,7 @@ Now you just need to paste this piece of code before that chunk:
 
 <i class="fa fa-exclamation-triangle"></i> **Warning:** Be sure that the
 widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
-`<div>` and in the `<script>` part. If not your map would not load. 
+`<div>` and in the `<script>` part. If not, your map would not load.
 {: .alert .alert-warning .p-3 .mx-2 .my-3}
 
 The `style="width:100%; height:216px;` part controls the actual size of
@@ -195,14 +208,14 @@ see which one is more suitable for your needs.
 
 Now you just have to publish your post as usual!! If everything has been
 properly set, when Jekyll builds your post it would include the
-libraries in the header and make the magic happens, just like this:
+libraries in the header and make the magic happen, just like this:
 
 <div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 
 <i class="fa fa-exclamation-triangle"></i> **Warning:** Have you checked
-the YAML front matter of your `.md` file? Have another look, specially
-if you have followed my Pro tip. 
+the YAML front matter of your `.md` file? Have another look, especially
+if you have followed my Pro tip.
 {: .alert .alert-warning .p-3 .mx-2 .my-3}
 
 ### Gallery: Size of a leaflet map <a name="extra"></a>
@@ -217,14 +230,14 @@ here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 
 With these examples you can see how to control the absolute size of the
 leaflet map. The disadvantage of this method is that the size would be
-fixed for all the devices, so maps sized for smartphones or tables
+fixed for all the devices, so maps sized for smartphones or tablets
 wouldn’t look as nice in laptops, etc. and vice versa.
 
 ##### Example 1: 672x480px
 
 Fixed size in pixels. By default in my machine:
 
-``` r
+```r
 leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%
   addTiles() %>%
   setMaxBounds(-200, -90, 200, 90) %>%
@@ -238,7 +251,7 @@ leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%
 
 Let’s go narrow and long with `html "width:200px;height:300px;"`:
 
-``` r
+```r
 leaflet(
   options = leafletOptions(minZoom = 1.25, maxZoom = 8),
   width = "200px", height = "300px"
@@ -258,7 +271,7 @@ screen, no matter what device you are using.
 
 ##### Example 3: 100% width
 
-``` r
+```r
 leaflet(
   options = leafletOptions(minZoom = 1.25, maxZoom = 8),
   width = "100%"

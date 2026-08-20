@@ -1,21 +1,27 @@
 ---
-title: Bzel 
+title: Bzel
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
+excerpt: Bzel integrates the bezel into your watchface. Display minutes as digits, as a moving dot or as a fill in the bezel
+tags:
+  - discontinued
+  - project
+  - pebble
+  - watchface
+  - javascript
+  - C
 header_img: https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png
 date: 2017-05-25
-tags: [discontinued, project,pebble,watchface,javascript,C]
 permalink: /projects/Bzel/
 project_links:
-    - url: https://github.com/dieghernan/Bzel
-      icon: fab fa-github
-      label: See on GitHub
-excerpt: Bzel intregates the bezel into your watchface. Display minutes as digits, as a moving dot or as a fill in the bezel
+  - url: https://github.com/dieghernan/Bzel
+    icon: fab fa-github
+    label: See on GitHub
 ---
 
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
-**Bzel** intregates the bezel into your watchface. Display minutes as digits, as a moving dot or as a fill in the bezel.
+**Bzel** integrates the bezel into your watchface. Display minutes as digits, as a moving dot or as a fill in the bezel.
 
 ![Banner](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png)
 
@@ -25,34 +31,35 @@ excerpt: Bzel intregates the bezel into your watchface. Display minutes as digit
 
 ## Features
 
-* Clock mode:
-   * Digital: Minute display based on analog movement
-   * Dot: Moving dot as minute marker
-   * Bezel: A bar moving around the bezel as minute marker
-* Autodetection of 12h/24h based on your watch settings
+- Clock mode:
+  - Digital: Minute display based on analog movement
+  - Dot: Moving dot as minute marker
+  - Bezel: A bar moving around the bezel as minute marker
+- Autodetection of 12h/24h based on your watch settings
 
 ## Take your pick
 
- * Pebble Health: Display daily steps.
- * Date - Get the weekday based on the language set on your Pebble.
- * Weather: Current conditions on °c or °f.
- * Choose your weather provider:
-    * [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API Key required (at this moment)_
-    * [Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)
-    * [OpenWeatherMap](https://openweathermap.org/)
- * Implementation of [pmkey.xyz](https://www.pmkey.xyz)    
- * Location, based on your selected weather provider
- * Night theme displayed between sunset and sunrise
-    
+- Pebble Health: Display daily steps.
+- Date - Get the weekday based on the language set on your Pebble.
+- Weather: Current conditions in °C or °F.
+- Choose your weather provider:
+  - [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API Key required (at this moment)_
+  - [Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)
+  - [OpenWeatherMap](https://openweathermap.org/)
+- Implementation of [pmkey.xyz](https://www.pmkey.xyz)
+- Location based on your selected weather provider
+- Night theme displayed between sunset and sunrise
+
 ## Internationalization
 
-Autotranslating of weekday supported for:
-* English 
-* Spanish
-* German
-* French
-* Portuguese
-* Italian
+Automatic weekday translation is supported for:
+
+- English
+- Spanish
+- German
+- French
+- Portuguese
+- Italian
 
 ## Future developments
 
@@ -80,11 +87,11 @@ Autotranslating of weekday supported for:
 
 ### Fonts
 
- * [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to regular alphabet, instead of Unicode values.
- * Custom font for icons created via [Fontastic](http://fontastic.me/).
- * Gotham Fonts] downloaded from [fontsgeek.com](http://fontsgeek.com)
-  
-### Weather providers  
+- [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to regular alphabet, instead of Unicode values.
+- Custom font for icons created via [Fontastic](http://fontastic.me/).
+- [Gotham Fonts] downloaded from [fontsgeek.com](http://fontsgeek.com)
+
+### Weather providers
 
 <div class="row">
 <div class="col">
@@ -105,6 +112,5 @@ Autotranslating of weekday supported for:
 ## License
 
 Developed under license [MIT](https://raw.githubusercontent.com/dieghernan/Bzel/master/LICENSE).
-
 
 **Made in Madrid, Spain ❤️**

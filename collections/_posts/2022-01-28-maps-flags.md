@@ -1,22 +1,29 @@
 ---
 title: "Beautiful Maps with R (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
-tags: [r_bloggers,rstats,rspatial,beautiful_maps, maps, terra,flags,rasterpic, giscoR]
+excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!). This package allows to geotag images, using a spatial object (from sf or terra) as a geographic reference.
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - beautiful_maps
+  - maps
+  - terra
+  - flags
+  - rasterpic
+  - giscoR
 header_img: ./assets/img/blog/20220128_flag-1.webp
-excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!!). This package allows to geotag images, using an spatial object (from sf or terra) as a geographic reference.
 redirect_from:
   - /202101_maps-flags/
-output: 
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
 ---
 
-
-
 On 27 Jan. 2022 my package **rasterpic** was accepted on
-[CRAN](https://cran.r-project.org/package=rasterpic) (Hooray!!). This package
-allows to geotag images, using an spatial object (from **sf** or **terra**) as a
+[CRAN](https://cran.r-project.org/package=rasterpic) (Hooray!). This package
+allows to geotag images, using a spatial object (from **sf** or **terra**) as a
 geographic reference.
 
 I tweeted about that, and it seems to have a good feedback from the
@@ -24,14 +31,12 @@ I tweeted about that, and it seems to have a good feedback from the
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {rasterpic} 📦 is now on CRAN, and we can convert our pngs to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
 I received also an interesting reply to this from **Hefin Ioan Rhys**
 [@HRJ21](https://twitter.com/HRJ21):
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ooh I think a map with countries filled with their own flag would be poppin&#39;.</p>&mdash; Hefin Ioan Rhys (@HRJ21) <a href="https://twitter.com/HRJ21/status/1486976368936116225?ref_src=twsrc%5Etfw">January 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
-That remembers me to a [previous
+That reminds me of a [previous
 post](https://dieghernan.github.io/202002_cartography1/#png-layer) that I wrote
 when I added some new functions to the **cartography** package, now replaced by
 the [**mapsf**](https://cran.r-project.org/package=mapsf) package.
@@ -47,7 +52,6 @@ development version of
 yet), that adds support to `SpatRaster` object on **ggplot2**. The flags would
 be extracted from the GitHub repository
 <https://github.com/hampusborgos/country-flags>.
-
 
 ```r
 
@@ -82,7 +86,6 @@ plot +
 <img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" />
 
 Now, let's add the flags with a loop:
-
 
 ```r
 

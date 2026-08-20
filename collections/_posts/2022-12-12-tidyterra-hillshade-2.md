@@ -1,17 +1,17 @@
 ---
 title: "Hillshade, colors and marginal plots with tidyterra (II)"
-subtitle: 'The rain in Spain does not stay mainly in the plain'
-excerpt: 'Add marginal plots to a SpatRaster map on ggplot2'
+subtitle: "The rain in Spain does not stay mainly in the plain"
+excerpt: "Add marginal plots to a SpatRaster map on ggplot2"
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- maps
-- ggplot2
-- tidyterra
-- terra
-- inset
-- mapSpain
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - tidyterra
+  - terra
+  - inset
+  - mapSpain
 output:
   md_document:
     variant: gfm
@@ -19,15 +19,13 @@ output:
 header_img: ./assets/img/blog/20221212_finalplot-1.webp
 ---
 
+_This is the second post of the series "Hillshade, colors and
+marginal plots with **tidyterra**". In this post I would explore an approach for
+annotating marginal plots to an **ggplot2** map of a SpatRaster, including
+information about the values by longitude and latitude. See the first post of the
+series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/)._
 
-
-*This is the second post of the series "Hillshade, colors and
-marginal plots with tidyterra". In this post I would explore an approach for
-annotating marginal plots to a ggplot2 map of a SpatRaster, including
-information of the values by longitude and latitude. See the first post of the
-series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/).*
-
-If you love watching classic movies, specially from the Hollywood's Golden Age,
+If you love watching classic movies, especially from Hollywood's Golden Age,
 you may recognize the following lyrics:
 
 > The rain in Spain stays mainly in the plain!
@@ -42,13 +40,10 @@ you may recognize the following lyrics:
 >
 > The rain in Spain stays mainly in the plain!
 
-
-
 {% include snippets/video.html id="uVmU3iANbgk" provider="youtube" nolazy="true" %}
 
-
-This hard statement is made on [*My Fair Lady
-(1964)*](https://en.wikipedia.org/wiki/My_Fair_Lady_(film)) by Audrey Hepburn,
+This hard statement is made on [_My Fair Lady
+(1964)_](<https://en.wikipedia.org/wiki/My_Fair_Lady_(film)>) by Audrey Hepburn,
 Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
 **completely false**.
 
@@ -62,7 +57,6 @@ stays (mainly).
 ## Libraries
 
 On this post we would use the following libraries:
-
 
 ```r
 ## Libraries
@@ -85,15 +79,14 @@ library(colorspace)
 
 ## The plain in Spain
 
-Well, the plain (or as we name it *La Meseta Central*) covers a large area of
-the inner land of Spain, with an average altitude of 650 meters over the sea
+Well, the plain (or as we name it _La Meseta Central_) covers a large area of
+inland Spain, with an average altitude of 650 meters above sea level
 level.
 
 I didn't find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
-(historically the *Meseta* is associated to Castile and Madrid) and elevation
+(historically the _Meseta_ is associated to Castile and Madrid) and elevation
 data to get a rough shape.
-
 
 ```r
 
@@ -162,11 +155,10 @@ autoplot(r_plain)
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" />
 
-We can create a now plot similar to the one produced in the [previous
+We can create a new plot similar to the one produced in the [previous
 post](https://dieghernan.github.io/202210_tidyterra-hillshade/) to identify the
 plain. In first place I create a base layer with a representation of the
 hillshade, that we would reuse later:
-
 
 ```r
 
@@ -193,7 +185,7 @@ index <- hill %>%
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and dont use aes
+# and don't use aes
 
 # Base hill plot
 hill_plot <- ggplot() +
@@ -208,7 +200,6 @@ hill_plot
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="plot of chunk 20221212_hill" width="100%" />
 
 And finally we overlay the altitude and the outline of the plain in Spain.
-
 
 ```r
 # Overlaying and theming
@@ -282,10 +273,9 @@ plot_esp
 
 ## The rain in Spain
 
-Let's check now wheter the rain falls mainly in the plain or not. We use here
+Let's check now whether the rain falls mainly in the plain or not. We use here
 `geodata::worldclim_country()` to get the average precipitation by month from
-[WordClim](https://www.worldclim.org/):
-
+[WorldClim](https://www.worldclim.org/):
 
 ```r
 # Precipitation of Spain
@@ -294,14 +284,14 @@ Let's check now wheter the rain falls mainly in the plain or not. We use here
 precip <- geodata::worldclim_country("ESP", "prec", mydir)
 
 precip
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 1980, 2760, 12  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> source      : ESP_wc2.1_30s_prec.tif 
-#> names       : ESP_w~rec_1, ESP_w~rec_2, ESP_w~rec_3, ESP_w~rec_4, ESP_w~rec_5, ESP_w~rec_6, ... 
-#> min values  :           0,           1,           1,           0,           0,           0, ... 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : ESP_wc2.1_30s_prec.tif
+#> names       : ESP_w~rec_1, ESP_w~rec_2, ESP_w~rec_3, ESP_w~rec_4, ESP_w~rec_5, ESP_w~rec_6, ...
+#> min values  :           0,           1,           1,           0,           0,           0, ...
 #> max values  :         296,         255,         199,         166,         181,         140, ...
 ```
 
@@ -310,20 +300,19 @@ we now just add the values by cell to get the annual average. Note that we also
 need to normalize the SpatRaster to the projection, extent and resolution of our
 `hill` object:
 
-
 ```r
 # Sum all layers
 precip_avg <- sum(precip)
 
 precip_avg
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 1980, 2760, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
 #> source(s)   : memory
-#> name        :  sum 
-#> min value   :    8 
+#> name        :  sum
+#> min value   :    8
 #> max value   : 2055
 
 
@@ -349,8 +338,7 @@ autoplot(precip_avg_mask)
 ### Creating a modified palette
 
 We can now start representing our precipitation map. I chose here to create a
-custom palette with `colorspace`  to better highlight the differences:
-
+custom palette with **colorspace** to better highlight the differences:
 
 ```r
 
@@ -367,9 +355,8 @@ show_col(mypal)
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="plot of chunk 20221212_mypal" width="100%" />
 
-And now we can create the final map showing if *the rain in Spain stays mainly
-in the plain*:
-
+And now we can create the final map showing if _the rain in Spain stays mainly
+in the plain_:
 
 ```r
 # Precipitation limits, rounded to 100
@@ -432,13 +419,13 @@ meteo_plot
 
 We can now check that the rain in Spain falls mainly in the Atlantic coast
 (North of Spain) and specifically in Galicia. That's why in Spanish the lyrics
-*The rain in Spain stays mainly in the plain* were translated into:
+_The rain in Spain stays mainly in the plain_ were translated into:
 
 > La lluvia en Sevilla es una pura maravilla.
 
-That can be translated as *"The rain in Seville is a true marvel"*. And it is,
+That can be translated as _"The rain in Seville is a true marvel"_. And it is,
 indeed. Seville (located in the south on the [Guadalquivir
-Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7) has circa 50 rainy days per year,
+Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7)) has circa 50 rainy days per year,
 featuring very hot and dry summers.
 
 ## Marginal plots (finally)
@@ -449,7 +436,6 @@ precipitation) by longitude and latitude.
 
 But first we add some additional margins and title axes to the main plot, so we
 can insert those marginal plots easily on our main plot:
-
 
 ```r
 # Now we can add titles on the secondary axis
@@ -488,7 +474,6 @@ plot_main
 
 On the following code, I am just drafting how the marginal plots would look
 like, so we can have a preview of the final result:
-
 
 ```r
 
@@ -592,7 +577,6 @@ ggplot() +
 Finally, we would use `cowplot::axis_canvas()` to create the marginal plots as
 we want:
 
-
 ```r
 
 # Last step: We combine plots
@@ -677,7 +661,6 @@ plot_y
 
 And insert everything in the main plot. See the final result:
 
-
 ```r
 
 # Combine all plots into one
@@ -707,7 +690,6 @@ plot. Here you can find a simplified version:
 
 <details markdown="1">
 <summary>Simplified version</summary>
-
 
 ```r
 

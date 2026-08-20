@@ -2,14 +2,14 @@
 title: "Mapping Antarctica"
 subtitle: "Cool maps from the South Pole"
 tags:
-- r_bloggers
-- beautiful_maps
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- giscoR
+  - r_bloggers
+  - beautiful_maps
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - giscoR
 output:
   html_document:
   md_document:
@@ -17,8 +17,6 @@ output:
     preserve_yaml: true
 header_img: https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp
 ---
-
-
 
 Creating maps with **R** is usually straightforward, but representations that
 cross the [International Date
@@ -35,8 +33,7 @@ Commission)](https://ec.europa.eu/eurostat/web/gisco) shapefile for Antarctica
 and produce clean orthographic maps. I walk through the manual corrections and
 then create a few example maps.
 
-
-``` r
+```r
 # Libraries
 library(tidyverse)
 library(sf)
@@ -50,11 +47,10 @@ library(rmapshaper)
 First, we obtain the GISCO Antarctica polygon and transform it to an
 orthographic projection centered on the South Pole.
 
-
-``` r
+```r
 antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") %>%
   select(NAME = NAME_ENGL) |>
-  # Ortho proj centered in the South Pole
+  # Orthographic projection centered on the South Pole
   st_transform(crs = "+proj=ortho +lat_0=-90 +lon_0=0")
 
 ggplot(antarct) +
@@ -75,22 +71,21 @@ orthographic projection. I correct it manually by:
 We convert polygons to point coordinates and inspect them to find the offending
 sequence:
 
-
-``` r
-# Identify the max
+```r
+# Identify the largest polygon
 ant_explode <- antarct |>
   st_cast("POLYGON")
 
 nrow(ant_explode)
 #> [1] 778
 
-# Max polygon
+# Largest polygon
 
 ant_max <- ant_explode[which.max(st_area(ant_explode)), ]
 
 coords <- st_coordinates(ant_max) |>
   as_tibble() |>
-  # Add id for points
+  # Add an ID for the points
   mutate(np = row_number())
 
 
@@ -106,8 +101,7 @@ From the plotted indices, we can see the problematic points fall roughly in the
 range 8200–9200. We inspect that interval in detail to select the exact indices
 to remove.
 
-
-``` r
+```r
 test <- coords |>
   filter(np %in% seq(8200, 9200))
 
@@ -127,8 +121,7 @@ the particular geometry and projection.
 
 </div>
 
-
-``` r
+```r
 # Final solution after some iterations...
 
 test |>
@@ -150,9 +143,10 @@ test |>
 
 After removing the offending points, we rebuild the polygon and reconstitute the
 full Antarctica shape from the corrected piece plus the remaining polygons.
+
 </div>
 
-``` r
+```r
 # From coordinates to polygon
 newpol <- coords |>
   as.data.frame() |>
@@ -202,8 +196,7 @@ proposed Antarctic flag designs.
 
 A simple rendition of Bartram's original concept:
 
-
-``` r
+```r
 bbox <- st_bbox(antarctica_fixed) # For limits on the panel
 
 antarctica_fixed |>
@@ -230,8 +223,7 @@ This example uses graticules to create a concentric "bullseye" pattern around
 Antarctica. Generating such graticules and merging meridians requires a few
 extra steps to avoid small gaps near the pole.
 
-
-``` r
+```r
 # Need graticules
 grats <- giscoR::gisco_get_countries() |>
   st_transform(st_crs(antarctica_fixed)) |>
@@ -254,8 +246,7 @@ We merge meridians so the area around the South Pole is filled. `st_graticule()`
 can leave a tiny hole at the pole; we fix this by joining complementary
 meridians.
 
-
-``` r
+```r
 # Merge meridians
 merid <- lapply(seq(-180, 0, 30), function(x) {
   df <- grats |>
@@ -284,8 +275,7 @@ grats_end <- merid |>
 We then cut and color the resulting graticules so they form the emblem-like
 pattern.
 
-
-``` r
+```r
 # Cut since some grats should be colored differently
 
 antarctica_simp <- rmapshaper::ms_simplify(antarctica_fixed, keep = 0.005)
@@ -314,12 +304,12 @@ antarctica_simp |>
 
 ### Antarctica Flag Redesigned
 
-In 2024, Graham Bartram revealed a new version of his original flag as part of 
-a global campaign to raise awareness about the growing problem of microplastic 
-pollution. The new design keeps the familiar white outline of Antarctica but 
-swaps the plain blue background for one filled with countless tiny, colorful 
-dots. These dots represent the microscopic bits of plastic that have been 
-discovered even in the planet’s most untouched places - including the Antarctic 
+In 2024, Graham Bartram revealed a new version of his original flag as part of
+a global campaign to raise awareness about the growing problem of microplastic
+pollution. The new design keeps the familiar white outline of Antarctica but
+swaps the plain blue background for one filled with countless tiny, colorful
+dots. These dots represent the microscopic bits of plastic that have been
+discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" />
@@ -334,8 +324,7 @@ procedure:
 4.  Color polygons so larger areas remain white while smaller polygons use
     magenta/pink tones.
 
-
-``` r
+```r
 # Maximum chunk of Antarctica, the one that we fixed
 
 ant_max_fixed
@@ -372,7 +361,7 @@ ggplot(plastic_end) +
 
 <img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" width="100%" />
 
-``` r
+```r
 
 
 # Random coloring

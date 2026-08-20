@@ -1,48 +1,54 @@
 ---
 title: Celestial Data
 subtitle: A compilation of celestial data files
+excerpt: This project provides several datasets in GeoJSON
+  and GeoPackage format of celestial objects as of J2000 epoch.
+tags:
+  - project
+  - maps
+  - astronomy
+  - celestial
+  - dataset
+  - csv
+  - geojson
+  - gpkg
 header_img: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
 date: 2023-01-23
-tags: [project,maps,astronomy,celestial,dataset,csv,geojson, gpkg]
 permalink: /projects/celestial-data/
 mathjax: true
-excerpt: This project provides several datasets in GeoJSON 
-  and GeoPackage format of celestial objects as of J2000 epoch.
 project_links:
-    - url: https://dieghernan.github.io/celestial_data/
-      icon: fas fa-external-link-alt
-      label: Visit the website
+  - url: https://dieghernan.github.io/celestial_data/
+    icon: fas fa-external-link-alt
+    label: Visit the website
 ---
-
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.7561601-blue)](https://doi.org/10.5281/zenodo.7561601)
 
 This project provides several datasets in GeoJSON and GeoPackage
 format of celestial objects as of J2000 epoch.
 
-The original files were provided on the 
-[d3-celestial plugin](https://github.com/ofrohn/d3-celestial/) 
-([Frohn 2015](#ref-frohn2015)) under 
-[BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause). The datasets 
-produced on this project consists on the same data provided on 
-[d3-celestial plugin](https://github.com/ofrohn/d3-celestial/) processed with 
+The original files were provided on the
+[d3-celestial plugin](https://github.com/ofrohn/d3-celestial/)
+([Frohn 2015](#ref-frohn2015)) under
+[BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause). The datasets
+produced by this project consist of the same data provided by
+[d3-celestial plugin](https://github.com/ofrohn/d3-celestial/) processed with
 the **R** package **sf** ([Pebesma 2018](#ref-pebesma2018)) to ensure its
 validity:
 
 - The spatial data objects are bounded to $$[-180, -90, 180, 90]$$.
 
-- Date is provided on WGS84 - World Geodetic System 1984 
+- Data are provided in WGS 84 - World Geodetic System 1984
   ([EPSG:4326](https://epsg.io/4326)).
 
-- All geometries valid as per 
+- All geometries valid as per
   [ST_IsValid](https://postgis.net/docs/ST_IsValid.html) (GEOS **3.9.3**).
 
 ## Distribution
 
 The data can be accessed from several API endpoints:
 
-``` html
-
+```html
 <!-- From GitHub -->
 https://raw.githubusercontent.com/dieghernan/celestial_data/main/data/mw.min.geojson
 
@@ -135,17 +141,16 @@ List of files provided
 
 See additional details on [Data Description](https://dieghernan.github.io/celestial_data/data).
 
-
 ## Citation
 
 Please cite these datasets as:
 
-Frohn, O., & Hernangómez, D. (2023). Celestial Data [Data set]. 
+Frohn, O., & Hernangómez, D. (2023). Celestial Data [Data set].
 <https://doi.org/10.5281/zenodo.7561601>
 
 A BibTeX entry:
 
-``` bibtex
+```bibtex
 
 @misc{frohnhernangomez:2023,
     title        = {Celestial Data},
@@ -156,7 +161,6 @@ A BibTeX entry:
 }
 
 ```
-
 
 ## References
 
@@ -169,7 +173,7 @@ Frohn, Olaf. 2015. "d3-celestial" <https://github.com/ofrohn/d3-celestial/>.
 <div id="ref-pebesma2018" class="csl-entry" markdown=1>
 
 Pebesma, Edzer. 2018. "Simple Features for R: Standardized Support for
-Spatial Vector Data." *The R Journal* 10 (1): 439446.
+Spatial Vector Data." _The R Journal_ 10 (1): 439446.
 <https://doi.org/10.32614/RJ-2018-009>.
 
 </div>

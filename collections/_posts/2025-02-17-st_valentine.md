@@ -2,14 +2,14 @@
 title: "Happy Valentine's Day"
 subtitle: "Do you know the Bonne projection?"
 tags:
-- r_bloggers
-- beautiful_maps
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- giscoR
+  - r_bloggers
+  - beautiful_maps
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - giscoR
 redirect_from:
   - /202402_st_valentine/
 output:
@@ -25,7 +25,7 @@ Projection](https://en.wikipedia.org/wiki/Bonne_projection)? This is a very
 special one, as used on whole world’s mapping produces this result. Happy
 Valentine’s Day!
 
-``` r
+```r
 library(sf)
 library(dplyr)
 library(giscoR)

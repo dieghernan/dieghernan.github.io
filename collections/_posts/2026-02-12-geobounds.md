@@ -1,5 +1,6 @@
 ---
 title: "Introducing geobounds"
+subtitle: "Easy access to administrative boundaries from geoBoundaries"
 description: "A simple way to retrieve datasets from geoBoundaries."
 tags:
   - r_bloggers
@@ -17,7 +18,7 @@ output:
 header_img: https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
 ---
 
-If you've ever worked with spatial data in R, this may ring a bell...
+If you've ever worked with spatial data in **R**, this may ring a bell...
 
 - Search for boundary data
 - Figure out which version is "official"
@@ -32,7 +33,7 @@ While searching for new data sources, I found the excellent
 data can be tedious since it's provided as zipped shapefiles, and as any GIS
 professional knows, [shapefiles should die!](http://switchfromshapefile.org/)
 
-Previously, the **rgeoboundaries** package was on CRAN and allowed to access the geoBoundaries API, but it was archived. So
+Previously, the **rgeoboundaries** package was on CRAN and allowed access to the geoBoundaries API, but it was archived. So
 I decided to create my own version, and **geobounds** was born.
 
 - Source code: <https://github.com/dieghernan/geobounds>
@@ -40,7 +41,7 @@ I decided to create my own version, and **geobounds** was born.
 
 It connects directly to the excellent
 [geoBoundaries](https://www.geoboundaries.org/) database and returns clean,
-ready-to-use `sf` objects with a single function call. No manual downloads. No
+ready-to-use **sf** objects with a single function call. No manual downloads. No
 shapefile messing.
 
 This is how it works.
@@ -120,7 +121,7 @@ gb_get_adm0(country = c("India", "Pakistan")) |>
   labs(
     fill = "Country",
     title = "Map of India & Pakistan",
-    subtitle = "Note overlapping in Kashmir region",
+    subtitle = "Note the overlap in the Kashmir region",
     caption = "Source: www.geoboundaries.org"
   )
 ```
@@ -168,7 +169,7 @@ print(object.size(norway_simp), units = "Mb")
 
 norway_all <- bind_rows(norway, norway_simp)
 
-# Plot ggplot2
+# Plot with ggplot2
 ggplot(norway_all) +
   geom_sf(fill = "#BA0C2F", color = "#00205B") +
   facet_wrap(vars(res)) +
@@ -208,7 +209,7 @@ also want to look at:
 
 ### rnaturalearth
 
-A very popular package to access Natural Earth datasets directly from R. It's
+A very popular package to access Natural Earth datasets directly from **R**. It's
 lightweight and great for quick global maps, especially at small scales.
 
 If you need physical layers (rivers, coastlines, elevation) alongside political
@@ -228,6 +229,6 @@ capabilities.
 
 ## Bottom line
 
-I built **geobounds** to provide direct access to geoBoundaries products. I hope this package would help you in your GIS joruney.
+I built **geobounds** to provide direct access to geoBoundaries products. I hope this package will help you in your GIS journey.
 
 Happy mapping!

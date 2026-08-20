@@ -1,16 +1,16 @@
 ---
 title: "Hillshade, colors and marginal plots with tidyterra (I)"
 subtitle: How to overlay SpatRasters
-excerpt: Using shadow effects on relief mappings is a very common technique, 
+excerpt: Using shadow effects on relief mappings is a very common technique,
   that allows to produce informative yet beautiful maps.
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- maps
-- ggplot2
-- tidyterra
-- terra
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - tidyterra
+  - terra
 output:
   html_document:
     df_print: paged
@@ -20,15 +20,13 @@ output:
 header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
 ---
 
-
-
-*This is the first post of a series of two, showing how to overlay a SpatRaster
+_This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a Hillshade background. Next post would show how to add marginal plots
-including information of the values of the raster by longitude and latitude. See
-the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/).*
+including information about the values of the raster by longitude and latitude. See
+the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/)._
 
 Using shadow effects on relief mappings is a very common technique, that allows
-to produce informative yet beautiful maps. If you are interested on this topic
+to produce informative yet beautiful maps. If you are interested in this topic
 and you work with **R**, you would have probably seen this map:
 
 ![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
@@ -36,7 +34,7 @@ and you work with **R**, you would have probably seen this map:
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)
 has been a reference for years. However, last developments on the **R** package
-ecosystem (`terra`, `sf` and support of both classes on `ggplot2`, development
+ecosystem (**terra**, **sf** and support of both classes on **ggplot2**, development
 of `ggnewscale`, etc.) can make even easier the task of producing such type of
 maps.
 
@@ -50,7 +48,6 @@ palette for this kind of maps.
 ## Libraries
 
 I would use the following libraries:
-
 
 ```r
 
@@ -73,7 +70,6 @@ simplicity, but you can use as well `elevatr` that is much more complete.
 However `elevatr` produces the result as `RasterLayers`, so you would need to
 convert the object to `SpatRaster` with `terra::rast()`.
 
-
 ```r
 
 # Cache map data
@@ -82,14 +78,14 @@ mydir <- "~/R/mapslib/misc"
 r_init <- elevation_30s("ROU", path = mydir)
 
 r_init
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> source      : ROU_elv_msk.tif 
-#> name        : ROU_elv_msk 
-#> min value   :          -4 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : ROU_elv_msk.tif
+#> name        : ROU_elv_msk
+#> min value   :          -4
 #> max value   :        2481
 
 # For better handling we set here the names
@@ -100,19 +96,18 @@ r <- r_init %>%
   mutate(alt = pmax(0, alt))
 
 r
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)
-#> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
-#> source      : memory 
-#> name        :  alt 
-#> min value   :    0 
+#> coord. ref. : lon/lat WGS 84 (EPSG:4326)
+#> source      : memory
+#> name        :  alt
+#> min value   :    0
 #> max value   : 2481
 ```
 
 We can now have a quick look to the plot with `tidyterra::autoplot()`:
-
 
 ```r
 # Quick look
@@ -130,7 +125,6 @@ so I would not go into details. Basically what we want to create is a layer that
 approximates the potential "texture" of the surface based on the elevation and
 the sun position. This is straightforward with `terra::terrain()` and
 `terra::shade()` functions:
-
 
 ```r
 
@@ -157,12 +151,12 @@ ggplot() +
 We can also do the following hack to avoid the use of a `scale_fill_*` (via
 `ggplot2` or via `ggnewscale::new_scale_fill()`):
 
--   Select a vector of colors (in this post `pal_greys`).
--   Extract the values of the raster and reescale them to the length of the
-    palette (`c(1, 1000)`).
--   Round those rescaled values to the nearest integer. So we would have a index
-    indicating which value of `pal_greys` should be mapped to each cell.
--   Now use the parameter `fill` on the `geom_` instead of using the scale.
+- Select a vector of colors (in this post `pal_greys`).
+- Extract the values of the raster and reescale them to the length of the
+  palette (`c(1, 1000)`).
+- Round those rescaled values to the nearest integer. So we would have an index
+  indicating which value of `pal_greys` should be mapped to each cell.
+- Now use the parameter `fill` on the `geom_` instead of using the scale.
 
 An additional note is that `geom_spatraster()` has a parameter `maxcell` that
 would perform a spatial resampling if the raster has more cells than `maxcell`.
@@ -171,7 +165,6 @@ the users often forgot about it), but we can force to plot all the cells by
 using `maxcell = Inf`. On this approach for using `fill` the value `maxcell`
 needs to be effectively set to `Inf` to ensure that the number of color values
 and the number of cells is the same.
-
 
 ```r
 
@@ -188,7 +181,7 @@ index <- hill %>%
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and dont use aes
+# and don't use aes
 
 hill_plot <- ggplot() +
   geom_spatraster(
@@ -206,19 +199,18 @@ hill_plot
 The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
-associated to low elevations while orange, browns and whites are associared to
+associated with low elevations, while orange, browns and whites are associated with
 high elevations on some of the most common elevation palettes (aka hypsometric
 tints). See for example the [Wikipedia Topographic maps
 conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps).
 
 This is not ideal, since greens can be confused with forests, for example, so an
-elevation map of desertic areas would not be appropiated with a
+elevation map of desert areas would not be appropriate with a
 green-brown-white color scheme.
 
 There is an additional point to take into account when designing color palettes
 for maps. A regular gradient would just interpolate colors assuming that the
 distance among colors is the same:
-
 
 ```r
 
@@ -233,7 +225,6 @@ autoplot(r) +
 
 For that reason, tidyterra provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
-
 
 ```r
 
@@ -256,16 +247,15 @@ overall perception of elevation improves. Note that the only difference between
 plots is exclusively the color palette.
 
 For producing our map we are going to assess visually the result of a selection
-of palettes provided by `tidyterra`. We use here the version
+of palettes provided by **tidyterra**. We use here the version
 `tidyterra::scale_fill_hypso_tint_c()` instead of
 `tidyterra::scale_fill_hypso_c()` for taking advantage of the uneven color
 gradients.
 
-A downside of using this scales is that we need also to adjust the `limits`
+A downside of using these scales is that we also need to adjust the `limits`
 argument of the functions to make `ggplot2` aware of the limits of the value of
 the raster. This is easily achieved with `terra::minmax()` but I added an extra
 touch rounding up and down the range of values to the nearest 500.
-
 
 ```r
 
@@ -286,7 +276,7 @@ r_limits
 #> [1]    0 2500
 
 
-# Now lets have some fun with scales from tidyterra
+# Now let's have some fun with scales from tidyterra
 
 elevt_test <- ggplot() +
   geom_spatraster(data = r)
@@ -315,14 +305,13 @@ plot_pal_test("wiki-2.0_hypso")
 
 I finally selected for my plot the `"dem_poster"` palette, but this is
 completely a personal choice. You should select the palette you feel more
-comfortable with. See the full range of color palettes provided by `tidyterra`
+comfortable with. See the full range of color palettes provided by **tidyterra**
 [here](https://dieghernan.github.io/tidyterra/articles/palettes.html).
 
 ## Final plot
 
 So now it is time to blend both the hillshade layer and the altitude layer using
 some level of `alpha` on the upper layer.
-
 
 ```r
 
@@ -349,7 +338,6 @@ base_plot
 
 And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:
-
 
 ```r
 myload_fonts <- function(fontname, family,
@@ -396,7 +384,6 @@ myload_fonts <- function(fontname, family,
 ```
 
 And now we theme it:
-
 
 ```r
 # Theming
@@ -447,19 +434,17 @@ base_plot +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="plot of chunk 20221017-6-finalplot" width="100%" />
 
-
 ## References
 
 Patterson T, Jenny B (2011). "The Development and Rationale of Cross-blended
-Hypsometric Tints." *Cartographic Perspectives*, 31--46. <https://doi.org/10.14714/CP69.20>
+Hypsometric Tints." _Cartographic Perspectives_, 31--46. <https://doi.org/10.14714/CP69.20>
 
 Grossenbacher T (2016). "Beautiful thematic maps with ggplot2 (only)."
 <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>.
 
-
 Royé D (2022). "Hillshade effects."
 <https://dominicroye.github.io/en/2022/hillshade-effects/>.
 
-Hernangómez D (2022). *tidyterra: tidyverse Methods and ggplot2 Helpers for
-terra Objects*. <doi:10.5281/zenodo.6572471>
+Hernangómez D (2022). _tidyterra: tidyverse Methods and ggplot2 Helpers for
+terra Objects_. <doi:10.5281/zenodo.6572471>
 <https://doi.org/10.5281/zenodo.6572471>.
