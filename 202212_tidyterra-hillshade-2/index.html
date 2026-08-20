@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -258,11 +258,11 @@
 		</nav>   
 	</div>
 			<p><em>This is the second post of the series “Hillshade, colors and
-marginal plots with tidyterra”. In this post I would explore an approach for
-annotating marginal plots to a ggplot2 map of a SpatRaster, including
-information of the values by longitude and latitude. See the first post of the
+marginal plots with <strong>tidyterra</strong>”. In this post I would explore an approach for
+annotating marginal plots to an <strong>ggplot2</strong> map of a SpatRaster, including
+information about the values by longitude and latitude. See the first post of the
 series <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">here</a>.</em></p>
-<p>If you love watching classic movies, specially from the Hollywood’s Golden Age,
+<p>If you love watching classic movies, especially from Hollywood’s Golden Age,
 you may recognize the following lyrics:</p>
 <blockquote>
  <p>The rain in Spain stays mainly in the plain!</p>
@@ -307,7 +307,7 @@ stays (mainly).</p>
 </span></code></pre></div></div>
 <h2 id="the-plain-in-spain">The plain in Spain</h2>
 <p>Well, the plain (or as we name it <em>La Meseta Central</em>) covers a large area of
-the inner land of Spain, with an average altitude of 650 meters over the sea
+inland Spain, with an average altitude of 650 meters above sea level
 level.</p>
 <p>I didn’t find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
@@ -377,7 +377,7 @@ data to get a rough shape.</p>
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r_plain</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
-<p>We can create a now plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
+<p>We can create a new plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
 post</a> to identify the
 plain. In first place I create a base layer with a representation of the
 hillshade, that we would reuse later:</p>
@@ -405,7 +405,7 @@ hillshade, that we would reuse later:</p>
 </span><span class="n">vector_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
 
 </span><span class="c1"># Need to avoid resampling</span><span class="w">
-</span><span class="c1"># and dont use aes</span><span class="w">
+</span><span class="c1"># and don't use aes</span><span class="w">
 
 </span><span class="c1"># Base hill plot</span><span class="w">
 </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -486,23 +486,23 @@ hillshade, that we would reuse later:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.webp" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
 <h2 id="the-rain-in-spain">The rain in Spain</h2>
-<p>Let’s check now wheter the rain falls mainly in the plain or not. We use here
+<p>Let’s check now whether the rain falls mainly in the plain or not. We use here
 <code class="language-plaintext highlighter-rouge">geodata::worldclim_country()</code> to get the average precipitation by month from
-<a href="https://www.worldclim.org/">WordClim</a>:</p>
+<a href="https://www.worldclim.org/">WorldClim</a>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Precipitation of Spain</span><span class="w">
 
 </span><span class="c1"># Get precip data</span><span class="w">
 </span><span class="n">precip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geodata</span><span class="o">::</span><span class="n">worldclim_country</span><span class="p">(</span><span class="s2">"ESP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"prec"</span><span class="p">,</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w">
 
 </span><span class="n">precip</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 1980, 2760, 12  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
-</span><span class="c1">#&gt; source      : ESP_wc2.1_30s_prec.tif </span><span class="w">
-</span><span class="c1">#&gt; names       : ESP_w~rec_1, ESP_w~rec_2, ESP_w~rec_3, ESP_w~rec_4, ESP_w~rec_5, ESP_w~rec_6, ... </span><span class="w">
-</span><span class="c1">#&gt; min values  :           0,           1,           1,           0,           0,           0, ... </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span><span class="w">
+</span><span class="c1">#&gt; source      : ESP_wc2.1_30s_prec.tif</span><span class="w">
+</span><span class="c1">#&gt; names       : ESP_w~rec_1, ESP_w~rec_2, ESP_w~rec_3, ESP_w~rec_4, ESP_w~rec_5, ESP_w~rec_6, ...</span><span class="w">
+</span><span class="c1">#&gt; min values  :           0,           1,           1,           0,           0,           0, ...</span><span class="w">
 </span><span class="c1">#&gt; max values  :         296,         255,         199,         166,         181,         140, ...</span><span class="w">
 </span></code></pre></div></div>
 <p>We have now a SpatRaster with 12 layers representing the value of each month. So
@@ -513,14 +513,14 @@ need to normalize the SpatRaster to the projection, extent and resolution of our
 </span><span class="n">precip_avg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">precip</span><span class="p">)</span><span class="w">
 
 </span><span class="n">precip_avg</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 1980, 2760, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span><span class="w">
 </span><span class="c1">#&gt; source(s)   : memory</span><span class="w">
-</span><span class="c1">#&gt; name        :  sum </span><span class="w">
-</span><span class="c1">#&gt; min value   :    8 </span><span class="w">
+</span><span class="c1">#&gt; name        :  sum</span><span class="w">
+</span><span class="c1">#&gt; min value   :    8</span><span class="w">
 </span><span class="c1">#&gt; max value   : 2055</span><span class="w">
 
 
@@ -543,7 +543,7 @@ need to normalize the SpatRaster to the projection, extent and resolution of our
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
 <h3 id="creating-a-modified-palette">Creating a modified palette</h3>
 <p>We can now start representing our precipitation map. I chose here to create a
-custom palette with <code class="language-plaintext highlighter-rouge">colorspace</code>  to better highlight the differences:</p>
+custom palette with <strong>colorspace</strong> to better highlight the differences:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sequential_hcl</span><span class="p">(</span><span class="w">
   </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w">
@@ -622,7 +622,7 @@ in the plain</em>:</p>
 </blockquote>
 <p>That can be translated as <em>“The rain in Seville is a true marvel”</em>. And it is,
 indeed. Seville (located in the south on the <a href="https://goo.gl/maps/V8ZrDjrA74CTknYb7">Guadalquivir
-Valley</a> has circa 50 rainy days per year,
+Valley</a>) has circa 50 rainy days per year,
 featuring very hot and dry summers.</p>
 <h2 id="marginal-plots-finally">Marginal plots (finally)</h2>
 <p>We can now start profiling our final plot. The idea is to create two bar charts,

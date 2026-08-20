@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Cast a line to subsegments in R",
-    "description": "User-defined function using sf package - This post introduces a used-defined function used for casting sf objects of class LINESTRING or POLYGON into sub-strings."
+    "description": "User-defined function using sf package - This post introduces a user-defined function for casting sf objects ofclass LINESTRING or POLYGON into substrings."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="User-defined function using sf package - This post introduces a used-defined function used for casting sf objects of class LINESTRING or POLYGON into sub-str...">
+   <meta name="description" content="User-defined function using sf package - This post introduces a user-defined function for casting sf objects ofclass LINESTRING or POLYGON into substrings.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/201905_Cast-to-subsegments/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="User-defined function using sf package - This post introduces a used-defined function used for casting sf objects of class LINESTRING..." >
+   <meta property="og:description" content="User-defined function using sf package - This post introduces a user-defined function for casting sf objects ofclass LINESTRING or POLYGON..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp" >
     <!-- Twitter/X Cards -->
@@ -254,17 +254,20 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Cast a line to subsegments in R</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required R packages</a></li><li class="nav-item nav d-block"><a href="#the-problem" class="nav-link">The problem</a></li><li class="nav-item nav d-block"><a href="#an-approach" class="nav-link">An approach</a></li><li class="nav-item nav d-block"><a href="#the-function-stdh_cast_substring" class="nav-link">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#the-problem" class="nav-link">The problem</a></li><li class="nav-item nav d-block"><a href="#an-approach" class="nav-link">An approach</a></li><li class="nav-item nav d-block"><a href="#the-function-stdh_cast_substring" class="nav-link">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></a></li></ul>
 		</nav>   
 	</div>
-			<p>This post introduces a used-defined function used for casting <code class="language-plaintext highlighter-rouge">sf</code> objects of <code class="language-plaintext highlighter-rouge">class</code> <code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into sub-strings.</p>
-<h2 id="required-r-packages">Required R packages</h2>
+			<p>This post introduces a user-defined function for casting <strong>sf</strong> objects of
+<code class="language-plaintext highlighter-rouge">class</code> <code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into substrings.</p>
+<h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="the-problem">The problem</h2>
-<p>The <code class="language-plaintext highlighter-rouge">sf</code>package includes <a href="https://r-spatial.github.io/sf/reference/st_cast.html"><code class="language-plaintext highlighter-rouge">st_cast</code></a>, a very powerful function that transforms geometries into other different types of geometries (i.e. <code class="language-plaintext highlighter-rouge">LINESTRING</code>to <code class="language-plaintext highlighter-rouge">POLYGON</code>, etc.).</p>
+<p>The <strong>sf</strong> package includes <a href="https://r-spatial.github.io/sf/reference/st_cast.html"><code class="language-plaintext highlighter-rouge">st_cast</code></a>,
+a powerful function that transforms geometries into other types of geometries
+(i.e. <code class="language-plaintext highlighter-rouge">LINESTRING</code> to <code class="language-plaintext highlighter-rouge">POLYGON</code>, etc.).</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">italy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italy"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w">
 </span><span class="n">italy_pol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">italy</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
 </span><span class="n">italy_lin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">italy_pol</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
@@ -308,10 +311,15 @@
    <p>When the input is not a <code class="language-plaintext highlighter-rouge">LINESTRING</code> or a <code class="language-plaintext highlighter-rouge">POLYGON</code> returns an error and stops.</p>
  </li>
  <li>
-   <p>The function accepts <code class="language-plaintext highlighter-rouge">sf</code> with several rows or <code class="language-plaintext highlighter-rouge">sfc</code> objects with several geometries, and returns the same class of input. In the case of <code class="language-plaintext highlighter-rouge">sf</code> objects, the input <code class="language-plaintext highlighter-rouge">data.frame</code> is added.</p>
+   <p>The function accepts <strong>sf</strong> objects with several rows or <code class="language-plaintext highlighter-rouge">sfc</code> objects with
+several geometries, and returns the same class as the input. In the case of
+<strong>sf</strong> objects, the input <code class="language-plaintext highlighter-rouge">data.frame</code> is added.</p>
  </li>
  <li>
-   <p>By default, the output is a <code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> geometry. This has the benefit that output has the same number of geometries than the input. This can be modified setting the parameter <code class="language-plaintext highlighter-rouge">to</code> as <code class="language-plaintext highlighter-rouge">LINESTRING</code>, that in fact only casts the <code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> object into <code class="language-plaintext highlighter-rouge">LINESTRING</code>.</p>
+   <p>By default, the output is a <code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> geometry. This has the benefit
+that the output has the same number of geometries as the input. This can be
+modified by setting the <code class="language-plaintext highlighter-rouge">to</code> parameter to <code class="language-plaintext highlighter-rouge">LINESTRING</code>, which only casts the
+<code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> object into <code class="language-plaintext highlighter-rouge">LINESTRING</code>.</p>
  </li>
 </ul>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stdh_cast_substring</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MULTILINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -408,7 +416,10 @@
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="plot of chunk 20190505_benchmarkfunction" /></p>
-<p>It can be seen a difference in terms of performance, noting that <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed in 914 sub-strings while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons to 8,414 sub-strings. In that sense, the original <code class="language-plaintext highlighter-rouge">st_cast</code> is much faster, although this solution may work well in most cases.</p>
+<p>There is a difference in performance: <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed
+into 914 substrings, while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons decomposed into 8,414
+substrings. In that sense, the original <code class="language-plaintext highlighter-rouge">st_cast</code> is much faster, although
+this solution may work well in most cases.</p>
 			<div class="mt-5 pt-3 mb-3 text-center">
 				<script type='text/javascript'
 					src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>

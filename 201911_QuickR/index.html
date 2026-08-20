@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Quick R: Inset maps",
-    "description": "An alternative using plot() - How to place an inset map in R? There are many solutions out there using the ggplot2 package (see Drawing beautiful maps programmatically with R, sf and ggplot2 by Mel Moreno and Mathieu Basille). However, I like the old reliable plot function, so the question is: is there another way?"
+    "description": "An alternative using plot() - How to place an inset map in R? There are many solutions out there usingthe ggplot2 package (see Drawing beautiful maps programmatically withR, sf and ggplot2by Mel Moreno and Mathieu Basille). However, I like the old reliable plotfunction, so the question is: is there another way?"
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="An alternative using plot() - How to place an inset map in R? There are many solutions out there using the ggplot2 package (see Drawing beautiful maps progra...">
+   <meta name="description" content="An alternative using plot() - How to place an inset map in R? There are many solutions out there usingthe ggplot2 package (see Drawing beautiful maps program...">
    <meta name="thumbnail" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/201911_QuickR/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="An alternative using plot() - How to place an inset map in R? There are many solutions out there using..." >
+   <meta property="og:description" content="An alternative using plot() - How to place an inset map in R? There are many solutions out there usingthe..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" >
     <!-- Twitter/X Cards -->
@@ -254,12 +254,16 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Quick R: Inset maps</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required R packages</a></li><li class="nav-item nav d-block"><a href="#mimicking-moreno--basille" class="nav-link">Mimicking Moreno &amp; Basille</a></li><li class="nav-item nav d-block"><a href="#insetting" class="nav-link">Insetting</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#mimicking-moreno--basille" class="nav-link">Mimicking Moreno &amp; Basille</a></li><li class="nav-item nav d-block"><a href="#insetting" class="nav-link">Insetting</a></li></ul>
 		</nav>   
 	</div>
-			<p>How to place an inset map in <strong>R</strong>? There are many solutions out there using the <code class="language-plaintext highlighter-rouge">ggplot2</code> package (see <a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html">Drawing beautiful maps programmatically with <strong>R</strong>, <code class="language-plaintext highlighter-rouge">sf</code> and <code class="language-plaintext highlighter-rouge">ggplot2</code></a> by Mel Moreno and Mathieu Basille). However, I like the old reliable <code class="language-plaintext highlighter-rouge">plot</code> function, so the question is: is there another way?</p>
+			<p>How to place an inset map in <strong>R</strong>? There are many solutions out there using
+the <strong>ggplot2</strong> package (see <a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html">Drawing beautiful maps programmatically with
+<strong>R</strong>, <strong>sf</strong> and <strong>ggplot2</strong></a>
+by Mel Moreno and Mathieu Basille). However, I like the old reliable <code class="language-plaintext highlighter-rouge">plot</code>
+function, so the question is: is there another way?</p>
 <p>There is. I found inspiration <a href="https://www.statmethods.net/advgraphs/layout.html">here</a> and I just applied it to a map.</p>
-<h2 id="required-r-packages">Required R packages</h2>
+<h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
@@ -393,7 +397,9 @@
 </span><span class="n">box</span><span class="p">(</span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"figure"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.webp" alt="plot of chunk 20191108_inset" /></p>
-<p>Results may vary depending of the size of the original plot (Mainland USA) and your plotting device and output. However with a bit of trial-and-error it is quite easy to adjust the final result.</p>
+<p>Results may vary depending on the size of the original plot (Mainland USA),
+your plotting device and the output. However, with a bit of trial and error,
+it is quite easy to adjust the final result.</p>
 <p>As an example, see one of my contributions to <strong>Wikimedia Commons</strong> that represents a map of the NUTS3 regions of the European Union. Several countries (France, Portugal, Spain) have overseas territories so I made a few insets on the right side.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /></p>
 			<div class="mt-5 pt-3 mb-3 text-center">
@@ -498,7 +504,9 @@
               Introducing geobounds
             </a>
          </p>
-         </div>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>

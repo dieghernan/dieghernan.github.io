@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Wikipedia Maps (I): Organ donor rates",
-    "description": "A choropleth map with R - This is a quick post on how to create a map as per the Wikipedia conventions. In this case I have chosen to plot the international organ donor rates, retrieved on 2019-02-10 although the data refers to 2017 (Source: IRODaT)."
+    "description": "A choropleth map with R - This is a quick post on how to create a map according to the Wikipedia conventions. In this case, I have chosen to plot the international organ donor rates, retrieved on February 10, 2019, although the data refers to 2017 (source: IRODaT)."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="A choropleth map with R - This is a quick post on how to create a map as per the Wikipedia conventions. In this case I have chosen to plot the international ...">
+   <meta name="description" content="A choropleth map with R - This is a quick post on how to create a map according to the Wikipedia conventions. In this case, I have chosen to plot the interna...">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/201910_WikiMap1/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="A choropleth map with R - This is a quick post on how to create a map as per the..." >
+   <meta property="og:description" content="A choropleth map with R - This is a quick post on how to create a map according to the..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" >
     <!-- Twitter/X Cards -->
@@ -254,12 +254,14 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Wikipedia Maps (I): Organ donor rates</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#webscrapping" class="nav-link">Webscrapping</a></li><li class="nav-item nav d-block"><a href="#merging-all-together" class="nav-link">Merging all together</a></li><li class="nav-item nav d-block"><a href="#make-the-svg-file" class="nav-link">Make the <code class="language-plaintext highlighter-rouge">.svg</code> file</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#web-scraping" class="nav-link">Web scraping</a></li><li class="nav-item nav d-block"><a href="#merging-all-together" class="nav-link">Merging all together</a></li><li class="nav-item nav d-block"><a href="#make-the-svg-file" class="nav-link">Make the <code class="language-plaintext highlighter-rouge">.svg</code> file</a></li></ul>
 		</nav>   
 	</div>
-			<p>This is a quick post on how to create a map as per the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps">Wikipedia conventions</a>. In this case I have chosen to plot the <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates">international organ donor rates</a>, retrieved on 2019-02-10 although the data refers to 2017 (Source: <a href="http://www.irodat.org/?p=database">IRODaT</a>).</p>
-<h2 id="webscrapping">Webscrapping</h2>
-<p>First step is to webscrap Wikipedia in order to get the final table. For doing so, I will use the <code class="language-plaintext highlighter-rouge">rvest</code> library. You can get the <code class="language-plaintext highlighter-rouge">xpath</code> you want to webscrap as explained <a href="https://stackoverflow.com/a/57972054/7877917">here</a>.</p>
+			<p>This is a quick post on how to create a map according to the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions#Gradient_maps">Wikipedia conventions</a>. In this case, I have chosen to plot the <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates">international organ donor rates</a>, retrieved on February 10, 2019, although the data refers to 2017 (source: <a href="http://www.irodat.org/?p=database">IRODaT</a>).</p>
+<h2 id="web-scraping">Web scraping</h2>
+<p>The first step is to scrape Wikipedia in order to get the final table. To do
+so, I will use the <strong>rvest</strong> package. You can get the <code class="language-plaintext highlighter-rouge">xpath</code> you want to
+scrape as explained <a href="https://stackoverflow.com/a/57972054/7877917">here</a>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 
@@ -336,7 +338,7 @@
   </span><span class="n">select</span><span class="p">(</span><span class="n">ISO_3166_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO3_CODE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="merging-all-together">Merging all together</h2>
-<p>Now let’s join and have a look to see what is going on. We use the <code class="language-plaintext highlighter-rouge">countrycode</code> package to retrieve the ISO3 codes of our scrapped dataset:</p>
+<p>Now let’s join and have a look to see what is going on. We use the <strong>countrycode</strong> package to retrieve the ISO3 codes of our scraped dataset:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">countrycode</span><span class="p">)</span><span class="w">
 
 </span><span class="n">Base</span><span class="o">$</span><span class="n">ISO_3166_3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">countrycode</span><span class="p">(</span><span class="n">Base</span><span class="o">$</span><span class="n">Country</span><span class="p">,</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"country.name"</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"iso3c"</span><span class="p">)</span><span class="w">
@@ -359,7 +361,8 @@
  <li>In terms of projection, Wikipedia recommends the <a href="https://en.wikipedia.org/wiki/Equirectangular_projection">Equirectangular projection</a> but, as in their own sample of a gradient map, I would choose to use the <a href="https://en.wikipedia.org/wiki/Robinson_projection">Robinson projection</a>.</li>
  <li>I should produce an <code class="language-plaintext highlighter-rouge">.svg</code> file following also the naming convention.</li>
 </ul>
-<p>Some libraries then to use: <code class="language-plaintext highlighter-rouge">RColorBrewer</code>, <code class="language-plaintext highlighter-rouge">rsvg</code> and specially one of my favourites, <code class="language-plaintext highlighter-rouge">cartography</code>:</p>
+<p>Some libraries remain to be used: <strong>RColorBrewer</strong>, <strong>rsvg</strong> and, especially,
+one of my favorites, <strong>cartography</strong>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rsvg</span><span class="p">)</span><span class="w">

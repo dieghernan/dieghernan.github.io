@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -236,46 +236,50 @@
 <p>This code would generate a leaflet map with a layer provided by Leaflet-providersESP.</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;title&gt;</span>Minimal page | leaflet-providersESP<span class="nt">&lt;/title&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
-	<span class="c">&lt;!-- Load Leaflet --&gt;</span>
-	<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"</span> <span class="nt">/&gt;</span>
-	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-	<span class="c">&lt;!-- Install leaflet-providersESP --&gt;</span>
-	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/gh/dieghernan/leaflet-providersESP/dist/leaflet-providersESP.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-	<span class="c">&lt;!-- Display map full page --&gt;</span>
-	<span class="nt">&lt;style&gt;</span>
-	<span class="nt">html</span> <span class="p">{</span>
-		<span class="nl">height</span><span class="p">:</span> <span class="m">100%</span>
-	<span class="p">}</span>
-	<span class="nt">body</span> <span class="p">{</span>
-		<span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-		<span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-		<span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-	<span class="p">}</span>
-	<span class="nf">#mapid</span> <span class="p">{</span>
-		<span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-		<span class="nl">width</span><span class="p">:</span> <span class="m">100%</span>
-	<span class="p">}</span>
-	<span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-	<span class="c">&lt;!-- Create map --&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mapid"</span><span class="nt">&gt;&lt;/div&gt;</span>
-	<span class="c">&lt;!-- Puerta del Sol - IDErioja server --&gt;</span>
-	<span class="nt">&lt;script&gt;</span>
-	<span class="kd">var</span> <span class="nx">mymap</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="dl">'</span><span class="s1">mapid</span><span class="dl">'</span><span class="p">).</span><span class="nf">setView</span><span class="p">([</span><span class="mf">40.4166</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.7038400</span><span class="p">],</span> <span class="mi">18</span><span class="p">);</span>
-	<span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nf">providerESP</span><span class="p">(</span><span class="dl">'</span><span class="s1">IDErioja</span><span class="dl">'</span><span class="p">).</span><span class="nf">addTo</span><span class="p">(</span><span class="nx">mymap</span><span class="p">);</span>
-	<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Minimal page | leaflet-providersESP<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span> <span class="nt">/&gt;</span>
+    <span class="c">&lt;!-- Load Leaflet --&gt;</span>
+    <span class="nt">&lt;link</span>
+      <span class="na">rel=</span><span class="s">"stylesheet"</span>
+      <span class="na">href=</span><span class="s">"https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"</span>
+    <span class="nt">/&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="c">&lt;!-- Install leaflet-providersESP --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/gh/dieghernan/leaflet-providersESP/dist/leaflet-providersESP.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="c">&lt;!-- Display map full page --&gt;</span>
+    <span class="nt">&lt;style&gt;</span>
+      <span class="nt">html</span> <span class="p">{</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nt">body</span> <span class="p">{</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+        <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+        <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nf">#mapid</span> <span class="p">{</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="c">&lt;!-- Create map --&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"mapid"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="c">&lt;!-- Puerta del Sol - IDErioja server --&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+      <span class="kd">var</span> <span class="nx">mymap</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="dl">"</span><span class="s2">mapid</span><span class="dl">"</span><span class="p">).</span><span class="nf">setView</span><span class="p">([</span><span class="mf">40.4166</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.70384</span><span class="p">],</span> <span class="mi">18</span><span class="p">);</span>
+      <span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">.</span><span class="nf">providerESP</span><span class="p">(</span><span class="dl">"</span><span class="s2">IDErioja</span><span class="dl">"</span><span class="p">).</span><span class="nf">addTo</span><span class="p">(</span><span class="nx">mymap</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 <div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary">
   <iframe class="embed-responsive-item" src="https://dieghernan.github.io/leaflet-providersESP/demo/minimal" allowfullscreen="" loading="lazy"></iframe>
 </div>
-<h2 class="mt-5 mb-2" id="all-providers">All providers</h2>
-<div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary">
+<h2 id="all-providers">All providers</h2>
+<div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary mt-5 mb-2">
   <iframe class="embed-responsive-item" src="https://dieghernan.github.io/leaflet-providersESP/allproviders/" allowfullscreen="" loading="lazy"></iframe>
 </div>
 		</article>
@@ -346,6 +350,25 @@
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/projects/celestial-data/" class="chulapa-text-body-color">
+              Celestial Data
+            </a>
+         </p>
+           <p class="card-text">
+              <small>A compilation of celestial data files</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2023-01-23T00:00:00+01:00">
+                january 23, 2023
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/projects/corona-atlas/" class="chulapa-text-body-color">
               Corona Atlas
             </a>
@@ -358,25 +381,6 @@
               <i class="far fa-calendar" aria-hidden="true"></i>
               <time datetime="2021-04-30T00:00:00+02:00">
                 april 30, 2021
-              </time>
-            </small>
-       </div>
-     </div>
-     <div class="card ml-sm-1 border chulapa-related">
-       <div class="card-body">
-         <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202203_Corona-timelapse/" class="chulapa-text-body-color">
-              Corona timelapse
-            </a>
-         </p>
-           <p class="card-text">
-              <small>Travel restrictions amidst the COVID crisis across time - A German perspective</small>
-           </p></div>
-       <div class="card-footer bg-transparent">
-            <small>
-              <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2022-03-14T00:00:00+01:00">
-                march 14, 2022
               </time>
             </small>
        </div>

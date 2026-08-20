@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -258,21 +258,21 @@
 		</nav>   
 	</div>
 			<p>If you have been playing around with <strong>R</strong> for a while, probably you are
-familiarized with the <code class="language-plaintext highlighter-rouge">volcano</code> dataset:</p>
+familiar with the <code class="language-plaintext highlighter-rouge">volcano</code> dataset:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
 </span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
-<p>This represents the topographic information of one of the volcanoes of Auckland
+<p>This represents the topographic information about one of the volcanoes of Auckland
 (New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
 Eden</a>. But <strong>do you know
 that this map is flipped?</strong></p>
 <p>On this post I introduce the <a href="https://github.com/dieghernan/tidyterra">tidyterra
 package</a>, recently added to
 <a href="https://CRAN.R-project.org/package=tidyterra">CRAN</a> and I would show you how to
-geotag the <code class="language-plaintext highlighter-rouge">volcano</code> dataset. We would produce also ggplot2 maps using the
-functions of <code class="language-plaintext highlighter-rouge">tidyterra</code>.</p>
+geotag the <code class="language-plaintext highlighter-rouge">volcano</code> dataset. We would also produce <strong>ggplot2</strong> maps using the
+functions of <strong>tidyterra</strong>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">terra</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
@@ -283,7 +283,7 @@ functions of <code class="language-plaintext highlighter-rouge">tidyterra</code>
 <h2 id="wait-volcano-is-flipped">Wait, <code class="language-plaintext highlighter-rouge">volcano</code> is flipped?</h2>
 <p>Let’s check it out. Thanks to the package <code class="language-plaintext highlighter-rouge">maptiles</code> we can have a glimpse of
 the location of Maungawhau using map tiles (as Google Maps uses). We would use
-<code class="language-plaintext highlighter-rouge">tidyterra</code> for displaying the map tile:</p>
+<strong>tidyterra</strong> for displaying the map tile:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># location of Maungawhau</span><span class="w">
 
@@ -314,7 +314,7 @@ the location of Maungawhau using map tiles (as Google Maps uses). We would use
 question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
 geo-tagged map tile)? Let’s check it out</p>
 <h2 id="working-with-spatrasters">Working with SpatRasters</h2>
-<p>Thanks to the <code class="language-plaintext highlighter-rouge">terra</code> package we can start converting <code class="language-plaintext highlighter-rouge">volcano</code> into a
+<p>Thanks to the <strong>terra</strong> package we can start converting <code class="language-plaintext highlighter-rouge">volcano</code> into a
 SpatRaster:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">volcano_rast</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">)</span><span class="w">
@@ -335,14 +335,14 @@ SpatRaster:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">volcano_rast_ok</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 1, 1  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. :  </span><span class="w">
-</span><span class="c1">#&gt; source      : memory </span><span class="w">
-</span><span class="c1">#&gt; name        : lyr.1 </span><span class="w">
-</span><span class="c1">#&gt; min value   :    94 </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. :</span><span class="w">
+</span><span class="c1">#&gt; source      : memory</span><span class="w">
+</span><span class="c1">#&gt; name        : lyr.1</span><span class="w">
+</span><span class="c1">#&gt; min value   :    94</span><span class="w">
 </span><span class="c1">#&gt; max value   :   195</span><span class="w">
 </span></code></pre></div></div>
 <p>Nice! Now we have a raster of <code class="language-plaintext highlighter-rouge">volcano</code>, but still without geotagged
@@ -373,7 +373,7 @@ Maungawhau</a>), that are:</p>
   </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span><span class="n">template</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
@@ -382,7 +382,7 @@ Maungawhau</a>), that are:</p>
 <p>So now we only need to transfer the values from <code class="language-plaintext highlighter-rouge">volcano_rast_ok</code> to our
 template:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Use tidyterra for pull the values of one raster</span><span class="w">
+</span><span class="c1"># Use tidyterra to pull the values of one raster</span><span class="w">
 </span><span class="c1"># and create a new layer</span><span class="w">
 
 </span><span class="n">volcano2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -390,14 +390,14 @@ template:</p>
   </span><span class="n">select</span><span class="p">(</span><span class="n">elevation</span><span class="p">)</span><span class="w">
 
 </span><span class="n">volcano2</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200) </span><span class="w">
-</span><span class="c1">#&gt; source      : memory </span><span class="w">
-</span><span class="c1">#&gt; name        : elevation </span><span class="w">
-</span><span class="c1">#&gt; min value   :        94 </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)</span><span class="w">
+</span><span class="c1">#&gt; source      : memory</span><span class="w">
+</span><span class="c1">#&gt; name        : elevation</span><span class="w">
+</span><span class="c1">#&gt; min value   :        94</span><span class="w">
 </span><span class="c1">#&gt; max value   :       195</span><span class="w">
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">)</span><span class="w">
@@ -411,12 +411,12 @@ template:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
 <h2 id="an-easter-egg">An Easter egg</h2>
-<p>The <code class="language-plaintext highlighter-rouge">volcano</code> dataset may not be completely up to date. As a compliment,
-<code class="language-plaintext highlighter-rouge">tidyterra</code> includes a <code class="language-plaintext highlighter-rouge">.tif</code> file with the same dimensions that our <code class="language-plaintext highlighter-rouge">volcano2</code>
+<p>The <code class="language-plaintext highlighter-rouge">volcano</code> dataset may not be completely up to date. As a complement,
+<strong>tidyterra</strong> includes a <code class="language-plaintext highlighter-rouge">.tif</code> file with the same dimensions that our <code class="language-plaintext highlighter-rouge">volcano2</code>
 raster, but with the topographic values extracted from <a href="https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/">Auckland LiDAR 1m DEM
 (2013)</a> and
 resampled to a resolution of 5x5 meters, for package size optimization. See here
-how to load it and check the plotting <code class="language-plaintext highlighter-rouge">tidyterra</code> possibilities:</p>
+how to load it and check the plotting possibilities of <strong>tidyterra</strong>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Load out Easter Egg</span><span class="w">
 
@@ -425,14 +425,14 @@ how to load it and check the plotting <code class="language-plaintext highlighte
 </span><span class="p">))</span><span class="w">
 
 </span><span class="n">volcano2_easter</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 174, 122, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 5, 5  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 1756969, 1757579, 5917003, 5917873  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193) </span><span class="w">
-</span><span class="c1">#&gt; source      : volcano2.tif </span><span class="w">
-</span><span class="c1">#&gt; name        : elevation </span><span class="w">
-</span><span class="c1">#&gt; min value   :  76.26222 </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193)</span><span class="w">
+</span><span class="c1">#&gt; source      : volcano2.tif</span><span class="w">
+</span><span class="c1">#&gt; name        : elevation</span><span class="w">
+</span><span class="c1">#&gt; min value   :  76.26222</span><span class="w">
 </span><span class="c1">#&gt; max value   :  195.5542</span><span class="w">
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>

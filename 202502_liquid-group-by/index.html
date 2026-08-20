@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Implementing group_by count in Liquid",
-    "description": "See the magic happening - This post explains implementing group_by count in Liquid for Jekyll, addressing issues with Jekyll 4.1.0 and providing a solution."
+    "description": "See the magic happening - This post explains implementing group_by count in Liquid for Jekyll,addressing issues with Jekyll 4.1.0 and providing a solution."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="See the magic happening - This post explains implementing group_by count in Liquid for Jekyll, addressing issues with Jekyll 4.1.0 and providing a solution.">
+   <meta name="description" content="See the magic happening - This post explains implementing group_by count in Liquid for Jekyll,addressing issues with Jekyll 4.1.0 and providing a solution.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/og_jekyll.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/202502_liquid-group-by/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="See the magic happening - This post explains implementing group_by count in Liquid for Jekyll, addressing issues with Jekyll 4.1.0..." >
+   <meta property="og:description" content="See the magic happening - This post explains implementing group_by count in Liquid for Jekyll,addressing issues with Jekyll 4.1.0 and..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/og_jekyll.webp" >
     <!-- Twitter/X Cards -->
@@ -257,57 +257,54 @@
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#alternative-group_by-with-liquid" class="nav-link">Alternative <code class="language-plaintext highlighter-rouge">group_by</code> with Liquid</a></li><li class="nav-item nav d-block"><a href="#sorting" class="nav-link">Sorting</a></li><li class="nav-item nav d-block"><a href="#bottom-line" class="nav-link">Bottom line</a></li></ul>
 		</nav>   
 	</div>
-			<p><a href="https://shopify.github.io/liquid/">Liquid</a> is an open-source template 
-language created by Shopify back in 2006 and written in Ruby. It is widely 
-used by several frameworks, with <a href="https://jekyllrb.com/">Jekyll</a> being one of 
+			<p><a href="https://shopify.github.io/liquid/">Liquid</a> is an open-source template
+language created by Shopify back in 2006 and written in Ruby. It is widely
+used by several frameworks, with <a href="https://jekyllrb.com/">Jekyll</a> being one of
 the most famous.</p>
-<p>This website is created using Jekyll, specifically my Jekyll template 
-<span class="chulapa">Chulapa</span> 
+<p>This website is created using Jekyll, specifically my Jekyll template
+<span class="chulapa">Chulapa</span>
 (<a href="https://dieghernan.github.io/chulapa">link</a>).</p>
-<p>Some time ago, <a href="https://github.com/cargocultprogramming">@cargocultprogramming</a> 
-opened <a href="https://github.com/dieghernan/chulapa/issues/29">dieghernan/chulapa#29</a> 
-because one of the components of the theme was broken in Jekyll <code class="language-plaintext highlighter-rouge">=&gt;4.1.0</code>. 
-Digging a bit, I saw 
-<a href="https://github.com/jekyll/jekyll/issues/8214">jekyll/jekyll#8214</a>, exposing 
-the same issue. What seemed to be a feature was indeed a bug that some 
+<p>Some time ago, <a href="https://github.com/cargocultprogramming">@cargocultprogramming</a>
+opened <a href="https://github.com/dieghernan/chulapa/issues/29">dieghernan/chulapa#29</a>
+because one of the components of the theme was broken in Jekyll <code class="language-plaintext highlighter-rouge">=&gt;4.1.0</code>.
+Digging a bit, I saw
+<a href="https://github.com/jekyll/jekyll/issues/8214">jekyll/jekyll#8214</a>, exposing
+the same issue. What seemed to be a feature was indeed a bug that some
 developers were exploiting.</p>
-<p>The change is that when applying the <code class="language-plaintext highlighter-rouge">group_by</code> Liquid filter on an array, it 
-used to produce a “grouped” version of the array, while on Jekyll <code class="language-plaintext highlighter-rouge">=&gt;4.1.0</code> 
+<p>The change is that when applying the <code class="language-plaintext highlighter-rouge">group_by</code> Liquid filter on an array, it
+used to produce a “grouped” version of the array, while on Jekyll <code class="language-plaintext highlighter-rouge">=&gt;4.1.0</code>
 it produces a different result that can’t be used in the same way.</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-
-{% assign alldocs = site.exercises %}
-{% assign grouptag = alldocs | map: 'tags' | join: ',' | split: ',' | group_by: tag %}
-
-{{ grouptag }}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {% assign alldocs = site.exercises %} {% assign grouptag = alldocs |
+map: 'tags' | join: ',' | split: ',' | group_by: tag %} {{ grouptag }}
 
 <span class="c">&lt;!-- Jekyll &lt; 4.1.0 result --&gt;</span>
-{"name"=&gt;"tag A", "items"=&gt;["tag A"], "size"=&gt;1}{"name"=&gt;"Tag B", "items"=&gt;["Tag B"], "size"=&gt;1}{"name"=&gt;"Virtualbox", "items"=&gt;["Virtualbox"], "size"=&gt;1}{"name"=&gt;"netcat", "items"=&gt;["netcat"], "size"=&gt;1}{"name"=&gt;"whois", "items"=&gt;["whois"], "size"=&gt;1}{"name"=&gt;"dig", "items"=&gt;["dig"], "size"=&gt;1} ... {"name"=&gt;"Hydra", "items"=&gt;["Hydra"], "size"=&gt;1}
+{"name"=&gt;"tag A", "items"=&gt;["tag A"], "size"=&gt;1}{"name"=&gt;"Tag B", "items"=&gt;["Tag
+B"], "size"=&gt;1}{"name"=&gt;"Virtualbox", "items"=&gt;["Virtualbox"],
+"size"=&gt;1}{"name"=&gt;"netcat", "items"=&gt;["netcat"], "size"=&gt;1}{"name"=&gt;"whois",
+"items"=&gt;["whois"], "size"=&gt;1}{"name"=&gt;"dig", "items"=&gt;["dig"], "size"=&gt;1} ...
+{"name"=&gt;"Hydra", "items"=&gt;["Hydra"], "size"=&gt;1}
 
 <span class="c">&lt;!-- Jekyll &gt;= 4.1.0 result --&gt;</span>
-{"name"=&gt;"", "items"=&gt;["tag A", "Tag B", "Virtualbox", "netcat", "whois", "dig", ... , "Hydra"], "size"=&gt;26}
-
-
+{"name"=&gt;"", "items"=&gt;["tag A", "Tag B", "Virtualbox", "netcat", "whois", "dig",
+... , "Hydra"], "size"=&gt;26} 
 </code></pre></div></div>
-<p>So basically, counting items was not easy anymore. I developed a solution in 
+<p>So basically, counting items was not easy anymore. I developed a solution in
 pure Liquid (which happens to be a quite verbose language out of the predefined
 filters) that is compatible with any Jekyll version.</p>
 <p>The algorithm is now implemented in <span class="chulapa">Chulapa</span>. You
 can check the results on my <a href="https://dieghernan.github.io/tags">/tags</a> page.</p>
 <p>Note that the tables produced in the example are taken from my live site,
 hence they may change as I add more posts. The results of the table should
-be the same as the order and number of tags displayed on the 
+have the same order and number of tags displayed on the
 <a href="https://dieghernan.github.io/tags">/tags</a> page.</p>
 <h2 id="alternative-group_by-with-liquid">Alternative <code class="language-plaintext highlighter-rouge">group_by</code> with Liquid</h2>
 <p>First, we define an array of all the tags included in the documents of my site:</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-{% assign alldocs = site.documents %}
-{% assign alltags = alldocs | map: 'tags' | join: ',' | split: ',' %}
-
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {% assign alldocs = site.documents %} {% assign alltags = alldocs |
+map: 'tags' | join: ',' | split: ',' %} 
 </code></pre></div></div>
 <div>
-<p>Cool! Now we can count the number of unique elements in 
-<code>alltags</code> by counting the occurrences of unique tags in the 
+<p>Cool! Now we can count the number of unique elements in
+<code>alltags</code> by counting the occurrences of unique tags in the
 array:</p>
 </div>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Allocating array to group_by: replacement --&gt;</span>
@@ -319,26 +316,26 @@ array:</p>
 {% assign count_tags = '' | split: ',' %}
 
 <span class="c">&lt;!-- Iterator 0 to number of unique tags - 1 (size = number of unique tags) --&gt;</span>
-{% assign n_tags = single_tags | size | minus: 1 %}
-
-{% for i in (0..n_tags) %}
+{% assign n_tags = single_tags | size | minus: 1 %} {% for i in (0..n_tags) %}
 <span class="c">&lt;!-- Populate --&gt;</span>
-  {% assign count_this_tag = alltags | where_exp:"item", "item == single_tags[i]" | size %}
-  {% assign count_tags = count_tags | push: count_this_tag %}
-{% endfor %}
+{% assign count_this_tag = alltags | where_exp:"item", "item == single_tags[i]"
+| size %} {% assign count_tags = count_tags | push: count_this_tag %} {% endfor
+%}
 
 <span class="c">&lt;!-- Display single_tags and count_tags as a table --&gt;</span>
 <span class="nt">&lt;table&gt;</span>
-  <span class="nt">&lt;caption&gt;</span>Display count of tags on this site <span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>
+    Display count of tags on this site
+  <span class="nt">&lt;/caption&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
     <span class="nt">&lt;th&gt;</span>Tag<span class="nt">&lt;/th&gt;</span>
     <span class="nt">&lt;th&gt;</span>Count<span class="nt">&lt;/th&gt;</span>
   <span class="nt">&lt;/tr&gt;</span>
   {% for i in (0..n_tags) %}
-    <span class="nt">&lt;tr&gt;</span>
-      <span class="nt">&lt;td&gt;</span>{{ single_tags[i] }}<span class="nt">&lt;/td&gt;</span>
-      <span class="nt">&lt;td&gt;</span>{{ count_tags[i] }}<span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ single_tags[i] }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ count_tags[i] }}<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
   {% endfor %}
 <span class="nt">&lt;/table&gt;</span>
 
@@ -548,7 +545,7 @@ array:</p>
      <td>4</td>
    </tr>
    <tr>
-     <td>webscrapping</td>
+     <td>webscraping</td>
      <td>1</td>
    </tr>
    <tr>
@@ -569,37 +566,30 @@ array:</p>
    </tr></table>
 </details>
 <h2 id="sorting">Sorting</h2>
-<p>How to rank the tags by the number of occurrences? We can set the maximum 
-number of occurrences and loop in reverse order. The ranked array would be 
+<p>How to rank the tags by the number of occurrences? We can set the maximum
+number of occurrences and loop in reverse order. The ranked array would be
 populated if a tag presents the number of occurrences in the main loop:</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Used in https://github.com/mmistakes/minimal-mistakes/blob/master/_includes/posts-taxonomy.html --&gt;</span>
-
-{% assign items_max = count_tags | sort | last %}
-{% assign sorted_tags = '' | split: ',' %}
-{% assign sorted_count_tags = '' | split: ',' %}
-
-{% for i in (1..items_max) reversed %}
-  {% for j in (0..n_tags) %}
-    {% if count_tags[j] == i %}
-     {% assign sorted_tags = sorted_tags | push: single_tags[j] %}
-     {% assign sorted_count_tags = sorted_count_tags | push: i %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-
-{% assign sorted_tags = sorted_tags | uniq %}
+ {% assign items_max = count_tags | sort | last %} {% assign
+sorted_tags = '' | split: ',' %} {% assign sorted_count_tags = '' | split: ','
+%} {% for i in (1..items_max) reversed %} {% for j in (0..n_tags) %} {% if
+count_tags[j] == i %} {% assign sorted_tags = sorted_tags | push: single_tags[j]
+%} {% assign sorted_count_tags = sorted_count_tags | push: i %} {% endif %} {%
+endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
 
 <span class="nt">&lt;table&gt;</span>
-  <span class="nt">&lt;caption&gt;</span>Display sorted count of tags on this site <span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>
+    Display sorted count of tags on this site
+  <span class="nt">&lt;/caption&gt;</span>
   <span class="nt">&lt;tr&gt;</span>
     <span class="nt">&lt;th&gt;</span>Tag<span class="nt">&lt;/th&gt;</span>
     <span class="nt">&lt;th&gt;</span>Count (desc sorted)<span class="nt">&lt;/th&gt;</span>
   <span class="nt">&lt;/tr&gt;</span>
   {%- for i in (0..n_tags) %}
-    <span class="nt">&lt;tr&gt;</span>
-      <span class="nt">&lt;td&gt;</span>{{ sorted_tags[i] }}<span class="nt">&lt;/td&gt;</span>
-      <span class="nt">&lt;td&gt;</span>{{ sorted_count_tags[i] }}<span class="nt">&lt;/td&gt;</span>
-    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;tr&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ sorted_tags[i] }}<span class="nt">&lt;/td&gt;</span>
+    <span class="nt">&lt;td&gt;</span>{{ sorted_count_tags[i] }}<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;/tr&gt;</span>
   {%- endfor -%}
 <span class="nt">&lt;/table&gt;</span>
 
@@ -817,7 +807,7 @@ populated if a tag presents the number of occurrences in the main loop:</p>
      <td>1</td>
    </tr>
    <tr>
-     <td>webscrapping</td>
+     <td>webscraping</td>
      <td>1</td>
    </tr>
    <tr>
@@ -831,35 +821,23 @@ populated if a tag presents the number of occurrences in the main loop:</p>
 </details>
 <h2 id="bottom-line">Bottom line</h2>
 <p>Done! Here you have a clean version of the algorithm:</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-{% assign alldocs = site.documents %}
-{% assign alltags = alldocs | map: 'tags' | join: ',' | split: ',' %}
-{% assign single_tags = alltags | uniq %}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {% assign alldocs = site.documents %} {% assign alltags = alldocs |
+map: 'tags' | join: ',' | split: ',' %} {% assign single_tags = alltags | uniq
+%}
 
 <span class="c">&lt;!-- Counting --&gt;</span>
-{% assign count_tags = '' | split: ',' %}
-{% assign n_tags = single_tags | size | minus: 1 %}
-{% for i in (0..n_tags) %}
-  {% assign count_this_tag = alltags | where_exp:"item", "item == single_tags[i]" | size %}
-  {% assign count_tags = count_tags | push: count_this_tag %}
-{% endfor %}
+{% assign count_tags = '' | split: ',' %} {% assign n_tags = single_tags | size
+| minus: 1 %} {% for i in (0..n_tags) %} {% assign count_this_tag = alltags |
+where_exp:"item", "item == single_tags[i]" | size %} {% assign count_tags =
+count_tags | push: count_this_tag %} {% endfor %}
 
 <span class="c">&lt;!-- Extra: sort --&gt;</span>
-{% assign items_max = count_tags | sort | last %}
-{% assign sorted_tags = '' | split: ',' %}
-{% assign sorted_count_tags = '' | split: ',' %}
-
-{% for i in (1..items_max) reversed %}
-  {% for j in (0..n_tags) %}
-    {% if count_tags[j] == i %}
-     {% assign sorted_tags = sorted_tags | push: single_tags[j] %}
-     {% assign sorted_count_tags = sorted_count_tags | push: i %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-
-{% assign sorted_tags = sorted_tags | uniq %}
-
+{% assign items_max = count_tags | sort | last %} {% assign sorted_tags = '' |
+split: ',' %} {% assign sorted_count_tags = '' | split: ',' %} {% for i in
+(1..items_max) reversed %} {% for j in (0..n_tags) %} {% if count_tags[j] == i
+%} {% assign sorted_tags = sorted_tags | push: single_tags[j] %} {% assign
+sorted_count_tags = sorted_count_tags | push: i %} {% endif %} {% endfor %} {%
+endfor %} {% assign sorted_tags = sorted_tags | uniq %} 
 </code></pre></div></div>
 			<div class="mt-5 pt-3 mb-3 text-center">
 				<script type='text/javascript'

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -304,7 +304,7 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#the-githubjekyll-part" class="nav-link">The GitHub/Jekyll part</a><ul><li class="nav-item nav d-block"><a href="#1-what-to-include" class="nav-link">1. What to include</a></li><li class="nav-item nav d-block"><a href="#2where-to-include" class="nav-link">2.Where to include</a></li></ul></li><li class="nav-item nav d-block"><a href="#the-rstudio-part" class="nav-link">The RStudio part</a><ul><li class="nav-item nav d-block"><a href="#3-creating-the-leaflet-map" class="nav-link">3. Creating the leaflet map</a></li><li class="nav-item nav d-block"><a href="#4-set-up-the-yaml-front-matter-" class="nav-link">4. Set up the YAML front matter <a name="step4"></a></a></li></ul></li><li class="nav-item nav d-block"><a href="#the-markdown-part" class="nav-link">The Markdown part</a><ul><li class="nav-item nav d-block"><a href="#5-modifying-the-md-file" class="nav-link"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></a></li><li class="nav-item nav d-block"><a href="#6-publish-your-post" class="nav-link">6. Publish your post</a></li></ul></li><li class="nav-item nav d-block"><a href="#gallery-size-of-a-leaflet-map-" class="nav-link">Gallery: Size of a leaflet map <a name="extra"></a></a><ul><li class="nav-item nav d-block"><a href="#fixed-size" class="nav-link">Fixed size</a></li><li class="nav-item nav d-block"><a href="#responsive-size" class="nav-link">Responsive size</a></li></ul></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#the-githubjekyll-part" class="nav-link">The GitHub/Jekyll part</a><ul><li class="nav-item nav d-block"><a href="#1-what-to-include" class="nav-link">1. What to include</a></li><li class="nav-item nav d-block"><a href="#2-where-to-include" class="nav-link">2. Where to include</a></li></ul></li><li class="nav-item nav d-block"><a href="#the-rstudio-part" class="nav-link">The RStudio part</a><ul><li class="nav-item nav d-block"><a href="#3-creating-the-leaflet-map" class="nav-link">3. Creating the leaflet map</a></li><li class="nav-item nav d-block"><a href="#4-set-up-the-yaml-front-matter-" class="nav-link">4. Set up the YAML front matter <a name="step4"></a></a></li></ul></li><li class="nav-item nav d-block"><a href="#the-markdown-part" class="nav-link">The Markdown part</a><ul><li class="nav-item nav d-block"><a href="#5-modifying-the-md-file" class="nav-link"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></a></li><li class="nav-item nav d-block"><a href="#6-publish-your-post" class="nav-link">6. Publish your post</a></li></ul></li><li class="nav-item nav d-block"><a href="#gallery-size-of-a-leaflet-map-" class="nav-link">Gallery: Size of a leaflet map <a name="extra"></a></a><ul><li class="nav-item nav d-block"><a href="#fixed-size" class="nav-link">Fixed size</a></li><li class="nav-item nav d-block"><a href="#responsive-size" class="nav-link">Responsive size</a></li></ul></li></ul>
 		</nav>   
 	</div>
 			<p>Recently I have been struggling when trying to embed a
@@ -315,34 +315,8 @@
 In my case, I use the <a href="https://dieghernan.github.io/chulapa/"><span class="chulapa">Chulapa</span></a>
 remote theme created by myself.</p>
 <p><strong>Index</strong></p>
-<ol id="markdown-toc">
- <li><a href="#the-githubjekyll-part" id="markdown-toc-the-githubjekyll-part">The GitHub/Jekyll part</a>   <ol>
-     <li><a href="#1-what-to-include" id="markdown-toc-1-what-to-include">1. What to include</a></li>
-     <li><a href="#2where-to-include" id="markdown-toc-2where-to-include">2.Where to include</a></li>
-   </ol>
- </li>
- <li><a href="#the-rstudio-part" id="markdown-toc-the-rstudio-part">The RStudio part</a>   <ol>
-     <li><a href="#3-creating-the-leaflet-map" id="markdown-toc-3-creating-the-leaflet-map">3. Creating the leaflet map</a></li>
-     <li><a href="#4-set-up-the-yaml-front-matter-" id="markdown-toc-4-set-up-the-yaml-front-matter-">4. Set up the YAML front matter <a name="step4"></a></a></li>
-   </ol>
- </li>
- <li><a href="#the-markdown-part" id="markdown-toc-the-markdown-part">The Markdown part</a>   <ol>
-     <li><a href="#5-modifying-the-md-file" id="markdown-toc-5-modifying-the-md-file"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></a></li>
-     <li><a href="#6-publish-your-post" id="markdown-toc-6-publish-your-post">6. Publish your post</a></li>
-   </ol>
- </li>
- <li><a href="#gallery-size-of-a-leaflet-map-" id="markdown-toc-gallery-size-of-a-leaflet-map-">Gallery: Size of a leaflet map <a name="extra"></a></a>   <ol>
-     <li><a href="#fixed-size" id="markdown-toc-fixed-size">Fixed size</a>       <ol>
-         <li><a href="#example-1-672x480px" id="markdown-toc-example-1-672x480px">Example 1: 672x480px</a></li>
-         <li><a href="#example-2-200x300px" id="markdown-toc-example-2-200x300px">Example 2: 200x300px</a></li>
-       </ol>
-     </li>
-     <li><a href="#responsive-size" id="markdown-toc-responsive-size">Responsive size</a>       <ol>
-         <li><a href="#example-3-100-width" id="markdown-toc-example-3-100-width">Example 3: 100% width</a></li>
-       </ol>
-     </li>
-   </ol>
- </li>
+<ol>
+ <li>The generated Toc will be an ordered list</li>
 </ol>
 <p>Ready? Let’s go!</p>
 <h3 id="the-githubjekyll-part">The GitHub/Jekyll part</h3>
@@ -355,42 +329,48 @@ is a matter of <strong>what to include</strong> and <strong>where</strong> in yo
 this chunk:</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;head&gt;</span>
   <span class="c">&lt;!--code--&gt;</span>
-  
+
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/jquery/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
   <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"libs/bootstrap/css/flatly.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/bootstrap/js/bootstrap.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/bootstrap/shim/html5shiv.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-  
+
   ...
   <span class="c">&lt;!--more libraries--&gt;</span>
   ...
-  
+
   <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"libs/rstudio_leaflet/rstudio_leaflet.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"libs/leaflet-binding/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-  
+
   <span class="c">&lt;!--code--&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 </code></pre></div></div>
 <p>So now we have it! The only thing to remember is that we need <strong>to load
-the libraries from the leaflet server
-(<code class="language-plaintext highlighter-rouge">https://rstudio.github.io/leaflet</code>)</strong>, meaning that we have to prepend
+the libraries from the **leaflet</strong> server
+(<code class="language-plaintext highlighter-rouge">https://rstudio.github.io/leaflet</code>)**, meaning that we have to prepend
 that url to the libraries in our installation:</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://rstudio.github.io/leaflet/libs/bootstrap/css/flatly.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
-  
-  ...
-  <span class="c">&lt;!--more libraries--&gt;</span>
-  ...
-  
-  <span class="nt">&lt;link</span>     <span class="na">href=</span><span class="s">"https://rstudio.github.io/leaflet/libs/rstudio_leaflet/rstudio_leaflet.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">src= </span><span class="s">"https://rstudio.github.io/leaflet/libs/leaflet-binding/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span>
+  <span class="na">href=</span><span class="s">"https://rstudio.github.io/leaflet/libs/bootstrap/css/flatly.min.css"</span>
+  <span class="na">rel=</span><span class="s">"stylesheet"</span>
+<span class="nt">/&gt;</span>
+
+...
+<span class="c">&lt;!--more libraries--&gt;</span>
+...
+
+<span class="nt">&lt;link</span>
+  <span class="na">href=</span><span class="s">"https://rstudio.github.io/leaflet/libs/rstudio_leaflet/rstudio_leaflet.css"</span>
+  <span class="na">rel=</span><span class="s">"stylesheet"</span>
+<span class="nt">/&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://rstudio.github.io/leaflet/libs/leaflet-binding/leaflet.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </code></pre></div></div>
-<p>You can have a look of my implementation on
+<p>You can have a look at my implementation in
 <a href="https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/leaflet.html"><code class="language-plaintext highlighter-rouge">./_includes/leaflet.html</code></a>.</p>
-<h4 id="2where-to-include">2.Where to include</h4>
-<p>This a little bit more complicated, depending on the structure of your
+<h4 id="2-where-to-include">2. Where to include</h4>
+<p>This is a little more complicated, depending on the structure of your
 Jekyll template. The code chunk should be included in the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code>
 section of your page, so you would need to find where to put it. In the
 case of <span class="chulapa">Chulapa</span> it is on
@@ -425,19 +405,19 @@ created with the front matter:</p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">title</span><span class="pi">:</span> <span class="s">Leaflet, &lt;strong&gt;R&lt;/strong&gt;, Markdown, Jekyll and GitHub</span>
 <span class="na">subtitle</span><span class="pi">:</span> <span class="s">Make it work in 6 steps - a short tutorial</span>
-<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">R</span><span class="pi">,</span><span class="nv">leaflet</span><span class="pi">,</span><span class="nv">Jekyll</span><span class="pi">,</span> <span class="nv">html</span><span class="pi">,</span> <span class="nv">maps</span><span class="pi">]</span>
+<span class="na">tags</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">R</span><span class="pi">,</span> <span class="nv">leaflet</span><span class="pi">,</span> <span class="nv">Jekyll</span><span class="pi">,</span> <span class="nv">html</span><span class="pi">,</span> <span class="nv">maps</span><span class="pi">]</span>
 <span class="na">header_img</span><span class="pi">:</span> <span class="s">https://dieghernan.github.io/assets/figs/20190520_imgpost.webp</span>
 <span class="na">leafletmap</span><span class="pi">:</span> <span class="kc">true</span>
 <span class="na">always_allow_html</span><span class="pi">:</span> <span class="s">yes</span>
 <span class="na">last_modified_at</span><span class="pi">:</span> <span class="s">2021-05-30</span>
-<span class="na">output</span><span class="pi">:</span> 
+<span class="na">output</span><span class="pi">:</span>
   <span class="na">md_document</span><span class="pi">:</span>
     <span class="na">variant</span><span class="pi">:</span> <span class="s">gfm</span>
     <span class="na">preserve_yaml</span><span class="pi">:</span> <span class="kc">true</span>
 <span class="nn">---</span>
 </code></pre></div></div>
 <p>We are almost there! Now “Knit” your code and get the corresponding
-<code class="language-plaintext highlighter-rouge">.md</code>file.</p>
+<code class="language-plaintext highlighter-rouge">.md</code> file.</p>
 <h3 id="the-markdown-part">The Markdown part</h3>
 <h4 id="5-modifying-the-md-file"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></h4>
 <p><strong>Update: This is not needed any more! I still leave it here for info.
@@ -445,11 +425,11 @@ You can skip to the next section.</strong></p>
 <p>Have a look to the <code class="language-plaintext highlighter-rouge">.md</code> code that you have just created. Although not
 displayed in the preview, you can see in the file itself a chunk that
 looks like this:</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/json"</span><span class="na">data-for=</span><span class="s">"7ab57412f7b1df4d5773"</span><span class="nt">&gt;</span>
-    <span class="p">{</span><span class="dl">"</span><span class="s2">x</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">options</span><span class="dl">"</span><span class="p">:</span>
-      <span class="p">...</span>
-      <span class="dl">"</span><span class="s2">jsHooks</span><span class="dl">"</span><span class="p">:[]}</span>
-  <span class="nt">&lt;/script&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/json"</span> <span class="na">data-for=</span><span class="s">"7ab57412f7b1df4d5773"</span><span class="nt">&gt;</span>
+  <span class="p">{</span><span class="dl">"</span><span class="s2">x</span><span class="dl">"</span><span class="p">:{</span><span class="dl">"</span><span class="s2">options</span><span class="dl">"</span><span class="p">:</span>
+    <span class="p">...</span>
+    <span class="dl">"</span><span class="s2">jsHooks</span><span class="dl">"</span><span class="p">:[]}</span>
+<span class="nt">&lt;/script&gt;</span>
 </code></pre></div></div>
 <p>Actually that chunk is your leaflet map, created with <strong>RStudio</strong>. You
 can’t see it now because you are previewing a <code class="language-plaintext highlighter-rouge">markdown</code> file in your
@@ -463,7 +443,7 @@ but we would solve it later.</p>
 </code></pre></div></div>
 <p class="alert alert-warning p-3 mx-2 my-3"><i class="fa fa-exclamation-triangle"></i> <strong>Warning:</strong> Be sure that the
 widget id (<code class="language-plaintext highlighter-rouge">7ab57412f7b1df4d5773</code> in the example) is the same in the
-<code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> and in the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> part. If not your map would not load.</p>
+<code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> and in the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> part. If not, your map would not load.</p>
 <p>The <code class="language-plaintext highlighter-rouge">style="width:100%; height:216px;</code> part controls the actual size of
 the leaflet widget. In this case, the map would adapt to the width of
 the page with a fixed height of 216px. I put <a href="#extra">some examples</a> at
@@ -472,11 +452,11 @@ see which one is more suitable for your needs.</p>
 <h4 id="6-publish-your-post">6. Publish your post</h4>
 <p>Now you just have to publish your post as usual!! If everything has been
 properly set, when Jekyll builds your post it would include the
-libraries in the header and make the magic happens, just like this:</p>
+libraries in the header and make the magic happen, just like this:</p>
 <div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 <p class="alert alert-warning p-3 mx-2 my-3"><i class="fa fa-exclamation-triangle"></i> <strong>Warning:</strong> Have you checked
-the YAML front matter of your <code class="language-plaintext highlighter-rouge">.md</code> file? Have another look, specially
+the YAML front matter of your <code class="language-plaintext highlighter-rouge">.md</code> file? Have another look, especially
 if you have followed my Pro tip.</p>
 <h3 id="gallery-size-of-a-leaflet-map-">Gallery: Size of a leaflet map <a name="extra"></a></h3>
 <p><strong>A note:</strong> For a complete understanding of this section it is
@@ -487,7 +467,7 @@ here)</a>.</p>
 <h4 id="fixed-size">Fixed size</h4>
 <p>With these examples you can see how to control the absolute size of the
 leaflet map. The disadvantage of this method is that the size would be
-fixed for all the devices, so maps sized for smartphones or tables
+fixed for all the devices, so maps sized for smartphones or tablets
 wouldn’t look as nice in laptops, etc. and vice versa.</p>
 <h5 id="example-1-672x480px">Example 1: 672x480px</h5>
 <p>Fixed size in pixels. By default in my machine:</p>
@@ -587,7 +567,9 @@ screen, no matter what device you are using.</p>
               Introducing geobounds
             </a>
          </p>
-         </div>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -261,8 +261,13 @@
 		</nav>   
 	</div>
 			<p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>, AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
-<p>A common challenge when creating maps is how to include an inset map on your visualization. An inset map is nothing more than a smaller map usually included on a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but its geographical location would imply an imperfect visualization, or even to include small units that otherwise won’t be shown on the map.</p>
-<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>, but this time I would show how to produce these insets using the <code class="language-plaintext highlighter-rouge">ggplot2</code> and the <code class="language-plaintext highlighter-rouge">tmap</code> packages. In short: <strong>use <code class="language-plaintext highlighter-rouge">cowplot</code> package</strong>.</p>
+<p>A common challenge when creating maps is how to include an inset map in your
+visualization. An inset map is nothing more than a smaller map usually included
+in a corner that may provide additional context to the overall map. It is also
+useful for representing spatial units that may form part of a country but whose
+geographical location would result in an imperfect visualization, or for
+including small units that would otherwise not be shown on the map.</p>
+<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>, but this time I would show how to produce these insets using the <strong>ggplot2</strong> and <strong>tmap</strong> packages. In short: use the <strong>cowplot</strong> package.</p>
 <h2 id="test-case-canary-island-as-an-inset">Test case: Canary Island as an inset</h2>
 <p>On this example, I would create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and creating an inset for the Canary Islands.</p>
 <p>The “true” map of Spain is:</p>
@@ -338,7 +343,9 @@
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
-<p>Note also that this approach is valid not only for maps, but for all type of plot produced by <code class="language-plaintext highlighter-rouge">ggplot2</code>, since this package is not specific for map objects:</p>
+<p>Note also that this approach is valid not only for maps, but for all types of
+plots produced by <strong>ggplot2</strong>, since this package is not specific to map
+objects:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Combining non-spatial plots</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">palmerpenguins</span><span class="p">)</span><span class="w">
 
@@ -381,7 +388,7 @@
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
 <h2 id="on-tmap">On <code class="language-plaintext highlighter-rouge">tmap</code></h2>
-<p>We can follow a similar approach on <code class="language-plaintext highlighter-rouge">tmap</code>. On versions v3.x.x (there is a new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version on development</a>) we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <code class="language-plaintext highlighter-rouge">cowplot</code> can handle.</p>
+<p>We can follow a similar approach with <strong>tmap</strong>. In version 3.x.x (there is a new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version under development</a>), we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <strong>cowplot</strong> can handle.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tmap</span><span class="p">)</span><span class="w">
 
 </span><span class="n">main_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tm_shape</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -399,7 +406,8 @@
 
 </span><span class="n">sub_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tmap_grob</span><span class="p">(</span><span class="n">sub_tmap</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Once that we have these new “grobs”, we can use the same approach than we applied to <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+<p>Once we have these new “grobs”, we can use the same approach as the one we
+applied to <strong>ggplot2</strong> objects.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">main_tmap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">sub_tmap</span><span class="p">,</span><span class="w">
@@ -504,7 +512,9 @@
               Introducing geobounds
             </a>
          </p>
-         </div>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>

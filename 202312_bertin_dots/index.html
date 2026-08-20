@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -260,13 +260,13 @@
 	</div>
 			<p>Recently the <a href="https://r-graph-gallery.com/">R Graph Gallery</a> has incorporated a
 new post by <a href="https://twitter.com/BjnNowak">Benjamin Nowak</a> showing how to create
-a dot density map based on the work of the french cartographer <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques
+a dot density map based on the work of the French cartographer <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques
 Bertin</a> (1918 - 2010):</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/bertin.png" alt="Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
 (1967)" /></p>
 <p>In this post I would create a similar map for Iberia, and additionally I would
 show how to create a variation using a hexagonal grid instead of a rectangular
-one. This is the first issue of the series 
+one. This is the first issue of the series
 <a href="https://dieghernan.github.io/tags#beautiful_maps">Beautiful Maps with R</a>.</p>
 <h2 id="libraries">Libraries</h2>
 <p>I would use the following libraries for loading, manipulating and plotting
@@ -293,7 +293,7 @@ window), so we can get the corresponding shapes and create a buffer around it.</
 Global Human Settlement Layer</a>. We
 would use the global file with a resolution of 1 km on Mollweide projection
 (ESRI:54009).</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create observation window based the Iberian Peninsula and surroundings</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create observation window based on the Iberian Peninsula and surroundings</span><span class="w">
 </span><span class="c1"># We create a buffered circle</span><span class="w">
 </span><span class="n">owin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="w">
   </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"ES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PT"</span><span class="p">),</span><span class="w">
@@ -473,20 +473,21 @@ map.</p>
 <h2 id="alternative-hexagonal-grid">Alternative hexagonal grid</h2>
 <p>The previous plot is based on the centroids of each cell of the raster, that is,
 by definition, a rectangular grid. I would like also to experiment with
-hexagonal grids (i.e. grid of hexagons) since I have the feeling that looks more
-“natural” than the rectangular ones, that presents a regularity hardly seen in
+hexagonal grids (i.e. a grid of hexagons) since I have the feeling that they
+look more “natural” than the rectangular ones, which present a regularity
+hardly seen in
 the wild.</p>
 <p>The issue here is that <code class="language-plaintext highlighter-rouge">terra</code> does not produce this type of grids, however it
 is possible to create them with <code class="language-plaintext highlighter-rouge">sf::st_make_grid()</code>, so the workflow for this
-altenative is:</p>
+alternative is:</p>
 <ol>
- <li>Create a hexagonal grid, where each hexagon represents a similar area than
-each cell on the aggregated raster.</li>
+ <li>Create a hexagonal grid, where each hexagon represents a similar area to
+each cell in the aggregated raster.</li>
  <li>Extract the values of the raster to the new grid.</li>
  <li>Finally, follow the same steps on data wrangling and plotting.</li>
 </ol>
 <p>When working with <code class="language-plaintext highlighter-rouge">sf::st_make_grid(square = FALSE)</code>, the parameter <code class="language-plaintext highlighter-rouge">cellsize</code>
-should be the “diameter” of the hexagon instead of the area. Luckly, we can
+should be the “diameter” of the hexagon instead of the area. Luckily, we can
 infer this value since the area of a hexagon is</p>
 \[A = \frac{\sqrt{3}}{2}d^{2}\]
 <p>So we can extract \(d\) from the previous expression knowing the area \(A\) of
@@ -610,8 +611,7 @@ the aggregated cells:</p>
 <ul>
  <li>Bertin J (1967). <em>Sémiologie graphique. Les diagrammes. Les réseaux. Les
 cartes</em>. Gauthier-Villars, Paris.</li>
- <li>European Commission. Joint Research Centre. (2023). <em>GHSL data package
-2023.</em>. Publications Office, LU <a href="https://doi.org/10.2760/098587">https://doi.org/10.2760/098587</a></li>
+ <li>European Commission. Joint Research Centre. (2023). <em>GHSL data package 2023.</em>. Publications Office, LU <a href="https://doi.org/10.2760/098587">https://doi.org/10.2760/098587</a></li>
  <li>Hernangómez D (2023). “Using the tidyverse with terra objects: the tidyterra
 package <em>Journal of Open Source Software</em>, <em>8</em>(91), 5751. ISSN 2475-9066
 <a href="https://doi.org/10.21105/joss.05751">https://doi.org/10.21105/joss.05751</a></li>

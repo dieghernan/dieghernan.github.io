@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -259,16 +259,16 @@
 	</div>
 			<p><em>This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a Hillshade background. Next post would show how to add marginal plots
-including information of the values of the raster by longitude and latitude. See
+including information about the values of the raster by longitude and latitude. See
 the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">here</a>.</em></p>
 <p>Using shadow effects on relief mappings is a very common technique, that allows
-to produce informative yet beautiful maps. If you are interested on this topic
+to produce informative yet beautiful maps. If you are interested in this topic
 and you work with <strong>R</strong>, you would have probably seen this map:</p>
 <p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="swissmap" /></p>
 <p>The production of this map by <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">Timo
 Grossenbacher</a>
 has been a reference for years. However, last developments on the <strong>R</strong> package
-ecosystem (<code class="language-plaintext highlighter-rouge">terra</code>, <code class="language-plaintext highlighter-rouge">sf</code> and support of both classes on <code class="language-plaintext highlighter-rouge">ggplot2</code>, development
+ecosystem (<strong>terra</strong>, <strong>sf</strong> and support of both classes on <strong>ggplot2</strong>, development
 of <code class="language-plaintext highlighter-rouge">ggnewscale</code>, etc.) can make even easier the task of producing such type of
 maps.</p>
 <p>In fact, Dominic Royé recently wrote a very detailed
@@ -303,14 +303,14 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 </span><span class="n">r_init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">elevation_30s</span><span class="p">(</span><span class="s2">"ROU"</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mydir</span><span class="p">)</span><span class="w">
 
 </span><span class="n">r_init</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
-</span><span class="c1">#&gt; source      : ROU_elv_msk.tif </span><span class="w">
-</span><span class="c1">#&gt; name        : ROU_elv_msk </span><span class="w">
-</span><span class="c1">#&gt; min value   :          -4 </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span><span class="w">
+</span><span class="c1">#&gt; source      : ROU_elv_msk.tif</span><span class="w">
+</span><span class="c1">#&gt; name        : ROU_elv_msk</span><span class="w">
+</span><span class="c1">#&gt; min value   :          -4</span><span class="w">
 </span><span class="c1">#&gt; max value   :        2481</span><span class="w">
 
 </span><span class="c1"># For better handling we set here the names</span><span class="w">
@@ -321,14 +321,14 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
   </span><span class="n">mutate</span><span class="p">(</span><span class="n">alt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pmax</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">alt</span><span class="p">))</span><span class="w">
 
 </span><span class="n">r</span><span class="w">
-</span><span class="c1">#&gt; class       : SpatRaster </span><span class="w">
+</span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
 </span><span class="c1">#&gt; dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 0.008333333, 0.008333333  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)</span><span class="w">
-</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326) </span><span class="w">
-</span><span class="c1">#&gt; source      : memory </span><span class="w">
-</span><span class="c1">#&gt; name        :  alt </span><span class="w">
-</span><span class="c1">#&gt; min value   :    0 </span><span class="w">
+</span><span class="c1">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span><span class="w">
+</span><span class="c1">#&gt; source      : memory</span><span class="w">
+</span><span class="c1">#&gt; name        :  alt</span><span class="w">
+</span><span class="c1">#&gt; min value   :    0</span><span class="w">
 </span><span class="c1">#&gt; max value   : 2481</span><span class="w">
 </span></code></pre></div></div>
 <p>We can now have a quick look to the plot with <code class="language-plaintext highlighter-rouge">tidyterra::autoplot()</code>:</p>
@@ -369,7 +369,7 @@ the sun position. This is straightforward with <code class="language-plaintext h
  <li>Select a vector of colors (in this post <code class="language-plaintext highlighter-rouge">pal_greys</code>).</li>
  <li>Extract the values of the raster and reescale them to the length of the
 palette (<code class="language-plaintext highlighter-rouge">c(1, 1000)</code>).</li>
- <li>Round those rescaled values to the nearest integer. So we would have a index
+ <li>Round those rescaled values to the nearest integer. So we would have an index
 indicating which value of <code class="language-plaintext highlighter-rouge">pal_greys</code> should be mapped to each cell.</li>
  <li>Now use the parameter <code class="language-plaintext highlighter-rouge">fill</code> on the <code class="language-plaintext highlighter-rouge">geom_</code> instead of using the scale.</li>
 </ul>
@@ -394,7 +394,7 @@ and the number of cells is the same.</p>
 </span><span class="n">vector_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
 
 </span><span class="c1"># Need to avoid resampling</span><span class="w">
-</span><span class="c1"># and dont use aes</span><span class="w">
+</span><span class="c1"># and don't use aes</span><span class="w">
 
 </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="w">
@@ -409,12 +409,12 @@ and the number of cells is the same.</p>
 <p>The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
-associated to low elevations while orange, browns and whites are associared to
+associated with low elevations, while orange, browns and whites are associated with
 high elevations on some of the most common elevation palettes (aka hypsometric
 tints). See for example the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps">Wikipedia Topographic maps
 conventions</a>.</p>
 <p>This is not ideal, since greens can be confused with forests, for example, so an
-elevation map of desertic areas would not be appropiated with a
+elevation map of desert areas would not be appropriate with a
 green-brown-white color scheme.</p>
 <p>There is an additional point to take into account when designing color palettes
 for maps. A regular gradient would just interpolate colors assuming that the
@@ -446,11 +446,11 @@ the uneven gradient greens only correspond to the range (0 - 250 meters) and the
 overall perception of elevation improves. Note that the only difference between
 plots is exclusively the color palette.</p>
 <p>For producing our map we are going to assess visually the result of a selection
-of palettes provided by <code class="language-plaintext highlighter-rouge">tidyterra</code>. We use here the version
+of palettes provided by <strong>tidyterra</strong>. We use here the version
 <code class="language-plaintext highlighter-rouge">tidyterra::scale_fill_hypso_tint_c()</code> instead of
 <code class="language-plaintext highlighter-rouge">tidyterra::scale_fill_hypso_c()</code> for taking advantage of the uneven color
 gradients.</p>
-<p>A downside of using this scales is that we need also to adjust the <code class="language-plaintext highlighter-rouge">limits</code>
+<p>A downside of using these scales is that we also need to adjust the <code class="language-plaintext highlighter-rouge">limits</code>
 argument of the functions to make <code class="language-plaintext highlighter-rouge">ggplot2</code> aware of the limits of the value of
 the raster. This is easily achieved with <code class="language-plaintext highlighter-rouge">terra::minmax()</code> but I added an extra
 touch rounding up and down the range of values to the nearest 500.</p>
@@ -472,7 +472,7 @@ touch rounding up and down the range of values to the nearest 500.</p>
 </span><span class="c1">#&gt; [1]    0 2500</span><span class="w">
 
 
-</span><span class="c1"># Now lets have some fun with scales from tidyterra</span><span class="w">
+</span><span class="c1"># Now let's have some fun with scales from tidyterra</span><span class="w">
 
 </span><span class="n">elevt_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w">
@@ -499,7 +499,7 @@ touch rounding up and down the range of values to the nearest 500.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /></p>
 <p>I finally selected for my plot the <code class="language-plaintext highlighter-rouge">"dem_poster"</code> palette, but this is
 completely a personal choice. You should select the palette you feel more
-comfortable with. See the full range of color palettes provided by <code class="language-plaintext highlighter-rouge">tidyterra</code>
+comfortable with. See the full range of color palettes provided by <strong>tidyterra</strong>
 <a href="https://dieghernan.github.io/tidyterra/articles/palettes.html">here</a>.</p>
 <h2 id="final-plot">Final plot</h2>
 <p>So now it is time to blend both the hillshade layer and the altitude layer using

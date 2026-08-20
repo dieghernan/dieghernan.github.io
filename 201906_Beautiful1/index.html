@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Beautiful Maps with R (I): Fishnets, Honeycombs and Pixels",
-    "description": "Awesome simplified maps with R - Sometimes you want to produce maps with special layouts. I specially like maps with modified geometries, e.g. simplifiying the original shapes to squares or dots. When doing a little search over the web I found the fantastic post Fishnets and Honeycomb: Square vs. Hexagonal Spatial Grids by Matt Strimas-Mackey that was a huge inspiration (by the way, don’t miss his blog, full of very interesting pieces of work)."
+    "description": "Awesome simplified maps with R - Sometimes you want to produce maps with special layouts. I especially likemaps with modified geometries, e.g. simplifying the original shapes to squaresor dots. When searching the web, I found the fantastic post Fishnets andHoneycomb: Square vs. Hexagonal Spatial Gridsby Matt Strimas-Mackey, which was a hugeinspiration (by the way, don’t miss his blog, fullof very interesting pieces of work)."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="Awesome simplified maps with R - Sometimes you want to produce maps with special layouts. I specially like maps with modified geometries, e.g. simplifiying t...">
+   <meta name="description" content="Awesome simplified maps with R - Sometimes you want to produce maps with special layouts. I especially likemaps with modified geometries, e.g. simplifying th...">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/201906_Beautiful1/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="Awesome simplified maps with R - Sometimes you want to produce maps with special layouts. I specially like maps with..." >
+   <meta property="og:description" content="Awesome simplified maps with R - Sometimes you want to produce maps with special layouts. I especially likemaps with modified..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.webp" >
     <!-- Twitter/X Cards -->
@@ -254,12 +254,18 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required R packages</a></li><li class="nav-item nav d-block"><a href="#working-with-square-grids" class="nav-link">Working with square grids</a></li><li class="nav-item nav d-block"><a href="#going-hex" class="nav-link">Going hex</a></li><li class="nav-item nav d-block"><a href="#pixel-it" class="nav-link">Pixel it!</a></li><li class="nav-item nav d-block"><a href="#wrap-up" class="nav-link">Wrap up</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#working-with-square-grids" class="nav-link">Working with square grids</a></li><li class="nav-item nav d-block"><a href="#going-hex" class="nav-link">Going hex</a></li><li class="nav-item nav d-block"><a href="#pixel-it" class="nav-link">Pixel it!</a></li><li class="nav-item nav d-block"><a href="#wrap-up" class="nav-link">Wrap up</a></li></ul>
 		</nav>   
 	</div>
-			<p>Sometimes you want to produce maps with special layouts. I specially like maps with modified geometries, e.g. simplifiying the original shapes to squares or dots. When doing a little search over the web I found the fantastic post <a href="https://strimas.com/post/hexagonal-grids/">Fishnets and Honeycomb: Square vs. Hexagonal Spatial Grids</a> by <a href="https://strimas.com/#about">Matt Strimas-Mackey</a> that was a huge inspiration (by the way, don’t miss <a href="http://strimas.com/#posts">his blog</a>, full of very interesting pieces of work).</p>
-<p>The only thing I was not completely comfortable with was that the post used the <a href="https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial">old-fashioned</a> <code class="language-plaintext highlighter-rouge">sp</code> package instead of my personal fav, the <code class="language-plaintext highlighter-rouge">sf</code> package, (the post was published in 2016, note that author has also moved to the <code class="language-plaintext highlighter-rouge">sf</code> package since then). So I decided to explore further options with <code class="language-plaintext highlighter-rouge">sf</code>.</p>
-<p>The approach is similar (using grids over a map and work with that) but using <a href="https://www.rdocumentation.org/packages/sf/versions/0.7-4/topics/st_make_grid"><code class="language-plaintext highlighter-rouge">st_make_grid</code></a>. I also expanded it by grouping the grids and also producing dots over the geometries. So basically I produced 5 variations of the map:</p>
+			<p>Sometimes you want to produce maps with special layouts. I especially like
+maps with modified geometries, e.g. simplifying the original shapes to squares
+or dots. When searching the web, I found the fantastic post <a href="https://strimas.com/post/hexagonal-grids/">Fishnets and
+Honeycomb: Square vs. Hexagonal Spatial Grids</a>
+by <a href="https://strimas.com/#about">Matt Strimas-Mackey</a>, which was a huge
+inspiration (by the way, don’t miss <a href="http://strimas.com/#posts">his blog</a>, full
+of very interesting pieces of work).</p>
+<p>The only thing I was not completely comfortable with was that the post used the <a href="https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial">old-fashioned</a> <strong>sp</strong> package instead of my personal favorite, the <strong>sf</strong> package (the post was published in 2016; note that the author has also moved to the <strong>sf</strong> package since then). So I decided to explore further options with <strong>sf</strong>.</p>
+<p>The approach is similar (using grids over a map and working with them) but using <a href="https://www.rdocumentation.org/packages/sf/versions/0.7-4/topics/st_make_grid"><code class="language-plaintext highlighter-rouge">st_make_grid</code></a>. I also expanded it by grouping the grids and producing dots over the geometries. So basically I produced five variations of the map:</p>
 <table>
 <thead>
    <tr>
@@ -296,7 +302,7 @@
    </tr>
  </tbody>
 </table>
-<h2 id="required-r-packages">Required R packages</h2>
+<h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
@@ -333,7 +339,7 @@
 </span><span class="c1"># To sf</span><span class="w">
 </span><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">lengths</span><span class="p">(</span><span class="n">grid</span><span class="p">)),</span><span class="w"> </span><span class="n">grid</span><span class="p">)</span><span class="w"> </span><span class="c1"># Add index</span><span class="w">
 
-</span><span class="c1"># We identify the grids that belongs to a entity by assessing the centroid</span><span class="w">
+</span><span class="c1"># We identify the grids that belong to an entity by assessing the centroid</span><span class="w">
 </span><span class="n">cent_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_centroid</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span><span class="w">
 </span><span class="n">cent_merge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_join</span><span class="p">(</span><span class="n">cent_grid</span><span class="p">,</span><span class="w"> </span><span class="n">initial</span><span class="p">[</span><span class="s2">"index_target"</span><span class="p">],</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
 </span><span class="n">grid_new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">inner_join</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">cent_merge</span><span class="p">))</span><span class="w">
@@ -345,14 +351,14 @@
   </span><span class="n">do_union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Lets add the df</span><span class="w">
+</span><span class="c1"># Let's add the data frame</span><span class="w">
 </span><span class="n">Fishnet</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">left_join</span><span class="p">(</span><span class="w">
   </span><span class="n">Fishgeom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">select</span><span class="p">(</span><span class="n">index_target</span><span class="p">),</span><span class="w">
   </span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">index_target</span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Now lets create the Puzzle</span><span class="w">
+</span><span class="c1"># Now let's create the puzzle</span><span class="w">
 </span><span class="n">Puzzlegeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">aggregate</span><span class="p">(</span><span class="n">st_buffer</span><span class="p">(</span><span class="n">grid_new</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="c1"># Avoid slivers</span><span class="w">
   </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">grid_new</span><span class="o">$</span><span class="n">index_target</span><span class="p">),</span><span class="w">
   </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w">
@@ -382,7 +388,7 @@
 </span><span class="c1"># Make sf</span><span class="w">
 </span><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">lengths</span><span class="p">(</span><span class="n">grid</span><span class="p">)),</span><span class="w"> </span><span class="n">grid</span><span class="p">)</span><span class="w"> </span><span class="c1"># Add index</span><span class="w">
 
-</span><span class="c1"># We identify the grids that belongs to a entity by assessing the centroid</span><span class="w">
+</span><span class="c1"># We identify the grids that belong to an entity by assessing the centroid</span><span class="w">
 </span><span class="n">cent_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_centroid</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span><span class="w">
 </span><span class="n">cent_merge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_join</span><span class="p">(</span><span class="n">cent_grid</span><span class="p">,</span><span class="w"> </span><span class="n">initial</span><span class="p">[</span><span class="s2">"index_target"</span><span class="p">],</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
 </span><span class="n">grid_new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">inner_join</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="w"> </span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">cent_merge</span><span class="p">))</span><span class="w">
@@ -395,7 +401,7 @@
   </span><span class="n">do_union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Lets add the df</span><span class="w">
+</span><span class="c1"># Let's add the data frame</span><span class="w">
 </span><span class="n">Honeycomb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">left_join</span><span class="p">(</span><span class="w">
   </span><span class="n">Honeygeom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
     </span><span class="n">select</span><span class="p">(</span><span class="n">index_target</span><span class="p">),</span><span class="w">
@@ -403,7 +409,7 @@
 </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">index_target</span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Now lets create the Hexbin</span><span class="w">
+</span><span class="c1"># Now let's create the hexbin</span><span class="w">
 
 </span><span class="n">Hexbingeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">aggregate</span><span class="p">(</span><span class="w">
   </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">grid_new</span><span class="p">,</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w"> </span><span class="c1"># Avoid slivers</span><span class="w">
@@ -436,7 +442,7 @@
 </span><span class="c1"># Make sf</span><span class="w">
 </span><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">lengths</span><span class="p">(</span><span class="n">grid</span><span class="p">)),</span><span class="w"> </span><span class="n">grid</span><span class="p">)</span><span class="w"> </span><span class="c1"># Add index</span><span class="w">
 
-</span><span class="c1"># We identify the grids that belongs to a entity by assessing the centroid</span><span class="w">
+</span><span class="c1"># We identify the grids that belong to an entity by assessing the centroid</span><span class="w">
 </span><span class="n">cent_grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_centroid</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span><span class="w">
 </span><span class="n">cent_merge</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_join</span><span class="p">(</span><span class="n">cent_grid</span><span class="p">,</span><span class="w"> </span><span class="n">initial</span><span class="p">[</span><span class="s2">"index_target"</span><span class="p">],</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
 </span><span class="n">grid_new</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">cent_merge</span><span class="p">,</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
@@ -446,7 +452,7 @@
   </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w">
   </span><span class="n">do_union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
 </span><span class="p">)</span><span class="w">
-</span><span class="c1"># Lets add the df</span><span class="w">
+</span><span class="c1"># Let's add the data frame</span><span class="w">
 </span><span class="n">Pixel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">left_join</span><span class="p">(</span><span class="w">
   </span><span class="n">Pixelgeom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
     </span><span class="n">select</span><span class="p">(</span><span class="n">index_target</span><span class="p">),</span><span class="w">

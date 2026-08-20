@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Beautiful Maps with R (III): Patterns and hatched maps",
-    "description": "A solution for b/w and academic maps. - Updated 17 february 2020: All these pieces of work are already available on cartography &gt;v.2.4.0 on functions hatchedLayer and legendHatched. Just install it via install.packages(&quot;cartography&quot;). A dedicated blog post with examples on this link."
+    "description": "A solution for b/w and academic maps. - Updated 17 February 2020: All these pieces of work are already availablein cartography &gt;v.2.4.0 through the hatchedLayerand legendHatchedfunctions. Just install it via install.packages(&quot;cartography&quot;). A dedicatedblog post with examples is available at this link."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="A solution for b/w and academic maps. - Updated 17 february 2020: All these pieces of work are already available on cartography &gt;v.2.4.0 on functions hatc...">
+   <meta name="description" content="A solution for b/w and academic maps. - Updated 17 February 2020: All these pieces of work are already availablein cartography &gt;v.2.4.0 through the hatche...">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/201912_Beautiful3/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="A solution for b/w and academic maps. - Updated 17 february 2020: All these pieces of work are already available..." >
+   <meta property="og:description" content="A solution for b/w and academic maps. - Updated 17 February 2020: All these pieces of work are already availablein..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" >
     <!-- Twitter/X Cards -->
@@ -257,12 +257,17 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Beautiful Maps with R (III): Patterns and hatched maps</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required R packages</a></li><li class="nav-item nav d-block"><a href="#adding-legends-the-legendhatched-function" class="nav-link">Adding legends: the <code class="language-plaintext highlighter-rouge">legendHatched</code> function</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#adding-legends-the-legendhatched-function" class="nav-link">Adding legends: the <code class="language-plaintext highlighter-rouge">legendHatched</code> function</a></li></ul>
 		</nav>   
 	</div>
-			<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 17 february 2020</strong>: All these pieces of work are already available on <code class="language-plaintext highlighter-rouge">cartography &gt;v.2.4.0</code> on functions <a href="http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html"><code class="language-plaintext highlighter-rouge">hatchedLayer</code></a> and <a href="https://riatelab.github.io/cartography/docs/reference/legendHatched.html"><code class="language-plaintext highlighter-rouge">legendHatched</code></a>. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated blog post with examples on this <a href="../202002_cartography1">link</a>.</p>
-<p>On this post I would show how to produce different filling patterns that could be added over your shapefiles with the <code class="language-plaintext highlighter-rouge">cartography</code> package.</p>
-<h2 id="required-r-packages">Required R packages</h2>
+			<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 17 February 2020</strong>: All these pieces of work are already available
+in <strong>cartography</strong> &gt;v.2.4.0 through the <a href="http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html"><code class="language-plaintext highlighter-rouge">hatchedLayer</code></a>
+and <a href="https://riatelab.github.io/cartography/docs/reference/legendHatched.html"><code class="language-plaintext highlighter-rouge">legendHatched</code></a>
+functions. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated
+blog post with examples is available at this <a href="../202002_cartography1">link</a>.</p>
+<p>On this post I would show how to produce different filling patterns that could
+be added over your shapefiles with the <strong>cartography</strong> package.</p>
+<h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
@@ -358,9 +363,12 @@
  <li><code class="language-plaintext highlighter-rouge">ptrn.text</code>: Text to be used for each <code class="language-plaintext highlighter-rouge">categ="text"</code>, as a single value or a vector.</li>
  <li><code class="language-plaintext highlighter-rouge">dot.cex</code>: <code class="language-plaintext highlighter-rouge">cex</code> of each <code class="language-plaintext highlighter-rouge">categ="dot"</code>, as a single value or a vector.</li>
  <li><code class="language-plaintext highlighter-rouge">text.cex</code>: text size of each <code class="language-plaintext highlighter-rouge">categ="text"</code>, as a single value or a vector.</li>
- <li>As in the case of the <code class="language-plaintext highlighter-rouge">hatchedLayer</code>function, different graphical parameters can be passed (<code class="language-plaintext highlighter-rouge">lty</code>, <code class="language-plaintext highlighter-rouge">lwd</code>, <code class="language-plaintext highlighter-rouge">pch</code>, <code class="language-plaintext highlighter-rouge">bg</code> on points).</li>
+ <li>As in the case of the <code class="language-plaintext highlighter-rouge">hatchedLayer</code> function, different graphical
+parameters can be passed (<code class="language-plaintext highlighter-rouge">lty</code>, <code class="language-plaintext highlighter-rouge">lwd</code>, <code class="language-plaintext highlighter-rouge">pch</code>, <code class="language-plaintext highlighter-rouge">bg</code> on points).</li>
 </ul>
-<p>Note that is also possible to create solid legends, by setting <code class="language-plaintext highlighter-rouge">col</code> and <code class="language-plaintext highlighter-rouge">ptrn.bg</code> to the same color. Parameters would respect the order of the <code class="language-plaintext highlighter-rouge">categ</code> variable.</p>
+<p>Note that it is also possible to create solid legends by setting <code class="language-plaintext highlighter-rouge">col</code> and
+<code class="language-plaintext highlighter-rouge">ptrn.bg</code> to the same color. Parameters respect the order of the <code class="language-plaintext highlighter-rouge">categ</code>
+variable.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">DE</span><span class="p">))</span><span class="w"> </span><span class="c1"># Null geometry</span><span class="w">
 </span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
@@ -406,7 +414,7 @@
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playinglegend-1.webp" alt="plot of chunk 20191212_playinglegend" /></p>
-<p>I hope that you find this functions useful. Enjoy and nice mapping!</p>
+<p>I hope that you find these functions useful. Enjoy, and happy mapping!</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" title="plot of chunk 20191212_imgpost" alt="plot of chunk 20191212_imgpost" style="display: block; margin: auto;" /></p>
 			<div class="mt-5 pt-3 mb-3 text-center">
 				<script type='text/javascript'

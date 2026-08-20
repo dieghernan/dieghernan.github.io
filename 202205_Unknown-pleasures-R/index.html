@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -254,10 +254,10 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Unknown pleasures with R</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#creating-joyplot-maps-with-r" class="nav-link">Creating joyplot maps with <strong>R</strong></a></li><li class="nav-item nav d-block"><a href="#variations" class="nav-link">Variations</a><ul><li class="nav-item nav d-block"><a href="#using-geom_density_ridges" class="nav-link">Using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code></a></li><li class="nav-item nav d-block"><a href="#land-only" class="nav-link">Land only</a></li><li class="nav-item nav d-block"><a href="#with-colors" class="nav-link">With colors</a></li><li class="nav-item nav d-block"><a href="#combine-with-another-objects" class="nav-link">Combine with another objects</a></li></ul></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#creating-joyplot-maps-with-r" class="nav-link">Creating joyplot maps with <strong>R</strong></a></li><li class="nav-item nav d-block"><a href="#variations" class="nav-link">Variations</a><ul><li class="nav-item nav d-block"><a href="#using-geom_density_ridges" class="nav-link">Using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code></a></li><li class="nav-item nav d-block"><a href="#land-only" class="nav-link">Land only</a></li><li class="nav-item nav d-block"><a href="#with-colors" class="nav-link">With colors</a></li><li class="nav-item nav d-block"><a href="#combine-with-another-object" class="nav-link">Combine with another object</a></li></ul></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
 		</nav>   
 	</div>
-			<p>On 1970, Harold D. Craft Jr. published his Ph.D thesis <em>“Radio observations of
+			<p>In 1970, Harold D. Craft Jr. published his Ph.D. thesis <em>“Radio observations of
 the pulse profiles and dispersion measures of twelve pulsars”.</em> The thesis (337
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:</p>
@@ -268,7 +268,7 @@ Pulsars” by Harold D. Craft, Jr. (September 1970). Original source:
 <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/</a></p>
 <p>Nine years later, a young graphic designer named Peter Saville had a new
 project. He had to design the cover of the debut album of a young British rock
-band, named Joy Division. At some point of the process Bernand Summer (lead
+band, named Joy Division. At some point in the process, Bernard Sumner (lead
 guitar of Joy Division)<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, found the following image on <em>The Cambridge
 Encyclopaedia of Astronomy</em> (1977 edition):</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Cambridge: CP 1919 Pulsar
@@ -278,7 +278,7 @@ iconic status in the ’80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Joy Division - Unknown pleasure
 cover" /></p>
-<p>If you are interested on knowing more about this fascinating history of science
+<p>If you are interested in learning more about this fascinating history of science
 and design you can find it on <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">Pop Culture Pulsar: Origin Story of Joy
 Division’s Unknown Pleasures Album
 Cover</a>
@@ -286,7 +286,7 @@ by <a href="https://www.scientificamerican.com/author/jen-christiansen/">Jen
 Christiansen</a>.</p>
 <p>Since then, this kind of plots have become very popular, being known as <strong>ridge
 plots</strong> or <strong>joyplots</strong>, in honor of Joy Division. On this post, I would produce
-“joyplots” with R for specific regions of the world using the elevation data for
+“joyplots” with <strong>R</strong> for specific regions of the world using the elevation data for
 creating the ridges.</p>
 <h2 id="creating-joyplot-maps-with-r">Creating joyplot maps with <strong>R</strong></h2>
 <p>This topic has already been covered by other authors, as <a href="https://danielredondo.com/blog/2020-01-25-joy_division/">Daniel
@@ -309,7 +309,7 @@ suitable CRS defined in meters (in this case).</p>
  <li>
    <p>Joyplots are much cooler when only a few lines are displayed. This is
 directly related with the number of rows of our raster. A very detailed
-raster (e.g. lots of rows) would produce a much detailed plot but it may not
+raster (e.g. lots of rows) would produce a much more detailed plot but it may not
 suit our needs.</p>
  </li>
 </ul>
@@ -328,8 +328,9 @@ suit our needs.</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggridges</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>The first step consists on selecting our region of interest (<code class="language-plaintext highlighter-rouge">sf</code> object) and
-extracting the elevation data. We can achieve that with <code class="language-plaintext highlighter-rouge">giscoR</code> and <code class="language-plaintext highlighter-rouge">elevatr</code>.
+<p>The first step consists of selecting our region of interest (<code class="language-plaintext highlighter-rouge">sf</code> object) and
+extracting the elevation data. We can achieve that with <strong>giscoR</strong> and
+<strong>elevatr</strong>.
 In this post I would create a joyplot of
 <a href="https://en.wikipedia.org/wiki/Andalusia">Andalusia</a>. Note that, given we are
 creating just a visualization, the resolution of the sf object is not very
@@ -415,7 +416,7 @@ creating the joyplot.</p>
 </span></code></pre></div></div>
 <p>Now is a good moment to adjust the units of the coordinates and the elevation if
 needed. In this case both are in meters, but I would show you how to perform
-those adjustment with the <code class="language-plaintext highlighter-rouge">units</code> package:</p>
+those adjustments with the <strong>units</strong> package:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="w">
 
@@ -455,7 +456,7 @@ those adjustment with the <code class="language-plaintext highlighter-rouge">uni
 </span><span class="c1">#&gt; # ... with 12,838 more rows</span><span class="w">
 </span></code></pre></div></div>
 <p>Finally, we can create our joyplot. Note that we can “train” the scales of our
-<code class="language-plaintext highlighter-rouge">ggplot</code> to an spatial object automatically if we pass our <code class="language-plaintext highlighter-rouge">region</code> object into
+<code class="language-plaintext highlighter-rouge">ggplot</code> to a spatial object automatically if we pass our <code class="language-plaintext highlighter-rouge">region</code> object into
 the plot. The relative height of the ridges is controlled via the <code class="language-plaintext highlighter-rouge">scale</code>
 parameter:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -519,7 +520,7 @@ other artifacts.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
 <h3 id="land-only">Land only</h3>
 <p>If we use <code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> it is quite easy to remove some parts of the lines,
-as the parameter <code class="language-plaintext highlighter-rouge">min_height</code> allow us to control the minimum height to be
+as the parameter <code class="language-plaintext highlighter-rouge">min_height</code> allows us to control the minimum height to be
 plotted. I found this much more difficult when using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code>,
 where the equivalent parameter <code class="language-plaintext highlighter-rouge">rel_min_height</code> is relative to the overall
 maximum height.</p>
@@ -578,7 +579,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
-<h3 id="combine-with-another-objects">Combine with another objects</h3>
+<h3 id="combine-with-another-object">Combine with another object</h3>
 <p>Like using a <code class="language-plaintext highlighter-rouge">sf</code> object:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">highres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_nuts</span><span class="p">(</span><span class="w">

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -281,7 +281,7 @@ then create a few example maps.</p>
 orthographic projection centered on the South Pole.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">antarct</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ATA"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">select</span><span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NAME_ENGL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="c1"># Ortho proj centered in the South Pole</span><span class="w">
+  </span><span class="c1"># Orthographic projection centered on the South Pole</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+proj=ortho +lat_0=-90 +lon_0=0"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarct</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -299,20 +299,20 @@ geometry with the corrected one.</li>
 </ol>
 <p>We convert polygons to point coordinates and inspect them to find the offending
 sequence:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Identify the max</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Identify the largest polygon</span><span class="w">
 </span><span class="n">ant_explode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">antarct</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">nrow</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)</span><span class="w">
 </span><span class="c1">#&gt; [1] 778</span><span class="w">
 
-</span><span class="c1"># Max polygon</span><span class="w">
+</span><span class="c1"># Largest polygon</span><span class="w">
 
 </span><span class="n">ant_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ant_explode</span><span class="p">[</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
 
 </span><span class="n">coords</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">ant_max</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">as_tibble</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="c1"># Add id for points</span><span class="w">
+  </span><span class="c1"># Add an ID for the points</span><span class="w">
   </span><span class="n">mutate</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
 
 
@@ -494,12 +494,12 @@ pattern.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" width="100%" /></p>
 <h3 id="antarctica-flag-redesigned">Antarctica Flag Redesigned</h3>
-<p>In 2024, Graham Bartram revealed a new version of his original flag as part of 
-a global campaign to raise awareness about the growing problem of microplastic 
-pollution. The new design keeps the familiar white outline of Antarctica but 
-swaps the plain blue background for one filled with countless tiny, colorful 
-dots. These dots represent the microscopic bits of plastic that have been 
-discovered even in the planet’s most untouched places - including the Antarctic 
+<p>In 2024, Graham Bartram revealed a new version of his original flag as part of
+a global campaign to raise awareness about the growing problem of microplastic
+pollution. The new design keeps the familiar white outline of Antarctica but
+swaps the plain blue background for one filled with countless tiny, colorful
+dots. These dots represent the microscopic bits of plastic that have been
+discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" /></p>
 <p>Because the design relies on randomness, we approximate it using the following

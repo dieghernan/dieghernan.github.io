@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -261,9 +261,13 @@
  <footer class="blockquote-footer text-right">Jiang (2013)</footer>
 </blockquote>
 <h2 id="abstract">Abstract</h2>
-<p>This vignette discusses the implementation of the “Head/tail breaks” style (Jiang (2013)) on the <code class="language-plaintext highlighter-rouge">classIntervals</code> function of the <code class="language-plaintext highlighter-rouge">classInt</code> package. A step-by-step example is presented in order to clarify the method. A case study using <code class="language-plaintext highlighter-rouge">spData::afcon</code> is also included, making use of other additional packages as <code class="language-plaintext highlighter-rouge">sf</code>.</p>
+<p>This vignette discusses the implementation of the “Head/tail breaks” style
+(Jiang (2013)) in the <code class="language-plaintext highlighter-rouge">classIntervals</code> function from the <strong>classInt</strong> package.
+A step-by-step example is presented to clarify the method. A case study using
+<code class="language-plaintext highlighter-rouge">spData::afcon</code> is also included, making use of additional packages such as
+<strong>sf</strong>.</p>
 <h2 id="introduction">Introduction</h2>
-<p>The <strong>Head/tail breaks</strong>, sometimes referred as <strong>ht-index</strong> (Jiang and Yin (2013)), is a classification scheme introduced by Jiang (2013) in order to find groupings or hierarchy for data with a heavy-tailed distribution.</p>
+<p>The <strong>Head/tail breaks</strong>, sometimes referred to as the <strong>ht-index</strong> (Jiang and Yin (2013)), are a classification scheme introduced by Jiang (2013) to find groupings or hierarchy in data with a heavy-tailed distribution.</p>
 <p>Heavy-tailed distributions are heavily right skewed, with a minority of large values in the head and a majority of small values in the tail. This imbalance between the head and tail, or between many small values and a few large values, can be expressed as <em>“far more small things than large things”</em>.</p>
 <p>Heavy tailed distributions are commonly characterized by a power law, a lognormal or an exponential function. Nature, society, finance (Vasicek (2002)) and our daily lives are full of rare and extreme events,
 which are termed “black swan events” (Taleb (2008)). This line of thinking provides a good reason to reverse our thinking by focusing on low-frequency events.</p>
@@ -313,17 +317,23 @@ which are termed “black swan events” (Taleb (2008)). This line of thinking p
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="plot of chunk 20200405_charheavytail" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="plot of chunk 20200405_charheavytail" /></p>
 <h2 id="breaking-method">Breaking method</h2>
-<p>The method itself consists on a four-step process performed recursively until a stopping condition is satisfied. Given a vector of values \(v = (a_1, a_2, ..., a_n)\) the process can be described as follows:</p>
+<p>The method itself consists of a four-step process performed recursively until a
+stopping condition is satisfied. Given a vector of values \(v = (a_1, a_2,
+..., a_n)\), the process can be described as follows:</p>
 <ol>
  <li>On each iteration, compute \(\mu = \sum_{i=1}^{n} a_i \:\:\: \forall \: a_i \in v\).</li>
  <li>Break \(v\) into the \(tail\) and the \(head\):
-\(tail = \{ a_x \in v | a_x \lt \mu \}\) 
+\(tail = \{ a_x \in v | a_x \lt \mu \}\)
 \(head = \{ a_x \in v | a_x \gt \mu \}\).</li>
  <li>Assess if the proportion of \(head\) over \(v\) is lower or equal than a given threshold:
-\(\frac{|head|}{|v|} \le thresold\)</li>
+\(\frac{|head|}{|v|} \le threshold\)</li>
  <li>If 3 is <code class="language-plaintext highlighter-rouge">TRUE</code>, repeat 1 to 3 until the condition is <code class="language-plaintext highlighter-rouge">FALSE</code> or no more partitions are possible (i.e. \(head\) has less than two elements).</li>
 </ol>
-<p>It is important to note that, at the beginning of a new iteration, \(v\) is replaced by \(head\). The underlying hypothesis is to create partitions until the head and the tail are balanced in terms of distribution.So the stopping criteria is satisfied when the last head and the last tail are evenly balanced.</p>
+<p>It is important to note that, at the beginning of a new iteration, \(v\) is
+replaced by \(head\). The underlying hypothesis is to create partitions until
+the head and the tail are balanced in terms of distribution. The stopping
+criterion is satisfied when the last head and the last tail are evenly
+balanced.</p>
 <p>In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good approximation, meaning that if the \(head\) contains more than 40% of the observations the distribution is not considered heavy-tailed.</p>
 <p>The final breaks are the vector of consecutive \(\mu\):</p>
 \[breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n )\]
@@ -449,7 +459,11 @@ End Function
 </span></code></pre></div></div>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE
 </code></pre></div></div>
-<p>As stated in Jiang (2013), the number  of breaks is naturally determined, however the <code class="language-plaintext highlighter-rouge">thr</code> parameter could help to adjust the final number. A lower value on <code class="language-plaintext highlighter-rouge">thr</code> would provide less breaks while a larger <code class="language-plaintext highlighter-rouge">thr</code> would increase the number, if the underlying distribution follows the <em>“far more small things than large things”</em> principle.</p>
+<p>As stated in Jiang (2013), the number of breaks is naturally determined;
+however, the <code class="language-plaintext highlighter-rouge">thr</code> parameter can help adjust the final number. A lower value
+of <code class="language-plaintext highlighter-rouge">thr</code> provides fewer breaks, while a larger <code class="language-plaintext highlighter-rouge">thr</code> increases the number if
+the underlying distribution follows the <em>“far more small things than large
+things”</em> principle.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
 
@@ -515,7 +529,7 @@ End Function
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="plot of chunk 20200405_summspdata" /></p>
 <p>The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the <em>“far more small things than large things”</em> principle.</p>
-<p>As a testing proof, on top of <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> we  would use also <code class="language-plaintext highlighter-rouge">quantile</code> to have a broader view on the different breaking styles. As <code class="language-plaintext highlighter-rouge">quantile</code> is a position-based metric, it doesn’t account for the magnitude of F(x) (hierarchy), so the breaks are solely defined by the position of x on the distribution.</p>
+<p>As a testing proof, on top of <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> we would use also <code class="language-plaintext highlighter-rouge">quantile</code> to have a broader view on the different breaking styles. As <code class="language-plaintext highlighter-rouge">quantile</code> is a position-based metric, it doesn’t account for the magnitude of F(x) (hierarchy), so the breaks are solely defined by the position of x on the distribution.</p>
 <p>Applying the three aforementioned methods to break the data:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">brks_ht</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
 </span><span class="n">print</span><span class="p">(</span><span class="n">brks_ht</span><span class="p">)</span><span class="w">
@@ -542,7 +556,7 @@ End Function
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp" alt="plot of chunk 20200405_breaksample" /></p>
-<p>It is observed that the top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> enclose 5 observations, whereas <code class="language-plaintext highlighter-rouge">fisher</code> includes 13 observations. In terms of classification, <code class="language-plaintext highlighter-rouge">headtails</code> breaks focuses more on extreme values.</p>
+<p>It is observed that the top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> enclose five observations, whereas <code class="language-plaintext highlighter-rouge">fisher</code> includes 13 observations. In terms of classification, the <code class="language-plaintext highlighter-rouge">headtails</code> breaks focus more on extreme values.</p>
 <p>The next plot compares a continuous distribution of <code class="language-plaintext highlighter-rouge">totcon</code> re-escalated to a range of <code class="language-plaintext highlighter-rouge">[1,nclass]</code> versus the distribution across breaks for each style. The continuous distribution has been offset by -0.5 in order to align the continuous and the discrete distributions.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Helper function to reescale values</span><span class="w">
 </span><span class="n">help_reescale</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -682,7 +696,15 @@ End Function
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="plot of chunk 20200405_finalplot" /></p>
 <p>As per the results, <code class="language-plaintext highlighter-rouge">headtails</code> seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The <code class="language-plaintext highlighter-rouge">quantile</code> style, as expected, just provides a clustering without taking into account the real hierarchy. The <code class="language-plaintext highlighter-rouge">fisher</code> plot is in-between of these two interpretations.</p>
-<p>It is also important to note that <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> reveal different information that can be useful depending of the context. While <code class="language-plaintext highlighter-rouge">headtails</code> highlights the outliers, it fails on providing a good clustering on the tail, while <code class="language-plaintext highlighter-rouge">fisher</code> seems to reflect better these patterns. This can be observed on the values of Western Africa and the Niger River Basin, where <code class="language-plaintext highlighter-rouge">headtails</code> doesn’t highlight any special cluster of conflicts, <code class="language-plaintext highlighter-rouge">fisher</code> suggests a potential cluster, aligned with the high-granularity plot. This can be confirmed on the histogram generated previously, where a concentration of <code class="language-plaintext highlighter-rouge">totcon</code> around 1,000 is visible.</p>
+<p>It is also important to note that <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> reveal different
+information that can be useful depending on the context. While <code class="language-plaintext highlighter-rouge">headtails</code>
+highlights the outliers, it fails to provide good clustering on the tail, while
+<code class="language-plaintext highlighter-rouge">fisher</code> seems to reflect these patterns better. This can be observed in the
+values of Western Africa and the Niger River Basin, where <code class="language-plaintext highlighter-rouge">headtails</code> does not
+highlight any special cluster of conflicts, while <code class="language-plaintext highlighter-rouge">fisher</code> suggests a
+potential cluster aligned with the high-granularity plot. This can be
+confirmed in the histogram generated previously, where a concentration of
+<code class="language-plaintext highlighter-rouge">totcon</code> around 1,000 is visible.</p>
 <h2 id="references">References</h2>
 <p>Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution." <em>The Professional Geographer</em> 65 (3): 482–94. <a href="https://doi.org/10.1080/00330124.2012.700499">DOI</a>.</p>
 <p>———. 2019. "A Recursive Definition of Goodness of Space for Bridging the Concepts of Space and Place for Sustainability." <em>Sustainability</em> 11 (15): 4091. <a href="https://doi.org/10.3390/su11154091">DOI</a>.</p>

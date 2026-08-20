@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-06-17 -->
+    <!-- Page build 2026-08-20 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -263,20 +263,20 @@ question by <a href="https://bensstats.wordpress.com/">Benjamin Smith</a> that b
 mind: <a href="https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date">Creating Star Map Visualizations Based on Location and
 Date</a>
 !!</p>
-<p>Oh my! Can we do this with <strong>R</strong>? Answer is: Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
+<p>Oh my! Can we do this with <strong>R</strong>? The answer is: Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
 Fitter</a> already worked on this two years ago,
 see his <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial
 Maps</a>. So I decided
 to put some work on this.</p>
-<p>Since then, I also learnt that Benjamin and myself have been working on parallel
-on the same topic. He is preparing a <strong>R</strong> package named
+<p>Since then, I also learnt that Benjamin and I have been working in parallel
+on the same topic. He is preparing an <strong>R</strong> package named
 <a href="https://github.com/benyamindsmith/starBliss"><code class="language-plaintext highlighter-rouge">starBliss</code></a> and hopefully this
 post would be of some help.</p>
 <p class="alert alert-info p-3 mx-2 mb-3">I have very little knowledge on this topic, so if you find errors or
 have any suggestions please let me know in the <strong>Comments</strong> section below</p>
 <h2 id="first-things-first-the-data">First things first: The data</h2>
 <p>The initial data source of all these projects (Kim, Benjamin and myself) is the
-same, and it is provided on the D3 plugin
+same, and it is provided by the D3 plugin
 <a href="https://github.com/ofrohn/d3-celestial/tree/master/data">d3-celestial</a> by <a href="http://armchairastronautics.blogspot.com/">Olaf
 Frohn</a>. As Kim Fitter pointed out on
 <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">his post</a>, these
@@ -284,8 +284,8 @@ data files present the problem (experienced by <a href="https://stackoverflow.co
 user</a>) of lines crossing
 the international date line (longitude 180º). I also found that some files are
 not valid as per <code class="language-plaintext highlighter-rouge">sf::st_make_valid()</code>.</p>
-<p>Solution? I processed and fixed almost every file (some of them as the
-corresponding to the Milky Way or the lines for Chinese constellations manually)
+<p>Solution? I processed and fixed almost every file, including the files
+corresponding to the Milky Way and the lines for Chinese constellations, manually,
 to provide a set of files. That is the origin of my project <a href="https://dieghernan.github.io/celestial_data/">Celestial
 Data</a>, that provides all these
 files on several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
@@ -298,7 +298,7 @@ task:</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">nominatimlite</span><span class="p">)</span><span class="w">
 
-</span><span class="c1">## Wrange data and dates</span><span class="w">
+</span><span class="c1">## Wrangling data and dates</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">lutz</span><span class="p">)</span><span class="w">
@@ -437,8 +437,8 @@ plugin</strong>.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 </details>
-<p>The final result would have an spherical outline. That means that we would need
-to perform an spherical cut. Did you know that <a href="https://r-spatial.org/r/2020/06/17/s2.html">in r-spatial the Earth is no
+<p>The final result would have a spherical outline. That means that we would need
+to perform a spherical cut. Did you know that <a href="https://r-spatial.org/r/2020/06/17/s2.html">in r-spatial the Earth is no
 longer flat</a>? Thanks to <code class="language-plaintext highlighter-rouge">s2</code> we can
 overcome this issue. Additionally, we would get rid of <a href="https://stackoverflow.com/questions/75205747/how-to-remove-random-diagonal-lines-from-star-map-vizualizations-produced-by-geo/75212722#75212722">artifacts derived from
 the changes on the
@@ -534,11 +534,11 @@ that for us.</p>
   </span><span class="n">unlist</span><span class="p">()</span><span class="w">
 
 </span><span class="n">desired_loc</span><span class="w">
-</span><span class="c1">#&gt;       lat       lon </span><span class="w">
+</span><span class="c1">#&gt;       lat       lon</span><span class="w">
 </span><span class="c1">#&gt; 40.416705 -3.703582</span><span class="w">
 </span></code></pre></div></div>
 <p>With respect to our object <code class="language-plaintext highlighter-rouge">desired_date</code>, it is quite relevant for accurate
-plotting to specify the correct time zone. Since we already now the latitude and
+plotting to specify the correct time zone. Since we already know the latitude and
 longitude of our desired location, we can easily get that with the <code class="language-plaintext highlighter-rouge">lutz</code>
 package:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">desired_date</span><span class="w">
@@ -557,9 +557,9 @@ package:</p>
 </span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 CEST"</span><span class="w">
 </span></code></pre></div></div>
 <h4 id="about-time-zones">About time zones</h4>
-<p>Some online shops that creates this kind of maps (I won’t post links) includes
+<p>Some online shops that create this kind of map (I won’t post links) include
 this script:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>... 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 
 'selectedHour': '22',
 'selectedMinute': '00',
@@ -594,7 +594,7 @@ so we are going to replicate that as well:</p>
 </span><span class="n">lat_prj</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
 
 </span><span class="nf">c</span><span class="p">(</span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt;      lon      lat </span><span class="w">
+</span><span class="c1">#&gt;      lon      lat</span><span class="w">
 </span><span class="c1">#&gt; 23.15892 40.41670</span><span class="w">
 
 </span><span class="c1"># Create proj4string w/ Airy projection</span><span class="w">
@@ -729,7 +729,7 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Cut to buffer, we dont flip this one (it is not an object of the space)</span><span class="w">
+</span><span class="c1"># Cut to buffer; we don't flip this one (it is not an object of the space)</span><span class="w">
 </span><span class="n">grat_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="w">
   </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat</span><span class="p">,</span><span class="w">
   </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
@@ -932,21 +932,21 @@ this whole different set of geometries:</p>
 <h2 id="references">References</h2>
 <p>Meeus J (1998). <em>Astronomical algorithms</em>, 2nd edition. Willmann-Bell,
 Richmond, Va. ISBN 9780943396613.</p>
-<p>Frohn O, Hernangómez D (2023). “Celestial Data.” 
+<p>Frohn O, Hernangómez D (2023). “Celestial Data.”
 <a href="https://doi.org/10.5281/zenodo.7561601">doi:10.5281/zenodo.7561601</a>,
 <a href="https://dieghernan.github.io/celestial_data/">https://dieghernan.github.io/celestial_data/</a>.</p>
 <p>Frohn O (2015). “d3-celestial.” <a href="https://github.com/ofrohn/d3-celestial/">https://github.com/ofrohn/d3-celestial/</a>.</p>
 <p>Fitter K (2019). “Celestial Maps.” (<a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">link</a>).</p>
 <p>Still J (2020). “Astronomical Calculations: Sidereal Time.” <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">https://squarewidget.com/astronomical-calculations-sidereal-time/</a>.</p>
-<p>Pebesma E, Dunnington D (2020). “In r-spatial, the Earth is no longer flat.” 
+<p>Pebesma E, Dunnington D (2020). “In r-spatial, the Earth is no longer flat.”
 (<a href="https://r-spatial.org/r/2020/06/17/s2.html">link</a>).</p>
-<p>Royé D (2020). “Firefly Cartography.” 
+<p>Royé D (2020). “Firefly Cartography.”
 (<a href="https://dominicroye.github.io/en/2021/firefly-cartography/">link</a>).</p>
 <div class="footnotes" role="doc-endnotes">
  <ol>
    <li id="fn:1">
      <p>In fact, the download is performed via the
-<a href="https://www.jsdelivr.com/">jsDelivr</a>, that distribute files hosted on
+<a href="https://www.jsdelivr.com/">jsDelivr</a>, which distributes files hosted on
 <a href="https://www.jsdelivr.com/github">GitHub via CDN.</a> This is supposed to
 improve performance but in any case the underlying data source is the GitHub
 repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
@@ -1020,7 +1020,9 @@ repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a>
               Introducing geobounds
             </a>
          </p>
-         </div>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
