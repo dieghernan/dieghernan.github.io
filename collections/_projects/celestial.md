@@ -1,8 +1,7 @@
 ---
-title: Celestial Data
+title: Celestial data
 subtitle: A compilation of celestial data files
-excerpt: This project provides several datasets in GeoJSON
-  and GeoPackage format of celestial objects as of J2000 epoch.
+excerpt: This project provides several datasets of celestial objects as of the J2000 epoch in GeoJSON and GeoPackage formats.
 tags:
   - project
   - maps
@@ -24,14 +23,14 @@ project_links:
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.7561601-blue)](https://doi.org/10.5281/zenodo.7561601)
 
-This project provides several datasets in GeoJSON and GeoPackage
-format of celestial objects as of J2000 epoch.
+This project provides several datasets of celestial objects as of the J2000
+epoch in GeoJSON and GeoPackage formats.
 
-The original files were provided on the
+The original files were provided by the
 [d3-celestial plugin](https://github.com/ofrohn/d3-celestial/)
 ([Frohn 2015](#ref-frohn2015)) under
 [BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause). The datasets
-produced by this project consist of the same data provided by
+produced by this project consist of the same data provided by the
 [d3-celestial plugin](https://github.com/ofrohn/d3-celestial/) processed with
 the **R** package **sf** ([Pebesma 2018](#ref-pebesma2018)) to ensure its
 validity:
@@ -41,7 +40,7 @@ validity:
 - Data are provided in WGS 84 - World Geodetic System 1984
   ([EPSG:4326](https://epsg.io/4326)).
 
-- All geometries valid as per
+- All geometries are valid as per
   [ST_IsValid](https://postgis.net/docs/ST_IsValid.html) (GEOS **3.9.3**).
 
 ## Distribution
@@ -52,7 +51,7 @@ The data can be accessed from several API endpoints:
 <!-- From GitHub -->
 https://raw.githubusercontent.com/dieghernan/celestial_data/main/data/mw.min.geojson
 
-<!-- From the Website -->
+<!-- From the website -->
 https://dieghernan.github.io/celestial_data/data/mw.min.geojson
 
 <!-- From jsDelivr -->
@@ -61,11 +60,12 @@ https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/mw.min.geojson
 
 ## Data
 
-Data is provided in GeoJSON (`*.geojson`) and GeoPackage (`*.gpkg`) format.
-Additionally, for GeoJSON formats a minified version (`*.min.geojson`) is
+Data are provided in GeoJSON (`*.geojson`) and GeoPackage (`*.gpkg`) formats.
+Additionally, for GeoJSON files a minified version (`*.min.geojson`) is
 also provided.
 
-The data source can be found on the corresponding [GitHub repo](https://github.com/dieghernan/celestial_data/tree/main/data).
+The data source can be found in the corresponding
+[GitHub repo](https://github.com/dieghernan/celestial_data/tree/main/data).
 
 <details markdown=1 class="my-2">
 <summary>
@@ -139,7 +139,8 @@ List of files provided
 
 </details>
 
-See additional details on [Data Description](https://dieghernan.github.io/celestial_data/data).
+See additional details in the
+[data description](https://dieghernan.github.io/celestial_data/data).
 
 ## Citation
 

@@ -1,7 +1,7 @@
 ---
 title: Leaflet-providersESP
 subtitle: Plugin for Leaflet.js
-excerpt: Leaflet plugin for adding WMS/WMTS provided by public organisms of Spain.
+excerpt: Leaflet plugin for adding WMS/WMTS provided by public agencies in Spain.
 tags:
   - project
   - maps
@@ -15,15 +15,19 @@ project_links:
     label: Visit the website
 ---
 
-**Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that contains configurations for various tile layers provided by public organisms of Spain.
+**Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that
+contains configurations for various tile layers provided by public agencies in
+Spain.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4318010.svg)](https://doi.org/10.5281/zenodo.4318010)
 
 ## Demo
 
-Full docs and examples on <https://dieghernan.github.io/leaflet-providersESP/>
+Full docs and examples are available at
+<https://dieghernan.github.io/leaflet-providersESP/>.
 
-This code would generate a leaflet map with a layer provided by Leaflet-providersESP.
+This code generates a Leaflet map with a layer provided by
+Leaflet-providersESP.
 
 ```html
 <!DOCTYPE html>

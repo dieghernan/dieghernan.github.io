@@ -40,8 +40,8 @@ that this map is flipped?**
 
 On this post I introduce the [tidyterra
 package](https://github.com/dieghernan/tidyterra), recently added to
-[CRAN](https://CRAN.R-project.org/package=tidyterra) and I would show you how to
-geotag the `volcano` dataset. We would also produce **ggplot2** maps using the
+[CRAN](https://CRAN.R-project.org/package=tidyterra), and I show you how to
+geotag the `volcano` dataset. We will also produce **ggplot2** maps using the
 functions of **tidyterra**.
 
 ```r
@@ -56,7 +56,7 @@ library(sf)
 ## Wait, `volcano` is flipped?
 
 Let's check it out. Thanks to the package `maptiles` we can have a glimpse of
-the location of Maungawhau using map tiles (as Google Maps uses). We would use
+the location of Maungawhau using map tiles (as Google Maps uses). We will use
 **tidyterra** for displaying the map tile:
 
 ```r

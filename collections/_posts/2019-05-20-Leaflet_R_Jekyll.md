@@ -1,6 +1,6 @@
 ---
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
-subtitle: Make it work in 6 steps - a short tutorial
+subtitle: Make it work in 6 steps - A short tutorial
 tags:
   - r_bloggers
   - rstats
@@ -19,9 +19,9 @@ output:
     preserve_yaml: true
 ---
 
-Recently I have been struggling when trying to embed a
+Recently, I have been struggling when trying to embed a
 [leaflet](https://rstudio.github.io/leaflet) map created with
-**RStudio** on my blog, hosted in GitHub via
+**RStudio** on my blog, hosted on GitHub via
 [Jekyll](https://jekyllrb.com) (**Spoiler**: [I succeeded
 <i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)).
 In my case, I use the [<span
@@ -30,7 +30,7 @@ remote theme created by myself.
 
 **Index**
 
-1. The generated Toc will be an ordered list
+1. The generated ToC will be an ordered list
    {:toc}
 
 Ready? Let’s go!
@@ -38,14 +38,14 @@ Ready? Let’s go!
 ### The GitHub/Jekyll part
 
 The first step is to install the requested libraries in your GitHub
-page. As Jekyll basically transforms `markdown` into `html`, this step
+page. As Jekyll basically transforms Markdown into HTML, this step
 is a matter of **what to include** and **where** in your own repository.
 
 #### 1. What to include
 
-This part is not really hard. When having a look to the source code of
-[Leaflet for R](https://rstudio.github.io/leaflet/) site it can be seen
-this chunk:
+This part is not really hard. When looking at the source code of the
+[Leaflet for R](https://rstudio.github.io/leaflet/) site, you can see this
+chunk:
 
 ```html
 <head>
@@ -71,7 +71,7 @@ this chunk:
 So now we have it! The only thing to remember is that we need **to load
 the libraries from the **leaflet** server
 (`https://rstudio.github.io/leaflet`)**, meaning that we have to prepend
-that url to the libraries in our installation:
+that URL to the libraries in our installation:
 
 ```html
 <script src="https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"></script>
@@ -103,11 +103,11 @@ section of your page, so you would need to find where to put it. In the
 case of <span class="chulapa">Chulapa</span> it is on
 [`./_includes/custom/custom_head_before_css.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/custom/custom_head_before_css.html).
 
-So now you just have to paste in the `<head>` the code that you got on
-step 1.
+So now you just have to paste the code that you got in step 1 into the
+`<head>`.
 
 <i class="fa fa-star"></i> **Pro tip:** For a better performance of the
-site, include these libraries only when you need it. In my case, I added
+site, include these libraries only when you need them. In my case, I added
 a custom variable in my YAML front matter for those posts with a leaflet
 map, `leafletmap: true`. Go to step 4 for a working example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3}
@@ -116,9 +116,9 @@ map, `leafletmap: true`. Go to step 4 for a working example.
 
 #### 3. Creating the leaflet map
 
-Now it’s time to create a leaflet map with **RStudio**. I just keep it
+Now it’s time to create a leaflet map with **RStudio**. I will keep it
 simple for this post, so I took the first example provided in [Leaflet
-for R - Introduction](https://rstudio.github.io/leaflet/)
+for R - Introduction](https://rstudio.github.io/leaflet/).
 
 ```r
 library(leaflet)
@@ -139,7 +139,7 @@ Before knitting your `.Rmd`, you have to set up the [YAML front
 matter](https://bookdown.org/yihui/rmarkdown/markdown-document.html).
 Here it is **essential** to set up the option `always_allow_html: yes`,
 as well as `output: github_document`. As an example, this post was
-created with the front matter:
+created with this front matter:
 
 ```yaml
 ---
@@ -167,7 +167,7 @@ We are almost there! Now “Knit” your code and get the corresponding
 **Update: This is not needed any more! I still leave it here for info.
 You can skip to the next section.**
 
-Have a look to the `.md` code that you have just created. Although not
+Have a look at the `.md` code that you have just created. Although not
 displayed in the preview, you can see in the file itself a chunk that
 looks like this:
 
@@ -182,7 +182,7 @@ looks like this:
 Actually that chunk is your leaflet map, created with **RStudio**. You
 can’t see it now because you are previewing a `markdown` file in your
 local PC, and the libraries installed in step 1 are installed on GitHub,
-but we would solve it later.
+but we will solve that later.
 
 Now you just need to paste this piece of code before that chunk:
 
@@ -199,15 +199,15 @@ widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
 {: .alert .alert-warning .p-3 .mx-2 .my-3}
 
 The `style="width:100%; height:216px;` part controls the actual size of
-the leaflet widget. In this case, the map would adapt to the width of
-the page with a fixed height of 216px. I put [some examples](#extra) at
-the end of the post of different size options so you can have a look and
-see which one is more suitable for your needs.
+the leaflet widget. In this case, the map will adapt to the width of
+the page with a fixed height of 216px. I put [some examples](#extra) of
+different size options at the end of the post so you can have a look and see
+which one is more suitable for your needs.
 
 #### 6. Publish your post
 
 Now you just have to publish your post as usual!! If everything has been
-properly set, when Jekyll builds your post it would include the
+properly set, when Jekyll builds your post it will include the
 libraries in the header and make the magic happen, just like this:
 
 <div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
@@ -220,7 +220,7 @@ if you have followed my Pro tip.
 
 ### Gallery: Size of a leaflet map <a name="extra"></a>
 
-**A note:** For a complete understanding of this section it is
+**A note:** For a complete understanding of this section, it is
 recommended to access it on multiple devices, so you can see the
 different behavior on different screens. Google Chrome allows you to
 simulate different devices [(more info
@@ -228,7 +228,7 @@ here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 
 #### Fixed size
 
-With these examples you can see how to control the absolute size of the
+With these examples, you can see how to control the absolute size of the
 leaflet map. The disadvantage of this method is that the size would be
 fixed for all the devices, so maps sized for smartphones or tablets
 wouldn’t look as nice in laptops, etc. and vice versa.
@@ -266,7 +266,7 @@ leaflet(
 
 #### Responsive size
 
-**Recommended option.** These maps would adapt to the width of your
+**Recommended option.** These maps will adapt to the width of your
 screen, no matter what device you are using.
 
 ##### Example 3: 100% width

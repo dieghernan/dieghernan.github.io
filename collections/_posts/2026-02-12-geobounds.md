@@ -33,16 +33,17 @@ While searching for new data sources, I found the excellent
 data can be tedious since it's provided as zipped shapefiles, and as any GIS
 professional knows, [shapefiles should die!](http://switchfromshapefile.org/)
 
-Previously, the **rgeoboundaries** package was on CRAN and allowed access to the geoBoundaries API, but it was archived. So
-I decided to create my own version, and **geobounds** was born.
+Previously, the **rgeoboundaries** package was on CRAN and allowed access to
+the geoBoundaries API, but it was archived. So I decided to create my own
+version, and **geobounds** was born.
 
 - Source code: <https://github.com/dieghernan/geobounds>
 - **pkgdown** website: <https://dieghernan.github.io/geobounds/>
 
 It connects directly to the excellent
 [geoBoundaries](https://www.geoboundaries.org/) database and returns clean,
-ready-to-use **sf** objects with a single function call. No manual downloads. No
-shapefile messing.
+ready-to-use **sf** objects with a single function call. No manual downloads and
+no shapefile handling.
 
 This is how it works.
 
@@ -202,7 +203,7 @@ Use **geobounds** when:
 - You prefer code over manual downloads
 - You're building maps, dashboards, or spatial analyses
 
-## Related Packages
+## Related packages
 
 **geobounds** is not alone in this space. Depending on your needs, you might
 also want to look at:
@@ -229,6 +230,7 @@ capabilities.
 
 ## Bottom line
 
-I built **geobounds** to provide direct access to geoBoundaries products. I hope this package will help you in your GIS journey.
+I built **geobounds** to provide direct access to geoBoundaries products. I hope
+this package will help you in your GIS journey.
 
 Happy mapping!

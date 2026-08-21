@@ -1,9 +1,16 @@
 ---
-title: "Beautiful Maps with <strong>R</strong> (I): Fishnets, Honeycombs and Pixels"
-subtitle: "Awesome simplified maps with R"
-tags: [r_bloggers,rstats,rspatial,beautiful_maps, maps, sf]
-header_img: ./assets/img/blog/20190602_imgpost-1.png
-output: 
+title: "Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels"
+subtitle: "Simplified maps with R"
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - beautiful_maps
+  - maps
+  - sf
+  - giscoR
+header_img: ./assets/img/blog/20190602_imgpost-1.webp
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
@@ -19,11 +26,24 @@ knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
 
-Sometimes you want to produce maps with special layouts. I specially like maps with modified geometries, e.g. simplifiying the original shapes to squares or dots. When doing a little search over the web I found the fantastic post [Fishnets and Honeycomb: Square vs. Hexagonal Spatial Grids](http://strimas.com/spatial/hexagonal-grids/) by [Matt Strimas-Mackey](http://strimas.com/about/) that was a huge inspiration (by the way, don't miss [his blog](http://strimas.com/#posts), full of very interesting pieces of work). 
+Sometimes you want to produce maps with special layouts. I especially like
+maps with modified geometries, e.g. simplifying the original shapes to squares
+or dots. When searching the web, I found the fantastic post [Fishnets and
+Honeycomb: Square vs. Hexagonal Spatial Grids](https://strimas.com/post/hexagonal-grids/)
+by [Matt Strimas-Mackey](https://strimas.com/#about), which was a huge
+inspiration (by the way, don't miss [his blog](http://strimas.com/#posts), full
+of very interesting pieces of work).
 
-The only thing I was not completely comfortable with was that the post used the [old-fashioned](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial) `sp` package instead of my personal fav, the `sf` package, (the post was published in 2016, note that author has also moved to the `sf` package since then). So I decided to explore further options with `sf`.
+The only thing I was not completely comfortable with was that the post used the
+[old-fashioned](https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial)
+**sp** package instead of my personal favorite, the **sf** package. The post
+was published in 2016, and note that the author has also moved to the **sf**
+package since then. So I decided to explore further options with **sf**.
 
-The approach is similar (using grids over a map and work with that) but using [`st_make_grid`](https://www.rdocumentation.org/packages/sf/versions/0.7-4/topics/st_make_grid). I also expanded it by grouping the grids and also producing dots over the geometries. So basically I produced 5 variations of the map:
+The approach is similar, using grids over a map and working with them, but with
+[`st_make_grid`](https://www.rdocumentation.org/packages/sf/versions/0.7-4/topics/st_make_grid).
+I also expanded it by grouping the grids and producing dots over the geometries.
+So basically I produced five variations of the map:
 
 | Type          | Replacement | Grouped  |
 | ------------- |:-------------:| :-----:|
@@ -34,7 +54,7 @@ The approach is similar (using grids over a map and work with that) but using [`
 | **Pixel** | Dot | No
 
 
-## Required R packages
+## Required **R** packages
 
 ```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
 library(sf)
@@ -66,7 +86,10 @@ target <- st_geometry(initial)
 mypal <- colorRampPalette(c("#F3F8F8", "#008080"))
 ```
 
-<i class="fas fa-exclamation-triangle"></i> **Warning:** The `cellsize` should be established in the same unit that the projection (in this case is meters). Pay special attention on this, given that if the parameter is too small (meaning that the grid is too dense) **R** could crash easily.
+<i class="fas fa-exclamation-triangle"></i> **Warning:** The `cellsize` should
+be set in the same unit as the projection (in this case, meters). Pay special
+attention to this because if the parameter is too small, meaning that the grid
+is too dense, **R** could crash easily.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 }
 
 ```{r 20190602_squares, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90, dev.args=list(bg = NA)}
@@ -81,7 +104,7 @@ grid <- st_make_grid(target,
 # To sf
 grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
 
-# We identify the grids that belongs to a entity by assessing the centroid
+# We identify the grids that belong to an entity by assessing the centroid
 cent_grid <- st_centroid(grid)
 cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
 grid_new <- inner_join(grid, st_drop_geometry(cent_merge))
@@ -93,14 +116,14 @@ Fishgeom <- aggregate(grid_new,
   do_union = FALSE
 )
 
-# Lets add the df
+# Let's add the data frame
 Fishnet <- left_join(
   Fishgeom %>% select(index_target),
   st_drop_geometry(initial)
 ) %>%
   select(-index_target)
 
-# Now lets create the Puzzle
+# Now let's create the puzzle
 Puzzlegeom <- aggregate(st_buffer(grid_new, 0.5), # Avoid slivers
   by = list(grid_new$index_target),
   FUN = min,
@@ -121,7 +144,8 @@ plot(st_geometry(Puzzle), col = mypal(4), main = "Puzzle")
 
 ## Going hex
 
-Extremely easy. We just need to change the `square` parameter of `st_make_grid` from `TRUE` to `FALSE`
+Extremely easy. We just need to change the `square` parameter of
+`st_make_grid` from `TRUE` to `FALSE`.
 
 ```{r 20190602_hex, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90,  dev.args=list(bg = NA)}
 
@@ -135,7 +159,7 @@ grid <- st_make_grid(target,
 # Make sf
 grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
 
-# We identify the grids that belongs to a entity by assessing the centroid
+# We identify the grids that belong to an entity by assessing the centroid
 cent_grid <- st_centroid(grid)
 cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
 grid_new <- inner_join(grid, st_drop_geometry(cent_merge))
@@ -148,7 +172,7 @@ Honeygeom <- aggregate(
   do_union = FALSE
 )
 
-# Lets add the df
+# Let's add the data frame
 Honeycomb <- left_join(
   Honeygeom %>%
     select(index_target),
@@ -156,7 +180,7 @@ Honeycomb <- left_join(
 ) %>%
   select(-index_target)
 
-# Now lets create the Hexbin
+# Now let's create the hexbin
 
 Hexbingeom <- aggregate(
   st_buffer(grid_new, 0.5), # Avoid slivers
@@ -192,7 +216,7 @@ grid <- st_make_grid(target,
 # Make sf
 grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
 
-# We identify the grids that belongs to a entity by assessing the centroid
+# We identify the grids that belong to an entity by assessing the centroid
 cent_grid <- st_centroid(grid)
 cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
 grid_new <- st_buffer(cent_merge, 50 * 1000 / 2)
@@ -202,7 +226,7 @@ Pixelgeom <- aggregate(
   FUN = min,
   do_union = FALSE
 )
-# Lets add the df
+# Let's add the data frame
 Pixel <- left_join(
   Pixelgeom %>%
     select(index_target),
@@ -218,7 +242,8 @@ plot(st_geometry(Pixel), col = mypal(4), main = "Pixel")
 
 ## Wrap up
 
-So finally I wrapped all that in a function (see the code in [my repo](https://github.com/dieghernan/dieghernan.github.io/tree/master/assets/functions)), that I named `stdh_gridpol`:
+Finally, I wrapped all that in a function named `stdh_gridpol`. See the code in
+[my repo](https://github.com/dieghernan/dieghernan.github.io/tree/master/assets/functions):
 ```{r 20190602_function, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=3*350/90, dpi=90,  dev.args=list(bg = NA)}
 stdh_gridpol <- function(sf,
                          to = "fishnet",
@@ -230,7 +255,7 @@ stdh_gridpol <- function(sf,
                          ),
                          sliver = 0.5) {
   if (!unique(st_geometry_type(sf)) %in% c("POLYGON", "MULTIPOLYGON")) {
-    stop("Input should be  MULTIPOLYGON or POLYGON")
+    stop("Input should be MULTIPOLYGON or POLYGON")
   }
   if (!to %in% c("fishnet", "puzzle", "honeycomb", "hexbin", "pixel")) {
     stop("'to' should be 'fishnet','puzzle','honeycomb','hexbin' or 'pixel'")
@@ -321,7 +346,9 @@ plot(st_geometry(hex), col = mypal(4), main = "Hexbin")
 plot(st_geometry(pix), col = mypal(4), main = "Pixel")
 ```
 
-And that's it! The function `stdh_gridpol` has some alert mechanisms, as accepting only `POLYGON` or `MULTIPOLYGON`, and the default value of `gridsize` is computed in a way that the shortest dimension would have 40 cells.
+And that's it! The function `stdh_gridpol` has some alert mechanisms, such as
+accepting only `POLYGON` or `MULTIPOLYGON`, and the default value of `gridsize`
+is computed so that the shortest dimension has 40 cells.
 
 ```{r 20190602_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
 world <- ne_countries(returnclass = "sf")

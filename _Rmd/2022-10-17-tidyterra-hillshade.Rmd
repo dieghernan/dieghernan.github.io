@@ -1,23 +1,23 @@
 ---
 title: "Hillshade, colors and marginal plots with tidyterra (I)"
 subtitle: How to overlay SpatRasters
-excerpt: Using shadow effects on relief mappings is a very common technique, 
-  that allows to produce informative yet beautiful maps.
+excerpt: Using shadow effects on relief mappings is a very common technique,
+  which produces informative yet beautiful maps.
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- maps
-- ggplot2
-- tidyterra
-- terra
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - tidyterra
+  - terra
 output:
   html_document:
     df_print: paged
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20221017-6-finalplot-1.png
+header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
 ---
 
 ```{r setup, include=FALSE}
@@ -34,13 +34,13 @@ rm(list = ls())
 ```
 
 *This is the first post of a series of two, showing how to overlay a SpatRaster
-on top of a Hillshade background. Next post would show how to add marginal plots
-including information of the values of the raster by longitude and latitude. See
-more posts on [tidyterra](https://dieghernan.github.io/tags#tidyterra)*
+on top of a hillshade background. The next post shows how to add marginal plots
+including information on the values of the raster by longitude and latitude. See
+the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/).*
 
-Using shadow effects on relief mappings is a very common technique, that allows
-to produce informative yet beautiful maps. If you are interested on this topic
-and you work with **R**, you would have probably seen this map:
+Using shadow effects on relief mappings is a very common technique, which
+produces informative yet beautiful maps. If you are interested in this topic and
+you work with **R**, you would have probably seen this map:
 
 ![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
@@ -53,14 +53,13 @@ maps.
 
 In fact, Dominic Royé recently wrote a very detailed
 [post](https://dominicroye.github.io/en/2022/hillshade-effects/) on creating
-shadow effects on map reliefs. On this first post of the series I would
-replicate that technique with a slight variation (e.g. not making use of
-`ggnewscale`) and I would discuss a bit on the potential choice of a color
-palette for this kind of maps.
+shadow effects on map reliefs. In this first post of the series, I replicate
+that technique with a slight variation (e.g. not making use of `ggnewscale`) and
+discuss the potential choice of a color palette for this kind of map.
 
 ## Libraries
 
-I would use the following libraries:
+I will use the following libraries:
 
 ```{r}
 
@@ -103,7 +102,7 @@ r
 
 ```
 
-We can now have a quick look to the plot with `tidyterra::autoplot()`:
+We can now have a quick look at the plot with `tidyterra::autoplot()`:
 
 ```{r 20221017-1-autoplot}
 # Quick look
@@ -147,7 +146,7 @@ We can also do the following hack to avoid the use of a `scale_fill_*` (via
 -   Select a vector of colors (in this post `pal_greys`).
 -   Extract the values of the raster and reescale them to the length of the
     palette (`c(1, 1000)`).
--   Round those rescaled values to the nearest integer. So we would have a index
+-   Round those rescaled values to the nearest integer. So we would have an index
     indicating which value of `pal_greys` should be mapped to each cell.
 -   Now use the parameter `fill` on the `geom_` instead of using the scale.
 
@@ -189,12 +188,12 @@ The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
 associated to low elevations while orange, browns and whites are associared to
-high elevations on some of the most common elevation palettes (aka hypsometric
+high elevations on some of the most common elevation palettes (AKA hypsometric
 tints). See for example the [Wikipedia Topographic maps
 conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps).
 
 This is not ideal, since greens can be confused with forests, for example, so an
-elevation map of desertic areas would not be appropiated with a
+elevation map of desert areas would not be appropriate with a
 green-brown-white color scheme.
 
 There is an additional point to take into account when designing color palettes

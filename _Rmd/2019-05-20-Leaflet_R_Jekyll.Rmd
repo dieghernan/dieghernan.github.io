@@ -1,12 +1,19 @@
 ---
 title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
-subtitle: Make it work in 6 steps - a short tutorial
-tags: [r_bloggers,rstats,rspatial,leaflet,Jekyll, html, maps]
-header_img: ./assets/img/blog/20190520_imgpost.png
+subtitle: Make it work in 6 steps - A short tutorial
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - leaflet
+  - jekyll
+  - html
+  - maps
+header_img: ./assets/img/blog/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30
-output: 
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
@@ -26,22 +33,33 @@ library(rmarkdown)
 library(htmlwidgets)
 ```
 
-Recently I have been struggling when trying to embed a [leaflet](https://rstudio.github.io/leaflet) map created with **RStudio** on my blog, hosted in GitHub via [Jekyll](https://jekyllrb.com) (**Spoiler**: [I succeeded <i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)). In my case, I use the [[Chulapa]{.chulapa}](https://dieghernan.github.io/chulapa/) remote theme created by myself.
+Recently, I have been struggling when trying to embed a
+[leaflet](https://rstudio.github.io/leaflet) map created with
+**RStudio** on my blog, hosted on GitHub via
+[Jekyll](https://jekyllrb.com) (**Spoiler**: [I succeeded
+<i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)).
+In my case, I use the [<span
+class="chulapa">Chulapa</span>](https://dieghernan.github.io/chulapa/)
+remote theme created by myself.
 
 **Index**
 
-1 Numbered list.
-{:toc}
+1. The generated ToC will be an ordered list
+   {:toc}
 
-Ready? Let's go!
+Ready? Let’s go!
 
 ### The GitHub/Jekyll part
 
-The first step is to install the requested libraries in your GitHub page. As Jekyll basically transforms `markdown` into `html`, this step is a matter of **what to include** and **where** in your own repository.
+The first step is to install the requested libraries in your GitHub
+page. As Jekyll basically transforms Markdown into HTML, this step
+is a matter of **what to include** and **where** in your own repository.
 
 #### 1. What to include
 
-This part is not really hard. When having a look to the source code of [Leaflet for R](https://rstudio.github.io/leaflet/) site it can be seen this chunk:
+This part is not really hard. When looking at the source code of the
+[Leaflet for R](https://rstudio.github.io/leaflet/) site, you can see this
+chunk:
 
 ```html
 <head>
@@ -64,7 +82,10 @@ This part is not really hard. When having a look to the source code of [Leaflet 
 </head>
 ```
 
-So now we have it! The only thing to remember is that we need **to load the libraries from the leaflet server (`https://rstudio.github.io/leaflet`)**, meaning that we have to prepend that url to the libraries in our installation:
+So now we have it! The only thing to remember is that we need **to load
+the libraries from the **leaflet** server
+(`https://rstudio.github.io/leaflet`)**, meaning that we have to prepend
+that URL to the libraries in our installation:
 
 ```html
   <script src="https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js"></script>
@@ -79,22 +100,33 @@ So now we have it! The only thing to remember is that we need **to load the libr
   <script src= "https://rstudio.github.io/leaflet/libs/leaflet-binding/leaflet.js"></script>
 ```
 
-You can have a look of my implementation on [`./_includes/leaflet.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/leaflet.html).
+You can have a look at my implementation in
+[`./_includes/leaflet.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/leaflet.html).
 
-#### 2.Where to include
+#### 2. Where to include
 
-This a little bit more complicated, depending on the structure of your Jekyll template. The code chunk should be included in the `<head>` section of your page, so you would need to find where to put it. In the case of [Chulapa]{.chulapa} it is on [`./_includes/custom/custom_head_before_css.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/custom/custom_head_before_css.html).
+This is a little more complicated, depending on the structure of your
+Jekyll template. The code chunk should be included in the `<head>`
+section of your page, so you would need to find where to put it. In the
+case of <span class="chulapa">Chulapa</span> it is on
+[`./_includes/custom/custom_head_before_css.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/custom/custom_head_before_css.html).
 
-So now you just have to paste in the `<head>` the code that you got on step 1.
+So now you just have to paste the code that you got in step 1 into the
+`<head>`.
 
-<i class="fa fa-star"></i> **Pro tip:** For a better performance of the site, include these libraries only when you need it. In my case, I added a custom variable in my YAML front matter for those posts with a leaflet map, `leafletmap: true`. Go to step 4 for a working example. 
+<i class="fa fa-star"></i> **Pro tip:** For a better performance of the
+site, include these libraries only when you need them. In my case, I added
+a custom variable in my YAML front matter for those posts with a leaflet
+map, `leafletmap: true`. Go to step 4 for a working example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 ### The RStudio part
 
 #### 3. Creating the leaflet map
 
-Now it's time to create a leaflet map with **RStudio**. I just keep it simple for this post, so I took the first example provided in [Leaflet for R - Introduction](https://rstudio.github.io/leaflet/)
+Now it’s time to create a leaflet map with **RStudio**. I will keep it
+simple for this post, so I took the first example provided in [Leaflet
+for R - Introduction](https://rstudio.github.io/leaflet/).
 
 ```r
 library(leaflet)
@@ -109,7 +141,11 @@ It is assumed that you are [creating a post with **RStudio**](https://rmarkdown.
 
 #### 4. Set up the YAML front matter <a name="step4"></a>
 
-Before knitting your `.Rmd`, you have to set up the [YAML front matter](https://bookdown.org/yihui/rmarkdown/markdown-document.html). Here it is **essential** to set up the option `always_allow_html: yes`, as well as `output: github_document`. As an example, this post was created with the front matter:
+Before knitting your `.Rmd`, you have to set up the [YAML front
+matter](https://bookdown.org/yihui/rmarkdown/markdown-document.html).
+Here it is **essential** to set up the option `always_allow_html: yes`,
+as well as `output: github_document`. As an example, this post was
+created with this front matter:
 
 ```yaml
 ---
@@ -127,15 +163,19 @@ output:
 ---
 ```
 
-We are almost there! Now "Knit" your code and get the corresponding `.md`file.
+We are almost there! Now “Knit” your code and get the corresponding
+`.md` file.
 
 ### The Markdown part
 
 #### ~~5. Modifying the `.md` file~~
 
-**Update: This is not needed any more! I still leave it here for info. You can skip to the next section.**
+**Update: This is not needed any more! I still leave it here for info.
+You can skip to the next section.**
 
-Have a look to the `.md` code that you have just created. Although not displayed in the preview, you can see in the file itself a chunk that looks like this:
+Have a look at the `.md` code that you have just created. Although not
+displayed in the preview, you can see in the file itself a chunk that
+looks like this:
 
 ```html
   <script type="application/json"data-for="7ab57412f7b1df4d5773">
@@ -145,7 +185,10 @@ Have a look to the `.md` code that you have just created. Although not displayed
   </script>
 ```
 
-Actually that chunk is your leaflet map, created with **RStudio**. You can't see it now because you are previewing a `markdown` file in your local PC, and the libraries installed in step 1 are installed on GitHub, but we would solve it later.
+Actually that chunk is your leaflet map, created with **RStudio**. You
+can’t see it now because you are previewing a `markdown` file in your
+local PC, and the libraries installed in step 1 are installed on GitHub,
+but we will solve that later.
 
 Now you just need to paste this piece of code before that chunk:
 
@@ -156,14 +199,22 @@ Now you just need to paste this piece of code before that chunk:
   ...
 ```
 
-<i class="fa fa-exclamation-triangle"></i> **Warning:** Be sure that the widget id (`7ab57412f7b1df4d5773` in the example) is the same in the `<div>` and in the `<script>` part. If not your map would not load.
+<i class="fa fa-exclamation-triangle"></i> **Warning:** Be sure that the
+widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
+`<div>` and in the `<script>` part. If not, your map would not load.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
-The `style="width:100%; height:216px;` part controls the actual size of the leaflet widget. In this case, the map would adapt to the width of the page with a fixed height of 216px. I put [some examples](#extra) at the end of the post of different size options so you can have a look and see which one is more suitable for your needs.
+The `style="width:100%; height:216px;` part controls the actual size of
+the leaflet widget. In this case, the map will adapt to the width of
+the page with a fixed height of 216px. I put [some examples](#extra) of
+different size options at the end of the post so you can have a look and see
+which one is more suitable for your needs.
 
 #### 6. Publish your post
 
-Now you just have to publish your post as usual!! If everything has been properly set, when Jekyll builds your post it would include the libraries in the header and make the magic happens, just like this:
+Now you just have to publish your post as usual!! If everything has been
+properly set, when Jekyll builds your post it will include the
+libraries in the header and make the magic happen, just like this:
 
 ```{r print_map, echo=FALSE,message=FALSE,warning=FALSE}
 # Here is when the map is created and printed
@@ -175,17 +226,26 @@ m <- leaflet() %>%
 m # Print the map
 ```
 
-<i class="fa fa-exclamation-triangle"></i> **Warning:** Have you checked the YAML front matter of your `.md` file? Have another look, specially if you have followed my Pro tip.
+<i class="fa fa-exclamation-triangle"></i> **Warning:** Have you checked
+the YAML front matter of your `.md` file? Have another look, especially
+if you have followed my Pro tip.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
 ### Gallery: Size of a leaflet map <a name="extra"></a>
 
-**A note:** For a complete understanding of this section it is recommended to access it on multiple devices, so you can see the different behavior on different screens. Google Chrome allows you to simulate different devices [(more info here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
+**A note:** For a complete understanding of this section, it is
+recommended to access it on multiple devices, so you can see the
+different behavior on different screens. Google Chrome allows you to
+simulate different devices [(more info
+here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 
 
 #### Fixed size
 
-With these examples you can see how to control the absolute size of the leaflet map. The disadvantage of this method is that the size would be fixed for all the devices, so maps sized for smartphones or tables wouldn't look as nice in laptops, etc. and vice versa.
+With these examples, you can see how to control the absolute size of the
+leaflet map. The disadvantage of this method is that the size would be
+fixed for all the devices, so maps sized for smartphones or tablets
+wouldn’t look as nice in laptops, etc. and vice versa.
 
 ##### Example 1: 672x480px
 
@@ -200,7 +260,7 @@ leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%
 
 ##### Example 2: 200x300px
 
-Let's go narrow and long with `html "width:200px;height:300px;"`:
+Let’s go narrow and long with `html "width:200px;height:300px;"`:
 
 
 ```{r example2}
@@ -215,7 +275,8 @@ leaflet(
 
 #### Responsive size
 
-**Recommended option.** These maps would adapt to the width of your screen, no matter what device you are using.
+**Recommended option.** These maps will adapt to the width of your
+screen, no matter what device you are using.
 
 ##### Example 3: 100% width
 

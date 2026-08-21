@@ -29,7 +29,7 @@ install.packages("resmush")
 ## What is reSmush.it?
 
 reSmush.it is a **free online API** that provides image optimization and has
-been implemented in WordPress, Drupal, or Magento. Some features of reSmush.it
+been implemented in WordPress, Drupal and Magento. Some features of reSmush.it
 include:
 
 - Free optimization services, no API key required.
@@ -45,8 +45,8 @@ include:
     used by several online optimizers.
 
 **reSmush.it** is free of charge, but its team is planning to offer more
-services as well as extending the service to support other types of image files. If
-you enjoy this API (as I do), you can consider supporting them.
+services and extending the service to support other types of image files. If you
+enjoy this API (as I do), you can consider supporting them.
 
 <div class="text-center my-3">
 <a title="Support reSmush.it on ko-fi.com" class="kofi-button" style="background-color:#ff5e5b;" href="https://ko-fi.com/E1E51PW00" target="_blank">
@@ -76,7 +76,7 @@ development and SEO optimization. For example, I optimized all the images on
 this blog using `resmush_dir()`, which is a shorthand for optimizing all files
 in a specific folder.
 
-There are other alternatives that I would discuss [at the end of this
+There are other alternatives that I discuss [at the end of this
 post](#other-alternatives), but in one line, the reSmush.it API performs fast
 with minimal configuration for a wide range of formats without needing an API
 key.
@@ -85,8 +85,8 @@ key.
 
 ### With local files
 
-Let’s present an example of how a local file can be optimized. First we create
-a large plot with **ggplot2**
+Let’s present an example of how a local file can be optimized. First, we create
+a large plot with **ggplot2**.
 
 ```r
 library(tidyterra)

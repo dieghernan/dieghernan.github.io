@@ -1,7 +1,7 @@
 ---
 title: TextWatch Clima
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
-excerpt: TextWatch Clima upgrades the classic TextWatch watchface by adding a bunch of new capabilities.
+excerpt: TextWatch Clima upgrades the classic TextWatch watch face by adding a set of new capabilities.
 tags:
   - discontinued
   - project
@@ -21,7 +21,8 @@ permalink: /projects/TextWatchClima/
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
-**TextWatch Clima** upgrades the classic TextWatch watchface by adding a bunch of new capabilities.
+**TextWatch Clima** upgrades the classic TextWatch watch face by adding a set of
+new capabilities.
 
 ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
 
@@ -60,7 +61,7 @@ permalink: /projects/TextWatchClima/
 - Weather: Current conditions in °C or °F.
 - Night theme displayed between sunset and sunrise
 - Choose your weather provider:
-  - **Yahoo** _No API Key required (at this moment)_
+  - **Yahoo** _No API key required at this moment_
   - **[Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)**
   - **[OpenWeatherMap](https://openweathermap.org/)**
 - **Implementation of [pmkey.xyz](https://www.pmkey.xyz)**
@@ -72,14 +73,15 @@ permalink: /projects/TextWatchClima/
 - [x] Fuzzy time
 - [x] Battery
 - [x] Option for animations
-- [x] Option for non pmkey users
+- [x] Option for non-pmkey users
 - [x] More languages (Swedish, Esperanto...)
 
 ## Attributions
 
 ### Fonts
 
-- [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to regular alphabet, instead of Unicode values.
+- [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers,
+  modified and fitted to the regular alphabet instead of Unicode values.
 - Custom font for icons created via [Fontastic](http://fontastic.me/).
 - Gotham Fonts downloaded from [fontsgeek.com](http://fontsgeek.com)
 
@@ -99,7 +101,9 @@ permalink: /projects/TextWatchClima/
 
 ### Others
 
-- [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
+- [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a
+  unique PIN and add API keys for your favorite online services. Please check
+  [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
 - [wackyneighbor](https://github.com/wackyneighbor) project [DC TextWatch Deluxe](https://github.com/wackyneighbor/DC_Text_Watch_Deluxe)
 
 ## Screenshots

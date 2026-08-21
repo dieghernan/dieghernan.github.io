@@ -1,7 +1,7 @@
 ---
 title: 7egment
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
-excerpt: 7egment is a customizable watchface based on the classic 7-segment display that adds your location and the current weather information in the language used on your watch and smartphone.
+excerpt: 7egment is a customizable watch face based on the classic 7-segment display that adds your location and current weather information in the language used on your watch and smartphone.
 tags:
   - discontinued
   - project
@@ -21,7 +21,9 @@ project_links:
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
-**7egment** is a customizable watchface based on the classic 7-segment display that adds your location and the current weather information in the language used on your watch and smartphone.
+**7egment** is a customizable watch face based on the classic 7-segment display
+that adds your location and current weather information in the language used on
+your watch and smartphone.
 
 ![Banner](https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png)
 
@@ -31,7 +33,7 @@ project_links:
 
 ## Features
 
-- Autodetection of 12h/24h based on your watch settings
+- Autodetection of 12h/24h mode based on your watch settings
 - Internationalization: Automatic weekday translation is supported for:
   - English
   - Spanish
@@ -43,7 +45,7 @@ project_links:
 ## Options
 
 - Choose background colors, frame and text
-- 3 Bands design. Make it match your tie!
+- Three-band design. Make it match your tie!
 - Weather: Current conditions in °C or °F.
 - Choose your weather provider:
   - [Wunderground](https://www.wunderground.com)
@@ -69,7 +71,7 @@ project_links:
 
 ## Attributions
 
-### Fonts:
+### Fonts
 
 - [DSEG7Modern-Bold](http://www.keshikan.net/fonts-e.html) by Keshikan けしかん.
 - [Digital7-Regular](https://fontsgeek.com/fonts/Digital7-Regular) downloaded from [fontsgeek.com](http://fontsgeek.com)
@@ -87,7 +89,9 @@ project_links:
 
 ### Others
 
-[Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
+[Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique
+PIN and add API keys for your favorite online services. Please check
+[www.pmkey.xyz](https://www.pmkey.xyz) for more info.
 
 ## License
 

@@ -1,24 +1,24 @@
 ---
 title: "Star Map with R"
-subtitle: 'Creating Star Map Visualizations Based on Location and Date'
+subtitle: "Creating Star Map Visualizations Based on Location and Date"
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- s2
-- astronomy
-- celestial
-- geojson
-- gpkg
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - s2
+  - astronomy
+  - celestial
+  - geojson
+  - gpkg
 output:
   html_document:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20230125_celestial_map-1.webp
+header_img: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
 ---
 
 ```{r setup, include=FALSE}
@@ -43,7 +43,7 @@ Date](https://stackoverflow.com/questions/75064069/creating-star-map-visualizati
 !!
 
 Oh my! Can we do this with **R**? Answer is: Of course! In fact, [Kim
-Fitter](https://kimnewzealand.github.io/) already worked on this two years ago,
+Fitter](https://kimnewzealand.github.io/) already worked on this two years earlier,
 see his [Celestial
 Maps](https://kimnewzealand.github.io/2019/02/21/celestial-maps/). So I decided
 to put some work on this.
@@ -112,7 +112,7 @@ Now we prepare some helper functions:
     34.72782** would be converted into **34° 43' 40.15" N**).
 
 [^1]: In fact, the download is performed via the
-    [jsDelivr](https://www.jsdelivr.com/), that distribute files hosted on
+    [jsDelivr](https://www.jsdelivr.com/), which distributes files hosted on
     [GitHub via CDN.](https://www.jsdelivr.com/github) This is supposed to
     improve performance but in any case the underlying data source is the GitHub
     repo.
@@ -243,7 +243,7 @@ get_mst <- function(dt, lng) {
 
 </details>
 
-The final result would have an spherical outline. That means that we would need
+The final result would have a spherical outline. That means that we would need
 to perform an spherical cut. Did you know that [in r-spatial the Earth is no
 longer flat](https://r-spatial.org/r/2020/06/17/s2.html)? Thanks to `s2` we can
 overcome this issue. Additionally, we would get rid of [artifacts derived from
@@ -672,7 +672,7 @@ ggplot() +
 Voilà! I checked several times the results with the results provided by
 d3-celestial.js on the [location
 demo](https://ofrohn.github.io/celestial-demo/location.html) and the underlying
-calculations on Javascript and everything seems to be up and running.
+calculations in JavaScript, and everything seems to be up and running.
 
 ## Extra: Chinese constellations
 

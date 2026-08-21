@@ -1,6 +1,6 @@
 ---
-title: Using CountryCodes database and sf package
-subtitle: vignette of the CountryCodes project
+title: Using the CountryCodes database and sf package
+subtitle: Vignette of the CountryCodes project
 tags:
   - r_bloggers
   - rstats
@@ -15,9 +15,9 @@ output:
     preserve_yaml: true
 ---
 
-This vignette is an example of using the database provided in the GitHub project
+This vignette shows how to use the database provided in the GitHub project
 [Country Codes and International Organizations & Groups](https://dieghernan.github.io/projects/countrycodes/)
-by using the **sf** package in **R**.
+with the **sf** package in **R**.
 
 ## Required **R** packages
 
@@ -30,9 +30,9 @@ library(dplyr)
 
 ## Reading the data
 
-The first step consists of reading the database provided (in this example the
-`json` file) and extracting one international organization. In this example we
-will plot the [Commonwealth of Nations](https://en.wikipedia.org/wiki/Commonwealth_of_Nations).
+The first step is to read the provided database (in this example, the `json`
+file) and extract one international organization. In this example, we will plot
+the [Commonwealth of Nations](https://en.wikipedia.org/wiki/Commonwealth_of_Nations).
 
 ```r
 df <- fromJSON("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json")
@@ -104,11 +104,11 @@ df_org %>%
 | BRB        | Barbados          | member |
 | BLZ        | Belize            | member |
 
-## Replacing the data on a map.
+## Replacing the data on a map
 
 In this example the **rnaturalearth** package is used for retrieving an `sf`
-object. The code below replaces the `data.frame` part of the `sf` object
-and replaces the `data.frame` with the dedicated database.
+object. The code below replaces the `data.frame` part of the `sf` object with
+the dedicated database.
 
 ```r
 testmap <- ne_countries(50,
@@ -118,7 +118,7 @@ testmap <- ne_countries(50,
   select(ISO_3166_3 = adm0_a3) %>%
   full_join(df_org)
 
-# We add also tiny countries
+# We also add tiny countries
 tiny <- ne_countries(50,
   "tiny_countries",
   returnclass = "sf"
@@ -139,7 +139,9 @@ tiny$C <- coalesce(tiny$C, tiny$C_sov)
 
 ## Plotting map: Wikipedia style
 
-Now we would try to plot a map resembling the one presented in the [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the Commonwealth.
+Now we will try to plot a map resembling the one presented in the
+[Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the
+Commonwealth.
 
 ![Wiki](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
 
@@ -189,7 +191,7 @@ plot(
   add = T
 )
 
-# By last, add tiny countries
+# Finally, add tiny countries
 # All
 plot(
   st_geometry(tiny_rob),

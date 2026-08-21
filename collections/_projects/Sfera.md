@@ -1,7 +1,7 @@
 ---
 title: Sfera
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
-excerpt: Sfera for Pebble Time Round is a highly customizable watchface that gets the most out of the smartwatch capabilities. Set your preferences and enjoy this beautifully designed watchface.
+excerpt: Sfera for Pebble Time Round is a highly customizable watch face that gets the most out of the smartwatch capabilities. Set your preferences and enjoy this beautifully designed watch face.
 tags:
   - discontinued
   - project
@@ -21,7 +21,9 @@ project_links:
 **Project discontinued** due to the shutdown of Pebble.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
-**Sfera** for Pebble Time Round is a highly customizable watchface that gets the most out of the smartwatch capabilities. Set your preferences and enjoy this beautifully designed watchface.
+**Sfera** for Pebble Time Round is a highly customizable watch face that gets
+the most out of the smartwatch capabilities. Set your preferences and enjoy this
+beautifully designed watch face.
 
 ![Banner](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
 
@@ -32,11 +34,11 @@ project_links:
 ## Features
 
 - Clock mode:
-  - Analog: Classic analog watchface
+  - Analog: Classic analog watch face
   - Digital: Centered hour and minute display based on analog movement
-  - Dual: Analog and Digital all in one
-  - Mix: Digital Hour and Analog Minute
-- Autodetection of 12h/24h based on your watch settings
+  - Dual: Analog and digital, all in one
+  - Mix: Digital hour and analog minute
+- Autodetection of 12h/24h mode based on your watch settings
 
 ## Take your pick
 
@@ -45,7 +47,7 @@ project_links:
 - Battery level displayed beautifully as an arc near the bezel. Choose your color and, below 20%, it turns red!
 - Weather: Current conditions in °C or °F.
 - Choose your weather provider:
-  - [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API Key required (at this moment)_
+  - [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API key required at this moment_
   - [Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)
   - [OpenWeatherMap](https://openweathermap.org/)
 - Implementation of [pmkey.xyz](https://www.pmkey.xyz)
@@ -68,7 +70,7 @@ Automatic weekday translation is supported for:
 - [x] 12/24h mode
 - [x] Night theme
 - [x] Several weather providers available
-- [x] [pmkey.xyz](https://www.pmkey.xyz) implemented for easy managing your API keys
+- [x] [pmkey.xyz](https://www.pmkey.xyz) implemented for easy API key management
 
 ## Screenshots
 
@@ -76,9 +78,10 @@ Automatic weekday translation is supported for:
 
 ## Attributions
 
-### Fonts:
+### Fonts
 
-- [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to regular alphabet, instead of Unicode values.
+- [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers,
+  modified and fitted to the regular alphabet instead of Unicode values.
 - Custom font for icons created via **Fontastic** downloaded from [fontsgeek.com](http://fontsgeek.com)
 
 ### Weather providers
@@ -97,7 +100,9 @@ Automatic weekday translation is supported for:
 
 ### Others
 
-[Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique PIN and add API Keys for your favorite online services. Please check [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
+[Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique
+PIN and add API keys for your favorite online services. Please check
+[www.pmkey.xyz](https://www.pmkey.xyz) for more info.
 
 ## License
 

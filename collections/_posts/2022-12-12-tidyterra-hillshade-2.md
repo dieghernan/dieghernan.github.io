@@ -20,8 +20,8 @@ header_img: ./assets/img/blog/20221212_finalplot-1.webp
 ---
 
 _This is the second post of the series "Hillshade, colors and
-marginal plots with **tidyterra**". In this post I would explore an approach for
-annotating marginal plots to an **ggplot2** map of a SpatRaster, including
+marginal plots with **tidyterra**". In this post, I explore an approach for
+annotating marginal plots on a **ggplot2** map of a SpatRaster, including
 information about the values by longitude and latitude. See the first post of the
 series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/)._
 
@@ -50,13 +50,13 @@ Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
 The rain in Spain stays mainly in the north, most notably in Galicia. And I can
 prove it!
 
-On this post I would overlay a SpatRaster showing average precipitation data
+In this post, I overlay a SpatRaster showing average precipitation data
 with an extra set of plots on the margin to identify where the rain in Spain
 stays (mainly).
 
 ## Libraries
 
-On this post we would use the following libraries:
+In this post, we will use the following libraries:
 
 ```r
 ## Libraries
@@ -80,8 +80,7 @@ library(colorspace)
 ## The plain in Spain
 
 Well, the plain (or as we name it _La Meseta Central_) covers a large area of
-inland Spain, with an average altitude of 650 meters above sea level
-level.
+inland Spain, with an average altitude of 650 meters above sea level.
 
 I didn't find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
@@ -574,7 +573,7 @@ ggplot() +
 
 ### Putting all the pieces together
 
-Finally, we would use `cowplot::axis_canvas()` to create the marginal plots as
+Finally, we use `cowplot::axis_canvas()` to create the marginal plots as
 we want:
 
 ```r

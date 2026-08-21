@@ -17,7 +17,7 @@ output:
 ---
 
 <blockquote class="blockquote">
-  <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
+  <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
   <footer class="blockquote-footer text-right">Jiang (2013)</footer>
 </blockquote>
 
@@ -216,7 +216,7 @@ brks == ht_sample_par$brks
 ## [1] TRUE TRUE TRUE TRUE TRUE TRUE
 ```
 
-As stated in Jiang (2013), the number of breaks is naturally determined;
+As stated in Jiang (2013), the number of breaks is naturally determined,
 however, the `thr` parameter can help adjust the final number. A lower value
 of `thr` provides fewer breaks, while a larger `thr` increases the number if
 the underlying distribution follows the _"far more small things than large
@@ -266,14 +266,22 @@ The method always returns at least one break, corresponding to `mean(var)`.
 
 ## Case study
 
-Jiang (2013) states that _\"the new classification scheme is more natural than the natural breaks in finding the groupings or hierarchy for data with a heavy-tailed distribution.\"_ (p. 482), referring to Jenks' natural breaks method. In this case study we would compare `headtails` vs. `fisher`, that is the alias for the Fisher-Jenks algorithm and it is always preferred to the `jenks` style (see `?classIntervals`). For this example we will use the `afcon` dataset from `spData` package, plus some additional spatial information in order to create the data visualization.
+Jiang (2013) states that _\"the new classification scheme is more natural than
+the natural breaks in finding the groupings or hierarchy for data with a
+heavy-tailed distribution.\"_ (p. 482), referring to Jenks' natural breaks
+method. In this case study, we compare `headtails` vs. `fisher`, which is the
+alias for the Fisher-Jenks algorithm and is always preferred to the `jenks`
+style (see `?classIntervals`). For this example, we will use the `afcon`
+dataset from the **spData** package, plus some additional spatial information to
+create the data visualization.
 
 ```r
 library(spData)
 data(afcon, package = "spData")
 ```
 
-Let's have a look to the Top 10 values and the distribution of the variable `totcon` (index of total conflict 1966-78):
+Let's have a look at the top 10 values and the distribution of the variable
+`totcon` (index of total conflict 1966-78):
 
 ```r
 # Top10
@@ -300,7 +308,10 @@ par(opar)
 
 The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the _"far more small things than large things"_ principle.
 
-As a testing proof, on top of `headtails` and `fisher` we would use also `quantile` to have a broader view on the different breaking styles. As `quantile` is a position-based metric, it doesn't account for the magnitude of F(x) (hierarchy), so the breaks are solely defined by the position of x on the distribution.
+As a test, on top of `headtails` and `fisher`, we also use `quantile` to get a
+broader view of the different breaking styles. As `quantile` is a position-based
+metric, it doesn't account for the magnitude of F(x) (hierarchy), so the breaks
+are solely defined by the position of x in the distribution.
 
 Applying the three aforementioned methods to break the data:
 

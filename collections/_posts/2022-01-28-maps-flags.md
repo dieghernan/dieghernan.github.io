@@ -1,7 +1,7 @@
 ---
-title: "Beautiful Maps with R (IV): Fun with flags revisited"
+title: "Beautiful maps with R (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
-excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (Hooray!). This package allows to geotag images, using a spatial object (from sf or terra) as a geographic reference.
+excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This package geotags images, using a spatial object (from sf or terra) as a geographic reference.
 tags:
   - r_bloggers
   - rstats
@@ -23,15 +23,15 @@ output:
 
 On 27 Jan. 2022 my package **rasterpic** was accepted on
 [CRAN](https://cran.r-project.org/package=rasterpic) (Hooray!). This package
-allows to geotag images, using a spatial object (from **sf** or **terra**) as a
+geotags images, using a spatial object (from **sf** or **terra**) as a
 geographic reference.
 
-I tweeted about that, and it seems to have a good feedback from the
+I tweeted about that, and it seems to have received good feedback from the
 [#rspatial](https://twitter.com/hashtag/rspatial) community:
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {rasterpic} 📦 is now on CRAN, and we can convert our pngs to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-I received also an interesting reply to this from **Hefin Ioan Rhys**
+I also received an interesting reply to this from **Hefin Ioan Rhys**
 [@HRJ21](https://twitter.com/HRJ21):
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ooh I think a map with countries filled with their own flag would be poppin&#39;.</p>&mdash; Hefin Ioan Rhys (@HRJ21) <a href="https://twitter.com/HRJ21/status/1486976368936116225?ref_src=twsrc%5Etfw">January 28, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -41,16 +41,15 @@ post](https://dieghernan.github.io/202002_cartography1/#png-layer) that I wrote
 when I added some new functions to the **cartography** package, now replaced by
 the [**mapsf**](https://cran.r-project.org/package=mapsf) package.
 
-With rasterpic we have now an alternative tool for creating maps using images,
-and this quick post would show you how to do it.
+With **rasterpic**, we now have an alternative tool for creating maps using
+images, and this quick post shows you how to do it.
 
-I would replicate the Africa map presented on my previous plot, but this time I
-would use newer packages, as
-[**giscoR**](https://cran.r-project.org/package=giscoR) package, and the
-development version of
-[**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92) (not released
-yet), that adds support to `SpatRaster` object on **ggplot2**. The flags would
-be extracted from the GitHub repository
+I will replicate the Africa map presented in my previous plot, but this time I
+will use newer packages, such as
+[**giscoR**](https://cran.r-project.org/package=giscoR), and the development
+version of [**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92)
+(not released yet), which adds support for `SpatRaster` objects in **ggplot2**.
+The flags will be extracted from the GitHub repository
 <https://github.com/hampusborgos/country-flags>.
 
 ```r
@@ -89,7 +88,7 @@ Now, let's add the flags with a loop:
 
 ```r
 
-# We paste the ISO2 code to each african country
+# We paste the ISO2 code to each African country
 africa$iso2 <- countrycode(africa$ISO3_CODE, "iso3c", "iso2c")
 
 # Get flags from repo - low quality to speed up the code

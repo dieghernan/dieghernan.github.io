@@ -60,9 +60,9 @@ Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-
 by [Jen
 Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
 
-Since then, this kind of plots have become very popular, being known as **ridge
-plots** or **joyplots**, in honor of Joy Division. On this post, I would produce
-"joyplots" with **R** for specific regions of the world using the elevation data for
+Since then, these kinds of plots have become very popular, known as **ridge
+plots** or **joyplots**, in honor of Joy Division. In this post, I produce
+"joyplots" with **R** for specific regions of the world using elevation data for
 creating the ridges.
 
 ## Creating joyplot maps with **R**
@@ -71,7 +71,7 @@ This topic has already been covered by other authors, as [Daniel
 Redondo](https://danielredondo.com/blog/2020-01-25-joy_division/) (Spanish) and
 [Travis M.
 White](https://cartographicperspectives.org/index.php/journal/article/view/1536/1726).
-However, they both use QGIS, while on this post I would work completely on
+However, they both use QGIS, while in this post I work completely in
 **R**.
 
 Some initial considerations we may need to bear in mind:
@@ -110,7 +110,7 @@ library(ggridges)
 The first step consists of selecting our region of interest (`sf` object) and
 extracting the elevation data. We can achieve that with **giscoR** and
 **elevatr**.
-In this post I would create a joyplot of
+In this post, I create a joyplot of
 [Andalusia](https://en.wikipedia.org/wiki/Andalusia). Note that, given we are
 creating just a visualization, the resolution of the sf object is not very
 relevant.
@@ -174,11 +174,11 @@ raster:
 
 - We need to ensure that all the valid values are equal or greater than zero.
 
-- We would replace the `NAs` produced when masking the raster to zero. We
-  would use this later to decide whether to remove or not some parts of the
+- We will replace the `NAs` produced when masking the raster to zero. We
+  will use this later to decide whether to remove some parts of the
   plot.
 
-After that, we would create a data frame with the information needed for
+After that, we create a data frame with the information needed for
 creating the joyplot.
 
 ```r
@@ -206,7 +206,7 @@ as_tibble(dem_df)
 ```
 
 Now is a good moment to adjust the units of the coordinates and the elevation if
-needed. In this case both are in meters, but I would show you how to perform
+needed. In this case both are in meters, but I will show you how to perform
 those adjustments with the **units** package:
 
 ```r

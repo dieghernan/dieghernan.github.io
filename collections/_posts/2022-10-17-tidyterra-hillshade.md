@@ -2,7 +2,7 @@
 title: "Hillshade, colors and marginal plots with tidyterra (I)"
 subtitle: How to overlay SpatRasters
 excerpt: Using shadow effects on relief mappings is a very common technique,
-  that allows to produce informative yet beautiful maps.
+  which produces informative yet beautiful maps.
 tags:
   - r_bloggers
   - rstats
@@ -21,7 +21,7 @@ header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
 ---
 
 _This is the first post of a series of two, showing how to overlay a SpatRaster
-on top of a Hillshade background. Next post would show how to add marginal plots
+on top of a hillshade background. The next post shows how to add marginal plots
 including information about the values of the raster by longitude and latitude. See
 the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/)._
 
@@ -40,14 +40,14 @@ maps.
 
 In fact, Dominic Royé recently wrote a very detailed
 [post](https://dominicroye.github.io/en/2022/hillshade-effects/) on creating
-shadow effects on map reliefs. On this first post of the series I would
-replicate that technique with a slight variation (e.g. not making use of
-`ggnewscale`) and I would discuss a bit on the potential choice of a color
+shadow effects on map reliefs. In this first post of the series, I replicate
+that technique with a slight variation (e.g. not making use of
+`ggnewscale`) and discuss the potential choice of a color
 palette for this kind of maps.
 
 ## Libraries
 
-I would use the following libraries:
+I will use the following libraries:
 
 ```r
 
@@ -107,7 +107,7 @@ r
 #> max value   : 2481
 ```
 
-We can now have a quick look to the plot with `tidyterra::autoplot()`:
+We can now have a quick look at the plot with `tidyterra::autoplot()`:
 
 ```r
 # Quick look

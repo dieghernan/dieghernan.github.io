@@ -1,6 +1,6 @@
 ---
 title: Cast a line to subsegments in R
-subtitle: User-defined function using sf package
+subtitle: User-defined function using the sf package
 tags:
   - r_bloggers
   - rstats
@@ -15,8 +15,8 @@ output:
     preserve_yaml: true
 ---
 
-This post introduces a user-defined function for casting **sf** objects of
-`class` `LINESTRING` or `POLYGON` into substrings.
+This post introduces a user-defined function for casting **sf** objects of class
+`LINESTRING` or `POLYGON` into substrings.
 
 ## Required **R** packages
 
@@ -46,13 +46,15 @@ plot(st_geometry(italy_pt), col = c("red", "yellow", "blue"), main = "POINT")
 
 ![plot of chunk 20190505_italycast](https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp)
 
-What I missed when using `st_cast` is the possibility to "break" the `LINESTRING` objects into sub-segments:
+What I missed when using `st_cast` was the possibility of breaking
+`LINESTRING` objects into subsegments:
 
 ![plot of chunk 20190505_italycastsub](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
 
 ## An approach
 
-So one possible solution could be to create `LINESTRING` objects for each consecutive pair of `POINT` objects across the original geometry. Let's check it:
+One possible solution is to create `LINESTRING` objects for each consecutive
+pair of `POINT` objects across the original geometry. Let's check it:
 
 ```r
 par(mfrow = c(1, 2), mar = c(1, 1, 1, 1))
@@ -82,7 +84,8 @@ plot(st_geometry(geom), col = c("red", "yellow", "blue"), main = "AFTER FUNCTION
 
 Finally, I wrapped the solution into a function and extended it a little bit:
 
-- When the input is not a `LINESTRING` or a `POLYGON` returns an error and stops.
+- When the input is not a `LINESTRING` or a `POLYGON`, it returns an error and
+  stops.
 
 - The function accepts **sf** objects with several rows or `sfc` objects with
   several geometries, and returns the same class as the input. In the case of
@@ -98,7 +101,7 @@ stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
   ggg <- st_geometry(x)
 
   if (!unique(st_geometry_type(ggg)) %in% c("POLYGON", "LINESTRING")) {
-    stop("Input should be  LINESTRING or POLYGON")
+    stop("Input should be LINESTRING or POLYGON")
   }
   for (k in 1:length(st_geometry(ggg))) {
     sub <- ggg[k]
@@ -133,7 +136,8 @@ stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
 }
 ```
 
-The function could be improved in terms of performance. Given that it works at a coordinate level, for high-resolution objects it has some degree of delay
+The function could be improved in terms of performance. Given that it works at
+the coordinate level, high-resolution objects introduce some delay.
 
 ```r
 test100 <- ne_countries(

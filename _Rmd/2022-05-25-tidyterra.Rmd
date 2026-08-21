@@ -4,21 +4,22 @@ subtitle: Easily work and ggplot SpatRasters
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
 tags:
-- r_bloggers
-- rstats
-- rspatial
-- maps
-- sf
-- ggplot2
-- tidyterra
-- terra
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - tidyterra
+  - terra
+  - maptiles
+  - r_package
 output:
   html_document:
     df_print: paged
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20220525_easteregg-2.png
+header_img: ./assets/img/blog/20220525_easteregg-2.webp
 ---
 
 ```{r setup, include=FALSE}
@@ -48,11 +49,11 @@ This represents the topographic information of one of the volcanoes of Auckland
 Eden](https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden). But **do you know
 that this map is flipped?**
 
-On this post I introduce the [tidyterra
+In this post, I introduce the [tidyterra
 package](https://github.com/dieghernan/tidyterra), recently added to
-[CRAN](https://CRAN.R-project.org/package=tidyterra) and I would show you how to
-geotag the `volcano` dataset. We would produce also ggplot2 maps using the
-functions of `tidyterra`.
+[CRAN](https://CRAN.R-project.org/package=tidyterra), and I show you how to
+geotag the `volcano` dataset. We will also produce **ggplot2** maps using the
+functions of **tidyterra**.
 
 ```{r}
 # Libraries
@@ -66,8 +67,8 @@ library(sf)
 ## Wait, `volcano` is flipped?
 
 Let's check it out. Thanks to the package `maptiles` we can have a glimpse of
-the location of Maungawhau using map tiles (as Google Maps uses). We would use
-`tidyterra` for displaying the map tile:
+the location of Maungawhau using map tiles (as Google Maps uses). We will use
+**tidyterra** to display the map tile:
 
 ```{r 20220525_tile}
 
@@ -177,8 +178,8 @@ ggtile +
 
 ## An Easter egg
 
-The `volcano` dataset may not be completely up to date. As a compliment,
-`tidyterra` includes a `.tif` file with the same dimensions that our `volcano2`
+The `volcano` dataset may not be completely up to date. As a complement,
+**tidyterra** includes a `.tif` file with the same dimensions as our `volcano2`
 raster, but with the topographic values extracted from [Auckland LiDAR 1m DEM
 (2013)](https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/) and
 resampled to a resolution of 5x5 meters, for package size optimization. See here

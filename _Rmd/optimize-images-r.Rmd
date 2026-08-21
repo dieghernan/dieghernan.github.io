@@ -1,10 +1,11 @@
 ---
 title: "Optimize your images with R and reSmush.it"
 subtitle: "Introducing the resmush package"
+excerpt: Compress the size of your images with R, resmush and reSmush.it
 tags:
-- r_bloggers
-- r_package
-- resmush
+  - r_bloggers
+  - r_package
+  - resmush
 output:
   md_document:
     variant: gfm
@@ -46,8 +47,8 @@ images using [reSmush.it](https://resmush.it/).
 ## What is reSmush.it?
 
 reSmush.it is a **free online API** that provides image optimization, and it has
-been implemented on Wordpress, Drupal or Magento. Some of the features of
-reSmush.it are:
+been implemented in WordPress, Drupal and Magento. Some features of reSmush.it
+are:
 
 -   Free optimization services, no API key required.
 -   Optimize local and online images.
@@ -68,24 +69,24 @@ One of the main reasons I developed **resmush** is because I used to ship
 vignettes](https://ropensci.org/blog/2019/12/08/precompute-vignettes/) with my
 packages (see
 [**tidyterra**](https://cran.r-project.org/web/packages/tidyterra/vignettes/welcome.html)
-as an example). I found that the plots created on CRAN with the standard
+as an example). I found that the plots created by CRAN with the standard
 configuration (i.e., not precomputed vignettes but built on CRAN itself) are not
 very satisfying, and in some of the packages I developed (especially those
-related to mapping), they don't do justice to the actual results when a use**R**
+related to mapping), they don't do justice to the actual results when a user
 runs them.
 
-This approach has the drawback that it produces images of higher quality at a
+This approach has the drawback that it produces images of higher quality at the
 expense of size. So, to avoid reaching [CRAN's 5Mb max size
 policy](https://cran.r-project.org/web/packages/policies.html), I developed
 **resmush**, which enables me to reduce the size of the images without a
-significant loss in quality
+significant loss in quality.
 
 Another use case for **resmush** is optimizing images in the context of web page
-development and SEO optimization. For example, I optimized all the images on
+development and SEO optimization. For example, I optimized all the images in
 this blog using `resmush_dir()`, which is a shorthand for optimizing all files
 in a specific folder.
 
-There are other alternatives that I would discuss [at the end of this
+There are other alternatives that I discuss [at the end of this
 post](#altern), but in one line, reSmush.it API performs fast with minimal
 configuration for a wide range of formats without an API key.
 
@@ -93,8 +94,8 @@ configuration for a wide range of formats without an API key.
 
 ### With local files
 
-Let's present an example of how a local file can be optimized. First we create a
-large plot with **ggplot2**
+Let’s present an example of how a local file can be optimized. First, we create
+a large plot with **ggplot2**.
 
 ```{r local-ggplot2, message=FALSE, fig.cap="Original file"}
 library(tidyterra)
@@ -125,12 +126,12 @@ png::readPNG("cyl_resmush.png") %>%
   grid::grid.raster()
 ```
 
-By default `resmush_file()/resmush_dir()` do not overwrite the original file,
-altough this may be modified with the parameter `overwrite = TRUE` Now the
+By default, `resmush_file()/resmush_dir()` do not overwrite the original file,
+although this may be modified with the parameter `overwrite = TRUE`. Now the
 resmushed file ("cyl_resmush.png") has a size of
 `r pretty_size("cyl_resmush.png")`.
 
-Let's compare them size-by-side:
+Let’s compare the results side-by-side:
 
 ::: figure
 ![Original online figure](cyl.png){alt="Original online figure"} ![Optimized
@@ -144,7 +145,7 @@ Original picture (top) 1.7 Mb and optimized picture (bottom) 762.2 Kb
 </p>
 :::
 
-We can chech the reduction of size without reducing the dimensions of the image.
+We can check the reduction in size without reducing the dimensions of the image.
 
 ```{r summaryfiles}
 size_src <- file.size("cyl.png") %>%
@@ -160,7 +161,7 @@ dim_dest <- dim(png::readPNG("cyl_resmush.png"))[1:2] %>% paste0(collapse = "x")
 data.frame(
   source = c("original file", "compressed file"),
   size = c(size_src, size_dest),
-  dimensions = c(dim_src,dim_dest)
+  dimensions = c(dim_src, dim_dest)
 ) %>%
   knitr::kable()
 
@@ -170,7 +171,7 @@ data.frame(
 
 We can also optimize online files with `resmush_url()` and download them on
 disk. In this example I present a feature of all the functions of **resmush**,
-that is that they return an invisible data frame with a summary of the process.
+which is that they return an invisible data frame with a summary of the process.
 
 ```{r online, message=TRUE}
 url <- "https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg"
@@ -211,7 +212,7 @@ position at Posit PBC (formerly RStudio)
 one of the key contributors (if not the most) to reproducible research space
 with <strong>R</strong> through his libraries.</p>
 
-<p>If you have ever used and enjoyed his packages consider sponsor him.</p>
+<p>If you have ever used and enjoyed his packages, consider sponsoring him.</p>
 
 ::: {.text-center .my-3}
 ```         
@@ -223,12 +224,12 @@ with <strong>R</strong> through his libraries.</p>
 :::
 
 -   One of the many packages developed by Yihui Xie is
-    [**xfun**](https://cran.r-project.org/package=xfun) , that includes
-    following functions that optimize image files:
+    [**xfun**](https://cran.r-project.org/package=xfun), which includes
+    the following functions that optimize image files:
 
     -   `xfun::tinify()` is similar to `resmush_file()` but uses
         [TinyPNG](https://tinypng.com/). API key required.
-    -   `xfun::optipng()` compress local files with OptiPNG (that needs to be
+    -   `xfun::optipng()` compresses local files with OptiPNG (that needs to be
         installed locally).
 
 -   [**tinieR**](https://jmablog.github.io/tinieR/) package by
@@ -260,7 +261,7 @@ with <strong>R</strong> through his libraries.</p>
 
 : Table 2: **R** packages: Formats admitted.
 
-Additionally, if you host your projects in GitHub, you can try
+Additionally, if you host your projects on GitHub, you can try
 [Imgbot](https://imgbot.net/) that is free for open-source projects. Imgbot
 provides automatic optimization for files in your repos and the optimized files
-would be included in specific PR before merging in your work.
+are included in a specific PR before merging into your work.

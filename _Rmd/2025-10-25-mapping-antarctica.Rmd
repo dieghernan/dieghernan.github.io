@@ -2,20 +2,20 @@
 title: "Mapping Antarctica"
 subtitle: "Cool maps from the South Pole"
 tags:
-- r_bloggers
-- beautiful_maps
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- giscoR
+  - r_bloggers
+  - beautiful_maps
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - giscoR
 output:
   html_document:
   md_document:
     variant: gfm
     preserve_yaml: true
-header_img: xxx.png
+header_img: https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp
 ---
 
 ```{r setup, include=FALSE}
@@ -229,7 +229,7 @@ ggplot(grats) +
 ```
 
 We merge meridians so the area around the South Pole is filled. `st_graticule()`
-can leave a tiny hole at the pole; we fix this by joining complementary
+can leave a tiny hole at the pole, and we fix this by joining complementary
 meridians.
 
 ```{r 202510_fixgrats}

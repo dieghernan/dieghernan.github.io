@@ -1,5 +1,5 @@
 ---
-title: Country Codes & Organizations
+title: Country codes & organizations
 subtitle: A database with geocodes
 tags:
   - project
@@ -20,15 +20,20 @@ project_links:
 show_toc: true
 ---
 
-Complete database of countries and territories, their different country codes under common standards (ISO-3166, GEC _(Formerly FIPS_), M49 (_UN_), STANAG (_NATO_), NUTS (_EU_), etc.) and their membership in different international organizations.
+Complete database of countries and territories, their different country codes
+under common standards (ISO-3166, GEC _(formerly FIPS)_, M49 (_UN_), STANAG
+(_NATO_), NUTS (_EU_), etc.) and their membership in different international
+organizations.
 
 <sup>_Note that blanks are presented as_ `""` _instead of_ `NA` _since ISO-3166-ALPHA 2 for Namibia is_ **NA**.</sup>
 
-**[vignette: Using Country Codes](https://dieghernan.github.io/201904_Using-CountryCodes/)**
+**[Vignette: Using country codes](https://dieghernan.github.io/201904_Using-CountryCodes/)**
 
-## A. Country Codes `.csv`
+## A. Country codes `.csv`
 
-Main `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodes.csv) containing:
+Main `.csv` file
+[(link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodes.csv)
+containing:
 
 - Country and regional codes
 - Currency, dependency status and sovereignty information
@@ -60,23 +65,28 @@ Main `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-Intern
 - Names in English and Spanish: countries, continents and regions, and capitals
 - Population, area (km<sup>2</sup>) and developed region
 
-## B. International Organizations `.csv`
+## B. International organizations `.csv`
 
-A single `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/CountrycodesOrgs.csv) describing the membership status of each country across 186 international organizations.
+A single `.csv` file
+[(link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/CountrycodesOrgs.csv)
+describing the membership status of each country across 186 international
+organizations.
 
 | Field        | Description                      |
 | ------------ | -------------------------------- |
-| `ISO_3166_2` | Matches with Countrycodes `.csv` |
-| `ISO_3166_3` | Matches with Countrycodes `.csv` |
-| `NAME.EN`    | Matches with Countrycodes `.csv` |
+| `ISO_3166_2` | Matches Countrycodes `.csv` |
+| `ISO_3166_3` | Matches Countrycodes `.csv` |
+| `NAME.EN`    | Matches Countrycodes `.csv` |
 | `source`     | Main data source                 |
 | `org_name`   | Name of the organization         |
 | `org_id`     | Abbreviation or internal ID      |
 | `org_member` | Membership status                |
 
-## C. Full json file `.json`
+## C. Full JSON file `.json`
 
-This `.json` file [(Link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodesfull.json) combines the previous files:
+This `.json` file
+[(link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodesfull.json)
+combines the previous files:
 
 ```json
 [

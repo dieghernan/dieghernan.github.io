@@ -32,14 +32,14 @@ Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 ![Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
 (1967)](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
-In this post I would create a similar map for Iberia, and additionally I would
-show how to create a variation using a hexagonal grid instead of a rectangular
-one. This is the first issue of the series
+In this post, I create a similar map for Iberia and also show how to create a
+variation using a hexagonal grid instead of a rectangular one. This is the first
+issue of the series
 [Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
 
-I would use the following libraries for loading, manipulating and plotting
+I will use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
 ```r
@@ -60,13 +60,13 @@ library(exactextractr)
 
 ## Get the data
 
-The first step is always to get the data we need. My final map would use as a
-base a circular layout with Iberia in the middle (that would be our observation
-window), so we can get the corresponding shapes and create a buffer around it.
+The first step is always to get the data we need. My final map uses a circular
+layout with Iberia in the middle (that is our observation window), so we can get
+the corresponding shapes and create a buffer around it.
 
-After that, we would extract the population spatial distribution from [GHSL -
+After that, we extract the population spatial distribution from [GHSL -
 Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
-would use the global file with a resolution of 1 km on Mollweide projection
+use the global file with a resolution of 1 km on Mollweide projection
 (ESRI:54009).
 
 ```r
@@ -105,10 +105,10 @@ base_gg
 
 <img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_basemap"/>
 
-That would be our base map. Now we download programmatically the GHSL data and
-we would check that everything is correct. At this point, it is interesting to
+That is our base map. Now we download the GHSL data programmatically and check
+that everything is correct. At this point, it is interesting to
 use the `win` argument when reading the raster with `terra::rast()`, as this
-would allow us to load only the desired area with the subsequent improvement in
+allows us to load only the desired area with the subsequent improvement in
 terms of performance.
 
 ```r
@@ -116,7 +116,7 @@ terms of performance.
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
 
-# This is where I would store the file, you would need to modify the folder
+# This is where I store the file, you need to modify the folder
 fname <- file.path("~/R/mapslib/GHS", basename(url))
 if (!file.exists(fname)) {
   download.file(url, fname)
@@ -158,12 +158,12 @@ base_gg +
 The GHSL information contains the estimated population on each grid. However the
 file has a high resolution (more than 2 millions of cells) so for plotting
 purposes we are going to reduce (i.e. aggregate) the number of cells so we can
-have a better dot visualization. Once that we aggregate, we would compute the
+have a better dot visualization. Once we aggregate, we compute the
 area of each new aggregated cell and compute the corresponding population
 density.
 
-Instead of using the numeric range of densities, we would use categories for the
-final map, so we would classify the density into different groups:
+Instead of using the numeric range of densities, we use categories for the final
+map, so we classify the density into different groups:
 
 ```r
 # Reduce resolution for visualization
@@ -172,7 +172,7 @@ nrow(pop_init)
 #> [1] 1511
 factor <- round(nrow(pop_init) / 100)
 
-# Each new cell would contain the sum of population of the aggregated cells
+# Each new cell contains the sum of population of the aggregated cells
 pop_agg <- terra::aggregate(pop_init,
   fact = factor, fun = "sum",
   na.rm = TRUE
@@ -205,7 +205,7 @@ pop_points <- pop_agg %>%
 
 ## Final plot
 
-And finally the map. In this case I would save it as a high resolution square
+And finally, the map. In this case, I save it as a high-resolution square
 map.
 
 ```r
@@ -265,8 +265,8 @@ ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 
 ## Alternative hexagonal grid
 
-The previous plot is based on the centroids of each cell of the raster, that is,
-by definition, a rectangular grid. I would like also to experiment with
+The previous plot is based on the centroids of each cell of the raster, which is,
+by definition, a rectangular grid. I would also like to experiment with
 hexagonal grids (i.e. a grid of hexagons) since I have the feeling that they
 look more "natural" than the rectangular ones, which present a regularity
 hardly seen in

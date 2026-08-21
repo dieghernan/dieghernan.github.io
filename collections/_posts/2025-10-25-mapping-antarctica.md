@@ -243,7 +243,7 @@ ggplot(grats) +
 <img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" width="100%" />
 
 We merge meridians so the area around the South Pole is filled. `st_graticule()`
-can leave a tiny hole at the pole; we fix this by joining complementary
+can leave a tiny hole at the pole, and we fix this by joining complementary
 meridians.
 
 ```r

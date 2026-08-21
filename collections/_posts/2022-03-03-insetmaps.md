@@ -4,7 +4,7 @@ subtitle: "A map on a map"
 excerpt: A common challenge when creating maps is how to include an inset map on
   your visualization. An inset map is a smaller map usually included on a corner
   that may provide additional context to the overall map, or may include map
-  units than won't be usually represented properly.
+  units that would not usually be represented properly.
 tags:
   - r_bloggers
   - rstats
@@ -33,11 +33,15 @@ useful for representing spatial units that may form part of a country but whose
 geographical location would result in an imperfect visualization, or for
 including small units that would otherwise not be shown on the map.
 
-I have already covered this [using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/), but this time I would show how to produce these insets using the **ggplot2** and **tmap** packages. In short: use the **cowplot** package.
+I have already covered this
+[using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/),
+but this time I show how to produce these insets using the **ggplot2** and
+**tmap** packages. In short: use the **cowplot** package.
 
 ## Test case: Canary Island as an inset
 
-On this example, I would create a map of Spain using `mapSpain` and creating an inset for the Canary Islands.
+In this example, I create a map of Spain using `mapSpain` and an inset for the
+Canary Islands.
 
 The "true" map of Spain is:
 
@@ -55,7 +59,9 @@ ggplot(regions) +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%"/>
 
-I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary Islands I would use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083))
+I use a different CRS for each part of Spain. In the case of mainland Spain, I
+use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary
+Islands I use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083)).
 
 ```r
 main <- regions %>%
@@ -79,15 +85,18 @@ ggplot(island) +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
 
-So that was easy! Just a couple of maps using `ggplot2`. Let's start mixing and matching!
+So that was easy! Just a couple of maps using `ggplot2`. Let's start mixing and
+matching!
 
 ## On `ggplot2`
 
-We have already created two quick maps on `ggplot2`. Now, to produce our map with insets we would:
+We have already created two quick maps with `ggplot2`. Now, to produce our map
+with insets we will:
 
-1.  Produce two plots: The main plot and the sub plot providing a minimal style. We would store them as `ggplot2` objects.
+1.  Produce two plots: the main plot and the subplot, providing a minimal style.
+    We will store them as `ggplot2` objects.
 
-2.  We would combine both objects with `cowplot`.
+2.  Combine both objects with `cowplot`.
 
 ```r
 # Main plot
@@ -97,7 +106,7 @@ main_gg <- ggplot(main) +
   theme(
     plot.background = element_rect(fill = "grey85", colour = NA),
     # Add a bit of margin on the bottom left
-    # We would place the inset there
+    # We will place the inset there
     plot.margin = margin(l = 80, b = 80)
   )
 
@@ -112,7 +121,10 @@ sub_gg <- ggplot(island) +
   )
 ```
 
-We have our objects in place, and now is when the magic happens! With `cowplot` we can combine both maps on a single one. You may need to play a bit with the parameters `x`, `y` `hjust` and `vjust` of the sub plot to improve the placement:
+We have our objects in place, and now is when the magic happens! With `cowplot`,
+we can combine both maps into a single one. You may need to play a bit with the
+parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve the
+placement:
 
 ```r
 library(cowplot)
@@ -164,7 +176,7 @@ flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
   theme(plot.background = element_rect(fill = "white"))
 
 
-# Non-sense plot!
+# Nonsense plot!
 ggdraw() +
   draw_plot(mass_flipper) +
   draw_plot(flipper_hist,
@@ -178,7 +190,10 @@ ggdraw() +
 
 ## On `tmap`
 
-We can follow a similar approach with **tmap**. In version 3.x.x (there is a new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)), we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap` objects to the objects that **cowplot** can handle.
+We can follow a similar approach with **tmap**. In version 3.x.x (there is a
+new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)),
+we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to
+convert the `tmap` objects to the objects that **cowplot** can handle.
 
 ```r
 library(tmap)
@@ -215,7 +230,9 @@ ggdraw() +
 
 ## Update: On `mapsf`
 
-[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of `mapsf`, shared also how to create inset maps using that package:
+[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA
+[\@rgeomatic](https://twitter.com/rgeomatic)), the developer of `mapsf`, also
+shared how to create inset maps using that package:
 
 ```r
 library(mapsf)

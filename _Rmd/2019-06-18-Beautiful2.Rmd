@@ -1,11 +1,21 @@
 ---
 title: "Beautiful Maps with R (II): Fun with flags"
 subtitle: "Put a picture on your map"
-tags: [r_bloggers,rstats,rspatial,beautiful_maps, maps, raster,flags,sf,function]
-last_modified_at: 2020-12-29
-header_img: ./assets/img/blog/20190618_imgpost-1.png
 excerpt: Want to use a flag (or any *.png file) as a background of your map? You are in the right post.
-output: 
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - beautiful_maps
+  - maps
+  - raster
+  - flags
+  - function
+  - mapSpain
+  - giscoR
+last_modified_at: 2023-01-23
+header_img: ./assets/img/blog/20190618_imgpost-1.webp
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
@@ -29,10 +39,15 @@ options(gisco_cache_dir = "~/R/mapslib/GISCO/")
 **Updated 29 december 2020**: All these pieces of work are already available on `cartography >v.2.4.0` on functions [`getPngLayer`](http://riatelab.github.io/cartography/docs/reference/getPngLayer.html). Just install it via `install.packages("cartography")`. A dedicated blog post with examples on this [link](../202002_cartography1).
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
-Want to use a flag (or any `*.png` file) as a background of your map? You are in the right post. I am aware that there are some **R** packages out [there](https://github.com/RobertMyles/flagfillr), but we focus here in the option provided by `cartography::getPngLayer()`, that basically converts your image into a raster (see also this article of [Paul Murrell](https://www.stat.auckland.ac.nz/people/pmur002), **"Raster Images in R Graphics"** [(*The R Journal, Volume 3/1, June 2011*)](https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf)). 
+Want to use a flag (or any `*.png` file) as a background for your map? You are
+in the right post. I am aware that there are some **R** packages out
+[there](https://github.com/RobertMyles/flagfillr), but we focus here on the
+option provided by `cartography::getPngLayer()`, which basically converts your
+image into a raster. See also Paul Murrell's article **"Raster Images in R
+Graphics"** [(_The R Journal, Volume 3/1, June 2011_)](https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf).
 
 
-## Required R packages
+## Required **R** packages
 
 ```{r libs, warning=FALSE, message=FALSE}
 library(dplyr)
@@ -44,9 +59,15 @@ library(giscoR)
 
 ## Choosing a good source for our shape
 
-In this post I am going to plot a map of Spain with its [autonomous communities (plus 2 autonomous cities)](https://en.wikipedia.org/wiki/Autonomous_communities_of_Spain), that is the first-level administrative division of the country. [Wikipedia](https://en.wikipedia.org/wiki/Autonomous_communities_of_Spain) shows an initial map identifying also the flag of each territory.
+In this post, I am going to plot a map of Spain with its
+[autonomous communities (plus 2 autonomous cities)](https://en.wikipedia.org/wiki/Autonomous_communities_of_Spain),
+which are the first-level administrative divisions of the country.
+[Wikipedia](https://en.wikipedia.org/wiki/Autonomous_communities_of_Spain)
+shows an initial map that also identifies the flag of each territory.
 
-For that, I will use `mapSpain`, that uses information from `giscoR`, whose source is the geodata available in [**Eurostat**](https://ec.europa.eu/eurostat). I would also use `giscoR` to get the world around Spain.
+For that, I will use `mapSpain`, which uses information from `giscoR`, whose
+source is the geodata available in [**Eurostat**](https://ec.europa.eu/eurostat).
+I will also use `giscoR` to get the world around Spain.
 
 
 ```{r 20190618_preparing,  message=FALSE, warning=FALSE,  fig.height=550/90, fig.width=750/90,dpi=90, paged.print=FALSE, results='hide'}
@@ -86,7 +107,10 @@ Now we have it! A nice map of Spain with a layout based on the [Wikipedia conven
 
 ## Loading the flag
 
-As a first example, I chose [Asturias](https://en.wikipedia.org/wiki/Asturias) to build my code. So the goal here is to create a `RasterBrick` from the desired `*.png` file, add the necessary geographical information and use the shape of Asturias to crop the flag.
+As a first example, I chose [Asturias](https://en.wikipedia.org/wiki/Asturias)
+to build my code. The goal here is to create a `RasterBrick` from the desired
+`*.png` file, add the necessary geographical information and use the shape of
+Asturias to crop the flag.
 
 ```{r 20190618_Asturias,  message=FALSE, warning=FALSE,  fig.width=1000/90,fig.height=(500/2)/90,dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
 
@@ -116,7 +140,8 @@ par(opar)
 
 
 
-<i class="fa fa-star"></i> **Pro tip:** Use high-quality `*.png`, otherwise the plot would look quite poor. Here I show an extreme example.
+<i class="fa fa-star"></i> **Pro tip:** Use high-quality `*.png` files,
+otherwise the plot will look quite poor. Here I show an extreme example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ```{r 20190618_svg,  message=FALSE, warning=FALSE, dev='png', fig.width=800/(90),fig.height=550/(90),dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
@@ -328,7 +353,8 @@ plot(st_geometry(Spain),
 )
 ```
 
-We are done now. If you have suggestion you can leave a comment. As always, if you enjoyed the post you can share it on your preferred social network.
+We are done now. If you have suggestions, you can leave a comment. As always,
+if you enjoyed the post, you can share it on your preferred social network.
 
 ```{r 20190618_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
 

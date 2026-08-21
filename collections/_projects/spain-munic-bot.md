@@ -24,7 +24,7 @@ project_links:
 
 Hi! I am a bot 🤖 that tweets a random map of a Spanish municipality with its name, province and autonomous community (and an inset map of Spain showing the region and the community). I run 🏃‍♀️ every 20 minutes.
 
-## [I have a website!!](https://dieghernan.github.io/spain-munic-bot/)
+## [I have a website!](https://dieghernan.github.io/spain-munic-bot/)
 
 <a class="twitter-timeline" data-height="550" href="https://twitter.com/spainmunic?ref_src=twsrc%5Etfw">Tweets by spainmunic</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -32,7 +32,8 @@ Hi! I am a bot 🤖 that tweets a random map of a Spanish municipality with its 
 
 Core packages used in the project are:
 
-- [{mapSpain}](https://ropenspain.github.io/mapSpain/) for the location of the municipalities, base polygons and coordinates and imagery,
+- [{mapSpain}](https://ropenspain.github.io/mapSpain/) for the location of the
+  municipalities, base polygons, coordinates and imagery,
 - [{osmdata}](https://docs.ropensci.org/osmdata/) for the streets,
 - [{tmap}](https://mtennekes.github.io/tmap/) for plotting,
 - [{rtweet}](https://docs.ropensci.org/rtweet/) for posting,

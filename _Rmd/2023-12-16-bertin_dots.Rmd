@@ -1,27 +1,27 @@
 ---
 title: "Beautiful Maps with R (V): Point densities"
 subtitle: "Bertin's dot density maps with R and GHSL"
+excerpt: Another way to represent demographics on a map.
 tags:
-- r_bloggers
-- beautiful_maps
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- s2
-- terra
-- tidyterra
-- giscoR
+  - r_bloggers
+  - beautiful_maps
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - terra
+  - tidyterra
+  - giscoR
 output:
+  html_document:
   md_document:
     variant: gfm
     preserve_yaml: yes
-  html_document:
-header_img: xxx.png
+header_img: ./assets/img/blog/202312_finalmap.webp
 mathjax: true
 bibliography: bertin.bib
-nocite: '@*'
+nocite: "@*"
 ---
 
 ```{r setup, include=FALSE}
@@ -128,7 +128,7 @@ terms of performance.
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
 
-# This is where I would store the file, you would need to modify the folder
+# This is where I store the file, you need to modify the folder
 fname <- file.path("~/R/mapslib/GHS",  basename(url))
 if(!file.exists(fname)){
   download.file(url, fname)
@@ -276,7 +276,7 @@ ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 ## Alternative hexagonal grid
 
 The previous plot is based on the centroids of each cell of the raster, that is,
-by definition, a rectangular grid. I would like also to experiment with
+by definition, a rectangular grid. I would also like to experiment with
 hexagonal grids (i.e. grid of hexagons) since I have the feeling that looks more
 "natural" than the rectangular ones, that presents a regularity hardly seen in
 the wild.
