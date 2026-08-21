@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -258,8 +258,8 @@
 		</nav>   
 	</div>
 			<p><em>This is the second post of the series “Hillshade, colors and
-marginal plots with <strong>tidyterra</strong>”. In this post I would explore an approach for
-annotating marginal plots to an <strong>ggplot2</strong> map of a SpatRaster, including
+marginal plots with <strong>tidyterra</strong>”. In this post, I explore an approach for
+annotating marginal plots on a <strong>ggplot2</strong> map of a SpatRaster, including
 information about the values by longitude and latitude. See the first post of the
 series <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">here</a>.</em></p>
 <p>If you love watching classic movies, especially from Hollywood’s Golden Age,
@@ -283,11 +283,11 @@ Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
 <strong>completely false</strong>.</p>
 <p>The rain in Spain stays mainly in the north, most notably in Galicia. And I can
 prove it!</p>
-<p>On this post I would overlay a SpatRaster showing average precipitation data
+<p>In this post, I overlay a SpatRaster showing average precipitation data
 with an extra set of plots on the margin to identify where the rain in Spain
 stays (mainly).</p>
 <h2 id="libraries">Libraries</h2>
-<p>On this post we would use the following libraries:</p>
+<p>In this post, we will use the following libraries:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Libraries</span><span class="w">
 
 </span><span class="c1"># Data manipulation</span><span class="w">
@@ -307,8 +307,7 @@ stays (mainly).</p>
 </span></code></pre></div></div>
 <h2 id="the-plain-in-spain">The plain in Spain</h2>
 <p>Well, the plain (or as we name it <em>La Meseta Central</em>) covers a large area of
-inland Spain, with an average altitude of 650 meters above sea level
-level.</p>
+inland Spain, with an average altitude of 650 meters above sea level.</p>
 <p>I didn’t find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
 (historically the <em>Meseta</em> is associated to Castile and Madrid) and elevation
@@ -755,7 +754,7 @@ like, so we can have a preview of the final result:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
 <h3 id="putting-all-the-pieces-together">Putting all the pieces together</h3>
-<p>Finally, we would use <code class="language-plaintext highlighter-rouge">cowplot::axis_canvas()</code> to create the marginal plots as
+<p>Finally, we use <code class="language-plaintext highlighter-rouge">cowplot::axis_canvas()</code> to create the marginal plots as
 we want:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Last step: We combine plots</span><span class="w">

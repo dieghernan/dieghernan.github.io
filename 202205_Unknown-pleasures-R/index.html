@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -284,16 +284,16 @@ Division’s Unknown Pleasures Album
 Cover</a>
 by <a href="https://www.scientificamerican.com/author/jen-christiansen/">Jen
 Christiansen</a>.</p>
-<p>Since then, this kind of plots have become very popular, being known as <strong>ridge
-plots</strong> or <strong>joyplots</strong>, in honor of Joy Division. On this post, I would produce
-“joyplots” with <strong>R</strong> for specific regions of the world using the elevation data for
+<p>Since then, these kinds of plots have become very popular, known as <strong>ridge
+plots</strong> or <strong>joyplots</strong>, in honor of Joy Division. In this post, I produce
+“joyplots” with <strong>R</strong> for specific regions of the world using elevation data for
 creating the ridges.</p>
 <h2 id="creating-joyplot-maps-with-r">Creating joyplot maps with <strong>R</strong></h2>
 <p>This topic has already been covered by other authors, as <a href="https://danielredondo.com/blog/2020-01-25-joy_division/">Daniel
 Redondo</a> (Spanish) and
 <a href="https://cartographicperspectives.org/index.php/journal/article/view/1536/1726">Travis M.
 White</a>.
-However, they both use QGIS, while on this post I would work completely on
+However, they both use QGIS, while in this post I work completely in
 <strong>R</strong>.</p>
 <p>Some initial considerations we may need to bear in mind:</p>
 <ul>
@@ -331,7 +331,7 @@ suit our needs.</p>
 <p>The first step consists of selecting our region of interest (<code class="language-plaintext highlighter-rouge">sf</code> object) and
 extracting the elevation data. We can achieve that with <strong>giscoR</strong> and
 <strong>elevatr</strong>.
-In this post I would create a joyplot of
+In this post, I create a joyplot of
 <a href="https://en.wikipedia.org/wiki/Andalusia">Andalusia</a>. Note that, given we are
 creating just a visualization, the resolution of the sf object is not very
 relevant.</p>
@@ -385,12 +385,12 @@ raster:</p>
    <p>We need to ensure that all the valid values are equal or greater than zero.</p>
  </li>
  <li>
-   <p>We would replace the <code class="language-plaintext highlighter-rouge">NAs</code> produced when masking the raster to zero. We
-would use this later to decide whether to remove or not some parts of the
+   <p>We will replace the <code class="language-plaintext highlighter-rouge">NAs</code> produced when masking the raster to zero. We
+will use this later to decide whether to remove some parts of the
 plot.</p>
  </li>
 </ul>
-<p>After that, we would create a data frame with the information needed for
+<p>After that, we create a data frame with the information needed for
 creating the joyplot.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">dem_agg</span><span class="p">[</span><span class="n">dem_agg</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
@@ -415,7 +415,7 @@ creating the joyplot.</p>
 </span><span class="c1">#&gt; # ... with 12,838 more rows</span><span class="w">
 </span></code></pre></div></div>
 <p>Now is a good moment to adjust the units of the coordinates and the elevation if
-needed. In this case both are in meters, but I would show you how to perform
+needed. In this case both are in meters, but I will show you how to perform
 those adjustments with the <strong>units</strong> package:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">units</span><span class="p">)</span><span class="w">

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Head/Tails breaks on the classInt package.",
-    "description": "There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?
+    "description": "There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?
   Jiang (2013)"
     }
 }
@@ -106,7 +106,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based o...">
+   <meta name="description" content="There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, bas...">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -114,7 +114,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/202004_headtails/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by..." >
+   <meta property="og:description" content="There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" >
     <!-- Twitter/X Cards -->
@@ -257,7 +257,7 @@
 				<ul class="chulapa-toc-wrapper list-group mb-5 mx-3 mx-lg-5" id="toc"><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#abstract">Abstract</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#introduction">Introduction</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#breaking-method">Breaking method</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#step-by-step-example">Step by step example</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#implementation-on-classint-package">Implementation on <code class="language-plaintext highlighter-rouge">classInt</code> package</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#case-study">Case study</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#references">References</a></li></ul>
 			</nav>
 			<blockquote class="blockquote">
- <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent); this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
+ <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
  <footer class="blockquote-footer text-right">Jiang (2013)</footer>
 </blockquote>
 <h2 id="abstract">Abstract</h2>
@@ -459,7 +459,7 @@ End Function
 </span></code></pre></div></div>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE
 </code></pre></div></div>
-<p>As stated in Jiang (2013), the number of breaks is naturally determined;
+<p>As stated in Jiang (2013), the number of breaks is naturally determined,
 however, the <code class="language-plaintext highlighter-rouge">thr</code> parameter can help adjust the final number. A lower value
 of <code class="language-plaintext highlighter-rouge">thr</code> provides fewer breaks, while a larger <code class="language-plaintext highlighter-rouge">thr</code> increases the number if
 the underlying distribution follows the <em>“far more small things than large
@@ -503,11 +503,19 @@ things”</em> principle.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp" alt="plot of chunk 20200405_examplesimp" /></p>
 <p>The method always returns at least one break, corresponding to <code class="language-plaintext highlighter-rouge">mean(var)</code>.</p>
 <h2 id="case-study">Case study</h2>
-<p>Jiang (2013) states that <em>"the new classification scheme is more natural than the natural breaks in finding the groupings or hierarchy for data with a heavy-tailed distribution."</em> (p. 482), referring to Jenks’ natural breaks method. In this case study we would compare <code class="language-plaintext highlighter-rouge">headtails</code> vs. <code class="language-plaintext highlighter-rouge">fisher</code>, that is the alias for the Fisher-Jenks algorithm and it is always preferred to the <code class="language-plaintext highlighter-rouge">jenks</code> style (see <code class="language-plaintext highlighter-rouge">?classIntervals</code>). For this example we will use the <code class="language-plaintext highlighter-rouge">afcon</code> dataset from <code class="language-plaintext highlighter-rouge">spData</code> package, plus some additional spatial information in order to create the data visualization.</p>
+<p>Jiang (2013) states that <em>"the new classification scheme is more natural than
+the natural breaks in finding the groupings or hierarchy for data with a
+heavy-tailed distribution."</em> (p. 482), referring to Jenks’ natural breaks
+method. In this case study, we compare <code class="language-plaintext highlighter-rouge">headtails</code> vs. <code class="language-plaintext highlighter-rouge">fisher</code>, which is the
+alias for the Fisher-Jenks algorithm and is always preferred to the <code class="language-plaintext highlighter-rouge">jenks</code>
+style (see <code class="language-plaintext highlighter-rouge">?classIntervals</code>). For this example, we will use the <code class="language-plaintext highlighter-rouge">afcon</code>
+dataset from the <strong>spData</strong> package, plus some additional spatial information to
+create the data visualization.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">spData</span><span class="p">)</span><span class="w">
 </span><span class="n">data</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spData"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Let’s have a look to the Top 10 values and the distribution of the variable <code class="language-plaintext highlighter-rouge">totcon</code> (index of total conflict 1966-78):</p>
+<p>Let’s have a look at the top 10 values and the distribution of the variable
+<code class="language-plaintext highlighter-rouge">totcon</code> (index of total conflict 1966-78):</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Top10</span><span class="w">
 </span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">afcon</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">)],</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
 
@@ -529,7 +537,10 @@ things”</em> principle.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="plot of chunk 20200405_summspdata" /></p>
 <p>The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the <em>“far more small things than large things”</em> principle.</p>
-<p>As a testing proof, on top of <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> we would use also <code class="language-plaintext highlighter-rouge">quantile</code> to have a broader view on the different breaking styles. As <code class="language-plaintext highlighter-rouge">quantile</code> is a position-based metric, it doesn’t account for the magnitude of F(x) (hierarchy), so the breaks are solely defined by the position of x on the distribution.</p>
+<p>As a test, on top of <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code>, we also use <code class="language-plaintext highlighter-rouge">quantile</code> to get a
+broader view of the different breaking styles. As <code class="language-plaintext highlighter-rouge">quantile</code> is a position-based
+metric, it doesn’t account for the magnitude of F(x) (hierarchy), so the breaks
+are solely defined by the position of x in the distribution.</p>
 <p>Applying the three aforementioned methods to break the data:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">brks_ht</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
 </span><span class="n">print</span><span class="p">(</span><span class="n">brks_ht</span><span class="p">)</span><span class="w">
@@ -744,10 +755,10 @@ confirmed in the histogram generated previously, where a concentration of
 	  <p class="page-link">|</p>
 	 </li>	
 	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
-	   <p class="page-link chulapa-label">Beautiful Maps...</p>
+	   <p class="page-link chulapa-label">Beautiful maps...</p>
 	 </li>
 	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
-	   <p class="page-link chulapa-label">Beautiful Maps with R (IV):...</p>
+	   <p class="page-link chulapa-label">Beautiful maps with R (IV):...</p>
 	 </li>
    <li class="page-item text-right ml-0 ">
       <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202201_maps-flags/">
@@ -815,11 +826,11 @@ confirmed in the histogram generated previously, where a concentration of
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">
-              Beautiful Maps with R (III): Patterns and hatched maps
+              Beautiful maps with R (III): Patterns and hatched maps
             </a>
          </p>
            <p class="card-text">
-              <small>A solution for b/w and academic maps.</small>
+              <small>A solution for black-and-white and academic maps</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>

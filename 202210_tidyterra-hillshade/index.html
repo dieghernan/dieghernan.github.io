@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Hillshade, colors and marginal plots with tidyterra (I)",
-    "description": "How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, that allows to produce informative yet beautiful maps."
+    "description": "How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, which produces informative yet beautiful maps."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, that allows to produce informative yet beautiful maps.">
+   <meta name="description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, which produces informative yet beautiful maps.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/202210_tidyterra-hillshade/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, that allows to produce..." >
+   <meta property="og:description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, which produces informative yet..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" >
     <!-- Twitter/X Cards -->
@@ -258,7 +258,7 @@
 		</nav>   
 	</div>
 			<p><em>This is the first post of a series of two, showing how to overlay a SpatRaster
-on top of a Hillshade background. Next post would show how to add marginal plots
+on top of a hillshade background. The next post shows how to add marginal plots
 including information about the values of the raster by longitude and latitude. See
 the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">here</a>.</em></p>
 <p>Using shadow effects on relief mappings is a very common technique, that allows
@@ -273,12 +273,12 @@ of <code class="language-plaintext highlighter-rouge">ggnewscale</code>, etc.) c
 maps.</p>
 <p>In fact, Dominic Royé recently wrote a very detailed
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/">post</a> on creating
-shadow effects on map reliefs. On this first post of the series I would
-replicate that technique with a slight variation (e.g. not making use of
-<code class="language-plaintext highlighter-rouge">ggnewscale</code>) and I would discuss a bit on the potential choice of a color
+shadow effects on map reliefs. In this first post of the series, I replicate
+that technique with a slight variation (e.g. not making use of
+<code class="language-plaintext highlighter-rouge">ggnewscale</code>) and discuss the potential choice of a color
 palette for this kind of maps.</p>
 <h2 id="libraries">Libraries</h2>
-<p>I would use the following libraries:</p>
+<p>I will use the following libraries:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1">## Libraries</span><span class="w">
 
@@ -331,7 +331,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 </span><span class="c1">#&gt; min value   :    0</span><span class="w">
 </span><span class="c1">#&gt; max value   : 2481</span><span class="w">
 </span></code></pre></div></div>
-<p>We can now have a quick look to the plot with <code class="language-plaintext highlighter-rouge">tidyterra::autoplot()</code>:</p>
+<p>We can now have a quick look at the plot with <code class="language-plaintext highlighter-rouge">tidyterra::autoplot()</code>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Quick look</span><span class="w">
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">

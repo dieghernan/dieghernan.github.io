@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Cast a line to subsegments in R",
-    "description": "User-defined function using sf package - This post introduces a user-defined function for casting sf objects ofclass LINESTRING or POLYGON into substrings."
+    "description": "User-defined function using the sf package - This post introduces a user-defined function for casting sf objects of classLINESTRING or POLYGON into substrings."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="User-defined function using sf package - This post introduces a user-defined function for casting sf objects ofclass LINESTRING or POLYGON into substrings.">
+   <meta name="description" content="User-defined function using the sf package - This post introduces a user-defined function for casting sf objects of classLINESTRING or POLYGON into substrings.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/201905_Cast-to-subsegments/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="User-defined function using sf package - This post introduces a user-defined function for casting sf objects ofclass LINESTRING or POLYGON..." >
+   <meta property="og:description" content="User-defined function using the sf package - This post introduces a user-defined function for casting sf objects of classLINESTRING or..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp" >
     <!-- Twitter/X Cards -->
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Cast a line to subsegments in R</h1><p class="lead chulapa-subtitle p-summary">User-defined function using sf package</p>
+           <h1 class="p-name">Cast a line to subsegments in R</h1><p class="lead chulapa-subtitle p-summary">User-defined function using the sf package</p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -257,8 +257,8 @@
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#the-problem" class="nav-link">The problem</a></li><li class="nav-item nav d-block"><a href="#an-approach" class="nav-link">An approach</a></li><li class="nav-item nav d-block"><a href="#the-function-stdh_cast_substring" class="nav-link">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></a></li></ul>
 		</nav>   
 	</div>
-			<p>This post introduces a user-defined function for casting <strong>sf</strong> objects of
-<code class="language-plaintext highlighter-rouge">class</code> <code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into substrings.</p>
+			<p>This post introduces a user-defined function for casting <strong>sf</strong> objects of class
+<code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into substrings.</p>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
@@ -279,10 +279,12 @@ a powerful function that transforms geometries into other types of geometries
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp" alt="plot of chunk 20190505_italycast" /></p>
-<p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> is the possibility to “break” the <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into sub-segments:</p>
+<p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> was the possibility of breaking
+<code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="plot of chunk 20190505_italycastsub" /></p>
 <h2 id="an-approach">An approach</h2>
-<p>So one possible solution could be to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects across the original geometry. Let’s check it:</p>
+<p>One possible solution is to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive
+pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects across the original geometry. Let’s check it:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
 </span><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spain"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -308,7 +310,8 @@ a powerful function that transforms geometries into other types of geometries
 <p>Finally, I wrapped the solution into a function and extended it a little bit:</p>
 <ul>
  <li>
-   <p>When the input is not a <code class="language-plaintext highlighter-rouge">LINESTRING</code> or a <code class="language-plaintext highlighter-rouge">POLYGON</code> returns an error and stops.</p>
+   <p>When the input is not a <code class="language-plaintext highlighter-rouge">LINESTRING</code> or a <code class="language-plaintext highlighter-rouge">POLYGON</code>, it returns an error and
+stops.</p>
  </li>
  <li>
    <p>The function accepts <strong>sf</strong> objects with several rows or <code class="language-plaintext highlighter-rouge">sfc</code> objects with
@@ -326,7 +329,7 @@ modified by setting the <code class="language-plaintext highlighter-rouge">to</c
   </span><span class="n">ggg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
 
   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">unique</span><span class="p">(</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">ggg</span><span class="p">))</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">stop</span><span class="p">(</span><span class="s2">"Input should be  LINESTRING or POLYGON"</span><span class="p">)</span><span class="w">
+    </span><span class="n">stop</span><span class="p">(</span><span class="s2">"Input should be LINESTRING or POLYGON"</span><span class="p">)</span><span class="w">
   </span><span class="p">}</span><span class="w">
   </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">ggg</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="n">sub</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w">
@@ -360,7 +363,8 @@ modified by setting the <code class="language-plaintext highlighter-rouge">to</c
   </span><span class="nf">return</span><span class="p">(</span><span class="n">endgeom</span><span class="p">)</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
-<p>The function could be improved in terms of performance. Given that it works at a coordinate level, for high-resolution objects it has some degree of delay</p>
+<p>The function could be improved in terms of performance. Given that it works at
+the coordinate level, high-resolution objects introduce some delay.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test100</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="w">
   </span><span class="n">continent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"south america"</span><span class="p">,</span><span class="w">
   </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="w">
@@ -436,10 +440,10 @@ this solution may work well in most cases.</p>
 	  </a>
    </li>
    <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
-     <p class="page-link chulapa-label">Using CountryCodes database...</p>
+     <p class="page-link chulapa-label">Using the CountryCodes data...</p>
    </li>
    <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
-     <p class="page-link chulapa-label">Using CountryC...</p>
+     <p class="page-link chulapa-label">Using the Coun...</p>
    </li>
 	 <li class="page-item disabled mx-auto invisible">
 	  <p class="page-link">|</p>
@@ -479,11 +483,11 @@ this solution may work well in most cases.</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">
-              Beautiful Maps with R (III): Patterns and hatched maps
+              Beautiful maps with R (III): Patterns and hatched maps
             </a>
          </p>
            <p class="card-text">
-              <small>A solution for b/w and academic maps.</small>
+              <small>A solution for black-and-white and academic maps</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
@@ -517,11 +521,11 @@ this solution may work well in most cases.</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">
-              Using CountryCodes database and sf package
+              Using the CountryCodes database and sf package
             </a>
          </p>
            <p class="card-text">
-              <small>vignette of the CountryCodes project</small>
+              <small>Vignette of the CountryCodes project</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>

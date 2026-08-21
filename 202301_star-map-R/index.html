@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -264,7 +264,7 @@ mind: <a href="https://stackoverflow.com/questions/75064069/creating-star-map-vi
 Date</a>
 !!</p>
 <p>Oh my! Can we do this with <strong>R</strong>? The answer is: Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
-Fitter</a> already worked on this two years ago,
+Fitter</a> already worked on this two years earlier,
 see his <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial
 Maps</a>. So I decided
 to put some work on this.</p>
@@ -389,8 +389,8 @@ want to know more on this I recommend <a href="https://squarewidget.com/astronom
 post</a> by
 <a href="https://squarewidget.com/">James Still</a>.</p>
 <p>So basically the input is a <code class="language-plaintext highlighter-rouge">POSIXct</code> date time and a given longitude and the
-result is an alternative longitude that we would use to adjust the projection of
-our Star Map. This would provide the rotation observed on <strong>d3-celestial
+result is an alternative longitude that we use to adjust the projection of our
+Star Map. This provides the rotation observed in the <strong>d3-celestial
 plugin</strong>.</p>
 <details class="my-4">
   <summary>Show <code>get_mst()</code></summary>
@@ -793,7 +793,7 @@ So we can use <code class="language-plaintext highlighter-rouge">ggfx::with_blur
  </li>
  <li>
    <p>We can also add a glowing effect to our stars and constellations (have a
-look to Dominic Royé’s post <a href="https://dominicroye.github.io/en/2021/firefly-cartography/">Firefly
+look at Dominic Royé’s post <a href="https://dominicroye.github.io/en/2021/firefly-cartography/">Firefly
 Cartography</a> to
 know more about this). The only drawback is that I was not able to use
 <code class="language-plaintext highlighter-rouge">ggshadow</code> with <code class="language-plaintext highlighter-rouge">LINESTRING</code> (Dominic shows how to do it with <code class="language-plaintext highlighter-rouge">POINT</code>), so
@@ -861,7 +861,7 @@ instead I converted my lines (the constellations) to coordinates and applied
 <p>Voilà! I checked several times the results with the results provided by
 d3-celestial.js on the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
 demo</a> and the underlying
-calculations on Javascript and everything seems to be up and running.</p>
+calculations in JavaScript, and everything seems to be up and running.</p>
 <h2 id="extra-chinese-constellations">Extra: Chinese constellations</h2>
 <p><a href="https://dieghernan.github.io/celestial_data/">Celestial Data</a> also provides
 data for traditional Chinese constellations, so we can create a similar map with
@@ -948,7 +948,7 @@ Richmond, Va. ISBN 9780943396613.</p>
      <p>In fact, the download is performed via the
 <a href="https://www.jsdelivr.com/">jsDelivr</a>, which distributes files hosted on
 <a href="https://www.jsdelivr.com/github">GitHub via CDN.</a> This is supposed to
-improve performance but in any case the underlying data source is the GitHub
+improve performance, but in any case the underlying data source is the GitHub
 repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
    </li>
  </ol>

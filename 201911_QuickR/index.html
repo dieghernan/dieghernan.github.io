@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -262,14 +262,19 @@ the <strong>ggplot2</strong> package (see <a href="https://www.r-spatial.org/r/2
 <strong>R</strong>, <strong>sf</strong> and <strong>ggplot2</strong></a>
 by Mel Moreno and Mathieu Basille). However, I like the old reliable <code class="language-plaintext highlighter-rouge">plot</code>
 function, so the question is: is there another way?</p>
-<p>There is. I found inspiration <a href="https://www.statmethods.net/advgraphs/layout.html">here</a> and I just applied it to a map.</p>
+<p>There is. I found inspiration
+<a href="https://www.statmethods.net/advgraphs/layout.html">here</a> and I just applied it
+to a map.</p>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="mimicking-moreno--basille">Mimicking Moreno &amp; Basille</h2>
-<p>I would present here an alternative version of <a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html">Drawing beautiful maps programmatically with R, sf and ggplot2</a>, so the bulk of the detail can be found there. I would focus only in the <code class="language-plaintext highlighter-rouge">plot()</code>side.</p>
+<p>I present here an alternative version of
+<a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html">Drawing beautiful maps programmatically with R, sf and ggplot2</a>,
+so the bulk of the detail can be found there. I focus only on the <code class="language-plaintext highlighter-rouge">plot()</code>
+side.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">world</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"medium"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w">
 </span><span class="n">USA</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">world</span><span class="p">,</span><span class="w"> </span><span class="n">admin</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"United States of America"</span><span class="p">)</span><span class="w">
 
@@ -329,12 +334,16 @@ function, so the question is: is there another way?</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.webp" alt="plot of chunk 20191108_Hawaii" /></p>
 <h2 id="insetting">Insetting</h2>
-<p>From now on, I just focus on the inset part, using the <code class="language-plaintext highlighter-rouge">fig()</code> option on <code class="language-plaintext highlighter-rouge">par()</code>. Quoting <a href="https://www.statmethods.net/advgraphs/layout.html">statmethods</a>:</p>
+<p>From now on, I focus on the inset part, using the <code class="language-plaintext highlighter-rouge">fig()</code> option on <code class="language-plaintext highlighter-rouge">par()</code>.
+Quoting <a href="https://www.statmethods.net/advgraphs/layout.html">statmethods</a>:</p>
 <blockquote>
  <p><em>(…) think of the full graph area as going from <code class="language-plaintext highlighter-rouge">(0,0)</code> in the lower left corner to <code class="language-plaintext highlighter-rouge">(1,1)</code> in the upper right corner. The format of the <code class="language-plaintext highlighter-rouge">fig=</code> parameter is a numerical vector of the form <code class="language-plaintext highlighter-rouge">c(x1, x2, y1, y2)</code>(…)
 <code class="language-plaintext highlighter-rouge">fig=</code> starts a new plot, so to add to an existing plot use <code class="language-plaintext highlighter-rouge">new=TRUE</code>.</em></p>
 </blockquote>
-<p>So being <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">y1</code> the starting points and <code class="language-plaintext highlighter-rouge">x2</code>, <code class="language-plaintext highlighter-rouge">y2</code> the final points, we just can set up those parameters and adjust the final placement of the insets. Additionally I added a box around the insets using <code class="language-plaintext highlighter-rouge">bbox()</code>. I didn’t mimic Moreno &amp; Basille here and I just worked it by myself.</p>
+<p>With <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">y1</code> as the starting points and <code class="language-plaintext highlighter-rouge">x2</code>, <code class="language-plaintext highlighter-rouge">y2</code> as the final points,
+we can set up those parameters and adjust the final placement of the insets.
+Additionally, I added a box around the insets using <code class="language-plaintext highlighter-rouge">bbox()</code>. I didn’t mimic
+Moreno &amp; Basille here and I just worked it out by myself.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
   </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">world</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -400,7 +409,10 @@ function, so the question is: is there another way?</p>
 <p>Results may vary depending on the size of the original plot (Mainland USA),
 your plotting device and the output. However, with a bit of trial and error,
 it is quite easy to adjust the final result.</p>
-<p>As an example, see one of my contributions to <strong>Wikimedia Commons</strong> that represents a map of the NUTS3 regions of the European Union. Several countries (France, Portugal, Spain) have overseas territories so I made a few insets on the right side.</p>
+<p>As an example, see one of my contributions to <strong>Wikimedia Commons</strong>, which
+represents a map of the NUTS3 regions of the European Union. Several countries
+(France, Portugal, Spain) have overseas territories, so I made a few insets on
+the right side.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /></p>
 			<div class="mt-5 pt-3 mb-3 text-center">
 				<script type='text/javascript'
@@ -418,19 +430,19 @@ it is quite easy to adjust the final result.</p>
 	  </a>
    </li>
    <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
-     <p class="page-link chulapa-label">Wikipedia Maps (I): Organ d...</p>
+     <p class="page-link chulapa-label">Wikipedia maps (I): Organ d...</p>
    </li>
    <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
-     <p class="page-link chulapa-label">Wikipedia Maps...</p>
+     <p class="page-link chulapa-label">Wikipedia maps...</p>
    </li>
 	 <li class="page-item disabled mx-auto invisible">
 	  <p class="page-link">|</p>
 	 </li>	
 	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
-	   <p class="page-link chulapa-label">Beautiful Maps...</p>
+	   <p class="page-link chulapa-label">Beautiful maps...</p>
 	 </li>
 	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
-	   <p class="page-link chulapa-label">Beautiful Maps with R (III)...</p>
+	   <p class="page-link chulapa-label">Beautiful maps with R (III)...</p>
 	 </li>
    <li class="page-item text-right ml-0 ">
       <a class="page-link border-0 px-4" href="https://dieghernan.github.io/201912_Beautiful3/">
@@ -482,11 +494,11 @@ it is quite easy to adjust the final result.</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">
-              Using CountryCodes database and sf package
+              Using the CountryCodes database and sf package
             </a>
          </p>
            <p class="card-text">
-              <small>vignette of the CountryCodes project</small>
+              <small>Vignette of the CountryCodes project</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-20 -->
+    <!-- Page build 2026-08-21 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Insets with ggplot2 and tmap - and mapsf!",
-    "description": "A map on a map - A common challenge when creating maps is how to include an inset map on your visualization. An inset map is a smaller map usually included on a corner that may provide additional context to the overall map, or may include map units than won’t be usually represented properly."
+    "description": "A map on a map - A common challenge when creating maps is how to include an inset map on your visualization. An inset map is a smaller map usually included on a corner that may provide additional context to the overall map, or may include map units that would not usually be represented properly."
     }
 }
 </script><script type="application/ld+json">
@@ -267,9 +267,13 @@ in a corner that may provide additional context to the overall map. It is also
 useful for representing spatial units that may form part of a country but whose
 geographical location would result in an imperfect visualization, or for
 including small units that would otherwise not be shown on the map.</p>
-<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>, but this time I would show how to produce these insets using the <strong>ggplot2</strong> and <strong>tmap</strong> packages. In short: use the <strong>cowplot</strong> package.</p>
+<p>I have already covered this
+<a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>,
+but this time I show how to produce these insets using the <strong>ggplot2</strong> and
+<strong>tmap</strong> packages. In short: use the <strong>cowplot</strong> package.</p>
 <h2 id="test-case-canary-island-as-an-inset">Test case: Canary Island as an inset</h2>
-<p>On this example, I would create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and creating an inset for the Canary Islands.</p>
+<p>In this example, I create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and an inset for the
+Canary Islands.</p>
 <p>The “true” map of Spain is:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
@@ -282,7 +286,9 @@ including small units that would otherwise not be shown on the map.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
-<p>I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary Islands I would use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>)</p>
+<p>I use a different CRS for each part of Spain. In the case of mainland Spain, I
+use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary
+Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">main</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">25830</span><span class="p">)</span><span class="w">
@@ -299,15 +305,18 @@ including small units that would otherwise not be shown on the map.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
-<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and matching!</p>
+<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and
+matching!</p>
 <h2 id="on-ggplot2">On <code class="language-plaintext highlighter-rouge">ggplot2</code></h2>
-<p>We have already created two quick maps on <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map with insets we would:</p>
+<p>We have already created two quick maps with <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map
+with insets we will:</p>
 <ol>
  <li>
-   <p>Produce two plots: The main plot and the sub plot providing a minimal style. We would store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+   <p>Produce two plots: the main plot and the subplot, providing a minimal style.
+We will store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
  </li>
  <li>
-   <p>We would combine both objects with <code class="language-plaintext highlighter-rouge">cowplot</code>.</p>
+   <p>Combine both objects with <code class="language-plaintext highlighter-rouge">cowplot</code>.</p>
  </li>
 </ol>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Main plot</span><span class="w">
@@ -317,7 +326,7 @@ including small units that would otherwise not be shown on the map.</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey85"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
     </span><span class="c1"># Add a bit of margin on the bottom left</span><span class="w">
-    </span><span class="c1"># We would place the inset there</span><span class="w">
+    </span><span class="c1"># We will place the inset there</span><span class="w">
     </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 
@@ -331,7 +340,10 @@ including small units that would otherwise not be shown on the map.</p>
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey95"</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code> we can combine both maps on a single one. You may need to play a bit with the parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code> <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the sub plot to improve the placement:</p>
+<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code>,
+we can combine both maps into a single one. You may need to play a bit with the
+parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the subplot to improve the
+placement:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -377,7 +389,7 @@ objects:</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">))</span><span class="w">
 
 
-</span><span class="c1"># Non-sense plot!</span><span class="w">
+</span><span class="c1"># Nonsense plot!</span><span class="w">
 </span><span class="n">ggdraw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">mass_flipper</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">draw_plot</span><span class="p">(</span><span class="n">flipper_hist</span><span class="p">,</span><span class="w">
@@ -388,7 +400,10 @@ objects:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
 <h2 id="on-tmap">On <code class="language-plaintext highlighter-rouge">tmap</code></h2>
-<p>We can follow a similar approach with <strong>tmap</strong>. In version 3.x.x (there is a new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version under development</a>), we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <strong>cowplot</strong> can handle.</p>
+<p>We can follow a similar approach with <strong>tmap</strong>. In version 3.x.x (there is a
+new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version under development</a>),
+we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to
+convert the <code class="language-plaintext highlighter-rouge">tmap</code> objects to the objects that <strong>cowplot</strong> can handle.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tmap</span><span class="p">)</span><span class="w">
 
 </span><span class="n">main_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tm_shape</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -417,7 +432,9 @@ applied to <strong>ggplot2</strong> objects.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
 <h2 id="update-on-mapsf">Update: On <code class="language-plaintext highlighter-rouge">mapsf</code></h2>
-<p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA <a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, shared also how to create inset maps using that package:</p>
+<p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA
+<a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, also
+shared how to create inset maps using that package:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapsf</span><span class="p">)</span><span class="w">
 
 </span><span class="n">mf_map</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w">
@@ -443,10 +460,10 @@ applied to <strong>ggplot2</strong> objects.</p>
 	  </a>
    </li>
    <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
-     <p class="page-link chulapa-label">Beautiful Maps with R (IV):...</p>
+     <p class="page-link chulapa-label">Beautiful maps with R (IV):...</p>
    </li>
    <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
-     <p class="page-link chulapa-label">Beautiful Maps...</p>
+     <p class="page-link chulapa-label">Beautiful maps...</p>
    </li>
 	 <li class="page-item disabled mx-auto invisible">
 	  <p class="page-link">|</p>
