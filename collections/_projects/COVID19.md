@@ -1,5 +1,5 @@
 ---
-title: COVID19 Microsite
+title: COVID19 microsite
 subtitle: Tracking the outbreak in Spain by region
 tags:
   - discontinued
