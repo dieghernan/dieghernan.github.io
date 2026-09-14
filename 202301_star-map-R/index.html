@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Star map with R",
-    "description": "Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily check onStackOverflow when I found aquestion by Benjamin Smith that blew mymind: Creating Star Map Visualizations Based on Location andDate!!"
+    "description": "Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily check onStack Overflow when I found aquestion by Benjamin Smith that blew mymind: Creating Star Map Visualizations Based on Location andDate!!"
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily check onStackOverflow when I found aquestion by Benj...">
+   <meta name="description" content="Creating Star Map Visualizations Based on Location and Date - A couple of weeks ago I was doing my daily check onStack Overflow when I found aquestion by Ben...">
    <meta name="thumbnail" content="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -254,11 +254,11 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Star map with R</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#first-things-first-the-data" class="nav-link">First things first: The data</a></li><li class="nav-item nav d-block"><a href="#creating-a-star-map-with-r" class="nav-link">Creating a Star Map with R</a><ul><li class="nav-item nav d-block"><a href="#helper-funs" class="nav-link">Helper funs</a></li><li class="nav-item nav d-block"><a href="#inputs" class="nav-link">Inputs</a><ul><li class="nav-item nav d-block"><a href="#about-time-zones" class="nav-link">About time zones</a></li></ul></li><li class="nav-item nav d-block"><a href="#setup" class="nav-link">Setup</a></li><li class="nav-item nav d-block"><a href="#celestial-data" class="nav-link">Celestial Data</a></li><li class="nav-item nav d-block"><a href="#graticules" class="nav-link">Graticules</a></li></ul></li><li class="nav-item nav d-block"><a href="#visualization-with-ggplot2" class="nav-link">Visualization with <code class="language-plaintext highlighter-rouge">ggplot2</code></a></li><li class="nav-item nav d-block"><a href="#extra-chinese-constellations" class="nav-link">Extra: Chinese constellations</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#first-things-first-the-data" class="nav-link">First things first: the data</a></li><li class="nav-item nav d-block"><a href="#creating-a-star-map-with-r" class="nav-link">Creating a star map with R</a><ul><li class="nav-item nav d-block"><a href="#helper-functions" class="nav-link">Helper functions</a></li><li class="nav-item nav d-block"><a href="#inputs" class="nav-link">Inputs</a><ul><li class="nav-item nav d-block"><a href="#about-time-zones" class="nav-link">About time zones</a></li></ul></li><li class="nav-item nav d-block"><a href="#setup" class="nav-link">Setup</a></li><li class="nav-item nav d-block"><a href="#celestial-data" class="nav-link">Celestial data</a></li><li class="nav-item nav d-block"><a href="#graticules" class="nav-link">Graticules</a></li></ul></li><li class="nav-item nav d-block"><a href="#visualization-with-ggplot2" class="nav-link">Visualization with <strong>ggplot2</strong></a></li><li class="nav-item nav d-block"><a href="#extra-chinese-constellations" class="nav-link">Extra: Chinese constellations</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
 		</nav>   
 	</div>
 			<p>A couple of weeks ago I was doing my daily check on
-<a href="https://stackoverflow.com/questions/tagged/sf">StackOverflow</a> when I found a
+<a href="https://stackoverflow.com/questions/tagged/sf">Stack Overflow</a> when I found a
 question by <a href="https://bensstats.wordpress.com/">Benjamin Smith</a> that blew my
 mind: <a href="https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date">Creating Star Map Visualizations Based on Location and
 Date</a>
@@ -267,30 +267,30 @@ Date</a>
 Fitter</a> already worked on this two years earlier,
 see his <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial
 Maps</a>. So I decided
-to put some work on this.</p>
-<p>Since then, I also learnt that Benjamin and I have been working in parallel
+to put some work into this.</p>
+<p>Since then, I have also learned that Benjamin and I have been working in parallel
 on the same topic. He is preparing an <strong>R</strong> package named
-<a href="https://github.com/benyamindsmith/starBliss"><code class="language-plaintext highlighter-rouge">starBliss</code></a> and hopefully this
-post would be of some help.</p>
-<p class="alert alert-info p-3 mx-2 mb-3">I have very little knowledge on this topic, so if you find errors or
-have any suggestions please let me know in the <strong>Comments</strong> section below</p>
-<h2 id="first-things-first-the-data">First things first: The data</h2>
+<a href="https://github.com/benyamindsmith/starBliss"><strong>starBliss</strong></a> and hopefully this
+post will be of some help.</p>
+<p class="alert alert-info p-3 mx-2 mb-3">I have very little knowledge of this topic, so if you find errors or
+have any suggestions, please let me know in the comments section below.</p>
+<h2 id="first-things-first-the-data">First things first: the data</h2>
 <p>The initial data source of all these projects (Kim, Benjamin and myself) is the
 same, and it is provided by the D3 plugin
 <a href="https://github.com/ofrohn/d3-celestial/tree/master/data">d3-celestial</a> by <a href="http://armchairastronautics.blogspot.com/">Olaf
-Frohn</a>. As Kim Fitter pointed out on
+Frohn</a>. As Kim Fitter pointed out in
 <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">his post</a>, these
-data files present the problem (experienced by <a href="https://stackoverflow.com/search?q=%5Bsf%5D+dateline">almost any <code class="language-plaintext highlighter-rouge">sf</code>
+data files present the problem (experienced by <a href="https://stackoverflow.com/search?q=%5Bsf%5D+dateline">almost any <strong>sf</strong>
 user</a>) of lines crossing
 the international date line (longitude 180º). I also found that some files are
 not valid as per <code class="language-plaintext highlighter-rouge">sf::st_make_valid()</code>.</p>
 <p>Solution? I processed and fixed almost every file, including the files
 corresponding to the Milky Way and the lines for Chinese constellations, manually,
 to provide a set of files. That is the origin of my project <a href="https://dieghernan.github.io/celestial_data/">Celestial
-Data</a>, that provides all these
-files on several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
-repo</a> to know more about it.</p>
-<h2 id="creating-a-star-map-with-r">Creating a Star Map with R</h2>
+Data</a>, which provides all these
+files in several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
+repo</a> to learn more about it.</p>
+<h2 id="creating-a-star-map-with-r">Creating a star map with R</h2>
 <p>The first step is loading a bunch of libraries that would help us on this cosmic
 task:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Spatial manipulation</span><span class="w">
@@ -308,7 +308,7 @@ task:</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggfx</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggshadow</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<h3 id="helper-funs">Helper funs</h3>
+<h3 id="helper-functions">Helper functions</h3>
 <p>Now we prepare some helper functions:</p>
 <ul>
  <li>
@@ -318,8 +318,8 @@ repo</a><sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="
 specific directory <code class="language-plaintext highlighter-rouge">cachedir</code> and loads it with <code class="language-plaintext highlighter-rouge">sf::st_read()</code>.</p>
  </li>
  <li>
-   <p><code class="language-plaintext highlighter-rouge">pretty_lonlat()</code> is a labeller that returns a decimal longitude or latitude
-coordinate in the format degrees/minutes/seconds (e.g a <strong>latitude
+   <p><code class="language-plaintext highlighter-rouge">pretty_lonlat()</code> is a labeler that returns a decimal longitude or latitude
+coordinate in the format degrees/minutes/seconds (e.g., a <strong>latitude
 34.72782</strong> would be converted into <strong>34° 43’ 40.15” N</strong>).</p>
  </li>
 </ul>
@@ -383,12 +383,13 @@ done on the <strong>d3-celestial plugin</strong> and I found the function
 that I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). As per some of the research that I did
 this function computes the <a href="https://en.wikipedia.org/wiki/Sidereal_time">Mean Sidereal
 Time</a> (MST) given a specific
-longitude (maybe then is more accurate Local Sidereal Time? Just wondering)
+longitude (perhaps Local Sidereal Time is a more accurate term here?)
 expressed in degrees, following the formulas provided by Meeus (1998). If you
 want to know more on this I recommend <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
 post</a> by
 <a href="https://squarewidget.com/">James Still</a>.</p>
-<p>So basically the input is a <code class="language-plaintext highlighter-rouge">POSIXct</code> date time and a given longitude and the
+<!-- FIXME: Confirm whether the function returns mean or local sidereal time. -->
+<p>So basically the input is a <code class="language-plaintext highlighter-rouge">POSIXct</code> date-time and a given longitude and the
 result is an alternative longitude that we use to adjust the projection of our
 Star Map. This provides the rotation observed in the <strong>d3-celestial
 plugin</strong>.</p>
@@ -439,7 +440,7 @@ plugin</strong>.</p>
 </details>
 <p>The final result would have a spherical outline. That means that we would need
 to perform a spherical cut. Did you know that <a href="https://r-spatial.org/r/2020/06/17/s2.html">in r-spatial the Earth is no
-longer flat</a>? Thanks to <code class="language-plaintext highlighter-rouge">s2</code> we can
+longer flat</a>? Thanks to <strong>s2</strong> we can
 overcome this issue. Additionally, we would get rid of <a href="https://stackoverflow.com/questions/75205747/how-to-remove-random-diagonal-lines-from-star-map-vizualizations-produced-by-geo/75212722#75212722">artifacts derived from
 the changes on the
 projection</a>.
@@ -500,10 +501,10 @@ that for us.</p>
 <p>Now we are ready to start creating our visualization. We need only two inputs:</p>
 <ul>
  <li>
-   <p>A desired location, that we would geocode with <code class="language-plaintext highlighter-rouge">nominatimlite</code>.</p>
+   <p>A desired location, that we would geocode with <strong>nominatimlite</strong>.</p>
  </li>
  <li>
-   <p>A specific moment of time.</p>
+   <p>A specific moment in time.</p>
  </li>
 </ul>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Inputs</span><span class="w">
@@ -539,7 +540,7 @@ that for us.</p>
 </span></code></pre></div></div>
 <p>With respect to our object <code class="language-plaintext highlighter-rouge">desired_date</code>, it is quite relevant for accurate
 plotting to specify the correct time zone. Since we already know the latitude and
-longitude of our desired location, we can easily get that with the <code class="language-plaintext highlighter-rouge">lutz</code>
+longitude of our desired location, we can easily get that with the <strong>lutz</strong>
 package:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">desired_date</span><span class="w">
 </span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 UTC"</span><span class="w">
@@ -580,7 +581,7 @@ moment would be 10:00 hence no stars are visible) you would need to adjust
 </span><span class="c1">#&gt; [1] "2015-09-23 10:00:00 NZST"</span><span class="w">
 </span></code></pre></div></div>
 <h3 id="setup">Setup</h3>
-<p>Now we can start creating our buffers and projections, that would help us to
+<p>Now we can start creating our buffers and projections, which will help us to
 crop the celestial data objects.</p>
 <p>I noticed also that the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
 demo</a> of
@@ -628,9 +629,9 @@ so we are going to replicate that as well:</p>
   </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<h3 id="celestial-data">Celestial Data</h3>
+<h3 id="celestial-data">Celestial data</h3>
 <p>Now, we can load the data of our choice. In this case I have selected to
-represent the Milky Way, Constellation Lines and Stars.</p>
+represent the Milky Way, constellation lines and stars.</p>
 <p>We also add some additional variables that would help us to improve the
 visualization.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"mw.min.geojson"</span><span class="p">)</span><span class="w">
@@ -714,7 +715,7 @@ visualization.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
 <h3 id="graticules">Graticules</h3>
-<p>We are going also to include graticules, so the Earth poles can be quickly
+<p>We are also going to include graticules, so the Earth’s poles can be quickly
 spotted. In this case we don’t apply any affine transformation, so the <code class="language-plaintext highlighter-rouge">flip</code>
 parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut()</code> needs to be set as <code class="language-plaintext highlighter-rouge">NULL</code>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_graticule</span><span class="p">(</span><span class="w">
@@ -743,9 +744,9 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
-<h2 id="visualization-with-ggplot2">Visualization with <code class="language-plaintext highlighter-rouge">ggplot2</code></h2>
+<h2 id="visualization-with-ggplot2">Visualization with <strong>ggplot2</strong></h2>
 <p>We are almost set! For preparing the final map, first we are going to create the
-corresponding labels, that would be included as <code class="language-plaintext highlighter-rouge">caption</code> on the <code class="language-plaintext highlighter-rouge">ggplot2</code> map:</p>
+corresponding labels, which will be included as <code class="language-plaintext highlighter-rouge">caption</code> on the <strong>ggplot2</strong> map:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lat_lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pretty_lonlat</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lat"</span><span class="p">)</span><span class="w">
 </span><span class="n">lon_lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pretty_lonlat</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lon"</span><span class="p">)</span><span class="w">
 
@@ -796,9 +797,9 @@ So we can use <code class="language-plaintext highlighter-rouge">ggfx::with_blur
 look at Dominic Royé’s post <a href="https://dominicroye.github.io/en/2021/firefly-cartography/">Firefly
 Cartography</a> to
 know more about this). The only drawback is that I was not able to use
-<code class="language-plaintext highlighter-rouge">ggshadow</code> with <code class="language-plaintext highlighter-rouge">LINESTRING</code> (Dominic shows how to do it with <code class="language-plaintext highlighter-rouge">POINT</code>), so
+<strong>ggshadow</strong> with <code class="language-plaintext highlighter-rouge">LINESTRING</code> (Dominic shows how to do it with <code class="language-plaintext highlighter-rouge">POINT</code>), so
 instead I converted my lines (the constellations) to coordinates and applied
-<code class="language-plaintext highlighter-rouge">ggshadow::geom_glowpath()</code></p>
+<code class="language-plaintext highlighter-rouge">ggshadow::geom_glowpath()</code>.</p>
  </li>
 </ul>
 <p>So we are ready now to create the final visualization:</p>
@@ -865,7 +866,7 @@ calculations in JavaScript, and everything seems to be up and running.</p>
 <h2 id="extra-chinese-constellations">Extra: Chinese constellations</h2>
 <p><a href="https://dieghernan.github.io/celestial_data/">Celestial Data</a> also provides
 data for traditional Chinese constellations, so we can create a similar map with
-this whole different set of geometries:</p>
+this entirely different set of geometries:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">const_cn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"constellations.lines.cn.min.geojson"</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Cut and prepare for geom_glowpath() on a single step</span><span class="w">
@@ -1017,7 +1018,7 @@ repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202602_geobounds/" class="chulapa-text-body-color">
-              Introducing geobounds
+              Introducing <strong>geobounds</strong>
             </a>
          </p>
            <p class="card-text">

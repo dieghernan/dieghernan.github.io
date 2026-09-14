@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Insets with ggplot2 and tmap - and mapsf!",
-    "description": "A map on a map - A common challenge when creating maps is how to include an inset map on your visualization. An inset map is a smaller map usually included on a corner that may provide additional context to the overall map, or may include map units that would not usually be represented properly."
+    "description": "A map on a map - A common challenge when creating maps is how to include an inset map in your visualization. An inset map is a smaller map usually included in a corner that may provide additional context to the overall map, or may include map units that would not usually be represented properly."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="A map on a map - A common challenge when creating maps is how to include an inset map on your visualization. An inset map is a smaller map usually included o...">
+   <meta name="description" content="A map on a map - A common challenge when creating maps is how to include an inset map in your visualization. An inset map is a smaller map usually included i...">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220303_inset.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/202203_insetmaps/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="A map on a map - A common challenge when creating maps is how to include an inset map on..." >
+   <meta property="og:description" content="A map on a map - A common challenge when creating maps is how to include an inset map in..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220303_inset.webp" >
     <!-- Twitter/X Cards -->
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Insets with ggplot2 and tmap - and mapsf!</h1><p class="lead chulapa-subtitle p-summary">A map on a map</p>
+           <h1 class="p-name">Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!</h1><p class="lead chulapa-subtitle p-summary">A map on a map</p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -214,7 +214,7 @@
          <meta itemprop="position" content="1" ></li>
       <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
           itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Insets with ggplot2 and tmap - and mapsf!</span>
+        <span itemprop="name">Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!</span>
        <meta itemprop="position" content="2" >
      </li>
  </ol>
@@ -256,8 +256,8 @@
 				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
 			</button>
 		</p>
-		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Insets with ggplot2 and tmap - and mapsf!</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#test-case-canary-island-as-an-inset" class="nav-link">Test case: Canary Island as an inset</a></li><li class="nav-item nav d-block"><a href="#on-ggplot2" class="nav-link">On <code class="language-plaintext highlighter-rouge">ggplot2</code></a></li><li class="nav-item nav d-block"><a href="#on-tmap" class="nav-link">On <code class="language-plaintext highlighter-rouge">tmap</code></a></li><li class="nav-item nav d-block"><a href="#update-on-mapsf" class="nav-link">Update: On <code class="language-plaintext highlighter-rouge">mapsf</code></a></li></ul>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!</a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#test-case-canary-islands-as-an-inset" class="nav-link">Test case: Canary Islands as an inset</a></li><li class="nav-item nav d-block"><a href="#on-ggplot2" class="nav-link">On <strong>ggplot2</strong></a></li><li class="nav-item nav d-block"><a href="#on-tmap" class="nav-link">On <strong>tmap</strong></a></li><li class="nav-item nav d-block"><a href="#update-on-mapsf" class="nav-link">Update: On <strong>mapsf</strong></a></li></ul>
 		</nav>   
 	</div>
 			<p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>, AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
@@ -271,8 +271,8 @@ including small units that would otherwise not be shown on the map.</p>
 <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code> function</a>,
 but this time I show how to produce these insets using the <strong>ggplot2</strong> and
 <strong>tmap</strong> packages. In short: use the <strong>cowplot</strong> package.</p>
-<h2 id="test-case-canary-island-as-an-inset">Test case: Canary Island as an inset</h2>
-<p>In this example, I create a map of Spain using <code class="language-plaintext highlighter-rouge">mapSpain</code> and an inset for the
+<h2 id="test-case-canary-islands-as-an-inset">Test case: Canary Islands as an inset</h2>
+<p>In this example, I create a map of Spain using <strong>mapSpain</strong> and an inset for the
 Canary Islands.</p>
 <p>The “true” map of Spain is:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapSpain</span><span class="p">)</span><span class="w">
@@ -305,18 +305,18 @@ Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
-<p>So that was easy! Just a couple of maps using <code class="language-plaintext highlighter-rouge">ggplot2</code>. Let’s start mixing and
+<p>So that was easy! Just a couple of maps using <strong>ggplot2</strong>. Let’s start mixing and
 matching!</p>
-<h2 id="on-ggplot2">On <code class="language-plaintext highlighter-rouge">ggplot2</code></h2>
-<p>We have already created two quick maps with <code class="language-plaintext highlighter-rouge">ggplot2</code>. Now, to produce our map
+<h2 id="on-ggplot2">On <strong>ggplot2</strong></h2>
+<p>We have already created two quick maps with <strong>ggplot2</strong>. Now, to produce our map
 with insets we will:</p>
 <ol>
  <li>
    <p>Produce two plots: the main plot and the subplot, providing a minimal style.
-We will store them as <code class="language-plaintext highlighter-rouge">ggplot2</code> objects.</p>
+We will store them as <code class="language-plaintext highlighter-rouge">ggplot</code> objects.</p>
  </li>
  <li>
-   <p>Combine both objects with <code class="language-plaintext highlighter-rouge">cowplot</code>.</p>
+   <p>Combine both objects with <strong>cowplot</strong>.</p>
  </li>
 </ol>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Main plot</span><span class="w">
@@ -340,7 +340,7 @@ We will store them as <code class="language-plaintext highlighter-rouge">ggplot2
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey95"</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>We have our objects in place, and now is when the magic happens! With <code class="language-plaintext highlighter-rouge">cowplot</code>,
+<p>We have our objects in place, and now is when the magic happens! With <strong>cowplot</strong>,
 we can combine both maps into a single one. You may need to play a bit with the
 parameters <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">hjust</code> and <code class="language-plaintext highlighter-rouge">vjust</code> of the subplot to improve the
 placement:</p>
@@ -399,7 +399,7 @@ objects:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
-<h2 id="on-tmap">On <code class="language-plaintext highlighter-rouge">tmap</code></h2>
+<h2 id="on-tmap">On <strong>tmap</strong></h2>
 <p>We can follow a similar approach with <strong>tmap</strong>. In version 3.x.x (there is a
 new <a href="https://github.com/r-tmap/tmap/issues/599">revamped version under development</a>),
 we can use <a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to
@@ -431,9 +431,9 @@ applied to <strong>ggplot2</strong> objects.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
-<h2 id="update-on-mapsf">Update: On <code class="language-plaintext highlighter-rouge">mapsf</code></h2>
+<h2 id="update-on-mapsf">Update: On <strong>mapsf</strong></h2>
 <p><a href="https://rgeomatic.hypotheses.org/">Timotheé Giraud</a> (AKA
-<a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <code class="language-plaintext highlighter-rouge">mapsf</code>, also
+<a href="https://twitter.com/rgeomatic">\@rgeomatic</a>), the developer of <strong>mapsf</strong>, also
 shared how to create inset maps using that package:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mapsf</span><span class="p">)</span><span class="w">
 
@@ -507,7 +507,7 @@ shared how to create inset maps using that package:</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" class="chulapa-text-body-color">
-              Hillshade, colors and marginal plots with tidyterra (II)
+              Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)
             </a>
          </p>
            <p class="card-text">
@@ -526,7 +526,7 @@ shared how to create inset maps using that package:</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202602_geobounds/" class="chulapa-text-body-color">
-              Introducing geobounds
+              Introducing <strong>geobounds</strong>
             </a>
          </p>
            <p class="card-text">

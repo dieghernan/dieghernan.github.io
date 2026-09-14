@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -266,13 +266,13 @@ the most famous.</p>
 (<a href="https://dieghernan.github.io/chulapa">link</a>).</p>
 <p>Some time ago, <a href="https://github.com/cargocultprogramming">@cargocultprogramming</a>
 opened <a href="https://github.com/dieghernan/chulapa/issues/29">dieghernan/chulapa#29</a>
-because one of the components of the theme was broken in Jekyll <code class="language-plaintext highlighter-rouge">=&gt;4.1.0</code>.
+because one of the components of the theme was broken in Jekyll <code class="language-plaintext highlighter-rouge">&gt;=4.1.0</code>.
 Digging a bit, I saw
 <a href="https://github.com/jekyll/jekyll/issues/8214">jekyll/jekyll#8214</a>, exposing
 the same issue. What seemed to be a feature was indeed a bug that some
 developers were exploiting.</p>
 <p>The change is that when applying the <code class="language-plaintext highlighter-rouge">group_by</code> Liquid filter on an array, it
-used to produce a “grouped” version of the array, while on Jekyll <code class="language-plaintext highlighter-rouge">=&gt;4.1.0</code>
+used to produce a “grouped” version of the array, while in Jekyll <code class="language-plaintext highlighter-rouge">&gt;=4.1.0</code>
 it produces a different result that can’t be used in the same way.</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {% assign alldocs = site.exercises %} {% assign grouptag = alldocs |
 map: 'tags' | join: ',' | split: ',' | group_by: tag %} {{ grouptag }}
@@ -289,7 +289,7 @@ B"], "size"=&gt;1}{"name"=&gt;"Virtualbox", "items"=&gt;["Virtualbox"],
 ... , "Hydra"], "size"=&gt;26} 
 </code></pre></div></div>
 <p>So basically, counting items was not easy anymore. I developed a solution in
-pure Liquid (which happens to be a quite verbose language out of the predefined
+pure Liquid (which is quite verbose when working outside the predefined
 filters) that is compatible with any Jekyll version.</p>
 <p>The algorithm is now implemented in <span class="chulapa">Chulapa</span>. You
 can check the results on my <a href="https://dieghernan.github.io/tags">/tags</a> page.</p>

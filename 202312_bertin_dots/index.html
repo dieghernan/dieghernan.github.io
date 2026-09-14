@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -265,7 +265,7 @@ Bertin</a> (1918 - 2010):</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/bertin.png" alt="Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
 (1967)" /></p>
 <p>In this post, I create a similar map for Iberia and also show how to create a
-variation using a hexagonal grid instead of a rectangular one. This is the first
+variation using a hexagonal grid instead of a rectangular one. This is the fifth
 issue of the series
 <a href="https://dieghernan.github.io/tags#beautiful_maps">Beautiful Maps with R</a>.</p>
 <h2 id="libraries">Libraries</h2>
@@ -291,7 +291,7 @@ layout with Iberia in the middle (that is our observation window), so we can get
 the corresponding shapes and create a buffer around it.</p>
 <p>After that, we extract the population spatial distribution from <a href="https://ghsl.jrc.ec.europa.eu/download.php">GHSL -
 Global Human Settlement Layer</a>. We
-use the global file with a resolution of 1 km on Mollweide projection
+use the global file with a resolution of 1 km in the Mollweide projection
 (ESRI:54009).</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Create observation window based on the Iberian Peninsula and surroundings</span><span class="w">
 </span><span class="c1"># We create a buffered circle</span><span class="w">
@@ -371,8 +371,8 @@ terms of performance.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="plot of chunk 202312_base_raster-1" /></p>
 <h2 id="data-wrangling">Data wrangling</h2>
-<p>The GHSL information contains the estimated population on each grid. However the
-file has a high resolution (more than 2 millions of cells) so for plotting
+<p>The GHSL information contains the estimated population in each cell. However, the
+file has a high resolution (more than 2 million cells), so for plotting
 purposes we are going to reduce (i.e. aggregate) the number of cells so we can
 have a better dot visualization. Once we aggregate, we compute the
 area of each new aggregated cell and compute the corresponding population
@@ -477,7 +477,7 @@ hexagonal grids (i.e. a grid of hexagons) since I have the feeling that they
 look more “natural” than the rectangular ones, which present a regularity
 hardly seen in
 the wild.</p>
-<p>The issue here is that <code class="language-plaintext highlighter-rouge">terra</code> does not produce this type of grids, however it
+<p>The issue here is that <strong>terra</strong> does not produce this type of grid. However, it
 is possible to create them with <code class="language-plaintext highlighter-rouge">sf::st_make_grid()</code>, so the workflow for this
 alternative is:</p>
 <ol>
@@ -536,7 +536,7 @@ the aggregated cells:</p>
   </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1" /></p>
-<p>Finally we just compute densities, create categories and finally the map:</p>
+<p>Finally, we compute densities, create categories and produce the map:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Mask and categorize</span><span class="w">
 </span><span class="n">pop_sf_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop_agg_sf</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="c1"># Compute density by cell</span><span class="w">
@@ -720,7 +720,7 @@ R2023A data.” <a href="https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0ED
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" class="chulapa-text-body-color">
-              Hillshade, colors and marginal plots with tidyterra (II)
+              Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)
             </a>
          </p>
            <p class="card-text">

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Hillshade, colors and marginal plots with tidyterra (II)</h1><p class="lead chulapa-subtitle p-summary">The rain in Spain does not stay mainly in the plain</p>
+           <h1 class="p-name">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)</h1><p class="lead chulapa-subtitle p-summary">The rain in Spain does not stay mainly in the plain</p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -214,7 +214,7 @@
          <meta itemprop="position" content="1" ></li>
       <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
           itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Hillshade, colors and marginal plots with tidyterra (II)</span>
+        <span itemprop="name">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)</span>
        <meta itemprop="position" content="2" >
      </li>
  </ol>
@@ -253,7 +253,7 @@
 				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
 			</button>
 		</p>
-		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Hillshade, colors and marginal plots with tidyterra (II)</a></p>		
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)</a></p>		
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#libraries" class="nav-link">Libraries</a></li><li class="nav-item nav d-block"><a href="#the-plain-in-spain" class="nav-link">The plain in Spain</a></li><li class="nav-item nav d-block"><a href="#the-rain-in-spain" class="nav-link">The rain in Spain</a><ul><li class="nav-item nav d-block"><a href="#creating-a-modified-palette" class="nav-link">Creating a modified palette</a></li></ul></li><li class="nav-item nav d-block"><a href="#marginal-plots-finally" class="nav-link">Marginal plots (finally)</a><ul><li class="nav-item nav d-block"><a href="#profiling-marginal-plots" class="nav-link">Profiling marginal plots</a></li><li class="nav-item nav d-block"><a href="#putting-all-the-pieces-together" class="nav-link">Putting all the pieces together</a></li></ul></li><li class="nav-item nav d-block"><a href="#recap" class="nav-link">Recap</a></li></ul>
 		</nav>   
 	</div>
@@ -277,7 +277,7 @@ you may recognize the following lyrics:</p>
 <div class="embed-responsive embed-responsive-16by9 my-2 chulapa-rounded-lg" itemscope="" itemprop="VideoObject" itemtype="https://schema.org/VideoObject">
       <iframe loading="lazy" title="Video from YouTube" class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/uVmU3iANbgk" allowfullscreen="" itemprop="embedUrl"></iframe>
  </div>
-<p>This hard statement is made on <a href="https://en.wikipedia.org/wiki/My_Fair_Lady_(film)"><em>My Fair Lady
+<p>This emphatic statement is made in <a href="https://en.wikipedia.org/wiki/My_Fair_Lady_(film)"><em>My Fair Lady
 (1964)</em></a> by Audrey Hepburn,
 Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
 <strong>completely false</strong>.</p>
@@ -310,7 +310,7 @@ stays (mainly).</p>
 inland Spain, with an average altitude of 650 meters above sea level.</p>
 <p>I didn’t find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
-(historically the <em>Meseta</em> is associated to Castile and Madrid) and elevation
+(historically the <em>Meseta</em> is associated with Castile and Madrid) and elevation
 data to get a rough shape.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Using mapSpain</span><span class="w">
@@ -378,8 +378,8 @@ data to get a rough shape.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
 <p>We can create a new plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
 post</a> to identify the
-plain. In first place I create a base layer with a representation of the
-hillshade, that we would reuse later:</p>
+plain. First, I create a base layer with a representation of the
+hillshade, which we will reuse later:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Creating hillshade</span><span class="w">
 
@@ -613,8 +613,8 @@ in the plain</em>:</p>
 </span><span class="n">meteo_plot</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
-<p>We can now check that the rain in Spain falls mainly in the Atlantic coast
-(North of Spain) and specifically in Galicia. That’s why in Spanish the lyrics
+<p>We can now see that the rain in Spain falls mainly on the Atlantic coast
+(northern Spain) and specifically in Galicia. That’s why in Spanish the lyrics
 <em>The rain in Spain stays mainly in the plain</em> were translated into:</p>
 <blockquote>
  <p>La lluvia en Sevilla es una pura maravilla.</p>
@@ -627,7 +627,7 @@ featuring very hot and dry summers.</p>
 <p>We can now start profiling our final plot. The idea is to create two bar charts,
 representing the value to be plotted (in this case, average annual
 precipitation) by longitude and latitude.</p>
-<p>But first we add some additional margins and title axes to the main plot, so we
+<p>But first we add some additional margins and axis titles to the main plot, so we
 can insert those marginal plots easily on our main plot:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Now we can add titles on the secondary axis</span><span class="w">
 
@@ -660,7 +660,7 @@ can insert those marginal plots easily on our main plot:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
 <h3 id="profiling-marginal-plots">Profiling marginal plots</h3>
-<p>On the following code, I am just drafting how the marginal plots would look
+<p>In the following code, I am drafting what the marginal plots would look
 like, so we can have a preview of the final result:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Profiling marginal plots</span><span class="w">
@@ -852,7 +852,7 @@ we want:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
 <p>And with a bit of effort we got it.</p>
 <h2 id="recap">Recap</h2>
-<p>Much of the code we have created relates with the theming and labels of the
+<p>Much of the code we have created relates to the theming and labels of the
 plot. Here you can find a simplified version:</p>
 <details>
   <summary>Simplified version</summary>
@@ -1079,7 +1079,7 @@ plot. Here you can find a simplified version:</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/" class="chulapa-text-body-color">
-              Hillshade, colors and marginal plots with tidyterra (I)
+              Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)
             </a>
          </p>
            <p class="card-text">
@@ -1098,7 +1098,7 @@ plot. Here you can find a simplified version:</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">
-              Introducing tidyterra
+              Introducing <strong>tidyterra</strong>
             </a>
          </p>
            <p class="card-text">

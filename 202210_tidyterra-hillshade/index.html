@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Hillshade, colors and marginal plots with tidyterra (I)",
-    "description": "How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, which produces informative yet beautiful maps."
+    "description": "How to overlay SpatRasters - Using shadow effects on relief maps is a very common technique, which produces informative yet beautiful maps."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, which produces informative yet beautiful maps.">
+   <meta name="description" content="How to overlay SpatRasters - Using shadow effects on relief maps is a very common technique, which produces informative yet beautiful maps.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/202210_tidyterra-hillshade/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="How to overlay SpatRasters - Using shadow effects on relief mappings is a very common technique, which produces informative yet..." >
+   <meta property="og:description" content="How to overlay SpatRasters - Using shadow effects on relief maps is a very common technique, which produces informative yet..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" >
     <!-- Twitter/X Cards -->
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Hillshade, colors and marginal plots with tidyterra (I)</h1><p class="lead chulapa-subtitle p-summary">How to overlay SpatRasters</p>
+           <h1 class="p-name">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)</h1><p class="lead chulapa-subtitle p-summary">How to overlay SpatRasters</p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -214,7 +214,7 @@
          <meta itemprop="position" content="1" ></li>
       <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
           itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Hillshade, colors and marginal plots with tidyterra (I)</span>
+        <span itemprop="name">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)</span>
        <meta itemprop="position" content="2" >
      </li>
  </ol>
@@ -253,7 +253,7 @@
 				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
 			</button>
 		</p>
-		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Hillshade, colors and marginal plots with tidyterra (I)</a></p>		
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)</a></p>		
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#libraries" class="nav-link">Libraries</a></li><li class="nav-item nav d-block"><a href="#get-the-data" class="nav-link">Get the data</a></li><li class="nav-item nav d-block"><a href="#hillshading" class="nav-link">Hillshading</a></li><li class="nav-item nav d-block"><a href="#selecting-colors" class="nav-link">Selecting colors</a></li><li class="nav-item nav d-block"><a href="#final-plot" class="nav-link">Final plot</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
 		</nav>   
 	</div>
@@ -261,22 +261,22 @@
 on top of a hillshade background. The next post shows how to add marginal plots
 including information about the values of the raster by longitude and latitude. See
 the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">here</a>.</em></p>
-<p>Using shadow effects on relief mappings is a very common technique, that allows
-to produce informative yet beautiful maps. If you are interested in this topic
-and you work with <strong>R</strong>, you would have probably seen this map:</p>
+<p>Using shadow effects on relief maps is a very common technique that helps
+produce informative yet beautiful maps. If you are interested in this topic
+and you work with <strong>R</strong>, you have probably seen this map:</p>
 <p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="swissmap" /></p>
 <p>The production of this map by <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">Timo
 Grossenbacher</a>
-has been a reference for years. However, last developments on the <strong>R</strong> package
+has been a reference for years. However, recent developments in the <strong>R</strong> package
 ecosystem (<strong>terra</strong>, <strong>sf</strong> and support of both classes on <strong>ggplot2</strong>, development
-of <code class="language-plaintext highlighter-rouge">ggnewscale</code>, etc.) can make even easier the task of producing such type of
+of <strong>ggnewscale</strong>, etc.) can make it even easier to produce these types of
 maps.</p>
 <p>In fact, Dominic Royé recently wrote a very detailed
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/">post</a> on creating
 shadow effects on map reliefs. In this first post of the series, I replicate
 that technique with a slight variation (e.g. not making use of
-<code class="language-plaintext highlighter-rouge">ggnewscale</code>) and discuss the potential choice of a color
-palette for this kind of maps.</p>
+<strong>ggnewscale</strong>) and discuss the potential choice of a color
+palette for this kind of map.</p>
 <h2 id="libraries">Libraries</h2>
 <p>I will use the following libraries:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -292,9 +292,9 @@ palette for this kind of maps.</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">geodata</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="get-the-data">Get the data</h2>
-<p>First step is to get the altitude data. I use here the package <code class="language-plaintext highlighter-rouge">geodata</code> for
-simplicity, but you can use as well <code class="language-plaintext highlighter-rouge">elevatr</code> that is much more complete.
-However <code class="language-plaintext highlighter-rouge">elevatr</code> produces the result as <code class="language-plaintext highlighter-rouge">RasterLayers</code>, so you would need to
+<p>The first step is to get the altitude data. I use the <strong>geodata</strong> package for
+simplicity, but you can also use <strong>elevatr</strong>, which is much more comprehensive.
+However, <strong>elevatr</strong> produces the result as a <code class="language-plaintext highlighter-rouge">RasterLayer</code>, so you would need to
 convert the object to <code class="language-plaintext highlighter-rouge">SpatRaster</code> with <code class="language-plaintext highlighter-rouge">terra::rast()</code>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cache map data</span><span class="w">
@@ -338,11 +338,11 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="plot of chunk 20221017-1-autoplot" width="100%" /></p>
 <h2 id="hillshading">Hillshading</h2>
-<p>Next step is to calculate the hillshade. Royé has a very detailed discussion
+<p>The next step is to calculate the hillshade. Royé has a very detailed discussion
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade">here</a>,
 so I would not go into details. Basically what we want to create is a layer that
 approximates the potential “texture” of the surface based on the elevation and
-the sun position. This is straightforward with <code class="language-plaintext highlighter-rouge">terra::terrain()</code> and
+the sun’s position. This is straightforward with the <code class="language-plaintext highlighter-rouge">terra::terrain()</code> and
 <code class="language-plaintext highlighter-rouge">terra::shade()</code> functions:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1">## Create hillshade effect</span><span class="w">
@@ -364,10 +364,10 @@ the sun position. This is straightforward with <code class="language-plaintext h
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" /></p>
 <p>We can also do the following hack to avoid the use of a <code class="language-plaintext highlighter-rouge">scale_fill_*</code> (via
-<code class="language-plaintext highlighter-rouge">ggplot2</code> or via <code class="language-plaintext highlighter-rouge">ggnewscale::new_scale_fill()</code>):</p>
+<strong>ggplot2</strong> or via <code class="language-plaintext highlighter-rouge">ggnewscale::new_scale_fill()</code>):</p>
 <ul>
  <li>Select a vector of colors (in this post <code class="language-plaintext highlighter-rouge">pal_greys</code>).</li>
- <li>Extract the values of the raster and reescale them to the length of the
+ <li>Extract the values of the raster and rescale them to the length of the
 palette (<code class="language-plaintext highlighter-rouge">c(1, 1000)</code>).</li>
  <li>Round those rescaled values to the nearest integer. So we would have an index
 indicating which value of <code class="language-plaintext highlighter-rouge">pal_greys</code> should be mapped to each cell.</li>
@@ -376,10 +376,10 @@ indicating which value of <code class="language-plaintext highlighter-rouge">pal
 <p>An additional note is that <code class="language-plaintext highlighter-rouge">geom_spatraster()</code> has a parameter <code class="language-plaintext highlighter-rouge">maxcell</code> that
 would perform a spatial resampling if the raster has more cells than <code class="language-plaintext highlighter-rouge">maxcell</code>.
 This is for optimization (note that <code class="language-plaintext highlighter-rouge">terra::plot()</code> has the same setup and that
-the users often forgot about it), but we can force to plot all the cells by
-using <code class="language-plaintext highlighter-rouge">maxcell = Inf</code>. On this approach for using <code class="language-plaintext highlighter-rouge">fill</code> the value <code class="language-plaintext highlighter-rouge">maxcell</code>
+users often forget about it), but we can force all cells to be plotted by
+using <code class="language-plaintext highlighter-rouge">maxcell = Inf</code>. In this approach using <code class="language-plaintext highlighter-rouge">fill</code>, the value of <code class="language-plaintext highlighter-rouge">maxcell</code>
 needs to be effectively set to <code class="language-plaintext highlighter-rouge">Inf</code> to ensure that the number of color values
-and the number of cells is the same.</p>
+and the number of cells are the same.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Use a vector of colors</span><span class="w">
 
@@ -427,7 +427,7 @@ distance among colors is the same:</p>
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" /></p>
-<p>For that reason, tidyterra provides additional gradients whose colors are placed
+<p>For that reason, <strong>tidyterra</strong> provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Hypso gradient</span><span class="w">
@@ -451,7 +451,7 @@ of palettes provided by <strong>tidyterra</strong>. We use here the version
 <code class="language-plaintext highlighter-rouge">tidyterra::scale_fill_hypso_c()</code> for taking advantage of the uneven color
 gradients.</p>
 <p>A downside of using these scales is that we also need to adjust the <code class="language-plaintext highlighter-rouge">limits</code>
-argument of the functions to make <code class="language-plaintext highlighter-rouge">ggplot2</code> aware of the limits of the value of
+argument of the functions to make <strong>ggplot2</strong> aware of the limits of the value of
 the raster. This is easily achieved with <code class="language-plaintext highlighter-rouge">terra::minmax()</code> but I added an extra
 touch rounding up and down the range of values to the nearest 500.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -704,7 +704,7 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" class="chulapa-text-body-color">
-              Hillshade, colors and marginal plots with tidyterra (II)
+              Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)
             </a>
          </p>
            <p class="card-text">
@@ -723,7 +723,7 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">
-              Introducing tidyterra
+              Introducing <strong>tidyterra</strong>
             </a>
          </p>
            <p class="card-text">

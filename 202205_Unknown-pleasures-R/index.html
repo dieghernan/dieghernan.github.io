@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Unknown pleasures with R",
-    "description": "Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using  elevation data with R, sf, terra and ggridges."
+    "description": "Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using elevation data with R, sf, terra and ggridges."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using  elevation data with R, sf, terra and ggridges.">
+   <meta name="description" content="Joyplot elevation maps with ggridges and terra - Create ridgelines (AKA joyplots) of territories using elevation data with R, sf, terra and ggridges.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Unknown pleasures with R</h1><p class="lead chulapa-subtitle p-summary">Joyplot elevation maps with ggridges and terra</p>
+           <h1 class="p-name">Unknown pleasures with R</h1><p class="lead chulapa-subtitle p-summary">Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong></p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -269,11 +269,11 @@ Pulsars” by Harold D. Craft, Jr. (September 1970). Original source:
 <p>Nine years later, a young graphic designer named Peter Saville had a new
 project. He had to design the cover of the debut album of a young British rock
 band, named Joy Division. At some point in the process, Bernard Sumner (lead
-guitar of Joy Division)<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, found the following image on <em>The Cambridge
+guitarist of Joy Division)<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> found the following image in <em>The Cambridge
 Encyclopaedia of Astronomy</em> (1977 edition):</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Cambridge: CP 1919 Pulsar
 Image" /></p>
-<p>Saville presented a black and white version, producing a cover that reaches an
+<p>Saville presented a black-and-white version, producing a cover that reached
 iconic status in the ’80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Joy Division - Unknown pleasure
@@ -289,7 +289,7 @@ plots</strong> or <strong>joyplots</strong>, in honor of Joy Division. In this p
 “joyplots” with <strong>R</strong> for specific regions of the world using elevation data for
 creating the ridges.</p>
 <h2 id="creating-joyplot-maps-with-r">Creating joyplot maps with <strong>R</strong></h2>
-<p>This topic has already been covered by other authors, as <a href="https://danielredondo.com/blog/2020-01-25-joy_division/">Daniel
+<p>This topic has already been covered by other authors, such as <a href="https://danielredondo.com/blog/2020-01-25-joy_division/">Daniel
 Redondo</a> (Spanish) and
 <a href="https://cartographicperspectives.org/index.php/journal/article/view/1536/1726">Travis M.
 White</a>.
@@ -298,17 +298,17 @@ However, they both use QGIS, while in this post I work completely in
 <p>Some initial considerations we may need to bear in mind:</p>
 <ul>
  <li>
-   <p>On this post I will use <code class="language-plaintext highlighter-rouge">geom_ridgline()</code> instead of
-<code class="language-plaintext highlighter-rouge">geom_density_ridges()</code>. This would provide us with more control on the
-final plot, but it has a point of attention: <strong>both the coordinates and the
+   <p>In this post I will use <code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> instead of
+<code class="language-plaintext highlighter-rouge">geom_density_ridges()</code>. This gives us more control over the
+final plot, but there is a caveat: <strong>both the coordinates and the
 elevation should be in the same unit</strong> (<a href="https://wilkelab.org/ggridges/reference/geom_ridgeline.html">See
-why</a> ).
+why</a>).
 Therefore we should project both the raster and the base <code class="language-plaintext highlighter-rouge">sf</code> object on a
 suitable CRS defined in meters (in this case).</p>
  </li>
  <li>
    <p>Joyplots are much cooler when only a few lines are displayed. This is
-directly related with the number of rows of our raster. A very detailed
+directly related to the number of rows in our raster. A very detailed
 raster (e.g. lots of rows) would produce a much more detailed plot but it may not
 suit our needs.</p>
  </li>
@@ -341,9 +341,9 @@ relevant.</p>
   </span><span class="c1"># And project data</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">25830</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Now we need to extract the elevation using <code class="language-plaintext highlighter-rouge">elevatr</code>. We can also adjust the
-zoom level as needed. You can find a good guidance on the zoom levels on the
-<a href="https://wiki.openstreetmap.org/wiki/Zoom_levels">OpenStreetMaps wiki</a>.</p>
+<p>Now we need to extract the elevation using <strong>elevatr</strong>. We can also adjust the
+zoom level as needed. You can find guidance on zoom levels in the
+<a href="https://wiki.openstreetmap.org/wiki/Zoom_levels">OpenStreetMap wiki</a>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">dem</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_elev_raster</span><span class="p">(</span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">clip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bbox"</span><span class="p">,</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="c1"># And convert to terra</span><span class="w">
@@ -362,7 +362,7 @@ zoom level as needed. You can find a good guidance on the zoom levels on the
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
 <p>We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
-reduce the number of cells or increasing the size of the cells) using a scaling
+reduce the number of cells or increase their size) using a scaling
 factor that would reduce the number of rows to our desired target (in this case
 90 rows):</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Approx</span><span class="w">
@@ -376,16 +376,16 @@ factor that would reduce the number of rows to our desired target (in this case
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
-<p>We can check how the number of rows have decreased. Also, the plot shows that we
-have now less cells.</p>
+<p>We can check how the number of rows has decreased. Also, the plot shows that we
+now have fewer cells.</p>
 <p>Now, we may need to perform additional manipulations on the values of the
 raster:</p>
 <ul>
  <li>
-   <p>We need to ensure that all the valid values are equal or greater than zero.</p>
+   <p>We need to ensure that all valid values are greater than or equal to zero.</p>
  </li>
  <li>
-   <p>We will replace the <code class="language-plaintext highlighter-rouge">NAs</code> produced when masking the raster to zero. We
+   <p>We will replace the <code class="language-plaintext highlighter-rouge">NA</code> values produced when masking the raster with zeros. We
 will use this later to decide whether to remove some parts of the
 plot.</p>
  </li>
@@ -545,7 +545,7 @@ parts of the string can be easily removed.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
 <h3 id="with-colors">With colors</h3>
-<p>We can apply different colors to the plot. Note that <code class="language-plaintext highlighter-rouge">ggridges</code> only accepts
+<p>We can apply different colors to the plot. Note that <strong>ggridges</strong> only accepts
 different <code class="language-plaintext highlighter-rouge">aes</code> by row, and not by column:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Classify on three different bands</span><span class="w">
@@ -580,7 +580,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
 <h3 id="combine-with-another-object">Combine with another object</h3>
-<p>Like using a <code class="language-plaintext highlighter-rouge">sf</code> object:</p>
+<p>For example, using an <code class="language-plaintext highlighter-rouge">sf</code> object:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">highres</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_nuts</span><span class="p">(</span><span class="w">
   </span><span class="n">nuts_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ES61"</span><span class="p">,</span><span class="w">
@@ -608,7 +608,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
-<p>Or maybe adding a frame to the plot</p>
+<p>Or adding a frame to the plot:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">frame</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.polygons</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">,</span><span class="w"> </span><span class="n">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_as_sf</span><span class="p">()</span><span class="w">

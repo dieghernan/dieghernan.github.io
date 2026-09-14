@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-08-23 -->
+    <!-- Page build 2026-09-14 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Introducing tidyterra</h1><p class="lead chulapa-subtitle p-summary">Easily work and ggplot SpatRasters</p>
+           <h1 class="p-name">Introducing <strong>tidyterra</strong></h1><p class="lead chulapa-subtitle p-summary">Easily work and ggplot SpatRasters</p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -214,7 +214,7 @@
          <meta itemprop="position" content="1" ></li>
       <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
           itemtype="https://schema.org/ListItem">
-        <span itemprop="name">Introducing tidyterra</span>
+        <span itemprop="name">Introducing <strong>tidyterra</strong></span>
        <meta itemprop="position" content="2" >
      </li>
  </ol>
@@ -253,11 +253,11 @@
 				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
 			</button>
 		</p>
-		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Introducing tidyterra</a></p>		
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Introducing <strong>tidyterra</strong></a></p>		
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#wait-volcano-is-flipped" class="nav-link">Wait, <code class="language-plaintext highlighter-rouge">volcano</code> is flipped?</a></li><li class="nav-item nav d-block"><a href="#working-with-spatrasters" class="nav-link">Working with SpatRasters</a></li><li class="nav-item nav d-block"><a href="#an-easter-egg" class="nav-link">An Easter egg</a></li></ul>
 		</nav>   
 	</div>
-			<p>If you have been playing around with <strong>R</strong> for a while, probably you are
+			<p>If you have been playing around with <strong>R</strong> for a while, you are probably
 familiar with the <code class="language-plaintext highlighter-rouge">volcano</code> dataset:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
@@ -268,7 +268,7 @@ familiar with the <code class="language-plaintext highlighter-rouge">volcano</co
 (New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
 Eden</a>. But <strong>do you know
 that this map is flipped?</strong></p>
-<p>On this post I introduce the <a href="https://github.com/dieghernan/tidyterra">tidyterra
+<p>In this post I introduce the <a href="https://github.com/dieghernan/tidyterra"><strong>tidyterra</strong>
 package</a>, recently added to
 <a href="https://CRAN.R-project.org/package=tidyterra">CRAN</a>, and I show you how to
 geotag the <code class="language-plaintext highlighter-rouge">volcano</code> dataset. We will also produce <strong>ggplot2</strong> maps using the
@@ -281,7 +281,7 @@ functions of <strong>tidyterra</strong>.</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="wait-volcano-is-flipped">Wait, <code class="language-plaintext highlighter-rouge">volcano</code> is flipped?</h2>
-<p>Let’s check it out. Thanks to the package <code class="language-plaintext highlighter-rouge">maptiles</code> we can have a glimpse of
+<p>Let’s check it out. Thanks to the package <strong>maptiles</strong> we can have a glimpse of
 the location of Maungawhau using map tiles (as Google Maps uses). We will use
 <strong>tidyterra</strong> for displaying the map tile:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -312,7 +312,7 @@ the location of Maungawhau using map tiles (as Google Maps uses). We will use
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
 <p>So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
 question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
-geo-tagged map tile)? Let’s check it out</p>
+geotagged map tile)? Let’s check it out.</p>
 <h2 id="working-with-spatrasters">Working with SpatRasters</h2>
 <p>Thanks to the <strong>terra</strong> package we can start converting <code class="language-plaintext highlighter-rouge">volcano</code> into a
 SpatRaster:</p>
@@ -346,10 +346,10 @@ SpatRaster:</p>
 </span><span class="c1">#&gt; max value   :   195</span><span class="w">
 </span></code></pre></div></div>
 <p>Nice! Now we have a raster of <code class="language-plaintext highlighter-rouge">volcano</code>, but still without geotagged
-information. Thanks to this article of Tomislav Hengl
+information. Thanks to this article by Tomislav Hengl
 (<a href="https://twitter.com/tom_hengl">\@tom_hengl</a>) we can check the basic geographic
 parameters of <code class="language-plaintext highlighter-rouge">volcano</code> (see <a href="https://geomorphometry.org/volcano-maungawhau/">Volcano
-Maungawhau</a>), that are:</p>
+Maungawhau</a>), which are:</p>
 <ul>
  <li><strong>CRS</strong>: EPSG:27200</li>
  <li><strong>xllcorner</strong>: 2667400</li>
@@ -412,7 +412,7 @@ template:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
 <h2 id="an-easter-egg">An Easter egg</h2>
 <p>The <code class="language-plaintext highlighter-rouge">volcano</code> dataset may not be completely up to date. As a complement,
-<strong>tidyterra</strong> includes a <code class="language-plaintext highlighter-rouge">.tif</code> file with the same dimensions that our <code class="language-plaintext highlighter-rouge">volcano2</code>
+<strong>tidyterra</strong> includes a <code class="language-plaintext highlighter-rouge">.tif</code> file with the same dimensions as our <code class="language-plaintext highlighter-rouge">volcano2</code>
 raster, but with the topographic values extracted from <a href="https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/">Auckland LiDAR 1m DEM
 (2013)</a> and
 resampled to a resolution of 5x5 meters, for package size optimization. See here
@@ -557,7 +557,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" class="chulapa-text-body-color">
-              Hillshade, colors and marginal plots with tidyterra (II)
+              Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)
             </a>
          </p>
            <p class="card-text">
@@ -576,7 +576,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/" class="chulapa-text-body-color">
-              Hillshade, colors and marginal plots with tidyterra (I)
+              Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)
             </a>
          </p>
            <p class="card-text">
