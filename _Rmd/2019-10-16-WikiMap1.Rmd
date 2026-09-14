@@ -95,15 +95,15 @@ DonorRate <- left_join(
 As already explained, I would like to follow the Wikipedia conventions, so there
 are some things to bear in mind:
 
--   Obviously, the colors. Wikipedia already provides good guidance for this. I
-    will use the `RColorBrewer` library, which implements
-    [ColorBrewer](http://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9) in
-    **R**.
--   In terms of projection, Wikipedia recommends the
-    [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection)
-    but, as in their own sample of a gradient map, I will use the
-    [Robinson projection](https://en.wikipedia.org/wiki/Robinson_projection).
--   I should also produce an `.svg` file following the naming convention.
+- Obviously, the colors. Wikipedia already provides good guidance for this. I
+  will use the **RColorBrewer** library, which implements
+  [ColorBrewer](http://colorbrewer2.org/#type=sequential&scheme=PuBu&n=9) in
+  **R**.
+- In terms of projection, Wikipedia recommends the
+  [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection)
+  but, as in their own sample of a gradient map, I will use the
+  [Robinson projection](https://en.wikipedia.org/wiki/Robinson_projection).
+- I should also produce an `.svg` file following the naming convention.
 
 Some libraries remain to be used: **RColorBrewer**, **rsvg** and, especially,
 one of my favorites, **cartography**:

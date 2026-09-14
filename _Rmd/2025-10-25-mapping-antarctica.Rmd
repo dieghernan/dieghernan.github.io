@@ -73,7 +73,7 @@ ggplot(antarct) +
 ```
 
 The shapefile contains a visible "lollipop" cut that looks unnatural in an
-orthographic projection. I correct it manually by:
+orthographic projection. I correct it manually with these steps:
 
 1.  Identify the polygon that represents the main Antarctic landmass.
 2.  Convert that polygon to a sequence of coordinates (points).
@@ -286,12 +286,18 @@ antarctica_simp |>
   labs(title = "Emblem of the Antarctic Treaty")
 ```
 
-### Antarctica Flag Redesigned
+### Antarctica flag redesigned
 
-In 2024, Graham Bartram presented a refreshed version of his flag that preserves
-the white Antarctic outline but fills the blue field with many tiny, colorful
-dots representing microplastics - even in remote regions. Because the design
-relies on randomness, we approximate it using the following procedure:
+In 2024, Graham Bartram revealed a new version of his original flag as part of
+a global campaign to raise awareness about the growing problem of microplastic
+pollution. The new design keeps the familiar white outline of Antarctica but
+swaps the plain blue background for one filled with countless tiny, colorful
+dots. These dots represent the microscopic bits of plastic that have been
+discovered even in the planet’s most untouched places, including the Antarctic
+ice and its surrounding oceans.
+
+Because the design relies on randomness, we approximate it using the following
+procedure:
 
 1.  Sample random points across the Antarctic polygon.
 2.  Build Voronoi polygons from those points, then apply a small negative buffer

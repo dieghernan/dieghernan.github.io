@@ -1,5 +1,5 @@
 ---
-title: "Beautiful Maps with R (V): Point densities"
+title: "Beautiful maps with R (V): Point densities"
 subtitle: "Bertin's dot density maps with R and GHSL"
 excerpt: Another way to represent demographics on a map.
 tags:
@@ -40,19 +40,20 @@ rm(list = ls())
 
 Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a
 new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
-a dot density map based on the work of the french cartographer [Jacques
+a dot density map based on the work of the French cartographer [Jacques
 Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 
 ![Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
 (1967)](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
-In this post I would create a similar map for Iberia, and additionally I would
-show how to create a variation using a hexagonal grid instead of a rectangular
-one.
+In this post, I create a similar map for Iberia and also show how to create a
+variation using a hexagonal grid instead of a rectangular one. This is the fifth
+issue of the series
+[Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
 
-I would use the following libraries for loading, manipulating and plotting
+I will use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
 ```{r libraries}
@@ -74,13 +75,13 @@ library(exactextractr)
 
 ## Get the data
 
-The first step is always to get the data we need. My final map would use as a
-base a circular layout with Iberia in the middle (that would be our observation
-window), so we can get the corresponding shapes and create a buffer around it.
+The first step is always to get the data we need. My final map uses a circular
+layout with Iberia in the middle (that is our observation window), so we can get
+the corresponding shapes and create a buffer around it.
 
-After that, we would extract the population spatial distribution from [GHSL -
+After that, we extract the population spatial distribution from [GHSL -
 Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
-would use the global file with a resolution of 1 km on Mollweide projection
+use the global file with a resolution of 1 km in the Mollweide projection
 (ESRI:54009).
 
 ```{r 202312_basemap}
@@ -117,10 +118,10 @@ base_gg <- ggplot() +
 base_gg
 ```
 
-That would be our base map. Now we download programmatically the GHSL data and
-we would check that everything is correct. At this point, it is interesting to
+That is our base map. Now we download the GHSL data programmatically and check
+that everything is correct. At this point, it is interesting to
 use the `win` argument when reading the raster with `terra::rast()`, as this
-would allow us to load only the desired area with the subsequent improvement in
+allows us to load only the desired area with the subsequent improvement in
 terms of performance.
 
 ```{r 202312_base_raster}
@@ -161,15 +162,15 @@ base_gg +
 
 ## Data wrangling
 
-The GHSL information contains the estimated population on each grid. However the
-file has a high resolution (more than 2 millions of cells) so for plotting
+The GHSL information contains the estimated population in each cell. However, the
+file has a high resolution (more than 2 million cells), so for plotting
 purposes we are going to reduce (i.e. aggregate) the number of cells so we can
-have a better dot visualization. Once that we aggregate, we would compute the
+have a better dot visualization. Once we aggregate, we compute the
 area of each new aggregated cell and compute the corresponding population
 density.
 
-Instead of using the numeric range of densities, we would use categories for the
-final map, so we would classify the density into different groups:
+Instead of using the numeric range of densities, we use categories for the final
+map, so we classify the density into different groups:
 
 ```{r}
 
@@ -210,7 +211,7 @@ pop_points <- pop_agg %>%
 
 ## Final plot
 
-And finally the map. In this case I would save it as a high resolution square
+And finally, the map. In this case, I save it as a high-resolution square
 map.
 
 ```{r 202312_finalmap}
@@ -275,31 +276,32 @@ ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 
 ## Alternative hexagonal grid
 
-The previous plot is based on the centroids of each cell of the raster, that is,
+The previous plot is based on the centroids of each cell of the raster, which is,
 by definition, a rectangular grid. I would also like to experiment with
-hexagonal grids (i.e. grid of hexagons) since I have the feeling that looks more
-"natural" than the rectangular ones, that presents a regularity hardly seen in
+hexagonal grids (i.e. a grid of hexagons) since I have the feeling that they
+look more "natural" than the rectangular ones, which present a regularity
+hardly seen in
 the wild.
 
-The issue here is that `terra` does not produce this type of grids, however it
+The issue here is that **terra** does not produce this type of grid. However, it
 is possible to create them with `sf::st_make_grid()`, so the workflow for this
-altenative is:
+alternative is:
 
-1.  Create a hexagonal grid, where each hexagon represents a similar area than
-    each cell on the aggregated raster.
+1.  Create a hexagonal grid, where each hexagon represents a similar area to
+    each cell in the aggregated raster.
 2.  Extract the values of the raster to the new grid.
 3.  Finally, follow the same steps on data wrangling and plotting.
 
 When working with `sf::st_make_grid(square = FALSE)`, the parameter `cellsize`
-should be the "diameter" of the hexagon instead of the area. Luckly, we can
+should be the "diameter" of the hexagon instead of the area. Luckily, we can
 infer this value since the area of a hexagon is
 
 $$
 A = \frac{\sqrt{3}}{2}d^{2}
 $$
 
-So we can extract $d$ from the previous expresion knowing the area $A$ of the
-aggregated cells:
+So we can extract $$d$$ from the previous expression knowing the area $$A$$ of
+the aggregated cells:
 
 ```{r}
 # Hex grid with sf ----
@@ -347,7 +349,7 @@ base_gg +
 
 ```
 
-Finally we just compute densities, create categories and finally the map:
+Finally, we compute densities, create categories and produce the map:
 
 ```{r 202312_finalmap_hex}
 

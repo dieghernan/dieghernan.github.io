@@ -1,5 +1,5 @@
 ---
-title: "Hillshade, colors and marginal plots with tidyterra (II)"
+title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)"
 subtitle: "The rain in Spain does not stay mainly in the plain"
 excerpt: "Add marginal plots to a SpatRaster map on ggplot2"
 tags:
@@ -33,11 +33,11 @@ knitr::opts_chunk$set(
 rm(list = ls())
 ```
 
-*This is the second post of the series "Hillshade, colors and
+_This is the second post of the series "Hillshade, colors and
 marginal plots with **tidyterra**". In this post, I explore an approach for
 annotating marginal plots on a **ggplot2** map of a SpatRaster, including
 information about the values by longitude and latitude. See the first post of the
-series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/).*
+series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/)._
 
 If you love watching classic movies, especially from Hollywood's Golden Age,
 you may recognize the following lyrics:
@@ -59,8 +59,8 @@ you may recognize the following lyrics:
 {% include snippets/video.html id="uVmU3iANbgk" provider="youtube" nolazy="true" %}
 
 
-This hard statement is made on [*My Fair Lady
-(1964)*](https://en.wikipedia.org/wiki/My_Fair_Lady_(film)) by Audrey Hepburn,
+This emphatic statement is made in [_My Fair Lady
+(1964)_](<https://en.wikipedia.org/wiki/My_Fair_Lady_(film)>) by Audrey Hepburn,
 Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
 **completely false**.
 
@@ -96,12 +96,12 @@ library(colorspace)
 
 ## The plain in Spain
 
-Well, the plain (or as we name it *La Meseta Central*) covers a large area of
+Well, the plain (or as we name it _La Meseta Central_) covers a large area of
 inland Spain, with an average altitude of 650 meters above sea level.
 
 I didn't find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
-(historically the *Meseta* is associated to Castile and Madrid) and elevation
+(historically the _Meseta_ is associated with Castile and Madrid) and elevation
 data to get a rough shape.
 
 ```{r 20221212_plan_alt}
@@ -169,10 +169,10 @@ r_plain <- exploded %>%
 autoplot(r_plain)
 ```
 
-We can create a now plot similar to the one produced in the [previous
+We can create a new plot similar to the one produced in the [previous
 post](https://dieghernan.github.io/202210_tidyterra-hillshade/) to identify the
-plain. In first place I create a base layer with a representation of the
-hillshade, that we would reuse later:
+plain. First, I create a base layer with a representation of the
+hillshade, which we will reuse later:
 
 ```{r 20221212_hill}
 
@@ -282,9 +282,9 @@ plot_esp
 
 ## The rain in Spain
 
-Let's check now wheter the rain falls mainly in the plain or not. We use here
+Let's check now whether the rain falls mainly in the plain or not. We use here
 `geodata::worldclim_country()` to get the average precipitation by month from
-[WordClim](https://www.worldclim.org/):
+[WorldClim](https://www.worldclim.org/):
 
 ```{r 20221212_precip_data}
 # Precipitation of Spain
@@ -327,7 +327,7 @@ autoplot(precip_avg_mask)
 ### Creating a modified palette
 
 We can now start representing our precipitation map. I chose here to create a
-custom palette with `colorspace`  to better highlight the differences:
+custom palette with **colorspace** to better highlight the differences:
 
 ```{r 20221212_mypal}
 
@@ -342,8 +342,8 @@ mypal <- sequential_hcl(
 show_col(mypal)
 ```
 
-And now we can create the final map showing if *the rain in Spain stays mainly
-in the plain*:
+And now we can create the final map showing if _the rain in Spain stays mainly
+in the plain_:
 
 ```{r 20221212_precip_end}
 # Precipitation limits, rounded to 100
@@ -402,15 +402,15 @@ meteo_plot <- hill_plot +
 meteo_plot
 ```
 
-We can now check that the rain in Spain falls mainly in the Atlantic coast
-(North of Spain) and specifically in Galicia. That's why in Spanish the lyrics
-*The rain in Spain stays mainly in the plain* were translated into:
+We can now see that the rain in Spain falls mainly on the Atlantic coast
+(northern Spain) and specifically in Galicia. That's why in Spanish the lyrics
+_The rain in Spain stays mainly in the plain_ were translated into:
 
 > La lluvia en Sevilla es una pura maravilla.
 
-That can be translated as *"The rain in Seville is a true marvel"*. And it is,
+That can be translated as _"The rain in Seville is a true marvel"_. And it is,
 indeed. Seville (located in the south on the [Guadalquivir
-Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7) has circa 50 rainy days per year,
+Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7)) has circa 50 rainy days per year,
 featuring very hot and dry summers.
 
 ## Marginal plots (finally)
@@ -419,7 +419,7 @@ We can now start profiling our final plot. The idea is to create two bar charts,
 representing the value to be plotted (in this case, average annual
 precipitation) by longitude and latitude.
 
-But first we add some additional margins and title axes to the main plot, so we
+But first we add some additional margins and axis titles to the main plot, so we
 can insert those marginal plots easily on our main plot:
 
 ```{r 20221212_precip_for_margin}
@@ -455,7 +455,7 @@ plot_main
 
 ### Profiling marginal plots
 
-On the following code, I am just drafting how the marginal plots would look
+In the following code, I am drafting what the marginal plots would look
 like, so we can have a preview of the final result:
 
 ```{r 20221212_profile_marg}
@@ -652,7 +652,7 @@ And with a bit of effort we got it.
 
 ## Recap
 
-Much of the code we have created relates with the theming and labels of the
+Much of the code we have created relates to the theming and labels of the
 plot. Here you can find a simplified version:
 
 <details markdown="1">

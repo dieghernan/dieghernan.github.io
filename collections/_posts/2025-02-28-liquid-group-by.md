@@ -29,14 +29,14 @@ This website is created using Jekyll, specifically my Jekyll template
 
 Some time ago, [@cargocultprogramming](https://github.com/cargocultprogramming)
 opened [dieghernan/chulapa#29](https://github.com/dieghernan/chulapa/issues/29)
-because one of the components of the theme was broken in Jekyll `=>4.1.0`.
+because one of the components of the theme was broken in Jekyll `>=4.1.0`.
 Digging a bit, I saw
 [jekyll/jekyll#8214](https://github.com/jekyll/jekyll/issues/8214), exposing
 the same issue. What seemed to be a feature was indeed a bug that some
 developers were exploiting.
 
 The change is that when applying the `group_by` Liquid filter on an array, it
-used to produce a "grouped" version of the array, while on Jekyll `=>4.1.0`
+used to produce a "grouped" version of the array, while in Jekyll `>=4.1.0`
 it produces a different result that can't be used in the same way.
 
 ```html
@@ -56,7 +56,7 @@ B"], "size"=>1}{"name"=>"Virtualbox", "items"=>["Virtualbox"],
 ```
 
 So basically, counting items was not easy anymore. I developed a solution in
-pure Liquid (which happens to be a quite verbose language out of the predefined
+pure Liquid (which is quite verbose when working outside the predefined
 filters) that is compatible with any Jekyll version.
 
 The algorithm is now implemented in <span class="chulapa">Chulapa</span>. You

@@ -16,7 +16,8 @@ output:
 ---
 
 
-This is a very personal post, where I just show the map of all the places I have traveled by plain
+This is a very personal post, where I just show the map of all the
+places I have traveled to by plane.
 
 
 
@@ -228,7 +229,7 @@ map
 {: .alert .alert-info .p-3 .mx-2 .my-3 .lead}
 
 
-## Top Cities
+## Top cities
 
 ```{r Cities,echo=FALSE,  warning=FALSE, message=FALSE, tidy='styler'}
 names <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodes.csv")
@@ -251,7 +252,7 @@ knitr::kable(head(Cities %>% select(
 ) %>% filter(City != "Madrid") %>% arrange(desc(N)), 10), format = "markdown")
 ```
 
-## Top Countries
+## Top countries
 
 ```{r Countries,echo=FALSE, warning=FALSE, message=FALSE, tidy='styler'}
 
@@ -268,7 +269,7 @@ format = "markdown"
 )
 ```
 
-## Top Continents
+## Top continents
 
 ```{r Continents, echo=FALSE, warning=FALSE, message=FALSE, tidy='styler'}
 

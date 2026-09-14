@@ -1,5 +1,5 @@
 ---
-title: "New features on cartography package"
+title: "New features in the <strong>cartography</strong> package"
 subtitle: "Vignette of the package expansion"
 tags:
   - r_bloggers
@@ -21,7 +21,8 @@ output:
 
 ## Introduction
 
-The aim of this document is to describe the new features added to `cartography` on version `2.4.0` by
+This document describes the new features added to **cartography** in version
+`2.4.0` by
 [dieghernan](https://github.com/dieghernan/) and already available on **CRAN**.
 
 Those new features are:
@@ -41,7 +42,7 @@ packageVersion("cartography")
 ## [1] '3.0.0'
 ```
 
-## Hatched Map
+## Hatched map
 
 Version of typology/choropleth maps using a hatched filling. This is
 particularly useful for maps that need to be printed in black and white, such
@@ -334,7 +335,7 @@ layoutLayer(
 
 ![plot of chunk 20200217_hatched-adv](https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp)
 
-## `png` Layer
+## PNG layer
 
 This new capability geotags a `.png` file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a `POLYGON/MULTIPOLYGON`.
 
@@ -423,7 +424,7 @@ pngLayer(UKpng, add=TRUE)
 
 ![plot of chunk 20200217_png-adv](https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp)
 
-## wordcloudLayer
+## `wordcloudLayer()`
 
 A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.
 

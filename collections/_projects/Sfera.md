@@ -22,7 +22,7 @@ project_links:
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 **Sfera** for Pebble Time Round is a highly customizable watch face that gets
-the most out of the smartwatch capabilities. Set your preferences and enjoy this
+the most out of the smartwatch's capabilities. Set your preferences and enjoy this
 beautifully designed watch face.
 
 ![Banner](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)

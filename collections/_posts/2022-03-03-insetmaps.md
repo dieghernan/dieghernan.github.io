@@ -1,8 +1,8 @@
 ---
-title: "Insets with ggplot2 and tmap - and mapsf!"
+title: "Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!"
 subtitle: "A map on a map"
-excerpt: A common challenge when creating maps is how to include an inset map on
-  your visualization. An inset map is a smaller map usually included on a corner
+excerpt: A common challenge when creating maps is how to include an inset map in
+  your visualization. An inset map is a smaller map usually included in a corner
   that may provide additional context to the overall map, or may include map
   units that would not usually be represented properly.
 tags:
@@ -38,9 +38,9 @@ I have already covered this
 but this time I show how to produce these insets using the **ggplot2** and
 **tmap** packages. In short: use the **cowplot** package.
 
-## Test case: Canary Island as an inset
+## Test case: Canary Islands as an inset
 
-In this example, I create a map of Spain using `mapSpain` and an inset for the
+In this example, I create a map of Spain using **mapSpain** and an inset for the
 Canary Islands.
 
 The "true" map of Spain is:
@@ -85,18 +85,18 @@ ggplot(island) +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
 
-So that was easy! Just a couple of maps using `ggplot2`. Let's start mixing and
+So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing and
 matching!
 
-## On `ggplot2`
+## On **ggplot2**
 
-We have already created two quick maps with `ggplot2`. Now, to produce our map
+We have already created two quick maps with **ggplot2**. Now, to produce our map
 with insets we will:
 
 1.  Produce two plots: the main plot and the subplot, providing a minimal style.
-    We will store them as `ggplot2` objects.
+    We will store them as `ggplot` objects.
 
-2.  Combine both objects with `cowplot`.
+2.  Combine both objects with **cowplot**.
 
 ```r
 # Main plot
@@ -121,7 +121,7 @@ sub_gg <- ggplot(island) +
   )
 ```
 
-We have our objects in place, and now is when the magic happens! With `cowplot`,
+We have our objects in place, and now is when the magic happens! With **cowplot**,
 we can combine both maps into a single one. You may need to play a bit with the
 parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve the
 placement:
@@ -188,7 +188,7 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%"/>
 
-## On `tmap`
+## On **tmap**
 
 We can follow a similar approach with **tmap**. In version 3.x.x (there is a
 new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)),
@@ -228,10 +228,10 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%"/>
 
-## Update: On `mapsf`
+## Update: On **mapsf**
 
 [Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA
-[\@rgeomatic](https://twitter.com/rgeomatic)), the developer of `mapsf`, also
+[\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
 shared how to create inset maps using that package:
 
 ```r

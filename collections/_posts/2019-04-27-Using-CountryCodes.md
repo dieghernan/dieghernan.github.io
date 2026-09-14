@@ -1,5 +1,5 @@
 ---
-title: Using the CountryCodes database and sf package
+title: Using the CountryCodes database and <strong>sf</strong> package
 subtitle: Vignette of the CountryCodes project
 tags:
   - r_bloggers

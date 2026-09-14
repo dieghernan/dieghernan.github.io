@@ -1,6 +1,6 @@
 ---
 title: Cast a line to subsegments in R
-subtitle: User-defined function using the sf package
+subtitle: User-defined function using the <strong>sf</strong> package
 tags:
   - r_bloggers
   - rstats

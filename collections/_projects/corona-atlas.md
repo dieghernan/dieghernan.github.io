@@ -34,7 +34,7 @@ Interactive map of the international COVID-19 risk areas as designated by the Ge
 
 The data is updated periodically from the website of the [Robert Koch Institute](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Risikogebiete_neu.html).
 
-Data scraping is performed on **Python** with
+Data scraping is performed in **Python** with
 [**scrapy**](https://scrapy.org/).
 The scraper also uses
 [**pandas**](https://pandas.pydata.org/) and
@@ -47,4 +47,4 @@ generated via [{rmarkdown}](https://rmarkdown.rstudio.com/) using
 the [tidyverse](https://www.tidyverse.org/).
 For the deployment, map logic has moved to JavaScript to support multiple languages.
 
-[Read more on this post](/202203_Corona-timelapse)
+[Read more in this post](/202203_Corona-timelapse)

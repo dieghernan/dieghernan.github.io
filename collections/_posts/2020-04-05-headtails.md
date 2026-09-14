@@ -1,5 +1,5 @@
 ---
-title: "Head/Tails breaks on the <code>classInt</code> package."
+title: "Head/tail breaks in the <strong>classInt</strong> package"
 tags:
   - r_bloggers
   - rstats
@@ -24,19 +24,28 @@ output:
 ## Abstract
 
 This vignette discusses the implementation of the "Head/tail breaks" style
-(Jiang (2013)) in the `classIntervals` function from the **classInt** package.
+(Jiang (2013)) in the `classIntervals()` function from the **classInt** package.
 A step-by-step example is presented to clarify the method. A case study using
 `spData::afcon` is also included, making use of additional packages such as
 **sf**.
 
 ## Introduction
 
-The **Head/tail breaks**, sometimes referred to as the **ht-index** (Jiang and Yin (2013)), are a classification scheme introduced by Jiang (2013) to find groupings or hierarchy in data with a heavy-tailed distribution.
+**Head/tail breaks** is a classification scheme introduced by Jiang (2013) for
+revealing hierarchies in data with many small values and a few large ones.
+The related **ht-index** measures the depth of this hierarchy, rather than
+being another name for the classification method.
 
-Heavy-tailed distributions are heavily right skewed, with a minority of large values in the head and a majority of small values in the tail. This imbalance between the head and tail, or between many small values and a few large values, can be expressed as _"far more small things than large things"_.
+The distributions considered here are strongly right-skewed, with a minority
+of large values in the head and a majority of small values in the tail. This
+imbalance can be expressed as _"far more small things than large things"_.
 
-Heavy tailed distributions are commonly characterized by a power law, a lognormal or an exponential function. Nature, society, finance (Vasicek (2002)) and our daily lives are full of rare and extreme events,
-which are termed "black swan events" (Taleb (2008)). This line of thinking provides a good reason to reverse our thinking by focusing on low-frequency events.
+Power-law and lognormal distributions are examples of heavy-tailed
+distributions. The head/tail breaks literature also considers exponential
+distributions under its broader description of this imbalance. Nature,
+society and finance (Vasicek (2002)) provide examples of rare and extreme
+events. Taleb (2008) discusses the impact of unexpected extreme events,
+offering another reason to pay attention to low-frequency observations.
 
 ```r
 library(classInt)
@@ -92,27 +101,28 @@ The method itself consists of a four-step process performed recursively until a
 stopping condition is satisfied. Given a vector of values $$v = (a_1, a_2,
 ..., a_n) $$, the process can be described as follows:
 
-1. On each iteration, compute $$\mu = \sum_{i=1}^{n} a_i \:\:\: \forall \: a_i \in v$$.
+1. Compute the arithmetic mean, $$\mu = \frac{1}{n}\sum_{i=1}^{n} a_i$$.
 2. Break $$v$$ into the $$tail$$ and the $$head$$:
    $$tail = \{ a_x \in v | a_x \lt \mu \} $$
 $$head = \{ a_x \in v | a_x \gt \mu \} $$.
-3. Assess if the proportion of $$head$$ over $$v$$ is lower or equal than a given threshold:
+3. Check whether the proportion of observations in the head is at most the
+   chosen threshold:
    $$\frac{|head|}{|v|} \le threshold  $$
-4. If 3 is `TRUE`, repeat 1 to 3 until the condition is `FALSE` or no more partitions are possible (i.e. $$head$$ has less than two elements).
+4. If step 3 is `TRUE` and the head contains at least two observations, replace
+   $$v$$ with $$head$$ and repeat. Otherwise, stop.
 
-It is important to note that, at the beginning of a new iteration, $$v$$ is
-replaced by $$head$$. The underlying hypothesis is to create partitions until
-the head and the tail are balanced in terms of distribution. The stopping
-criterion is satisfied when the last head and the last tail are evenly
-balanced.
+Only values strictly above the mean enter the next iteration. Values equal to
+the mean are not part of the head. Stopping does not require an exact 50/50
+split.
 
-In terms of threshold, Jiang, Liu, and Jia (2013) set 40% as a good approximation, meaning that if the $$head$$ contains more than 40% of the observations the distribution is not considered heavy-tailed.
+A threshold of 40% provides a practical stopping rule. It is not a statistical
+test for whether a distribution is heavy-tailed.
 
 The final breaks are the vector of consecutive $$\mu$$:
 
 $$ breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n ) $$
 
-## Step by step example
+## Step-by-step example
 
 We reproduce here the pseudo-code[^1] as per Jiang (2019):
 
@@ -127,7 +137,9 @@ Recursive function Head/tail Breaks:
 End Function
 ```
 
-A step-by-step example in **R** (for illustrative purposes) has been developed:
+The following **R** example uses `prop < thr`, whereas the pseudocode above
+uses `head <= 40%`. At exactly 40%, the R loop stops and the pseudocode
+continues. This distinction does not affect the example below.
 
 ```r
 opar <- par(no.readonly = TRUE)
@@ -192,7 +204,8 @@ par(opar)
 
 ![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp)
 
-As it can be seen, in each iteration the resulting head gradually loses the high-tail property, until the stopping condition is met.
+The head proportion varies across iterations and reaches 50% in the fourth,
+which stops the loop. It does not increase monotonically.
 
 | iter |       mu | prop   | n_var | n_head |
 | ---: | -------: | :----- | ----: | -----: |
@@ -201,11 +214,13 @@ As it can be seen, in each iteration the resulting head gradually loses the high
 |    3 |  85.1766 | 19.35% |    31 |      6 |
 |    4 | 264.7126 | 50%    |     6 |      3 |
 
-The resulting breaks are then defined as `breaks = c(min(var), mu1, mu2, ..., mu_n, max(var))`.
+The break vector includes the original minimum and maximum, plus the means
+computed during the iterations. Here the original data are `sample_par`, since
+`var` is replaced by the head inside the loop.
 
-## Implementation on `classInt` package
+## Implementation in the **classInt** package
 
-The implementation in the `classIntervals` function should replicate the results:
+The implementation in `classIntervals()` reproduces these results:
 
 ```r
 ht_sample_par <- classIntervals(sample_par, style = "headtails")
@@ -216,9 +231,9 @@ brks == ht_sample_par$brks
 ## [1] TRUE TRUE TRUE TRUE TRUE TRUE
 ```
 
-As stated in Jiang (2013), the number of breaks is naturally determined,
-however, the `thr` parameter can help adjust the final number. A lower value
-of `thr` provides fewer breaks, while a larger `thr` increases the number if
+As stated in Jiang (2013), the number of breaks is determined by the data.
+However, the `thr` parameter can help adjust the final number. A lower value
+of `thr` can yield fewer breaks, while a larger `thr` can increase the number if
 the underlying distribution follows the _"far more small things than large
 things"_ principle.
 
@@ -262,7 +277,9 @@ par(opar)
 
 ![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp)
 
-The method always returns at least one break, corresponding to `mean(var)`.
+For this example, even `thr = 0` retains the mean as an internal break.
+The returned vector also contains the minimum and maximum, so this gives two
+classes, not one.
 
 ## Case study
 
@@ -306,12 +323,13 @@ par(opar)
 
 ![plot of chunk 20200405_summspdata](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp)![plot of chunk 20200405_summspdata](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp)
 
-The data shows that EG and SU data present a clear hierarchy over the rest of values. As per the histogram, we can confirm a heavy-tailed distribution and therefore the _"far more small things than large things"_ principle.
+The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram
+shows a strongly right-skewed pattern with many small values and a few large
+ones.
 
-As a test, on top of `headtails` and `fisher`, we also use `quantile` to get a
-broader view of the different breaking styles. As `quantile` is a position-based
-metric, it doesn't account for the magnitude of F(x) (hierarchy), so the breaks
-are solely defined by the position of x in the distribution.
+In addition to `headtails` and `fisher`, we use `quantile` to compare the
+classification styles. Quantile breaks are based on ranks rather than the
+size of the gaps between observations.
 
 Applying the three aforementioned methods to break the data:
 
@@ -343,9 +361,13 @@ par(opar)
 
 ![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp)![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp)![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp)
 
-It is observed that the top three classes of `headtails` enclose five observations, whereas `fisher` includes 13 observations. In terms of classification, the `headtails` breaks focus more on extreme values.
+The top three classes of `headtails` contain five observations, whereas those
+of `fisher` contain 13. In this example, `headtails` gives more detail at the
+upper end of the distribution.
 
-The next plot compares a continuous distribution of `totcon` re-escalated to a range of `[1,nclass]` versus the distribution across breaks for each style. The continuous distribution has been offset by -0.5 in order to align the continuous and the discrete distributions.
+The next plot compares density estimates of the rescaled `totcon` values and
+the class assignments from each method. The original values are rescaled to
+`[1, nclass]` and shifted by -0.5 for the visual comparison.
 
 ```r
 # Helper function to reescale values
@@ -406,11 +428,15 @@ par(opar)
 
 ![plot of chunk 20200405_benchmarkbreaks](https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp)
 
-It can be observed that the distribution of `headtails` breaks is also heavy-tailed, and closer to the original distribution. On the other extreme, "quantile" provides a quasi-uniform distribution, ignoring the `totcon` hierarchy
+In this example, the class assignments from `headtails` retain more of the
+original imbalance. By contrast, `quantile` aims for similar numbers of
+observations per class, regardless of the gaps between values.
 
-In terms of data visualization, we compare here the final map using the techniques mentioned above. On this plotting exercise, a choropleth map would be created.
+We now compare the methods using proportional-symbol maps. Symbol size
+represents `totcon`, while color distinguishes the classes.
 
-Additionally, a high-granularity choropleth map is created with a greater number of classes, in order to compare and contrast the actual grouping options against a more granular approach.
+The first map uses proportional symbols without class-based colors, providing
+a reference for the three classified maps.
 
 ```r
 library(sf)
@@ -493,7 +519,10 @@ par(opar)
 
 ![plot of chunk 20200405_finalplot](https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp)
 
-As per the results, `headtails` seems to provide a better understanding of the most extreme values when the result is compared against the high-granularity plot. The `quantile` style, as expected, just provides a clustering without taking into account the real hierarchy. The `fisher` plot is in-between of these two interpretations.
+Compared with the unclassified proportional-symbol map, `headtails` makes
+the most extreme values easier to distinguish. The `quantile` style groups
+observations by rank, while `fisher` provides an intermediate view in this
+example.
 
 It is also important to note that `headtails` and `fisher` reveal different
 information that can be useful depending on the context. While `headtails`
@@ -501,7 +530,7 @@ highlights the outliers, it fails to provide good clustering on the tail, while
 `fisher` seems to reflect these patterns better. This can be observed in the
 values of Western Africa and the Niger River Basin, where `headtails` does not
 highlight any special cluster of conflicts, while `fisher` suggests a
-potential cluster aligned with the high-granularity plot. This can be
+potential cluster consistent with the unclassified map. This can be
 confirmed in the histogram generated previously, where a concentration of
 `totcon` around 1,000 is visible.
 
@@ -519,4 +548,5 @@ Taleb, Nassim Nicholas. 2008. _The Black Swan: The Impact of the Highly Improbab
 
 Vasicek, Oldrich. 2002. \"Loan Portfolio Value.\" _Risk_, December, 160–62.
 
-[^1]: The method implemented on `classInt` corresponds to head/tails 1.0 as named on this article.
+[^1]: The method implemented in **classInt** corresponds to head/tail breaks
+    1.0, as named in this article.

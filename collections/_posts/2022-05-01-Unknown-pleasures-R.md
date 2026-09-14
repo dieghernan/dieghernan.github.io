@@ -1,8 +1,8 @@
 ---
 title: "Unknown pleasures with R"
-subtitle: Joyplot elevation maps with ggridges and terra
+subtitle: Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong>
 excerpt:
-  Create ridgelines (AKA joyplots) of territories using  elevation data with
+  Create ridgelines (AKA joyplots) of territories using elevation data with
   R, sf, terra and ggridges.
 tags:
   - r_bloggers
@@ -38,7 +38,7 @@ Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
 Nine years later, a young graphic designer named Peter Saville had a new
 project. He had to design the cover of the debut album of a young British rock
 band, named Joy Division. At some point in the process, Bernard Sumner (lead
-guitar of Joy Division)[^1], found the following image on _The Cambridge
+guitarist of Joy Division)[^1] found the following image in _The Cambridge
 Encyclopaedia of Astronomy_ (1977 edition):
 
 [^1]: Other versions of the story credit drummer Stephen Morris for finding it.
@@ -46,7 +46,7 @@ Encyclopaedia of Astronomy_ (1977 edition):
 ![Cambridge: CP 1919 Pulsar
 Image](https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg)
 
-Saville presented a black and white version, producing a cover that reaches an
+Saville presented a black-and-white version, producing a cover that reached
 iconic status in the '80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:
 
@@ -67,7 +67,7 @@ creating the ridges.
 
 ## Creating joyplot maps with **R**
 
-This topic has already been covered by other authors, as [Daniel
+This topic has already been covered by other authors, such as [Daniel
 Redondo](https://danielredondo.com/blog/2020-01-25-joy_division/) (Spanish) and
 [Travis M.
 White](https://cartographicperspectives.org/index.php/journal/article/view/1536/1726).
@@ -76,16 +76,16 @@ However, they both use QGIS, while in this post I work completely in
 
 Some initial considerations we may need to bear in mind:
 
-- On this post I will use `geom_ridgline()` instead of
-  `geom_density_ridges()`. This would provide us with more control on the
-  final plot, but it has a point of attention: **both the coordinates and the
+- In this post I will use `geom_ridgeline()` instead of
+  `geom_density_ridges()`. This gives us more control over the
+  final plot, but there is a caveat: **both the coordinates and the
   elevation should be in the same unit** ([See
-  why](https://wilkelab.org/ggridges/reference/geom_ridgeline.html) ).
+  why](https://wilkelab.org/ggridges/reference/geom_ridgeline.html)).
   Therefore we should project both the raster and the base `sf` object on a
   suitable CRS defined in meters (in this case).
 
 - Joyplots are much cooler when only a few lines are displayed. This is
-  directly related with the number of rows of our raster. A very detailed
+  directly related to the number of rows in our raster. A very detailed
   raster (e.g. lots of rows) would produce a much more detailed plot but it may not
   suit our needs.
 
@@ -123,9 +123,9 @@ region <- gisco_get_nuts(nuts_id = "ES61") %>%
   st_transform(25830)
 ```
 
-Now we need to extract the elevation using `elevatr`. We can also adjust the
-zoom level as needed. You can find a good guidance on the zoom levels on the
-[OpenStreetMaps wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
+Now we need to extract the elevation using **elevatr**. We can also adjust the
+zoom level as needed. You can find guidance on zoom levels in the
+[OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
 
 ```r
 
@@ -148,7 +148,7 @@ terra::plot(dem)
 
 We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
-reduce the number of cells or increasing the size of the cells) using a scaling
+reduce the number of cells or increase their size) using a scaling
 factor that would reduce the number of rows to our desired target (in this case
 90 rows):
 
@@ -166,15 +166,15 @@ terra::plot(dem_agg)
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" />
 
-We can check how the number of rows have decreased. Also, the plot shows that we
-have now less cells.
+We can check how the number of rows has decreased. Also, the plot shows that we
+now have fewer cells.
 
 Now, we may need to perform additional manipulations on the values of the
 raster:
 
-- We need to ensure that all the valid values are equal or greater than zero.
+- We need to ensure that all valid values are greater than or equal to zero.
 
-- We will replace the `NAs` produced when masking the raster to zero. We
+- We will replace the `NA` values produced when masking the raster with zeros. We
   will use this later to decide whether to remove some parts of the
   plot.
 
@@ -361,7 +361,7 @@ ggplot() +
 
 ### With colors
 
-We can apply different colors to the plot. Note that `ggridges` only accepts
+We can apply different colors to the plot. Note that **ggridges** only accepts
 different `aes` by row, and not by column:
 
 ```r
@@ -401,7 +401,7 @@ ggplot() +
 
 ### Combine with another object
 
-Like using a `sf` object:
+For example, using an `sf` object:
 
 ```r
 
@@ -433,7 +433,7 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" />
 
-Or maybe adding a frame to the plot
+Or adding a frame to the plot:
 
 ```r
 

@@ -1,5 +1,5 @@
 ---
-title: "Introducing tidyterra"
+title: "Introducing <strong>tidyterra</strong>"
 subtitle: Easily work and ggplot SpatRasters
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
@@ -22,7 +22,7 @@ output:
 header_img: ./assets/img/blog/20220525_easteregg-2.webp
 ---
 
-If you have been playing around with **R** for a while, probably you are
+If you have been playing around with **R** for a while, you are probably
 familiar with the `volcano` dataset:
 
 ```r
@@ -38,7 +38,7 @@ This represents the topographic information about one of the volcanoes of Auckla
 Eden](https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden). But **do you know
 that this map is flipped?**
 
-On this post I introduce the [tidyterra
+In this post I introduce the [**tidyterra**
 package](https://github.com/dieghernan/tidyterra), recently added to
 [CRAN](https://CRAN.R-project.org/package=tidyterra), and I show you how to
 geotag the `volcano` dataset. We will also produce **ggplot2** maps using the
@@ -55,7 +55,7 @@ library(sf)
 
 ## Wait, `volcano` is flipped?
 
-Let's check it out. Thanks to the package `maptiles` we can have a glimpse of
+Let's check it out. Thanks to the package **maptiles** we can have a glimpse of
 the location of Maungawhau using map tiles (as Google Maps uses). We will use
 **tidyterra** for displaying the map tile:
 
@@ -90,7 +90,7 @@ ggtile
 
 So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
 question is, how to match the `volcano` dataset (a matrix) with this tile (a
-geo-tagged map tile)? Let's check it out
+geotagged map tile)? Let's check it out.
 
 ## Working with SpatRasters
 
@@ -135,10 +135,10 @@ volcano_rast_ok
 ```
 
 Nice! Now we have a raster of `volcano`, but still without geotagged
-information. Thanks to this article of Tomislav Hengl
+information. Thanks to this article by Tomislav Hengl
 ([\@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
 parameters of `volcano` (see [Volcano
-Maungawhau](https://geomorphometry.org/volcano-maungawhau/)), that are:
+Maungawhau](https://geomorphometry.org/volcano-maungawhau/)), which are:
 
 - **CRS**: EPSG:27200
 - **xllcorner**: 2667400
@@ -212,7 +212,7 @@ ggtile +
 ## An Easter egg
 
 The `volcano` dataset may not be completely up to date. As a complement,
-**tidyterra** includes a `.tif` file with the same dimensions that our `volcano2`
+**tidyterra** includes a `.tif` file with the same dimensions as our `volcano2`
 raster, but with the topographic values extracted from [Auckland LiDAR 1m DEM
 (2013)](https://data.linz.govt.nz/layer/53405-auckland-lidar-1m-dem-2013/) and
 resampled to a resolution of 5x5 meters, for package size optimization. See here

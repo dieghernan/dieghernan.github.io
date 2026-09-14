@@ -1,6 +1,6 @@
 ---
 title: spain-munic-bot
-subtitle: A twitter bot written in R.
+subtitle: A Twitter bot written in R.
 excerpt: Twitter bot - random municipalities of Spain with {mapSpain} posted with {rtweet} via a GitHub Action
 tags:
   - discontinued

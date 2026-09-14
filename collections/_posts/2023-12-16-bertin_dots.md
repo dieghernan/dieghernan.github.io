@@ -33,7 +33,7 @@ Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 (1967)](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
 In this post, I create a similar map for Iberia and also show how to create a
-variation using a hexagonal grid instead of a rectangular one. This is the first
+variation using a hexagonal grid instead of a rectangular one. This is the fifth
 issue of the series
 [Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
 
@@ -66,7 +66,7 @@ the corresponding shapes and create a buffer around it.
 
 After that, we extract the population spatial distribution from [GHSL -
 Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
-use the global file with a resolution of 1 km on Mollweide projection
+use the global file with a resolution of 1 km in the Mollweide projection
 (ESRI:54009).
 
 ```r
@@ -155,8 +155,8 @@ base_gg +
 
 ## Data wrangling
 
-The GHSL information contains the estimated population on each grid. However the
-file has a high resolution (more than 2 millions of cells) so for plotting
+The GHSL information contains the estimated population in each cell. However, the
+file has a high resolution (more than 2 million cells), so for plotting
 purposes we are going to reduce (i.e. aggregate) the number of cells so we can
 have a better dot visualization. Once we aggregate, we compute the
 area of each new aggregated cell and compute the corresponding population
@@ -272,7 +272,7 @@ look more "natural" than the rectangular ones, which present a regularity
 hardly seen in
 the wild.
 
-The issue here is that `terra` does not produce this type of grids, however it
+The issue here is that **terra** does not produce this type of grid. However, it
 is possible to create them with `sf::st_make_grid()`, so the workflow for this
 alternative is:
 
@@ -342,7 +342,7 @@ base_gg +
 
 <img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1"/>
 
-Finally we just compute densities, create categories and finally the map:
+Finally, we compute densities, create categories and produce the map:
 
 ```r
 # Mask and categorize

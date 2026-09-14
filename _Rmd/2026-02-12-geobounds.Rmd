@@ -1,5 +1,5 @@
 ---
-title: "Introducing geobounds"
+title: "Introducing <strong>geobounds</strong>"
 subtitle: "Easy access to administrative boundaries from geoBoundaries"
 description: "A simple way to retrieve datasets from geoBoundaries."
 tags:
@@ -35,13 +35,13 @@ rm(list = ls())
 
 If you've ever worked with spatial data in **R**, this may ring a bell...
 
--   Search for boundary data
--   Figure out which version is "official"
--   Download a shapefile
--   Unzip it
--   Load it
--   Fix projections
--   Repeat
+- Search for boundary data
+- Figure out which version is "official"
+- Download a shapefile
+- Unzip it
+- Load it
+- Fix projections
+- Repeat
 
 While searching for new data sources, I found the excellent
 [geoBoundaries](https://www.geoboundaries.org/) database. However, accessing the
@@ -52,8 +52,8 @@ Previously, the **rgeoboundaries** package was on CRAN and allowed access to
 the geoBoundaries API, but it was archived. So I decided to create my own
 version, and **geobounds** was born.
 
--   Source code: <https://github.com/dieghernan/geobounds>
--   **pkgdown** website: <https://dieghernan.github.io/geobounds/>
+- Source code: <https://github.com/dieghernan/geobounds>
+- **pkgdown** website: <https://dieghernan.github.io/geobounds/>
 
 It connects directly to the excellent
 [geoBoundaries](https://www.geoboundaries.org/) database and returns clean,
@@ -193,9 +193,9 @@ ggplot(norway_all) +
 
 Downloaded files are cached locally. That means:
 
--   You download once
--   Re-running your script is fast
--   Your workflow stays reproducible
+- You download once
+- Re-running your script is fast
+- Your workflow stays reproducible
 
 You can set the cache directory with:
 
@@ -205,21 +205,21 @@ gb_set_cache_dir("a/path/to/a/folder")
 
 ```
 
-## When should you use geobounds?
+## When should you use **geobounds**?
 
 Use **geobounds** when:
 
--   You need reliable global administrative boundaries
--   You want reproducible workflows
--   You prefer code over manual downloads
--   You're building maps, dashboards, or spatial analyses
+- You need reliable global administrative boundaries
+- You want reproducible workflows
+- You prefer code over manual downloads
+- You're building maps, dashboards or spatial analyses
 
 ## Related packages
 
 **geobounds** is not alone in this space. Depending on your needs, you might
 also want to look at:
 
-### rnaturalearth
+### **rnaturalearth**
 
 A very popular package to access Natural Earth datasets directly from **R**. It's
 lightweight and great for quick global maps, especially at small scales.
@@ -227,13 +227,13 @@ lightweight and great for quick global maps, especially at small scales.
 If you need physical layers (rivers, coastlines, elevation) alongside political
 boundaries, this is often a good choice.
 
-### giscoR
+### **giscoR**
 
 If your focus is Europe, **giscoR** provides direct access to Eurostat GISCO
 data. It's particularly useful for NUTS regions and European statistical
 boundaries.
 
-### osmdata
+### **osmdata**
 
 When administrative boundaries are not enough and you need OpenStreetMap
 features (roads, POIs, land use, etc.), **osmdata** gives you powerful querying

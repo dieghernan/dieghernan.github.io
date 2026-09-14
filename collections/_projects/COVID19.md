@@ -17,7 +17,7 @@ date: 2020-04-04
 <i class="fas fa-skull-crossbones"></i> **Project discontinued**
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
-Visit the microsite with maps and official data on the impact of COVID19 in Spain.
+Visit the microsite with maps and official data on the impact of COVID-19 in Spain.
 
 <https://dieghernan.github.io/COVID19>
 [In Spanish]

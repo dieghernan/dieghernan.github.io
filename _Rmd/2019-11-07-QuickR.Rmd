@@ -117,11 +117,11 @@ plot(
 
 ## Insetting
 
-From now on, I focus on the inset part, using the `fig()` option on `par()`.
+From now on, I focus on the inset part, using the `fig` argument of `par()`.
 Quoting [statmethods](https://www.statmethods.net/advgraphs/layout.html):
 
->*(...) think of the full graph area as going from `(0,0)` in the lower left corner to `(1,1)` in the upper right corner. The format of the `fig=` parameter is a numerical vector of the form `c(x1, x2, y1, y2)`(...)
-`fig=` starts a new plot, so to add to an existing plot use `new=TRUE`.*
+> _(...) think of the full graph area as going from `(0,0)` in the lower left corner to `(1,1)` in the upper right corner. The format of the `fig=` parameter is a numerical vector of the form `c(x1, x2, y1, y2)`(...)
+> `fig=` starts a new plot, so to add to an existing plot use `new=TRUE`._
 
 With `x1` and `y1` as the starting points and `x2`, `y2` as the final points,
 we can set up those parameters and adjust the final placement of the insets.

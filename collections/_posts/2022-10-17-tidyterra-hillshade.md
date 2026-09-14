@@ -1,7 +1,7 @@
 ---
-title: "Hillshade, colors and marginal plots with tidyterra (I)"
+title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)"
 subtitle: How to overlay SpatRasters
-excerpt: Using shadow effects on relief mappings is a very common technique,
+excerpt: Using shadow effects on relief maps is a very common technique,
   which produces informative yet beautiful maps.
 tags:
   - r_bloggers
@@ -25,25 +25,25 @@ on top of a hillshade background. The next post shows how to add marginal plots
 including information about the values of the raster by longitude and latitude. See
 the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/)._
 
-Using shadow effects on relief mappings is a very common technique, that allows
-to produce informative yet beautiful maps. If you are interested in this topic
-and you work with **R**, you would have probably seen this map:
+Using shadow effects on relief maps is a very common technique that helps
+produce informative yet beautiful maps. If you are interested in this topic
+and you work with **R**, you have probably seen this map:
 
 ![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)
-has been a reference for years. However, last developments on the **R** package
+has been a reference for years. However, recent developments in the **R** package
 ecosystem (**terra**, **sf** and support of both classes on **ggplot2**, development
-of `ggnewscale`, etc.) can make even easier the task of producing such type of
+of **ggnewscale**, etc.) can make it even easier to produce these types of
 maps.
 
 In fact, Dominic Royé recently wrote a very detailed
 [post](https://dominicroye.github.io/en/2022/hillshade-effects/) on creating
 shadow effects on map reliefs. In this first post of the series, I replicate
 that technique with a slight variation (e.g. not making use of
-`ggnewscale`) and discuss the potential choice of a color
-palette for this kind of maps.
+**ggnewscale**) and discuss the potential choice of a color
+palette for this kind of map.
 
 ## Libraries
 
@@ -65,9 +65,9 @@ library(geodata)
 
 ## Get the data
 
-First step is to get the altitude data. I use here the package `geodata` for
-simplicity, but you can use as well `elevatr` that is much more complete.
-However `elevatr` produces the result as `RasterLayers`, so you would need to
+The first step is to get the altitude data. I use the **geodata** package for
+simplicity, but you can also use **elevatr**, which is much more comprehensive.
+However, **elevatr** produces the result as a `RasterLayer`, so you would need to
 convert the object to `SpatRaster` with `terra::rast()`.
 
 ```r
@@ -119,11 +119,11 @@ autoplot(r) +
 
 ## Hillshading
 
-Next step is to calculate the hillshade. Royé has a very detailed discussion
+The next step is to calculate the hillshade. Royé has a very detailed discussion
 [here](https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade),
 so I would not go into details. Basically what we want to create is a layer that
 approximates the potential "texture" of the surface based on the elevation and
-the sun position. This is straightforward with `terra::terrain()` and
+the sun's position. This is straightforward with the `terra::terrain()` and
 `terra::shade()` functions:
 
 ```r
@@ -149,10 +149,10 @@ ggplot() +
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" />
 
 We can also do the following hack to avoid the use of a `scale_fill_*` (via
-`ggplot2` or via `ggnewscale::new_scale_fill()`):
+**ggplot2** or via `ggnewscale::new_scale_fill()`):
 
 - Select a vector of colors (in this post `pal_greys`).
-- Extract the values of the raster and reescale them to the length of the
+- Extract the values of the raster and rescale them to the length of the
   palette (`c(1, 1000)`).
 - Round those rescaled values to the nearest integer. So we would have an index
   indicating which value of `pal_greys` should be mapped to each cell.
@@ -161,10 +161,10 @@ We can also do the following hack to avoid the use of a `scale_fill_*` (via
 An additional note is that `geom_spatraster()` has a parameter `maxcell` that
 would perform a spatial resampling if the raster has more cells than `maxcell`.
 This is for optimization (note that `terra::plot()` has the same setup and that
-the users often forgot about it), but we can force to plot all the cells by
-using `maxcell = Inf`. On this approach for using `fill` the value `maxcell`
+users often forget about it), but we can force all cells to be plotted by
+using `maxcell = Inf`. In this approach using `fill`, the value of `maxcell`
 needs to be effectively set to `Inf` to ensure that the number of color values
-and the number of cells is the same.
+and the number of cells are the same.
 
 ```r
 
@@ -223,7 +223,7 @@ autoplot(r) +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" />
 
-For that reason, tidyterra provides additional gradients whose colors are placed
+For that reason, **tidyterra** provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
 
 ```r
@@ -253,7 +253,7 @@ of palettes provided by **tidyterra**. We use here the version
 gradients.
 
 A downside of using these scales is that we also need to adjust the `limits`
-argument of the functions to make `ggplot2` aware of the limits of the value of
+argument of the functions to make **ggplot2** aware of the limits of the value of
 the raster. This is easily achieved with `terra::minmax()` but I added an extra
 touch rounding up and down the range of values to the nearest 500.
 

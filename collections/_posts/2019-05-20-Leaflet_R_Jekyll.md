@@ -37,7 +37,7 @@ Ready? Let’s go!
 
 ### The GitHub/Jekyll part
 
-The first step is to install the requested libraries in your GitHub
+The first step is to install the required libraries on your GitHub
 page. As Jekyll basically transforms Markdown into HTML, this step
 is a matter of **what to include** and **where** in your own repository.
 
@@ -164,7 +164,7 @@ We are almost there! Now “Knit” your code and get the corresponding
 
 #### ~~5. Modifying the `.md` file~~
 
-**Update: This is not needed any more! I still leave it here for info.
+**Update: This is no longer needed. I have kept it here for reference.
 You can skip to the next section.**
 
 Have a look at the `.md` code that you have just created. Although not
@@ -231,7 +231,7 @@ here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 With these examples, you can see how to control the absolute size of the
 leaflet map. The disadvantage of this method is that the size would be
 fixed for all the devices, so maps sized for smartphones or tablets
-wouldn’t look as nice in laptops, etc. and vice versa.
+wouldn’t look as nice on laptops, and vice versa.
 
 ##### Example 1: 672x480px
 

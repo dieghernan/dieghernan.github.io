@@ -60,7 +60,7 @@ ggplot(antarct) +
 <img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" width="100%" />
 
 The shapefile contains a visible "lollipop" cut that looks unnatural in an
-orthographic projection. I correct it manually by:
+orthographic projection. I correct it manually with these steps:
 
 1.  Identify the polygon that represents the main Antarctic landmass.
 2.  Convert that polygon to a sequence of coordinates (points).
@@ -302,7 +302,7 @@ antarctica_simp |>
 
 <img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" width="100%" />
 
-### Antarctica Flag Redesigned
+### Antarctica flag redesigned
 
 In 2024, Graham Bartram revealed a new version of his original flag as part of
 a global campaign to raise awareness about the growing problem of microplastic

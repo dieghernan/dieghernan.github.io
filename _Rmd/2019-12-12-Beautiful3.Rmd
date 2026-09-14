@@ -145,13 +145,15 @@ hatchedLayer(DE,
 As a complementary function, there is also `legendHatched`. The main parameters
 are:
 
--   `pos`, `title.txt`, `title.cex`, `values.cex`, `categ`, `cex` and `frame`: See `?cartography::legendTypo`.
--   `patterns`: Vector of patterns to be created for each element on `categ`.
--   `ptrn.bg`: Background of the legend box for each `categ`.
--   `ptrn.text`: Text to be used for each `categ="text"`, as a single value or a vector.
--   `dot.cex`: `cex` of each `categ="dot"`, as a single value or a vector.
--   `text.cex`: Text size of each `categ="text"`, as a single value or a vector.
--   As in the case of the `hatchedLayer` function, different graphical parameters can be passed (`lty`, `lwd`, `pch`, `bg` on points).
+- `pos`, `title.txt`, `title.cex`, `values.cex`, `categ`, `cex` and `frame`:
+  See `?cartography::legendTypo`.
+- `patterns`: Vector of patterns to be created for each element on `categ`.
+- `ptrn.bg`: Background of the legend box for each `categ`.
+- `ptrn.text`: Text to be used for each `categ="text"`, as a single value or a vector.
+- `dot.cex`: `cex` of each `categ="dot"`, as a single value or a vector.
+- `text.cex`: Text size of each `categ="text"`, as a single value or a vector.
+- As in the case of the `hatchedLayer` function, different graphical
+  parameters can be passed (`lty`, `lwd`, `pch`, `bg` on points).
 
 Note that it is also possible to create solid legends by setting `col` and
 `ptrn.bg` to the same color. Parameters respect the order of the `categ`

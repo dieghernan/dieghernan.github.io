@@ -1,5 +1,5 @@
 ---
-title: Using the CountryCodes database and sf package
+title: Using the CountryCodes database and <strong>sf</strong> package
 subtitle: Vignette of the CountryCodes project
 tags:
   - r_bloggers
@@ -49,6 +49,7 @@ library(dplyr)
 ```
 
 ## Reading the data
+
 The first step is to read the provided database (in this example, the `json`
 file) and extract one international organization. In this example, we will plot
 the [Commonwealth of Nations](https://en.wikipedia.org/wiki/Commonwealth_of_Nations).
@@ -97,6 +98,7 @@ df_org %>%
 ```
 
 ## Replacing the data on a map
+
 In this example the **rnaturalearth** package is used for retrieving an `sf`
 object. The code below replaces the `data.frame` part of the `sf` object with
 the dedicated database.
@@ -129,6 +131,7 @@ tiny$C <- coalesce(tiny$C, tiny$C_sov)
 ```
 
 ## Plotting map: Wikipedia style
+
 Now we will try to plot a map resembling the one presented in the
 [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the
 Commonwealth.

@@ -68,7 +68,7 @@ new capabilities.
 
 ![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
 
-## Next developments
+## Future developments
 
 - [x] Fuzzy time
 - [x] Battery

@@ -22,7 +22,7 @@ header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
 
 Do you know the [Bonne
 Projection](https://en.wikipedia.org/wiki/Bonne_projection)? This is a very
-special one, as used on whole world’s mapping produces this result. Happy
+special one, as it produces this result when used to map the whole world. Happy
 Valentine’s Day!
 
 ```r

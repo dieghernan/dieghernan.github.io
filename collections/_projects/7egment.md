@@ -44,7 +44,7 @@ your watch and smartphone.
 
 ## Options
 
-- Choose background colors, frame and text
+- Choose colors for the background, frame and text
 - Three-band design. Make it match your tie!
 - Weather: Current conditions in °C or °F.
 - Choose your weather provider:

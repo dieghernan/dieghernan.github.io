@@ -1,6 +1,6 @@
 ---
 title: Cast a line to subsegments in R
-subtitle: User-defined function using the sf package
+subtitle: User-defined function using the <strong>sf</strong> package
 tags:
   - r_bloggers
   - rstats
@@ -132,14 +132,14 @@ plot(st_geometry(geom), col = c("red", "yellow", "blue"), main = "AFTER FUNCTION
 
 Finally, I wrapped the solution into a function and extended it a little bit:
 
-* When the input is not a `LINESTRING` or a `POLYGON`, it returns an error and
+- When the input is not a `LINESTRING` or a `POLYGON`, it returns an error and
   stops.
 
-* The function accepts **sf** objects with several rows or `sfc` objects with
+- The function accepts **sf** objects with several rows or `sfc` objects with
   several geometries, and returns the same class as the input. In the case of
   **sf** objects, the input `data.frame` is added.
 
-* By default, the output is a `MULTILINESTRING` geometry. This has the benefit
+- By default, the output is a `MULTILINESTRING` geometry. This has the benefit
   that the output has the same number of geometries as the input. This can be
   modified by setting the `to` parameter to `LINESTRING`, which only casts the
   `MULTILINESTRING` object into `LINESTRING`.

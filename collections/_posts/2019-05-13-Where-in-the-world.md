@@ -16,7 +16,7 @@ output:
 ---
 
 This is a very personal post, where I just show the map of all the
-places I have traveled by plane
+places I have traveled to by plane.
 
 <!--html_preserve-->
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-377442f1f9831abb6bee" style="width:672px;height:480px;"></div>
@@ -26,7 +26,7 @@ places I have traveled by plane
 **✈️ 251,536.4 kms. flown so far.**
 {: .alert .alert-info .p-3 .mx-2 .my-3 .lead}
 
-## Top Cities
+## Top cities
 
 | City              | Country        |   N |
 | :---------------- | :------------- | --: |
@@ -41,7 +41,7 @@ places I have traveled by plane
 | Amsterdam         | Netherlands    |   4 |
 | Frankfurt         | Germany        |   4 |
 
-## Top Countries
+## Top countries
 
 | Country        | Continent |   N |
 | :------------- | :-------- | --: |
@@ -51,7 +51,7 @@ places I have traveled by plane
 | Belgium        | Europe    |   8 |
 | France         | Europe    |   6 |
 
-## Top Continents
+## Top continents
 
 | Continent     | Region           |   N |
 | :------------ | :--------------- | --: |
