@@ -26,7 +26,7 @@ project_links:
 <i class="fas fa-skull-crossbones"></i> **Project discontinued**
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
-<img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" style="width: 25%;">
+<img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="Corona Atlas logo" style="width: 25%;">
 
 Visit <https://dieghernan.github.io/corona-atlas.de/>
 

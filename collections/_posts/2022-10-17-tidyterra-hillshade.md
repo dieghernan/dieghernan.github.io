@@ -29,7 +29,7 @@ Using shadow effects on relief maps is a very common technique that helps
 produce informative yet beautiful maps. If you are interested in this topic
 and you work with **R**, you have probably seen this map:
 
-![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
+![Bivariate thematic map of Switzerland combining two variables with a color legend and shaded terrain relief.](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)
@@ -115,7 +115,7 @@ autoplot(r) +
   theme_minimal()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="plot of chunk 20221017-1-autoplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains." width="100%" />
 
 ## Hillshading
 
@@ -146,7 +146,7 @@ ggplot() +
 #> SpatRaster resampled to ncells = 501501
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="Grayscale hillshade map of Romania, revealing the Carpathian mountain arc through simulated light and shadow." width="100%" />
 
 We can also do the following hack to avoid the use of a `scale_fill_*` (via
 **ggplot2** or via `ggnewscale::new_scale_fill()`):
@@ -192,7 +192,7 @@ hill_plot <- ggplot() +
 hill_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="plot of chunk 20221017-3-hillalt" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="Alternative grayscale hillshade map of Romania, showing terrain relief with a different shading calculation." width="100%" />
 
 ## Selecting colors
 
@@ -221,7 +221,7 @@ autoplot(r) +
   scale_fill_gradientn(colours = grad, na.value = NA)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="Elevation map of Romania using a regular color gradient. Green lowlands surround the higher Carpathian Mountains." width="100%" />
 
 For that reason, **tidyterra** provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
@@ -236,7 +236,7 @@ autoplot(r) +
   scale_fill_gradientn(colours = grad_hypso, na.value = NA)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="plot of chunk 20221017-hypso-gradient" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks." width="100%" />
 
 Can you notice the difference? In the first map greens are the dominant color.
 However greens are representing a wide range of elevations (0-750 meters) that
@@ -301,7 +301,7 @@ plot_pal_test("utah_1")
 plot_pal_test("wiki-2.0_hypso")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="Relief map of Romania using the etopo1_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="Relief map of Romania using the dem_poster elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="Relief map of Romania using the ocean elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="Relief map of Romania using the pastel elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="Relief map of Romania using the urban_1 elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="Relief map of Romania using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" />
 
 I finally selected for my plot the `"dem_poster"` palette, but this is
 completely a personal choice. You should select the palette you feel more
@@ -334,7 +334,7 @@ base_plot <- hill_plot +
 base_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="plot of chunk 20221017-5-blend" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="Relief map of Romania combining elevation colors with hillshade so mountain slopes remain visible beneath the color gradient." width="100%" />
 
 And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:
@@ -432,7 +432,7 @@ base_plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="plot of chunk 20221017-6-finalplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend." width="100%" />
 
 ## References
 

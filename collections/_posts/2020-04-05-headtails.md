@@ -93,7 +93,7 @@ hist(
 par(opar)
 ```
 
-![plot of chunk 20200405_charheavytail](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp)![plot of chunk 20200405_charheavytail](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp)
+![Ranked-value plot of a Pareto sample. Values fall steeply and then flatten; reference lines mark the top 20 percent and the 80th percentile.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp)![Histogram of a Pareto sample. Most values are small, with a long tail of rare large values.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp)
 
 ## Breaking method
 
@@ -202,7 +202,7 @@ for (i in 1:10) {
 par(opar)
 ```
 
-![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp)![plot of chunk 20200405_stepbystep](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp)
+![Histogram at step 1 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp)![Histogram at step 2 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp)![Histogram at step 3 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp)![Histogram at step 4 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp)
 
 The head proportion varies across iterations and reaches 50% in the fourth,
 which stops the loop. It does not increase monotonically.
@@ -275,7 +275,7 @@ plot(
 par(opar)
 ```
 
-![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp)![plot of chunk 20200405_examplesimp](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp)
+![Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp)![Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0.2. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp)![Cumulative distribution of a Pareto sample classified with a head/tail threshold of the default value. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp)![Cumulative distribution of a Pareto sample classified with a head/tail threshold of 1. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp)
 
 For this example, even `thr = 0` retains the mean as an internal break.
 The returned vector also contains the minimum and maximum, so this gives two
@@ -321,7 +321,7 @@ plot(
 par(opar)
 ```
 
-![plot of chunk 20200405_summspdata](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp)![plot of chunk 20200405_summspdata](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp)
+![Histogram of total conflict counts in African countries from 1966 to 1978. Most countries have low counts, with a few much higher values.](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp)![Density curve of total conflict counts in African countries from 1966 to 1978, with a peak at low counts and a long right tail.](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp)
 
 The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram
 shows a strongly right-skewed pattern with many small values and a few large
@@ -359,7 +359,7 @@ plot(brks_quantile, pal = pal1, main = "quantile")
 par(opar)
 ```
 
-![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp)![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp)![plot of chunk 20200405_breaksample](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp)
+![Cumulative distribution of African conflict counts classified using head/tail breaks. Vertical lines and a colored strip identify the class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp)![Cumulative distribution of African conflict counts classified using Fisher breaks. Vertical lines and a colored strip identify the class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp)![Cumulative distribution of African conflict counts classified using quantile breaks. Vertical lines and a colored strip identify the class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp)
 
 The top three classes of `headtails` contain five observations, whereas those
 of `fisher` contain 13. In this example, `headtails` gives more detail at the
@@ -426,7 +426,7 @@ legend("topright",
 par(opar)
 ```
 
-![plot of chunk 20200405_benchmarkbreaks](https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp)
+![Density curves comparing continuous African conflict counts with values classified using head/tail, Fisher and quantile breaks. The methods produce different distribution shapes.](https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp)
 
 In this example, the class assignments from `headtails` retain more of the
 original imbalance. By contrast, `quantile` aims for similar numbers of
@@ -517,7 +517,7 @@ title(main = "Head Tails")
 par(opar)
 ```
 
-![plot of chunk 20200405_finalplot](https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp)
+![Four proportional-symbol maps of African conflict counts comparing the unclassified data with quantile, Fisher and head/tail classifications. Circle size represents conflict counts and colors distinguish classes.](https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp)
 
 Compared with the unclassified proportional-symbol map, `headtails` makes
 the most extreme values easier to distinguish. The `quantile` style groups

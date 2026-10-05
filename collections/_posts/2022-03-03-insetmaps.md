@@ -57,7 +57,7 @@ ggplot(regions) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%"/>
 
 I use a different CRS for each part of Spain. In the case of mainland Spain, I
 use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary
@@ -72,7 +72,7 @@ ggplot(main) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%"/>
 
 ```r
 island <- regions %>%
@@ -83,7 +83,7 @@ ggplot(island) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="Map of the Canary Islands in their local projected coordinate system." width="100%"/>
 
 So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing and
 matching!
@@ -138,7 +138,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%"/>
 
 Note also that this approach is valid not only for maps, but for all types of
 plots produced by **ggplot2**, since this package is not specific to map
@@ -186,7 +186,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%"/>
 
 ## On **tmap**
 
@@ -226,7 +226,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%"/>
 
 ## Update: On **mapsf**
 
@@ -244,4 +244,4 @@ box(lwd = .5)
 mf_inset_off()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%"/>

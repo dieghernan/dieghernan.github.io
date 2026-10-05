@@ -24,7 +24,7 @@ permalink: /projects/TextWatchClima/
 **TextWatch Clima** upgrades the classic TextWatch watch face by adding a set of
 new capabilities.
 
-![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
+![TextWatch Clima watch face displaying the time in words on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
 
 **Available for all the Classic, Time and Pebble 2 models**
 
@@ -37,7 +37,7 @@ new capabilities.
 - Exact hour in natural language
 - Autofit to screen
 
-![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerTime.png)
+![TextWatch Clima watch face displaying the time in words on Pebble Time.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerTime.png)
 
 ## Take your pick
 
@@ -66,7 +66,7 @@ new capabilities.
   - **[OpenWeatherMap](https://openweathermap.org/)**
 - **Implementation of [pmkey.xyz](https://www.pmkey.xyz)**
 
-![banner](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
+![TextWatch Clima watch face displaying the time in words on Pebble Classic.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
 
 ## Future developments
 
@@ -89,13 +89,13 @@ new capabilities.
 
 <div class="row">
 <div class="col">
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp"></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo"></a>
 </div>
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp"></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground"></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp"></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap"></a>
 </div>
 </div>
 
@@ -110,13 +110,13 @@ new capabilities.
 
 <div class="row">
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif" alt="gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif" alt="Animated TextWatch Clima watch face on Pebble Classic.">
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif" alt="gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif" alt="Animated TextWatch Clima watch face on Pebble Time.">
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif" alt="gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif" alt="Animated TextWatch Clima watch face on Pebble Time Round.">
 </div>
 </div>
 

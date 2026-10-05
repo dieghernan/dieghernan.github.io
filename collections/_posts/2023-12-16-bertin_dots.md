@@ -29,8 +29,7 @@ new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
 a dot density map based on the work of the French cartographer [Jacques
 Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 
-![Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
-(1967)](https://dieghernan.github.io/assets/img/misc/bertin.png)
+![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
 In this post, I create a similar map for Iberia and also show how to create a
 variation using a hexagonal grid instead of a rectangular one. This is the fifth
@@ -103,7 +102,7 @@ base_gg <- ggplot() +
 base_gg
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_basemap"/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window."/>
 
 That is our base map. Now we download the GHSL data programmatically and check
 that everything is correct. At this point, it is interesting to
@@ -151,7 +150,7 @@ base_gg +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="plot of chunk 202312_base_raster-1"/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="Population raster over the Iberian Peninsula with country and regional boundaries. Color represents population per raster cell."/>
 
 ## Data wrangling
 
@@ -261,7 +260,7 @@ final_plot <- base_gg +
 ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="plot of chunk 202312_base_raster-1"/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."/>
 
 ## Alternative hexagonal grid
 
@@ -340,7 +339,7 @@ base_gg +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1"/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="Map of the Iberian Peninsula with population totals aggregated into hexagonal cells. Color represents the population in each cell."/>
 
 Finally, we compute densities, create categories and produce the map:
 
@@ -414,7 +413,7 @@ final_plot_hex <- base_gg +
 ggsave("202312_finalmap_hex.png", dpi = 300, width = 8, height = 8)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="plot of chunk 202312_finalmap_hex"/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters."/>
 
 And that's it! Which one do you like the most? Let me know in the comments.
 

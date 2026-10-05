@@ -22,7 +22,7 @@ Visit the microsite with maps and official data on the impact of COVID-19 in Spa
 <https://dieghernan.github.io/COVID19>
 [In Spanish]
 
-![FallecidosEvo](https://dieghernan.github.io/COVID19/assets/Fallecidos.gif)
+![Animation of the evolution of reported COVID-19 deaths in Spain.](https://dieghernan.github.io/COVID19/assets/Fallecidos.gif)
 
 Overall deaths in Spain due to COVID-19: evolution
 {: .caption }

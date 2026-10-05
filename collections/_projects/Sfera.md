@@ -25,7 +25,7 @@ project_links:
 the most out of the smartwatch's capabilities. Set your preferences and enjoy this
 beautifully designed watch face.
 
-![Banner](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
+![Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58c2f7110dfc32a52a00081f?native=false&query=Sfera&section=watchfaces" role="button">Download from Rebble Appstore</a>
@@ -74,7 +74,7 @@ Automatic weekday translation is supported for:
 
 ## Screenshots
 
-![GIF](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif)
+![Animated Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif)
 
 ## Attributions
 
@@ -88,13 +88,13 @@ Automatic weekday translation is supported for:
 
 <div class="row">
 <div class="col">
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp"></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo"></a>
 </div>
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp"></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground"></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp"></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap"></a>
 </div>
 </div>
 

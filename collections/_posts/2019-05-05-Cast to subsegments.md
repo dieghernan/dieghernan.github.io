@@ -44,12 +44,12 @@ plot(st_geometry(italy_lin), col = c("red", "yellow", "blue"), main = "LINE")
 plot(st_geometry(italy_pt), col = c("red", "yellow", "blue"), main = "POINT")
 ```
 
-![plot of chunk 20190505_italycast](https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp)
+![Four maps of Italy comparing multipolygon, polygon, line and point representations. Separate polygons and boundary vertices become visible as the geometry is converted.](https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp)
 
 What I missed when using `st_cast` was the possibility of breaking
 `LINESTRING` objects into subsegments:
 
-![plot of chunk 20190505_italycastsub](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
+![Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments.](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
 
 ## An approach
 
@@ -78,7 +78,7 @@ geom <- lapply(
 plot(st_geometry(geom), col = c("red", "yellow", "blue"), main = "AFTER FUNCTION")
 ```
 
-![plot of chunk 20190505_testspain](https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp)
+![Two outlines of Spain comparing the original boundary with a version split into short, individually colored segments.](https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp)
 
 ## The function `stdh_cast_substring`
 
@@ -183,7 +183,7 @@ plot(st_geometry(test50), col = "#FEFEE9", border = "#646464", add = T)
 plot(st_geometry(t2), col = c("red", "yellow", "blue"), add = T, lwd = 0.5)
 ```
 
-![plot of chunk 20190505_benchmarkfunction](https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp)
+![Map of South America with country boundaries split into short segments, illustrated with alternating colors.](https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp)
 
 There is a difference in performance: `test100` has 15 polygons decomposed
 into 914 substrings, while `test50` has 80 polygons decomposed into 8,414

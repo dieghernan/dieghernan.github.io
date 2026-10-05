@@ -46,7 +46,7 @@ output:
 <i class="fas fa-skull-crossbones"></i> **Project discontinued**
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
-![corona-timelapse](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)
+![Animated map tracking the spread of COVID-19 over time.](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)
 
 In April 2021, my brother Diego and I saw
 the need for a friendly and automated interface to the meticulous and ever-changing restrictions that the German authorities imposed on travel abroad amid the COVID crisis.

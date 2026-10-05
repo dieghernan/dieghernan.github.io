@@ -143,7 +143,7 @@ Now we will try to plot a map resembling the one presented in the
 [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the
 Commonwealth.
 
-![Wiki](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
+![World map highlighting member states of the Commonwealth of Nations.](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
 
 The map we will generate is presented in a Robinson projection, and the color
 palette will be based on the [Wikipedia convention for Orthographic Maps](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Orthographic_maps),
@@ -228,4 +228,4 @@ plot(bbox,
 )
 ```
 
-![plot of chunk 20190427_mapfin](https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp)
+![World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles.](https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp)

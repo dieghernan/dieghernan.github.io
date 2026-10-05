@@ -135,7 +135,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_hatched-min](https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp)
+![Map of European trade blocs using gray fills for membership and diagonal hatching to identify the euro area.](https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp)
 
 ### Example 2
 
@@ -225,7 +225,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_hatched](https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp)
+![Map of Europe using different hatching patterns to distinguish the United Nations geographic regions.](https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp)
 
 `legendHatched` honors the order of the parameters. In this case, two `dot`
 patterns are present, so `pch = c(4,15)` takes care of that. Note that three
@@ -333,7 +333,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_hatched-adv](https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp)
+![Map of European countries combining colored fills and hatching to distinguish trade bloc membership.](https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp)
 
 ## PNG layer
 
@@ -397,7 +397,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_pnglayer](https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp)
+![Map of Africa with each country filled with its national flag.](https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp)
 
 ### Example 2
 
@@ -422,7 +422,7 @@ UKpng=getPngLayer(UK,urluk)
 pngLayer(UKpng, add=TRUE)
 ```
 
-![plot of chunk 20200217_png-adv](https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp)
+![European Union flag with the Union Jack clipped to the outline of the United Kingdom.](https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp)
 
 ## `wordcloudLayer()`
 
@@ -453,7 +453,7 @@ layoutLayer(
 )
 ```
 
-![plot of chunk 20200217_wordcloud1](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp)
+![Word map of Europe with country names positioned geographically. Text size and color represent population density; Malta is especially prominent.](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp)
 
 ### Example 2
 
@@ -505,4 +505,4 @@ layoutLayer(title="Most frequent genres on US",
             theme="orange.pal")
 ```
 
-![plot of chunk 20200217_wordcloud2](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp)
+![Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently.](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp)

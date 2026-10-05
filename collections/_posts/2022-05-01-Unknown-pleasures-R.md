@@ -27,8 +27,7 @@ the pulse profiles and dispersion measures of twelve pulsars"._ The thesis (337
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:
 
-![Craft
-Pulsars](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)
+![Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses.](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)
 
 From "Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
@@ -43,15 +42,13 @@ Encyclopaedia of Astronomy_ (1977 edition):
 
 [^1]: Other versions of the story credit drummer Stephen Morris for finding it.
 
-![Cambridge: CP 1919 Pulsar
-Image](https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg)
+![Page from The Cambridge Encyclopaedia of Astronomy with stacked signal traces from pulsar CP 1919, forming a central cluster of peaks.](https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg)
 
 Saville presented a black-and-white version, producing a cover that reached
 iconic status in the '80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:
 
-![Joy Division - Unknown pleasure
-cover](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
+![Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
 If you are interested in learning more about this fascinating history of science
 and design you can find it on [Pop Culture Pulsar: Origin Story of Joy
@@ -144,7 +141,7 @@ nrow(dem)
 terra::plot(dem)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" />
 
 We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
@@ -164,7 +161,7 @@ nrow(dem_agg)
 terra::plot(dem_agg)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" />
 
 We can check how the number of rows has decreased. Also, the plot shows that we
 now have fewer cells.
@@ -270,7 +267,7 @@ ggplot() +
   theme_ridges()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" />
 
 The last step is to provide a black theme, resembling the cover of the album:
 
@@ -293,7 +290,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
 
 ## Variations
 
@@ -325,7 +322,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" />
 
 ### Land only
 
@@ -357,7 +354,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" />
 
 ### With colors
 
@@ -397,7 +394,7 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" />
 
 ### Combine with another object
 
@@ -431,7 +428,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" />
 
 Or adding a frame to the plot:
 
@@ -457,7 +454,7 @@ ggplot() +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" />
 
 ## References
 

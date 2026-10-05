@@ -57,7 +57,7 @@ ggplot(antarct) +
   geom_sf(fill = "lightblue")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" alt="South Pole-centered map of Antarctica with a narrow lollipop-shaped gap extending from the coast toward the pole, caused by a polygon artifact." width="100%" />
 
 The shapefile contains a visible "lollipop" cut that looks unnatural in an
 orthographic projection. I correct it manually with these steps:
@@ -95,7 +95,7 @@ ggplot(coords, aes(X, Y)) +
   coord_equal()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" alt="Coordinate plot of the Antarctic coastline with numbered vertices. A line and loop extending into the interior identify the polygon artifact." width="100%" />
 
 From the plotted indices, we can see the problematic points fall roughly in the
 range 8200–9200. We inspect that interval in detail to select the exact indices
@@ -111,7 +111,7 @@ test |>
   geom_text(aes(label = np), check_overlap = TRUE)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" alt="Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact." width="100%" />
 
 <div class="alert alert-warning p-3 mx-2 mb-3">
 
@@ -139,7 +139,7 @@ test |>
 ```
 
 <div class="figure row no-gutters">
-<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" width="50%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" alt="Coordinate plot of vertices 8289 through 9130 selected for removal. They form the unwanted loop and stem." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" alt="Coordinate plot of the vertices retained from the inspected interval. They trace a section of the Antarctic coastline." width="50%" />
 
 After removing the offending points, we rebuild the polygon and reconstitute the
 full Antarctica shape from the corrected piece plus the remaining polygons.
@@ -185,7 +185,7 @@ ggplot(antarctica_fixed) +
   geom_sf(fill = "lightblue")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" alt="South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area." width="100%" />
 
 ## Plotting examples
 
@@ -215,7 +215,7 @@ antarctica_fixed |>
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_bartram-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_bartram-1.webp" alt="Antarctic flag design with a white silhouette of the continent on a blue background." width="100%" />
 
 ### Emblem of the Antarctic Treaty
 
@@ -240,7 +240,7 @@ ggplot(grats) +
   geom_sf(color = "darkblue")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" alt="Polar coordinate grid centered on the South Pole, with concentric latitude circles and radial longitude lines." width="100%" />
 
 We merge meridians so the area around the South Pole is filled. `st_graticule()`
 can leave a tiny hole at the pole, and we fix this by joining complementary
@@ -300,7 +300,7 @@ antarctica_simp |>
   labs(title = "Emblem of the Antarctic Treaty")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" alt="Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background." width="100%" />
 
 ### Antarctica flag redesigned
 
@@ -312,7 +312,7 @@ dots. These dots represent the microscopic bits of plastic that have been
 discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" alt="Antarctic flag variation with the white continental silhouette formed by scattered marks on a blue background." />
 
 Because the design relies on randomness, we approximate it using the following
 procedure:
@@ -359,7 +359,7 @@ ggplot(plastic_end) +
   geom_sf(fill = "darkblue")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" alt="Map of Antarctica filled with randomly distributed blue points inside the continent boundary." width="100%" />
 
 ```r
 
@@ -391,4 +391,4 @@ ggplot() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" alt="Antarctic flag variation with the continental silhouette formed by scattered white points on a blue background." width="100%" />

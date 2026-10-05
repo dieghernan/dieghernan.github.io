@@ -82,7 +82,7 @@ plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="Map of Africa with national borders and neighboring countries shown for context." width="100%" />
 
 Now, let's add the flags with a loop:
 
@@ -116,4 +116,4 @@ plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="Map of Africa with national flags clipped to each country boundary." width="100%" />

@@ -25,7 +25,7 @@ project_links:
 that adds your location and current weather information in the language used on
 your watch and smartphone.
 
-![Banner](https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png)
+![7egment watch face with a seven-segment time display and weather information.](https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png)
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/591ead370dfc32aacf000204?section=watchfaces" role="button">Download from Rebble Appstore</a>
@@ -59,13 +59,13 @@ your watch and smartphone.
 
 <div class="row">
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PC.gif" alt="gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PC.gif" alt="Animated 7egment watch face on Pebble Classic.">
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PT.gif" alt="gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PT.gif" alt="Animated 7egment watch face on Pebble Time.">
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PTR.gif" alt="gif">
+        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PTR.gif" alt="Animated 7egment watch face on Pebble Time Round.">
 </div>
 </div>
 
@@ -80,10 +80,10 @@ your watch and smartphone.
 
 <div class="row">
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp"></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground"></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp"></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap"></a>
 </div>
 </div>
 

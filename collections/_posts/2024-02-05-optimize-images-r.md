@@ -50,7 +50,7 @@ enjoy this API (as I do), you can consider supporting them.
 
 <div class="text-center my-3">
 <a title="Support reSmush.it on ko-fi.com" class="kofi-button" style="background-color:#ff5e5b;" href="https://ko-fi.com/E1E51PW00" target="_blank">
-<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi reSmush.it donations" class="kofiimg">Support reSmush.it on Ko-fi</span></a>
+<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="" class="kofiimg">Support reSmush.it on Ko-fi</span></a>
 </div>
 
 ## Why the **resmush** package?
@@ -105,7 +105,7 @@ cyl_gg
 
 <div class="figure">
 
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original file" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization." width="100%" />
 <p class="caption">
 Original file
 </p>
@@ -136,7 +136,7 @@ png::readPNG("cyl_resmush.png") %>%
 
 <div class="figure">
 
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized file" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization." width="100%" />
 <p class="caption">
 Optimized file
 </p>
@@ -151,10 +151,10 @@ Let’s compare the results side-by-side:
 
 <div class="figure row no-gutters">
 <a href="https://dieghernan.github.io/assets/img/samples/cyl.png" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original online figure">
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization.">
 </a>
 <a href="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized figure">
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization.">
 </a>
 <p class="caption">
 Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
@@ -213,11 +213,11 @@ knitr::kable(dm)
 <div class="figure row no-gutters">
 <a href="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" class="col-sm-6 p-1">
 <img
-src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Original online figure">
+src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Colorful illustration of sunset over ocean waves and a beach, before image optimization.">
 </a>
 
 <a href="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Optimized online figure" >
+<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Colorful illustration of sunset over ocean waves and a beach, after image optimization." >
 </a>
 <p class="caption">
 

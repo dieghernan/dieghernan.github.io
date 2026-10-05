@@ -24,7 +24,7 @@ project_links:
 **Bzel** integrates the bezel into your watch face. Display minutes as digits,
 as a moving dot or as a fill in the bezel.
 
-![Banner](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png)
+![Bzel watch face with minutes displayed around the bezel.](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png)
 
 ::: text-center
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/59280895b67f9f43f80004c9" role="button">Download
@@ -77,19 +77,19 @@ Automatic weekday translation is supported for:
 :::::: row
 ::: {.col-sm .mb-1}
 ```         
-    <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPTR.gif" alt="gif">
+    <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPTR.gif" alt="Animated Bzel watch face on Pebble Time Round.">
 ```
 :::
 
 ::: {.col-sm .mb-1}
 ```         
-    <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPT.gif" alt="gif">
+    <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPT.gif" alt="Animated Bzel watch face on Pebble Time.">
 ```
 :::
 
 ::: {.col-sm .mb-1}
 ```         
-    <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelBW.gif" alt="gif">
+    <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelBW.gif" alt="Animated Bzel watch face on a monochrome Pebble watch.">
 ```
 :::
 ::::::
@@ -107,15 +107,15 @@ Automatic weekday translation is supported for:
 
 :::::: row
 ::: col
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp"/></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo"/></a>
 :::
 
 ::: col
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" alt="wp" width="120"/></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" alt="Weather Underground" width="120"/></a>
 :::
 
 ::: col
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" alt="wp" width="60"/></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" alt="OpenWeatherMap" width="60"/></a>
 :::
 ::::::
 

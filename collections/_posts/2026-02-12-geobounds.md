@@ -78,7 +78,7 @@ gb_get_adm0(country = "Panama") |>
   labs(caption = "Source: www.geoboundaries.org")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202602-adm0-1.webp" alt="" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202602-adm0-1.webp" alt="Map of Panama showing its national boundary and offshore islands." width="100%" />
 
 You can also retrieve multiple administrative levels at once. For example:
 
@@ -96,7 +96,7 @@ gb_get(country = "Panama", adm_lvl = "all", simplified = TRUE) |>
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3." width="100%" />
 
 ## Global Composite Boundaries (CGAZ)
 
@@ -127,7 +127,7 @@ gb_get_adm0(country = c("India", "Pakistan")) |>
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" alt="" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" alt="Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims." width="100%" />
 
 And here's the same comparison using CGAZ with `gb_get_world()`:
 
@@ -144,7 +144,7 @@ gb_get_world(c("India", "Pakistan")) |>
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202602-cgaz-1.webp" alt="" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202602-cgaz-1.webp" alt="Map of India and Pakistan using harmonized boundaries. The country polygons meet without overlapping in Kashmir." width="100%" />
 
 ## Understanding the data
 
@@ -178,7 +178,7 @@ ggplot(norway_all) +
   labs(caption = "Source: www.geoboundaries.org")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp" alt="" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp" alt="Two maps of Norway comparing full-resolution and simplified national boundaries. Simplification retains the broad outline while reducing coastline detail." width="100%" />
 
 ## Caching
 
