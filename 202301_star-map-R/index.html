@@ -275,7 +275,7 @@ post will be of some help.</p>
 <p class="alert alert-info p-3 mx-2 mb-3">I have very little knowledge of this topic, so if you find errors or
 have any suggestions, please let me know in the comments section below.</p>
 <h2 id="first-things-first-the-data">First things first: the data</h2>
-<p>The initial data source of all these projects (Kim, Benjamin and myself) is the
+<p>The initial data source for all these projects (Kim’s, Benjamin’s and mine) is the
 same, and it is provided by the D3 plugin
 <a href="https://github.com/ofrohn/d3-celestial/tree/master/data">d3-celestial</a> by <a href="http://armchairastronautics.blogspot.com/">Olaf
 Frohn</a>. As Kim Fitter pointed out in
@@ -291,7 +291,7 @@ Data</a>, which provides all these
 files in several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
 repo</a> to learn more about it.</p>
 <h2 id="creating-a-star-map-with-r">Creating a star map with R</h2>
-<p>The first step is loading a bunch of libraries that would help us on this cosmic
+<p>The first step is to load libraries that will help us with this cosmic
 task:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Spatial manipulation</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
@@ -380,12 +380,12 @@ demo</a> there is some
 degree of rotation depending on the location and the time. I found how this is
 done on the <strong>d3-celestial plugin</strong> and I found the function
 <a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250"><code class="language-plaintext highlighter-rouge">getMST(dt, lng)</code></a>,
-that I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). As per some of the research that I did
+which I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). Based on the research I did,
 this function computes the <a href="https://en.wikipedia.org/wiki/Sidereal_time">Mean Sidereal
 Time</a> (MST) given a specific
 longitude (perhaps Local Sidereal Time is a more accurate term here?)
 expressed in degrees, following the formulas provided by Meeus (1998). If you
-want to know more on this I recommend <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
+want to learn more about this, I recommend <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
 post</a> by
 <a href="https://squarewidget.com/">James Still</a>.</p>
 <!-- FIXME: Confirm whether the function returns mean or local sidereal time. -->
@@ -501,7 +501,7 @@ that for us.</p>
 <p>Now we are ready to start creating our visualization. We need only two inputs:</p>
 <ul>
  <li>
-   <p>A desired location, that we would geocode with <strong>nominatimlite</strong>.</p>
+   <p>A desired location, which we will geocode with <strong>nominatimlite</strong>.</p>
  </li>
  <li>
    <p>A specific moment in time.</p>
@@ -583,7 +583,7 @@ moment would be 10:00 hence no stars are visible) you would need to adjust
 <h3 id="setup">Setup</h3>
 <p>Now we can start creating our buffers and projections, which will help us to
 crop the celestial data objects.</p>
-<p>I noticed also that the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
+<p>I also noticed that the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
 demo</a> of
 <strong>d3-celestial.js</strong> uses <a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/demo/location.html#L17-L22">Airy
 projection</a>,
@@ -630,7 +630,7 @@ so we are going to replicate that as well:</p>
   </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 <h3 id="celestial-data">Celestial data</h3>
-<p>Now, we can load the data of our choice. In this case I have selected to
+<p>Now, we can load the data of our choice. In this case, I have chosen to
 represent the Milky Way, constellation lines and stars.</p>
 <p>We also add some additional variables that would help us to improve the
 visualization.</p>
@@ -946,7 +946,7 @@ Richmond, Va. ISBN 9780943396613.</p>
 <div class="footnotes" role="doc-endnotes">
  <ol>
    <li id="fn:1">
-     <p>In fact, the download is performed via the
+     <p>In fact, the download is performed via
 <a href="https://www.jsdelivr.com/">jsDelivr</a>, which distributes files hosted on
 <a href="https://www.jsdelivr.com/github">GitHub via CDN.</a> This is supposed to
 improve performance, but in any case the underlying data source is the GitHub

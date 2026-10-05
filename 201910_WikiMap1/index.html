@@ -254,7 +254,7 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Wikipedia maps (I): Organ donor rates</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#web-scraping" class="nav-link">Web scraping</a></li><li class="nav-item nav d-block"><a href="#merging-all-together" class="nav-link">Merging all together</a></li><li class="nav-item nav d-block"><a href="#make-the-svg-file" class="nav-link">Make the <code class="language-plaintext highlighter-rouge">.svg</code> file</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#web-scraping" class="nav-link">Web scraping</a></li><li class="nav-item nav d-block"><a href="#merging-everything-together" class="nav-link">Merging everything together</a></li><li class="nav-item nav d-block"><a href="#make-the-svg-file" class="nav-link">Make the <code class="language-plaintext highlighter-rouge">.svg</code> file</a></li></ul>
 		</nav>   
 	</div>
 			<p>This is a quick post on how to create a map according to the
@@ -342,7 +342,7 @@ scrape as explained <a href="https://stackoverflow.com/a/57972054/7877917">here<
 </span><span class="n">WorldMap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3857</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">select</span><span class="p">(</span><span class="n">ISO_3166_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISO3_CODE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<h2 id="merging-all-together">Merging all together</h2>
+<h2 id="merging-everything-together">Merging everything together</h2>
 <p>Now let’s join and have a look to see what is going on. We use the
 <strong>countrycode</strong> package to retrieve the ISO3 codes of our scraped dataset:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">countrycode</span><span class="p">)</span><span class="w">

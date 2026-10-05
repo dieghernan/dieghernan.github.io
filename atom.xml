@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-10-05T16:22:54+02:00</updated>
+	<updated>2026-10-05T16:30:28+02:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One world | Projects, maps and coding</title>
 	<subtitle>Projects, maps and coding</subtitle>
@@ -707,7 +707,7 @@ filters) that is compatible with any Jekyll version.&lt;/p&gt;
 can check the results on my &lt;a href=&quot;https://dieghernan.github.io/tags&quot;&gt;/tags&lt;/a&gt; page.&lt;/p&gt;
 
 &lt;p&gt;Note that the tables produced in the example are taken from my live site,
-hence they may change as I add more posts. The results of the table should
+so they may change as I add more posts. The table results should
 have the same order and number of tags displayed on the
 &lt;a href=&quot;https://dieghernan.github.io/tags&quot;&gt;/tags&lt;/a&gt; page.&lt;/p&gt;
 
@@ -992,7 +992,7 @@ array:&lt;/p&gt;
 
 &lt;p&gt;How to rank the tags by the number of occurrences? We can set the maximum
 number of occurrences and loop in reverse order. The ranked array would be
-populated if a tag presents the number of occurrences in the main loop:&lt;/p&gt;
+populated when a tag’s count matches the current number in the main loop:&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Used in https://github.com/mmistakes/minimal-mistakes/blob/master/_includes/posts-taxonomy.html --&amp;gt;&lt;/span&gt;
  {% assign items_max = count_tags | sort | last %} {% assign
@@ -1440,7 +1440,7 @@ this blog using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&
 in a specific folder.&lt;/p&gt;
 
 &lt;p&gt;There are other alternatives that I discuss &lt;a href=&quot;#other-alternatives&quot;&gt;at the end of this
-post&lt;/a&gt;, but in one line, the reSmush.it API performs fast
+post&lt;/a&gt;, but briefly, the reSmush.it API works quickly
 with minimal configuration for a wide range of formats without needing an API
 key.&lt;/p&gt;
 
@@ -1480,7 +1480,7 @@ Original file
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;The file has a size of 1.7 MB. We can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resmush_file()&lt;/code&gt; to
-reduce it, see:&lt;/p&gt;
+reduce it:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resmush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resmush_file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cyl.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1518,7 +1518,7 @@ parameter. Now, the optimized file (&lt;code class=&quot;language-plaintext high
 &lt;/a&gt;
 &lt;p class=&quot;caption&quot;&gt;
 Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
-(Compression 55.46%). Click on the images to enlarge.
+(55.46% reduction in file size). Click on the images to enlarge.
 &lt;/p&gt;
 &lt;/div&gt;
 
@@ -1618,7 +1618,7 @@ disk. In this example, I demonstrate a feature of all the functions in
 &lt;p class=&quot;caption&quot;&gt;
 
 Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
-(Compression 26.63%). Click on the images to enlarge.
+(26.63% reduction in file size). Click on the images to enlarge.
 
 &lt;/p&gt;
 
@@ -2080,7 +2080,7 @@ alternative is:&lt;/p&gt;
   &lt;li&gt;Create a hexagonal grid, where each hexagon represents a similar area to
 each cell in the aggregated raster.&lt;/li&gt;
   &lt;li&gt;Extract the values of the raster to the new grid.&lt;/li&gt;
-  &lt;li&gt;Finally, follow the same steps on data wrangling and plotting.&lt;/li&gt;
+  &lt;li&gt;Finally, follow the same data wrangling and plotting steps.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;When working with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf::st_make_grid(square = FALSE)&lt;/code&gt;, the parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cellsize&lt;/code&gt;
@@ -2120,7 +2120,7 @@ the aggregated cells:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop_agg_sf&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;area_km2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;area_km2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop_agg_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now, we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exact_extract()&lt;/code&gt; to extract the population on each hexagonal grid.&lt;/p&gt;
+&lt;p&gt;Now, we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exact_extract()&lt;/code&gt; to extract the population in each hexagonal cell.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Extract aggregated population by hex cell&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop_agg_sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;population&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exact_extract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pop_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -2274,7 +2274,7 @@ have any suggestions, please let me know in the comments section below.&lt;/p&gt
 
 &lt;h2 id=&quot;first-things-first-the-data&quot;&gt;First things first: the data&lt;/h2&gt;
 
-&lt;p&gt;The initial data source of all these projects (Kim, Benjamin and myself) is the
+&lt;p&gt;The initial data source for all these projects (Kim’s, Benjamin’s and mine) is the
 same, and it is provided by the D3 plugin
 &lt;a href=&quot;https://github.com/ofrohn/d3-celestial/tree/master/data&quot;&gt;d3-celestial&lt;/a&gt; by &lt;a href=&quot;http://armchairastronautics.blogspot.com/&quot;&gt;Olaf
 Frohn&lt;/a&gt;. As Kim Fitter pointed out in
@@ -2293,7 +2293,7 @@ repo&lt;/a&gt; to learn more about it.&lt;/p&gt;
 
 &lt;h2 id=&quot;creating-a-star-map-with-r&quot;&gt;Creating a star map with R&lt;/h2&gt;
 
-&lt;p&gt;The first step is loading a bunch of libraries that would help us on this cosmic
+&lt;p&gt;The first step is to load libraries that will help us with this cosmic
 task:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Spatial manipulation&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -2391,12 +2391,12 @@ demo&lt;/a&gt; there is some
 degree of rotation depending on the location and the time. I found how this is
 done on the &lt;strong&gt;d3-celestial plugin&lt;/strong&gt; and I found the function
 &lt;a href=&quot;https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getMST(dt, lng)&lt;/code&gt;&lt;/a&gt;,
-that I ported to &lt;strong&gt;R&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_mst()&lt;/code&gt;). As per some of the research that I did
+which I ported to &lt;strong&gt;R&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_mst()&lt;/code&gt;). Based on the research I did,
 this function computes the &lt;a href=&quot;https://en.wikipedia.org/wiki/Sidereal_time&quot;&gt;Mean Sidereal
 Time&lt;/a&gt; (MST) given a specific
 longitude (perhaps Local Sidereal Time is a more accurate term here?)
 expressed in degrees, following the formulas provided by Meeus (1998). If you
-want to know more on this I recommend &lt;a href=&quot;https://squarewidget.com/astronomical-calculations-sidereal-time/&quot;&gt;this
+want to learn more about this, I recommend &lt;a href=&quot;https://squarewidget.com/astronomical-calculations-sidereal-time/&quot;&gt;this
 post&lt;/a&gt; by
 &lt;a href=&quot;https://squarewidget.com/&quot;&gt;James Still&lt;/a&gt;.&lt;/p&gt;
 
@@ -2526,7 +2526,7 @@ that for us.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;A desired location, that we would geocode with &lt;strong&gt;nominatimlite&lt;/strong&gt;.&lt;/p&gt;
+    &lt;p&gt;A desired location, which we will geocode with &lt;strong&gt;nominatimlite&lt;/strong&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;A specific moment in time.&lt;/p&gt;
@@ -2619,7 +2619,7 @@ moment would be 10:00 hence no stars are visible) you would need to adjust
 &lt;p&gt;Now we can start creating our buffers and projections, which will help us to
 crop the celestial data objects.&lt;/p&gt;
 
-&lt;p&gt;I noticed also that the &lt;a href=&quot;https://ofrohn.github.io/celestial-demo/location.html&quot;&gt;location
+&lt;p&gt;I also noticed that the &lt;a href=&quot;https://ofrohn.github.io/celestial-demo/location.html&quot;&gt;location
 demo&lt;/a&gt; of
 &lt;strong&gt;d3-celestial.js&lt;/strong&gt; uses &lt;a href=&quot;https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/demo/location.html#L17-L22&quot;&gt;Airy
 projection&lt;/a&gt;,
@@ -2669,7 +2669,7 @@ so we are going to replicate that as well:&lt;/p&gt;
 
 &lt;h3 id=&quot;celestial-data&quot;&gt;Celestial data&lt;/h3&gt;
 
-&lt;p&gt;Now, we can load the data of our choice. In this case I have selected to
+&lt;p&gt;Now, we can load the data of our choice. In this case, I have chosen to
 represent the Milky Way, constellation lines and stars.&lt;/p&gt;
 
 &lt;p&gt;We also add some additional variables that would help us to improve the
@@ -3028,7 +3028,7 @@ Richmond, Va. ISBN 9780943396613.&lt;/p&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
 
-      &lt;p&gt;In fact, the download is performed via the
+      &lt;p&gt;In fact, the download is performed via
 &lt;a href=&quot;https://www.jsdelivr.com/&quot;&gt;jsDelivr&lt;/a&gt;, which distributes files hosted on
 &lt;a href=&quot;https://www.jsdelivr.com/github&quot;&gt;GitHub via CDN.&lt;/a&gt; This is supposed to
 improve performance, but in any case the underlying data source is the GitHub
@@ -3081,7 +3081,7 @@ validity:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;The spatial data objects are bounded to \([-180, -90, 180, 90]\).&lt;/p&gt;
+    &lt;p&gt;The spatial data objects are bounded by \([-180, -90, 180, 90]\).&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Data are provided in WGS 84 - World Geodetic System 1984
@@ -3118,7 +3118,7 @@ also provided.&lt;/p&gt;
 
 &lt;details class=&quot;my-2&quot;&gt;
   &lt;summary&gt;
-List of files provided
+List of files provided:
 &lt;/summary&gt;
 
   &lt;ul&gt;
@@ -3283,7 +3283,7 @@ you may recognize the following lyrics:&lt;/p&gt;
 
 &lt;p&gt;This emphatic statement is made in &lt;a href=&quot;https://en.wikipedia.org/wiki/My_Fair_Lady_(film)&quot;&gt;&lt;em&gt;My Fair Lady
 (1964)&lt;/em&gt;&lt;/a&gt; by Audrey Hepburn,
-Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
+Rex Harrison and Stanley Holloway. But as a Spaniard, I can tell you it is
 &lt;strong&gt;completely false&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;The rain in Spain stays mainly in the north, most notably in Galicia. And I can
@@ -3317,7 +3317,7 @@ stays (mainly).&lt;/p&gt;
 
 &lt;h2 id=&quot;the-plain-in-spain&quot;&gt;The plain in Spain&lt;/h2&gt;
 
-&lt;p&gt;Well, the plain (or as we name it &lt;em&gt;La Meseta Central&lt;/em&gt;) covers a large area of
+&lt;p&gt;The plain (or as we call it, &lt;em&gt;La Meseta Central&lt;/em&gt;) covers a large area of
 inland Spain, with an average altitude of 650 meters above sea level.&lt;/p&gt;
 
 &lt;p&gt;I didn’t find any accurate spatial data file with the bounds of the plain, so
@@ -3667,7 +3667,7 @@ representing the value to be plotted (in this case, average annual
 precipitation) by longitude and latitude.&lt;/p&gt;
 
 &lt;p&gt;But first we add some additional margins and axis titles to the main plot, so we
-can insert those marginal plots easily on our main plot:&lt;/p&gt;
+can easily insert those marginal plots into our main plot:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Now we can add titles on the secondary axis&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -4182,7 +4182,7 @@ convert the object to &lt;code class=&quot;language-plaintext highlighter-rouge&
 
 &lt;p&gt;The next step is to calculate the hillshade. Royé has a very detailed discussion
 &lt;a href=&quot;https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade&quot;&gt;here&lt;/a&gt;,
-so I would not go into details. Basically what we want to create is a layer that
+so I will not go into detail. What we want to create is a layer that
 approximates the potential “texture” of the surface based on the elevation and
 the sun’s position. This is straightforward with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terra::terrain()&lt;/code&gt; and
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terra::shade()&lt;/code&gt; functions:&lt;/p&gt;
@@ -4260,7 +4260,7 @@ and the number of cells are the same.&lt;/p&gt;
 &lt;p&gt;The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
-associated with low elevations, while orange, browns and whites are associated with
+associated with low elevations, while oranges, browns and whites are associated with
 high elevations on some of the most common elevation palettes (aka hypsometric
 tints). See for example the &lt;a href=&quot;https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps&quot;&gt;Wikipedia Topographic maps
 conventions&lt;/a&gt;.&lt;/p&gt;
@@ -4297,13 +4297,13 @@ unevenly with the goal of providing a better understanding of the maps:&lt;/p&gt
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp&quot; alt=&quot;Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Can you notice the difference? In the first map greens are the dominant color.
-However greens are representing a wide range of elevations (0-750 meters) that
-correspond with most of the territory. In terms of perception, we won’t be
+&lt;p&gt;Can you notice the difference? In the first map, green is the dominant color.
+However, greens represent a wide range of elevations (0-750 meters) that
+correspond to most of the territory. In terms of perception, we won’t be
 clearly spotting elevation differences in the center of the country, while with
 the uneven gradient greens only correspond to the range (0 - 250 meters) and the
 overall perception of elevation improves. Note that the only difference between
-plots is exclusively the color palette.&lt;/p&gt;
+plots is the color palette.&lt;/p&gt;
 
 &lt;p&gt;For producing our map we are going to assess visually the result of a selection
 of palettes provided by &lt;strong&gt;tidyterra&lt;/strong&gt;. We use here the version
@@ -4520,7 +4520,7 @@ terra Objects&lt;/em&gt;. &amp;lt;doi:10.5281/zenodo.6572471&amp;gt;
 		<content type="html" xml:base="https://dieghernan.github.io/202205_tidyterra/">
 		
 		
-		&lt;h3&gt;Easily work and ggplot SpatRasters&lt;/h3&gt;
+		&lt;h3&gt;Easily work with and plot SpatRasters&lt;/h3&gt;
 		
   		
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp&#39; &gt;
@@ -4558,7 +4558,7 @@ functions of &lt;strong&gt;tidyterra&lt;/strong&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;wait-volcano-is-flipped&quot;&gt;Wait, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volcano&lt;/code&gt; is flipped?&lt;/h2&gt;
 
 &lt;p&gt;Let’s check it out. Thanks to the package &lt;strong&gt;maptiles&lt;/strong&gt; we can have a glimpse of
-the location of Maungawhau using map tiles (as Google Maps uses). We will use
+the location of Maungawhau using map tiles, as in Google Maps. We will use
 &lt;strong&gt;tidyterra&lt;/strong&gt; for displaying the map tile:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4589,8 +4589,8 @@ the location of Maungawhau using map tiles (as Google Maps uses). We will use
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp&quot; title=&quot;plot of chunk 20220525_tile&quot; alt=&quot;Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
-question is, how to match the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volcano&lt;/code&gt; dataset (a matrix) with this tile (a
+&lt;p&gt;Here we have a crisp RGB tile of Maungawhau. Now, the next
+question is how to match the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volcano&lt;/code&gt; dataset (a matrix) with this tile (a
 geotagged map tile)? Let’s check it out.&lt;/p&gt;
 
 &lt;h2 id=&quot;working-with-spatrasters&quot;&gt;Working with SpatRasters&lt;/h2&gt;
@@ -4825,12 +4825,12 @@ Encyclopaedia of Astronomy&lt;/em&gt; (1977 edition):&lt;/p&gt;
 
 &lt;p&gt;Saville presented a black-and-white version, producing a cover that reached
 iconic status in the ’80s. This cover has been reproduced in the form of
-tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:&lt;/p&gt;
+tattoos, clothing, merchandise, video games and even 3-D sculptures:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg&quot; alt=&quot;Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background.&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you are interested in learning more about this fascinating history of science
-and design you can find it on &lt;a href=&quot;https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/&quot;&gt;Pop Culture Pulsar: Origin Story of Joy
+and design, you can read &lt;a href=&quot;https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/&quot;&gt;Pop Culture Pulsar: Origin Story of Joy
 Division’s Unknown Pleasures Album
 Cover&lt;/a&gt;
 by &lt;a href=&quot;https://www.scientificamerican.com/author/jen-christiansen/&quot;&gt;Jen
@@ -4859,7 +4859,7 @@ However, they both use QGIS, while in this post I work completely in
 final plot, but there is a caveat: &lt;strong&gt;both the coordinates and the
 elevation should be in the same unit&lt;/strong&gt; (&lt;a href=&quot;https://wilkelab.org/ggridges/reference/geom_ridgeline.html&quot;&gt;See
 why&lt;/a&gt;).
-Therefore we should project both the raster and the base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; object on a
+Therefore, we should project both the raster and the base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; object to a
 suitable CRS defined in meters (in this case).&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -4892,7 +4892,7 @@ extracting the elevation data. We can achieve that with &lt;strong&gt;giscoR&lt;
 &lt;strong&gt;elevatr&lt;/strong&gt;.
 In this post, I create a joyplot of
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Andalusia&quot;&gt;Andalusia&lt;/a&gt;. Note that, given we are
-creating just a visualization, the resolution of the sf object is not very
+creating just a visualization, the resolution of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; object is not very
 relevant.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
@@ -5138,7 +5138,7 @@ parts of the string can be easily removed.&lt;/p&gt;
 &lt;h3 id=&quot;with-colors&quot;&gt;With colors&lt;/h3&gt;
 
 &lt;p&gt;We can apply different colors to the plot. Note that &lt;strong&gt;ggridges&lt;/strong&gt; only accepts
-different &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aes&lt;/code&gt; by row, and not by column:&lt;/p&gt;
+different &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aes&lt;/code&gt; by row, not by column:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Classify on three different bands&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -5240,7 +5240,7 @@ measures of twelve pulsars.&lt;/em&gt; Cornell University.&lt;/p&gt;
 &lt;p&gt;Mitton, Simon (1977). &lt;em&gt;The Cambridge encyclopaedia of astronomy.&lt;/em&gt; Prentice-Hall
 of Canada.&lt;/p&gt;
 
-&lt;p&gt;Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures`’ image
+&lt;p&gt;Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures’ image
 went from underground album cover to a piece of cultural ubiquity” &lt;em&gt;The
 Washington Post&lt;/em&gt;. &lt;a href=&quot;https://wapo.st/3K6Chsc&quot;&gt;https://wapo.st/3K6Chsc&lt;/a&gt;&lt;/p&gt;
 
@@ -5705,9 +5705,9 @@ The scraper also uses
 &lt;a href=&quot;https://pypi.org/project/pycountry/&quot;&gt;&lt;strong&gt;pycountry&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;For the prototype version, map visualization was created with &lt;strong&gt;R&lt;/strong&gt; and
-generated via &lt;a href=&quot;https://rmarkdown.rstudio.com/&quot;&gt;{rmarkdown}&lt;/a&gt; using
-&lt;a href=&quot;http://rstudio.github.io/leaflet/&quot;&gt;{leaflet}&lt;/a&gt;,
-&lt;a href=&quot;https://dieghernan.github.io/giscoR/&quot;&gt;{giscoR}&lt;/a&gt; and some packages included in
+generated via &lt;a href=&quot;https://rmarkdown.rstudio.com/&quot;&gt;&lt;strong&gt;rmarkdown&lt;/strong&gt;&lt;/a&gt; using
+&lt;a href=&quot;http://rstudio.github.io/leaflet/&quot;&gt;&lt;strong&gt;leaflet&lt;/strong&gt;&lt;/a&gt;,
+&lt;a href=&quot;https://dieghernan.github.io/giscoR/&quot;&gt;&lt;strong&gt;giscoR&lt;/strong&gt;&lt;/a&gt; and some packages included in
 the &lt;a href=&quot;https://www.tidyverse.org/&quot;&gt;tidyverse&lt;/a&gt;.
 For the deployment, map logic has moved to JavaScript to support multiple languages.&lt;/p&gt;
 
@@ -5750,11 +5750,11 @@ For the deployment, map logic has moved to JavaScript to support multiple langua
 &lt;p&gt;Core packages used in the project are:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ropenspain.github.io/mapSpain/&quot;&gt;{mapSpain}&lt;/a&gt; for the location of the
-municipalities, base polygons, coordinates and imagery,&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.ropensci.org/osmdata/&quot;&gt;{osmdata}&lt;/a&gt; for the streets,&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://mtennekes.github.io/tmap/&quot;&gt;{tmap}&lt;/a&gt; for plotting,&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.ropensci.org/rtweet/&quot;&gt;{rtweet}&lt;/a&gt; for posting,&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ropenspain.github.io/mapSpain/&quot;&gt;&lt;strong&gt;mapSpain&lt;/strong&gt;&lt;/a&gt; for the location of the
+municipalities, base polygons, coordinates and imagery.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.ropensci.org/osmdata/&quot;&gt;&lt;strong&gt;osmdata&lt;/strong&gt;&lt;/a&gt; for the streets.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mtennekes.github.io/tmap/&quot;&gt;&lt;strong&gt;tmap&lt;/strong&gt;&lt;/a&gt; for plotting.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.ropensci.org/rtweet/&quot;&gt;&lt;strong&gt;rtweet&lt;/strong&gt;&lt;/a&gt; for posting.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Other packages used are &lt;strong&gt;sf&lt;/strong&gt;, &lt;strong&gt;dplyr&lt;/strong&gt; and other common supporting packages.&lt;/p&gt;
@@ -5942,7 +5942,7 @@ offering another reason to pay attention to low-frequency observations.&lt;/p&gt
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp&quot; alt=&quot;Ranked-value plot of a Pareto sample. Values fall steeply and then flatten; reference lines mark the top 20 percent and the 80th percentile.&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp&quot; alt=&quot;Histogram of a Pareto sample. Most values are small, with a long tail of rare large values.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp&quot; alt=&quot;Ranked-value plot of a Pareto sample. Values fall steeply and then flatten, with reference lines marking the top 20 percent and the 80th percentile.&quot; /&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp&quot; alt=&quot;Histogram of a Pareto sample. Most values are small, with a long tail of rare large values.&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;breaking-method&quot;&gt;Breaking method&lt;/h2&gt;
 
@@ -6811,7 +6811,8 @@ line-type patterns are also plotted, as in the previous case, and &lt;code class
 
 &lt;p&gt;This new capability geotags a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.png&lt;/code&gt; file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POLYGON/MULTIPOLYGON&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;For high-quality png maps, &lt;strong&gt;it is recommended to plot your map on a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.svg&lt;/code&gt; device&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;For high-quality PNG maps, &lt;strong&gt;it is recommended to plot your map on an SVG
+graphics device&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;example-1-1&quot;&gt;Example 1&lt;/h3&gt;
 
@@ -6898,7 +6899,10 @@ line-type patterns are also plotted, as in the previous case, and &lt;code class
 
 &lt;p&gt;A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.&lt;/p&gt;
 
-&lt;p&gt;Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.&lt;/p&gt;
+&lt;p&gt;Word cloud layers fitted into a map shape provide a good trade-off between
+physical location, scale and labels. The size and color of the words are based
+on the frequency of the factor being plotted, highlighting the most frequent
+terms.&lt;/p&gt;
 
 &lt;h3 id=&quot;example-1-2&quot;&gt;Example 1&lt;/h3&gt;
 
@@ -6922,7 +6926,7 @@ line-type patterns are also plotted, as in the previous case, and &lt;code class
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp&quot; alt=&quot;Word map of Europe with country names positioned geographically. Text size and color represent population density; Malta is especially prominent.&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp&quot; alt=&quot;Word map of Europe with country names positioned geographically. Text size and color represent population density, with Malta especially prominent.&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;example-2-2&quot;&gt;Example 2&lt;/h3&gt;
 
@@ -7571,7 +7575,7 @@ scrape as explained &lt;a href=&quot;https://stackoverflow.com/a/57972054/787791
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ISO_3166_3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ISO3_CODE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;merging-all-together&quot;&gt;Merging all together&lt;/h2&gt;
+&lt;h2 id=&quot;merging-everything-together&quot;&gt;Merging everything together&lt;/h2&gt;
 
 &lt;p&gt;Now let’s join and have a look to see what is going on. We use the
 &lt;strong&gt;countrycode&lt;/strong&gt; package to retrieve the ISO3 codes of our scraped dataset:&lt;/p&gt;
@@ -8096,7 +8100,7 @@ is too dense, &lt;strong&gt;R&lt;/strong&gt; could crash easily.&lt;/p&gt;
 
 &lt;h2 id=&quot;pixel-it&quot;&gt;Pixel it!&lt;/h2&gt;
 
-&lt;p&gt;Also quite easy, just a couple of tweaks more, always using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;st_make_grid&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Also quite easy, just a couple more tweaks, still using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;st_make_grid&lt;/code&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grid&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_make_grid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Kms&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -8269,7 +8273,7 @@ of very interesting pieces of work).&lt;/p&gt;
 &lt;a href=&quot;https://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; (&lt;strong&gt;Spoiler&lt;/strong&gt;: &lt;a href=&quot;https://dieghernan.github.io/201905_Where-in-the-world/&quot;&gt;I succeeded
 &lt;i class=&quot;fa fa-thumbs-up&quot;&gt;&lt;/i&gt;&lt;/a&gt;).
 In my case, I use the &lt;a href=&quot;https://dieghernan.github.io/chulapa/&quot;&gt;&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;&lt;/a&gt;
-remote theme created by myself.&lt;/p&gt;
+remote theme that I created.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Index&lt;/strong&gt;&lt;/p&gt;
 
@@ -8311,9 +8315,9 @@ chunk:&lt;/p&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;So now we have it! The only thing to remember is that we need &lt;strong&gt;to load
-the libraries from the **leaflet&lt;/strong&gt; server
-(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://rstudio.github.io/leaflet&lt;/code&gt;)**, meaning that we have to prepend
+&lt;p&gt;So now we have it! The only thing to remember is that we need to load
+the libraries from the &lt;strong&gt;leaflet&lt;/strong&gt; server
+(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://rstudio.github.io/leaflet&lt;/code&gt;), meaning that we have to prepend
 that URL to the libraries in our installation:&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://rstudio.github.io/leaflet/libs/jquery/jquery.min.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
@@ -8442,7 +8446,7 @@ which one is more suitable for your needs.&lt;/p&gt;
 
 &lt;h4 id=&quot;6-publish-your-post&quot;&gt;6. Publish your post&lt;/h4&gt;
 
-&lt;p&gt;Now you just have to publish your post as usual!! If everything has been
+&lt;p&gt;Now you just have to publish your post as usual! If everything has been
 properly set, when Jekyll builds your post it will include the
 libraries in the header and make the magic happen, just like this:&lt;/p&gt;
 
@@ -8470,7 +8474,7 @@ wouldn’t look as nice on laptops, and vice versa.&lt;/p&gt;
 
 &lt;h5 id=&quot;example-1-672x480px&quot;&gt;Example 1: 672x480px&lt;/h5&gt;
 
-&lt;p&gt;Fixed size in pixels. By default in my machine:&lt;/p&gt;
+&lt;p&gt;Fixed size in pixels. The default on my machine:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;leaflet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;leafletOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minZoom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxZoom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addTiles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -8527,7 +8531,7 @@ screen, no matter what device you are using.&lt;/p&gt;
 &lt;a href=&quot;https://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; (&lt;strong&gt;Spoiler&lt;/strong&gt;: &lt;a href=&quot;https://dieghernan.github.io/201905_Where-in-the-world/&quot;&gt;I succeeded
 &lt;i class=&quot;fa fa-thumbs-up&quot;&gt;&lt;/i&gt;&lt;/a&gt;).
 In my case, I use the &lt;a href=&quot;https://dieghernan.github.io/chulapa/&quot;&gt;&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;&lt;/a&gt;
-remote theme created by myself.&lt;/p&gt;
+remote theme that I created.&lt;/p&gt;
 </summary>
 		<category term="posts"/>
 		<category term="html"/><category term="jekyll"/><category term="leaflet"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/>
@@ -9007,7 +9011,7 @@ the &lt;a href=&quot;https://en.wikipedia.org/wiki/Commonwealth_of_Nations&quot;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;In our case, the value to search is &lt;strong&gt;C&lt;/strong&gt;. A function that extracts the
+&lt;p&gt;In our case, the value to search for is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C&lt;/code&gt;. A function that extracts the
 membership from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;json&lt;/code&gt; database is also provided:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ISO_memcol&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -9024,7 +9028,8 @@ membership from the &lt;code class=&quot;language-plaintext highlighter-rouge&qu
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df_org&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ISO_memcol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;df_org&lt;/code&gt; has a new column, named &lt;strong&gt;C&lt;/strong&gt;, containing the membership status of each country.&lt;/p&gt;
+&lt;p&gt;Now &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;df_org&lt;/code&gt; has a new column, named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C&lt;/code&gt;, containing the membership status
+of each country.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df_org&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -9135,7 +9140,7 @@ the dedicated database.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiny&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coalesce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiny&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiny&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;C_sov&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;plotting-map-wikipedia-style&quot;&gt;Plotting map: Wikipedia style&lt;/h2&gt;
+&lt;h2 id=&quot;plotting-a-map-wikipedia-style&quot;&gt;Plotting a map: Wikipedia style&lt;/h2&gt;
 
 &lt;p&gt;Now we will try to plot a map resembling the one presented in the
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Commonwealth_of_Nations&quot;&gt;Wikipedia page&lt;/a&gt; for the
@@ -9372,7 +9377,7 @@ containing:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Currency&lt;/li&gt;
   &lt;li&gt;Dependency status&lt;/li&gt;
-  &lt;li&gt;Names in English and Spanish: countries, continents and regions, and capitals&lt;/li&gt;
+  &lt;li&gt;Names in English and Spanish for countries, continents, regions and capitals&lt;/li&gt;
   &lt;li&gt;Population, area (km&lt;sup&gt;2&lt;/sup&gt;) and developed region&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -9901,7 +9906,7 @@ PIN and add API keys for your favorite online services. Please check
 		
 		<author>
 			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
-		<summary type="html">Sfera for Pebble Time Round is a highly customizable watch face that gets the most out of the smartwatch capabilities. Set your preferences and enjoy this beautifully designed watch face.</summary>
+		<summary type="html">Sfera for Pebble Time Round is a highly customizable watch face that gets the most out of the smartwatch&#39;s capabilities. Set your preferences and enjoy this beautifully designed watch face.</summary>
 		<category term="projects"/>
 		<category term="C"/><category term="discontinued"/><category term="javascript"/><category term="pebble"/><category term="project"/><category term="watchface"/>
 	</entry><entry>
@@ -9935,7 +9940,7 @@ new capabilities.&lt;/p&gt;
 &lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Exact hour in natural language&lt;/li&gt;
+  &lt;li&gt;Exact time in natural language&lt;/li&gt;
   &lt;li&gt;Autofit to screen&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -9946,7 +9951,7 @@ new capabilities.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Date format: Day Month / Month Day&lt;/li&gt;
   &lt;li&gt;Fuzzy time option&lt;/li&gt;
-  &lt;li&gt;Animation on text&lt;/li&gt;
+  &lt;li&gt;Text animation&lt;/li&gt;
   &lt;li&gt;Language
     &lt;ul&gt;
       &lt;li&gt;Spanish&lt;/li&gt;

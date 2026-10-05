@@ -443,7 +443,7 @@ is too dense, <strong>R</strong> could crash easily.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.webp" alt="Two maps of Great Britain comparing separate hexagonal grid cells with cells merged into regional shapes. Colors distinguish regions." /></p>
 <h2 id="pixel-it">Pixel it!</h2>
-<p>Also quite easy, just a couple of tweaks more, always using <code class="language-plaintext highlighter-rouge">st_make_grid</code>.</p>
+<p>Also quite easy, just a couple more tweaks, still using <code class="language-plaintext highlighter-rouge">st_make_grid</code>.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_make_grid</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w">
   </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="c1"># Kms</span><span class="w">
   </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span><span class="w">

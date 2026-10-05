@@ -483,7 +483,7 @@ alternative is:</p>
  <li>Create a hexagonal grid, where each hexagon represents a similar area to
 each cell in the aggregated raster.</li>
  <li>Extract the values of the raster to the new grid.</li>
- <li>Finally, follow the same steps on data wrangling and plotting.</li>
+ <li>Finally, follow the same data wrangling and plotting steps.</li>
 </ol>
 <p>When working with <code class="language-plaintext highlighter-rouge">sf::st_make_grid(square = FALSE)</code>, the parameter <code class="language-plaintext highlighter-rouge">cellsize</code>
 should be the “diameter” of the hexagon instead of the area. Luckily, we can
@@ -518,7 +518,7 @@ the aggregated cells:</p>
 
 </span><span class="n">pop_agg_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">area_km2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">area_km2</span><span class="p">,</span><span class="w"> </span><span class="n">geom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pop_agg_sf</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Now, we use <code class="language-plaintext highlighter-rouge">exact_extract()</code> to extract the population on each hexagonal grid.</p>
+<p>Now, we use <code class="language-plaintext highlighter-rouge">exact_extract()</code> to extract the population in each hexagonal cell.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Extract aggregated population by hex cell</span><span class="w">
 </span><span class="n">pop_agg_sf</span><span class="o">$</span><span class="n">population</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">exact_extract</span><span class="p">(</span><span class="n">pop_init</span><span class="p">,</span><span class="w">
   </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pop_agg_sf</span><span class="p">,</span><span class="w">

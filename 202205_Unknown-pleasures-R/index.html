@@ -273,10 +273,10 @@ Encyclopaedia of Astronomy</em> (1977 edition):</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Page from The Cambridge Encyclopaedia of Astronomy with stacked signal traces from pulsar CP 1919, forming a central cluster of peaks." /></p>
 <p>Saville presented a black-and-white version, producing a cover that reached
 iconic status in the ’80s. This cover has been reproduced in the form of
-tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
+tattoos, clothing, merchandise, video games and even 3-D sculptures:</p>
 <p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background." /></p>
 <p>If you are interested in learning more about this fascinating history of science
-and design you can find it on <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">Pop Culture Pulsar: Origin Story of Joy
+and design, you can read <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">Pop Culture Pulsar: Origin Story of Joy
 Division’s Unknown Pleasures Album
 Cover</a>
 by <a href="https://www.scientificamerican.com/author/jen-christiansen/">Jen
@@ -300,7 +300,7 @@ However, they both use QGIS, while in this post I work completely in
 final plot, but there is a caveat: <strong>both the coordinates and the
 elevation should be in the same unit</strong> (<a href="https://wilkelab.org/ggridges/reference/geom_ridgeline.html">See
 why</a>).
-Therefore we should project both the raster and the base <code class="language-plaintext highlighter-rouge">sf</code> object on a
+Therefore, we should project both the raster and the base <code class="language-plaintext highlighter-rouge">sf</code> object to a
 suitable CRS defined in meters (in this case).</p>
  </li>
  <li>
@@ -330,7 +330,7 @@ extracting the elevation data. We can achieve that with <strong>giscoR</strong> 
 <strong>elevatr</strong>.
 In this post, I create a joyplot of
 <a href="https://en.wikipedia.org/wiki/Andalusia">Andalusia</a>. Note that, given we are
-creating just a visualization, the resolution of the sf object is not very
+creating just a visualization, the resolution of the <code class="language-plaintext highlighter-rouge">sf</code> object is not very
 relevant.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Select a Spanish Region: Andalucia</span><span class="w">
@@ -543,7 +543,7 @@ parts of the string can be easily removed.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" /></p>
 <h3 id="with-colors">With colors</h3>
 <p>We can apply different colors to the plot. Note that <strong>ggridges</strong> only accepts
-different <code class="language-plaintext highlighter-rouge">aes</code> by row, and not by column:</p>
+different <code class="language-plaintext highlighter-rouge">aes</code> by row, not by column:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Classify on three different bands</span><span class="w">
 
@@ -632,7 +632,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
 measures of twelve pulsars.</em> Cornell University.</p>
 <p>Mitton, Simon (1977). <em>The Cambridge encyclopaedia of astronomy.</em> Prentice-Hall
 of Canada.</p>
-<p>Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures`’ image
+<p>Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures’ image
 went from underground album cover to a piece of cultural ubiquity” <em>The
 Washington Post</em>. <a href="https://wapo.st/3K6Chsc">https://wapo.st/3K6Chsc</a></p>
 <p>White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division’s

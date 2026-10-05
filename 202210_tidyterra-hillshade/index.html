@@ -340,7 +340,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 <h2 id="hillshading">Hillshading</h2>
 <p>The next step is to calculate the hillshade. Royé has a very detailed discussion
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade">here</a>,
-so I would not go into details. Basically what we want to create is a layer that
+so I will not go into detail. What we want to create is a layer that
 approximates the potential “texture” of the surface based on the elevation and
 the sun’s position. This is straightforward with the <code class="language-plaintext highlighter-rouge">terra::terrain()</code> and
 <code class="language-plaintext highlighter-rouge">terra::shade()</code> functions:</p>
@@ -409,7 +409,7 @@ and the number of cells are the same.</p>
 <p>The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
-associated with low elevations, while orange, browns and whites are associated with
+associated with low elevations, while oranges, browns and whites are associated with
 high elevations on some of the most common elevation palettes (aka hypsometric
 tints). See for example the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps">Wikipedia Topographic maps
 conventions</a>.</p>
@@ -438,13 +438,13 @@ unevenly with the goal of providing a better understanding of the maps:</p>
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_hypso</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks." width="100%" /></p>
-<p>Can you notice the difference? In the first map greens are the dominant color.
-However greens are representing a wide range of elevations (0-750 meters) that
-correspond with most of the territory. In terms of perception, we won’t be
+<p>Can you notice the difference? In the first map, green is the dominant color.
+However, greens represent a wide range of elevations (0-750 meters) that
+correspond to most of the territory. In terms of perception, we won’t be
 clearly spotting elevation differences in the center of the country, while with
 the uneven gradient greens only correspond to the range (0 - 250 meters) and the
 overall perception of elevation improves. Note that the only difference between
-plots is exclusively the color palette.</p>
+plots is the color palette.</p>
 <p>For producing our map we are going to assess visually the result of a selection
 of palettes provided by <strong>tidyterra</strong>. We use here the version
 <code class="language-plaintext highlighter-rouge">tidyterra::scale_fill_hypso_tint_c()</code> instead of
@@ -727,7 +727,7 @@ terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
             </a>
          </p>
            <p class="card-text">
-              <small>Easily work and ggplot SpatRasters</small>
+              <small>Easily work with and plot SpatRasters</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>

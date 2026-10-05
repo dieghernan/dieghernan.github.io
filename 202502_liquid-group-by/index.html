@@ -294,7 +294,7 @@ filters) that is compatible with any Jekyll version.</p>
 <p>The algorithm is now implemented in <span class="chulapa">Chulapa</span>. You
 can check the results on my <a href="https://dieghernan.github.io/tags">/tags</a> page.</p>
 <p>Note that the tables produced in the example are taken from my live site,
-hence they may change as I add more posts. The results of the table should
+so they may change as I add more posts. The table results should
 have the same order and number of tags displayed on the
 <a href="https://dieghernan.github.io/tags">/tags</a> page.</p>
 <h2 id="alternative-group_by-with-liquid">Alternative <code class="language-plaintext highlighter-rouge">group_by</code> with Liquid</h2>
@@ -568,7 +568,7 @@ array:</p>
 <h2 id="sorting">Sorting</h2>
 <p>How to rank the tags by the number of occurrences? We can set the maximum
 number of occurrences and loop in reverse order. The ranked array would be
-populated if a tag presents the number of occurrences in the main loop:</p>
+populated when a tag’s count matches the current number in the main loop:</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Used in https://github.com/mmistakes/minimal-mistakes/blob/master/_includes/posts-taxonomy.html --&gt;</span>
  {% assign items_max = count_tags | sort | last %} {% assign
 sorted_tags = '' | split: ',' %} {% assign sorted_count_tags = '' | split: ','

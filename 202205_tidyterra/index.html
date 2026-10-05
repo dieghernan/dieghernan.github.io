@@ -70,7 +70,7 @@
     "@context": "http://schema.org",
     "@type": "WebPage",
     "name": "Introducing tidyterra",
-    "description": "Easily work and ggplot SpatRasters - tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2."
+    "description": "Easily work with and plot SpatRasters - tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2."
     }
 }
 </script><script type="application/ld+json">
@@ -105,7 +105,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="Easily work and ggplot SpatRasters - tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2.">
+   <meta name="description" content="Easily work with and plot SpatRasters - tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -113,7 +113,7 @@
    <meta property="og:site_name" content="One world | Projects, maps and coding" >
    <meta property="og:url" content="https://dieghernan.github.io/202205_tidyterra/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="Easily work and ggplot SpatRasters - tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2...." >
+   <meta property="og:description" content="Easily work with and plot SpatRasters - tidyterra provides tidyverse methods for terra objects and geom functions for plotting with..." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" >
     <!-- Twitter/X Cards -->
@@ -198,7 +198,7 @@
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
-           <h1 class="p-name">Introducing <strong>tidyterra</strong></h1><p class="lead chulapa-subtitle p-summary">Easily work and ggplot SpatRasters</p>
+           <h1 class="p-name">Introducing <strong>tidyterra</strong></h1><p class="lead chulapa-subtitle p-summary">Easily work with and plot SpatRasters</p>
            <hr class="mb-0">
 			</div>
 		</div>
@@ -282,7 +282,7 @@ functions of <strong>tidyterra</strong>.</p>
 </span></code></pre></div></div>
 <h2 id="wait-volcano-is-flipped">Wait, <code class="language-plaintext highlighter-rouge">volcano</code> is flipped?</h2>
 <p>Let’s check it out. Thanks to the package <strong>maptiles</strong> we can have a glimpse of
-the location of Maungawhau using map tiles (as Google Maps uses). We will use
+the location of Maungawhau using map tiles, as in Google Maps. We will use
 <strong>tidyterra</strong> for displaying the map tile:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># location of Maungawhau</span><span class="w">
@@ -310,8 +310,8 @@ the location of Maungawhau using map tiles (as Google Maps uses). We will use
 </span><span class="n">ggtile</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" /></p>
-<p>So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
-question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
+<p>Here we have a crisp RGB tile of Maungawhau. Now, the next
+question is how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
 geotagged map tile)? Let’s check it out.</p>
 <h2 id="working-with-spatrasters">Working with SpatRasters</h2>
 <p>Thanks to the <strong>terra</strong> package we can start converting <code class="language-plaintext highlighter-rouge">volcano</code> into a

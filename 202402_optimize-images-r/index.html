@@ -312,7 +312,7 @@ development and SEO optimization. For example, I optimized all the images on
 this blog using <code class="language-plaintext highlighter-rouge">resmush_dir()</code>, which is a shorthand for optimizing all files
 in a specific folder.</p>
 <p>There are other alternatives that I discuss <a href="#other-alternatives">at the end of this
-post</a>, but in one line, the reSmush.it API performs fast
+post</a>, but briefly, the reSmush.it API works quickly
 with minimal configuration for a wide range of formats without needing an API
 key.</p>
 <h2 id="using-the-resmush-package">Using the <strong>resmush</strong> package</h2>
@@ -343,7 +343,7 @@ Original file
 </span><span class="n">ggsave</span><span class="p">(</span><span class="s2">"cyl.png"</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p>The file has a size of 1.7 MB. We can use <code class="language-plaintext highlighter-rouge">resmush_file()</code> to
-reduce it, see:</p>
+reduce it:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">resmush</span><span class="p">)</span><span class="w">
 </span><span class="n">resmush_file</span><span class="p">(</span><span class="s2">"cyl.png"</span><span class="p">)</span><span class="w">
 </span><span class="c1">#&gt; ══ resmush summary ══════════════════════════════════════════</span><span class="w">
@@ -374,7 +374,7 @@ parameter. Now, the optimized file (<code class="language-plaintext highlighter-
 </a>
 <p class="caption">
 Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
-(Compression 55.46%). Click on the images to enlarge.
+(55.46% reduction in file size). Click on the images to enlarge.
 </p>
 </div>
 <p>We can verify that the image has been compressed without reducing its
@@ -463,7 +463,7 @@ disk. In this example, I demonstrate a feature of all the functions in
 </a>
 <p class="caption">
 Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
-(Compression 26.63%). Click on the images to enlarge.
+(26.63% reduction in file size). Click on the images to enlarge.
 </p>
 </div>
 <h2 id="other-alternatives">Other alternatives</h2>
@@ -698,7 +698,7 @@ your work.</p>
             </a>
          </p>
            <p class="card-text">
-              <small>Easily work and ggplot SpatRasters</small>
+              <small>Easily work with and plot SpatRasters</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>

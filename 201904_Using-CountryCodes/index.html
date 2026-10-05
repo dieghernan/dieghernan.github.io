@@ -254,7 +254,7 @@
 			</button>
 		</p>
 		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Using the CountryCodes database and <strong>sf</strong> package</a></p>		
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#reading-the-data" class="nav-link">Reading the data</a></li><li class="nav-item nav d-block"><a href="#replacing-the-data-on-a-map" class="nav-link">Replacing the data on a map</a></li><li class="nav-item nav d-block"><a href="#plotting-map-wikipedia-style" class="nav-link">Plotting map: Wikipedia style</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#reading-the-data" class="nav-link">Reading the data</a></li><li class="nav-item nav d-block"><a href="#replacing-the-data-on-a-map" class="nav-link">Replacing the data on a map</a></li><li class="nav-item nav d-block"><a href="#plotting-a-map-wikipedia-style" class="nav-link">Plotting a map: Wikipedia style</a></li></ul>
 		</nav>   
 	</div>
 			<p>This vignette shows how to use the database provided in the GitHub project
@@ -318,7 +318,7 @@ the <a href="https://en.wikipedia.org/wiki/Commonwealth_of_Nations">Commonwealth
    </tr>
  </tbody>
 </table>
-<p>In our case, the value to search is <strong>C</strong>. A function that extracts the
+<p>In our case, the value to search for is <code class="language-plaintext highlighter-rouge">C</code>. A function that extracts the
 membership from the <code class="language-plaintext highlighter-rouge">json</code> database is also provided:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ISO_memcol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w">
                        </span><span class="n">orgtosearch</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -333,7 +333,8 @@ membership from the <code class="language-plaintext highlighter-rouge">json</cod
 </span><span class="p">}</span><span class="w">
 </span><span class="n">df_org</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Now <code class="language-plaintext highlighter-rouge">df_org</code> has a new column, named <strong>C</strong>, containing the membership status of each country.</p>
+<p>Now <code class="language-plaintext highlighter-rouge">df_org</code> has a new column, named <code class="language-plaintext highlighter-rouge">C</code>, containing the membership status
+of each country.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_org</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">count</span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">kable</span><span class="p">(</span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">)</span><span class="w">
@@ -436,7 +437,7 @@ the dedicated database.</p>
 </span><span class="n">tiny</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">left_join</span><span class="p">(</span><span class="n">tiny</span><span class="p">,</span><span class="w"> </span><span class="n">ISOCommon</span><span class="p">)</span><span class="w">
 </span><span class="n">tiny</span><span class="o">$</span><span class="n">C</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coalesce</span><span class="p">(</span><span class="n">tiny</span><span class="o">$</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="n">tiny</span><span class="o">$</span><span class="n">C_sov</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<h2 id="plotting-map-wikipedia-style">Plotting map: Wikipedia style</h2>
+<h2 id="plotting-a-map-wikipedia-style">Plotting a map: Wikipedia style</h2>
 <p>Now we will try to plot a map resembling the one presented in the
 <a href="https://en.wikipedia.org/wiki/Commonwealth_of_Nations">Wikipedia page</a> for the
 Commonwealth.</p>
