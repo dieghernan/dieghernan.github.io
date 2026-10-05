@@ -339,7 +339,8 @@ layoutLayer(
 
 This new capability geotags a `.png` file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a `POLYGON/MULTIPOLYGON`.
 
-For high-quality png maps, **it is recommended to plot your map on a `.svg` device**.
+For high-quality PNG maps, **it is recommended to plot your map on an SVG
+graphics device**.
 
 ### Example 1
 
@@ -428,7 +429,10 @@ pngLayer(UKpng, add=TRUE)
 
 A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.
 
-Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.
+Word cloud layers fitted into a map shape provide a good trade-off between
+physical location, scale and labels. The size and color of the words are based
+on the frequency of the factor being plotted, highlighting the most frequent
+terms.
 
 ### Example 1
 
@@ -453,7 +457,7 @@ layoutLayer(
 )
 ```
 
-![Word map of Europe with country names positioned geographically. Text size and color represent population density; Malta is especially prominent.](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp)
+![Word map of Europe with country names positioned geographically. Text size and color represent population density, with Malta especially prominent.](https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp)
 
 ### Example 2
 

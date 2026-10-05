@@ -32,10 +32,10 @@ Hi! I am a bot 🤖 that tweets a random map of a Spanish municipality with its 
 
 Core packages used in the project are:
 
-- [{mapSpain}](https://ropenspain.github.io/mapSpain/) for the location of the
-  municipalities, base polygons, coordinates and imagery,
-- [{osmdata}](https://docs.ropensci.org/osmdata/) for the streets,
-- [{tmap}](https://mtennekes.github.io/tmap/) for plotting,
-- [{rtweet}](https://docs.ropensci.org/rtweet/) for posting,
+- [**mapSpain**](https://ropenspain.github.io/mapSpain/) for the location of the
+  municipalities, base polygons, coordinates and imagery.
+- [**osmdata**](https://docs.ropensci.org/osmdata/) for the streets.
+- [**tmap**](https://mtennekes.github.io/tmap/) for plotting.
+- [**rtweet**](https://docs.ropensci.org/rtweet/) for posting.
 
 Other packages used are **sf**, **dplyr** and other common supporting packages.

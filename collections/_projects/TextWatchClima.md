@@ -34,7 +34,7 @@ new capabilities.
 
 ## Features
 
-- Exact hour in natural language
+- Exact time in natural language
 - Autofit to screen
 
 ![TextWatch Clima watch face displaying the time in words on Pebble Time.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerTime.png)
@@ -43,7 +43,7 @@ new capabilities.
 
 - Date format: Day Month / Month Day
 - Fuzzy time option
-- Animation on text
+- Text animation
 - Language
   - Spanish
   - English

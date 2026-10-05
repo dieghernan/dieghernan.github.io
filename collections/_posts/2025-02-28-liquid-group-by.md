@@ -63,7 +63,7 @@ The algorithm is now implemented in <span class="chulapa">Chulapa</span>. You
 can check the results on my [/tags](https://dieghernan.github.io/tags) page.
 
 Note that the tables produced in the example are taken from my live site,
-hence they may change as I add more posts. The results of the table should
+so they may change as I add more posts. The table results should
 have the same order and number of tags displayed on the
 [/tags](https://dieghernan.github.io/tags) page.
 
@@ -153,7 +153,7 @@ array:</p>
 
 How to rank the tags by the number of occurrences? We can set the maximum
 number of occurrences and loop in reverse order. The ranked array would be
-populated if a tag presents the number of occurrences in the main loop:
+populated when a tag's count matches the current number in the main loop:
 
 ```html
 <!-- Used in https://github.com/mmistakes/minimal-mistakes/blob/master/_includes/posts-taxonomy.html -->

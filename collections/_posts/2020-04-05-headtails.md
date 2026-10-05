@@ -93,7 +93,7 @@ hist(
 par(opar)
 ```
 
-![Ranked-value plot of a Pareto sample. Values fall steeply and then flatten; reference lines mark the top 20 percent and the 80th percentile.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp)![Histogram of a Pareto sample. Most values are small, with a long tail of rare large values.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp)
+![Ranked-value plot of a Pareto sample. Values fall steeply and then flatten, with reference lines marking the top 20 percent and the 80th percentile.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp)![Histogram of a Pareto sample. Most values are small, with a long tail of rare large values.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp)
 
 ## Breaking method
 

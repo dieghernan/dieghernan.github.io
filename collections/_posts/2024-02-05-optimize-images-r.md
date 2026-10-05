@@ -77,7 +77,7 @@ this blog using `resmush_dir()`, which is a shorthand for optimizing all files
 in a specific folder.
 
 There are other alternatives that I discuss [at the end of this
-post](#other-alternatives), but in one line, the reSmush.it API performs fast
+post](#other-alternatives), but briefly, the reSmush.it API works quickly
 with minimal configuration for a wide range of formats without needing an API
 key.
 
@@ -119,7 +119,7 @@ ggsave("cyl.png", width = 5, height = 0.7 * 5)
 ```
 
 The file has a size of 1.7 MB. We can use `resmush_file()` to
-reduce it, see:
+reduce it:
 
 ```r
 library(resmush)
@@ -158,7 +158,7 @@ Let’s compare the results side-by-side:
 </a>
 <p class="caption">
 Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
-(Compression 55.46%). Click on the images to enlarge.
+(55.46% reduction in file size). Click on the images to enlarge.
 </p>
 </div>
 
@@ -222,7 +222,7 @@ src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Colo
 <p class="caption">
 
 Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
-(Compression 26.63%). Click on the images to enlarge.
+(26.63% reduction in file size). Click on the images to enlarge.
 
 </p>
 

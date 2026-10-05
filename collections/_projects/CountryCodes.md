@@ -62,7 +62,7 @@ containing:
 
 - Currency
 - Dependency status
-- Names in English and Spanish: countries, continents and regions, and capitals
+- Names in English and Spanish for countries, continents, regions and capitals
 - Population, area (km<sup>2</sup>) and developed region
 
 ## B. International organizations `.csv`

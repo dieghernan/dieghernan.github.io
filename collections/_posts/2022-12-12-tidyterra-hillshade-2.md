@@ -44,7 +44,7 @@ you may recognize the following lyrics:
 
 This emphatic statement is made in [_My Fair Lady
 (1964)_](<https://en.wikipedia.org/wiki/My_Fair_Lady_(film)>) by Audrey Hepburn,
-Rex Harrison and Stanley Holloway. But as a Spaniard I can tell it is
+Rex Harrison and Stanley Holloway. But as a Spaniard, I can tell you it is
 **completely false**.
 
 The rain in Spain stays mainly in the north, most notably in Galicia. And I can
@@ -79,7 +79,7 @@ library(colorspace)
 
 ## The plain in Spain
 
-Well, the plain (or as we name it _La Meseta Central_) covers a large area of
+The plain (or as we call it, _La Meseta Central_) covers a large area of
 inland Spain, with an average altitude of 650 meters above sea level.
 
 I didn't find any accurate spatial data file with the bounds of the plain, so
@@ -434,7 +434,7 @@ representing the value to be plotted (in this case, average annual
 precipitation) by longitude and latitude.
 
 But first we add some additional margins and axis titles to the main plot, so we
-can insert those marginal plots easily on our main plot:
+can easily insert those marginal plots into our main plot:
 
 ```r
 # Now we can add titles on the secondary axis

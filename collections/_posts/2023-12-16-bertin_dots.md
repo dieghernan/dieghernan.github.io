@@ -278,7 +278,7 @@ alternative is:
 1.  Create a hexagonal grid, where each hexagon represents a similar area to
     each cell in the aggregated raster.
 2.  Extract the values of the raster to the new grid.
-3.  Finally, follow the same steps on data wrangling and plotting.
+3.  Finally, follow the same data wrangling and plotting steps.
 
 When working with `sf::st_make_grid(square = FALSE)`, the parameter `cellsize`
 should be the "diameter" of the hexagon instead of the area. Luckily, we can
@@ -320,7 +320,7 @@ area_km2 <- st_area(pop_agg_sf) %>%
 pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
 ```
 
-Now, we use `exact_extract()` to extract the population on each hexagonal grid.
+Now, we use `exact_extract()` to extract the population in each hexagonal cell.
 
 ```r
 # Extract aggregated population by hex cell

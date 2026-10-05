@@ -35,7 +35,7 @@ produced by this project consist of the same data provided by the
 the **R** package **sf** ([Pebesma 2018](#ref-pebesma2018)) to ensure its
 validity:
 
-- The spatial data objects are bounded to $$[-180, -90, 180, 90]$$.
+- The spatial data objects are bounded by $$[-180, -90, 180, 90]$$.
 
 - Data are provided in WGS 84 - World Geodetic System 1984
   ([EPSG:4326](https://epsg.io/4326)).
@@ -69,7 +69,7 @@ The data source can be found in the corresponding
 
 <details markdown=1 class="my-2">
 <summary>
-List of files provided
+List of files provided:
 </summary>
 
 - `asterisms.geojson`

@@ -46,12 +46,12 @@ Encyclopaedia of Astronomy_ (1977 edition):
 
 Saville presented a black-and-white version, producing a cover that reached
 iconic status in the '80s. This cover has been reproduced in the form of
-tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:
+tattoos, clothing, merchandise, video games and even 3-D sculptures:
 
 ![Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
 If you are interested in learning more about this fascinating history of science
-and design you can find it on [Pop Culture Pulsar: Origin Story of Joy
+and design, you can read [Pop Culture Pulsar: Origin Story of Joy
 Division's Unknown Pleasures Album
 Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/)
 by [Jen
@@ -78,7 +78,7 @@ Some initial considerations we may need to bear in mind:
   final plot, but there is a caveat: **both the coordinates and the
   elevation should be in the same unit** ([See
   why](https://wilkelab.org/ggridges/reference/geom_ridgeline.html)).
-  Therefore we should project both the raster and the base `sf` object on a
+  Therefore, we should project both the raster and the base `sf` object to a
   suitable CRS defined in meters (in this case).
 
 - Joyplots are much cooler when only a few lines are displayed. This is
@@ -109,7 +109,7 @@ extracting the elevation data. We can achieve that with **giscoR** and
 **elevatr**.
 In this post, I create a joyplot of
 [Andalusia](https://en.wikipedia.org/wiki/Andalusia). Note that, given we are
-creating just a visualization, the resolution of the sf object is not very
+creating just a visualization, the resolution of the `sf` object is not very
 relevant.
 
 ```r
@@ -359,7 +359,7 @@ ggplot() +
 ### With colors
 
 We can apply different colors to the plot. Note that **ggridges** only accepts
-different `aes` by row, and not by column:
+different `aes` by row, not by column:
 
 ```r
 
@@ -464,7 +464,7 @@ measures of twelve pulsars._ Cornell University.
 Mitton, Simon (1977). _The Cambridge encyclopaedia of astronomy._ Prentice-Hall
 of Canada.
 
-Lipez, Zachary (2019, June 14). "How Joy Division's 'Unknown Pleasures\`' image
+Lipez, Zachary (2019, June 14). "How Joy Division's 'Unknown Pleasures' image
 went from underground album cover to a piece of cultural ubiquity" _The
 Washington Post_. <https://wapo.st/3K6Chsc>
 

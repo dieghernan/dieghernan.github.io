@@ -41,9 +41,9 @@ The scraper also uses
 [**pycountry**](https://pypi.org/project/pycountry/).
 
 For the prototype version, map visualization was created with **R** and
-generated via [{rmarkdown}](https://rmarkdown.rstudio.com/) using
-[{leaflet}](http://rstudio.github.io/leaflet/),
-[{giscoR}](https://dieghernan.github.io/giscoR/) and some packages included in
+generated via [**rmarkdown**](https://rmarkdown.rstudio.com/) using
+[**leaflet**](http://rstudio.github.io/leaflet/),
+[**giscoR**](https://dieghernan.github.io/giscoR/) and some packages included in
 the [tidyverse](https://www.tidyverse.org/).
 For the deployment, map logic has moved to JavaScript to support multiple languages.
 

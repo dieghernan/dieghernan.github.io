@@ -26,7 +26,7 @@ Recently, I have been struggling when trying to embed a
 <i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)).
 In my case, I use the [<span
 class="chulapa">Chulapa</span>](https://dieghernan.github.io/chulapa/)
-remote theme created by myself.
+remote theme that I created.
 
 **Index**
 
@@ -68,9 +68,9 @@ chunk:
 </head>
 ```
 
-So now we have it! The only thing to remember is that we need **to load
+So now we have it! The only thing to remember is that we need to load
 the libraries from the **leaflet** server
-(`https://rstudio.github.io/leaflet`)**, meaning that we have to prepend
+(`https://rstudio.github.io/leaflet`), meaning that we have to prepend
 that URL to the libraries in our installation:
 
 ```html
@@ -206,7 +206,7 @@ which one is more suitable for your needs.
 
 #### 6. Publish your post
 
-Now you just have to publish your post as usual!! If everything has been
+Now you just have to publish your post as usual! If everything has been
 properly set, when Jekyll builds your post it will include the
 libraries in the header and make the magic happen, just like this:
 
@@ -235,7 +235,7 @@ wouldn’t look as nice on laptops, and vice versa.
 
 ##### Example 1: 672x480px
 
-Fixed size in pixels. By default in my machine:
+Fixed size in pixels. The default on my machine:
 
 ```r
 leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%

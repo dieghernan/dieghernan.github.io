@@ -121,7 +121,7 @@ autoplot(r) +
 
 The next step is to calculate the hillshade. Royé has a very detailed discussion
 [here](https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade),
-so I would not go into details. Basically what we want to create is a layer that
+so I will not go into detail. What we want to create is a layer that
 approximates the potential "texture" of the surface based on the elevation and
 the sun's position. This is straightforward with the `terra::terrain()` and
 `terra::shade()` functions:
@@ -199,7 +199,7 @@ hill_plot
 The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
-associated with low elevations, while orange, browns and whites are associated with
+associated with low elevations, while oranges, browns and whites are associated with
 high elevations on some of the most common elevation palettes (aka hypsometric
 tints). See for example the [Wikipedia Topographic maps
 conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps).
@@ -238,13 +238,13 @@ autoplot(r) +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks." width="100%" />
 
-Can you notice the difference? In the first map greens are the dominant color.
-However greens are representing a wide range of elevations (0-750 meters) that
-correspond with most of the territory. In terms of perception, we won't be
+Can you notice the difference? In the first map, green is the dominant color.
+However, greens represent a wide range of elevations (0-750 meters) that
+correspond to most of the territory. In terms of perception, we won't be
 clearly spotting elevation differences in the center of the country, while with
 the uneven gradient greens only correspond to the range (0 - 250 meters) and the
 overall perception of elevation improves. Note that the only difference between
-plots is exclusively the color palette.
+plots is the color palette.
 
 For producing our map we are going to assess visually the result of a selection
 of palettes provided by **tidyterra**. We use here the version

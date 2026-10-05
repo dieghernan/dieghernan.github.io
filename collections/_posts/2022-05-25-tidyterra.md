@@ -1,6 +1,6 @@
 ---
 title: "Introducing <strong>tidyterra</strong>"
-subtitle: Easily work and ggplot SpatRasters
+subtitle: Easily work with and plot SpatRasters
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
 tags:
@@ -56,7 +56,7 @@ library(sf)
 ## Wait, `volcano` is flipped?
 
 Let's check it out. Thanks to the package **maptiles** we can have a glimpse of
-the location of Maungawhau using map tiles (as Google Maps uses). We will use
+the location of Maungawhau using map tiles, as in Google Maps. We will use
 **tidyterra** for displaying the map tile:
 
 ```r
@@ -88,8 +88,8 @@ ggtile
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" />
 
-So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
-question is, how to match the `volcano` dataset (a matrix) with this tile (a
+Here we have a crisp RGB tile of Maungawhau. Now, the next
+question is how to match the `volcano` dataset (a matrix) with this tile (a
 geotagged map tile)? Let's check it out.
 
 ## Working with SpatRasters

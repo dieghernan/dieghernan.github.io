@@ -52,7 +52,7 @@ kable(orgsdb[grep("Common", orgsdb$org_name), ], format = "markdown")
 | 43  | Common Market for Eastern and Southern Africa | COMESA   |
 | 115 | Southern Cone Common Market                   | MERCOSUR |
 
-In our case, the value to search is **C**. A function that extracts the
+In our case, the value to search for is `C`. A function that extracts the
 membership from the `json` database is also provided:
 
 ```r
@@ -70,7 +70,8 @@ ISO_memcol <- function(df,
 df_org <- ISO_memcol(df, "C")
 ```
 
-Now `df_org` has a new column, named **C**, containing the membership status of each country.
+Now `df_org` has a new column, named `C`, containing the membership status
+of each country.
 
 ```r
 df_org %>%
@@ -137,7 +138,7 @@ tiny <- left_join(tiny, ISOCommon)
 tiny$C <- coalesce(tiny$C, tiny$C_sov)
 ```
 
-## Plotting map: Wikipedia style
+## Plotting a map: Wikipedia style
 
 Now we will try to plot a map resembling the one presented in the
 [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the
