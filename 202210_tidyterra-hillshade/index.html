@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -264,7 +264,7 @@ the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade
 <p>Using shadow effects on relief maps is a very common technique that helps
 produce informative yet beautiful maps. If you are interested in this topic
 and you work with <strong>R</strong>, you have probably seen this map:</p>
-<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="swissmap" /></p>
+<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="Bivariate thematic map of Switzerland combining two variables with a color legend and shaded terrain relief." /></p>
 <p>The production of this map by <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">Timo
 Grossenbacher</a>
 has been a reference for years. However, recent developments in the <strong>R</strong> package
@@ -336,7 +336,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="plot of chunk 20221017-1-autoplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains." width="100%" /></p>
 <h2 id="hillshading">Hillshading</h2>
 <p>The next step is to calculate the hillshade. Royé has a very detailed discussion
 <a href="https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade">here</a>,
@@ -362,7 +362,7 @@ the sun’s position. This is straightforward with the <code class="language-pla
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span><span class="c1">#&gt; SpatRaster resampled to ncells = 501501</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="Grayscale hillshade map of Romania, revealing the Carpathian mountain arc through simulated light and shadow." width="100%" /></p>
 <p>We can also do the following hack to avoid the use of a <code class="language-plaintext highlighter-rouge">scale_fill_*</code> (via
 <strong>ggplot2</strong> or via <code class="language-plaintext highlighter-rouge">ggnewscale::new_scale_fill()</code>):</p>
 <ul>
@@ -404,7 +404,7 @@ and the number of cells are the same.</p>
 
 </span><span class="n">hill_plot</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="plot of chunk 20221017-3-hillalt" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="Alternative grayscale hillshade map of Romania, showing terrain relief with a different shading calculation." width="100%" /></p>
 <h2 id="selecting-colors">Selecting colors</h2>
 <p>The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
@@ -426,7 +426,7 @@ distance among colors is the same:</p>
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="Elevation map of Romania using a regular color gradient. Green lowlands surround the higher Carpathian Mountains." width="100%" /></p>
 <p>For that reason, <strong>tidyterra</strong> provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -437,7 +437,7 @@ unevenly with the goal of providing a better understanding of the maps:</p>
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_hypso</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="plot of chunk 20221017-hypso-gradient" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks." width="100%" /></p>
 <p>Can you notice the difference? In the first map greens are the dominant color.
 However greens are representing a wide range of elevations (0-750 meters) that
 correspond with most of the territory. In terms of perception, we won’t be
@@ -496,7 +496,7 @@ touch rounding up and down the range of values to the nearest 500.</p>
 </span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"utah_1"</span><span class="p">)</span><span class="w">
 </span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"wiki-2.0_hypso"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="Relief map of Romania using the etopo1_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="Relief map of Romania using the dem_poster elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="Relief map of Romania using the ocean elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="Relief map of Romania using the pastel elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="Relief map of Romania using the urban_1 elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="Relief map of Romania using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /></p>
 <p>I finally selected for my plot the <code class="language-plaintext highlighter-rouge">"dem_poster"</code> palette, but this is
 completely a personal choice. You should select the palette you feel more
 comfortable with. See the full range of color palettes provided by <strong>tidyterra</strong>
@@ -523,7 +523,7 @@ some level of <code class="language-plaintext highlighter-rouge">alpha</code> on
 
 </span><span class="n">base_plot</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="plot of chunk 20221017-5-blend" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="Relief map of Romania combining elevation colors with hillshade so mountain slopes remain visible beneath the color gradient." width="100%" /></p>
 <p>And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myload_fonts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">fontname</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="p">,</span><span class="w">
@@ -614,7 +614,7 @@ a font from Google with a custom function:</p>
     </span><span class="n">legend.spacing.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unit</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"pt"</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="plot of chunk 20221017-6-finalplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend." width="100%" /></p>
 <h2 id="references">References</h2>
 <p>Patterson T, Jenny B (2011). “The Development and Rationale of Cross-blended
 Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. <a href="https://doi.org/10.14714/CP69.20">https://doi.org/10.14714/CP69.20</a></p>

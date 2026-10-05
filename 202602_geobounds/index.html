@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -303,7 +303,7 @@ no shapefile handling.</p>
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#072357"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-adm0-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-adm0-1.webp" alt="Map of Panama showing its national boundary and offshore islands." width="100%" /></p>
 <p>You can also retrieve multiple administrative levels at once. For example:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Simplified files</span><span class="w">
 </span><span class="n">gb_get</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Panama"</span><span class="p">,</span><span class="w"> </span><span class="n">adm_lvl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"all"</span><span class="p">,</span><span class="w"> </span><span class="n">simplified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
@@ -317,7 +317,7 @@ no shapefile handling.</p>
     </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3." width="100%" /></p>
 <h2 id="global-composite-boundaries-cgaz">Global Composite Boundaries (CGAZ)</h2>
 <p>When you download individual country files, each country reflects its own view
 of borders. This results in:</p>
@@ -342,7 +342,7 @@ Administrative Zones (CGAZ) dataset that can be accessed with <code class="langu
     </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" alt="Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims." width="100%" /></p>
 <p>And here’s the same comparison using CGAZ with <code class="language-plaintext highlighter-rouge">gb_get_world()</code>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gb_get_world</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"India"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pakistan"</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -355,7 +355,7 @@ Administrative Zones (CGAZ) dataset that can be accessed with <code class="langu
     </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-cgaz-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-cgaz-1.webp" alt="Map of India and Pakistan using harmonized boundaries. The country polygons meet without overlapping in Kashmir." width="100%" /></p>
 <h2 id="understanding-the-data">Understanding the data</h2>
 <p>The geoBoundaries database undergoes rigorous quality assurance, including
 manual review and hand-digitization of physical maps. This ensures the highest
@@ -383,7 +383,7 @@ datasets by setting <code class="language-plaintext highlighter-rouge">simplifie
   </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp" alt="Two maps of Norway comparing full-resolution and simplified national boundaries. Simplification retains the broad outline while reducing coastline detail." width="100%" /></p>
 <h2 id="caching">Caching</h2>
 <p>Downloaded files are cached locally. That means:</p>
 <ul>

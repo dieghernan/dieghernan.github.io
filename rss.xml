@@ -7,8 +7,8 @@
 		<description>Personal blog of dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, dieghernan</copyright>	
-		<pubDate>Mon, 14 Sep 2026 11:34:08 +0200</pubDate>
-		<lastBuildDate>Mon, 14 Sep 2026 11:34:08 +0200</lastBuildDate>
+		<pubDate>Mon, 05 Oct 2026 16:22:54 +0200</pubDate>
+		<lastBuildDate>Mon, 05 Oct 2026 16:22:54 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -84,7 +84,7 @@ no shapefile handling.</p>
   </span><span class="n">labs</span><span class="p">(</span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-adm0-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-adm0-1.webp" alt="Map of Panama showing its national boundary and offshore islands." width="100%" /></p>
 
 <p>You can also retrieve multiple administrative levels at once. For example:</p>
 
@@ -101,7 +101,7 @@ no shapefile handling.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3." width="100%" /></p>
 
 <h2 id="global-composite-boundaries-cgaz">Global Composite Boundaries (CGAZ)</h2>
 
@@ -133,7 +133,7 @@ Administrative Zones (CGAZ) dataset that can be accessed with <code class="langu
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" alt="Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims." width="100%" /></p>
 
 <p>And here’s the same comparison using CGAZ with <code class="language-plaintext highlighter-rouge">gb_get_world()</code>:</p>
 
@@ -149,7 +149,7 @@ Administrative Zones (CGAZ) dataset that can be accessed with <code class="langu
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-cgaz-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-cgaz-1.webp" alt="Map of India and Pakistan using harmonized boundaries. The country polygons meet without overlapping in Kashmir." width="100%" /></p>
 
 <h2 id="understanding-the-data">Understanding the data</h2>
 
@@ -182,7 +182,7 @@ datasets by setting <code class="language-plaintext highlighter-rouge">simplifie
   </span><span class="n">labs</span><span class="p">(</span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Source: www.geoboundaries.org"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp" alt="" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp" alt="Two maps of Norway comparing full-resolution and simplified national boundaries. Simplification retains the broad outline while reducing coastline detail." width="100%" /></p>
 
 <h2 id="caching">Caching</h2>
 
@@ -293,7 +293,7 @@ orthographic projection centered on the South Pole.</p>
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" alt="South Pole-centered map of Antarctica with a narrow lollipop-shaped gap extending from the coast toward the pole, caused by a polygon artifact." width="100%" /></p>
 
 <p>The shapefile contains a visible “lollipop” cut that looks unnatural in an
 orthographic projection. I correct it manually with these steps:</p>
@@ -332,7 +332,7 @@ sequence:</p>
   </span><span class="n">coord_equal</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" alt="Coordinate plot of the Antarctic coastline with numbered vertices. A line and loop extending into the interior identify the polygon artifact." width="100%" /></p>
 
 <p>From the plotted indices, we can see the problematic points fall roughly in the
 range 8200–9200. We inspect that interval in detail to select the exact indices
@@ -347,7 +347,7 @@ to remove.</p>
   </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" alt="Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact." width="100%" /></p>
 
 <div class="alert alert-warning p-3 mx-2 mb-3">
 
@@ -374,7 +374,7 @@ the particular geometry and projection.
 </span></code></pre></div></div>
 
 <div class="figure row no-gutters">
-<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" width="50%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" alt="Coordinate plot of vertices 8289 through 9130 selected for removal. They form the unwanted loop and stem." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" alt="Coordinate plot of the vertices retained from the inspected interval. They trace a section of the Antarctic coastline." width="50%" />
 
 After removing the offending points, we rebuild the polygon and reconstitute the
 full Antarctica shape from the corrected piece plus the remaining polygons.
@@ -419,7 +419,7 @@ full Antarctica shape from the corrected piece plus the remaining polygons.
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" alt="South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area." width="100%" /></p>
 
 <h2 id="plotting-examples">Plotting examples</h2>
 
@@ -448,7 +448,7 @@ proposed Antarctic flag designs.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_bartram-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_bartram-1.webp" alt="Antarctic flag design with a white silhouette of the continent on a blue background." width="100%" /></p>
 
 <h3 id="emblem-of-the-antarctic-treaty">Emblem of the Antarctic Treaty</h3>
 
@@ -472,7 +472,7 @@ extra steps to avoid small gaps near the pole.</p>
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty1-1.webp" alt="Polar coordinate grid centered on the South Pole, with concentric latitude circles and radial longitude lines." width="100%" /></p>
 
 <p>We merge meridians so the area around the South Pole is filled. <code class="language-plaintext highlighter-rouge">st_graticule()</code>
 can leave a tiny hole at the pole, and we fix this by joining complementary
@@ -530,7 +530,7 @@ pattern.</p>
   </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Emblem of the Antarctic Treaty"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" alt="Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background." width="100%" /></p>
 
 <h3 id="antarctica-flag-redesigned">Antarctica flag redesigned</h3>
 
@@ -542,7 +542,7 @@ dots. These dots represent the microscopic bits of plastic that have been
 discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" alt="Antarctic flag variation with the white continental silhouette formed by scattered marks on a blue background." /></p>
 
 <p>Because the design relies on randomness, we approximate it using the following
 procedure:</p>
@@ -590,7 +590,7 @@ magenta/pink tones.</li>
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-1.webp" alt="Map of Antarctica filled with randomly distributed blue points inside the continent boundary." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -621,7 +621,7 @@ magenta/pink tones.</li>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" alt="Antarctic flag variation with the continental silhouette formed by scattered white points on a blue background." width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -1309,7 +1309,7 @@ Valentine’s Day!</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="Happy Valentine's Day" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -1365,7 +1365,7 @@ enjoy this API (as I do), you can consider supporting them.</p>
 
 <div class="text-center my-3">
 <a title="Support reSmush.it on ko-fi.com" class="kofi-button" style="background-color:#ff5e5b;" href="https://ko-fi.com/E1E51PW00" target="_blank">
-<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi reSmush.it donations" class="kofiimg" />Support reSmush.it on Ko-fi</span></a>
+<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="" class="kofiimg" />Support reSmush.it on Ko-fi</span></a>
 </div>
 
 <h2 id="why-the-resmush-package">Why the <strong>resmush</strong> package?</h2>
@@ -1419,7 +1419,7 @@ a large plot with <strong>ggplot2</strong>.</p>
 
 <div class="figure">
 
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original file" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization." width="100%" />
 <p class="caption">
 Original file
 </p>
@@ -1448,7 +1448,7 @@ reduce it, see:</p>
 
 <div class="figure">
 
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized file" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization." width="100%" />
 <p class="caption">
 Optimized file
 </p>
@@ -1463,10 +1463,10 @@ parameter. Now, the optimized file (<code class="language-plaintext highlighter-
 
 <div class="figure row no-gutters">
 <a href="https://dieghernan.github.io/assets/img/samples/cyl.png" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original online figure" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization." />
 </a>
 <a href="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized figure" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization." />
 </a>
 <p class="caption">
 Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
@@ -1561,11 +1561,11 @@ disk. In this example, I demonstrate a feature of all the functions in
 
 <div class="figure row no-gutters">
 <a href="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Original online figure" />
+<img src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Colorful illustration of sunset over ocean waves and a beach, before image optimization." />
 </a>
 
 <a href="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Optimized online figure" />
+<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Colorful illustration of sunset over ocean waves and a beach, after image optimization." />
 </a>
 <p class="caption">
 
@@ -1779,8 +1779,7 @@ new post by <a href="https://twitter.com/BjnNowak">Benjamin Nowak</a> showing ho
 a dot density map based on the work of the French cartographer <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques
 Bertin</a> (1918 - 2010):</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/misc/bertin.png" alt="Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
-(1967)" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/bertin.png" alt="Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations." /></p>
 
 <p>In this post, I create a similar map for Iberia and also show how to create a
 variation using a hexagonal grid instead of a rectangular one. This is the fifth
@@ -1851,7 +1850,7 @@ use the global file with a resolution of 1 km in the Mollweide projection
 </span><span class="n">base_gg</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_basemap" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window." /></p>
 
 <p>That is our base map. Now we download the GHSL data programmatically and check
 that everything is correct. At this point, it is interesting to
@@ -1898,7 +1897,7 @@ terms of performance.</p>
   </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="plot of chunk 202312_base_raster-1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="Population raster over the Iberian Peninsula with country and regional boundaries. Color represents population per raster cell." /></p>
 
 <h2 id="data-wrangling">Data wrangling</h2>
 
@@ -2006,7 +2005,7 @@ map.</p>
 </span><span class="n">ggsave</span><span class="p">(</span><span class="s2">"202312_finalmap.png"</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="plot of chunk 202312_base_raster-1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." /></p>
 
 <h2 id="alternative-hexagonal-grid">Alternative hexagonal grid</h2>
 
@@ -2083,7 +2082,7 @@ the aggregated cells:</p>
   </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="Map of the Iberian Peninsula with population totals aggregated into hexagonal cells. Color represents the population in each cell." /></p>
 
 <p>Finally, we compute densities, create categories and produce the map:</p>
 
@@ -2156,7 +2155,7 @@ the aggregated cells:</p>
 </span><span class="n">ggsave</span><span class="p">(</span><span class="s2">"202312_finalmap_hex.png"</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="plot of chunk 202312_finalmap_hex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." /></p>
 
 <p>And that’s it! Which one do you like the most? Let me know in the comments.</p>
 
@@ -2623,7 +2622,7 @@ visualization.</p>
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-1.webp" alt="plot of chunk 20230125_mw" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-1.webp" alt="Full-sky map of the Milky Way in longitude and latitude coordinates. Filled bands trace its curved extent across the sky." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># And process it</span><span class="w">
@@ -2642,7 +2641,7 @@ visualization.</p>
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="plot of chunk 20230125_mw" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="Milky Way bands clipped and projected to the selected viewing hemisphere." width="100%" /></p>
 
 <p>Now it is the turn of the constellations:</p>
 
@@ -2653,7 +2652,7 @@ visualization.</p>
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-1.webp" alt="plot of chunk 20230125_const" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-1.webp" alt="Full-sky map of constellation lines in longitude and latitude coordinates, with line segments connecting stars into constellation outlines." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cut to buffer</span><span class="w">
@@ -2671,7 +2670,7 @@ visualization.</p>
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="plot of chunk 20230125_const" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="Constellation lines clipped and projected to the selected circular viewing hemisphere." width="100%" /></p>
 
 <p>And finally the stars:</p>
 
@@ -2685,7 +2684,7 @@ visualization.</p>
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-1.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-1.webp" alt="Full-sky map of stars in longitude and latitude coordinates. Larger and more opaque points represent brighter stars." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cut to buffer</span><span class="w">
@@ -2704,7 +2703,7 @@ visualization.</p>
   </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="Star map clipped and projected to the selected circular viewing hemisphere. Larger and more opaque points represent brighter stars." width="100%" /></p>
 
 <h3 id="graticules">Graticules</h3>
 
@@ -2723,7 +2722,7 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="Rectangular coordinate grid with latitude lines every 10 degrees and longitude lines every 30 degrees." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cut to buffer; we don't flip this one (it is not an object of the space)</span><span class="w">
@@ -2740,7 +2739,7 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="Coordinate grid projected to the selected hemisphere. Curved latitude lines and converging longitude lines reveal the pole." width="100%" /></p>
 
 <h2 id="visualization-with-ggplot2">Visualization with <strong>ggplot2</strong></h2>
 
@@ -2863,7 +2862,7 @@ instead I converted my lines (the constellations) to coordinates and applied
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp" alt="plot of chunk 20230125_celestial_map" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp" alt="Circular star map for Madrid with constellation lines, stars sized by brightness and the Milky Way on a dark background." width="100%" /></p>
 
 <p>Voilà! I checked several times the results with the results provided by
 d3-celestial.js on the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
@@ -2939,7 +2938,7 @@ this entirely different set of geometries:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map_cn-1.webp" alt="plot of chunk 20230125_celestial_map_cn" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map_cn-1.webp" alt="Circular star map for Madrid using Chinese constellation lines, with stars sized by brightness and the Milky Way on a dark background." width="100%" /></p>
 
 <h2 id="references">References</h2>
 
@@ -3304,7 +3303,7 @@ data to get a rough shape.</p>
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">r_plain</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="plot of chunk 20221212_plan_alt" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="Map of plateau outlines in Spain, extracted from terrain between 600 and 1,100 meters above sea level." width="100%" /></p>
 
 <p>We can create a new plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
 post</a> to identify the
@@ -3347,7 +3346,7 @@ hillshade, which we will reuse later:</p>
 </span><span class="n">hill_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="plot of chunk 20221212_hill" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="Grayscale hillshade map of mainland Spain and the Balearic Islands, showing mountain ranges through light and shadow." width="100%" /></p>
 
 <p>And finally we overlay the altitude and the outline of the plain in Spain.</p>
 
@@ -3418,7 +3417,7 @@ hillshade, which we will reuse later:</p>
 </span><span class="n">plot_esp</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.webp" alt="plot of chunk 20221212_hill_overlay" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_hill_overlay-1.webp" alt="Relief map of Spain combining hillshade with elevation colors to distinguish mountain ranges from lower terrain." width="100%" /></p>
 
 <h2 id="the-rain-in-spain">The rain in Spain</h2>
 
@@ -3480,7 +3479,7 @@ need to normalize the SpatRaster to the projection, extent and resolution of our
 </span><span class="n">autoplot</span><span class="p">(</span><span class="n">precip_avg_mask</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="plot of chunk 20221212_prepare_precip" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="Map of average yearly precipitation in mainland Spain and the Balearic Islands. Higher values occur along the northern coast and lower values in the southeast." width="100%" /></p>
 
 <h3 id="creating-a-modified-palette">Creating a modified palette</h3>
 
@@ -3499,7 +3498,7 @@ custom palette with <strong>colorspace</strong> to better highlight the differen
 </span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="plot of chunk 20221212_mypal" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="Grid of 16 color swatches with hexadecimal labels, forming a precipitation palette from pale yellow through green and blue to purple." width="100%" /></p>
 
 <p>And now we can create the final map showing if <em>the rain in Spain stays mainly
 in the plain</em>:</p>
@@ -3560,7 +3559,7 @@ in the plain</em>:</p>
 </span><span class="n">meteo_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="plot of chunk 20221212_precip_end" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="Map of average yearly precipitation in Spain with hillshade beneath the color layer. Wetter northern and northwestern areas contrast with the drier southeast." width="100%" /></p>
 
 <p>We can now see that the rain in Spain falls mainly on the Atlantic coast
 (northern Spain) and specifically in Galicia. That’s why in Spanish the lyrics
@@ -3614,7 +3613,7 @@ can insert those marginal plots easily on our main plot:</p>
 </span><span class="n">plot_main</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="plot of chunk 20221212_precip_for_margin" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="Map of average yearly precipitation in Spain prepared for adding marginal profiles. Colors distinguish the wetter north from the drier southeast." width="100%" /></p>
 
 <h3 id="profiling-marginal-plots">Profiling marginal plots</h3>
 
@@ -3680,7 +3679,7 @@ like, so we can have a preview of the final result:</p>
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="Bar profile of average yearly precipitation by east-west position in Spain. Bar height and color encode rainfall in millimeters, with the highest averages toward the west." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -3714,7 +3713,7 @@ like, so we can have a preview of the final result:</p>
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="plot of chunk 20221212_profile_marg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="Horizontal bar profile of average yearly precipitation by north-south position in Spain. Bar length and color encode rainfall in millimeters, with higher averages in the north." width="100%" /></p>
 
 <h3 id="putting-all-the-pieces-together">Putting all the pieces together</h3>
 
@@ -3760,7 +3759,7 @@ we want:</p>
 </span><span class="n">plot_x</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="Bar profile of average yearly precipitation from west to east in Spain, formatted for placement above the map. Height and color encode rainfall in millimeters." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">plot_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">axis_canvas</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span><span class="w"> </span><span class="n">coord_flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -3799,7 +3798,7 @@ we want:</p>
 </span><span class="n">plot_y</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="plot of chunk 20221212_prepare_axis" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="Horizontal bar profile of average yearly precipitation from south to north in Spain, formatted for placement beside the map. Length and color encode rainfall in millimeters." width="100%" /></p>
 
 <p>And insert everything in the main plot. See the final result:</p>
 
@@ -3820,7 +3819,7 @@ we want:</p>
 </span><span class="n">gg_final</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="plot of chunk 20221212_finalplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="Map of average yearly precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages." width="100%" /></p>
 
 <p>And with a bit of effort we got it.</p>
 
@@ -3973,7 +3972,7 @@ plot. Here you can find a simplified version:</p>
 </span><span class="n">gg_final_simp</span><span class="w">
 </span></code></pre></div>  </div>
 
-  <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.webp" alt="plot of chunk 20221212_simplified" width="100%" /></p>
+  <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.webp" alt="Simplified precipitation map of Spain with marginal bar profiles above and to the right. Colors encode rainfall, with higher averages in the north and west." width="100%" /></p>
 
 </details>
 </div>
@@ -4000,7 +3999,7 @@ the second post <a href="https://dieghernan.github.io/202212_tidyterra-hillshade
 produce informative yet beautiful maps. If you are interested in this topic
 and you work with <strong>R</strong>, you have probably seen this map:</p>
 
-<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="swissmap" /></p>
+<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="Bivariate thematic map of Switzerland combining two variables with a color legend and shaded terrain relief." /></p>
 
 <p>The production of this map by <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">Timo
 Grossenbacher</a>
@@ -4083,7 +4082,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
   </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="plot of chunk 20221017-1-autoplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains." width="100%" /></p>
 
 <h2 id="hillshading">Hillshading</h2>
 
@@ -4113,7 +4112,7 @@ the sun’s position. This is straightforward with the <code class="language-pla
 </span><span class="c1">#&gt; SpatRaster resampled to ncells = 501501</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="plot of chunk 20221017-2-hillroye" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="Grayscale hillshade map of Romania, revealing the Carpathian mountain arc through simulated light and shadow." width="100%" /></p>
 
 <p>We can also do the following hack to avoid the use of a <code class="language-plaintext highlighter-rouge">scale_fill_*</code> (via
 <strong>ggplot2</strong> or via <code class="language-plaintext highlighter-rouge">ggnewscale::new_scale_fill()</code>):</p>
@@ -4160,7 +4159,7 @@ and the number of cells are the same.</p>
 </span><span class="n">hill_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="plot of chunk 20221017-3-hillalt" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-3-hillalt-1.webp" alt="Alternative grayscale hillshade map of Romania, showing terrain relief with a different shading calculation." width="100%" /></p>
 
 <h2 id="selecting-colors">Selecting colors</h2>
 
@@ -4188,7 +4187,7 @@ distance among colors is the same:</p>
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="plot of chunk 20221017-regular-gradient" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-regular-gradient-1.webp" alt="Elevation map of Romania using a regular color gradient. Green lowlands surround the higher Carpathian Mountains." width="100%" /></p>
 
 <p>For that reason, <strong>tidyterra</strong> provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:</p>
@@ -4202,7 +4201,7 @@ unevenly with the goal of providing a better understanding of the maps:</p>
   </span><span class="n">scale_fill_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_hypso</span><span class="p">,</span><span class="w"> </span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="plot of chunk 20221017-hypso-gradient" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks." width="100%" /></p>
 
 <p>Can you notice the difference? In the first map greens are the dominant color.
 However greens are representing a wide range of elevations (0-750 meters) that
@@ -4266,7 +4265,7 @@ touch rounding up and down the range of values to the nearest 500.</p>
 </span><span class="n">plot_pal_test</span><span class="p">(</span><span class="s2">"wiki-2.0_hypso"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="plot of chunk 20221017-4-explorepals" width="50%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="Relief map of Romania using the etopo1_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="Relief map of Romania using the dem_poster elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="Relief map of Romania using the ocean elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="Relief map of Romania using the pastel elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="Relief map of Romania using the urban_1 elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="Relief map of Romania using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /></p>
 
 <p>I finally selected for my plot the <code class="language-plaintext highlighter-rouge">"dem_poster"</code> palette, but this is
 completely a personal choice. You should select the palette you feel more
@@ -4298,7 +4297,7 @@ some level of <code class="language-plaintext highlighter-rouge">alpha</code> on
 </span><span class="n">base_plot</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="plot of chunk 20221017-5-blend" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="Relief map of Romania combining elevation colors with hillshade so mountain slopes remain visible beneath the color gradient." width="100%" /></p>
 
 <p>And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:</p>
@@ -4394,7 +4393,7 @@ a font from Google with a custom function:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="plot of chunk 20221017-6-finalplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend." width="100%" /></p>
 
 <h2 id="references">References</h2>
 
@@ -4433,7 +4432,7 @@ familiar with the <code class="language-plaintext highlighter-rouge">volcano</co
 </span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="plot of chunk 20220525_volcano" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" /></p>
 
 <p>This represents the topographic information about one of the volcanoes of Auckland
 (New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
@@ -4486,7 +4485,7 @@ the location of Maungawhau using map tiles (as Google Maps uses). We will use
 </span><span class="n">ggtile</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="plot of chunk 20220525_tile" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" /></p>
 
 <p>So well, here you go. A neat and crisp RGB tile of Maungawhau. Now, the next
 question is, how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
@@ -4503,7 +4502,7 @@ SpatRaster:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" title="plot of chunk 20220525_volcano_raster" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Wait, it is flipped!</span><span class="w">
@@ -4516,7 +4515,7 @@ SpatRaster:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="plot of chunk 20220525_volcano_raster" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">volcano_rast_ok</span><span class="w">
@@ -4594,7 +4593,7 @@ template:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" title="plot of chunk 20220525_create_volcano2" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># And plot it</span><span class="w">
@@ -4603,7 +4602,7 @@ template:</p>
   </span><span class="n">scale_fill_terrain_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="plot of chunk 20220525_create_volcano2" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" /></p>
 
 <h2 id="an-easter-egg">An Easter egg</h2>
 
@@ -4634,7 +4633,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" title="plot of chunk 20220525_easteregg" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -4650,7 +4649,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
   </span><span class="n">labs</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation (m)"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -4660,7 +4659,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
   </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau overlaid with elevation contours at 10-meter intervals. Nested contours outline the crater and its rim." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -4679,7 +4678,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" title="plot of chunk 20220525_easteregg" alt="plot of chunk 20220525_easteregg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -4700,8 +4699,7 @@ the pulse profiles and dispersion measures of twelve pulsars”.</em> The thesis
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp" alt="Craft
-Pulsars" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp" alt="Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses." /></p>
 
 <p class="caption">From “Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars” by Harold D. Craft, Jr. (September 1970). Original source:
@@ -4713,15 +4711,13 @@ band, named Joy Division. At some point in the process, Bernard Sumner (lead
 guitarist of Joy Division)<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> found the following image in <em>The Cambridge
 Encyclopaedia of Astronomy</em> (1977 edition):</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Cambridge: CP 1919 Pulsar
-Image" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Page from The Cambridge Encyclopaedia of Astronomy with stacked signal traces from pulsar CP 1919, forming a central cluster of peaks." /></p>
 
 <p>Saville presented a black-and-white version, producing a cover that reached
 iconic status in the ’80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Joy Division - Unknown pleasure
-cover" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background." /></p>
 
 <p>If you are interested in learning more about this fascinating history of science
 and design you can find it on <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">Pop Culture Pulsar: Origin Story of Joy
@@ -4816,7 +4812,7 @@ zoom level as needed. You can find guidance on zoom levels in the
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" /></p>
 
 <p>We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
@@ -4835,7 +4831,7 @@ factor that would reduce the number of rows to our desired target (in this case
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" /></p>
 
 <p>We can check how the number of rows has decreased. Also, the plot shows that we
 now have fewer cells.</p>
@@ -4943,7 +4939,7 @@ parameter:</p>
   </span><span class="n">theme_ridges</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" /></p>
 
 <p>The last step is to provide a black theme, resembling the cover of the album:</p>
 
@@ -4965,7 +4961,7 @@ parameter:</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" /></p>
 
 <h2 id="variations">Variations</h2>
 
@@ -4996,7 +4992,7 @@ other artifacts.</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" /></p>
 
 <h3 id="land-only">Land only</h3>
 
@@ -5027,7 +5023,7 @@ parts of the string can be easily removed.</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" /></p>
 
 <h3 id="with-colors">With colors</h3>
 
@@ -5066,7 +5062,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" /></p>
 
 <h3 id="combine-with-another-object">Combine with another object</h3>
 
@@ -5099,7 +5095,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" /></p>
 
 <p>Or adding a frame to the plot:</p>
 
@@ -5124,7 +5120,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" /></p>
 
 <h2 id="references">References</h2>
 
@@ -5168,7 +5164,7 @@ Unknown Pleasures Album Art. <em>Cartographic Perspectives</em>, (92), 65–78.
     		<p>1 min.</p>
 				<div><p class="alert alert-danger p-3 mx-2 mb-3 lead text-center"><i class="fas fa-skull-crossbones"></i> <strong>Project discontinued</strong></p>
 
-<p><img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif" alt="corona-timelapse" /></p>
+<p><img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif" alt="Animated map tracking the spread of COVID-19 over time." /></p>
 
 <p>In April 2021, my brother Diego and I saw
 the need for a friendly and automated interface to the meticulous and ever-changing restrictions that the German authorities imposed on travel abroad amid the COVID crisis.</p>
@@ -5238,7 +5234,7 @@ Canary Islands.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%" /></p>
 
 <p>I use a different CRS for each part of Spain. In the case of mainland Spain, I
 use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary
@@ -5252,7 +5248,7 @@ Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -5262,7 +5258,7 @@ Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" /></p>
 
 <p>So that was easy! Just a couple of maps using <strong>ggplot2</strong>. Let’s start mixing and
 matching!</p>
@@ -5320,7 +5316,7 @@ placement:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%" /></p>
 
 <p>Note also that this approach is valid not only for maps, but for all types of
 plots produced by <strong>ggplot2</strong>, since this package is not specific to map
@@ -5367,7 +5363,7 @@ objects:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" /></p>
 
 <h2 id="on-tmap">On <strong>tmap</strong></h2>
 
@@ -5405,7 +5401,7 @@ applied to <strong>ggplot2</strong> objects.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" /></p>
 
 <h2 id="update-on-mapsf">Update: On <strong>mapsf</strong></h2>
 
@@ -5422,7 +5418,7 @@ shared how to create inset maps using that package:</p>
 </span><span class="n">mf_inset_off</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -5500,7 +5496,7 @@ The flags will be extracted from the GitHub repository
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="plot of chunk 20220128_africa" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="Map of Africa with national borders and neighboring countries shown for context." width="100%" /></p>
 
 <p>Now, let’s add the flags with a loop:</p>
 
@@ -5533,7 +5529,7 @@ The flags will be extracted from the GitHub repository
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="plot of chunk 20220128_flag" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="Map of Africa with national flags clipped to each country boundary." width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -5551,7 +5547,7 @@ The flags will be extracted from the GitHub repository
     		<p>1 min.</p>
 				<div><p class="alert alert-danger p-3 mx-2 mb-3 lead text-center"><i class="fas fa-skull-crossbones"></i> <strong>Project discontinued</strong></p>
 
-<p><img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="corona-logo" style="width: 25%;" /></p>
+<p><img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="Corona Atlas logo" style="width: 25%;" /></p>
 
 <p>Visit <a href="https://dieghernan.github.io/corona-atlas.de/">https://dieghernan.github.io/corona-atlas.de/</a></p>
 
@@ -5782,7 +5778,7 @@ offering another reason to pay attention to low-frequency observations.</p>
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="plot of chunk 20200405_charheavytail" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="plot of chunk 20200405_charheavytail" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Ranked-value plot of a Pareto sample. Values fall steeply and then flatten; reference lines mark the top 20 percent and the 80th percentile." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="Histogram of a Pareto sample. Most values are small, with a long tail of rare large values." /></p>
 
 <h2 id="breaking-method">Breaking method</h2>
 
@@ -5891,7 +5887,7 @@ continues. This distinction does not affect the example below.</p>
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp" alt="plot of chunk 20200405_stepbystep" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp" alt="plot of chunk 20200405_stepbystep" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Histogram at step 1 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp" alt="Histogram at step 2 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp" alt="Histogram at step 3 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp" alt="Histogram at step 4 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain." /></p>
 
 <p>The head proportion varies across iterations and reaches 50% in the fourth,
 which stops the loop. It does not increase monotonically.</p>
@@ -5996,7 +5992,7 @@ things”</em> principle.</p>
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp" alt="plot of chunk 20200405_examplesimp" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp" alt="plot of chunk 20200405_examplesimp" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0. Vertical lines and a colored strip indicate the resulting class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0.2. Vertical lines and a colored strip indicate the resulting class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of the default value. Vertical lines and a colored strip indicate the resulting class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of 1. Vertical lines and a colored strip indicate the resulting class intervals." /></p>
 
 <p>For this example, even <code class="language-plaintext highlighter-rouge">thr = 0</code> retains the mean as an internal break.
 The returned vector also contains the minimum and maximum, so this gives two
@@ -6040,7 +6036,7 @@ create the data visualization.</p>
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="plot of chunk 20200405_summspdata" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="plot of chunk 20200405_summspdata" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of total conflict counts in African countries from 1966 to 1978. Most countries have low counts, with a few much higher values." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Density curve of total conflict counts in African countries from 1966 to 1978, with a peak at low counts and a long right tail." /></p>
 
 <p>The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram
 shows a strongly right-skewed pattern with many small values and a few large
@@ -6077,7 +6073,7 @@ size of the gaps between observations.</p>
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp" alt="plot of chunk 20200405_breaksample" /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp" alt="plot of chunk 20200405_breaksample" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Cumulative distribution of African conflict counts classified using head/tail breaks. Vertical lines and a colored strip identify the class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp" alt="Cumulative distribution of African conflict counts classified using Fisher breaks. Vertical lines and a colored strip identify the class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp" alt="Cumulative distribution of African conflict counts classified using quantile breaks. Vertical lines and a colored strip identify the class intervals." /></p>
 
 <p>The top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> contain five observations, whereas those
 of <code class="language-plaintext highlighter-rouge">fisher</code> contain 13. In this example, <code class="language-plaintext highlighter-rouge">headtails</code> gives more detail at the
@@ -6143,7 +6139,7 @@ the class assignments from each method. The original values are rescaled to
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp" alt="plot of chunk 20200405_benchmarkbreaks" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp" alt="Density curves comparing continuous African conflict counts with values classified using head/tail, Fisher and quantile breaks. The methods produce different distribution shapes." /></p>
 
 <p>In this example, the class assignments from <code class="language-plaintext highlighter-rouge">headtails</code> retain more of the
 original imbalance. By contrast, <code class="language-plaintext highlighter-rouge">quantile</code> aims for similar numbers of
@@ -6233,7 +6229,7 @@ a reference for the three classified maps.</p>
 </span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="plot of chunk 20200405_finalplot" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four proportional-symbol maps of African conflict counts comparing the unclassified data with quantile, Fisher and head/tail classifications. Circle size represents conflict counts and colors distinguish classes." /></p>
 
 <p>Compared with the unclassified proportional-symbol map, <code class="language-plaintext highlighter-rouge">headtails</code> makes
 the most extreme values easier to distinguish. The <code class="language-plaintext highlighter-rouge">quantile</code> style groups
@@ -6294,7 +6290,7 @@ confirmed in the histogram generated previously, where a concentration of
 <p><a href="https://dieghernan.github.io/COVID19">https://dieghernan.github.io/COVID19</a>
 [In Spanish]</p>
 
-<p><img src="https://dieghernan.github.io/COVID19/assets/Fallecidos.gif" alt="FallecidosEvo" /></p>
+<p><img src="https://dieghernan.github.io/COVID19/assets/Fallecidos.gif" alt="Animation of the evolution of reported COVID-19 deaths in Spain." /></p>
 
 <p class="caption">Overall deaths in Spain due to COVID-19: evolution</p>
 </div>
@@ -6428,7 +6424,7 @@ dimensions.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="plot of chunk 20200217_hatched-min" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="Map of European trade blocs using gray fills for membership and diagonal hatching to identify the euro area." /></p>
 
 <h3 id="example-2">Example 2</h3>
 
@@ -6517,7 +6513,7 @@ dimensions.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="plot of chunk 20200217_hatched" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="Map of Europe using different hatching patterns to distinguish the United Nations geographic regions." /></p>
 
 <p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order of the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code>
 patterns are present, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three
@@ -6624,7 +6620,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="plot of chunk 20200217_hatched-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="Map of European countries combining colored fills and hatching to distinguish trade bloc membership." /></p>
 
 <h2 id="png-layer">PNG layer</h2>
 
@@ -6687,7 +6683,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="plot of chunk 20200217_pnglayer" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="Map of Africa with each country filled with its national flag." /></p>
 
 <h3 id="example-2-1">Example 2</h3>
 
@@ -6711,7 +6707,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="plot of chunk 20200217_png-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="European Union flag with the Union Jack clipped to the outline of the United Kingdom." /></p>
 
 <h2 id="wordcloudlayer"><code class="language-plaintext highlighter-rouge">wordcloudLayer()</code></h2>
 
@@ -6741,7 +6737,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="plot of chunk 20200217_wordcloud1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="Word map of Europe with country names positioned geographically. Text size and color represent population density; Malta is especially prominent." /></p>
 
 <h3 id="example-2-2">Example 2</h3>
 
@@ -6792,7 +6788,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
             </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="plot of chunk 20200217_wordcloud2" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently." /></p>
 </div>
 				]]>
 			</description>
@@ -6852,7 +6848,7 @@ country in the EU.</p>
      </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp" alt="plot of chunk 20200602_imgpost" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp" alt="Map of Europe overlaid with the European Union flag. The United Kingdom is left white to illustrate Brexit." /></p>
 </div>
 				]]>
 			</description>
@@ -6919,7 +6915,7 @@ over your shapefiles with the <strong>cartography</strong> package.</p>
 </span><span class="n">title</span><span class="p">(</span><span class="s2">"circle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_showfun-1.webp" alt="plot of chunk 20191212_showfun" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_showfun-1.webp" alt="Eleven outlines of Germany filled with different patterns, including dots, text, diamonds, grids, hexagons, lines, zigzags and circles." /></p>
 
 <p>Let’s play a little bit more with some of the additional features of the
 function:</p>
@@ -6972,7 +6968,7 @@ function:</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playing-1.webp" alt="plot of chunk 20191212_playing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playing-1.webp" alt="Six outlines of Germany illustrating variations in pattern size, density, color and background." /></p>
 
 <h2 id="adding-legends-the-legendhatched-function">Adding legends: the <code class="language-plaintext highlighter-rouge">legendHatched</code> function</h2>
 
@@ -7040,11 +7036,11 @@ variable.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playinglegend-1.webp" alt="plot of chunk 20191212_playinglegend" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_playinglegend-1.webp" alt="Outline of Germany surrounded by four example legends combining patterns, text and solid fills." /></p>
 
 <p>I hope that you find these functions useful. Enjoy, and happy mapping!</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" title="plot of chunk 20191212_imgpost" alt="plot of chunk 20191212_imgpost" style="display: block; margin: auto;" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" title="plot of chunk 20191212_imgpost" alt="Map of Martinique combining hatching for median income ranges with gray fills distinguishing the prefecture, sub-prefectures and other municipalities." style="display: block; margin: auto;" /></p>
 </div>
 				]]>
 			</description>
@@ -7106,7 +7102,7 @@ side.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_main-1.webp" alt="plot of chunk 20191108_main" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_main-1.webp" alt="Map of the contiguous United States with neighboring countries shown for geographic context." /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Alaska----</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
@@ -7126,7 +7122,7 @@ side.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.webp" alt="plot of chunk 20191108_Alaska" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Alaska-1.webp" alt="Map of Alaska with neighboring parts of Canada and Russia shown for geographic context." /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Plot Hawaii----</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="w">
@@ -7146,7 +7142,7 @@ side.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.webp" alt="plot of chunk 20191108_Hawaii" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.webp" alt="Map of the Hawaiian island chain." /></p>
 
 <h2 id="insetting">Insetting</h2>
 
@@ -7225,7 +7221,7 @@ Moreno &amp; Basille here and I just worked it out by myself.</p>
 </span><span class="n">box</span><span class="p">(</span><span class="n">which</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"figure"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.webp" alt="plot of chunk 20191108_inset" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191108_inset-1.webp" alt="Map of the contiguous United States with separate insets for Alaska and Hawaii at the lower left." /></p>
 
 <p>Results may vary depending on the size of the original plot (Mainland USA),
 your plotting device and the output. However, with a bit of trial and error,
@@ -7236,7 +7232,7 @@ represents a map of the NUTS3 regions of the European Union. Several countries
 (France, Portugal, Spain) have overseas territories, so I made a few insets on
 the right side.</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/1000px-Population_density_by_NUTS_3_region_%282017%29.svg.png" alt="Choropleth map of population density in European NUTS 3 regions in 2017, with insets for overseas territories." /></p>
 </div>
 				]]>
 			</description>
@@ -7436,7 +7432,7 @@ one of my favorites, <strong>cartography</strong>:</p>
 
 <p>And that’s all. Our <code class="language-plaintext highlighter-rouge">.svg</code> file is ready to be included in Wikipedia.</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" alt="img" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" alt="World choropleth map of organ donors per million people in 2017. Darker blue indicates higher donor rates and gray indicates missing data." /></p>
 
 <p class="alert alert-info p-3 mx-2 mb-3"><strong>Update</strong>: The map is already part of the <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary">Wikipedia article</a>.</p>
 </div>
@@ -7520,7 +7516,7 @@ I will also use <strong>giscoR</strong> to get the world around Spain.</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">bboxcan</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.webp" alt="plot of chunk 20190618_preparing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.webp" alt="Map of Spain with autonomous community boundaries and a separate box for the Canary Islands." /></p>
 
 <p>Now we have it! A nice map of Spain with a layout based on the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps">Wikipedia convention for location maps</a>.</p>
 
@@ -7553,7 +7549,7 @@ Asturias to crop the flag.</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Spain</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="plot of chunk 20190618_Asturias" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="Two maps comparing the rectangular flag of Asturias with the same flag clipped to the boundary of Asturias." /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -7582,7 +7578,7 @@ otherwise the plot will look quite poor. Here I show an extreme example.</p>
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">MURHigh</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.webp" alt="plot of chunk 20190618_svg" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.webp" alt="Two flag-filled maps of Murcia comparing low and high image resolutions. The higher-resolution flag has smoother edges." /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -7625,7 +7621,7 @@ otherwise the plot will look quite poor. Here I show an extreme example.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="plot of chunk 20190618_allCCAA" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="Map of Spain with each autonomous community filled with its flag and the Canary Islands shown in an inset." /></p>
 
 <p>We are done now. If you have suggestions, you can leave a comment. As always,
 if you enjoyed the post, you can share it on your preferred social network.</p>
@@ -7784,7 +7780,7 @@ is too dense, <strong>R</strong> could crash easily.</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Puzzle</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Puzzle"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_squares-1.webp" alt="plot of chunk 20190602_squares" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_squares-1.webp" alt="Two maps of Great Britain comparing separate square grid cells with cells merged into regional shapes. Colors distinguish regions." /></p>
 
 <h2 id="going-hex">Going hex</h2>
 
@@ -7843,7 +7839,7 @@ is too dense, <strong>R</strong> could crash easily.</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Hexbin</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Hexbin"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.webp" alt="plot of chunk 20190602_hex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_hex-1.webp" alt="Two maps of Great Britain comparing separate hexagonal grid cells with cells merged into regional shapes. Colors distinguish regions." /></p>
 
 <h2 id="pixel-it">Pixel it!</h2>
 
@@ -7881,7 +7877,7 @@ is too dense, <strong>R</strong> could crash easily.</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Pixel</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mypal</span><span class="p">(</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Pixel"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_pix-1.webp" alt="plot of chunk 20190602_pix" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_pix-1.webp" alt="Map of Great Britain represented by separated square pixels, colored by region." /></p>
 
 <h2 id="wrap-up">Wrap up</h2>
 
@@ -7979,7 +7975,7 @@ is too dense, <strong>R</strong> could crash easily.</p>
 </span><span class="n">pix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_gridpol</span><span class="p">(</span><span class="n">GB</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"pixel"</span><span class="p">,</span><span class="w"> </span><span class="n">gridsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.webp" alt="plot of chunk 20190602_functionex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190602_functionex-1.webp" alt="Grid of maps of Great Britain comparing square, hexagonal and pixel representations at different grid sizes." /></p>
 
 <p>And that’s it! The function <code class="language-plaintext highlighter-rouge">stdh_gridpol</code> has some alert mechanisms, such as
 accepting only <code class="language-plaintext highlighter-rouge">POLYGON</code> or <code class="language-plaintext highlighter-rouge">MULTIPOLYGON</code>, and the default value of <code class="language-plaintext highlighter-rouge">gridsize</code>
@@ -8461,12 +8457,12 @@ a powerful function that transforms geometries into other types of geometries
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp" alt="plot of chunk 20190505_italycast" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp" alt="Four maps of Italy comparing multipolygon, polygon, line and point representations. Separate polygons and boundary vertices become visible as the geometry is converted." /></p>
 
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> was the possibility of breaking
 <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="plot of chunk 20190505_italycastsub" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." /></p>
 
 <h2 id="an-approach">An approach</h2>
 
@@ -8494,7 +8490,7 @@ pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects 
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"AFTER FUNCTION"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp" alt="plot of chunk 20190505_testspain" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp" alt="Two outlines of Spain comparing the original boundary with a version split into short, individually colored segments." /></p>
 
 <h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></h2>
 
@@ -8619,7 +8615,7 @@ the coordinate level, high-resolution objects introduce some delay.</p>
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="plot of chunk 20190505_benchmarkfunction" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="Map of South America with country boundaries split into short segments, illustrated with alternating colors." /></p>
 
 <p>There is a difference in performance: <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed
 into 914 substrings, while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons decomposed into 8,414
@@ -8842,7 +8838,7 @@ the dedicated database.</p>
 <a href="https://en.wikipedia.org/wiki/Commonwealth_of_Nations">Wikipedia page</a> for the
 Commonwealth.</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg" alt="Wiki" /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg" alt="World map highlighting member states of the Commonwealth of Nations." /></p>
 
 <p>The map we will generate is presented in a Robinson projection, and the color
 palette will be based on the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Orthographic_maps">Wikipedia convention for Orthographic Maps</a>,
@@ -8926,7 +8922,7 @@ since it is the one used in the example.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" alt="plot of chunk 20190427_mapfin" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" alt="World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles." /></p>
 </div>
 				]]>
 			</description>
@@ -9211,7 +9207,7 @@ combines the previous files:</p>
 <p><strong>Bzel</strong> integrates the bezel into your watch face. Display minutes as digits,
 as a moving dot or as a fill in the bezel.</p>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png" alt="Banner" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png" alt="Bzel watch face with minutes displayed around the bezel." /></p>
 
 <p>::: text-center
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/59280895b67f9f43f80004c9" role="button">Download
@@ -9277,17 +9273,17 @@ moment</em></li>
 
 <p>:::::: row
 ::: {.col-sm .mb-1}</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPTR.gif" alt="gif"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPTR.gif" alt="Animated Bzel watch face on Pebble Time Round."&gt;
 </code></pre></div></div>
 <p>:::</p>
 
 <p>::: {.col-sm .mb-1}</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPT.gif" alt="gif"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPT.gif" alt="Animated Bzel watch face on Pebble Time."&gt;
 </code></pre></div></div>
 <p>:::</p>
 
 <p>::: {.col-sm .mb-1}</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelBW.gif" alt="gif"&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    &lt;img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelBW.gif" alt="Animated Bzel watch face on a monochrome Pebble watch."&gt;
 </code></pre></div></div>
 <p>:::
 ::::::</p>
@@ -9307,15 +9303,15 @@ modified and fitted to the regular alphabet instead of Unicode values.</li>
 
 <p>:::::: row
 ::: col
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp" /></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo" /></a>
 :::</p>
 
 <p>::: col
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" alt="wp" width="120" /></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" alt="Weather Underground" width="120" /></a>
 :::</p>
 
 <p>::: col
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" alt="wp" width="60" /></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" alt="OpenWeatherMap" width="60" /></a>
 :::
 ::::::</p>
 
@@ -9352,7 +9348,7 @@ PIN and add API keys for your favorite online services. Please check
 that adds your location and current weather information in the language used on
 your watch and smartphone.</p>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png" alt="Banner" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png" alt="7egment watch face with a seven-segment time display and weather information." /></p>
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/591ead370dfc32aacf000204?section=watchfaces" role="button">Download from Rebble Appstore</a>
@@ -9396,13 +9392,13 @@ your watch and smartphone.</p>
 
 <div class="row">
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PC.gif" alt="gif" />
+        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PC.gif" alt="Animated 7egment watch face on Pebble Classic." />
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PT.gif" alt="gif" />
+        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PT.gif" alt="Animated 7egment watch face on Pebble Time." />
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PTR.gif" alt="gif" />
+        <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PTR.gif" alt="Animated 7egment watch face on Pebble Time Round." />
 </div>
 </div>
 
@@ -9419,10 +9415,10 @@ your watch and smartphone.</p>
 
 <div class="row">
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp" /></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground" /></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp" /></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap" /></a>
 </div>
 </div>
 
@@ -9458,7 +9454,7 @@ PIN and add API keys for your favorite online services. Please check
 the most out of the smartwatch’s capabilities. Set your preferences and enjoy this
 beautifully designed watch face.</p>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png" alt="Banner" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png" alt="Sfera watch face on Pebble Time Round." /></p>
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58c2f7110dfc32a52a00081f?native=false&amp;query=Sfera&amp;section=watchfaces" role="button">Download from Rebble Appstore</a>
@@ -9521,7 +9517,7 @@ beautifully designed watch face.</p>
 
 <h2 id="screenshots">Screenshots</h2>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif" alt="GIF" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif" alt="Animated Sfera watch face on Pebble Time Round." /></p>
 
 <h2 id="attributions">Attributions</h2>
 
@@ -9537,13 +9533,13 @@ modified and fitted to the regular alphabet instead of Unicode values.</li>
 
 <div class="row">
 <div class="col">
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp" /></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo" /></a>
 </div>
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp" /></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground" /></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp" /></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap" /></a>
 </div>
 </div>
 
@@ -9578,7 +9574,7 @@ PIN and add API keys for your favorite online services. Please check
 <p><strong>TextWatch Clima</strong> upgrades the classic TextWatch watch face by adding a set of
 new capabilities.</p>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png" alt="banner" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png" alt="TextWatch Clima watch face displaying the time in words on Pebble Time Round." /></p>
 
 <p><strong>Available for all the Classic, Time and Pebble 2 models</strong></p>
 
@@ -9593,7 +9589,7 @@ new capabilities.</p>
   <li>Autofit to screen</li>
 </ul>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerTime.png" alt="banner" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerTime.png" alt="TextWatch Clima watch face displaying the time in words on Pebble Time." /></p>
 
 <h2 id="take-your-pick">Take your pick</h2>
 
@@ -9630,7 +9626,7 @@ new capabilities.</p>
   <li><strong>Implementation of <a href="https://www.pmkey.xyz">pmkey.xyz</a></strong></li>
 </ul>
 
-<p><img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png" alt="banner" /></p>
+<p><img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png" alt="TextWatch Clima watch face displaying the time in words on Pebble Classic." /></p>
 
 <h2 id="future-developments">Future developments</h2>
 
@@ -9657,13 +9653,13 @@ modified and fitted to the regular alphabet instead of Unicode values.</li>
 
 <div class="row">
 <div class="col">
-<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="wp" /></a>
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo" /></a>
 </div>
 <div class="col">
-<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="wp" /></a>
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground" /></a>
 </div>
 <div class="col">
-<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="wp" /></a>
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap" /></a>
 </div>
 </div>
 
@@ -9680,13 +9676,13 @@ unique PIN and add API keys for your favorite online services. Please check
 
 <div class="row">
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif" alt="gif" />
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif" alt="Animated TextWatch Clima watch face on Pebble Classic." />
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif" alt="gif" />
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif" alt="Animated TextWatch Clima watch face on Pebble Time." />
 </div>
 <div class="col-sm mb-1">
-        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif" alt="gif" />
+        <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif" alt="Animated TextWatch Clima watch face on Pebble Time Round." />
 </div>
 </div>
 

@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -262,8 +262,7 @@
 new post by <a href="https://twitter.com/BjnNowak">Benjamin Nowak</a> showing how to create
 a dot density map based on the work of the French cartographer <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques
 Bertin</a> (1918 - 2010):</p>
-<p><img src="https://dieghernan.github.io/assets/img/misc/bertin.png" alt="Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
-(1967)" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/bertin.png" alt="Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations." /></p>
 <p>In this post, I create a similar map for Iberia and also show how to create a
 variation using a hexagonal grid instead of a rectangular one. This is the fifth
 issue of the series
@@ -325,7 +324,7 @@ use the global file with a resolution of 1 km in the Mollweide projection
 
 </span><span class="n">base_gg</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="plot of chunk 202312_basemap" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window." /></p>
 <p>That is our base map. Now we download the GHSL data programmatically and check
 that everything is correct. At this point, it is interesting to
 use the <code class="language-plaintext highlighter-rouge">win</code> argument when reading the raster with <code class="language-plaintext highlighter-rouge">terra::rast()</code>, as this
@@ -369,7 +368,7 @@ terms of performance.</p>
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pop_init</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50000</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="plot of chunk 202312_base_raster-1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="Population raster over the Iberian Peninsula with country and regional boundaries. Color represents population per raster cell." /></p>
 <h2 id="data-wrangling">Data wrangling</h2>
 <p>The GHSL information contains the estimated population in each cell. However, the
 file has a high resolution (more than 2 million cells), so for plotting
@@ -469,7 +468,7 @@ map.</p>
 
 </span><span class="n">ggsave</span><span class="p">(</span><span class="s2">"202312_finalmap.png"</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="plot of chunk 202312_base_raster-1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." /></p>
 <h2 id="alternative-hexagonal-grid">Alternative hexagonal grid</h2>
 <p>The previous plot is based on the centroids of each cell of the raster, which is,
 by definition, a rectangular grid. I would also like to experiment with
@@ -535,7 +534,7 @@ the aggregated cells:</p>
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">na.value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"transparent"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.3</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="plot of chunk 202312_base_raster-1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="Map of the Iberian Peninsula with population totals aggregated into hexagonal cells. Color represents the population in each cell." /></p>
 <p>Finally, we compute densities, create categories and produce the map:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Mask and categorize</span><span class="w">
 </span><span class="n">pop_sf_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pop_agg_sf</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -605,7 +604,7 @@ the aggregated cells:</p>
 
 </span><span class="n">ggsave</span><span class="p">(</span><span class="s2">"202312_finalmap_hex.png"</span><span class="p">,</span><span class="w"> </span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="plot of chunk 202312_finalmap_hex" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." /></p>
 <p>And that’s it! Which one do you like the most? Let me know in the comments.</p>
 <h2 id="references">References</h2>
 <ul>

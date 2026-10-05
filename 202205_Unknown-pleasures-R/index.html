@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -261,8 +261,7 @@
 the pulse profiles and dispersion measures of twelve pulsars”.</em> The thesis (337
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:</p>
-<p><img src="https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp" alt="Craft
-Pulsars" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp" alt="Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses." /></p>
 <p class="caption">From “Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars” by Harold D. Craft, Jr. (September 1970). Original source:
 <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/</a></p>
@@ -271,13 +270,11 @@ project. He had to design the cover of the debut album of a young British rock
 band, named Joy Division. At some point in the process, Bernard Sumner (lead
 guitarist of Joy Division)<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> found the following image in <em>The Cambridge
 Encyclopaedia of Astronomy</em> (1977 edition):</p>
-<p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Cambridge: CP 1919 Pulsar
-Image" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg" alt="Page from The Cambridge Encyclopaedia of Astronomy with stacked signal traces from pulsar CP 1919, forming a central cluster of peaks." /></p>
 <p>Saville presented a black-and-white version, producing a cover that reached
 iconic status in the ’80s. This cover has been reproduced in the form of
 tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:</p>
-<p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Joy Division - Unknown pleasure
-cover" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg" alt="Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background." /></p>
 <p>If you are interested in learning more about this fascinating history of science
 and design you can find it on <a href="https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/">Pop Culture Pulsar: Origin Story of Joy
 Division’s Unknown Pleasures Album
@@ -359,7 +356,7 @@ zoom level as needed. You can find guidance on zoom levels in the
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="plot of chunk 20220501_andalucia_dem" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" /></p>
 <p>We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
 reduce the number of cells or increase their size) using a scaling
@@ -375,7 +372,7 @@ factor that would reduce the number of rows to our desired target (in this case
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="plot of chunk 20220501_andalucia_dem_agg" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" /></p>
 <p>We can check how the number of rows has decreased. Also, the plot shows that we
 now have fewer cells.</p>
 <p>Now, we may need to perform additional manipulations on the values of the
@@ -473,7 +470,7 @@ parameter:</p>
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_ridges</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="plot of chunk 20220501_andalucia_ridges" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" /></p>
 <p>The last step is to provide a black theme, resembling the cover of the album:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -492,7 +489,7 @@ parameter:</p>
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="plot of chunk 20220501_andalucia_joyplot" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" /></p>
 <h2 id="variations">Variations</h2>
 <p>We can produce some variations of the same map using several parameters and
 other artifacts.</p>
@@ -517,7 +514,7 @@ other artifacts.</p>
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="plot of chunk 20220501_andalucia_ridges_dens" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" /></p>
 <h3 id="land-only">Land only</h3>
 <p>If we use <code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> it is quite easy to remove some parts of the lines,
 as the parameter <code class="language-plaintext highlighter-rouge">min_height</code> allows us to control the minimum height to be
@@ -543,7 +540,7 @@ parts of the string can be easily removed.</p>
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="plot of chunk 20220501_andalucia_landonly" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" /></p>
 <h3 id="with-colors">With colors</h3>
 <p>We can apply different colors to the plot. Note that <strong>ggridges</strong> only accepts
 different <code class="language-plaintext highlighter-rouge">aes</code> by row, and not by column:</p>
@@ -578,7 +575,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
     </span><span class="m">.95</span><span class="w">
   </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="plot of chunk 20220501_andalucia_colors" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" /></p>
 <h3 id="combine-with-another-object">Combine with another object</h3>
 <p>For example, using an <code class="language-plaintext highlighter-rouge">sf</code> object:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -607,7 +604,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="plot of chunk 20220501_andalucia_combine" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" /></p>
 <p>Or adding a frame to the plot:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">frame</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.polygons</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">,</span><span class="w"> </span><span class="n">extent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -629,7 +626,7 @@ different <code class="language-plaintext highlighter-rouge">aes</code> by row, 
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="plot of chunk 20220501_andalucia_frame" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" /></p>
 <h2 id="references">References</h2>
 <p>Craft Jr, H. D. (1970). <em>Radio observations of the pulse profiles and dispersion
 measures of twelve pulsars.</em> Cornell University.</p>

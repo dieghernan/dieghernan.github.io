@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -317,7 +317,7 @@ I will also use <strong>giscoR</strong> to get the world around Spain.</p>
 </span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">bboxcan</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.webp" alt="plot of chunk 20190618_preparing" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_preparing-1.webp" alt="Map of Spain with autonomous community boundaries and a separate box for the Canary Islands." /></p>
 <p>Now we have it! A nice map of Spain with a layout based on the <a href="https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Location_maps">Wikipedia convention for location maps</a>.</p>
 <h2 id="loading-the-flag">Loading the flag</h2>
 <p>As a first example, I chose <a href="https://en.wikipedia.org/wiki/Asturias">Asturias</a>
@@ -345,7 +345,7 @@ Asturias to crop the flag.</p>
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">flagmask</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">Spain</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="plot of chunk 20190618_Asturias" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="Two maps comparing the rectangular flag of Asturias with the same flag clipped to the boundary of Asturias." /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p class="alert alert-info p-3 mx-2 mb-3"><i class="fa fa-star"></i> <strong>Pro tip:</strong> Use high-quality <code class="language-plaintext highlighter-rouge">*.png</code> files,
@@ -370,7 +370,7 @@ otherwise the plot will look quite poor. Here I show an extreme example.</p>
 </span><span class="n">plot_sf</span><span class="p">(</span><span class="n">MURshp</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"High"</span><span class="p">)</span><span class="w">
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">MURHigh</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.webp" alt="plot of chunk 20190618_svg" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_svg-1.webp" alt="Two flag-filled maps of Murcia comparing low and high image resolutions. The higher-resolution flag has smoother edges." /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p>Now, we are ready to have <a href="https://the-big-bang-theory.com/fun_with_flags/">fun with flags</a>. It’s time to make the flag map of the autonomous communities of Spain.</p>
@@ -409,7 +409,7 @@ otherwise the plot will look quite poor. Here I show an extreme example.</p>
   </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="plot of chunk 20190618_allCCAA" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190618_allCCAA-1.webp" alt="Map of Spain with each autonomous community filled with its flag and the Canary Islands shown in an inset." /></p>
 <p>We are done now. If you have suggestions, you can leave a comment. As always,
 if you enjoyed the post, you can share it on your preferred social network.</p>
 			<div class="mt-5 pt-3 mb-3 text-center">

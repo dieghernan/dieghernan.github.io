@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -360,7 +360,7 @@ dimensions.</p>
   </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="plot of chunk 20200217_hatched-min" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="Map of European trade blocs using gray fills for membership and diagonal hatching to identify the euro area." /></p>
 <h3 id="example-2">Example 2</h3>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
@@ -446,7 +446,7 @@ dimensions.</p>
   </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="plot of chunk 20200217_hatched" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="Map of Europe using different hatching patterns to distinguish the United Nations geographic regions." /></p>
 <p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order of the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code>
 patterns are present, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three
 line-type patterns are also plotted, as in the previous case, and <code class="language-plaintext highlighter-rouge">lty = c(1,
@@ -548,7 +548,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
   </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="plot of chunk 20200217_hatched-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="Map of European countries combining colored fills and hatching to distinguish trade bloc membership." /></p>
 <h2 id="png-layer">PNG layer</h2>
 <p>This new capability geotags a <code class="language-plaintext highlighter-rouge">.png</code> file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a <code class="language-plaintext highlighter-rouge">POLYGON/MULTIPOLYGON</code>.</p>
 <p>For high-quality png maps, <strong>it is recommended to plot your map on a <code class="language-plaintext highlighter-rouge">.svg</code> device</strong>.</p>
@@ -605,7 +605,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
   </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="plot of chunk 20200217_pnglayer" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="Map of Africa with each country filled with its national flag." /></p>
 <h3 id="example-2-1">Example 2</h3>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
@@ -626,7 +626,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
 
 </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="plot of chunk 20200217_png-adv" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="European Union flag with the Union Jack clipped to the outline of the United Kingdom." /></p>
 <h2 id="wordcloudlayer"><code class="language-plaintext highlighter-rouge">wordcloudLayer()</code></h2>
 <p>A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.</p>
 <p>Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.</p>
@@ -650,7 +650,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
   </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="plot of chunk 20200217_wordcloud1" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="Word map of Europe with country names positioned geographically. Text size and color represent population density; Malta is especially prominent." /></p>
 <h3 id="example-2-2">Example 2</h3>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Genres from MB--</span><span class="w">
@@ -698,7 +698,7 @@ line-type patterns are also plotted, as in the previous case, and <code class="l
               </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
             </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="plot of chunk 20200217_wordcloud2" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently." /></p>
 			<div class="mt-5 pt-3 mb-3 text-center">
 				<script type='text/javascript'
 					src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>

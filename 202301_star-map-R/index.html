@@ -5,7 +5,7 @@
     <!--  MIT License-->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-09-14 -->
+    <!-- Page build 2026-10-05 -->
      <!-- Jekyll Version 4.4.1 -->
     <!--Google Structured Data-->
     <script type="application/ld+json">
@@ -644,7 +644,7 @@ visualization.</p>
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-1.webp" alt="plot of chunk 20230125_mw" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-1.webp" alt="Full-sky map of the Milky Way in longitude and latitude coordinates. Filled bands trace its curved extent across the sky." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># And process it</span><span class="w">
 
@@ -661,7 +661,7 @@ visualization.</p>
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="plot of chunk 20230125_mw" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="Milky Way bands clipped and projected to the selected viewing hemisphere." width="100%" /></p>
 <p>Now it is the turn of the constellations:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">const</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"constellations.lines.min.geojson"</span><span class="p">)</span><span class="w">
 
@@ -669,7 +669,7 @@ visualization.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-1.webp" alt="plot of chunk 20230125_const" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-1.webp" alt="Full-sky map of constellation lines in longitude and latitude coordinates, with line segments connecting stars into constellation outlines." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cut to buffer</span><span class="w">
 
@@ -685,7 +685,7 @@ visualization.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="plot of chunk 20230125_const" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="Constellation lines clipped and projected to the selected circular viewing hemisphere." width="100%" /></p>
 <p>And finally the stars:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"stars.6.min.geojson"</span><span class="p">)</span><span class="w">
 
@@ -696,7 +696,7 @@ visualization.</p>
   </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-1.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-1.webp" alt="Full-sky map of stars in longitude and latitude coordinates. Larger and more opaque points represent brighter stars." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cut to buffer</span><span class="w">
 
@@ -713,7 +713,7 @@ visualization.</p>
   </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="plot of chunk 20230125_stars" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="Star map clipped and projected to the selected circular viewing hemisphere. Larger and more opaque points represent brighter stars." width="100%" /></p>
 <h3 id="graticules">Graticules</h3>
 <p>We are also going to include graticules, so the Earth’s poles can be quickly
 spotted. In this case we don’t apply any affine transformation, so the <code class="language-plaintext highlighter-rouge">flip</code>
@@ -728,7 +728,7 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="Rectangular coordinate grid with latitude lines every 10 degrees and longitude lines every 30 degrees." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Cut to buffer; we don't flip this one (it is not an object of the space)</span><span class="w">
 </span><span class="n">grat_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="w">
@@ -743,7 +743,7 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="plot of chunk 20230125_grat" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="Coordinate grid projected to the selected hemisphere. Curved latitude lines and converging longitude lines reveal the pole." width="100%" /></p>
 <h2 id="visualization-with-ggplot2">Visualization with <strong>ggplot2</strong></h2>
 <p>We are almost set! For preparing the final map, first we are going to create the
 corresponding labels, which will be included as <code class="language-plaintext highlighter-rouge">caption</code> on the <strong>ggplot2</strong> map:</p>
@@ -858,7 +858,7 @@ instead I converted my lines (the constellations) to coordinates and applied
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp" alt="plot of chunk 20230125_celestial_map" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp" alt="Circular star map for Madrid with constellation lines, stars sized by brightness and the Milky Way on a dark background." width="100%" /></p>
 <p>Voilà! I checked several times the results with the results provided by
 d3-celestial.js on the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
 demo</a> and the underlying
@@ -929,7 +929,7 @@ this entirely different set of geometries:</p>
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map_cn-1.webp" alt="plot of chunk 20230125_celestial_map_cn" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map_cn-1.webp" alt="Circular star map for Madrid using Chinese constellation lines, with stars sized by brightness and the Milky Way on a dark background." width="100%" /></p>
 <h2 id="references">References</h2>
 <p>Meeus J (1998). <em>Astronomical algorithms</em>, 2nd edition. Willmann-Bell,
 Richmond, Va. ISBN 9780943396613.</p>
