@@ -4,10 +4,8 @@ subtitle: A database with geocodes
 tags:
   - project
   - rstats
-  - webscraping
   - dataset
   - csv
-  - json
 header_img: ./assets/img/misc/countrycodes.png
 permalink: /projects/Country-Codes-and-International-Organizations/
 redirect_from:

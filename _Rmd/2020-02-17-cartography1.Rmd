@@ -8,7 +8,6 @@ tags:
   - beautiful_maps
   - maps
   - sf
-  - cartography
   - r_package
 header_img: ./assets/img/blog/20200217_wordcloud2-1.webp
 header_type: "splash"

@@ -7,7 +7,6 @@ tags:
   - rstats
   - maps
   - sf
-  - cartography
   - COVID19
 header_img: https://dieghernan.github.io/COVID19/assets/img/header.png
 permalink: /projects/COVID19

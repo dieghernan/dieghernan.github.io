@@ -7,7 +7,6 @@ tags:
   - rspatial
   - sf
   - maps
-  - vignette
   - rnaturalearth
 header_img: ./assets/img/blog/20190427_mapfin-1.webp
 output:
