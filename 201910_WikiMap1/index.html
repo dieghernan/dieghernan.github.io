@@ -19,7 +19,7 @@
       "headline": "Wikipedia maps (I): Organ donor rates",
       "image": "https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp",
       "datePublished": "2019-10-16T00:00:00+02:00",
-      "dateModified": "2019-10-16T00:00:00+02:00",
+      "dateModified": "2026-10-07T00:00:00+02:00",
       "author": {
         "@type": "Person",
         "name": "dieghernan"
@@ -70,7 +70,7 @@
 	"@context": "https://schema.org",
 	"@type": "WebPage",
 	"name": "Wikipedia maps (I): Organ donor rates",
-	"description": "A choropleth map with R - This is a quick post on how to create a map according to theWikipedia conventions.In this case, I have chosen to plot theinternational organ donor rates,retrieved on February 10, 2019, although the data refers to 2017 (source:IRODaT)."
+	"description": "A choropleth map with R - Map international organ donor rates using Wikipedia data and cartography."
 	}
 </script><script type="application/ld+json">
 {
@@ -104,7 +104,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="author" content="dieghernan" >
    <meta name="copyright" content="dieghernan" >
-   <meta name="description" content="A choropleth map with R - This is a quick post on how to create a map according to theWikipedia conventions.In this case, I have chosen to plot theinternatio...">
+   <meta name="description" content="A choropleth map with R - Map international organ donor rates using Wikipedia data and cartography.">
    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" >
    <meta name="robots" content="index, follow"><meta name="keywords" content="">
     <!-- OpenGraph -->
@@ -112,7 +112,7 @@
    <meta property="og:site_name" content="One World | R packages, maps and open-source projects" >
    <meta property="og:url" content="https://dieghernan.github.io/201910_WikiMap1/" >
    <meta property="og:type" content="website" >
-   <meta property="og:description" content="A choropleth map with R - This is a quick post on how to create a map according to theWikipedia..." >
+   <meta property="og:description" content="A choropleth map with R - Map international organ donor rates using Wikipedia data and cartography." >
    <meta property="og:locale" content="en-US" >
    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp" >
     <!-- Twitter/X Cards -->
@@ -219,7 +219,10 @@
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2019-10-16T00:00:00+02:00" class="dt-published" >16 oct 2019</time>
+            <time class="dt-updated" datetime="2026-10-07T00:00:00+02:00">07 oct 2026</time> 
+            <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
+            <br>
+            <span class="font-weight-light chulapa-text-line-through">16 oct 2019</span>
         </div></div>
          <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
             <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/201910_WikiMap1/&text=Wikipedia+maps+%28I%29%3A+Organ+donor+rates&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,Wikipedia,sf,cartography,svg,maps,giscoR" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
@@ -262,6 +265,10 @@ In this case, I have chosen to plot the
 <a href="https://en.wikipedia.org/wiki/International_organ_donor_rates">international organ donor rates</a>,
 retrieved on February 10, 2019, although the data refers to 2017 (source:
 <a href="http://www.irodat.org/?p=database">IRODaT</a>).</p>
+<p class="alert alert-info p-3 mx-2 mb-3"><strong>Historical example:</strong> The mapping examples use <strong>cartography</strong>, which is now
+in maintenance mode. Its maintainers recommend <a href="https://riatelab.github.io/mapsf/"><strong>mapsf</strong></a>
+for new work. The original code and outputs are preserved and have not been
+revalidated against current package versions.</p>
 <h2 id="web-scraping">Web scraping</h2>
 <p>The first step is to scrape Wikipedia in order to get the final table. To do
 so, I will use the <strong>rvest</strong> package. You can get the <code class="language-plaintext highlighter-rouge">xpath</code> you want to
