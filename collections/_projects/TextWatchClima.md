@@ -64,7 +64,7 @@ new capabilities.
   - **Yahoo** _No API key required at this moment_
   - **[Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)**
   - **[OpenWeatherMap](https://openweathermap.org/)**
-- **Implementation of [pmkey.xyz](https://www.pmkey.xyz)**
+- **Historical integration with Master Key (pmkey.xyz)**
 
 ![TextWatch Clima watch face displaying the time in words on Pebble Classic.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
 
@@ -82,7 +82,7 @@ new capabilities.
 
 - [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers,
   modified and fitted to the regular alphabet instead of Unicode values.
-- Custom font for icons created via [Fontastic](http://fontastic.me/).
+- Custom font for icons created via Fontastic.
 - Gotham Fonts downloaded from [fontsgeek.com](http://fontsgeek.com)
 
 ### Weather providers
@@ -101,9 +101,8 @@ new capabilities.
 
 ### Others
 
-- [Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a
-  unique PIN and add API keys for your favorite online services. Please check
-  [www.pmkey.xyz](https://www.pmkey.xyz) for more info.
+- Master Key (pmkey.xyz) was a service for Pebble users that managed API keys
+  through a unique PIN.
 - [wackyneighbor](https://github.com/wackyneighbor) project [DC TextWatch Deluxe](https://github.com/wackyneighbor/DC_Text_Watch_Deluxe)
 
 ## Screenshots
