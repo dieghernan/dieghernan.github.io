@@ -1,7 +1,7 @@
 ---
 title: Corona Atlas
 subtitle: Interactive map of the international COVID-19 risk areas as designated by the German authorities.
-excerpt: Interactive map of the international COVID-19 risk areas as designated by the German authorities. The data is updated periodically from the website of the Robert Koch Institute.
+excerpt: Historical interactive map of international COVID-19 risk areas, based on assessments by the German authorities during the project’s operation.
 tags:
   - discontinued
   - project
@@ -15,7 +15,7 @@ tags:
   - javascript
 header_img: "https://dieghernan.github.io/corona-atlas.de/assets/img/og_corona_atlas.png"
 date: 2021-04-30
-last_modified_at: 2025-02-17
+last_modified_at: 2026-10-07
 permalink: /projects/corona-atlas/
 project_links:
   - url: https://dieghernan.github.io/corona-atlas.de/
@@ -26,7 +26,8 @@ project_links:
     label: See on GitHub
 ---
 
-<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the
+descriptions below refer to its period of operation.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 <img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="Corona Atlas logo" style="width: 25%;">
@@ -35,7 +36,7 @@ Visit <https://dieghernan.github.io/corona-atlas.de/>
 
 Interactive map of the international COVID-19 risk areas as designated by the German authorities.
 
-The data is updated periodically from the website of the [Robert Koch Institute](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Risikogebiete_neu.html).
+During the project, data was updated periodically from the website of the [Robert Koch Institute](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Risikogebiete_neu.html).
 
 Data scraping is performed in **Python** with
 [**scrapy**](https://scrapy.org/).

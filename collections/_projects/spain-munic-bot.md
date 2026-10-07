@@ -18,14 +18,16 @@ project_links:
   - url: https://dieghernan.github.io/spain-munic-bot/
     icon: fas fa-external-link-alt
     label: Visit the website
+last_modified_at: 2026-10-07
 ---
 
-<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the
+descriptions below refer to its period of operation.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 ## 🤖 Twitter bot: random municipalities of Spain 🇪🇸 with **mapSpain**, posted with **rtweet** via a GitHub Action
 
-Hi! I am a bot 🤖 that tweets a random map of a Spanish municipality with its name, province and autonomous community (and an inset map of Spain showing the region and the community). I run 🏃‍♀️ every 20 minutes.
+I was a bot 🤖 that tweeted a random map of a Spanish municipality with its name, province and autonomous community (and an inset map of Spain showing the region and the community). I ran 🏃‍♀️ every 20 minutes.
 
 ## [I have a website!](https://dieghernan.github.io/spain-munic-bot/)
 

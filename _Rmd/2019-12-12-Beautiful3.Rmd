@@ -12,20 +12,14 @@ tags:
   - r_package
   - cartography
   - giscoR
-last_modified_at: 2020-02-17
+last_modified_at: 2026-10-07
 header_img: ./assets/img/blog/20191212_imgpost-1.webp
 output:
   md_document:
     variant: gfm
     preserve_yaml: true
+excerpt: "Create patterned and hatched map fills with the cartography package."
 ---
-
-**Updated 17 February 2020**: All these pieces of work are already available
-in **cartography** >v.2.4.0 through the [`hatchedLayer`](http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html)
-and [`legendHatched`](https://riatelab.github.io/cartography/docs/reference/legendHatched.html)
-functions. Just install it via `install.packages("cartography")`. A dedicated
-blog post with examples is available at this [link](../202002_cartography1).
-{: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
@@ -36,6 +30,19 @@ rm(list = ls())
 In this post, I show how to produce different filling patterns that can be added
 over your shapefiles with the **cartography** package.
 
+
+**Historical example:** The mapping examples use **cartography**, which is now
+in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
+for new work. The original code and outputs are preserved and have not been
+revalidated against current package versions.
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
+
+**Updated 17 February 2020**: All these pieces of work are already available
+in **cartography** >v.2.4.0 through the [`hatchedLayer`](http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html)
+and [`legendHatched`](https://riatelab.github.io/cartography/docs/reference/legendHatched.html)
+functions. Just install it via `install.packages("cartography")`. A dedicated
+blog post with examples is available at this [link](../202002_cartography1).
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ## Required **R** packages
 
