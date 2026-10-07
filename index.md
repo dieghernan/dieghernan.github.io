@@ -1,6 +1,6 @@
 ---
 title: "One World"
-subtitle: "Blog & Projects"
+subtitle: "R packages, spatial data, maps and open-source projects"
 header_type: hero
 header_img: /assets/img/site/banner.png
 ---
