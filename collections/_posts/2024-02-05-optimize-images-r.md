@@ -6,6 +6,7 @@ tags:
   - r_bloggers
   - r_package
   - resmush
+  - rstats
 output:
   md_document:
     variant: gfm

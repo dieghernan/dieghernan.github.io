@@ -10,6 +10,8 @@ tags:
   - ggplot2
   - sf
   - geobounds
+  - r_package
+  - dataset
 output:
   html_document:
   md_document:

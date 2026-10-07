@@ -3,7 +3,7 @@ title: Country codes & organizations
 subtitle: A database with geocodes
 tags:
   - project
-  - R
+  - rstats
   - webscraping
   - dataset
   - csv

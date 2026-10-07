@@ -5,9 +5,12 @@ excerpt: Twitter bot - random municipalities of Spain with {mapSpain} posted wit
 tags:
   - discontinued
   - project
-  - R
+  - rstats
   - maps
   - twitter
+  - rspatial
+  - mapSpain
+  - tmap
 header_img: "https://dieghernan.github.io/spain-munic-bot/assets/img/sample.png"
 date: 2021-01-29
 permalink: /projects/spain-munic-bot/

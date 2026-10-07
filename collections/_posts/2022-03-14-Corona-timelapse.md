@@ -4,7 +4,7 @@ subtitle: Travel restrictions amidst the COVID crisis across time - A German per
 tags:
   - discontinued
   - project
-  - R
+  - rstats
   - maps
   - leaflet
   - python

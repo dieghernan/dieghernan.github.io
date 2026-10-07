@@ -20,3 +20,20 @@ for (const a of document.querySelectorAll("h5")) {
 </script>
 
 <!-- end custom bottom scripts -->
+{% if page.tag_aliases %}
+<script>
+const tagAliases = {{ page.tag_aliases | jsonify }};
+for (const [alias, tag] of Object.entries(tagAliases)) {
+    const section = document.getElementById(tag);
+    if (section && !document.getElementById(alias)) {
+        const anchor = document.createElement("span");
+        anchor.id = alias;
+        section.prepend(anchor);
+    }
+}
+const legacyTag = document.getElementById(location.hash.slice(1));
+if (legacyTag && Object.hasOwn(tagAliases, location.hash.slice(1))) {
+    legacyTag.scrollIntoView();
+}
+</script>
+{% endif %}

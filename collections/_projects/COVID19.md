@@ -4,7 +4,7 @@ subtitle: Tracking the outbreak in Spain by region
 tags:
   - discontinued
   - project
-  - R
+  - rstats
   - maps
   - sf
   - cartography
