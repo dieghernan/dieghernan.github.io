@@ -13,17 +13,8 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
+excerpt: "Map the United Kingdom’s departure from the EU using country boundaries and flag imagery."
 ---
-
-**Historical example:** The mapping examples use **cartography**, which is now
-in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
-for new work. The original code and outputs are preserved and have not been
-revalidated against current package versions.
-{: .alert .alert-info .p-3 .mx-2 .mb-3 }
-
-
-
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
@@ -37,6 +28,12 @@ and social considerations, there is another consequence: there is now one fewer
 country in the EU.
 
 We will miss you, UK. We wish you the best.
+
+**Historical example:** The mapping examples use **cartography**, which is now
+in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
+for new work. The original code and outputs are preserved and have not been
+revalidated against current package versions.
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ```{r 20200602_imgpost, fig.height=540/90, fig.width=810/90, message=FALSE, warning=FALSE, dev='ragg_png', dpi=90}
 library(cartography)

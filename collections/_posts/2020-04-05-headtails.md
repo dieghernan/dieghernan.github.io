@@ -15,14 +15,8 @@ output:
     variant: gfm
     preserve_yaml: true
 last_modified_at: 2026-10-07
+excerpt: "Explore head/tail breaks classification with classInt and a spatial case study."
 ---
-
-**Historical example:** The mapping examples use **cartography**, which is now
-in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
-for new work. The original code and outputs are preserved and have not been
-revalidated against current package versions.
-{: .alert .alert-info .p-3 .mx-2 .mb-3 }
-
 
 <blockquote class="blockquote">
   <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
@@ -36,6 +30,12 @@ This vignette discusses the implementation of the "Head/tail breaks" style
 A step-by-step example is presented to clarify the method. A case study using
 `spData::afcon` is also included, making use of additional packages such as
 **sf**.
+
+**Historical example:** The mapping examples use **cartography**, which is now
+in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
+for new work. The original code and outputs are preserved and have not been
+revalidated against current package versions.
+{: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ## Introduction
 
