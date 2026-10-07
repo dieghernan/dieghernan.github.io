@@ -50,7 +50,7 @@ beautifully designed watch face.
   - [Yahoo.com](https://www.yahoo.com/?ilc=401) _No API key required at this moment_
   - [Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)
   - [OpenWeatherMap](https://openweathermap.org/)
-- Implementation of [pmkey.xyz](https://www.pmkey.xyz)
+- Historical integration with Master Key (pmkey.xyz)
 - Location based on your selected weather provider
 - Night theme displayed between sunset and sunrise
 
@@ -70,7 +70,7 @@ Automatic weekday translation is supported for:
 - [x] 12/24h mode
 - [x] Night theme
 - [x] Several weather providers available
-- [x] [pmkey.xyz](https://www.pmkey.xyz) implemented for easy API key management
+- [x] Master Key (pmkey.xyz) was implemented for easy API key management
 
 ## Screenshots
 
@@ -100,9 +100,8 @@ Automatic weekday translation is supported for:
 
 ### Others
 
-[Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique
-PIN and add API keys for your favorite online services. Please check
-[www.pmkey.xyz](https://www.pmkey.xyz) for more info.
+Master Key (pmkey.xyz) was a service for Pebble users that managed API keys
+through a unique PIN.
 
 ## License
 

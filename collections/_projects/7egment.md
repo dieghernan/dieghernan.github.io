@@ -50,7 +50,7 @@ your watch and smartphone.
 - Choose your weather provider:
   - [Wunderground](https://www.wunderground.com)
   - [OpenWeatherMap](https://openweathermap.org/)
-- Implementation of [pmkey.xyz](https://www.pmkey.xyz)
+- Historical integration with Master Key (pmkey.xyz)
 - Location based on your selected weather provider
 - Bluetooth and GPS warnings
 - Night theme displayed between sunset and sunrise
@@ -89,9 +89,8 @@ your watch and smartphone.
 
 ### Others
 
-[Master Key](https://www.pmkey.xyz) is a service for Pebble users. Get a unique
-PIN and add API keys for your favorite online services. Please check
-[www.pmkey.xyz](https://www.pmkey.xyz) for more info.
+Master Key (pmkey.xyz) was a service for Pebble users that managed API keys
+through a unique PIN.
 
 ## License
 
