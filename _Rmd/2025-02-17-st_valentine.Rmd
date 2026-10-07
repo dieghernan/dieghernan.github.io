@@ -40,7 +40,6 @@ special one, as it produces this result when used to map the whole world. Happy
 Valentine’s Day!
 
 ```{r happval}
-
 library(sf)
 library(dplyr)
 library(giscoR)
@@ -52,11 +51,11 @@ world <- gisco_get_countries()
 
 # Shaped ocean
 
-h_earth <- world %>% 
+h_earth <- world %>%
   # Fine grid
-  st_make_grid(n = c(50,50)) %>% 
+  st_make_grid(n = c(50, 50)) %>%
   # Bonne projection
-  st_transform("ESRI:54024") %>% 
+  st_transform("ESRI:54024") %>%
   # To sf object (data-frame like)
   st_sf(couple = 2, someval = 1, .)
 
@@ -71,14 +70,17 @@ ggplot() +
   geom_sf(data = h_earth, fill = "#f9b7bb", color = "#f9b7bb") +
   geom_sf(data = world, fill = "#d24658", color = "#d24658") +
   theme_void() +
-  labs(title = "Happy Valentine's Day",
-       caption = "Bonne Projection (ESRI:54024)") +
-  theme(plot.background = element_rect(fill = "#faddcf", 
-                                        color = "transparent"),
-        text = element_text(family = "emilys", colour = "#d24658"),
-        plot.title = element_text(hjust = 0.5, size = rel(3)),
-        plot.caption = element_text(hjust = 0.5, size = rel(2))
-        )
-
- 
+  labs(
+    title = "Happy Valentine's Day",
+    caption = "Bonne Projection (ESRI:54024)"
+  ) +
+  theme(
+    plot.background = element_rect(
+      fill = "#faddcf",
+      color = "transparent"
+    ),
+    text = element_text(family = "emilys", colour = "#d24658"),
+    plot.title = element_text(hjust = 0.5, size = rel(3)),
+    plot.caption = element_text(hjust = 0.5, size = rel(2))
+  )
 ```

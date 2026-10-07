@@ -55,8 +55,6 @@ DE <- gisco_get_countries(country = "Germany", epsg = 3857)
 Let's see how it works.
 
 ```{r 20191212_showfun, warning=FALSE, message=FALSE, tidy='styler', fig.height=500/90,fig.width=500/90, dpi=90 }
-
-
 par(
   mfrow = c(3, 4),
   mar = c(1, 1, 1, 1),
@@ -90,8 +88,6 @@ Let's play a little bit more with some of the additional features of the
 function:
 
 ```{r 20191212_playing, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=500/90, dpi=90 }
-
-
 par(mar = c(1, 1, 1, 1), mfrow = c(2, 3))
 plot(st_geometry(DE))
 hatchedLayer(
@@ -160,8 +156,6 @@ Note that it is also possible to create solid legends by setting `col` and
 variable.
 
 ```{r 20191212_playinglegend, warning=FALSE, message=FALSE,dpi=90, fig.width=500/90, fig.height=500/90,  tidy='styler'}
-
-
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
 plot(st_geometry(DE)) # Null geometry
 legendHatched(

@@ -105,7 +105,6 @@ Some initial considerations we may need to bear in mind:
 Now, let's start with the required libraries:
 
 ```{r libs}
-
 # Libraries
 
 # Spatial
@@ -129,7 +128,6 @@ creating just a visualization, the resolution of the sf object is not very
 relevant.
 
 ```{r}
-
 # Select a Spanish Region: Andalucia
 region <- gisco_get_nuts(nuts_id = "ES61") %>%
   # And project data
@@ -141,7 +139,6 @@ zoom level as needed. You can find guidance on zoom levels in the
 [OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
 
 ```{r 20220501_andalucia_dem}
-
 dem <- get_elev_raster(region, z = 7, clip = "bbox", expand = 10000) %>%
   # And convert to terra
   rast() %>%
@@ -189,7 +186,6 @@ After that, we create a data frame with the information needed for
 creating the joyplot.
 
 ```{r}
-
 dem_agg[dem_agg < 0] <- 0
 dem_agg[is.na(dem_agg)] <- 0
 
@@ -203,7 +199,6 @@ needed. In this case both are in meters, but I will show you how to perform
 those adjustments with the **units** package:
 
 ```{r}
-
 library(units)
 
 # Units of DEM projection
@@ -233,7 +228,6 @@ the plot. The relative height of the ridges is controlled via the `scale`
 parameter:
 
 ```{r 20220501_andalucia_ridges}
-
 ggplot() +
   # Just for the scales, pass with NA arguments so it is not shown
   geom_sf(data = region, color = NA, fill = NA) +
@@ -251,7 +245,6 @@ ggplot() +
 The last step is to provide a black theme, resembling the cover of the album:
 
 ```{r 20220501_andalucia_joyplot}
-
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_ridgeline(
@@ -280,7 +273,6 @@ We can use `geom_density_ridges()` with `stat="identity"` instead of
 `geom_ridgeline()` for creating a similar map:
 
 ```{r 20220501_andalucia_ridges_dens}
-
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_density_ridges(
@@ -335,7 +327,6 @@ We can apply different colors to the plot. Note that **ggridges** only accepts
 different `aes` by row, and not by column:
 
 ```{r 20220501_andalucia_colors}
-
 # Classify on three different bands
 
 dem_df <- dem_df %>%
@@ -372,7 +363,6 @@ ggplot() +
 For example, using an `sf` object:
 
 ```{r 20220501_andalucia_combine}
-
 highres <- gisco_get_nuts(
   nuts_id = "ES61",
   resolution = 1
@@ -402,7 +392,6 @@ ggplot() +
 Or adding a frame to the plot:
 
 ```{r 20220501_andalucia_frame}
-
 frame <- as.polygons(dem_agg, extent = TRUE) %>%
   st_as_sf()
 

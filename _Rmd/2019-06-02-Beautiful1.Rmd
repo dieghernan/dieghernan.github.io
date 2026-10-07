@@ -148,8 +148,6 @@ Extremely easy. We just need to change the `square` parameter of
 `st_make_grid` from `TRUE` to `FALSE`.
 
 ```{r 20190602_hex, warning=FALSE, message=FALSE, tidy='styler',fig.width=500/90, fig.height=350/90, dpi=90,  dev.args=list(bg = NA)}
-
-
 grid <- st_make_grid(target,
   50 * 1000, # Kms
   crs = st_crs(initial),

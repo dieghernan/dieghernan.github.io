@@ -79,7 +79,6 @@ I will also use **giscoR** to get the world around Spain.
 
 
 ```{r 20190618_preparing,  message=FALSE, warning=FALSE,  fig.height=550/90, fig.width=750/90,dpi=90, paged.print=FALSE, results='hide'}
-
 Spain <- esp_get_ccaa(epsg = 3857, res = 3)
 
 World <- gisco_get_countries(epsg = 3857, res = 3)
@@ -121,8 +120,6 @@ to build my code. The goal here is to create a `RasterBrick` from the desired
 Asturias to crop the flag.
 
 ```{r 20190618_Asturias,  message=FALSE, warning=FALSE,  fig.width=1000/90,fig.height=(500/2)/90,dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
-
-
 # 1.Shape---
 shp <- Spain %>% filter(ccaa.shortname.es == "Asturias")
 
@@ -153,8 +150,6 @@ otherwise the plot will look quite poor. Here I show an extreme example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ```{r 20190618_svg,  message=FALSE, warning=FALSE, dev='png', fig.width=800/(90),fig.height=550/(90),dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
-
-
 MURshp <- Spain %>% filter(ccaa.shortname.es == "Murcia")
 MURLow <- getPngLayer(
   MURshp,
@@ -183,13 +178,13 @@ Now, we are ready to have [fun with flags](https://the-big-bang-theory.com/fun_w
 
 
 ```{r 20190618_finalmap, tidy='styler', eval=FALSE}
-
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
-plot(Spain %>%
-  st_geometry(),
-col = NA,
-border = NA,
-bg = "#C6ECFF"
+plot(
+  Spain %>%
+    st_geometry(),
+  col = NA,
+  border = NA,
+  bg = "#C6ECFF"
 )
 plot(st_geometry(World),
   col = "#E0E0E0",
@@ -221,13 +216,13 @@ plot(st_geometry(Spain),
 ```
 
 ```{r 20190618_allCCAA, echo=FALSE,  fig.height=550/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, results='hide', eval=TRUE}
-
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
-plot(Spain %>%
-  st_geometry(),
-col = NA,
-border = NA,
-bg = "#C6ECFF"
+plot(
+  Spain %>%
+    st_geometry(),
+  col = NA,
+  border = NA,
+  bg = "#C6ECFF"
 )
 plot(st_geometry(World),
   col = "#E0E0E0",
@@ -365,7 +360,6 @@ We are done now. If you have suggestions, you can leave a comment. As always,
 if you enjoyed the post, you can share it on your preferred social network.
 
 ```{r 20190618_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
-
 nuts1 <- gisco_get_nuts(nuts_level = "1", epsg = 3035, res = 3)
 
 

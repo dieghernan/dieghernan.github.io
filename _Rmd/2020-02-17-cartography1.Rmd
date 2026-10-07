@@ -254,7 +254,6 @@ line-type patterns are also plotted, as in the previous case, and `lty = c(1,
 `hatchedLayer` could also be useful for plotting several dimensions on the same map, in combination with another function of the package.
 
 ```{r 20200217_hatched-adv, fig.height=7, fig.width=7, margin=TRUE}
-
 library(sf)
 library(cartography)
 
@@ -280,7 +279,6 @@ flag <- ifelse(!flag %in% c("Europe", "European Union"), "Other",
   flag
 )
 cntries$flag <- flag
-
 
 
 # Plot lims
@@ -425,7 +423,6 @@ layoutLayer(
 ### Example 2
 
 ```{r 20200217_png-adv, fig.height=5, fig.width=7, margin=TRUE}
-
 library(sf)
 library(cartography)
 
@@ -454,7 +451,6 @@ Wordcloud layers fitted into a map shape provide a good trade-off between physic
 ### Example 1
 
 ```{r 20200217_wordcloud1, fig.height=7, fig.width=7, margin=TRUE}
-
 eu$dens <- eu$pop / eu$area_km2
 
 wordcloudLayer(eu,
@@ -478,7 +474,6 @@ layoutLayer(
 
 ### Example 2
 ```{r 20200217_wordcloud2, fig.height=7, fig.width=7, margin=TRUE}
-
 # Genres from MB--
 # Import genres
 collected <- read.csv("./assets/data/US_MB.csv", stringsAsFactors = F)

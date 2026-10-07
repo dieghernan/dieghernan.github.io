@@ -63,7 +63,6 @@ palette for this kind of map.
 I will use the following libraries:
 
 ```{r}
-
 ## Libraries
 
 library(terra)
@@ -84,7 +83,6 @@ However, **elevatr** produces the result as a `RasterLayer`, so you would need t
 convert the object to `SpatRaster` with `terra::rast()`.
 
 ```{r }
-
 # Cache map data
 mydir <- "~/R/mapslib/misc"
 
@@ -100,7 +98,6 @@ r <- r_init %>%
   mutate(alt = pmax(0, alt))
 
 r
-
 ```
 
 We can now have a quick look at the plot with `tidyterra::autoplot()`:
@@ -109,8 +106,6 @@ We can now have a quick look at the plot with `tidyterra::autoplot()`:
 # Quick look
 autoplot(r) +
   theme_minimal()
-
-
 ```
 
 ## Hillshading
@@ -123,7 +118,6 @@ the sun's position. This is straightforward with the `terra::terrain()` and
 `terra::shade()` functions:
 
 ```{r 20221017-2-hillroye, message=TRUE}
-
 ## Create hillshade effect
 
 slope <- terrain(r, "slope", unit = "radians")
@@ -160,7 +154,6 @@ needs to be effectively set to `Inf` to ensure that the number of color values
 and the number of cells are the same.
 
 ```{r 20221017-3-hillalt}
-
 # Use a vector of colors
 
 
@@ -177,8 +170,10 @@ vector_cols <- pal_greys[index]
 # and dont use aes
 
 hill_plot <- ggplot() +
-  geom_spatraster(data = hill, fill = vector_cols, maxcell = Inf,
-                  alpha = 1)
+  geom_spatraster(
+    data = hill, fill = vector_cols, maxcell = Inf,
+    alpha = 1
+  )
 
 hill_plot
 ```
@@ -202,28 +197,23 @@ for maps. A regular gradient would just interpolate colors assuming that the
 distance among colors is the same:
 
 ```{r 20221017-regular-gradient}
-
 # Regular gradient
 grad <- hypso.colors(10, "dem_poster")
 
 autoplot(r) +
   scale_fill_gradientn(colours = grad, na.value = NA)
-
 ```
 
 For that reason, **tidyterra** provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
 
 ```{r 20221017-hypso-gradient}
-
 # Hypso gradient
 grad_hypso <- hypso.colors2(10, "dem_poster")
 
 
 autoplot(r) +
   scale_fill_gradientn(colours = grad_hypso, na.value = NA)
-
-
 ```
 
 Can you notice the difference? In the first map greens are the dominant color.
@@ -246,7 +236,6 @@ the raster. This is easily achieved with `terra::minmax()` but I added an extra
 touch rounding up and down the range of values to the nearest 500.
 
 ```{r 20221017-4-explorepals, fig.show='hold', out.width="50%"}
-
 # Try some options, but we need to be aware of the values of our raster
 
 r_limits <- minmax(r) %>% as.vector()
@@ -298,7 +287,6 @@ So now it is time to blend both the hillshade layer and the altitude layer using
 some level of `alpha` on the upper layer.
 
 ```{r 20221017-5-blend}
-
 base_plot <- hill_plot +
   # Avoid resampling with maxcell
   geom_spatraster(data = r, maxcell = Inf) +
@@ -316,17 +304,14 @@ base_plot <- hill_plot +
   )
 
 base_plot
-
-
 ```
 
 And with a bit of trickery and theming we can have our final map. First we load
 a font from Google with a custom function:
 
 ```{r}
-myload_fonts <- function(fontname, family, 
+myload_fonts <- function(fontname, family,
                          fontdir = tempdir()) {
-  
   fontname_url <- utils::URLencode(fontname)
   fontzip <- tempfile(fileext = ".zip")
   download.file(paste0("https://fonts.google.com/download?family=", fontname_url),
@@ -349,9 +334,11 @@ myload_fonts <- function(fontname, family,
 
 
   namefile <- gsub(" ", "", fontname)
-  paths_end <- file.path(fontdir,
-                         paste(namefile, paths, sep = "-"))
-    
+  paths_end <- file.path(
+    fontdir,
+    paste(namefile, paths, sep = "-")
+  )
+
 
   names(paths_end) <- names(paths)
 
@@ -364,8 +351,6 @@ myload_fonts <- function(fontname, family,
 
   return(invisible())
 }
-
-
 ```
 
 And now we theme it:
@@ -376,7 +361,7 @@ myload_fonts("Noto Serif", "notoserif", "~/R/googlefonts")
 showtext::showtext_auto()
 
 # Adjust text size
-base_text_size = 30
+base_text_size <- 30
 
 base_plot +
   # Change guide
@@ -403,9 +388,11 @@ base_plot +
     plot.background = element_rect("grey97", colour = NA),
     plot.margin = margin(20, 20, 20, 20),
     plot.caption = element_text(size = base_text_size * 0.5),
-    plot.title = element_text(face = "bold", size = base_text_size*1.4),
-    plot.subtitle = element_text(margin = margin(b = 10), 
-                                 size = base_text_size),
+    plot.title = element_text(face = "bold", size = base_text_size * 1.4),
+    plot.subtitle = element_text(
+      margin = margin(b = 10),
+      size = base_text_size
+    ),
     axis.text = element_text(size = base_text_size * 0.7),
     legend.position = "bottom",
     legend.title = element_text(size = base_text_size * 0.8),
@@ -413,8 +400,6 @@ base_plot +
     legend.key = element_rect("grey50"),
     legend.spacing.x = unit(0, "pt")
   )
-
-
 ```
 
 

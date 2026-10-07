@@ -59,7 +59,6 @@ What I missed when using `st_cast` was the possibility of breaking
 `LINESTRING` objects into subsegments:
 
 ```{r 20190505_italycastsub,warning=FALSE, tidy='styler', echo=FALSE,dev="png",fig.width=250/90, fig.height=250/90, dpi=90 }
-
 par(mfrow = c(1, 1), mar = c(1, 1, 1, 1), bg = NA)
 stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
   ggg <- st_geometry(x)
@@ -197,7 +196,6 @@ test50 <- ne_countries(50,
   returnclass = "sf"
 ) %>%
   st_cast("POLYGON")
-
 
 
 init <- Sys.time()

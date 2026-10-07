@@ -57,7 +57,6 @@ I will use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
 ```{r libraries}
-
 # Base spatial packages
 library(terra)
 library(sf)
@@ -85,14 +84,14 @@ use the global file with a resolution of 1 km in the Mollweide projection
 (ESRI:54009).
 
 ```{r 202312_basemap}
-
 # Create observation window based the Iberian Peninsula and surroundings
 # We create a buffered circle
 owin <- gisco_get_countries(
   country = c("ES", "PT"),
   # We buffer in 3035 since I want my final map on this projection
   epsg = 3035,
-  resolution = 60) %>%
+  resolution = 60
+) %>%
   st_geometry() %>%
   st_union() %>%
   st_centroid(of_largest_polygon = TRUE) %>%
@@ -130,8 +129,8 @@ terms of performance.
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
 
 # This is where I store the file, you need to modify the folder
-fname <- file.path("~/R/mapslib/GHS",  basename(url))
-if(!file.exists(fname)){
+fname <- file.path("~/R/mapslib/GHS", basename(url))
+if (!file.exists(fname)) {
   download.file(url, fname)
 }
 zip_content <- unzip(fname, list = TRUE)
@@ -156,8 +155,6 @@ ncell(pop_init)
 base_gg +
   geom_spatraster(data = pop_init, maxcell = 50000) +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
-
-
 ```
 
 ## Data wrangling
@@ -173,15 +170,16 @@ Instead of using the numeric range of densities, we use categories for the final
 map, so we classify the density into different groups:
 
 ```{r}
-
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
 nrow(pop_init)
 factor <- round(nrow(pop_init) / 100)
 
 # Each new cell would contain the sum of population of the aggregated cells
-pop_agg <- terra::aggregate(pop_init, fact = factor, fun = "sum", 
-                            na.rm = TRUE)
+pop_agg <- terra::aggregate(pop_init,
+  fact = factor, fun = "sum",
+  na.rm = TRUE
+)
 
 
 # Compute area of each new cell
@@ -206,7 +204,6 @@ pop_points <- pop_agg %>%
     dens < 1500 ~ "F",
     TRUE ~ "G"
   ))
-
 ```
 
 ## Final plot
@@ -215,8 +212,6 @@ And finally, the map. In this case, I save it as a high-resolution square
 map.
 
 ```{r 202312_finalmap}
-
-
 # Final plot
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
@@ -259,17 +254,13 @@ final_plot <- base_gg +
     plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
     plot.caption = element_markdown(
       color = "grey20",
-      margin = margin(t = 20,b = 5, unit = "pt"),
+      margin = margin(t = 20, b = 5, unit = "pt"),
       hjust = .5
     )
   )
 
 
-
 ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
-
-
-
 ```
 
 ![](202312_finalmap.png)
@@ -334,9 +325,9 @@ Now, we use `exact_extract()` to extract the population on each hexagonal grid.
 ```{r 202312_hexgrid_base}
 # Extract aggregated population by hex cell
 pop_agg_sf$population <- exact_extract(pop_init,
-                                       y = pop_agg_sf,
-                                       progress = FALSE,
-                                       fun = "sum"
+  y = pop_agg_sf,
+  progress = FALSE,
+  fun = "sum"
 )
 
 
@@ -346,13 +337,11 @@ base_gg +
     aes(fill = population), color = NA
   ) +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
-
 ```
 
 Finally, we compute densities, create categories and produce the map:
 
 ```{r 202312_finalmap_hex}
-
 # Mask and categorize
 pop_sf_points <- pop_agg_sf %>%
   # Compute density by cell
@@ -420,7 +409,7 @@ final_plot_hex <- base_gg +
     plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
     plot.caption = element_markdown(
       color = "grey20",
-      margin = margin(t = 20,b = 5, unit = "pt"),
+      margin = margin(t = 20, b = 5, unit = "pt"),
       hjust = .5
     )
   )

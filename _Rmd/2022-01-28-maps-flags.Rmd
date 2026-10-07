@@ -68,7 +68,6 @@ The flags will be extracted from the GitHub repository
 <https://github.com/hampusborgos/country-flags>.
 
 ```{r 20220128_africa}
-
 # Development version of ggspatial
 # devtools::install_github("paleolimbot/ggspatial")
 library(ggspatial)
@@ -100,7 +99,6 @@ plot +
 Now, let's add the flags with a loop:
 
 ```{r 20220128_flag}
-
 # We paste the ISO2 code to each African country
 africa$iso2 <- countrycode(africa$ISO3_CODE, "iso3c", "iso2c")
 

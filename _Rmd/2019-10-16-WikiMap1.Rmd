@@ -73,7 +73,6 @@ Now let's join and have a look to see what is going on. We use the
 **countrycode** package to retrieve the ISO3 codes of our scraped dataset:
 
 ```{r 20191016_joining, message=FALSE, warning=FALSE, paged.print=FALSE}
-
 library(countrycode)
 
 Base$ISO_3166_3 <- countrycode(Base$Country, origin = "country.name", destination = "iso3c")
@@ -130,7 +129,7 @@ bbox <- st_linestring(rbind(
 svg(
   "Organ donor rate per million by country gradient map (2017).svg",
   pointsize = 90,
-  width =  1600 / 90,
+  width = 1600 / 90,
   height = 728 / 90
 )
 

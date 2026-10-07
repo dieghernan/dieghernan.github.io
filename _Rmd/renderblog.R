@@ -39,8 +39,8 @@ diegpost <- function(file) {
     lines
   )
   newlines <- gsub(
-    '(../assets/img',
-    '(https://dieghernan.github.io/assets/img',
+    "(../assets/img",
+    "(https://dieghernan.github.io/assets/img",
     newlines,
     fixed = TRUE
   )
@@ -97,8 +97,8 @@ diegpost_draft <- function(file) {
     lines
   )
   newlines <- gsub(
-    '(../assets/img',
-    '(https://dieghernan.github.io/assets/img',
+    "(../assets/img",
+    "(https://dieghernan.github.io/assets/img",
     newlines,
     fixed = TRUE
   )
@@ -125,12 +125,14 @@ diegpost_draft <- function(file) {
 # file <- "bertin_dots"
 # diegpost_draft(file)
 
-#Render 2019-04-27-Using-CountryCodes ----
+# Render 2019-04-27-Using-CountryCodes ----
 
-#diegpost("2019-04-27-Using-CountryCodes")
+# diegpost("2019-04-27-Using-CountryCodes")
 # diegpost("2019-05-05-Cast to subsegments")
 #
-# #diegpost("2019-05-13-Where-in-the-world")
+diegpost("2019-05-13-Where-in-the-world")
+
+
 # #diegpost("2019-05-20-Leaflet_R_Jekyll")
 # diegpost("2019-06-02-Beautiful1")
 # diegpost("2019-06-18-Beautiful2")
@@ -207,8 +209,8 @@ for (newfile in allmds) {
     lines
   )
   newlines <- gsub(
-    '(../assets/img',
-    '(https://dieghernan.github.io/assets/img',
+    "(../assets/img",
+    "(https://dieghernan.github.io/assets/img",
     newlines,
     fixed = TRUE
   )
@@ -288,6 +290,6 @@ install.packages("ggpattern")
 
 posts <- list.files("collections/_posts", full.names = TRUE)
 
-i = 19
+i <- 19
 
 file.edit(posts[i])

@@ -105,7 +105,6 @@ for this case I would approximate it using a mixture of political borders
 data to get a rough shape.
 
 ```{r 20221212_plan_alt}
-
 # Using mapSpain
 the_plain <- esp_get_prov(
   c(
@@ -157,7 +156,6 @@ exploded <- r %>%
   fillHoles()
 
 
-
 # Select biggest polygons (area bigger than 50 kms 2)
 r_plain <- exploded %>%
   # Add area
@@ -175,7 +173,6 @@ plain. First, I create a base layer with a representation of the
 hillshade, which we will reuse later:
 
 ```{r 20221212_hill}
-
 # Creating hillshade
 
 slope <- terrain(r, "slope", unit = "radians")
@@ -330,7 +327,6 @@ We can now start representing our precipitation map. I chose here to create a
 custom palette with **colorspace** to better highlight the differences:
 
 ```{r 20221212_mypal}
-
 mypal <- sequential_hcl(
   n = 16,
   h = c(320, 80),
@@ -459,7 +455,6 @@ In the following code, I am drafting what the marginal plots would look
 like, so we can have a preview of the final result:
 
 ```{r 20221212_profile_marg}
-
 # Profiling marginal plots
 
 # Getting averages by x,y
@@ -554,7 +549,6 @@ Finally, we use `cowplot::axis_canvas()` to create the marginal plots as
 we want:
 
 ```{r 20221212_prepare_axis}
-
 # Last step: We combine plots
 
 # Marginal plots
@@ -631,7 +625,6 @@ plot_y
 And insert everything in the main plot. See the final result:
 
 ```{r 20221212_finalplot}
-
 # Combine all plots into one
 sizes_axis <- grid::unit(.3, "null")
 
@@ -659,7 +652,6 @@ plot. Here you can find a simplified version:
 <summary>Simplified version</summary>
 
 ```{r 20221212_simplified}
-
 # Libraries
 # Data manipulation
 library(terra)

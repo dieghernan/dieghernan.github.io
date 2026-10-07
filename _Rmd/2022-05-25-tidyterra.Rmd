@@ -39,7 +39,6 @@ If you have been playing around with **R** for a while, you are probably
 familiar with the `volcano` dataset:
 
 ```{r 20220525_volcano}
-
 data("volcano")
 image(volcano, col = terrain.colors(256, rev = TRUE))
 ```
@@ -71,7 +70,6 @@ the location of Maungawhau using map tiles (as Google Maps uses). We will use
 **tidyterra** for displaying the map tile:
 
 ```{r 20220525_tile}
-
 # location of Maungawhau
 
 box <- c(
@@ -107,14 +105,15 @@ Thanks to the **terra** package we can start converting `volcano` into a
 SpatRaster:
 
 ```{r 20220525_volcano_raster}
-
 volcano_rast <- rast(volcano)
 
 terra::plot(volcano_rast)
 
 # Wait, it is flipped!
-volcano_rast_ok <- rast(volcano[seq(nrow(volcano), 1, -1), 
-                                seq(ncol(volcano), 1, -1) ])
+volcano_rast_ok <- rast(volcano[
+  seq(nrow(volcano), 1, -1),
+  seq(ncol(volcano), 1, -1)
+])
 
 # Much better!
 terra::plot(volcano_rast_ok)
@@ -138,7 +137,6 @@ Maungawhau](https://geomorphometry.org/volcano-maungawhau/)), which are:
 And we can translate that easily to an empty SpatRaster:
 
 ```{r}
-
 # Extra length for proper handling extent
 xrange <- range(seq(from = 2667400, length.out = 62, by = 10))
 yrange <- range(seq(from = 6478700, length.out = 88, by = 10))
@@ -158,7 +156,6 @@ So now we only need to transfer the values from `volcano_rast_ok` to our
 template:
 
 ```{r 20220525_create_volcano2}
-
 # Use tidyterra for pull the values of one raster
 # and create a new layer
 
@@ -186,11 +183,11 @@ resampled to a resolution of 5x5 meters, for package size optimization. See here
 how to load it and check the plotting possibilities of **tidyterra**:
 
 ```{r 20220525_easteregg}
-
 # Load out Easter Egg
 
 volcano2_easter <- rast(system.file("extdata/volcano2.tif",
-                                    package = "tidyterra"))
+  package = "tidyterra"
+))
 
 volcano2_easter
 terra::plot(volcano2_easter)
@@ -198,7 +195,7 @@ terra::plot(volcano2_easter)
 
 # Only altitudes of more than 130m
 
-volcano_filter <- volcano2_easter %>% 
+volcano_filter <- volcano2_easter %>%
   filter(elevation > 130)
 
 

@@ -153,7 +153,6 @@ uses `head <= 40%`. At exactly 40%, the R loop stops and the pseudocode
 continues. This distinction does not affect the example below.
 
 ```{r 20200405_stepbystep,dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.show='hold'}
-
 opar <- par(no.readonly = TRUE)
 par(mar = c(2, 2, 3, 1), cex = 0.8)
 var <- sample_par
@@ -302,7 +301,6 @@ Let's have a look at the top 10 values and the distribution of the variable
 `totcon` (index of total conflict 1966-78):
 
 ```{r 20200405_summspdata, fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
-
 # Top10
 knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")], 10))
 
@@ -434,8 +432,6 @@ The first map uses proportional symbols without class-based colors, providing
 a reference for the three classified maps.
 
 ```{r 20200405_finalplot, fig.show='hold', dev.args=list(bg = NA), message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide', fig.asp=1}
-
-
 library(sf)
 library(giscoR)
 library(cartography)
@@ -453,7 +449,6 @@ afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
 afcon.sf <- st_transform(afcon.sf, st_crs(africa))
 # afcon.sf <- st_join(africa[, "admin"], afcon.sf)
 afcon.sf <- afcon.sf[order(afcon.sf$totcon), ]
-
 
 
 # High granularity map

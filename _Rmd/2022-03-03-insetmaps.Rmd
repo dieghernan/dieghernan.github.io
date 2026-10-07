@@ -59,7 +59,6 @@ Canary Islands.
 The "true" map of Spain is:
 
 ```{r 20220303_truemap}
-
 library(mapSpain)
 library(sf)
 library(ggplot2)
@@ -76,7 +75,6 @@ use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary
 Islands I use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083)).
 
 ```{r 20220303_mainsub}
-
 main <- regions %>%
   filter(ccaa.shortname.es != "Canarias") %>%
   st_transform(25830)
@@ -107,7 +105,6 @@ with insets we will:
 2.  Combine both objects with **cowplot**.
 
 ```{r }
-
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
@@ -136,7 +133,6 @@ parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve the
 placement:
 
 ```{r 20220303_insetggplot}
-
 library(cowplot)
 
 ggdraw() +
@@ -163,12 +159,13 @@ mass_flipper <- ggplot(
     y = body_mass_g
   )
 ) +
-  geom_point(aes(
-    color = species,
-    shape = species
-  ),
-  size = 3,
-  alpha = 0.8
+  geom_point(
+    aes(
+      color = species,
+      shape = species
+    ),
+    size = 3,
+    alpha = 0.8
   ) +
   theme_minimal() +
   scale_color_manual(values = c("darkorange", "purple", "cyan4"))
@@ -221,7 +218,6 @@ sub_tmap <- tmap_grob(sub_tmap)
 ```
 
 ```{r include=FALSE}
-
 # Trick for knitr!
 library(tmap)
 
@@ -245,7 +241,6 @@ Once we have these new "grobs", we can use the same approach as the one we
 applied to **ggplot2** objects.
 
 ```{r 20220303_insettmap}
-
 ggdraw() +
   draw_plot(main_tmap) +
   draw_plot(sub_tmap,
@@ -261,7 +256,6 @@ ggdraw() +
 shared how to create inset maps using that package:
 
 ```{r 20220303_insetmapsf}
-
 library(mapsf)
 
 mf_map(main)
