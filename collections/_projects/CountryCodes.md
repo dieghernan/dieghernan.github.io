@@ -47,7 +47,7 @@ containing:
 | `ISO_3166_1`      | ISO 3166-1 numeric                    | Wikipedia           |
 | `ISO_3166_2`      | ISO 3166-1 alpha-2                    | Wikipedia           |
 | `ISO_3166_3`      | ISO 3166-1 alpha-3                    | Wikipedia           |
-| `FIPS_GEC`        | Geopolitical Entities and Codes (GEC) | CIA World Factbook  | [Formerly FIPS 1PUB 10-4](https://www.cia.gov/library/publications/the-world-factbook/appendix/appendix-d.html) |
+| `FIPS_GEC`        | Geopolitical Entities and Codes (GEC) | CIA World Factbook  | Formerly FIPS 1PUB 10-4 (historical CIA reference) |
 | `STANAG`          | STANAG 1059 Country Codes             | CIA World Factbook  | Used by NATO                                                                                                    |
 | `M49`             | UN Country Code                       | UN Stats            |
 | `NUTS`            | NUTS 0 code                           | Wikipedia           | Used by EU                                                                                                      |
@@ -151,7 +151,7 @@ ISO_memcol = function(df, #Input dataframe
 - Wikipedia, the free encyclopedia
   - [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
   - [NUTS](https://es.wikipedia.org/wiki/Nomenclatura_de_las_Unidades_Territoriales_Estad%C3%ADsticas)
-- [The World Factbook](https://www.cia.gov/library/publications/the-world-factbook/index.html) - CIA
+- The World Factbook - CIA (historical source used for this dataset)
 - [United Nations Statistical Division](https://unstats.un.org/unsd/methodology/m49/overview/)
 - [geonames](https://www.geonames.org/)
 - [REST COUNTRIES](https://restcountries.com/)

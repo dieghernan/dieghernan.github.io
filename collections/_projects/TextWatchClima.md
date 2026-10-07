@@ -82,7 +82,7 @@ new capabilities.
 
 - [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers,
   modified and fitted to the regular alphabet instead of Unicode values.
-- Custom font for icons created via [Fontastic](http://fontastic.me/).
+- Custom font for icons created via Fontastic.
 - Gotham Fonts downloaded from [fontsgeek.com](http://fontsgeek.com)
 
 ### Weather providers
