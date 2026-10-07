@@ -12,7 +12,7 @@ tags:
   - COVID19
 header_img: "https://dieghernan.github.io/corona-atlas.de/timelapse/frames/D2021-04-16.png"
 date: 2022-03-14
-last_modified_at: 2025-02-17
+last_modified_at: 2026-10-07
 project_links:
   - url: https://dieghernan.github.io/corona-atlas.de/en
     icon: fas fa-external-link-alt
@@ -43,7 +43,8 @@ output:
   preserve_yaml: true
 ---
 
-<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This post reflects the situation in March 2022 and
+is preserved as a historical account, not current travel information.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 ![Animated map tracking the spread of COVID-19 over time.](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)

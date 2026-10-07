@@ -1,6 +1,6 @@
 ---
 title: COVID19 microsite
-subtitle: Tracking the outbreak in Spain by region
+subtitle: Historical maps of COVID-19 in Spain by region
 tags:
   - discontinued
   - project
@@ -12,12 +12,14 @@ tags:
 header_img: https://dieghernan.github.io/COVID19/assets/img/header.png
 permalink: /projects/COVID19
 date: 2020-04-04
+last_modified_at: 2026-10-07
 ---
 
-<i class="fas fa-skull-crossbones"></i> **Project discontinued**
+<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the
+descriptions below refer to its period of operation.
 {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
-Visit the microsite with maps and official data on the impact of COVID-19 in Spain.
+The microsite documented the impact of COVID-19 in Spain with maps and official data.
 
 <https://dieghernan.github.io/COVID19>
 [In Spanish]
