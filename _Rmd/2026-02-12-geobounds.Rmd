@@ -2,6 +2,7 @@
 title: "Introducing <strong>geobounds</strong>"
 subtitle: "Easy access to administrative boundaries from geoBoundaries"
 description: "A simple way to retrieve datasets from geoBoundaries."
+excerpt: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds."
 tags:
   - r_bloggers
   - rstats
