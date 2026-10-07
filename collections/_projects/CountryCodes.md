@@ -154,6 +154,6 @@ ISO_memcol = function(df, #Input dataframe
 - [The World Factbook](https://www.cia.gov/library/publications/the-world-factbook/index.html) - CIA
 - [United Nations Statistical Division](https://unstats.un.org/unsd/methodology/m49/overview/)
 - [geonames](https://www.geonames.org/)
-- [REST COUNTRIES](https://restcountries.eu/)
+- [REST COUNTRIES](https://restcountries.com/)
 - [Unicode Common Locale Data Repository (CLDR) Project](https://github.com/unicode-cldr)
 - <http://www.statoids.com/>

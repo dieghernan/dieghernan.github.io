@@ -136,9 +136,9 @@ volcano_rast_ok
 
 Nice! Now we have a raster of `volcano`, but still without geotagged
 information. Thanks to this article by Tomislav Hengl
-([\@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
+([@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
 parameters of `volcano` (see [Volcano
-Maungawhau](https://geomorphometry.org/volcano-maungawhau/)), which are:
+Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)), which are:
 
 - **CRS**: EPSG:27200
 - **xllcorner**: 2667400

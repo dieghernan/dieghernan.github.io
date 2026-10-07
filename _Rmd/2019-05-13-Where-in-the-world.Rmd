@@ -25,14 +25,14 @@ places I have traveled to by plane.
 
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(global.par = TRUE)
-rm(list = ls())
 
 # output: github_document always_allow_html: yes
 
 library(pacman)
 rm(list = ls())
 
-source("../../pass.R")
+GEONAMES_USER <- Sys.getenv("GEONAMES_USER")
+
 
 library(pacman)
 p_load(
