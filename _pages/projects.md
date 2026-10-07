@@ -5,7 +5,7 @@ subtitle: 'R packages, spatial data and open-source tools'
 permalink: /projects
 include_collection: projects
 index_sort: date
-excerpt: R packages for spatial data, maps, software citation and image optimization, alongside other open-source projects.
+excerpt: Explore spatial tools, software citation, image optimization and other projects by dieghernan.
 header_type: hero
 header_img: /assets/img/site/banner.png
 show_breadcrumb   : true

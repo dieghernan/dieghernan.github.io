@@ -1,9 +1,10 @@
 ---
 title: 'Gallery'
-subtitle: 'Pieces of work at a glance'
+subtitle: Maps and plots
 permalink: /gallery
 header_type: hero
 header_img: /assets/img/site/banner.png
+excerpt: A selection of cartography, Wikimedia contributions and visualizations from the blog.
 ---
 
 

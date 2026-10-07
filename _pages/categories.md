@@ -2,6 +2,7 @@
 layout: cloudcategory
 title: Categories
 permalink: /categories
-excerpt: Categories on this theme
+excerpt: Explore posts and projects grouped by category.
 show_breadcrumb   : true
+subtitle: Browse by category
 ---
