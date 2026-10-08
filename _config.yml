@@ -1,7 +1,6 @@
 # Chulapa configuration for One World
 # Sections follow https://dieghernan.github.io/chulapa/docs/02-config
-# Blank optional settings use theme defaults where available.
-
+# Only configured site options are listed here.
 
 # Installation
 github:
@@ -11,19 +10,19 @@ remote_theme: dieghernan/chulapa
 # A. Site settings/SEO
 locale: en-US
 title: One World
-title_separator:
 subtitle: R packages, maps and open-source projects
 description: R packages, spatial data, maps and open-source projects by dieghernan
 url: https://dieghernan.github.io
 baseurl: ''
 repository: dieghernan/dieghernan.github.io
-words_per_minute:
 timezone: Europe/Madrid
 
 # A.1. SEO and author
-og_locale:
-og_locale_alternate: []
 og_image: "./assets/img/site/banner.png"
+og_image_alt: Raster map with irregular areas in magenta, orange, yellow and turquoise.
+og_image_width: 799
+og_image_height: 429
+og_image_type: image/png
 twitter_site: dhernangomez
 author:
   name: dieghernan
@@ -56,26 +55,18 @@ publisher:
   name: dieghernan
   url: https://dieghernan.github.io/
   image: "/assets/img/site/avatar.png"
-  logo:
 
 # A.2. Font Awesome
-fa_version:
 fa_kit_code: afe0d1dec9
-fa_v4_support:
 
 # A.3. Google Analytics
 gtag_id: G-FWXW2HLTVZ
-analytics_id:
 
 # A.4. Search engines
 search:
   provider: algolia
   algolia_logo: true
-  label:
-  landing_page:
   maxwords: 500
-  show_attrib:
-google_cse_id:
 algolia:
   application_id: KOIKA5PDQO
   index_name: blog
@@ -105,15 +96,9 @@ algolia:
 # A.5. Comments
 comments:
   provider: giscus
-  disqus_shortname:
-  cactus_shortname:
-  cusdis_app_id:
-  cusdis_host:
-  website_id:
 
 # B.1. Navbar
 navbar:
-  style:
   expand: xl
   brand:
     title: One World
@@ -154,7 +139,6 @@ footer:
   - label: RPubs
     icon: fab fa-r-project
     url: https://rpubs.com/dieghernan
-  copyright:
 
 # C.1. Google Fonts
 googlefonts:
@@ -167,7 +151,6 @@ chulapa-skin:
   skin: gitdev
   vars:
     font-family-monospace: Fira Code
-  autothemer:
 
 # D.1. Pagination
 paginate: 5
