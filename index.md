@@ -4,6 +4,7 @@ subtitle: "R packages, spatial data, maps and open-source projects"
 header_type: hero
 header_img: /assets/img/site/banner.png
 excerpt: A personal portfolio and blog by dieghernan.
+description: "R packages, spatial data, maps and open-source projects by dieghernan."
 ---
 
 ## <a href="./blog" class="text-dark">Recent posts</a>

@@ -34,6 +34,7 @@ featured_packages:
     description: Optimize images from R using the reSmush.it service.
     documentation: https://dieghernan.github.io/resmush/
     source: https://github.com/dieghernan/resmush
+description: "Explore R packages for spatial data, software citation and image optimization, plus other open-source projects by dieghernan."
 ---
 
 

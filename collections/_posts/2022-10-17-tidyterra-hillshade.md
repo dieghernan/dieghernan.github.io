@@ -18,6 +18,9 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
+description: "Create relief maps in R by combining hillshade and elevation colors with terra, tidyterra and ggplot2."
+schema_image:
+  - /assets/img/blog/20221017-6-finalplot-1.webp
 ---
 
 _This is the first post of a series of two, showing how to overlay a SpatRaster

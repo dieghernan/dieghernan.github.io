@@ -19,6 +19,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
+description: "Use rasterpic to georeference flags and other images and turn them into basemaps in R."
 ---
 
 On 27 Jan. 2022 my package **rasterpic** was accepted on

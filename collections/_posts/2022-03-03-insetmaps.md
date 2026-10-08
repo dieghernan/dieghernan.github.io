@@ -22,6 +22,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
+description: "Create inset maps in R with ggplot2, tmap and mapsf to show geographic context and outlying regions."
 ---
 
 _This post is dedicated to [Dominic Royé](https://dominicroye.github.io/en/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)_

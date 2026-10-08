@@ -5,6 +5,7 @@ permalink: /gallery
 header_type: hero
 header_img: /assets/img/site/banner.png
 excerpt: A selection of cartography, Wikimedia contributions and visualizations from the blog.
+description: "A selection of maps, Wikimedia contributions and visualizations from the blog."
 ---
 
 

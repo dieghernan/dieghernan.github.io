@@ -22,6 +22,7 @@ header_img: ./assets/img/blog/202312_finalmap.webp
 mathjax: true
 bibliography: bertin.bib
 nocite: "@*"
+description: "Create Bertin-style dot density maps in R using Global Human Settlement Layer population data."
 ---
 
 Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a

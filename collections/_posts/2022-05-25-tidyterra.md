@@ -20,6 +20,10 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: ./assets/img/blog/20220525_easteregg-2.webp
+description: "Use tidyterra to manipulate terra spatial objects with tidyverse methods and plot SpatRasters with ggplot2."
+schema_image:
+  - /assets/img/blog/20220525_easteregg-2.webp
+  - /assets/img/blog/20220525_easteregg-3.webp
 ---
 
 If you have been playing around with **R** for a while, you are probably
