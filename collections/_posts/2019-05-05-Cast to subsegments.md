@@ -13,6 +13,9 @@ output:
   md_document:
     variant: markdown_github
     preserve_yaml: true
+og_image_width: 400
+og_image_height: 500
+og_image_type: "image/webp"
 ---
 
 This post introduces a user-defined function for casting **sf** objects of class

@@ -6,6 +6,10 @@ header_type: hero
 header_img: /assets/img/site/banner.png
 excerpt: A selection of cartography, Wikimedia contributions and visualizations from the blog.
 description: "A selection of maps, Wikimedia contributions and visualizations from the blog."
+og_image_width: 799
+og_image_height: 429
+og_image_type: "image/png"
+og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and turquoise."
 ---
 
 

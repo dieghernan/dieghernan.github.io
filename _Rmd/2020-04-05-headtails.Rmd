@@ -16,6 +16,9 @@ output:
     preserve_yaml: true
 last_modified_at: 2026-10-07
 excerpt: "Explore head/tail breaks classification with classInt and a spatial case study."
+og_image_width: 630
+og_image_height: 630
+og_image_type: "image/webp"
 ---
 
 <blockquote class="blockquote">

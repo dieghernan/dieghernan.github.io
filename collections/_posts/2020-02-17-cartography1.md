@@ -18,6 +18,9 @@ output:
     preserve_yaml: true
 last_modified_at: 2026-10-07
 excerpt: "Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0."
+og_image_width: 504
+og_image_height: 504
+og_image_type: "image/webp"
 ---
 
 ## Introduction

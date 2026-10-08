@@ -20,6 +20,9 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: ./assets/img/blog/20220501_joyplots.webp
+og_image_width: 4200
+og_image_height: 4200
+og_image_type: "image/webp"
 ---
 
 In 1970, Harold D. Craft Jr. published his Ph.D. thesis _"Radio observations of

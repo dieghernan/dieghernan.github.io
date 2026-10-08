@@ -12,6 +12,9 @@ header_img: ./assets/img/blog/20190427_mapfin-1.webp
 output:
   md_document:
     preserve_yaml: true
+og_image_width: 853
+og_image_height: 433
+og_image_type: "image/webp"
 ---
 
 This vignette shows how to use the database provided in the GitHub project

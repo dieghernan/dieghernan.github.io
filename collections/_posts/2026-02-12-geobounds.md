@@ -23,6 +23,10 @@ schema_image:
   - /assets/img/blog/202602-overlaps-1.webp
   - /assets/img/blog/202602-all-levs-1.webp
   - /assets/img/blog/202602-simpl-1.webp
+og_image_width: 2028
+og_image_height: 1700
+og_image_type: "image/webp"
+og_image_alt: "Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims."
 ---
 
 If you've ever worked with spatial data in **R**, this may ring a bell...

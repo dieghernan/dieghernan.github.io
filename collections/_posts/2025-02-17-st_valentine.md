@@ -18,6 +18,10 @@ output:
     preserve_yaml: yes
   html_document:
 header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
+og_image_width: 3000
+og_image_height: 3000
+og_image_type: "image/webp"
+og_image_alt: "World map in a heart-shaped Bonne projection, with a Valentine greeting above it."
 ---
 
 Do you know the [Bonne

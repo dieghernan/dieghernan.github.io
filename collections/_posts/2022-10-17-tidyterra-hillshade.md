@@ -21,6 +21,12 @@ header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
 description: "Create relief maps in R by combining hillshade and elevation colors with terra, tidyterra and ggplot2."
 schema_image:
   - /assets/img/blog/20221017-6-finalplot-1.webp
+og_image_width: 2100
+og_image_height: 1943
+og_image_type: "image/webp"
+og_image_alt: "Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend."
+seo_title: "Hillshade and elevation maps with tidyterra: One World"
+og_title: "Hillshade and elevation maps with tidyterra"
 ---
 
 _This is the first post of a series of two, showing how to overlay a SpatRaster

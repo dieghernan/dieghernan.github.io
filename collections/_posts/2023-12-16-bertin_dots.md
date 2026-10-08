@@ -23,6 +23,10 @@ mathjax: true
 bibliography: bertin.bib
 nocite: "@*"
 description: "Create Bertin-style dot density maps in R using Global Human Settlement Layer population data."
+og_image_width: 2400
+og_image_height: 2400
+og_image_type: "image/webp"
+og_image_alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
 ---
 
 Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a

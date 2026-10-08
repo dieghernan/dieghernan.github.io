@@ -16,6 +16,9 @@ project_links:
     icon: fab fa-github
     label: See on GitHub
 show_toc: true
+og_image_width: 480
+og_image_height: 480
+og_image_type: "image/png"
 ---
 
 Complete database of countries and territories, their different country codes

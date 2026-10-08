@@ -16,6 +16,9 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: "https://dieghernan.github.io/assets/img/blog/og_jekyll.webp"
+og_image_width: 1200
+og_image_height: 630
+og_image_type: "image/webp"
 ---
 
 [Liquid](https://shopify.github.io/liquid/) is an open-source template

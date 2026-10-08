@@ -24,6 +24,10 @@ description: "Use tidyterra to manipulate terra spatial objects with tidyverse m
 schema_image:
   - /assets/img/blog/20220525_easteregg-2.webp
   - /assets/img/blog/20220525_easteregg-3.webp
+og_image_width: 2100
+og_image_height: 2100
+og_image_type: "image/webp"
+og_image_alt: "Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map."
 ---
 
 If you have been playing around with **R** for a while, you are probably

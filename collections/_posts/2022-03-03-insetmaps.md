@@ -23,6 +23,11 @@ output:
     variant: gfm
     preserve_yaml: true
 description: "Create inset maps in R with ggplot2, tmap and mapsf to show geographic context and outlying regions."
+og_image_width: 2100
+og_image_height: 2100
+og_image_type: "image/webp"
+seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
+og_title: "Inset maps with ggplot2, tmap and mapsf"
 ---
 
 _This post is dedicated to [Dominic Royé](https://dominicroye.github.io/en/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)_

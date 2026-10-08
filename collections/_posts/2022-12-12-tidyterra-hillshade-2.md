@@ -21,6 +21,12 @@ description: "Map precipitation in Spain with hillshade and marginal profiles us
 schema_image:
   - /assets/img/blog/20221212_finalplot-1.webp
   - /assets/img/blog/20221212_precip_end-1.webp
+og_image_width: 2100
+og_image_height: 2100
+og_image_type: "image/webp"
+og_image_alt: "Map of average yearly precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages."
+seo_title: "Precipitation maps with tidyterra and marginal plots: One World"
+og_title: "Precipitation maps with tidyterra and marginal plots"
 ---
 
 _This is the second post of the series "Hillshade, colors and

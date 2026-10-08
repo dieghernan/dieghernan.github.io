@@ -35,6 +35,10 @@ featured_packages:
     documentation: https://dieghernan.github.io/resmush/
     source: https://github.com/dieghernan/resmush
 description: "Explore R packages for spatial data, software citation and image optimization, plus other open-source projects by dieghernan."
+og_image_width: 799
+og_image_height: 429
+og_image_type: "image/png"
+og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and turquoise."
 ---
 
 

@@ -13,6 +13,9 @@ project_links:
   - url: https://dieghernan.github.io/leaflet-providersESP/
     icon: fas fa-external-link-alt
     label: Visit the website
+og_image_width: 1082
+og_image_height: 577
+og_image_type: "image/png"
 ---
 
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that
