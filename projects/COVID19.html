@@ -12,10 +12,9 @@
         {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://dieghernan.github.io/projects/COVID19"
-      },
+      "@id": "https://dieghernan.github.io/projects/COVID19",
+      "name": "COVID19 microsite",
+      "description": "Historical maps of COVID-19 in Spain by region - Project discontinued. This page documents a historical project; the descriptions below refer to its period of operation.",
       "headline":"COVID19 microsite",
       "image": "https://dieghernan.github.io/COVID19/assets/img/header.png",
       "datePublished": "2020-04-04T00:00:00+02:00",
@@ -51,28 +50,25 @@
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id":"https://dieghernan.github.io/projects/COVID19#breadcrumb",
       "itemListElement": [
       {
         "@type": "ListItem",
+        "@id":"https://dieghernan.github.io/projects/COVID19#breadcrumb-1",
         "position": 1,
         "name":"Projects",
         "item":"https://dieghernan.github.io/projects"
       },
     {
         "@type": "ListItem",
+        "@id":"https://dieghernan.github.io/projects/COVID19#breadcrumb-2",
         "position": 2,
-        "name":"COVID19 microsite"
+        "item": "https://dieghernan.github.io/projects/COVID19",
+        "name": "COVID19 microsite"
       }]
     }
     </script>
 <script type="application/ld+json">
-	{
-	"@context": "https://schema.org",
-	"@type": "WebPage",
-	"name":"COVID19 microsite",
-	"description": "Historical maps of COVID-19 in Spain by region - Project discontinued. This page documents a historical project; the descriptions below refer to its period of operation."
-	}
-</script><script type="application/ld+json">
 {
   "@context" : "https://schema.org",
   "@type" : "Person",
@@ -127,7 +123,7 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+    <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
@@ -203,12 +199,13 @@
 <div class="row my-1">
 <div class="col-lg-5 offset-lg-2 col small">
  <nav aria-label="breadcrumb">
-  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList" itemid="https://dieghernan.github.io/projects/COVID19#breadcrumb">
             <li class="breadcrumb-item" itemprop="itemListElement" itemscope
-          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/projects" itemprop="item"><span itemprop="name">Projects</span></a>
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/projects/COVID19#breadcrumb-1"><a href="https://dieghernan.github.io/projects" itemprop="item"><span itemprop="name">Projects</span></a>
          <meta itemprop="position" content="1" ></li>
       <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
-          itemtype="https://schema.org/ListItem">
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/projects/COVID19#breadcrumb-2">
+      <link itemprop="item" href="https://dieghernan.github.io/projects/COVID19">
         <span itemprop="name">COVID19 microsite</span>
        <meta itemprop="position" content="2" >
      </li>
@@ -284,37 +281,18 @@ descriptions below refer to its period of operation.</p>
              <nav class="card-group" aria-label="random -articles"><div class="card  border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202002_cartography1/" class="chulapa-text-body-color">
-              New features in the <strong>cartography</strong> package
+            <a href="https://dieghernan.github.io/projects/spain-munic-bot/" class="chulapa-text-body-color">
+              spain-munic-bot
             </a>
          </p>
            <p class="card-text">
-              <small>Vignette of the package expansion</small>
+              <small>A Twitter bot written in R.</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-02-17T00:00:00+01:00">
-                february 17, 2020
-              </time>
-            </small>
-       </div>
-     </div>
-     <div class="card ml-sm-1 border chulapa-related">
-       <div class="card-body">
-         <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201906_Beautiful1/" class="chulapa-text-body-color">
-              Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels
-            </a>
-         </p>
-           <p class="card-text">
-              <small>Simplified maps with R</small>
-           </p></div>
-       <div class="card-footer bg-transparent">
-            <small>
-              <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-06-02T00:00:00+02:00">
-                june 02, 2019
+              <time datetime="2021-01-29T00:00:00+01:00">
+                january 29, 2021
               </time>
             </small>
        </div>
@@ -334,6 +312,25 @@ descriptions below refer to its period of operation.</p>
               <i class="far fa-calendar" aria-hidden="true"></i>
               <time datetime="2019-04-27T00:00:00+02:00">
                 april 27, 2019
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/projects/leaflet-providersESP/" class="chulapa-text-body-color">
+              Leaflet-providersESP
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Plugin for Leaflet.js</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-10-26T00:00:00+01:00">
+                october 26, 2020
               </time>
             </small>
        </div>
@@ -377,7 +374,7 @@ descriptions below refer to its period of operation.</p>
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<script src="/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <script>
 for (const a of document.querySelectorAll(".badge")) {

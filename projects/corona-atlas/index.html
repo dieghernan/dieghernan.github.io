@@ -12,10 +12,9 @@
         {
       "@context": "https://schema.org",
       "@type": "WebPage",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://dieghernan.github.io/projects/corona-atlas/"
-      },
+      "@id": "https://dieghernan.github.io/projects/corona-atlas/",
+      "name": "Corona Atlas",
+      "description": "Interactive map of the international COVID-19 risk areas as designated by the German authorities. - Historical interactive map of international COVID-19 risk areas, based on assessments by the German authorities during the project’s operation.",
       "headline":"Corona Atlas",
       "image": "https://dieghernan.github.io/corona-atlas.de/assets/img/og_corona_atlas.png",
       "datePublished": "2021-04-30T00:00:00+02:00",
@@ -51,28 +50,25 @@
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id":"https://dieghernan.github.io/projects/corona-atlas/#breadcrumb",
       "itemListElement": [
       {
         "@type": "ListItem",
+        "@id":"https://dieghernan.github.io/projects/corona-atlas/#breadcrumb-1",
         "position": 1,
         "name":"Projects",
         "item":"https://dieghernan.github.io/projects"
       },
     {
         "@type": "ListItem",
+        "@id":"https://dieghernan.github.io/projects/corona-atlas/#breadcrumb-2",
         "position": 2,
-        "name":"Corona Atlas"
+        "item": "https://dieghernan.github.io/projects/corona-atlas/",
+        "name": "Corona Atlas"
       }]
     }
     </script>
 <script type="application/ld+json">
-	{
-	"@context": "https://schema.org",
-	"@type": "WebPage",
-	"name":"Corona Atlas",
-	"description": "Interactive map of the international COVID-19 risk areas as designated by the German authorities. - Historical interactive map of international COVID-19 risk areas, based on assessments by the German authorities during the project’s operation."
-	}
-</script><script type="application/ld+json">
 {
   "@context" : "https://schema.org",
   "@type" : "Person",
@@ -127,7 +123,7 @@
     <!-- Fontawesome-->
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
-    <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js" as="script" >
+    <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
@@ -209,12 +205,13 @@
 <div class="row my-1">
 <div class="col-lg-5 offset-lg-2 col small">
  <nav aria-label="breadcrumb">
-  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList" itemid="https://dieghernan.github.io/projects/corona-atlas/#breadcrumb">
             <li class="breadcrumb-item" itemprop="itemListElement" itemscope
-          itemtype="https://schema.org/ListItem"><a href="https://dieghernan.github.io/projects" itemprop="item"><span itemprop="name">Projects</span></a>
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/projects/corona-atlas/#breadcrumb-1"><a href="https://dieghernan.github.io/projects" itemprop="item"><span itemprop="name">Projects</span></a>
          <meta itemprop="position" content="1" ></li>
       <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
-          itemtype="https://schema.org/ListItem">
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/projects/corona-atlas/#breadcrumb-2">
+      <link itemprop="item" href="https://dieghernan.github.io/projects/corona-atlas/">
         <span itemprop="name">Corona Atlas</span>
        <meta itemprop="position" content="2" >
      </li>
@@ -305,18 +302,18 @@ For the deployment, map logic has moved to JavaScript to support multiple langua
              <nav class="card-group" aria-label="random -articles"><div class="card  border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201905_Where-in-the-world/" class="chulapa-text-body-color">
-              Where in the world?
+            <a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">
+              Using the CountryCodes database and <strong>sf</strong> package
             </a>
          </p>
            <p class="card-text">
-              <small>A leaflet map with the places I have flown</small>
+              <small>Vignette of the CountryCodes project</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-05-13T00:00:00+02:00">
-                may 13, 2019
+              <time datetime="2019-04-27T00:00:00+02:00">
+                april 27, 2019
               </time>
             </small>
        </div>
@@ -324,18 +321,18 @@ For the deployment, map logic has moved to JavaScript to support multiple langua
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202502_st_valentine/" class="chulapa-text-body-color">
-              Happy Valentine’s Day
+            <a href="https://dieghernan.github.io/projects/Bzel/" class="chulapa-text-body-color">
+              Bzel
             </a>
          </p>
            <p class="card-text">
-              <small>Do you know the Bonne projection?</small>
+              <small>A Pebble <i class="fas fa-skull-crossbones"></i> project</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2025-02-17T00:00:00+01:00">
-                february 17, 2025
+              <time datetime="2017-05-25T00:00:00+02:00">
+                may 25, 2017
               </time>
             </small>
        </div>
@@ -343,18 +340,18 @@ For the deployment, map logic has moved to JavaScript to support multiple langua
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202312_bertin_dots/" class="chulapa-text-body-color">
-              Beautiful maps with R (V): Point densities
+            <a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" class="chulapa-text-body-color">
+              Unknown pleasures with R
             </a>
          </p>
            <p class="card-text">
-              <small>Bertin’s dot density maps with R and GHSL</small>
+              <small>Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong></small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2023-12-16T00:00:00+01:00">
-                december 16, 2023
+              <time datetime="2022-05-01T00:00:00+02:00">
+                may 01, 2022
               </time>
             </small>
        </div>
@@ -398,7 +395,7 @@ For the deployment, map logic has moved to JavaScript to support multiple langua
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/js/chulapa_script.js"></script>
+	<script src="/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <script>
 for (const a of document.querySelectorAll(".badge")) {
