@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -161,6 +161,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/blog/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -172,6 +173,8 @@
 						<a class="nav-link  active font-weight-bold" href="https://dieghernan.github.io/blog/">Blog<span class="sr-only">(current)</span></a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -187,7 +190,7 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
    <h1 class="p-name">Blog</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">R, maps and spatial data</p>
  </div>
@@ -213,13 +216,13 @@
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202602_geobounds/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202602_geobounds/" aria-label="Introducing geobounds" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202602_geobounds/"><h5 class="card-title">Introducing <strong>geobounds</strong></h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Easy access to administrative boundaries from geoBoundaries</h6><div class="card-text">Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds.</div>
+				<a href="https://dieghernan.github.io/202602_geobounds/"><h2 class="h5 card-title">Introducing <strong>geobounds</strong></h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Easy access to administrative boundaries from geoBoundaries</p><div class="card-text">Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -231,13 +234,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20260
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202510_mapping-antarctica/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202510_mapping-antarctica/" aria-label="Mapping Antarctica" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202510_mapping-antarctica/"><h5 class="card-title">Mapping Antarctica</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Cool maps from the South Pole</h6><div class="card-text">Creating maps with R is usually straightforward, but representations that
+				<a href="https://dieghernan.github.io/202510_mapping-antarctica/"><h2 class="h5 card-title">Mapping Antarctica</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Cool maps from the South Pole</p><div class="card-text">Creating maps with R is usually straightforward, but representations that
 cross the International Date
 Line or that use polar
 projections can be tricky.
@@ -253,13 +256,13 @@ projections can be tricky.
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202502_liquid-group-by/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202502_liquid-group-by/" aria-label="Implementing group_by count in Liquid" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/og_jekyll.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202502_liquid-group-by/"><h5 class="card-title">Implementing <code>group_by</code> count in Liquid</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">See the magic happening</h6><div class="card-text">This post explains implementing group_by count in Liquid for Jekyll,
+				<a href="https://dieghernan.github.io/202502_liquid-group-by/"><h2 class="h5 card-title">Implementing <code>group_by</code> count in Liquid</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">See the magic happening</p><div class="card-text">This post explains implementing group_by count in Liquid for Jekyll,
 addressing issues with Jekyll 4.1.0 and providing a solution.
 </div>
 			</article>
@@ -273,13 +276,13 @@ addressing issues with Jekyll 4.1.0 and providing a solution.
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202502_st_valentine/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202502_st_valentine/" aria-label="Happy Valentine&#39;s Day" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202502_st_valentine/"><h5 class="card-title">Happy Valentine’s Day</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Do you know the Bonne projection?</h6><div class="card-text">Do you know the Bonne
+				<a href="https://dieghernan.github.io/202502_st_valentine/"><h2 class="h5 card-title">Happy Valentine’s Day</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Do you know the Bonne projection?</p><div class="card-text">Do you know the Bonne
 Projection? This is a very
 special one, as it produces this result when used to map the whole world. Happy
 Valentine’s Day!
@@ -295,13 +298,13 @@ Valentine’s Day!
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202402_optimize-images-r/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202402_optimize-images-r/" aria-label="Optimize your images with R and reSmush.it" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/misc/compress-img.png')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202402_optimize-images-r/"><h5 class="card-title">Optimize your images with R and reSmush.it</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Introducing the <strong>resmush</strong> package</h6><div class="card-text">Compress the size of your images with R, resmush and reSmush.it</div>
+				<a href="https://dieghernan.github.io/202402_optimize-images-r/"><h2 class="h5 card-title">Optimize your images with R and reSmush.it</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Introducing the <strong>resmush</strong> package</p><div class="card-text">Compress the size of your images with R, resmush and reSmush.it</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">

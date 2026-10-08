@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -161,6 +161,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/blog/page2/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -172,6 +173,8 @@
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -187,7 +190,7 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
    <h1 class="p-name">Blog</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">R, maps and spatial data</p>
  </div>
@@ -213,13 +216,13 @@
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202312_bertin_dots/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202312_bertin_dots/" aria-label="Beautiful maps with R (V): Point densities" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202312_bertin_dots/"><h5 class="card-title">Beautiful maps with R (V): Point densities</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Bertin’s dot density maps with R and GHSL</h6><div class="card-text">Another way to represent demographics on a map.</div>
+				<a href="https://dieghernan.github.io/202312_bertin_dots/"><h2 class="h5 card-title">Beautiful maps with R (V): Point densities</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Bertin’s dot density maps with R and GHSL</p><div class="card-text">Another way to represent demographics on a map.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -231,13 +234,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20231
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202301_star-map-R/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202301_star-map-R/" aria-label="Star map with R" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202301_star-map-R/"><h5 class="card-title">Star map with R</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Creating Star Map Visualizations Based on Location and Date</h6><div class="card-text">A couple of weeks ago I was doing my daily check on
+				<a href="https://dieghernan.github.io/202301_star-map-R/"><h2 class="h5 card-title">Star map with R</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Creating Star Map Visualizations Based on Location and Date</p><div class="card-text">A couple of weeks ago I was doing my daily check on
 Stack Overflow when I found a
 question by Benjamin Smith that blew my
 mind: Creating Star Map Visualizations Based on Location and
@@ -255,13 +258,13 @@ Date
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/" aria-label="Hillshade, colors and marginal plots with tidyterra (II)" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/"><h5 class="card-title">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">The rain in Spain does not stay mainly in the plain</h6><div class="card-text">Add marginal plots to a SpatRaster map on ggplot2</div>
+				<a href="https://dieghernan.github.io/202212_tidyterra-hillshade-2/"><h2 class="h5 card-title">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">The rain in Spain does not stay mainly in the plain</p><div class="card-text">Add marginal plots to a SpatRaster map on ggplot2</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -273,13 +276,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20221
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202210_tidyterra-hillshade/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202210_tidyterra-hillshade/" aria-label="Hillshade, colors and marginal plots with tidyterra (I)" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202210_tidyterra-hillshade/"><h5 class="card-title">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">How to overlay SpatRasters</h6><div class="card-text">Using shadow effects on relief maps is a very common technique, which produces informative yet beautiful maps.</div>
+				<a href="https://dieghernan.github.io/202210_tidyterra-hillshade/"><h2 class="h5 card-title">Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">How to overlay SpatRasters</p><div class="card-text">Using shadow effects on relief maps is a very common technique, which produces informative yet beautiful maps.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -291,13 +294,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20221
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202205_tidyterra/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202205_tidyterra/" aria-label="Introducing tidyterra" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202205_tidyterra/"><h5 class="card-title">Introducing <strong>tidyterra</strong></h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Easily work with and plot SpatRasters</h6><div class="card-text">tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2.</div>
+				<a href="https://dieghernan.github.io/202205_tidyterra/"><h2 class="h5 card-title">Introducing <strong>tidyterra</strong></h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Easily work with and plot SpatRasters</p><div class="card-text">tidyterra provides tidyverse methods for terra objects and geom functions for plotting with ggplot2.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">

@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -161,6 +161,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/blog/page3/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -172,6 +173,8 @@
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -187,7 +190,7 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
    <h1 class="p-name">Blog</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">R, maps and spatial data</p>
  </div>
@@ -213,13 +216,13 @@
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" aria-label="Unknown pleasures with R" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/"><h5 class="card-title">Unknown pleasures with R</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong></h6><div class="card-text">Create ridgelines (AKA joyplots) of territories using elevation data with R, sf, terra and ggridges.</div>
+				<a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/"><h2 class="h5 card-title">Unknown pleasures with R</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong></p><div class="card-text">Create ridgelines (AKA joyplots) of territories using elevation data with R, sf, terra and ggridges.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -231,13 +234,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202203_Corona-timelapse/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202203_Corona-timelapse/" aria-label="Corona timelapse" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/corona-atlas.de/timelapse/frames/D2021-04-16.png')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202203_Corona-timelapse/"><h5 class="card-title">Corona timelapse</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Travel restrictions amidst the COVID crisis across time - A German perspective</h6><div class="card-text"> Project discontinued. This post reflects the situation in March 2022 and
+				<a href="https://dieghernan.github.io/202203_Corona-timelapse/"><h2 class="h5 card-title">Corona timelapse</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Travel restrictions amidst the COVID crisis across time - A German perspective</p><div class="card-text"> Project discontinued. This post reflects the situation in March 2022 and
 is preserved as a historical account, not current travel information.
 </div>
 			</article>
@@ -252,13 +255,13 @@ is preserved as a historical account, not current travel information.
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202203_insetmaps/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202203_insetmaps/" aria-label="Insets with ggplot2 and tmap - and mapsf!" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220303_inset.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202203_insetmaps/"><h5 class="card-title">Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">A map on a map</h6><div class="card-text">A common challenge when creating maps is how to include an inset map in your visualization. An inset map is a smaller map usually included in a corner that may provide additional context to the overall map, or may include map units that would not usually be represented properly.</div>
+				<a href="https://dieghernan.github.io/202203_insetmaps/"><h2 class="h5 card-title">Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">A map on a map</p><div class="card-text">A common challenge when creating maps is how to include an inset map in your visualization. An inset map is a smaller map usually included in a corner that may provide additional context to the overall map, or may include map units that would not usually be represented properly.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -271,13 +274,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202201_maps-flags/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202201_maps-flags/" aria-label="Beautiful maps with R (IV): Fun with flags revisited" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202201_maps-flags/"><h5 class="card-title">Beautiful maps with R (IV): Fun with flags revisited</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Any picture as a basemap</h6><div class="card-text">On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This package geotags images, using a spatial object (from sf or terra) as a geographic reference.</div>
+				<a href="https://dieghernan.github.io/202201_maps-flags/"><h2 class="h5 card-title">Beautiful maps with R (IV): Fun with flags revisited</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Any picture as a basemap</p><div class="card-text">On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This package geotags images, using a spatial object (from sf or terra) as a geographic reference.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -289,12 +292,12 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20220
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202004_headtails/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202004_headtails/" aria-label="Head/tail breaks in the classInt package" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202004_headtails/"><h5 class="card-title">Head/tail breaks in the <strong>classInt</strong> package</h5></a>
+				<a href="https://dieghernan.github.io/202004_headtails/"><h2 class="h5 card-title">Head/tail breaks in the <strong>classInt</strong> package</h2></a>
 				<div class="card-text">Explore head/tail breaks classification with classInt and a spatial case study.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">

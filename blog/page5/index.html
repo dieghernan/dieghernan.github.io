@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -161,6 +161,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/blog/page5/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -172,6 +173,8 @@
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -187,7 +190,7 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
    <h1 class="p-name">Blog</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">R, maps and spatial data</p>
  </div>
@@ -213,13 +216,13 @@
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201906_Beautiful2/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201906_Beautiful2/" aria-label="Beautiful maps with R (II): Fun with flags" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201906_Beautiful2/"><h5 class="card-title">Beautiful maps with R (II): Fun with flags</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Put a picture on your map</h6><div class="card-text">Want to use a flag (or any *.png file) as a background for your map? You are in the right place.</div>
+				<a href="https://dieghernan.github.io/201906_Beautiful2/"><h2 class="h5 card-title">Beautiful maps with R (II): Fun with flags</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Put a picture on your map</p><div class="card-text">Want to use a flag (or any *.png file) as a background for your map? You are in the right place.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -232,13 +235,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201906_Beautiful1/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201906_Beautiful1/" aria-label="Beautiful maps with R (I): Fishnets, honeycombs and pixels" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201906_Beautiful1/"><h5 class="card-title">Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Simplified maps with R</h6><div class="card-text">Sometimes you want to produce maps with special layouts. I especially like
+				<a href="https://dieghernan.github.io/201906_Beautiful1/"><h2 class="h5 card-title">Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Simplified maps with R</p><div class="card-text">Sometimes you want to produce maps with special layouts. I especially like
 maps with modified geometries, e.g. simplifying the original shapes to squares
 or dots. When searching the web, I found the fantastic post Fishnets and
 Honeycomb: Square vs. Hexagonal Spatial Grids
@@ -257,13 +260,13 @@ of very interesting pieces of work).
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" aria-label="Leaflet, R, Markdown, Jekyll and GitHub" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/"><h5 class="card-title">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Make it work in 6 steps - A short tutorial</h6><div class="card-text">Recently, I have been struggling when trying to embed a
+				<a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/"><h2 class="h5 card-title">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Make it work in 6 steps - A short tutorial</p><div class="card-text">Recently, I have been struggling when trying to embed a
 leaflet map created with
 RStudio on my blog, hosted on GitHub via
 Jekyll (Spoiler: I succeeded
@@ -283,13 +286,13 @@ remote theme that I created.
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201905_Where-in-the-world/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201905_Where-in-the-world/" aria-label="Where in the world?" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201905_Where-in-the-world/"><h5 class="card-title">Where in the world?</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">A leaflet map with the places I have flown</h6><div class="card-text">This is a very personal post, where I just show the map of all the places I have
+				<a href="https://dieghernan.github.io/201905_Where-in-the-world/"><h2 class="h5 card-title">Where in the world?</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">A leaflet map with the places I have flown</p><div class="card-text">This is a very personal post, where I just show the map of all the places I have
 traveled to by plane.
 </div>
 			</article>
@@ -303,13 +306,13 @@ traveled to by plane.
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201905_Cast-to-subsegments/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201905_Cast-to-subsegments/" aria-label="Cast a line to subsegments in R" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201905_Cast-to-subsegments/"><h5 class="card-title">Cast a line to subsegments in R</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">User-defined function using the <strong>sf</strong> package</h6><div class="card-text">This post introduces a user-defined function for casting sf objects of class
+				<a href="https://dieghernan.github.io/201905_Cast-to-subsegments/"><h2 class="h5 card-title">Cast a line to subsegments in R</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">User-defined function using the <strong>sf</strong> package</p><div class="card-text">This post introduces a user-defined function for casting sf objects of class
 LINESTRING or POLYGON into substrings.
 </div>
 			</article>

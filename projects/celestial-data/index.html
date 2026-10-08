@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -162,6 +162,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/projects/celestial-data/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -173,6 +174,8 @@
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -188,11 +191,11 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp')"><div class="container-lg py-4">
    <h1 class="p-name">Celestial data</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">A compilation of celestial data files</p>
    <div class="btn-group-vertical btn-group-lg mt-2 text-center" role="group">
-      <a href="https://dieghernan.github.io/celestial_data/" class="btn chulapa-btn-project" role="button" aria-disabled="true">
+      <a href="https://dieghernan.github.io/celestial_data/" class="btn chulapa-btn-project">
                 <i class="fas fa-external-link-alt fa-lg mr-2"></i>Visit the website</a>
    </div>
  </div>
@@ -416,18 +419,18 @@ Spatial Vector Data.” <em>The R Journal</em> 10 (1): 439446.
              <nav class="card-group" aria-label="random -articles"><div class="card  border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/projects/COVID19" class="chulapa-text-body-color">
-              COVID19 microsite
+            <a href="https://dieghernan.github.io/202301_star-map-R/" class="chulapa-text-body-color">
+              Star map with R
             </a>
          </p>
            <p class="card-text">
-              <small>Historical maps of COVID-19 in Spain by region</small>
+              <small>Creating Star Map Visualizations Based on Location and Date</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-04-04T00:00:00+02:00">
-                april 04, 2020
+              <time datetime="2023-01-25T00:00:00+01:00">
+                january 25, 2023
               </time>
             </small>
        </div>
@@ -454,18 +457,18 @@ Spatial Vector Data.” <em>The R Journal</em> 10 (1): 439446.
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/projects/leaflet-providersESP/" class="chulapa-text-body-color">
-              Leaflet-providersESP
+            <a href="https://dieghernan.github.io/projects/COVID19" class="chulapa-text-body-color">
+              COVID19 microsite
             </a>
          </p>
            <p class="card-text">
-              <small>Plugin for Leaflet.js</small>
+              <small>Historical maps of COVID-19 in Spain by region</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-10-26T00:00:00+01:00">
-                october 26, 2020
+              <time datetime="2020-04-04T00:00:00+02:00">
+                april 04, 2020
               </time>
             </small>
        </div>

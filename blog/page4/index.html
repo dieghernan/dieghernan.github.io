@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -161,6 +161,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/blog/page4/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -172,6 +173,8 @@
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -187,7 +190,7 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><!-- Chulapa template for pagination --><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/site/banner.png')"><div class="container-lg py-4">
    <h1 class="p-name">Blog</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">R, maps and spatial data</p>
  </div>
@@ -213,13 +216,13 @@
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202002_cartography1/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202002_cartography1/" aria-label="New features in the cartography package" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202002_cartography1/"><h5 class="card-title">New features in the <strong>cartography</strong> package</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Vignette of the package expansion</h6><div class="card-text">Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0.</div>
+				<a href="https://dieghernan.github.io/202002_cartography1/"><h2 class="h5 card-title">New features in the <strong>cartography</strong> package</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Vignette of the package expansion</p><div class="card-text">Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -232,13 +235,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/202002_Brexit/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/202002_Brexit/" aria-label="We&#39;ll miss you, UK" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/202002_Brexit/"><h5 class="card-title">We’ll miss you, UK</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">Brexit and the consequences</h6><div class="card-text">Map the United Kingdom’s departure from the EU using country boundaries and flag imagery.</div>
+				<a href="https://dieghernan.github.io/202002_Brexit/"><h2 class="h5 card-title">We’ll miss you, UK</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">Brexit and the consequences</p><div class="card-text">Map the United Kingdom’s departure from the EU using country boundaries and flag imagery.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -251,13 +254,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201912_Beautiful3/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201912_Beautiful3/" aria-label="Beautiful maps with R (III): Patterns and hatched maps" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201912_Beautiful3/"><h5 class="card-title">Beautiful maps with R (III): Patterns and hatched maps</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">A solution for black-and-white and academic maps</h6><div class="card-text">Create patterned and hatched map fills with the cartography package.</div>
+				<a href="https://dieghernan.github.io/201912_Beautiful3/"><h2 class="h5 card-title">Beautiful maps with R (III): Patterns and hatched maps</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">A solution for black-and-white and academic maps</p><div class="card-text">Create patterned and hatched map fills with the cartography package.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">
@@ -270,13 +273,13 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20191
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201911_QuickR/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201911_QuickR/" aria-label="Quick R: Inset maps" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/3840px-Population_density_by_NUTS_3_region_%282017%29.svg.png')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201911_QuickR/"><h5 class="card-title">Quick R: Inset maps</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">An alternative using plot()</h6><div class="card-text">How to place an inset map in R? There are many solutions out there using
+				<a href="https://dieghernan.github.io/201911_QuickR/"><h2 class="h5 card-title">Quick R: Inset maps</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">An alternative using plot()</p><div class="card-text">How to place an inset map in R? There are many solutions out there using
 the ggplot2 package (see Drawing beautiful maps programmatically with
 R, sf and ggplot2
 by Mel Moreno and Mathieu Basille). However, I like the old reliable plot
@@ -293,13 +296,13 @@ function, so the question is: is there another way?
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index">
 	<div class="row g-0">
-		<a href="https://dieghernan.github.io/201910_WikiMap1/" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
+		<a href="https://dieghernan.github.io/201910_WikiMap1/" aria-label="Wikipedia maps (I): Organ donor rates" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient  "
 style="background-image: url('https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp')">
 		</a>
 		<div class="col-sm">
 			<article class="card-body chulapa-links-hover-only">
-				<a href="https://dieghernan.github.io/201910_WikiMap1/"><h5 class="card-title">Wikipedia maps (I): Organ donor rates</h5></a>
-				<h6 class="card-subtitle mb-2 text-muted">A choropleth map with <strong>R</strong></h6><div class="card-text">Map international organ donor rates using Wikipedia data and cartography.</div>
+				<a href="https://dieghernan.github.io/201910_WikiMap1/"><h2 class="h5 card-title">Wikipedia maps (I): Organ donor rates</h2></a>
+				<p class="h6 card-subtitle mb-2 chulapa-text-body-color">A choropleth map with <strong>R</strong></p><div class="card-text">Map international organ donor rates using Wikipedia data and cartography.</div>
 			</article>
 			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
 				<p class="small text-right font-italic mb-1">

@@ -120,7 +120,7 @@
     <!-- v6 -->
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/dieghernan/chulapa@master/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <!-- Theme css (Bootstrap included) -->
   <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
     <!-- Highlighter -->
@@ -161,6 +161,7 @@
 <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column h-entry" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<a class="u-url d-none" href="https://dieghernan.github.io/projects/TextWatchClima/">Invisible link to canonical for Microformats</a>
 	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -172,6 +173,8 @@
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
 					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
 					</li><li class="nav-item">
@@ -187,11 +190,11 @@
 					</li></ul>
 			</div></div>
 </nav>
-	<header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png')"><div class="container-lg py-4">
+			<div id="chulapa-content" tabindex="-1"></div><header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png')"><div class="container-lg py-4">
    <h1 class="p-name">TextWatch Clima</h1><hr class="my-3">
    <p class="chulapa-subtitle p-summary">A Pebble <i class="fas fa-skull-crossbones"></i> project</p>
    <div class="btn-group-vertical btn-group-lg mt-2 text-center" role="group">
-      <a href="https://github.com/dieghernan/TextWatchClima" class="btn chulapa-btn-project" role="button" aria-disabled="true">
+      <a href="https://github.com/dieghernan/TextWatchClima" class="btn chulapa-btn-project">
                 <i class="fab fa-github fa-lg mr-2"></i>See on GitHub</a>
    </div>
  </div>
@@ -391,25 +394,6 @@ through a unique PIN.</li>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/projects/Sfera/" class="chulapa-text-body-color">
-              Sfera
-            </a>
-         </p>
-           <p class="card-text">
-              <small>A Pebble <i class="fas fa-skull-crossbones"></i> project</small>
-           </p></div>
-       <div class="card-footer bg-transparent">
-            <small>
-              <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2017-03-14T00:00:00+01:00">
-                march 14, 2017
-              </time>
-            </small>
-       </div>
-     </div>
-     <div class="card ml-sm-1 border chulapa-related">
-       <div class="card-body">
-         <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/projects/7egment/" class="chulapa-text-body-color">
               7egment
             </a>
@@ -422,6 +406,25 @@ through a unique PIN.</li>
               <i class="far fa-calendar" aria-hidden="true"></i>
               <time datetime="2017-05-17T00:00:00+02:00">
                 may 17, 2017
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/projects/corona-atlas/" class="chulapa-text-body-color">
+              Corona Atlas
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Interactive map of the international COVID-19 risk areas as designated by the German authorities.</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2021-04-30T00:00:00+02:00">
+                april 30, 2021
               </time>
             </small>
        </div>
