@@ -1,6 +1,10 @@
 ---
 layout: minimal
+header_in_content: true
 ---
+<div class="h-entry d-flex flex-column flex-fill">
+{% include snippets/canonical-url.html url=page.url canonical=page.canonical_url %}
+<a class="u-url d-none" href="{{ canonical_url | escape }}">Invisible link to canonical for Microformats</a>
 {% include components/headers.html headertype= page.header_type
 imghero=page.header_img projects=page.project_links %}
 <main class="container-lg pb-3 flex-fill">
@@ -34,10 +38,9 @@ imghero=page.header_img projects=page.project_links %}
 
 			{% if page.show_kofi %}
 			<div class="mt-5 pt-3 mb-3 text-center">
-				<script type='text/javascript'
-					src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
 				<script
-					type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
+					src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+				<script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
 			</div>
 			{% endif %}
 		</article>
@@ -64,3 +67,4 @@ imghero=page.header_img projects=page.project_links %}
 {%- if page.show_random -%}
 {%- include components/random.html -%}
 {%- endif -%}
+</div>
