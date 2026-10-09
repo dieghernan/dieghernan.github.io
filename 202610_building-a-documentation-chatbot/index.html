@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.1.0 -->
+    <!-- MIT License -->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2026-10-09 -->
+    <!-- Jekyll Version 4.4.1 -->
+    <!-- Google structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/#article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/"
+        },
+        "headline": "Building a documentation chatbot for Chulapa",
+        "image": ["https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp"],
+        "datePublished": "2026-10-09T00:00:00+02:00",
+        "dateModified": "2026-10-09T00:00:00+02:00",
+        "author": {
+          "@type": "Person",
+          "name": "dieghernan",
+          "url": "https://x.com/dhernangomez",
+          "sameAs": [
+            "https://fosstodon.org/@dhernangomez",
+            "https://bsky.app/profile/dieghernan.bsky.social",
+            "https://github.com/dieghernan/",
+            "https://stackoverflow.com/users/7877917/dieghernan",
+            "https://orcid.org/0000-0001-8457-4658"
+          ]
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "dieghernan",
+          "url": "https://dieghernan.github.io/",
+          "image": "https://dieghernan.github.io/assets/img/site/avatar.png"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/#breadcrumb-1",
+            "position": 1,
+            "name": "Blog",
+            "item": "https://dieghernan.github.io/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/#breadcrumb-2",
+            "position": 2,
+            "item": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/",
+            "name": "Building a documentation chatbot for Chulapa"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202610_building-a-documentation-chatbot/",
+        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
+        "name": "Building a documentation chatbot for Chulapa",
+        "description": "A development diary: context, small screens and useful answers - How I built an AI assistant for my theme’s documentation, and what happened when I started asking it real questions."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+        "homeLocation": {
+          "@type": "Place",
+          "name": "Madrid, Spain"
+        },
+        "description": "Site author",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": [
+          "https://x.com/dhernangomez",
+          "https://fosstodon.org/@dhernangomez",
+          "https://bsky.app/profile/dieghernan.bsky.social",
+          "https://github.com/dieghernan/",
+          "https://stackoverflow.com/users/7877917/dieghernan",
+          "https://orcid.org/0000-0001-8457-4658"
+        ]
+      }
+    </script>
+    <title>Building a documentation chatbot for Chulapa | One World</title>
+    <link rel="canonical" href="https://dieghernan.github.io/202610_building-a-documentation-chatbot/">
+    <!-- Atom feed -->
+    <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One World" >
+    <!-- RSS 2.0 feed -->
+    <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One World" >
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="dieghernan" >
+    <meta name="copyright" content="dieghernan" >
+    <meta name="description" content="A development diary: context, small screens and useful answers - How I built an AI assistant for my theme’s documentation, and what happened when I started asking it real questions.">
+    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp" >
+    <meta name="robots" content="index, follow">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Building a documentation chatbot for Chulapa | One World" >
+    <meta property="og:site_name" content="One World" >
+    <meta property="og:url" content="https://dieghernan.github.io/202610_building-a-documentation-chatbot/" >
+    <meta property="og:type" content="article" >
+    <meta property="article:published_time" content="2026-10-09T00:00:00+02:00">
+    <meta property="article:author" content="https://github.com/dieghernan">
+    <meta property="article:tag" content="jekyll">
+    <meta property="article:tag" content="html">
+    <meta property="article:tag" content="chulapa">
+    <meta property="og:description" content="A development diary: context, small screens and useful answers - How I built an AI assistant for my theme’s documentation, and what happened when I started asking it real questions." >
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp" >
+    <meta property="og:image:alt" content="Paper collage of an open notebook with code-like marks, floating conversation shapes and golden sparkles beside a window overlooking Madrid." >
+    <meta property="og:image:width" content="1730" >
+    <meta property="og:image:height" content="909" >
+    <meta property="og:image:type" content="image/webp" >
+    <!-- Twitter/X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="A development diary: context, small screens and useful answers - How I built an AI assistant for my theme’s documentation, and what happened when I started asking it real questions.">
+    <meta name="twitter:site" content="@dhernangomez" >
+    <meta name="twitter:creator" content="@dhernangomez" >
+    <!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
+    <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <!-- Theme css (Bootstrap included) -->
+    <link rel="stylesheet" id="maincss" href="https://dieghernan.github.io/assets/css/main.css" >
+    <!-- Highlighter -->
+    <link id="csshigh" rel="stylesheet" href="https://dieghernan.github.io/assets/css/highlighter.css" >
+    <!-- Custom css -->
+    <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FWXW2HLTVZ');
+    </script>
+        <!-- start custom head snippets -->
+    <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
+    <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc">
+    <meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508">
+    <meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+    <!-- insert favicons. use https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    <!-- end custom head snippets -->
+</head>
+<body class="d-flex flex-column" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
+					</li><li class="nav-item dropdown"><a class="nav-link dropdown-toggle " href="#" id="Archives" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Archives</a>
+						<div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li></ul>
+			</div></div>
+</nav>
+			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
+  <a class="u-url d-none" href="https://dieghernan.github.io/202610_building-a-documentation-chatbot/">Invisible link to canonical for Microformats</a>
+<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Building a documentation chatbot for <span class="chulapa">Chulapa</span></h1><p class="lead chulapa-subtitle p-summary">A development diary: context, small screens and useful answers</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+ <main class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList" itemid="https://dieghernan.github.io/202610_building-a-documentation-chatbot/#breadcrumb">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202610_building-a-documentation-chatbot/#breadcrumb-1"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202610_building-a-documentation-chatbot/#breadcrumb-2">
+      <link itemprop="item" href="https://dieghernan.github.io/202610_building-a-documentation-chatbot/">
+        <span itemprop="name">Building a documentation chatbot for Chulapa</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2026-10-09T00:00:00+02:00" class="dt-published" >09 oct 2026</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202610_building-a-documentation-chatbot/&text=Building+a+documentation+chatbot+for+Chulapa&via=dhernangomez&hashtags=jekyll,html,chulapa" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Building%20a%20documentation%20chatbot%20for%20Chulapa%20https://dieghernan.github.io/202610_building-a-documentation-chatbot/%20%23jekyll%20%23html%20%23chulapa" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202610_building-a-documentation-chatbot/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Building+a+documentation+chatbot+for+Chulapa%20https://dieghernan.github.io/202610_building-a-documentation-chatbot/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202610_building-a-documentation-chatbot/&title=Building+a+documentation+chatbot+for+Chulapa" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+   <div class="row pt-2">
+     <aside class="col-lg-2 mt-lg-3 small"><div class="h-card p-author"><a class="u-url d-none" href="https://github.com/dieghernan">dieghernan</a><div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+     <article id="maincontent" class="col-lg-8 mt-3 e-content">
+	<button class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='demo' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar'>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Building a documentation chatbot for <span class="chulapa">Chulapa</span></a></p>		
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#start-with-a-prototype-then-decide-where-it-belongs" class="nav-link">Start with a prototype, then decide where it belongs</a></li><li class="nav-item nav d-block"><a href="#a-static-site-with-a-separate-ai-backend" class="nav-link">A static site with a separate AI backend</a></li><li class="nav-item nav d-block"><a href="#the-first-answers-exposed-the-missing-context" class="nav-link">The first answers exposed the missing context</a></li><li class="nav-item nav d-block"><a href="#testing-questions-instead-of-counting-successful-requests" class="nav-link">Testing questions instead of counting successful requests</a></li><li class="nav-item nav d-block"><a href="#a-chat-history-that-does-not-become-model-memory" class="nav-link">A chat history that does not become model memory</a></li><li class="nav-item nav d-block"><a href="#the-phone-found-problems-the-desktop-missed" class="nav-link">The phone found problems the desktop missed</a></li><li class="nav-item nav d-block"><a href="#limits-and-maintenance-are-part-of-the-implementation" class="nav-link">Limits and maintenance are part of the implementation</a></li><li class="nav-item nav d-block"><a href="#what-i-want-this-assistant-to-do-well" class="nav-link">What I want this assistant to do well</a></li></ul>
+		</nav>   
+	</div>
+       <p>This website uses my <strong>Jekyll</strong> theme,
+<a href="https://dieghernan.github.io/chulapa"><span class="chulapa">Chulapa</span></a>. Some time ago, I
+started wondering whether I could add a chatbot to its documentation. The docs
+already explain the settings, layouts and snippets, but you sometimes need to
+know what a feature is called before finding it. Could I make that a little
+easier?</p>
+<p>The idea was simple: ask a question, get a useful example and follow a link to
+the original docs. With <strong>Codex</strong>, I had an initial version working on the page
+in <strong>less than an hour</strong>. That was the prototype, though. Checking its answers
+and making it behave properly on a phone took quite a few more rounds.</p>
+<h2 id="start-with-a-prototype-then-decide-where-it-belongs">Start with a prototype, then decide where it belongs</h2>
+<p>I started with references rather than an empty editor. The <a href="https://www.freecodecamp.org/news/how-to-build-an-embeddable-ai-chatbot-widget-with-cloudflare-workers/">freeCodeCamp
+tutorial on an embeddable
+chatbot</a>
+provided a practical starting point for a browser widget backed by
+<strong>Cloudflare Workers</strong>. I also liked the visual approach in <a href="https://www.malte-grosser.com/post/adding-a-free-ai-chatbot/">Malte Grosser’s chatbot
+post</a>.</p>
+<p>I built the implementation with <strong>Codex</strong>. I described what I wanted, supplied
+those references and asked it to inspect the existing theme and documentation.
+Then we worked through the Worker, the widget and the context together. I tested
+the page, asked the chatbot questions and brought back screenshots when
+something looked wrong. <strong>Codex</strong> helped turn that feedback into code changes.</p>
+<p>This was useful for getting a prototype running quickly. It also meant I could
+spend more time trying the assistant as a visitor would: does this answer help
+me configure my site? Can I read it with the keyboard open? What happens after a
+long conversation?</p>
+<p>At first, I considered adding the chatbot as a theme feature. That quickly felt
+like too much to ask of someone who just wants a <strong>Jekyll</strong> site. An AI account, a
+separate backend and a maintained knowledge summary would become part of their
+setup.</p>
+<p>So I kept it as an extension of the theme’s documentation site. The
+<a href="https://github.com/dieghernan/chulapa/tree/main/docs/ai-chatbot">implementation and evaluation
+files</a> live
+under <code class="language-plaintext highlighter-rouge">docs/ai-chatbot/</code> in the theme repository. Someone using the theme does
+not need to set up a Worker or maintain an AI context. This also gives me room
+to experiment without making every experiment part of the template.</p>
+<h2 id="a-static-site-with-a-separate-ai-backend">A static site with a separate AI backend</h2>
+<p><strong>Jekyll</strong> still builds the documentation as static pages. A script loads the chat
+widget, and a <strong>Cloudflare Worker</strong> serves the widget and handles questions. The
+Worker sends the question, instructions and a reviewed documentation summary to
+<strong>Workers AI</strong>, then returns the answer to the browser.</p>
+<p>The model currently configured is <code class="language-plaintext highlighter-rouge">@cf/google/gemma-4-26b-a4b-it</code>. The Worker
+accesses it through an <code class="language-plaintext highlighter-rouge">AI</code> binding, so visitors do not receive an API key. The
+important separation is between publishing the site and publishing the
+assistant: a <strong>GitHub Pages</strong> deployment does not update the Worker.</p>
+<p>There is no automatic document retrieval in this implementation. The context is
+a Markdown file maintained alongside the code. Adding a documentation URL or the
+RSS feed URL gives the model a reference to share; it does not make the Worker
+download that page or discover new posts.</p>
+<p>That was an intentional starting point. I can inspect exactly which facts the
+assistant receives, and updating it does not require a vector database or a
+document indexing pipeline. The tradeoff is that I have to keep that summary
+current.</p>
+<h2 id="the-first-answers-exposed-the-missing-context">The first answers exposed the missing context</h2>
+<p>One of my first questions was: “Can I add video here?” The answer did not really
+help. I knew the docs explained how to do it, so I asked <strong>Codex</strong> to check what the
+assistant was receiving. The summary needed the video snippet and its options,
+not just a general mention that videos were supported.</p>
+<p>Another exchange made the problem particularly obvious. I asked how to change a
+skin, and the assistant explained <code class="language-plaintext highlighter-rouge">chulapa-skin.skin</code>. Then I asked which skins
+were available. It replied that there were more than 40, but gave no names. That
+was related to the question, yet it did not help me choose anything.</p>
+<p>The context needed actual skin names and a link to the visual catalog. It also
+needed an instruction to give examples when someone asks what is available. For
+configuration questions, a small complete example is often more useful than
+another paragraph:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">chulapa-skin</span><span class="pi">:</span>
+  <span class="na">skin</span><span class="pi">:</span> <span class="s">darkly</span>
+</code></pre></div></div>
+<p>I expanded the summary selectively: installation, configuration, layouts,
+videos, galleries, navigation, search, comments, SEO and the FAQ. Later passes
+added Sass variables and Markdown guidance. I tried to include the details that
+let someone act: exact option names, defaults, a short example and the right
+source page.</p>
+<p>Copying all the docs into the prompt would have been easier to automate. It
+would also make each request larger and leave plenty of irrelevant information
+competing with the answer. The goal was informative help with a manageable
+context, rather than the longest possible context.</p>
+<h2 id="testing-questions-instead-of-counting-successful-requests">Testing questions instead of counting successful requests</h2>
+<p>I asked <strong>Codex</strong> to work through the documentation in batches and send basic and
+advanced questions to the live assistant. Installation and skin changes were
+only the beginning. We also checked project-site URLs, favicons, local videos,
+galleries, highlighting and combinations of settings. I reviewed the results and
+used the weak answers to decide where the context needed more detail.</p>
+<p>Issues and Discussions supplied useful questions too. They show how people
+describe a problem before they know which option solves it. I treated them as
+test material, checking the answer against the documentation rather than
+assuming a suggested feature had been implemented.</p>
+<p>The evaluation runner records full responses so I can review the explanation,
+code and source links. A successful HTTP response only means that the request
+worked. It says nothing about whether the YAML is correct, the answer covers
+every part of the question or the link points to the right page.</p>
+<p>Some failures were subtle: a plausible option in the wrong place, an incomplete
+example or a source link with an invented anchor. Follow-up tests helped target
+those weaknesses. I also included unsupported features and unrelated questions
+to check whether the assistant would acknowledge missing information.</p>
+<p>This process is sometimes called “training the chatbot,” but I did not train or
+fine-tune the model. I improved the supplied context and instructions, then
+tested the resulting answers. Those changes can help, but they do not guarantee
+that every future response will be correct.</p>
+<h2 id="a-chat-history-that-does-not-become-model-memory">A chat history that does not become model memory</h2>
+<p>The widget keeps recent messages in the tab’s session storage, making it easier
+to return to an answer while browsing. Each request to the model is independent,
+however: earlier messages are not sent with the next question.</p>
+<p>That distinction needed to be visible. A familiar chat interface naturally
+invites questions such as “And what about that one?” Here, it is better to ask a
+complete question. I added that guidance near the input and a clear-chat control
+for the local history.</p>
+<p>Answers arrive as Markdown. The widget renders them with <strong>Marked</strong> and sanitizes
+the resulting HTML with <strong>DOMPurify</strong>. Lists and code blocks become readable, code
+can be copied, and permitted documentation links remain clickable. Formatting
+the theme name with its <code class="language-plaintext highlighter-rouge">chulapa</code> class also helps the assistant feel like part
+of the site, while code and configuration identifiers keep their original text.</p>
+<h2 id="the-phone-found-problems-the-desktop-missed">The phone found problems the desktop missed</h2>
+<p>The interface took several rounds of testing on a real phone. Opening the
+keyboard could zoom the page or leave the panel clipped. Rotating the phone made
+the available space even smaller. A desktop browser resized to a narrow width
+was useful, but it did not reproduce all of those behaviors.</p>
+<p>The input now uses a mobile-friendly text size, and the panel responds to the
+visual viewport so it can fit above the keyboard. Opening the chat on mobile
+does not automatically focus the input and summon the keyboard.</p>
+<p>Long conversations revealed another bug: a second scrollbar appeared on the
+outer panel, followed by a large empty area below the form. Constraining the
+message log and clipping its paint overflow kept scrolling inside the history,
+with the header and question form visible.</p>
+<p>The launcher also had to coexist with the floating navigation button and the
+table of contents. After trying different positions, I settled on stacking the
+chatbot above the navigation FAB on smaller screens, matching its size and right
+margin, with a gap between them. Small alignment differences were much more
+noticeable than I expected.</p>
+<p>I replaced the robot with a small sparkle SVG and used <code class="language-plaintext highlighter-rouge">currentColor</code> so its
+color follows the control’s CSS. The send button uses a paper-plane icon. These
+are small details, but they matter in a widget that stays visible while reading.</p>
+<h2 id="limits-and-maintenance-are-part-of-the-implementation">Limits and maintenance are part of the implementation</h2>
+<p>The Worker has input checks, a bounded response length and a rate-limit binding
+configured for five requests per IP per minute. Live testing eventually produced
+a rejection, but it also showed that the cutoff was not exactly the sixth
+request. Cloudflare describes this limiter as approximate and local to each
+location in its <a href="https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/">Rate Limiting API
+documentation</a>.
+It is useful protection, not an exact global usage counter.</p>
+<p>I kept the account on the Free plan without a paid fallback. The applicable
+allowance is a separate boundary to review against <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/">Cloudflare’s <strong>Workers AI</strong>
+pricing</a>.
+Testing questions consumes that allowance too.</p>
+<p>For context or implementation updates, I run these commands from the
+<span class="chulapa">Chulapa</span> repository:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>docs/ai-chatbot
+npm ci
+npm run build
+npm <span class="nb">test
+</span>npx wrangler deploy
+</code></pre></div></div>
+<p>The deployment step is deliberate. Updating a Markdown file in the repository
+does not change what the live model receives until the Worker is rebuilt and
+deployed.</p>
+<p>I also added instructions for coding agents: when documentation changes, review
+the assistant’s context and relevant evaluation cases. That should help keep
+maintenance connected to the work that changes the source documentation.</p>
+<h2 id="what-i-want-this-assistant-to-do-well">What I want this assistant to do well</h2>
+<p>I want someone to ask a practical question, receive an informative answer and
+leave with a working example or a useful documentation link. There are still
+limitations: independent questions require enough detail, combined questions can
+lose a part of the answer, and source links need continued checking.</p>
+<p>You can try it on the
+<a href="https://dieghernan.github.io/chulapa/docs"><span class="chulapa">Chulapa</span> documentation site</a>. Open the sparkle button and
+ask a complete question about your setup. I would love to hear which answers
+helped and which ones sent you back to the docs!</p>
+<p>Getting the first version onto the page was quick. Most of the work came after
+that: choosing the context, checking the answers and fixing the things I found
+by using it. The documentation and site search are still there, and I want the
+assistant to make them easier to explore.</p>
+<div class="alert alert-info p-3 mx-2 mb-3" role="note">
+<p><strong>AI assistance:</strong> I wrote this post with help from
+<strong>Codex</strong>, including drafting and editing the text. I reviewed it
+against the implementation and my experience building the chatbot. The header
+illustration was also generated with AI.</p>
+</div>
+         <div class="mt-5 pt-3 mb-3 text-center">
+            <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
+            <script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
+         </div>
+     </article>
+   </div>
+ </main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202602_geobounds/" tabindex="-1">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Introducing geobounds</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Introducing ge...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none invisible">
+	   <p class="page-link chulapa-label"></p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline invisible">
+	   <p class="page-link chulapa-label"></p>
+	 </li>
+   <li class="page-item text-right ml-0 invisible">
+      <a class="page-link border-0 px-4" href="#">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#jekyll" class="badge chulapa-pill-bg-primary p-category" rel="tag" >jekyll</a>
+      <a href="https://dieghernan.github.io/tags#html" class="badge chulapa-pill-bg-primary p-category" rel="tag" >html</a>
+      <a href="https://dieghernan.github.io/tags#chulapa" class="badge chulapa-pill-bg-primary p-category" rel="tag" >chulapa</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+       <div class="container-lg mt-1 mb-2">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+             <hr>
+               <h2 class="h5">Related posts</h2>
+             <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202502_liquid-group-by/" class="chulapa-text-body-color">
+              Implementing <code>group_by</code> count in Liquid
+            </a>
+         </p>
+           <p class="card-text">
+              <small>See the magic happening</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-28T00:00:00+01:00">
+                february 28, 2025
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" class="chulapa-text-body-color">
+              Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Make it work in 6 steps - A short tutorial</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-05-20T00:00:00+02:00">
+                may 20, 2019
+              </time>
+            </small>
+       </div>
+     </div></nav>
+           </div>
+         </div>
+       </div></div>
+<!-- Footer -->
+ <footer class="footer-chulapa text-center mt-0 pt-3">
+   <div class="container">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+         <script src="https://giscus.app/client.js"
+  data-repo="dieghernan/dieghernan.github.io"
+  data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA=" data-category="Blog"
+  data-category-id="DIC_kwDOEOD0Qs4CcqYn" data-mapping="title"
+  data-strict="0" data-reactions-enabled="1" data-emit-metadata="1"
+  data-input-position="top" data-theme="dark_high_contrast" data-lang="es"
+  data-loading="lazy" crossorigin="anonymous" async>
+</script>
+           </div>
+        </div>
+      </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RSS</span>
+            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">Stack Overflow</span>
+            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">WikiCommons</span>
+            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">GitHub</span>
+            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span><span class="sr-only">RPubs</span>
+            </a></div><p class="mt-2 mb-3">&copy; 2026 dieghernan</p>
+          <!-- Do not remove this in order to give  attributions -->
+         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End  attributions -->
+       </div>
+     </div>
+ </div>
+</footer>
+<!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>
