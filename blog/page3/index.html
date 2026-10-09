@@ -136,30 +136,23 @@
       gtag('js', new Date());
       gtag('config', 'G-FWXW2HLTVZ');
     </script>
-    <!-- start custom head snippets -->
-<link rel="webmention"
-  href="https://webmention.io/dieghernan.github.io/webmention" />
-<link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc" />
-<meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508" />
-<meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
-<!-- insert favicons. use https://realfavicongenerator.net/ -->
-<link rel="apple-touch-icon" sizes="180x180"
-  href="/assets/img/favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32"
-  href="/assets/img/favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16"
-  href="/assets/img/favicons/favicon-16x16.png">
-<link rel="manifest" href="/assets/img/favicons/site.webmanifest">
-<link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg"
-  color="#5bbad5">
-<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
-<meta name="msapplication-TileColor" content="#2b5797">
-<meta name="msapplication-TileImage"
-  content="/assets/img/favicons/mstile-144x144.png">
-<meta name="msapplication-config"
-  content="/assets/img/favicons/browserconfig.xml">
-<meta name="theme-color" content="#000000">
-<!-- end custom head snippets -->
+        <!-- start custom head snippets -->
+    <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
+    <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc">
+    <meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508">
+    <meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+    <!-- insert favicons. use https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    <!-- end custom head snippets -->
 </head>
 <body class="d-flex flex-column" id="body">
 	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
@@ -212,7 +205,7 @@
  </nav>
  </div></div>
 <div class="row pt-2 mt-3">
-   <section class="col-md-8 offset-md-2">
+   <div class="col-md-8 offset-md-2">
 <div class="col-12 mb-2">
 <div class="card chulapa-border-card-index h-entry">
 	<div class="row g-0">
@@ -308,38 +301,43 @@ style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200
 	</div>
 </div>
 </div>
-   </section>
+   </div>
  </div>
-</main><nav aria-label="Page navigation example" class="container-lg mt-4 chulapa-pagination text-center">
-               <ul class="col-md-8 offset-md-2 pagination justify-content-around ">
-                   <li class="page-item  ">
-                        <a class="page-link border-0 px-3 px-sm-4" href="/blog" tabindex="-1">
-                            <i class="fa fa-step-backward" aria-hidden="true"></i><span class="sr-only">First</span>
-                        </a>
-                   </li>
-                   <li class="page-item ">
-                        <a class="page-link border-0 px-3 px-sm-4" href="/blog/page2/">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
-                        </a>
-                   </li>
-                   <li class="d-flex flex-grow-1">
-                   <ul class="list-unstyled d-flex flex-grow-1 justify-content-center chulapa-pagination-inner">
-                     <li class="page-item ">
-                          <a class="page-link border-0 rounded-0" href="/blog/page2/">2</a></li><li class="page-item  active">
-                          <a class="page-link border-0 rounded-0" href="/blog/page3/">3</a></li><li class="page-item ">
-                          <a class="page-link border-0 rounded-0" href="/blog/page4/">4</a></li>
-                   </ul>
-                   </li>
-                   <li class="page-item ">
-                        <a class="page-link border-0 px-3 px-sm-4" href="/blog/page4/">
-                            <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
-                   </li>
-                   <li class="page-item ">
-                        <a class="page-link border-0 px-3 px-sm-4" href="/blog/page6/">
-                            <i class="fa fa-step-forward" aria-hidden="true"></i><span class="sr-only">Last</span></a>
-                   </li>
-               </ul>
-           </nav>
+</main><nav aria-label="Blog pagination" class="container-lg mt-4 chulapa-pagination text-center">
+   <ul class="col-md-8 offset-md-2 pagination justify-content-around">
+     <li class="page-item ">
+        <a class="page-link border-0 px-3 px-sm-4" href="/blog">
+          <i class="fa fa-step-backward" aria-hidden="true"></i><span class="sr-only">First</span>
+        </a>
+     </li>
+     <li class="page-item ">
+        <a class="page-link border-0 px-3 px-sm-4" href="/blog/page2/">
+          <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+        </a>
+     </li>
+     <li class="d-flex flex-grow-1">
+       <ul class="list-unstyled d-flex flex-grow-1 justify-content-center chulapa-pagination-inner">
+         <li class="page-item ">
+              <a class="page-link border-0 rounded-0" href="/blog/page2/">2</a>
+           </li><li class="page-item  active">
+              <a class="page-link border-0 rounded-0" aria-current="page" href="/blog/page3/">3</a>
+           </li><li class="page-item ">
+              <a class="page-link border-0 rounded-0" href="/blog/page4/">4</a>
+           </li>
+       </ul>
+     </li>
+     <li class="page-item ">
+        <a class="page-link border-0 px-3 px-sm-4" href="/blog/page4/">
+          <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span>
+        </a>
+     </li>
+     <li class="page-item ">
+        <a class="page-link border-0 px-3 px-sm-4" href="/blog/page6/">
+          <i class="fa fa-step-forward" aria-hidden="true"></i><span class="sr-only">Last</span>
+        </a>
+     </li>
+   </ul>
+ </nav>
 <!-- Footer -->
  <footer class="footer-chulapa text-center mt-0 pt-3">
    <div class="container">
