@@ -34,10 +34,10 @@ Leaflet-providersESP.
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Minimal page | leaflet-providersESP</title>
     <meta charset="utf-8" />
+    <title>Minimal page | leaflet-providersESP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Load Leaflet -->
     <link
@@ -76,7 +76,7 @@ Leaflet-providersESP.
 ```
 
 <div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary">
-  <iframe class="embed-responsive-item" src="https://dieghernan.github.io/leaflet-providersESP/demo/minimal" allowfullscreen loading="lazy"></iframe>
+  <iframe class="embed-responsive-item" title="Leaflet-providersESP minimal map demo" src="https://dieghernan.github.io/leaflet-providersESP/demo/minimal" allowfullscreen loading="lazy"></iframe>
 </div>
 
 ## All providers
@@ -84,5 +84,5 @@ Leaflet-providersESP.
 {: .mt-5 .mb-2}
 
 <div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary">
-  <iframe class="embed-responsive-item" src="https://dieghernan.github.io/leaflet-providersESP/allproviders/" allowfullscreen loading="lazy"></iframe>
+  <iframe class="embed-responsive-item" title="Leaflet-providersESP map with all providers" src="https://dieghernan.github.io/leaflet-providersESP/allproviders/" allowfullscreen loading="lazy"></iframe>
 </div>

@@ -28,7 +28,7 @@ beautifully designed watch face.
 ![Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
 
 <div class="text-center">
-<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58c2f7110dfc32a52a00081f?native=false&query=Sfera&section=watchfaces" role="button">Download from Rebble Appstore</a>
+<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58c2f7110dfc32a52a00081f?native=false&query=Sfera&section=watchfaces">Download from Rebble Appstore</a>
 </div>
 
 ## Features

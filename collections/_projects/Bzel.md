@@ -27,7 +27,7 @@ as a moving dot or as a fill in the bezel.
 ![Bzel watch face with minutes displayed around the bezel.](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png)
 
 ::: text-center
-<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/59280895b67f9f43f80004c9" role="button">Download
+<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/59280895b67f9f43f80004c9">Download
 from Rebble Appstore</a>
 :::
 

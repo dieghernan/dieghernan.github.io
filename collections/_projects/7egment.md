@@ -28,7 +28,7 @@ your watch and smartphone.
 ![7egment watch face with a seven-segment time display and weather information.](https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png)
 
 <div class="text-center">
-<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/591ead370dfc32aacf000204?section=watchfaces" role="button">Download from Rebble Appstore</a>
+<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/591ead370dfc32aacf000204?section=watchfaces">Download from Rebble Appstore</a>
 </div>
 
 ## Features

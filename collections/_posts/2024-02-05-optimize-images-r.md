@@ -257,7 +257,7 @@ There are other alternatives for optimizing images with **R**, but first…
 
 <div class="text-center my-3">
 
-      <a class="btn btn-light border border-dark" role="button" aria-label="Sponsor @yihui" target="_top" href="https://github.com/sponsors/yihui?o=esb">
+      <a class="btn btn-light border border-dark" aria-label="Sponsor @yihui" target="_top" href="https://github.com/sponsors/yihui?o=esb">
       <i class="fa-regular fa-heart fa-lg mr-2" aria-hidden="true" style="color: #bf3989;"></i><span class="font-weight-bold">Sponsor Yihui Xie</span>
       </a>
 
