@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-10-09T14:15:51+02:00</updated>
+	<updated>2026-10-09T14:57:00+02:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -27,7 +27,7 @@
   		
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp&#39; &gt;
 			
-	&lt;p&gt;9 min.&lt;/p&gt;
+	&lt;p&gt;10 min.&lt;/p&gt;
 			&lt;p&gt;This website uses my &lt;strong&gt;Jekyll&lt;/strong&gt; theme,
 &lt;a href=&quot;https://dieghernan.github.io/chulapa&quot;&gt;&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;&lt;/a&gt;. Some time ago, I
 started wondering whether I could add a chatbot to its documentation. The docs
@@ -36,9 +36,11 @@ know what a feature is called before finding it. Could I make that a little
 easier?&lt;/p&gt;
 
 &lt;p&gt;The idea was simple: ask a question, get a useful example and follow a link to
-the original docs. With &lt;strong&gt;Codex&lt;/strong&gt;, I had an initial version working on the page
-in &lt;strong&gt;less than an hour&lt;/strong&gt;. That was the prototype, though. Checking its answers
-and making it behave properly on a phone took quite a few more rounds.&lt;/p&gt;
+the original docs. With &lt;a href=&quot;https://learn.chatgpt.com/learn/codex&quot;&gt;&lt;strong&gt;Codex&lt;/strong&gt;&lt;/a&gt;,
+OpenAI’s coding agent, I had an initial version working on the page in
+&lt;strong&gt;less than an hour&lt;/strong&gt;: I could open the widget, send a question and read its
+answer. That was the prototype, though. Checking its answers and making it
+behave properly on a phone took quite a few more rounds.&lt;/p&gt;
 
 &lt;h2 id=&quot;start-with-a-prototype-then-decide-where-it-belongs&quot;&gt;Start with a prototype, then decide where it belongs&lt;/h2&gt;
 
@@ -51,12 +53,14 @@ post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I built the implementation with &lt;strong&gt;Codex&lt;/strong&gt;. I described what I wanted, supplied
 those references and asked it to inspect the existing theme and documentation.
-Then we worked through the Worker, the widget and the context together. I tested
+There were three pieces to work on: the widget visitors use in the browser,
+the Worker that processes requests on Cloudflare and the context, a summary of
+the documentation supplied to the model. We worked through them together. I tested
 the page, asked the chatbot questions and brought back screenshots when
 something looked wrong. &lt;strong&gt;Codex&lt;/strong&gt; helped turn that feedback into code changes.&lt;/p&gt;
 
-&lt;p&gt;This was useful for getting a prototype running quickly. It also meant I could
-spend more time trying the assistant as a visitor would: does this answer help
+&lt;p&gt;Working this way let me spend more time trying the assistant as a visitor
+would: does this answer help
 me configure my site? Can I read it with the keyboard open? What happens after a
 long conversation?&lt;/p&gt;
 
@@ -74,15 +78,19 @@ to experiment without making every experiment part of the template.&lt;/p&gt;
 
 &lt;h2 id=&quot;a-static-site-with-a-separate-ai-backend&quot;&gt;A static site with a separate AI backend&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt; still builds the documentation as static pages. A script loads the chat
+&lt;p&gt;&lt;strong&gt;Jekyll&lt;/strong&gt; builds the static documentation pages. I chose a separate service
+to process the chatbot’s questions. A script loads the chat
 widget, and a &lt;strong&gt;Cloudflare Worker&lt;/strong&gt; serves the widget and handles questions. The
 Worker sends the question, instructions and a reviewed documentation summary to
-&lt;strong&gt;Workers AI&lt;/strong&gt;, then returns the answer to the browser.&lt;/p&gt;
+&lt;strong&gt;Workers AI&lt;/strong&gt;, Cloudflare’s service for running AI models, then returns the
+answer to the browser.&lt;/p&gt;
 
-&lt;p&gt;The model currently configured is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@cf/google/gemma-4-26b-a4b-it&lt;/code&gt;. The Worker
-accesses it through an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AI&lt;/code&gt; binding, so visitors do not receive an API key. The
-important separation is between publishing the site and publishing the
-assistant: a &lt;strong&gt;GitHub Pages&lt;/strong&gt; deployment does not update the Worker.&lt;/p&gt;
+&lt;p&gt;The model currently configured is &lt;strong&gt;Gemma&lt;/strong&gt;, using the identifier
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@cf/google/gemma-4-26b-a4b-it&lt;/code&gt;. The Worker accesses it through an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AI&lt;/code&gt; binding:
+a connection configured in Cloudflare that lets the Worker call &lt;strong&gt;Workers AI&lt;/strong&gt;.
+That connection stays on the server side, so visitors do not receive an API key.
+&lt;strong&gt;Codex&lt;/strong&gt; helped me build and test the implementation; &lt;strong&gt;Gemma&lt;/strong&gt; is the model
+that answers visitors’ questions.&lt;/p&gt;
 
 &lt;p&gt;There is no automatic document retrieval in this implementation. The context is
 a Markdown file maintained alongside the code. Adding a documentation URL or the
@@ -94,6 +102,13 @@ assistant receives, and updating it does not require a vector database or a
 document indexing pipeline. The tradeoff is that I have to keep that summary
 current.&lt;/p&gt;
 
+&lt;p&gt;Making the answers readable was another part of the interface work. They
+arrive as Markdown, which &lt;strong&gt;Marked&lt;/strong&gt; converts to HTML for lists, code blocks
+and links. &lt;strong&gt;DOMPurify&lt;/strong&gt; then removes potentially dangerous HTML before the
+answer is displayed. Visitors can copy code and follow permitted documentation
+links. Mentions of the theme use its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chulapa&lt;/code&gt; class, while code and
+configuration identifiers retain their original formatting.&lt;/p&gt;
+
 &lt;h2 id=&quot;the-first-answers-exposed-the-missing-context&quot;&gt;The first answers exposed the missing context&lt;/h2&gt;
 
 &lt;p&gt;One of my first questions was: “Can I add video here?” The answer did not really
@@ -101,15 +116,21 @@ help. I knew the docs explained how to do it, so I asked &lt;strong&gt;Codex&lt;
 assistant was receiving. The summary needed the video snippet and its options,
 not just a general mention that videos were supported.&lt;/p&gt;
 
-&lt;p&gt;Another exchange made the problem particularly obvious. I asked how to change a
-skin, and the assistant explained &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chulapa-skin.skin&lt;/code&gt;. Then I asked which skins
+&lt;p&gt;Another exchange made the problem particularly obvious. The theme has built-in
+skins that change the site’s visual appearance. I asked how to change a skin,
+and the assistant explained &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chulapa-skin.skin&lt;/code&gt;. Then I asked which skins
 were available. It replied that there were more than 40, but gave no names. That
 was related to the question, yet it did not help me choose anything.&lt;/p&gt;
 
-&lt;p&gt;The context needed actual skin names and a link to the visual catalog. It also
-needed an instruction to give examples when someone asks what is available. For
+&lt;p&gt;I added actual skin names and a link to the visual catalog to the context,
+along with an instruction to give examples when someone asks what is available.
+In the follow-up tests, the assistant returned skin names and a link to the
+catalog instead of just repeating the number of choices. That was a useful
+improvement I could check directly, even though other answers still needed work.
+For
 configuration questions, a small complete example is often more useful than
-another paragraph:&lt;/p&gt;
+another paragraph. For example, this goes in the site’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; to
+select the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;darkly&lt;/code&gt; skin:&lt;/p&gt;
 
 &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;chulapa-skin&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;skin&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;darkly&lt;/span&gt;
@@ -134,13 +155,19 @@ only the beginning. We also checked project-site URLs, favicons, local videos,
 galleries, highlighting and combinations of settings. I reviewed the results and
 used the weak answers to decide where the context needed more detail.&lt;/p&gt;
 
-&lt;p&gt;Issues and Discussions supplied useful questions too. They show how people
-describe a problem before they know which option solves it. I treated them as
-test material, checking the answer against the documentation rather than
-assuming a suggested feature had been implemented.&lt;/p&gt;
+&lt;p&gt;I also asked &lt;strong&gt;Codex&lt;/strong&gt; to look for real user questions in the
+&lt;a href=&quot;https://github.com/dieghernan/chulapa/issues&quot;&gt;Issues&lt;/a&gt; and
+&lt;a href=&quot;https://github.com/dieghernan/chulapa/discussions&quot;&gt;Discussions&lt;/a&gt; of the
+&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt; repository. These helped us test the
+assistant with the wording people actually use when they get stuck, rather
+than only questions based on documentation headings. We used those questions
+to prepare evaluation cases and checked the answers against the docs. Feature
+requests needed particular care: someone asking for an option does not mean
+the theme already supports it.&lt;/p&gt;
 
-&lt;p&gt;The evaluation runner records full responses so I can review the explanation,
-code and source links. A successful HTTP response only means that the request
+&lt;p&gt;We added an evaluation script that sends questions to the live assistant in
+batches and saves the full responses. That gives me a record to review for
+the explanation, code and source links. A successful HTTP response only means that the request
 worked. It says nothing about whether the YAML is correct, the answer covers
 every part of the question or the link points to the right page.&lt;/p&gt;
 
@@ -158,18 +185,15 @@ that every future response will be correct.&lt;/p&gt;
 
 &lt;p&gt;The widget keeps recent messages in the tab’s session storage, making it easier
 to return to an answer while browsing. Each request to the model is independent,
-however: earlier messages are not sent with the next question.&lt;/p&gt;
+however: earlier messages are not sent with the next question. This started as
+a limitation of the prototype, rather than a deliberate choice to rule out
+conversational memory, and remains a limitation of the version described here.
+Keeping the history visible does not change what the backend sends to the model.&lt;/p&gt;
 
 &lt;p&gt;That distinction needed to be visible. A familiar chat interface naturally
 invites questions such as “And what about that one?” Here, it is better to ask a
 complete question. I added that guidance near the input and a clear-chat control
 for the local history.&lt;/p&gt;
-
-&lt;p&gt;Answers arrive as Markdown. The widget renders them with &lt;strong&gt;Marked&lt;/strong&gt; and sanitizes
-the resulting HTML with &lt;strong&gt;DOMPurify&lt;/strong&gt;. Lists and code blocks become readable, code
-can be copied, and permitted documentation links remain clickable. Formatting
-the theme name with its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chulapa&lt;/code&gt; class also helps the assistant feel like part
-of the site, while code and configuration identifiers keep their original text.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-phone-found-problems-the-desktop-missed&quot;&gt;The phone found problems the desktop missed&lt;/h2&gt;
 
@@ -178,41 +202,50 @@ keyboard could zoom the page or leave the panel clipped. Rotating the phone made
 the available space even smaller. A desktop browser resized to a narrow width
 was useful, but it did not reproduce all of those behaviors.&lt;/p&gt;
 
-&lt;p&gt;The input now uses a mobile-friendly text size, and the panel responds to the
-visual viewport so it can fit above the keyboard. Opening the chat on mobile
-does not automatically focus the input and summon the keyboard.&lt;/p&gt;
+&lt;p&gt;The input now uses a mobile-friendly text size, and the panel follows the
+space actually visible on screen when the keyboard opens. That available area
+is called the visual viewport; using it helps the panel fit above the keyboard.
+Opening the chat on mobile does not automatically focus the input and summon
+the keyboard.&lt;/p&gt;
 
 &lt;p&gt;Long conversations revealed another bug: a second scrollbar appeared on the
 outer panel, followed by a large empty area below the form. Constraining the
 message log and clipping its paint overflow kept scrolling inside the history,
 with the header and question form visible.&lt;/p&gt;
 
-&lt;p&gt;The launcher also had to coexist with the floating navigation button and the
-table of contents. After trying different positions, I settled on stacking the
-chatbot above the navigation FAB on smaller screens, matching its size and right
-margin, with a gap between them. Small alignment differences were much more
+&lt;p&gt;The button that opens the chatbot also had to coexist with the theme’s floating
+menu button and its separate table-of-contents control. After trying different
+positions, I settled on stacking the chatbot button above the menu button on
+smaller screens, matching its size and right margin, with a gap between them.
+Small alignment differences were much more
 noticeable than I expected.&lt;/p&gt;
 
-&lt;p&gt;I replaced the robot with a small sparkle SVG and used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;currentColor&lt;/code&gt; so its
-color follows the control’s CSS. The send button uses a paper-plane icon. These
-are small details, but they matter in a widget that stays visible while reading.&lt;/p&gt;
+&lt;p&gt;I wanted the launcher to fit the site visually and still be easy to recognize.
+We tried a robot icon first, then settled on a small sparkle SVG for opening
+the assistant and a paper-plane icon for sending a question. The SVG uses
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;currentColor&lt;/code&gt;, so its color follows the button’s CSS instead of being fixed
+inside the image. That makes it easier to keep the icon consistent with the
+rest of the control.&lt;/p&gt;
 
 &lt;h2 id=&quot;limits-and-maintenance-are-part-of-the-implementation&quot;&gt;Limits and maintenance are part of the implementation&lt;/h2&gt;
 
-&lt;p&gt;The Worker has input checks, a bounded response length and a rate-limit binding
+&lt;p&gt;I wanted to keep the experiment within the Free account’s allowance, including
+the requests we sent while testing. The Worker has input checks, a bounded
+response length and a rate-limit binding
 configured for five requests per IP per minute. Live testing eventually produced
 a rejection, but it also showed that the cutoff was not exactly the sixth
 request. Cloudflare describes this limiter as approximate and local to each
-location in its &lt;a href=&quot;https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/&quot;&gt;Rate Limiting API
+location, meaning a Cloudflare data center, in its &lt;a href=&quot;https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/&quot;&gt;Rate Limiting API
 documentation&lt;/a&gt;.
 It is useful protection, not an exact global usage counter.&lt;/p&gt;
 
-&lt;p&gt;I kept the account on the Free plan without a paid fallback. The applicable
-allowance is a separate boundary to review against &lt;a href=&quot;https://developers.cloudflare.com/workers-ai/platform/pricing/&quot;&gt;Cloudflare’s &lt;strong&gt;Workers AI&lt;/strong&gt;
-pricing&lt;/a&gt;.
-Testing questions consumes that allowance too.&lt;/p&gt;
+&lt;p&gt;The per-IP limit controls how often a visitor can send questions; the account’s
+quota limits total AI usage. I kept the account on the Free plan without
+configuring a paid alternative to continue answering when its allowance runs
+out. The current allowances are listed in
+&lt;a href=&quot;https://developers.cloudflare.com/workers-ai/platform/pricing/&quot;&gt;Cloudflare’s &lt;strong&gt;Workers AI&lt;/strong&gt; pricing&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;For context or implementation updates, I run these commands from the
+&lt;p&gt;To maintain this implementation, I run these commands from the
 &lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt; repository:&lt;/p&gt;
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;docs/ai-chatbot
@@ -222,13 +255,16 @@ npm &lt;span class=&quot;nb&quot;&gt;test
 &lt;/span&gt;npx wrangler deploy
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The deployment step is deliberate. Updating a Markdown file in the repository
-does not change what the live model receives until the Worker is rebuilt and
-deployed.&lt;/p&gt;
+&lt;p&gt;These commands build, test and deploy the existing Worker; they are not a
+complete installation guide for a new chatbot. A &lt;strong&gt;GitHub Pages&lt;/strong&gt; deployment
+publishes the documentation, while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wrangler deploy&lt;/code&gt; updates the assistant.
+Changes to the context reach the live model only after rebuilding and deploying
+the Worker.&lt;/p&gt;
 
-&lt;p&gt;I also added instructions for coding agents: when documentation changes, review
-the assistant’s context and relevant evaluation cases. That should help keep
-maintenance connected to the work that changes the source documentation.&lt;/p&gt;
+&lt;p&gt;I also added an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AGENTS.md&lt;/code&gt; file with repository instructions for &lt;strong&gt;Codex&lt;/strong&gt; and
+other coding agents: when documentation changes, review the assistant’s context
+and relevant evaluation cases. That makes this check part of the work on the
+docs, instead of something I have to remember afterward.&lt;/p&gt;
 
 &lt;h2 id=&quot;what-i-want-this-assistant-to-do-well&quot;&gt;What I want this assistant to do well&lt;/h2&gt;
 
@@ -242,10 +278,10 @@ lose a part of the answer, and source links need continued checking.&lt;/p&gt;
 ask a complete question about your setup. I would love to hear which answers
 helped and which ones sent you back to the docs!&lt;/p&gt;
 
-&lt;p&gt;Getting the first version onto the page was quick. Most of the work came after
-that: choosing the context, checking the answers and fixing the things I found
-by using it. The documentation and site search are still there, and I want the
-assistant to make them easier to explore.&lt;/p&gt;
+&lt;p&gt;The most useful part of the process was trying the assistant with questions I
+already knew how to answer. It made the gaps easy to spot: an answer could sound
+reasonable and still leave me without the setting or example I needed. That is
+what I want to keep checking as the documentation grows.&lt;/p&gt;
 
 &lt;div class=&quot;alert alert-info p-3 mx-2 mb-3&quot; role=&quot;note&quot;&gt;
 &lt;p&gt;&lt;strong&gt;AI assistance:&lt;/strong&gt; I wrote this post with help from
