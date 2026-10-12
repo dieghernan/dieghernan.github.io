@@ -296,7 +296,8 @@
 				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
 			</button>
 		</p>
-		<nav class="navbar-nav px-3 my-auto">		  <p class="mb-2" ><a class="nav-link font-weight-bold lead" href="#">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</a></p>		
+		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
+		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub</a></p>
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#the-githubjekyll-part" class="nav-link">The GitHub/Jekyll part</a><ul><li class="nav-item nav d-block"><a href="#1-what-to-include" class="nav-link">1. What to include</a></li><li class="nav-item nav d-block"><a href="#2-where-to-include" class="nav-link">2. Where to include</a></li></ul></li><li class="nav-item nav d-block"><a href="#the-rstudio-part" class="nav-link">The RStudio part</a><ul><li class="nav-item nav d-block"><a href="#3-creating-the-leaflet-map" class="nav-link">3. Creating the leaflet map</a></li><li class="nav-item nav d-block"><a href="#4-set-up-the-yaml-front-matter-" class="nav-link">4. Set up the YAML front matter <a name="step4"></a></a></li></ul></li><li class="nav-item nav d-block"><a href="#the-markdown-part" class="nav-link">The Markdown part</a><ul><li class="nav-item nav d-block"><a href="#5-modifying-the-md-file" class="nav-link"><del>5. Modifying the <code class="language-plaintext highlighter-rouge">.md</code> file</del></a></li><li class="nav-item nav d-block"><a href="#6-publish-your-post" class="nav-link">6. Publish your post</a></li></ul></li><li class="nav-item nav d-block"><a href="#gallery-size-of-a-leaflet-map-" class="nav-link">Gallery: Size of a leaflet map <a name="extra"></a></a><ul><li class="nav-item nav d-block"><a href="#fixed-size" class="nav-link">Fixed size</a></li><li class="nav-item nav d-block"><a href="#responsive-size" class="nav-link">Responsive size</a></li></ul></li></ul>
 		</nav>   
 	</div>
@@ -612,11 +613,11 @@ screen, no matter what device you are using.</p>
          </div>
        </div></div>
   <!-- Footer -->
- <footer class="footer-chulapa text-center mt-0 pt-3">
-   <div class="container">
-         <div class="row">
-           <div class="col-lg-8 offset-lg-2">
-         <script src="https://giscus.app/client.js"
+  <footer class="footer-chulapa text-center mt-0 pt-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+              <script src="https://giscus.app/client.js"
   data-repo="dieghernan/dieghernan.github.io"
   data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA=" data-category="Blog"
   data-category-id="DIC_kwDOEOD0Qs4CcqYn" data-mapping="title"
@@ -624,40 +625,58 @@ screen, no matter what device you are using.</p>
   data-input-position="top" data-theme="dark_high_contrast" data-lang="es"
   data-loading="lazy" crossorigin="anonymous" async>
 </script>
-           </div>
+            </div>
+          </div>
         </div>
-      </div>
-   <div class="container">
-     <div class="row">
-       <div class="col-xl-10 offset-xl-1"><div role="navigation" class="d-flex flex-wrap justify-content-center"><a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-10 offset-xl-1">
+          <nav aria-label="Footer links" class="d-flex flex-wrap justify-content-center">
+            <a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span><span class="sr-only">RSS</span>
-            </a><a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+              </span>
+              <span class="sr-only">RSS</span>
+            </a>
+            <a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
-              </span><span class="sr-only">Stack Overflow</span>
-            </a><a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+              </span>
+              <span class="sr-only">Stack Overflow</span>
+            </a>
+            <a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
-              </span><span class="sr-only">WikiCommons</span>
-            </a><a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+              </span>
+              <span class="sr-only">WikiCommons</span>
+            </a>
+            <a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-              </span><span class="sr-only">GitHub</span>
-            </a><a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead"><span class="fa-stack fa-lg" aria-hidden="true">
+              </span>
+              <span class="sr-only">GitHub</span>
+            </a>
+            <a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
-              </span><span class="sr-only">RPubs</span>
-            </a></div><p class="mt-2 mb-3">&copy; 2026 dieghernan</p>
-          <!-- Do not remove this in order to give  attributions -->
-         <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
-          <!-- End  attributions -->
-       </div>
-     </div>
- </div>
-</footer>
-<!-- Footer -->
+              </span>
+              <span class="sr-only">RPubs</span>
+            </a>
+          </nav>
+          <p class="mt-2 mb-3">&copy; 2026 dieghernan</p>
+          <!-- Do not remove this in order to give attributions -->
+          <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End attributions -->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer -->
 <!-- JS, Popper.js, and jQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
