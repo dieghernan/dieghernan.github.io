@@ -30,11 +30,11 @@ https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Meat_consumption_rate_
 https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Organ_donor_rate_per_million_by_country_gradient_map_%282017%29.svg/1000px-Organ_donor_rate_per_million_by_country_gradient_map_%282017%29.svg.png,
 https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Population_per_km2_in_Spain_%282011%29.svg/2560px-Population_per_km2_in_Spain_%282011%29.svg.png" %}
 
-{% include_cached snippets/carousel.html external=externalgallery  random="true" controls="true" indicators="true" interval=2000 %}
+{% include_cached snippets/carousel.html external=externalgallery  random="true" controls="true" indicators="true" interval=2000 photoswipe=true %}
 
 
 ## Blog
 
 Plots used on my posts.
 
-{% include_cached snippets/carousel.html internal="imgblog" random="true" controls="true" indicators="true" interval=2000 %}
+{% include_cached snippets/carousel.html internal="imgblog" random="true" controls="true" indicators="true" interval=2000 photoswipe=true %}
