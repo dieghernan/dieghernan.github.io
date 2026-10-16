@@ -63,6 +63,9 @@ The blog uses its discoverable Atom and RSS feeds to publish through
 [Bridgy Fed](https://fed.brid.gy/web/dieghernan.github.io). The home page's
 representative `h-card` supplies the blog's display name, avatar, banner and bio.
 Keep its `u-url` pointing to the site's canonical home page.
+Edit `indieweb_profile` in `_config.yml` to update the name, nickname, bio,
+location, topics and profile links. The `custom/h-card.html` include renders
+the card outside the home page's `h-entry` so parsers can discover it directly.
 
 The file [`.well-known/atproto-did`](.well-known/atproto-did) contains the DID of
 the blog's bridged Bluesky account, not the author's personal account. Jekyll

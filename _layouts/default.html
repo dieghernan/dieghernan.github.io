@@ -2,6 +2,9 @@
 layout: minimal
 header_in_content: true
 ---
+{% if page.url == '/' %}
+  {% include custom/h-card.html %}
+{% endif %}
 <div class="h-entry d-flex flex-column flex-fill">
   {% include snippets/canonical-url.html url=page.url canonical=page.canonical_url %}
   <a class="u-url d-none" href="{{ canonical_url | escape }}">Invisible link to canonical for Microformats</a>
