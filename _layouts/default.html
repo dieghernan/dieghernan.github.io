@@ -44,6 +44,13 @@ header_in_content: true
         {% endif %}
       </article>
     </div>
+    {% if page.show_webmentions %}
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          {% include custom/webmentions.html %}
+        </div>
+      </div>
+    {% endif %}
   </main>
   {%- if page.show_bottomnavs -%}
     {%- include components/navbeforeafter.html -%}

@@ -1,0 +1,26 @@
+{% include snippets/canonical-url.html url=page.url canonical=page.canonical_url %}
+<link rel="stylesheet" href="{{ '/assets/css/webmentions.css' | relative_url }}">
+<section class="webmentions mt-5 pt-4 border-top" aria-labelledby="webmentions-heading"
+  data-webmentions data-target="{{ canonical_url | escape }}">
+  <header class="webmentions-header">
+    <h2 id="webmentions-heading" class="h4"><i class="fa-regular fa-comments mr-2" aria-hidden="true"></i>Mentions and replies</h2>
+    <p class="text-muted small">Conversations from across the web.</p>
+  </header>
+  <button class="btn btn-outline-primary mb-3" type="button" data-webmentions-load hidden>Load mentions</button>
+  <p class="webmentions-status small text-muted" role="status" data-webmentions-status></p>
+  <ol class="webmentions-replies" data-webmentions-results hidden></ol>
+  <div class="webmentions-reactions" data-webmentions-reactions hidden></div>
+  <noscript><p>JavaScript is needed to display mentions. You can still send one using the form below.</p></noscript>
+  <details class="webmentions-send mt-4">
+    <summary>Shared your thoughts on this post? <span class="text-primary">Drop your link here!</span></summary>
+    <form class="mt-3" method="post" action="https://webmention.io/dieghernan.github.io/webmention">
+      <p class="small" id="webmention-help">Publish a page that links to this post, then submit its URL. Webmention.io will check the link before the mention appears.</p>
+      <input type="hidden" name="target" value="{{ canonical_url | escape }}">
+      <label for="webmention-source">URL of your page</label>
+      <input class="form-control mb-3" id="webmention-source" name="source" type="url"
+        placeholder="https://example.com/your-post/" aria-describedby="webmention-help" required>
+      <button class="btn btn-outline-primary" type="submit">Send webmention</button>
+    </form>
+  </details>
+</section>
+<script src="{{ '/assets/js/webmentions.js' | relative_url }}" defer></script>
