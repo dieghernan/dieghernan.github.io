@@ -19,7 +19,7 @@
           "@id": "https://dieghernan.github.io/202610_webmentions/"
         },
         "headline": "Conversations across the web with Webmentions",
-        "image": ["https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp"],
+        "image": ["https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp"],
         "datePublished": "2026-10-16T00:00:00+02:00",
         "dateModified": "2026-10-16T00:00:00+02:00",
         "author": {
@@ -108,7 +108,7 @@
     <meta name="author" content="dieghernan" >
     <meta name="copyright" content="dieghernan" >
     <meta name="description" content="Bringing mentions, likes and reposts back to the blog - A small addition to my Jekyll blog, inspired by Matt Hobbs: Webmentions with a Chulapa look.">
-    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp" >
+    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
     <meta property="og:title" content="Conversations across the web with Webmentions | One World" >
@@ -123,8 +123,8 @@
     <meta property="article:tag" content="indieweb">
     <meta property="og:description" content="Bringing mentions, likes and reposts back to the blog - A small addition to my Jekyll blog, inspired by Matt Hobbs: Webmentions with a Chulapa look." >
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp" >
-    <meta property="og:image:alt" content="Laptop displaying a blog on a wooden desk beside a window, with an open notebook, a pen and potted plants." >
+    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp" >
+    <meta property="og:image:alt" content="Paper collage of a blog page connected by threads to smaller pages, conversation bubbles and circular portraits." >
     <meta property="og:image:width" content="1727" >
     <meta property="og:image:height" content="911" >
     <meta property="og:image:type" content="image/webp" >
@@ -209,7 +209,7 @@
 			<div id="chulapa-content" tabindex="-1"></div>
 <div class="h-entry d-flex flex-column flex-fill">
   <a class="u-url d-none" href="https://dieghernan.github.io/202610_webmentions/">Invisible link to canonical for Microformats</a>
-<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp')">
+<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp')">
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
@@ -276,18 +276,20 @@
        <p>Conversations about a blog post often happen somewhere else. Someone shares a
 link, replies on their own site or reacts to a post on social media. I wanted
 to bring some of that activity back here.</p>
-<p>This implementation was directly inspired by <strong>Matt Hobbs’s article,
-“Implementing Webmentions on this blog,” published on Nooshu</strong>:</p>
-<p><a href="https://nooshu.com/blog/2019/11/18/implementing-webmentions/">https://nooshu.com/blog/2019/11/18/implementing-webmentions/</a></p>
+<p>This implementation was directly inspired by <strong>Matt Hobbs’s</strong> article,
+<a href="https://nooshu.com/blog/2019/11/18/implementing-webmentions/">Implementing Webmentions on this blog</a>,
+published on <strong>Nooshu</strong>.</p>
 <p>I liked its simple presentation: links to mentions and replies,
 followed by small groups of avatars for likes and reposts. So I added a
 similar section to this blog, using the typography, colors and buttons from
 <a href="https://dieghernan.github.io/chulapa"><span class="chulapa">Chulapa</span></a>.</p>
 <h2 id="how-it-works">How it works</h2>
-<p>A Webmention is a notification that one page links to another. If you write
+<p>A <a href="https://www.w3.org/TR/webmention/">Webmention</a> is a notification that one
+page links to another. If you write
 about one of my posts on your own site, you can send its URL so the link can
 appear below the original article.</p>
-<p>This blog already advertised a <strong>webmention.io</strong> endpoint. The missing piece
+<p>This blog already advertised a <a href="https://webmention.io/"><strong>Webmention.io</strong></a>
+endpoint. The missing piece
 was displaying the mentions it had collected. A small JavaScript file now
 requests the public mentions for each post’s canonical URL and builds the
 section automatically when the page opens.</p>
@@ -316,7 +318,7 @@ It is a nice way to let a static blog take part in a wider conversation.</p>
 <p><strong>AI assistance:</strong> I wrote this post with help from
 <strong>Codex</strong>, including drafting and editing the text. Codex also
 helped implement and test the Webmentions section. The header image was
-generated with AI and depicts a fictional workspace.</p>
+also generated with AI.</p>
 </div>
          <div class="mt-5 pt-3 mb-3 text-center">
             <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
@@ -346,7 +348,7 @@ generated with AI and depicts a fictional workspace.</p>
       <label for="webmention-source">URL of your page</label>
       <input class="form-control mb-3" id="webmention-source" name="source" type="url"
         placeholder="https://example.com/your-post/" aria-describedby="webmention-help" required>
-      <button class="btn btn-outline-primary" type="submit">Send webmention</button>
+      <button class="btn btn-primary" type="submit">Send webmention</button>
     </form>
   </details>
 </section>

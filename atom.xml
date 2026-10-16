@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-10-16T22:36:26+02:00</updated>
+	<updated>2026-10-16T22:43:21+02:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -25,17 +25,16 @@
 		&lt;h3&gt;Bringing mentions, likes and reposts back to the blog&lt;/h3&gt;
 		
   		
-			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp&#39; &gt;
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp&#39; &gt;
 			
 	&lt;p&gt;2 min.&lt;/p&gt;
 			&lt;p&gt;Conversations about a blog post often happen somewhere else. Someone shares a
 link, replies on their own site or reacts to a post on social media. I wanted
 to bring some of that activity back here.&lt;/p&gt;
 
-&lt;p&gt;This implementation was directly inspired by &lt;strong&gt;Matt Hobbs’s article,
-“Implementing Webmentions on this blog,” published on Nooshu&lt;/strong&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://nooshu.com/blog/2019/11/18/implementing-webmentions/&quot;&gt;https://nooshu.com/blog/2019/11/18/implementing-webmentions/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This implementation was directly inspired by &lt;strong&gt;Matt Hobbs’s&lt;/strong&gt; article,
+&lt;a href=&quot;https://nooshu.com/blog/2019/11/18/implementing-webmentions/&quot;&gt;Implementing Webmentions on this blog&lt;/a&gt;,
+published on &lt;strong&gt;Nooshu&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;I liked its simple presentation: links to mentions and replies,
 followed by small groups of avatars for likes and reposts. So I added a
@@ -44,11 +43,13 @@ similar section to this blog, using the typography, colors and buttons from
 
 &lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;/h2&gt;
 
-&lt;p&gt;A Webmention is a notification that one page links to another. If you write
+&lt;p&gt;A &lt;a href=&quot;https://www.w3.org/TR/webmention/&quot;&gt;Webmention&lt;/a&gt; is a notification that one
+page links to another. If you write
 about one of my posts on your own site, you can send its URL so the link can
 appear below the original article.&lt;/p&gt;
 
-&lt;p&gt;This blog already advertised a &lt;strong&gt;webmention.io&lt;/strong&gt; endpoint. The missing piece
+&lt;p&gt;This blog already advertised a &lt;a href=&quot;https://webmention.io/&quot;&gt;&lt;strong&gt;Webmention.io&lt;/strong&gt;&lt;/a&gt;
+endpoint. The missing piece
 was displaying the mentions it had collected. A small JavaScript file now
 requests the public mentions for each post’s canonical URL and builds the
 section automatically when the page opens.&lt;/p&gt;
@@ -86,7 +87,7 @@ It is a nice way to let a static blog take part in a wider conversation.&lt;/p&g
 &lt;p&gt;&lt;strong&gt;AI assistance:&lt;/strong&gt; I wrote this post with help from
 &lt;strong&gt;Codex&lt;/strong&gt;, including drafting and editing the text. Codex also
 helped implement and test the Webmentions section. The header image was
-generated with AI and depicts a fictional workspace.&lt;/p&gt;
+also generated with AI.&lt;/p&gt;
 &lt;/div&gt;
 
 		</content>
