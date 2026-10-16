@@ -1,4 +1,5 @@
 ---
+giscus_discussion: 39
 title: "Implementing <code>group_by</code> count in Liquid"
 subtitle: "See the magic happening"
 excerpt: |

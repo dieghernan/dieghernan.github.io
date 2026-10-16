@@ -1,4 +1,5 @@
 ---
+giscus_discussion: 36
 title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)"
 subtitle: How to overlay SpatRasters
 excerpt: Using shadow effects on relief maps is a very common technique,

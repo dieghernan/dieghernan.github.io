@@ -1,4 +1,5 @@
 ---
+giscus_discussion: 32
 title: "Beautiful maps with R (V): Point densities"
 subtitle: "Bertin's dot density maps with R and GHSL"
 excerpt: Another way to represent demographics on a map.
