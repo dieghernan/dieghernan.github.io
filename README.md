@@ -57,6 +57,27 @@ The [GitHub Actions workflows](.github/workflows/) build the site and deploy it 
 
 The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.org/). Jekyll copies it unchanged to `/llms.txt`, and the deployment workflows include it with the generated site. Update its selected links when the site structure or featured resources change.
 
+## Bridgy Fed
+
+The blog uses its discoverable Atom and RSS feeds to publish through
+[Bridgy Fed](https://fed.brid.gy/web/dieghernan.github.io). The home page's
+representative `h-card` supplies the blog's display name, avatar, banner and bio.
+Keep its `u-url` pointing to the site's canonical home page.
+
+The file [`.well-known/atproto-did`](.well-known/atproto-did) contains the DID of
+the blog's bridged Bluesky account, not the author's personal account. Jekyll
+includes `.well-known` explicitly so the file is published without HTML layout.
+After deployment, check that `https://dieghernan.github.io/.well-known/atproto-did`
+returns only the DID, then complete the custom Bluesky handle change from the
+blog's Bridgy Fed user page. Publishing the file alone does not change the handle.
+Refresh the profile there after publishing changes to the `h-card`.
+
+Keep feed-based publishing enabled: sending even one webmention to Bridgy Fed
+switches the site to webmention-based publishing and stops feed polling. The
+incoming webmention.io endpoint is separate and can remain enabled. Feed polling
+is asynchronous; the current Bridgy Fed implementation schedules checks between
+two hours and one day apart. A profile refresh does not import posts.
+
 ## License
 
 This repository is distributed under the [MIT license](LICENSE).

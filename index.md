@@ -90,8 +90,8 @@ og_title: "One World: R packages, maps and open-source projects"
 <a rel="me" href="https://web.brid.gy/r/https://dieghernan.github.io/" class="d-none">brid.gy Verification</a>
 
 <span class="h-card d-none">
-  <a rel="me" href="https://dieghernan.github.io" class="u-url u-uid">dieghernan</a>
-  <img class="u-photo" src="https://dieghernan.github.io/assets/img/site/avatar.png" />
-  <img class="u-featured" src="https://dieghernan.github.io/assets/img/site/banner.png" />
+  <a rel="me" href="{{ '/' | absolute_url }}" class="p-name u-url u-uid">One World · dieghernan</a>
+  <img class="u-photo" src="{{ site.author.avatar | absolute_url }}" alt="dieghernan's avatar" />
+  <img class="u-featured" src="{{ site.og_image | absolute_url }}" alt="{{ site.og_image_alt | escape }}" />
   <span class="p-note">I just love maps.</span>
 </span>

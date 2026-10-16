@@ -59,6 +59,7 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: _site/ # Change it to 'docs/_site/' if the site is hosted in (e.g.) 'docs' folder
+          include-hidden-files: true # Publish .well-known/atproto-did
 
   # Deployment job
   deploy:
