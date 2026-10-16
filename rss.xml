@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, dieghernan</copyright>	
-		<pubDate>Fri, 16 Oct 2026 22:24:08 +0200</pubDate>
-		<lastBuildDate>Fri, 16 Oct 2026 22:24:08 +0200</lastBuildDate>
+		<pubDate>Fri, 16 Oct 2026 22:36:26 +0200</pubDate>
+		<lastBuildDate>Fri, 16 Oct 2026 22:36:26 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -18,6 +18,81 @@
 			<link>https://dieghernan.github.io/</link>
 			<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		</image><item>
+			<title>Conversations across the web with Webmentions</title>
+			<description>
+				<![CDATA[	
+ 				<h3>Bringing mentions, likes and reposts back to the blog</h3>
+    		<p>2 min.</p>
+				<div><p>Conversations about a blog post often happen somewhere else. Someone shares a
+link, replies on their own site or reacts to a post on social media. I wanted
+to bring some of that activity back here.</p>
+
+<p>This implementation was directly inspired by <strong>Matt Hobbs’s article,
+“Implementing Webmentions on this blog,” published on Nooshu</strong>:</p>
+
+<p><a href="https://nooshu.com/blog/2019/11/18/implementing-webmentions/">https://nooshu.com/blog/2019/11/18/implementing-webmentions/</a></p>
+
+<p>I liked its simple presentation: links to mentions and replies,
+followed by small groups of avatars for likes and reposts. So I added a
+similar section to this blog, using the typography, colors and buttons from
+<a href="https://dieghernan.github.io/chulapa"><span class="chulapa">Chulapa</span></a>.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>A Webmention is a notification that one page links to another. If you write
+about one of my posts on your own site, you can send its URL so the link can
+appear below the original article.</p>
+
+<p>This blog already advertised a <strong>webmention.io</strong> endpoint. The missing piece
+was displaying the mentions it had collected. A small JavaScript file now
+requests the public mentions for each post’s canonical URL and builds the
+section automatically when the page opens.</p>
+
+<p>Mentions and replies appear as a numbered list of links and authors. Likes
+and reposts have their own counts and rows of overlapping avatars. The
+content stays on its original site; each link takes you to the conversation.
+The existing GitHub comments are still available, too.</p>
+
+<h2 id="a-small-addition-to-a-static-blog">A small addition to a static blog</h2>
+
+<p>The implementation uses a Jekyll include, a stylesheet and plain JavaScript.
+There is no extra Jekyll plugin or change to the deployment workflow.
+<strong>Webmention.io</strong> handles receiving and verifying links, while the browser
+loads the results through its public API.</p>
+
+<p>I tried it with the <a href="/202602_geobounds/">geobounds post</a>,
+which already had mentions, and with a recent post that had none. Both cases
+matter: an empty section should still explain how to join in.</p>
+
+<p>Social reactions need a bridge that sends them as Webmentions; they do not
+appear automatically just because a link was shared on a social network.</p>
+
+<h2 id="send-a-link">Send a link</h2>
+
+<p>Written something that links to this post? Open <strong>Shared your thoughts on this
+post? Drop your link here!</strong> below and submit your page’s URL. The form works
+without JavaScript, although displaying existing mentions requires it.</p>
+
+<p>Thanks to <strong>Matt Hobbs</strong> for the inspiration and for sharing his
+<a href="https://gist.github.com/Nooshu/121e5bf7f3d5c6528413c57db257894f">implementation</a>.
+It is a nice way to let a static blog take part in a wider conversation.</p>
+
+<div class="alert alert-info p-3 mx-2 mb-3" role="note">
+<p><strong>AI assistance:</strong> I wrote this post with help from
+<strong>Codex</strong>, including drafting and editing the text. Codex also
+helped implement and test the Webmentions section. The header image was
+generated with AI and depicts a fictional workspace.</p>
+</div>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/202610_webmentions/</link>
+			<category>posts</category>
+		    <category>chulapa</category><category>html</category><category>indieweb</category><category>jekyll</category><media:title type="html"><![CDATA[Conversations across the web with Webmentions ]]></media:title>
+      <media:content url="https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202610_webmentions/</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 +0200</pubDate>
+		</item><item>
 			<title>Building a documentation chatbot for Chulapa</title>
 			<description>
 				<![CDATA[	
@@ -1053,11 +1128,11 @@ array:</p>
     </tr>
     <tr>
       <td>jekyll</td>
-      <td>3</td>
+      <td>4</td>
     </tr>
     <tr>
       <td>html</td>
-      <td>3</td>
+      <td>4</td>
     </tr>
     <tr>
       <td>beautiful_maps</td>
@@ -1173,7 +1248,7 @@ array:</p>
     </tr>
     <tr>
       <td>chulapa</td>
-      <td>2</td>
+      <td>3</td>
     </tr>
     <tr>
       <td>geobounds</td>
@@ -1182,6 +1257,10 @@ array:</p>
     <tr>
       <td>dataset</td>
       <td>3</td>
+    </tr>
+    <tr>
+      <td>indieweb</td>
+      <td>1</td>
     </tr>
     <tr>
       <td>pebble</td>
@@ -1312,6 +1391,14 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
       <td>4</td>
     </tr>
     <tr>
+      <td>jekyll</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>html</td>
+      <td>4</td>
+    </tr>
+    <tr>
       <td>flags</td>
       <td>4</td>
     </tr>
@@ -1340,19 +1427,15 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
       <td>3</td>
     </tr>
     <tr>
-      <td>jekyll</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>html</td>
-      <td>3</td>
-    </tr>
-    <tr>
       <td>inset</td>
       <td>3</td>
     </tr>
     <tr>
       <td>COVID19</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>chulapa</td>
       <td>3</td>
     </tr>
     <tr>
@@ -1381,10 +1464,6 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
     </tr>
     <tr>
       <td>gpkg</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>chulapa</td>
       <td>2</td>
     </tr>
     <tr>
@@ -1433,6 +1512,10 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
     </tr>
     <tr>
       <td>geobounds</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>indieweb</td>
       <td>1</td>
     </tr>
     <tr>

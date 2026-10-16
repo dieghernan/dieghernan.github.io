@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-10-16T22:24:08+02:00</updated>
+	<updated>2026-10-16T22:36:26+02:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -14,6 +14,89 @@
 	<rights>(c) 2026, dieghernan</rights>
 	<icon>https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png</icon>
 	<logo>https://dieghernan.github.io/assets/img/site/banner.png</logo><entry>
+		<title type="html">Conversations across the web with Webmentions</title>
+		<link href="https://dieghernan.github.io/202610_webmentions/" rel="alternate" type="text/html" title="Conversations across the web with Webmentions"/>
+		<published>2026-10-16T00:00:00+02:00</published>
+		<updated>2026-10-16T00:00:00+02:00</updated>
+		<id>https://dieghernan.github.io/202610_webmentions/</id>
+		<content type="html" xml:base="https://dieghernan.github.io/202610_webmentions/">
+		
+		
+		&lt;h3&gt;Bringing mentions, likes and reposts back to the blog&lt;/h3&gt;
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202610-webmentions-header-photo.webp&#39; &gt;
+			
+	&lt;p&gt;2 min.&lt;/p&gt;
+			&lt;p&gt;Conversations about a blog post often happen somewhere else. Someone shares a
+link, replies on their own site or reacts to a post on social media. I wanted
+to bring some of that activity back here.&lt;/p&gt;
+
+&lt;p&gt;This implementation was directly inspired by &lt;strong&gt;Matt Hobbs’s article,
+“Implementing Webmentions on this blog,” published on Nooshu&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nooshu.com/blog/2019/11/18/implementing-webmentions/&quot;&gt;https://nooshu.com/blog/2019/11/18/implementing-webmentions/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I liked its simple presentation: links to mentions and replies,
+followed by small groups of avatars for likes and reposts. So I added a
+similar section to this blog, using the typography, colors and buttons from
+&lt;a href=&quot;https://dieghernan.github.io/chulapa&quot;&gt;&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-it-works&quot;&gt;How it works&lt;/h2&gt;
+
+&lt;p&gt;A Webmention is a notification that one page links to another. If you write
+about one of my posts on your own site, you can send its URL so the link can
+appear below the original article.&lt;/p&gt;
+
+&lt;p&gt;This blog already advertised a &lt;strong&gt;webmention.io&lt;/strong&gt; endpoint. The missing piece
+was displaying the mentions it had collected. A small JavaScript file now
+requests the public mentions for each post’s canonical URL and builds the
+section automatically when the page opens.&lt;/p&gt;
+
+&lt;p&gt;Mentions and replies appear as a numbered list of links and authors. Likes
+and reposts have their own counts and rows of overlapping avatars. The
+content stays on its original site; each link takes you to the conversation.
+The existing GitHub comments are still available, too.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-small-addition-to-a-static-blog&quot;&gt;A small addition to a static blog&lt;/h2&gt;
+
+&lt;p&gt;The implementation uses a Jekyll include, a stylesheet and plain JavaScript.
+There is no extra Jekyll plugin or change to the deployment workflow.
+&lt;strong&gt;Webmention.io&lt;/strong&gt; handles receiving and verifying links, while the browser
+loads the results through its public API.&lt;/p&gt;
+
+&lt;p&gt;I tried it with the &lt;a href=&quot;/202602_geobounds/&quot;&gt;geobounds post&lt;/a&gt;,
+which already had mentions, and with a recent post that had none. Both cases
+matter: an empty section should still explain how to join in.&lt;/p&gt;
+
+&lt;p&gt;Social reactions need a bridge that sends them as Webmentions; they do not
+appear automatically just because a link was shared on a social network.&lt;/p&gt;
+
+&lt;h2 id=&quot;send-a-link&quot;&gt;Send a link&lt;/h2&gt;
+
+&lt;p&gt;Written something that links to this post? Open &lt;strong&gt;Shared your thoughts on this
+post? Drop your link here!&lt;/strong&gt; below and submit your page’s URL. The form works
+without JavaScript, although displaying existing mentions requires it.&lt;/p&gt;
+
+&lt;p&gt;Thanks to &lt;strong&gt;Matt Hobbs&lt;/strong&gt; for the inspiration and for sharing his
+&lt;a href=&quot;https://gist.github.com/Nooshu/121e5bf7f3d5c6528413c57db257894f&quot;&gt;implementation&lt;/a&gt;.
+It is a nice way to let a static blog take part in a wider conversation.&lt;/p&gt;
+
+&lt;div class=&quot;alert alert-info p-3 mx-2 mb-3&quot; role=&quot;note&quot;&gt;
+&lt;p&gt;&lt;strong&gt;AI assistance:&lt;/strong&gt; I wrote this post with help from
+&lt;strong&gt;Codex&lt;/strong&gt;, including drafting and editing the text. Codex also
+helped implement and test the Webmentions section. The header image was
+generated with AI and depicts a fictional workspace.&lt;/p&gt;
+&lt;/div&gt;
+
+		</content>
+		
+		<author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
+		<summary type="html">A small addition to my Jekyll blog, inspired by Matt Hobbs: Webmentions with a Chulapa look.</summary>
+		<category term="posts"/>
+		<category term="chulapa"/><category term="html"/><category term="indieweb"/><category term="jekyll"/>
+	</entry><entry>
 		<title type="html">Building a documentation chatbot for &lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;</title>
 		<link href="https://dieghernan.github.io/202610_building-a-documentation-chatbot/" rel="alternate" type="text/html" title="Building a documentation chatbot for Chulapa"/>
 		<published>2026-10-09T00:00:00+02:00</published>
@@ -1086,11 +1169,11 @@ array:&lt;/p&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;jekyll&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;html&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;beautiful_maps&lt;/td&gt;
@@ -1206,7 +1289,7 @@ array:&lt;/p&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;chulapa&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;geobounds&lt;/td&gt;
@@ -1215,6 +1298,10 @@ array:&lt;/p&gt;
     &lt;tr&gt;
       &lt;td&gt;dataset&lt;/td&gt;
       &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;indieweb&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;pebble&lt;/td&gt;
@@ -1345,6 +1432,14 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
       &lt;td&gt;4&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td&gt;jekyll&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;html&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
       &lt;td&gt;flags&lt;/td&gt;
       &lt;td&gt;4&lt;/td&gt;
     &lt;/tr&gt;
@@ -1373,19 +1468,15 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
       &lt;td&gt;3&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;jekyll&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;html&lt;/td&gt;
-      &lt;td&gt;3&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
       &lt;td&gt;inset&lt;/td&gt;
       &lt;td&gt;3&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;COVID19&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;chulapa&lt;/td&gt;
       &lt;td&gt;3&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -1414,10 +1505,6 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;gpkg&lt;/td&gt;
-      &lt;td&gt;2&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;chulapa&lt;/td&gt;
       &lt;td&gt;2&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -1466,6 +1553,10 @@ endfor %} {% endfor %} {% assign sorted_tags = sorted_tags | uniq %}
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;geobounds&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;indieweb&lt;/td&gt;
       &lt;td&gt;1&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
