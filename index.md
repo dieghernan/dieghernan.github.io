@@ -13,13 +13,13 @@ seo_title: "One World: R packages, maps and open-source projects"
 og_title: "One World: R packages, maps and open-source projects"
 ---
 
-## <a href="./blog" class="text-dark">Recent posts</a>
+## <a href="./blog" class="text-body">Recent posts</a>
 {: .mb-5 }
 
 {% include_cached components/indexcards.html cacheddocs=site.posts cachedlimit=3 %}
 
 <div class="text-right mx-3">
-  <a href="./blog/" class="btn btn-outline-primary border-0">Blog <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>
+  <a href="./blog/" class="btn btn-primary border-0">Blog <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>
 </div>
 
 <div class="mt-5 pt-3 mb-3 text-center">
@@ -30,7 +30,7 @@ og_title: "One World: R packages, maps and open-source projects"
 * * *
 {: .my-5 .bg-primary }
 
-## <a href="./projects" class="text-dark">Projects</a>
+## <a href="./projects" class="text-body">Projects</a>
 {: .mb-5 }
 
 {%- assign alldocs = site.documents |
@@ -39,7 +39,7 @@ og_title: "One World: R packages, maps and open-source projects"
 {% include_cached components/indexcards.html cacheddocs=alldocs cachedlimit=3 %}
 
 <div class="text-right mx-3">
-  <a href="./projects" class="btn btn-outline-primary border-0">More projects <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>
+  <a href="./projects" class="btn btn-primary border-0">More projects <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>
 </div>
 
   {%- assign alldocs = site.documents -%}
