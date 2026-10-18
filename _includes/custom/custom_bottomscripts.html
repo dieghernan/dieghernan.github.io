@@ -37,8 +37,9 @@ if (themeSelector) {
     const updateThemeSelector = function () {
         const mode = document.documentElement.dataset.themeMode || "light";
         themeLabel.textContent = themeNames[mode];
-        themeSelector.setAttribute("aria-label", "Color theme: " + themeNames[mode]);
-        themeSelector.setAttribute("title", "Color theme: " + themeNames[mode]);
+        const themeButton = themeSelector.querySelector("#chulapa-theme-selector-button");
+        themeButton.setAttribute("aria-label", "Color theme: " + themeNames[mode]);
+        themeButton.setAttribute("title", "Color theme: " + themeNames[mode]);
         themeIcon.className = themeIcons[mode];
 
         for (const option of themeOptions) {
