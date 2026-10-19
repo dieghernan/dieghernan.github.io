@@ -3,7 +3,7 @@
     {%- assign syndication_url = value | strip -%}
     {%- assign prefix = syndication_url | downcase | slice: 0, 8 -%}
     {%- assign short_prefix = syndication_url | downcase | slice: 0, 7 -%}
-    {%- assign host = syndication_url | split: '/' | slice: 2 | first -%}
+    {%- assign host = syndication_url | split: '/' | slice: 2 | first | split: '?' | first | split: '#' | first -%}
     {%- if host and host != empty -%}
       {%- if prefix == 'https://' or short_prefix == 'http://' -%}
         <li class="list-inline-item"><a class="u-syndication text-break" rel="syndication" href="{{ syndication_url | escape }}">{{ host | escape }}</a></li>
