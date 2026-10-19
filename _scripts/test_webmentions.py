@@ -48,7 +48,7 @@ class WebmentionsTests(unittest.TestCase):
         self.assertEqual(self.calls, [])
 
     def test_new_post_sends_once_and_edited_post_resends(self):
-        state = {'version': 1, 'posts': {}}
+        state = {'version': 2, 'posts': {}}
         wm.process(self.posts, state, request=self.request)
         self.assertEqual(len(self.calls), 3)
         wm.process(self.posts, state, request=self.request)
@@ -63,14 +63,14 @@ class WebmentionsTests(unittest.TestCase):
             if data:
                 raise TimeoutError('receiver unavailable')
             return self.request(url, data)
-        state = {'version': 1, 'posts': {}}
+        state = {'version': 2, 'posts': {}}
         wm.process(self.posts, state, request=fail)
         self.assertNotIn(TARGET, state['posts'][SOURCE])
         wm.process(self.posts, state, request=self.request)
         self.assertIn(TARGET, state['posts'][SOURCE])
 
     def test_stale_live_article_is_not_sent(self):
-        state = {'version': 1, 'posts': {}}
+        state = {'version': 2, 'posts': {}}
         self.html = self.html.replace('Hello', 'Old')
         wm.process(self.posts, state, request=self.request)
         self.assertEqual(self.calls, [(SOURCE, None)])
@@ -100,10 +100,34 @@ class WebmentionsTests(unittest.TestCase):
         headers['Link'] = f'<{ENDPOINT}>; title="Webmention, endpoint"; rel="webmention"'
         self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, headers, '')), ENDPOINT)
 
+    def test_layout_scope_migration_does_not_resend_known_deliveries(self):
+        state = {'version': 1, 'posts': {SOURCE: {TARGET: 'old-layout-digest'}}}
+        with patch.dict(wm.SCOPE_MIGRATIONS, {'old-layout-digest': self.post['digest']}):
+            wm.process(self.posts, state, request=self.request)
+        self.assertEqual(self.calls, [])
+        self.assertEqual(state['version'], 2)
+        self.assertEqual(state['posts'][SOURCE][TARGET], self.post['digest'])
+        self.html = self.html.replace('Hello', 'Edited after migration')
+        self.post['digest'] = wm.Page(self.html).digest
+        wm.process(self.posts, state, request=self.request)
+        self.assertEqual(len(self.calls), 3)
+
+    def test_layout_scope_migration_does_not_mask_an_editorial_edit(self):
+        state = {'version': 1, 'posts': {SOURCE: {TARGET: 'old-layout-digest'}}}
+        with patch.dict(wm.SCOPE_MIGRATIONS, {'old-layout-digest': 'different-editorial-content'}):
+            wm.process(self.posts, state, request=self.request)
+        self.assertEqual(len(self.calls), 3)
+
+    def test_layout_scope_migration_retains_failed_targets(self):
+        state = {'version': 1, 'posts': {SOURCE: {}}}
+        wm.process(self.posts, state, request=self.request)
+        self.assertEqual(len(self.calls), 3)
+        self.assertEqual(state['posts'][SOURCE][TARGET], self.post['digest'])
+
     def test_no_endpoint_is_recorded(self):
         def unsupported(url, data=None):
             return url, Message(), self.html if url == SOURCE else '<p>No endpoint</p>'
-        state = {'version': 1, 'posts': {}}
+        state = {'version': 2, 'posts': {}}
         wm.process(self.posts, state, request=unsupported)
         self.assertIn(TARGET, state['posts'][SOURCE])
 

@@ -118,8 +118,13 @@ records each accepted source/target/content combination and links without an
 endpoint. Unchanged deliveries are skipped; failed requests are retried on the
 next successful deployment. An edited article may notify existing destinations
 again. Removing links or deleting posts does not send deletion notifications.
-Keep this state branch: deleting it resets the baseline. No extra secret,
-service or Python dependency is needed; the job uses the repository's
+Keep this state branch: deleting it resets the baseline. Ledger version 2
+uses the audited fingerprint pairs in `_scripts/webmention-scope-v2.json` to
+migrate recorded targets to the editorial-only `e-content` scope without
+resending them just because the layout changed. Both the old and new hashes
+must match; an editorial edit does not match that pair and is still processed.
+Targets without a record (including failed submissions) remain pending. No extra
+secret, service or Python dependency is needed; the job uses the repository's
 `GITHUB_TOKEN` with permission to write this branch.
 
 The sender excludes this site's own domain and `fed.brid.gy` (including its
