@@ -4,7 +4,6 @@ subtitle: "Easy access to administrative boundaries from geoBoundaries"
 description: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds, including simplified and harmonized datasets."
 excerpt: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds."
 syndication:
-  - https://rweekly.org/2026-W08.html
   - https://www.r-bloggers.com/2026/02/introducing-geoboundaries/
 tags:
   - r_bloggers
