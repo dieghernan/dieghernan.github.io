@@ -2,6 +2,8 @@
 title: "Beautiful maps with R (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
 excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This package geotags images, using a spatial object (from sf or terra) as a geographic reference.
+syndication:
+  - https://www.r-bloggers.com/2022/01/beautiful-maps-with-r-iv-fun-with-flags-revisited/
 tags:
   - r_bloggers
   - rstats

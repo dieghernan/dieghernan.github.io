@@ -5,6 +5,8 @@ excerpt: A common challenge when creating maps is how to include an inset map in
   your visualization. An inset map is a smaller map usually included in a corner
   that may provide additional context to the overall map, or may include map
   units that would not usually be represented properly.
+syndication:
+  - https://www.r-bloggers.com/2022/03/insets-with-ggplot2-and-tmap-and-mapsf/
 tags:
   - r_bloggers
   - rstats
