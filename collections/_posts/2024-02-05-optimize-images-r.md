@@ -3,6 +3,8 @@ giscus_discussion: 34
 title: "Optimize your images with R and reSmush.it"
 subtitle: "Introducing the <strong>resmush</strong> package"
 excerpt: Compress the size of your images with R, resmush and reSmush.it
+syndication:
+  - https://www.r-bloggers.com/2024/02/optimize-your-images-with-r-and-resmush-it/
 tags:
   - r_bloggers
   - r_package

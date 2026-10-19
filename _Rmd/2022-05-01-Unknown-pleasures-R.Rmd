@@ -4,6 +4,8 @@ subtitle: Joyplot elevation maps with <strong>ggridges</strong> and <strong>terr
 excerpt:
   Create ridgelines (AKA joyplots) of territories using elevation data with
   R, sf, terra and ggridges.
+syndication:
+  - https://www.r-bloggers.com/2022/04/unknown-pleasures-with-r/
 tags:
   - r_bloggers
   - rstats

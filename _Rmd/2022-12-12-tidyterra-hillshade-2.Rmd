@@ -2,6 +2,8 @@
 title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)"
 subtitle: "The rain in Spain does not stay mainly in the plain"
 excerpt: "Add marginal plots to a SpatRaster map on ggplot2"
+syndication:
+  - https://www.r-bloggers.com/2022/12/hillshade-colors-and-marginal-plots-with-tidyterra-ii/
 tags:
   - r_bloggers
   - rstats

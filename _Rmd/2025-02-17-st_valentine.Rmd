@@ -1,6 +1,9 @@
 ---
 title: "Happy Valentine's Day"
 subtitle: "Do you know the Bonne projection?"
+syndication:
+  - https://www.r-bloggers.com/2025/02/happy-valentines-day-2/
+  - https://www.r-bloggers.com/2024/02/happy-valentines-day/
 tags:
   - r_bloggers
   - beautiful_maps

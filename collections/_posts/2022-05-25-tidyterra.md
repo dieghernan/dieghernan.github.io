@@ -3,6 +3,8 @@ title: "Introducing <strong>tidyterra</strong>"
 subtitle: Easily work with and plot SpatRasters
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
+syndication:
+  - https://www.r-bloggers.com/2022/05/introducing-tidyterra/
 tags:
   - r_bloggers
   - rstats

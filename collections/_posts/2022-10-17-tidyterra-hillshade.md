@@ -4,6 +4,8 @@ title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)
 subtitle: How to overlay SpatRasters
 excerpt: Using shadow effects on relief maps is a very common technique,
   which produces informative yet beautiful maps.
+syndication:
+  - https://www.r-bloggers.com/2022/10/hillshade-colors-and-marginal-plots-with-tidyterra-i/
 tags:
   - r_bloggers
   - rstats
