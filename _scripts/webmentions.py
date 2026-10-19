@@ -200,16 +200,55 @@ def posts_in(site):
     return posts
 
 
+def header_parts(value, separator):
+    """Split Link values/parameters outside quoted strings and URI brackets."""
+    start = 0
+    quoted = escaped = bracketed = False
+    for index, char in enumerate(value):
+        if escaped:
+            escaped = False
+        elif quoted and char == '\\':
+            escaped = True
+        elif char == '"' and not bracketed:
+            quoted = not quoted
+        elif not quoted:
+            if char == '<':
+                bracketed = True
+            elif char == '>':
+                bracketed = False
+            elif char == separator and not bracketed:
+                yield value[start:index].strip()
+                start = index + 1
+    yield value[start:].strip()
+
+
+def header_endpoints(header):
+    for link in header_parts(header, ','):
+        match = re.fullmatch(r'<([^>]+)>(.*)', link)
+        if not match:
+            continue
+        for parameter in header_parts(match[2], ';'):
+            name, equals, value = parameter.partition('=')
+            if equals and name.strip().lower() == 'rel':
+                value = value.strip()
+                if value.startswith('"'):
+                    quoted = re.fullmatch(r'"((?:[^"\\]|\\.)*)"', value)
+                    if not quoted:
+                        break
+                    value = re.sub(r'\\(.)', r'\1', quoted[1])
+                if 'webmention' in value.lower().split():
+                    yield match[1]
+                break
+
+
 def discover(target, request=fetch):
     final, headers, html = request(target)
     # RFC 8288 Link headers take precedence over HTML discovery.
     for header in headers.get_all('Link', []):
-        for match in re.finditer(r'<([^>]+)>\s*((?:;[^,]*)*)', header):
-            rel = re.search(r';\s*rel\s*=\s*(?:"([^"]*)"|([^;\s,]+))', match[2], re.I)
-            if rel and 'webmention' in (rel[1] or rel[2]).lower().split():
-                endpoint = urljoin(final, match[1])
-                if allowed(endpoint):
-                    return endpoint
+        for value in header_endpoints(header):
+            endpoint = urljoin(final, value)
+            if allowed(endpoint):
+                return endpoint
     for value in Page(html).endpoints:
         endpoint = urljoin(final, value)
         if allowed(endpoint):

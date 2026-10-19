@@ -76,6 +76,30 @@ class WebmentionsTests(unittest.TestCase):
         self.assertEqual(self.calls, [(SOURCE, None)])
         self.assertEqual(state['posts'][SOURCE], {})
 
+    def test_link_headers_preserve_quoted_separators_and_escapes(self):
+        cases = [
+            f'<{ENDPOINT}>; title="Webmention, endpoint"; rel="webmention"',
+            f'<https://ignored.example/>; title="Other, link"; rel="alternate", <{ENDPOINT}>; rel=webmention',
+            f'<{ENDPOINT}>; title="A; B, C"; rel="alternate Webmention"',
+            '<' + ENDPOINT + r'>; title="A \"quoted, endpoint\""; rel="webmention"',
+            f'<{ENDPOINT}>; rel="webmention"; title="A, B", <https://ignored.example/>; rel=alternate',
+        ]
+        for header in cases:
+            with self.subTest(header=header):
+                headers = Message()
+                headers['Link'] = header
+                self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, headers, '')), ENDPOINT)
+        headers = Message()
+        headers['Link'] = f'<{ENDPOINT}?options=a,b>; title="Comma in URI"; rel=webmention'
+        self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, headers, '')), ENDPOINT + '?options=a,b')
+
+    def test_quoted_title_cannot_supply_a_false_relation(self):
+        headers = Message()
+        headers['Link'] = '<https://ignored.example/>; title="A; rel=webmention, B"; rel=alternate'
+        self.assertIsNone(wm.discover(TARGET, lambda u: (TARGET, headers, '')))
+        headers['Link'] = f'<{ENDPOINT}>; title="Webmention, endpoint"; rel="webmention"'
+        self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, headers, '')), ENDPOINT)
+
     def test_no_endpoint_is_recorded(self):
         def unsupported(url, data=None):
             return url, Message(), self.html if url == SOURCE else '<p>No endpoint</p>'
