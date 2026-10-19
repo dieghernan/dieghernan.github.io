@@ -124,8 +124,11 @@ service or Python dependency is needed; the job uses the repository's
 
 The sender excludes this site's own domain and `fed.brid.gy` (including its
 subdomains), endpoints and redirect destinations. This preserves Bridgy Fed's
-feed-based publishing. It also rejects private network addresses and never
-follows endpoint POST redirects. Receiver failures are logged and do not block
+feed-based publishing. It also pins each connection to a validated public IP while retaining the
+original hostname for HTTPS certificate checks, and never follows endpoint POST
+redirects. The sender requires direct network access (as on GitHub-hosted
+runners); it refuses requests if a forward proxy is configured because a proxy
+would resolve the destination independently. Receiver failures are logged and do not block
 the already completed deployment. Review the **Send outgoing Webmentions** job
 log for accepted, unsupported and retryable destinations. Disabling that job
 stops outgoing notifications without affecting incoming Webmentions.

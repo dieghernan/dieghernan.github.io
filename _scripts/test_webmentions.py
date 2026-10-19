@@ -3,7 +3,7 @@ from email.message import Message
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 from urllib.parse import parse_qs
 from urllib.request import Request
 
@@ -113,6 +113,54 @@ class WebmentionsTests(unittest.TestCase):
         with patch.object(wm.socket, 'getaddrinfo', return_value=private):
             with self.assertRaises(ValueError):
                 wm.validate_request(TARGET)
+
+
+    def test_relation_tokens_are_case_insensitive(self):
+        for token in ('Webmention', 'WEBMENTION', 'webmention'):
+            for tag in ('link', 'a'):
+                html = f'<{tag} rel="alternate {token}" href="{ENDPOINT}">'
+                self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, Message(), html)), ENDPOINT)
+            headers = Message()
+            headers['Link'] = f'<{ENDPOINT}>; REL="alternate {token}"'
+            self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, headers, '')), ENDPOINT)
+
+    def test_connections_pin_validated_address_and_preserve_tls_hostname(self):
+        public = [(wm.socket.AF_INET, wm.socket.SOCK_STREAM, 6, '', ('93.184.216.34', 443))]
+        private = [(wm.socket.AF_INET, wm.socket.SOCK_STREAM, 6, '', ('127.0.0.1', 443))]
+        for handler, scheme in ((wm.PublicHTTPHandler(), 'http'), (wm.PublicHTTPSHandler(), 'https')):
+            with self.subTest(scheme=scheme):
+                sock = Mock()
+                context = Mock()
+                handler._context = context
+                def open_connection(factory, req, **kwargs):
+                    connection = factory('other.example', timeout=15, **kwargs)
+                    connection.connect()
+                    self.assertEqual(connection.host, 'other.example')
+                with patch.object(wm.socket, 'getaddrinfo', side_effect=[public, private]) as dns, \
+                     patch.object(wm.socket, 'socket', return_value=sock), \
+                     patch.object(handler, 'do_open', side_effect=open_connection):
+                    getattr(handler, scheme + '_open')(Request(scheme + '://other.example/post/'))
+                self.assertEqual(dns.call_count, 1)
+                sock.connect.assert_called_once_with(('93.184.216.34', 443))
+                if scheme == 'https':
+                    context.wrap_socket.assert_called_once_with(sock, server_hostname='other.example')
+
+    def test_redirect_destination_is_validated_before_any_connection(self):
+        handler = wm.SafeRedirects()
+        redirected = handler.redirect_request(Request(TARGET), None, 302, '', {}, 'https://redirect.example/')
+        private = [(wm.socket.AF_INET, wm.socket.SOCK_STREAM, 6, '', ('127.0.0.1', 443))]
+        with patch.object(wm.socket, 'getaddrinfo', return_value=private), \
+             patch.object(wm.socket, 'socket') as create_socket:
+            with self.assertRaises(ValueError):
+                wm.PublicHTTPSHandler().https_open(redirected)
+        create_socket.assert_not_called()
+
+    def test_proxy_is_rejected_without_bypassing_it(self):
+        with patch.object(wm, 'getproxies', return_value={'https': 'http://proxy.example:8080'}), \
+             patch.object(wm, 'build_opener') as opener:
+            with self.assertRaisesRegex(ValueError, 'direct egress'):
+                wm.fetch(TARGET)
+        opener.assert_not_called()
 
     def test_generated_posts_only_and_article_links_only(self):
         body = (f'<p><a href="{TARGET}#a">A</a><a href="{TARGET}#b">B</a>'

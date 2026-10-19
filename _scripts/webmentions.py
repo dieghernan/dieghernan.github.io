@@ -2,6 +2,8 @@
 """Send post Webmentions after deployment, using a durable per-target ledger."""
 import argparse
 import hashlib
+from functools import partial
+from http.client import HTTPConnection, HTTPSConnection
 from html.parser import HTMLParser
 import ipaddress
 import json
@@ -9,7 +11,8 @@ from pathlib import Path
 import re
 import socket
 from urllib.parse import urlencode, urldefrag, urljoin, urlsplit
-from urllib.request import build_opener, HTTPRedirectHandler, Request
+from urllib.request import (build_opener, getproxies, HTTPHandler, HTTPSHandler,
+                            HTTPRedirectHandler, ProxyHandler, Request)
 
 ORIGIN = 'https://dieghernan.github.io'
 LIMIT = 4 * 1024 * 1024
@@ -35,6 +38,51 @@ def validate_request(url):
     addresses = socket.getaddrinfo(p.hostname, p.port or (443 if p.scheme == 'https' else 80), type=socket.SOCK_STREAM)
     if not addresses or any(not ipaddress.ip_address(a[4][0]).is_global for a in addresses):
         raise ValueError('Non-public destination')
+    return addresses
+
+
+def connect_addresses(addresses, address, timeout=15, source_address=None):
+    """Connect to a validated sockaddr, without resolving the hostname again."""
+    last_error = None
+    for family, kind, protocol, _, sockaddr in addresses:
+        sock = socket.socket(family, kind, protocol)
+        try:
+            sock.settimeout(timeout)
+            if source_address:
+                sock.bind(source_address)
+            sock.connect(sockaddr)
+            return sock
+        except OSError as error:
+            sock.close()
+            last_error = error
+    raise last_error or OSError('No validated addresses')
+
+
+class PinnedConnection:
+    def __init__(self, *args, addresses, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._create_connection = partial(connect_addresses, addresses)
+
+
+class PinnedHTTPConnection(PinnedConnection, HTTPConnection):
+    pass
+
+
+class PinnedHTTPSConnection(PinnedConnection, HTTPSConnection):
+    # HTTPSConnection keeps the original hostname for TLS SNI/certificate checks.
+    pass
+
+
+class PublicHTTPHandler(HTTPHandler):
+    def http_open(self, req):
+        connection = partial(PinnedHTTPConnection, addresses=validate_request(req.full_url))
+        return self.do_open(connection, req)
+
+
+class PublicHTTPSHandler(HTTPSHandler):
+    def https_open(self, req):
+        connection = partial(PinnedHTTPSConnection, addresses=validate_request(req.full_url))
+        return self.do_open(connection, req, context=self._context)
 
 
 class SafeRedirects(HTTPRedirectHandler):
@@ -45,16 +93,18 @@ class SafeRedirects(HTTPRedirectHandler):
         external = urlsplit(req.full_url).hostname != urlsplit(ORIGIN).hostname
         if not allowed(newurl, external=external):
             raise ValueError('Excluded redirect destination')
-        validate_request(newurl)
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
 
 def fetch(url, data=None):
-    validate_request(url)
+    # A forward proxy resolves destinations itself, so address pinning cannot be
+    # guaranteed. Fail closed rather than bypass a configured environment proxy.
+    if any(getproxies().get(key) for key in ('http', 'https', 'all')):
+        raise ValueError('DNS pinning requires direct egress; configured proxies are unsupported')
     headers = {'User-Agent': 'dieghernan-Webmentions/1.0 (+https://dieghernan.github.io/)'}
     if data is not None:
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    with build_opener(SafeRedirects()).open(Request(url, data=data, headers=headers), timeout=15) as r:
+    with build_opener(ProxyHandler({}), PublicHTTPHandler(), PublicHTTPSHandler(), SafeRedirects()).open(Request(url, data=data, headers=headers), timeout=15) as r:
         body = r.read(LIMIT + 1)
         if len(body) > LIMIT:
             raise ValueError('Response too large')
@@ -76,9 +126,9 @@ class Page(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
-        if tag == 'link' and 'canonical' in a.get('rel', '').split():
+        if tag == 'link' and 'canonical' in a.get('rel', '').lower().split():
             self.canonical = a.get('href')
-        if tag in ('link', 'a') and 'webmention' in a.get('rel', '').split() and a.get('href'):
+        if tag in ('link', 'a') and 'webmention' in a.get('rel', '').lower().split() and a.get('href'):
             self.endpoints.append(a['href'])
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.schema = []
@@ -156,7 +206,7 @@ def discover(target, request=fetch):
     for header in headers.get_all('Link', []):
         for match in re.finditer(r'<([^>]+)>\s*((?:;[^,]*)*)', header):
             rel = re.search(r';\s*rel\s*=\s*(?:"([^"]*)"|([^;\s,]+))', match[2], re.I)
-            if rel and 'webmention' in (rel[1] or rel[2]).split():
+            if rel and 'webmention' in (rel[1] or rel[2]).lower().split():
                 endpoint = urljoin(final, match[1])
                 if allowed(endpoint):
                     return endpoint
