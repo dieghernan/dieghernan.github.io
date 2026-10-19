@@ -5,22 +5,26 @@ header_in_content: true
 {% if page.url == '/' %}
   {% include custom/h-card.html %}
 {% endif %}
-<div class="h-entry d-flex flex-column flex-fill">
-  {% include snippets/canonical-url.html url=page.url canonical=page.canonical_url %}
-  <a class="u-url d-none" href="{{ canonical_url | escape }}">Invisible link to canonical for Microformats</a>
+{%- assign is_feed = false -%}
+{%- if layout.chulapa_microformats_feed == true -%}
+  {%- assign is_feed = true -%}
+{%- endif -%}
+<div class="{% if is_feed %}h-feed{% else %}h-entry{% endif %} d-flex flex-column flex-fill">
+  {% include snippets/microformats-url.html %}
+  <main class="d-flex flex-column flex-fill">
   {% include components/headers.html headertype=page.header_type
     imghero=page.header_img projects=page.project_links %}
-  <main class="container-lg pb-3 flex-fill">
+  <div class="container-lg pb-3 flex-fill">
     {% if page.show_breadcrumb or page.show_date or page.show_sociallinks -%}
       {%- include components/breadcrumbdatesocial.html -%}
     {% endif %}
     <div class="row pt-2">
-      <aside class="col-lg-2 mt-lg-3 small">
+      <{% if page.show_author %}aside{% else %}div{% endif %} class="col-lg-2 mt-lg-3 small">
         {%- if page.show_author -%}
           {% include components/author.html %}
         {%- endif -%}
-      </aside>
-      <article id="maincontent" class="col-lg-8 mt-3 e-content">
+      </{% if page.show_author %}aside{% else %}div{% endif %}>
+      <{% if is_feed %}div{% else %}article{% endif %} id="maincontent" class="col-lg-8 mt-3">
         {% if page.show_sidetoc %}
           {% include components/sidetoc.html %}
         {% endif %}
@@ -35,14 +39,16 @@ header_in_content: true
             %}
           </nav>
         {% endif %}
+        {% unless is_feed %}<div class="e-content">{% endunless %}
         {{- content -}}
+        {% unless is_feed %}</div>{% endunless %}
         {% if page.show_kofi %}
           <div class="mt-5 pt-3 mb-3 text-center">
             <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
             <script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
           </div>
         {% endif %}
-      </article>
+      </{% if is_feed %}div{% else %}article{% endif %}>
     </div>
     {% include custom/syndication.html %}
     {% if page.show_webmentions %}
@@ -52,6 +58,7 @@ header_in_content: true
         </div>
       </div>
     {% endif %}
+  </div>
   </main>
   {%- if page.show_bottomnavs -%}
     {%- include components/navbeforeafter.html -%}

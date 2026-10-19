@@ -16,6 +16,7 @@ from urllib.request import (build_opener, getproxies, HTTPHandler, HTTPSHandler,
 
 ORIGIN = 'https://dieghernan.github.io'
 LIMIT = 4 * 1024 * 1024
+SCOPE_MIGRATIONS = json.loads(Path(__file__).with_name('webmention-scope-v2.json').read_text())
 VOID = set('area base br col embed hr img input link meta param source track wbr'.split())
 
 
@@ -258,13 +259,24 @@ def discover(target, request=fetch):
 
 def process(posts, state, request=fetch, checkpoint=lambda: None):
     if state is None:
-        state = {'version': 1, 'posts': {
+        state = {'version': 2, 'posts': {
             source: {target: post['digest'] for target in post['targets']}
             for source, post in posts.items()}}
         print(f'Baseline: {len(posts)} existing posts recorded; no mentions sent.')
         return state
-    if state.get('version') != 1 or not isinstance(state.get('posts'), dict):
+    if state.get('version') not in (1, 2) or not isinstance(state.get('posts'), dict):
         raise ValueError('Unknown ledger format')
+    if state['version'] == 1:
+        # Rebase only the exact old/new fingerprints audited for this layout
+        # transition. An editorial edit does not match and still gets sent.
+        for source, post in posts.items():
+            seen = state['posts'].get(source, {})
+            for target in post['targets']:
+                if SCOPE_MIGRATIONS.get(seen.get(target)) == post['digest']:
+                    seen[target] = post['digest']
+        state['version'] = 2
+        checkpoint()
+        print('Migrated known deliveries to editorial e-content; pending targets retained.')
     for source, post in posts.items():
         seen = state['posts'].setdefault(source, {})
         pending = [t for t in post['targets'] if seen.get(t) != post['digest']]
