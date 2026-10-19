@@ -81,6 +81,28 @@ incoming webmention.io endpoint is separate and can remain enabled. Feed polling
 is asynchronous; the current Bridgy Fed implementation schedules checks between
 two hours and one day apart. A profile refresh does not import posts.
 
+## Syndicated copies of posts
+
+When a post also exists on another service, add its actual public permalink
+(not a profile URL) to the post's frontmatter:
+
+```yaml
+syndication:
+  - https://social.example/@author/123456
+  - https://bsky.app/profile/example.com/post/example
+```
+
+These are illustrative URLs, not existing copies of this site's posts. Replace
+them with the real permalinks before publishing. If the post has an equivalent
+`.Rmd` source, keep its frontmatter synchronized.
+
+The default layout displays an “Also published on” list outside the article's
+`e-content` and inside its `h-entry`. Each link has `u-syndication` and
+`rel="syndication"`, allowing IndieWeb readers to identify the copies. Only
+absolute HTTP(S) links with a hostname are rendered; no section appears when
+there are no usable links. No JavaScript, notifications or new service is
+required. This does not change Bridgy Fed's feed-based publishing.
+
 ## License
 
 This repository is distributed under the [MIT license](LICENSE).
