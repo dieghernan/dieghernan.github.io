@@ -18,47 +18,6 @@ for (const a of document.querySelectorAll("h5, h2.h5")) {
     }
 }
 
-const themeSelector = document.getElementById("chulapa-theme-selector");
-if (themeSelector) {
-    const themeLabel = themeSelector.querySelector(".chulapa-theme-label");
-    const themeIcon = themeSelector.querySelector("i");
-    const themeOptions = themeSelector.querySelectorAll("[data-theme-mode]");
-    const themeNames = {
-        light: "Light",
-        dark: "Dark",
-        auto: "Auto"
-    };
-    const themeIcons = {
-        light: "fas fa-sun",
-        dark: "fas fa-moon",
-        auto: "fa fa-adjust"
-    };
-
-    const updateThemeSelector = function () {
-        const mode = document.documentElement.dataset.themeMode || "light";
-        themeLabel.textContent = themeNames[mode];
-        const themeButton = themeSelector.querySelector("#chulapa-theme-selector-button");
-        themeButton.setAttribute("aria-label", "Color theme: " + themeNames[mode]);
-        themeButton.setAttribute("title", "Color theme: " + themeNames[mode]);
-        themeIcon.className = themeIcons[mode];
-
-        for (const option of themeOptions) {
-            const selected = option.dataset.themeMode === mode;
-            option.classList.toggle("active", selected);
-            option.setAttribute("aria-checked", String(selected));
-        }
-    };
-
-    for (const option of themeOptions) {
-        option.addEventListener("click", function () {
-            window.chulapaSetThemeMode(option.dataset.themeMode);
-            updateThemeSelector();
-        });
-    }
-
-    updateThemeSelector();
-    window.addEventListener("storage", updateThemeSelector);
-}
 </script>
 
 <!-- end custom bottom scripts -->
