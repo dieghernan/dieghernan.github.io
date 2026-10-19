@@ -29,6 +29,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    name: Build site with Jekyll
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -63,6 +64,7 @@ jobs:
 
   # Deployment job
   deploy:
+    name: Deploy to web
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -76,26 +78,30 @@ jobs:
   push-gh-pages:
     name: Push site to gh-pages branch
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     continue-on-error: true
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: true
       - name: Download the built site
         uses: actions/download-artifact@v5
         with:
           name: github-pages
-          path: ${{ runner.temp }}/pages-artifact
+          path: pages-artifact
       - name: Unpack site
         run: |
-          mkdir -p "$RUNNER_TEMP/published-site"
-          tar -xf "$RUNNER_TEMP/pages-artifact/artifact.tar" -C "$RUNNER_TEMP/published-site"
+          mkdir -p published-site
+          tar -xf pages-artifact/artifact.tar -C published-site
       - name: Deploy to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4.9.0
         with:
           branch: gh-pages
-          folder: ${{ runner.temp }}/published-site
-
+          folder: published-site
+ 
   algolia:
     name: Update Algolia index
     needs: deploy
