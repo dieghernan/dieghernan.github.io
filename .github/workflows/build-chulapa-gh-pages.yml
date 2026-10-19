@@ -73,6 +73,29 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
+  push-gh-pages:
+    name: Push site to gh-pages branch
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+    steps:
+      - name: Download the built site
+        uses: actions/download-artifact@v5
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/pages-artifact
+      - name: Unpack site
+        run: |
+          mkdir -p "$RUNNER_TEMP/published-site"
+          tar -xf "$RUNNER_TEMP/pages-artifact/artifact.tar" -C "$RUNNER_TEMP/published-site"
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4.9.0
+        with:
+          branch: gh-pages
+          folder: ${{ runner.temp }}/published-site
+
   algolia:
     name: Update Algolia index
     needs: deploy
