@@ -1,0 +1,26 @@
+name: Test outgoing Webmentions
+on:
+  pull_request:
+    paths:
+      - '_scripts/**'
+      - '.github/workflows/*webmentions*'
+      - '.github/workflows/build-chulapa-gh-pages.yml'
+  push:
+    branches: [main]
+    paths:
+      - '_scripts/**'
+      - '.github/workflows/*webmentions*'
+      - '.github/workflows/build-chulapa-gh-pages.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s _scripts -p 'test_*.py'

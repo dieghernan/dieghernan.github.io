@@ -103,6 +103,43 @@ absolute HTTP(S) links with a hostname are rendered; no section appears when
 there are no usable links. No JavaScript, notifications or new service is
 required. This does not change Bridgy Fed's feed-based publishing.
 
+## Outgoing Webmentions
+
+After the Pages deployment succeeds on `main`, its workflow reads posts from the
+exact deployed HTML artifact and sends Webmentions to external links inside each
+article's `e-content`. Navigation, syndicated-copy footers and project pages are
+not included. Discovery supports HTTP `Link` headers and HTML `rel="webmention"`.
+The source article must also match the live public page before any sends occur;
+a stale CDN response is retried on the next deployment.
+
+The first run creates a baseline without notifying the historical archive.
+Later runs process new or edited articles. A dedicated `webmention-state` branch
+records each accepted source/target/content combination and links without an
+endpoint. Unchanged deliveries are skipped; failed requests are retried on the
+next successful deployment. An edited article may notify existing destinations
+again. Removing links or deleting posts does not send deletion notifications.
+Keep this state branch: deleting it resets the baseline. No extra secret,
+service or Python dependency is needed; the job uses the repository's
+`GITHUB_TOKEN` with permission to write this branch.
+
+The sender excludes this site's own domain and `fed.brid.gy` (including its
+subdomains), endpoints and redirect destinations. This preserves Bridgy Fed's
+feed-based publishing. It also pins each connection to a validated public IP while retaining the
+original hostname for HTTPS certificate checks, and never follows endpoint POST
+redirects. The sender requires direct network access (as on GitHub-hosted
+runners); it refuses requests if a forward proxy is configured because a proxy
+would resolve the destination independently. Receiver failures are logged and do not block
+the already completed deployment. Review the **Send outgoing Webmentions** job
+log for accepted, unsupported and retryable destinations. Disabling that job
+stops outgoing notifications without affecting incoming Webmentions.
+
+Local checks do not send notifications:
+
+```sh
+python -m unittest discover -s _scripts -p 'test_*.py'
+python _scripts/webmentions.py --site _site --state /tmp/webmention-state.json --dry-run
+```
+
 ## License
 
 This repository is distributed under the [MIT license](LICENSE).
