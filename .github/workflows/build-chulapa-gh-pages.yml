@@ -9,7 +9,7 @@ name: Deploy Chulapa Jekyll site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master","main"]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -50,7 +50,7 @@ jobs:
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: |
-          cd  . # Change it to 'docs' if the site is hosted in (e.g.) 'docs' folder 
+          cd  . # Change it to 'docs' if the site is hosted in (e.g.) 'docs' folder
           bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         shell: bash
         env:
@@ -101,7 +101,7 @@ jobs:
         with:
           branch: gh-pages
           folder: published-site
- 
+
   algolia:
     name: Update Algolia index
     needs: deploy
