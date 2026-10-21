@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.2.0 (unreleased) -->
+    <!-- MIT License -->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2026-10-21 -->
+    <!-- Jekyll Version 4.4.1 -->
+    <!-- Google structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": "https://dieghernan.github.io/202004_headtails/#article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://dieghernan.github.io/202004_headtails/"
+        },
+        "headline": "Head/tail breaks in the classInt package",
+        "image": ["https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp"],
+        "datePublished": "2020-04-05T00:00:00+02:00",
+        "dateModified": "2026-10-07T00:00:00+02:00",
+        "author": {
+          "@type": "Person",
+          "name": "dieghernan",
+          "url": "https://x.com/dhernangomez",
+          "sameAs": [
+            "https://fosstodon.org/@dhernangomez",
+            "https://bsky.app/profile/dieghernan.bsky.social",
+            "https://github.com/dieghernan/",
+            "https://stackoverflow.com/users/7877917/dieghernan",
+            "https://orcid.org/0000-0001-8457-4658"
+          ]
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "dieghernan",
+          "url": "https://dieghernan.github.io/",
+          "image": "https://dieghernan.github.io/assets/img/site/avatar.png"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://dieghernan.github.io/202004_headtails/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202004_headtails/#breadcrumb-1",
+            "position": 1,
+            "name": "Blog",
+            "item": "https://dieghernan.github.io/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202004_headtails/#breadcrumb-2",
+            "position": 2,
+            "item": "https://dieghernan.github.io/202004_headtails/",
+            "name": "Head/tail breaks in the classInt package"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202004_headtails/",
+        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
+        "name": "Head/tail breaks in the classInt package",
+        "description": "Explore head/tail breaks classification with classInt and a spatial case study."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+        "homeLocation": {
+          "@type": "Place",
+          "name": "Madrid, Spain"
+        },
+        "description": "Site author",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": [
+          "https://x.com/dhernangomez",
+          "https://fosstodon.org/@dhernangomez",
+          "https://bsky.app/profile/dieghernan.bsky.social",
+          "https://github.com/dieghernan/",
+          "https://stackoverflow.com/users/7877917/dieghernan",
+          "https://orcid.org/0000-0001-8457-4658"
+        ]
+      }
+    </script>
+    <title>Head/tail breaks in the classInt package | One World</title>
+    <link rel="canonical" href="https://dieghernan.github.io/202004_headtails/">
+    <!-- Atom feed -->
+    <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One World" >
+    <!-- RSS 2.0 feed -->
+    <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One World" >
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="dieghernan" >
+    <meta name="copyright" content="dieghernan" >
+    <meta name="description" content="Explore head/tail breaks classification with classInt and a spatial case study.">
+    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" >
+    <meta name="robots" content="index, follow">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Head/tail breaks in the classInt package | One World" >
+    <meta property="og:site_name" content="One World" >
+    <meta property="og:url" content="https://dieghernan.github.io/202004_headtails/" >
+    <meta property="og:type" content="article" >
+    <meta property="article:published_time" content="2020-04-05T00:00:00+02:00">
+    <meta property="article:modified_time" content="2026-10-07T00:00:00+02:00">
+    <meta property="article:author" content="https://github.com/dieghernan">
+    <meta property="article:tag" content="r_bloggers">
+    <meta property="article:tag" content="rstats">
+    <meta property="article:tag" content="rspatial">
+    <meta property="article:tag" content="classInt">
+    <meta property="article:tag" content="r_package">
+    <meta property="og:description" content="Explore head/tail breaks classification with classInt and a spatial case study." >
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" >
+    <meta property="og:image:width" content="630" >
+    <meta property="og:image:height" content="630" >
+    <meta property="og:image:type" content="image/webp" >
+    <!-- Twitter/X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Explore head/tail breaks classification with classInt and a spatial case study.">
+    <meta name="twitter:site" content="@dhernangomez" >
+    <meta name="twitter:creator" content="@dhernangomez" >
+    <!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
+    <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <link rel="stylesheet" id="maincss" href="/assets/css/main.css">
+    <link rel="stylesheet" id="csshigh" href="/assets/css/highlighter.css">
+    <script>
+    (function () {
+      'use strict';
+      var paths = {
+        light: ["/assets/css/main.css", "/assets/css/highlighter.css"],
+        dark: ["/assets/css/dark/main.css", "/assets/css/dark/highlighter.css"]
+      };
+      var themeColors = {
+        light: "",
+        dark: ""
+      };
+      function updateThemeColor(theme) {
+        var meta = document.querySelector('meta[data-chulapa-theme-color]');
+        var color = themeColors[theme];
+        if (!color) { if (meta) meta.remove(); return; }
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.name = 'theme-color';
+          meta.setAttribute('data-chulapa-theme-color', '');
+          document.head.appendChild(meta);
+        }
+        meta.content = color;
+      }
+      var key = 'chulapa-theme';
+      var mode = 'light';
+      var scheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+      var root = document.documentElement;
+      var request = 0;
+      function valid(value) { return ['light', 'dark', 'auto'].indexOf(value) !== -1; }
+      function resolved(value) { return value === 'dark' || (value === 'auto' && scheme && scheme.matches) ? 'dark' : 'light'; }
+      try { var stored = localStorage.getItem(key); if (valid(stored)) mode = stored; } catch (error) {}
+      var theme = resolved(mode);
+      root.dataset.theme = theme;
+      root.dataset.themeMode = mode;
+      root.style.colorScheme = theme;
+      updateThemeColor(theme);
+      /* A link error can come from an optional font import. Verify the end of
+         this exact generated sheet, never an imported or currently active sheet.
+         Unknown imports and inaccessible CSSOM keep the normal safe fallback. */
+      function usable(link, target, index, failed) {
+        try {
+          var rules = link.sheet.cssRules;
+          if (rules.length < 2) return false;
+          var last = rules[rules.length - 1];
+          var expected = (index === 0 ? 'main-' : 'highlighter-') + target;
+          if (!last || last.selectorText !== ':root' ||
+              last.style.getPropertyValue('--chulapa-css-ready').trim() !== expected) return false;
+          if (!failed) return true;
+          if (index !== 0) return false;
+          var imports = 0;
+          for (var i = 0; i < rules.length; i++) {
+            if (rules[i].type !== 3) continue; /* CSSImportRule */
+            var url = new URL(rules[i].href, document.baseURI);
+            if (url.origin !== 'https://fonts.googleapis.com' ||
+                (url.pathname !== '/css' && url.pathname !== '/css2')) return false;
+            imports++;
+          }
+          return imports > 0;
+        } catch (error) { return false; }
+      }
+      /* Recover initial dark CSS failures without discarding the saved choice. */
+      if (theme === 'dark') {
+        var initialPending = ['maincss', 'csshigh'];
+        function stopInitialListeners() {
+          document.removeEventListener('error', initialFinished, true);
+          document.removeEventListener('load', initialFinished, true);
+        }
+        function initialFinished(event) {
+          var ids = ['maincss', 'csshigh'];
+          var link = event.target;
+          if (link !== document.getElementById(link.id)) return;
+          var index = initialPending.indexOf(link.id);
+          if (index === -1) return;
+          if (usable(link, 'dark', ids.indexOf(link.id), event.type === 'error')) {
+            initialPending.splice(index, 1);
+            if (!initialPending.length) stopInitialListeners();
+            return;
+          }
+          stopInitialListeners();
+          ++request;
+          ids.forEach(function (id, index) {
+            var current = document.getElementById(id);
+            if (current) current.href = paths.light[index];
+          });
+          root.dataset.theme = 'light';
+          root.style.colorScheme = 'light';
+          updateThemeColor('light');
+          controls();
+        }
+        document.addEventListener('error', initialFinished, true);
+        document.addEventListener('load', initialFinished, true);
+      }
+      /* Static light links also work when CSP blocks this script. Replace them
+         with parser-blocking dark links before body content can be painted. */
+      if (theme === 'dark') {
+        ['maincss', 'csshigh'].forEach(function (id, index) {
+          document.getElementById(id).remove();
+          document.write('<link rel="stylesheet" id="' + id + '" href="' + paths.dark[index] + '">');
+        });
+      }
+      function controls() {
+        var names = {light: 'Light', dark: 'Dark', auto: 'Auto'};
+        var icons = {light: 'fas fa-sun', dark: 'fas fa-moon', auto: 'fa fa-adjust'};
+        document.querySelectorAll('.chulapa-theme-selector').forEach(function (selector) {
+          var button = selector.querySelector('.chulapa-theme-toggle');
+          if (!button) { selector.hidden = true; return; }
+          button.setAttribute('aria-label', 'Color theme: ' + names[mode]);
+          button.title = 'Color theme: ' + names[mode];
+          var icon = button.querySelector('i');
+          var label = button.querySelector('.chulapa-theme-label');
+          if (icon) icon.className = icons[mode];
+          if (label) label.textContent = names[mode];
+          selector.querySelectorAll('[data-theme-mode]').forEach(function (option) {
+            var selected = option.dataset.themeMode === mode;
+            option.classList.toggle('active', selected);
+            option.setAttribute('aria-pressed', String(selected));
+          });
+          selector.hidden = false;
+        });
+      }
+      function apply(value) {
+        var ids = ['maincss', 'csshigh'];
+        var previous = ids.map(function (id) { return document.getElementById(id); });
+        /* Custom head overrides may remove the managed stylesheet pair. */
+        if (previous.some(function (link) { return !link || link.tagName !== 'LINK'; })) return false;
+        var target = resolved(value);
+        var currentRequest = ++request;
+        mode = value;
+        root.dataset.themeMode = mode;
+        controls();
+        if (target === root.dataset.theme) return true;
+        var links = paths[target].map(function (url) {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.media = 'not all';
+          link.href = url;
+          return link;
+        });
+        var loaded = 0;
+        function discard() { links.forEach(function (link) { link.remove(); }); }
+        function failed() {
+          discard();
+          if (currentRequest === request) {
+            ++request;
+            controls();
+          }
+        }
+        links.forEach(function (link, index) {
+          var settled = false;
+          function finished(event) {
+            if (settled) return;
+            settled = true;
+            if (!usable(link, target, index, event.type === 'error')) { failed(); return; }
+            if (++loaded !== 2) return;
+            if (currentRequest !== request) { discard(); return; }
+            /* Do not overwrite stylesheets replaced by custom scripts while loading. */
+            if (previous.some(function (old, index) { return document.getElementById(ids[index]) !== old; })) { failed(); return; }
+            ids.forEach(function (id, index) {
+              previous[index].remove();
+              links[index].id = id;
+              links[index].media = 'all';
+            });
+            root.dataset.theme = target;
+            root.style.colorScheme = target;
+            updateThemeColor(target);
+          }
+          link.onerror = finished;
+          link.onload = finished;
+          /* Keep the custom stylesheet last in the cascade. */
+          document.head.insertBefore(link, previous[0]);
+        });
+        return true;
+      }
+      /* Preserve the prototype's entry point for custom controls, with one initialization read. */
+      window.chulapaSetThemeMode = function (value) {
+        if (!valid(value) || !apply(value)) return;
+        try { localStorage.setItem(key, mode); } catch (error) {}
+      };
+      document.addEventListener('DOMContentLoaded', controls);
+      document.addEventListener('click', function (event) {
+        var option = event.target.closest && event.target.closest('.chulapa-theme-selector [data-theme-mode]');
+        if (!option || !valid(option.dataset.themeMode)) return;
+        window.chulapaSetThemeMode(option.dataset.themeMode);
+        var button = option.closest('.chulapa-theme-selector').querySelector('.chulapa-theme-toggle');
+        if (button) button.focus();
+      });
+      window.addEventListener('storage', function (event) {
+        if (event.key === key || event.key === null) apply(valid(event.newValue) ? event.newValue : 'light');
+      });
+      if (scheme) {
+        var changed = function () { if (mode === 'auto') apply('auto'); };
+        if (scheme.addEventListener) scheme.addEventListener('change', changed);
+        else if (scheme.addListener) scheme.addListener(changed);
+      }
+    })();
+    </script>
+    <!-- Custom css -->
+    <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FWXW2HLTVZ');
+    </script>
+    <script data-goatcounter="https://dieghernan.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+        <!-- start custom head snippets -->
+    <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
+    <link rel="indieauth-metadata" href="https://indiekey.id/.well-known/oauth-authorization-server/s/j35a2ja6eg5casc2">
+    <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c23b83bb-5f33-4256-a5b5-fbc59c1c7ae8"></script>
+    <meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508">
+    <meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+    <link rel="authorization_endpoint" href="https://indiekey.id/s/j35a2ja6eg5casc2/auth">
+    <link rel="token_endpoint" href="https://indiekey.id/token">
+    <link rel="microsub" href="https://aperture.p3k.io/microsub/1119">
+    <!-- insert favicons. use https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    <!-- end custom head snippets -->
+</head>
+<body class="d-flex flex-column" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
+					</li><li class="nav-item dropdown"><button type="button" class="nav-link dropdown-toggle " id="Archives" data-toggle="dropdown" aria-expanded="false">Archives</button>
+						<div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li>
+<li class="nav-item dropdown chulapa-theme-selector" hidden>
+  <button type="button" class="nav-link dropdown-toggle chulapa-theme-toggle" id="chulapa-theme-classic" data-toggle="dropdown" aria-expanded="false" aria-label="Color theme: Light" title="Color theme: Light">
+    <i class="fas fa-sun" aria-hidden="true"></i>
+    <span class="chulapa-theme-label">Light</span>
+  </button>
+ <div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="chulapa-theme-classic">
+    <button type="button" class="dropdown-item" data-theme-mode="light" aria-pressed="true"><i class="fas fa-sun mr-2" aria-hidden="true"></i>Light</button>
+    <button type="button" class="dropdown-item" data-theme-mode="dark" aria-pressed="false"><i class="fas fa-moon mr-2" aria-hidden="true"></i>Dark</button>
+    <button type="button" class="dropdown-item" data-theme-mode="auto" aria-pressed="false"><i class="fa fa-adjust mr-2" aria-hidden="true"></i>Auto</button>
+ </div>
+</li>
+			</ul>
+			</div></div>
+</nav>
+			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
+  <a class="u-url d-none" href="https://dieghernan.github.io/202004_headtails/">Invisible link to canonical for Microformats</a>
+ <main class="d-flex flex-column flex-fill">
+<header class="d-flex align-items-center splash-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp')"><div class="container-lg">
+   <h1 class="p-name" >Head/tail breaks in the <strong>classInt</strong> package</h1>
+ </div>
+</header>
+ <div class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList" itemid="https://dieghernan.github.io/202004_headtails/#breadcrumb">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202004_headtails/#breadcrumb-1"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202004_headtails/#breadcrumb-2">
+      <link itemprop="item" href="https://dieghernan.github.io/202004_headtails/">
+        <span itemprop="name">Head/tail breaks in the classInt package</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time class="dt-updated" datetime="2026-10-07T00:00:00+02:00">07 oct 2026</time> 
+            <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
+            <br>
+            <time class="dt-published font-weight-light chulapa-text-line-through" datetime="2020-04-05T00:00:00+02:00">05 apr 2020</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202004_headtails/&text=Head%2Ftail+breaks+in+the+classInt+package&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,classInt,r_package" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Head/tail%20breaks%20in%20the%20classInt%20package%20https://dieghernan.github.io/202004_headtails/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23classInt%20%23r_package" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202004_headtails/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Head%2Ftail+breaks+in+the+classInt+package%20https://dieghernan.github.io/202004_headtails/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202004_headtails/&title=Head%2Ftail+breaks+in+the+classInt+package" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+   <div class="row pt-2">
+     <aside class="col-lg-2 mt-lg-3 small"><div class="h-card p-author"><a class="u-url d-none" href="https://github.com/dieghernan">dieghernan</a><div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+     <article id="maincontent" class="col-lg-8 mt-3">
+	<button type="button" class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='chulapa-sidetoc-toggle' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar' aria-hidden="true" inert>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
+		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Head/tail breaks in the <strong>classInt</strong> package</a></p>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#abstract" class="nav-link">Abstract</a></li><li class="nav-item nav d-block"><a href="#introduction" class="nav-link">Introduction</a></li><li class="nav-item nav d-block"><a href="#breaking-method" class="nav-link">Breaking method</a></li><li class="nav-item nav d-block"><a href="#step-by-step-example" class="nav-link">Step-by-step example</a></li><li class="nav-item nav d-block"><a href="#implementation-in-the-classint-package" class="nav-link">Implementation in the <strong>classInt</strong> package</a></li><li class="nav-item nav d-block"><a href="#case-study" class="nav-link">Case study</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+		</nav>   
+	</div>
+         <nav aria-label="table-of-contents">
+           <ul class="chulapa-toc-wrapper list-group mb-5 mx-3 mx-lg-5" id="toc"><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#abstract">Abstract</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#introduction">Introduction</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#breaking-method">Breaking method</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#step-by-step-example">Step-by-step example</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#implementation-in-the-classint-package">Implementation in the <strong>classInt</strong> package</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#case-study">Case study</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#references">References</a></li></ul>
+         </nav>
+       <div class="e-content"><blockquote class="blockquote">
+ <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
+ <footer class="blockquote-footer text-right">Jiang (2013)</footer>
+</blockquote>
+<h2 id="abstract">Abstract</h2>
+<p>This vignette discusses the implementation of the “Head/tail breaks” style
+(Jiang (2013)) in the <code class="language-plaintext highlighter-rouge">classIntervals()</code> function from the <strong>classInt</strong> package.
+A step-by-step example is presented to clarify the method. A case study using
+<code class="language-plaintext highlighter-rouge">spData::afcon</code> is also included, making use of additional packages such as
+<strong>sf</strong>.</p>
+<p class="alert alert-info p-3 mx-2 mb-3"><strong>Historical example:</strong> The mapping examples use <strong>cartography</strong>, which is now
+in maintenance mode. Its maintainers recommend <a href="https://riatelab.github.io/mapsf/"><strong>mapsf</strong></a>
+for new work. The original code and outputs are preserved and have not been
+revalidated against current package versions.</p>
+<h2 id="introduction">Introduction</h2>
+<p><strong>Head/tail breaks</strong> is a classification scheme introduced by Jiang (2013) for
+revealing hierarchies in data with many small values and a few large ones.
+The related <strong>ht-index</strong> measures the depth of this hierarchy, rather than
+being another name for the classification method.</p>
+<p>The distributions considered here are strongly right-skewed, with a minority
+of large values in the head and a majority of small values in the tail. This
+imbalance can be expressed as <em>“far more small things than large things”</em>.</p>
+<p>Power-law and lognormal distributions are examples of heavy-tailed
+distributions. The head/tail breaks literature also considers exponential
+distributions under its broader description of this imbalance. Nature,
+society and finance (Vasicek (2002)) provide examples of rare and extreme
+events. Taleb (2008) discusses the impact of unexpected extreme events,
+offering another reason to pay attention to low-frequency observations.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">classInt</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 1. Characterization of heavy-tail distributions----</span><span class="w">
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Pareto distribution a=1 b=1.161 n=1000</span><span class="w">
+</span><span class="n">sample_par</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">runif</span><span class="p">(</span><span class="m">1000</span><span class="p">))</span><span class="o">^</span><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1.161</span><span class="p">)</span><span class="w">
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">sort</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
+  </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"l"</span><span class="p">,</span><span class="w">
+  </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"F(x)"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"80/20 principle"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="w">
+  </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="m">.8</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red3"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">abline</span><span class="p">(</span><span class="w">
+  </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">sample_par</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"topleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"F(x): p80"</span><span class="p">,</span><span class="w"> </span><span class="s2">"x: Top 20%"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">hist</span><span class="p">(</span><span class="w">
+  </span><span class="n">sample_par</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">probability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Ranked-value plot of a Pareto sample. Values fall steeply and then flatten, with reference lines marking the top 20 percent and the 80th percentile." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="Histogram of a Pareto sample. Most values are small, with a long tail of rare large values." /></p>
+<h2 id="breaking-method">Breaking method</h2>
+<p>The method itself consists of a four-step process performed recursively until a
+stopping condition is satisfied. Given a vector of values \(v = (a_1, a_2,
+..., a_n)\), the process can be described as follows:</p>
+<ol>
+ <li>Compute the arithmetic mean, \(\mu = \frac{1}{n}\sum_{i=1}^{n} a_i\).</li>
+ <li>Break \(v\) into the \(tail\) and the \(head\):
+\(tail = \{ a_x \in v | a_x \lt \mu \}\)
+\(head = \{ a_x \in v | a_x \gt \mu \}\).</li>
+ <li>Check whether the proportion of observations in the head is at most the
+chosen threshold:
+\(\frac{|head|}{|v|} \le threshold\)</li>
+ <li>If step 3 is <code class="language-plaintext highlighter-rouge">TRUE</code> and the head contains at least two observations, replace
+\(v\) with \(head\) and repeat. Otherwise, stop.</li>
+</ol>
+<p>Only values strictly above the mean enter the next iteration. Values equal to
+the mean are not part of the head. Stopping does not require an exact 50/50
+split.</p>
+<p>A threshold of 40% provides a practical stopping rule. It is not a statistical
+test for whether a distribution is heavy-tailed.</p>
+<p>The final breaks are the vector of consecutive \(\mu\):</p>
+\[breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n )\]
+<h2 id="step-by-step-example">Step-by-step example</h2>
+<p>We reproduce here the pseudo-code<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> as per Jiang (2019):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Recursive function Head/tail Breaks:
+ Rank the input data from the largest to the smallest
+ Break the data into the head and the tail around the mean;
+ // the head for those above the mean
+ // the tail for those below the mean
+ While (head &lt;= 40%):
+ Head/tail Breaks (head);
+End Function
+</code></pre></div></div>
+<p>The following <strong>R</strong> example uses <code class="language-plaintext highlighter-rouge">prop &lt; thr</code>, whereas the pseudocode above
+uses <code class="language-plaintext highlighter-rouge">head &lt;= 40%</code>. At exactly 40%, the R loop stops and the pseudocode
+continues. This distinction does not affect the example below.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">var</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample_par</span><span class="w">
+</span><span class="n">thr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">.4</span><span class="w">
+</span><span class="n">brks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">var</span><span class="p">),</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">var</span><span class="p">))</span><span class="w"> </span><span class="c1"># Initialise with min and max</span><span class="w">
+
+</span><span class="n">sum_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w">
+  </span><span class="n">mu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">prop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">n_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">n_head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Pars for chart</span><span class="w">
+</span><span class="n">limchart</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">brks</span><span class="w">
+</span><span class="c1"># Iteration</span><span class="w">
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">mu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="w">
+  </span><span class="n">brks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">brks</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="p">))</span><span class="w">
+  </span><span class="n">head</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">var</span><span class="p">[</span><span class="n">var</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">mu</span><span class="p">]</span><span class="w">
+  </span><span class="n">prop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">var</span><span class="p">)</span><span class="w">
+  </span><span class="n">stopit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="n">sum_table</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rbind</span><span class="p">(</span><span class="w">
+    </span><span class="n">sum_table</span><span class="p">,</span><span class="w">
+    </span><span class="nf">c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">prop</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">var</span><span class="p">),</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">head</span><span class="p">))</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">hist</span><span class="p">(</span><span class="w">
+    </span><span class="n">var</span><span class="p">,</span><span class="w">
+    </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"Iter "</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w">
+    </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+    </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+    </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">limchart</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+  </span><span class="n">ylabel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">hist</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="o">$</span><span class="n">counts</span><span class="p">)</span><span class="w">
+  </span><span class="n">labelplot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"PropHead: "</span><span class="p">,</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">prop</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="s2">"%"</span><span class="p">)</span><span class="w">
+  </span><span class="n">text</span><span class="p">(</span><span class="w">
+    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w">
+    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ylabel</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labelplot</span><span class="p">,</span><span class="w">
+    </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="n">legend</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+    </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">),</span><span class="w">
+    </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red3"</span><span class="p">),</span><span class="w">
+    </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+    </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isFALSE</span><span class="p">(</span><span class="n">stopit</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="k">break</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">head</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Histogram at step 1 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp" alt="Histogram at step 2 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp" alt="Histogram at step 3 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp" alt="Histogram at step 4 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain." /></p>
+<p>The head proportion varies across iterations and reaches 50% in the fourth,
+which stops the loop. It does not increase monotonically.</p>
+<table>
+<thead>
+   <tr>
+     <th style="text-align: right">iter</th>
+     <th style="text-align: right">mu</th>
+     <th style="text-align: left">prop</th>
+     <th style="text-align: right">n_var</th>
+     <th style="text-align: right">n_head</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td style="text-align: right">1</td>
+     <td style="text-align: right">5.6755</td>
+     <td style="text-align: left">14.5%</td>
+     <td style="text-align: right">1000</td>
+     <td style="text-align: right">145</td>
+   </tr>
+   <tr>
+     <td style="text-align: right">2</td>
+     <td style="text-align: right">27.2369</td>
+     <td style="text-align: left">21.38%</td>
+     <td style="text-align: right">145</td>
+     <td style="text-align: right">31</td>
+   </tr>
+   <tr>
+     <td style="text-align: right">3</td>
+     <td style="text-align: right">85.1766</td>
+     <td style="text-align: left">19.35%</td>
+     <td style="text-align: right">31</td>
+     <td style="text-align: right">6</td>
+   </tr>
+   <tr>
+     <td style="text-align: right">4</td>
+     <td style="text-align: right">264.7126</td>
+     <td style="text-align: left">50%</td>
+     <td style="text-align: right">6</td>
+     <td style="text-align: right">3</td>
+   </tr>
+ </tbody>
+</table>
+<p>The break vector includes the original minimum and maximum, plus the means
+computed during the iterations. Here the original data are <code class="language-plaintext highlighter-rouge">sample_par</code>, since
+<code class="language-plaintext highlighter-rouge">var</code> is replaced by the head inside the loop.</p>
+<h2 id="implementation-in-the-classint-package">Implementation in the <strong>classInt</strong> package</h2>
+<p>The implementation in <code class="language-plaintext highlighter-rouge">classIntervals()</code> reproduces these results:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ht_sample_par</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
+</span><span class="n">brks</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ht_sample_par</span><span class="o">$</span><span class="n">brks</span><span class="w">
+</span></code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE
+</code></pre></div></div>
+<p>As stated in Jiang (2013), the number of breaks is determined by the data.
+However, the <code class="language-plaintext highlighter-rouge">thr</code> parameter can help adjust the final number. A lower value
+of <code class="language-plaintext highlighter-rouge">thr</code> can yield fewer breaks, while a larger <code class="language-plaintext highlighter-rouge">thr</code> can increase the number if
+the underlying distribution follows the <em>“far more small things than large
+things”</em> principle.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pal1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"wheat1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"wheat2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Minimum: single break</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = 0"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Two breaks</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = 0.2"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Default breaks: 0.4</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = Default"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Maximum breaks</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="s2">"number of breaks"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">sample_par</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w"> </span><span class="n">thr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"thr = 1"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0. Vertical lines and a colored strip indicate the resulting class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0.2. Vertical lines and a colored strip indicate the resulting class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of the default value. Vertical lines and a colored strip indicate the resulting class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp" alt="Cumulative distribution of a Pareto sample classified with a head/tail threshold of 1. Vertical lines and a colored strip indicate the resulting class intervals." /></p>
+<p>For this example, even <code class="language-plaintext highlighter-rouge">thr = 0</code> retains the mean as an internal break.
+The returned vector also contains the minimum and maximum, so this gives two
+classes, not one.</p>
+<h2 id="case-study">Case study</h2>
+<p>Jiang (2013) states that <em>"the new classification scheme is more natural than
+the natural breaks in finding the groupings or hierarchy for data with a
+heavy-tailed distribution."</em> (p. 482), referring to Jenks’ natural breaks
+method. In this case study, we compare <code class="language-plaintext highlighter-rouge">headtails</code> vs. <code class="language-plaintext highlighter-rouge">fisher</code>, which is the
+alias for the Fisher-Jenks algorithm and is always preferred to the <code class="language-plaintext highlighter-rouge">jenks</code>
+style (see <code class="language-plaintext highlighter-rouge">?classIntervals</code>). For this example, we will use the <code class="language-plaintext highlighter-rouge">afcon</code>
+dataset from the <strong>spData</strong> package, plus some additional spatial information to
+create the data visualization.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">spData</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spData"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Let’s have a look at the top 10 values and the distribution of the variable
+<code class="language-plaintext highlighter-rouge">totcon</code> (index of total conflict 1966-78):</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Top10</span><span class="w">
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="n">afcon</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">)],</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
+
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">hist</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">),</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Distribution"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of total conflict counts in African countries from 1966 to 1978. Most countries have low counts, with a few much higher values." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Density curve of total conflict counts in African countries from 1966 to 1978, with a peak at low counts and a long right tail." /></p>
+<p>The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram
+shows a strongly right-skewed pattern with many small values and a few large
+ones.</p>
+<p>In addition to <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code>, we use <code class="language-plaintext highlighter-rouge">quantile</code> to compare the
+classification styles. Quantile breaks are based on ranks rather than the
+size of the gaps between observations.</p>
+<p>Applying the three aforementioned methods to break the data:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">brks_ht</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">brks_ht</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Same number of classes for "fisher"</span><span class="w">
+</span><span class="n">nclass</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">brks_ht</span><span class="o">$</span><span class="n">brks</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="n">brks_fisher</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fisher"</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">brks_fisher</span><span class="p">)</span><span class="w">
+
+</span><span class="n">brks_quantile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile"</span><span class="p">,</span><span class="w">
+  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">print</span><span class="p">(</span><span class="n">brks_quantile</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pal1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"wheat1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"wheat2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">)</span><span class="w">
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">brks_ht</span><span class="p">,</span><span class="w"> </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">brks_fisher</span><span class="p">,</span><span class="w"> </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fisher"</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">brks_quantile</span><span class="p">,</span><span class="w"> </span><span class="n">pal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal1</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile"</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Cumulative distribution of African conflict counts classified using head/tail breaks. Vertical lines and a colored strip identify the class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp" alt="Cumulative distribution of African conflict counts classified using Fisher breaks. Vertical lines and a colored strip identify the class intervals." /><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp" alt="Cumulative distribution of African conflict counts classified using quantile breaks. Vertical lines and a colored strip identify the class intervals." /></p>
+<p>The top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> contain five observations, whereas those
+of <code class="language-plaintext highlighter-rouge">fisher</code> contain 13. In this example, <code class="language-plaintext highlighter-rouge">headtails</code> gives more detail at the
+upper end of the distribution.</p>
+<p>The next plot compares density estimates of the rescaled <code class="language-plaintext highlighter-rouge">totcon</code> values and
+the class assignments from each method. The original values are rescaled to
+<code class="language-plaintext highlighter-rouge">[1, nclass]</code> and shifted by -0.5 for the visual comparison.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Helper function to reescale values</span><span class="w">
+</span><span class="n">help_reescale</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">
+  </span><span class="n">r</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">max</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">min</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">min</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">ecdf_class</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">help_reescale</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w">
+  </span><span class="n">max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">0.5</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">ht_breaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">brks_ht</span><span class="o">$</span><span class="n">brks</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+  </span><span class="n">include.lowest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">fisher_breaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">brks_fisher</span><span class="o">$</span><span class="n">brks</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+  </span><span class="n">include.lowest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile_break</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cut</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
+  </span><span class="n">brks_quantile</span><span class="o">$</span><span class="n">brks</span><span class="p">,</span><span class="w">
+  </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+  </span><span class="n">include.lowest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">ecdf_class</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">),</span><span class="w">
+  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"class"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">ht_breaks</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">fisher_breaks</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"limegreen"</span><span class="p">,</span><span class="w"> </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span><span class="n">lines</span><span class="p">(</span><span class="n">density</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile_break</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">,</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">legend</span><span class="p">(</span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Continuous"</span><span class="p">,</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fisher"</span><span class="p">,</span><span class="w"> </span><span class="s2">"quantile"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"limegreen"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red3"</span><span class="p">),</span><span class="w">
+  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w">
+  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp" alt="Density curves comparing continuous African conflict counts with values classified using head/tail, Fisher and quantile breaks. The methods produce different distribution shapes." /></p>
+<p>In this example, the class assignments from <code class="language-plaintext highlighter-rouge">headtails</code> retain more of the
+original imbalance. By contrast, <code class="language-plaintext highlighter-rouge">quantile</code> aims for similar numbers of
+observations per class, regardless of the gaps between values.</p>
+<p>We now compare the methods using proportional-symbol maps. Symbol size
+represents <code class="language-plaintext highlighter-rouge">totcon</code>, while color distinguishes the classes.</p>
+<p>The first map uses proportional symbols without class-based colors, providing
+a reference for the three classified maps.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="n">opar</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">no.readonly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">par</span><span class="p">(</span><span class="w">
+  </span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w">
+  </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">africa</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w"> </span><span class="n">region</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Africa"</span><span class="p">,</span><span class="w"> </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3857</span><span class="p">)</span><span class="w">
+
+</span><span class="n">afcon.sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sf</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">))</span><span class="w">
+</span><span class="n">afcon.sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="n">afcon.sf</span><span class="p">,</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w">
+</span><span class="c1"># afcon.sf &lt;- st_join(africa[, "admin"], afcon.sf)</span><span class="w">
+</span><span class="n">afcon.sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">afcon.sf</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">afcon.sf</span><span class="o">$</span><span class="n">totcon</span><span class="p">),</span><span class="w"> </span><span class="p">]</span><span class="w">
+
+
+
+</span><span class="c1"># High granularity map</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adjustcolor</span><span class="p">(</span><span class="s2">"grey10"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha.f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">),</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"High granularity map"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Quantile</span><span class="w">
+
+</span><span class="n">pal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">hcl.colors</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"inferno"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsTypoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var2.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">var2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile_break"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Quantile"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># Fisher</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsTypoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var2.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">var2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"fisher_breaks"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fisher"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Head Tails</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey80"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">propSymbolsTypoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">afcon.sf</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">,</span><span class="w">
+  </span><span class="n">inches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pal</span><span class="p">,</span><span class="w">
+  </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.var2.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottomleft"</span><span class="p">,</span><span class="w">
+  </span><span class="n">var2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ht_breaks"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">title</span><span class="p">(</span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head Tails"</span><span class="p">)</span><span class="w">
+</span><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four proportional-symbol maps of African conflict counts comparing the unclassified data with quantile, Fisher and head/tail classifications. Circle size represents conflict counts and colors distinguish classes." /></p>
+<p>Compared with the unclassified proportional-symbol map, <code class="language-plaintext highlighter-rouge">headtails</code> makes
+the most extreme values easier to distinguish. The <code class="language-plaintext highlighter-rouge">quantile</code> style groups
+observations by rank, while <code class="language-plaintext highlighter-rouge">fisher</code> provides an intermediate view in this
+example.</p>
+<p>It is also important to note that <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> reveal different
+information that can be useful depending on the context. While <code class="language-plaintext highlighter-rouge">headtails</code>
+highlights the outliers, it fails to provide good clustering on the tail, while
+<code class="language-plaintext highlighter-rouge">fisher</code> seems to reflect these patterns better. This can be observed in the
+values of Western Africa and the Niger River Basin, where <code class="language-plaintext highlighter-rouge">headtails</code> does not
+highlight any special cluster of conflicts, while <code class="language-plaintext highlighter-rouge">fisher</code> suggests a
+potential cluster consistent with the unclassified map. This can be
+confirmed in the histogram generated previously, where a concentration of
+<code class="language-plaintext highlighter-rouge">totcon</code> around 1,000 is visible.</p>
+<h2 id="references">References</h2>
+<p>Jiang, Bin. 2013. "Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution." <em>The Professional Geographer</em> 65 (3): 482–94. <a href="https://doi.org/10.1080/00330124.2012.700499">DOI</a>.</p>
+<p>———. 2019. "A Recursive Definition of Goodness of Space for Bridging the Concepts of Space and Place for Sustainability." <em>Sustainability</em> 11 (15): 4091. <a href="https://doi.org/10.3390/su11154091">DOI</a>.</p>
+<p>Jiang, Bin, Xintao Liu, and Tao Jia. 2013. "Scaling of Geographic Space as a Universal Rule for Map Generalization." <em>Annals of the Association of American Geographers</em> 103 (4): 844–55. <a href="https://doi.org/10.1080/00045608.2013.765773">DOI</a>.</p>
+<p>Jiang, Bin, and Junjun Yin. 2013. "Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features." <em>Annals of the Association of American Geographers</em> 104 (3): 530–40. <a href="https://doi.org/10.1080/00045608.2013.834239">DOI</a>.</p>
+<p>Taleb, Nassim Nicholas. 2008. <em>The Black Swan: The Impact of the Highly Improbable.</em> 1st ed. London: Random House.</p>
+<p>Vasicek, Oldrich. 2002. "Loan Portfolio Value." <em>Risk</em>, December, 160–62.</p>
+<div class="footnotes" role="doc-endnotes">
+ <ol>
+   <li id="fn:1">
+     <p>The method implemented in <strong>classInt</strong> corresponds to head/tail breaks
+1.0, as named in this article. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+   </li>
+ </ol>
+</div>
+</div>
+         <div class="mt-5 pt-3 mb-3 text-center">
+            <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
+            <script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
+         </div>
+     </article>
+   </div>
+     <div class="row">
+       <div class="col-lg-8 offset-lg-2">
+<link rel="stylesheet" href="/assets/css/webmentions.css">
+<section class="webmentions mt-5 pt-4 border-top" aria-labelledby="webmentions-heading"
+  data-webmentions data-target="https://dieghernan.github.io/202004_headtails/">
+<header class="webmentions-header">
+   <h2 id="webmentions-heading" class="h4"><i class="fa-regular fa-comments mr-2" aria-hidden="true"></i>Mentions and replies</h2>
+   <p class="text-muted small">Conversations from across the web.</p>
+ </header>
+  <button class="btn btn-outline-primary mb-3" type="button" data-webmentions-load hidden>Load mentions</button>
+ <p class="webmentions-status small text-muted" role="status" data-webmentions-status></p>
+ <ol class="webmentions-replies" data-webmentions-results hidden></ol>
+ <div class="webmentions-reactions" data-webmentions-reactions hidden></div>
+  <noscript><p>JavaScript is needed to display mentions. You can still send one using the form below.</p></noscript>
+  <details class="webmentions-send mt-4">
+    <summary>Shared your thoughts on this post? <span class="text-muted">Drop your link here!</span></summary>
+    <form class="mt-3" method="post" action="https://webmention.io/dieghernan.github.io/webmention">
+     <p class="small" id="webmention-help">Publish a page that links to this post, then submit its URL. Webmention.io will check the link before the mention appears.</p>
+      <input type="hidden" name="target" value="https://dieghernan.github.io/202004_headtails/">
+      <label for="webmention-source">URL of your page</label>
+      <input class="form-control mb-3" id="webmention-source" name="source" type="url"
+        placeholder="https://example.com/your-post/" aria-describedby="webmention-help" required>
+      <button class="btn btn-primary" type="submit">Send webmention</button>
+    </form>
+  </details>
+</section>
+<script src="/assets/js/webmentions.js" defer></script>
+       </div>
+     </div>
+ </div>
+ </main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202002_cartography1/">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">New features in the cartogr...</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">New features i...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Beautiful maps...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Beautiful maps with R (IV):...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202201_maps-flags/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#classInt" class="badge chulapa-pill-bg-primary p-category" rel="tag" >classInt</a>
+      <a href="https://dieghernan.github.io/tags#r_package" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_package</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+       <div class="container-lg mt-1 mb-2">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+             <hr>
+               <h2 class="h5">Related posts</h2>
+             <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202602_geobounds/" class="chulapa-text-body-color">
+              Introducing <strong>geobounds</strong>
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-02-12T00:00:00+01:00">
+                february 12, 2026
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">
+              Introducing <strong>tidyterra</strong>
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Easily work with and plot SpatRasters</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2022-05-25T00:00:00+02:00">
+                may 25, 2022
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202002_cartography1/" class="chulapa-text-body-color">
+              New features in the <strong>cartography</strong> package
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Vignette of the package expansion</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2020-02-17T00:00:00+01:00">
+                february 17, 2020
+              </time>
+            </small>
+       </div>
+     </div></nav>
+           </div>
+         </div>
+       </div></div>
+  <!-- Footer -->
+  <footer class="footer-chulapa text-center mt-0 pt-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+              <script src="https://giscus.app/client.js"
+  data-repo="dieghernan/dieghernan.github.io"
+  data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA=" data-category="Blog"
+  data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+  data-mapping="pathname"
+  data-strict="0" data-reactions-enabled="1" data-emit-metadata="1"
+  data-input-position="top" data-theme="dark_high_contrast" data-lang="en"
+  data-loading="lazy" crossorigin="anonymous" async>
+</script>
+            </div>
+          </div>
+        </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-10 offset-xl-1">
+          <nav aria-label="Footer links" class="d-flex flex-wrap justify-content-center">
+            <a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">RSS</span>
+            </a>
+            <a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">Stack Overflow</span>
+            </a>
+            <a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">WikiCommons</span>
+            </a>
+            <a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">GitHub</span>
+            </a>
+            <a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">RPubs</span>
+            </a>
+          </nav>
+          <p class="mt-2 mb-3">&copy; 2026 dieghernan</p>
+          <!-- Do not remove this in order to give attributions -->
+          <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a><br><b>GitDev Dark</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End attributions -->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5, h2.h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>

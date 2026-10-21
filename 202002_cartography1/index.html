@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.2.0 (unreleased) -->
+    <!-- MIT License -->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2026-10-21 -->
+    <!-- Jekyll Version 4.4.1 -->
+    <!-- Google structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": "https://dieghernan.github.io/202002_cartography1/#article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://dieghernan.github.io/202002_cartography1/"
+        },
+        "headline": "New features in the cartography package",
+        "image": ["https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp"],
+        "datePublished": "2020-02-17T00:00:00+01:00",
+        "dateModified": "2026-10-07T00:00:00+02:00",
+        "author": {
+          "@type": "Person",
+          "name": "dieghernan",
+          "url": "https://x.com/dhernangomez",
+          "sameAs": [
+            "https://fosstodon.org/@dhernangomez",
+            "https://bsky.app/profile/dieghernan.bsky.social",
+            "https://github.com/dieghernan/",
+            "https://stackoverflow.com/users/7877917/dieghernan",
+            "https://orcid.org/0000-0001-8457-4658"
+          ]
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "dieghernan",
+          "url": "https://dieghernan.github.io/",
+          "image": "https://dieghernan.github.io/assets/img/site/avatar.png"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://dieghernan.github.io/202002_cartography1/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202002_cartography1/#breadcrumb-1",
+            "position": 1,
+            "name": "Blog",
+            "item": "https://dieghernan.github.io/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202002_cartography1/#breadcrumb-2",
+            "position": 2,
+            "item": "https://dieghernan.github.io/202002_cartography1/",
+            "name": "New features in the cartography package"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202002_cartography1/",
+        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
+        "name": "New features in the cartography package",
+        "description": "Vignette of the package expansion - Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+        "homeLocation": {
+          "@type": "Place",
+          "name": "Madrid, Spain"
+        },
+        "description": "Site author",
+        "name": "dieghernan",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": [
+          "https://x.com/dhernangomez",
+          "https://fosstodon.org/@dhernangomez",
+          "https://bsky.app/profile/dieghernan.bsky.social",
+          "https://github.com/dieghernan/",
+          "https://stackoverflow.com/users/7877917/dieghernan",
+          "https://orcid.org/0000-0001-8457-4658"
+        ]
+      }
+    </script>
+    <title>New features in the cartography package | One World</title>
+    <link rel="canonical" href="https://dieghernan.github.io/202002_cartography1/">
+    <!-- Atom feed -->
+    <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One World" >
+    <!-- RSS 2.0 feed -->
+    <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One World" >
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="dieghernan" >
+    <meta name="copyright" content="dieghernan" >
+    <meta name="description" content="Vignette of the package expansion - Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0.">
+    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" >
+    <meta name="robots" content="index, follow">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="New features in the cartography package | One World" >
+    <meta property="og:site_name" content="One World" >
+    <meta property="og:url" content="https://dieghernan.github.io/202002_cartography1/" >
+    <meta property="og:type" content="article" >
+    <meta property="article:published_time" content="2020-02-17T00:00:00+01:00">
+    <meta property="article:modified_time" content="2026-10-07T00:00:00+02:00">
+    <meta property="article:author" content="https://github.com/dieghernan">
+    <meta property="article:tag" content="r_bloggers">
+    <meta property="article:tag" content="rstats">
+    <meta property="article:tag" content="rspatial">
+    <meta property="article:tag" content="beautiful_maps">
+    <meta property="article:tag" content="maps">
+    <meta property="article:tag" content="sf">
+    <meta property="article:tag" content="r_package">
+    <meta property="og:description" content="Vignette of the package expansion - Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0." >
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" >
+    <meta property="og:image:width" content="504" >
+    <meta property="og:image:height" content="504" >
+    <meta property="og:image:type" content="image/webp" >
+    <!-- Twitter/X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Vignette of the package expansion - Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0.">
+    <meta name="twitter:site" content="@dhernangomez" >
+    <meta name="twitter:creator" content="@dhernangomez" >
+    <!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Fontawesome-->
+    <!-- v6 -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
+    <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <link rel="stylesheet" id="maincss" href="/assets/css/main.css">
+    <link rel="stylesheet" id="csshigh" href="/assets/css/highlighter.css">
+    <script>
+    (function () {
+      'use strict';
+      var paths = {
+        light: ["/assets/css/main.css", "/assets/css/highlighter.css"],
+        dark: ["/assets/css/dark/main.css", "/assets/css/dark/highlighter.css"]
+      };
+      var themeColors = {
+        light: "",
+        dark: ""
+      };
+      function updateThemeColor(theme) {
+        var meta = document.querySelector('meta[data-chulapa-theme-color]');
+        var color = themeColors[theme];
+        if (!color) { if (meta) meta.remove(); return; }
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.name = 'theme-color';
+          meta.setAttribute('data-chulapa-theme-color', '');
+          document.head.appendChild(meta);
+        }
+        meta.content = color;
+      }
+      var key = 'chulapa-theme';
+      var mode = 'light';
+      var scheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+      var root = document.documentElement;
+      var request = 0;
+      function valid(value) { return ['light', 'dark', 'auto'].indexOf(value) !== -1; }
+      function resolved(value) { return value === 'dark' || (value === 'auto' && scheme && scheme.matches) ? 'dark' : 'light'; }
+      try { var stored = localStorage.getItem(key); if (valid(stored)) mode = stored; } catch (error) {}
+      var theme = resolved(mode);
+      root.dataset.theme = theme;
+      root.dataset.themeMode = mode;
+      root.style.colorScheme = theme;
+      updateThemeColor(theme);
+      /* A link error can come from an optional font import. Verify the end of
+         this exact generated sheet, never an imported or currently active sheet.
+         Unknown imports and inaccessible CSSOM keep the normal safe fallback. */
+      function usable(link, target, index, failed) {
+        try {
+          var rules = link.sheet.cssRules;
+          if (rules.length < 2) return false;
+          var last = rules[rules.length - 1];
+          var expected = (index === 0 ? 'main-' : 'highlighter-') + target;
+          if (!last || last.selectorText !== ':root' ||
+              last.style.getPropertyValue('--chulapa-css-ready').trim() !== expected) return false;
+          if (!failed) return true;
+          if (index !== 0) return false;
+          var imports = 0;
+          for (var i = 0; i < rules.length; i++) {
+            if (rules[i].type !== 3) continue; /* CSSImportRule */
+            var url = new URL(rules[i].href, document.baseURI);
+            if (url.origin !== 'https://fonts.googleapis.com' ||
+                (url.pathname !== '/css' && url.pathname !== '/css2')) return false;
+            imports++;
+          }
+          return imports > 0;
+        } catch (error) { return false; }
+      }
+      /* Recover initial dark CSS failures without discarding the saved choice. */
+      if (theme === 'dark') {
+        var initialPending = ['maincss', 'csshigh'];
+        function stopInitialListeners() {
+          document.removeEventListener('error', initialFinished, true);
+          document.removeEventListener('load', initialFinished, true);
+        }
+        function initialFinished(event) {
+          var ids = ['maincss', 'csshigh'];
+          var link = event.target;
+          if (link !== document.getElementById(link.id)) return;
+          var index = initialPending.indexOf(link.id);
+          if (index === -1) return;
+          if (usable(link, 'dark', ids.indexOf(link.id), event.type === 'error')) {
+            initialPending.splice(index, 1);
+            if (!initialPending.length) stopInitialListeners();
+            return;
+          }
+          stopInitialListeners();
+          ++request;
+          ids.forEach(function (id, index) {
+            var current = document.getElementById(id);
+            if (current) current.href = paths.light[index];
+          });
+          root.dataset.theme = 'light';
+          root.style.colorScheme = 'light';
+          updateThemeColor('light');
+          controls();
+        }
+        document.addEventListener('error', initialFinished, true);
+        document.addEventListener('load', initialFinished, true);
+      }
+      /* Static light links also work when CSP blocks this script. Replace them
+         with parser-blocking dark links before body content can be painted. */
+      if (theme === 'dark') {
+        ['maincss', 'csshigh'].forEach(function (id, index) {
+          document.getElementById(id).remove();
+          document.write('<link rel="stylesheet" id="' + id + '" href="' + paths.dark[index] + '">');
+        });
+      }
+      function controls() {
+        var names = {light: 'Light', dark: 'Dark', auto: 'Auto'};
+        var icons = {light: 'fas fa-sun', dark: 'fas fa-moon', auto: 'fa fa-adjust'};
+        document.querySelectorAll('.chulapa-theme-selector').forEach(function (selector) {
+          var button = selector.querySelector('.chulapa-theme-toggle');
+          if (!button) { selector.hidden = true; return; }
+          button.setAttribute('aria-label', 'Color theme: ' + names[mode]);
+          button.title = 'Color theme: ' + names[mode];
+          var icon = button.querySelector('i');
+          var label = button.querySelector('.chulapa-theme-label');
+          if (icon) icon.className = icons[mode];
+          if (label) label.textContent = names[mode];
+          selector.querySelectorAll('[data-theme-mode]').forEach(function (option) {
+            var selected = option.dataset.themeMode === mode;
+            option.classList.toggle('active', selected);
+            option.setAttribute('aria-pressed', String(selected));
+          });
+          selector.hidden = false;
+        });
+      }
+      function apply(value) {
+        var ids = ['maincss', 'csshigh'];
+        var previous = ids.map(function (id) { return document.getElementById(id); });
+        /* Custom head overrides may remove the managed stylesheet pair. */
+        if (previous.some(function (link) { return !link || link.tagName !== 'LINK'; })) return false;
+        var target = resolved(value);
+        var currentRequest = ++request;
+        mode = value;
+        root.dataset.themeMode = mode;
+        controls();
+        if (target === root.dataset.theme) return true;
+        var links = paths[target].map(function (url) {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.media = 'not all';
+          link.href = url;
+          return link;
+        });
+        var loaded = 0;
+        function discard() { links.forEach(function (link) { link.remove(); }); }
+        function failed() {
+          discard();
+          if (currentRequest === request) {
+            ++request;
+            controls();
+          }
+        }
+        links.forEach(function (link, index) {
+          var settled = false;
+          function finished(event) {
+            if (settled) return;
+            settled = true;
+            if (!usable(link, target, index, event.type === 'error')) { failed(); return; }
+            if (++loaded !== 2) return;
+            if (currentRequest !== request) { discard(); return; }
+            /* Do not overwrite stylesheets replaced by custom scripts while loading. */
+            if (previous.some(function (old, index) { return document.getElementById(ids[index]) !== old; })) { failed(); return; }
+            ids.forEach(function (id, index) {
+              previous[index].remove();
+              links[index].id = id;
+              links[index].media = 'all';
+            });
+            root.dataset.theme = target;
+            root.style.colorScheme = target;
+            updateThemeColor(target);
+          }
+          link.onerror = finished;
+          link.onload = finished;
+          /* Keep the custom stylesheet last in the cascade. */
+          document.head.insertBefore(link, previous[0]);
+        });
+        return true;
+      }
+      /* Preserve the prototype's entry point for custom controls, with one initialization read. */
+      window.chulapaSetThemeMode = function (value) {
+        if (!valid(value) || !apply(value)) return;
+        try { localStorage.setItem(key, mode); } catch (error) {}
+      };
+      document.addEventListener('DOMContentLoaded', controls);
+      document.addEventListener('click', function (event) {
+        var option = event.target.closest && event.target.closest('.chulapa-theme-selector [data-theme-mode]');
+        if (!option || !valid(option.dataset.themeMode)) return;
+        window.chulapaSetThemeMode(option.dataset.themeMode);
+        var button = option.closest('.chulapa-theme-selector').querySelector('.chulapa-theme-toggle');
+        if (button) button.focus();
+      });
+      window.addEventListener('storage', function (event) {
+        if (event.key === key || event.key === null) apply(valid(event.newValue) ? event.newValue : 'light');
+      });
+      if (scheme) {
+        var changed = function () { if (mode === 'auto') apply('auto'); };
+        if (scheme.addEventListener) scheme.addEventListener('change', changed);
+        else if (scheme.addListener) scheme.addListener(changed);
+      }
+    })();
+    </script>
+    <!-- Custom css -->
+    <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FWXW2HLTVZ');
+    </script>
+    <script data-goatcounter="https://dieghernan.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+        <!-- start custom head snippets -->
+    <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
+    <link rel="indieauth-metadata" href="https://indiekey.id/.well-known/oauth-authorization-server/s/j35a2ja6eg5casc2">
+    <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c23b83bb-5f33-4256-a5b5-fbc59c1c7ae8"></script>
+    <meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508">
+    <meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+    <link rel="authorization_endpoint" href="https://indiekey.id/s/j35a2ja6eg5casc2/auth">
+    <link rel="token_endpoint" href="https://indiekey.id/token">
+    <link rel="microsub" href="https://aperture.p3k.io/microsub/1119">
+    <!-- insert favicons. use https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    <!-- end custom head snippets -->
+</head>
+<body class="d-flex flex-column" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
+	<nav class="navbar navbar-expand-xl sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
+					</li><li class="nav-item dropdown"><button type="button" class="nav-link dropdown-toggle " id="Archives" data-toggle="dropdown" aria-expanded="false">Archives</button>
+						<div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub repo</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://www.r-bloggers.com/"><i class="fas fa-external-link-alt" aria-hidden="true"></i> R-bloggers</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li>
+<li class="nav-item dropdown chulapa-theme-selector" hidden>
+  <button type="button" class="nav-link dropdown-toggle chulapa-theme-toggle" id="chulapa-theme-classic" data-toggle="dropdown" aria-expanded="false" aria-label="Color theme: Light" title="Color theme: Light">
+    <i class="fas fa-sun" aria-hidden="true"></i>
+    <span class="chulapa-theme-label">Light</span>
+  </button>
+ <div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="chulapa-theme-classic">
+    <button type="button" class="dropdown-item" data-theme-mode="light" aria-pressed="true"><i class="fas fa-sun mr-2" aria-hidden="true"></i>Light</button>
+    <button type="button" class="dropdown-item" data-theme-mode="dark" aria-pressed="false"><i class="fas fa-moon mr-2" aria-hidden="true"></i>Dark</button>
+    <button type="button" class="dropdown-item" data-theme-mode="auto" aria-pressed="false"><i class="fa fa-adjust mr-2" aria-hidden="true"></i>Auto</button>
+ </div>
+</li>
+			</ul>
+			</div></div>
+</nav>
+			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
+  <a class="u-url d-none" href="https://dieghernan.github.io/202002_cartography1/">Invisible link to canonical for Microformats</a>
+ <main class="d-flex flex-column flex-fill">
+<header class="d-flex align-items-center splash-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp')"><div class="container-lg">
+   <h1 class="p-name" >New features in the <strong>cartography</strong> package</h1><hr class="my-3">
+   <p class="chulapa-subtitle p-summary">Vignette of the package expansion</p>
+ </div>
+</header>
+ <div class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList" itemid="https://dieghernan.github.io/202002_cartography1/#breadcrumb">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202002_cartography1/#breadcrumb-1"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202002_cartography1/#breadcrumb-2">
+      <link itemprop="item" href="https://dieghernan.github.io/202002_cartography1/">
+        <span itemprop="name">New features in the cartography package</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time class="dt-updated" datetime="2026-10-07T00:00:00+02:00">07 oct 2026</time> 
+            <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
+            <br>
+            <time class="dt-published font-weight-light chulapa-text-line-through" datetime="2020-02-17T00:00:00+01:00">17 feb 2020</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202002_cartography1/&text=New+features+in+the+cartography+package&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,beautiful_maps,maps,sf,r_package" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=New%20features%20in%20the%20cartography%20package%20https://dieghernan.github.io/202002_cartography1/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23beautiful_maps%20%23maps%20%23sf%20%23r_package" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202002_cartography1/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=New+features+in+the+cartography+package%20https://dieghernan.github.io/202002_cartography1/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202002_cartography1/&title=New+features+in+the+cartography+package" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+   <div class="row pt-2">
+     <aside class="col-lg-2 mt-lg-3 small"><div class="h-card p-author"><a class="u-url d-none" href="https://github.com/dieghernan">dieghernan</a><div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="dieghernan" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						dieghernan
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://stackoverflow.com/users/7877917/dieghernan" title="On StackOverflow" aria-label="On StackOverflow" ><i class="fab fa-stack-overflow fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+     <article id="maincontent" class="col-lg-8 mt-3">
+	<button type="button" class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='chulapa-sidetoc-toggle' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar' aria-hidden="true" inert>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
+		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">New features in the <strong>cartography</strong> package</a></p>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#introduction" class="nav-link">Introduction</a></li><li class="nav-item nav d-block"><a href="#installation" class="nav-link">Installation</a></li><li class="nav-item nav d-block"><a href="#hatched-map" class="nav-link">Hatched map</a><ul><li class="nav-item nav d-block"><a href="#example-1" class="nav-link">Example 1</a></li><li class="nav-item nav d-block"><a href="#example-2" class="nav-link">Example 2</a></li><li class="nav-item nav d-block"><a href="#example-3" class="nav-link">Example 3</a></li></ul></li><li class="nav-item nav d-block"><a href="#png-layer" class="nav-link">PNG layer</a><ul><li class="nav-item nav d-block"><a href="#example-1-1" class="nav-link">Example 1</a></li><li class="nav-item nav d-block"><a href="#example-2-1" class="nav-link">Example 2</a></li></ul></li><li class="nav-item nav d-block"><a href="#wordcloudlayer" class="nav-link"><code class="language-plaintext highlighter-rouge">wordcloudLayer()</code></a><ul><li class="nav-item nav d-block"><a href="#example-1-2" class="nav-link">Example 1</a></li><li class="nav-item nav d-block"><a href="#example-2-2" class="nav-link">Example 2</a></li></ul></li></ul>
+		</nav>   
+	</div>
+         <nav aria-label="table-of-contents">
+           <ul class="chulapa-toc-wrapper list-group mb-5 mx-3 mx-lg-5" id="toc"><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#introduction">Introduction</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#installation">Installation</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#hatched-map">Hatched map</a><ul><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-1">Example 1</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-2">Example 2</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-3">Example 3</a></li></ul></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#png-layer">PNG layer</a><ul><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-1-1">Example 1</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-2-1">Example 2</a></li></ul></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#wordcloudlayer"><code class="language-plaintext highlighter-rouge">wordcloudLayer()</code></a><ul><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-1-2">Example 1</a></li><li class="list-group-item font-weight-bold py-1 pr-0 mr-0 chulapa-toc-reset"><a href="#example-2-2">Example 2</a></li></ul></li></ul>
+         </nav>
+       <div class="e-content"><h2 id="introduction">Introduction</h2>
+<p>This document describes the new features added to <strong>cartography</strong> in version
+<code class="language-plaintext highlighter-rouge">2.4.0</code> by
+<a href="https://github.com/dieghernan/">dieghernan</a> and already available on <strong>CRAN</strong>.</p>
+<p class="alert alert-info p-3 mx-2 mb-3"><strong>Historical example:</strong> The mapping examples use <strong>cartography</strong>, which is now
+in maintenance mode. Its maintainers recommend <a href="https://riatelab.github.io/mapsf/"><strong>mapsf</strong></a>
+for new work. The original code and outputs are preserved and have not been
+revalidated against current package versions.</p>
+<p>Those new features are:</p>
+<ul>
+ <li><code class="language-plaintext highlighter-rouge">hatchedLayer</code> and <code class="language-plaintext highlighter-rouge">legendHatched</code> functions.</li>
+ <li><code class="language-plaintext highlighter-rouge">pngLayer</code> and <code class="language-plaintext highlighter-rouge">getPngLayer</code> functions.</li>
+ <li><code class="language-plaintext highlighter-rouge">wordcloudLayer</code> function.</li>
+</ul>
+<p>These functions don’t handle <code class="language-plaintext highlighter-rouge">sp</code> objects on purpose, favoring <code class="language-plaintext highlighter-rouge">sf</code> instead.</p>
+<h2 id="installation">Installation</h2>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#install.packages("cartography")</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+</span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## [1] '3.0.0'</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="hatched-map">Hatched map</h2>
+<p>Version of typology/choropleth maps using a hatched filling. This is
+particularly useful for maps that need to be printed in black and white, such
+as academic papers. These maps are also useful for representing overlapping
+dimensions.</p>
+<h3 id="example-1">Example 1</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">jsonlite</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Shape</span><span class="w">
+</span><span class="n">cntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="s2">"https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson"</span><span class="p">,</span><span class="w">
+                  </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="c1">## Reading layer `CNTR_RG_20M_2016_3035' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3035.geojson' using driver `GeoJSON'</span><span class="w">
+</span><span class="c1">## Simple feature collection with 257 features and 6 fields</span><span class="w">
+</span><span class="c1">## Geometry type: MULTIPOLYGON</span><span class="w">
+</span><span class="c1">## Dimension:     XY</span><span class="w">
+</span><span class="c1">## Bounding box:  xmin: -7142317 ymin: -9160665 xmax: 16932290 ymax: 15428010</span><span class="w">
+</span><span class="c1">## Projected CRS: ETRS89-extended / LAEA Europe</span><span class="w">
+
+</span><span class="c1"># Include trade blocks</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fromJSON</span><span class="p">(</span><span class="s2">"https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json"</span><span class="p">)</span><span class="w">
+</span><span class="n">ISO_memcol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w">
+                       </span><span class="n">orgtosearch</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">ind</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">match</span><span class="p">(</span><span class="n">orgtosearch</span><span class="p">,</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"org_id"</span><span class="p">]))</span><span class="w">
+  </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">df</span><span class="p">),</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+    </span><span class="n">unlist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s2">"org_member"</span><span class="p">])[</span><span class="n">ind</span><span class="p">])</span><span class="w">
+  </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">or</span><span class="p">)),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
+  </span><span class="nf">names</span><span class="p">(</span><span class="n">or</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">orgtosearch</span><span class="w">
+  </span><span class="n">df2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">or</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">))</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EU"</span><span class="p">)</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EFTA"</span><span class="p">)</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ISO_memcol</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="s2">"EuroArea"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">cntries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w">
+                </span><span class="n">df</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO3_CODE"</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO_3166_3"</span><span class="p">,</span><span class="w">
+                </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">#Limits EU</span><span class="w">
+</span><span class="c1">#Plot base map</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">),</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EU</span><span class="p">),]),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EFTA</span><span class="p">),]),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="c1">#Add hatching</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">cntries</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">EuroArea</span><span class="p">),],</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right2left"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">legendTypo</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"EU"</span><span class="p">,</span><span class="w"> </span><span class="s2">"EFTA"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"grey60"</span><span class="p">,</span><span class="w"> </span><span class="s2">"black"</span><span class="p">),</span><span class="w">
+  </span><span class="n">nodata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Within EU"</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Euro\nArea"</span><span class="p">,</span><span class="w">
+  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right2left"</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"European Trade Blocks"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-min-1.webp" alt="Map of European trade blocs using gray fills for membership and diagonal hatching to identify the euro area." /></p>
+<h3 id="example-2">Example 2</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Plot World</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">cntries</span><span class="o">$</span><span class="n">geometry</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">),</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="c1">#Add layers for non european area - left2right</span><span class="w">
+</span><span class="n">NOEUR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Europe"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">CONTINENT.EN</span><span class="p">))</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">NOEUR</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left2right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+  </span><span class="c1">#Basic usage</span><span class="w">
+  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+  </span><span class="c1">#Densify default grid</span><span class="w">
+  </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey50"</span><span class="w">
+</span><span class="p">)</span><span class="w">            </span><span class="c1">#Formatting</span><span class="w">
+
+</span><span class="c1">#Extract Europe Regions</span><span class="w">
+</span><span class="n">EUR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Europe"</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"Western Asia"</span><span class="p">)[,</span><span class="w"> </span><span class="s2">"SUBREGION.EN"</span><span class="p">]</span><span class="w">
+</span><span class="n">levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#Plot Regions</span><span class="w">
+</span><span class="c1"># First element with zigzag</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w">
+             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"zigzag"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#dot with parms</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w">
+  </span><span class="n">cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w">
+  </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#vertical</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">3</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
+             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#another dot</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="n">EUR</span><span class="p">[</span><span class="n">EUR</span><span class="o">$</span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">levels</span><span class="p">[</span><span class="m">4</span><span class="p">],</span><span class="w"> </span><span class="p">],</span><span class="w">
+             </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+             </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+             </span><span class="n">pch</span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w">
+             </span><span class="n">density</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#create legend</span><span class="w">
+</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
+  </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"topright"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.cex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">levels</span><span class="p">,</span><span class="w"> </span><span class="s2">"Others"</span><span class="p">),</span><span class="w">
+  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"zigzag"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"dot"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"left2right"</span><span class="p">),</span><span class="w">
+  </span><span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">15</span><span class="p">),</span><span class="w">
+  </span><span class="n">lty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">levels</span><span class="p">)),</span><span class="w"> </span><span class="s2">"grey50"</span><span class="p">),</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Regions of Europe (United Nations)"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-1.webp" alt="Map of Europe using different hatching patterns to distinguish the United Nations geographic regions." /></p>
+<p><code class="language-plaintext highlighter-rouge">legendHatched</code> honors the order of the parameters. In this case, two <code class="language-plaintext highlighter-rouge">dot</code>
+patterns are present, so <code class="language-plaintext highlighter-rouge">pch = c(4,15)</code> takes care of that. Note that three
+line-type patterns are also plotted, as in the previous case, and <code class="language-plaintext highlighter-rouge">lty = c(1,
+1, 3)</code> respects that order.</p>
+<h3 id="example-3">Example 3</h3>
+<p><code class="language-plaintext highlighter-rouge">hatchedLayer</code> could also be useful for plotting several dimensions on the same map, in combination with another function of the package.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+
+
+</span><span class="c1">#Warsaw Pact - roughly mapped via UN Region</span><span class="w">
+</span><span class="n">wp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">SUBREGION.EN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Eastern Europe"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#European Union - after Brexit</span><span class="w">
+</span><span class="n">eu</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">EU</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#Euro Area</span><span class="w">
+</span><span class="n">ea</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">EuroArea</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#Flags for plotting</span><span class="w">
+</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">cntries</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">eu</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
+              </span><span class="n">cntries</span><span class="o">$</span><span class="n">CONTINENT.EN</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="o">!</span><span class="n">flag</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Europe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"European Union"</span><span class="p">),</span><span class="w"> </span><span class="s2">"Other"</span><span class="p">,</span><span class="w">
+              </span><span class="n">flag</span><span class="p">)</span><span class="w">
+</span><span class="n">cntries</span><span class="o">$</span><span class="n">flag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">flag</span><span class="w">
+
+
+
+</span><span class="c1">#Plot lims</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries</span><span class="p">),</span><span class="w">
+  </span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="m">7150000</span><span class="p">),</span><span class="w">
+  </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="m">5500000</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">#Combine with typoLayer</span><span class="w">
+</span><span class="n">typoLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cntries</span><span class="p">,</span><span class="w">
+  </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"flag"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+  </span><span class="n">legend.values.order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
+                          </span><span class="s2">"Europe"</span><span class="p">,</span><span class="w">
+                          </span><span class="s2">"Other"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#hatching</span><span class="w">
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ea</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"left2right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">cellsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100000</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">hatchedLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wp</span><span class="p">,</span><span class="w">
+  </span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">,</span><span class="w">
+  </span><span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span><span class="w">
+  </span><span class="n">cellsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">75000</span><span class="p">,</span><span class="w">
+  </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Legend</span><span class="w">
+</span><span class="n">legendHatched</span><span class="p">(</span><span class="w">
+  </span><span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"right"</span><span class="p">,</span><span class="w">
+  </span><span class="n">title.txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Economic Region"</span><span class="p">,</span><span class="w">
+  </span><span class="n">categ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Euro Area"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Former \nWarsaw Pact"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"European Union"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Europe"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Other"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"left2right"</span><span class="p">,</span><span class="w"> </span><span class="s2">"vertical"</span><span class="p">),</span><span class="w">
+  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"black"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
+  </span><span class="n">ptrn.bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#A6BDDB"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"#E0E0E0"</span><span class="p">),</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"European Countries - Blocks"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_hatched-adv-1.webp" alt="Map of European countries combining colored fills and hatching to distinguish trade bloc membership." /></p>
+<h2 id="png-layer">PNG layer</h2>
+<p>This new capability geotags a <code class="language-plaintext highlighter-rouge">.png</code> file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a <code class="language-plaintext highlighter-rouge">POLYGON/MULTIPOLYGON</code>.</p>
+<p>For high-quality PNG maps, <strong>it is recommended to plot your map on an SVG
+graphics device</strong>.</p>
+<h3 id="example-1-1">Example 1</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="n">cntries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_read</span><span class="p">(</span><span class="s2">"https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson"</span><span class="p">,</span><span class="w">
+                  </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="c1">## Reading layer `CNTR_RG_20M_2016_3857' from data source `https://ec.europa.eu/eurostat/cache/GISCO/distribution/v2/countries/geojson/CNTR_RG_20M_2016_3857.geojson' using driver `GeoJSON'</span><span class="w">
+</span><span class="c1">## Simple feature collection with 257 features and 6 fields</span><span class="w">
+</span><span class="c1">## Geometry type: MULTIPOLYGON</span><span class="w">
+</span><span class="c1">## Dimension:     XY</span><span class="w">
+</span><span class="c1">## Bounding box:  xmin: -20037510 ymin: -30240970 xmax: 20037510 ymax: 18446790</span><span class="w">
+</span><span class="c1">## Projected CRS: WGS 84 / Pseudo-Mercator</span><span class="w">
+
+</span><span class="n">cntries2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merge</span><span class="p">(</span><span class="n">cntries2</span><span class="p">,</span><span class="w">
+                </span><span class="n">df</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO3_CODE"</span><span class="p">,</span><span class="w">
+                </span><span class="n">by.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ISO_3166_3"</span><span class="p">,</span><span class="w">
+                </span><span class="n">all.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">africa</span><span class="o">=</span><span class="n">subset</span><span class="p">(</span><span class="n">cntries2</span><span class="p">,</span><span class="w"> </span><span class="n">CONTINENT.EN</span><span class="w"> </span><span class="o">==</span><span class="s2">"Africa"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">area_km2</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#Get bigger countries</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">,]),</span><span class="w"> </span><span class="n">bg</span><span class="o">=</span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"grey90"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Iterate for Africa</span><span class="w">
+</span><span class="c1">#Get flags from repo - low quality to speed up the vignette</span><span class="w">
+</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"</span><span class="w">
+
+
+</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">cntry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="s2">"ISO_3166_2"</span><span class="p">]))</span><span class="w">
+  </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">africa</span><span class="p">[</span><span class="n">i</span><span class="p">,],</span><span class="w">
+                  </span><span class="n">paste</span><span class="p">(</span><span class="n">flagrepo</span><span class="p">,</span><span class="w"> </span><span class="n">tolower</span><span class="p">(</span><span class="n">cntry</span><span class="p">),</span><span class="w"> </span><span class="s2">".png"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">))</span><span class="w">
+  </span><span class="n">pngLayer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="c1">#Add borders</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cntries2</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">0.4</span><span class="p">)</span><span class="w">
+
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Flags of Africa"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_pnglayer-1.webp" alt="Map of Africa with each country filled with its national flag." /></p>
+<h3 id="example-2-1">Example 2</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">cartography</span><span class="p">)</span><span class="w">
+
+</span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="m">2200000</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="o">=</span><span class="m">7150000</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="m">1380000</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="o">=</span><span class="m">5500000</span><span class="p">)</span><span class="w">
+</span><span class="n">nuts0</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">st_crop</span><span class="p">(</span><span class="n">cntries</span><span class="p">,</span><span class="w"> </span><span class="n">box</span><span class="p">)</span><span class="w">
+
+</span><span class="n">UK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuts0</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"UK"</span><span class="p">)</span><span class="w">
+</span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/800px-Flag_of_Europe.svg.png"</span><span class="w">
+
+
+</span><span class="n">EU</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">nuts0</span><span class="p">,</span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">mask</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">EU</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">urluk</span><span class="o">=</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/gb.png"</span><span class="w">
+
+</span><span class="n">UKpng</span><span class="o">=</span><span class="n">getPngLayer</span><span class="p">(</span><span class="n">UK</span><span class="p">,</span><span class="n">urluk</span><span class="p">)</span><span class="w">
+
+</span><span class="n">pngLayer</span><span class="p">(</span><span class="n">UKpng</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_png-adv-1.webp" alt="European Union flag with the Union Jack clipped to the outline of the United Kingdom." /></p>
+<h2 id="wordcloudlayer"><code class="language-plaintext highlighter-rouge">wordcloudLayer()</code></h2>
+<p>A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.</p>
+<p>Word cloud layers fitted into a map shape provide a good trade-off between
+physical location, scale and labels. The size and color of the words are based
+on the frequency of the factor being plotted, highlighting the most frequent
+terms.</p>
+<h3 id="example-1-2">Example 1</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">eu</span><span class="o">$</span><span class="n">dens</span><span class="o">=</span><span class="n">eu</span><span class="o">$</span><span class="n">pop</span><span class="o">/</span><span class="n">eu</span><span class="o">$</span><span class="n">area_km2</span><span class="w">
+
+</span><span class="n">wordcloudLayer</span><span class="p">(</span><span class="n">eu</span><span class="p">,</span><span class="n">txt</span><span class="o">=</span><span class="s2">"NAME.EN"</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="s2">"dens"</span><span class="p">,</span><span class="w">
+               </span><span class="n">fittopol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+               </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w">
+               </span><span class="n">cex.maxmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">br</span><span class="o">=</span><span class="n">getBreaks</span><span class="p">(</span><span class="n">eu</span><span class="o">$</span><span class="n">dens</span><span class="p">,</span><span class="w"> </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">)</span><span class="w">
+
+</span><span class="n">legendChoro</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">title.txt</span><span class="o">=</span><span class="s2">"Pop Density"</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="n">carto.pal</span><span class="p">(</span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="m">7</span><span class="p">))</span><span class="w">
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="w">
+  </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Population Density in Europe"</span><span class="p">,</span><span class="w">
+  </span><span class="n">theme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blue.pal"</span><span class="p">,</span><span class="w">
+  </span><span class="n">sources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"© EuroGeographics for the administrative boundaries."</span><span class="p">,</span><span class="w">
+  </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w">
+  </span><span class="n">frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud1-1.webp" alt="Word map of Europe with country names positioned geographically. Text size and color represent population density, with Malta especially prominent." /></p>
+<h3 id="example-2-2">Example 2</h3>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="c1"># Genres from MB--</span><span class="w">
+</span><span class="c1">#Import genres</span><span class="w">
+</span><span class="n">collected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"./assets/data/US_MB.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">F</span><span class="p">)</span><span class="w">
+</span><span class="n">collected</span><span class="o">=</span><span class="n">collected</span><span class="p">[</span><span class="m">-1</span><span class="p">,]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
+</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s2">"united states of america"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_transform</span><span class="p">(</span><span class="m">3857</span><span class="p">)</span><span class="w">
+</span><span class="c1">#Get main polygon</span><span class="w">
+</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_union</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
+</span><span class="n">areas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span><span class="w">
+</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shape</span><span class="p">[</span><span class="n">areas</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">areas</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">1234</span><span class="p">)</span><span class="w">
+</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span><span class="c1">#Sample regular</span><span class="w">
+</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">points</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"regular"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#Center points</span><span class="w">
+
+</span><span class="n">centr</span><span class="o">=</span><span class="n">st_centroid</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">of_largest_polygon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">f</span><span class="o">=</span><span class="n">st_distance</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="n">centr</span><span class="p">)</span><span class="w">
+</span><span class="n">dfpoints</span><span class="o">=</span><span class="n">st_sf</span><span class="p">(</span><span class="n">dist</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="w">
+               </span><span class="n">geometry</span><span class="o">=</span><span class="n">points</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">((</span><span class="n">dist</span><span class="p">))</span><span class="w">
+
+
+</span><span class="c1">#Create df</span><span class="w">
+</span><span class="n">points</span><span class="o">=</span><span class="n">st_sf</span><span class="p">(</span><span class="n">collected</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,],</span><span class="w">
+             </span><span class="n">geometry</span><span class="o">=</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">dfpoints</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">])</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="s2">"grey95"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
+</span><span class="n">wordcloudLayer</span><span class="p">(</span><span class="n">points</span><span class="p">,</span><span class="w">
+               </span><span class="n">txt</span><span class="o">=</span><span class="s2">"genre"</span><span class="p">,</span><span class="w">
+               </span><span class="n">freq</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span><span class="w">
+               </span><span class="n">cex.maxmin</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">),</span><span class="w">
+               </span><span class="n">col</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ba478f"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#eb743b"</span><span class="p">),</span><span class="w">
+               </span><span class="n">nclass</span><span class="o">=</span><span class="m">7</span><span class="p">,</span><span class="w">
+               </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">layoutLayer</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Most frequent genres on US"</span><span class="p">,</span><span class="w">
+            </span><span class="n">sources</span><span class="o">=</span><span class="s2">"Musicbrainz"</span><span class="p">,</span><span class="w">
+              </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"cartography "</span><span class="p">,</span><span class="w"> </span><span class="n">packageVersion</span><span class="p">(</span><span class="s2">"cartography"</span><span class="p">)),</span><span class="w">
+            </span><span class="n">theme</span><span class="o">=</span><span class="s2">"orange.pal"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp" alt="Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently." /></p>
+</div>
+         <div class="mt-5 pt-3 mb-3 text-center">
+            <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
+            <script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
+         </div>
+     </article>
+   </div>
+     <div class="row">
+       <div class="col-lg-8 offset-lg-2">
+<link rel="stylesheet" href="/assets/css/webmentions.css">
+<section class="webmentions mt-5 pt-4 border-top" aria-labelledby="webmentions-heading"
+  data-webmentions data-target="https://dieghernan.github.io/202002_cartography1/">
+<header class="webmentions-header">
+   <h2 id="webmentions-heading" class="h4"><i class="fa-regular fa-comments mr-2" aria-hidden="true"></i>Mentions and replies</h2>
+   <p class="text-muted small">Conversations from across the web.</p>
+ </header>
+  <button class="btn btn-outline-primary mb-3" type="button" data-webmentions-load hidden>Load mentions</button>
+ <p class="webmentions-status small text-muted" role="status" data-webmentions-status></p>
+ <ol class="webmentions-replies" data-webmentions-results hidden></ol>
+ <div class="webmentions-reactions" data-webmentions-reactions hidden></div>
+  <noscript><p>JavaScript is needed to display mentions. You can still send one using the form below.</p></noscript>
+  <details class="webmentions-send mt-4">
+    <summary>Shared your thoughts on this post? <span class="text-muted">Drop your link here!</span></summary>
+    <form class="mt-3" method="post" action="https://webmention.io/dieghernan.github.io/webmention">
+     <p class="small" id="webmention-help">Publish a page that links to this post, then submit its URL. Webmention.io will check the link before the mention appears.</p>
+      <input type="hidden" name="target" value="https://dieghernan.github.io/202002_cartography1/">
+      <label for="webmention-source">URL of your page</label>
+      <input class="form-control mb-3" id="webmention-source" name="source" type="url"
+        placeholder="https://example.com/your-post/" aria-describedby="webmention-help" required>
+      <button class="btn btn-primary" type="submit">Send webmention</button>
+    </form>
+  </details>
+</section>
+<script src="/assets/js/webmentions.js" defer></script>
+       </div>
+     </div>
+ </div>
+ </main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202002_Brexit/">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">We’ll miss you, UK</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">We’ll miss you...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
+	   <p class="page-link chulapa-label">Head/tail brea...</p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
+	   <p class="page-link chulapa-label">Head/tail breaks in the cla...</p>
+	 </li>
+   <li class="page-item text-right ml-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202004_headtails/">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#beautiful_maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >beautiful_maps</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category" rel="tag" >sf</a>
+      <a href="https://dieghernan.github.io/tags#r_package" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_package</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+       <div class="container-lg mt-1 mb-2">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+             <hr>
+               <h2 class="h5">Related posts</h2>
+             <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">
+              Beautiful maps with R (III): Patterns and hatched maps
+            </a>
+         </p>
+           <p class="card-text">
+              <small>A solution for black-and-white and academic maps</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2019-12-12T00:00:00+01:00">
+                december 12, 2019
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202602_geobounds/" class="chulapa-text-body-color">
+              Introducing <strong>geobounds</strong>
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-02-12T00:00:00+01:00">
+                february 12, 2026
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202510_mapping-antarctica/" class="chulapa-text-body-color">
+              Mapping Antarctica
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Cool maps from the South Pole</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-10-25T00:00:00+02:00">
+                october 25, 2025
+              </time>
+            </small>
+       </div>
+     </div></nav>
+           </div>
+         </div>
+       </div></div>
+  <!-- Footer -->
+  <footer class="footer-chulapa text-center mt-0 pt-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+              <script src="https://giscus.app/client.js"
+  data-repo="dieghernan/dieghernan.github.io"
+  data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA=" data-category="Blog"
+  data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+  data-mapping="pathname"
+  data-strict="0" data-reactions-enabled="1" data-emit-metadata="1"
+  data-input-position="top" data-theme="dark_high_contrast" data-lang="en"
+  data-loading="lazy" crossorigin="anonymous" async>
+</script>
+            </div>
+          </div>
+        </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-10 offset-xl-1">
+          <nav aria-label="Footer links" class="d-flex flex-wrap justify-content-center">
+            <a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">RSS</span>
+            </a>
+            <a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">Stack Overflow</span>
+            </a>
+            <a href="https://commons.wikimedia.org/wiki/Special:ListFiles?limit=50&user=dieghernan84" title="footerWikiCommons" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-wikipedia-w fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">WikiCommons</span>
+            </a>
+            <a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">GitHub</span>
+            </a>
+            <a href="https://rpubs.com/dieghernan" title="footerRPubs" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-r-project fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">RPubs</span>
+            </a>
+          </nav>
+          <p class="mt-2 mb-3">&copy; 2026 dieghernan</p>
+          <!-- Do not remove this in order to give attributions -->
+          <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a><br><b>GitDev Dark</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End attributions -->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5, h2.h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>
