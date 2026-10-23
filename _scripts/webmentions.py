@@ -16,7 +16,15 @@ from urllib.request import (build_opener, getproxies, HTTPHandler, HTTPSHandler,
 
 ORIGIN = 'https://dieghernan.github.io'
 LIMIT = 4 * 1024 * 1024
-SCOPE_MIGRATIONS = json.loads(Path(__file__).with_name('webmention-scope-v2.json').read_text())
+LEDGER_VERSION = 3
+
+
+def internal(url):
+    p = urlsplit(url)
+    path = p.path
+    chulapa = path == '/chulapa' or path.startswith('/chulapa/')
+    return ((p.hostname or '').lower().rstrip('.') == urlsplit(ORIGIN).hostname
+            and not chulapa)
 VOID = set('area base br col embed hr img input link meta param source track wbr'.split())
 
 
@@ -27,7 +35,7 @@ def allowed(url, external=True):
         return (p.scheme in ('http', 'https') and bool(host)
                 and not p.username and not p.password and p.port in (None, 80, 443)
                 and host != 'fed.brid.gy' and not host.endswith('.fed.brid.gy')
-                and (not external or host != urlsplit(ORIGIN).hostname))
+                and (not external or not internal(url)))
     except ValueError:
         return False
 
@@ -91,7 +99,7 @@ class SafeRedirects(HTTPRedirectHandler):
         # Never replay a form submission to a redirected endpoint.
         if req.get_method() != 'GET':
             raise ValueError('Endpoint redirected the submission')
-        external = urlsplit(req.full_url).hostname != urlsplit(ORIGIN).hostname
+        external = not internal(req.full_url)
         if not allowed(newurl, external=external):
             raise ValueError('Excluded redirect destination')
         return super().redirect_request(req, fp, code, msg, headers, newurl)
@@ -188,7 +196,7 @@ def has_post(data):
 def posts_in(site):
     posts = {}
     for path in sorted(Path(site).rglob('*.html')):
-        page = Page(path.read_text())
+        page = Page(path.read_text(encoding='utf-8'))
         if not page.post or not page.canonical or not page.content:
             continue
         if not page.canonical.startswith(ORIGIN + '/'):
@@ -259,24 +267,16 @@ def discover(target, request=fetch):
 
 def process(posts, state, request=fetch, checkpoint=lambda: None):
     if state is None:
-        state = {'version': 2, 'posts': {
-            source: {target: post['digest'] for target in post['targets']}
-            for source, post in posts.items()}}
-        print(f'Baseline: {len(posts)} existing posts recorded; no mentions sent.')
-        return state
-    if state.get('version') not in (1, 2) or not isinstance(state.get('posts'), dict):
+        state = {'version': LEDGER_VERSION, 'posts': {}}
+    if state.get('version') not in (1, 2, LEDGER_VERSION) or not isinstance(state.get('posts'), dict):
         raise ValueError('Unknown ledger format')
-    if state['version'] == 1:
-        # Rebase only the exact old/new fingerprints audited for this layout
-        # transition. An editorial edit does not match and still gets sent.
-        for source, post in posts.items():
-            seen = state['posts'].get(source, {})
-            for target in post['targets']:
-                if SCOPE_MIGRATIONS.get(seen.get(target)) == post['digest']:
-                    seen[target] = post['digest']
-        state['version'] = 2
+    if state['version'] != LEDGER_VERSION:
+        # The old baseline included historical links that were never sent.
+        # Reset once, before delivery, so interrupted runs resume the new ledger.
+        state.clear()
+        state.update({'version': LEDGER_VERSION, 'posts': {}})
         checkpoint()
-        print('Migrated known deliveries to editorial e-content; pending targets retained.')
+        print('Rebuilding delivery ledger: historical posts will be processed once.')
     for source, post in posts.items():
         seen = state['posts'].setdefault(source, {})
         pending = [t for t in post['targets'] if seen.get(t) != post['digest']]
@@ -313,12 +313,14 @@ def main():
     args = parser.parse_args()
     posts = posts_in(args.site)
     path = Path(args.state)
-    state = json.loads(path.read_text()) if path.exists() else None
+    state = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'version': LEDGER_VERSION, 'posts': {}}
     if args.dry_run:
         print(f'Dry run: {len(posts)} posts, {sum(len(p["targets"]) for p in posts.values())} eligible links; no requests or writes.')
         return
     def save():
-        path.write_text(json.dumps(state, indent=2, sort_keys=True) + '\n')
+        temporary = path.with_suffix(path.suffix + '.tmp')
+        temporary.write_text(json.dumps(state, indent=2, sort_keys=True) + '\n', encoding='utf-8')
+        temporary.replace(path)
     state = process(posts, state, checkpoint=save)
     save()
 

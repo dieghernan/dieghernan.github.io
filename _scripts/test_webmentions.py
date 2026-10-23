@@ -40,15 +40,16 @@ class WebmentionsTests(unittest.TestCase):
             return url, Message(), ''
         self.fail(url)
 
-    def test_baseline_never_contacts_any_site(self):
+    def test_first_run_sends_existing_links_once(self):
         state = wm.process(self.posts, None, request=self.request)
+        self.assertEqual(state['version'], 3)
         self.assertEqual(state['posts'][SOURCE][TARGET], self.post['digest'])
-        self.assertEqual(self.calls, [])
+        self.assertEqual(len(self.calls), 3)
         wm.process(self.posts, state, request=self.request)
-        self.assertEqual(self.calls, [])
+        self.assertEqual(len(self.calls), 3)
 
     def test_new_post_sends_once_and_edited_post_resends(self):
-        state = {'version': 2, 'posts': {}}
+        state = {'version': 3, 'posts': {}}
         wm.process(self.posts, state, request=self.request)
         self.assertEqual(len(self.calls), 3)
         wm.process(self.posts, state, request=self.request)
@@ -63,14 +64,14 @@ class WebmentionsTests(unittest.TestCase):
             if data:
                 raise TimeoutError('receiver unavailable')
             return self.request(url, data)
-        state = {'version': 2, 'posts': {}}
+        state = {'version': 3, 'posts': {}}
         wm.process(self.posts, state, request=fail)
         self.assertNotIn(TARGET, state['posts'][SOURCE])
         wm.process(self.posts, state, request=self.request)
         self.assertIn(TARGET, state['posts'][SOURCE])
 
     def test_stale_live_article_is_not_sent(self):
-        state = {'version': 2, 'posts': {}}
+        state = {'version': 3, 'posts': {}}
         self.html = self.html.replace('Hello', 'Old')
         wm.process(self.posts, state, request=self.request)
         self.assertEqual(self.calls, [(SOURCE, None)])
@@ -100,34 +101,37 @@ class WebmentionsTests(unittest.TestCase):
         headers['Link'] = f'<{ENDPOINT}>; title="Webmention, endpoint"; rel="webmention"'
         self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, headers, '')), ENDPOINT)
 
-    def test_layout_scope_migration_does_not_resend_known_deliveries(self):
-        state = {'version': 1, 'posts': {SOURCE: {TARGET: 'old-layout-digest'}}}
-        with patch.dict(wm.SCOPE_MIGRATIONS, {'old-layout-digest': self.post['digest']}):
-            wm.process(self.posts, state, request=self.request)
-        self.assertEqual(self.calls, [])
-        self.assertEqual(state['version'], 2)
-        self.assertEqual(state['posts'][SOURCE][TARGET], self.post['digest'])
-        self.html = self.html.replace('Hello', 'Edited after migration')
-        self.post['digest'] = wm.Page(self.html).digest
-        wm.process(self.posts, state, request=self.request)
-        self.assertEqual(len(self.calls), 3)
+    def test_legacy_baseline_is_rebuilt_once_and_checkpointed_before_sending(self):
+        for version in (1, 2):
+            with self.subTest(version=version):
+                self.calls = []
+                state = {'version': version, 'posts': {SOURCE: {TARGET: self.post['digest']}}}
+                checkpoints = []
+                def save():
+                    checkpoints.append((state['version'], bool(state['posts']), len(self.calls)))
+                returned = wm.process(self.posts, state, request=self.request, checkpoint=save)
+                self.assertIs(returned, state)
+                self.assertEqual(checkpoints[0], (3, False, 0))
+                self.assertEqual(len(self.calls), 3)
+                wm.process(self.posts, state, request=self.request)
+                self.assertEqual(len(self.calls), 3)
 
-    def test_layout_scope_migration_does_not_mask_an_editorial_edit(self):
-        state = {'version': 1, 'posts': {SOURCE: {TARGET: 'old-layout-digest'}}}
-        with patch.dict(wm.SCOPE_MIGRATIONS, {'old-layout-digest': 'different-editorial-content'}):
-            wm.process(self.posts, state, request=self.request)
-        self.assertEqual(len(self.calls), 3)
-
-    def test_layout_scope_migration_retains_failed_targets(self):
-        state = {'version': 1, 'posts': {SOURCE: {}}}
+    def test_interrupted_rebuild_retains_progress_and_failed_targets(self):
+        state = {'version': 2, 'posts': {SOURCE: {TARGET: self.post['digest']}}}
+        def fail(url, data=None):
+            if data:
+                raise TimeoutError('unavailable')
+            return self.request(url, data)
+        wm.process(self.posts, state, request=fail)
+        self.assertEqual(state['version'], 3)
+        self.assertNotIn(TARGET, state['posts'][SOURCE])
         wm.process(self.posts, state, request=self.request)
-        self.assertEqual(len(self.calls), 3)
-        self.assertEqual(state['posts'][SOURCE][TARGET], self.post['digest'])
+        self.assertIn(TARGET, state['posts'][SOURCE])
 
     def test_no_endpoint_is_recorded(self):
         def unsupported(url, data=None):
             return url, Message(), self.html if url == SOURCE else '<p>No endpoint</p>'
-        state = {'version': 2, 'posts': {}}
+        state = {'version': 3, 'posts': {}}
         wm.process(self.posts, state, request=unsupported)
         self.assertIn(TARGET, state['posts'][SOURCE])
 
@@ -155,6 +159,22 @@ class WebmentionsTests(unittest.TestCase):
             handler.redirect_request(Request(ENDPOINT, data=b'x'), None, 307, '', {}, TARGET)
         with self.assertRaises(ValueError):
             handler.redirect_request(Request(TARGET), None, 302, '', {}, SOURCE)
+
+    def test_chulapa_targets_and_redirects_are_allowed(self):
+        for path in ('/chulapa', '/chulapa/', '/chulapa/docs/01-install'):
+            self.assertTrue(wm.allowed(wm.ORIGIN + path))
+        for path in ('/', '/chulapa-other/', '/202610_webmentions/'):
+            self.assertFalse(wm.allowed(wm.ORIGIN + path))
+        handler = wm.SafeRedirects()
+        target = wm.ORIGIN + '/chulapa'
+        redirected = handler.redirect_request(Request(target), None, 301, '', {}, target + '/')
+        self.assertEqual(redirected.full_url, target + '/')
+        html = f'<link rel="webmention" href="{wm.ORIGIN}/chulapa/receiver">'
+        self.assertEqual(wm.discover(target, lambda u: (target, Message(), html)),
+                         wm.ORIGIN + '/chulapa/receiver')
+        for path in ('/', '/202610_webmentions/'):
+            with self.assertRaises(ValueError):
+                handler.redirect_request(Request(target), None, 302, '', {}, wm.ORIGIN + path)
 
     def test_private_address_rejected(self):
         private = [(2, 1, 6, '', ('127.0.0.1', 443))]
@@ -213,13 +233,15 @@ class WebmentionsTests(unittest.TestCase):
     def test_generated_posts_only_and_article_links_only(self):
         body = (f'<p><a href="{TARGET}#a">A</a><a href="{TARGET}#b">B</a>'
                 '<a href="/internal/">Own site</a><a href="https://fed.brid.gy/web/a">Fed</a>'
+                '<a href="/chulapa/docs/01-install">Chulapa</a>'
+                '<a href="/chulapa-other/">Internal</a>'
                 '<a href="mailto:a@example.com">Mail</a><img src="https://image.example/a.png"></p>')
         with tempfile.TemporaryDirectory() as folder:
             Path(folder, 'post.html').write_text(article(body))
             Path(folder, 'page.html').write_text(article(body).replace('BlogPosting', 'WebPage'))
             posts = wm.posts_in(folder)
         self.assertEqual(set(posts), {SOURCE})
-        self.assertEqual(posts[SOURCE]['targets'], [TARGET])
+        self.assertEqual(posts[SOURCE]['targets'], [wm.ORIGIN + '/chulapa/docs/01-install', TARGET])
 
     def test_invalid_state_and_empty_site_fail_closed(self):
         with self.assertRaises(ValueError):

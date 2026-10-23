@@ -105,38 +105,42 @@ required. This does not change Bridgy Fed's feed-based publishing.
 
 ## Outgoing Webmentions
 
-After the Pages deployment succeeds on `main`, its workflow reads posts from the
-exact deployed HTML artifact and sends Webmentions to external links inside each
-article's `e-content`. Navigation, syndicated-copy footers and project pages are
-not included. Discovery supports HTTP `Link` headers and HTML `rel="webmention"`.
-The source article must also match the live public page before any sends occur;
-a stale CDN response is retried on the next deployment.
+The independent `Send outgoing Webmentions` workflow runs after a successful
+Pages deployment on `main`, or manually from Actions. Automatic runs read the
+exact deployed HTML artifact; manual runs build the blog without deploying it.
+The sender processes links inside posts' editorial `e-content`, excluding
+navigation, syndicated-copy footers and project pages. Each source must match
+its live public page before sending; unpublished edits and stale CDN content
+remain pending.
 
-The first run creates a baseline without notifying the historical archive.
-Later runs process new or edited articles. A dedicated `webmention-state` branch
-records each accepted source/target/content combination and links without an
-endpoint. Unchanged deliveries are skipped; failed requests are retried on the
-next successful deployment. An edited article may notify existing destinations
-again. Removing links or deleting posts does not send deletion notifications.
-Keep this state branch: deleting it resets the baseline. Ledger version 2
-uses the audited fingerprint pairs in `_scripts/webmention-scope-v2.json` to
-migrate recorded targets to the editorial-only `e-content` scope without
-resending them just because the layout changed. Both the old and new hashes
-must match; an editorial edit does not match that pair and is still processed.
-Targets without a record (including failed submissions) remain pending. No extra
-secret, service or Python dependency is needed; the job uses the repository's
-`GITHUB_TOKEN` with permission to write this branch.
+The first execution of ledger version 3 rebuilds the earlier baseline and
+processes the historical archive, including links previously recorded without
+being sent. The previous `state.json` is preserved as `state-before-v3.json`
+in the `webmention-state` branch and remains available in Git history. The
+migration is checkpointed before delivery and never repeats once version 3 has
+been saved. Completed targets are checkpointed atomically, so interrupted runs
+resume pending work. Acceptance means the receiver accepted the submission,
+not that verification or publication has finished.
 
-The sender excludes this site's own domain and `fed.brid.gy` (including its
-subdomains), endpoints and redirect destinations. This preserves Bridgy Fed's
-feed-based publishing. It also pins each connection to a validated public IP while retaining the
-original hostname for HTTPS certificate checks, and never follows endpoint POST
-redirects. The sender requires direct network access (as on GitHub-hosted
-runners); it refuses requests if a forward proxy is configured because a proxy
-would resolve the destination independently. Receiver failures are logged and do not block
-the already completed deployment. Review the **Send outgoing Webmentions** job
-log for accepted, unsupported and retryable destinations. Disabling that job
-stops outgoing notifications without affecting incoming Webmentions.
+Subsequent runs skip unchanged deliveries and retry failed requests. Links
+without an endpoint are recorded, too. Edited articles can notify existing
+destinations again. Removing links or deleting posts does not send deletion
+notifications. Keep the state branch: restoring it from Git preserves delivery
+history, whereas losing it causes the archive to be processed again.
+
+Internal blog links are excluded. Links to `/chulapa` and `/chulapa/` paths on
+the same domain are eligible; other same-domain links remain excluded. All
+`fed.brid.gy` destinations, including subdomains, endpoints and redirects,
+remain excluded to preserve Bridgy Fed's feed-based publishing. Discovery
+supports HTTP `Link` headers and HTML `rel="webmention"`.
+
+The sender pins connections to validated public IPs while retaining the
+original hostname for HTTPS certificate checks. It rejects non-public
+addresses, configured forward proxies and endpoint POST redirects. No extra
+secret or service is needed: `GITHUB_TOKEN` writes the delivery-state branch.
+The independent workflow's failures do not affect the completed deployment.
+Inspect its logs for accepted, unsupported and retryable targets. Disabling
+this workflow stops outgoing notifications without affecting incoming mentions.
 
 Local checks do not send notifications:
 
