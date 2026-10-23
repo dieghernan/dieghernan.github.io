@@ -52,7 +52,7 @@ you may recognize the following lyrics:
 >
 > The rain in Spain stays mainly in the plain!
 
-{% include snippets/video.html id="uVmU3iANbgk" provider="youtube"
+{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" video_res="hqdefault"
    name="My Fair Lady - The Rain In Spain"
    thumbnail_url="https://i.ytimg.com/vi/uVmU3iANbgk/hqdefault.jpg"
    upload_date="2008-08-06T02:46:17-07:00"
