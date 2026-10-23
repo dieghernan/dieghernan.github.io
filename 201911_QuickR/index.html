@@ -490,7 +490,7 @@ the <strong>ggplot2</strong> package (see <a href="https://www.r-spatial.org/r/2
 by Mel Moreno and Mathieu Basille). However, I like the old reliable <code class="language-plaintext highlighter-rouge">plot</code>
 function, so the question is: is there another way?</p>
 <p>There is. I found inspiration
-<a href="https://www.statmethods.net/advgraphs/layout.html">here</a> and I just applied it
+<a href="https://www.datacamp.com/doc/r/combining-plots">here</a> and I just applied it
 to a map.</p>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
@@ -562,7 +562,7 @@ side.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20191108_Hawaii-1.webp" alt="Map of the Hawaiian island chain." /></p>
 <h2 id="insetting">Insetting</h2>
 <p>From now on, I focus on the inset part, using the <code class="language-plaintext highlighter-rouge">fig</code> argument of <code class="language-plaintext highlighter-rouge">par()</code>.
-Quoting <a href="https://www.statmethods.net/advgraphs/layout.html">statmethods</a>:</p>
+Quoting <a href="https://www.datacamp.com/doc/r/combining-plots">statmethods</a>:</p>
 <blockquote>
  <p><em>(…) think of the full graph area as going from <code class="language-plaintext highlighter-rouge">(0,0)</code> in the lower left corner to <code class="language-plaintext highlighter-rouge">(1,1)</code> in the upper right corner. The format of the <code class="language-plaintext highlighter-rouge">fig=</code> parameter is a numerical vector of the form <code class="language-plaintext highlighter-rouge">c(x1, x2, y1, y2)</code>(…)
 <code class="language-plaintext highlighter-rouge">fig=</code> starts a new plot, so to add to an existing plot use <code class="language-plaintext highlighter-rouge">new=TRUE</code>.</em></p>

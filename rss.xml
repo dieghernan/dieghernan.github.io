@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, dieghernan</copyright>	
-		<pubDate>Fri, 23 Oct 2026 22:21:35 +0200</pubDate>
-		<lastBuildDate>Fri, 23 Oct 2026 22:21:35 +0200</lastBuildDate>
+		<pubDate>Fri, 23 Oct 2026 22:38:19 +0200</pubDate>
+		<lastBuildDate>Fri, 23 Oct 2026 22:38:19 +0200</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -1677,7 +1677,7 @@ enjoy this API (as I do), you can consider supporting them.</p>
 <p>One of the main reasons I developed <strong>resmush</strong> is because I usually
 include <a href="https://ropensci.org/blog/2019/12/08/precompute-vignettes/">precomputed
 vignettes</a>
-with my packages (see <a href="https://cran.r-project.org/web/packages/tidyterra/vignettes/welcome.html"><strong>tidyterra</strong></a>
+with my packages (see <a href="https://dieghernan.github.io/tidyterra/articles/tidyterra.html"><strong>tidyterra</strong></a>
 as an example). I found that the plots created on CRAN with the standard
 configuration (i.e., not precomputed vignettes but built on CRAN itself) were
 not very satisfying. In some of the packages I developed, especially those
@@ -3099,7 +3099,7 @@ So we can use <code class="language-plaintext highlighter-rouge">ggfx::with_blur
   </li>
   <li>
     <p>We can also add a glowing effect to our stars and constellations (have a
-look at Dominic Royé’s post <a href="https://dominicroye.github.io/en/2021/firefly-cartography/">Firefly
+look at Dominic Royé’s post <a href="https://dominicroye.github.io/blog/firefly-maps/index.html">Firefly
 Cartography</a> to
 know more about this). The only drawback is that I was not able to use
 <strong>ggshadow</strong> with <code class="language-plaintext highlighter-rouge">LINESTRING</code> (Dominic shows how to do it with <code class="language-plaintext highlighter-rouge">POINT</code>), so
@@ -3263,7 +3263,7 @@ Richmond, Va. ISBN 9780943396613.</p>
 (<a href="https://r-spatial.org/r/2020/06/17/s2.html">link</a>).</p>
 
 <p>Royé D (2020). “Firefly Cartography.”
-(<a href="https://dominicroye.github.io/en/2021/firefly-cartography/">link</a>).</p>
+(<a href="https://dominicroye.github.io/blog/firefly-maps/index.html">link</a>).</p>
 <div class="footnotes" role="doc-endnotes">
   <ol>
     <li id="fn:1">
@@ -4326,7 +4326,7 @@ of <strong>ggnewscale</strong>, etc.) can make it even easier to produce these t
 maps.</p>
 
 <p>In fact, Dominic Royé recently wrote a very detailed
-<a href="https://dominicroye.github.io/en/2022/hillshade-effects/">post</a> on creating
+<a href="https://dominicroye.github.io/blog/hillshade-effect/">post</a> on creating
 shadow effects on map reliefs. In this first post of the series, I replicate
 that technique with a slight variation (e.g. not making use of
 <strong>ggnewscale</strong>) and discuss the potential choice of a color
@@ -4404,7 +4404,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 <h2 id="hillshading">Hillshading</h2>
 
 <p>The next step is to calculate the hillshade. Royé has a very detailed discussion
-<a href="https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade">here</a>,
+<a href="https://dominicroye.github.io/blog/hillshade-effect/#calculate-the-hillshade">here</a>,
 so I will not go into detail. What we want to create is a layer that
 approximates the potential “texture” of the surface based on the elevation and
 the sun’s position. This is straightforward with the <code class="language-plaintext highlighter-rouge">terra::terrain()</code> and
@@ -4721,7 +4721,7 @@ Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. <a href="http
 <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/</a>.</p>
 
 <p>Royé D (2022). “Hillshade effects.”
-<a href="https://dominicroye.github.io/en/2022/hillshade-effects/">https://dominicroye.github.io/en/2022/hillshade-effects/</a>.</p>
+<a href="https://dominicroye.github.io/blog/hillshade-effect/">https://dominicroye.github.io/blog/hillshade-effect/</a>.</p>
 
 <p>Hernangómez D (2022). <em>tidyterra: tidyverse Methods and ggplot2 Helpers for
 terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
@@ -5449,7 +5449,7 @@ of Canada.</p>
 
 <p>Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures’ image
 went from underground album cover to a piece of cultural ubiquity” <em>The
-Washington Post</em>. <a href="https://wapo.st/3K6Chsc">https://wapo.st/3K6Chsc</a></p>
+Washington Post</em>. <a href="https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html">https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html</a></p>
 
 <p>White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division’s
 Unknown Pleasures Album Art. <em>Cartographic Perspectives</em>, (92), 65–78.
@@ -5520,7 +5520,7 @@ German bureaucracy.</p>
 				<![CDATA[	
  				<h3>A map on a map</h3>
     		<p>3 min.</p>
-				<div><p><em>This post is dedicated to <a href="https://dominicroye.github.io/en/">Dominic Royé</a>, AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
+				<div><p><em>This post is dedicated to <a href="https://dominicroye.github.io/">Dominic Royé</a>, AKA <a href="https://twitter.com/dr_xeo">\@dr_xeo</a></em></p>
 
 <p>A common challenge when creating maps is how to include an inset map in your
 visualization. An inset map is nothing more than a smaller map usually included
@@ -7407,7 +7407,7 @@ by Mel Moreno and Mathieu Basille). However, I like the old reliable <code class
 function, so the question is: is there another way?</p>
 
 <p>There is. I found inspiration
-<a href="https://www.statmethods.net/advgraphs/layout.html">here</a> and I just applied it
+<a href="https://www.datacamp.com/doc/r/combining-plots">here</a> and I just applied it
 to a map.</p>
 
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
@@ -7491,7 +7491,7 @@ side.</p>
 <h2 id="insetting">Insetting</h2>
 
 <p>From now on, I focus on the inset part, using the <code class="language-plaintext highlighter-rouge">fig</code> argument of <code class="language-plaintext highlighter-rouge">par()</code>.
-Quoting <a href="https://www.statmethods.net/advgraphs/layout.html">statmethods</a>:</p>
+Quoting <a href="https://www.datacamp.com/doc/r/combining-plots">statmethods</a>:</p>
 
 <blockquote>
   <p><em>(…) think of the full graph area as going from <code class="language-plaintext highlighter-rouge">(0,0)</code> in the lower left corner to <code class="language-plaintext highlighter-rouge">(1,1)</code> in the upper right corner. The format of the <code class="language-plaintext highlighter-rouge">fig=</code> parameter is a numerical vector of the form <code class="language-plaintext highlighter-rouge">c(x1, x2, y1, y2)</code>(…)
@@ -7998,7 +7998,7 @@ inspiration (by the way, don’t miss <a href="http://strimas.com/#posts">his bl
 of very interesting pieces of work).</p>
 
 <p>The only thing I was not completely comfortable with was that the post used the
-<a href="https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial">old-fashioned</a>
+<a href="https://r.geocompx.org/">old-fashioned</a>
 <strong>sp</strong> package instead of my personal favorite, the <strong>sf</strong> package. The post
 was published in 2016, and note that the author has also moved to the <strong>sf</strong>
 package since then. So I decided to explore further options with <strong>sf</strong>.</p>

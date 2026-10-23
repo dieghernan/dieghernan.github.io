@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/rbloggers.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-10-23T22:21:35+02:00</updated>
+	<updated>2026-10-23T22:38:19+02:00</updated>
 	<id>https://dieghernan.github.io/rbloggers.xml</id>
 	<title>One World | R packages, maps and open-source projects - R Project</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -784,7 +784,7 @@ enjoy this API (as I do), you can consider supporting them.&lt;/p&gt;
 &lt;p&gt;One of the main reasons I developed &lt;strong&gt;resmush&lt;/strong&gt; is because I usually
 include &lt;a href=&quot;https://ropensci.org/blog/2019/12/08/precompute-vignettes/&quot;&gt;precomputed
 vignettes&lt;/a&gt;
-with my packages (see &lt;a href=&quot;https://cran.r-project.org/web/packages/tidyterra/vignettes/welcome.html&quot;&gt;&lt;strong&gt;tidyterra&lt;/strong&gt;&lt;/a&gt;
+with my packages (see &lt;a href=&quot;https://dieghernan.github.io/tidyterra/articles/tidyterra.html&quot;&gt;&lt;strong&gt;tidyterra&lt;/strong&gt;&lt;/a&gt;
 as an example). I found that the plots created on CRAN with the standard
 configuration (i.e., not precomputed vignettes but built on CRAN itself) were
 not very satisfying. In some of the packages I developed, especially those
@@ -2220,7 +2220,7 @@ So we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;We can also add a glowing effect to our stars and constellations (have a
-look at Dominic Royé’s post &lt;a href=&quot;https://dominicroye.github.io/en/2021/firefly-cartography/&quot;&gt;Firefly
+look at Dominic Royé’s post &lt;a href=&quot;https://dominicroye.github.io/blog/firefly-maps/index.html&quot;&gt;Firefly
 Cartography&lt;/a&gt; to
 know more about this). The only drawback is that I was not able to use
 &lt;strong&gt;ggshadow&lt;/strong&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt; (Dominic shows how to do it with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POINT&lt;/code&gt;), so
@@ -2384,7 +2384,7 @@ Richmond, Va. ISBN 9780943396613.&lt;/p&gt;
 (&lt;a href=&quot;https://r-spatial.org/r/2020/06/17/s2.html&quot;&gt;link&lt;/a&gt;).&lt;/p&gt;
 
 &lt;p&gt;Royé D (2020). “Firefly Cartography.”
-(&lt;a href=&quot;https://dominicroye.github.io/en/2021/firefly-cartography/&quot;&gt;link&lt;/a&gt;).&lt;/p&gt;
+(&lt;a href=&quot;https://dominicroye.github.io/blog/firefly-maps/index.html&quot;&gt;link&lt;/a&gt;).&lt;/p&gt;
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
@@ -3289,7 +3289,7 @@ of &lt;strong&gt;ggnewscale&lt;/strong&gt;, etc.) can make it even easier to pro
 maps.&lt;/p&gt;
 
 &lt;p&gt;In fact, Dominic Royé recently wrote a very detailed
-&lt;a href=&quot;https://dominicroye.github.io/en/2022/hillshade-effects/&quot;&gt;post&lt;/a&gt; on creating
+&lt;a href=&quot;https://dominicroye.github.io/blog/hillshade-effect/&quot;&gt;post&lt;/a&gt; on creating
 shadow effects on map reliefs. In this first post of the series, I replicate
 that technique with a slight variation (e.g. not making use of
 &lt;strong&gt;ggnewscale&lt;/strong&gt;) and discuss the potential choice of a color
@@ -3367,7 +3367,7 @@ convert the object to &lt;code class=&quot;language-plaintext highlighter-rouge&
 &lt;h2 id=&quot;hillshading&quot;&gt;Hillshading&lt;/h2&gt;
 
 &lt;p&gt;The next step is to calculate the hillshade. Royé has a very detailed discussion
-&lt;a href=&quot;https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade&quot;&gt;here&lt;/a&gt;,
+&lt;a href=&quot;https://dominicroye.github.io/blog/hillshade-effect/#calculate-the-hillshade&quot;&gt;here&lt;/a&gt;,
 so I will not go into detail. What we want to create is a layer that
 approximates the potential “texture” of the surface based on the elevation and
 the sun’s position. This is straightforward with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terra::terrain()&lt;/code&gt; and
@@ -3684,7 +3684,7 @@ Hypsometric Tints.” &lt;em&gt;Cartographic Perspectives&lt;/em&gt;, 31–46. &
 &lt;a href=&quot;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&quot;&gt;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Royé D (2022). “Hillshade effects.”
-&lt;a href=&quot;https://dominicroye.github.io/en/2022/hillshade-effects/&quot;&gt;https://dominicroye.github.io/en/2022/hillshade-effects/&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&quot;https://dominicroye.github.io/blog/hillshade-effect/&quot;&gt;https://dominicroye.github.io/blog/hillshade-effect/&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Hernangómez D (2022). &lt;em&gt;tidyterra: tidyverse Methods and ggplot2 Helpers for
 terra Objects&lt;/em&gt;. &amp;lt;doi:10.5281/zenodo.6572471&amp;gt;
@@ -4426,7 +4426,7 @@ of Canada.&lt;/p&gt;
 
 &lt;p&gt;Lipez, Zachary (2019, June 14). “How Joy Division’s ‘Unknown Pleasures’ image
 went from underground album cover to a piece of cultural ubiquity” &lt;em&gt;The
-Washington Post&lt;/em&gt;. &lt;a href=&quot;https://wapo.st/3K6Chsc&quot;&gt;https://wapo.st/3K6Chsc&lt;/a&gt;&lt;/p&gt;
+Washington Post&lt;/em&gt;. &lt;a href=&quot;https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html&quot;&gt;https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division’s
 Unknown Pleasures Album Art. &lt;em&gt;Cartographic Perspectives&lt;/em&gt;, (92), 65–78.
@@ -4463,7 +4463,7 @@ Unknown Pleasures Album Art. &lt;em&gt;Cartographic Perspectives&lt;/em&gt;, (92
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/20220303_inset.webp&#39; &gt;
 			
 	&lt;p&gt;3 min.&lt;/p&gt;
-			&lt;p&gt;&lt;em&gt;This post is dedicated to &lt;a href=&quot;https://dominicroye.github.io/en/&quot;&gt;Dominic Royé&lt;/a&gt;, AKA &lt;a href=&quot;https://twitter.com/dr_xeo&quot;&gt;\@dr_xeo&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+			&lt;p&gt;&lt;em&gt;This post is dedicated to &lt;a href=&quot;https://dominicroye.github.io/&quot;&gt;Dominic Royé&lt;/a&gt;, AKA &lt;a href=&quot;https://twitter.com/dr_xeo&quot;&gt;\@dr_xeo&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;A common challenge when creating maps is how to include an inset map in your
 visualization. An inset map is nothing more than a smaller map usually included
@@ -6133,7 +6133,7 @@ by Mel Moreno and Mathieu Basille). However, I like the old reliable &lt;code cl
 function, so the question is: is there another way?&lt;/p&gt;
 
 &lt;p&gt;There is. I found inspiration
-&lt;a href=&quot;https://www.statmethods.net/advgraphs/layout.html&quot;&gt;here&lt;/a&gt; and I just applied it
+&lt;a href=&quot;https://www.datacamp.com/doc/r/combining-plots&quot;&gt;here&lt;/a&gt; and I just applied it
 to a map.&lt;/p&gt;
 
 &lt;h2 id=&quot;required-r-packages&quot;&gt;Required &lt;strong&gt;R&lt;/strong&gt; packages&lt;/h2&gt;
@@ -6217,7 +6217,7 @@ side.&lt;/p&gt;
 &lt;h2 id=&quot;insetting&quot;&gt;Insetting&lt;/h2&gt;
 
 &lt;p&gt;From now on, I focus on the inset part, using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fig&lt;/code&gt; argument of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;par()&lt;/code&gt;.
-Quoting &lt;a href=&quot;https://www.statmethods.net/advgraphs/layout.html&quot;&gt;statmethods&lt;/a&gt;:&lt;/p&gt;
+Quoting &lt;a href=&quot;https://www.datacamp.com/doc/r/combining-plots&quot;&gt;statmethods&lt;/a&gt;:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;em&gt;(…) think of the full graph area as going from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(0,0)&lt;/code&gt; in the lower left corner to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(1,1)&lt;/code&gt; in the upper right corner. The format of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fig=&lt;/code&gt; parameter is a numerical vector of the form &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;c(x1, x2, y1, y2)&lt;/code&gt;(…)
@@ -6750,7 +6750,7 @@ inspiration (by the way, don’t miss &lt;a href=&quot;http://strimas.com/#posts
 of very interesting pieces of work).&lt;/p&gt;
 
 &lt;p&gt;The only thing I was not completely comfortable with was that the post used the
-&lt;a href=&quot;https://geocompr.robinlovelace.net/intro.html#the-history-of-r-spatial&quot;&gt;old-fashioned&lt;/a&gt;
+&lt;a href=&quot;https://r.geocompx.org/&quot;&gt;old-fashioned&lt;/a&gt;
 &lt;strong&gt;sp&lt;/strong&gt; package instead of my personal favorite, the &lt;strong&gt;sf&lt;/strong&gt; package. The post
 was published in 2016, and note that the author has also moved to the &lt;strong&gt;sf&lt;/strong&gt;
 package since then. So I decided to explore further options with &lt;strong&gt;sf&lt;/strong&gt;.&lt;/p&gt;

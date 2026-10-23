@@ -502,7 +502,7 @@ ecosystem (<strong>terra</strong>, <strong>sf</strong> and support of both class
 of <strong>ggnewscale</strong>, etc.) can make it even easier to produce these types of
 maps.</p>
 <p>In fact, Dominic Royé recently wrote a very detailed
-<a href="https://dominicroye.github.io/en/2022/hillshade-effects/">post</a> on creating
+<a href="https://dominicroye.github.io/blog/hillshade-effect/">post</a> on creating
 shadow effects on map reliefs. In this first post of the series, I replicate
 that technique with a slight variation (e.g. not making use of
 <strong>ggnewscale</strong>) and discuss the potential choice of a color
@@ -569,7 +569,7 @@ convert the object to <code class="language-plaintext highlighter-rouge">SpatRas
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains." width="100%" /></p>
 <h2 id="hillshading">Hillshading</h2>
 <p>The next step is to calculate the hillshade. Royé has a very detailed discussion
-<a href="https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade">here</a>,
+<a href="https://dominicroye.github.io/blog/hillshade-effect/#calculate-the-hillshade">here</a>,
 so I will not go into detail. What we want to create is a layer that
 approximates the potential “texture” of the surface based on the elevation and
 the sun’s position. This is straightforward with the <code class="language-plaintext highlighter-rouge">terra::terrain()</code> and
@@ -851,7 +851,7 @@ Hypsometric Tints.” <em>Cartographic Perspectives</em>, 31–46. <a href="http
 <p>Grossenbacher T (2016). “Beautiful thematic maps with ggplot2 (only).”
 <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/</a>.</p>
 <p>Royé D (2022). “Hillshade effects.”
-<a href="https://dominicroye.github.io/en/2022/hillshade-effects/">https://dominicroye.github.io/en/2022/hillshade-effects/</a>.</p>
+<a href="https://dominicroye.github.io/blog/hillshade-effect/">https://dominicroye.github.io/blog/hillshade-effect/</a>.</p>
 <p>Hernangómez D (2022). <em>tidyterra: tidyverse Methods and ggplot2 Helpers for
 terra Objects</em>. &lt;doi:10.5281/zenodo.6572471&gt;
 <a href="https://doi.org/10.5281/zenodo.6572471">https://doi.org/10.5281/zenodo.6572471</a>.</p>
