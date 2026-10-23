@@ -51,7 +51,7 @@ of **ggnewscale**, etc.) can make it even easier to produce these types of
 maps.
 
 In fact, Dominic Royé recently wrote a very detailed
-[post](https://dominicroye.github.io/en/2022/hillshade-effects/) on creating
+[post](https://dominicroye.github.io/blog/hillshade-effect/) on creating
 shadow effects on map reliefs. In this first post of the series, I replicate
 that technique with a slight variation (e.g. not making use of
 **ggnewscale**) and discuss the potential choice of a color
@@ -132,7 +132,7 @@ autoplot(r) +
 ## Hillshading
 
 The next step is to calculate the hillshade. Royé has a very detailed discussion
-[here](https://dominicroye.github.io/en/2022/hillshade-effects/#calculate-the-hillshade),
+[here](https://dominicroye.github.io/blog/hillshade-effect/#calculate-the-hillshade),
 so I will not go into detail. What we want to create is a layer that
 approximates the potential "texture" of the surface based on the elevation and
 the sun's position. This is straightforward with the `terra::terrain()` and
@@ -455,7 +455,7 @@ Grossenbacher T (2016). "Beautiful thematic maps with ggplot2 (only)."
 <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>.
 
 Royé D (2022). "Hillshade effects."
-<https://dominicroye.github.io/en/2022/hillshade-effects/>.
+<https://dominicroye.github.io/blog/hillshade-effect/>.
 
 Hernangómez D (2022). _tidyterra: tidyverse Methods and ggplot2 Helpers for
 terra Objects_. <doi:10.5281/zenodo.6572471>

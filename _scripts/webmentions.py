@@ -135,13 +135,13 @@ class Page(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
-        if tag == 'link' and 'canonical' in a.get('rel', '').lower().split():
+        if tag == 'link' and 'canonical' in (a.get('rel') or '').lower().split():
             self.canonical = a.get('href')
-        if tag in ('link', 'a') and 'webmention' in a.get('rel', '').lower().split() and a.get('href'):
+        if tag in ('link', 'a') and 'webmention' in (a.get('rel') or '').lower().split() and a.get('href'):
             self.endpoints.append(a['href'])
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.schema = []
-        if self.depth is None and 'e-content' in a.get('class', '').split():
+        if self.depth is None and 'e-content' in (a.get('class') or '').split():
             self.depth = len(self.stack)
         if self.depth is not None:
             self.content.append(self.get_starttag_text())

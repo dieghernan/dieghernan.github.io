@@ -471,7 +471,7 @@ of Canada.
 
 Lipez, Zachary (2019, June 14). "How Joy Division's 'Unknown Pleasures' image
 went from underground album cover to a piece of cultural ubiquity" _The
-Washington Post_. <https://wapo.st/3K6Chsc>
+Washington Post_. <https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html>
 
 White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division's
 Unknown Pleasures Album Art. _Cartographic Perspectives_, (92), 65--78.

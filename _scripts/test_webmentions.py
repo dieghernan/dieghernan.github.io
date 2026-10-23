@@ -176,6 +176,15 @@ class WebmentionsTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 handler.redirect_request(Request(target), None, 302, '', {}, wm.ORIGIN + path)
 
+    def test_valueless_html_attributes_do_not_break_discovery(self):
+        html = ('<link rel><a rel href="https://example.org/">Link</a>'
+                '<div class><script type></script></div>'
+                f'<link rel="webmention" href="{ENDPOINT}">')
+        self.assertEqual(wm.discover(TARGET, lambda u: (TARGET, Message(), html)), ENDPOINT)
+        page = wm.Page(article('<p class>Hello</p>'))
+        self.assertEqual(page.canonical, SOURCE)
+        self.assertEqual(page.post, True)
+
     def test_private_address_rejected(self):
         private = [(2, 1, 6, '', ('127.0.0.1', 443))]
         with patch.object(wm.socket, 'getaddrinfo', return_value=private):
