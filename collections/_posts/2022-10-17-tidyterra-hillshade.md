@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-10-23
 giscus_discussion: 36
 title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)"
 subtitle: How to overlay SpatRasters
@@ -449,7 +450,7 @@ base_plot +
 ## References
 
 Patterson T, Jenny B (2011). "The Development and Rationale of Cross-blended
-Hypsometric Tints." _Cartographic Perspectives_, 31--46. <https://doi.org/10.14714/CP69.20>
+Hypsometric Tints." _Cartographic Perspectives_, (69), 31--46. <https://doi.org/10.14714/CP69.20>
 
 Grossenbacher T (2016). "Beautiful thematic maps with ggplot2 (only)."
 <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>.
@@ -457,6 +458,6 @@ Grossenbacher T (2016). "Beautiful thematic maps with ggplot2 (only)."
 Royé D (2022). "Hillshade effects."
 <https://dominicroye.github.io/blog/hillshade-effect/>.
 
-Hernangómez D (2022). _tidyterra: tidyverse Methods and ggplot2 Helpers for
-terra Objects_. <doi:10.5281/zenodo.6572471>
-<https://doi.org/10.5281/zenodo.6572471>.
+Hernangómez D (2023). "Using the tidyverse with terra objects: the tidyterra
+package." _Journal of Open Source Software_, _8_(91), 5751.
+<https://doi.org/10.21105/joss.05751>.

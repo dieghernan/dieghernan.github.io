@@ -553,7 +553,7 @@ Jiang, Bin. 2013. \"Head/Tail Breaks: A New Classification Scheme for Data with 
 
 Jiang, Bin, Xintao Liu, and Tao Jia. 2013. \"Scaling of Geographic Space as a Universal Rule for Map Generalization.\" _Annals of the Association of American Geographers_ 103 (4): 844–55. [DOI](https://doi.org/10.1080/00045608.2013.765773).
 
-Jiang, Bin, and Junjun Yin. 2013. \"Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features.\" _Annals of the Association of American Geographers_ 104 (3): 530–40. [DOI](https://doi.org/10.1080/00045608.2013.834239).
+Jiang, Bin, and Junjun Yin. 2014. \"Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features.\" _Annals of the Association of American Geographers_ 104 (3): 530–40. [DOI](https://doi.org/10.1080/00045608.2013.834239).
 
 Taleb, Nassim Nicholas. 2008. _The Black Swan: The Impact of the Highly Improbable._ 1st ed. London: Random House.
 

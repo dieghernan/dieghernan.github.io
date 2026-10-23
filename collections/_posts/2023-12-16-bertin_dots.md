@@ -429,9 +429,9 @@ And that's it! Which one do you like the most? Let me know in the comments.
 
 - Bertin J (1967). _Sémiologie graphique. Les diagrammes. Les réseaux. Les
   cartes_. Gauthier-Villars, Paris.
-- European Commission. Joint Research Centre. (2023). _GHSL data package 2023._. Publications Office, LU <https://doi.org/10.2760/098587>
+- European Commission. Joint Research Centre. (2023). _GHSL data package 2023._ Publications Office, LU <https://doi.org/10.2760/098587>
 - Hernangómez D (2023). "Using the tidyverse with terra objects: the tidyterra
-  package _Journal of Open Source Software_, _8_(91), 5751. ISSN 2475-9066
+  package." _Journal of Open Source Software_, _8_(91), 5751. ISSN 2475-9066
   <https://doi.org/10.21105/joss.05751>
 - Pesaresi M, Politis P (2023). "GHS-BUILT-C R2023A - GHS Settlement
   Characteristics, derived from Sentinel2 composite (2018) and other GHS
