@@ -1,295 +1,111 @@
-# Setup----
-library(pacman)
-
-p_load(ezknitr)
-p_load(styler)
-
-path.expand("./_Rmd")
-
-file.path(getwd())
-
-diegpost <- function(file) {
-  getwd()
-  ezknit(
-    paste0(getwd(), "/_Rmd/", file, ".Rmd"),
-    out_dir = "./collections/_posts",
-    fig_dir = "../assets/img/blog",
-    keep_html = FALSE
-  )
-
-  # # Move images
-  current_folder <- "./collections/assets/img/blog"
-  new_folder <- "./assets/img/blog"
-  list_of_files <- list.files(current_folder)
-  file.copy(
-    file.path(current_folder, list_of_files),
-    new_folder,
-    overwrite = TRUE,
-    recursive = TRUE
-  )
-  unlink("./collections/assets", recursive = TRUE, force = TRUE)
-
-  # Fix img links
-  newfile <- paste0("./collections/_posts", "/", file, ".md")
-
-  lines <- readLines(newfile)
-  newlines <- gsub(
-    '<img src="../assets/img',
-    '<img src="https://dieghernan.github.io/assets/img',
-    lines
-  )
-  newlines <- gsub(
-    "(../assets/img",
-    "(https://dieghernan.github.io/assets/img",
-    newlines,
-    fixed = TRUE
-  )
-
-  # Fix double slashes
-  newlines <- gsub(
-    "https://dieghernan.github.io/assets/img//",
-    "https://dieghernan.github.io/assets/img/",
-    newlines,
-    fixed = TRUE
-  )
-
-  newlines <- gsub(
-    "https://dieghernan.github.io/assets/img/blog//",
-    "https://dieghernan.github.io/assets/img/blog/",
-    newlines,
-    fixed = TRUE
-  )
-
-  writeLines(newlines, newfile)
-}
-
-
-diegpost_draft <- function(file) {
-  getwd()
-  ezknit(
-    paste0(getwd(), "/_Rmd/", file, ".Rmd"),
-    out_dir = "./collections/_drafts",
-    fig_dir = "../assets/img/drafts",
-    keep_html = FALSE
-  )
-
-  # # Move images
-  current_folder <- "./collections/assets/img/drafts"
-  new_folder <- "./assets/img/drafts/"
-  list_of_files <- list.files(current_folder)
-
-  file.copy(
-    file.path(current_folder, list_of_files),
-    new_folder,
-    overwrite = TRUE,
-    recursive = TRUE
-  )
-
-  unlink("./collections/assets", recursive = TRUE, force = TRUE)
-
-  # Fix img links
-  newfile <- paste0("./collections/_drafts", "/", file, ".md")
-
-  lines <- readLines(newfile)
-  newlines <- gsub(
-    '<img src="../assets/img',
-    '<img src="https://dieghernan.github.io/assets/img',
-    lines
-  )
-  newlines <- gsub(
-    "(../assets/img",
-    "(https://dieghernan.github.io/assets/img",
-    newlines,
-    fixed = TRUE
-  )
-
-  # Fix double slashes
-  newlines <- gsub(
-    "https://dieghernan.github.io/assets/img//",
-    "https://dieghernan.github.io/assets/img/",
-    newlines,
-    fixed = TRUE
-  )
-
-  newlines <- gsub(
-    "https://dieghernan.github.io/assets/img/drafts//",
-    "https://dieghernan.github.io/assets/img/drafts/",
-    newlines,
-    fixed = TRUE
-  )
-
-  writeLines(newlines, newfile)
-}
-
-
-# file <- "bertin_dots"
-# diegpost_draft(file)
-
-# Render 2019-04-27-Using-CountryCodes ----
-
-# diegpost("2019-04-27-Using-CountryCodes")
-# diegpost("2019-05-05-Cast to subsegments")
-#
-diegpost("2019-05-13-Where-in-the-world")
-
-
-# #diegpost("2019-05-20-Leaflet_R_Jekyll")
-# diegpost("2019-06-02-Beautiful1")
-# diegpost("2019-06-18-Beautiful2")
-# #diegpost("2019-10-16-WikiMap1")
-# diegpost("2019-11-07-QuickR")
-# diegpost("2019-12-12-Beautiful3")
-# diegpost("2020-02-06-Brexit")
-# diegpost("2020-02-17-cartography1")
-# diegpost("2020-04-05-headtails")
-# diegpost("2022-03-03-insetmaps")
-
-# diegpost("2022-05-25-tidyterra")
-# diegpost("2019-05-13-Where-in-the-world")
-diegpost("2026-02-12-geobounds")
-
-
-im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
-
-
-lapply(im, function(x) {
-  file.copy(x, "./assets/img/towebp/")
-  unlink(x)
-})
-
-
-plots <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
-lapply(plots, knitr::plot_crop)
-
-
-# Try converting to webp
-
-im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
-
-x <- im[3]
-
-a <- lapply(im, function(x) {
-  f <- png::readPNG(x)
-
-  out <- gsub(".png$", ".webp", x)
-  dim(f)
-  aa <- try(webp::write_webp(f, out), silent = TRUE)
-
-  if (class(aa) == "try-error") {
-    file.copy(x, "assets/img/blognoconv")
-    unlink(x)
+# Render posts from any working directory after sourcing this file.
+.renderblog_root <- local({
+  script <- sys.frame(1)$ofile
+  if (is.null(script)) {
+    normalizePath(".", winslash = "/", mustWork = TRUE)
   } else {
-    file.copy(out, "assets/img/blog")
-    unlink(out)
-    unlink(x)
+    normalizePath(
+      file.path(dirname(script), ".."),
+      winslash = "/",
+      mustWork = TRUE
+    )
   }
 })
 
-
-# Fix img url
-
-post <- "geobounds"
-
-
-allmds <- list.files(
-  "./collections/",
-  recursive = TRUE,
-  pattern = post,
-  full.names = TRUE
-)
-
-
-for (newfile in allmds) {
-  message(newfile, "\n")
-
-  lines <- readLines(newfile)
-  newlines <- gsub(
-    '<img src="../assets/img',
-    '<img src="https://dieghernan.github.io/assets/img',
-    lines
+render_blog <- function(file, draft = FALSE, root = .renderblog_root) {
+  root <- normalizePath(root, winslash = "/", mustWork = TRUE)
+  name <- sub("\\.[Rr]md$", "", basename(file))
+  input <- file.path(root, "_Rmd", paste0(name, ".Rmd"))
+  if (!file.exists(input)) {
+    stop("Rmd file not found: ", input, call. = FALSE)
+  }
+  folder <- if (draft) "drafts" else "blog"
+  output_dir <- file.path(
+    root,
+    "collections",
+    if (draft) "_drafts" else "_posts"
   )
-  newlines <- gsub(
-    "(../assets/img",
-    "(https://dieghernan.github.io/assets/img",
-    newlines,
-    fixed = TRUE
+  image_dir <- paste0("assets/img/", folder, "/")
+  dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(file.path(root, image_dir), recursive = TRUE, showWarnings = FALSE)
+
+  old_knit <- knitr::opts_knit$get()
+  old_chunk <- knitr::opts_chunk$get()
+  old_hooks <- knitr::knit_hooks$get()
+  old_option_hooks <- knitr::opts_hooks$get()
+  on.exit(
+    {
+      knitr::opts_knit$restore(old_knit)
+      knitr::opts_chunk$restore(old_chunk)
+      knitr::knit_hooks$restore(old_hooks)
+      knitr::opts_hooks$restore(old_option_hooks)
+    },
+    add = TRUE
   )
 
-  writeLines(newlines, newfile)
+  knitr::opts_knit$set(root.dir = root, base.dir = root)
+  knitr::opts_chunk$set(
+    fig.path = paste0(image_dir, name, "-"),
+    dev = "ragg_png",
+    dpi = 200
+  )
+  knitr::render_markdown()
+  knitr::opts_hooks$set(fig.path = function(options) {
+    options$fig.path <- paste0(image_dir, basename(options$fig.path))
+    options
+  })
+  plot_hook <- knitr::knit_hooks$get("plot")
+  knitr::knit_hooks$set(plot = function(x, options) {
+    urls <- vapply(
+      x,
+      function(path) {
+        local_path <- if (grepl("^([A-Za-z]:|/)", path)) {
+          path
+        } else {
+          file.path(root, path)
+        }
+        if (grepl("\\.png$", path, ignore.case = TRUE)) {
+          converted <- sub("\\.png$", ".webp", local_path, ignore.case = TRUE)
+          webp::write_webp(png::readPNG(local_path), converted)
+          # Read back the result before removing the intermediate image.
+          webp::read_webp(converted)
+          unlink(local_path)
+          local_path <- converted
+        }
+        absolute <- normalizePath(local_path, winslash = "/", mustWork = TRUE)
+        prefix <- paste0(root, "/")
+        if (!startsWith(absolute, prefix)) {
+          stop(
+            "Generated image is outside the blog directory: ",
+            absolute,
+            call. = FALSE
+          )
+        }
+        paste0(
+          "https://dieghernan.github.io/",
+          substring(absolute, nchar(prefix) + 1)
+        )
+      },
+      character(1)
+    )
+    plot_hook(urls, options)
+  })
+
+  temporary <- tempfile(fileext = ".md")
+  on.exit(unlink(temporary), add = TRUE)
+  knitr::knit(input, output = temporary, envir = new.env(parent = globalenv()))
+  output <- file.path(output_dir, paste0(name, ".md"))
+  if (!file.copy(temporary, output, overwrite = TRUE)) {
+    stop("Could not save Markdown: ", output, call. = FALSE)
+  }
+  message("Post rendered: ", output)
+  invisible(output)
 }
 
+diegpost <- function(file, root = .renderblog_root) {
+  render_blog(file, root = root)
+}
 
-# ezknit(
-#   "/cloud/project/_Rmd/2019-04-05-Cast to subsegments.Rmd",
-#   wd="/cloud/project/assets",
-#   out_dir = "../collections/_posts",
-#   fig_dir = "../../assets/img/blog",
-#   keep_html = FALSE,
-#   chunk_opts = list(dev='svg'),
-#   verbose = T
-# )
-
-draft <- "Unknown-pleasures-R"
-
-# unlink(".collections", recursive = TRUE)
-
-ezknit(
-  paste0(getwd(), "/_Rmd/", draft, ".Rmd"),
-  out_dir = "./collections/_drafts",
-  fig_dir = "./img/",
-  keep_html = FALSE
-)
-
-
-# Try converting to webp
-
-im <- list.files("./assets/img/blog", pattern = "png$", full.names = TRUE)
-
-
-lapply(im, function(x) {
-  file.copy(x, "./assets/img/towebp")
-  unlink(x)
-})
-
-im <- list.files("./assets/img/towebp", pattern = "png$", full.names = TRUE)
-
-x <- im[3]
-
-a <- lapply(im, function(x) {
-  f <- png::readPNG(x)
-
-  out <- gsub(".png$", ".webp", x)
-  dim(f)
-  aa <- try(webp::write_webp(f, out), silent = TRUE)
-
-  if (class(aa) == "try-error") {
-    file.copy(x, "assets/img/blognoconv")
-    unlink(x)
-  } else {
-    file.copy(out, "assets/img/blog")
-  }
-})
-
-webp::write_webp(f, "a.webp")
-
-x <- im[1]
-
-x <- "assets/img/blog/20191212_imgpost-1.png"
-
-img <- magick::image_read(x)
-img2 <- magick::image_convert(img, colorspace = "sRGB")
-
-aa <- magick::image_data(img, "rgba")
-
-arr <- as.raster(img2)
-
-magick::colorspace_types()
-
-install.packages("ggpattern")
-
-
-posts <- list.files("collections/_posts", full.names = TRUE)
-
-i <- 19
-
-file.edit(posts[i])
+diegpost_draft <- function(file, root = .renderblog_root) {
+  render_blog(file, draft = TRUE, root = root)
+}
