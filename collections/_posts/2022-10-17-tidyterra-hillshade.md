@@ -38,7 +38,8 @@ og_title: "Hillshade and elevation maps with tidyterra"
 **Updated on October 25, 2026:** This post now uses **ggblend** to combine
 hillshade and elevation colors with a multiply blend, following
 [Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/).
-The final map replaces the original overlay with reduced opacity.
+The final map replaces the original overlay with reduced opacity. Dominic 
+Royé also posted how to use **ggblend** in [Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/).
 {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 _This is the first post of a series of two, showing how to overlay a SpatRaster
