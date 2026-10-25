@@ -1,5 +1,5 @@
 ---
-last_modified_at: 2026-10-23
+last_modified_at: 2026-10-25
 giscus_discussion: 36
 title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)"
 subtitle: How to overlay SpatRasters
@@ -26,12 +26,20 @@ description: "Create relief maps in R by combining hillshade and elevation color
 schema_image:
   - /assets/img/blog/20221017-6-finalplot-1.webp
 og_image_width: 2100
-og_image_height: 1943
+og_image_height: 2100
 og_image_type: "image/webp"
 og_image_alt: "Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend."
 seo_title: "Hillshade and elevation maps with tidyterra: One World"
 og_title: "Hillshade and elevation maps with tidyterra"
 ---
+
+
+
+**Updated on October 25, 2026:** This post now uses **ggblend** to combine
+hillshade and elevation colors with a multiply blend, following
+[Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/).
+The final map replaces the original overlay with reduced opacity.
+{: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 _This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a hillshade background. The next post shows how to add marginal plots
@@ -42,7 +50,7 @@ Using shadow effects on relief maps is a very common technique that helps
 produce informative yet beautiful maps. If you are interested in this topic
 and you work with **R**, you have probably seen this map:
 
-![Bivariate thematic map of Switzerland combining two variables with a color legend and shaded terrain relief.](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
+![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)
@@ -62,8 +70,8 @@ palette for this kind of map.
 
 I will use the following libraries:
 
-```r
 
+``` r
 ## Libraries
 
 library(terra)
@@ -83,8 +91,8 @@ simplicity, but you can also use **elevatr**, which is much more comprehensive.
 However, **elevatr** produces the result as a `RasterLayer`, so you would need to
 convert the object to `SpatRaster` with `terra::rast()`.
 
-```r
 
+``` r
 # Cache map data
 mydir <- "~/R/mapslib/misc"
 
@@ -92,7 +100,7 @@ r_init <- elevation_30s("ROU", path = mydir)
 
 r_init
 #> class       : SpatRaster
-#> dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)
+#> size        : 588, 1176, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
@@ -105,16 +113,16 @@ r_init
 names(r_init) <- "alt"
 
 # We don't want values lower than 0
-r <- r_init %>%
+r <- r_init |>
   mutate(alt = pmax(0, alt))
 
 r
 #> class       : SpatRaster
-#> dimensions  : 588, 1176, 1  (nrow, ncol, nlyr)
+#> size        : 588, 1176, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : 20.1, 29.9, 43.5, 48.4  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
-#> source      : memory
+#> source(s)   : memory
 #> name        :  alt
 #> min value   :    0
 #> max value   : 2481
@@ -122,9 +130,12 @@ r
 
 We can now have a quick look at the plot with `tidyterra::autoplot()`:
 
-```r
+
+``` r
 # Quick look
 autoplot(r) +
+  scale_fill_terrain_c(na.value = NA) +
+  facet_wrap(vars(lyr)) +
   theme_minimal()
 ```
 
@@ -134,13 +145,13 @@ autoplot(r) +
 
 The next step is to calculate the hillshade. Royé has a very detailed discussion
 [here](https://dominicroye.github.io/blog/hillshade-effect/#calculate-the-hillshade),
-so I will not go into detail. What we want to create is a layer that
+so I would not go into details. Basically what we want to create is a layer that
 approximates the potential "texture" of the surface based on the elevation and
 the sun's position. This is straightforward with the `terra::terrain()` and
 `terra::shade()` functions:
 
-```r
 
+``` r
 ## Create hillshade effect
 
 slope <- terrain(r, "slope", unit = "radians")
@@ -156,7 +167,7 @@ pal_greys <- hcl.colors(1000, "Grays")
 ggplot() +
   geom_spatraster(data = hill) +
   scale_fill_gradientn(colors = pal_greys, na.value = NA)
-#> SpatRaster resampled to ncells = 501501
+#> <SpatRaster> resampled to 501501 cells.
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-2-hillroye-1.webp" alt="Grayscale hillshade map of Romania, revealing the Carpathian mountain arc through simulated light and shadow." width="100%" />
@@ -179,22 +190,20 @@ using `maxcell = Inf`. In this approach using `fill`, the value of `maxcell`
 needs to be effectively set to `Inf` to ensure that the number of color values
 and the number of cells are the same.
 
-```r
 
+``` r
 # Use a vector of colors
 
-
-index <- hill %>%
-  mutate(index_col = rescale(shades, to = c(1, length(pal_greys)))) %>%
-  mutate(index_col = round(index_col)) %>%
+index <- hill |>
+  mutate(index_col = rescale(shades, to = c(1, length(pal_greys)))) |>
+  mutate(index_col = round(index_col)) |>
   pull(index_col)
-
 
 # Get cols
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and don't use aes
+# and dont use aes
 
 hill_plot <- ggplot() +
   geom_spatraster(
@@ -212,7 +221,7 @@ hill_plot
 The selection of colors for elevation maps is a key aspect when designing this
 kind of visualization since colors can be confused with environmental phenomena
 (Patterson and Jenny, 2011). For example, by convention green colors are
-associated with low elevations, while oranges, browns and whites are associated with
+associated with low elevations, while orange, browns and whites are associated with
 high elevations on some of the most common elevation palettes (aka hypsometric
 tints). See for example the [Wikipedia Topographic maps
 conventions](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Topographic_maps).
@@ -225,12 +234,13 @@ There is an additional point to take into account when designing color palettes
 for maps. A regular gradient would just interpolate colors assuming that the
 distance among colors is the same:
 
-```r
 
+``` r
 # Regular gradient
 grad <- hypso.colors(10, "dem_poster")
 
 autoplot(r) +
+  facet_wrap(vars(lyr)) +
   scale_fill_gradientn(colours = grad, na.value = NA)
 ```
 
@@ -239,25 +249,25 @@ autoplot(r) +
 For that reason, **tidyterra** provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
 
-```r
 
+``` r
 # Hypso gradient
 grad_hypso <- hypso.colors2(10, "dem_poster")
 
-
 autoplot(r) +
+  facet_wrap(vars(lyr)) +
   scale_fill_gradientn(colours = grad_hypso, na.value = NA)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-hypso-gradient-1.webp" alt="Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks." width="100%" />
 
-Can you notice the difference? In the first map, green is the dominant color.
-However, greens represent a wide range of elevations (0-750 meters) that
-correspond to most of the territory. In terms of perception, we won't be
+Can you notice the difference? In the first map greens are the dominant color.
+However greens are representing a wide range of elevations (0-750 meters) that
+correspond with most of the territory. In terms of perception, we won't be
 clearly spotting elevation differences in the center of the country, while with
 the uneven gradient greens only correspond to the range (0 - 250 meters) and the
 overall perception of elevation improves. Note that the only difference between
-plots is the color palette.
+plots is exclusively the color palette.
 
 For producing our map we are going to assess visually the result of a selection
 of palettes provided by **tidyterra**. We use here the version
@@ -270,11 +280,11 @@ argument of the functions to make **ggplot2** aware of the limits of the value o
 the raster. This is easily achieved with `terra::minmax()` but I added an extra
 touch rounding up and down the range of values to the nearest 500.
 
-```r
 
+``` r
 # Try some options, but we need to be aware of the values of our raster
 
-r_limits <- minmax(r) %>% as.vector()
+r_limits <- minmax(r) |> as.vector()
 
 # Rounded to lower and upper 500
 r_limits <- c(floor(r_limits[1] / 500), ceiling(r_limits[2] / 500)) * 500
@@ -283,13 +293,12 @@ r_limits <- c(floor(r_limits[1] / 500), ceiling(r_limits[2] / 500)) * 500
 r_limits <- pmax(r_limits, 0)
 
 # Compare
-minmax(r) %>% as.vector()
+minmax(r) |> as.vector()
 #> [1]    0 2481
 r_limits
 #> [1]    0 2500
 
-
-# Now let's have some fun with scales from tidyterra
+# Now lets have some fun with scales from tidyterra
 
 elevt_test <- ggplot() +
   geom_spatraster(data = r)
@@ -297,9 +306,11 @@ elevt_test <- ggplot() +
 # Create a helper function
 
 plot_pal_test <- function(pal) {
+  palette_stops <- hypsometric_tints_db[hypsometric_tints_db$pal == pal, ]
   elevt_test +
     scale_fill_hypso_tint_c(
       limits = r_limits,
+      values = rescale(palette_stops$limit, to = r_limits),
       palette = pal
     ) +
     ggtitle(pal) +
@@ -314,7 +325,7 @@ plot_pal_test("utah_1")
 plot_pal_test("wiki-2.0_hypso")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="Relief map of Romania using the etopo1_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="Relief map of Romania using the dem_poster elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="Relief map of Romania using the ocean elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="Relief map of Romania using the pastel elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="Relief map of Romania using the urban_1 elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="Relief map of Romania using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp" alt="Relief map of Romania using the etopo1_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp" alt="Relief map of Romania using the dem_poster elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp" alt="Relief map of Romania using the spain elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp" alt="Relief map of Romania using the pakistan elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp" alt="Relief map of Romania using the utah_1 elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" alt="Relief map of Romania using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands." width="50%" />
 
 I finally selected for my plot the `"dem_poster"` palette, but this is
 completely a personal choice. You should select the palette you feel more
@@ -323,18 +334,30 @@ comfortable with. See the full range of color palettes provided by **tidyterra**
 
 ## Final plot
 
-So now it is time to blend both the hillshade layer and the altitude layer using
-some level of `alpha` on the upper layer.
+We can combine the elevation colors and hillshade with a multiply blend.
+This preserves more of the elevation palette's saturation than the original
+overlay, which used `alpha = 0.4`. The hillshade darkens the colors to reveal
+the terrain. Its opacity controls the strength of the shading.
 
-```r
+Both rasters would normally need their own `fill` scale. We already converted
+the hillshade to fixed colors above. Here we also extract the elevation colors
+with `ggplot_build()` before passing both layers to **ggblend**. Using
+`maxcell = Inf` keeps the color vectors matched to the raster cells.
 
-base_plot <- hill_plot +
-  # Avoid resampling with maxcell
+
+``` r
+# Fit the full palette to the local elevation range
+palette_stops <- subset(hypsometric_tints_db, pal == "dem_poster")
+palette_values <- rescale(palette_stops$limit, to = r_limits)
+
+elevation_plot <- ggplot() +
   geom_spatraster(data = r, maxcell = Inf) +
   scale_fill_hypso_tint_c(
     limits = r_limits,
+    values = palette_values,
     palette = "dem_poster",
-    alpha = 0.4,
+    na.value = NA,
+    guide = guide_colourbar(barheight = unit(4, "in")),
     labels = label_comma(),
     # For the legend I use custom breaks
     breaks = c(
@@ -344,67 +367,64 @@ base_plot <- hill_plot +
     )
   )
 
+elevation_fill <- ggplot_build(elevation_plot)$data[[1]]$fill
+stopifnot(
+  compareGeom(r, hill),
+  length(elevation_fill) == ncell(r),
+  length(vector_cols) == ncell(hill)
+)
+
+# Keep the scale-trained layer underneath to generate the elevation legend
+base_plot <- elevation_plot +
+  (list(
+    geom_spatraster(data = r, fill = elevation_fill, maxcell = Inf),
+    geom_spatraster(
+      data = hill, fill = vector_cols, alpha = 0.85, maxcell = Inf
+    )
+  ) |>
+    ggblend::blend("multiply"))
+
 base_plot
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-5-blend-1.webp" alt="Relief map of Romania combining elevation colors with hillshade so mountain slopes remain visible beneath the color gradient." width="100%" />
 
-And with a bit of trickery and theming we can have our final map. First we load
-a font from Google with a custom function:
+The opaque elevation layer inside the blend covers the scale-trained layer
+underneath, which supplies the legend. The legend shows the elevation palette
+before shading. We render with **ragg**, which supports the compositing groups
+used by **ggblend**.
 
-```r
-myload_fonts <- function(fontname, family,
-                         fontdir = tempdir()) {
-  fontname_url <- utils::URLencode(fontname)
-  fontzip <- tempfile(fileext = ".zip")
-  download.file(paste0("https://fonts.google.com/download?family=", fontname_url),
-    fontzip,
-    quiet = TRUE,
-    mode = "wb"
+For the final map, we use Noto Serif when its font files are available locally
+and fall back to the system serif font otherwise:
+
+
+``` r
+font_dir <- path.expand("~/R/googlefonts")
+font_files <- file.path(
+  font_dir,
+  paste0("NotoSerif-", c("Regular", "Bold", "Italic", "BoldItalic"), ".ttf")
+)
+font_family <- "serif"
+if (all(file.exists(font_files))) {
+  systemfonts::register_font(
+    "notoserif",
+    plain = font_files[1],
+    bold = font_files[2],
+    italic = font_files[3],
+    bolditalic = font_files[4]
   )
-  unzip(fontzip,
-    exdir = fontdir,
-    junkpaths = TRUE
-  )
-
-  # Load fonts
-  paths <- list(
-    regular = "Regular.ttf",
-    bold = "Bold.ttf",
-    italic = "Italic.ttf",
-    bolditalic = "BoldItalic.ttf"
-  )
-
-
-  namefile <- gsub(" ", "", fontname)
-  paths_end <- file.path(
-    fontdir,
-    paste(namefile, paths, sep = "-")
-  )
-
-
-  names(paths_end) <- names(paths)
-
-  sysfonts::font_add(family,
-    regular = paths_end["regular"],
-    bold = paths_end["bold"],
-    italic = paths_end["italic"],
-    bolditalic = paths_end["bolditalic"]
-  )
-
-  return(invisible())
+  font_family <- "notoserif"
 }
 ```
 
 And now we theme it:
 
-```r
+
+``` r
 # Theming
-myload_fonts("Noto Serif", "notoserif", "~/R/googlefonts")
-showtext::showtext_auto()
 
 # Adjust text size
-base_text_size <- 30
+base_text_size <- 16
 
 base_plot +
   # Change guide
@@ -412,21 +432,23 @@ base_plot +
     title = "   m.",
     direction = "horizontal",
     nrow = 1,
-    keywidth = 1.75,
+    keywidth = unit(0.45, "in"),
     keyheight = 0.5,
-    label.position = "bottom",
-    title.position = "right",
+    theme = theme(
+      legend.text.position = "bottom",
+      legend.title.position = "right"
+    ),
     override.aes = list(alpha = 1)
   )) +
   labs(
     title = "Elevation of Romania",
-    subtitle = "Hillshade and hypsometric tint blend",
+    subtitle = "Hillshade and hypsometric tint | Multiply blend",
     caption = paste0(
       "@dhernangomez using tidyterra, ggplot2, geodata R packages.",
       " Data: Shuttle Radar Topography Mission (SRTM)"
     )
   ) +
-  theme_minimal(base_family = "notoserif") +
+  theme_minimal(base_family = font_family) +
   theme(
     plot.background = element_rect("grey97", colour = NA),
     plot.margin = margin(20, 20, 20, 20),
@@ -438,10 +460,10 @@ base_plot +
     ),
     axis.text = element_text(size = base_text_size * 0.7),
     legend.position = "bottom",
-    legend.title = element_text(size = base_text_size * 0.8),
-    legend.text = element_text(size = base_text_size * 0.8),
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 8),
     legend.key = element_rect("grey50"),
-    legend.spacing.x = unit(0, "pt")
+    legend.key.spacing.x = unit(0, "pt")
   )
 ```
 

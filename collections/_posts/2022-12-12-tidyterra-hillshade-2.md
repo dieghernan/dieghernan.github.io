@@ -1,4 +1,5 @@
 ---
+last_modified_at: 2026-10-25
 title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)"
 subtitle: "The rain in Spain does not stay mainly in the plain"
 excerpt: "Add marginal plots to a SpatRaster map on ggplot2"
@@ -30,6 +31,14 @@ og_image_alt: "Map of average yearly precipitation in Spain with hillshade and m
 seo_title: "Precipitation maps with tidyterra and marginal plots: One World"
 og_title: "Precipitation maps with tidyterra and marginal plots"
 ---
+
+
+
+**Updated on October 25, 2026:** The elevation and precipitation maps now use
+**ggblend** to multiply their colors with the hillshade, following
+[Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/).
+The map and marginal profiles now share the same precipitation palette and limits.
+{: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 _This is the second post of the series "Hillshade, colors and
 marginal plots with **tidyterra**". In this post, I explore an approach for
@@ -75,7 +84,8 @@ stays (mainly).
 
 In this post, we will use the following libraries:
 
-```r
+
+``` r
 ## Libraries
 
 # Data manipulation
@@ -104,8 +114,8 @@ for this case I would approximate it using a mixture of political borders
 (historically the _Meseta_ is associated with Castile and Madrid) and elevation
 data to get a rough shape.
 
-```r
 
+``` r
 # Using mapSpain
 the_plain <- esp_get_prov(
   c(
@@ -114,11 +124,11 @@ the_plain <- esp_get_prov(
     "Teruel"
   ),
   epsg = 4326, resolution = 1
-) %>%
-  mutate(the_plain = TRUE) %>%
-  group_by(the_plain) %>%
+) |>
+  mutate(the_plain = TRUE) |>
+  group_by(the_plain) |>
   # Combine
-  summarise() %>%
+  summarise() |>
   # To terra, until this step was sf
   vect()
 
@@ -130,39 +140,36 @@ the_plain <- esp_get_prov(
 
 mydir <- "~/R/mapslib/misc"
 
-
 r_init <- elevation_30s("ESP", path = mydir)
 
 # For better handling we set here the names
 names(r_init) <- "alt"
 
 # We don't want values lower than 0 on the raster
-r <- r_init %>%
+r <- r_init |>
   mutate(alt = pmax(0, alt))
-
 
 # Now intersect the raster and the vector and filter by range
 
-exploded <- r %>%
-  crop(the_plain, mask = TRUE) %>%
+exploded <- r |>
+  crop(the_plain, mask = TRUE) |>
   # Let's define here a range of elevations
-  filter(alt > 600 & alt < 1100) %>%
-  drop_na() %>%
-  as.polygons(dissolve = TRUE, na.rm = TRUE) %>%
+  filter(alt > 600 & alt < 1100) |>
+  drop_na() |>
+  as.polygons(dissolve = TRUE, na.rm = TRUE) |>
   # Aggregate first
-  aggregate() %>%
+  aggregate() |>
   # Explode vectors
-  disagg() %>%
+  disagg() |>
   # And fill holes
   fillHoles()
 
-
-
 # Select biggest polygons (area bigger than 50 kms 2)
-r_plain <- exploded %>%
-  # Add area
-  mutate(area = expanse(exploded)) %>%
-  filter(area > 50000**2) %>%
+r_plain <- exploded
+# Add an attribute before filtering polygons without an attribute table
+r_plain$area <- expanse(r_plain)
+r_plain <- r_plain |>
+  filter(area > 50000**2) |>
   # And convert to lines
   as.lines()
 
@@ -176,8 +183,8 @@ post](https://dieghernan.github.io/202210_tidyterra-hillshade/) to identify the
 plain. First, I create a base layer with a representation of the
 hillshade, which we will reuse later:
 
-```r
 
+``` r
 # Creating hillshade
 
 slope <- terrain(r, "slope", unit = "radians")
@@ -191,17 +198,16 @@ names(hill) <- "shades"
 pal_greys <- hcl.colors(1000, "Grays")
 
 # Index of color by cell
-index <- hill %>%
-  mutate(index_col = rescale(shades, to = c(1, length(pal_greys)))) %>%
-  mutate(index_col = round(index_col)) %>%
+index <- hill |>
+  mutate(index_col = rescale(shades, to = c(1, length(pal_greys)))) |>
+  mutate(index_col = round(index_col)) |>
   pull(index_col)
-
 
 # Get cols
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and don't use aes
+# and dont use aes
 
 # Base hill plot
 hill_plot <- ggplot() +
@@ -215,14 +221,49 @@ hill_plot
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_hill-1.webp" alt="Grayscale hillshade map of mainland Spain and the Balearic Islands, showing mountain ranges through light and shadow." width="100%" />
 
-And finally we overlay the altitude and the outline of the plain in Spain.
+As in the updated first post, we resolve the thematic raster's colors before
+combining it with the hillshade. This helper keeps the original scale underneath
+the blend to generate the legend. The opaque thematic layer inside the blend
+covers it, and the hillshade adds texture with an opacity of 0.85. The legend
+shows the palette before shading. We use **ragg** to render these compositing
+groups.
 
-```r
+
+``` r
+# Blend a thematic raster with the fixed hillshade colors
+blend_hillshade <- function(data, fill_scale) {
+  stopifnot(compareGeom(data, hill))
+  thematic_plot <- ggplot() +
+    geom_spatraster(data = data, maxcell = Inf) +
+    fill_scale
+  thematic_fill <- ggplot_build(thematic_plot)$data[[1]]$fill
+  stopifnot(
+    length(thematic_fill) == ncell(data),
+    length(vector_cols) == ncell(hill)
+  )
+
+  # The layer underneath supplies the scale and legend
+  thematic_plot +
+    (list(
+      geom_spatraster(data = data, fill = thematic_fill, maxcell = Inf),
+      geom_spatraster(
+        data = hill, fill = vector_cols, alpha = 0.85, maxcell = Inf
+      )
+    ) |>
+      ggblend::blend("multiply"))
+}
+```
+
+And finally we blend the altitude with the hillshade and draw the outline of
+the plain above both layers.
+
+
+``` r
 # Overlaying and theming
 
 # Aware of limits of the raster
 
-alt_limits <- minmax(r) %>% as.vector()
+alt_limits <- minmax(r) |> as.vector()
 # Round to lower and higher 500 integer with a min of 0
 alt_limits <- pmax(
   c(floor(alt_limits[1] / 500), ceiling(alt_limits[2] / 500)) * 500,
@@ -232,31 +273,30 @@ alt_limits <- pmax(
 alt_limits
 #> [1]    0 3500
 
-
 base_text_size <- 9
 
+alt_palette <- subset(hypsometric_tints_db, pal == "wiki-schwarzwald-cont")
+alt_scale <- scale_fill_hypso_tint_c(
+  palette = "wiki-schwarzwald-cont",
+  limits = alt_limits,
+  values = rescale(alt_palette$limit, to = alt_limits),
+  na.value = NA,
+  breaks = seq(0, 3500, 250),
+  labels = label_comma()
+)
 
-plot_esp <- hill_plot +
-  geom_spatraster(data = r, maxcell = Inf) +
-  # Overlay the_plain
+plot_esp <- blend_hillshade(r, alt_scale) +
   geom_spatvector(
     data = r_plain,
     color = alpha("black", 0.7),
     linewidth = 0.15
-  ) +
-  scale_fill_hypso_tint_c(
-    palette = "wiki-schwarzwald-cont",
-    limits = alt_limits,
-    alpha = 0.4,
-    breaks = seq(0, 3500, 250),
-    labels = label_comma()
   ) +
   guides(fill = guide_legend(
     title = "   m.",
     title.position = "top",
     keywidth = .5,
     reverse = TRUE,
-    override.aes = list(alpha = 0.8)
+    override.aes = list(alpha = 1)
   )) +
   labs(
     title = "Elevation of Spain",
@@ -293,7 +333,8 @@ Let's check now whether the rain falls mainly in the plain or not. We use here
 `geodata::worldclim_country()` to get the average precipitation by month from
 [WorldClim](https://www.worldclim.org/):
 
-```r
+
+``` r
 # Precipitation of Spain
 
 # Get precip data
@@ -301,7 +342,7 @@ precip <- geodata::worldclim_country("ESP", "prec", mydir)
 
 precip
 #> class       : SpatRaster
-#> dimensions  : 1980, 2760, 12  (nrow, ncol, nlyr)
+#> size        : 1980, 2760, 12  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
@@ -316,13 +357,14 @@ we now just add the values by cell to get the annual average. Note that we also
 need to normalize the SpatRaster to the projection, extent and resolution of our
 `hill` object:
 
-```r
+
+``` r
 # Sum all layers
 precip_avg <- sum(precip)
 
 precip_avg
 #> class       : SpatRaster
-#> dimensions  : 1980, 2760, 1  (nrow, ncol, nlyr)
+#> size        : 1980, 2760, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : -18.5, 4.5, 27.5, 44  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326)
@@ -331,14 +373,13 @@ precip_avg
 #> min value   :    8
 #> max value   : 2055
 
-
 compare_spatrasters(precip_avg, hill)
 
 # Align raster using hill
 
-precip_avg_mask <- precip_avg %>%
-  project(hill) %>%
-  crop(hill) %>%
+precip_avg_mask <- precip_avg |>
+  project(hill) |>
+  crop(hill) |>
   mask(hill)
 
 # Normalize
@@ -356,8 +397,8 @@ autoplot(precip_avg_mask)
 We can now start representing our precipitation map. I chose here to create a
 custom palette with **colorspace** to better highlight the differences:
 
-```r
 
+``` r
 mypal <- sequential_hcl(
   n = 16,
   h = c(320, 80),
@@ -374,35 +415,36 @@ show_col(mypal)
 And now we can create the final map showing if _the rain in Spain stays mainly
 in the plain_:
 
-```r
+
+``` r
 # Precipitation limits, rounded to 100
 prec_limits <- floor(as.vector(minmax(precip_avg_mask)) / 100) * 100 + c(0, 100)
 
+# Reuse this scale for the map and both marginal profiles
+precip_scale <- scale_fill_gradientn(
+  colours = mypal,
+  limits = prec_limits,
+  na.value = NA,
+  labels = label_comma(),
+  breaks = seq(0, prec_limits[2], 250)
+)
 
-meteo_plot <- hill_plot +
-  geom_spatraster(data = precip_avg_mask, maxcell = Inf) +
-  # Overlay the_plain
+meteo_plot <- blend_hillshade(precip_avg_mask, precip_scale) +
   geom_spatvector(
     data = r_plain, color = alpha("black", 0.7),
     linewidth = .1
   ) +
-  # This part is theming only
-  scale_fill_gradientn(
-    colours = alpha(mypal, 0.7),
-    na.value = NA,
-    labels = label_comma(),
-    breaks = seq(0, prec_limits[2], 250)
-  ) +
   guides(fill = guide_legend(
     direction = "horizontal",
     keyheight = .5,
-    keywidth = 2,
-    title.position = "right",
-    label.position = "bottom",
+    keywidth = unit(0.4, "in"),
+    theme = theme(
+      legend.title.position = "right",
+      legend.text.position = "bottom"
+    ),
     nrow = 1,
-    family = "serif",
     title = " mm.",
-    override.aes = list(alpha = 0.9)
+    override.aes = list(alpha = 1)
   )) +
   labs(
     title = "Average yearly precipitation of Spain",
@@ -424,9 +466,8 @@ meteo_plot <- hill_plot +
     legend.position = "bottom",
     legend.title = element_text(size = base_text_size * .7),
     legend.text = element_text(size = base_text_size * .7),
-    legend.spacing.x = unit(0, "pt")
+    legend.key.spacing.x = unit(0, "pt")
   )
-
 
 meteo_plot
 ```
@@ -450,10 +491,16 @@ We can now start profiling our final plot. The idea is to create two bar charts,
 representing the value to be plotted (in this case, average annual
 precipitation) by longitude and latitude.
 
-But first we add some additional margins and axis titles to the main plot, so we
-can easily insert those marginal plots into our main plot:
+The map and both profiles use `precip_scale`, with the same opaque colors and
+explicit limits. Hillshade changes the map's brightness, while the profiles
+show the unshaded palette. The averages are calculated from the precipitation
+values, before any color mapping or blending.
 
-```r
+But first we add some additional margins and axis titles to the main plot, so we
+can insert those marginal plots easily on our main plot:
+
+
+``` r
 # Now we can add titles on the secondary axis
 
 plot_main <- meteo_plot +
@@ -491,23 +538,22 @@ plot_main
 In the following code, I am drafting what the marginal plots would look
 like, so we can have a preview of the final result:
 
-```r
 
+``` r
 # Profiling marginal plots
 
 # Getting averages by x,y
-marg_x <- precip_avg_mask %>%
-  as_tibble(xy = TRUE) %>%
-  drop_na() %>%
-  group_by(x) %>%
+marg_x <- precip_avg_mask |>
+  as_tibble(xy = TRUE) |>
+  drop_na() |>
+  group_by(x) |>
   summarise(avg = mean(prec))
 
-marg_y <- precip_avg_mask %>%
-  as_tibble(xy = TRUE) %>%
-  drop_na() %>%
-  group_by(y) %>%
+marg_y <- precip_avg_mask |>
+  as_tibble(xy = TRUE) |>
+  drop_na() |>
+  group_by(y) |>
   summarise(avg = mean(prec))
-
 
 # Cowplot would delete axis, we create an axis at 1000 and 2000
 br_4marginal <- c(1000, 2000)
@@ -534,12 +580,7 @@ ggplot() +
     nudge_y = 100,
     size = 3
   ) +
-  scale_fill_gradientn(
-    colours = alpha(mypal, 0.9),
-    na.value = NA,
-    labels = label_comma(),
-    limits = prec_limits
-  ) +
+  precip_scale +
   scale_y_continuous(
     breaks = br_4marginal,
     limits = c(0, max(br_4marginal) * 1.5)
@@ -553,7 +594,7 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="Bar profile of average yearly precipitation by east-west position in Spain. Bar height and color encode rainfall in millimeters, with the highest averages toward the west." width="100%" />
 
-```r
+``` r
 
 ggplot() +
   geom_col(
@@ -568,12 +609,7 @@ ggplot() +
     angle = 270,
     size = 3
   ) +
-  scale_fill_gradientn(
-    colours = alpha(mypal, 0.9),
-    na.value = NA,
-    labels = label_comma(),
-    limits = prec_limits
-  ) +
+  precip_scale +
   scale_y_continuous(
     breaks = br_4marginal,
     limits = c(0, max(br_4marginal) * 1.2)
@@ -593,8 +629,8 @@ ggplot() +
 Finally, we use `cowplot::axis_canvas()` to create the marginal plots as
 we want:
 
-```r
 
+``` r
 # Last step: We combine plots
 
 # Marginal plots
@@ -613,12 +649,7 @@ plot_x <- axis_canvas(plot_main, axis = "x") +
     fontface = "italic",
     size = base_text_size * 0.2
   ) +
-  scale_fill_gradientn(
-    colours = alpha(mypal, 0.9),
-    na.value = NA,
-    labels = label_comma(),
-    limits = prec_limits
-  ) +
+  precip_scale +
   scale_y_continuous(
     breaks = br_4marginal,
     limits = c(0, max(br_4marginal) * 1.5)
@@ -635,7 +666,7 @@ plot_x
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="Bar profile of average yearly precipitation from west to east in Spain, formatted for placement above the map. Height and color encode rainfall in millimeters." width="100%" />
 
-```r
+``` r
 
 plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
   geom_col(
@@ -653,12 +684,7 @@ plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
     fontface = "italic",
     size = base_text_size * 0.2
   ) +
-  scale_fill_gradientn(
-    limits = prec_limits,
-    colours = alpha(mypal, 0.9),
-    na.value = NA,
-    labels = label_comma()
-  ) +
+  precip_scale +
   scale_y_continuous(
     breaks = br_4marginal,
     limits = c(0, max(br_4marginal) * 1.5)
@@ -677,8 +703,8 @@ plot_y
 
 And insert everything in the main plot. See the final result:
 
-```r
 
+``` r
 # Combine all plots into one
 sizes_axis <- grid::unit(.3, "null")
 
@@ -707,8 +733,8 @@ plot. Here you can find a simplified version:
 <details markdown="1">
 <summary>Simplified version</summary>
 
-```r
 
+``` r
 # Libraries
 # Data manipulation
 library(terra)
@@ -727,8 +753,8 @@ library(colorspace)
 # Get the data
 mydir <- "~/R/mapslib/misc"
 
-r <- elevation_30s("ESP", path = mydir) %>%
-  rename(alt = 1) %>%
+r <- elevation_30s("ESP", path = mydir) |>
+  rename(alt = 1) |>
   mutate(alt = pmax(0, alt))
 
 # Creating hillshade
@@ -744,15 +770,13 @@ names(hill) <- "shades"
 pal_greys <- hcl.colors(1000, "Grays")
 
 # Index of color by cell
-index <- hill %>%
-  mutate(index_col = rescale(shades, to = c(1, length(pal_greys)))) %>%
-  mutate(index_col = round(index_col)) %>%
+index <- hill |>
+  mutate(index_col = rescale(shades, to = c(1, length(pal_greys)))) |>
+  mutate(index_col = round(index_col)) |>
   pull(index_col)
-
 
 # Get cols
 vector_cols <- pal_greys[index]
-
 
 # Base hill plot
 hill_plot <- ggplot() +
@@ -762,12 +786,35 @@ hill_plot <- ggplot() +
   ) +
   theme_minimal()
 
+# Blend a thematic raster with the fixed hillshade colors
+blend_hillshade <- function(data, fill_scale) {
+  stopifnot(compareGeom(data, hill))
+  thematic_plot <- ggplot() +
+    geom_spatraster(data = data, maxcell = Inf) +
+    fill_scale
+  thematic_fill <- ggplot_build(thematic_plot)$data[[1]]$fill
+  stopifnot(
+    length(thematic_fill) == ncell(data),
+    length(vector_cols) == ncell(hill)
+  )
+
+  # The layer underneath supplies the scale and legend
+  thematic_plot +
+    (list(
+      geom_spatraster(data = data, fill = thematic_fill, maxcell = Inf),
+      geom_spatraster(
+        data = hill, fill = vector_cols, alpha = 0.85, maxcell = Inf
+      )
+    ) |>
+      ggblend::blend("multiply"))
+}
+
 # Overlay
 precip <- geodata::worldclim_country("ESP", "prec", mydir)
-precip_end <- sum(precip) %>%
-  project(hill) %>%
-  crop(hill) %>%
-  mask(hill) %>%
+precip_end <- sum(precip) |>
+  project(hill) |>
+  crop(hill) |>
+  mask(hill) |>
   rename(prec = 1)
 
 p_range <- as.vector(minmax(precip_end))
@@ -780,26 +827,25 @@ mypal <- sequential_hcl(
   rev = TRUE
 )
 
-
-base_plot <- hill_plot +
-  geom_spatraster(data = precip_end, maxcell = Inf) +
-  scale_fill_gradientn(
-    colors = alpha(mypal, 0.7), na.value = NA,
-    limits = p_range
-  )
+precip_scale <- scale_fill_gradientn(
+  colours = mypal, na.value = NA,
+  limits = p_range
+)
+base_plot <- blend_hillshade(precip_end, precip_scale) +
+  theme_minimal()
 
 # Marginal plots
 # Data
-marg_x <- precip_end %>%
-  as_tibble(xy = TRUE) %>%
-  drop_na() %>%
-  group_by(x) %>%
+marg_x <- precip_end |>
+  as_tibble(xy = TRUE) |>
+  drop_na() |>
+  group_by(x) |>
   summarise(avg = mean(prec))
 
-marg_y <- precip_end %>%
-  as_tibble(xy = TRUE) %>%
-  drop_na() %>%
-  group_by(y) %>%
+marg_y <- precip_end |>
+  as_tibble(xy = TRUE) |>
+  drop_na() |>
+  group_by(y) |>
   summarise(avg = mean(prec))
 
 # Adding marginal plots
@@ -811,11 +857,7 @@ plot_x <- axis_canvas(base_plot, axis = "x") +
     color = NA,
     show.legend = FALSE
   ) +
-  scale_fill_gradientn(
-    colours = alpha(mypal, 0.9),
-    na.value = NA,
-    limits = p_range
-  ) +
+  precip_scale +
   theme_void()
 
 plot_y <- axis_canvas(base_plot, axis = "y", coord_flip = TRUE) +
@@ -825,11 +867,7 @@ plot_y <- axis_canvas(base_plot, axis = "y", coord_flip = TRUE) +
     color = NA,
     show.legend = FALSE
   ) +
-  scale_fill_gradientn(
-    colours = alpha(mypal, 0.9),
-    na.value = NA,
-    limits = p_range
-  ) +
+  precip_scale +
   theme_void() +
   coord_flip()
 
