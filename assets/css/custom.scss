@@ -23,6 +23,25 @@ pre code {
   max-width: 100%;
 }
 
+.kofi-support {
+  border-top: 1px solid currentColor;
+}
+
+.kofi-support-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+  font: inherit;
+}
+
+.kofi-support-link:focus-visible {
+  outline: 3px solid #767676;
+  outline-offset: 4px;
+}
+
 @view-transition {
   navigation: auto;
 }

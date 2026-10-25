@@ -22,11 +22,6 @@ og_title: "One World: R packages, maps and open-source projects"
   <a href="./blog/" class="btn btn-primary border-0">Blog <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>
 </div>
 
-<div class="mt-5 pt-3 mb-3 text-center">
-  <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
-  <script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z');kofiwidget2.draw();</script>
-</div>
-
 * * *
 {: .my-5 .bg-primary }
 
@@ -41,6 +36,8 @@ og_title: "One World: R packages, maps and open-source projects"
 <div class="text-right mx-3">
   <a href="./projects" class="btn btn-primary border-0">More projects <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>
 </div>
+
+{% include custom/kofi.html %}
 
   {%- assign alldocs = site.documents -%}
   {%- assign showcol = true -%}

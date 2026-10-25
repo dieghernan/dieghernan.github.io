@@ -43,10 +43,7 @@ header_in_content: true
         {{- content -}}
         {% unless is_feed %}</div>{% endunless %}
         {% if page.show_kofi %}
-          <div class="mt-5 pt-3 mb-3 text-center">
-            <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script>
-            <script>kofiwidget2.init('Support Me on Ko-fi', '#000000', 'K3K43H86Z'); kofiwidget2.draw();</script>
-          </div>
+          {% include custom/kofi.html %}
         {% endif %}
       </{% if is_feed %}div{% else %}article{% endif %}>
     </div>
