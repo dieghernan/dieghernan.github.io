@@ -1,16 +1,13 @@
 <script src="https://giscus.app/client.js"
-        data-repo="dieghernan/dieghernan.github.io"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA="
-        data-category="Blog"
-        data-category-id="DIC_kwDOEOD0Qs4CcqYn"
-        data-mapping="title"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="1"
-        data-input-position="top"
-        data-theme="dark_high_contrast"
-        data-lang="es"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
+  data-repo="dieghernan/dieghernan.github.io"
+  data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA=" data-category="Blog"
+  data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+  {% if page.giscus_discussion %}
+  data-mapping="number" data-term="{{ page.giscus_discussion | escape }}"
+  {% else %}
+  data-mapping="pathname"
+  {% endif %}
+  data-strict="0" data-reactions-enabled="1" data-emit-metadata="1"
+  data-input-position="top" data-theme="dark_high_contrast" data-lang="en"
+  data-loading="lazy" crossorigin="anonymous" async>
 </script>

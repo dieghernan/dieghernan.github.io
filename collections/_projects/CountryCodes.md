@@ -1,77 +1,93 @@
 ---
-title: Country Codes & Organizations
+title: Country codes & organizations
 subtitle: A database with geocodes
+tags:
+  - project
+  - rstats
+  - dataset
+  - csv
 header_img: ./assets/img/misc/countrycodes.png
-tags: [project,R,webscrapping,dataset,csv,json]
 permalink: /projects/Country-Codes-and-International-Organizations/
 redirect_from:
   - /projects/countrycodes/
 date: 2019-04-11
 project_links:
-    - url: https://github.com/dieghernan/Country-Codes-and-International-Organizations
-      icon: fab fa-github
-      label: See on GitHub
+  - url: https://github.com/dieghernan/Country-Codes-and-International-Organizations
+    icon: fab fa-github
+    label: See on GitHub
 show_toc: true
+og_image_width: 480
+og_image_height: 480
+og_image_type: "image/png"
 ---
 
-Complete database of countries and territories, their different country codes under common standards (ISO-3166, GEC *(Formerly FIPS*), M49 (*UN*), STANAG (*NATO*), NUTS (*EU*), etc.) and their membership in different international organizations.
+Complete database of countries and territories, their different country codes
+under common standards (ISO-3166, GEC _(formerly FIPS)_, M49 (_UN_), STANAG
+(_NATO_), NUTS (_EU_), etc.) and their membership in different international
+organizations.
 
-<sup>*Note that blanks are presented as* `""` *instead of* `NA` *since ISO-3166-ALPHA 2 for Namibia is* **NA**.</sup>
+<sup>_Note that blanks are presented as_ `""` _instead of_ `NA` _since ISO-3166-ALPHA 2 for Namibia is_ **NA**.</sup>
 
-**[vignette: Using Country Codes](https://dieghernan.github.io/201904_Using-CountryCodes/)**
+**[Vignette: Using country codes](https://dieghernan.github.io/201904_Using-CountryCodes/)**
 
-## A. Country Codes `.csv`
+## A. Country codes `.csv`
 
-Main `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodes.csv) containing:
+Main `.csv` file
+[(link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodes.csv)
+containing:
 
-* Country and regional codes
-* Currency, dependency status ans sovereignty info
-* Names in english and spanish as provided by [Unicode CLDR](http://cldr.unicode.org/translation/displaynames/country-names)
-* Additional information (demographics, capital, area, etc.)
+- Country and regional codes
+- Currency, dependency status and sovereignty information
+- Names in English and Spanish as provided by [Unicode CLDR](http://cldr.unicode.org/translation/displaynames/country-names)
+- Additional information (demographics, capital, area, etc.)
 
 ### Codes included
 
-Field | Description | Source |Notes 
---- | --------- | -----|-----
-`ISO_3166_1`|ISO 3166-1 numeric |Wikipedia
-`ISO_3166_2`|ISO 3166-1 alpha-2 |Wikipedia
-`ISO_3166_3`|ISO 3166-1 alpha-3 |Wikipedia
-`FIPS_GEC`|Geopolitical Entities and Codes (GEC)| CIA World Factbook|[Formerly FIPS 1PUB 10-4](https://www.cia.gov/library/publications/the-world-factbook/appendix/appendix-d.html)
-`STANAG`|STANAG 1059 Country Codes| CIA World Factbook|  Used by NATO
-`M49`|UN Country Code| UN Stats
-`NUTS`|NUTS 0 code |Wikipedia |Used by EU
-`geonameId`|geonameId|geonames
-`continentcode`|geonames Continent Code|geonames
-`regioncode`|UN Regional Code|UN Stats
-`interregioncode`|Interregional Code|UN Stats
-`subregioncode`|Subregion Code|UN Stats
-`ISO_3166_3.sov`|Sovereign code |Wikipedia, Statoids | If non-independent
+| Field             | Description                           | Source              | Notes                                                                                                           |
+| ----------------- | ------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `ISO_3166_1`      | ISO 3166-1 numeric                    | Wikipedia           |
+| `ISO_3166_2`      | ISO 3166-1 alpha-2                    | Wikipedia           |
+| `ISO_3166_3`      | ISO 3166-1 alpha-3                    | Wikipedia           |
+| `FIPS_GEC`        | Geopolitical Entities and Codes (GEC) | CIA World Factbook  | Formerly FIPS 1PUB 10-4 (historical CIA reference) |
+| `STANAG`          | STANAG 1059 Country Codes             | CIA World Factbook  | Used by NATO                                                                                                    |
+| `M49`             | UN Country Code                       | UN Stats            |
+| `NUTS`            | NUTS 0 code                           | Wikipedia           | Used by EU                                                                                                      |
+| `geonameId`       | geonameId                             | geonames            |
+| `continentcode`   | geonames Continent Code               | geonames            |
+| `regioncode`      | UN Regional Code                      | UN Stats            |
+| `interregioncode` | Interregional Code                    | UN Stats            |
+| `subregioncode`   | Subregion Code                        | UN Stats            |
+| `ISO_3166_3.sov`  | Sovereign code                        | Wikipedia, Statoids | If non-independent                                                                                              |
 
 ### Other information included
 
-* Currency
-* Dependency status
-* Names in english and spanish: Country, Continents & Regions, capital
-* Population, area (km<sup>2</sup>) and developed region
+- Currency
+- Dependency status
+- Names in English and Spanish for countries, continents, regions and capitals
+- Population, area (km<sup>2</sup>) and developed region
 
+## B. International organizations `.csv`
 
-## B. International Organizations `.csv`
+A single `.csv` file
+[(link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/CountrycodesOrgs.csv)
+describing the membership status of each country across 186 international
+organizations.
 
-A single `.csv` file [(Link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/CountrycodesOrgs.csv) describing the membership status of each country across 186 international organizations.
+| Field        | Description                      |
+| ------------ | -------------------------------- |
+| `ISO_3166_2` | Matches Countrycodes `.csv` |
+| `ISO_3166_3` | Matches Countrycodes `.csv` |
+| `NAME.EN`    | Matches Countrycodes `.csv` |
+| `source`     | Main data source                 |
+| `org_name`   | Name of the organization         |
+| `org_id`     | Abbreviation or internal ID      |
+| `org_member` | Membership status                |
 
-Field | Description
---- | ---------
-`ISO_3166_2`| Matches with Countrycodes `.csv`
-`ISO_3166_3`| Matches with Countrycodes `.csv`
-`NAME.EN`| Matches with Countrycodes `.csv`
-`source`| Main data source
-`org_name`| Name of the organization
-`org_id` | Abbreviation or internal ID
-`org_member` | Membership status
+## C. Full JSON file `.json`
 
-## C. Full json file `.json`
-
-This `.json` file [(Link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodesfull.json) combines the previous files:
+This `.json` file
+[(link)](https://github.com/dieghernan/Country-Codes-and-International-Organizations/tree/master/outputs/Countrycodesfull.json)
+combines the previous files:
 
 ```json
 [
@@ -103,7 +119,7 @@ This `.json` file [(Link)](https://github.com/dieghernan/Country-Codes-and-Inter
     "pop": 34586184,
     "area_km2": 2381740,
     "Developed": "Developing",
-    "org_id": ["ABEDA", "ACP", "ADB", "AFDB", "AFESD", "AG", "AL", 
+    "org_id": ["ABEDA", "ACP", "ADB", "AFDB", "AFESD", "AG", "AL",
     ...
     ],
     "org_member": ["member", null, null, "member", "member", null,
@@ -114,6 +130,7 @@ This `.json` file [(Link)](https://github.com/dieghernan/Country-Codes-and-Inter
   ...
 ]
 ```
+
 A complementary function (intended to be used in **R**) has been developed:
 
 ```r
@@ -130,15 +147,14 @@ ISO_memcol = function(df, #Input dataframe
 }
 ```
 
-
 ## D. Data sources
 
-* Wikipedia, the free encyclopedia
-  * [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
-  * [NUTS](https://es.wikipedia.org/wiki/Nomenclatura_de_las_Unidades_Territoriales_Estad%C3%ADsticas)
-* [The World Factbook](https://www.cia.gov/library/publications/the-world-factbook/index.html) - CIA
-* [United Nations Statistical Division](https://unstats.un.org/unsd/methodology/m49/overview/)
-* [geonames](https://www.geonames.org/)
-* [REST COUNTRIES](https://restcountries.eu/)
-* [Unicode Common Locale Data Repository (CLDR) Project](https://github.com/unicode-cldr)
-* <http://www.statoids.com/>
+- Wikipedia, the free encyclopedia
+  - [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
+  - [NUTS](https://es.wikipedia.org/wiki/Nomenclatura_de_las_Unidades_Territoriales_Estad%C3%ADsticas)
+- The World Factbook - CIA (historical source used for this dataset)
+- [United Nations Statistical Division](https://unstats.un.org/unsd/methodology/m49/overview/)
+- [geonames](https://www.geonames.org/)
+- [REST COUNTRIES](https://restcountries.com/)
+- [Unicode Common Locale Data Repository (CLDR) Project](https://github.com/unicode-cldr)
+- <http://www.statoids.com/>

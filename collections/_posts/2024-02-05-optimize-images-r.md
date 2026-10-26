@@ -1,35 +1,42 @@
 ---
+giscus_discussion: 34
 title: "Optimize your images with R and reSmush.it"
-subtitle: "Introducing the resmush package"
+subtitle: "Introducing the <strong>resmush</strong> package"
 excerpt: Compress the size of your images with R, resmush and reSmush.it
+syndication:
+  - https://www.r-bloggers.com/2024/02/optimize-your-images-with-r-and-resmush-it/
 tags:
-- r_bloggers
-- r_package
-- resmush
+  - r_bloggers
+  - r_package
+  - resmush
+  - rstats
 output:
   md_document:
     variant: gfm
     preserve_yaml: yes
   html_document:
 header_img: https://dieghernan.github.io/assets/img/misc/compress-img.png
+og_image_width: 1200
+og_image_height: 630
+og_image_type: "image/png"
 ---
 
 The **resmush** package has recently been accepted on
-[CRAN](https://cran.r-project.org/package=resmush)! This small utility package 
-allows for the optimization (i.e., compression) of local and online images 
+[CRAN](https://cran.r-project.org/package=resmush)! This small utility package
+allows for the optimization (i.e., compression) of local and online images
 using [reSmush.it](https://resmush.it/).
 
 You can install **resmush** from
 [**CRAN**](https://CRAN.R-project.org/package=resmush) with:
 
-``` r
+```r
 install.packages("resmush")
 ```
 
 ## What is reSmush.it?
 
-reSmush.it is a **free online API** that provides image optimization and has 
-been implemented on WordPress, Drupal, or Magento. Some features of reSmush.it
+reSmush.it is a **free online API** that provides image optimization and has
+been implemented in WordPress, Drupal and Magento. Some features of reSmush.it
 include:
 
 - Free optimization services, no API key required.
@@ -39,57 +46,56 @@ include:
 - Compression using several algorithms:
   - [**PNGQuant**](https://pngquant.org/): Strip unneeded chunks from
     PNGs while preserving full alpha transparency.
-  - [**JPEGOptim**](https://github.com/tjko/jpegoptim)**:** Lossless 
+  - [**JPEGOptim**](https://github.com/tjko/jpegoptim)**:** Lossless
     optimization based on optimizing the Huffman tables.
   - [**OptiPNG**](https://optipng.sourceforge.net/): `png` reducer
     used by several online optimizers.
 
-**reSmush.it** is free of charge, but its team is planning to offer more 
-serves as well as extend the service to support other types of image files. If 
-you enjoy this API (as I do), you can consider supporting them.
+**reSmush.it** is free of charge, but its team is planning to offer more
+services and extend the service to support other types of image files. If you
+enjoy this API (as I do), you can consider supporting them.
 
 <div class="text-center my-3">
 <a title="Support reSmush.it on ko-fi.com" class="kofi-button" style="background-color:#ff5e5b;" href="https://ko-fi.com/E1E51PW00" target="_blank">
-<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="Ko-fi reSmush.it donations" class="kofiimg">Support reSmush.it on Ko-fi</span></a>
+<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="" class="kofiimg">Support reSmush.it on Ko-fi</span></a>
 </div>
 
-## Why the resmush package?
+## Why the **resmush** package?
 
 One of the main reasons I developed **resmush** is because I usually
-include [precomputed 
- vignettes](https://ropensci.org/blog/2019/12/08/precompute-vignettes/) 
-with my packages (see [**tidyterra**](https://cran.r-project.org/web/packages/tidyterra/vignettes/welcome.html) 
-as an example). I found that the plots created on CRAN with the standard 
-configuration (i.e., not precomputed vignettes but built on CRAN itself) were 
-not very satisfying. In some of the packages I developed, especially those 
-related to mapping, they didn’t do justice to the actual results when a user 
+include [precomputed
+vignettes](https://ropensci.org/blog/2019/12/08/precompute-vignettes/)
+with my packages (see [**tidyterra**](https://dieghernan.github.io/tidyterra/articles/tidyterra.html)
+as an example). I found that the plots created on CRAN with the standard
+configuration (i.e., not precomputed vignettes but built on CRAN itself) were
+not very satisfying. In some of the packages I developed, especially those
+related to mapping, they didn’t do justice to the actual results when a user
 runs them.
 
-Precomputing vignettes has the drawback of producing higher-quality images at 
-the expense of size. To avoid exceeding [CRAN’s 5Mb maximum size 
-policy](https://cran.r-project.org/web/packages/policies.html), I developed 
-**resmush**, which enables me to reduce the size of the images without a 
+Precomputing vignettes has the drawback of producing higher-quality images at
+the expense of size. To avoid exceeding [CRAN’s 5 MB maximum size
+policy](https://cran.r-project.org/web/packages/policies.html), I developed
+**resmush**, which enables me to reduce the size of the images without a
 significant loss in quality.
 
 Another use case for **resmush** is optimizing images in the context of web page
-development and SEO optimization. For example, I optimized all the images on 
-this blog using `resmush_dir()`, which is a shorthand for optimizing all files 
+development and SEO optimization. For example, I optimized all the images on
+this blog using `resmush_dir()`, which is a shorthand for optimizing all files
 in a specific folder.
 
-There are other alternatives that I would discuss [at the end of this 
-post](#other-alternatives), but in one line, the reSmush.it API performs fast 
-with minimal configuration for a wide range of formats without needing an API 
+There are other alternatives that I discuss [at the end of this
+post](#other-alternatives), but briefly, the reSmush.it API works quickly
+with minimal configuration for a wide range of formats without needing an API
 key.
 
-
-## Using the resmush package
+## Using the **resmush** package
 
 ### With local files
 
-Let’s present an example of how a local file can be optimized. First we create 
-a large plot with **ggplot2**
+Let’s present an example of how a local file can be optimized. First, we create
+a large plot with **ggplot2**.
 
-``` r
+```r
 library(tidyterra)
 library(ggplot2)
 library(terra)
@@ -106,23 +112,23 @@ cyl_gg
 
 <div class="figure">
 
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original file" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization." width="100%" />
 <p class="caption">
 Original file
 </p>
 
 </div>
 
-``` r
+```r
 
 # And we save it for resmushing
 ggsave("cyl.png", width = 5, height = 0.7 * 5)
 ```
 
-Cool, but the file has a size of 1.7 Mb. So we can use `resmush_file()` to 
-reduce it, see:
+The file has a size of 1.7 MB. We can use `resmush_file()` to
+reduce it:
 
-``` r
+```r
 library(resmush)
 resmush_file("cyl.png")
 #> ══ resmush summary ══════════════════════════════════════════
@@ -137,36 +143,36 @@ png::readPNG("cyl_resmush.png") %>%
 
 <div class="figure">
 
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized file" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization." width="100%" />
 <p class="caption">
 Optimized file
 </p>
 
 </div>
 
-By default, `resmush_file()` and `resmush_dir()` do not overwrite the original 
-file, although this behavior may be modified with the `overwrite = TRUE` 
-parameter. Now, the resmushed file (`"cyl_resmush.png"`) has a size of 762.2 Kb.
+By default, `resmush_file()` and `resmush_dir()` do not overwrite the original
+file, although this behavior may be modified with the `overwrite = TRUE`
+parameter. Now, the optimized file (`"cyl_resmush.png"`) has a size of 762.2 kB.
 
 Let’s compare the results side-by-side:
 
 <div class="figure row no-gutters">
 <a href="https://dieghernan.github.io/assets/img/samples/cyl.png" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Original online figure">
+<img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization.">
 </a>
 <a href="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Optimized figure">
+<img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization.">
 </a>
 <p class="caption">
-Original picture (left/top) 1.7 Mb and optimized picture (right/bottom) 762.2 Kb
-(Compression 55.46%). Click in the images to enlarge.
+Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
+(55.46% reduction in file size). Click on the images to enlarge.
 </p>
 </div>
 
-We can verify that the image has been compressed without reducing its 
+We can verify that the image has been compressed without reducing its
 dimensions.
 
-``` r
+```r
 size_src <- file.size("cyl.png") %>%
   `class<-`("object_size") %>%
   format(units = "auto")
@@ -186,44 +192,44 @@ data.frame(
 ```
 
 | source          | size     | dimensions |
-|:----------------|:---------|:-----------|
+| :-------------- | :------- | :--------- |
 | original file   | 1.7 Mb   | 1050x1500  |
 | compressed file | 762.2 Kb | 1050x1500  |
 
 ### With online files
 
-We can also optimize online files with `resmush_url()` and download them to 
-disk. In this example, I demonstrate a feature of all the functions in 
+We can also optimize online files with `resmush_url()` and download them to
+disk. In this example, I demonstrate a feature of all the functions in
 **resmush**: they return an invisible data frame with a summary of the process.
 
-``` r
+```r
 url <- "https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg"
 
 # Invisible data frame
 dm <- resmush_url(url, "sample_optimized.jpg", report = FALSE)
 ```
 
-``` r
+```r
 knitr::kable(dm)
 ```
 
 | src_img                                                            | dest_img             | src_size | dest_size | compress_ratio | notes | src_bytes | dest_bytes |
-|:-------------------------------------------------------------------|:---------------------|:---------|:----------|:---------------|:------|----------:|-----------:|
+| :----------------------------------------------------------------- | :------------------- | :------- | :-------- | :------------- | :---- | --------: | ---------: |
 | <https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg> | sample_optimized.jpg | 1.3 Mb   | 985 Kb    | 26.63%         | OK    |   1374693 |    1008593 |
 
 <div class="figure row no-gutters">
 <a href="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" class="col-sm-6 p-1">
 <img
-src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Original online figure">
+src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Colorful illustration of sunset over ocean waves and a beach, before image optimization.">
 </a>
 
 <a href="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" class="col-sm-6 p-1">
-<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Optimized online figure" >
+<img src="https://dieghernan.github.io/assets/img/samples/sample_optimized.jpg" alt="Colorful illustration of sunset over ocean waves and a beach, after image optimization." >
 </a>
 <p class="caption">
 
-Original picture (left/top) 1.3 Mb and optimized picture (right/bottom) 985 Kb
-(Compression 26.63%). Click in the images to enlarge.
+Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
+(26.63% reduction in file size). Click on the images to enlarge.
 
 </p>
 
@@ -237,25 +243,24 @@ There are other alternatives for optimizing images with **R**, but first…
 
 <p>
   <a href="https://yihui.org/">Yihui Xie</a>, one of the most prominent figures
-  in the <strong>R</strong> community, was recently laid off from his position 
-  at Posit PBC (formerly RStudio) 
+  in the <strong>R</strong> community, was recently laid off from his position
+  at Posit PBC (formerly RStudio)
   (<a href="https://yihui.org/en/2024/01/bye-rstudio/">more info here</a>).
 </p>
 <p>
-  Yihui is the developer of <strong>knitr</strong>, <strong>markdown</strong>, 
-  <strong>blogdown</strong>, and <strong>bookdown</strong>, among others, and he 
-  has been one of the key contributors (if not the most) to the reproducible 
+  Yihui is the developer of <strong>knitr</strong>, <strong>markdown</strong>,
+  <strong>blogdown</strong> and <strong>bookdown</strong>, among others, and he
+  has been one of the key contributors (if not the most) to the reproducible
   research space with <strong>R</strong> through his libraries.
 </p>
 <p>
-  If you have ever used and enjoyed his packages, consider sponsoring him on 
+  If you have ever used and enjoyed his packages, consider sponsoring him on
   GitHub.
 </p>
 
-
 <div class="text-center my-3">
 
-      <a class="btn btn-light border border-dark" role="button" aria-label="Sponsor @yihui" target="_top" href="https://github.com/sponsors/yihui?o=esb">
+      <a class="btn btn-light border border-dark" aria-label="Sponsor @yihui" target="_top" href="https://github.com/sponsors/yihui?o=esb">
       <i class="fa-regular fa-heart fa-lg mr-2" aria-hidden="true" style="color: #bf3989;"></i><span class="font-weight-bold">Sponsor Yihui Xie</span>
       </a>
 
@@ -263,19 +268,19 @@ There are other alternatives for optimizing images with **R**, but first…
 
 </div>
 
-- One of the many packages developed by Yihui is 
-  [**xfun**](https://cran.r-project.org/package=xfun), which includes the 
+- One of the many packages developed by Yihui is
+  [**xfun**](https://cran.r-project.org/package=xfun), which includes the
   following functions for optimizing image files:
-  - `xfun::tinify()` is similar to `resmush_file()` but uses 
+  - `xfun::tinify()` is similar to `resmush_file()` but uses
     [**TinyPNG**](https://tinypng.com/). An API key is required.
-  - `xfun::optipng()` compresses local files with **OptiPNG** (which needs to be 
+  - `xfun::optipng()` compresses local files with **OptiPNG** (which needs to be
     installed locally).
-- [**tinieR**](https://jmablog.github.io/tinieR/) package by 
-  [jmablog](https://jmablog.com/). An **R** package that provides a full 
+- [**tinieR**](https://jmablog.github.io/tinieR/) package by
+  [jmablog](https://jmablog.com/). An **R** package that provides a full
   interface with [**TinyPNG**](https://tinypng.com/).
-- [**optout**](https://github.com/coolbutuseless/optout) package by 
-  [@coolbutuseless](https://coolbutuseless.github.io/). Similar to 
-  `xfun::optipng()` with additional options. Requires additional software to 
+- [**optout**](https://github.com/coolbutuseless/optout) package by
+  [@coolbutuseless](https://coolbutuseless.github.io/). Similar to
+  `xfun::optipng()` with additional options. Requires additional software to
   be installed locally.
 
 <table class="table table-sm table-striped">
@@ -336,7 +341,7 @@ images.</caption>
 </table>
 
 <table class="table table-striped">
-<caption>Table 2: <strong>R</strong> packages: Formats admitted.</caption>
+<caption>Table 2: <strong>R</strong> packages: Supported formats.</caption>
     <thead>
    <tr>
      <th class="align-middle">tool</th>
@@ -403,8 +408,8 @@ images.</caption>
  </tbody>
 </table>
 
-Additionally, if you host your projects on GitHub, you can try 
-[Imgbot](https://imgbot.net/), which is free for open-source projects. Imgbot 
-provides automatic optimization for files in your repositories, and the 
-optimized files will be included in specific pull requests before merging into 
+Additionally, if you host your projects on GitHub, you can try
+[Imgbot](https://imgbot.net/), which is free for open-source projects. Imgbot
+provides automatic optimization for files in your repositories, and the
+optimized files will be included in specific pull requests before merging into
 your work.

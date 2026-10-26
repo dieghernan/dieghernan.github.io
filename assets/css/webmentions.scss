@@ -1,0 +1,55 @@
+---
+---
+.webmentions {
+  overflow-wrap: anywhere;
+
+  summary { cursor: pointer; }
+
+  .webmentions-header h2 { margin-bottom: .35rem; }
+  .webmentions-status { margin: 1.25rem 0; }
+  .webmentions-empty {
+    border-left: 3px solid currentColor;
+    padding: .75rem 1rem;
+    background: rgba(128, 128, 128, .06);
+  }
+  .webmentions-reactions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  .webmentions-reactions[hidden] { display: none; }
+  .webmentions-reaction {
+    font-size: .875rem;
+    ul { display: flex; flex-wrap: wrap; gap: .2rem 0; padding: 0; margin: 0; list-style: none; }
+    li + li { margin-left: -.5rem; }
+    a { display: block; border-radius: 50%; }
+    a:hover, a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+    .webmention-avatar { width: 3rem; height: 3rem; border: 2px solid var(--light, #fff); }
+  }
+  .webmentions-replies { padding-left: 1.5rem; margin-bottom: 2rem; }
+  .webmention-mention { margin-bottom: .5rem; a { text-decoration: underline; } }
+  .webmention-avatar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(128, 128, 128, .12);
+    font-weight: 700;
+    img { position: absolute; width: 100%; height: 100%; object-fit: cover; }
+  }
+  .webmentions-send {
+    font-weight: 700;
+    font-size: .875rem;
+    summary { padding: .75rem 0; }
+    form { padding: 1rem; border-left: 3px solid currentColor; }
+  }
+}
+
+

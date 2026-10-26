@@ -1,32 +1,59 @@
 ---
-title: "Insets with ggplot2 and tmap - and mapsf!"
+title: "Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!"
 subtitle: "A map on a map"
+excerpt: A common challenge when creating maps is how to include an inset map in
+  your visualization. An inset map is a smaller map usually included in a corner
+  that may provide additional context to the overall map, or may include map
+  units that would not usually be represented properly.
+syndication:
+  - https://www.r-bloggers.com/2022/03/insets-with-ggplot2-and-tmap-and-mapsf/
+tags:
+  - r_bloggers
+  - rstats
+  - rspatial
+  - maps
+  - sf
+  - ggplot2
+  - tmap
+  - mapSpain
+  - mapsf
+  - inset
 last_modified_at: 2022-03-03
-tags: [r_bloggers,rstats,rspatial, maps,sf,ggplot2, tmap, mapSpain, mapsf, inset]
 header_img: ./assets/img/blog/20220303_inset.webp
-excerpt: A common challenge when creating maps is how to include an inset map on 
-  your visualization. An inset map is a smaller map usually included on a corner 
-  that may provide additional context to the overall map, or may include map 
-  units than won't be usually represented properly.
-output: 
+output:
   md_document:
     variant: gfm
     preserve_yaml: true
+description: "Create inset maps in R with ggplot2, tmap and mapsf to show geographic context and outlying regions."
+og_image_width: 2100
+og_image_height: 2100
+og_image_type: "image/webp"
+seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
+og_title: "Inset maps with ggplot2, tmap and mapsf"
 ---
 
-*This post is dedicated to [Dominic Royé](https://dominicroye.github.io/en/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)*
+_This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)_
 
-A common challenge when creating maps is how to include an inset map on your visualization. An inset map is nothing more than a smaller map usually included on a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but its geographical location would imply an imperfect visualization, or even to include small units that otherwise won't be shown on the map.
+A common challenge when creating maps is how to include an inset map in your
+visualization. An inset map is nothing more than a smaller map usually included
+in a corner that may provide additional context to the overall map. It is also
+useful for representing spatial units that may form part of a country but whose
+geographical location would result in an imperfect visualization, or for
+including small units that would otherwise not be shown on the map.
 
-I have already covered this [using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/), but this time I would show how to produce these insets using the `ggplot2` and the `tmap` packages. In short: **use `cowplot` package**.
+I have already covered this
+[using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/),
+but this time I show how to produce these insets using the **ggplot2** and
+**tmap** packages. In short: use the **cowplot** package.
 
-## Test case: Canary Island as an inset
+## Test case: Canary Islands as an inset
 
-On this example, I would create a map of Spain using `mapSpain` and creating an inset for the Canary Islands.
+In this example, I create a map of Spain using **mapSpain** and an inset for the
+Canary Islands.
 
 The "true" map of Spain is:
 
-``` r
+```r
 library(mapSpain)
 library(sf)
 library(ggplot2)
@@ -38,11 +65,13 @@ ggplot(regions) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="plot of chunk 20220303_truemap" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%"/>
 
-I would use a different CRS for each part of Spain. In the case of mainland Spain I would use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary Islands I would use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083))
+I use a different CRS for each part of Spain. In the case of mainland Spain, I
+use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary
+Islands I use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083)).
 
-``` r
+```r
 main <- regions %>%
   filter(ccaa.shortname.es != "Canarias") %>%
   st_transform(25830)
@@ -51,9 +80,9 @@ ggplot(main) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%"/>
 
-``` r
+```r
 island <- regions %>%
   filter(ccaa.shortname.es == "Canarias") %>%
   st_transform(4083)
@@ -62,19 +91,22 @@ ggplot(island) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="plot of chunk 20220303_mainsub" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="Map of the Canary Islands in their local projected coordinate system." width="100%"/>
 
-So that was easy! Just a couple of maps using `ggplot2`. Let's start mixing and matching!
+So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing and
+matching!
 
-## On `ggplot2`
+## On **ggplot2**
 
-We have already created two quick maps on `ggplot2`. Now, to produce our map with insets we would:
+We have already created two quick maps with **ggplot2**. Now, to produce our map
+with insets we will:
 
-1.  Produce two plots: The main plot and the sub plot providing a minimal style. We would store them as `ggplot2` objects.
+1.  Produce two plots: the main plot and the subplot, providing a minimal style.
+    We will store them as `ggplot` objects.
 
-2.  We would combine both objects with `cowplot`.
+2.  Combine both objects with **cowplot**.
 
-``` r
+```r
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
@@ -82,7 +114,7 @@ main_gg <- ggplot(main) +
   theme(
     plot.background = element_rect(fill = "grey85", colour = NA),
     # Add a bit of margin on the bottom left
-    # We would place the inset there
+    # We will place the inset there
     plot.margin = margin(l = 80, b = 80)
   )
 
@@ -97,9 +129,12 @@ sub_gg <- ggplot(island) +
   )
 ```
 
-We have our objects in place, and now is when the magic happens! With `cowplot` we can combine both maps on a single one. You may need to play a bit with the parameters `x`, `y` `hjust` and `vjust` of the sub plot to improve the placement:
+We have our objects in place, and now is when the magic happens! With **cowplot**,
+we can combine both maps into a single one. You may need to play a bit with the
+parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve the
+placement:
 
-``` r
+```r
 library(cowplot)
 
 ggdraw() +
@@ -111,11 +146,13 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="plot of chunk 20220303_insetggplot" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%"/>
 
-Note also that this approach is valid not only for maps, but for all type of plot produced by `ggplot2`, since this package is not specific for map objects:
+Note also that this approach is valid not only for maps, but for all types of
+plots produced by **ggplot2**, since this package is not specific to map
+objects:
 
-``` r
+```r
 # Combining non-spatial plots
 library(palmerpenguins)
 
@@ -147,7 +184,7 @@ flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
   theme(plot.background = element_rect(fill = "white"))
 
 
-# Non-sense plot!
+# Nonsense plot!
 ggdraw() +
   draw_plot(mass_flipper) +
   draw_plot(flipper_hist,
@@ -157,13 +194,16 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="plot of chunk 20220303_insetggplot_nonsense" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%"/>
 
-## On `tmap`
+## On **tmap**
 
-We can follow a similar approach on `tmap`. On versions v3.x.x (there is a new [revamped version on development](https://github.com/r-tmap/tmap/issues/599)) we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap` objects to the objects that `cowplot` can handle.
+We can follow a similar approach with **tmap**. In version 3.x.x (there is a
+new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)),
+we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to
+convert the `tmap` objects to the objects that **cowplot** can handle.
 
-``` r
+```r
 library(tmap)
 
 main_tmap <- tm_shape(main) +
@@ -182,9 +222,10 @@ sub_tmap <- tm_shape(island) +
 sub_tmap <- tmap_grob(sub_tmap)
 ```
 
-Once that we have these new "grobs", we can use the same approach than we applied to `ggplot2` objects.
+Once we have these new "grobs", we can use the same approach as the one we
+applied to **ggplot2** objects.
 
-``` r
+```r
 ggdraw() +
   draw_plot(main_tmap) +
   draw_plot(sub_tmap,
@@ -193,13 +234,15 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="plot of chunk 20220303_insettmap" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%"/>
 
-## Update: On `mapsf`
+## Update: On **mapsf**
 
-[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of `mapsf`, shared also how to create inset maps using that package:
+[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA
+[\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
+shared how to create inset maps using that package:
 
-``` r
+```r
 library(mapsf)
 
 mf_map(main)
@@ -209,4 +252,4 @@ box(lwd = .5)
 mf_inset_off()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="plot of chunk 20220303_insetmapsf" width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%"/>

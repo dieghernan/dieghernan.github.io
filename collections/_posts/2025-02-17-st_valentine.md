@@ -1,15 +1,18 @@
 ---
 title: "Happy Valentine's Day"
 subtitle: "Do you know the Bonne projection?"
+syndication:
+  - https://www.r-bloggers.com/2025/02/happy-valentines-day-2/
+  - https://www.r-bloggers.com/2024/02/happy-valentines-day/
 tags:
-- r_bloggers
-- beautiful_maps
-- rstats
-- rspatial
-- maps
-- ggplot2
-- sf
-- giscoR
+  - r_bloggers
+  - beautiful_maps
+  - rstats
+  - rspatial
+  - maps
+  - ggplot2
+  - sf
+  - giscoR
 redirect_from:
   - /202402_st_valentine/
 output:
@@ -18,14 +21,18 @@ output:
     preserve_yaml: yes
   html_document:
 header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
+og_image_width: 3000
+og_image_height: 3000
+og_image_type: "image/webp"
+og_image_alt: "World map in a heart-shaped Bonne projection, with a Valentine greeting above it."
 ---
 
 Do you know the [Bonne
 Projection](https://en.wikipedia.org/wiki/Bonne_projection)? This is a very
-special one, as used on whole world’s mapping produces this result. Happy
+special one, as it produces this result when used to map the whole world. Happy
 Valentine’s Day!
 
-``` r
+```r
 library(sf)
 library(dplyr)
 library(giscoR)
@@ -71,4 +78,4 @@ ggplot() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="Happy Valentine's Day" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />

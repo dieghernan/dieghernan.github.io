@@ -1,33 +1,39 @@
 ---
 title: Where in the world?
 subtitle: A leaflet map with the places I have flown
-tags: [rstats,rspatial,maps,leaflet]
-header_img: /assets/img/blog/201905_Where-in-the-world.png
+tags:
+  - rstats
+  - rspatial
+  - maps
+  - leaflet
+header_img: /assets/img/blog/201905_Where-in-the-world.webp
 leafletmap: true
-always_allow_html: yes
-output: 
+always_allow_html: true
+output:
+  html_document:
+    
   md_document:
     variant: gfm
     preserve_yaml: true
+og_image_width: 741
+og_image_height: 370
+og_image_type: "image/webp"
 ---
 
-
-This is a very personal post, where I just show the map of all the places I have traveled by plain
-
-
+This is a very personal post, where I just show the map of all the places I have
+traveled to by plane.
 
 ```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
-
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(global.par = TRUE)
-rm(list = ls())
 
 # output: github_document always_allow_html: yes
 
 library(pacman)
 rm(list = ls())
 
-source("../../pass.R")
+GEONAMES_USER <- Sys.getenv("GEONAMES_USER")
+
 
 library(pacman)
 p_load(
@@ -37,7 +43,8 @@ p_load(
   geosphere,
   leaflet,
   leaflet.extras,
-  sf
+  sf,
+  mapSpain
 )
 
 
@@ -63,8 +70,8 @@ tosearch$tofun <- ifelse(tosearch$toloc == "San Sebastian",
   tosearch$tofun
 )
 tosearch$tofun <- ifelse(tosearch$toloc == "Lyon",
-                         "Lyon+fr",
-                         tosearch$tofun
+  "Lyon+fr",
+  tosearch$tofun
 )
 airports <- function(place, n = 1, lang = "en") {
   url <- paste(
@@ -155,7 +162,7 @@ kms <- sum((as.numeric(st_length(data)) * data$n) / 1000)
 outline <- ndots[chull(ndots$long, ndots$lat), ]
 # Leaflet-----
 map <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
-  addProviderTiles(providers$CartoDB.DarkMatter,
+  addProviderEspTiles("IDErioja.Oscuro",
     options = list(detectRetina = TRUE)
   ) %>%
   setView(-3.56948, 40.49181, zoom = 3) %>%
@@ -217,14 +224,10 @@ map <- hideGroup(map, c("Destinations", "Flights", "Outline"))
 map
 ```
 
+**✈️ `r format(kms, nsmall=1, big.mark=",")` kms. flown so far.** {: .alert
+.alert-info .p-3 .mx-2 .my-3 .lead}
 
-
-
-**✈️ `r format(kms, nsmall=1, big.mark=",")` kms. flown so far.**
-{: .alert .alert-info .p-3 .mx-2 .my-3 .lead}
-
-
-## Top Cities
+## Top cities
 
 ```{r Cities,echo=FALSE,  warning=FALSE, message=FALSE, tidy='styler'}
 names <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodes.csv")
@@ -247,33 +250,33 @@ knitr::kable(head(Cities %>% select(
 ) %>% filter(City != "Madrid") %>% arrange(desc(N)), 10), format = "markdown")
 ```
 
-## Top Countries
+## Top countries
 
 ```{r Countries,echo=FALSE, warning=FALSE, message=FALSE, tidy='styler'}
-
-knitr::kable(head(
-  Cities %>% filter(City != "Madrid") %>%
-    select(
-      Country,
-      Continent, n
-    ) %>% group_by(Country, Continent) %>% summarise(N = sum(n)) %>%
-    arrange(desc(N)),
-  5
-),
-format = "markdown"
+knitr::kable(
+  head(
+    Cities %>% filter(City != "Madrid") %>%
+      select(
+        Country,
+        Continent, n
+      ) %>% group_by(Country, Continent) %>% summarise(N = sum(n)) %>%
+      arrange(desc(N)),
+    5
+  ),
+  format = "markdown"
 )
 ```
 
-## Top Continents
+## Top continents
 
 ```{r Continents, echo=FALSE, warning=FALSE, message=FALSE, tidy='styler'}
-
-knitr::kable(head(
-  Cities %>% filter(City != "Madrid") %>%
-    select(Continent, Region, n) %>% group_by(Continent, Region) %>% summarise(N = sum(n)) %>%
-    arrange(desc(N)),
-  5
-),
-format = "markdown"
+knitr::kable(
+  head(
+    Cities %>% filter(City != "Madrid") %>%
+      select(Continent, Region, n) %>% group_by(Continent, Region) %>% summarise(N = sum(n)) %>%
+      arrange(desc(N)),
+    5
+  ),
+  format = "markdown"
 )
 ```

@@ -9,7 +9,7 @@ name: Deploy Chulapa Jekyll site to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master","main"]
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,13 +29,14 @@ concurrency:
 jobs:
   # Build job
   build:
+    name: Build site with Jekyll
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to work out-of-the-box with jekyll-github-metadata
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@v1
@@ -45,23 +46,25 @@ jobs:
           working-directory: '.' # Default directory of the site, change it to 'docs' if the site is hosted in (e.g.) 'docs' folder
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: |
-          cd  . # Change it to 'docs' if the site is hosted in (e.g.) 'docs' folder 
+          cd  . # Change it to 'docs' if the site is hosted in (e.g.) 'docs' folder
           bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         shell: bash
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site/ # Change it to 'docs/_site/' if the site is hosted in (e.g.) 'docs' folder
+          include-hidden-files: true # Publish .well-known/atproto-did
 
   # Deployment job
   deploy:
+    name: Deploy to web
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -70,4 +73,47 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+
+  push-gh-pages:
+    name: Push site to gh-pages branch
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: true
+      - name: Download the built site
+        uses: actions/download-artifact@v5
+        with:
+          name: github-pages
+          path: pages-artifact
+      - name: Unpack site
+        run: |
+          mkdir -p published-site
+          tar -xf pages-artifact/artifact.tar -C published-site
+      - name: Deploy to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4.9.0
+        with:
+          branch: gh-pages
+          folder: published-site
+
+  algolia:
+    name: Update Algolia index
+    needs: deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Algolia Jekyll Action
+        uses: dieghernan/algolia-jekyll-action@v2.1
+        with:
+          ruby-version: 3.4
+          APIKEY: '${{ secrets.ALGOLIA_API_KEY }}'

@@ -1,0 +1,15 @@
+{% assign profile = site.indieweb_profile %}
+<div class="h-card d-none">
+  <a class="p-name u-url u-uid" rel="me" href="{{ '/' | absolute_url }}">{{ profile.name | escape }}</a>
+  <span class="p-nickname">{{ profile.nickname | escape }}</span>
+  <img class="u-photo" src="{{ site.author.avatar | absolute_url }}" alt="{{ site.author.name | escape }}'s avatar">
+  <img class="u-featured" src="{{ site.og_image | absolute_url }}" alt="{{ site.og_image_alt | escape }}">
+  <span class="p-note">{{ profile.note | escape }}</span>
+  <span class="p-locality">{{ profile.locality | escape }}</span>, <span class="p-country-name">{{ profile.country | escape }}</span>
+  {% for category in profile.categories %}
+    <span class="p-category">{{ category | escape }}</span>
+  {% endfor %}
+  {% for url in profile.links %}
+    <a class="u-url" rel="me" href="{{ url | escape }}">{{ url | escape }}</a>
+  {% endfor %}
+</div>

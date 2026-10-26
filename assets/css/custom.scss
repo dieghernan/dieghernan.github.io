@@ -22,3 +22,36 @@ pre code {
 .leaflet {
   max-width: 100%;
 }
+
+.kofi-support {
+  border-top: 1px solid currentColor;
+}
+
+.kofi-support-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  max-width: 100%;
+  white-space: normal;
+  font: inherit;
+}
+
+.kofi-support-link:focus-visible {
+  outline: 3px solid #767676;
+  outline-offset: 4px;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    -webkit-font-feature-settings: "liga", "dlig";
+    -moz-font-feature-settings: "liga=1, dlig=1";
+    -moz-font-feature-settings: "liga", "dlig";
+    -ms-font-feature-settings: "liga", "dlig";
+    -o-font-feature-settings: "liga", "dlig";
+    font-feature-settings: "liga", "dlig";
+    text-rendering: optimizeLegibility;
+}

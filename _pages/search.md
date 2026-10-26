@@ -1,7 +1,9 @@
 ---
 layout: search
 title: Search
-subtitle: 
+subtitle: Find posts and projects
 permalink: /search.html
+excerpt: Search articles, R packages, maps and other work by dieghernan.
+description: "Search articles, R packages, maps and other work by dieghernan."
+robots: "noindex, follow"
 ---
-

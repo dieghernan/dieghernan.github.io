@@ -5,6 +5,7 @@ tags:
 - r_bloggers
 - r_package
 - resmush
+- rstats
 output:
   md_document:
     variant: gfm
@@ -43,7 +44,7 @@ One of the main reasons I developed **resmush** is because I used to
 ship [precomputed
 vignettes](https://ropensci.org/blog/2019/12/08/precompute-vignettes/)
 with my packages (see
-[**tidyterra**](https://cran.r-project.org/web/packages/tidyterra/vignettes/welcome.html)
+[**tidyterra**](https://dieghernan.github.io/tidyterra/articles/tidyterra.html)
 as an example). I found that the plots created on CRAN with the standard
 configuration (i.e., not precomputed vignettes but built on CRAN itself)
 are not very satisfying, and in some of the packages I developed
