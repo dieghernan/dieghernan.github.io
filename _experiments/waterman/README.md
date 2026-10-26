@@ -11,13 +11,15 @@ From the repository root:
 Rscript _experiments/waterman/waterman.R
 ```
 
-R dependencies: `sf`, `giscoR`, `V8`, `magick` and `rsvg`. JavaScript runs inside
-`V8`; a separate Node.js installation is not required.
+R dependencies: **sf**, **giscoR**, **V8**, **magick** and **rsvg**. JavaScript
+runs inside
+**V8**; a separate Node.js installation is not required.
 
 ## Data and projection
 
-Country boundaries come from Eurostat/GISCO through `giscoR`, using the 2024
-release at 1:20 million resolution. The script downloads these pinned JavaScript
+Country boundaries come from Eurostat/GISCO through **giscoR**, using the 2024
+release at 1:20 million resolution. The script downloads these specific versions
+of the JavaScript
 libraries from jsDelivr and caches them in the local `vendor` directory:
 
 - D3 7.9.0.

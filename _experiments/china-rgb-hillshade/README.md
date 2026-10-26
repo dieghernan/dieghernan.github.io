@@ -1,12 +1,14 @@
 # China: a single-band RGB hillshade
 
 Test the alternative proposed in the [hillshade discussion](https://github.com/dieghernan/dieghernan.github.io/discussions/36#discussioncomment-8696064):
-stretch a hillshade to 0–255 and display the same band as all three RGB channels.
+stretch a hillshade to 0–255 and display the same band as all three RGB
+channels.
 The background is combined with elevation using `ggblend::blend("multiply")`.
 
-The RGB version needs only the normal elevation `fill` scale. It does not
+The RGB version needs only the standard elevation `fill` scale. It does not
 extract fixed color vectors or add a hidden thematic layer to recover the
-legend. The reference uses fixed colors and an additional scale-trained layer,
+legend. The reference uses fixed colors and an additional layer that trains the
+elevation scale,
 as in the other hillshade blending experiments.
 
 ## Run
@@ -17,8 +19,9 @@ From the repository root:
 Rscript _experiments/china-rgb-hillshade/china-rgb-hillshade.R
 ```
 
-R dependencies: `terra`, `tidyterra`, `ggplot2`, `geodata`, `scales`, `ggblend`,
-`ragg` and `magick`. No GDAL CLI installation is needed.
+R dependencies: **terra**, **tidyterra**, **ggplot2**, **geodata**, **scales**,
+**ggblend**,
+**ragg** and **magick**. No GDAL CLI installation is needed.
 
 ## Download and cache locations
 
@@ -67,7 +70,7 @@ build data for the sampled plotting grid.
 ## Outputs
 
 - `china-reference.png`: fixed colors with an extra layer for the legend.
-- `china-rgb.png`: one-band RGB hillshade with a normal elevation legend.
+- `china-rgb.png`: single-band RGB hillshade with a standard elevation legend.
 - `china-comparison.png`: both maps side by side.
 - `validation.txt`: resolved cache paths, grid dimensions and scale checks.
 - `session-info.txt`: the R environment used for rendering.

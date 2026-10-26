@@ -38,7 +38,7 @@ og_title: "Precipitation maps with tidyterra and marginal plots"
 **ggblend** to multiply their colors with the hillshade, following
 [Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/).
 The map and marginal profiles now share the same precipitation palette and limits.
-Dominic Royé also posted how to use **ggblend** in 
+Dominic Royé also demonstrates how to use **ggblend** in
 [Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/).
 {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
