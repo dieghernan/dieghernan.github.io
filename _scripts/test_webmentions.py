@@ -248,9 +248,13 @@ class WebmentionsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             Path(folder, 'post.html').write_text(article(body))
             Path(folder, 'page.html').write_text(article(body).replace('BlogPosting', 'WebPage'))
+            project = article(body, source=wm.ORIGIN + '/projects/example/')
+            Path(folder, 'project.html').write_text(project.replace('BlogPosting', 'WebPage'))
             posts = wm.posts_in(folder)
-        self.assertEqual(set(posts), {SOURCE})
+        self.assertEqual(set(posts), {SOURCE, wm.ORIGIN + '/projects/example/'})
         self.assertEqual(posts[SOURCE]['targets'], [wm.ORIGIN + '/chulapa/docs/01-install', TARGET])
+        self.assertEqual(posts[wm.ORIGIN + '/projects/example/']['targets'],
+                         [wm.ORIGIN + '/chulapa/docs/01-install', TARGET])
 
     def test_invalid_state_and_empty_site_fail_closed(self):
         with self.assertRaises(ValueError):

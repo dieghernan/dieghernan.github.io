@@ -108,10 +108,11 @@ required. This does not change Bridgy Fed's feed-based publishing.
 The independent `Send outgoing Webmentions` workflow runs after a successful
 Pages deployment on `main`, or manually from Actions. Automatic runs read the
 exact deployed HTML artifact; manual runs build the blog without deploying it.
-The sender processes links inside posts' editorial `e-content`, excluding
-navigation, syndicated-copy footers and project pages. Each source must match
-its live public page before sending; unpublished edits and stale CDN content
-remain pending.
+The sender processes links inside blog posts and project pages' editorial
+`e-content`, excluding navigation and syndicated-copy footers. Project pages
+are identified by their `/projects/` canonical URL and `WebPage` structured
+data. Each source must match its live public page before sending; unpublished
+edits and stale CDN content remain pending.
 
 The first execution of ledger version 3 rebuilds the earlier baseline and
 processes the historical archive, including links previously recorded without
