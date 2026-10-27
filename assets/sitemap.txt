@@ -1,0 +1,9 @@
+---
+layout: null
+permalink: ./sitemap.txt
+---
+{%- assign  alldocs = 	site.documents -%}
+{%- for document in alldocs  -%}
+{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
+{{ canonical_url | escape }}
+{%- endfor -%}	
