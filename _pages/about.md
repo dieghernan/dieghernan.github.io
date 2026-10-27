@@ -3,14 +3,14 @@ title: About
 subtitle: I just love maps.
 permalink: /about
 header_type: base
-excerpt: Meet Diego, known online as dieghernan, and explore his work with R, maps and open-source software.
-description: "About Diego (dieghernan), his R packages, cartography and open-source projects."
+excerpt: Meet dieghernan and explore his work with R, maps and open-source software.
+description: "About dieghernan, his R packages, cartography and open-source projects."
 include_on_search: true
 ---
 
-![Diego's avatar](/assets/img/site/avatar.png){: width="120" height="120" .rounded-circle .float-md-right .ml-md-4 .mb-3 }
+![dieghernan's avatar](/assets/img/site/avatar.png){: width="120" height="120" .rounded-circle .float-md-right .ml-md-4 .mb-3 }
 
-Hi, I'm Diego, known online as **dieghernan**. This is where I share my interest in **R**, spatial data, cartography and open-source software.
+Hi, I'm **dieghernan**. This is where I share my interest in **R**, spatial data, cartography and open-source software.
 
 ## Maps, **R** and open source
 
