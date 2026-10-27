@@ -5,10 +5,11 @@ header_type: hero
 header_img: /assets/img/site/banner.png
 excerpt: A personal portfolio and blog by dieghernan.
 description: "R packages, spatial data, maps and open-source projects by dieghernan."
-og_image_width: 799
-og_image_height: 429
-og_image_type: "image/png"
+og_image: /assets/img/site/banner-og.jpg
 og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and turquoise."
+og_image_width: 1200
+og_image_height: 630
+og_image_type: "image/jpeg"
 seo_title: "One World: R packages, maps and open-source projects"
 og_title: "One World: R packages, maps and open-source projects"
 ---
