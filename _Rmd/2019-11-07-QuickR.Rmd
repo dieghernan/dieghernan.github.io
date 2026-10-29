@@ -58,7 +58,7 @@ I present here an alternative version of
 so the bulk of the detail can be found there. I focus only on the `plot()`
 side.
 
-```{r 20191108_main, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
+```{r 20191108_main, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90, fig.alt="Map of the contiguous United States with neighboring countries shown for geographic context."}
 world <- ne_countries(scale = "medium", returnclass = "sf")
 USA <- subset(world, admin == "United States of America")
 
@@ -81,7 +81,7 @@ plot(
 )
 ```
 
-```{r 20191108_Alaska, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
+```{r 20191108_Alaska, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90, fig.alt="Map of Alaska with neighboring parts of Canada and Russia shown for geographic context."}
 # Plot Alaska----
 plot(
   st_geometry(world %>%
@@ -100,7 +100,7 @@ plot(
 )
 ```
 
-```{r 20191108_Hawaii, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90}
+```{r 20191108_Hawaii, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=500/90, fig.height=300/90, fig.alt="Map of the Hawaiian island chain."}
 # Plot Hawaii----
 plot(
   st_geometry(world %>%
@@ -132,7 +132,7 @@ we can set up those parameters and adjust the final placement of the insets.
 Additionally, I added a box around the insets using `bbox()`. I didn't mimic
 Moreno & Basille here and I just worked it out by myself.
 
-```{r 20191108_inset, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=900/90, fig.height=650/90}
+```{r 20191108_inset, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, tidy='styler', results='hide',fig.width=900/90, fig.height=650/90, fig.alt="Map of the contiguous United States with separate insets for Alaska and Hawaii at the lower left."}
 par(mar = c(0, 0, 0, 0))
 plot(
   st_geometry(world %>%
@@ -204,6 +204,6 @@ represents a map of the NUTS3 regions of the European Union. Several countries
 (France, Portugal, Spain) have overseas territories, so I made a few insets on
 the right side.
 
-<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/3840px-Population_density_by_NUTS_3_region_%282017%29.svg.png">
+<img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/3840px-Population_density_by_NUTS_3_region_%282017%29.svg.png" alt="Choropleth map of population density in European NUTS 3 regions in 2017, with insets for overseas territories.">
 
 
