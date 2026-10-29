@@ -16,6 +16,10 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
+knit: (function(input, encoding) {
+  source(file.path(dirname(input), "renderblog.R"));
+  diegpost(input)
+  })
 ---
 
 

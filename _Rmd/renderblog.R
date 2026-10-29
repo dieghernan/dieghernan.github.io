@@ -82,8 +82,9 @@ render_blog <- function(file, draft = FALSE, root = .renderblog_root) {
           )
         }
         paste0(
-          "https://dieghernan.github.io/",
-          substring(absolute, nchar(prefix) + 1)
+          "{{ '/",
+          substring(absolute, nchar(prefix) + 1),
+          "' | absolute_url }}"
         )
       },
       character(1)

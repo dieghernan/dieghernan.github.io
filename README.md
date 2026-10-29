@@ -51,6 +51,18 @@ bundle exec jekyll build
 
 The generated site is written to `_site/`, which is ignored by Git.
 
+To render a single R Markdown post, run this in R from the repository root:
+
+```r
+source("_Rmd/renderblog.R")
+diegpost("2026-10-24-orange-peel")
+```
+
+Use `diegpost_draft()` instead to write to `collections/_drafts/`, then preview
+with `bundle exec jekyll serve --drafts`. The renderer preserves front matter,
+Liquid and HTML, converts generated PNG figures to WebP and uses Jekyll's
+`absolute_url` filter for full image URLs in posts and feeds.
+
 ## Deployment
 
 The [GitHub Actions workflows](.github/workflows/) build the site and deploy it to GitHub Pages when changes are pushed to `main` or `master`. Deployment can also be started manually from the Actions tab.

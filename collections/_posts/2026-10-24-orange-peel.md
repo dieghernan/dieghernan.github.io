@@ -117,7 +117,7 @@ ggplot() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp" alt="World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel." width="100%" />
+<img src="{{ '/assets/img/blog/202610_goode-map-1.webp' | absolute_url }}" alt="World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel." width="100%" />
 
 ## References
 
