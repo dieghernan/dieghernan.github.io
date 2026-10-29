@@ -1,0 +1,22 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": {{ page.url | absolute_url | append: '#profile' | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "mainEntity": {
+    "@type": "Person",
+    "@id": {{ page.url | absolute_url | append: '#person' | jsonify }},
+    "name": "dieghernan",
+    "url": {{ page.url | absolute_url | jsonify }},
+    "description": {{ page.description | jsonify }},
+    "image": {{ '/assets/img/site/avatar.png' | absolute_url | jsonify }},
+    "sameAs": [
+      "https://github.com/dieghernan",
+      "https://fosstodon.org/@dhernangomez",
+      "https://bsky.app/profile/dieghernan.bsky.social",
+      "https://orcid.org/0000-0001-8457-4658"
+    ]
+  }
+}
+</script>

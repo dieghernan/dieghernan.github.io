@@ -6,6 +6,7 @@ header_type: base
 excerpt: Meet dieghernan and explore his work with R, maps and open-source software.
 description: "About dieghernan, his R packages, cartography and open-source projects."
 include_on_search: true
+profile_page: true
 ---
 
 ![dieghernan's avatar](/assets/img/site/avatar.png){: width="120" height="120" .rounded-circle .float-md-right .ml-md-4 .mb-3 }

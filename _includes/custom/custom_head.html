@@ -1,4 +1,7 @@
 <link rel="describedby" type="text/plain" href="{{ '/llms.txt' | relative_url }}">
+{% if page.profile_page %}
+{% include custom/profile-page.html %}
+{% endif %}
     <!-- start custom head snippets -->
     <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
     <link rel="indieauth-metadata" href="https://indiekey.id/.well-known/oauth-authorization-server/s/j35a2ja6eg5casc2">
