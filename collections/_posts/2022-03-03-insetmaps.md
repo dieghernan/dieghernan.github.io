@@ -32,6 +32,8 @@ seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
 og_title: "Inset maps with ggplot2, tmap and mapsf"
 ---
 
+
+
 _This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)_
 
 A common challenge when creating maps is how to include an inset map in your
@@ -53,7 +55,8 @@ Canary Islands.
 
 The "true" map of Spain is:
 
-```r
+
+``` r
 library(mapSpain)
 library(sf)
 library(ggplot2)
@@ -65,13 +68,14 @@ ggplot(regions) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_truemap-1.webp" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%" />
 
 I use a different CRS for each part of Spain. In the case of mainland Spain, I
 use ETRS89 / UTM 30N ([EPSG:25830](https://epsg.io/25830)) and for the Canary
 Islands I use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083)).
 
-```r
+
+``` r
 main <- regions %>%
   filter(ccaa.shortname.es != "Canarias") %>%
   st_transform(25830)
@@ -80,9 +84,11 @@ ggplot(main) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-1.webp" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%" />
 
-```r
+``` r
+
+
 island <- regions %>%
   filter(ccaa.shortname.es == "Canarias") %>%
   st_transform(4083)
@@ -91,7 +97,7 @@ ggplot(island) +
   geom_sf()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="Map of the Canary Islands in their local projected coordinate system." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-2.webp" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" />
 
 So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing and
 matching!
@@ -106,7 +112,8 @@ with insets we will:
 
 2.  Combine both objects with **cowplot**.
 
-```r
+
+``` r
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
@@ -134,7 +141,8 @@ we can combine both maps into a single one. You may need to play a bit with the
 parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve the
 placement:
 
-```r
+
+``` r
 library(cowplot)
 
 ggdraw() +
@@ -146,13 +154,14 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot-1.webp" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%" />
 
 Note also that this approach is valid not only for maps, but for all types of
 plots produced by **ggplot2**, since this package is not specific to map
 objects:
 
-```r
+
+``` r
 # Combining non-spatial plots
 library(palmerpenguins)
 
@@ -163,12 +172,13 @@ mass_flipper <- ggplot(
     y = body_mass_g
   )
 ) +
-  geom_point(aes(
-    color = species,
-    shape = species
-  ),
-  size = 3,
-  alpha = 0.8
+  geom_point(
+    aes(
+      color = species,
+      shape = species
+    ),
+    size = 3,
+    alpha = 0.8
   ) +
   theme_minimal() +
   scale_color_manual(values = c("darkorange", "purple", "cyan4"))
@@ -194,7 +204,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot_nonsense-1.webp" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" />
 
 ## On **tmap**
 
@@ -203,7 +213,8 @@ new [revamped version under development](https://github.com/r-tmap/tmap/issues/5
 we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to
 convert the `tmap` objects to the objects that **cowplot** can handle.
 
-```r
+
+``` r
 library(tmap)
 
 main_tmap <- tm_shape(main) +
@@ -222,10 +233,13 @@ sub_tmap <- tm_shape(island) +
 sub_tmap <- tmap_grob(sub_tmap)
 ```
 
+
+
 Once we have these new "grobs", we can use the same approach as the one we
 applied to **ggplot2** objects.
 
-```r
+
+``` r
 ggdraw() +
   draw_plot(main_tmap) +
   draw_plot(sub_tmap,
@@ -234,7 +248,7 @@ ggdraw() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" />
 
 ## Update: On **mapsf**
 
@@ -242,7 +256,8 @@ ggdraw() +
 [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
 shared how to create inset maps using that package:
 
-```r
+
+``` r
 library(mapsf)
 
 mf_map(main)
@@ -252,4 +267,4 @@ box(lwd = .5)
 mf_inset_off()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%"/>
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_insetmapsf-1.webp" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" />

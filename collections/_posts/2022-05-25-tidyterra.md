@@ -32,16 +32,18 @@ og_image_type: "image/webp"
 og_image_alt: "Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map."
 ---
 
+
+
 If you have been playing around with **R** for a while, you are probably
 familiar with the `volcano` dataset:
 
-```r
 
+``` r
 data("volcano")
 image(volcano, col = terrain.colors(256, rev = TRUE))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" />
 
 This represents the topographic information about one of the volcanoes of Auckland
 (New Zealand), specifically [Maungawhau / Mount
@@ -54,7 +56,8 @@ package](https://github.com/dieghernan/tidyterra), recently added to
 geotag the `volcano` dataset. We will also produce **ggplot2** maps using the
 functions of **tidyterra**.
 
-```r
+
+``` r
 # Libraries
 library(terra)
 library(ggplot2)
@@ -69,8 +72,8 @@ Let's check it out. Thanks to the package **maptiles** we can have a glimpse of
 the location of Maungawhau using map tiles, as in Google Maps. We will use
 **tidyterra** for displaying the map tile:
 
-```r
 
+``` r
 # location of Maungawhau
 
 box <- c(
@@ -96,7 +99,7 @@ ggtile <- ggplot() +
 ggtile
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" />
 
 Here we have a crisp RGB tile of Maungawhau. Now, the next
 question is how to match the `volcano` dataset (a matrix) with this tile (a
@@ -107,16 +110,16 @@ geotagged map tile)? Let's check it out.
 Thanks to the **terra** package we can start converting `volcano` into a
 SpatRaster:
 
-```r
 
+``` r
 volcano_rast <- rast(volcano)
 
 terra::plot(volcano_rast)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" title="plot of chunk 20220525_volcano_raster" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" />
 
-```r
+``` r
 
 # Wait, it is flipped!
 volcano_rast_ok <- rast(volcano[
@@ -128,17 +131,17 @@ volcano_rast_ok <- rast(volcano[
 terra::plot(volcano_rast_ok)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" />
 
-```r
+``` r
 
 volcano_rast_ok
 #> class       : SpatRaster
-#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> size        : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 1, 1  (x, y)
 #> extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)
 #> coord. ref. :
-#> source      : memory
+#> source(s)   : memory
 #> name        : lyr.1
 #> min value   :    94
 #> max value   :   195
@@ -146,7 +149,7 @@ volcano_rast_ok
 
 Nice! Now we have a raster of `volcano`, but still without geotagged
 information. Thanks to this article by Tomislav Hengl
-([@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
+([\@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
 parameters of `volcano` (see [Volcano
 Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)), which are:
 
@@ -159,8 +162,8 @@ Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)), whi
 
 And we can translate that easily to an empty SpatRaster:
 
-```r
 
+``` r
 # Extra length for proper handling extent
 xrange <- range(seq(from = 2667400, length.out = 62, by = 10))
 yrange <- range(seq(from = 6478700, length.out = 88, by = 10))
@@ -175,7 +178,7 @@ template <- rast(
 )
 template
 #> class       : SpatRaster
-#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> size        : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 10, 10  (x, y)
 #> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
 #> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)
@@ -184,8 +187,8 @@ template
 So now we only need to transfer the values from `volcano_rast_ok` to our
 template:
 
-```r
 
+``` r
 # Use tidyterra to pull the values of one raster
 # and create a new layer
 
@@ -195,11 +198,11 @@ volcano2 <- template %>%
 
 volcano2
 #> class       : SpatRaster
-#> dimensions  : 87, 61, 1  (nrow, ncol, nlyr)
+#> size        : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 10, 10  (x, y)
 #> extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)
 #> coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)
-#> source      : memory
+#> source(s)   : memory
 #> name        : elevation
 #> min value   :        94
 #> max value   :       195
@@ -207,9 +210,9 @@ volcano2
 terra::plot(volcano2)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" title="plot of chunk 20220525_create_volcano2" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" />
 
-```r
+``` r
 
 # And plot it
 ggtile +
@@ -217,7 +220,7 @@ ggtile +
   scale_fill_terrain_c(alpha = 0.75)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" />
 
 ## An Easter egg
 
@@ -228,8 +231,8 @@ raster, but with the topographic values extracted from [Auckland LiDAR 1m DEM
 resampled to a resolution of 5x5 meters, for package size optimization. See here
 how to load it and check the plotting possibilities of **tidyterra**:
 
-```r
 
+``` r
 # Load out Easter Egg
 
 volcano2_easter <- rast(system.file("extdata/volcano2.tif",
@@ -238,20 +241,20 @@ volcano2_easter <- rast(system.file("extdata/volcano2.tif",
 
 volcano2_easter
 #> class       : SpatRaster
-#> dimensions  : 174, 122, 1  (nrow, ncol, nlyr)
+#> size        : 174, 122, 1  (nrow, ncol, nlyr)
 #> resolution  : 5, 5  (x, y)
 #> extent      : 1756969, 1757579, 5917003, 5917873  (xmin, xmax, ymin, ymax)
 #> coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193)
 #> source      : volcano2.tif
-#> name        : elevation
-#> min value   :  76.26222
-#> max value   :  195.5542
+#> name        :  elevation
+#> min value   :  76.262222
+#> max value   : 195.554199
 terra::plot(volcano2_easter)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" title="plot of chunk 20220525_easteregg" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" />
 
-```r
+``` r
 
 
 # Only altitudes of more than 130m
@@ -266,9 +269,9 @@ ggtile +
   labs(fill = "Elevation (m)")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" alt="Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map." width="100%" />
 
-```r
+``` r
 
 
 # Contour lines
@@ -277,9 +280,9 @@ ggtile +
   geom_spatraster_contour(data = volcano2_easter, binwidth = 10)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau overlaid with elevation contours at 10-meter intervals. Nested contours outline the crater and its rim." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" alt="Street map of Maungawhau overlaid with elevation contours at 10-meter intervals. Nested contours outline the crater and its rim." width="100%" />
 
-```r
+``` r
 
 
 # Contour lines + contour polygons
@@ -297,4 +300,4 @@ ggtile +
   coord_sf(expand = FALSE)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" />
