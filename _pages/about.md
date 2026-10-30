@@ -11,6 +11,8 @@ profile_page: true
 
 ![dieghernan's avatar](/assets/img/site/avatar.png){: width="120" height="120" .rounded-circle .float-md-right .ml-md-4 .mb-3 }
 
+{% include custom/h-card.html %}
+
 Hi, I'm **dieghernan**. This is where I share my interest in **R**, spatial data, cartography and open-source software.
 
 ## Maps, **R** and open source
