@@ -88,3 +88,4 @@ og_title: "One World: R packages, maps and open-source projects"
 <a rel="me" href="https://fosstodon.org/@dhernangomez" class="d-none">Mastodon Verification</a>
 <a rel="me" href="https://web.brid.gy/r/https://dieghernan.github.io/" class="d-none">brid.gy Verification</a>
 <a rel="me" href="https://gravatar.com/dieghernan" class="d-none">gravatar Verification</a>
+<a rel="me" href="https://bsky.app/profile/dieghernan.github.io" class="d-none">bridgy fed Verification</a>
