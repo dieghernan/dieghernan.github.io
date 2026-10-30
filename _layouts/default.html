@@ -32,6 +32,7 @@ header_in_content: true
           {% assign h_min = page.h_min | default: 2 %}
           {% assign h_max = page.h_max | default: 4 %}
           <nav aria-label="table-of-contents">
+          <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans" class="d-none">https://fed.brid.gy/</a>
             {% include components/toc.html sanitize=false html=content h_min=h_min
               h_max=h_max skip_no_ids=true id="toc"
               class="chulapa-toc-wrapper.list-group.mb-5.mx-3.mx-lg-5"
