@@ -12,13 +12,14 @@ import webmentions as wm
 SOURCE = wm.ORIGIN + '/new-post/'
 TARGET = 'https://other.example/post/'
 ENDPOINT = 'https://receiver.example/webmention'
+BRIDGY = 'https://fed.brid.gy/'
 
 
-def article(body, source=SOURCE):
+def article(body, source=SOURCE, extra=''):
     return (f'<html><head><link rel="canonical" href="{source}">'
             '<script type="application/ld+json">{"@type":"BlogPosting"}</script>'
             '</head><body><nav><a href="https://nav.example/">Nav</a></nav>'
-            f'<article class="e-content">{body}</article>'
+            f'{extra}<article class="e-content">{body}</article>'
             '<footer><a href="https://footer.example/">Footer</a></footer></body></html>')
 
 
@@ -143,18 +144,24 @@ class WebmentionsTests(unittest.TestCase):
         result = wm.discover(TARGET, lambda u: (TARGET, Message(), '<a rel="webmention" href="../wm">'))
         self.assertEqual(result, 'https://other.example/wm')
 
-    def test_excluded_endpoints_are_never_returned(self):
-        for host in ('fed.brid.gy', 'sub.fed.brid.gy', 'FED.BRID.GY.', 'dieghernan.github.io'):
+    def test_bridgy_host_is_allowed_but_subdomains_are_excluded(self):
+        self.assertTrue(wm.allowed(BRIDGY))
+        self.assertTrue(wm.allowed('https://fed.brid.gy/webmention'))
+        for host in ('sub.fed.brid.gy', 'SUB.FED.BRID.GY.'):
             html = f'<link rel="webmention" href="https://{host}/wm">'
             self.assertIsNone(wm.discover(TARGET, lambda u: (TARGET, Message(), html)))
+        html = f'<link rel="webmention" href="{wm.ORIGIN}/wm">'
+        self.assertIsNone(wm.discover(TARGET, lambda u: (TARGET, Message(), html)))
         self.assertFalse(wm.allowed('https://fed.brid.gy@fed.brid.gy/wm'))
         self.assertFalse(wm.allowed('javascript:alert(1)'))
         self.assertFalse(wm.allowed('https://?query'))
 
-    def test_redirects_block_bridgy_and_post_replay(self):
+    def test_redirects_allow_bridgy_but_block_subdomains_and_post_replay(self):
         handler = wm.SafeRedirects()
+        redirected = handler.redirect_request(Request(TARGET), None, 302, '', {}, 'https://fed.brid.gy/wm')
+        self.assertEqual(redirected.full_url, 'https://fed.brid.gy/wm')
         with self.assertRaises(ValueError):
-            handler.redirect_request(Request(TARGET), None, 302, '', {}, 'https://fed.brid.gy/wm')
+            handler.redirect_request(Request(TARGET), None, 302, '', {}, 'https://sub.fed.brid.gy/wm')
         with self.assertRaises(ValueError):
             handler.redirect_request(Request(ENDPOINT, data=b'x'), None, 307, '', {}, TARGET)
         with self.assertRaises(ValueError):
@@ -190,7 +197,6 @@ class WebmentionsTests(unittest.TestCase):
         with patch.object(wm.socket, 'getaddrinfo', return_value=private):
             with self.assertRaises(ValueError):
                 wm.validate_request(TARGET)
-
 
     def test_relation_tokens_are_case_insensitive(self):
         for token in ('Webmention', 'WEBMENTION', 'webmention'):
@@ -251,10 +257,20 @@ class WebmentionsTests(unittest.TestCase):
             project = article(body, source=wm.ORIGIN + '/projects/example/')
             Path(folder, 'project.html').write_text(project.replace('BlogPosting', 'WebPage'))
             posts = wm.posts_in(folder)
-        self.assertEqual(set(posts), {SOURCE, wm.ORIGIN + '/projects/example/'})
-        self.assertEqual(posts[SOURCE]['targets'], [wm.ORIGIN + '/chulapa/docs/01-install', TARGET])
-        self.assertEqual(posts[wm.ORIGIN + '/projects/example/']['targets'],
-                         [wm.ORIGIN + '/chulapa/docs/01-install', TARGET])
+        expected = [wm.ORIGIN + '/chulapa/docs/01-install', TARGET, 'https://fed.brid.gy/web/a']
+        self.assertEqual(posts[SOURCE]['targets'], expected)
+        self.assertEqual(posts[wm.ORIGIN + '/projects/example/']['targets'], expected)
+
+    def test_bridgy_trigger_outside_e_content_is_collected(self):
+        extra = '<a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden></a>'
+        html = article('<p>No external links</p>', extra=extra)
+        page = wm.Page(html)
+        self.assertNotIn(BRIDGY, page.targets)
+        self.assertIn(BRIDGY, page.bridgy_targets)
+        with tempfile.TemporaryDirectory() as folder:
+            Path(folder, 'post.html').write_text(html)
+            posts = wm.posts_in(folder)
+        self.assertEqual(posts[SOURCE]['targets'], [BRIDGY])
 
     def test_invalid_state_and_empty_site_fail_closed(self):
         with self.assertRaises(ValueError):
