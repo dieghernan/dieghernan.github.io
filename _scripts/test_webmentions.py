@@ -144,9 +144,12 @@ class WebmentionsTests(unittest.TestCase):
         result = wm.discover(TARGET, lambda u: (TARGET, Message(), '<a rel="webmention" href="../wm">'))
         self.assertEqual(result, 'https://other.example/wm')
 
-    def test_bridgy_host_is_allowed_but_subdomains_are_excluded(self):
+    def test_bridgy_host_is_allowed_but_only_root_is_a_target(self):
         self.assertTrue(wm.allowed(BRIDGY))
         self.assertTrue(wm.allowed('https://fed.brid.gy/webmention'))
+        self.assertTrue(wm.allowed_target(BRIDGY))
+        self.assertFalse(wm.allowed_target('https://fed.brid.gy/webmention'))
+        self.assertFalse(wm.allowed_target('https://fed.brid.gy/web/a'))
         for host in ('sub.fed.brid.gy', 'SUB.FED.BRID.GY.'):
             html = f'<link rel="webmention" href="https://{host}/wm">'
             self.assertIsNone(wm.discover(TARGET, lambda u: (TARGET, Message(), html)))
@@ -257,7 +260,7 @@ class WebmentionsTests(unittest.TestCase):
             project = article(body, source=wm.ORIGIN + '/projects/example/')
             Path(folder, 'project.html').write_text(project.replace('BlogPosting', 'WebPage'))
             posts = wm.posts_in(folder)
-        expected = [wm.ORIGIN + '/chulapa/docs/01-install', TARGET, 'https://fed.brid.gy/web/a']
+        expected = [wm.ORIGIN + '/chulapa/docs/01-install', TARGET]
         self.assertEqual(posts[SOURCE]['targets'], expected)
         self.assertEqual(posts[wm.ORIGIN + '/projects/example/']['targets'], expected)
 
