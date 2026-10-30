@@ -34,7 +34,7 @@ def allowed(url, external=True):
         host = (p.hostname or '').lower().rstrip('.')
         return (p.scheme in ('http', 'https') and bool(host)
                 and not p.username and not p.password and p.port in (None, 80, 443)
-                and host != 'fed.brid.gy' and not host.endswith('.fed.brid.gy')
+                and (host == 'fed.brid.gy' or not host.endswith('.fed.brid.gy'))
                 and (not external or not internal(url)))
     except ValueError:
         return False
@@ -127,6 +127,7 @@ class Page(HTMLParser):
         self.post = False
         self.project = False
         self.targets = set()
+        self.bridgy_targets = set()
         self.endpoints = []
         self.stack = []
         self.content = []
@@ -136,13 +137,16 @@ class Page(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        classes = (a.get('class') or '').split()
         if tag == 'link' and 'canonical' in (a.get('rel') or '').lower().split():
             self.canonical = a.get('href')
         if tag in ('link', 'a') and 'webmention' in (a.get('rel') or '').lower().split() and a.get('href'):
             self.endpoints.append(a['href'])
+        if tag == 'a' and 'u-bridgy-fed' in classes and a.get('href'):
+            self.bridgy_targets.add(a['href'])
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.schema = []
-        if self.depth is None and 'e-content' in (a.get('class') or '').split():
+        if self.depth is None and 'e-content' in classes:
             self.depth = len(self.stack)
         if self.depth is not None:
             self.content.append(self.get_starttag_text())
@@ -216,7 +220,8 @@ def posts_in(site):
             continue
         if not page.canonical.startswith(ORIGIN + '/'):
             raise ValueError('Unexpected canonical URL')
-        targets = sorted({urldefrag(urljoin(page.canonical, t))[0] for t in page.targets
+        raw_targets = page.targets | page.bridgy_targets
+        targets = sorted({urldefrag(urljoin(page.canonical, t))[0] for t in raw_targets
                           if allowed(urljoin(page.canonical, t))})
         posts[page.canonical] = {'digest': page.digest, 'targets': targets}
     if not posts:
