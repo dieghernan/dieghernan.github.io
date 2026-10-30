@@ -40,6 +40,27 @@ def allowed(url, external=True):
         return False
 
 
+def bridgy_target(url):
+    """Only the Bridgy Fed root is a valid publishing target."""
+    try:
+        p = urlsplit(url)
+        return (p.scheme == 'https'
+                and (p.hostname or '').lower().rstrip('.') == 'fed.brid.gy'
+                and not p.username and not p.password and p.port in (None, 443)
+                and p.path in ('', '/') and not p.query and not p.fragment)
+    except ValueError:
+        return False
+
+
+def allowed_target(url):
+    """Filter links that may become outgoing Webmention targets."""
+    try:
+        host = (urlsplit(url).hostname or '').lower().rstrip('.')
+        return allowed(url) and (host != 'fed.brid.gy' or bridgy_target(url))
+    except ValueError:
+        return False
+
+
 def validate_request(url):
     if not allowed(url, external=False):
         raise ValueError('Excluded URL')
@@ -142,7 +163,7 @@ class Page(HTMLParser):
             self.canonical = a.get('href')
         if tag in ('link', 'a') and 'webmention' in (a.get('rel') or '').lower().split() and a.get('href'):
             self.endpoints.append(a['href'])
-        if tag == 'a' and 'u-bridgy-fed' in classes and a.get('href'):
+        if tag == 'a' and 'u-bridgy-fed' in classes and bridgy_target(a.get('href', '')):
             self.bridgy_targets.add(a['href'])
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.schema = []
@@ -222,7 +243,7 @@ def posts_in(site):
             raise ValueError('Unexpected canonical URL')
         raw_targets = page.targets | page.bridgy_targets
         targets = sorted({urldefrag(urljoin(page.canonical, t))[0] for t in raw_targets
-                          if allowed(urljoin(page.canonical, t))})
+                          if allowed_target(urljoin(page.canonical, t))})
         posts[page.canonical] = {'digest': page.digest, 'targets': targets}
     if not posts:
         raise ValueError('No published posts found; refusing to initialize an empty ledger')
