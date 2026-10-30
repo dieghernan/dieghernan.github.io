@@ -11,6 +11,7 @@ header_in_content: true
 {%- endif -%}
 <div class="{% if is_feed %}h-feed{% else %}h-entry{% endif %} d-flex flex-column flex-fill">
   {% include snippets/microformats-url.html %}
+  {% unless is_feed %}<a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans"></a>{% endunless %}
   <main class="d-flex flex-column flex-fill">
   {% include components/headers.html headertype=page.header_type
     imghero=page.header_img projects=page.project_links %}
@@ -32,7 +33,6 @@ header_in_content: true
           {% assign h_min = page.h_min | default: 2 %}
           {% assign h_max = page.h_max | default: 4 %}
           <nav aria-label="table-of-contents">
-          <a class="u-bridgy-fed" href="https://fed.brid.gy/" hidden="from-humans" class="d-none">https://fed.brid.gy/</a>
             {% include components/toc.html sanitize=false html=content h_min=h_min
               h_max=h_max skip_no_ids=true id="toc"
               class="chulapa-toc-wrapper.list-group.mb-5.mx-3.mx-lg-5"
@@ -74,9 +74,9 @@ header_in_content: true
     {% endif %}
   {%- endif -%}
   {%- if page.show_related -%}
-    {%- include components/related.html -%}
+    {% include components/related.html %}
   {%- endif -%}
   {%- if page.show_random -%}
-    {%- include components/random.html -%}
+    {% include components/random.html %}
   {%- endif -%}
 </div>
