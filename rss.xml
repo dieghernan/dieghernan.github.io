@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, dieghernan</copyright>	
-		<pubDate>Fri, 30 Oct 2026 00:46:21 +0100</pubDate>
-		<lastBuildDate>Fri, 30 Oct 2026 00:46:21 +0100</lastBuildDate>
+		<pubDate>Fri, 30 Oct 2026 01:02:46 +0100</pubDate>
+		<lastBuildDate>Fri, 30 Oct 2026 01:02:46 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -4886,12 +4886,11 @@ package. <em>Journal of Open Source Software</em>, <em>8</em>(91), 5751,
 				<div><p>If you have been playing around with <strong>R</strong> for a while, you are probably
 familiar with the <code class="language-plaintext highlighter-rouge">volcano</code> dataset:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
 </span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" title="plot of chunk 20220525_volcano" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" /></p>
 
 <p>This represents the topographic information about one of the volcanoes of Auckland
 (New Zealand), specifically <a href="https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden">Maungawhau / Mount
@@ -4918,8 +4917,7 @@ functions of <strong>tidyterra</strong>.</p>
 the location of Maungawhau using map tiles, as in Google Maps. We will use
 <strong>tidyterra</strong> for displaying the map tile:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># location of Maungawhau</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># location of Maungawhau</span><span class="w">
 
 </span><span class="n">box</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
   </span><span class="m">174.7611552780</span><span class="p">,</span><span class="w">
@@ -4944,7 +4942,7 @@ the location of Maungawhau using map tiles, as in Google Maps. We will use
 </span><span class="n">ggtile</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" title="plot of chunk 20220525_tile" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" /></p>
 
 <p>Here we have a crisp RGB tile of Maungawhau. Now, the next
 question is how to match the <code class="language-plaintext highlighter-rouge">volcano</code> dataset (a matrix) with this tile (a
@@ -4955,13 +4953,12 @@ geotagged map tile)? Let’s check it out.</p>
 <p>Thanks to the <strong>terra</strong> package we can start converting <code class="language-plaintext highlighter-rouge">volcano</code> into a
 SpatRaster:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="n">volcano_rast</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">volcano_rast</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">)</span><span class="w">
 
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" title="plot of chunk 20220525_volcano_raster" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Wait, it is flipped!</span><span class="w">
@@ -4974,16 +4971,16 @@ SpatRaster:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" title="plot of chunk 20220525_volcano_raster" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="n">volcano_rast_ok</span><span class="w">
 </span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
-</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; size        : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 1, 1  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)</span><span class="w">
 </span><span class="c1">#&gt; coord. ref. :</span><span class="w">
-</span><span class="c1">#&gt; source      : memory</span><span class="w">
+</span><span class="c1">#&gt; source(s)   : memory</span><span class="w">
 </span><span class="c1">#&gt; name        : lyr.1</span><span class="w">
 </span><span class="c1">#&gt; min value   :    94</span><span class="w">
 </span><span class="c1">#&gt; max value   :   195</span><span class="w">
@@ -4991,7 +4988,7 @@ SpatRaster:</p>
 
 <p>Nice! Now we have a raster of <code class="language-plaintext highlighter-rouge">volcano</code>, but still without geotagged
 information. Thanks to this article by Tomislav Hengl
-(<a href="https://twitter.com/tom_hengl">@tom_hengl</a>) we can check the basic geographic
+(<a href="https://twitter.com/tom_hengl">\@tom_hengl</a>) we can check the basic geographic
 parameters of <code class="language-plaintext highlighter-rouge">volcano</code> (see <a href="https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/">Volcano
 Maungawhau</a>), which are:</p>
 
@@ -5006,8 +5003,7 @@ Maungawhau</a>), which are:</p>
 
 <p>And we can translate that easily to an empty SpatRaster:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Extra length for proper handling extent</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Extra length for proper handling extent</span><span class="w">
 </span><span class="n">xrange</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2667400</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">62</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
 </span><span class="n">yrange</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6478700</span><span class="p">,</span><span class="w"> </span><span class="n">length.out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">88</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span><span class="w">
 
@@ -5021,7 +5017,7 @@ Maungawhau</a>), which are:</p>
 </span><span class="p">)</span><span class="w">
 </span><span class="n">template</span><span class="w">
 </span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
-</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; size        : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
 </span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)</span><span class="w">
@@ -5030,8 +5026,7 @@ Maungawhau</a>), which are:</p>
 <p>So now we only need to transfer the values from <code class="language-plaintext highlighter-rouge">volcano_rast_ok</code> to our
 template:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Use tidyterra to pull the values of one raster</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Use tidyterra to pull the values of one raster</span><span class="w">
 </span><span class="c1"># and create a new layer</span><span class="w">
 
 </span><span class="n">volcano2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
@@ -5040,11 +5035,11 @@ template:</p>
 
 </span><span class="n">volcano2</span><span class="w">
 </span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
-</span><span class="c1">#&gt; dimensions  : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; size        : 87, 61, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 10, 10  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 2667400, 2668010, 6478700, 6479570  (xmin, xmax, ymin, ymax)</span><span class="w">
 </span><span class="c1">#&gt; coord. ref. : NZGD49 / New Zealand Map Grid (EPSG:27200)</span><span class="w">
-</span><span class="c1">#&gt; source      : memory</span><span class="w">
+</span><span class="c1">#&gt; source(s)   : memory</span><span class="w">
 </span><span class="c1">#&gt; name        : elevation</span><span class="w">
 </span><span class="c1">#&gt; min value   :        94</span><span class="w">
 </span><span class="c1">#&gt; max value   :       195</span><span class="w">
@@ -5052,7 +5047,7 @@ template:</p>
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" title="plot of chunk 20220525_create_volcano2" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># And plot it</span><span class="w">
@@ -5061,7 +5056,7 @@ template:</p>
   </span><span class="n">scale_fill_terrain_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" title="plot of chunk 20220525_create_volcano2" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" /></p>
 
 <h2 id="an-easter-egg">An Easter egg</h2>
 
@@ -5072,8 +5067,7 @@ raster, but with the topographic values extracted from <a href="https://data.lin
 resampled to a resolution of 5x5 meters, for package size optimization. See here
 how to load it and check the plotting possibilities of <strong>tidyterra</strong>:</p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Load out Easter Egg</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load out Easter Egg</span><span class="w">
 
 </span><span class="n">volcano2_easter</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"extdata/volcano2.tif"</span><span class="p">,</span><span class="w">
   </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tidyterra"</span><span class="w">
@@ -5081,18 +5075,18 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
 
 </span><span class="n">volcano2_easter</span><span class="w">
 </span><span class="c1">#&gt; class       : SpatRaster</span><span class="w">
-</span><span class="c1">#&gt; dimensions  : 174, 122, 1  (nrow, ncol, nlyr)</span><span class="w">
+</span><span class="c1">#&gt; size        : 174, 122, 1  (nrow, ncol, nlyr)</span><span class="w">
 </span><span class="c1">#&gt; resolution  : 5, 5  (x, y)</span><span class="w">
 </span><span class="c1">#&gt; extent      : 1756969, 1757579, 5917003, 5917873  (xmin, xmax, ymin, ymax)</span><span class="w">
 </span><span class="c1">#&gt; coord. ref. : NZGD2000 / New Zealand Transverse Mercator 2000 (EPSG:2193)</span><span class="w">
 </span><span class="c1">#&gt; source      : volcano2.tif</span><span class="w">
-</span><span class="c1">#&gt; name        : elevation</span><span class="w">
-</span><span class="c1">#&gt; min value   :  76.26222</span><span class="w">
-</span><span class="c1">#&gt; max value   :  195.5542</span><span class="w">
+</span><span class="c1">#&gt; name        :  elevation</span><span class="w">
+</span><span class="c1">#&gt; min value   :  76.262222</span><span class="w">
+</span><span class="c1">#&gt; max value   : 195.554199</span><span class="w">
 </span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" title="plot of chunk 20220525_easteregg" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -5108,7 +5102,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
   </span><span class="n">labs</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Elevation (m)"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" alt="Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -5118,7 +5112,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
   </span><span class="n">geom_spatraster_contour</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">binwidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau overlaid with elevation contours at 10-meter intervals. Nested contours outline the crater and its rim." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp" alt="Street map of Maungawhau overlaid with elevation contours at 10-meter intervals. Nested contours outline the crater and its rim." width="100%" /></p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 
@@ -5137,7 +5131,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" title="plot of chunk 20220525_easteregg" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" /></p>
 </div>
 				]]>
 			</description>
@@ -5694,7 +5688,7 @@ Canary Islands.</p>
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_truemap-1.webp" title="plot of chunk 20220303_truemap" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_truemap-1.webp" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%" /></p>
 
 <p>I use a different CRS for each part of Spain. In the case of mainland Spain, I
 use ETRS89 / UTM 30N (<a href="https://epsg.io/25830">EPSG:25830</a>) and for the Canary
@@ -5708,9 +5702,11 @@ Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-1.webp" title="plot of chunk 20220303_mainsub" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-1.webp" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%" /></p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="n">island</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">regions</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Canarias"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">4083</span><span class="p">)</span><span class="w">
 
@@ -5718,7 +5714,7 @@ Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_mainsub-2.webp" title="plot of chunk 20220303_mainsub" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-2.webp" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" /></p>
 
 <p>So that was easy! Just a couple of maps using <strong>ggplot2</strong>. Let’s start mixing and
 matching!</p>
@@ -5776,7 +5772,7 @@ placement:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot-1.webp" title="plot of chunk 20220303_insetggplot" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot-1.webp" alt="Map of Spain with the Canary Islands moved into a boxed inset at the lower left." width="100%" /></p>
 
 <p>Note also that this approach is valid not only for maps, but for all types of
 plots produced by <strong>ggplot2</strong>, since this package is not specific to map
@@ -5792,12 +5788,13 @@ objects:</p>
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body_mass_g</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="w">
-    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w">
-    </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">species</span><span class="w">
-  </span><span class="p">),</span><span class="w">
-  </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
-  </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="w">
+      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">species</span><span class="p">,</span><span class="w">
+      </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">species</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w">
+    </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_color_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"darkorange"</span><span class="p">,</span><span class="w"> </span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cyan4"</span><span class="p">))</span><span class="w">
@@ -5823,7 +5820,7 @@ objects:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetggplot_nonsense-1.webp" title="plot of chunk 20220303_insetggplot_nonsense" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot_nonsense-1.webp" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" /></p>
 
 <h2 id="on-tmap">On <strong>tmap</strong></h2>
 
@@ -5861,7 +5858,7 @@ applied to <strong>ggplot2</strong> objects.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insettmap-1.webp" title="plot of chunk 20220303_insettmap" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" /></p>
 
 <h2 id="update-on-mapsf">Update: On <strong>mapsf</strong></h2>
 
@@ -5878,7 +5875,7 @@ shared how to create inset maps using that package:</p>
 </span><span class="n">mf_inset_off</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog//20220303_insetmapsf-1.webp" title="plot of chunk 20220303_insetmapsf" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insetmapsf-1.webp" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" /></p>
 </div>
 				]]>
 			</description>
