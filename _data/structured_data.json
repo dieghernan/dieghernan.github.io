@@ -19,7 +19,19 @@
       "name": "Celestial Data",
       "url": "https://dieghernan.github.io/celestial_data/",
       "description": "Collection of celestial datasets for the J2000 epoch, derived from d3-celestial and distributed in GeoJSON, GeoPackage and CSV formats. This project page introduces the collection; its website provides dataset descriptions and downloads.",
-      "sameAs": "https://doi.org/10.5281/zenodo.7561601"
+      "sameAs": "https://doi.org/10.5281/zenodo.7561601",
+      "license": "https://opensource.org/licenses/BSD-3-Clause",
+      "creator": [
+        {
+          "@type": "Person",
+          "name": "Olaf Frohn"
+        },
+        {
+          "@type": "Person",
+          "name": "Diego Hernangómez",
+          "sameAs": "https://orcid.org/0000-0001-8457-4658"
+        }
+      ]
     },
     "leaflet": {
       "@type": "SoftwareSourceCode",
@@ -28,14 +40,22 @@
       "url": "https://dieghernan.github.io/leaflet-providersESP/",
       "description": "Leaflet plugin with configurations for cartographic layers and WMS/WMTS services provided by public agencies in Spain.",
       "codeRepository": "https://github.com/dieghernan/leaflet-providersESP",
-      "programmingLanguage": "JavaScript"
+      "programmingLanguage": "JavaScript",
+      "license": "https://opensource.org/licenses/MIT"
     },
     "covid": {
       "@type": "Dataset",
       "@id": "https://dieghernan.github.io/COVID19/#dataset",
       "name": "Historical processed COVID-19 data for Spain",
       "url": "https://dieghernan.github.io/COVID19/",
-      "description": "Historical processed snapshot of ISCIII COVID-19 data used for maps and charts of Spain. The project is obsolete and no longer updated; the project website documents the archived dataset and CSV download."
+      "description": "Historical processed snapshot of ISCIII COVID-19 data used for maps and charts of Spain. The project is obsolete and no longer updated; the project website documents the archived dataset and CSV download.",
+      "creator": {
+        "@type": "Person",
+        "@id": "https://dieghernan.github.io/#author",
+        "name": "Diego Hernangómez",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": "https://orcid.org/0000-0001-8457-4658"
+      }
     },
     "bot": {
       "@type": "SoftwareSourceCode",
@@ -44,14 +64,21 @@
       "url": "https://dieghernan.github.io/spain-munic-bot/",
       "description": "R code for generating maps of buildings and urban growth in Spanish municipalities. Automated posting is disabled; the project preserves its historical outputs.",
       "codeRepository": "https://github.com/dieghernan/spain-munic-bot",
-      "programmingLanguage": "R"
+      "programmingLanguage": "R",
+      "license": "https://opensource.org/licenses/MIT"
     },
     "countrycodes": {
       "@type": "Dataset",
       "@id": "https://dieghernan.github.io/projects/Country-Codes-and-International-Organizations/#dataset",
       "name": "Country codes and international organizations",
       "url": "https://github.com/dieghernan/Country-Codes-and-International-Organizations",
-      "description": "Database of countries and territories, their codes under different standards and their membership in international organizations. The project page documents its CSV and JSON files and source references."
+      "description": "Database of countries and territories, their codes under different standards and their membership in international organizations. The project page documents its CSV and JSON files and source references.",
+      "creator": {
+        "@type": "Person",
+        "name": "Diego Hernangómez",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": "https://orcid.org/0000-0001-8457-4658"
+      }
     },
     "corona": {
       "@type": "SoftwareSourceCode",
@@ -64,7 +91,8 @@
         "Python",
         "JavaScript",
         "R"
-      ]
+      ],
+      "license": "https://opensource.org/licenses/MIT"
     },
     "7egment": {
       "@type": "SoftwareSourceCode",
@@ -76,7 +104,8 @@
       "programmingLanguage": [
         "C",
         "JavaScript"
-      ]
+      ],
+      "license": "https://opensource.org/licenses/MIT"
     },
     "bzel": {
       "@type": "SoftwareSourceCode",
@@ -88,7 +117,8 @@
       "programmingLanguage": [
         "C",
         "JavaScript"
-      ]
+      ],
+      "license": "https://opensource.org/licenses/MIT"
     },
     "sfera": {
       "@type": "SoftwareSourceCode",
@@ -100,7 +130,8 @@
       "programmingLanguage": [
         "C",
         "JavaScript"
-      ]
+      ],
+      "license": "https://opensource.org/licenses/MIT"
     },
     "textwatch": {
       "@type": "SoftwareSourceCode",
@@ -112,7 +143,8 @@
       "programmingLanguage": [
         "C",
         "JavaScript"
-      ]
+      ],
+      "license": "https://opensource.org/licenses/MIT"
     }
   },
   "project_pages": {
@@ -144,5 +176,13 @@
     "/202212_tidyterra-hillshade-2/": "tidyterra",
     "/202402_optimize-images-r/": "resmush",
     "/202602_geobounds/": "geobounds"
+  },
+  "package_licenses": {
+    "tidyterra": "https://opensource.org/licenses/MIT",
+    "cffr": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "giscoR": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "mapSpain": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "geobounds": "https://opensource.org/licenses/MIT",
+    "resmush": "https://opensource.org/licenses/MIT"
   }
 }

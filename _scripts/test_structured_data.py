@@ -41,6 +41,10 @@ class StructuredDataTests(unittest.TestCase):
             self.assertIn(item["url"], html)
             self.assertIn(item["codeRepository"], html)
             self.assertEqual(item["programmingLanguage"], "R")
+            expected_license = ("https://www.gnu.org/licenses/gpl-3.0.html"
+                                if item["name"] in {"cffr", "giscoR", "mapSpain"}
+                                else "https://opensource.org/licenses/MIT")
+            self.assertEqual(item["license"], expected_license)
         # The theme's general collection list remains independently available.
         self.assertEqual(len([item for item in blocks if item.get("@type") == "CollectionPage"
                              and "mainEntity" in item]), 1)
@@ -55,8 +59,23 @@ class StructuredDataTests(unittest.TestCase):
                 self.assertIn(entity["subjectOf"]["@id"], {item.get("@id") for item in blocks
                                                         if item.get("@type") == "WebPage"})
                 self.assertGreaterEqual(len(entity["description"]), 50)
-                for field in ("datePublished", "dateModified", "version", "distribution", "license"):
+                if entity["@type"] == "Dataset":
+                    self.assertTrue(entity["creator"])
+                else:
+                    self.assertEqual(entity["license"], "https://opensource.org/licenses/MIT")
+                for field in ("datePublished", "dateModified", "version", "distribution"):
                     self.assertNotIn(field, entity)
+
+    def test_celestial_summaries_include_verified_license_and_creators(self):
+        for url in ("/projects/celestial-data/", "/202301_star-map-R/"):
+            with self.subTest(url=url):
+                _, blocks = page(url)
+                dataset, = [item for item in blocks if item.get("@type") == "Dataset"]
+                self.assertEqual(dataset["license"], "https://opensource.org/licenses/BSD-3-Clause")
+                self.assertEqual([item["name"] for item in dataset["creator"]],
+                                 ["Olaf Frohn", "Diego Hernangómez"])
+                self.assertEqual(dataset["creator"][1]["sameAs"],
+                                 "https://orcid.org/0000-0001-8457-4658")
 
     def test_article_relations_reuse_the_published_article_identity(self):
         urls = set(DATA["article_relations"]) | set(DATA["package_articles"])
@@ -68,6 +87,10 @@ class StructuredDataTests(unittest.TestCase):
                 entities = [item for item in blocks if "subjectOf" in item]
                 self.assertEqual(len(entities), 1)
                 self.assertEqual(entities[0]["subjectOf"]["@id"], article["@id"])
+                if entities[0]["@type"] == "Dataset":
+                    self.assertTrue(entities[0]["creator"])
+                else:
+                    self.assertTrue(entities[0]["license"])
         _, star_blocks = page("/202301_star-map-R/")
         celestial, = [item for item in star_blocks if item.get("@type") == "Dataset"]
         self.assertEqual(celestial["@id"], "https://dieghernan.github.io/celestial_data/#collection")

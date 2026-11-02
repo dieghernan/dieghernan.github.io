@@ -6,6 +6,7 @@
   "description": {{ include.package.description | jsonify }},
   "url": {{ include.package.documentation | jsonify }},
   "codeRepository": {{ include.package.source | jsonify }},
+  "license": {{ site.data.structured_data.package_licenses[include.package.name] | jsonify }},
   "programmingLanguage": "R"{% if include.subject %},
   "subjectOf": {"@id": {{ include.subject | jsonify }}}{% endif %}
 }

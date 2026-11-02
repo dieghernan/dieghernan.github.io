@@ -15,7 +15,10 @@ the general collection list, articles, pages and breadcrumbs.
 Project summaries use `subjectOf` to reference the existing project WebPage or
 BlogPosting. Only explicitly selected articles receive these relationships;
 code examples alone do not qualify. Package article summaries reuse the same
-featured package definitions. Do not infer licenses, versions or sole authorship.
+featured package definitions. Software licenses are checked against the upstream
+license files and R package DESCRIPTION files. Celestial Data retains the
+collection's BSD-3-Clause license and both creators. Do not infer a data license
+from a repository's software license, or invent versions or sole authorship.
 
 The existing ProfilePage uses the shared personal identity, preserving its
 sameAs profiles and ORCID. This does not alter the theme's author entities.
