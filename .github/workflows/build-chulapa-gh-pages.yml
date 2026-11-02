@@ -52,6 +52,9 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      - name: Check project structured data
+        run: python3 -m unittest discover -s _scripts -p test_structured_data.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

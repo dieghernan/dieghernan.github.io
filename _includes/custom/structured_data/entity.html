@@ -1,0 +1,7 @@
+{
+  "@context": "https://schema.org",
+  {% for property in include.entity %}
+  {{ property[0] | jsonify }}: {{ property[1] | jsonify | replace: '<', '\u003c' }},
+  {% endfor %}
+  "subjectOf": {"@id": {{ include.subject | jsonify }}}
+}

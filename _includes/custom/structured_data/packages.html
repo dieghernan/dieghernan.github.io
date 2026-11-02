@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "@id": {{ page.url | absolute_url | append: '#featured-packages' | jsonify }},
+  "name": "Featured R packages",
+  "itemListOrder": "https://schema.org/ItemListUnordered",
+  "numberOfItems": {{ page.featured_packages.size }},
+  "itemListElement": [
+    {% for package in page.featured_packages %}
+    {% include custom/structured_data/package.html package=package %}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
