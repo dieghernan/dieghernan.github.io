@@ -59,16 +59,19 @@ The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.or
 
 ## Bridgy Fed
 
-Bridgy Fed is disabled. The representative `h-card` retains `#nobridge` in
-`indieweb_profile.note` in `_config.yml` to prevent automatic bridging.
-The custom handle verification file, Bridgy Fed redirects and publishing link
-have been removed. Incoming and outgoing Webmentions remain independent.
+The blog's representative `h-card` supplies its profile to
+[Bridgy Fed](https://fed.brid.gy/web/dieghernan.github.io). Edit
+`indieweb_profile` in `_config.yml` to update it, then refresh the profile
+on the Bridgy Fed user page.
 
-To start a new setup, remove `#nobridge` only when ready to enable bridging,
-then update the profile on the
-[Bridgy Fed user page](https://fed.brid.gy/web/dieghernan.github.io).
-Configure one bridge at a time and verify its current DID before setting
-a custom Bluesky handle.
+Use the default Bluesky handle, `dieghernan.github.io.web.brid.gy`, while
+checking the setup. Custom handle verification and Bridgy Fed redirects
+are not configured. Verify the current DID before adding a custom handle.
+
+Publish through the discoverable Atom and RSS feeds. Do not add a
+`u-bridgy-fed` publishing link or send Webmentions to Bridgy Fed: sending
+one switches the blog from feed polling to Webmention-based publishing.
+Incoming and outgoing Webmentions for other services remain independent.
 
 ## Syndicated copies of posts
 
