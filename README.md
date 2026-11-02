@@ -59,27 +59,16 @@ The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.or
 
 ## Bridgy Fed
 
-The blog uses its discoverable Atom and RSS feeds to publish through
-[Bridgy Fed](https://fed.brid.gy/web/dieghernan.github.io). The home page's
-representative `h-card` supplies the blog's display name, avatar, banner and bio.
-Keep its `u-url` pointing to the site's canonical home page.
-Edit `indieweb_profile` in `_config.yml` to update the name, nickname, bio,
-location, topics and profile links. The `custom/h-card.html` include renders
-the card outside the home page's `h-entry` so parsers can discover it directly.
+Bridgy Fed is disabled. The representative `h-card` retains `#nobridge` in
+`indieweb_profile.note` in `_config.yml` to prevent automatic bridging.
+The custom handle verification file, Bridgy Fed redirects and publishing link
+have been removed. Incoming and outgoing Webmentions remain independent.
 
-The file [`.well-known/atproto-did`](.well-known/atproto-did) contains the DID of
-the blog's bridged Bluesky account, not the author's personal account. Jekyll
-includes `.well-known` explicitly so the file is published without HTML layout.
-After deployment, check that `https://dieghernan.github.io/.well-known/atproto-did`
-returns only the DID, then complete the custom Bluesky handle change from the
-blog's Bridgy Fed user page. Publishing the file alone does not change the handle.
-Refresh the profile there after publishing changes to the `h-card`.
-
-Keep feed-based publishing enabled: sending even one webmention to Bridgy Fed
-switches the site to webmention-based publishing and stops feed polling. The
-incoming webmention.io endpoint is separate and can remain enabled. Feed polling
-is asynchronous; the current Bridgy Fed implementation schedules checks between
-two hours and one day apart. A profile refresh does not import posts.
+To start a new setup, remove `#nobridge` only when ready to enable bridging,
+then update the profile on the
+[Bridgy Fed user page](https://fed.brid.gy/web/dieghernan.github.io).
+Configure one bridge at a time and verify its current DID before setting
+a custom Bluesky handle.
 
 ## Syndicated copies of posts
 
