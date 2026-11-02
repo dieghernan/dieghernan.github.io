@@ -68,10 +68,12 @@ Use the default Bluesky handle, `dieghernan.github.io.web.brid.gy`, while
 checking the setup. Custom handle verification and Bridgy Fed redirects
 are not configured. Verify the current DID before adding a custom handle.
 
-Publish through the discoverable Atom and RSS feeds. Do not add a
-`u-bridgy-fed` publishing link or send Webmentions to Bridgy Fed: sending
-one switches the blog from feed polling to Webmention-based publishing.
-Incoming and outgoing Webmentions for other services remain independent.
+Publish through Webmentions sent by the `Send outgoing Webmentions` workflow
+after deployment. The default layout adds a hidden `u-bridgy-fed` link inside
+each article's `h-entry`, which the sender collects as a publishing target.
+Sending a Webmention to Bridgy Fed switches the blog from feed polling to
+Webmention-based publishing. RSS and Atom remain available to readers.
+Incoming Webmentions remain independent.
 
 ## Syndicated copies of posts
 
@@ -93,7 +95,7 @@ The default layout displays an “Also published on” list outside the article'
 `rel="syndication"`, allowing IndieWeb readers to identify the copies. Only
 absolute HTTP(S) links with a hostname are rendered; no section appears when
 there are no usable links. No JavaScript, notifications or new service is
-required. This does not change Bridgy Fed's feed-based publishing.
+required. Publishing to Bridgy Fed uses the separate `u-bridgy-fed` link.
 
 ## Outgoing Webmentions
 
@@ -122,10 +124,11 @@ notifications. Keep the state branch: restoring it from Git preserves delivery
 history, whereas losing it causes the archive to be processed again.
 
 Internal blog links are excluded. Links to `/chulapa` and `/chulapa/` paths on
-the same domain are eligible; other same-domain links remain excluded. All
-`fed.brid.gy` destinations, including subdomains, endpoints and redirects,
-remain excluded to preserve Bridgy Fed's feed-based publishing. Discovery
-supports HTTP `Link` headers and HTML `rel="webmention"`.
+the same domain are eligible; other same-domain links remain excluded.
+The `https://fed.brid.gy/` root is allowed as a publishing target. Other
+paths and subdomains are excluded as targets; endpoint discovery and
+redirects can use the root host, but not its subdomains. Discovery supports
+HTTP `Link` headers and HTML `rel="webmention"`.
 
 The sender pins connections to validated public IPs while retaining the
 original hostname for HTTPS certificate checks. It rejects non-public
