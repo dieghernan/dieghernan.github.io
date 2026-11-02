@@ -64,9 +64,12 @@ The blog's representative `h-card` supplies its profile to
 `indieweb_profile` in `_config.yml` to update it, then refresh the profile
 on the Bridgy Fed user page.
 
-Use the default Bluesky handle, `dieghernan.github.io.web.brid.gy`, while
-checking the setup. Custom handle verification and Bridgy Fed redirects
-are not configured. Verify the current DID before adding a custom handle.
+The blog uses `dieghernan.github.io` as its custom Bluesky handle.
+`.well-known/atproto-did` verifies the domain with the blog account's DID,
+`did:plc:frgeqa77h66m6s4a67pdotgl`. Keep the Mastodon bridge on its separate
+default handle, `dhernangomez.fosstodon.org.ap.brid.gy`.
+After deploying the verification file, refresh the profile on the Bridgy Fed
+user page to apply the custom handle. Bridgy Fed redirects are not configured.
 
 Publish through Webmentions sent by the `Send outgoing Webmentions` workflow
 after deployment. The default layout adds a hidden `u-bridgy-fed` link inside
