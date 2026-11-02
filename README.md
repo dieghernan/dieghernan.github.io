@@ -71,6 +71,15 @@ default handle, `dhernangomez.fosstodon.org.ap.brid.gy`.
 After deploying the verification file, refresh the profile on the Bridgy Fed
 user page to apply the custom handle. Bridgy Fed redirects are not configured.
 
+`.well-known/site.standard.publication` verifies the blog's standard.site
+publication by serving its AT URI directly. If Bridgy Fed recreates that
+publication record, update this file to match the current record URI.
+
+WebFinger forwarding is not configured: GitHub Pages cannot provide the HTTP
+redirects with preserved query parameters that Bridgy Fed requires.
+Jekyll's HTML redirects do not satisfy that requirement. The blog retains
+its Bridgy Fed address in the fediverse.
+
 Publish through Webmentions sent by the `Send outgoing Webmentions` workflow
 after deployment. The default layout adds a hidden `u-bridgy-fed` link inside
 each article's `h-entry`, which the sender collects as a publishing target.
