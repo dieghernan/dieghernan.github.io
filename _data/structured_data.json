@@ -13,12 +13,32 @@
     ]
   },
   "entities": {
+    "codigospostales": {
+      "@type": "Dataset",
+      "@id": "https://dieghernan.github.io/codigospostales/#dataset",
+      "name": "Estimated postal code areas of Spain",
+      "url": "https://dieghernan.github.io/codigospostales/",
+      "description": "Estimated postal code areas for Spain derived from open CartoCiudad addresses and administrative boundaries using Voronoi polygons. These are not official postal boundaries and some areas remain unassigned. The project website provides interactive maps and full and simplified GeoPackage downloads.",
+      "sameAs": "https://doi.org/10.5281/zenodo.23698418",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "creator": {
+        "@type": "Person",
+        "name": "Diego Hernangómez",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": "https://orcid.org/0000-0001-8457-4658"
+      },
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "DOI",
+        "value": "10.5281/zenodo.23698418"
+      }
+    },
     "celestial": {
       "@type": "Dataset",
       "@id": "https://dieghernan.github.io/celestial_data/#collection",
       "name": "Celestial Data",
       "url": "https://dieghernan.github.io/celestial_data/",
-      "description": "Collection of celestial datasets for the J2000 epoch, derived from d3-celestial and distributed in GeoJSON, GeoPackage and CSV formats. This project page introduces the collection; its website provides dataset descriptions and downloads.",
+      "description": "Collection of celestial datasets derived from d3-celestial. GeoJSON and GeoPackage files represent J2000 celestial angles as GIS geometries; CSV tables provide names and attributes. These are not locations on Earth or predictions of the current sky. Downloads follow the repository main branch and may differ from the DOI archive.",
       "sameAs": "https://doi.org/10.5281/zenodo.7561601",
       "license": "https://opensource.org/licenses/BSD-3-Clause",
       "creator": [
@@ -29,9 +49,11 @@
         {
           "@type": "Person",
           "name": "Diego Hernangómez",
-          "sameAs": "https://orcid.org/0000-0001-8457-4658"
+          "sameAs": "https://orcid.org/0000-0001-8457-4658",
+          "url": "https://dieghernan.github.io/"
         }
-      ]
+      ],
+      "identifier": "https://doi.org/10.5281/zenodo.7561601"
     },
     "leaflet": {
       "@type": "SoftwareSourceCode",
@@ -41,21 +63,30 @@
       "description": "Leaflet plugin with configurations for cartographic layers and WMS/WMTS services provided by public agencies in Spain.",
       "codeRepository": "https://github.com/dieghernan/leaflet-providersESP",
       "programmingLanguage": "JavaScript",
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@id": "https://dieghernan.github.io/leaflet-providersESP/#author",
+        "@type": "Person",
+        "name": "Diego Hernangómez",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": "https://orcid.org/0000-0001-8457-4658"
+      },
+      "runtimePlatform": "Leaflet"
     },
     "covid": {
       "@type": "Dataset",
       "@id": "https://dieghernan.github.io/COVID19/#dataset",
-      "name": "Historical processed COVID-19 data for Spain",
+      "name": "Historical processed COVID-19 data for Spain, February–April 2020",
       "url": "https://dieghernan.github.io/COVID19/",
-      "description": "Historical processed snapshot of ISCIII COVID-19 data used for maps and charts of Spain. The project is obsolete and no longer updated; the project website documents the archived dataset and CSV download.",
+      "description": "Historical snapshot of processed ISCIII COVID-19 data for Spain, covering February 20 to April 8, 2020. The CSV preserves the original processing values and criteria; it is not a revised series or an updated service. The project is obsolete.",
       "creator": {
         "@type": "Person",
         "@id": "https://dieghernan.github.io/#author",
         "name": "Diego Hernangómez",
         "url": "https://dieghernan.github.io/",
         "sameAs": "https://orcid.org/0000-0001-8457-4658"
-      }
+      },
+      "temporalCoverage": "2020-02-20/2020-04-08"
     },
     "bot": {
       "@type": "SoftwareSourceCode",
@@ -65,7 +96,15 @@
       "description": "R code for generating maps of buildings and urban growth in Spanish municipalities. Automated posting is disabled; the project preserves its historical outputs.",
       "codeRepository": "https://github.com/dieghernan/spain-munic-bot",
       "programmingLanguage": "R",
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "@id": "https://dieghernan.github.io/#author",
+        "name": "Diego Hernangómez",
+        "url": "https://dieghernan.github.io/",
+        "sameAs": "https://orcid.org/0000-0001-8457-4658"
+      },
+      "runtimePlatform": "R"
     },
     "countrycodes": {
       "@type": "Dataset",
@@ -92,7 +131,11 @@
         "JavaScript",
         "R"
       ],
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "Diego & Rodrigo"
+      }
     },
     "7egment": {
       "@type": "SoftwareSourceCode",
@@ -105,7 +148,12 @@
         "C",
         "JavaScript"
       ],
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan",
+        "url": "https://github.com/dieghernan"
+      }
     },
     "bzel": {
       "@type": "SoftwareSourceCode",
@@ -118,7 +166,12 @@
         "C",
         "JavaScript"
       ],
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan",
+        "url": "https://github.com/dieghernan"
+      }
     },
     "sfera": {
       "@type": "SoftwareSourceCode",
@@ -131,7 +184,12 @@
         "C",
         "JavaScript"
       ],
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan",
+        "url": "https://github.com/dieghernan"
+      }
     },
     "textwatch": {
       "@type": "SoftwareSourceCode",
@@ -144,10 +202,16 @@
         "C",
         "JavaScript"
       ],
-      "license": "https://opensource.org/licenses/MIT"
+      "license": "https://opensource.org/licenses/MIT",
+      "author": {
+        "@type": "Person",
+        "name": "dieghernan",
+        "url": "https://github.com/dieghernan"
+      }
     }
   },
   "project_pages": {
+    "/projects/postal-codes-spain": "codigospostales",
     "/projects/celestial-data/": "celestial",
     "/projects/leaflet-providersESP/": "leaflet",
     "/projects/COVID19": "covid",
@@ -184,5 +248,13 @@
     "mapSpain": "https://www.gnu.org/licenses/gpl-3.0.html",
     "geobounds": "https://opensource.org/licenses/MIT",
     "resmush": "https://opensource.org/licenses/MIT"
+  },
+  "package_identifiers": {
+    "tidyterra": "https://doi.org/10.21105/joss.05751",
+    "cffr": "https://doi.org/10.21105/joss.03900",
+    "giscoR": "https://doi.org/10.32614/CRAN.package.giscoR",
+    "mapSpain": "https://doi.org/10.32614/CRAN.package.mapSpain",
+    "geobounds": "https://doi.org/10.32614/CRAN.package.geobounds",
+    "resmush": "https://doi.org/10.32614/CRAN.package.resmush"
   }
 }
