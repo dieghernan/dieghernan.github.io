@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-03T21:06:45+01:00</updated>
+	<updated>2026-11-04T00:26:53+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -141,51 +141,103 @@ de España con SIG y datos abiertos&lt;/em&gt;. NoSoloSIG.
 		<content type="html" xml:base="https://dieghernan.github.io/projects/gifs/">
 		
 		
-		&lt;h3&gt;MITECO data and firefly cartography with R&lt;/h3&gt;
+		&lt;h3&gt;EGIF reports, reconciled fire records and cartography with R&lt;/h3&gt;
 		
   		
 			&lt;img src=&#39;https://dieghernan.github.io/gifs/assets/social-preview.jpg&#39; &gt;
 			
-	&lt;p&gt;1 min.&lt;/p&gt;
-			&lt;p&gt;&lt;strong&gt;GIFs&lt;/strong&gt; provides a dataset and an infographic of large forest fires in Spain,
-compiled from the statistics of the Ministry for the Ecological Transition
-and the Demographic Challenge (MITECO). Here, GIF means &lt;em&gt;gran incendio
-forestal&lt;/em&gt;: a fire with at least 500 hectares of forest area burned.&lt;/p&gt;
+	&lt;p&gt;3 min.&lt;/p&gt;
+			&lt;p&gt;&lt;strong&gt;GIFs&lt;/strong&gt; brings together structured data on large forest fires in Spain and
+&lt;strong&gt;R&lt;/strong&gt; code for an infographic inspired by
+&lt;a href=&quot;https://dominicroye.github.io/blog/firefly-maps/&quot;&gt;Dominic Royé’s firefly cartography&lt;/a&gt;.
+Here, GIF means &lt;em&gt;gran incendio forestal&lt;/em&gt;: a fire with at least 500 hectares
+of forest area burned.&lt;/p&gt;
 
-&lt;p&gt;The project uses &lt;strong&gt;R&lt;/strong&gt; to prepare the data and create a map inspired by
-&lt;a href=&quot;https://dominicroye.github.io/blog/firefly-maps/&quot;&gt;Dominic Royé’s firefly cartography&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The project combines exports from MITECO’s General Forest Fire Statistics
+(EGIF) with its annual reports and provisional updates. It preserves source
+information and reconciliation notes so that users can trace how records
+were selected, grouped and located.&lt;/p&gt;
 
-&lt;h2 id=&quot;data-and-interpretation&quot;&gt;Data and interpretation&lt;/h2&gt;
+&lt;h2 id=&quot;two-related-data-products&quot;&gt;Two related data products&lt;/h2&gt;
 
-&lt;p&gt;Records span February 27, 2010 to September 26, 2026. These dates mark the
-first and last records in the dataset; they do not represent complete annual
-coverage. The dataset is not a real-time fire monitoring service.&lt;/p&gt;
+&lt;p&gt;The collection currently provides two complementary views:&lt;/p&gt;
 
-&lt;p&gt;The CSV contains municipality and province names, INE codes, dates and forest
-area burned in hectares. It combines final statistics for 2010–2021 with
-provisional reports for 2022–2026. Dates recorded as December 31, 2012 identify
-the year only, rather than a confirmed day of ignition.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;EGIF reports:&lt;/strong&gt; 329 selected reports from 2010–2023. Each row has a unique
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;egif_part_id&lt;/code&gt; and includes source fields, burned areas, cause, provenance,
+notes and coordinates where they can be interpreted.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reconciled fires:&lt;/strong&gt; 455 fire records from 2010–2026, used by the
+infographic. Each fire has a stable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fire_id&lt;/code&gt;; a fire may bring together
+several EGIF reports.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Map points use municipal reference locations from &lt;strong&gt;mapSpain&lt;/strong&gt;, not exact fire
-locations or perimeters. Circle sizes aggregate forest area burned at each
-reference location.&lt;/p&gt;
+&lt;p&gt;These are different units of observation. Do not add the two tables’ row
+counts or burned areas together. The 500-hectare threshold is applied after
+explicitly documented groupings of reports belonging to the same fire.&lt;/p&gt;
 
-&lt;h2 id=&quot;downloads-and-reuse&quot;&gt;Downloads and reuse&lt;/h2&gt;
+&lt;p&gt;EGIF takes priority when a documented match exists. Records without a match
+retain their original MITECO annual report or provisional update. Reports
+awaiting reconciliation keep an empty &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fire_id&lt;/code&gt; and are not automatically
+added as new fires, which helps avoid double counting.&lt;/p&gt;
 
-&lt;p&gt;The &lt;a href=&quot;https://dieghernan.github.io/gifs/&quot;&gt;project website&lt;/a&gt; provides the infographic,
-a CSV download and citation information. Consult its
-&lt;a href=&quot;https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md&quot;&gt;documented methodology&lt;/a&gt;
-for collection decisions, source limitations and validation. Machine-readable
-field descriptions are available in the
-&lt;a href=&quot;https://dieghernan.github.io/gifs/croissant.json&quot;&gt;Croissant metadata&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;coverage-and-limitations&quot;&gt;Coverage and limitations&lt;/h2&gt;
+
+&lt;p&gt;The fire-level records span February 27, 2010 to September 26, 2026. These
+are the first and last dates in the file, not evidence of complete annual
+coverage. The project is not a real-time monitoring service.&lt;/p&gt;
+
+&lt;p&gt;The documented reconciliation still has nine earlier fire records and eight
+selected EGIF reports awaiting a match. Two additional records retain their
+provisional source because their province has no reports in the 2023 EGIF
+export. That export contains no records for seven provinces, so an absence
+from these files should not be interpreted as an absence of fires.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md&quot;&gt;methodology&lt;/a&gt;
+explains source priority, explicit groupings and unresolved cases. The
+&lt;a href=&quot;https://github.com/dieghernan/gifs/blob/main/data-raw/README.md&quot;&gt;data guide&lt;/a&gt;
+documents the source exports and processing. The original ZIP files are
+preserved with SHA-256 checksums.&lt;/p&gt;
+
+&lt;h2 id=&quot;coordinates-and-the-infographic&quot;&gt;Coordinates and the infographic&lt;/h2&gt;
+
+&lt;p&gt;Geographic coordinates use EPSG:4326, keeping the Canary Islands in their
+actual location. EGIF coordinates are transformed only when their coordinate
+system can be interpreted. Missing coordinates or an unknown datum leave the
+geographic coordinates empty rather than producing an invented point.&lt;/p&gt;
+
+&lt;p&gt;The fire-level view uses interpretable EGIF coordinates where available and
+an identified municipal reference location otherwise. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;location_method&lt;/code&gt;
+distinguishes these sources. For fires with several reports, the view records
+which report supplies its reference point. Declared municipality codes and
+municipalities obtained through a spatial join are retained separately.&lt;/p&gt;
+
+&lt;p&gt;The points are reference locations, not fire perimeters. Municipal reference
+locations come from IGN through SIANE and &lt;strong&gt;mapSpain&lt;/strong&gt;. The infographic reads
+the reconciled fire view and uses circle sizes to show forest area burned.&lt;/p&gt;
+
+&lt;h2 id=&quot;downloads-citation-and-reuse&quot;&gt;Downloads, citation and reuse&lt;/h2&gt;
+
+&lt;p&gt;Both products are available in &lt;strong&gt;CSV&lt;/strong&gt;, &lt;strong&gt;JSON&lt;/strong&gt; and &lt;strong&gt;GeoJSON&lt;/strong&gt; from the
+&lt;a href=&quot;https://dieghernan.github.io/gifs/&quot;&gt;project website&lt;/a&gt;. Read identifiers and
+municipality codes as text to preserve their representation. JSON supplies
+explicit types and null values; GeoJSON retains records without usable
+coordinates with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;geometry: null&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Machine-readable field descriptions are provided separately in the
+&lt;a href=&quot;https://dieghernan.github.io/gifs/croissant/parts.json&quot;&gt;EGIF report Croissant metadata&lt;/a&gt;
+and the &lt;a href=&quot;https://dieghernan.github.io/gifs/croissant/fires.json&quot;&gt;fire-level Croissant metadata&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For reproducible analyses, cite the DOI of the version used. The collection’s
+&lt;a href=&quot;https://doi.org/10.5281/zenodo.23932940&quot;&gt;version 2.0.0 DOI&lt;/a&gt; identifies the
+archived release; the &lt;a href=&quot;https://doi.org/10.5281/zenodo.23929996&quot;&gt;general DOI&lt;/a&gt;
+groups the project’s releases.&lt;/p&gt;
 
 &lt;p&gt;Data reuse follows the
 &lt;a href=&quot;https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html&quot;&gt;MITECO legal notice&lt;/a&gt;,
 including attribution and preservation of the original conditions and metadata.
-The repository’s MIT license applies to its code and documentation. The project
+The municipal cartography credits CartoBase ANE 2006–2024, CC BY 4.0, IGN.
+The repository’s MIT license applies to code and documentation. The project
 is independent and does not imply MITECO participation or endorsement.&lt;/p&gt;
-
-&lt;p&gt;Cite the dataset using &lt;a href=&quot;https://doi.org/10.5281/zenodo.23929997&quot;&gt;its Zenodo DOI&lt;/a&gt;.&lt;/p&gt;
 
 		</content>
 		
@@ -193,9 +245,9 @@ is independent and does not imply MITECO participation or endorsement.&lt;/p&gt;
 			<name>Diego HH</name>
 			<uri>https://dieghernan.github.io/</uri>
 		</author>
-		<summary type="html">Explore a dataset and infographic of large forest fires in Spain, with CSV downloads, documented methodology and Croissant metadata.</summary>
+		<summary type="html">Explore EGIF reports and reconciled records of large forest fires in Spain, with CSV, JSON and GeoJSON downloads and documented methodology.</summary>
 		<category term="projects"/>
-		<category term="csv"/><category term="dataset"/><category term="maps"/><category term="project"/><category term="rspatial"/><category term="rstats"/>
+		<category term="csv"/><category term="dataset"/><category term="geojson"/><category term="maps"/><category term="project"/><category term="rspatial"/><category term="rstats"/>
 	</entry><entry>
 		<title type="html">Let’s peel the world</title>
 		<link href="https://dieghernan.github.io/202610_orange-peel/" rel="alternate" type="text/html" title="Let’s peel the world"/>
@@ -1625,7 +1677,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;geojson&lt;/td&gt;
-        &lt;td&gt;2&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1899,6 +1951,11 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
+        &lt;td&gt;geojson&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+    
+      &lt;tr&gt;
         &lt;td&gt;gpkg&lt;/td&gt;
         &lt;td&gt;3&lt;/td&gt;
       &lt;/tr&gt;
@@ -1930,11 +1987,6 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;celestial&lt;/td&gt;
-        &lt;td&gt;2&lt;/td&gt;
-      &lt;/tr&gt;
-    
-      &lt;tr&gt;
-        &lt;td&gt;geojson&lt;/td&gt;
         &lt;td&gt;2&lt;/td&gt;
       &lt;/tr&gt;
     

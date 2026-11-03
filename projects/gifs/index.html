@@ -6,7 +6,7 @@
     <!-- MIT License -->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-11-03 -->
+    <!-- Page build 2026-11-04 -->
     <!-- Jekyll Version 4.4.1 -->
     <!-- Google structured data -->
     <script type="application/ld+json">
@@ -22,7 +22,7 @@
           "@id": "https://dieghernan.github.io/projects/gifs/#primaryimage",
           "url": "https://dieghernan.github.io/gifs/assets/social-preview.jpg"
         },
-        "description": "MITECO data and firefly cartography with R - Explore a dataset and infographic of large forest fires in Spain, with CSV downloads, documented methodology and Croissant metadata.",
+        "description": "EGIF reports, reconciled fire records and cartography with R - Explore EGIF reports and reconciled records of large forest fires in Spain, with CSV, JSON and GeoJSON downloads and documented methodology.",
         "inLanguage": "en-US",
         "headline": "Large forest fires in Spain",
         "image": "https://dieghernan.github.io/gifs/assets/social-preview.jpg",
@@ -103,7 +103,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Diego HH" >
     <meta name="copyright" content="Diego HH" >
-    <meta name="description" content="MITECO data and firefly cartography with R - Explore a dataset and infographic of large forest fires in Spain, with CSV downloads, documented methodology and Croissant metadata.">
+    <meta name="description" content="EGIF reports, reconciled fire records and cartography with R - Explore EGIF reports and reconciled records of large forest fires in Spain, with CSV, JSON and GeoJSON downloads and documented methodology.">
     <meta name="thumbnail" content="https://dieghernan.github.io/gifs/assets/social-preview.jpg" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
@@ -111,7 +111,7 @@
     <meta property="og:site_name" content="One World" >
     <meta property="og:url" content="https://dieghernan.github.io/projects/gifs/" >
     <meta property="og:type" content="website" >
-    <meta property="og:description" content="MITECO data and firefly cartography with R - Explore a dataset and infographic of large forest fires in Spain, with CSV downloads, documented methodology and Croissant metadata." >
+    <meta property="og:description" content="EGIF reports, reconciled fire records and cartography with R - Explore EGIF reports and reconciled records of large forest fires in Spain, with CSV, JSON and GeoJSON downloads and documented methodology." >
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/gifs/assets/social-preview.jpg" >
     <meta property="og:image:alt" content="Large forest fires in Spain, 2010–2026. Dark map with orange circles sized by forest area burned." >
@@ -120,7 +120,7 @@
     <meta property="og:image:type" content="image/jpeg" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="MITECO data and firefly cartography with R - Explore a dataset and infographic of large forest fires in Spain, with CSV downloads, documented methodology and Croissant metadata.">
+    <meta name="twitter:description" content="EGIF reports, reconciled fire records and cartography with R - Explore EGIF reports and reconciled records of large forest fires in Spain, with CSV, JSON and GeoJSON downloads and documented methodology.">
     <meta name="twitter:site" content="@dhernangomez" >
     <meta name="twitter:creator" content="@dhernangomez" >
     <!-- CSS -->
@@ -371,16 +371,18 @@
 {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  "@id": "https://dieghernan.github.io/gifs/#dataset",
+  "@id": "https://dieghernan.github.io/gifs/#collection",
   "name": "Grandes incendios forestales en España",
   "url": "https://dieghernan.github.io/gifs/",
-  "identifier": "https://doi.org/10.5281/zenodo.23929997",
-  "sameAs": "https://doi.org/10.5281/zenodo.23929997",
+  "identifier": "https://doi.org/10.5281/zenodo.23932940",
+  "sameAs": "https://doi.org/10.5281/zenodo.23932940",
+  "isPartOf": "https://doi.org/10.5281/zenodo.23929996",
   "license": "https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html",
   "creator": {"@type":"Person","name":"Diego HH","url":"https://dieghernan.github.io/","sameAs":"https://orcid.org/0000-0001-8457-4658","@id":"https://dieghernan.github.io/gifs/#author"},
   "temporalCoverage": "2010-02-27/2026-09-26",
-  "spatialCoverage": {"@type":"Place","name":"España"},
-  "description": "Dataset of large forest fires in Spain with at least 500 hectares of forest area burned, compiled from MITECO statistics. Records span February 27, 2010 to September 26, 2026; this is not complete annual coverage or real-time monitoring. It combines final statistics for 2010–2021 and provisional reports for 2022–2026. Dates in 2012 identify the year only. Map points use municipal reference locations, not exact fire locations or perimeters.",
+  "spatialCoverage": {"@type":"Place","name":"España","geo":{"@type":"GeoShape","box":"27.9282566760271 -17.9896594 43.5444539 3.0381681","description":"Extensión de los puntos con coordenadas disponibles; no representa los perímetros quemados ni implica cobertura territorial completa."}},
+  "description": "Collection of selected EGIF reports on large forest fires in Spain from 2010–2023 and a reconciled fire-level view covering records from 2010–2026. EGIF takes priority where a documented match exists; other records retain their original MITECO reports. Reports and fires are different units and must not be added together. Some matches remain unresolved and coverage is incomplete. Locations use interpretable EGIF coordinates in EPSG:4326, with identified municipal reference points as a fallback in the fire-level view; they are not fire perimeters.",
+  "hasPart": [{"@id":"https://dieghernan.github.io/gifs/#dataset-parts"},{"@id":"https://dieghernan.github.io/gifs/#dataset-fires"}],
   "subjectOf": {"@id": "https://dieghernan.github.io/projects/gifs/"}
 }
 </script>
@@ -433,13 +435,13 @@
  <main class="d-flex flex-column flex-fill">
 <header class="d-flex align-items-center hero-chulapa-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.7)), url('https://dieghernan.github.io/gifs/assets/social-preview.jpg')"><div class="container-lg py-4">
    <h1 class="p-name">Large forest fires in Spain</h1><hr class="my-3">
-   <p class="chulapa-subtitle p-summary">MITECO data and firefly cartography with R</p>
+   <p class="chulapa-subtitle p-summary">EGIF reports, reconciled fire records and cartography with R</p>
    <div class="btn-group-vertical btn-group-lg mt-2 text-center" role="group">
       <a href="https://dieghernan.github.io/gifs/" class="btn chulapa-btn-project">
                 <i class="fas fa-external-link-alt fa-lg mr-2"></i>Visit the website</a>
       <a href="https://github.com/dieghernan/gifs" class="btn chulapa-btn-project">
                 <i class="fab fa-github fa-lg mr-2"></i>See on GitHub</a>
-      <a href="https://doi.org/10.5281/zenodo.23929997" class="btn chulapa-btn-project">
+      <a href="https://doi.org/10.5281/zenodo.23932940" class="btn chulapa-btn-project">
                 <i class="fas fa-database fa-lg mr-2"></i>Cite the dataset</a>
    </div>
  </div>
@@ -462,8 +464,8 @@
  </nav>
  </div>
          <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
-            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/projects/gifs/&text=Large+forest+fires+in+Spain&via=dhernangomez&hashtags=project,rstats,rspatial,maps,dataset,csv" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
-            <a href="https://bsky.app/intent/compose?text=Large%20forest%20fires%20in%20Spain%20https://dieghernan.github.io/projects/gifs/%20%23project%20%23rstats%20%23rspatial%20%23maps%20%23dataset%20%23csv" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/projects/gifs/&text=Large+forest+fires+in+Spain&via=dhernangomez&hashtags=project,rstats,rspatial,maps,dataset,csv,geojson" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Large%20forest%20fires%20in%20Spain%20https://dieghernan.github.io/projects/gifs/%20%23project%20%23rstats%20%23rspatial%20%23maps%20%23dataset%20%23csv%20%23geojson" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
             <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/projects/gifs/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
              <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Large+forest+fires+in+Spain%20https://dieghernan.github.io/projects/gifs/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
          <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/projects/gifs/&title=Large+forest+fires+in+Spain" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
@@ -471,36 +473,78 @@
    <div class="row pt-2">
      <div class="col-lg-2 mt-lg-3 small"><span class="p-author h-card d-none" hidden><span class="p-name">Diego HH</span><a class="u-url" href="https://dieghernan.github.io/">Diego HH</a><img class="u-photo" src="https://dieghernan.github.io/assets/img/site/avatar.png" alt=""></span></div>
      <article id="maincontent" class="col-lg-8 mt-3">
-       <div class="e-content"><p><strong>GIFs</strong> provides a dataset and an infographic of large forest fires in Spain,
-compiled from the statistics of the Ministry for the Ecological Transition
-and the Demographic Challenge (MITECO). Here, GIF means <em>gran incendio
-forestal</em>: a fire with at least 500 hectares of forest area burned.</p>
-<p>The project uses <strong>R</strong> to prepare the data and create a map inspired by
-<a href="https://dominicroye.github.io/blog/firefly-maps/">Dominic Royé’s firefly cartography</a>.</p>
-<h2 id="data-and-interpretation">Data and interpretation</h2>
-<p>Records span February 27, 2010 to September 26, 2026. These dates mark the
-first and last records in the dataset; they do not represent complete annual
-coverage. The dataset is not a real-time fire monitoring service.</p>
-<p>The CSV contains municipality and province names, INE codes, dates and forest
-area burned in hectares. It combines final statistics for 2010–2021 with
-provisional reports for 2022–2026. Dates recorded as December 31, 2012 identify
-the year only, rather than a confirmed day of ignition.</p>
-<p>Map points use municipal reference locations from <strong>mapSpain</strong>, not exact fire
-locations or perimeters. Circle sizes aggregate forest area burned at each
-reference location.</p>
-<h2 id="downloads-and-reuse">Downloads and reuse</h2>
-<p>The <a href="https://dieghernan.github.io/gifs/">project website</a> provides the infographic,
-a CSV download and citation information. Consult its
-<a href="https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md">documented methodology</a>
-for collection decisions, source limitations and validation. Machine-readable
-field descriptions are available in the
-<a href="https://dieghernan.github.io/gifs/croissant.json">Croissant metadata</a>.</p>
+       <div class="e-content"><p><strong>GIFs</strong> brings together structured data on large forest fires in Spain and
+<strong>R</strong> code for an infographic inspired by
+<a href="https://dominicroye.github.io/blog/firefly-maps/">Dominic Royé’s firefly cartography</a>.
+Here, GIF means <em>gran incendio forestal</em>: a fire with at least 500 hectares
+of forest area burned.</p>
+<p>The project combines exports from MITECO’s General Forest Fire Statistics
+(EGIF) with its annual reports and provisional updates. It preserves source
+information and reconciliation notes so that users can trace how records
+were selected, grouped and located.</p>
+<h2 id="two-related-data-products">Two related data products</h2>
+<p>The collection currently provides two complementary views:</p>
+<ul>
+ <li><strong>EGIF reports:</strong> 329 selected reports from 2010–2023. Each row has a unique
+<code class="language-plaintext highlighter-rouge">egif_part_id</code> and includes source fields, burned areas, cause, provenance,
+notes and coordinates where they can be interpreted.</li>
+ <li><strong>Reconciled fires:</strong> 455 fire records from 2010–2026, used by the
+infographic. Each fire has a stable <code class="language-plaintext highlighter-rouge">fire_id</code>; a fire may bring together
+several EGIF reports.</li>
+</ul>
+<p>These are different units of observation. Do not add the two tables’ row
+counts or burned areas together. The 500-hectare threshold is applied after
+explicitly documented groupings of reports belonging to the same fire.</p>
+<p>EGIF takes priority when a documented match exists. Records without a match
+retain their original MITECO annual report or provisional update. Reports
+awaiting reconciliation keep an empty <code class="language-plaintext highlighter-rouge">fire_id</code> and are not automatically
+added as new fires, which helps avoid double counting.</p>
+<h2 id="coverage-and-limitations">Coverage and limitations</h2>
+<p>The fire-level records span February 27, 2010 to September 26, 2026. These
+are the first and last dates in the file, not evidence of complete annual
+coverage. The project is not a real-time monitoring service.</p>
+<p>The documented reconciliation still has nine earlier fire records and eight
+selected EGIF reports awaiting a match. Two additional records retain their
+provisional source because their province has no reports in the 2023 EGIF
+export. That export contains no records for seven provinces, so an absence
+from these files should not be interpreted as an absence of fires.</p>
+<p>The <a href="https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md">methodology</a>
+explains source priority, explicit groupings and unresolved cases. The
+<a href="https://github.com/dieghernan/gifs/blob/main/data-raw/README.md">data guide</a>
+documents the source exports and processing. The original ZIP files are
+preserved with SHA-256 checksums.</p>
+<h2 id="coordinates-and-the-infographic">Coordinates and the infographic</h2>
+<p>Geographic coordinates use EPSG:4326, keeping the Canary Islands in their
+actual location. EGIF coordinates are transformed only when their coordinate
+system can be interpreted. Missing coordinates or an unknown datum leave the
+geographic coordinates empty rather than producing an invented point.</p>
+<p>The fire-level view uses interpretable EGIF coordinates where available and
+an identified municipal reference location otherwise. <code class="language-plaintext highlighter-rouge">location_method</code>
+distinguishes these sources. For fires with several reports, the view records
+which report supplies its reference point. Declared municipality codes and
+municipalities obtained through a spatial join are retained separately.</p>
+<p>The points are reference locations, not fire perimeters. Municipal reference
+locations come from IGN through SIANE and <strong>mapSpain</strong>. The infographic reads
+the reconciled fire view and uses circle sizes to show forest area burned.</p>
+<h2 id="downloads-citation-and-reuse">Downloads, citation and reuse</h2>
+<p>Both products are available in <strong>CSV</strong>, <strong>JSON</strong> and <strong>GeoJSON</strong> from the
+<a href="https://dieghernan.github.io/gifs/">project website</a>. Read identifiers and
+municipality codes as text to preserve their representation. JSON supplies
+explicit types and null values; GeoJSON retains records without usable
+coordinates with <code class="language-plaintext highlighter-rouge">geometry: null</code>.</p>
+<p>Machine-readable field descriptions are provided separately in the
+<a href="https://dieghernan.github.io/gifs/croissant/parts.json">EGIF report Croissant metadata</a>
+and the <a href="https://dieghernan.github.io/gifs/croissant/fires.json">fire-level Croissant metadata</a>.</p>
+<p>For reproducible analyses, cite the DOI of the version used. The collection’s
+<a href="https://doi.org/10.5281/zenodo.23932940">version 2.0.0 DOI</a> identifies the
+archived release; the <a href="https://doi.org/10.5281/zenodo.23929996">general DOI</a>
+groups the project’s releases.</p>
 <p>Data reuse follows the
 <a href="https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html">MITECO legal notice</a>,
 including attribution and preservation of the original conditions and metadata.
-The repository’s MIT license applies to its code and documentation. The project
+The municipal cartography credits CartoBase ANE 2006–2024, CC BY 4.0, IGN.
+The repository’s MIT license applies to code and documentation. The project
 is independent and does not imply MITECO participation or endorsement.</p>
-<p>Cite the dataset using <a href="https://doi.org/10.5281/zenodo.23929997">its Zenodo DOI</a>.</p>
 </div>
      </article>
    </div>
@@ -543,6 +587,7 @@ is independent and does not imply MITECO participation or endorsement.</p>
       <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
       <a href="https://dieghernan.github.io/tags#dataset" class="badge chulapa-pill-bg-primary p-category" rel="tag" >dataset</a>
       <a href="https://dieghernan.github.io/tags#csv" class="badge chulapa-pill-bg-primary p-category" rel="tag" >csv</a>
+      <a href="https://dieghernan.github.io/tags#geojson" class="badge chulapa-pill-bg-primary p-category" rel="tag" >geojson</a>
      </div>
    </div>
 </div>
@@ -555,18 +600,18 @@ is independent and does not imply MITECO participation or endorsement.</p>
              <nav class="card-group" aria-label="random -articles"><div class="card  border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202002_cartography1/" class="chulapa-text-body-color">
-              New features in the <strong>cartography</strong> package
+            <a href="https://dieghernan.github.io/202205_tidyterra/" class="chulapa-text-body-color">
+              Introducing <strong>tidyterra</strong>
             </a>
          </p>
            <p class="card-text">
-              <small>Vignette of the package expansion</small>
+              <small>Easily work with and plot SpatRasters</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-02-17T00:00:00+01:00">
-                february 17, 2020
+              <time datetime="2022-05-25T00:00:00+02:00">
+                may 25, 2022
               </time>
             </small>
        </div>
@@ -574,18 +619,18 @@ is independent and does not imply MITECO participation or endorsement.</p>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">
-              Beautiful maps with R (III): Patterns and hatched maps
+            <a href="https://dieghernan.github.io/201906_Beautiful2/" class="chulapa-text-body-color">
+              Beautiful maps with R (II): Fun with flags
             </a>
          </p>
            <p class="card-text">
-              <small>A solution for black-and-white and academic maps</small>
+              <small>Put a picture on your map</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-12-12T00:00:00+01:00">
-                december 12, 2019
+              <time datetime="2019-06-18T00:00:00+02:00">
+                june 18, 2019
               </time>
             </small>
        </div>
@@ -593,18 +638,18 @@ is independent and does not imply MITECO participation or endorsement.</p>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">
-              Using the CountryCodes database and <strong>sf</strong> package
+            <a href="https://dieghernan.github.io/projects/corona-atlas/" class="chulapa-text-body-color">
+              Corona Atlas
             </a>
          </p>
            <p class="card-text">
-              <small>Vignette of the CountryCodes project</small>
+              <small>Interactive map of the international COVID-19 risk areas as designated by the German authorities.</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-04-27T00:00:00+02:00">
-                april 27, 2019
+              <time datetime="2021-04-30T00:00:00+02:00">
+                april 30, 2021
               </time>
             </small>
        </div>
