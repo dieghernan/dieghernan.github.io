@@ -53,7 +53,36 @@ The generated site is written to `_site/`, which is ignored by Git.
 
 ## Deployment
 
-The [GitHub Actions workflows](.github/workflows/) build the site and deploy it to GitHub Pages when changes are pushed to `main` or `master`. Deployment can also be started manually from the Actions tab.
+The [GitHub Actions workflows](.github/workflows/) build the site and deploy it to GitHub Pages when changes are pushed to `main`. Deployment can also be started manually from the Actions tab.
+
+### Netlify previews
+
+[netlify.toml](netlify.toml) configures the `dhhdevblog` site with the same root
+directory, `_site` output, Ruby 3.4, Node 22 and Pretty URLs used in its dashboard.
+Netlify builds include drafts from `collections/_drafts/`, including on its
+production URL and PR previews. Incremental builds are disabled so cached output
+does not retain stale pages. GitHub Pages builds continue to exclude drafts.
+
+Lighthouse and Jekyll Cache remain enabled in the Netlify dashboard, preserving
+their installed versions. The dashboard also selects `main` as the production
+branch, disables branch deploys and enables Deploy Previews for PRs against
+`main`. These settings are not changed by the TOML file.
+
+### Checks
+
+Webmention unit tests run independently of Jekyll:
+
+```sh
+python -m unittest discover -s _scripts -p test_webmentions.py
+```
+
+The structured-data workflow builds the site before checking its rendered
+JSON-LD. To run the same checks locally:
+
+```sh
+bundle exec jekyll build --config _config.yml,_config_build.yml
+python -m unittest discover -s _scripts -p test_structured_data.py
+```
 
 The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.org/). Jekyll copies it unchanged to `/llms.txt`, and the deployment workflows include it with the generated site. Update its selected links when the site structure or featured resources change.
 
