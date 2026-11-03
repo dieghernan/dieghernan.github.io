@@ -67,7 +67,7 @@ class StructuredDataTests(unittest.TestCase):
                              and "mainEntity" in item]), 1)
 
     def test_project_entities_reference_the_existing_pages(self):
-        self.assertEqual(len(DATA["project_pages"]), 11)
+        self.assertEqual(len(DATA["project_pages"]), 12)
         for url, key in DATA["project_pages"].items():
             with self.subTest(url=url):
                 _, blocks = page(url)
