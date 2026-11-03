@@ -26,6 +26,51 @@ sameAs profiles and ORCID. This does not alter the theme's author entities.
 Build with `bundle exec jekyll build`, then run
 `py -m unittest discover -s _scripts -p test_structured_data.py`.
 
+## Maintenance workflow
+
+The project websites are the source of truth. This blog maintains short,
+manually synchronized summaries, not an independent metadata catalog.
+When a website has no equivalent project JSON-LD, use its linked primary
+repository: README and configuration for scope and credits, LICENSE for software
+licensing, DESCRIPTION for R package metadata and CITATION.cff for citation
+identifiers. Do not treat missing or malformed markup as evidence for a value.
+Record unresolved discrepancies rather than guessing.
+
+Recheck a project when adding it, changing its summary or destination URL,
+learning of an upstream metadata change or reviewing its archived status.
+
+1. Read the current destination page and its project JSON-LD. Compare the
+   matching Dataset or SoftwareSourceCode entity, rather than the theme's
+   WebSite or WebPage entity. Use the primary files above when needed.
+2. Preserve upstream `@id`, `@type`, canonical URL, repository, DOI, license and
+   author or creator identities where declared. Keep blog-assigned IDs stable
+   until an equivalent upstream entity exists. Check limitations, temporal
+   coverage and whether the project is discontinued or automated posting is off.
+3. Update `entities` in `_data/structured_data.json` for project summaries.
+   Update `featured_packages` in `_pages/projects.md` for package names,
+   descriptions and links, and `package_licenses` and `package_identifiers` in
+   the data file for their licenses and DOI links. Keep the visible project
+   descriptions consistent with the structured summaries.
+4. Check `project_pages`, `article_relations` and `package_articles` when adding
+   or moving pages. These mappings use exact, case-sensitive Jekyll URL paths,
+   including trailing slashes. `subjectOf` is generated locally by the includes.
+5. Keep names and descriptions concise; English translations are allowed if
+   they preserve upstream meaning and limitations. Leave release dates,
+   versions, distributions, child datasets and Croissant descriptors upstream.
+6. Update the affected row in the verification table with the source, check
+   date and any unresolved discrepancy. The date below describes the baseline
+   review; a partial recheck does not renew the dates of other entries.
+7. After metadata changes, build and check the rendered output:
+
+   ```sh
+   bundle exec jekyll build --config _config.yml,_config_build.yml
+   py -m unittest discover -s _scripts -p test_structured_data.py
+   ```
+
+The tests check the local rendered markup and expected relationships. They do
+not fetch upstream websites or establish that metadata is still current.
+Review the source comparison separately. Builds do not import upstream metadata.
+
 ## Upstream verification
 
 Last checked: November 3, 2026. This is a manual synchronization, not a live

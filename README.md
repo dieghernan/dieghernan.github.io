@@ -84,6 +84,12 @@ bundle exec jekyll build --config _config.yml,_config_build.yml
 python -m unittest discover -s _scripts -p test_structured_data.py
 ```
 
+Project JSON-LD summaries follow the original project websites as their source
+of truth. See the [maintenance workflow and source inventory](_includes/custom/structured_data/README.md#maintenance-workflow)
+for the fields to update, upstream verification and fallback sources when a
+project has no equivalent JSON-LD. Synchronization is manual; the checks above
+validate local output without comparing it with live upstream metadata.
+
 The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.org/). Jekyll copies it unchanged to `/llms.txt`, and the deployment workflows include it with the generated site. Update its selected links when the site structure or featured resources change.
 
 ## Bridgy Fed
