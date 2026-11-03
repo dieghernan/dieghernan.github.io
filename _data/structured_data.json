@@ -276,11 +276,12 @@
     },
     "gifs": {
       "@type": "Dataset",
-      "@id": "https://dieghernan.github.io/gifs/#dataset",
+      "@id": "https://dieghernan.github.io/gifs/#collection",
       "name": "Grandes incendios forestales en España",
       "url": "https://dieghernan.github.io/gifs/",
-      "identifier": "https://doi.org/10.5281/zenodo.23929997",
-      "sameAs": "https://doi.org/10.5281/zenodo.23929997",
+      "identifier": "https://doi.org/10.5281/zenodo.23932940",
+      "sameAs": "https://doi.org/10.5281/zenodo.23932940",
+      "isPartOf": "https://doi.org/10.5281/zenodo.23929996",
       "license": "https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html",
       "creator": {
         "@type": "Person",
@@ -292,9 +293,22 @@
       "temporalCoverage": "2010-02-27/2026-09-26",
       "spatialCoverage": {
         "@type": "Place",
-        "name": "España"
+        "name": "España",
+        "geo": {
+          "@type": "GeoShape",
+          "box": "27.9282566760271 -17.9896594 43.5444539 3.0381681",
+          "description": "Extensión de los puntos con coordenadas disponibles; no representa los perímetros quemados ni implica cobertura territorial completa."
+        }
       },
-      "description": "Dataset of large forest fires in Spain with at least 500 hectares of forest area burned, compiled from MITECO statistics. Records span February 27, 2010 to September 26, 2026; this is not complete annual coverage or real-time monitoring. It combines final statistics for 2010–2021 and provisional reports for 2022–2026. Dates in 2012 identify the year only. Map points use municipal reference locations, not exact fire locations or perimeters."
+      "description": "Collection of selected EGIF reports on large forest fires in Spain from 2010–2023 and a reconciled fire-level view covering records from 2010–2026. EGIF takes priority where a documented match exists; other records retain their original MITECO reports. Reports and fires are different units and must not be added together. Some matches remain unresolved and coverage is incomplete. Locations use interpretable EGIF coordinates in EPSG:4326, with identified municipal reference points as a fallback in the fire-level view; they are not fire perimeters.",
+      "hasPart": [
+        {
+          "@id": "https://dieghernan.github.io/gifs/#dataset-parts"
+        },
+        {
+          "@id": "https://dieghernan.github.io/gifs/#dataset-fires"
+        }
+      ]
     }
   },
   "project_pages": {
