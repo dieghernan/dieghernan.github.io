@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": {{ page.url | absolute_url | append: '#profile' | jsonify }},
+  "url": {{ page.url | absolute_url | jsonify }},
+  "mainEntity": {
+    {% for property in site.data.structured_data.profile %}
+    {{ property[0] | jsonify }}: {{ property[1] | jsonify }},
+    {% endfor %}
+    "description": {{ page.description | jsonify }},
+    "image": {{ '/assets/img/site/avatar.png' | absolute_url | jsonify }}
+  }
+}

@@ -34,8 +34,29 @@ def allowed(url, external=True):
         host = (p.hostname or '').lower().rstrip('.')
         return (p.scheme in ('http', 'https') and bool(host)
                 and not p.username and not p.password and p.port in (None, 80, 443)
-                and host != 'fed.brid.gy' and not host.endswith('.fed.brid.gy')
+                and (host == 'fed.brid.gy' or not host.endswith('.fed.brid.gy'))
                 and (not external or not internal(url)))
+    except ValueError:
+        return False
+
+
+def bridgy_target(url):
+    """Only the Bridgy Fed root is a valid publishing target."""
+    try:
+        p = urlsplit(url)
+        return (p.scheme == 'https'
+                and (p.hostname or '').lower().rstrip('.') == 'fed.brid.gy'
+                and not p.username and not p.password and p.port in (None, 443)
+                and p.path in ('', '/') and not p.query and not p.fragment)
+    except ValueError:
+        return False
+
+
+def allowed_target(url):
+    """Filter links that may become outgoing Webmention targets."""
+    try:
+        host = (urlsplit(url).hostname or '').lower().rstrip('.')
+        return allowed(url) and (host != 'fed.brid.gy' or bridgy_target(url))
     except ValueError:
         return False
 
@@ -125,7 +146,9 @@ class Page(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.canonical = None
         self.post = False
+        self.project = False
         self.targets = set()
+        self.bridgy_targets = set()
         self.endpoints = []
         self.stack = []
         self.content = []
@@ -135,13 +158,16 @@ class Page(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        classes = (a.get('class') or '').split()
         if tag == 'link' and 'canonical' in (a.get('rel') or '').lower().split():
             self.canonical = a.get('href')
         if tag in ('link', 'a') and 'webmention' in (a.get('rel') or '').lower().split() and a.get('href'):
             self.endpoints.append(a['href'])
+        if tag == 'a' and 'u-bridgy-fed' in classes and bridgy_target(a.get('href', '')):
+            self.bridgy_targets.add(a['href'])
         if tag == 'script' and a.get('type') == 'application/ld+json':
             self.schema = []
-        if self.depth is None and 'e-content' in (a.get('class') or '').split():
+        if self.depth is None and 'e-content' in classes:
             self.depth = len(self.stack)
         if self.depth is not None:
             self.content.append(self.get_starttag_text())
@@ -167,6 +193,7 @@ class Page(HTMLParser):
             try:
                 data = json.loads(''.join(self.schema))
                 self.post |= has_post(data)
+                self.project |= has_project(data)
             except ValueError:
                 pass
             self.schema = None
@@ -193,16 +220,30 @@ def has_post(data):
     return False
 
 
+def has_project(data):
+    if isinstance(data, list):
+        return any(has_project(x) for x in data)
+    if isinstance(data, dict):
+        types = data.get('@type', [])
+        if types == 'WebPage' or isinstance(types, list) and 'WebPage' in types:
+            return True
+        return has_project(data.get('@graph', []))
+    return False
+
+
 def posts_in(site):
     posts = {}
     for path in sorted(Path(site).rglob('*.html')):
         page = Page(path.read_text(encoding='utf-8'))
-        if not page.post or not page.canonical or not page.content:
+        is_project = (page.project and page.canonical
+                      and page.canonical.startswith(ORIGIN + '/projects/'))
+        if not (page.post or is_project) or not page.canonical or not page.content:
             continue
         if not page.canonical.startswith(ORIGIN + '/'):
             raise ValueError('Unexpected canonical URL')
-        targets = sorted({urldefrag(urljoin(page.canonical, t))[0] for t in page.targets
-                          if allowed(urljoin(page.canonical, t))})
+        raw_targets = page.targets | page.bridgy_targets
+        targets = sorted({urldefrag(urljoin(page.canonical, t))[0] for t in raw_targets
+                          if allowed_target(urljoin(page.canonical, t))})
         posts[page.canonical] = {'digest': page.digest, 'targets': targets}
     if not posts:
         raise ValueError('No published posts found; refusing to initialize an empty ledger')

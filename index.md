@@ -5,10 +5,12 @@ header_type: hero
 header_img: /assets/img/site/banner.png
 excerpt: A personal portfolio and blog by dieghernan.
 description: "R packages, spatial data, maps and open-source projects by dieghernan."
-og_image_width: 799
-og_image_height: 429
-og_image_type: "image/png"
-og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and turquoise."
+og_image: /assets/img/site/social-preview.jpg
+og_image_alt: One World. R packages, maps and open-source projects by dieghernan,
+  with a raster map in magenta, orange, yellow and turquoise.
+og_image_width: 1200
+og_image_height: 630
+og_image_type: image/jpeg
 seo_title: "One World: R packages, maps and open-source projects"
 og_title: "One World: R packages, maps and open-source projects"
 ---
@@ -84,5 +86,5 @@ og_title: "One World: R packages, maps and open-source projects"
 
 <a href="https://github.com/dieghernan" rel="me" class="d-none">github.com/dieghernan</a>
 <a rel="me" href="https://fosstodon.org/@dhernangomez" class="d-none">Mastodon Verification</a>
-<a rel="me" href="https://web.brid.gy/r/https://dieghernan.github.io/" class="d-none">brid.gy Verification</a>
+<a rel="me" href="https://web.brid.gy/r/https://dieghernan.github.io/" class="d-none">Bridgy Fed Verification</a>
 <a rel="me" href="https://gravatar.com/dieghernan" class="d-none">gravatar Verification</a>

@@ -1,0 +1,31 @@
+{%- assign project_key = site.data.structured_data.project_pages[page.url] -%}
+{%- assign article_relations = site.data.structured_data.article_relations[page.url] -%}
+{%- assign package_name = site.data.structured_data.package_articles[page.url] -%}
+{%- assign subject_url = page.url | absolute_url -%}
+{%- if page.featured_packages -%}
+<script type="application/ld+json">
+{% include custom/structured_data/packages.html %}
+</script>
+{%- endif -%}
+{%- if project_key -%}
+{%- assign project_entity = site.data.structured_data.entities[project_key] -%}
+<script type="application/ld+json">
+{% include custom/structured_data/entity.html entity=project_entity subject=subject_url %}
+</script>
+{%- endif -%}
+{%- if article_relations or package_name -%}
+{%- assign article_id = subject_url | append: '#article' -%}
+{%- for key in article_relations -%}
+{%- assign article_entity = site.data.structured_data.entities[key] -%}
+<script type="application/ld+json">
+{% include custom/structured_data/entity.html entity=article_entity subject=article_id %}
+</script>
+{%- endfor -%}
+{%- if package_name -%}
+{%- assign projects_page = site.pages | where: 'url', '/projects' | first -%}
+{%- assign package = projects_page.featured_packages | where: 'name', package_name | first -%}
+<script type="application/ld+json">
+{% include custom/structured_data/package.html package=package subject=article_id context=true %}
+</script>
+{%- endif -%}
+{%- endif -%}

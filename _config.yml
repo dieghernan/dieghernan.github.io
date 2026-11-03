@@ -18,11 +18,12 @@ repository: dieghernan/dieghernan.github.io
 timezone: Europe/Madrid
 
 # A.1. SEO and author
-og_image: "./assets/img/site/banner.png"
-og_image_alt: Raster map with irregular areas in magenta, orange, yellow and turquoise.
-og_image_width: 799
-og_image_height: 429
-og_image_type: image/png
+og_image: /assets/img/site/social-preview.jpg
+og_image_alt: One World. R packages, maps and open-source projects by dieghernan,
+  with a raster map in magenta, orange, yellow and turquoise.
+og_image_width: 1200
+og_image_height: 630
+og_image_type: image/jpeg
 twitter_site: dhernangomez
 author:
   name: dieghernan
@@ -64,7 +65,7 @@ indieweb_profile:
   links:
   - https://github.com/dieghernan
   - https://fosstodon.org/@dhernangomez
-  - https://bsky.app/profile/dieghernan.github.io
+  - https://bsky.app/profile/dieghernan.bsky.social
 
 # A.1.1. Publisher
 publisher:
@@ -72,7 +73,28 @@ publisher:
   name: dieghernan
   url: https://dieghernan.github.io/
   image: "/assets/img/site/avatar.png"
-
+  avatar: "./assets/img/site/avatar.png"
+  location: Madrid, Spain
+  links:
+  - url: https://x.com/dhernangomez
+    icon: fab fa-square-x-twitter
+    label: My Twitter/X
+  - url: https://fosstodon.org/@dhernangomez
+    icon: fa-brands fa-mastodon
+    label: My Mastodon
+  - url: https://bsky.app/profile/dieghernan.bsky.social
+    icon: fa-brands fa-square-bluesky
+    label: My Bluesky
+  - url: https://github.com/dieghernan/
+    icon: fab fa-github
+    label: My GitHub
+  - url: https://stackoverflow.com/users/7877917/dieghernan
+    icon: fab fa-stack-overflow
+    label: On StackOverflow
+  - url: https://orcid.org/0000-0001-8457-4658
+    icon: fa-brands fa-orcid
+    label: My Orcid
+ 
 # A.2. Font Awesome
 fa_kit_code: afe0d1dec9
 
@@ -171,6 +193,8 @@ chulapa-skin:
   skin: gitdev
   vars:
     font-family-monospace: Fira Code
+    carousel-control-color: "#24292f"
+    carousel-indicator-active-bg: "#24292f"
 
 chulapa-skin-dark:
   highlight: one.dark

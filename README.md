@@ -59,27 +59,33 @@ The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.or
 
 ## Bridgy Fed
 
-The blog uses its discoverable Atom and RSS feeds to publish through
-[Bridgy Fed](https://fed.brid.gy/web/dieghernan.github.io). The home page's
-representative `h-card` supplies the blog's display name, avatar, banner and bio.
-Keep its `u-url` pointing to the site's canonical home page.
-Edit `indieweb_profile` in `_config.yml` to update the name, nickname, bio,
-location, topics and profile links. The `custom/h-card.html` include renders
-the card outside the home page's `h-entry` so parsers can discover it directly.
+The blog's representative `h-card` supplies its profile to
+[Bridgy Fed](https://fed.brid.gy/web/dieghernan.github.io). Edit
+`indieweb_profile` in `_config.yml` to update it, then refresh the profile
+on the Bridgy Fed user page.
 
-The file [`.well-known/atproto-did`](.well-known/atproto-did) contains the DID of
-the blog's bridged Bluesky account, not the author's personal account. Jekyll
-includes `.well-known` explicitly so the file is published without HTML layout.
-After deployment, check that `https://dieghernan.github.io/.well-known/atproto-did`
-returns only the DID, then complete the custom Bluesky handle change from the
-blog's Bridgy Fed user page. Publishing the file alone does not change the handle.
-Refresh the profile there after publishing changes to the `h-card`.
+The blog uses `dieghernan.github.io` as its custom Bluesky handle.
+`.well-known/atproto-did` verifies the domain with the blog account's DID,
+`did:plc:frgeqa77h66m6s4a67pdotgl`. Keep the Mastodon bridge on its separate
+default handle, `dhernangomez.fosstodon.org.ap.brid.gy`.
+After deploying the verification file, refresh the profile on the Bridgy Fed
+user page to apply the custom handle. Bridgy Fed redirects are not configured.
 
-Keep feed-based publishing enabled: sending even one webmention to Bridgy Fed
-switches the site to webmention-based publishing and stops feed polling. The
-incoming webmention.io endpoint is separate and can remain enabled. Feed polling
-is asynchronous; the current Bridgy Fed implementation schedules checks between
-two hours and one day apart. A profile refresh does not import posts.
+`.well-known/site.standard.publication` verifies the blog's standard.site
+publication by serving its AT URI directly. If Bridgy Fed recreates that
+publication record, update this file to match the current record URI.
+
+WebFinger forwarding is not configured: GitHub Pages cannot provide the HTTP
+redirects with preserved query parameters that Bridgy Fed requires.
+Jekyll's HTML redirects do not satisfy that requirement. The blog retains
+its Bridgy Fed address in the fediverse.
+
+Publish through Webmentions sent by the `Send outgoing Webmentions` workflow
+after deployment. The default layout adds a hidden `u-bridgy-fed` link inside
+each article's `h-entry`, which the sender collects as a publishing target.
+Sending a Webmention to Bridgy Fed switches the blog from feed polling to
+Webmention-based publishing. RSS and Atom remain available to readers.
+Incoming Webmentions remain independent.
 
 ## Syndicated copies of posts
 
@@ -101,17 +107,18 @@ The default layout displays an “Also published on” list outside the article'
 `rel="syndication"`, allowing IndieWeb readers to identify the copies. Only
 absolute HTTP(S) links with a hostname are rendered; no section appears when
 there are no usable links. No JavaScript, notifications or new service is
-required. This does not change Bridgy Fed's feed-based publishing.
+required. Publishing to Bridgy Fed uses the separate `u-bridgy-fed` link.
 
 ## Outgoing Webmentions
 
 The independent `Send outgoing Webmentions` workflow runs after a successful
 Pages deployment on `main`, or manually from Actions. Automatic runs read the
 exact deployed HTML artifact; manual runs build the blog without deploying it.
-The sender processes links inside posts' editorial `e-content`, excluding
-navigation, syndicated-copy footers and project pages. Each source must match
-its live public page before sending; unpublished edits and stale CDN content
-remain pending.
+The sender processes links inside blog posts and project pages' editorial
+`e-content`, excluding navigation and syndicated-copy footers. Project pages
+are identified by their `/projects/` canonical URL and `WebPage` structured
+data. Each source must match its live public page before sending; unpublished
+edits and stale CDN content remain pending.
 
 The first execution of ledger version 3 rebuilds the earlier baseline and
 processes the historical archive, including links previously recorded without
@@ -129,10 +136,11 @@ notifications. Keep the state branch: restoring it from Git preserves delivery
 history, whereas losing it causes the archive to be processed again.
 
 Internal blog links are excluded. Links to `/chulapa` and `/chulapa/` paths on
-the same domain are eligible; other same-domain links remain excluded. All
-`fed.brid.gy` destinations, including subdomains, endpoints and redirects,
-remain excluded to preserve Bridgy Fed's feed-based publishing. Discovery
-supports HTTP `Link` headers and HTML `rel="webmention"`.
+the same domain are eligible; other same-domain links remain excluded.
+The `https://fed.brid.gy/` root is allowed as a publishing target. Other
+paths and subdomains are excluded as targets; endpoint discovery and
+redirects can use the root host, but not its subdomains. Discovery supports
+HTTP `Link` headers and HTML `rel="webmention"`.
 
 The sender pins connections to validated public IPs while retaining the
 original hostname for HTTPS certificate checks. It rejects non-public
