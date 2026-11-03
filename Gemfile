@@ -16,6 +16,6 @@ gem 'kramdown-parser-gfm'
 gem 'tzinfo'
 gem 'tzinfo-data'
 gem 'faraday-retry'
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'wdm', '>= 0.1.0', platforms: :windows
 gem 'ostruct'
 gem 'fiddle'
