@@ -87,7 +87,7 @@ the original, including its limitations. The blog adds its own `subjectOf` link.
 | COVID19 | [Dataset JSON-LD](https://dieghernan.github.io/COVID19/) | Dataset ID and creator match. Preserve the February–April 2020 coverage. Upstream does not declare a dataset license. |
 | spain-munic-bot | [Software JSON-LD](https://dieghernan.github.io/spain-munic-bot/) | Canonical source-code ID, repository, MIT license, author and R runtime match. Posting remains disabled. |
 | Country codes and international organizations | [Repository README](https://github.com/dieghernan/Country-Codes-and-International-Organizations#readme) and [LICENSE](https://github.com/dieghernan/Country-Codes-and-International-Organizations/blob/HEAD/LICENSE) | No project JSON-LD found. Retain the blog-assigned dataset ID. Do not apply the software MIT license to the aggregated data. |
-| Corona Atlas | [Repository](https://github.com/dieghernan/corona-atlas.de), especially `_config.yml`, README and LICENSE | No dedicated software JSON-LD found. Retain the blog-assigned source-code ID and MIT license. The configuration credits “Diego & Rodrigo”; do not infer sole authorship. |
+| Corona Atlas | [Software JSON-LD](https://dieghernan.github.io/corona-atlas.de/) | Checked November 3, 2026. Canonical source-code ID, MIT license, both authors with ORCID and all three translation contributors match upstream. |
 | 7egment | [Repository](https://github.com/dieghernan/7egment), especially `package.json`, README and LICENSE | No project JSON-LD found. Retain the blog-assigned source-code ID. MIT license and author handle verified. |
 | Bzel | [Repository](https://github.com/dieghernan/Bzel), especially `package.json`, README and LICENSE | No project JSON-LD found. Retain the blog-assigned source-code ID. MIT license and author handle verified. |
 | Sfera | [Repository](https://github.com/dieghernan/Sfera), especially `package.json`, README and LICENSE | No project JSON-LD found. Retain the blog-assigned source-code ID. MIT license and author handle verified. |
@@ -107,6 +107,7 @@ Hernangómez as the
 author, so the summaries reuse the shared profile. Package software licenses
 do not describe the licenses of downloaded geographic data.
 
-Corona Atlas also publishes legacy theme JSON-LD, including a malformed WebPage
-block. This blog does not copy that markup; the repository's configuration and
-license provide the author credit and software license for its summary.
+Corona Atlas now publishes its own canonical SoftwareSourceCode entity. The
+blog reuses that entity, including both authors and the three translation
+contributors, and adds its local `subjectOf` relationship. Recheck the project
+JSON-LD when updating this summary.

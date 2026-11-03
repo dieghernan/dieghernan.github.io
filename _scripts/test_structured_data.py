@@ -126,7 +126,8 @@ class StructuredDataTests(unittest.TestCase):
     def test_repository_only_projects_keep_verified_authorship(self):
         _, blocks = page("/projects/corona-atlas/")
         software, = [item for item in blocks if item.get("@type") == "SoftwareSourceCode"]
-        self.assertEqual(software["author"]["name"], "Diego & Rodrigo")
+        self.assertEqual([author["name"] for author in software["author"]],
+                         ["Diego Hernangómez", "Rodrigo Hernangómez"])
         for url in ("/projects/7egment/", "/projects/Bzel/", "/projects/Sfera/", "/projects/TextWatchClima/"):
             with self.subTest(url=url):
                 _, blocks = page(url)
