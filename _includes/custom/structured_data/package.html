@@ -7,6 +7,8 @@
   "url": {{ include.package.documentation | jsonify }},
   "codeRepository": {{ include.package.source | jsonify }},
   "license": {{ site.data.structured_data.package_licenses[include.package.name] | jsonify }},
+  "sameAs": {{ site.data.structured_data.package_identifiers[include.package.name] | jsonify }},
+  "author": {{ site.data.structured_data.profile | jsonify }},
   "programmingLanguage": "R"{% if include.subject %},
   "subjectOf": {"@id": {{ include.subject | jsonify }}}{% endif %}
 }
