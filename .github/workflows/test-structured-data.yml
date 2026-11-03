@@ -29,3 +29,7 @@ jobs:
           JEKYLL_GITHUB_TOKEN: ${{ github.token }}
       - name: Check project structured data
         run: python -m unittest discover -s _scripts -p 'test_structured_data.py'
+      - name: Install microformats parser
+        run: python -m pip install -r _scripts/requirements-microformats.txt
+      - name: Check blog authorship with a real microformats parser
+        run: python -m unittest discover -s _scripts -p 'test_authorship.py'

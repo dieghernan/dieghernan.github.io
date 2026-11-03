@@ -1,0 +1,17 @@
+{%- assign entry = include.document -%}
+{%- if entry.author -%}
+  {%- assign entry_author = entry.author -%}
+{%- else -%}
+  {%- assign entry_author = site.author -%}
+{%- endif -%}
+{%- assign entry_author_url = entry_author.url | strip -%}
+<span class="p-author h-card d-none">
+  {%- if entry_author_url != empty -%}
+  <a class="p-name u-url u-uid" href="{{ entry_author_url | absolute_url | escape }}">{{ entry_author.name | escape }}</a>
+  {%- else -%}
+  <span class="p-name">{{ entry_author.name | escape }}</span>
+  {%- endif -%}
+  {%- if entry_author.avatar -%}
+  <img class="u-photo" src="{{ entry_author.avatar | absolute_url | escape }}" alt="{{ entry_author.name | escape }}'s avatar">
+  {%- endif -%}
+</span>

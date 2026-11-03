@@ -19,6 +19,7 @@ project_links:
     label: Visit the website
 author:
   name: "Rodrigo Hernangómez"
+  url: https://uselessness.science
   avatar: "https://github.com/rodrihgh.png"
   bio: "PhD student in Electrical Engineering. Fascinated by the interplay between beauty and math."
   location: Berlin, Germany

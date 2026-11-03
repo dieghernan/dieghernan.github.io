@@ -15,11 +15,14 @@ og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and tu
 ---
 <!-- Chulapa template for pagination -->
 {%- include components/headers.html headertype=page.header_type imghero=page.header_img -%}
-<main class="container-lg pb-3 flex-fill">
+<main class="h-feed container-lg pb-3 flex-fill">
+  <a class="p-name u-url d-none" href="{{ page.url | absolute_url | escape }}">{{ page.title | escape }}</a>
+  {% include custom/entry-author.html document=page %}
   {%- include components/breadcrumbdatesocial.html -%}
   <div class="row pt-2 mt-3">
     <div class="col-md-8 offset-md-2">
-      {% include_cached components/indexcards.html cacheddocs=paginator.posts cachedlimit=site.paginate %}
+      <!-- TODO: Once Chulapa #199 is available in the theme used here, switch back to components/indexcards.html and remove custom/blog-cards.html. Remove custom/entry-author.html only after replacing its feed-author use above. https://github.com/dieghernan/chulapa/issues/199 -->
+      {% include_cached custom/blog-cards.html cacheddocs=paginator.posts cachedlimit=site.paginate %}
     </div>
   </div>
 </main>

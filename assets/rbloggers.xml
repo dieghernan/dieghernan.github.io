@@ -15,11 +15,10 @@ permalink: ./rbloggers.xml
 	<subtitle>{{- site.subtitle | strip_html -}}</subtitle>
 	{%- endif %}
 	<author>
-		<name>{{ site.author.name | default: site.github.owner_name }}</name>
-		{% assign authorlink = site.author.links | where_exp: "item", "item.url contains 'http'" -%}
-		{% for link in authorlink limit: 1 -%}
-		<uri>{{ link.url | absolute_url }}</uri>
-		{%- endfor %}			
+		<name>{{ site.author.name | default: site.github.owner_name | xml_escape }}</name>
+		{% assign authorlink = site.author.links | where_exp: "item", "item.url contains 'http'" | first -%}
+		{% assign authorurl = site.author.url | default: authorlink.url -%}
+		{% if authorurl %}<uri>{{ authorurl | absolute_url | xml_escape }}</uri>{% endif %}
 	</author>
 	<rights>(c) {{ site.time | date: '%Y' }}, {{  site.author.name | default: site.github.owner_name }}</rights>
 	{% if site.navbar.brand.img -%}
@@ -58,10 +57,10 @@ permalink: ./rbloggers.xml
 		</content>
 		{% assign entryauthor = document.author | default: site.author %}
 		<author>
-			<name>{{ entryauthor.name | default: site.github.owner_name }}</name>
-			{%- for link in entryauthor.links limit: 1 -%}
-			<uri>{{ link.url | absolute_url }}</uri>
-			{%- endfor -%}		
+			<name>{{ entryauthor.name | default: site.github.owner_name | xml_escape }}</name>
+			{%- assign authorlink = entryauthor.links | where_exp: "item", "item.url contains 'http'" | first -%}
+			{%- assign authorurl = entryauthor.url | default: authorlink.url -%}
+			{% if authorurl %}<uri>{{ authorurl | absolute_url | xml_escape }}</uri>{% endif %}
 		</author>
 		<summary type="html">{{ document.excerpt | escape }}</summary>
 		<category term="{{ document.collection }}"/>

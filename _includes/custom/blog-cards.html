@@ -1,0 +1,52 @@
+{%- assign alldocs = include.cacheddocs -%}
+   {% for post in alldocs limit: include.cachedlimit %}
+<div class="col-12 mb-2">
+<div class="card chulapa-border-card-index h-entry">
+  {% include custom/entry-author.html document=post %}
+	<div class="row g-0">
+		<a href="{{- post.url | absolute_url -}}" aria-label="{{ post.title | default: 'Read article' | markdownify | strip_html | strip | escape_once }}" class="col-sm-1 chulapa-min-h-10 chulapa-card-img chulapa-overlay-img chulapa-gradient {% if post.header_img == nil or post.og_image -%} d-none d-sm-flex {% endif %} "
+{% if post.header_img or post.og_image  -%} style="background-image: url('{{- post.og_image | default: post.header_img | absolute_url -}}')"{%-endif-%}>
+		</a>
+		<div class="col-sm">
+			<article class="card-body chulapa-links-hover-only">
+				<a class="u-url" href="{{- post.url | absolute_url -}}"><h2 class="h5 card-title p-name">{{- post.title  | default: "---" | markdownify | remove: '<p>' | remove: '</p>' | strip_newlines | strip -}}</h2></a>
+				{% if post.subtitle -%}<p class="h6 card-subtitle mb-2 chulapa-text-body-color">{{- post.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip_newlines | strip -}}</p>{%- endif %}
+
+{%- assign card_excerpt = post.excerpt -%}
+{%- unless card_excerpt and card_excerpt != empty -%}
+{%- assign card_excerpt = post.content |
+              markdownify |  newline_to_br |
+              replace:"<br />", ",.," |
+              replace:"{{", ",.," |
+              replace:"{%", ",.," |
+              split: ",.," | first -%}
+{%- endunless -%}
+				<div class="card-text p-summary">{{- card_excerpt | strip_html |
+              escape_once -}}
+				</div>
+			</article>
+			{% if post.date or post.show_tags or post.show_categories %}
+			<div class="border-top-0 card-footer border-primary chulapa-bg-transparent">
+				{% if post.date -%}<p class="small text-right font-italic mb-1">
+{% if post.last_modified_at %}
+<i class="fa fa-redo fa-xs" aria-hidden="true"></i> {% endif %}
+<time class="dt-published" datetime="{{- post.date | date_to_xmlschema -}}">{{- post.date | date: "%d/%m/%Y"  -}}</time></p>{%- endif %}
+				{%- for category in post.categories -%}
+				<a href="{{- category | replace: " ", "-" | prepend: "#" |
+						prepend: post.cloudcategory_url |
+						absolute_url | uri_escape -}}" class="badge chulapa-pill-bg-secondary mx-1 p-category">{{- category -}}
+				</a>
+				{%- endfor -%}
+				{%- for tag in post.tags -%}
+				<a href="{{- tag | replace: " ", "-" | prepend: "#" |
+					   prepend: post.cloudtag_url |
+					   absolute_url | uri_escape -}}" class="badge chulapa-pill-bg-primary mx-1 p-category">{{- tag -}}
+				</a>
+				{%- endfor -%}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+</div>
+{% endfor %}
