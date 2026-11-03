@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, Diego HH</copyright>
-		<pubDate>Tue, 03 Nov 2026 17:37:05 +0100</pubDate>
-		<lastBuildDate>Tue, 03 Nov 2026 17:37:05 +0100</lastBuildDate>
+		<pubDate>Tue, 03 Nov 2026 21:06:45 +0100</pubDate>
+		<lastBuildDate>Tue, 03 Nov 2026 21:06:45 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -126,6 +126,62 @@ de España con SIG y datos abiertos</em>. NoSoloSIG.
 		    <category>dataset</category><category>gpkg</category><category>leaflet</category><category>maps</category><category>project</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Postal codes of Spain ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/misc/postal-codes-spain.jpg" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/misc/postal-codes-spain.jpg" /><guid isPermaLink="true">https://dieghernan.github.io/projects/postal-codes-spain</guid>
+      <pubDate>Tue, 03 Nov 2026 00:00:00 +0100</pubDate>
+		</item>
+		<item>
+			<dc:creator>Diego HH</dc:creator>
+			<title>Large forest fires in Spain</title>
+			<description>
+				<![CDATA[	
+ 				<h3>MITECO data and firefly cartography with R</h3>
+    		<p>1 min.</p>
+				<div><p><strong>GIFs</strong> provides a dataset and an infographic of large forest fires in Spain,
+compiled from the statistics of the Ministry for the Ecological Transition
+and the Demographic Challenge (MITECO). Here, GIF means <em>gran incendio
+forestal</em>: a fire with at least 500 hectares of forest area burned.</p>
+
+<p>The project uses <strong>R</strong> to prepare the data and create a map inspired by
+<a href="https://dominicroye.github.io/blog/firefly-maps/">Dominic Royé’s firefly cartography</a>.</p>
+
+<h2 id="data-and-interpretation">Data and interpretation</h2>
+
+<p>Records span February 27, 2010 to September 26, 2026. These dates mark the
+first and last records in the dataset; they do not represent complete annual
+coverage. The dataset is not a real-time fire monitoring service.</p>
+
+<p>The CSV contains municipality and province names, INE codes, dates and forest
+area burned in hectares. It combines final statistics for 2010–2021 with
+provisional reports for 2022–2026. Dates recorded as December 31, 2012 identify
+the year only, rather than a confirmed day of ignition.</p>
+
+<p>Map points use municipal reference locations from <strong>mapSpain</strong>, not exact fire
+locations or perimeters. Circle sizes aggregate forest area burned at each
+reference location.</p>
+
+<h2 id="downloads-and-reuse">Downloads and reuse</h2>
+
+<p>The <a href="https://dieghernan.github.io/gifs/">project website</a> provides the infographic,
+a CSV download and citation information. Consult its
+<a href="https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md">documented methodology</a>
+for collection decisions, source limitations and validation. Machine-readable
+field descriptions are available in the
+<a href="https://dieghernan.github.io/gifs/croissant.json">Croissant metadata</a>.</p>
+
+<p>Data reuse follows the
+<a href="https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html">MITECO legal notice</a>,
+including attribution and preservation of the original conditions and metadata.
+The repository’s MIT license applies to its code and documentation. The project
+is independent and does not imply MITECO participation or endorsement.</p>
+
+<p>Cite the dataset using <a href="https://doi.org/10.5281/zenodo.23929997">its Zenodo DOI</a>.</p>
+</div>
+				]]>
+			</description>
+			<link>https://dieghernan.github.io/projects/gifs/</link>
+			<category>projects</category>
+		    <category>csv</category><category>dataset</category><category>maps</category><category>project</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Large forest fires in Spain ]]></media:title>
+      <media:content url="https://dieghernan.github.io/gifs/assets/social-preview.jpg" medium="image"/>
+      <media:thumbnail url="https://dieghernan.github.io/gifs/assets/social-preview.jpg" /><guid isPermaLink="true">https://dieghernan.github.io/projects/gifs/</guid>
       <pubDate>Tue, 03 Nov 2026 00:00:00 +0100</pubDate>
 		</item>
 		<item>
@@ -1335,12 +1391,12 @@ produces no table rows.</p>
     
       <tr>
         <td>rstats</td>
-        <td>31</td>
+        <td>32</td>
       </tr>
     
       <tr>
         <td>rspatial</td>
-        <td>27</td>
+        <td>28</td>
       </tr>
     
       <tr>
@@ -1350,7 +1406,7 @@ produces no table rows.</p>
     
       <tr>
         <td>maps</td>
-        <td>29</td>
+        <td>30</td>
       </tr>
     
       <tr>
@@ -1450,7 +1506,7 @@ produces no table rows.</p>
     
       <tr>
         <td>project</td>
-        <td>12</td>
+        <td>13</td>
       </tr>
     
       <tr>
@@ -1530,7 +1586,7 @@ produces no table rows.</p>
     
       <tr>
         <td>dataset</td>
-        <td>4</td>
+        <td>5</td>
       </tr>
     
       <tr>
@@ -1560,7 +1616,7 @@ produces no table rows.</p>
     
       <tr>
         <td>csv</td>
-        <td>2</td>
+        <td>3</td>
       </tr>
     
       <tr>
@@ -1640,17 +1696,17 @@ filter is unnecessary.</p>
     
       <tr>
         <td>rstats</td>
-        <td>31</td>
+        <td>32</td>
       </tr>
     
       <tr>
         <td>maps</td>
-        <td>29</td>
+        <td>30</td>
       </tr>
     
       <tr>
         <td>rspatial</td>
-        <td>27</td>
+        <td>28</td>
       </tr>
     
       <tr>
@@ -1664,12 +1720,12 @@ filter is unnecessary.</p>
       </tr>
     
       <tr>
-        <td>giscoR</td>
-        <td>12</td>
+        <td>project</td>
+        <td>13</td>
       </tr>
     
       <tr>
-        <td>project</td>
+        <td>giscoR</td>
         <td>12</td>
       </tr>
     
@@ -1704,6 +1760,11 @@ filter is unnecessary.</p>
       </tr>
     
       <tr>
+        <td>dataset</td>
+        <td>5</td>
+      </tr>
+    
+      <tr>
         <td>javascript</td>
         <td>5</td>
       </tr>
@@ -1735,11 +1796,6 @@ filter is unnecessary.</p>
     
       <tr>
         <td>tidyterra</td>
-        <td>4</td>
-      </tr>
-    
-      <tr>
-        <td>dataset</td>
         <td>4</td>
       </tr>
     
@@ -1784,6 +1840,11 @@ filter is unnecessary.</p>
       </tr>
     
       <tr>
+        <td>csv</td>
+        <td>3</td>
+      </tr>
+    
+      <tr>
         <td>tmap</td>
         <td>2</td>
       </tr>
@@ -1805,11 +1866,6 @@ filter is unnecessary.</p>
     
       <tr>
         <td>geojson</td>
-        <td>2</td>
-      </tr>
-    
-      <tr>
-        <td>csv</td>
         <td>2</td>
       </tr>
     

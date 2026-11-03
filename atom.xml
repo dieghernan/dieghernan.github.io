@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-03T17:37:05+01:00</updated>
+	<updated>2026-11-03T21:06:45+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -132,6 +132,70 @@ de España con SIG y datos abiertos&lt;/em&gt;. NoSoloSIG.
 		<summary type="html">Explore estimated postal code areas for Spain and download GeoPackage files for R, Python and QGIS.</summary>
 		<category term="projects"/>
 		<category term="dataset"/><category term="gpkg"/><category term="leaflet"/><category term="maps"/><category term="project"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
+	</entry><entry>
+		<title type="html">Large forest fires in Spain</title>
+		<link href="https://dieghernan.github.io/projects/gifs/" rel="alternate" type="text/html" title="Large forest fires in Spain"/>
+		<published>2026-11-03T00:00:00+01:00</published>
+		<updated>2026-11-03T00:00:00+01:00</updated>
+		<id>https://dieghernan.github.io/projects/gifs/</id>
+		<content type="html" xml:base="https://dieghernan.github.io/projects/gifs/">
+		
+		
+		&lt;h3&gt;MITECO data and firefly cartography with R&lt;/h3&gt;
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/gifs/assets/social-preview.jpg&#39; &gt;
+			
+	&lt;p&gt;1 min.&lt;/p&gt;
+			&lt;p&gt;&lt;strong&gt;GIFs&lt;/strong&gt; provides a dataset and an infographic of large forest fires in Spain,
+compiled from the statistics of the Ministry for the Ecological Transition
+and the Demographic Challenge (MITECO). Here, GIF means &lt;em&gt;gran incendio
+forestal&lt;/em&gt;: a fire with at least 500 hectares of forest area burned.&lt;/p&gt;
+
+&lt;p&gt;The project uses &lt;strong&gt;R&lt;/strong&gt; to prepare the data and create a map inspired by
+&lt;a href=&quot;https://dominicroye.github.io/blog/firefly-maps/&quot;&gt;Dominic Royé’s firefly cartography&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-and-interpretation&quot;&gt;Data and interpretation&lt;/h2&gt;
+
+&lt;p&gt;Records span February 27, 2010 to September 26, 2026. These dates mark the
+first and last records in the dataset; they do not represent complete annual
+coverage. The dataset is not a real-time fire monitoring service.&lt;/p&gt;
+
+&lt;p&gt;The CSV contains municipality and province names, INE codes, dates and forest
+area burned in hectares. It combines final statistics for 2010–2021 with
+provisional reports for 2022–2026. Dates recorded as December 31, 2012 identify
+the year only, rather than a confirmed day of ignition.&lt;/p&gt;
+
+&lt;p&gt;Map points use municipal reference locations from &lt;strong&gt;mapSpain&lt;/strong&gt;, not exact fire
+locations or perimeters. Circle sizes aggregate forest area burned at each
+reference location.&lt;/p&gt;
+
+&lt;h2 id=&quot;downloads-and-reuse&quot;&gt;Downloads and reuse&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://dieghernan.github.io/gifs/&quot;&gt;project website&lt;/a&gt; provides the infographic,
+a CSV download and citation information. Consult its
+&lt;a href=&quot;https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md&quot;&gt;documented methodology&lt;/a&gt;
+for collection decisions, source limitations and validation. Machine-readable
+field descriptions are available in the
+&lt;a href=&quot;https://dieghernan.github.io/gifs/croissant.json&quot;&gt;Croissant metadata&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Data reuse follows the
+&lt;a href=&quot;https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html&quot;&gt;MITECO legal notice&lt;/a&gt;,
+including attribution and preservation of the original conditions and metadata.
+The repository’s MIT license applies to its code and documentation. The project
+is independent and does not imply MITECO participation or endorsement.&lt;/p&gt;
+
+&lt;p&gt;Cite the dataset using &lt;a href=&quot;https://doi.org/10.5281/zenodo.23929997&quot;&gt;its Zenodo DOI&lt;/a&gt;.&lt;/p&gt;
+
+		</content>
+		
+		<author>
+			<name>Diego HH</name>
+			<uri>https://dieghernan.github.io/</uri>
+		</author>
+		<summary type="html">Explore a dataset and infographic of large forest fires in Spain, with CSV downloads, documented methodology and Croissant metadata.</summary>
+		<category term="projects"/>
+		<category term="csv"/><category term="dataset"/><category term="maps"/><category term="project"/><category term="rspatial"/><category term="rstats"/>
 	</entry><entry>
 		<title type="html">Let’s peel the world</title>
 		<link href="https://dieghernan.github.io/202610_orange-peel/" rel="alternate" type="text/html" title="Let’s peel the world"/>
@@ -1396,12 +1460,12 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rstats&lt;/td&gt;
-        &lt;td&gt;31&lt;/td&gt;
+        &lt;td&gt;32&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rspatial&lt;/td&gt;
-        &lt;td&gt;27&lt;/td&gt;
+        &lt;td&gt;28&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1411,7 +1475,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;maps&lt;/td&gt;
-        &lt;td&gt;29&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1511,7 +1575,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;project&lt;/td&gt;
-        &lt;td&gt;12&lt;/td&gt;
+        &lt;td&gt;13&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1591,7 +1655,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;dataset&lt;/td&gt;
-        &lt;td&gt;4&lt;/td&gt;
+        &lt;td&gt;5&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1621,7 +1685,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;csv&lt;/td&gt;
-        &lt;td&gt;2&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1701,17 +1765,17 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rstats&lt;/td&gt;
-        &lt;td&gt;31&lt;/td&gt;
+        &lt;td&gt;32&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;maps&lt;/td&gt;
-        &lt;td&gt;29&lt;/td&gt;
+        &lt;td&gt;30&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rspatial&lt;/td&gt;
-        &lt;td&gt;27&lt;/td&gt;
+        &lt;td&gt;28&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1725,12 +1789,12 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
-        &lt;td&gt;giscoR&lt;/td&gt;
-        &lt;td&gt;12&lt;/td&gt;
+        &lt;td&gt;project&lt;/td&gt;
+        &lt;td&gt;13&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
-        &lt;td&gt;project&lt;/td&gt;
+        &lt;td&gt;giscoR&lt;/td&gt;
         &lt;td&gt;12&lt;/td&gt;
       &lt;/tr&gt;
     
@@ -1765,6 +1829,11 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
+        &lt;td&gt;dataset&lt;/td&gt;
+        &lt;td&gt;5&lt;/td&gt;
+      &lt;/tr&gt;
+    
+      &lt;tr&gt;
         &lt;td&gt;javascript&lt;/td&gt;
         &lt;td&gt;5&lt;/td&gt;
       &lt;/tr&gt;
@@ -1796,11 +1865,6 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;tidyterra&lt;/td&gt;
-        &lt;td&gt;4&lt;/td&gt;
-      &lt;/tr&gt;
-    
-      &lt;tr&gt;
-        &lt;td&gt;dataset&lt;/td&gt;
         &lt;td&gt;4&lt;/td&gt;
       &lt;/tr&gt;
     
@@ -1845,6 +1909,11 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
+        &lt;td&gt;csv&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+    
+      &lt;tr&gt;
         &lt;td&gt;tmap&lt;/td&gt;
         &lt;td&gt;2&lt;/td&gt;
       &lt;/tr&gt;
@@ -1866,11 +1935,6 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;geojson&lt;/td&gt;
-        &lt;td&gt;2&lt;/td&gt;
-      &lt;/tr&gt;
-    
-      &lt;tr&gt;
-        &lt;td&gt;csv&lt;/td&gt;
         &lt;td&gt;2&lt;/td&gt;
       &lt;/tr&gt;
     
