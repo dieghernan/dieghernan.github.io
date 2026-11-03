@@ -1,7 +1,7 @@
 ---
 title: spain-munic-bot
-subtitle: A Twitter bot written in R.
-excerpt: Twitter bot - random municipalities of Spain with {mapSpain} posted with {rtweet} via a GitHub Action
+subtitle: An archive of maps generated with R
+excerpt: Archived maps of buildings and urban growth in Spanish municipalities, generated with R. Automated posting is disabled.
 tags:
   - discontinued
   - project
@@ -18,7 +18,11 @@ project_links:
   - url: https://dieghernan.github.io/spain-munic-bot/
     icon: fas fa-external-link-alt
     label: Visit the website
+  - url: https://github.com/dieghernan/spain-munic-bot
+    icon: fab fa-github
+    label: See on GitHub
 last_modified_at: 2026-10-07
+og_image_alt: "Map of buildings in Málaga colored by construction period."
 ---
 
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the

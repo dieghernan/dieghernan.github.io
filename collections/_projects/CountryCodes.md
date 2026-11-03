@@ -1,6 +1,7 @@
 ---
 title: Country codes & organizations
 subtitle: A database with geocodes
+excerpt: Country and territory codes under different standards, with membership in international organizations.
 tags:
   - project
   - rstats
@@ -19,6 +20,7 @@ show_toc: true
 og_image_width: 480
 og_image_height: 480
 og_image_type: "image/png"
+og_image_alt: "Illustration of the Country codes and international organizations project."
 ---
 
 Complete database of countries and territories, their different country codes

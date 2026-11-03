@@ -27,6 +27,8 @@ og_image_type: "image/jpeg"
 og_image_alt: "Map of estimated postal code areas in Spain with prefix 28."
 ---
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698418.svg)](https://doi.org/10.5281/zenodo.23698418)
+
 **Códigos postales de España** provides estimated postal code areas for Spain,
 built from open address data from [CartoCiudad](https://www.cartociudad.es/web/portal/)
 and administrative boundaries. Explore the results on interactive maps and

@@ -12,7 +12,7 @@ tags:
   - dataset
   - csv
   - geojson
-header_img: https://dieghernan.github.io/gifs/assets/social-preview.jpg
+header_img: /assets/img/misc/gifs.webp
 og_image: https://dieghernan.github.io/gifs/assets/social-preview.jpg
 og_image_width: 1200
 og_image_height: 630
@@ -25,10 +25,9 @@ project_links:
   - url: https://github.com/dieghernan/gifs
     icon: fab fa-github
     label: See on GitHub
-  - url: https://doi.org/10.5281/zenodo.23932940
-    icon: fas fa-database
-    label: Cite the dataset
 ---
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932940.svg)](https://doi.org/10.5281/zenodo.23932940)
 
 **GIFs** brings together structured data on large forest fires in Spain and
 **R** code for an infographic inspired by
@@ -119,3 +118,8 @@ including attribution and preservation of the original conditions and metadata.
 The municipal cartography credits CartoBase ANE 2006–2024, CC BY 4.0, IGN.
 The repository's MIT license applies to code and documentation. The project
 is independent and does not imply MITECO participation or endorsement.
+
+## References
+
+Royé, Dominic. 2021. “Firefly Cartography.” June 1.
+[https://dominicroye.github.io/blog/firefly-maps/](https://dominicroye.github.io/blog/firefly-maps/).

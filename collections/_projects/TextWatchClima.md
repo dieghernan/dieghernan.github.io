@@ -12,10 +12,14 @@ tags:
 date: 2017-02-16
 header_img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
 project_links:
+  - url: https://dieghernan.github.io/TextWatchClima/
+    icon: fas fa-external-link-alt
+    label: Visit the website
   - url: https://github.com/dieghernan/TextWatchClima
     icon: fab fa-github
     label: See on GitHub
 permalink: /projects/TextWatchClima/
+og_image_alt: "TextWatch Clima watch face displaying the time in words on Pebble Time Round."
 ---
 
 **Project discontinued** due to the shutdown of Pebble.

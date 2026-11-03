@@ -13,9 +13,13 @@ project_links:
   - url: https://dieghernan.github.io/leaflet-providersESP/
     icon: fas fa-external-link-alt
     label: Visit the website
+  - url: https://github.com/dieghernan/leaflet-providersESP
+    icon: fab fa-github
+    label: See on GitHub
 og_image_width: 1082
 og_image_height: 577
 og_image_type: "image/png"
+og_image_alt: "Map of Spain illustrating Leaflet-providersESP cartographic layers."
 ---
 
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that

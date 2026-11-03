@@ -19,9 +19,13 @@ project_links:
   - url: https://dieghernan.github.io/celestial_data/
     icon: fas fa-external-link-alt
     label: Visit the website
+  - url: https://github.com/dieghernan/celestial_data
+    icon: fab fa-github
+    label: See on GitHub
+og_image_alt: "Map of stars and constellations from the Celestial Data collection."
 ---
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.7561601-blue)](https://doi.org/10.5281/zenodo.7561601)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7561601.svg)](https://doi.org/10.5281/zenodo.7561601)
 
 This project provides several datasets of celestial objects as of the J2000
 epoch in GeoJSON and GeoPackage formats.

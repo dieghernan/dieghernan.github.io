@@ -13,9 +13,13 @@ header_img: https://raw.githubusercontent.com/dieghernan/Bzel/master/store/Banne
 date: 2017-05-25
 permalink: /projects/Bzel/
 project_links:
+  - url: https://dieghernan.github.io/Bzel/
+    icon: fas fa-external-link-alt
+    label: Visit the website
   - url: https://github.com/dieghernan/Bzel
     icon: fab fa-github
     label: See on GitHub
+og_image_alt: "Bzel watch face showing minutes around the bezel of Pebble watches."
 ---
 
 **Project discontinued** due to the shutdown of Pebble.

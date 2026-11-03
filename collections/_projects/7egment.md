@@ -13,9 +13,13 @@ header_img: https://raw.githubusercontent.com/dieghernan/7egment/master/store/Ba
 date: 2017-05-17
 permalink: /projects/7egment/
 project_links:
+  - url: https://dieghernan.github.io/7egment/
+    icon: fas fa-external-link-alt
+    label: Visit the website
   - url: https://github.com/dieghernan/7egment
     icon: fab fa-github
     label: See on GitHub
+og_image_alt: "7egment watch face showing a seven-segment time display on Pebble watches."
 ---
 
 **Project discontinued** due to the shutdown of Pebble.

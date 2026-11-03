@@ -13,9 +13,13 @@ header_img: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/Sfe
 date: 2017-03-14
 permalink: /projects/Sfera/
 project_links:
+  - url: https://dieghernan.github.io/Sfera/
+    icon: fas fa-external-link-alt
+    label: Visit the website
   - url: https://github.com/dieghernan/Sfera
     icon: fab fa-github
     label: See on GitHub
+og_image_alt: "Sfera watch face on a Pebble Time Round."
 ---
 
 **Project discontinued** due to the shutdown of Pebble.

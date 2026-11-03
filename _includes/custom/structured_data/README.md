@@ -112,3 +112,17 @@ Corona Atlas now publishes its own canonical SoftwareSourceCode entity. The
 blog reuses that entity, including both authors and the three translation
 contributors, and adds its local `subjectOf` relationship. Recheck the project
 JSON-LD when updating this summary.
+
+## Project page presentation
+
+Project pages inherit the collection's `hero` header. Use `project_links`
+only for the project website and source repository, in that order, with
+`Visit the website` and `See on GitHub` labels. Omit the website button if no
+working project website is available. Keep citations, downloads and other
+resources in the page content. Zenodo datasets use a linked DOI badge near
+the start of the content, using `https://zenodo.org/badge/DOI/<doi>.svg`.
+
+Use the project visualization as `header_img` and a separate `og_image` when
+a sharing card is available. Supply an English `og_image_alt` describing the
+selected sharing image, or the header image when it is the fallback. Add a
+concise excerpt for project cards and identify historical projects clearly.

@@ -1,6 +1,6 @@
 ---
 title: Corona Atlas
-subtitle: Interactive map of the international COVID-19 risk areas as designated by the German authorities.
+subtitle: Historical international COVID-19 risk areas designated by German authorities
 excerpt: Historical interactive map of international COVID-19 risk areas, based on assessments by the German authorities during the project’s operation.
 tags:
   - discontinued
@@ -24,6 +24,7 @@ project_links:
   - url: https://github.com/dieghernan/corona-atlas.de
     icon: fab fa-github
     label: See on GitHub
+og_image_alt: "Historical map of international COVID-19 risk areas designated by German authorities."
 ---
 
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the
