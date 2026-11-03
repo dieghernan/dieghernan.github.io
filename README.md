@@ -104,6 +104,13 @@ user page to apply the custom handle. Bridgy Fed redirects are not configured.
 publication by serving its AT URI directly. If Bridgy Fed recreates that
 publication record, update this file to match the current record URI.
 
+`_data/standard_site_documents.json` maps each bridged page's exact URL path
+to its `site.standard.document` AT URI. The custom head include adds a
+`<link rel="site.standard.document">` only on matching pages. When a new
+document is bridged, add its path and URI from the blog's AT Protocol
+repository to this map, then rebuild. Keep paths case-sensitive and preserve
+trailing slashes. Builds do not query Bridgy Fed.
+
 WebFinger forwarding is not configured: GitHub Pages cannot provide the HTTP
 redirects with preserved query parameters that Bridgy Fed requires.
 Jekyll's HTML redirects do not satisfy that requirement. The blog retains

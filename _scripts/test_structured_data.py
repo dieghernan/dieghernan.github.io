@@ -20,6 +20,16 @@ def page(url):
 
 
 class StructuredDataTests(unittest.TestCase):
+    def test_standard_site_documents_link_from_the_matching_page_head(self):
+        documents = json.loads((ROOT / "_data/standard_site_documents.json").read_text(encoding="utf-8"))
+        for url, uri in documents.items():
+            with self.subTest(url=url):
+                html, _ = page(url)
+                head = html.split("</head>", 1)[0]
+                self.assertEqual(re.findall(r'<link rel="site.standard.document" href="([^"]+)">', head), [uri])
+        html, _ = page("/about")
+        self.assertNotIn('rel="site.standard.document"', html)
+
     def test_profile_uses_the_shared_personal_identity(self):
         _, blocks = page("/about")
         profile, = [item for item in blocks if item.get("@type") == "ProfilePage"]

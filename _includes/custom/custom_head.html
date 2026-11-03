@@ -1,4 +1,8 @@
 <link rel="describedby" type="text/plain" href="{{ '/llms.txt' | relative_url }}">
+{% assign standard_site_document = site.data.standard_site_documents[page.url] %}
+{% if standard_site_document %}
+<link rel="site.standard.document" href="{{ standard_site_document | escape }}">
+{% endif %}
 {% if page.profile_page %}
 {% include custom/profile-page.html %}
 {% endif %}
