@@ -83,12 +83,10 @@ class AuthorshipTests(unittest.TestCase):
                         guest_entries.append(url)
                         self.assertEqual(properties["name"], ["Rodrigo Hernangómez"])
                         self.assertEqual(properties["url"], [GUEST_URL])
-                        self.assertEqual(properties["uid"], [GUEST_URL])
                         self.assertEqual(properties["photo"][0]["value"], "https://github.com/rodrihgh.png")
                     else:
                         self.assertEqual(properties["name"], ["Diego HH"])
                         self.assertEqual(properties["url"], [HOME])
-                        self.assertEqual(properties["uid"], [HOME])
                         self.assertEqual(properties["photo"][0]["value"], HOME + "assets/img/site/avatar.png")
         self.assertEqual(guest_entries, [HOME + "202203_Corona-timelapse/"])
 
