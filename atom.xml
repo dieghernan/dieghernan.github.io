@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-03T07:02:20+01:00</updated>
+	<updated>2026-11-03T08:03:49+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -14,6 +14,122 @@
 	<rights>(c) 2026, dieghernan</rights>
 	<icon>https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png</icon>
 	<logo>https://dieghernan.github.io/assets/img/site/social-preview.jpg</logo><entry>
+		<title type="html">Postal codes of Spain</title>
+		<link href="https://dieghernan.github.io/projects/postal-codes-spain" rel="alternate" type="text/html" title="Postal codes of Spain"/>
+		<published>2026-11-03T00:00:00+01:00</published>
+		<updated>2026-11-03T00:00:00+01:00</updated>
+		<id>https://dieghernan.github.io/projects/postal-codes-spain</id>
+		<content type="html" xml:base="https://dieghernan.github.io/projects/postal-codes-spain">
+		
+		
+		&lt;h3&gt;Estimated postal code areas from open data&lt;/h3&gt;
+		
+  		
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/misc/postal-codes-spain.jpg&#39; &gt;
+			
+	&lt;p&gt;2 min.&lt;/p&gt;
+			&lt;p&gt;&lt;strong&gt;Códigos postales de España&lt;/strong&gt; provides estimated postal code areas for Spain,
+built from open address data from &lt;a href=&quot;https://www.cartociudad.es/web/portal/&quot;&gt;CartoCiudad&lt;/a&gt;
+and administrative boundaries. Explore the results on interactive maps and
+download the data for use in &lt;strong&gt;R&lt;/strong&gt;, &lt;strong&gt;Python&lt;/strong&gt; or &lt;strong&gt;QGIS&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;Postal code polygons are useful for linking addresses and statistics to areas
+on a map. According to &lt;a href=&quot;https://doi.org/10.12842/WPIVIE_0322&quot;&gt;Goerlich (2022)&lt;/a&gt;,
+the Correos polygons available through CartoCiudad stopped being offered for
+download in early 2017. This project explores a reproducible alternative based
+on open address data.&lt;/p&gt;
+
+&lt;p&gt;An early reference is José Ignacio Sánchez’s
+&lt;a href=&quot;https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos&quot;&gt;2020 article in NoSoloSIG&lt;/a&gt;,
+which describes how to estimate postal areas from CartoCiudad addresses using
+GIS tools. This project applies the approach developed in
+&lt;a href=&quot;https://www.uv.es/goerlich/Ivie/CodPost.html&quot;&gt;Francisco José Goerlich’s 2022 work&lt;/a&gt;,
+with its own choices for selecting addresses and handling areas without an
+assignment.&lt;/p&gt;
+
+&lt;h2 id=&quot;maps-and-data&quot;&gt;Maps and data&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://dieghernan.github.io/codigospostales/&quot;&gt;project website&lt;/a&gt; includes
+interactive maps and two GeoPackage downloads: a full version for spatial
+analysis and a simplified version for visualization. Both include postal code
+areas and administrative areas pending assignment.&lt;/p&gt;
+
+&lt;p&gt;The data is shared under a
+&lt;a href=&quot;https://creativecommons.org/licenses/by/4.0/&quot;&gt;Creative Commons Attribution 4.0 International license&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;interactive-map&quot;&gt;Interactive map&lt;/h3&gt;
+
+&lt;p&gt;Search for a postal code or address, select a two-digit prefix and compare the
+estimated areas with CartoCiudad. The viewer uses the simplified data and does
+not display areas pending assignment. Its controls are in Spanish.&lt;/p&gt;
+
+&lt;p class=&quot;d-flex flex-wrap&quot;&gt;
+  &lt;a class=&quot;btn btn-primary mr-2 mb-2&quot; href=&quot;https://dieghernan.github.io/codigospostales/visor/mapa/#prefix=28&quot;&gt;Open the map in a full window&lt;/a&gt;
+  &lt;a class=&quot;btn btn-outline-primary mb-2&quot; href=&quot;https://dieghernan.github.io/codigospostales/visor/&quot;&gt;Viewer guide&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;div class=&quot;embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary&quot;&gt;
+  &lt;iframe class=&quot;embed-responsive-item&quot; title=&quot;Interactive map of estimated postal code areas in Spain&quot; src=&quot;https://dieghernan.github.io/codigospostales/visor/mapa/#prefix=28&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;methodology&quot;&gt;Methodology&lt;/h2&gt;
+
+&lt;p&gt;Following Goerlich’s approach, the workflow treats each separate component of
+an administrative area independently. When the selected addresses share a
+single postal code, it assigns that code to the whole component. When several
+codes are present, it builds Voronoi polygons around the address locations,
+clips them to the administrative boundary and merges areas with the same code.
+The final polygons are dissolved by postal code across provinces.&lt;/p&gt;
+
+&lt;p&gt;This implementation selects addresses using an inward buffer of 200 m, with a
+second attempt at 50 m if none are found, rather than the 20 m described by
+Goerlich. Components without selected addresses remain unassigned unless the
+municipality has a single postal code recovered from its other components.
+The administrative boundaries come from
+&lt;a href=&quot;https://doi.org/10.5281/zenodo.15345101&quot;&gt;LAU2boundaries4Spain&lt;/a&gt;, by Francisco José
+Goerlich and Pedro Pérez Vázquez.&lt;/p&gt;
+
+&lt;p&gt;These are estimated areas, not official postal boundaries. Coverage depends on
+the source addresses and some areas remain unassigned. The
+&lt;a href=&quot;https://github.com/dieghernan/codigospostales&quot;&gt;repository&lt;/a&gt; documents the sources,
+methodology, limitations and steps to reproduce the data.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Instituto Geográfico Nacional / Centro Nacional de Información Geográfica
+(IGN/CNIG). (n.d.). &lt;em&gt;CartoCiudad&lt;/em&gt; [Dataset].
+&lt;a href=&quot;https://www.cartociudad.es/web/portal/&quot;&gt;Data portal&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Instituto Geográfico Nacional / Centro Nacional de Información Geográfica
+(IGN/CNIG). (n.d.). &lt;em&gt;Servicios de visualización de CartoCiudad: direcciones
+y códigos postales&lt;/em&gt;.
+&lt;a href=&quot;https://www.cartociudad.es/web/portal/directorio-de-servicios/visualizacion&quot;&gt;WMS documentation&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Correos. (n.d.). &lt;em&gt;Base de datos de códigos postales y capa cartográfica&lt;/em&gt;.
+&lt;a href=&quot;https://www.correos.es/es/es/empresas/marketing/identifica-a-tus-clientes-potenciales/base-de-datos-de-codigos-postales&quot;&gt;Product information&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Goerlich, F. J. (2022). &lt;em&gt;Elaboración de un mapa de códigos postales de España
+con recursos libres. Cómo evitar pagar por disponer de información de
+referencia&lt;/em&gt;. Working Papers Ivie, no. 2022-3. Ivie.
+&lt;a href=&quot;https://doi.org/10.12842/WPIVIE_0322&quot;&gt;doi:10.12842/WPIVIE_0322&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Goerlich, F. J., &amp;amp; Pérez Vázquez, P. (2025). &lt;em&gt;Base de datos histórica de
+contornos municipales de España –LAU2boundaries4Spain–&lt;/em&gt; (version v2) [Dataset].
+Zenodo. &lt;a href=&quot;https://doi.org/10.5281/zenodo.15345101&quot;&gt;doi:10.5281/zenodo.15345101&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Hernangómez, D. (2026). &lt;em&gt;Códigos postales de España&lt;/em&gt; (version 1.0.0) [Dataset].
+Zenodo. &lt;a href=&quot;https://doi.org/10.5281/zenodo.23698418&quot;&gt;doi:10.5281/zenodo.23698418&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Sánchez, J. I. (2020, November 13). &lt;em&gt;Así hice el mapa de los códigos postales
+de España con SIG y datos abiertos&lt;/em&gt;. NoSoloSIG.
+&lt;a href=&quot;https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos&quot;&gt;Article&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+		</content>
+		
+		<author>
+			<name>dieghernan</name><uri>https://x.com/dhernangomez</uri></author>
+		<summary type="html">Explore estimated postal code areas for Spain and download GeoPackage files for R, Python and QGIS.</summary>
+		<category term="projects"/>
+		<category term="dataset"/><category term="gpkg"/><category term="leaflet"/><category term="maps"/><category term="project"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
+	</entry><entry>
 		<title type="html">Let’s peel the world</title>
 		<link href="https://dieghernan.github.io/202610_orange-peel/" rel="alternate" type="text/html" title="Let’s peel the world"/>
 		<published>2026-10-24T00:00:00+02:00</published>
@@ -1267,22 +1383,22 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rstats&lt;/td&gt;
-        &lt;td&gt;30&lt;/td&gt;
+        &lt;td&gt;31&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rspatial&lt;/td&gt;
-        &lt;td&gt;26&lt;/td&gt;
+        &lt;td&gt;27&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;sf&lt;/td&gt;
-        &lt;td&gt;15&lt;/td&gt;
+        &lt;td&gt;16&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;maps&lt;/td&gt;
-        &lt;td&gt;28&lt;/td&gt;
+        &lt;td&gt;29&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1297,7 +1413,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;leaflet&lt;/td&gt;
-        &lt;td&gt;5&lt;/td&gt;
+        &lt;td&gt;6&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1382,7 +1498,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;project&lt;/td&gt;
-        &lt;td&gt;11&lt;/td&gt;
+        &lt;td&gt;12&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1437,7 +1553,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;gpkg&lt;/td&gt;
-        &lt;td&gt;2&lt;/td&gt;
+        &lt;td&gt;3&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1462,7 +1578,7 @@ produces no table rows.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;dataset&lt;/td&gt;
-        &lt;td&gt;3&lt;/td&gt;
+        &lt;td&gt;4&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1572,17 +1688,17 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rstats&lt;/td&gt;
-        &lt;td&gt;30&lt;/td&gt;
+        &lt;td&gt;31&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;maps&lt;/td&gt;
-        &lt;td&gt;28&lt;/td&gt;
+        &lt;td&gt;29&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
         &lt;td&gt;rspatial&lt;/td&gt;
-        &lt;td&gt;26&lt;/td&gt;
+        &lt;td&gt;27&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1592,7 +1708,7 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;sf&lt;/td&gt;
-        &lt;td&gt;15&lt;/td&gt;
+        &lt;td&gt;16&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1601,12 +1717,12 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
-        &lt;td&gt;ggplot2&lt;/td&gt;
-        &lt;td&gt;11&lt;/td&gt;
+        &lt;td&gt;project&lt;/td&gt;
+        &lt;td&gt;12&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
-        &lt;td&gt;project&lt;/td&gt;
+        &lt;td&gt;ggplot2&lt;/td&gt;
         &lt;td&gt;11&lt;/td&gt;
       &lt;/tr&gt;
     
@@ -1621,6 +1737,11 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
+        &lt;td&gt;leaflet&lt;/td&gt;
+        &lt;td&gt;6&lt;/td&gt;
+      &lt;/tr&gt;
+    
+      &lt;tr&gt;
         &lt;td&gt;r_package&lt;/td&gt;
         &lt;td&gt;6&lt;/td&gt;
       &lt;/tr&gt;
@@ -1628,11 +1749,6 @@ filter is unnecessary.&lt;/p&gt;
       &lt;tr&gt;
         &lt;td&gt;terra&lt;/td&gt;
         &lt;td&gt;6&lt;/td&gt;
-      &lt;/tr&gt;
-    
-      &lt;tr&gt;
-        &lt;td&gt;leaflet&lt;/td&gt;
-        &lt;td&gt;5&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
@@ -1671,6 +1787,11 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
+        &lt;td&gt;dataset&lt;/td&gt;
+        &lt;td&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+    
+      &lt;tr&gt;
         &lt;td&gt;pebble&lt;/td&gt;
         &lt;td&gt;4&lt;/td&gt;
       &lt;/tr&gt;
@@ -1701,12 +1822,12 @@ filter is unnecessary.&lt;/p&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
-        &lt;td&gt;chulapa&lt;/td&gt;
+        &lt;td&gt;gpkg&lt;/td&gt;
         &lt;td&gt;3&lt;/td&gt;
       &lt;/tr&gt;
     
       &lt;tr&gt;
-        &lt;td&gt;dataset&lt;/td&gt;
+        &lt;td&gt;chulapa&lt;/td&gt;
         &lt;td&gt;3&lt;/td&gt;
       &lt;/tr&gt;
     
@@ -1732,11 +1853,6 @@ filter is unnecessary.&lt;/p&gt;
     
       &lt;tr&gt;
         &lt;td&gt;geojson&lt;/td&gt;
-        &lt;td&gt;2&lt;/td&gt;
-      &lt;/tr&gt;
-    
-      &lt;tr&gt;
-        &lt;td&gt;gpkg&lt;/td&gt;
         &lt;td&gt;2&lt;/td&gt;
       &lt;/tr&gt;
     
