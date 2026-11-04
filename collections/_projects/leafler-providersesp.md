@@ -79,11 +79,6 @@ Leaflet-providersESP.
 </html>
 ```
 
-<p class="d-flex flex-wrap">
-  <a class="btn btn-primary mr-2 mb-2" href="https://dieghernan.github.io/leaflet-providersESP/demo/minimal">Open the map in a full window</a>
-  <a class="btn btn-outline-primary mb-2" href="https://dieghernan.github.io/leaflet-providersESP/">Documentation</a>
-</p>
-
 <div class="embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary">
   <iframe class="embed-responsive-item" title="Leaflet-providersESP minimal map demo" src="https://dieghernan.github.io/leaflet-providersESP/demo/minimal" allowfullscreen loading="lazy"></iframe>
 </div>
