@@ -498,7 +498,7 @@
 		</nav>   
 	</div>
        <div class="e-content"><p><a href="https://shopify.github.io/liquid/">Liquid</a> is a template language used by
-<a href="https://jekyllrb.com/">Jekyll</a>, the static site generator behind this website
+<a href="https://jekyllrb.com/"><strong>Jekyll</strong></a>, the static site generator behind this website
 and my theme, <span class="chulapa">Chulapa</span>
 (<a href="https://dieghernan.github.io/chulapa">link</a>).</p>
 <p>Some time ago, <a href="https://github.com/cargocultprogramming">@cargocultprogramming</a>
@@ -516,12 +516,12 @@ The problem appeared with Jekyll 4.1.0 and was also reported in
 <p>In that example, <code class="language-plaintext highlighter-rouge">tag</code> is an undefined variable, rather than the name of a
 property on each item. Jekyll 4.0.1 produced separate groups for the strings,
 but 4.1.0 placed them in a single group with an empty name. This specific
-usage changed; grouping objects by a named property remains supported.</p>
+usage changed. Grouping objects by a named property remains supported.</p>
 <p>The workaround below counts string occurrences without custom plugins.
 It uses Liquid templates with Jekyll-specific filters, including <code class="language-plaintext highlighter-rouge">where_exp</code>
 and <code class="language-plaintext highlighter-rouge">push</code>, so it is not portable to every Liquid environment.
-<a href="https://jekyllrb.com/docs/liquid/filters/"><code class="language-plaintext highlighter-rouge">where_exp</code> requires Jekyll 3.2.0 or later</a>;
-the live examples here run with the version used to build this site.</p>
+<a href="https://jekyllrb.com/docs/liquid/filters/"><code class="language-plaintext highlighter-rouge">where_exp</code> requires <strong>Jekyll</strong> 3.2.0 or later</a>.
+The live examples run with the version used to build this site.</p>
 <p>The algorithm is implemented in <span class="chulapa">Chulapa</span>.
 The expandable tables use this site’s documents and change as posts are
 added. You can also see the tags on the <a href="https://dieghernan.github.io/tags">/tags</a>

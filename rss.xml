@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, Diego HH</copyright>
-		<pubDate>Wed, 04 Nov 2026 20:58:12 +0100</pubDate>
-		<lastBuildDate>Wed, 04 Nov 2026 20:58:12 +0100</lastBuildDate>
+		<pubDate>Wed, 04 Nov 2026 21:11:45 +0100</pubDate>
+		<lastBuildDate>Wed, 04 Nov 2026 21:11:45 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -1347,7 +1347,7 @@ magenta/pink tones.</li>
  				<h3>See the magic happening</h3>
     		<p>5 min.</p>
 				<div><p><a href="https://shopify.github.io/liquid/">Liquid</a> is a template language used by
-<a href="https://jekyllrb.com/">Jekyll</a>, the static site generator behind this website
+<a href="https://jekyllrb.com/"><strong>Jekyll</strong></a>, the static site generator behind this website
 and my theme, <span class="chulapa">Chulapa</span>
 (<a href="https://dieghernan.github.io/chulapa">link</a>).</p>
 
@@ -1369,13 +1369,13 @@ The problem appeared with Jekyll 4.1.0 and was also reported in
 <p>In that example, <code class="language-plaintext highlighter-rouge">tag</code> is an undefined variable, rather than the name of a
 property on each item. Jekyll 4.0.1 produced separate groups for the strings,
 but 4.1.0 placed them in a single group with an empty name. This specific
-usage changed; grouping objects by a named property remains supported.</p>
+usage changed. Grouping objects by a named property remains supported.</p>
 
 <p>The workaround below counts string occurrences without custom plugins.
 It uses Liquid templates with Jekyll-specific filters, including <code class="language-plaintext highlighter-rouge">where_exp</code>
 and <code class="language-plaintext highlighter-rouge">push</code>, so it is not portable to every Liquid environment.
-<a href="https://jekyllrb.com/docs/liquid/filters/"><code class="language-plaintext highlighter-rouge">where_exp</code> requires Jekyll 3.2.0 or later</a>;
-the live examples here run with the version used to build this site.</p>
+<a href="https://jekyllrb.com/docs/liquid/filters/"><code class="language-plaintext highlighter-rouge">where_exp</code> requires <strong>Jekyll</strong> 3.2.0 or later</a>.
+The live examples run with the version used to build this site.</p>
 
 <p>The algorithm is implemented in <span class="chulapa">Chulapa</span>.
 The expandable tables use this site’s documents and change as posts are
@@ -3136,21 +3136,15 @@ demo</a> there is some
 degree of rotation depending on the location and the time. I found how this is
 done on the <strong>d3-celestial plugin</strong> and I found the function
 <a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250"><code class="language-plaintext highlighter-rouge">getMST(dt, lng)</code></a>,
-which I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). Based on the research I did,
-this function computes the <a href="https://en.wikipedia.org/wiki/Sidereal_time">Mean Sidereal
-Time</a> (MST) given a specific
-longitude (perhaps Local Sidereal Time is a more accurate term here?)
-expressed in degrees, following the formulas provided by Meeus (1998). If you
-want to learn more about this, I recommend <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
+which I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). The function uses Meeus’s (1998) formula
+for Greenwich mean sidereal time, adds the observer’s east-positive longitude
+and wraps the result to the interval [0°, 360°). This gives local mean sidereal
+time in degrees. For more detail, see <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
 post</a> by
 <a href="https://squarewidget.com/">James Still</a>.</p>
 
-<!-- FIXME: Confirm whether the function returns mean or local sidereal time. -->
-
-<p>So basically the input is a <code class="language-plaintext highlighter-rouge">POSIXct</code> date-time and a given longitude and the
-result is an alternative longitude that we use to adjust the projection of our
-Star Map. This provides the rotation observed in the <strong>d3-celestial
-plugin</strong>.</p>
+<p>The inputs are a <code class="language-plaintext highlighter-rouge">POSIXct</code> date-time and the observer’s longitude in degrees.
+The example uses the returned angle to rotate the star map’s projection.</p>
 
 <details class="my-4">
 
@@ -3815,8 +3809,9 @@ validity:</p>
     <p>The spatial data objects are bounded by \([-180, -90, 180, 90]\).</p>
   </li>
   <li>
-    <p>Data are provided in WGS 84 - World Geodetic System 1984
-(<a href="https://epsg.io/4326">EPSG:4326</a>).</p>
+    <p>The coordinates represent J2000 celestial directions in degrees.
+<a href="https://epsg.io/4326">EPSG:4326</a> is assigned for compatibility with GIS
+software. The angles are right ascension and declination.</p>
   </li>
   <li>
     <p>All geometries are valid as per
@@ -3826,7 +3821,7 @@ validity:</p>
 
 <h2 id="distribution">Distribution</h2>
 
-<p>The data can be accessed from several API endpoints:</p>
+<p>These URLs serve the same minified GeoJSON file from the main branch.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- From GitHub --&gt;</span>
 https://raw.githubusercontent.com/dieghernan/celestial_data/main/data/mw.min.geojson

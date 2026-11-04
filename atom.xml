@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-04T20:58:12+01:00</updated>
+	<updated>2026-11-04T21:11:45+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -1416,7 +1416,7 @@ projections can be tricky.&lt;/p&gt;
 			
 	&lt;p&gt;5 min.&lt;/p&gt;
 			&lt;p&gt;&lt;a href=&quot;https://shopify.github.io/liquid/&quot;&gt;Liquid&lt;/a&gt; is a template language used by
-&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;, the static site generator behind this website
+&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;&lt;strong&gt;Jekyll&lt;/strong&gt;&lt;/a&gt;, the static site generator behind this website
 and my theme, &lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;
 (&lt;a href=&quot;https://dieghernan.github.io/chulapa&quot;&gt;link&lt;/a&gt;).&lt;/p&gt;
 
@@ -1438,13 +1438,13 @@ The problem appeared with Jekyll 4.1.0 and was also reported in
 &lt;p&gt;In that example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tag&lt;/code&gt; is an undefined variable, rather than the name of a
 property on each item. Jekyll 4.0.1 produced separate groups for the strings,
 but 4.1.0 placed them in a single group with an empty name. This specific
-usage changed; grouping objects by a named property remains supported.&lt;/p&gt;
+usage changed. Grouping objects by a named property remains supported.&lt;/p&gt;
 
 &lt;p&gt;The workaround below counts string occurrences without custom plugins.
 It uses Liquid templates with Jekyll-specific filters, including &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where_exp&lt;/code&gt;
 and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;push&lt;/code&gt;, so it is not portable to every Liquid environment.
-&lt;a href=&quot;https://jekyllrb.com/docs/liquid/filters/&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where_exp&lt;/code&gt; requires Jekyll 3.2.0 or later&lt;/a&gt;;
-the live examples here run with the version used to build this site.&lt;/p&gt;
+&lt;a href=&quot;https://jekyllrb.com/docs/liquid/filters/&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;where_exp&lt;/code&gt; requires &lt;strong&gt;Jekyll&lt;/strong&gt; 3.2.0 or later&lt;/a&gt;.
+The live examples run with the version used to build this site.&lt;/p&gt;
 
 &lt;p&gt;The algorithm is implemented in &lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;.
 The expandable tables use this site’s documents and change as posts are
@@ -3243,21 +3243,15 @@ demo&lt;/a&gt; there is some
 degree of rotation depending on the location and the time. I found how this is
 done on the &lt;strong&gt;d3-celestial plugin&lt;/strong&gt; and I found the function
 &lt;a href=&quot;https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getMST(dt, lng)&lt;/code&gt;&lt;/a&gt;,
-which I ported to &lt;strong&gt;R&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_mst()&lt;/code&gt;). Based on the research I did,
-this function computes the &lt;a href=&quot;https://en.wikipedia.org/wiki/Sidereal_time&quot;&gt;Mean Sidereal
-Time&lt;/a&gt; (MST) given a specific
-longitude (perhaps Local Sidereal Time is a more accurate term here?)
-expressed in degrees, following the formulas provided by Meeus (1998). If you
-want to learn more about this, I recommend &lt;a href=&quot;https://squarewidget.com/astronomical-calculations-sidereal-time/&quot;&gt;this
+which I ported to &lt;strong&gt;R&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_mst()&lt;/code&gt;). The function uses Meeus’s (1998) formula
+for Greenwich mean sidereal time, adds the observer’s east-positive longitude
+and wraps the result to the interval [0°, 360°). This gives local mean sidereal
+time in degrees. For more detail, see &lt;a href=&quot;https://squarewidget.com/astronomical-calculations-sidereal-time/&quot;&gt;this
 post&lt;/a&gt; by
 &lt;a href=&quot;https://squarewidget.com/&quot;&gt;James Still&lt;/a&gt;.&lt;/p&gt;
 
-&lt;!-- FIXME: Confirm whether the function returns mean or local sidereal time. --&gt;
-
-&lt;p&gt;So basically the input is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POSIXct&lt;/code&gt; date-time and a given longitude and the
-result is an alternative longitude that we use to adjust the projection of our
-Star Map. This provides the rotation observed in the &lt;strong&gt;d3-celestial
-plugin&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The inputs are a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POSIXct&lt;/code&gt; date-time and the observer’s longitude in degrees.
+The example uses the returned angle to rotate the star map’s projection.&lt;/p&gt;
 
 &lt;details class=&quot;my-4&quot;&gt;
 
@@ -3936,8 +3930,9 @@ validity:&lt;/p&gt;
     &lt;p&gt;The spatial data objects are bounded by \([-180, -90, 180, 90]\).&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Data are provided in WGS 84 - World Geodetic System 1984
-(&lt;a href=&quot;https://epsg.io/4326&quot;&gt;EPSG:4326&lt;/a&gt;).&lt;/p&gt;
+    &lt;p&gt;The coordinates represent J2000 celestial directions in degrees.
+&lt;a href=&quot;https://epsg.io/4326&quot;&gt;EPSG:4326&lt;/a&gt; is assigned for compatibility with GIS
+software. The angles are right ascension and declination.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;All geometries are valid as per
@@ -3947,7 +3942,7 @@ validity:&lt;/p&gt;
 
 &lt;h2 id=&quot;distribution&quot;&gt;Distribution&lt;/h2&gt;
 
-&lt;p&gt;The data can be accessed from several API endpoints:&lt;/p&gt;
+&lt;p&gt;These URLs serve the same minified GeoJSON file from the main branch.&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- From GitHub --&amp;gt;&lt;/span&gt;
 https://raw.githubusercontent.com/dieghernan/celestial_data/main/data/mw.min.geojson

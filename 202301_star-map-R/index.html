@@ -638,19 +638,14 @@ demo</a> there is some
 degree of rotation depending on the location and the time. I found how this is
 done on the <strong>d3-celestial plugin</strong> and I found the function
 <a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250"><code class="language-plaintext highlighter-rouge">getMST(dt, lng)</code></a>,
-which I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). Based on the research I did,
-this function computes the <a href="https://en.wikipedia.org/wiki/Sidereal_time">Mean Sidereal
-Time</a> (MST) given a specific
-longitude (perhaps Local Sidereal Time is a more accurate term here?)
-expressed in degrees, following the formulas provided by Meeus (1998). If you
-want to learn more about this, I recommend <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
+which I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). The function uses Meeus’s (1998) formula
+for Greenwich mean sidereal time, adds the observer’s east-positive longitude
+and wraps the result to the interval [0°, 360°). This gives local mean sidereal
+time in degrees. For more detail, see <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">this
 post</a> by
 <a href="https://squarewidget.com/">James Still</a>.</p>
-<!-- FIXME: Confirm whether the function returns mean or local sidereal time. -->
-<p>So basically the input is a <code class="language-plaintext highlighter-rouge">POSIXct</code> date-time and a given longitude and the
-result is an alternative longitude that we use to adjust the projection of our
-Star Map. This provides the rotation observed in the <strong>d3-celestial
-plugin</strong>.</p>
+<p>The inputs are a <code class="language-plaintext highlighter-rouge">POSIXct</code> date-time and the observer’s longitude in degrees.
+The example uses the returned angle to rotate the star map’s projection.</p>
 <details class="my-4">
   <summary>Show <code>get_mst()</code></summary>
  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Derive rotation degrees of the projection given a date and a longitude</span><span class="w">
