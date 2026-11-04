@@ -33,6 +33,10 @@ You can install **resmush** from
 install.packages("resmush")
 ```
 
+This post was featured in [episode 152 of R Weekly Highlights](https://rweekly.fireside.fm/152?t=80).
+
+<iframe src="https://player.fireside.fm/v3/87RSVeFz+jIaHRwHf?theme=dark&amp;t=705" width="100%" height="200" frameborder="0" scrolling="no"></iframe>
+
 ## What is reSmush.it?
 
 reSmush.it is a **free online API** that provides image optimization and has
@@ -50,15 +54,6 @@ include:
     optimization based on optimizing the Huffman tables.
   - [**OptiPNG**](https://optipng.sourceforge.net/): `png` reducer
     used by several online optimizers.
-
-**reSmush.it** is free of charge, but its team is planning to offer more
-services and extend the service to support other types of image files. If you
-enjoy this API (as I do), you can consider supporting them.
-
-<div class="text-center my-3">
-<a title="Support reSmush.it on ko-fi.com" class="kofi-button" style="background-color:#ff5e5b;" href="https://ko-fi.com/E1E51PW00" target="_blank">
-<span class="kofitext"><img src="https://storage.ko-fi.com/cdn/cup-border.png" alt="" class="kofiimg">Support reSmush.it on Ko-fi</span></a>
-</div>
 
 ## Why the **resmush** package?
 
