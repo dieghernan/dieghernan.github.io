@@ -13,9 +13,9 @@ tags:
   - csv
   - geojson
 header_img: /assets/img/misc/gifs.webp
-og_image: https://dieghernan.github.io/gifs/assets/social-preview.jpg
+og_image: https://dieghernan.github.io/assets/img/misc/gifs.jpg
 og_image_width: 1200
-og_image_height: 630
+og_image_height: 800
 og_image_type: image/jpeg
 og_image_alt: "Large forest fires in Spain, 2010–2026. Dark map with orange circles sized by forest area burned."
 project_links:
