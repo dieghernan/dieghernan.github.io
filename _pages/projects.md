@@ -42,7 +42,7 @@ og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and tu
 ---
 
 
-## R packages
+## **R** packages
 
 Tools for working with spatial data, creating maps, citing software and optimizing images.
 

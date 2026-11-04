@@ -1,6 +1,6 @@
 # Blog-specific structured data
 
-This layer complements Chulapa without replacing or normalizing its JSON-LD.
+This layer complements **Chulapa** without replacing or normalizing its JSON-LD.
 The gallery is deliberately excluded.
 
 `_data/structured_data.json` contains the profile, project entity summaries and
@@ -9,7 +9,7 @@ project websites. Do not copy their release dates, versions or distributions.
 New locally described resources have stable identifiers on their project page.
 
 The featured package list reads `featured_packages` from the Projects page,
-so its markup follows the visible cards. Chulapa retains responsibility for
+so its markup follows the visible cards. **Chulapa** retains responsibility for
 the general collection list, articles, pages and breadcrumbs.
 
 Project summaries use `subjectOf` to reference the existing project WebPage or
@@ -52,14 +52,14 @@ learning of an upstream metadata change or reviewing its archived status.
    the data file for their licenses and DOI links. Keep the visible project
    descriptions consistent with the structured summaries.
 4. Check `project_pages`, `article_relations` and `package_articles` when adding
-   or moving pages. These mappings use exact, case-sensitive Jekyll URL paths,
+   or moving pages. These mappings use exact, case-sensitive **Jekyll** URL paths,
    including trailing slashes. `subjectOf` is generated locally by the includes.
-5. Keep names and descriptions concise; English translations are allowed if
+5. Keep names and descriptions concise. English translations are allowed if
    they preserve upstream meaning and limitations. Leave release dates,
    versions, distributions, child datasets and Croissant descriptors upstream.
 6. Update the affected row in the verification table with the source, check
    date and any unresolved discrepancy. The date below describes the baseline
-   review; a partial recheck does not renew the dates of other entries.
+   review. A partial recheck does not renew the dates of other entries.
 7. After metadata changes, build and check the rendered output:
 
    ```sh

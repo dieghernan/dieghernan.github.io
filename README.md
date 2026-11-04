@@ -4,7 +4,7 @@
 
 This repository contains the source of [One World](https://dieghernan.github.io/), my personal blog and portfolio. I share R tutorials, mapping experiments and the tools I build along the way.
 
-The site runs on [Jekyll](https://jekyllrb.com/) with my [Chulapa](https://dieghernan.github.io/chulapa/) theme and is hosted on GitHub Pages.
+The site runs on [**Jekyll**](https://jekyllrb.com/) with my [**Chulapa**](https://dieghernan.github.io/chulapa/) theme and is hosted on **GitHub Pages**.
 
 ## Explore the site
 
@@ -25,14 +25,14 @@ Featured packages include [tidyterra](https://dieghernan.github.io/tidyterra/), 
 | [collections/_posts/](collections/_posts/) | Published blog articles in Markdown. |
 | [collections/_projects/](collections/_projects/) | Individual project pages. |
 | [_Rmd/](_Rmd/) | R Markdown sources for tutorials and mapping experiments. |
-| [_includes/](_includes/) and [_layouts/](_layouts/) | Site customizations that extend Chulapa. |
+| [_includes/](_includes/) and [_layouts/](_layouts/) | Site customizations that extend **Chulapa**. |
 | [assets/](assets/) | Styles, scripts and other static assets. |
-| [_config.yml](_config.yml) | Jekyll configuration and site settings. |
+| [_config.yml](_config.yml) | **Jekyll** configuration and site settings. |
 | [llms.txt](llms.txt) | A curated guide to the site for language models. |
 
 ## Run locally
 
-Use Ruby 3.4, as specified in [.ruby-version](.ruby-version), and Bundler. The [Gemfile](Gemfile) specifies Jekyll 4.4 and the site's plugins.
+Use **Ruby** 3.4, as specified in [.ruby-version](.ruby-version), and **Bundler**. The [Gemfile](Gemfile) specifies **Jekyll** 4.4 and the site's plugins.
 
 From the repository root:
 
@@ -41,7 +41,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Open [localhost:4000](http://localhost:4000/) to preview the site. Jekyll downloads the remote Chulapa theme during the build, so an internet connection is required.
+Open [localhost:4000](http://localhost:4000/) to preview the site. **Jekyll** downloads the remote **Chulapa** theme during the build, so an internet connection is required.
 
 To build without starting a server:
 
@@ -58,19 +58,19 @@ The [GitHub Actions workflows](.github/workflows/) build the site and deploy it 
 ### Netlify previews
 
 [netlify.toml](netlify.toml) configures the `dhhdevblog` site with the same root
-directory, `_site` output, Ruby 3.4, Node 22 and Pretty URLs used in its dashboard.
+directory, `_site` output, **Ruby** 3.4, **Node.js** 22 and Pretty URLs used in its dashboard.
 Netlify builds include drafts from `collections/_drafts/`, including on its
 production URL and PR previews. Incremental builds are disabled so cached output
 does not retain stale pages. GitHub Pages builds continue to exclude drafts.
 
-Lighthouse and Jekyll Cache remain enabled in the Netlify dashboard, preserving
+**Lighthouse** and **Jekyll Cache** remain enabled in the Netlify dashboard, preserving
 their installed versions. The dashboard also selects `main` as the production
 branch, disables branch deploys and enables Deploy Previews for PRs against
 `main`. These settings are not changed by the TOML file.
 
 ### Checks
 
-Webmention unit tests run independently of Jekyll:
+Webmention unit tests run independently of **Jekyll**.
 
 ```sh
 python -m unittest discover -s _scripts -p test_webmentions.py
@@ -87,7 +87,7 @@ python -m unittest discover -s _scripts -p test_structured_data.py
 Project JSON-LD summaries follow the original project websites as their source
 of truth. See the [maintenance workflow and source inventory](_includes/custom/structured_data/README.md#maintenance-workflow)
 for the fields to update, upstream verification and fallback sources when a
-project has no equivalent JSON-LD. Synchronization is manual; the checks above
+project has no equivalent JSON-LD. Synchronization is manual. The checks above
 validate local output without comparing it with live upstream metadata.
 
 The root [llms.txt](llms.txt) follows the [llms.txt proposal](https://llmstxt.org/). Jekyll copies it unchanged to `/llms.txt`, and the deployment workflows include it with the generated site. Update its selected links when the site structure or featured resources change.
@@ -155,11 +155,11 @@ required. Publishing to Bridgy Fed uses the separate `u-bridgy-fed` link.
 
 The independent `Send outgoing Webmentions` workflow runs after a successful
 Pages deployment on `main`, or manually from Actions. Automatic runs read the
-exact deployed HTML artifact; manual runs build the blog without deploying it.
+exact deployed HTML artifact. Manual runs build the blog without deploying it.
 The sender processes links inside blog posts and project pages' editorial
 `e-content`, excluding navigation and syndicated-copy footers. Project pages
 are identified by their `/projects/` canonical URL and `WebPage` structured
-data. Each source must match its live public page before sending; unpublished
+data. Each source must match its live public page before sending. Unpublished
 edits and stale CDN content remain pending.
 
 The first execution of ledger version 3 rebuilds the earlier baseline and
