@@ -1,6 +1,8 @@
 ---
 title: "Mapping Antarctica"
 subtitle: "Cool maps from the South Pole"
+syndication:
+  - https://www.r-bloggers.com/2025/10/mapping-antarctica/
 tags:
   - r_bloggers
   - beautiful_maps
