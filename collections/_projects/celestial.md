@@ -41,15 +41,16 @@ validity:
 
 - The spatial data objects are bounded by $$[-180, -90, 180, 90]$$.
 
-- Data are provided in WGS 84 - World Geodetic System 1984
-  ([EPSG:4326](https://epsg.io/4326)).
+- The coordinates represent J2000 celestial directions in degrees.
+  [EPSG:4326](https://epsg.io/4326) is assigned for compatibility with GIS
+  software. The angles are right ascension and declination.
 
 - All geometries are valid as per
   [ST_IsValid](https://postgis.net/docs/ST_IsValid.html) (GEOS **3.9.3**).
 
 ## Distribution
 
-The data can be accessed from several API endpoints:
+These URLs serve the same minified GeoJSON file from the main branch.
 
 ```html
 <!-- From GitHub -->

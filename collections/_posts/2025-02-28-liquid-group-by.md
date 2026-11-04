@@ -23,7 +23,7 @@ og_image_type: "image/webp"
 ---
 
 [Liquid](https://shopify.github.io/liquid/) is a template language used by
-[Jekyll](https://jekyllrb.com/), the static site generator behind this website
+[**Jekyll**](https://jekyllrb.com/), the static site generator behind this website
 and my theme, <span class="chulapa">Chulapa</span>
 ([link](https://dieghernan.github.io/chulapa)).
 
@@ -46,13 +46,13 @@ The affected code used `group_by` to count repeated strings in an array:
 In that example, `tag` is an undefined variable, rather than the name of a
 property on each item. Jekyll 4.0.1 produced separate groups for the strings,
 but 4.1.0 placed them in a single group with an empty name. This specific
-usage changed; grouping objects by a named property remains supported.
+usage changed. Grouping objects by a named property remains supported.
 
 The workaround below counts string occurrences without custom plugins.
 It uses Liquid templates with Jekyll-specific filters, including `where_exp`
 and `push`, so it is not portable to every Liquid environment.
-[`where_exp` requires Jekyll 3.2.0 or later](https://jekyllrb.com/docs/liquid/filters/);
-the live examples here run with the version used to build this site.
+[`where_exp` requires **Jekyll** 3.2.0 or later](https://jekyllrb.com/docs/liquid/filters/).
+The live examples run with the version used to build this site.
 
 The algorithm is implemented in <span class="chulapa">Chulapa</span>.
 The expandable tables use this site's documents and change as posts are

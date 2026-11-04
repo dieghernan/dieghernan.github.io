@@ -181,19 +181,15 @@ demo](https://ofrohn.github.io/celestial-demo/location.html) there is some
 degree of rotation depending on the location and the time. I found how this is
 done on the **d3-celestial plugin** and I found the function
 [`getMST(dt, lng)`](https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250),
-that I ported to **R** (`get_mst()`). As per some of the research that I did
-this function computes the [Mean Sidereal
-Time](https://en.wikipedia.org/wiki/Sidereal_time) (MST) given a specific
-longitude (perhaps Local Sidereal Time is a more accurate term here?)
-expressed in degrees, following the formulas provided by Meeus (1998). If you
-want to know more on this I recommend [this
+which I ported to **R** (`get_mst()`). The function uses Meeus's (1998) formula
+for Greenwich mean sidereal time, adds the observer's east-positive longitude
+and wraps the result to the interval [0°, 360°). This gives local mean sidereal
+time in degrees. For more detail, see [this
 post](https://squarewidget.com/astronomical-calculations-sidereal-time/) by
 [James Still](https://squarewidget.com/).
 
-So basically the input is a `POSIXct` date-time and a given longitude and the
-result is an alternative longitude that we use to adjust the projection of our
-Star Map. This provides the rotation observed in the **d3-celestial
-plugin**.
+The inputs are a `POSIXct` date-time and the observer's longitude in degrees.
+The example uses the returned angle to rotate the star map's projection.
 
 <details class="my-4" markdown="1">
 
