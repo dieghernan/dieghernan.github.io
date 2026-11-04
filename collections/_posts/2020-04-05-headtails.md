@@ -547,17 +547,21 @@ confirmed in the histogram generated previously, where a concentration of
 
 ## References
 
-Jiang, Bin. 2013. \"Head/Tail Breaks: A New Classification Scheme for Data with a Heavy-Tailed Distribution.\" _The Professional Geographer_ 65 (3): 482–94. <https://doi.org/10.1080/00330124.2012.700499>.
-
-———. 2019. \"A Recursive Definition of Goodness of Space for Bridging the Concepts of Space and Place for Sustainability.\" _Sustainability_ 11 (15): 4091. <https://doi.org/10.3390/su11154091>.
-
-Jiang, Bin, Xintao Liu, and Tao Jia. 2013. \"Scaling of Geographic Space as a Universal Rule for Map Generalization.\" _Annals of the Association of American Geographers_ 103 (4): 844–55. <https://doi.org/10.1080/00045608.2013.765773>.
-
-Jiang, Bin, and Junjun Yin. 2014. \"Ht-Index for Quantifying the Fractal or Scaling Structure of Geographic Features.\" _Annals of the Association of American Geographers_ 104 (3): 530–40. <https://doi.org/10.1080/00045608.2013.834239>.
-
-Taleb, Nassim Nicholas. 2008. _The Black Swan: The Impact of the Highly Improbable._ 1st ed. London: Random House.
-
-Vasicek, Oldrich. 2002. \"Loan Portfolio Value.\" _Risk_, December, 160–62.
+- Jiang, B. (2013). "Head/Tail Breaks: A New Classification Scheme for Data with
+  a Heavy-Tailed Distribution." _The Professional Geographer_ 65 (3): 482–94.
+  <https://doi.org/10.1080/00330124.2012.700499>.
+- Jiang, B. (2019). "A Recursive Definition of Goodness of Space for Bridging
+  the Concepts of Space and Place for Sustainability." _Sustainability_ 11 (15):
+  4091\. <https://doi.org/10.3390/su11154091>.
+- Jiang, B., Liu, X. & Jia, T. (2013). "Scaling of Geographic Space as a
+  Universal Rule for Map Generalization." _Annals of the Association of American
+  Geographers_ 103 (4): 844–55. <https://doi.org/10.1080/00045608.2013.765773>.
+- Jiang, B. & Yin, J. (2014). "Ht-Index for Quantifying the Fractal or Scaling
+  Structure of Geographic Features." _Annals of the Association of American
+  Geographers_ 104 (3): 530–40. <https://doi.org/10.1080/00045608.2013.834239>.
+- Taleb, N. N. (2008). _The Black Swan: The Impact of the Highly Improbable._
+  1st ed. London: Random House.
+- Vasicek, O. (2002). "Loan Portfolio Value." _Risk_, December, 160–62.
 
 [^1]: The method implemented in **classInt** corresponds to head/tail breaks
     1.0, as named in this article.

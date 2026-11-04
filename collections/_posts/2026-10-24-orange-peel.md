@@ -121,8 +121,9 @@ ggplot() +
 
 ## References
 
-The outline and masking approach follows Claus O. Wilke's
-[Interrupted Goode homolosine](https://wilkelab.org/practicalgg/articles/goode.html)
-example. For more on map projections, see Pyranhia's
-[Projections cartographiques : le guide pour ne pas y laisser sa santé mentale](https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html)
-(in French).
+- Wilke, C. O. (n.d.). "Interrupted Goode homolosine." _practicalgg_. The
+  outline and masking approach used in this post follows this example.
+  <https://wilkelab.org/practicalgg/articles/goode.html>.
+- Pyranhia. (2026). "Projections cartographiques : le guide pour ne pas y
+  laisser sa santé mentale" (in French).
+  <https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html>.
