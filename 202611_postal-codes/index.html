@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <!-- Chulapa Jekyll Theme - v2.2.1 (development) -->
+    <!-- MIT License -->
+    <!-- Docs: https://dieghernan.github.io/chulapa -->
+    <!-- Repo: https://github.com/dieghernan/chulapa -->
+    <!-- Page build 2026-11-06 -->
+    <!-- Jekyll Version 4.4.1 -->
+    <!-- Google structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "@id": "https://dieghernan.github.io/202611_postal-codes/#article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://dieghernan.github.io/202611_postal-codes/"
+        },
+        "description": "Build Voronoi polygons with R, then estimate postal code areas in Slovenia using giscoR and sf, with checks and a discussion of the data limitations.",
+        "inLanguage": "en-US",
+        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
+        "keywords": ["r_bloggers","rstats","rspatial","maps","ggplot2","sf","giscoR","dataset"],
+        "headline": "Postal codes and tessellations",
+        "image": ["https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp","https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp"],
+        "datePublished": "2026-11-06T00:00:00+01:00",
+        "dateModified": "2026-11-06T00:00:00+01:00",
+        "author": {"@id": "https://dieghernan.github.io/#author"},
+        "publisher": {
+          "@type": "Person",
+          "@id": "https://dieghernan.github.io/#publisher",
+          "name": "dieghernan",
+          "url": "https://dieghernan.github.io/",
+          "image": "https://dieghernan.github.io/assets/img/site/avatar.png"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://dieghernan.github.io/202611_postal-codes/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202611_postal-codes/#breadcrumb-1",
+            "position": 1,
+            "name": "Blog",
+            "item": "https://dieghernan.github.io/blog/"
+          },
+          {
+            "@type": "ListItem",
+            "@id": "https://dieghernan.github.io/202611_postal-codes/#breadcrumb-2",
+            "position": 2,
+            "item": "https://dieghernan.github.io/202611_postal-codes/",
+            "name": "Postal codes and tessellations"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://dieghernan.github.io/202611_postal-codes/",
+        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
+        "breadcrumb": {"@id": "https://dieghernan.github.io/202611_postal-codes/#breadcrumb"},
+        "mainEntity": {"@id": "https://dieghernan.github.io/202611_postal-codes/#article"},
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "@id": "https://dieghernan.github.io/202611_postal-codes/#primaryimage",
+          "url": "https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp"
+        },
+        "inLanguage": "en-US",
+        "name": "Postal codes and tessellations",
+        "description": "Build Voronoi polygons with R, then estimate postal code areas in Slovenia using giscoR and sf, with checks and a discussion of the data limitations."
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://dieghernan.github.io/#author",
+        "name": "Diego HH",
+        "url": "https://dieghernan.github.io/",
+        "image": "https://dieghernan.github.io/assets/img/site/avatar.png",
+        "homeLocation": {
+          "@type": "Place",
+          "name": "Madrid, Spain"
+        },
+        "sameAs": [
+          "https://x.com/dhernangomez",
+          "https://fosstodon.org/@dhernangomez",
+          "https://bsky.app/profile/dieghernan.bsky.social",
+          "https://github.com/dieghernan/",
+          "https://orcid.org/0000-0001-8457-4658"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://dieghernan.github.io/#website",
+        "url": "https://dieghernan.github.io/",
+        "name": "One World",
+        "publisher": {"@id": "https://dieghernan.github.io/#publisher"}
+      }
+    </script>
+    <title>Postal codes and tessellations | One World</title>
+    <link rel="canonical" href="https://dieghernan.github.io/202611_postal-codes/">
+    <!-- Atom feed -->
+    <link href="https://dieghernan.github.io/atom.xml" type="application/atom+xml" rel="alternate" title="Atom feed One World" >
+    <!-- RSS 2.0 feed -->
+    <link href="https://dieghernan.github.io/rss.xml" type="application/rss+xml" rel="alternate" title="RSS 2.0 feed One World" >
+    <!-- Meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Diego HH" >
+    <meta name="copyright" content="Diego HH" >
+    <meta name="description" content="Build Voronoi polygons with R, then estimate postal code areas in Slovenia using giscoR and sf, with checks and a discussion of the data limitations.">
+    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" >
+    <meta name="robots" content="index, follow">
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Postal codes and tessellations | One World" >
+    <meta property="og:site_name" content="One World" >
+    <meta property="og:url" content="https://dieghernan.github.io/202611_postal-codes/" >
+    <meta property="og:type" content="article" >
+    <meta property="article:published_time" content="2026-11-06T00:00:00+01:00">
+    <meta property="article:author" content="https://dieghernan.github.io/">
+    <meta property="article:tag" content="r_bloggers">
+    <meta property="article:tag" content="rstats">
+    <meta property="article:tag" content="rspatial">
+    <meta property="article:tag" content="maps">
+    <meta property="article:tag" content="ggplot2">
+    <meta property="article:tag" content="sf">
+    <meta property="article:tag" content="giscoR">
+    <meta property="article:tag" content="dataset">
+    <meta property="og:description" content="Build Voronoi polygons with R, then estimate postal code areas in Slovenia using giscoR and sf, with checks and a discussion of the data limitations." >
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" >
+    <meta property="og:image:alt" content="Map of Slovenia showing estimated postal areas for the 20 municipalities processed in this draft. Colors identify postal prefixes, dark gray marks unassigned components and light gray shows the remaining municipal background." >
+    <meta property="og:image:width" content="2348" >
+    <meta property="og:image:height" content="2100" >
+    <meta property="og:image:type" content="image/webp" >
+    <!-- Twitter/X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Build Voronoi polygons with R, then estimate postal code areas in Slovenia using giscoR and sf, with checks and a discussion of the data limitations.">
+    <meta name="twitter:site" content="@dhernangomez" >
+    <meta name="twitter:creator" content="@dhernangomez" >
+    <!-- CSS -->
+    <!-- Preconnect with Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+    <link rel="preload" href="/assets/js/chulapa_script.js" as="script" >
+    <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
+    <link rel="stylesheet" id="maincss" href="/assets/css/main.css">
+    <link rel="stylesheet" id="csshigh" href="/assets/css/highlighter.css">
+    <script>
+    (function () {
+      'use strict';
+      var paths = {
+        light: ["/assets/css/main.css", "/assets/css/highlighter.css"],
+        dark: ["/assets/css/dark/main.css", "/assets/css/dark/highlighter.css"]
+      };
+      var themeColors = {
+        light: "",
+        dark: ""
+      };
+      function updateThemeColor(theme) {
+        var meta = document.querySelector('meta[data-chulapa-theme-color]');
+        var color = themeColors[theme];
+        if (!color) { if (meta) meta.remove(); return; }
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.name = 'theme-color';
+          meta.setAttribute('data-chulapa-theme-color', '');
+          document.head.appendChild(meta);
+        }
+        meta.content = color;
+      }
+      var key = 'chulapa-theme';
+      var mode = 'light';
+      var scheme = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+      var root = document.documentElement;
+      var request = 0;
+      function valid(value) { return ['light', 'dark', 'auto'].indexOf(value) !== -1; }
+      function resolved(value) { return value === 'dark' || (value === 'auto' && scheme && scheme.matches) ? 'dark' : 'light'; }
+      try { var stored = localStorage.getItem(key); if (valid(stored)) mode = stored; } catch (error) {}
+      var theme = resolved(mode);
+      root.dataset.theme = theme;
+      root.dataset.themeMode = mode;
+      root.style.colorScheme = theme;
+      updateThemeColor(theme);
+      /* A link error can come from an optional font import. Verify the end of
+         this exact generated sheet, never an imported or currently active sheet.
+         Unknown imports and inaccessible CSSOM keep the normal safe fallback. */
+      function usable(link, target, index, failed) {
+        try {
+          var rules = link.sheet.cssRules;
+          if (rules.length < 2) return false;
+          var last = rules[rules.length - 1];
+          var expected = (index === 0 ? 'main-' : 'highlighter-') + target;
+          if (!last || last.selectorText !== ':root' ||
+              last.style.getPropertyValue('--chulapa-css-ready').trim() !== expected) return false;
+          if (!failed) return true;
+          if (index !== 0) return false;
+          var imports = 0;
+          for (var i = 0; i < rules.length; i++) {
+            if (rules[i].type !== 3) continue; /* CSSImportRule */
+            var url = new URL(rules[i].href, document.baseURI);
+            if (url.origin !== 'https://fonts.googleapis.com' ||
+                (url.pathname !== '/css' && url.pathname !== '/css2')) return false;
+            imports++;
+          }
+          return imports > 0;
+        } catch (error) { return false; }
+      }
+      /* Recover initial dark CSS failures without discarding the saved choice. */
+      if (theme === 'dark') {
+        var initialPending = ['maincss', 'csshigh'];
+        function stopInitialListeners() {
+          document.removeEventListener('error', initialFinished, true);
+          document.removeEventListener('load', initialFinished, true);
+        }
+        function initialFinished(event) {
+          var ids = ['maincss', 'csshigh'];
+          var link = event.target;
+          if (link !== document.getElementById(link.id)) return;
+          var index = initialPending.indexOf(link.id);
+          if (index === -1) return;
+          if (usable(link, 'dark', ids.indexOf(link.id), event.type === 'error')) {
+            initialPending.splice(index, 1);
+            if (!initialPending.length) stopInitialListeners();
+            return;
+          }
+          stopInitialListeners();
+          ++request;
+          ids.forEach(function (id, index) {
+            var current = document.getElementById(id);
+            if (current) current.href = paths.light[index];
+          });
+          root.dataset.theme = 'light';
+          root.style.colorScheme = 'light';
+          updateThemeColor('light');
+          controls();
+        }
+        document.addEventListener('error', initialFinished, true);
+        document.addEventListener('load', initialFinished, true);
+      }
+      /* Static light links also work when CSP blocks this script. Replace them
+         with parser-blocking dark links before body content can be painted. */
+      if (theme === 'dark') {
+        ['maincss', 'csshigh'].forEach(function (id, index) {
+          document.getElementById(id).remove();
+          document.write('<link rel="stylesheet" id="' + id + '" href="' + paths.dark[index] + '">');
+        });
+      }
+      function controls() {
+        var names = {light: 'Light', dark: 'Dark', auto: 'Auto'};
+        var icons = {light: 'fas fa-sun', dark: 'fas fa-moon', auto: 'fa fa-adjust'};
+        document.querySelectorAll('.chulapa-theme-selector').forEach(function (selector) {
+          var button = selector.querySelector('.chulapa-theme-toggle');
+          if (!button) { selector.hidden = true; return; }
+          button.setAttribute('aria-label', 'Color theme: ' + names[mode]);
+          button.title = 'Color theme: ' + names[mode];
+          var icon = button.querySelector('i');
+          var label = button.querySelector('.chulapa-theme-label');
+          if (icon) icon.className = icons[mode];
+          if (label) label.textContent = names[mode];
+          selector.querySelectorAll('[data-theme-mode]').forEach(function (option) {
+            var selected = option.dataset.themeMode === mode;
+            option.classList.toggle('active', selected);
+            option.setAttribute('aria-pressed', String(selected));
+          });
+          selector.hidden = false;
+        });
+      }
+      function apply(value) {
+        var ids = ['maincss', 'csshigh'];
+        var previous = ids.map(function (id) { return document.getElementById(id); });
+        /* Custom head overrides may remove the managed stylesheet pair. */
+        if (previous.some(function (link) { return !link || link.tagName !== 'LINK'; })) return false;
+        var target = resolved(value);
+        var currentRequest = ++request;
+        mode = value;
+        root.dataset.themeMode = mode;
+        controls();
+        if (target === root.dataset.theme) return true;
+        var links = paths[target].map(function (url) {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.media = 'not all';
+          link.href = url;
+          return link;
+        });
+        var loaded = 0;
+        function discard() { links.forEach(function (link) { link.remove(); }); }
+        function failed() {
+          discard();
+          if (currentRequest === request) {
+            ++request;
+            controls();
+          }
+        }
+        links.forEach(function (link, index) {
+          var settled = false;
+          function finished(event) {
+            if (settled) return;
+            settled = true;
+            if (!usable(link, target, index, event.type === 'error')) { failed(); return; }
+            if (++loaded !== 2) return;
+            if (currentRequest !== request) { discard(); return; }
+            /* Do not overwrite stylesheets replaced by custom scripts while loading. */
+            if (previous.some(function (old, index) { return document.getElementById(ids[index]) !== old; })) { failed(); return; }
+            ids.forEach(function (id, index) {
+              previous[index].remove();
+              links[index].id = id;
+              links[index].media = 'all';
+            });
+            root.dataset.theme = target;
+            root.style.colorScheme = target;
+            updateThemeColor(target);
+          }
+          link.onerror = finished;
+          link.onload = finished;
+          /* Keep the custom stylesheet last in the cascade. */
+          document.head.insertBefore(link, previous[0]);
+        });
+        return true;
+      }
+      /* Preserve the prototype's entry point for custom controls, with one initialization read. */
+      window.chulapaSetThemeMode = function (value) {
+        if (!valid(value) || !apply(value)) return;
+        try { localStorage.setItem(key, mode); } catch (error) {}
+      };
+      document.addEventListener('DOMContentLoaded', controls);
+      document.addEventListener('click', function (event) {
+        var option = event.target.closest && event.target.closest('.chulapa-theme-selector [data-theme-mode]');
+        if (!option || !valid(option.dataset.themeMode)) return;
+        window.chulapaSetThemeMode(option.dataset.themeMode);
+        var button = option.closest('.chulapa-theme-selector').querySelector('.chulapa-theme-toggle');
+        if (button) button.focus();
+      });
+      window.addEventListener('storage', function (event) {
+        if (event.key === key || event.key === null) apply(valid(event.newValue) ? event.newValue : 'light');
+      });
+      if (scheme) {
+        var changed = function () { if (mode === 'auto') apply('auto'); };
+        if (scheme.addEventListener) scheme.addEventListener('change', changed);
+        else if (scheme.addListener) scheme.addListener(changed);
+      }
+    })();
+    </script>
+    <!-- Custom css -->
+    <link rel="stylesheet" href="https://dieghernan.github.io/assets/css/custom.css" >
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FWXW2HLTVZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FWXW2HLTVZ');
+    </script>
+    <script data-goatcounter="https://dieghernan.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<link rel="describedby" type="text/plain" href="/llms.txt">
+    <!-- start custom head snippets -->
+    <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
+    <link rel="indieauth-metadata" href="https://indiekey.id/.well-known/oauth-authorization-server/s/j35a2ja6eg5casc2">
+    <link rel="pingback" href="https://webmention.io/dieghernan.github.io/xmlrpc">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="c23b83bb-5f33-4256-a5b5-fbc59c1c7ae8"></script>
+    <meta name="msvalidate.01" content="6AB8513679757EDD8E6978F8E8BC2508">
+    <meta name="fediverse:creator" content="@dhernangomez@fosstodon.org">
+    <link rel="authorization_endpoint" href="https://indiekey.id/s/j35a2ja6eg5casc2/auth">
+    <link rel="token_endpoint" href="https://indiekey.id/token">
+    <link rel="microsub" href="https://aperture.p3k.io/microsub/1119">
+    <!-- favicons -->
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="icon" href="/assets/img/favicons/favicon.ico" sizes="any">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/assets/img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#000000">
+    <!-- end custom head snippets -->
+</head>
+<body class="d-flex flex-column" id="body">
+	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
+	<nav class="navbar navbar-expand-lg sticky-top navbar-chulapa" aria-label="primary-navigation">
+	<div class="container-fluid mx-md-2">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarToggler">
+				<ul class="navbar-nav ml-auto"><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/projects">Projects</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/about">About</a>
+					</li><li class="nav-item dropdown"><button type="button" class="nav-link dropdown-toggle " id="Archives" data-toggle="dropdown" aria-expanded="false">Archives</button>
+						<div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="Archives"><a class="dropdown-item " href="https://dieghernan.github.io/archive">By date</a><a class="dropdown-item " href="https://dieghernan.github.io/tags">By tags</a></div>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/gallery">Gallery</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+					</li><li class="nav-item">
+						<a class="nav-link " href="https://dieghernan.github.io/search">
+							<span class="d-md-none p-0 pr-1">Search</span><i class="fa fa-search" aria-hidden="true"></i><span class="sr-only">Search</span>
+						</a>
+					</li>
+<li class="nav-item dropdown chulapa-theme-selector" hidden>
+  <button type="button" class="nav-link dropdown-toggle chulapa-theme-toggle" id="chulapa-theme-classic" data-toggle="dropdown" aria-expanded="false" aria-label="Color theme: Light" title="Color theme: Light">
+    <i class="fas fa-sun" aria-hidden="true"></i>
+    <span class="chulapa-theme-label">Light</span>
+  </button>
+ <div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="chulapa-theme-classic">
+    <button type="button" class="dropdown-item" data-theme-mode="light" aria-pressed="true"><i class="fas fa-sun mr-2" aria-hidden="true"></i>Light</button>
+    <button type="button" class="dropdown-item" data-theme-mode="dark" aria-pressed="false"><i class="fas fa-moon mr-2" aria-hidden="true"></i>Dark</button>
+    <button type="button" class="dropdown-item" data-theme-mode="auto" aria-pressed="false"><i class="fa fa-adjust mr-2" aria-hidden="true"></i>Auto</button>
+ </div>
+</li>
+			</ul>
+			</div></div>
+</nav>
+			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
+  <a class="u-url d-none" href="https://dieghernan.github.io/202611_postal-codes/">Invisible link to canonical for Microformats</a>
+    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" alt="Map of Slovenia showing estimated postal areas for the 20 municipalities processed in this draft. Colors identify postal prefixes, dark gray marks unassigned components and light gray shows the remaining municipal background.">
+  <a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans"></a>
+ <main class="d-flex flex-column flex-fill">
+<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp')">
+     </div><div class="container-lg mt-2">
+       <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+           <h1 class="p-name">Postal codes and tessellations</h1><p class="lead chulapa-subtitle p-summary">From postal points to areas using Voronoi polygons</p>
+           <hr class="mb-0">
+			</div>
+		</div>
+	</div>
+</header>
+ <div class="container-lg pb-3 flex-fill">
+<div class="row my-1">
+<div class="col-lg-5 offset-lg-2 col small">
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb my-0 py-0 chulapa-bg-transparent pl-0" itemscope itemtype="https://schema.org/BreadcrumbList" itemid="https://dieghernan.github.io/202611_postal-codes/#breadcrumb">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202611_postal-codes/#breadcrumb-1"><a href="https://dieghernan.github.io/blog/" itemprop="item"><span itemprop="name">Blog</span></a>
+         <meta itemprop="position" content="1" ></li>
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope
+          itemtype="https://schema.org/ListItem" itemid="https://dieghernan.github.io/202611_postal-codes/#breadcrumb-2">
+      <link itemprop="item" href="https://dieghernan.github.io/202611_postal-codes/">
+        <span itemprop="name">Postal codes and tessellations</span>
+       <meta itemprop="position" content="2" >
+     </li>
+ </ol>
+ </nav>
+ <div class="chulapaDateSocial">
+            <time datetime="2026-11-06T00:00:00+01:00" class="dt-published" >06 nov 2026</time>
+        </div></div>
+         <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202611_postal-codes/&text=Postal+codes+and+tessellations&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,maps,ggplot2,sf,giscoR,dataset" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Postal%20codes%20and%20tessellations%20https://dieghernan.github.io/202611_postal-codes/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23maps%20%23ggplot2%20%23sf%20%23giscoR%20%23dataset" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202611_postal-codes/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
+             <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Postal+codes+and+tessellations%20https://dieghernan.github.io/202611_postal-codes/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
+         <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202611_postal-codes/&title=Postal+codes+and+tessellations" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+         </div></div>
+   <div class="row pt-2">
+     <aside class="col-lg-2 mt-lg-3 small"><div class="h-card p-author"><a class="u-url d-none" href="https://dieghernan.github.io/">Diego HH</a><div class="row d-flex align-items-center mb-2"><img src="https://dieghernan.github.io/assets/img/site/avatar.png" alt="Diego HH" class="ml-3 mr-0 mx-lg-auto mb-lg-1 chulapa-avatar-size u-photo"><div class="col-9 col-lg-12 text-lg-center p-name">
+						Diego HH
+					</div>
+				</div>
+				<div class="row mb-2 mb-lg-0">
+					<div class="col text-lg-center"><address class="d-inline d-lg-block mr-2 mx-lg-auto mb-lg-2 small chulapa-links-hover-only">
+						  <a class="pr-lg-0 p-region" href="https://www.google.com/maps/search/?api=1&query=Madrid%2C+Spain">
+						    <i class="fas fa-map-marker-alt fa-lg mr-1" aria-hidden="true"></i>Madrid, Spain</a>
+						</address><div class="d-inline my-1 mx-lg-0 chulapa-links-hover-only"><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://x.com/dhernangomez" title="My Twitter/X" aria-label="My Twitter/X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://fosstodon.org/@dhernangomez" title="My Mastodon" aria-label="My Mastodon" ><i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://bsky.app/profile/dieghernan.bsky.social" title="My Bluesky" aria-label="My Bluesky" ><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://github.com/dieghernan/" title="My GitHub" aria-label="My GitHub" ><i class="fab fa-github fa-lg" aria-hidden="true"></i></a><a class="mr-2 mx-lg-1 u-url" rel="me" href="https://orcid.org/0000-0001-8457-4658" title="My Orcid" aria-label="My Orcid" ><i class="fa-brands fa-orcid fa-lg" aria-hidden="true"></i></a></div></div>
+				</div>
+				</div>
+</aside>
+     <article id="maincontent" class="col-lg-8 mt-3">
+	<button type="button" class="btn btn-primary btn-sm rounded-right position-fixed chulapa-btn-sidebar bs-canvas-anim chulapa-btn-nofocus chulapa-fa-static" id='chulapa-sidetoc-toggle' onclick="openSideBar()" aria-label="Open Sidebar" aria-expanded="false" aria-controls="sideBar">
+		<i class="fa-solid fa-plus"></i><span class="sr-only">Open Sidebar</span>
+	</button>
+	<div class="bs-canvas bs-canvas-anim bs-canvas-left position-fixed navbar-chulapa h-100" id='sideBar' aria-hidden="true" inert>
+		<p class="pt-2 pb-1 px-3">
+			<button type="button" class="navbar-text close chulapa-btn-nofocus chulapa-fa-static" aria-label="Close" onclick="closeSideBar()">
+				<i class="fa-solid fa-times"></i><span class="sr-only">Close Sidebar</span>
+			</button>
+		</p>
+		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
+		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Postal codes and tessellations</a></p>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#what-is-a-voronoi-polygon" class="nav-link">What is a Voronoi polygon?</a><ul><li class="nav-item nav d-block"><a href="#a-tiny-example-in-r" class="nav-link">A tiny example in <strong>R</strong></a></li></ul></li><li class="nav-item nav d-block"><a href="#before-we-start-what-are-we-estimating" class="nav-link">Before we start: what are we estimating?</a></li><li class="nav-item nav d-block"><a href="#getting-the-data" class="nav-link">Getting the data</a></li><li class="nav-item nav d-block"><a href="#starting-with-ljubljana" class="nav-link">Starting with Ljubljana</a><ul><li class="nav-item nav d-block"><a href="#building-the-cells" class="nav-link">Building the cells</a></li><li class="nav-item nav d-block"><a href="#clipping-and-recovering-postal-codes" class="nav-link">Clipping and recovering postal codes</a></li></ul></li><li class="nav-item nav d-block"><a href="#from-one-municipality-to-the-whole-country" class="nav-link">From one municipality to the whole country</a><ul><li class="nav-item nav d-block"><a href="#why-use-an-inward-margin" class="nav-link">Why use an inward margin?</a></li><li class="nav-item nav d-block"><a href="#three-cases-one-function" class="nav-link">Three cases, one function</a></li><li class="nav-item nav d-block"><a href="#handling-unassigned-areas" class="nav-link">Handling unassigned areas</a></li></ul></li><li class="nav-item nav d-block"><a href="#the-complete-map" class="nav-link">The complete map</a></li><li class="nav-item nav d-block"><a href="#checking-the-result" class="nav-link">Checking the result</a></li><li class="nav-item nav d-block"><a href="#back-to-spain" class="nav-link">Back to Spain</a></li><li class="nav-item nav d-block"><a href="#references" class="nav-link">References</a></li></ul>
+		</nav>   
+	</div>
+       <div class="e-content"><p>I recently published my project <a href="https://dieghernan.github.io/codigospostales/">Postal codes of
+Spain</a>, with estimated postal
+areas, an interactive map and GeoPackage downloads. But there is something we
+have not looked at yet: how do those address points become polygons? The answer
+is… <strong>Voronoi polygons</strong>.</p>
+<h2 id="what-is-a-voronoi-polygon">What is a Voronoi polygon?</h2>
+<p>Imagine a few shops on a flat map. Which one is closest to your house? Ask that
+question for every location and give each shop its own color. The result is a
+<strong>Voronoi diagram</strong>, also known as a <strong>Voronoi tessellation</strong>, <strong>Voronoi
+decomposition</strong>, <strong>Voronoi partition</strong> or <strong>Dirichlet tessellation</strong>. This
+technique divides a plane into regions based on the distance to a given set of
+points.</p>
+<p>In our example, each shop is a <strong>site</strong>, or generating point. Its <strong>Voronoi
+cell</strong>, also called a <strong>Thiessen polygon</strong>, contains the locations at least as
+close to that site as to any other. Along a shared edge, two sites are
+equally close. Where several cells meet, there may be a tie between more sites.
+With ordinary straight-line distance, the edges follow perpendicular bisectors
+between sites. Some cells extend indefinitely, so maps usually show them clipped
+to a study area.</p>
+<p>The name honors Georgy Voronoi, who studied these partitions in the early
+twentieth century. The idea has earlier roots, including Dirichlet’s
+nineteenth-century work (hence the name Dirichlet tessellation). <a href="https://doi.org/10.2478/pcr-2018-0009">Pokojski and
+Pokojska (2018)</a> review the history and
+geographical applications.</p>
+<p>These partitions are useful for exploring proximity to shops or public services,
+assigning areas to weather stations and studying spatial patterns. For example,
+Thiessen polygons can supply area weights when estimating rainfall from rain
+gauges. The underlying question is always about the chosen distance: the nearest
+hospital in a straight line may not be the quickest one to reach.</p>
+<h3 id="a-tiny-example-in-r">A tiny example in <strong>R</strong></h3>
+<p>Let’s start with five points in an imaginary square, including one at its
+center, using just <strong>sf</strong> and <strong>ggplot2</strong>. The coordinates have arbitrary units
+and no geographical coordinate reference system.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Define a common theme for the maps.</span><span class="w">
+</span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#faf8f2"</span><span class="w">
+</span><span class="n">ink</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#203b47"</span><span class="w">
+
+</span><span class="n">theme_set</span><span class="p">(</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme</span><span class="p">(</span><span class="w">
+      </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
+      </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey40"</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
+      </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">sites</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">site</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w"> </span><span class="s2">"D"</span><span class="p">,</span><span class="w"> </span><span class="s2">"E"</span><span class="p">),</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">),</span><span class="w">
+  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">toy_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sf</span><span class="p">(</span><span class="n">sites</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">study_area</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sfc</span><span class="p">(</span><span class="n">st_bbox</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">toy_cells</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">toy_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">study_area</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_collection_extract</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_intersection</span><span class="p">(</span><span class="n">study_area</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toy_cells</span><span class="p">,</span><span class="w">
+    </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"#a8dadc"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#f4c89a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#c6b8df"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#bfd59b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#f2b5c4"</span><span class="p">),</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toy_points</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#203b47"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sites</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">site</span><span class="p">),</span><span class="w">
+    </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#203b47"</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">datum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Five points, five Voronoi cells"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Each location belongs to the closest site"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-toy-example-1.webp" alt="Five labeled sites in a square: A and B below, C and D above, and E at the&#10;center, surrounded by its own bounded Voronoi cell.&#10;" width="100%" /></p>
+<p>Five points, five cells. The new point E at <code class="language-plaintext highlighter-rouge">(5, 5)</code> has a bounded cell
+surrounded by the other four. The outer cells extend beyond the square and are
+clipped to its edges. <code class="language-plaintext highlighter-rouge">st_union()</code> collects the points into one geometry,
+<code class="language-plaintext highlighter-rouge">st_voronoi()</code> builds the diagram and <code class="language-plaintext highlighter-rouge">st_intersection()</code> clips it to our
+square. The colors help us tell the cells apart. We have not assigned any postal
+codes yet.</p>
+<p>The diagram knows nothing about roads, rivers or administrative boundaries. As
+we move to postal points, we will need to make our choices about those
+boundaries explicit.</p>
+<h2 id="before-we-start-what-are-we-estimating">Before we start: what are we estimating?</h2>
+<p>The Spanish project uses CartoCiudad address points with their postal codes. It
+follows <a href="https://doi.org/10.12842/WPIVIE_0322">Goerlich (2022)</a>, who develops an
+idea presented by <a href="https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos">Sánchez
+(2020)</a>.
+The <a href="https://www.uv.es/goerlich/Ivie/CodPost.html">updated online version</a>
+describes the method in detail.</p>
+<p>For Slovenia, we will use GISCO’s postal points, retrieved with <strong>giscoR</strong>.
+There is an important difference here: a representative point for a code tells
+us much less than thousands of addresses with that code. Detailed addresses help
+the partition follow their distribution more closely, although proximity alone
+still cannot reproduce postal delivery decisions.</p>
+<p>We have not established that Slovenian postal areas should follow municipal
+boundaries. Imposing those boundaries is a modeling choice for this exercise,
+inspired by the Spanish workflow, rather than a verified property of the
+Slovenian postal system.</p>
+<p class="alert alert-warning p-3 mx-2 mb-3"><i class="fa fa-exclamation-triangle"></i> This post explains the workflow. The
+polygons we create are not official postal boundaries, and this exercise does
+not validate the GISCO postal data.</p>
+<h2 id="getting-the-data">Getting the data</h2>
+<p>First, let’s get the municipal boundaries and postal points. We use the 2024
+release of both datasets.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+
+</span><span class="n">municipalities</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_lau</span><span class="p">(</span><span class="w">
+  </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SI"</span><span class="p">,</span><span class="w"> </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3035</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">GISCO_ID</span><span class="p">,</span><span class="w"> </span><span class="n">LAU_NAME</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+
+</span><span class="n">raw_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_postalcodes</span><span class="p">(</span><span class="w">
+  </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SI"</span><span class="p">,</span><span class="w"> </span><span class="n">epsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3035</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>We work in <strong>ETRS89 / LAEA Europe (EPSG:3035)</strong>, a projected coordinate system
+with coordinates in meters. This makes the 200 m and 50 m margins used later
+meaningful. Voronoi uses Euclidean distances in this plane, rather than road
+distances. The projection does not preserve every distance exactly either.</p>
+<p>Before we start drawing, what have we actually downloaded?</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postal_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">raw_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">trimws</span><span class="p">(</span><span class="nf">as.character</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">),</span><span class="w"> </span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">code_counts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">postal_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_drop_geometry</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">count</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"points_per_code"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">Indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Municipalities"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Downloaded points"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Points with a postal code"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Distinct postal codes"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Codes represented by one point"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="n">nrow</span><span class="p">(</span><span class="n">municipalities</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">raw_points</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">postal_points</span><span class="p">),</span><span class="w">
+    </span><span class="n">nrow</span><span class="p">(</span><span class="n">code_counts</span><span class="p">),</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">code_counts</span><span class="o">$</span><span class="n">points_per_code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<table>
+<thead>
+   <tr>
+     <th style="text-align: left">Indicator</th>
+     <th style="text-align: right">Value</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td style="text-align: left">Municipalities</td>
+     <td style="text-align: right">212</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Downloaded points</td>
+     <td style="text-align: right">557</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Points with a postal code</td>
+     <td style="text-align: right">557</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Distinct postal codes</td>
+     <td style="text-align: right">557</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Codes represented by one point</td>
+     <td style="text-align: right">557</td>
+   </tr>
+ </tbody>
+</table>
+<p>These counts give us a first look at the file, but they are not a quality check.
+They do not establish whether every code is present or whether the coordinates
+are correct. With one point per code, we will be drawing areas around
+representatives rather than estimating them from individual addresses.</p>
+<p>Two points at exactly the same coordinates cannot generate separate Voronoi
+cells. We sort by postal code and keep the first point at each location, as in
+the original workflow. This is a reproducible tie-breaking rule, not evidence
+that the retained code is correct. The counts below show how many records we
+remove and how many locations have conflicting codes.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postal_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">postal_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">arrange</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">conflicts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">postal_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">codes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n_distinct</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">),</span><span class="w"> </span><span class="n">.groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"drop"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">codes</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+
+</span><span class="n">duplicates</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">duplicated</span><span class="p">(</span><span class="n">postal_points</span><span class="o">$</span><span class="n">geometry</span><span class="p">)</span><span class="w">
+
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">Indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Duplicate locations removed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Locations with conflicting codes"</span><span class="p">),</span><span class="w">
+  </span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">duplicates</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">conflicts</span><span class="p">))</span><span class="w">
+</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<table>
+<thead>
+   <tr>
+     <th style="text-align: left">Indicator</th>
+     <th style="text-align: right">Value</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td style="text-align: left">Duplicate locations removed</td>
+     <td style="text-align: right">79</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Locations with conflicting codes</td>
+     <td style="text-align: right">16</td>
+   </tr>
+ </tbody>
+</table>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">postal_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">postal_points</span><span class="p">[</span><span class="o">!</span><span class="n">duplicates</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="starting-with-ljubljana">Starting with Ljubljana</h2>
+<p>Let’s pick Ljubljana and keep the points inside it. We use <code class="language-plaintext highlighter-rouge">st_within()</code> so that
+a point exactly on a shared boundary is not assigned to both neighboring
+municipalities.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">city</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">municipalities</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">LAU_NAME</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Ljubljana"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">city_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_filter</span><span class="p">(</span><span class="n">postal_points</span><span class="p">,</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">.predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_within</span><span class="p">)</span><span class="w">
+
+</span><span class="n">base_map</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#e8e4d8"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w">
+
+</span><span class="n">gisco_attr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_attributions</span><span class="p">()</span><span class="w">
+
+</span><span class="n">base_map</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city_points</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#bd5137"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Ljubljana: the starting point"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A municipal boundary and points with postal codes"</span><span class="p">,</span><span class="w">
+    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gisco_attr</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-ljubljana-1.webp" alt="Outline of Ljubljana municipality with six postal point locations marked&#10;inside it.&#10;" width="100%" /></p>
+<h3 id="building-the-cells">Building the cells</h3>
+<p>Each cell contains locations at least as close to its generating point as to
+any other point. Cell boundaries occur where distances to two points are equal.
+For this first demonstration, we keep all interior points, without the margins used in
+the national workflow.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cells</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">city_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_as_sfc</span><span class="p">(</span><span class="n">st_bbox</span><span class="p">(</span><span class="n">city</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_collection_extract</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">_</span><span class="p">)</span><span class="w">
+
+</span><span class="n">base_map</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cells</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#bd5137"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city_points</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"An area of proximity for every point"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cells still extend beyond the municipal boundary"</span><span class="p">,</span><span class="w">
+    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Own elaboration using data from Eurostat / GISCO, 2024"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-1.webp" alt="Unclipped Voronoi cells outlined around six postal points, extending beyond&#10;the shaded Ljubljana municipal boundary.&#10;" width="100%" /></p>
+<p><code class="language-plaintext highlighter-rouge">st_union()</code> gathers the points so we build one diagram. One detail to keep in
+mind: <code class="language-plaintext highlighter-rouge">envelope</code> supplies a working extent, but <strong>does not clip</strong> the cells to
+the municipality. We need an intersection for that.</p>
+<h3 id="clipping-and-recovering-postal-codes">Clipping and recovering postal codes</h3>
+<p>It would be convenient if cells came out in the same order as the input points,
+but we should not rely on that. Instead, we recover each cell’s code with a
+spatial relationship before clipping. Each cell must contain exactly one
+generating point.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">point_matches</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_intersects</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span><span class="w"> </span><span class="n">city_points</span><span class="p">)</span><span class="w">
+
+</span><span class="n">cells</span><span class="o">$</span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">city_points</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">[</span><span class="n">unlist</span><span class="p">(</span><span class="n">point_matches</span><span class="p">)]</span><span class="w">
+
+</span><span class="n">clipped_geometry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_intersection</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cells</span><span class="p">),</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">city</span><span class="p">))</span><span class="w">
+
+</span><span class="n">city_cells</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+  </span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cells</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">[</span><span class="nf">attr</span><span class="p">(</span><span class="n">clipped_geometry</span><span class="p">,</span><span class="w"> </span><span class="s2">"idx"</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">]],</span><span class="w">
+  </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clipped_geometry</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">city_areas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">city_cells</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">.groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"drop"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+
+</span><span class="n">city_colours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setNames</span><span class="p">(</span><span class="w">
+  </span><span class="n">hcl.colors</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">city_areas</span><span class="p">),</span><span class="w"> </span><span class="n">palette</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Dark 3"</span><span class="p">),</span><span class="w">
+  </span><span class="n">sort</span><span class="p">(</span><span class="n">city_areas</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">city_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+  </span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city_areas</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">,</span><span class="w">
+  </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_point_on_surface</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">city_areas</span><span class="p">))</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">city_areas</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POSTCODE</span><span class="p">),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city_points</span><span class="p">,</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">21</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.4</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf_text</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city_labels</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POSTCODE</span><span class="p">),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">city_colours</span><span class="p">,</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"none"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">datum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"From points to estimated areas"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cells clipped and merged by postal code"</span><span class="p">,</span><span class="w">
+    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Teaching example · Not official postal boundaries"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp" alt="Six colored areas clipped to Ljubljana, labeled 1000, 1210, 1211, 1231, 1260&#10;and 1261, with their generating postal points marked.&#10;" width="100%" /></p>
+<p>We intersect the geometry columns, then use the intersection’s <code class="language-plaintext highlighter-rouge">idx</code> matrix to
+recover each cell’s postal code. This keeps the attribute assignment explicit.
+Label positions are also calculated from geometries alone.</p>
+<p>Grouping by postal code with <code class="language-plaintext highlighter-rouge">summarise()</code> merges the geometries. With many
+addresses sharing a code, their cells would dissolve into one geometry, possibly
+with several separate parts.</p>
+<h2 id="from-one-municipality-to-the-whole-country">From one municipality to the whole country</h2>
+<p>Ljubljana is done. Now let’s repeat the operation for each component of each
+municipality. Municipalities can have separate pieces: normalizing to
+<code class="language-plaintext highlighter-rouge">MULTIPOLYGON</code> and then casting to <code class="language-plaintext highlighter-rouge">POLYGON</code> lets us handle them independently,
+without automatically extending a code to a piece with no points.</p>
+<p>The municipality ID and name apply to every component, so we mark those
+attributes as spatially constant before splitting the geometries.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">components</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">municipalities</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_set_agr</span><span class="p">(</span><span class="s2">"constant"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTIPOLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">component_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="why-use-an-inward-margin">Why use an inward margin?</h3>
+<p>In the Spanish project, we first select addresses within an inward margin of
+<strong>200 m</strong>. If none are found, we try <strong>50 m</strong>. This reduces the influence of
+points close to a boundary, where small mismatches between layers may affect
+their assignment.</p>
+<p>There is no universal rule behind these numbers. Goerlich describes a 20 m
+margin. The 200 m and 50 m choices come from my implementation. We keep them
+here to explain that workflow, although sparse postal points make it easier to
+exclude useful information. Comparing other margins would be a useful next step.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">select_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">component</span><span class="p">,</span><span class="w"> </span><span class="n">postal_points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">margin</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="m">50</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">interior</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">component</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="n">margin</span><span class="p">)</span><span class="w">
+
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">all</span><span class="p">(</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">interior</span><span class="p">)))</span><span class="w"> </span><span class="k">next</span><span class="w">
+
+    </span><span class="n">selected_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_filter</span><span class="p">(</span><span class="n">postal_points</span><span class="p">,</span><span class="w"> </span><span class="n">interior</span><span class="p">,</span><span class="w">
+      </span><span class="n">.predicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_within</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">selected_points</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nf">return</span><span class="p">(</span><span class="n">selected_points</span><span class="p">)</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">postal_points</span><span class="p">[</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>The margin only selects points: the resulting areas cover the <strong>original</strong>
+component, not the smaller buffered geometry. If both attempts fail, we leave
+the component unassigned. We do not borrow the nearest point from outside the
+municipality.</p>
+<h3 id="three-cases-one-function">Three cases, one function</h3>
+<p>There are three cases to handle. With no points, we keep the component and
+assign <code class="language-plaintext highlighter-rouge">NA</code>. If all selected points share a code, we assign it to the whole
+component. We only need Voronoi when several codes are present: no need to split
+an area that already has a single assignment.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">build_areas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">component</span><span class="p">,</span><span class="w"> </span><span class="n">postal_points</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">selected_points</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">select_points</span><span class="p">(</span><span class="n">component</span><span class="p">,</span><span class="w"> </span><span class="n">postal_points</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">codes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">selected_points</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w">
+
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1L</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">component</span><span class="o">$</span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">codes</span><span class="p">))</span><span class="w"> </span><span class="n">codes</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="kc">NA_character_</span><span class="w">
+    </span><span class="nf">return</span><span class="p">(</span><span class="n">component</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+  </span><span class="n">cells</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">selected_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_as_sfc</span><span class="p">(</span><span class="n">st_bbox</span><span class="p">(</span><span class="n">component</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_collection_extract</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">_</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">point_matches</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_intersects</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span><span class="w"> </span><span class="n">selected_points</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">cells</span><span class="o">$</span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">selected_points</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">[</span><span class="n">unlist</span><span class="p">(</span><span class="n">point_matches</span><span class="p">)]</span><span class="w">
+
+  </span><span class="n">clipped_geometry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_intersection</span><span class="p">(</span><span class="w">
+    </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">cells</span><span class="p">),</span><span class="w">
+    </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">component</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">POSTCODE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cells</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">[</span><span class="nf">attr</span><span class="p">(</span><span class="n">clipped_geometry</span><span class="p">,</span><span class="w"> </span><span class="s2">"idx"</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">]],</span><span class="w">
+    </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clipped_geometry</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">group_by</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">summarise</span><span class="p">(</span><span class="n">.groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"drop"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+    </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
+
+  </span><span class="n">result</span><span class="o">$</span><span class="n">GISCO_ID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">component</span><span class="o">$</span><span class="n">GISCO_ID</span><span class="w">
+
+  </span><span class="n">result</span><span class="o">$</span><span class="n">LAU_NAME</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">component</span><span class="o">$</span><span class="n">LAU_NAME</span><span class="w">
+
+  </span><span class="n">result</span><span class="o">$</span><span class="n">component_id</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">component</span><span class="o">$</span><span class="n">component_id</span><span class="w">
+
+  </span><span class="n">result</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="nf">seq_len</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">components</span><span class="p">)),</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">build_areas</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="n">postal_points</span><span class="p">)</span><span class="w">
+</span><span class="p">})</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">bind_rows</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<h3 id="handling-unassigned-areas">Handling unassigned areas</h3>
+<p>Can we fill any of the gaps? A component without points may belong to a
+municipality whose other components have information. We recover its code only
+if the municipality has <strong>one distinct recovered code</strong>. This is an imputation
+from the available data, not proof that the municipality really has just one
+code.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">unique_codes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_drop_geometry</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">distinct</span><span class="p">(</span><span class="n">GISCO_ID</span><span class="p">,</span><span class="w"> </span><span class="n">POSTCODE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">add_count</span><span class="p">(</span><span class="n">GISCO_ID</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
+
+</span><span class="n">unassigned_before</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">))</span><span class="w">
+
+</span><span class="n">index</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">match</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">GISCO_ID</span><span class="p">,</span><span class="w"> </span><span class="n">unique_codes</span><span class="o">$</span><span class="n">GISCO_ID</span><span class="p">)</span><span class="w">
+
+</span><span class="n">recoverable</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">is.na</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="w">
+
+</span><span class="n">result</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">[</span><span class="n">recoverable</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unique_codes</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">recoverable</span><span class="p">]]</span><span class="w">
+</span></code></pre></div></div>
+<p>Before drawing the final map, let’s tidy up the geometries and keep only
+surfaces. Repairs can produce collections containing residual lines or points,
+which do not belong in an area layer. Dissolving by postal code also removes
+municipal boundaries between areas sharing that code.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">keep_surfaces</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">geometry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_make_valid</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">
+
+  </span><span class="n">geometry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">part</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">inherits</span><span class="p">(</span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MULTIPOLYGON"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GEOMETRYCOLLECTION"</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nf">return</span><span class="p">(</span><span class="n">st_multipolygon</span><span class="p">())</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+    </span><span class="n">surfaces</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">suppressWarnings</span><span class="p">(</span><span class="n">st_collection_extract</span><span class="p">(</span><span class="n">st_sfc</span><span class="p">(</span><span class="n">part</span><span class="p">),</span><span class="w"> </span><span class="s2">"POLYGON"</span><span class="p">))</span><span class="w">
+
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">surfaces</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0L</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nf">all</span><span class="p">(</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">surfaces</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nf">return</span><span class="p">(</span><span class="n">st_multipolygon</span><span class="p">())</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+    </span><span class="n">st_cast</span><span class="p">(</span><span class="n">st_union</span><span class="p">(</span><span class="n">surfaces</span><span class="p">),</span><span class="w"> </span><span class="s2">"MULTIPOLYGON"</span><span class="p">,</span><span class="w"> </span><span class="n">warn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
+  </span><span class="p">})</span><span class="w">
+
+  </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sfc</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">
+
+  </span><span class="n">x</span><span class="p">[</span><span class="o">!</span><span class="n">st_is_empty</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">unassigned</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">keep_surfaces</span><span class="p">()</span><span class="w">
+
+</span><span class="n">postal_areas</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">.groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"drop"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">keep_surfaces</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"MULTIPOLYGON"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<h2 id="the-complete-map">The complete map</h2>
+<p>For the national overview, let’s color the areas by the first digit of their
+code. This keeps the map readable, without claiming that we have validated a
+classification of postal regions. Gray is reserved for unassigned components,
+with their own legend entry.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">postal_colours</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"1"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#007F7F"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E87500"</span><span class="p">,</span><span class="w"> </span><span class="s2">"3"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#3B6FB6"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#A64E9A"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"5"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#649A32"</span><span class="p">,</span><span class="w"> </span><span class="s2">"6"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#D9AF00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"8"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#B94350"</span><span class="p">,</span><span class="w"> </span><span class="s2">"9"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#6255A4"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Unassigned"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#727A80"</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">postal_groups</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sort</span><span class="p">(</span><span class="n">unique</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="n">postal_areas</span><span class="o">$</span><span class="n">POSTCODE</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">municipalities</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#d5d2ca"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">postal_areas</span><span class="p">,</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">substr</span><span class="p">(</span><span class="n">POSTCODE</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.15</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unassigned</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Unassigned"</span><span class="p">),</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.15</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_manual</span><span class="p">(</span><span class="w">
+    </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">postal_colours</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Postal code group"</span><span class="p">,</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">postal_groups</span><span class="p">,</span><span class="w"> </span><span class="s2">"Unassigned"</span><span class="p">),</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">postal_groups</span><span class="p">,</span><span class="w"> </span><span class="s2">"xxx"</span><span class="p">),</span><span class="w"> </span><span class="s2">"Unassigned"</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">datum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Slovenia, point by point"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Proximity areas clipped to municipal boundaries"</span><span class="p">,</span><span class="w">
+    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="s2">"Eurostat / GISCO, 2024 · Own elaboration"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Dark grey: unassigned areas · Estimated boundaries, not official"</span><span class="p">,</span><span class="w">
+      </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\n"</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" alt="Map of Slovenia showing estimated postal areas for the 20 municipalities processed in this draft. Colors identify postal prefixes, dark gray marks unassigned components and light gray shows the remaining municipal background." width="100%" /></p>
+<h2 id="checking-the-result">Checking the result</h2>
+<p>The map is ready, but let’s check the geometry before going further. Are the
+polygons valid? Do assigned and unassigned areas cover the territory? Are there
+any appreciable overlaps? We allow one square meter for numerical differences in
+the geometry operations.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">territory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_union</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">municipalities</span><span class="p">))</span><span class="w">
+
+</span><span class="n">coverage</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_union</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">postal_areas</span><span class="p">),</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">unassigned</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">difference_m2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">st_sym_difference</span><span class="p">(</span><span class="n">territory</span><span class="p">,</span><span class="w"> </span><span class="n">coverage</span><span class="p">))))</span><span class="w">
+
+</span><span class="n">overlap_m2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="w">
+  </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">postal_areas</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">unassigned</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">coverage</span><span class="p">))</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">Indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Codes with an estimated area"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Components assigned by municipal recovery"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Unassigned records"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Unassigned area (km²)"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Coverage difference (m²)"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Overlap (m²)"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="n">nrow</span><span class="p">(</span><span class="n">postal_areas</span><span class="p">),</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">recoverable</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">unassigned</span><span class="p">),</span><span class="w">
+    </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">unassigned</span><span class="p">)))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1e6</span><span class="p">,</span><span class="w"> </span><span class="n">difference_m2</span><span class="p">,</span><span class="w">
+    </span><span class="n">overlap_m2</span><span class="w">
+  </span><span class="p">),</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w">
+</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+<table>
+<thead>
+   <tr>
+     <th style="text-align: left">Indicator</th>
+     <th style="text-align: right">Value</th>
+   </tr>
+ </thead>
+ <tbody>
+   <tr>
+     <td style="text-align: left">Codes with an estimated area</td>
+     <td style="text-align: right">468.0000</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Components assigned by municipal recovery</td>
+     <td style="text-align: right">4.0000</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Unassigned records</td>
+     <td style="text-align: right">6.0000</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Unassigned area (km²)</td>
+     <td style="text-align: right">150.2033</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Coverage difference (m²)</td>
+     <td style="text-align: right">0.0000</td>
+   </tr>
+   <tr>
+     <td style="text-align: left">Overlap (m²)</td>
+     <td style="text-align: right">-0.0002</td>
+   </tr>
+ </tbody>
+</table>
+<p>These checks verify the geometry, <strong>not postal accuracy</strong>. We could cover an
+entire country with valid polygons and still have a poor approximation of its
+delivery areas.</p>
+<h2 id="back-to-spain">Back to Spain</h2>
+<p>We now have the full sequence: points, proximity areas, clipping and merging by
+postal code. The same steps work with much more detailed addresses, such as the
+CartoCiudad data in my <a href="https://dieghernan.github.io/projects/postal-codes-spain">Spanish postal codes
+project</a>.</p>
+<p>The input data matters as much as the algorithm. With one representative point
+per code, Voronoi mainly maps distances between representatives. With address
+points, it can better approximate where each code’s addresses are concentrated.
+It still knows nothing about delivery routes, physical barriers or official
+boundaries.</p>
+<p>We have not compared these results with an independent postal source for
+Slovenia. Before using them for analysis, we would need to review coverage,
+coordinates, the relationship with municipalities and sensitivity to the
+margins. For now, we have a working example that shows how the polygons are
+built, one step at a time.</p>
+<h2 id="references">References</h2>
+<ul>
+ <li>Pokojski, W. &amp; Pokojska, P. (2018). Voronoi diagrams – inventor, method,
+applications. <em>Polish Cartographical Review</em>, <em>50</em>(3), 141–150.
+<a href="https://doi.org/10.2478/pcr-2018-0009">https://doi.org/10.2478/pcr-2018-0009</a>.</li>
+ <li>Goerlich, F. J. (2022). Elaboración de un mapa de códigos postales de España
+con recursos libres. Cómo evitar pagar por disponer de información de
+referencia. <em>Working Papers Ivie</em>, no. 2022-3. València: Ivie.
+<a href="https://doi.org/10.12842/WPIVIE_0322">https://doi.org/10.12842/WPIVIE_0322</a>.
+Updated online version: <a href="https://www.uv.es/goerlich/Ivie/CodPost.html">https://www.uv.es/goerlich/Ivie/CodPost.html</a>.</li>
+ <li>Sánchez, J. I. (2020, November 13). “Así hice el mapa de los códigos
+postales de España con SIG y datos abiertos.” NoSoloSIG.
+<a href="https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos">https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos</a>.</li>
+ <li>Hernangómez, D. (2026). Códigos postales de España [Dataset].
+<a href="https://doi.org/10.5281/zenodo.23698418">https://doi.org/10.5281/zenodo.23698418</a>.
+<a href="https://dieghernan.github.io/codigospostales/">https://dieghernan.github.io/codigospostales/</a>.</li>
+</ul>
+</div>
+         <aside class="kofi-support mt-5 mb-3 py-4 px-3 text-center" aria-label="Support my work">
+ <p class="mb-3">Find my maps and R projects useful? You can support my open-source work.</p>
+  <a class="btn btn-primary kofi-support-link" href="https://ko-fi.com/K3K43H86Z" target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-ko-fi mr-2" aria-hidden="true"></i>Support my work on Ko-fi<span class="sr-only"> (opens in a new tab)</span>
+  </a>
+</aside>
+     </article>
+   </div>
+     <div class="row">
+       <div class="col-lg-8 offset-lg-2">
+<link rel="stylesheet" href="/assets/css/webmentions.css">
+<section class="webmentions mt-5 pt-4 border-top" aria-labelledby="webmentions-heading"
+  data-webmentions data-target="https://dieghernan.github.io/202611_postal-codes/">
+<header class="webmentions-header">
+   <h2 id="webmentions-heading" class="h4"><i class="fa-regular fa-comments mr-2" aria-hidden="true"></i>Mentions and replies</h2>
+   <p class="text-muted small">Conversations from across the web.</p>
+ </header>
+  <button class="btn btn-outline-primary mb-3" type="button" data-webmentions-load hidden>Load mentions</button>
+ <p class="webmentions-status small text-muted" role="status" data-webmentions-status></p>
+ <ol class="webmentions-replies" data-webmentions-results hidden></ol>
+ <div class="webmentions-reactions" data-webmentions-reactions hidden></div>
+  <noscript><p>JavaScript is needed to display mentions. You can still send one using the form below.</p></noscript>
+  <details class="webmentions-send mt-4">
+    <summary>Shared your thoughts on this post? <span class="text-muted">Drop your link here!</span></summary>
+    <form class="mt-3" method="post" action="https://webmention.io/dieghernan.github.io/webmention">
+     <p class="small" id="webmention-help">Publish a page that links to this post, then submit its URL. Webmention.io will check the link before the mention appears.</p>
+      <input type="hidden" name="target" value="https://dieghernan.github.io/202611_postal-codes/">
+      <label for="webmention-source">URL of your page</label>
+      <input class="form-control mb-3" id="webmention-source" name="source" type="url"
+        placeholder="https://example.com/your-post/" aria-describedby="webmention-help" required>
+      <button class="btn btn-primary" type="submit">Send webmention</button>
+    </form>
+  </details>
+</section>
+<script src="/assets/js/webmentions.js" defer></script>
+       </div>
+     </div>
+ </div>
+ </main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
+   <li class="page-item text-left mr-0 ">
+      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202610_orange-peel/">
+	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
+	  </a>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
+     <p class="page-link chulapa-label">Let’s peel the world</p>
+   </li>
+   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
+     <p class="page-link chulapa-label">Let’s peel the...</p>
+   </li>
+	 <li class="page-item disabled mx-auto invisible">
+	  <p class="page-link">|</p>
+	 </li>	
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none invisible">
+	   <p class="page-link chulapa-label"></p>
+	 </li>
+	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline invisible">
+	   <p class="page-link chulapa-label"></p>
+	 </li>
+   <li class="page-item text-right ml-0 invisible">
+      <span class="page-link border-0 px-4">
+	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></span>
+   </li>
+ </ul>
+</nav>
+<div class="container-lg my-1">
+ <div class="row">
+   <div class="col-lg-8 offset-lg-2 col">
+      <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#maps" class="badge chulapa-pill-bg-primary p-category" rel="tag" >maps</a>
+      <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggplot2</a>
+      <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category" rel="tag" >sf</a>
+      <a href="https://dieghernan.github.io/tags#giscoR" class="badge chulapa-pill-bg-primary p-category" rel="tag" >giscoR</a>
+      <a href="https://dieghernan.github.io/tags#dataset" class="badge chulapa-pill-bg-primary p-category" rel="tag" >dataset</a>
+     </div>
+   </div>
+</div>
+<!-- Compatible with Jekyll v3 and v4, pure Jekyll group by -->
+       <div class="container-lg mt-1 mb-2">
+         <div class="row">
+           <div class="col-lg-8 offset-lg-2">
+             <hr>
+               <h2 class="h5">Related posts</h2>
+             <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202610_orange-peel/" class="chulapa-text-body-color">
+              Let’s peel the world
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Do you know the interrupted Goode homolosine projection?</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-10-24T00:00:00+02:00">
+                october 24, 2026
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202602_geobounds/" class="chulapa-text-body-color">
+              Introducing <strong>geobounds</strong>
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Easy access to administrative boundaries from geoBoundaries</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-02-12T00:00:00+01:00">
+                february 12, 2026
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202510_mapping-antarctica/" class="chulapa-text-body-color">
+              Mapping Antarctica
+            </a>
+         </p>
+           <p class="card-text">
+              <small>Cool maps from the South Pole</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-10-25T00:00:00+02:00">
+                october 25, 2025
+              </time>
+            </small>
+       </div>
+     </div></nav>
+           </div>
+         </div>
+       </div></div>
+  <!-- Footer -->
+  <footer class="footer-chulapa text-center mt-0 pt-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+              <script src="https://giscus.app/client.js"
+  data-repo="dieghernan/dieghernan.github.io"
+  data-repo-id="MDEwOlJlcG9zaXRvcnkyODMxNzgwNTA=" data-category="Blog"
+  data-category-id="DIC_kwDOEOD0Qs4CcqYn"
+  data-mapping="pathname"
+  data-strict="0" data-reactions-enabled="1" data-emit-metadata="1"
+  data-input-position="top" data-theme="dark_high_contrast" data-lang="en"
+  data-loading="lazy" crossorigin="anonymous" async>
+</script>
+            </div>
+          </div>
+        </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-10 offset-xl-1">
+          <nav aria-label="Footer links" class="d-flex flex-wrap justify-content-center">
+            <a href="https://dieghernan.github.io/atom.xml" title="footerRSS" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">RSS</span>
+            </a>
+            <a href="https://stackoverflow.com/users/7877917/dieghernan" title="footerStack Overflow" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">Stack Overflow</span>
+            </a>
+            <a href="https://github.com/dieghernan/" title="footerGitHub" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">GitHub</span>
+            </a>
+            <a href="https://www.r-bloggers.com/" title="footerR-bloggers" class="chulapa-footer-sociallink lead">
+              <span class="fa-stack fa-lg" aria-hidden="true">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa-solid fa-r fa-stack-1x fa-inverse"></i>
+              </span>
+              <span class="sr-only">R-bloggers</span>
+            </a>
+          </nav>
+          <p class="mt-2 mb-3">&copy; 2026 Diego HH</p>
+          <!-- Do not remove this in order to give attributions -->
+          <p class="chulapa-footer-brand">Powered by <a href="https://dieghernan.github.io/chulapa"> <span class="chulapa">Chulapa</span> Jekyll Theme</a><br><b>GitDev</b> skin by <a href="https://github.com/dieghernan">dieghernan</a><br><b>GitDev Dark</b> skin by <a href="https://github.com/dieghernan">dieghernan</a></p>
+          <!-- End attributions -->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer -->
+<!-- JS, Popper.js, and jQuery -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="/assets/js/chulapa_script.js"></script>
+	<!-- start custom scripts to be placed at the bottom of the page -->
+<script>
+for (const a of document.querySelectorAll(".badge")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+    }
+}
+for (const a of document.querySelectorAll(".btn")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("bg-danger");
+        a.classList.add("border-danger");
+    }
+}
+for (const a of document.querySelectorAll("h5, h2.h5")) {
+    if (a.textContent.match("discontinued")) {
+        a.classList.add("text-danger");
+    }
+}
+</script>
+<!-- end custom bottom scripts -->
+	</body>
+</html>
