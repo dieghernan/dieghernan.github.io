@@ -9,7 +9,12 @@ Its headings and all 17 R chunks (including options and plot labels) are
 identical to the first version. Only the title and prose differ; references
 are unchanged. Render it from the repository root with
 `source("_experiments/postal-voronoi-slovenia/render-v2.R")`.
-Both versions share the data cache and write the same GeoPackage layers.
+A third version, **postal-voronoi-v3.Rmd** / **postal-voronoi-v3.html**,
+keeps the conversational title with a tone between the first two drafts:
+direct explanations and friendly transitions, with fewer playful asides.
+It has the same headings, references and all 17 unchanged R chunks.
+Render it with `source("_experiments/postal-voronoi-slovenia/render-v3.R")`.
+All versions share the data cache and write the same GeoPackage layers.
 
 From the repository root, render with:
 
