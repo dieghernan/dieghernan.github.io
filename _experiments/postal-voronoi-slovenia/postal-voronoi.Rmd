@@ -164,7 +164,11 @@ We should not assume that cells come out in the same order as the input points. 
 point_matches <- st_intersects(cells, city_points)
 stopifnot(all(lengths(point_matches) == 1L))
 cells$POSTCODE <- city_points$POSTCODE[unlist(point_matches)]
-city_cells <- st_intersection(cells, st_geometry(city))
+clipped_geometry <- st_intersection(st_geometry(cells), st_geometry(city))
+city_cells <- st_sf(
+  POSTCODE = cells$POSTCODE[attr(clipped_geometry, "idx")[, 1]],
+  geometry = clipped_geometry
+)
 
 city_areas <- city_cells |>
   group_by(POSTCODE) |>
@@ -175,11 +179,15 @@ city_colours <- setNames(
   hcl.colors(nrow(city_areas), palette = "Dark 3"),
   sort(city_areas$POSTCODE)
 )
+city_labels <- st_sf(
+  POSTCODE = city_areas$POSTCODE,
+  geometry = st_point_on_surface(st_geometry(city_areas))
+)
 ggplot(city_areas) +
   geom_sf(aes(fill = POSTCODE), colour = background, linewidth = 0.6) +
   geom_sf(data = city_points, shape = 21, fill = ink,
     colour = background, size = 2.4) +
-  geom_sf_text(data = st_point_on_surface(city_areas),
+  geom_sf_text(data = city_labels,
     aes(label = POSTCODE), colour = ink, fontface = "bold", size = 3.5) +
   scale_fill_manual(values = city_colours, guide = "none") +
   coord_sf(datum = NA) +
@@ -188,14 +196,19 @@ ggplot(city_areas) +
     caption = "Teaching example · Not official postal boundaries")
 ```
 
+We intersect the geometry columns, then use the intersection’s `idx` matrix to recover each cell’s postal code. This keeps the attribute assignment explicit. Label positions are also calculated from geometries alone.
+
 Grouping by postal code with `summarise()` merges the geometries. With many addresses sharing a code, their cells would dissolve into one geometry, possibly with several separate parts.
 
 ## From one municipality to the whole country
 
 We now repeat the operation for each component of each municipality. A municipality may have separate pieces: normalizing to `MULTIPOLYGON` and then casting to `POLYGON` lets us handle them independently, rather than automatically extending a code to another piece with no points.
 
+The municipality ID and name apply to every component, so we mark those attributes as spatially constant before splitting the geometries.
+
 ```{r municipal-components}
 components <- municipalities |>
+  st_set_agr("constant") |>
   st_cast("MULTIPOLYGON") |>
   st_cast("POLYGON") |>
   mutate(component_id = row_number())
@@ -210,7 +223,7 @@ These are project parameters, not universal values. We keep them here to explain
 ```{r select-points}
 select_points <- function(component, postal_points) {
   for (margin in c(200, 50)) {
-    interior <- st_buffer(component, -margin)
+    interior <- st_buffer(st_geometry(component), -margin)
     if (all(st_is_empty(interior))) next
     selected_points <- st_filter(postal_points, interior, .predicate = st_within)
     if (nrow(selected_points) > 0) return(selected_points)
@@ -244,7 +257,11 @@ build_areas <- function(component, postal_points) {
   stopifnot(all(lengths(point_matches) == 1L))
   cells$POSTCODE <- selected_points$POSTCODE[unlist(point_matches)]
 
-  result <- st_intersection(cells, st_geometry(component)) |>
+  clipped_geometry <- st_intersection(st_geometry(cells), st_geometry(component))
+  result <- st_sf(
+    POSTCODE = cells$POSTCODE[attr(clipped_geometry, "idx")[, 1]],
+    geometry = clipped_geometry
+  ) |>
     group_by(POSTCODE) |>
     summarise(.groups = "drop") |>
     st_make_valid()
@@ -310,15 +327,28 @@ postal_areas <- result |>
 
 ## The complete map
 
-For the national overview, we colour areas by the first digit of their code. This is a visual grouping to keep the map readable, not a validated classification of postal regions. Unassigned components appear in grey.
+For the national overview, we colour areas by the first digit of their code. This is a visual grouping to keep the map readable, not a validated classification of postal regions. Grey is reserved for unassigned components, which also have their own legend entry.
 
 ```{r national-map, fig.height=7}
+postal_colours <- c(
+  "1" = "#007F7F", "2" = "#E87500", "3" = "#3B6FB6", "4" = "#A64E9A",
+  "5" = "#649A32", "6" = "#D9AF00", "8" = "#B94350", "9" = "#6255A4",
+  "Unassigned" = "#727A80"
+)
+postal_groups <- sort(unique(substr(postal_areas$POSTCODE, 1, 1)))
+stopifnot(all(postal_groups %in% names(postal_colours)))
+
 ggplot() +
   geom_sf(data = municipalities, fill = "#d5d2ca", colour = NA) +
   geom_sf(data = postal_areas,
     aes(fill = substr(POSTCODE, 1, 1)), colour = background, linewidth = 0.15) +
-  geom_sf(data = unassigned, fill = "#727a80", colour = background, linewidth = 0.15) +
-  scale_fill_brewer(palette = "Set2", name = "First postal code digit") +
+  geom_sf(data = unassigned, aes(fill = "Unassigned"),
+    colour = background, linewidth = 0.15) +
+  scale_fill_manual(
+    values = postal_colours, name = "Postal code group",
+    breaks = c(postal_groups, "Unassigned"),
+    labels = c(paste0(postal_groups, "xxx"), "Unassigned")
+  ) +
   coord_sf(datum = NA) +
   labs(title = "Slovenia, point by point",
     subtitle = "Proximity areas clipped to municipal boundaries",
@@ -331,7 +361,7 @@ ggplot() +
 A good-looking map is not enough. We check that geometries are valid, assigned and unassigned areas cover the territory and there are no appreciable area overlaps. We allow one square metre for numerical differences in geometric operations.
 
 ```{r geometry-checks}
-territory <- st_union(municipalities)
+territory <- st_union(st_geometry(municipalities))
 coverage <- st_union(c(st_geometry(postal_areas), st_geometry(unassigned)))
 difference_m2 <- as.numeric(sum(st_area(st_sym_difference(territory, coverage))))
 overlap_m2 <- as.numeric(
