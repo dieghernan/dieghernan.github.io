@@ -3,6 +3,14 @@
 First post draft, in English. Open **postal-voronoi.html** for the rendered article;
 edit **postal-voronoi.Rmd** for the source. This experiment is not published as a blog post.
 
+A second version, **postal-voronoi-v2.Rmd** / **postal-voronoi-v2.html**,
+uses a more conversational voice under the title *Postal codes and tessellations*.
+Its headings and all 17 R chunks (including options and plot labels) are
+identical to the first version. Only the title and prose differ; references
+are unchanged. Render it from the repository root with
+`source("_experiments/postal-voronoi-slovenia/render-v2.R")`.
+Both versions share the data cache and write the same GeoPackage layers.
+
 From the repository root, render with:
 
 ```r

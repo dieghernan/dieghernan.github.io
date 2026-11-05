@@ -1,0 +1,461 @@
+---
+title: "Postal codes and tessellations"
+subtitle: "A step-by-step example with Slovenia, giscoR and sf"
+author: "Diego Hernangómez"
+lang: en
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: false
+    theme: readable
+    highlight: tango
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE,
+  fig.width = 9, fig.height = 6, dpi = 160, dev = "ragg_png",
+  out.width = "100%")
+options(width = 85)
+```
+
+I recently published [Postal codes of Spain](https://dieghernan.github.io/codigospostales/): estimated postal areas, an interactive map and GeoPackage files ready to download. All very nice, but there is a question hiding behind those polygons: how did they get there?
+
+Enter **Voronoi tessellations**. A rather grand name for a simple idea: give each location to its nearest point. Add some clipping, merge the areas with the same postal code and we have the outline of our recipe.
+
+Let’s make it with **R**, **giscoR** and **sf**. We will start small, in Ljubljana, and then take on the rest of Slovenia. One municipality before a whole country seems reasonable!
+
+> **Working draft.** We are exploring the recipe here. These polygons are not official postal boundaries, and making them does not validate the GISCO postal data.
+
+## What is a Voronoi polygon?
+
+Imagine a few shops on a flat map. Which one is closest to your house? Now ask the same question for every location and give each shop its own color. There you have it: a **Voronoi diagram**, also called a Voronoi tessellation.
+
+Each shop becomes a **site**, or generating point, and gets its own **Voronoi cell**. Every location in that cell is at least as close to its site as to any other. On a shared edge, two sites tie; at a meeting point, more sites can join the tie. With straight-line distance, the edges follow perpendicular bisectors between sites. Some cells keep going forever, so we usually clip them to the bit of the map we want to show.
+
+The name honors Georgy Voronoi, who studied these partitions in the early twentieth century, although the idea goes back further, including Dirichlet’s work in the nineteenth century. [Pokojski and Pokojska (2018)](https://doi.org/10.2478/pcr-2018-0009) cover the history and geographical applications. And if you have come across **Thiessen polygons** in hydrology, yes, we are talking about the same thing.
+
+Where might this come in handy? Think shops, public services or areas assigned to weather stations. Thiessen polygons can also provide area weights for estimating rainfall from rain gauges. Just remember what “nearest” means here: the closest hospital in a straight line might be rather less convenient once you get on the road. The [DIMACS introduction](https://archive.dimacs.rutgers.edu/Institute/96/classroom/voronoi/intro.html) has more examples.
+
+### A tiny example in R
+
+No downloads yet. Let’s give four points an imaginary square to share, using just **sf** and **ggplot2**. The coordinates are made up, the units are arbitrary and there is no geographical coordinate reference system to worry about in this little example.
+
+```{r voronoi-toy-example, fig.height=5}
+library(sf)
+library(ggplot2)
+
+sites <- data.frame(
+  site = c("A", "B", "C", "D"),
+  x = c(2, 7, 3, 8),
+  y = c(2, 3, 8, 7)
+)
+toy_points <- st_as_sf(sites, coords = c("x", "y"))
+study_area <- st_as_sfc(st_bbox(c(xmin = 0, ymin = 0, xmax = 10, ymax = 10)))
+
+toy_cells <- toy_points |>
+  st_union() |>
+  st_voronoi(envelope = study_area) |>
+  st_collection_extract("POLYGON") |>
+  st_intersection(study_area)
+
+ggplot() +
+  geom_sf(data = toy_cells,
+    fill = c("#a8dadc", "#f4c89a", "#c6b8df", "#bfd59b"),
+    colour = "white", linewidth = 1) +
+  geom_sf(data = toy_points, colour = "#203b47", size = 3) +
+  geom_text(data = sites, aes(x, y, label = site),
+    nudge_y = 0.5, colour = "#203b47", fontface = "bold") +
+  coord_sf(datum = NA) +
+  labs(title = "Four points, four nearest-neighbour areas",
+    subtitle = "Each location belongs to the closest site") +
+  theme_void(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+Four dots, four cells. `st_union()` gathers the points into one geometry, `st_voronoi()` does the tessellation and `st_intersection()` trims it to our square. The colors only help us tell the cells apart; we have not given these points postal codes yet.
+
+Our little diagram knows nothing about roads, rivers or municipal boundaries. Keep that in mind as we move to real postal points: any boundaries we impose will be our choice.
+
+## Before we start: what are we estimating?
+
+For the Spanish project, the starting points are CartoCiudad addresses with their postal codes. The approach follows [Goerlich (2022)](https://doi.org/10.12842/WPIVIE_0322), building on an idea presented by [Sánchez (2020)](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos). If you want to dig into the method, Goerlich’s [updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html) is a good place to start.
+
+For this trip to Slovenia, we will get GISCO’s postal points through **giscoR**. There is a catch: one representative point for a postal code cannot tell us as much as thousands of addresses with that code. More detailed addresses give the partition more to work with, although proximity still does not tell us how the postal service organizes its rounds.
+
+There is another assumption to keep on the table. We are borrowing municipal clipping from the Spanish workflow; we have not checked that Slovenian postal areas should follow municipal boundaries. Convenient for our example, but still a modeling choice.
+
+## Getting the data
+
+First, the ingredients: municipal boundaries and postal points, both from the 2024 release. We cache the downloads so we only have to fetch them once. The first run downloads the European files even though we only ask for Slovenia, so that first coffee break may be a little longer.
+
+```{r packages}
+library(giscoR)
+library(dplyr)
+```
+
+```{r data}
+dir.create("data", showWarnings = FALSE)
+municipalities <- gisco_get_lau(
+  year = 2024, country = "SI", epsg = 3035, cache_dir = "data"
+) |>
+  select(LAU_ID = GISCO_ID, LAU_NAME) |>
+  st_make_valid()
+
+raw_points <- gisco_get_postalcodes(
+  year = 2024, country = "SI", epsg = 3035, cache_dir = "data"
+)
+stopifnot(!is.null(municipalities), !is.null(raw_points))
+```
+
+We will work in **ETRS89 / LAEA Europe (EPSG:3035)**, with coordinates in meters. That makes our later 200 m and 50 m margins straightforward to interpret. Voronoi measures straight-line, Euclidean distances on this projected plane. It does not follow roads, and the projection does not preserve every distance exactly either.
+
+Before we get carried away with maps, what did we actually download?
+
+```{r data-summary}
+postal_points <- raw_points |>
+  mutate(POSTCODE = trimws(as.character(POSTCODE))) |>
+  filter(!is.na(POSTCODE), POSTCODE != "") |>
+  select(POSTCODE)
+
+code_counts <- postal_points |>
+  st_drop_geometry() |>
+  count(POSTCODE, name = "points_per_code")
+
+knitr::kable(data.frame(
+  Indicator = c("Municipalities", "Downloaded points", "Points with a postal code",
+    "Distinct postal codes", "Codes represented by one point"),
+  Value = c(nrow(municipalities), nrow(raw_points), nrow(postal_points),
+    nrow(code_counts), sum(code_counts$points_per_code == 1))
+))
+```
+
+A useful first look, but a count is not a quality check. It does not tell us whether every code is there or whether the points are in the right place. With one point per code, we will be drawing around representatives, rather than reconstructing areas from individual addresses.
+
+Two points sitting on top of each other cannot each have a separate Voronoi cell. We sort by postal code and keep the first point at each location, following the original workflow. That makes the choice reproducible; it does not make the winning code correct. Below we count the records removed and the locations where different codes share the same coordinates.
+
+```{r duplicates}
+postal_points <- postal_points |> arrange(POSTCODE)
+coordinates <- as.data.frame(st_coordinates(postal_points))
+conflicts <- bind_cols(st_drop_geometry(postal_points), coordinates) |>
+  group_by(X, Y) |>
+  summarise(codes = n_distinct(POSTCODE), .groups = "drop") |>
+  filter(codes > 1)
+duplicates <- duplicated(coordinates)
+knitr::kable(data.frame(
+  Indicator = c("Duplicate locations removed", "Locations with conflicting codes"),
+  Value = c(sum(duplicates), nrow(conflicts))
+))
+postal_points <- postal_points[!duplicates, ]
+```
+
+## Starting with Ljubljana
+
+Let’s pick Ljubljana and keep the points inside it. We use `st_within()` so a point exactly on a shared boundary does not get invited into both neighboring municipalities.
+
+```{r city}
+city <- municipalities |> filter(LAU_NAME == "Ljubljana")
+stopifnot(nrow(city) == 1)
+city_points <- st_filter(postal_points, city, .predicate = st_within)
+stopifnot(nrow(city_points) >= 2)
+
+background <- "#faf8f2"
+ink <- "#203b47"
+theme_set(theme_void(base_size = 12) + theme(
+  plot.background = element_rect(fill = background, colour = NA),
+  panel.background = element_rect(fill = background, colour = NA),
+  plot.title = element_text(face = "bold", colour = ink, size = 19),
+  plot.subtitle = element_text(colour = ink),
+  plot.caption = element_text(colour = "grey40", hjust = 0),
+  plot.margin = margin(16, 16, 16, 16),
+  legend.position = "bottom"
+))
+
+base_map <- ggplot() +
+  geom_sf(data = city, fill = "#e8e4d8", colour = ink, linewidth = 0.4) +
+  coord_sf(datum = NA)
+
+base_map +
+  geom_sf(data = city_points, colour = "#bd5137", size = 2) +
+  labs(title = "Ljubljana: the starting point",
+    subtitle = "A municipal boundary and points with postal codes",
+    caption = "Source: Eurostat / GISCO, 2024")
+```
+
+### Building the cells
+
+Back to our nearest-point rule: each cell gets the locations closest to its generating point, with ties along the boundaries. For this first pass, we keep every interior point. The margins used in the national workflow can wait a moment.
+
+```{r voronoi}
+cells <- city_points |>
+  st_union() |>
+  st_voronoi(envelope = st_as_sfc(st_bbox(city))) |>
+  st_collection_extract("POLYGON") |>
+  st_sf(geometry = _)
+
+base_map +
+  geom_sf(data = cells, fill = NA, colour = "#bd5137", linewidth = 0.5) +
+  geom_sf(data = city_points, colour = ink, size = 2) +
+  labs(title = "An area of proximity for every point",
+    subtitle = "Cells still extend beyond the municipal boundary",
+    caption = "Own elaboration using Eurostat / GISCO, 2024")
+```
+
+`st_union()` gathers the points so we get one diagram. And here is a detail worth remembering: `envelope` sets a working extent, but **does not clip** the cells to Ljubljana. That is the intersection’s job.
+
+### Clipping and recovering postal codes
+
+Tempting as it may be, we cannot match cells and points just by their row order. Instead, we ask which point falls in each cell and recover its postal code before clipping. Each cell should contain exactly one generating point.
+
+```{r clip-cells}
+point_matches <- st_intersects(cells, city_points)
+stopifnot(all(lengths(point_matches) == 1L))
+cells$POSTCODE <- city_points$POSTCODE[unlist(point_matches)]
+clipped_geometry <- st_intersection(st_geometry(cells), st_geometry(city))
+city_cells <- st_sf(
+  POSTCODE = cells$POSTCODE[attr(clipped_geometry, "idx")[, 1]],
+  geometry = clipped_geometry
+)
+
+city_areas <- city_cells |>
+  group_by(POSTCODE) |>
+  summarise(.groups = "drop") |>
+  st_make_valid()
+
+city_colours <- setNames(
+  hcl.colors(nrow(city_areas), palette = "Dark 3"),
+  sort(city_areas$POSTCODE)
+)
+city_labels <- st_sf(
+  POSTCODE = city_areas$POSTCODE,
+  geometry = st_point_on_surface(st_geometry(city_areas))
+)
+ggplot(city_areas) +
+  geom_sf(aes(fill = POSTCODE), colour = background, linewidth = 0.6) +
+  geom_sf(data = city_points, shape = 21, fill = ink,
+    colour = background, size = 2.4) +
+  geom_sf_text(data = city_labels,
+    aes(label = POSTCODE), colour = ink, fontface = "bold", size = 3.5) +
+  scale_fill_manual(values = city_colours, guide = "none") +
+  coord_sf(datum = NA) +
+  labs(title = "From points to estimated areas",
+    subtitle = "Cells clipped and merged by postal code",
+    caption = "Teaching example · Not official postal boundaries")
+```
+
+We do the intersection on the geometry columns and use its `idx` matrix to bring each cell’s code back. That keeps the assignment explicit. For the labels, we also calculate positions from geometries alone.
+
+Now `summarise()` joins the geometries sharing a postal code. If we had many addresses with the same code, their cells would merge here. One code can still end up with several separate pieces; one geometry does not have to mean one continuous patch.
+
+## From one municipality to the whole country
+
+Ljubljana done. Let’s repeat the exercise for every component of every municipality. Why components? A municipality can have separate pieces, and a piece without points should not automatically inherit a code from another one. We normalize to `MULTIPOLYGON`, then cast to `POLYGON` to handle the pieces separately.
+
+The municipality ID and name still belong to every piece. We tell **sf** that these attributes are spatially constant before splitting the geometries.
+
+```{r municipal-components}
+components <- municipalities |>
+  st_set_agr("constant") |>
+  st_cast("MULTIPOLYGON") |>
+  st_cast("POLYGON") |>
+  mutate(component_id = row_number())
+```
+
+### Why use an inward margin?
+
+In the Spanish project, we start by looking **200 m** inside the boundary. No addresses? Try again with **50 m**. This gives points right next to a boundary less influence, since small mismatches between layers can put them on the wrong side.
+
+There is no magic in those numbers. They are choices from my implementation; Goerlich describes a 20 m margin. We keep 200 m and 50 m here to follow the same workflow, although sparse postal points make it easier to throw useful information away. Trying other margins would be a good experiment for another iteration.
+
+```{r select-points}
+select_points <- function(component, postal_points) {
+  for (margin in c(200, 50)) {
+    interior <- st_buffer(st_geometry(component), -margin)
+    if (all(st_is_empty(interior))) next
+    selected_points <- st_filter(postal_points, interior, .predicate = st_within)
+    if (nrow(selected_points) > 0) return(selected_points)
+  }
+  postal_points[0, ]
+}
+```
+
+The smaller geometry is just our point-selection window. The final areas still cover the **original** component. If neither margin finds a point, we leave that component unassigned instead of borrowing a point from outside the municipality.
+
+### Three cases, one function
+
+Our function has three possible jobs. No points: keep the component with `NA`. Points with just one code: give that code to the whole component. Several codes: time for Voronoi. No need to tessellate when there is nothing to split!
+
+```{r build-postal-areas}
+build_areas <- function(component, postal_points) {
+  selected_points <- select_points(component, postal_points)
+  codes <- unique(selected_points$POSTCODE)
+
+  if (length(codes) <= 1L) {
+    component$POSTCODE <- if (length(codes)) codes else NA_character_
+    return(component)
+  }
+
+  cells <- selected_points |>
+    st_union() |>
+    st_voronoi(envelope = st_as_sfc(st_bbox(component))) |>
+    st_collection_extract("POLYGON") |>
+    st_sf(geometry = _)
+  point_matches <- st_intersects(cells, selected_points)
+  stopifnot(all(lengths(point_matches) == 1L))
+  cells$POSTCODE <- selected_points$POSTCODE[unlist(point_matches)]
+
+  clipped_geometry <- st_intersection(st_geometry(cells), st_geometry(component))
+  result <- st_sf(
+    POSTCODE = cells$POSTCODE[attr(clipped_geometry, "idx")[, 1]],
+    geometry = clipped_geometry
+  ) |>
+    group_by(POSTCODE) |>
+    summarise(.groups = "drop") |>
+    st_make_valid()
+  result$LAU_ID <- component$LAU_ID
+  result$LAU_NAME <- component$LAU_NAME
+  result$component_id <- component$component_id
+  result
+}
+
+result <- lapply(seq_len(nrow(components)), function(i) {
+  build_areas(components[i, ], postal_points)
+}) |>
+  bind_rows()
+```
+
+### Handling unassigned areas
+
+Can we rescue any of the blanks? Sometimes another component of the same municipality has useful information. We fill a missing code only when the municipality has **one distinct recovered code**. This is an imputation from what we have found, not proof that the municipality really has only one postal code.
+
+```{r unassigned}
+unique_codes <- result |>
+  st_drop_geometry() |>
+  filter(!is.na(POSTCODE)) |>
+  distinct(LAU_ID, POSTCODE) |>
+  add_count(LAU_ID) |>
+  filter(n == 1)
+
+unassigned_before <- sum(is.na(result$POSTCODE))
+index <- match(result$LAU_ID, unique_codes$LAU_ID)
+recoverable <- is.na(result$POSTCODE) & !is.na(index)
+result$POSTCODE[recoverable] <- unique_codes$POSTCODE[index[recoverable]]
+```
+
+A little geometry housekeeping before the final map. Repairs can leave lines or points mixed in with the polygons, so we keep only surfaces. Then we dissolve by postal code, removing municipal borders between areas that share a code.
+
+```{r dissolve-areas}
+keep_surfaces <- function(x) {
+  geometry <- st_make_valid(st_geometry(x))
+  geometry <- lapply(geometry, function(part) {
+    if (!inherits(part, c("POLYGON", "MULTIPOLYGON", "GEOMETRYCOLLECTION"))) {
+      return(st_multipolygon())
+    }
+    surfaces <- suppressWarnings(st_collection_extract(st_sfc(part), "POLYGON"))
+    if (length(surfaces) == 0L || all(st_is_empty(surfaces))) {
+      return(st_multipolygon())
+    }
+    st_cast(st_union(surfaces), "MULTIPOLYGON", warn = FALSE)[[1]]
+  })
+  st_geometry(x) <- st_sfc(geometry, crs = st_crs(x))
+  x[!st_is_empty(x), ]
+}
+
+unassigned <- result |>
+  filter(is.na(POSTCODE)) |>
+  keep_surfaces()
+postal_areas <- result |>
+  filter(!is.na(POSTCODE)) |>
+  group_by(POSTCODE) |>
+  summarise(.groups = "drop") |>
+  keep_surfaces() |>
+  st_cast("MULTIPOLYGON")
+```
+
+## The complete map
+
+For the country view, let’s color the areas by the first digit of their code. This keeps the map readable without pretending we have validated a set of postal regions. Gray has one job only: unassigned components, with their own entry in the legend.
+
+```{r national-map, fig.height=7}
+postal_colours <- c(
+  "1" = "#007F7F", "2" = "#E87500", "3" = "#3B6FB6", "4" = "#A64E9A",
+  "5" = "#649A32", "6" = "#D9AF00", "8" = "#B94350", "9" = "#6255A4",
+  "Unassigned" = "#727A80"
+)
+postal_groups <- sort(unique(substr(postal_areas$POSTCODE, 1, 1)))
+stopifnot(all(postal_groups %in% names(postal_colours)))
+
+ggplot() +
+  geom_sf(data = municipalities, fill = "#d5d2ca", colour = NA) +
+  geom_sf(data = postal_areas,
+    aes(fill = substr(POSTCODE, 1, 1)), colour = background, linewidth = 0.15) +
+  geom_sf(data = unassigned, aes(fill = "Unassigned"),
+    colour = background, linewidth = 0.15) +
+  scale_fill_manual(
+    values = postal_colours, name = "Postal code group",
+    breaks = c(postal_groups, "Unassigned"),
+    labels = c(paste0(postal_groups, "xxx"), "Unassigned")
+  ) +
+  coord_sf(datum = NA) +
+  labs(title = "Slovenia, point by point",
+    subtitle = "Proximity areas clipped to municipal boundaries",
+    caption = paste("Eurostat / GISCO, 2024 · Own elaboration",
+      "Dark grey: unassigned areas · Estimated boundaries, not official", sep = "\n"))
+```
+
+## Checking the result
+
+Looking good! But before we trust the geometry, let’s check it. Are the polygons valid? Do assigned and unassigned areas cover the territory? Have we introduced any appreciable overlaps? We allow one square meter for numerical differences in the geometry operations.
+
+```{r geometry-checks}
+territory <- st_union(st_geometry(municipalities))
+coverage <- st_union(c(st_geometry(postal_areas), st_geometry(unassigned)))
+difference_m2 <- as.numeric(sum(st_area(st_sym_difference(territory, coverage))))
+overlap_m2 <- as.numeric(
+  sum(st_area(postal_areas)) + sum(st_area(unassigned)) - sum(st_area(coverage))
+)
+stopifnot(all(st_is_valid(postal_areas)), all(st_is_valid(unassigned)),
+  difference_m2 < 1, abs(overlap_m2) < 1)
+
+knitr::kable(data.frame(
+  Indicator = c("Codes with an estimated area", "Components assigned by municipal recovery",
+    "Unassigned records", "Unassigned area (km²)",
+    "Coverage difference (m²)", "Overlap (m²)"),
+  Value = round(c(nrow(postal_areas), sum(recoverable), nrow(unassigned),
+    as.numeric(sum(st_area(unassigned))) / 1e6, difference_m2,
+    overlap_m2), 4)
+))
+```
+
+Passing these checks tells us the geometry holds together. It says nothing about **postal accuracy**. A country covered in valid polygons can still be a poor map of its delivery areas.
+
+Let’s save both layers. The unassigned bits deserve to come along too.
+
+```{r export-layers}
+st_write(postal_areas, "postal-areas.gpkg", layer = "postal_areas",
+  delete_layer = TRUE, quiet = TRUE)
+st_write(unassigned, "postal-areas.gpkg", layer = "unassigned",
+  delete_layer = TRUE, quiet = TRUE)
+writeLines(capture.output(sessionInfo()), "session-info.txt")
+```
+
+## Back to Spain
+
+And there is our recipe: points, proximity areas, clipping and merging by postal code. The same steps work with much more detailed addresses, such as the CartoCiudad data in my [Spanish postal codes project](https://dieghernan.github.io/projects/postal-codes-spain).
+
+The ingredients matter as much as the recipe. With one representative point per code, we mostly map distances between representatives. Address points can bring us closer to where each code’s addresses are concentrated. They still do not tell Voronoi about delivery routes, physical barriers or official boundaries.
+
+We have not compared this example with an independent postal source for Slovenia. Before putting it to work in an analysis, I would want to check coverage, coordinates, the fit with municipalities and what happens when we change the margins. For now, we have opened the box and seen how the polygons get made.
+
+## References
+
+- Pokojski, W. & Pokojska, P. (2018). *Voronoi diagrams – inventor, method, applications*. Polish Cartographical Review, 50(3), 141–150. [doi:10.2478/pcr-2018-0009](https://doi.org/10.2478/pcr-2018-0009).
+- DIMACS. (1996). *Introduction to Voronoi diagrams*. [Tutorial](https://archive.dimacs.rutgers.edu/Institute/96/classroom/voronoi/intro.html).
+
+- Goerlich, F. J. (2022). *Creating a map of Spanish postal codes with free resources: how to avoid paying for reference information* [English translation of the Spanish title]. Working Papers Ivie, no. 2022-3. Valencia: Ivie. [doi:10.12842/WPIVIE_0322](https://doi.org/10.12842/WPIVIE_0322). [Updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html).
+- Sánchez, J. I. (2020, November 13). *How I made a map of Spanish postal codes with GIS and open data* [English translation of the Spanish title]. NoSoloSIG. [Article](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos).
+- Hernangómez, D. (2026). *Postal codes of Spain* [English translation of the Spanish title]. [Methodology, maps and downloads](https://dieghernan.github.io/codigospostales/).
+- Eurostat / GISCO. *Local Administrative Units*, 2024 release. [Access through giscoR and terms of use](https://ropengov.github.io/giscoR/reference/gisco_get_lau.html).
+- Eurostat / GISCO. *Postal codes*, 2024 release. [Access through giscoR](https://ropengov.github.io/giscoR/reference/gisco_get_postalcodes.html). The original data terms of use still apply to this example.
+- Pebesma, E. *sf: geometric unary operations*. [st_voronoi() documentation](https://r-spatial.github.io/sf/reference/geos_unary.html).
