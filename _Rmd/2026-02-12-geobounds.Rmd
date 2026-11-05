@@ -20,18 +20,18 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
-header_img: https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
-schema_image:
-  - /assets/img/blog/202602-overlaps-1.webp
-  - /assets/img/blog/202602-all-levs-1.webp
-  - /assets/img/blog/202602-simpl-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp"
+schema_image: ["https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp"]
 og_image_width: 2028
 og_image_height: 1700
 og_image_type: "image/webp"
 og_image_alt: "Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -82,12 +82,14 @@ This is how it works.
 
 ```{r}
 #| eval: false
+#| fig-cap: ""
 install.packages("geobounds")
 ```
 
 Load the package and other complementary packages:
 
 ```{r}
+#| fig-cap: ""
 library(geobounds)
 library(sf)
 library(ggplot2)
@@ -100,6 +102,8 @@ Administrative level 0 (ADM0) corresponds to countries:
 
 ```{r}
 #| label: 202602-adm0
+#| fig-cap: ""
+#| fig-alt: "Map of Panama showing its national boundary and offshore islands."
 # Panama
 
 gb_get_adm0(country = "Panama") |>
@@ -112,6 +116,8 @@ You can also retrieve multiple administrative levels at once. For example:
 
 ```{r}
 #| label: 202602-all-levs
+#| fig-cap: ""
+#| fig-alt: "Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3."
 # Simplified files
 gb_get(country = "Panama", adm_lvl = "all", simplified = TRUE) |>
   ggplot() +
@@ -141,6 +147,8 @@ Here's an example with country-level files:
 
 ```{r}
 #| label: 202602-overlaps
+#| fig-cap: ""
+#| fig-alt: "Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims."
 # Using individual (gb_get_adm) shapefiles
 gb_get_adm0(country = c("India", "Pakistan")) |>
   # Disputed area: Kashmir
@@ -159,6 +167,8 @@ And here's the same comparison using CGAZ with `gb_get_world()`:
 
 ```{r}
 #| label: 202602-cgaz
+#| fig-cap: ""
+#| fig-alt: "Map of India and Pakistan using harmonized boundaries. The country polygons meet without overlapping in Kashmir."
 gb_get_world(c("India", "Pakistan")) |>
   ggplot() +
   geom_sf(aes(fill = shapeName), alpha = 0.5) +
@@ -183,6 +193,8 @@ datasets by setting `simplified = TRUE`.
 
 ```{r}
 #| label: 202602-simpl
+#| fig-cap: ""
+#| fig-alt: "Two maps of Norway comparing full-resolution and simplified national boundaries. Simplification retains the broad outline while reducing coastline detail."
 # Different resolutions
 norway <- gb_get_adm0("NOR") |>
   mutate(res = "Full resolution")
@@ -214,6 +226,7 @@ You can set the cache directory with:
 
 ```{r}
 #| eval: false
+#| fig-cap: ""
 gb_set_cache_dir("a/path/to/a/folder")
 ```
 

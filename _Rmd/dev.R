@@ -6,9 +6,9 @@ library(giscoR)
 
 # File (including ice shelves)
 
-
 ant <- gisco_get_countries(
-  year = 2024, resolution = 1,
+  year = 2024,
+  resolution = 1,
   country = "ATA"
 ) %>%
   select(NAME = NAME_ENGL) |>
@@ -142,12 +142,15 @@ merid <- lapply(seq(-180, 0, 30), function(x) {
     type = "E",
     geometry = df2
   )
-}) |> bind_rows()
+}) |>
+  bind_rows()
 
 
 grats_end <- merid |>
-  bind_rows(grats |>
-    filter(type != "E"))
+  bind_rows(
+    grats |>
+      filter(type != "E")
+  )
 
 
 grats_yes <- st_intersection(grats_end, antarctica)
@@ -197,7 +200,8 @@ rand <- plastics[ff, ] |>
 rand$area <- st_area(rand) |> as.double()
 
 rand$fill <- sample(c("#ff00ec", "#9e00ec"), nrow(rand), replace = TRUE)
-rand$fill <- ifelse(rand$area > quantile(rand$area, probs = 0.4),
+rand$fill <- ifelse(
+  rand$area > quantile(rand$area, probs = 0.4),
   "white",
   rand$fill
 )

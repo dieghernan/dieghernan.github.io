@@ -47,6 +47,7 @@ render_blog_v2 <- function(file, draft = FALSE, root = .renderblog_v2_root) {
   knitr::opts_chunk$set(
     fig.path = paste0(image_dir, name, "-"),
     dev = "ragg_png",
+    fig.crop = TRUE,
     dpi = 200
   )
   knitr::render_markdown()
@@ -67,6 +68,12 @@ render_blog_v2 <- function(file, draft = FALSE, root = .renderblog_v2_root) {
           file.path(root, path)
         }
         if (grepl("\\.png$", path, ignore.case = TRUE)) {
+          if (isTRUE(options$fig.crop)) {
+            if (!requireNamespace("magick", quietly = TRUE)) {
+              stop("Install magick to crop figure margins.", call. = FALSE)
+            }
+            knitr::plot_crop(local_path)
+          }
           converted <- sub("\\.png$", ".webp", local_path, ignore.case = TRUE)
           webp::write_webp(png::readPNG(local_path), converted)
           # Read back the result before removing the intermediate image.

@@ -1,6 +1,6 @@
 ---
-title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
-subtitle: Make it work in 6 steps - A short tutorial
+title: "<strong>Leaflet</strong>, <strong>R</strong>, Markdown, <strong>Jekyll</strong> and GitHub"
+subtitle: "Make it work in 6 steps - A short tutorial"
 tags:
   - r_bloggers
   - rstats
@@ -9,7 +9,7 @@ tags:
   - jekyll
   - html
   - maps
-header_img: ./assets/img/blog/20190520_imgpost.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp"
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30
@@ -20,10 +20,16 @@ output:
 og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
+og_image_alt: "Street map of central Auckland with a blue location marker near the university."
 ---
 
 
-```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   echo = TRUE,
   message = FALSE,
@@ -36,12 +42,12 @@ library(htmlwidgets)
 ```
 
 Recently, I have been struggling when trying to embed a
-[leaflet](https://rstudio.github.io/leaflet) map created with
+[**leaflet**](https://rstudio.github.io/leaflet) map created with
 **RStudio** on my blog, hosted on GitHub via
-[Jekyll](https://jekyllrb.com) (**Spoiler**: [I succeeded
+[**Jekyll**](https://jekyllrb.com) (**Spoiler**: [I succeeded
 <i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)).
 In my case, I use the [<span
-class="chulapa">Chulapa</span>](https://dieghernan.github.io/chulapa/)
+class="chulapa"><strong>Chulapa</strong></span>](https://dieghernan.github.io/chulapa/)
 remote theme created by myself.
 
 **Index**
@@ -51,16 +57,16 @@ remote theme created by myself.
 
 Ready? Let’s go!
 
-### The GitHub/Jekyll part
+### The GitHub/**Jekyll** part
 
 The first step is to install the required libraries on your GitHub
-page. As Jekyll basically transforms Markdown into HTML, this step
+page. As **Jekyll** basically transforms Markdown into HTML, this step
 is a matter of **what to include** and **where** in your own repository.
 
 #### 1. What to include
 
 This part is not really hard. When looking at the source code of the
-[Leaflet for R](https://rstudio.github.io/leaflet/) site, you can see this
+[**Leaflet** for **R**](https://rstudio.github.io/leaflet/) site, you can see this
 chunk:
 
 ```html
@@ -84,9 +90,9 @@ chunk:
 </head>
 ```
 
-So now we have it! The only thing to remember is that we need **to load
+So now we have it! The only thing to remember is that we need to load
 the libraries from the **leaflet** server
-(`https://rstudio.github.io/leaflet`)**, meaning that we have to prepend
+(`https://rstudio.github.io/leaflet`), meaning that we have to prepend
 that URL to the libraries in our installation:
 
 ```html
@@ -108,9 +114,9 @@ You can have a look at my implementation in
 #### 2. Where to include
 
 This is a little more complicated, depending on the structure of your
-Jekyll template. The code chunk should be included in the `<head>`
+**Jekyll** template. The code chunk should be included in the `<head>`
 section of your page, so you would need to find where to put it. In the
-case of <span class="chulapa">Chulapa</span> it is on
+case of <span class="chulapa"><strong>Chulapa</strong></span> it is on
 [`./_includes/custom/custom_head_before_css.html`](https://github.com/dieghernan/dieghernan.github.io/blob/master/_includes/custom/custom_head_before_css.html).
 
 So now you just have to paste the code that you got in step 1 into the
@@ -118,17 +124,17 @@ So now you just have to paste the code that you got in step 1 into the
 
 <i class="fa fa-star"></i> **Pro tip:** For a better performance of the
 site, include these libraries only when you need them. In my case, I added
-a custom variable in my YAML front matter for those posts with a leaflet
+a custom variable in my YAML front matter for those posts with a **leaflet**
 map, `leafletmap: true`. Go to step 4 for a working example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
-### The RStudio part
+### The **RStudio** part
 
-#### 3. Creating the leaflet map
+#### 3. Creating the **leaflet** map
 
-Now it’s time to create a leaflet map with **RStudio**. I will keep it
-simple for this post, so I took the first example provided in [Leaflet
-for R - Introduction](https://rstudio.github.io/leaflet/).
+Now it’s time to create a **leaflet** map with **RStudio**. I will keep it
+simple for this post, so I took the first example provided in [**Leaflet**
+for **R** - Introduction](https://rstudio.github.io/leaflet/).
 
 ```r
 library(leaflet)
@@ -189,7 +195,7 @@ looks like this:
   </script>
 ```
 
-Actually that chunk is your leaflet map, created with **RStudio**. You
+Actually that chunk is your **leaflet** map, created with **RStudio**. You
 can’t see it now because you are previewing a `markdown` file in your
 local PC, and the libraries installed in step 1 are installed on GitHub,
 but we will solve that later.
@@ -209,18 +215,23 @@ widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
 The `style="width:100%; height:216px;` part controls the actual size of
-the leaflet widget. In this case, the map will adapt to the width of
-the page with a fixed height of 216px. I put [some examples](#extra) of
+the **leaflet** widget. In this case, the map will adapt to the width of
+the page with a fixed height of 216px. I put [some examples](https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra) of
 different size options at the end of the post so you can have a look and see
 which one is more suitable for your needs.
 
 #### 6. Publish your post
 
 Now you just have to publish your post as usual!! If everything has been
-properly set, when Jekyll builds your post it will include the
+properly set, when **Jekyll** builds your post it will include the
 libraries in the header and make the magic happen, just like this:
 
-```{r print_map, echo=FALSE,message=FALSE,warning=FALSE}
+```{r}
+#| label: print_map
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: ""
 # Here is when the map is created and printed
 
 library(leaflet)
@@ -235,7 +246,7 @@ the YAML front matter of your `.md` file? Have another look, especially
 if you have followed my Pro tip.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
-### Gallery: Size of a leaflet map <a name="extra"></a>
+### Gallery: Size of a **leaflet** map <a name="extra"></a>
 
 **A note:** For a complete understanding of this section, it is
 recommended to access it on multiple devices, so you can see the
@@ -247,7 +258,7 @@ here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 #### Fixed size
 
 With these examples, you can see how to control the absolute size of the
-leaflet map. The disadvantage of this method is that the size would be
+**leaflet** map. The disadvantage of this method is that the size would be
 fixed for all the devices, so maps sized for smartphones or tablets
 wouldn’t look as nice on laptops, and vice versa.
 
@@ -255,7 +266,9 @@ wouldn’t look as nice on laptops, and vice versa.
 
 Fixed size in pixels. By default in my machine:
 
-```{r example1}
+```{r}
+#| label: example1
+#| fig-cap: ""
 leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%
   addTiles() %>%
   setMaxBounds(-200, -90, 200, 90) %>%
@@ -267,7 +280,9 @@ leaflet(options = leafletOptions(minZoom = 1.25, maxZoom = 8)) %>%
 Let’s go narrow and long with `html "width:200px;height:300px;"`:
 
 
-```{r example2}
+```{r}
+#| label: example2
+#| fig-cap: ""
 leaflet(
   options = leafletOptions(minZoom = 1.25, maxZoom = 8),
   width = "200px", height = "300px"
@@ -284,7 +299,9 @@ screen, no matter what device you are using.
 
 ##### Example 3: 100% width
 
-```{r example3}
+```{r}
+#| label: example3
+#| fig-cap: ""
 leaflet(
   options = leafletOptions(minZoom = 1.25, maxZoom = 8),
   width = "100%"

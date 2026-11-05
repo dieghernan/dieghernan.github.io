@@ -12,7 +12,7 @@ tags:
   - ggplot2
   - sf
   - giscoR
-header_img: https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
 og_image_width: 2000
 og_image_height: 1100
 og_image_type: "image/webp"
@@ -23,7 +23,10 @@ output:
     preserve_yaml: true
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -38,7 +41,6 @@ knitr::opts_chunk$set(
   fig.cap = "",
   fig.alt = "World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel."
 )
-
 ```
 
 What would happen if we peeled the Earth like an orange? The
@@ -50,7 +52,9 @@ our world is ready to peel.
 Let's make it with **sf**, **giscoR** and **ggplot2**. First, we get the
 coastlines and draw the outline, following the cuts between the lobes.
 
-```{r outline}
+```{r}
+#| label: outline
+#| fig-cap: ""
 library(sf)
 library(ggplot2)
 library(giscoR)
@@ -74,7 +78,9 @@ mask <- st_difference(rectangle, outline)
 Next, we draw the meridians and parallels within each lobe so that they do not
 connect across the cuts.
 
-```{r graticule}
+```{r}
+#| label: graticule
+#| fig-cap: ""
 lobes <- list(
   c(-180, -40, 0, 90), c(-40, 180, 0, 90),
   c(-180, -100, -90, 0), c(-100, -20, -90, 0),
@@ -105,7 +111,10 @@ grat <- st_sfc(do.call(c, lines), crs = 4326) |>
 Finally, we add the orange palette. The mask hides anything outside the outline
 and keeps the edges of our peel tidy.
 
-```{r map}
+```{r}
+#| label: map
+#| fig-cap: ""
+#| fig-alt: "World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel."
 ggplot() +
   geom_sf(data = outline, fill = "#FFF0D9", colour = NA) +
   geom_sf(data = world, fill = "#F9B566", colour = "#B34D08", linewidth = 0.25) +

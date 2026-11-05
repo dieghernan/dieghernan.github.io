@@ -20,14 +20,17 @@ output:
     variant: gfm
     preserve_yaml: yes
   html_document:
-header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp"
 og_image_width: 3000
 og_image_height: 3000
 og_image_type: "image/webp"
 og_image_alt: "World map in a heart-shaped Bonne projection, with a Valentine greeting above it."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -46,7 +49,10 @@ Projection](https://en.wikipedia.org/wiki/Bonne_projection)? This is a very
 special one, as it produces this result when used to map the whole world. Happy
 Valentine’s Day!
 
-```{r happval}
+```{r}
+#| label: happval
+#| fig-cap: ""
+#| fig-alt: "World map in a heart-shaped Bonne projection, with a Valentine greeting above it."
 library(sf)
 library(dplyr)
 library(giscoR)

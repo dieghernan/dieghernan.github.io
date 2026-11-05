@@ -5,7 +5,6 @@
 library(pacman)
 # rm(list = ls())
 
-
 library(pacman)
 p_load(
   dplyr,
@@ -22,11 +21,10 @@ p_load(
 # Find airports----
 myflights <- read_excel("./assets/data/flights.xlsx")
 tosearch <- data.frame(
-  toloc =
-    (sort(append(
-      myflights$start,
-      myflights$end
-    ))),
+  toloc = (sort(append(
+    myflights$start,
+    myflights$end
+  ))),
   stringsAsFactors = F
 )
 
@@ -36,14 +34,12 @@ tosearch <- tosearch %>%
   as.data.frame()
 
 tosearch$tofun <- gsub(" ", "+", tosearch$toloc)
-tosearch$tofun <- ifelse(tosearch$toloc == "San Sebastian",
-                         "san+sebastian+es",
-                         tosearch$tofun
+tosearch$tofun <- ifelse(
+  tosearch$toloc == "San Sebastian",
+  "san+sebastian+es",
+  tosearch$tofun
 )
-tosearch$tofun <- ifelse(tosearch$toloc == "Lyon",
-                         "Lyon+fr",
-                         tosearch$tofun
-)
+tosearch$tofun <- ifelse(tosearch$toloc == "Lyon", "Lyon+fr", tosearch$tofun)
 
 airports <- function(place, n = 1, lang = "en") {
   url <- paste(
@@ -60,13 +56,14 @@ airports <- function(place, n = 1, lang = "en") {
   geonames <- fromJSON(url)
   geonames <- data.frame(geonames[["geonames"]])
   geonames$search <- place
-  geonames <- geonames %>% select(
-    tofun = search,
-    toponymName,
-    countryCode,
-    long = lng,
-    lat
-  )
+  geonames <- geonames %>%
+    select(
+      tofun = search,
+      toponymName,
+      countryCode,
+      long = lng,
+      lat
+    )
   return(geonames)
 }
 
@@ -135,8 +132,9 @@ kms <- sum((as.numeric(st_length(data)) * data$n) / 1000)
 outline <- ndots[chull(ndots$long, ndots$lat), ]
 # Leaflet-----
 map <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
-  addProviderTiles(providers$CartoDB.DarkMatter,
-                   options = list(detectRetina = TRUE)
+  addProviderTiles(
+    providers$CartoDB.DarkMatter,
+    options = list(detectRetina = TRUE)
   ) %>%
   setView(-3.56948, 40.49181, zoom = 3) %>%
   setMaxBounds(-180, -90, 180, 90) %>%

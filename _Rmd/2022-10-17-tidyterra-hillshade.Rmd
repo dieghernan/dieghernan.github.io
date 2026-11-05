@@ -2,7 +2,7 @@
 last_modified_at: 2026-10-25
 giscus_discussion: 36
 title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)"
-subtitle: How to overlay SpatRasters
+subtitle: "How to overlay SpatRasters"
 excerpt: Using shadow effects on relief maps is a very common technique,
   which produces informative yet beautiful maps.
 syndication:
@@ -21,10 +21,9 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"
 description: "Create relief maps in R by combining hillshade and elevation colors with terra, tidyterra and ggplot2."
-schema_image:
-  - /assets/img/blog/20221017-6-finalplot-1.webp
+schema_image: ["https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"]
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
@@ -33,7 +32,10 @@ seo_title: "Hillshade and elevation maps with tidyterra: One World"
 og_title: "Hillshade and elevation maps with tidyterra"
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -88,6 +90,7 @@ palette for this kind of map.
 I will use the following libraries:
 
 ```{r}
+#| fig-cap: ""
 ## Libraries
 
 library(terra)
@@ -107,7 +110,8 @@ simplicity, but you can also use **elevatr**, which is much more comprehensive.
 However, **elevatr** produces the result as a `RasterLayer`, so you would need to
 convert the object to `SpatRaster` with `terra::rast()`.
 
-```{r }
+```{r}
+#| fig-cap: ""
 # Cache map data
 mydir <- "~/R/mapslib/misc"
 
@@ -127,7 +131,11 @@ r
 
 We can now have a quick look at the plot with `tidyterra::autoplot()`:
 
-```{r 20221017-1-autoplot, fig.alt = c("Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains.")}
+```{r}
+#| label: 20221017-1-autoplot
+#| fig-alt: !expr c("Elevation map of Romania. Colors represent altitude and highlight
+#|   the arc of the Carpathian Mountains.")
+#| fig-cap: ""
 # Quick look
 autoplot(r) +
   scale_fill_terrain_c(na.value = NA) +
@@ -144,7 +152,12 @@ approximates the potential "texture" of the surface based on the elevation and
 the sun's position. This is straightforward with the `terra::terrain()` and
 `terra::shade()` functions:
 
-```{r 20221017-2-hillroye, fig.alt = c("Grayscale hillshade map of Romania, revealing the Carpathian mountain arc through simulated light and shadow."), message=TRUE}
+```{r}
+#| label: 20221017-2-hillroye
+#| message: true
+#| fig-alt: !expr c("Grayscale hillshade map of Romania, revealing the Carpathian mountain
+#|   arc through simulated light and shadow.")
+#| fig-cap: ""
 ## Create hillshade effect
 
 slope <- terrain(r, "slope", unit = "radians")
@@ -180,7 +193,11 @@ using `maxcell = Inf`. In this approach using `fill`, the value of `maxcell`
 needs to be effectively set to `Inf` to ensure that the number of color values
 and the number of cells are the same.
 
-```{r 20221017-3-hillalt, fig.alt = c("Alternative grayscale hillshade map of Romania, showing terrain relief with a different shading calculation.")}
+```{r}
+#| label: 20221017-3-hillalt
+#| fig-alt: !expr c("Alternative grayscale hillshade map of Romania, showing terrain
+#|   relief with a different shading calculation.")
+#| fig-cap: ""
 # Use a vector of colors
 
 index <- hill |>
@@ -221,7 +238,11 @@ There is an additional point to take into account when designing color palettes
 for maps. A regular gradient would just interpolate colors assuming that the
 distance among colors is the same:
 
-```{r 20221017-regular-gradient, fig.alt = c("Elevation map of Romania using a regular color gradient. Green lowlands surround the higher Carpathian Mountains.")}
+```{r}
+#| label: 20221017-regular-gradient
+#| fig-alt: !expr c("Elevation map of Romania using a regular color gradient. Green lowlands
+#|   surround the higher Carpathian Mountains.")
+#| fig-cap: ""
 # Regular gradient
 grad <- hypso.colors(10, "dem_poster")
 
@@ -233,7 +254,11 @@ autoplot(r) +
 For that reason, **tidyterra** provides additional gradients whose colors are placed
 unevenly with the goal of providing a better understanding of the maps:
 
-```{r 20221017-hypso-gradient, fig.alt = c("Elevation map of Romania using a hypsometric color gradient to distinguish lowlands, uplands and mountain peaks.")}
+```{r}
+#| label: 20221017-hypso-gradient
+#| fig-alt: !expr c("Elevation map of Romania using a hypsometric color gradient to distinguish
+#|   lowlands, uplands and mountain peaks.")
+#| fig-cap: ""
 # Hypso gradient
 grad_hypso <- hypso.colors2(10, "dem_poster")
 
@@ -261,7 +286,23 @@ argument of the functions to make **ggplot2** aware of the limits of the value o
 the raster. This is easily achieved with `terra::minmax()` but I added an extra
 touch rounding up and down the range of values to the nearest 500.
 
-```{r 20221017-4-explorepals, fig.alt = c("Relief map of Romania using the etopo1_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands.", "Relief map of Romania using the dem_poster elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands.", "Relief map of Romania using the spain elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands.", "Relief map of Romania using the pakistan elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands.", "Relief map of Romania using the utah_1 elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands.", "Relief map of Romania using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is visible against the surrounding lowlands."), fig.show='hold', out.width="50%"}
+```{r}
+#| label: 20221017-4-explorepals
+#| fig-alt: !expr
+#| - 'c("Relief map of Romania using the etopo1_hypso elevation palette over hillshade.
+#|   The Carpathian arc is visible against the surrounding lowlands.", "Relief map of
+#|   Romania using the dem_poster elevation palette over hillshade. The Carpathian arc
+#|   is visible against the surrounding lowlands.", "Relief map of Romania using the
+#|   spain elevation palette over hillshade. The Carpathian arc is visible against the
+#|   surrounding lowlands.", "Relief map of Romania using the pakistan elevation palette
+#|   over hillshade. The Carpathian arc is visible against the surrounding lowlands.", '
+#| - '    "Relief map of Romania using the utah_1 elevation palette over hillshade. The
+#|   Carpathian arc is visible against the surrounding lowlands.", "Relief map of Romania
+#|   using the wiki-2.0_hypso elevation palette over hillshade. The Carpathian arc is
+#|   visible against the surrounding lowlands.")'
+#| fig-show: hold
+#| out-width: 50%
+#| fig-cap: ""
 # Try some options, but we need to be aware of the values of our raster
 
 r_limits <- minmax(r) |> as.vector()
@@ -320,7 +361,11 @@ the hillshade to fixed colors above. Here we also extract the elevation colors
 with `ggplot_build()` before passing both layers to **ggblend**. Using
 `maxcell = Inf` keeps the color vectors matched to the raster cells.
 
-```{r 20221017-5-blend, fig.alt = c("Relief map of Romania combining elevation colors with hillshade so mountain slopes remain visible beneath the color gradient.")}
+```{r}
+#| label: 20221017-5-blend
+#| fig-alt: !expr c("Relief map of Romania combining elevation colors with hillshade
+#|   so mountain slopes remain visible beneath the color gradient.")
+#| fig-cap: ""
 # Fit the full palette to the local elevation range
 palette_stops <- subset(hypsometric_tints_db, pal == "dem_poster")
 palette_values <- rescale(palette_stops$limit, to = r_limits)
@@ -371,6 +416,7 @@ For the final map, we use Noto Serif when its font files are available locally
 and fall back to the system serif font otherwise:
 
 ```{r}
+#| fig-cap: ""
 font_dir <- path.expand("~/R/googlefonts")
 font_files <- file.path(
   font_dir,
@@ -391,7 +437,11 @@ if (all(file.exists(font_files))) {
 
 And now we theme it:
 
-```{r 20221017-6-finalplot, fig.alt = c("Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend.")}
+```{r}
+#| label: 20221017-6-finalplot
+#| fig-alt: !expr c("Relief map of Romania with elevation colors and hillshade highlighting
+#|   the Carpathian arc, accompanied by an altitude legend.")
+#| fig-cap: ""
 # Theming
 
 # Adjust text size

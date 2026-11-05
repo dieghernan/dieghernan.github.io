@@ -8,7 +8,7 @@ tags:
   - sf
   - maps
   - giscoR
-header_img: ./assets/img/blog/20191016_imgpost.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp"
 output:
   md_document:
     variant: gfm
@@ -18,9 +18,13 @@ excerpt: "Map international organ donor rates using Wikipedia data and cartograp
 og_image_width: 1600
 og_image_height: 728
 og_image_type: "image/webp"
+og_image_alt: "World choropleth map of organ donors per million people in 2017. Darker blue indicates higher donor rates and gray indicates missing data."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(echo = TRUE, tidy = "styler")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
@@ -45,7 +49,11 @@ The first step is to scrape Wikipedia in order to get the final table. To do
 so, I will use the **rvest** package. You can get the `xpath` you want to
 scrape as explained [here](https://stackoverflow.com/a/57972054/7877917).
 
-```{r 20191016_libs, warning=FALSE, message=FALSE}
+```{r}
+#| label: 20191016_libs
+#| warning: false
+#| message: false
+#| fig-cap: ""
 library(rvest)
 library(dplyr)
 
@@ -66,7 +74,13 @@ knitr::kable(head(Base, 10), format = "markdown")
 
 Now we need to choose a [good source of maps](https://dieghernan.github.io/201906_Beautiful2/):
 
-```{r 20191016_getmap, message=FALSE, warning=FALSE, paged.print=FALSE, results='hide'}
+```{r}
+#| label: 20191016_getmap
+#| message: false
+#| warning: false
+#| results: hide
+#| paged-print: false
+#| fig-cap: ""
 library(sf)
 library(giscoR)
 
@@ -80,7 +94,12 @@ WorldMap <- gisco_get_countries(resolution = 3, epsg = 3857) %>%
 Now let's join and have a look to see what is going on. We use the
 **countrycode** package to retrieve the ISO3 codes of our scraped dataset:
 
-```{r 20191016_joining, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r}
+#| label: 20191016_joining
+#| message: false
+#| warning: false
+#| paged-print: false
+#| fig-cap: ""
 library(countrycode)
 
 Base$ISO_3166_3 <- countrycode(Base$Country, origin = "country.name", destination = "iso3c")
@@ -115,7 +134,14 @@ are some things to bear in mind:
 Some libraries remain to be used: **RColorBrewer**, **rsvg** and, especially,
 one of my favorites, **cartography**:
 
-```{r 20191016_final, echo=TRUE, message=FALSE, warning=FALSE, eval=FALSE, paged.print=FALSE}
+```{r}
+#| label: 20191016_final
+#| echo: true
+#| message: false
+#| warning: false
+#| eval: false
+#| paged-print: false
+#| fig-cap: ""
 library(RColorBrewer)
 library(cartography)
 library(rsvg)
@@ -167,14 +193,23 @@ dev.off()
 
 And that's all. Our `.svg` file is ready to be included in Wikipedia.
 
-```{r 20191016_imgpost, message=FALSE, warning=FALSE, eval=FALSE, include=FALSE, paged.print=FALSE, results='hide'}
+```{r}
+#| label: 20191016_imgpost
+#| message: false
+#| warning: false
+#| eval: false
+#| include: false
+#| results: hide
+#| paged-print: false
+#| fig-cap: ""
+#| fig-alt: "World choropleth map of organ donors per million people in 2017. Darker blue indicates higher donor rates and gray indicates missing data."
 rsvg_png(
   "Organ donor rate per million by country gradient map (2017).svg",
   "20191016_imgpost.png"
 )
 ```
 
-![img](../assets/img/blog/20191016_imgpost.png)
+![World choropleth map of organ donors per million people in 2017. Darker blue indicates higher donor rates and gray indicates missing data.](https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp)
 
 **Update**: The map is already part of the [Wikipedia article](https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary).
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }

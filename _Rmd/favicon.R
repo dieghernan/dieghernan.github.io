@@ -32,12 +32,14 @@ cent <- countries %>%
 
 countries_buff <- st_intersection(countries, cent)
 
-nuts3.sf <- merge(nuts3,
+nuts3.sf <- merge(
+  nuts3,
   popdens,
   by.x = "NUTS_ID",
   by.y = "geo",
   all.x = TRUE
-) %>% st_intersection(cent)
+) %>%
+  st_intersection(cent)
 
 
 br <- c(0, 25, 50, 100, 200, 500, 1000, 2500, 5000, 10000, 30000, Inf)

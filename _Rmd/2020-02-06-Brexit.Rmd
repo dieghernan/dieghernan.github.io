@@ -8,7 +8,7 @@ tags:
   - flags
   - giscoR
 last_modified_at: 2026-10-07
-header_img: ./assets/img/blog/20200602_imgpost-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20200602_imgpost-1.webp"
 output:
   md_document:
     variant: gfm
@@ -17,9 +17,13 @@ excerpt: "Map the United Kingdom’s departure from the EU using country boundar
 og_image_width: 810
 og_image_height: 540
 og_image_type: "image/webp"
+og_image_alt: "Map of Europe overlaid with the European Union flag. The United Kingdom is left white to illustrate Brexit."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
@@ -38,7 +42,16 @@ for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
-```{r 20200602_imgpost, fig.height=540/90, fig.width=810/90, message=FALSE, warning=FALSE, dev='ragg_png', dpi=90}
+```{r}
+#| label: 20200602_imgpost
+#| message: false
+#| warning: false
+#| fig-height: !expr 540/90
+#| fig-width: !expr 810/90
+#| fig-format: ragg_png
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Map of Europe overlaid with the European Union flag. The United Kingdom is left white to illustrate Brexit."
 library(cartography)
 library(sf)
 library(giscoR)

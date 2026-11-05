@@ -17,14 +17,17 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
-header_img: https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp"
 og_image_width: 2053
 og_image_height: 1786
 og_image_type: "image/webp"
 og_image_alt: "South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -55,6 +58,7 @@ and produce clean orthographic maps. I walk through the manual corrections and
 then create a few example maps.
 
 ```{r}
+#| fig-cap: ""
 # Libraries
 library(tidyverse)
 library(sf)
@@ -68,7 +72,10 @@ library(rmapshaper)
 First, we obtain the GISCO Antarctica polygon and transform it to an
 orthographic projection centered on the South Pole.
 
-```{r 202510_init}
+```{r}
+#| label: 202510_init
+#| fig-cap: ""
+#| fig-alt: "South Pole-centered map of Antarctica with a narrow lollipop-shaped gap extending from the coast toward the pole, caused by a polygon artifact."
 antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") %>%
   select(NAME = NAME_ENGL) |>
   # Ortho proj centered in the South Pole
@@ -90,7 +97,10 @@ orthographic projection. I correct it manually with these steps:
 We convert polygons to point coordinates and inspect them to find the offending
 sequence:
 
-```{r 202510_init_ant}
+```{r}
+#| label: 202510_init_ant
+#| fig-cap: ""
+#| fig-alt: "Coordinate plot of the Antarctic coastline with numbered vertices. A line and loop extending into the interior identify the polygon artifact."
 # Identify the max
 ant_explode <- antarct |>
   st_cast("POLYGON")
@@ -117,7 +127,10 @@ From the plotted indices, we can see the problematic points fall roughly in the
 range 8200–9200. We inspect that interval in detail to select the exact indices
 to remove.
 
-```{r 202510_test_points}
+```{r}
+#| label: 202510_test_points
+#| fig-cap: ""
+#| fig-alt: "Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact."
 test <- coords |>
   filter(np %in% seq(8200, 9200))
 
@@ -133,7 +146,12 @@ repeated for other shapefiles. The approach is straightforward but depends on
 the particular geometry and projection.
 :::
 
-```{r 202510_final_sol, out.width="50%", fig.show="hold"}
+```{r}
+#| label: 202510_final_sol
+#| out-width: 50%
+#| fig-show: hold
+#| fig-cap: ""
+#| fig-alt: ["Coordinate plot of vertices 8289 through 9130 selected for removal. They form the unwanted loop and stem.", "Coordinate plot of the vertices retained from the inspected interval. They trace a section of the Antarctic coastline."]
 # Final solution after some iterations...
 
 test |>
@@ -153,7 +171,10 @@ test |>
 After removing the offending points, we rebuild the polygon and reconstitute the
 full Antarctica shape from the corrected piece plus the remaining polygons.
 
-```{r 202510_good_pol}
+```{r}
+#| label: 202510_good_pol
+#| fig-cap: ""
+#| fig-alt: "South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area."
 # From coordinates to polygon
 newpol <- coords |>
   as.data.frame() |>
@@ -192,7 +213,10 @@ proposed Antarctic flag designs.
 
 A simple rendition of Bartram's original concept:
 
-```{r 202510_bartram}
+```{r}
+#| label: 202510_bartram
+#| fig-cap: ""
+#| fig-alt: "Antarctic flag design with a white silhouette of the continent on a blue background."
 bbox <- st_bbox(antarctica_fixed) # For limits on the panel
 
 antarctica_fixed |>
@@ -217,7 +241,10 @@ This example uses graticules to create a concentric "bullseye" pattern around
 Antarctica. Generating such graticules and merging meridians requires a few
 extra steps to avoid small gaps near the pole.
 
-```{r 202510_treaty1}
+```{r}
+#| label: 202510_treaty1
+#| fig-cap: ""
+#| fig-alt: "Polar coordinate grid centered on the South Pole, with concentric latitude circles and radial longitude lines."
 # Need graticules
 grats <- giscoR::gisco_get_countries() |>
   st_transform(st_crs(antarctica_fixed)) |>
@@ -238,7 +265,9 @@ We merge meridians so the area around the South Pole is filled. `st_graticule()`
 can leave a tiny hole at the pole, and we fix this by joining complementary
 meridians.
 
-```{r 202510_fixgrats}
+```{r}
+#| label: 202510_fixgrats
+#| fig-cap: ""
 # Merge meridians
 merid <- lapply(seq(-180, 0, 30), function(x) {
   df <- grats |>
@@ -267,7 +296,10 @@ grats_end <- merid |>
 We then cut and color the resulting graticules so they form the emblem-like
 pattern.
 
-```{r 202510_treaty2}
+```{r}
+#| label: 202510_treaty2
+#| fig-cap: ""
+#| fig-alt: "Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background."
 # Cut since some grats should be colored differently
 
 antarctica_simp <- rmapshaper::ms_simplify(antarctica_fixed, keep = 0.005)
@@ -312,7 +344,10 @@ procedure:
 4.  Color polygons so larger areas remain white while smaller polygons use
     magenta/pink tones.
 
-```{r 202510_redesign}
+```{r}
+#| label: 202510_redesign
+#| fig-cap: ""
+#| fig-alt: ["Map of Antarctica filled with randomly distributed blue points inside the continent boundary.", "Antarctic flag variation with the continental silhouette formed by scattered white points on a blue background."]
 # Maximum chunk of Antarctica, the one that we fixed
 
 ant_max_fixed

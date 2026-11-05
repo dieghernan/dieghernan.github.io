@@ -1,5 +1,5 @@
 ---
-title: "Beautiful maps with R (III): Patterns and hatched maps"
+title: "Beautiful maps with <strong>R</strong> (III): Patterns and hatched maps"
 subtitle: "A solution for black-and-white and academic maps"
 tags:
   - r_bloggers
@@ -12,7 +12,7 @@ tags:
   - r_package
   - giscoR
 last_modified_at: 2026-10-07
-header_img: ./assets/img/blog/20191212_imgpost-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp"
 output:
   md_document:
     variant: gfm
@@ -24,7 +24,10 @@ og_image_type: "image/webp"
 og_image_alt: "Map of Martinique combining hatching for median income ranges with gray fills distinguishing the prefecture, sub-prefectures and other municipalities."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(echo = TRUE, dev = "ragg_png")
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
@@ -44,12 +47,17 @@ revalidated against current package versions.
 in **cartography** >v.2.4.0 through the [`hatchedLayer`](http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html)
 and [`legendHatched`](https://riatelab.github.io/cartography/docs/reference/legendHatched.html)
 functions. Just install it via `install.packages("cartography")`. A dedicated
-blog post with examples is available at this [link](../202002_cartography1).
+blog post with examples is available at this [link](https://dieghernan.github.io/202002_cartography1).
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 ## Required **R** packages
 
-```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: libs
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 library(sf)
 library(dplyr)
 library(giscoR)
@@ -57,14 +65,33 @@ library(cartography)
 ```
 
 
-```{r 20191212_dotex, message=FALSE, warning=FALSE, dpi=90, fig.width=200/90, fig.height=350/90,  paged.print=FALSE, tidy='styler', results='hide'}
+```{r}
+#| label: 20191212_dotex
+#| message: false
+#| warning: false
+#| tidy: styler
+#| results: hide
+#| fig-width: !expr 200/90
+#| fig-height: !expr 350/90
+#| paged-print: false
+#| fig-dpi: 90
+#| fig-cap: ""
 DE <- gisco_get_countries(country = "Germany", epsg = 3857)
 ```
 
 
 Let's see how it works.
 
-```{r 20191212_showfun, warning=FALSE, message=FALSE, tidy='styler', fig.height=500/90,fig.width=500/90, dpi=90 }
+```{r}
+#| label: 20191212_showfun
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-height: !expr 500/90
+#| fig-width: !expr 500/90
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Eleven outlines of Germany filled with different patterns, including dots, text, diamonds, grids, hexagons, lines, zigzags and circles."
 par(
   mfrow = c(3, 4),
   mar = c(1, 1, 1, 1),
@@ -97,7 +124,16 @@ title("circle")
 Let's play a little bit more with some of the additional features of the
 function:
 
-```{r 20191212_playing, warning=FALSE, message=FALSE, tidy='styler', fig.height=350/90,fig.width=500/90, dpi=90 }
+```{r}
+#| label: 20191212_playing
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-height: !expr 350/90
+#| fig-width: !expr 500/90
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Six outlines of Germany illustrating variations in pattern size, density, color and background."
 par(mar = c(1, 1, 1, 1), mfrow = c(2, 3))
 plot(st_geometry(DE))
 hatchedLayer(
@@ -165,7 +201,16 @@ Note that it is also possible to create solid legends by setting `col` and
 `ptrn.bg` to the same color. Parameters respect the order of the `categ`
 variable.
 
-```{r 20191212_playinglegend, warning=FALSE, message=FALSE,dpi=90, fig.width=500/90, fig.height=500/90,  tidy='styler'}
+```{r}
+#| label: 20191212_playinglegend
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-width: !expr 500/90
+#| fig-height: !expr 500/90
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Outline of Germany surrounded by four example legends combining patterns, text and solid fills."
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
 plot(st_geometry(DE)) # Null geometry
 legendHatched(
@@ -213,7 +258,19 @@ legendHatched(
 
 I hope that you find these functions useful. Enjoy, and happy mapping!
 
-```{r 20191212_imgpost, echo=FALSE, fig.align='center', fig.height=500/90, fig.width=474/90, warning=FALSE, dpi=90, results='hide', tidy='styler', message=FALSE}
+```{r}
+#| label: 20191212_imgpost
+#| echo: false
+#| warning: false
+#| results: hide
+#| tidy: styler
+#| message: false
+#| fig-align: center
+#| fig-height: !expr 500/90
+#| fig-width: !expr 474/90
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Map of Martinique combining hatching for median income ranges with gray fills distinguishing the prefecture, sub-prefectures and other municipalities."
 library(cartography)
 
 mtq <- st_read(system.file("gpkg/mtq.gpkg", package = "cartography"))

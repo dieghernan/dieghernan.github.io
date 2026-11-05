@@ -1,12 +1,12 @@
 ---
-title: Where in the world?
-subtitle: A leaflet map with the places I have flown
+title: "Where in the world?"
+subtitle: "A <strong>leaflet</strong> map with the places I have flown"
 tags:
   - rstats
   - rspatial
   - maps
   - leaflet
-header_img: /assets/img/blog/201905_Where-in-the-world.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.webp"
 leafletmap: true
 always_allow_html: true
 output:
@@ -18,12 +18,18 @@ output:
 og_image_width: 741
 og_image_height: 370
 og_image_type: "image/webp"
+og_image_alt: "Dark world map with green routes connecting Spain to destinations marked by blue circles."
 ---
 
 This is a very personal post, where I just show the map of all the places I have
 traveled to by plane.
 
-```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+```{r}
+#| label: setup
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: ""
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_knit$set(global.par = TRUE)
 
@@ -229,7 +235,13 @@ map
 
 ## Top cities
 
-```{r Cities,echo=FALSE,  warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: Cities
+#| echo: false
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 names <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodes.csv")
 Cities <- inner_join(ndots %>%
   select(
@@ -252,7 +264,13 @@ knitr::kable(head(Cities %>% select(
 
 ## Top countries
 
-```{r Countries,echo=FALSE, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: Countries
+#| echo: false
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 knitr::kable(
   head(
     Cities %>% filter(City != "Madrid") %>%
@@ -269,7 +287,13 @@ knitr::kable(
 
 ## Top continents
 
-```{r Continents, echo=FALSE, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: Continents
+#| echo: false
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 knitr::kable(
   head(
     Cities %>% filter(City != "Madrid") %>%

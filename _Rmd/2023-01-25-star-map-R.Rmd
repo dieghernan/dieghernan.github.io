@@ -1,5 +1,5 @@
 ---
-title: "Star map with R"
+title: "Star map with <strong>R</strong>"
 subtitle: "Creating Star Map Visualizations Based on Location and Date"
 syndication:
   - https://www.r-bloggers.com/2023/01/star-map-with-r/
@@ -20,10 +20,14 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
+header_img: "https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp"
+og_image_alt: "Circular star map with white constellation lines, stars and a coordinate grid on a dark background."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -78,12 +82,14 @@ Data](https://dieghernan.github.io/celestial_data/), which provides all these
 files in several spatial formats. Please [check out the
 repo](https://github.com/dieghernan/celestial_data) to learn more about it.
 
-## Creating a star map with R
+## Creating a star map with **R**
 
 The first step is loading a bunch of libraries that would help us on this cosmic
 task:
 
-```{r libraries}
+```{r}
+#| label: libraries
+#| fig-cap: ""
 # Spatial manipulation
 library(sf)
 library(s2)
@@ -124,7 +130,9 @@ Now we prepare some helper functions:
 <summary>Show <code>load_celestial</code> and
 <code>pretty_lonlat()</code></summary>
 
-```{r helper_funs1}
+```{r}
+#| label: helper_funs1
+#| fig-cap: ""
 load_celestial <- function(filename,
                            url = "https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/",
                            cachedir = tempdir()) {
@@ -195,7 +203,9 @@ The example uses the returned angle to rotate the star map's projection.
 
 <summary>Show <code>get_mst()</code></summary>
 
-```{r get_mst}
+```{r}
+#| label: get_mst
+#| fig-cap: ""
 # Derive rotation degrees of the projection given a date and a longitude
 get_mst <- function(dt, lng) {
   desired_date_utc <- lubridate::with_tz(dt, "UTC")
@@ -255,7 +265,9 @@ that for us.
 
 <summary>Show <code>sf_spherical_cut()</code></summary>
 
-```{r sf_spherical_cut}
+```{r}
+#| label: sf_spherical_cut
+#| fig-cap: ""
 # Cut a sf object with a buffer using spherical s2 geoms
 # Optionally, project and flip
 
@@ -315,6 +327,7 @@ Now we are ready to start creating our visualization. We need only two inputs:
 - A specific moment in time.
 
 ```{r}
+#| fig-cap: ""
 # Inputs
 desired_place <- "Madrid, Spain"
 
@@ -346,7 +359,9 @@ plotting to specify the correct time zone. Since we already know the latitude an
 longitude of our desired location, we can easily get that with the **lutz**
 package:
 
-```{r get_tz}
+```{r}
+#| label: get_tz
+#| fig-cap: ""
 desired_date
 
 # Get tz
@@ -378,7 +393,9 @@ that night sky is not accurate, think that in New Zealand the local time at that
 moment would be 10:00 hence no stars are visible) you would need to adjust
 `desired_date_tz` as:
 
-```{r wrong}
+```{r}
+#| label: wrong
+#| fig-cap: ""
 as_datetime(paste(as.Date(desired_date_tz), "22:00:00"), tz = "UTC")
 
 # That would really correspond to 10:00
@@ -397,7 +414,9 @@ demo](https://ofrohn.github.io/celestial-demo/location.html) of
 projection](https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/demo/location.html#L17-L22),
 so we are going to replicate that as well:
 
-```{r projections}
+```{r}
+#| label: projections
+#| fig-cap: ""
 # Get the rotation and prepare buffer and projection
 
 # Get right degrees
@@ -445,7 +464,10 @@ represent the Milky Way, constellation lines and stars.
 We also add some additional variables that would help us to improve the
 visualization.
 
-```{r 20230125_mw}
+```{r}
+#| label: 20230125_mw
+#| fig-cap: ""
+#| fig-alt: ["Full-sky map of the Milky Way in longitude and latitude coordinates. Filled bands trace its curved extent across the sky.", "Milky Way bands clipped and projected to the selected viewing hemisphere."]
 mw <- load_celestial("mw.min.geojson")
 
 # Add colors to MW to use on fill
@@ -474,7 +496,10 @@ ggplot(mw_end) +
 
 Now it is the turn of the constellations:
 
-```{r 20230125_const}
+```{r}
+#| label: 20230125_const
+#| fig-cap: ""
+#| fig-alt: ["Full-sky map of constellation lines in longitude and latitude coordinates, with line segments connecting stars into constellation outlines.", "Constellation lines clipped and projected to the selected circular viewing hemisphere."]
 const <- load_celestial("constellations.lines.min.geojson")
 
 ggplot(const) +
@@ -498,7 +523,10 @@ ggplot(const_end) +
 
 And finally the stars:
 
-```{r 20230125_stars}
+```{r}
+#| label: 20230125_stars
+#| fig-cap: ""
+#| fig-alt: ["Full-sky map of stars in longitude and latitude coordinates. Larger and more opaque points represent brighter stars.", "Star map clipped and projected to the selected circular viewing hemisphere. Larger and more opaque points represent brighter stars."]
 stars <- load_celestial("stars.6.min.geojson")
 
 ggplot(stars) +
@@ -530,7 +558,10 @@ We are also going to include graticules, so the Earth's poles can be quickly
 spotted. In this case we don't apply any affine transformation, so the `flip`
 parameter of `sf_spherical_cut()` needs to be set as `NULL`.
 
-```{r 20230125_grat}
+```{r}
+#| label: 20230125_grat
+#| fig-cap: ""
+#| fig-alt: ["Rectangular coordinate grid with latitude lines every 10 degrees and longitude lines every 30 degrees.", "Coordinate grid projected to the selected hemisphere. Curved latitude lines and converging longitude lines reveal the pole."]
 grat <- st_graticule(
   ndiscr = 5000,
   lat = seq(-90, 90, 10),
@@ -560,7 +591,9 @@ ggplot(grat_end) +
 We are almost set! For preparing the final map, first we are going to create the
 corresponding labels, which will be included as `caption` on the **ggplot2** map:
 
-```{r map_labs}
+```{r}
+#| label: map_labs
+#| fig-cap: ""
 lat_lab <- pretty_lonlat(desired_loc[1], type = "lat")
 lon_lab <- pretty_lonlat(desired_loc[2], type = "lon")
 
@@ -610,7 +643,10 @@ We can enhance the visualization by applying some interesting effects:
 
 So we are ready now to create the final visualization:
 
-```{r 20230125_celestial_map }
+```{r}
+#| label: 20230125_celestial_map
+#| fig-cap: ""
+#| fig-alt: "Circular star map for Madrid with constellation lines, stars sized by brightness and the Milky Way on a dark background."
 # Prepare MULTILINESTRING
 
 const_end_lines <- const_end %>%
@@ -678,7 +714,10 @@ calculations in JavaScript, and everything seems to be up and running.
 data for traditional Chinese constellations, so we can create a similar map with
 this entirely different set of geometries:
 
-```{r 20230125_celestial_map_cn}
+```{r}
+#| label: 20230125_celestial_map_cn
+#| fig-cap: ""
+#| fig-alt: "Circular star map for Madrid using Chinese constellation lines, with stars sized by brightness and the Milky Way on a dark background."
 const_cn <- load_celestial("constellations.lines.cn.min.geojson")
 
 # Cut and prepare for geom_glowpath() on a single step

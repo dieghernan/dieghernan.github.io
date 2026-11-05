@@ -1,6 +1,6 @@
 ---
 title: "Introducing <strong>tidyterra</strong>"
-subtitle: Easily work with and plot SpatRasters
+subtitle: "Easily work with and plot SpatRasters"
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
 syndication:
@@ -21,18 +21,19 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20220525_easteregg-2.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp"
 description: "Use tidyterra to manipulate terra spatial objects with tidyverse methods and plot SpatRasters with ggplot2."
-schema_image:
-  - /assets/img/blog/20220525_easteregg-2.webp
-  - /assets/img/blog/20220525_easteregg-3.webp
+schema_image: ["https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp", "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp"]
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
 og_image_alt: "Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -53,7 +54,11 @@ rm(list = ls())
 If you have been playing around with **R** for a while, you are probably
 familiar with the `volcano` dataset:
 
-```{r 20220525_volcano, fig.alt=c("Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground.")}
+```{r}
+#| label: 20220525_volcano
+#| fig-alt: !expr c("Elevation heatmap of Maungawhau in Auckland from the volcano dataset.
+#|   Colors indicate altitude and reveal the crater surrounded by higher ground.")
+#| fig-cap: ""
 data("volcano")
 image(volcano, col = terrain.colors(256, rev = TRUE))
 ```
@@ -70,6 +75,7 @@ geotag the `volcano` dataset. We will also produce **ggplot2** maps using the
 functions of **tidyterra**.
 
 ```{r}
+#| fig-cap: ""
 # Libraries
 library(terra)
 library(ggplot2)
@@ -84,7 +90,11 @@ Let's check it out. Thanks to the package **maptiles** we can have a glimpse of
 the location of Maungawhau using map tiles, as in Google Maps. We will use
 **tidyterra** for displaying the map tile:
 
-```{r 20220525_tile, fig.alt=c("Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets.")}
+```{r}
+#| label: 20220525_tile
+#| fig-alt: !expr c("Street map of Maungawhau in Auckland, showing the crater, surrounding
+#|   paths and nearby streets.")
+#| fig-cap: ""
 # location of Maungawhau
 
 box <- c(
@@ -119,7 +129,12 @@ geotagged map tile)? Let's check it out.
 Thanks to the **terra** package we can start converting `volcano` into a
 SpatRaster:
 
-```{r 20220525_volcano_raster, fig.alt=c("Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map.", "Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map.")}
+```{r}
+#| label: 20220525_volcano_raster
+#| fig-alt: !expr c("Elevation raster of Maungawhau before orientation correction. The
+#|   crater appears near the top of the map.", "Elevation raster of Maungawhau after
+#|   reversing rows and columns. The crater now appears near the bottom of the map.")
+#| fig-cap: ""
 volcano_rast <- rast(volcano)
 
 terra::plot(volcano_rast)
@@ -152,6 +167,7 @@ Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)), whi
 And we can translate that easily to an empty SpatRaster:
 
 ```{r}
+#| fig-cap: ""
 # Extra length for proper handling extent
 xrange <- range(seq(from = 2667400, length.out = 62, by = 10))
 yrange <- range(seq(from = 6478700, length.out = 88, by = 10))
@@ -170,7 +186,13 @@ template
 So now we only need to transfer the values from `volcano_rast_ok` to our
 template:
 
-```{r 20220525_create_volcano2, fig.alt=c("Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters.", "Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets.")}
+```{r}
+#| label: 20220525_create_volcano2
+#| fig-alt: !expr c("Georeferenced elevation map of Maungawhau. Projected coordinates
+#|   locate the terrain and colors represent altitude from 94 to 195 meters.", "Street
+#|   map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain
+#|   with the crater and surrounding streets.")
+#| fig-cap: ""
 # Use tidyterra to pull the values of one raster
 # and create a new layer
 
@@ -197,7 +219,16 @@ raster, but with the topographic values extracted from [Auckland LiDAR 1m DEM
 resampled to a resolution of 5x5 meters, for package size optimization. See here
 how to load it and check the plotting possibilities of **tidyterra**:
 
-```{r 20220525_easteregg, fig.alt=c("Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution.", "Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map.", "Street map of Maungawhau overlaid with elevation contours at 10-meter intervals. Nested contours outline the crater and its rim.", "Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals.")}
+```{r}
+#| label: 20220525_easteregg
+#| fig-alt: !expr c("Elevation map of Maungawhau derived from LiDAR data, showing the
+#|   crater and surrounding terrain at 5-meter resolution.", "Street map of Maungawhau
+#|   with an elevation overlay restricted to terrain above 130 meters. Lower ground remains
+#|   visible on the base map.", "Street map of Maungawhau overlaid with elevation contours
+#|   at 10-meter intervals. Nested contours outline the crater and its rim.", "Street
+#|   map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and
+#|   contour lines at 2.5-meter intervals.")
+#| fig-cap: ""
 # Load out Easter Egg
 
 volcano2_easter <- rast(system.file("extdata/volcano2.tif",

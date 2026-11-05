@@ -1,5 +1,5 @@
 ---
-title: "Beautiful maps with R (II): Fun with flags"
+title: "Beautiful maps with <strong>R</strong> (II): Fun with flags"
 subtitle: "Put a picture on your map"
 excerpt: Want to use a flag (or any *.png file) as a background for your map? You are in the right place.
 tags:
@@ -14,7 +14,7 @@ tags:
   - mapSpain
   - giscoR
 last_modified_at: 2023-01-23
-header_img: ./assets/img/blog/20190618_imgpost-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp"
 output:
   md_document:
     variant: gfm
@@ -22,12 +22,16 @@ output:
 og_image_width: 800
 og_image_height: 533
 og_image_type: "image/webp"
+og_image_alt: "Map of Europe in dark blue with a ring of yellow European Union stars on a light blue background."
 ---
 
 
 
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   echo = TRUE, tidy = "styler",
   dev = "ragg_png"
@@ -42,7 +46,7 @@ options(gisco_cache_dir = "~/R/mapslib/GISCO/")
 **Updated 29 December 2020**: All these pieces of work are already available
 in **cartography** >v.2.4.0 in the [`getPngLayer`](http://riatelab.github.io/cartography/docs/reference/getPngLayer.html)
 function. Just install it via `install.packages("cartography")`. A dedicated
-blog post with examples is available at this [link](../202002_cartography1).
+blog post with examples is available at this [link](https://dieghernan.github.io/202002_cartography1).
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 **Updated 25 January 2023**: **cartography** is in maintenance mode. You can use
@@ -55,12 +59,16 @@ in the right place. I am aware that there are some **R** packages out
 [there](https://github.com/RobertMyles/flagfillr), but we focus here on the
 option provided by `cartography::getPngLayer()`, which basically converts your
 image into a raster. See also Paul Murrell's article **"Raster Images in R
-Graphics"** [(_The R Journal, Volume 3/1, June 2011_)](https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf).
+Graphics"** [(_The **R** Journal, Volume 3/1, June 2011_)](https://journal.r-project.org/archive/2011/RJ-2011-008/RJ-2011-008.pdf).
 
 
 ## Required **R** packages
 
-```{r libs, warning=FALSE, message=FALSE}
+```{r}
+#| label: libs
+#| warning: false
+#| message: false
+#| fig-cap: ""
 library(dplyr)
 library(sf)
 library(cartography)
@@ -81,7 +89,17 @@ source is the geodata available in [**Eurostat**](https://ec.europa.eu/eurostat)
 I will also use **giscoR** to get the world around Spain.
 
 
-```{r 20190618_preparing,  message=FALSE, warning=FALSE,  fig.height=550/90, fig.width=750/90,dpi=90, paged.print=FALSE, results='hide'}
+```{r}
+#| label: 20190618_preparing
+#| message: false
+#| warning: false
+#| results: hide
+#| fig-height: !expr 550/90
+#| fig-width: !expr 750/90
+#| paged-print: false
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Map of Spain with autonomous community boundaries and a separate box for the Canary Islands."
 Spain <- esp_get_ccaa(epsg = 3857, res = 3)
 
 World <- gisco_get_countries(epsg = 3857, res = 3)
@@ -122,7 +140,18 @@ to build my code. The goal here is to create a `RasterBrick` from the desired
 `*.png` file, add the necessary geographical information and use the shape of
 Asturias to crop the flag.
 
-```{r 20190618_Asturias,  message=FALSE, warning=FALSE,  fig.width=1000/90,fig.height=(500/2)/90,dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+```{r}
+#| label: 20190618_Asturias
+#| message: false
+#| warning: false
+#| tidy: styler
+#| results: hide
+#| fig-width: !expr 1000/90
+#| fig-height: !expr (500/2)/90
+#| paged-print: false
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Two maps comparing the rectangular flag of Asturias with the same flag clipped to the boundary of Asturias."
 # 1.Shape---
 shp <- Spain %>% filter(ccaa.shortname.es == "Asturias")
 
@@ -152,7 +181,19 @@ par(opar)
 otherwise the plot will look quite poor. Here I show an extreme example.
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
-```{r 20190618_svg,  message=FALSE, warning=FALSE, dev='png', fig.width=800/(90),fig.height=550/(90),dpi=90, paged.print=FALSE, tidy='styler', results='hide'}
+```{r}
+#| label: 20190618_svg
+#| message: false
+#| warning: false
+#| tidy: styler
+#| results: hide
+#| fig-width: !expr 800/(90)
+#| fig-height: !expr 550/(90)
+#| paged-print: false
+#| fig-format: png
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Two flag-filled maps of Murcia comparing low and high image resolutions. The higher-resolution flag has smoother edges."
 MURshp <- Spain %>% filter(ccaa.shortname.es == "Murcia")
 MURLow <- getPngLayer(
   MURshp,
@@ -180,7 +221,11 @@ par(opar)
 Now, we are ready to have [fun with flags](https://the-big-bang-theory.com/fun_with_flags/). It's time to make the flag map of the autonomous communities of Spain.
 
 
-```{r 20190618_finalmap, tidy='styler', eval=FALSE}
+```{r}
+#| label: 20190618_finalmap
+#| tidy: styler
+#| eval: false
+#| fig-cap: ""
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
 plot(
   Spain %>%
@@ -218,7 +263,19 @@ plot(st_geometry(Spain),
 )
 ```
 
-```{r 20190618_allCCAA, echo=FALSE,  fig.height=550/90, fig.width=750/90, message=FALSE, warning=FALSE, dpi=90, paged.print=FALSE, results='hide', eval=TRUE}
+```{r}
+#| label: 20190618_allCCAA
+#| echo: false
+#| message: false
+#| warning: false
+#| results: hide
+#| eval: true
+#| fig-height: !expr 550/90
+#| fig-width: !expr 750/90
+#| paged-print: false
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "Map of Spain with each autonomous community filled with its flag and the Canary Islands shown in an inset."
 par(mar = c(0, 0, 0, 0), mfrow = c(1, 1))
 plot(
   Spain %>%
@@ -362,7 +419,16 @@ plot(st_geometry(Spain),
 We are done now. If you have suggestions, you can leave a comment. As always,
 if you enjoyed the post, you can share it on your preferred social network.
 
-```{r 20190618_imgpost, fig.height=533/90, fig.width=800/90, dpi=90, include=FALSE, dev='png', eval=TRUE}
+```{r}
+#| label: 20190618_imgpost
+#| include: false
+#| eval: true
+#| fig-height: !expr 533/90
+#| fig-width: !expr 800/90
+#| fig-dpi: 90
+#| fig-format: png
+#| fig-cap: ""
+#| fig-alt: "Map of Europe in dark blue with a ring of yellow European Union stars on a light blue background."
 nuts1 <- gisco_get_nuts(nuts_level = "1", epsg = 3035, res = 3)
 
 

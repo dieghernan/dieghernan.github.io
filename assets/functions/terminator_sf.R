@@ -59,19 +59,25 @@ terminator_sf <- function(time = Sys.Date(), from = -180, to = 180, by = 0.1) {
     T <- n / 36525
     # compute epsilon
     23.43929111 -
-      T * (46.836769 / 3600
-        - T * (0.0001831 / 3600
-          + T * (0.00200340 / 3600
-            - T * (0.576e-6 / 3600
-              - T * 4.34e-8 / 3600))))
+      T *
+        (46.836769 /
+          3600 -
+          T *
+            (0.0001831 /
+              3600 +
+              T *
+                (0.00200340 /
+                  3600 -
+                  T * (0.576e-6 / 3600 - T * 4.34e-8 / 3600))))
   }
 
   sunEquatorialPosition <- function(sunEclLng, eclObliq) {
     # compute the Sun's equatorial position from its ecliptic position
-    alpha <- rad2deg(atan(cos(deg2rad(eclObliq)) *
-      tan(deg2rad(sunEclLng))))
-    delta <- rad2deg(asin(sin(deg2rad(eclObliq))
-    * sin(deg2rad(sunEclLng))))
+    alpha <- rad2deg(atan(
+      cos(deg2rad(eclObliq)) *
+        tan(deg2rad(sunEclLng))
+    ))
+    delta <- rad2deg(asin(sin(deg2rad(eclObliq)) * sin(deg2rad(sunEclLng))))
 
     lQuadrant <- floor(sunEclLng / 90) * 90
     raQuadrant <- floor(alpha / 90) * 90
@@ -90,7 +96,6 @@ terminator_sf <- function(time = Sys.Date(), from = -180, to = 180, by = 0.1) {
     # for a given hour angle and sun position, compute the latitude of the terminator
     rad2deg(atan(-cos(deg2rad(ha)) / tan(deg2rad(sunPos$delta))))
   }
-
 
   # calculate latitude and longitude of terminator within specified range using time (in POSIXct format, e.g. `Sys.time()`)
   jDay <- getJulian(time)
@@ -138,7 +143,6 @@ terminator_sf <- function(time = Sys.Date(), from = -180, to = 180, by = 0.1) {
   daynight_line_sf <- sf::st_sfc(sf::st_linestring(as.matrix(daynight_line)))
   daynight_line_sf <- sf::st_set_crs(daynight_line_sf, 4326)
 
-
   # Split with lwgeom
   final_polys <- lwgeom::st_split(bb_pol, daynight_line_sf)
 
@@ -147,7 +151,9 @@ terminator_sf <- function(time = Sys.Date(), from = -180, to = 180, by = 0.1) {
 
   # Identify day/night
   daynight <- c("day", "night")
-  if (sunEqPos$delta > 0) daynight <- rev(daynight)
+  if (sunEqPos$delta > 0) {
+    daynight <- rev(daynight)
+  }
 
   # Get final pol
 
@@ -158,36 +164,35 @@ terminator_sf <- function(time = Sys.Date(), from = -180, to = 180, by = 0.1) {
   return(output)
 }
 
-
 # # EXAMPLES
-# 
+#
 # library(giscoR)
 # library(tidyverse)
-# 
+#
 # # terminator for current time on world map
 # term <- terminator_sf(Sys.Date())
-# 
+#
 # ggplot(gisco_countries) +
 #   geom_sf() +
 #   geom_sf(data = term, aes(fill = day_night), alpha = 0.3) +
 #   scale_fill_manual(values = c("white", "grey10")) +
 #   coord_sf(expand = FALSE)
-# 
-# 
+#
+#
 # # add terminator at a specific time to map of Europe
 # term2 <- terminator_sf(
 #   time = as.POSIXct("2018-01-01 07:00:00 GMT"),
 #   from = -12, to = 35
 # )
-# 
-# 
+#
+#
 # ggplot(gisco_countries) +
 #   geom_sf() +
 #   geom_sf(data = term2, aes(fill = day_night), alpha = 0.3) +
 #   scale_fill_manual(values = c("white", "grey10")) +
 #   coord_sf(expand = FALSE, xlim = c(-12, 35), ylim = c(35, 72))
-# 
-# 
+#
+#
 # # With projections
 # ggplot(giscoR::gisco_countries) +
 #   geom_sf() +
@@ -197,4 +202,4 @@ terminator_sf <- function(time = Sys.Date(), from = -180, to = 180, by = 0.1) {
 #   ) +
 #   scale_fill_manual(values = c("white", "grey10")) +
 #   coord_sf(crs = "+proj=robin")
-#   
+#

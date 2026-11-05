@@ -1,6 +1,6 @@
 ---
-title: "Beautiful maps with R (V): Point densities"
-subtitle: "Bertin's dot density maps with R and GHSL"
+title: "Beautiful maps with <strong>R</strong> (V): Point densities"
+subtitle: "Bertin's dot density maps with <strong>R</strong> and GHSL"
 excerpt: Another way to represent demographics on a map.
 syndication:
   - https://www.r-bloggers.com/2023/12/beautiful-maps-with-r-v-point-densities/
@@ -20,7 +20,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/202312_finalmap.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp"
 mathjax: true
 bibliography: bertin.bib
 description: "Create Bertin-style dot density maps in R using Global Human Settlement Layer population data."
@@ -30,7 +30,10 @@ og_image_type: "image/webp"
 og_image_alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
 ---
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -44,25 +47,26 @@ knitr::opts_chunk$set(
 rm(list = ls())
 ```
 
-Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a
+Recently the [**R** Graph Gallery](https://r-graph-gallery.com/) has incorporated a
 new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
 a dot density map based on the work of the French cartographer [Jacques
 Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
 
-![Jacques Bertin, Sémiologie graphique. Les diagrammes. Les réseaux. Les cartes
-(1967)](https://dieghernan.github.io/assets/img/misc/bertin.png)
+![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
 In this post, I create a similar map for Iberia and also show how to create a
 variation using a hexagonal grid instead of a rectangular one. This is the fifth
 issue of the series
-[Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
+[Beautiful Maps with **R**](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
 
 I will use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
-```{r libraries}
+```{r}
+#| label: libraries
+#| fig-cap: ""
 # Base spatial packages
 library(terra)
 library(sf)
@@ -89,7 +93,10 @@ Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
 use the global file with a resolution of 1 km in the Mollweide projection
 (ESRI:54009).
 
-```{r 202312_basemap}
+```{r}
+#| label: 202312_basemap
+#| fig-cap: ""
+#| fig-alt: "Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window."
 # Create observation window based the Iberian Peninsula and surroundings
 # We create a buffered circle
 owin <- gisco_get_countries(
@@ -129,7 +136,10 @@ use the `win` argument when reading the raster with `terra::rast()`, as this
 allows us to load only the desired area with the subsequent improvement in
 terms of performance.
 
-```{r 202312_base_raster}
+```{r}
+#| label: 202312_base_raster
+#| fig-cap: ""
+#| fig-alt: "Population raster over the Iberian Peninsula with country and regional boundaries. Color represents population per raster cell."
 # Download data
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
@@ -176,6 +186,7 @@ Instead of using the numeric range of densities, we use categories for the final
 map, so we classify the density into different groups:
 
 ```{r}
+#| fig-cap: ""
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
 nrow(pop_init)
@@ -217,7 +228,10 @@ pop_points <- pop_agg %>%
 And finally, the map. In this case, I save it as a high-resolution square
 map.
 
-```{r 202312_finalmap}
+```{r}
+#| label: 202312_finalmap
+#| fig-cap: ""
+#| fig-alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
 # Final plot
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
@@ -269,7 +283,7 @@ final_plot <- base_gg +
 ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
 ```
 
-![](202312_finalmap.png)
+![Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors.](https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp)
 
 ## Alternative hexagonal grid
 
@@ -301,6 +315,7 @@ So we can extract $$d$$ from the previous expression knowing the area $$A$$ of
 the aggregated cells:
 
 ```{r}
+#| fig-cap: ""
 # Hex grid with sf ----
 
 # Avg size of the cells on the aggregated grid
@@ -328,7 +343,10 @@ pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
 
 Now, we use `exact_extract()` to extract the population on each hexagonal grid.
 
-```{r 202312_hexgrid_base}
+```{r}
+#| label: 202312_hexgrid_base
+#| fig-cap: ""
+#| fig-alt: "Map of the Iberian Peninsula with population totals aggregated into hexagonal cells. Color represents the population in each cell."
 # Extract aggregated population by hex cell
 pop_agg_sf$population <- exact_extract(pop_init,
   y = pop_agg_sf,
@@ -347,7 +365,10 @@ base_gg +
 
 Finally, we compute densities, create categories and produce the map:
 
-```{r 202312_finalmap_hex}
+```{r}
+#| label: 202312_finalmap_hex
+#| fig-cap: ""
+#| fig-alt: "Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters."
 # Mask and categorize
 pop_sf_points <- pop_agg_sf %>%
   # Compute density by cell
@@ -423,7 +444,7 @@ final_plot_hex <- base_gg +
 ggsave("202312_finalmap_hex.png", dpi = 300, width = 8, height = 8)
 ```
 
-![](202312_finalmap_hex.png)
+![Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters.](https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp)
 
 And that's it! Which one do you like the most? Let me know in the comments.
 

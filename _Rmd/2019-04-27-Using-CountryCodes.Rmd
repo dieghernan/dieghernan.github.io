@@ -1,6 +1,6 @@
 ---
-title: Using the CountryCodes database and <strong>sf</strong> package
-subtitle: Vignette of the CountryCodes project
+title: "Using the <strong>CountryCodes</strong> database and <strong>sf</strong> package"
+subtitle: "Vignette of the <strong>CountryCodes</strong> project"
 tags:
   - r_bloggers
   - rstats
@@ -8,13 +8,14 @@ tags:
   - sf
   - maps
   - rnaturalearth
-header_img: ./assets/img/blog/20190427_mapfin-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp"
 output:
   md_document:
     preserve_yaml: true
 og_image_width: 853
 og_image_height: 433
 og_image_type: "image/webp"
+og_image_alt: "World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles."
 ---
 
 
@@ -24,7 +25,10 @@ with the **sf** package in **R**.
 
 
 
-```{r setup, include=FALSE}
+```{r}
+#| label: setup
+#| include: false
+#| fig-cap: ""
 knitr::opts_chunk$set(
   echo = TRUE,
   warning = FALSE,
@@ -43,7 +47,12 @@ library("rmarkdown")
 
 ## Required **R** packages
 
-```{r libs, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: libs
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 library(sf)
 library(jsonlite)
 library(rnaturalearth)
@@ -56,7 +65,12 @@ The first step is to read the provided database (in this example, the `json`
 file) and extract one international organization. In this example, we will plot
 the [Commonwealth of Nations](https://en.wikipedia.org/wiki/Commonwealth_of_Nations).
 
-```{r jsonandext, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: jsonandext
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 df <- fromJSON("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json")
 # Identify Commonwealth acronym
 orgsdb <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/CountrycodesOrgs.csv") %>%
@@ -67,7 +81,12 @@ kable(orgsdb[grep("Common", orgsdb$org_name), ], format = "markdown")
  
 In our case, the value to search is **C**. A function that extracts the
 membership from the `json` database is also provided:
-```{r funjson, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: funjson
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 ISO_memcol <- function(df,
                        orgtosearch) {
   ind <- match(orgtosearch, unlist(df[1, "org_id"]))
@@ -83,7 +102,12 @@ df_org <- ISO_memcol(df, "C")
 ```
 
 Now `df_org` has a new column, named **C**, containing the membership status of each country.
-```{r checkcol, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: checkcol
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 df_org %>%
   count(C) %>%
   kable(format = "markdown")
@@ -105,7 +129,12 @@ In this example the **rnaturalearth** package is used for retrieving an `sf`
 object. The code below replaces the `data.frame` part of the `sf` object with
 the dedicated database.
 
-```{r mapandrep, warning=FALSE, message=FALSE, tidy='styler'}
+```{r}
+#| label: mapandrep
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-cap: ""
 testmap <- ne_countries(50,
   "countries",
   returnclass = "sf"
@@ -138,14 +167,24 @@ Now we will try to plot a map resembling the one presented in the
 [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the
 Commonwealth.
 
-![Wiki](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
+![World map highlighting member states of the Commonwealth of Nations.](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
 
 The map we will generate is presented in a Robinson projection, and the color
 palette will be based on the [Wikipedia convention for Orthographic Maps](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Orthographic_maps),
 since it is the one used in the example.
 
 
-```{r 20190427_mapfin, warning=FALSE, message=FALSE, tidy='styler', dev="png",fig.width=853/90, fig.height=433/90, dpi=90}
+```{r}
+#| label: 20190427_mapfin
+#| warning: false
+#| message: false
+#| tidy: styler
+#| fig-width: !expr 853/90
+#| fig-height: !expr 433/90
+#| fig-format: png
+#| fig-dpi: 90
+#| fig-cap: ""
+#| fig-alt: "World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles."
 # Projecting the map
 testmap_rob <- st_transform(testmap, "+proj=robin")
 tiny_rob <- st_transform(tiny, "+proj=robin")
