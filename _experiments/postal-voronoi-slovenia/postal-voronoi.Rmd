@@ -28,6 +28,56 @@ Let’s do it with **R**, **giscoR** and **sf**. To keep things manageable, we w
 
 > **Working draft.** This example explains the workflow. The polygons we create are not official postal boundaries, and this exercise does not validate the GISCO postal data.
 
+## What is a Voronoi polygon?
+
+Imagine a few shops on a flat map. For any location, we can ask a simple question: which shop is closest? Give each shop its own colour and colour every location according to the answer. The result is a **Voronoi diagram**, also called a Voronoi tessellation.
+
+Each shop is a **site**, or generating point. Its **Voronoi cell** contains the locations at least as close to that site as to any other. Along a shared edge, two sites are equally close; where several cells meet, there may be a tie between more sites. With ordinary straight-line distance, the edges follow perpendicular bisectors between sites. Some cells extend indefinitely, so maps usually show them clipped to a study area.
+
+The name honours the mathematician Georgy Voronoi, who studied these partitions in the early twentieth century. The idea has earlier roots, including Dirichlet’s nineteenth-century work. [Pokojski and Pokojska (2018)](https://doi.org/10.2478/pcr-2018-0009) review their history and geographical applications. You may also encounter the name **Thiessen polygons**, particularly in hydrology.
+
+These partitions are useful for exploring proximity to shops or public services, assigning areas to weather stations and studying spatial patterns. For example, Thiessen polygons can supply area weights when estimating rainfall from rain gauges. The underlying question is always about the chosen distance: the nearest hospital in a straight line may not be the quickest one to reach. See the [DIMACS introduction](https://archive.dimacs.rutgers.edu/Institute/96/classroom/voronoi/intro.html) for further examples.
+
+### A tiny example in R
+
+Before downloading any geographical data, let’s try four points in an imaginary square. We only need **sf** and **ggplot2**. These coordinates have arbitrary units and no geographical coordinate reference system.
+
+```{r voronoi-toy-example, fig.height=5}
+library(sf)
+library(ggplot2)
+
+sites <- data.frame(
+  site = c("A", "B", "C", "D"),
+  x = c(2, 7, 3, 8),
+  y = c(2, 3, 8, 7)
+)
+toy_points <- st_as_sf(sites, coords = c("x", "y"))
+study_area <- st_as_sfc(st_bbox(c(xmin = 0, ymin = 0, xmax = 10, ymax = 10)))
+
+toy_cells <- toy_points |>
+  st_union() |>
+  st_voronoi(envelope = study_area) |>
+  st_collection_extract("POLYGON") |>
+  st_intersection(study_area)
+
+ggplot() +
+  geom_sf(data = toy_cells,
+    fill = c("#a8dadc", "#f4c89a", "#c6b8df", "#bfd59b"),
+    colour = "white", linewidth = 1) +
+  geom_sf(data = toy_points, colour = "#203b47", size = 3) +
+  geom_text(data = sites, aes(x, y, label = site),
+    nudge_y = 0.5, colour = "#203b47", fontface = "bold") +
+  coord_sf(datum = NA) +
+  labs(title = "Four points, four nearest-neighbour areas",
+    subtitle = "Each location belongs to the closest site") +
+  theme_void(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+The dots are the generating sites; the coloured polygons are their cells. `st_union()` collects the points into one geometry, `st_voronoi()` builds the diagram and `st_intersection()` clips it to our square. The colours simply distinguish cells: they do not represent postal codes yet.
+
+Nothing in this example knows about roads, rivers or administrative boundaries. Now we can use the same geometric idea with postal points, making our assumptions about those boundaries explicit.
+
 ## Before we start: what are we estimating?
 
 The Spanish project uses CartoCiudad address points with their postal codes. It follows [Goerlich (2022)](https://doi.org/10.12842/WPIVIE_0322), who develops an idea presented by [Sánchez (2020)](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos). The [updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html) describes the method in detail.
@@ -42,9 +92,7 @@ We need municipal boundaries and postal points. We will use the 2024 release of 
 
 ```{r packages}
 library(giscoR)
-library(sf)
 library(dplyr)
-library(ggplot2)
 ```
 
 ```{r data}
@@ -401,6 +449,9 @@ The quality of those addresses matters as much as the algorithm. With one repres
 This example does not compare its results with an independent postal source for Slovenia. Before using it for analysis, we would need to review coverage, coordinates, the relationship with municipalities and sensitivity to the margins. For now, it gives us a way to open the box and understand how the map is built.
 
 ## References
+
+- Pokojski, W. & Pokojska, P. (2018). *Voronoi diagrams – inventor, method, applications*. Polish Cartographical Review, 50(3), 141–150. [doi:10.2478/pcr-2018-0009](https://doi.org/10.2478/pcr-2018-0009).
+- DIMACS. (1996). *Introduction to Voronoi diagrams*. [Tutorial](https://archive.dimacs.rutgers.edu/Institute/96/classroom/voronoi/intro.html).
 
 - Goerlich, F. J. (2022). *Creating a map of Spanish postal codes with free resources: how to avoid paying for reference information* [English translation of the Spanish title]. Working Papers Ivie, no. 2022-3. Valencia: Ivie. [doi:10.12842/WPIVIE_0322](https://doi.org/10.12842/WPIVIE_0322). [Updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html).
 - Sánchez, J. I. (2020, November 13). *How I made a map of Spanish postal codes with GIS and open data* [English translation of the Spanish title]. NoSoloSIG. [Article](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos).
