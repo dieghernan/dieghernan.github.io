@@ -45,6 +45,7 @@ class WebmentionsTests(unittest.TestCase):
         state = wm.process(self.posts, None, request=self.request)
         self.assertEqual(state['version'], 3)
         self.assertEqual(state['posts'][SOURCE][TARGET], self.post['digest'])
+        self.assertEqual(state['results'][SOURCE][TARGET], {'status': 'accepted'})
         self.assertEqual(len(self.calls), 3)
         wm.process(self.posts, state, request=self.request)
         self.assertEqual(len(self.calls), 3)
@@ -68,8 +69,12 @@ class WebmentionsTests(unittest.TestCase):
         state = {'version': 3, 'posts': {}}
         wm.process(self.posts, state, request=fail)
         self.assertNotIn(TARGET, state['posts'][SOURCE])
+        self.assertEqual(state['results'][SOURCE][TARGET], {
+            'status': 'retry_target', 'error': 'TimeoutError',
+        })
         wm.process(self.posts, state, request=self.request)
         self.assertIn(TARGET, state['posts'][SOURCE])
+        self.assertEqual(state['results'][SOURCE][TARGET], {'status': 'accepted'})
 
     def test_stale_live_article_is_not_sent(self):
         state = {'version': 3, 'posts': {}}
@@ -77,6 +82,9 @@ class WebmentionsTests(unittest.TestCase):
         wm.process(self.posts, state, request=self.request)
         self.assertEqual(self.calls, [(SOURCE, None)])
         self.assertEqual(state['posts'][SOURCE], {})
+        self.assertEqual(state['results'][SOURCE][TARGET], {
+            'status': 'retry_source', 'error': 'ValueError',
+        })
 
     def test_link_headers_preserve_quoted_separators_and_escapes(self):
         cases = [
@@ -135,6 +143,7 @@ class WebmentionsTests(unittest.TestCase):
         state = {'version': 3, 'posts': {}}
         wm.process(self.posts, state, request=unsupported)
         self.assertIn(TARGET, state['posts'][SOURCE])
+        self.assertEqual(state['results'][SOURCE][TARGET], {'status': 'no_endpoint'})
 
     def test_header_discovery_precedes_relative_html_endpoint(self):
         headers = Message()

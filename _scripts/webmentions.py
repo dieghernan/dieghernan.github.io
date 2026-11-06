@@ -308,16 +308,27 @@ def discover(target, request=fetch):
 
 def process(posts, state, request=fetch, checkpoint=lambda: None):
     if state is None:
-        state = {'version': LEDGER_VERSION, 'posts': {}}
+        state = {'version': LEDGER_VERSION, 'posts': {}, 'results': {}}
     if state.get('version') not in (1, 2, LEDGER_VERSION) or not isinstance(state.get('posts'), dict):
         raise ValueError('Unknown ledger format')
     if state['version'] != LEDGER_VERSION:
         # The old baseline included historical links that were never sent.
         # Reset once, before delivery, so interrupted runs resume the new ledger.
         state.clear()
-        state.update({'version': LEDGER_VERSION, 'posts': {}})
+        state.update({'version': LEDGER_VERSION, 'posts': {}, 'results': {}})
         checkpoint()
         print('Rebuilding delivery ledger: historical posts will be processed once.')
+    results = state.setdefault('results', {})
+    if not isinstance(results, dict):
+        raise ValueError('Unknown result ledger format')
+
+    def record_result(source, target, result):
+        post_results = results.setdefault(source, {})
+        if not isinstance(post_results, dict):
+            raise ValueError('Unknown result ledger format')
+        post_results[target] = result
+        checkpoint()
+
     for source, post in posts.items():
         seen = state['posts'].setdefault(source, {})
         pending = [t for t in post['targets'] if seen.get(t) != post['digest']]
@@ -329,6 +340,11 @@ def process(posts, state, request=fetch, checkpoint=lambda: None):
             if final != source or live.canonical != source or live.digest != post['digest']:
                 raise ValueError('Published article does not match the deployed artifact yet')
         except Exception as error:
+            for target in pending:
+                record_result(source, target, {
+                    'status': 'retry_source',
+                    'error': type(error).__name__,
+                })
             print(f'Retry source {source}: {type(error).__name__}: {error}')
             continue
         for target in pending:
@@ -336,12 +352,18 @@ def process(posts, state, request=fetch, checkpoint=lambda: None):
                 endpoint = discover(target, request)
                 if endpoint:
                     request(endpoint, urlencode({'source': source, 'target': target}).encode())
+                    result = 'accepted'
                     print(f'Accepted: {source} -> {target}')
                 else:
+                    result = 'no_endpoint'
                     print(f'No endpoint: {target}')
                 seen[target] = post['digest']
-                checkpoint()
+                record_result(source, target, {'status': result})
             except Exception as error:
+                record_result(source, target, {
+                    'status': 'retry_target',
+                    'error': type(error).__name__,
+                })
                 print(f'Retry target {target}: {type(error).__name__}: {error}')
     return state
 
@@ -354,7 +376,8 @@ def main():
     args = parser.parse_args()
     posts = posts_in(args.site)
     path = Path(args.state)
-    state = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {'version': LEDGER_VERSION, 'posts': {}}
+    state = (json.loads(path.read_text(encoding='utf-8')) if path.exists()
+             else {'version': LEDGER_VERSION, 'posts': {}, 'results': {}})
     if args.dry_run:
         print(f'Dry run: {len(posts)} posts, {sum(len(p["targets"]) for p in posts.values())} eligible links; no requests or writes.')
         return

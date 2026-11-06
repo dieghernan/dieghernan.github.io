@@ -174,8 +174,11 @@ not that verification or publication has finished.
 Subsequent runs skip unchanged deliveries and retry failed requests. Links
 without an endpoint are recorded, too. Edited articles can notify existing
 destinations again. Removing links or deleting posts does not send deletion
-notifications. Keep the state branch: restoring it from Git preserves delivery
-history, whereas losing it causes the archive to be processed again.
+notifications. For each source and target URL, `state.json` also retains the
+latest outcome (`accepted`, `no_endpoint`, `retry_source` or `retry_target`);
+retry outcomes include the exception type. Keep the state branch: restoring it
+from Git preserves delivery history and latest outcomes, whereas losing it
+causes the archive to be processed again.
 
 Internal blog links are excluded. Links to `/chulapa` and `/chulapa/` paths on
 the same domain are eligible; other same-domain links remain excluded.
