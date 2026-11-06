@@ -12,8 +12,8 @@ tags:
   - dataset
   - csv
   - geojson
-header_img: /assets/img/misc/gifs-social.jpg
-og_image: /assets/img/misc/gifs-social.jpg
+header_img: https://dieghernan.github.io/assets/img/misc/gifs-social.jpg
+og_image: https://dieghernan.github.io/assets/img/misc/gifs-social.jpg
 og_image_width: 1200
 og_image_height: 630
 og_image_type: image/jpeg

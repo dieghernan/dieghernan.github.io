@@ -7,7 +7,7 @@ tags:
   - maps
   - leaflet
 date: 2020-10-26
-header_img: ./assets/img/misc/leaflet-providersesp.png
+header_img: https://dieghernan.github.io/assets/img/misc/leaflet-providersesp.png
 permalink: /projects/leaflet-providersESP/
 project_links:
   - url: https://dieghernan.github.io/leaflet-providersESP/

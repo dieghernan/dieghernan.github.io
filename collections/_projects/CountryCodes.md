@@ -7,7 +7,7 @@ tags:
   - rstats
   - dataset
   - csv
-header_img: ./assets/img/misc/countrycodes.png
+header_img: https://dieghernan.github.io/assets/img/misc/countrycodes.png
 permalink: /projects/Country-Codes-and-International-Organizations/
 redirect_from:
   - /projects/countrycodes/
