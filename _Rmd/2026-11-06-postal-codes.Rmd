@@ -7,6 +7,8 @@ description: >-
 excerpt: >-
   From five imaginary points to a map of Slovenia: postal code areas with 
   Voronoi, giscoR and sf.
+syndication:
+  - https://www.r-bloggers.com/2026/11/postal-codes-and-tessellations/
 tags:
   - r_bloggers
   - rstats
