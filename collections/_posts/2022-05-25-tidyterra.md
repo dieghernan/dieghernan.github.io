@@ -21,11 +21,11 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20220525_easteregg-2.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
 description: "Use tidyterra to manipulate terra spatial objects with tidyverse methods and plot SpatRasters with ggplot2."
 schema_image:
-  - /assets/img/blog/20220525_easteregg-2.webp
-  - /assets/img/blog/20220525_easteregg-3.webp
+  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
+  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"

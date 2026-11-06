@@ -10,7 +10,11 @@ tags:
   - python
   - guest-author
   - COVID19
-header_img: "https://dieghernan.github.io/corona-atlas.de/timelapse/frames/D2021-04-16.png"
+header_img: https://raw.githubusercontent.com/dieghernan/corona-atlas.de/master/timelapse/frames/D2021-04-16.png
+og_image_width: 1000
+og_image_height: 1000
+og_image_type: "image/png"
+og_image_alt: "Map of global COVID-19 risk classifications from the Robert Koch Institute on April 16, 2021. Countries are colored by risk status, with Germany highlighted in blue."
 date: 2022-03-14
 last_modified_at: 2026-10-07
 project_links:
@@ -40,8 +44,8 @@ author:
       icon: fa-brands fa-orcid
 output:
   md_document:
-  variant: gfm
-  preserve_yaml: true
+    variant: gfm
+    preserve_yaml: true
 ---
 
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This post reflects the situation in March 2022 and
@@ -65,7 +69,7 @@ After all, we hope that [corona-atlas] remains boring and that our world map rem
 
 ## Links
 
-- [Read more on this site](../projects/corona-atlas)
+- [Read more on this site](https://dieghernan.github.io/projects/corona-atlas/)
 - [Project's Website][corona-atlas]
 - [Project's Repository](https://github.com/dieghernan/corona-atlas.de)
 

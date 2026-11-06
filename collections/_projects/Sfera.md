@@ -30,6 +30,7 @@ the most out of the smartwatch's capabilities. Set your preferences and enjoy th
 beautifully designed watch face.
 
 ![Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
+<p class="caption">Users can choose analog, digital, dual or mixed clock modes.</p>
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58c2f7110dfc32a52a00081f?native=false&query=Sfera&section=watchfaces">Download from Rebble Appstore</a>
@@ -79,6 +80,7 @@ Automatic weekday translation is supported for:
 ## Screenshots
 
 ![Animated Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif)
+<p class="caption">The face also offers a battery arc, weather and an automatic night theme.</p>
 
 ## Attributions
 
@@ -109,6 +111,6 @@ through a unique PIN.
 
 ## License
 
-Developed under license [MIT](https://raw.githubusercontent.com/dieghernan/Sfera/master/LICENSE).
+Licensed under the [MIT license](https://raw.githubusercontent.com/dieghernan/Sfera/master/LICENSE).
 
 **Made in Madrid, Spain ❤️**

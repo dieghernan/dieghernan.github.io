@@ -1,5 +1,6 @@
 ---
-title: "Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels"
+title: >-
+  Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels
 subtitle: "Simplified maps with <strong>R</strong>"
 tags:
   - r_bloggers
@@ -17,7 +18,8 @@ output:
 og_image_width: 800
 og_image_height: 533
 og_image_type: "image/webp"
-og_image_alt: "World map represented by cyan hexagonal cells on a dark gray background."
+og_image_alt: >-
+  World map represented by cyan hexagonal cells on a dark gray background.
 ---
 
 
@@ -244,7 +246,7 @@ plot(st_geometry(Hexbin), col = mypal(4), main = "Hexbin")
 
 ## Pixel it!
 
-Also quite easy, just a couple of tweaks more, always using `st_make_grid`.
+Also quite easy, just a couple more tweaks, still using `st_make_grid`.
 ```{r}
 #| label: 20190602_pix
 #| warning: false

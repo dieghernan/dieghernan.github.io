@@ -29,6 +29,7 @@ og_image_alt: "Bzel watch face showing minutes around the bezel of Pebble watche
 as a moving dot or as a fill in the bezel.
 
 ![Bzel watch face with minutes displayed around the bezel.](https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png)
+<p class="caption">Bzel uses the bezel as an extra space for displaying the minutes.</p>
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/59280895b67f9f43f80004c9">Download
@@ -81,12 +82,15 @@ Automatic weekday translation is supported for:
 <div class="row">
 <div class="col-sm mb-1">
     <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPTR.gif" alt="Animated Bzel watch face on Pebble Time Round.">
+    <p class="caption">Minute progress displayed around the Pebble Time Round bezel.</p>
 </div>
 <div class="col-sm mb-1">
     <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelPT.gif" alt="Animated Bzel watch face on Pebble Time.">
+    <p class="caption">The bezel minute indicator adapted to the Pebble Time screen.</p>
 </div>
 <div class="col-sm mb-1">         
     <img src="https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BezelBW.gif" alt="Animated Bzel watch face on a monochrome Pebble watch.">
+    <p class="caption">Monochrome version of the bezel-based minute display.</p>
 </div>
 </div>
 
@@ -117,7 +121,6 @@ through a unique PIN.
 
 ## License
 
-Developed under license
-[MIT](https://raw.githubusercontent.com/dieghernan/Bzel/master/LICENSE).
+Licensed under the [MIT license](https://raw.githubusercontent.com/dieghernan/Bzel/master/LICENSE).
 
 **Made in Madrid, Spain ❤️**

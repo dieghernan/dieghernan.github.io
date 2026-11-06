@@ -19,7 +19,7 @@ tags:
   - mapsf
   - inset
 last_modified_at: 2022-03-03
-header_img: ./assets/img/blog/20220303_inset.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20220303_inset.webp
 output:
   md_document:
     variant: gfm
@@ -28,6 +28,7 @@ description: "Create inset maps in R with ggplot2, tmap and mapsf to show geogra
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
+og_image_alt: "Map of Brazil highlighted in red, with a world inset locating Brazil in South America."
 seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
 og_title: "Inset maps with ggplot2, tmap and mapsf"
 ---
@@ -252,7 +253,7 @@ ggdraw() +
 
 ## Update: On **mapsf**
 
-[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA
+[Timothée Giraud](https://rgeomatic.hypotheses.org/) (AKA
 [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
 shared how to create inset maps using that package:
 

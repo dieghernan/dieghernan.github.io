@@ -13,11 +13,15 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
-excerpt: "Map the United Kingdom’s departure from the EU using country boundaries and flag imagery."
+excerpt: >-
+  Map the United Kingdom’s departure from the EU using country boundaries and
+  flag imagery.
 og_image_width: 810
 og_image_height: 540
 og_image_type: "image/webp"
-og_image_alt: "Map of Europe overlaid with the European Union flag. The United Kingdom is left white to illustrate Brexit."
+og_image_alt: >-
+  Map of Europe overlaid with the European Union flag. The United Kingdom is
+  left white to illustrate Brexit.
 ---
 
 ```{r}
@@ -96,4 +100,3 @@ plot(st_geometry(UK),
   add = TRUE
 )
 ```
-

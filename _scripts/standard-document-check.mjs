@@ -2,7 +2,7 @@ const atUri = process.argv[2];
 
 if (!atUri) {
   console.error(
-    "Usage: node _scripts/check-standard-document.mjs <at://...>"
+    "Usage: node _scripts/standard-document-check.mjs <at://...>"
   );
   process.exit(1);
 }

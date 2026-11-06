@@ -21,10 +21,10 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20221017-6-finalplot-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 description: "Create relief maps in R by combining hillshade and elevation colors with terra, tidyterra and ggplot2."
 schema_image:
-  - /assets/img/blog/20221017-6-finalplot-1.webp
+  - https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
@@ -205,7 +205,7 @@ index <- hill |>
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and dont use aes
+# and don't use aes
 
 hill_plot <- ggplot() +
   geom_spatraster(
@@ -300,7 +300,7 @@ minmax(r) |> as.vector()
 r_limits
 #> [1]    0 2500
 
-# Now lets have some fun with scales from tidyterra
+# Now let's have some fun with scales from tidyterra
 
 elevt_test <- ggplot() +
   geom_spatraster(data = r)

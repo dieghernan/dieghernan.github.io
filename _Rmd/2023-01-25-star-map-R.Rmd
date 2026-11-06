@@ -21,7 +21,12 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: "https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp"
-og_image_alt: "Circular star map with white constellation lines, stars and a coordinate grid on a dark background."
+og_image_width: 1300
+og_image_height: 857
+og_image_type: "image/webp"
+og_image_alt: >-
+  Circular star map with white constellation lines, stars and a coordinate
+  grid on a dark background.
 ---
 
 ```{r}
@@ -65,14 +70,14 @@ have any suggestions, please let me know in the comments section below.
 
 ## First things first: the data
 
-The initial data source of all these projects (Kim, Benjamin and myself) is the
-same, and it is provided by the D3 plugin
+The initial data source for all these projects (Kim's, Benjamin's and mine) is
+the same, and it is provided by the D3 plugin
 [d3-celestial](https://github.com/ofrohn/d3-celestial/tree/master/data) by [Olaf
 Frohn](http://armchairastronautics.blogspot.com/). As Kim Fitter pointed out in
 [his post](https://kimnewzealand.github.io/2019/02/21/celestial-maps/), these
 data files present the problem (experienced by [almost any **sf**
 user](https://stackoverflow.com/search?q=%5Bsf%5D+dateline)) of lines crossing
-the international date line (longitude 180º). I also found that some files are
+the international date line (longitude 180°). I also found that some files are
 not valid as per `sf::st_make_valid()`.
 
 Solution? I processed and fixed almost every file, including the files
@@ -84,7 +89,7 @@ repo](https://github.com/dieghernan/celestial_data) to learn more about it.
 
 ## Creating a star map with **R**
 
-The first step is loading a bunch of libraries that would help us on this cosmic
+The first step is to load libraries that will help us with this cosmic
 task:
 
 ```{r}
@@ -116,14 +121,14 @@ Now we prepare some helper functions:
   specific directory `cachedir` and loads it with `sf::st_read()`.
 
 - `pretty_lonlat()` is a labeler that returns a decimal longitude or latitude
-  coordinate in the format degrees/minutes/seconds (e.g., a **latitude
+  coordinate in the format degrees/minutes/seconds (e.g., a **latitude of
   34.72782** would be converted into **34° 43' 40.15" N**).
 
 [^1]: In fact, the download is performed via the
     [jsDelivr](https://www.jsdelivr.com/), which distributes files hosted on
     [GitHub via CDN.](https://www.jsdelivr.com/github) This is supposed to
-    improve performance but in any case the underlying data source is the GitHub
-    repo.
+    improve performance, but in any case the underlying data source is the
+    GitHub repo.
 
 <details class="my-4" markdown="1">
 
@@ -294,7 +299,7 @@ sf_spherical_cut <- function(x, the_buff, the_crs = sf::st_crs(x), flip = NULL) 
     sf::st_transform(crs = the_crs)
 
   # If it is not POINT filter by valid and non-empty
-  # This if for performance
+  # This is for performance
   if (!geomtype == "POINT") {
     # If any is GEOMETRYCOLLECTION extract the right value
     if (any(sf::st_geometry_type(the_cut) == "GEOMETRYCOLLECTION")) {
@@ -322,11 +327,12 @@ sf_spherical_cut <- function(x, the_buff, the_crs = sf::st_crs(x), flip = NULL) 
 
 Now we are ready to start creating our visualization. We need only two inputs:
 
-- A desired location, that we would geocode with **nominatimlite**.
+- A desired location, which we will geocode with **nominatimlite**.
 
 - A specific moment in time.
 
 ```{r}
+#| label: geocode-map-location
 #| fig-cap: ""
 # Inputs
 desired_place <- "Madrid, Spain"
@@ -388,10 +394,10 @@ this script:
     ...
 
 This means that those shops are really creating the map at
-`YYYY-MM-DD 22:00:00 UTC`. If you want to exactly replicate that (even though
-that night sky is not accurate, think that in New Zealand the local time at that
-moment would be 10:00 hence no stars are visible) you would need to adjust
-`desired_date_tz` as:
+`YYYY-MM-DD 22:00:00 UTC`. If you want to replicate that exactly (even though
+the resulting night sky is not accurate—for example, in New Zealand the local
+time at that moment would be 10:00, so no stars would be visible), you would
+need to adjust `desired_date_tz` as follows:
 
 ```{r}
 #| label: wrong
@@ -408,7 +414,7 @@ as_datetime(paste(as.Date(desired_date_tz), "22:00:00"), tz = "UTC") %>%
 Now we can start creating our buffers and projections, which will help us to
 crop the celestial data objects.
 
-I noticed also that the [location
+I also noticed that the [location
 demo](https://ofrohn.github.io/celestial-demo/location.html) of
 **d3-celestial.js** uses [Airy
 projection](https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/demo/location.html#L17-L22),
@@ -432,8 +438,8 @@ target_crs <- paste0("+proj=airy +x_0=0 +y_0=0 +lon_0=", lon_prj, " +lat_0=", la
 
 target_crs
 
-# We need to flip celestial objects to get the impression of see from the Earth
-# to the sky, instead of from the sky to the Earth
+# Flip celestial objects to give the impression of viewing the sky from Earth,
+# rather than viewing the Earth from the sky.
 # https://stackoverflow.com/a/75064359/7877917
 # Flip matrix for affine transformation
 
@@ -458,7 +464,7 @@ hemisphere_sf <- hemisphere_s2 %>%
 
 ### Celestial data
 
-Now, we can load the data of our choice. In this case I have selected to
+Now, we can load the data of our choice. In this case, I have chosen to
 represent the Milky Way, constellation lines and stars.
 
 We also add some additional variables that would help us to improve the
@@ -703,7 +709,7 @@ ggplot() +
   )
 ```
 
-Voilà! I checked several times the results with the results provided by
+Voilà! I checked the results several times against those provided by
 d3-celestial.js on the [location
 demo](https://ofrohn.github.io/celestial-demo/location.html) and the underlying
 calculations in JavaScript, and everything seems to be up and running.

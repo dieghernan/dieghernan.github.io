@@ -21,7 +21,9 @@ header_img: "https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp
 og_image_width: 2053
 og_image_height: 1786
 og_image_type: "image/webp"
-og_image_alt: "South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area."
+og_image_alt: >-
+  South Pole-centered map of Antarctica after removing the polygon artifact.
+  The landmass is continuous across the previously affected area.
 ---
 
 ```{r}
@@ -58,6 +60,7 @@ and produce clean orthographic maps. I walk through the manual corrections and
 then create a few example maps.
 
 ```{r}
+#| label: load-mapping-packages
 #| fig-cap: ""
 # Libraries
 library(tidyverse)
@@ -140,11 +143,11 @@ test |>
   geom_text(aes(label = np), check_overlap = TRUE)
 ```
 
-::: {.alert .alert-warning .p-3 .mx-2 .mb-3}
+<div class="alert alert-warning p-3 mx-2 mb-3">
 Note: This cleaning is tailored to this specific shapefile and may need to be
 repeated for other shapefiles. The approach is straightforward but depends on
 the particular geometry and projection.
-:::
+</div>
 
 ```{r}
 #| label: 202510_final_sol
@@ -333,6 +336,8 @@ swaps the plain blue background for one filled with countless tiny, colorful
 dots. These dots represent the microscopic bits of plastic that have been
 discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.
+
+![Antarctic flag variation with the white continental silhouette formed by scattered marks on a blue background.](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png)
 
 Because the design relies on randomness, we approximate it using the following
 procedure:

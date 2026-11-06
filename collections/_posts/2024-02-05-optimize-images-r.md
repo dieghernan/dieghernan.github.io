@@ -19,6 +19,7 @@ header_img: https://dieghernan.github.io/assets/img/misc/compress-img.png
 og_image_width: 1200
 og_image_height: 630
 og_image_type: "image/png"
+og_image_alt: "White image-compression icon over a multicolored polygon background."
 ---
 
 The **resmush** package has recently been accepted on
@@ -79,7 +80,7 @@ this blog using `resmush_dir()`, which is a shorthand for optimizing all files
 in a specific folder.
 
 There are other alternatives that I discuss [at the end of this
-post](#other-alternatives), but briefly, the reSmush.it API works quickly
+post](https://dieghernan.github.io/202402_optimize-images-r/#other-alternatives), but briefly, the **reSmush.it** API works quickly
 with minimal configuration for a wide range of formats without needing an API
 key.
 
@@ -109,7 +110,7 @@ cyl_gg
 
 <img src="https://dieghernan.github.io/assets/img/samples/cyl.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization." width="100%" />
 <p class="caption">
-Original file
+Original satellite image before optimization.
 </p>
 
 </div>
@@ -140,7 +141,7 @@ png::readPNG("cyl_resmush.png") %>%
 
 <img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization." width="100%" />
 <p class="caption">
-Optimized file
+Satellite image after optimization with resmush_file().
 </p>
 
 </div>
@@ -159,8 +160,8 @@ Let’s compare the results side-by-side:
 <img src="https://dieghernan.github.io/assets/img/samples/cyl_resmush.png" alt="Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization.">
 </a>
 <p class="caption">
-Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
-(55.46% reduction in file size). Click on the images to enlarge.
+The original image (left/top) is 1.7 MB. The optimized image (right/bottom) is
+762.2 kB, a 55.46% reduction in file size. Click either image to enlarge.
 </p>
 </div>
 
@@ -223,8 +224,8 @@ src="https://dieghernan.github.io/assets/img/samples/sample_1.3mb.jpg" alt="Colo
 </a>
 <p class="caption">
 
-Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
-(26.63% reduction in file size). Click on the images to enlarge.
+The original image (left/top) is 1.3 MB. The optimized image (right/bottom) is
+985 kB, a 26.63% reduction in file size. Click either image to enlarge.
 
 </p>
 
@@ -245,8 +246,8 @@ There are other alternatives for optimizing images with **R**, but first…
 <p>
   Yihui is the developer of <strong>knitr</strong>, <strong>markdown</strong>,
   <strong>blogdown</strong> and <strong>bookdown</strong>, among others, and he
-  has been one of the key contributors (if not the most) to the reproducible
-  research space with <strong>R</strong> through his libraries.
+  has been one of the key contributors (if not the most important) to the
+  reproducible research space with <strong>R</strong> through his libraries.
 </p>
 <p>
   If you have ever used and enjoyed his packages, consider sponsoring him on

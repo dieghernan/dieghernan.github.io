@@ -8,7 +8,7 @@ tags:
   - sf
   - function
   - rnaturalearth
-header_img: ./assets/img/blog//20190505_benchmarkfunction-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp
 output:
   md_document:
     variant: markdown_github
@@ -16,6 +16,7 @@ output:
 og_image_width: 400
 og_image_height: 500
 og_image_type: "image/webp"
+og_image_alt: "Map of South America with country boundaries split into short segments, illustrated with alternating colors."
 ---
 
 This post introduces a user-defined function for casting **sf** objects of class

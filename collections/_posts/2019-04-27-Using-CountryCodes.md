@@ -8,13 +8,14 @@ tags:
   - sf
   - maps
   - rnaturalearth
-header_img: ./assets/img/blog/20190427_mapfin-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp
 output:
   md_document:
     preserve_yaml: true
 og_image_width: 853
 og_image_height: 433
 og_image_type: "image/webp"
+og_image_alt: "World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles."
 ---
 
 This vignette shows how to use the database provided in the GitHub project

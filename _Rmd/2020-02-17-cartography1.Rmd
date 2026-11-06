@@ -17,14 +17,18 @@ output:
     variant: gfm
     preserve_yaml: true
 last_modified_at: 2026-10-07
-excerpt: "Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0."
+excerpt: >-
+  Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0.
 og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
-og_image_alt: "Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently."
+og_image_alt: >-
+  Word map of the United States with music genre names positioned
+  geographically and sized by frequency. Rock and jazz appear prominently.
 ---
 
 ```{r}
+#| label: setup
 #| echo: false
 #| fig-cap: ""
 knitr::opts_chunk$set(
@@ -76,7 +80,7 @@ packageVersion("cartography")
 
 ## Hatched map
 
-Version of typology/choropleth maps using a hatched filling. This is
+This is a way to create typology or choropleth maps using hatching. It is
 particularly useful for maps that need to be printed in black and white, such
 as academic papers. These maps are also useful for representing overlapping
 dimensions.
@@ -398,7 +402,8 @@ layoutLayer(
 
 This new capability geotags a `.png` file, effectively converting the image into a tile. This allows the user to create visual maps by masking an image to the shape of a `POLYGON/MULTIPOLYGON`.
 
-For high-quality png maps, **it is recommended to plot your map on a `.svg` device**.
+For high-quality PNG maps, **it is recommended to plot your map on an SVG
+graphics device**.
 
 
 ### Example 1
@@ -493,7 +498,10 @@ pngLayer(UKpng, add = TRUE)
 
 A word cloud (or tag cloud) is a visual representation of text data. In a mapping context, this representation is useful for including several pieces of information at a glance.
 
-Wordcloud layers fitted into a map shape provide a good trade-off between physical location, scale and labels. Size and colors of the words are also based on the frequency of the factor to be plotted, highlighting the most frequent terms over the rest.
+Word cloud layers fitted into a map shape provide a good trade-off between
+physical location, scale and labels. The size and color of the words are based
+on the frequency of the factor being plotted, highlighting the most frequent
+terms.
 
 ### Example 1
 

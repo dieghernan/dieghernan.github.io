@@ -19,11 +19,11 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20221212_finalplot-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
 description: "Map precipitation in Spain with hillshade and marginal profiles using terra, tidyterra and ggplot2."
 schema_image:
-  - /assets/img/blog/20221212_finalplot-1.webp
-  - /assets/img/blog/20221212_precip_end-1.webp
+  - https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
+  - https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
@@ -209,7 +209,7 @@ index <- hill |>
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and dont use aes
+# and don't use aes
 
 # Base hill plot
 hill_plot <- ggplot() +

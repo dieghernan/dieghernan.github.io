@@ -21,10 +21,11 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/20220501_joyplots.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp
 og_image_width: 4200
 og_image_height: 4200
 og_image_type: "image/webp"
+og_image_alt: "Black poster with white elevation ridgelines forming the outline of Spain and the words Spain and Unknown Pleasures."
 ---
 
 In 1970, Harold D. Craft Jr. published his Ph.D. thesis _"Radio observations of

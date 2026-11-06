@@ -1,7 +1,8 @@
 ---
 last_modified_at: 2026-10-25
 giscus_discussion: 36
-title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)"
+title: >-
+  Hillshade, colors and marginal plots with <strong>tidyterra</strong> (I)
 subtitle: "How to overlay SpatRasters"
 excerpt: Using shadow effects on relief maps is a very common technique,
   which produces informative yet beautiful maps.
@@ -22,12 +23,16 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: "https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"
-description: "Create relief maps in R by combining hillshade and elevation colors with terra, tidyterra and ggplot2."
+description: >-
+  Create relief maps in R by combining hillshade and elevation colors with
+  terra, tidyterra and ggplot2.
 schema_image: ["https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"]
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
-og_image_alt: "Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend."
+og_image_alt: >-
+  Relief map of Romania with elevation colors and hillshade highlighting the
+  Carpathian arc, accompanied by an altitude legend.
 seo_title: "Hillshade and elevation maps with tidyterra: One World"
 og_title: "Hillshade and elevation maps with tidyterra"
 ---
@@ -90,6 +95,7 @@ palette for this kind of map.
 I will use the following libraries:
 
 ```{r}
+#| label: load-map-packages
 #| fig-cap: ""
 ## Libraries
 
@@ -111,6 +117,7 @@ However, **elevatr** produces the result as a `RasterLayer`, so you would need t
 convert the object to `SpatRaster` with `terra::rast()`.
 
 ```{r}
+#| label: download-elevation-data
 #| fig-cap: ""
 # Cache map data
 mydir <- "~/R/mapslib/misc"
@@ -209,7 +216,7 @@ index <- hill |>
 vector_cols <- pal_greys[index]
 
 # Need to avoid resampling
-# and dont use aes
+# and don't use aes
 
 hill_plot <- ggplot() +
   geom_spatraster(
@@ -317,7 +324,7 @@ r_limits <- pmax(r_limits, 0)
 minmax(r) |> as.vector()
 r_limits
 
-# Now lets have some fun with scales from tidyterra
+# Now let's have some fun with scales from tidyterra
 
 elevt_test <- ggplot() +
   geom_spatraster(data = r)
@@ -416,6 +423,7 @@ For the final map, we use Noto Serif when its font files are available locally
 and fall back to the system serif font otherwise:
 
 ```{r}
+#| label: register-font-fallback
 #| fig-cap: ""
 font_dir <- path.expand("~/R/googlefonts")
 font_files <- file.path(

@@ -18,7 +18,9 @@ output:
 og_image_width: 741
 og_image_height: 370
 og_image_type: "image/webp"
-og_image_alt: "Dark world map with green routes connecting Spain to destinations marked by blue circles."
+og_image_alt: >-
+  Dark world map with green routes connecting Spain to destinations marked
+  by blue circles.
 ---
 
 This is a very personal post, where I just show the map of all the places I have
@@ -230,7 +232,7 @@ map <- hideGroup(map, c("Destinations", "Flights", "Outline"))
 map
 ```
 
-**✈️ `r format(kms, nsmall=1, big.mark=",")` kms. flown so far.** {: .alert
+**✈️ `r format(kms, nsmall=1, big.mark=",")` km flown so far.** {: .alert
 .alert-info .p-3 .mx-2 .my-3 .lead}
 
 ## Top cities

@@ -22,9 +22,9 @@ output:
     preserve_yaml: true
 header_img: https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
 schema_image:
-  - /assets/img/blog/202602-overlaps-1.webp
-  - /assets/img/blog/202602-all-levs-1.webp
-  - /assets/img/blog/202602-simpl-1.webp
+  - https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
+  - https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp
+  - https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp
 og_image_width: 2028
 og_image_height: 1700
 og_image_type: "image/webp"

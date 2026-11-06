@@ -29,8 +29,9 @@ og_image_alt: "TextWatch Clima watch face displaying the time in words on Pebble
 new capabilities.
 
 ![TextWatch Clima watch face displaying the time in words on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png)
+<p class="caption">Weather and battery indicators can accompany the word-based time.</p>
 
-**Available for all the Classic, Time and Pebble 2 models**
+**Available for all Pebble Classic, Pebble Time and Pebble 2 models**
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58a94da90dfc32d35b0002f8?section=watchfaces">Download from Rebble Appstore</a>
@@ -42,6 +43,7 @@ new capabilities.
 - Autofit to screen
 
 ![TextWatch Clima watch face displaying the time in words on Pebble Time.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerTime.png)
+<p class="caption">Fuzzy time and animated text are optional display settings.</p>
 
 ## Take your pick
 
@@ -71,6 +73,7 @@ new capabilities.
 - **Historical integration with Master Key (pmkey.xyz)**
 
 ![TextWatch Clima watch face displaying the time in words on Pebble Classic.](https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerClass.png)
+<p class="caption">The watch face supports multiple languages and optional date formats.</p>
 
 ## Future developments
 
@@ -114,17 +117,20 @@ new capabilities.
 <div class="row">
 <div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShClass.gif" alt="Animated TextWatch Clima watch face on Pebble Classic.">
+        <p class="caption">The Classic edition supports multilingual display and optional weather.</p>
 </div>
 <div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShTime.gif" alt="Animated TextWatch Clima watch face on Pebble Time.">
+        <p class="caption">Text animation and fuzzy time are optional on this edition.</p>
 </div>
 <div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/ScrShRound.gif" alt="Animated TextWatch Clima watch face on Pebble Time Round.">
+        <p class="caption">Weather, battery status and a night theme are additional options.</p>
 </div>
 </div>
 
 ## License
 
-Developed under license [MIT](https://github.com/dieghernan/TextWatchES_Weather/blob/master/MIT%20License).
+Licensed under the [MIT license](https://github.com/dieghernan/TextWatchES_Weather/blob/master/MIT%20License).
 
 **Made in Madrid, Spain ❤️**

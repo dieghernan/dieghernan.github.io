@@ -7,8 +7,8 @@ tags:
   - html
   - chulapa
   - indieweb
-header_img: /assets/img/blog/202610-webmentions-header.webp
-schema_image: /assets/img/blog/202610-webmentions-header.webp
+header_img: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
+schema_image: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 og_image_width: 1727
 og_image_height: 911
 og_image_type: "image/webp"

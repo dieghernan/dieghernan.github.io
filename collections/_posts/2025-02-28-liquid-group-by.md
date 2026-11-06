@@ -20,6 +20,7 @@ header_img: "https://dieghernan.github.io/assets/img/blog/og_jekyll.webp"
 og_image_width: 1200
 og_image_height: 630
 og_image_type: "image/webp"
+og_image_alt: "White document-and-picture icon on an abstract multicolored geometric background."
 ---
 
 [Liquid](https://shopify.github.io/liquid/) is a template language used by

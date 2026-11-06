@@ -1,5 +1,7 @@
 ---
-title: "Using the <strong>CountryCodes</strong> database and <strong>sf</strong> package"
+title: >-
+  Using the <strong>CountryCodes</strong> database and <strong>sf</strong>
+  package
 subtitle: "Vignette of the <strong>CountryCodes</strong> project"
 tags:
   - r_bloggers
@@ -15,7 +17,9 @@ output:
 og_image_width: 853
 og_image_height: 433
 og_image_type: "image/webp"
-og_image_alt: "World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles."
+og_image_alt: >-
+  World map distinguishing Commonwealth member countries, their dependencies
+  and other countries. Small island states are marked with circles.
 ---
 
 
@@ -79,7 +83,7 @@ orgsdb <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-a
 kable(orgsdb[grep("Common", orgsdb$org_name), ], format = "markdown")
 ```
  
-In our case, the value to search is **C**. A function that extracts the
+In our case, the value to search for is `C`. A function that extracts the
 membership from the `json` database is also provided:
 ```{r}
 #| label: funjson
@@ -101,7 +105,7 @@ ISO_memcol <- function(df,
 df_org <- ISO_memcol(df, "C")
 ```
 
-Now `df_org` has a new column, named **C**, containing the membership status of each country.
+Now `df_org` has a new column, named `C`, containing the membership status of each country.
 ```{r}
 #| label: checkcol
 #| warning: false
@@ -161,7 +165,7 @@ tiny <- left_join(tiny, ISOCommon)
 tiny$C <- coalesce(tiny$C, tiny$C_sov)
 ```
 
-## Plotting map: Wikipedia style
+## Plotting a map: Wikipedia style
 
 Now we will try to plot a map resembling the one presented in the
 [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the

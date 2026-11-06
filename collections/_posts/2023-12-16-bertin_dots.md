@@ -21,7 +21,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: ./assets/img/blog/202312_finalmap.webp
+header_img: https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp
 mathjax: true
 bibliography: bertin.bib
 nocite: "@*"
@@ -32,10 +32,10 @@ og_image_type: "image/webp"
 og_image_alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
 ---
 
-Recently the [R Graph Gallery](https://r-graph-gallery.com/) has incorporated a
+Recently, the [R Graph Gallery](https://r-graph-gallery.com/) published a
 new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
 a dot density map based on the work of the French cartographer [Jacques
-Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
+Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010):
 
 ![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 

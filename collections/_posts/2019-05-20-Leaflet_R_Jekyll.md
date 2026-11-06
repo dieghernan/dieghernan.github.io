@@ -9,7 +9,7 @@ tags:
   - jekyll
   - html
   - maps
-header_img: ./assets/img/blog/20190520_imgpost.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes
 last_modified_at: 2021-05-30
@@ -20,6 +20,7 @@ output:
 og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
+og_image_alt: "Street map of central Auckland with a blue location marker near the university."
 ---
 
 Recently, I have been struggling when trying to embed a
@@ -203,7 +204,7 @@ widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
 
 The `style="width:100%; height:216px;` part controls the actual size of
 the leaflet widget. In this case, the map will adapt to the width of
-the page with a fixed height of 216px. I put [some examples](#extra) of
+the page with a fixed height of 216px. I put [some examples](https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra) of
 different size options at the end of the post so you can have a look and see
 which one is more suitable for your needs.
 

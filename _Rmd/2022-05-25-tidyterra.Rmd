@@ -22,12 +22,16 @@ output:
     variant: gfm
     preserve_yaml: yes
 header_img: "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp"
-description: "Use tidyterra to manipulate terra spatial objects with tidyverse methods and plot SpatRasters with ggplot2."
+description: >-
+  Use tidyterra to manipulate terra spatial objects with tidyverse methods and
+  plot SpatRasters with ggplot2.
 schema_image: ["https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp", "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp"]
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
-og_image_alt: "Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map."
+og_image_alt: >-
+  Street map of Maungawhau with an elevation overlay restricted to terrain
+  above 130 meters. Lower ground remains visible on the base map.
 ---
 
 ```{r}
@@ -75,6 +79,7 @@ geotag the `volcano` dataset. We will also produce **ggplot2** maps using the
 functions of **tidyterra**.
 
 ```{r}
+#| label: load-plotting-packages
 #| fig-cap: ""
 # Libraries
 library(terra)
@@ -167,6 +172,7 @@ Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)), whi
 And we can translate that easily to an empty SpatRaster:
 
 ```{r}
+#| label: create-empty-volcano-raster
 #| fig-cap: ""
 # Extra length for proper handling extent
 xrange <- range(seq(from = 2667400, length.out = 62, by = 10))

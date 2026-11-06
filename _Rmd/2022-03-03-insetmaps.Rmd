@@ -1,5 +1,7 @@
 ---
-title: "Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!"
+title: >-
+  Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and
+  <strong>mapsf</strong>!
 subtitle: "A map on a map"
 excerpt: A common challenge when creating maps is how to include an inset map in
   your visualization. An inset map is a smaller map usually included in a corner
@@ -24,13 +26,17 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
-description: "Create inset maps in R with ggplot2, tmap and mapsf to show geographic context and outlying regions."
+description: >-
+  Create inset maps in R with ggplot2, tmap and mapsf to show geographic
+  context and outlying regions.
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
 seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
 og_title: "Inset maps with ggplot2, tmap and mapsf"
-og_image_alt: "Map of Brazil highlighted in red, with a world inset locating Brazil in South America."
+og_image_alt: >-
+  Map of Brazil highlighted in red, with a world inset locating Brazil in
+  South America.
 ---
 
 ```{r}
@@ -131,6 +137,7 @@ with insets we will:
 2.  Combine both objects with **cowplot**.
 
 ```{r}
+#| label: create-main-and-inset-plots
 #| fig-cap: ""
 # Main plot
 main_gg <- ggplot(main) +
@@ -234,6 +241,7 @@ we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to
 convert the `tmap` objects to the objects that **cowplot** can handle.
 
 ```{r}
+#| label: create-tmap-inset-example
 #| eval: false
 #| fig-cap: ""
 library(tmap)
@@ -255,6 +263,7 @@ sub_tmap <- tmap_grob(sub_tmap)
 ```
 
 ```{r}
+#| label: create-hidden-tmap-inset-objects
 #| include: false
 #| fig-cap: ""
 # Trick for knitr!
@@ -294,7 +303,7 @@ ggdraw() +
 
 ## Update: On **mapsf**
 
-[Timotheé Giraud](https://rgeomatic.hypotheses.org/) (AKA
+[Timothée Giraud](https://rgeomatic.hypotheses.org/) (AKA
 [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
 shared how to create inset maps using that package:
 

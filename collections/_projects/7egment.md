@@ -30,6 +30,7 @@ that adds your location and current weather information in the language used on
 your watch and smartphone.
 
 ![7egment watch face with a seven-segment time display and weather information.](https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png)
+<p class="caption">The 7egment layout combines time, location and weather on a Pebble display.</p>
 
 <div class="text-center">
 <a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/591ead370dfc32aacf000204?section=watchfaces">Download from Rebble Appstore</a>
@@ -64,12 +65,15 @@ your watch and smartphone.
 <div class="row">
 <div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PC.gif" alt="Animated 7egment watch face on Pebble Classic.">
+        <p class="caption">The Pebble Classic edition uses a monochrome display.</p>
 </div>
 <div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PT.gif" alt="Animated 7egment watch face on Pebble Time.">
+        <p class="caption">The Pebble Time edition presents the same layout on a color screen.</p>
 </div>
 <div class="col-sm mb-1">
         <img src="https://raw.githubusercontent.com/dieghernan/7egment/master/store/PTR.gif" alt="Animated 7egment watch face on Pebble Time Round.">
+        <p class="caption">The Pebble Time Round edition adapts the layout to a circular screen.</p>
 </div>
 </div>
 
@@ -98,6 +102,6 @@ through a unique PIN.
 
 ## License
 
-Developed under license [MIT](https://raw.githubusercontent.com/dieghernan/7egment/master/LICENSE).
+Licensed under the [MIT license](https://raw.githubusercontent.com/dieghernan/7egment/master/LICENSE).
 
 **Made in Madrid, Spain ❤️**

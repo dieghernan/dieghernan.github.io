@@ -25,6 +25,7 @@ Featured packages include [tidyterra](https://dieghernan.github.io/tidyterra/), 
 | [collections/_posts/](collections/_posts/) | Published blog articles in Markdown. |
 | [collections/_projects/](collections/_projects/) | Individual project pages. |
 | [_Rmd/](_Rmd/) | R Markdown sources for tutorials and mapping experiments. |
+| [_scripts/](_scripts/) | Site-maintenance utilities, project scripts and tests. See the [script guide](_scripts/README.md). |
 | [_includes/](_includes/) and [_layouts/](_layouts/) | Site customizations that extend **Chulapa**. |
 | [assets/](assets/) | Styles, scripts and other static assets. |
 | [_config.yml](_config.yml) | **Jekyll** configuration and site settings. |

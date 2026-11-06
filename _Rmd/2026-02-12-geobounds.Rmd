@@ -1,8 +1,12 @@
 ---
 title: "Introducing <strong>geobounds</strong>"
 subtitle: "Easy access to administrative boundaries from geoBoundaries"
-description: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds, including simplified and harmonized datasets."
-excerpt: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds."
+description: >-
+  Retrieve administrative boundaries as ready-to-use sf objects in R with
+  geobounds, including simplified and harmonized datasets.
+excerpt: >-
+  Retrieve administrative boundaries as ready-to-use sf objects in R with
+  geobounds.
 syndication:
   - https://www.r-bloggers.com/2026/02/introducing-geoboundaries/
 tags:
@@ -25,7 +29,9 @@ schema_image: ["https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.w
 og_image_width: 2028
 og_image_height: 1700
 og_image_type: "image/webp"
-og_image_alt: "Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims."
+og_image_alt: >-
+  Map of India and Pakistan with translucent country fills. Overlapping
+  boundaries in Kashmir reveal conflicting territorial claims.
 ---
 
 ```{r}
@@ -81,6 +87,7 @@ This is how it works.
 [CRAN](https://cran.r-project.org/package=geobounds), so just install it with:
 
 ```{r}
+#| label: install-geobounds
 #| eval: false
 #| fig-cap: ""
 install.packages("geobounds")
@@ -89,6 +96,7 @@ install.packages("geobounds")
 Load the package and other complementary packages:
 
 ```{r}
+#| label: load-geobounds-packages
 #| fig-cap: ""
 library(geobounds)
 library(sf)
@@ -225,6 +233,7 @@ Downloaded files are cached locally. That means:
 You can set the cache directory with:
 
 ```{r}
+#| label: configure-geobounds-cache
 #| eval: false
 #| fig-cap: ""
 gb_set_cache_dir("a/path/to/a/folder")

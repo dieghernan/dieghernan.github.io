@@ -1,7 +1,9 @@
 ---
 title: "Beautiful maps with <strong>R</strong> (II): Fun with flags"
 subtitle: "Put a picture on your map"
-excerpt: Want to use a flag (or any *.png file) as a background for your map? You are in the right place.
+excerpt: >-
+  Want to use a flag (or any *.png file) as a background for your map? You
+  are in the right place.
 tags:
   - r_bloggers
   - rstats
@@ -22,7 +24,9 @@ output:
 og_image_width: 800
 og_image_height: 533
 og_image_type: "image/webp"
-og_image_alt: "Map of Europe in dark blue with a ring of yellow European Union stars on a light blue background."
+og_image_alt: >-
+  Map of Europe in dark blue with a ring of yellow European Union stars on a
+  light blue background.
 ---
 
 
@@ -46,7 +50,7 @@ options(gisco_cache_dir = "~/R/mapslib/GISCO/")
 **Updated 29 December 2020**: All these pieces of work are already available
 in **cartography** >v.2.4.0 in the [`getPngLayer`](http://riatelab.github.io/cartography/docs/reference/getPngLayer.html)
 function. Just install it via `install.packages("cartography")`. A dedicated
-blog post with examples is available at this [link](https://dieghernan.github.io/202002_cartography1).
+blog post with examples is available in this [post](https://dieghernan.github.io/202002_cartography1/).
 {: .alert .alert-info .p-3 .mx-2 .mb-3 }
 
 **Updated 25 January 2023**: **cartography** is in maintenance mode. You can use
@@ -447,4 +451,3 @@ par(mar = c(0, 0, 0, 0))
 pngLayer(flag, alpha = 150)
 pngLayer(flagcut, bgalpha = 0, add = T)
 ```
-

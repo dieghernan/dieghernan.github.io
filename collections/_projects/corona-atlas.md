@@ -52,4 +52,4 @@ generated via [**rmarkdown**](https://rmarkdown.rstudio.com/) using
 the [tidyverse](https://www.tidyverse.org/).
 For the deployment, map logic has moved to JavaScript to support multiple languages.
 
-[Read more in this post](/202203_Corona-timelapse)
+[Read more in this post](https://dieghernan.github.io/202203_Corona-timelapse/)

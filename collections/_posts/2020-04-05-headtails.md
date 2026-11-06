@@ -7,7 +7,7 @@ tags:
   - classInt
   - r_package
 header_type: "splash"
-header_img: ./assets/img/blog/20200405_finalplot-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp
 show_toc: true
 mathjax: true
 output:
@@ -19,6 +19,7 @@ excerpt: "Explore head/tail breaks classification with classInt and a spatial ca
 og_image_width: 630
 og_image_height: 630
 og_image_type: "image/webp"
+og_image_alt: "Four proportional-symbol maps of African conflict counts comparing the unclassified data with quantile, Fisher and head/tail classifications. Circle size represents conflict counts and colors distinguish classes."
 ---
 
 <blockquote class="blockquote">

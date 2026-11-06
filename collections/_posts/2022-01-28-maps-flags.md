@@ -14,7 +14,7 @@ tags:
   - flags
   - rasterpic
   - giscoR
-header_img: ./assets/img/blog/20220128_flag-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp
 redirect_from:
   - /202101_maps-flags/
 output:

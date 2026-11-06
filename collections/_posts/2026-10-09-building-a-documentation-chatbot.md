@@ -6,8 +6,8 @@ tags:
   - jekyll
   - html
   - chulapa
-header_img: /assets/img/blog/202610-chatbot-header.webp
-schema_image: /assets/img/blog/202610-chatbot-header.webp
+header_img: https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp
+schema_image: https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp
 og_image_width: 1730
 og_image_height: 909
 og_image_type: "image/webp"
@@ -40,10 +40,11 @@ post](https://www.malte-grosser.com/post/adding-a-free-ai-chatbot/).
 I built the implementation with **Codex**. I described what I wanted, supplied
 those references and asked it to inspect the existing theme and documentation.
 There were three pieces to work on: the widget visitors use in the browser,
-the Worker that processes requests on Cloudflare and the context, a summary of
-the documentation supplied to the model. We worked through them together. I tested
-the page, asked the chatbot questions and brought back screenshots when
-something looked wrong. **Codex** helped turn that feedback into code changes.
+the Worker that processes requests on Cloudflare and a context file containing
+a summary of the documentation supplied to the model. We worked through them
+together. I tested the page, asked the chatbot questions and brought back
+screenshots when something looked wrong. **Codex** helped turn that feedback
+into code changes.
 
 Working this way let me spend more time trying the assistant as a visitor
 would: does this answer help

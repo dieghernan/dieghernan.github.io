@@ -1,4 +1,5 @@
 ---
+giscus_discussion: 32
 title: "Beautiful maps with <strong>R</strong> (V): Point densities"
 subtitle: "Bertin's dot density maps with <strong>R</strong> and GHSL"
 excerpt: Another way to represent demographics on a map.
@@ -23,11 +24,16 @@ output:
 header_img: "https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp"
 mathjax: true
 bibliography: bertin.bib
-description: "Create Bertin-style dot density maps in R using Global Human Settlement Layer population data."
+description: >-
+  Create Bertin-style dot density maps in R using Global Human Settlement
+  Layer population data.
 og_image_width: 2400
 og_image_height: 2400
 og_image_type: "image/webp"
-og_image_alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
+og_image_alt: >-
+  Dot density map of the Iberian Peninsula. Larger dots represent higher
+  population density, revealing dense urban clusters and sparsely populated
+  interiors.
 ---
 
 ```{r}
@@ -47,10 +53,10 @@ knitr::opts_chunk$set(
 rm(list = ls())
 ```
 
-Recently the [**R** Graph Gallery](https://r-graph-gallery.com/) has incorporated a
+Recently, the [**R** Graph Gallery](https://r-graph-gallery.com/) published a
 new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
 a dot density map based on the work of the French cartographer [Jacques
-Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918 - 2010):
+Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010):
 
 ![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
@@ -186,6 +192,7 @@ Instead of using the numeric range of densities, we use categories for the final
 map, so we classify the density into different groups:
 
 ```{r}
+#| label: classify-population-density
 #| fig-cap: ""
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
@@ -301,7 +308,7 @@ alternative is:
 1.  Create a hexagonal grid, where each hexagon represents a similar area to
     each cell in the aggregated raster.
 2.  Extract the values of the raster to the new grid.
-3.  Finally, follow the same steps on data wrangling and plotting.
+3.  Finally, follow the same data wrangling and plotting steps.
 
 When working with `sf::st_make_grid(square = FALSE)`, the parameter `cellsize`
 should be the "diameter" of the hexagon instead of the area. Luckily, we can
@@ -315,6 +322,7 @@ So we can extract $$d$$ from the previous expression knowing the area $$A$$ of
 the aggregated cells:
 
 ```{r}
+#| label: create-hexagonal-grid
 #| fig-cap: ""
 # Hex grid with sf ----
 
@@ -341,7 +349,8 @@ area_km2 <- st_area(pop_agg_sf) %>%
 pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
 ```
 
-Now, we use `exact_extract()` to extract the population on each hexagonal grid.
+Now, we use `exact_extract()` to extract the population in each hexagonal
+cell.
 
 ```{r}
 #| label: 202312_hexgrid_base

@@ -143,7 +143,9 @@ ggsave(
 library(maptiles)
 library(terra)
 
-pol <- elevation |> as.polygons() |> as_sf()
+pol <- elevation |>
+  as.polygons() |>
+  as_sf()
 
 rgb_tile <- maptiles::get_tiles(
   pol,

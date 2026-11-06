@@ -1,6 +1,8 @@
 ---
 title: "Unknown pleasures with <strong>R</strong>"
-subtitle: "Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong>"
+subtitle: >-
+  Joyplot elevation maps with <strong>ggridges</strong> and
+  <strong>terra</strong>
 excerpt:
   Create ridgelines (AKA joyplots) of territories using elevation data with
   R, sf, terra and ggridges.
@@ -25,7 +27,9 @@ header_img: "https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp
 og_image_width: 4200
 og_image_height: 4200
 og_image_type: "image/webp"
-og_image_alt: "Black poster with white elevation ridgelines forming the outline of Spain and the words Spain and Unknown Pleasures."
+og_image_alt: >-
+  Black poster with white elevation ridgelines forming the outline of Spain
+  and the words Spain and Unknown Pleasures.
 ---
 
 ```{r}
@@ -49,7 +53,7 @@ the pulse profiles and dispersion measures of twelve pulsars"._ The thesis (337
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:
 
-![Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses.](https://static.scientificamerican.com/blogs/assets/sa-visual/Image/pulsar_trio.jpg)
+![Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses.](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)
 
 From "Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
@@ -67,13 +71,12 @@ Encyclopaedia of Astronomy_ (1977 edition):
 
 Saville presented a black-and-white version, producing a cover that reached
 iconic status in the '80s. This cover has been reproduced in the form of
-tattoos, fashion clothes, merchandising, video games and even 3-D sculptures:
+tattoos, clothing, merchandise, video games and even 3-D sculptures:
 
-![Joy Division - Unknown pleasure
-cover](https://upload.wikimedia.org/wikipedia/en/3/33/Unknown_Pleasures_Spotify.jpg)
+![Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
 If you are interested in learning more about this fascinating history of science
-and design you can find it on [Pop Culture Pulsar: Origin Story of Joy
+and design, you can read [Pop Culture Pulsar: Origin Story of Joy
 Division's Unknown Pleasures Album
 Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/)
 by [Jen
@@ -100,7 +103,7 @@ Some initial considerations we may need to bear in mind:
   final plot, but there is a caveat: **both the coordinates and the
   elevation should be in the same unit** ([See
   why](https://wilkelab.org/ggridges/reference/geom_ridgeline.html)).
-  Therefore we should project both the raster and the base `sf` object on a
+  Therefore, we should project both the raster and the base `sf` object to a
   suitable CRS defined in meters (in this case).
 
 - Joyplots are much cooler when only a few lines are displayed. This is
@@ -136,6 +139,7 @@ creating just a visualization, the resolution of the **sf** object is not very
 relevant.
 
 ```{r}
+#| label: select-and-project-region
 #| fig-cap: ""
 # Select a Spanish Region: Andalucia
 region <- gisco_get_nuts(nuts_id = "ES61") %>%
@@ -201,6 +205,7 @@ After that, we create a data frame with the information needed for
 creating the joyplot.
 
 ```{r}
+#| label: prepare-joyplot-data
 #| fig-cap: ""
 dem_agg[dem_agg < 0] <- 0
 dem_agg[is.na(dem_agg)] <- 0
@@ -215,6 +220,7 @@ needed. In this case both are in meters, but I will show you how to perform
 those adjustments with the **units** package:
 
 ```{r}
+#| label: convert-joyplot-units
 #| fig-cap: ""
 library(units)
 
@@ -353,7 +359,7 @@ ggplot() +
 ### With colors
 
 We can apply different colors to the plot. Note that **ggridges** only accepts
-different `aes` by row, and not by column:
+different `aes` by row, not by column:
 
 ```{r}
 #| label: 20220501_andalucia_colors

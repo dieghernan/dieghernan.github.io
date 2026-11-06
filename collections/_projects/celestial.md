@@ -32,11 +32,11 @@ epoch in GeoJSON and GeoPackage formats.
 
 The original files were provided by the
 [d3-celestial plugin](https://github.com/ofrohn/d3-celestial/)
-([Frohn 2015](#ref-frohn2015)) under
+([Frohn 2015](https://dieghernan.github.io/projects/celestial-data/#ref-frohn2015)) under
 [BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause). The datasets
 produced by this project consist of the same data provided by the
 [d3-celestial plugin](https://github.com/ofrohn/d3-celestial/) processed with
-the **R** package **sf** ([Pebesma 2018](#ref-pebesma2018)) to ensure its
+the **R** package **sf** ([Pebesma 2018](https://dieghernan.github.io/projects/celestial-data/#ref-pebesma2018)) to ensure its
 validity:
 
 - The spatial data objects are bounded by $$[-180, -90, 180, 90]$$.

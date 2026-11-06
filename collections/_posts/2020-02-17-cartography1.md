@@ -9,7 +9,7 @@ tags:
   - maps
   - sf
   - r_package
-header_img: ./assets/img/blog/20200217_wordcloud2-1.webp
+header_img: https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp
 header_type: "splash"
 show_toc: true
 output:
@@ -21,6 +21,7 @@ excerpt: "Examples of hatched maps, PNG layers and word clouds in cartography 2.
 og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
+og_image_alt: "Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently."
 ---
 
 ## Introduction
@@ -54,7 +55,7 @@ packageVersion("cartography")
 
 ## Hatched map
 
-Version of typology/choropleth maps using a hatched filling. This is
+This is a way to create typology or choropleth maps using hatching. It is
 particularly useful for maps that need to be printed in black and white, such
 as academic papers. These maps are also useful for representing overlapping
 dimensions.

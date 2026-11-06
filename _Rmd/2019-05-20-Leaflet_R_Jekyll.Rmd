@@ -1,5 +1,7 @@
 ---
-title: "<strong>Leaflet</strong>, <strong>R</strong>, Markdown, <strong>Jekyll</strong> and GitHub"
+title: >-
+  <strong>Leaflet</strong>, <strong>R</strong>, Markdown,
+  <strong>Jekyll</strong> and GitHub
 subtitle: "Make it work in 6 steps - A short tutorial"
 tags:
   - r_bloggers
@@ -20,7 +22,9 @@ output:
 og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
-og_image_alt: "Street map of central Auckland with a blue location marker near the university."
+og_image_alt: >-
+  Street map of central Auckland with a blue location marker near the
+  university.
 ---
 
 
@@ -48,7 +52,7 @@ Recently, I have been struggling when trying to embed a
 <i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)).
 In my case, I use the [<span
 class="chulapa"><strong>Chulapa</strong></span>](https://dieghernan.github.io/chulapa/)
-remote theme created by myself.
+remote theme that I created.
 
 **Index**
 
@@ -212,7 +216,7 @@ Now you just need to paste this piece of code before that chunk:
 <i class="fa fa-exclamation-triangle"></i> **Warning:** Be sure that the
 widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
 `<div>` and in the `<script>` part. If not, your map would not load.
-{: .alert .alert-warning .p-3 .mx-2 .mb-3}
+{: .alert .alert-warning .p-3 .mx-2 .my-3}
 
 The `style="width:100%; height:216px;` part controls the actual size of
 the **leaflet** widget. In this case, the map will adapt to the width of
@@ -222,7 +226,7 @@ which one is more suitable for your needs.
 
 #### 6. Publish your post
 
-Now you just have to publish your post as usual!! If everything has been
+Now you just have to publish your post as usual! If everything has been
 properly set, when **Jekyll** builds your post it will include the
 libraries in the header and make the magic happen, just like this:
 
@@ -244,7 +248,7 @@ m # Print the map
 <i class="fa fa-exclamation-triangle"></i> **Warning:** Have you checked
 the YAML front matter of your `.md` file? Have another look, especially
 if you have followed my Pro tip.
-{: .alert .alert-warning .p-3 .mx-2 .mb-3}
+{: .alert .alert-warning .p-3 .mx-2 .my-3}
 
 ### Gallery: Size of a **leaflet** map <a name="extra"></a>
 
@@ -264,7 +268,7 @@ wouldn’t look as nice on laptops, and vice versa.
 
 ##### Example 1: 672x480px
 
-Fixed size in pixels. By default in my machine:
+Fixed size in pixels. The default on my machine:
 
 ```{r}
 #| label: example1
