@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, Diego HH</copyright>
-		<pubDate>Fri, 06 Nov 2026 00:27:09 +0100</pubDate>
-		<lastBuildDate>Fri, 06 Nov 2026 00:27:09 +0100</lastBuildDate>
+		<pubDate>Fri, 06 Nov 2026 01:09:24 +0100</pubDate>
+		<lastBuildDate>Fri, 06 Nov 2026 01:09:24 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -24,7 +24,7 @@
 			<description>
 				<![CDATA[	
  				<h3>From postal points to areas using Voronoi polygons</h3>
-    		<p>14 min.</p>
+    		<p>13 min.</p>
 				<div><p>I recently published my project <a href="https://dieghernan.github.io/codigospostales/">Postal codes of
 Spain</a>, with estimated postal
 areas, an interactive map and GeoPackage downloads. But there is something we
@@ -122,7 +122,7 @@ and no geographical coordinate reference system.</p>
 
 <p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-toy-example-1.webp" alt="Five labeled sites in a square: A and B below, C and D above, and E at the&#10;center, surrounded by its own bounded Voronoi cell.&#10;" width="100%" /></p>
 
-<p>Five points, five cells. The new point E at <code class="language-plaintext highlighter-rouge">(5, 5)</code> has a bounded cell
+<p>Five points, five cells. The point E at <code class="language-plaintext highlighter-rouge">(5, 5)</code> has a bounded cell
 surrounded by the other four. The outer cells extend beyond the square and are
 clipped to its edges. <code class="language-plaintext highlighter-rouge">st_union()</code> collects the points into one geometry,
 <code class="language-plaintext highlighter-rouge">st_voronoi()</code> builds the diagram and <code class="language-plaintext highlighter-rouge">st_intersection()</code> clips it to our
