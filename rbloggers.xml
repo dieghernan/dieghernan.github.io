@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/rbloggers.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-06T07:49:08+01:00</updated>
+	<updated>2026-11-06T11:24:26+01:00</updated>
 	<id>https://dieghernan.github.io/rbloggers.xml</id>
 	<title>One World | R packages, maps and open-source projects - R Project</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -26,7 +26,7 @@
   		
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp&#39; &gt;
 			
-	&lt;p&gt;13 min.&lt;/p&gt;
+	&lt;p&gt;14 min.&lt;/p&gt;
 			&lt;p&gt;I recently published my project &lt;a href=&quot;https://dieghernan.github.io/codigospostales/&quot;&gt;Postal codes of
 Spain&lt;/a&gt;, with estimated postal
 areas, an interactive map and GeoPackage downloads. But there is something we
@@ -720,8 +720,8 @@ Updated online version: &lt;a href=&quot;https://www.uv.es/goerlich/Ivie/CodPost
   &lt;li&gt;Sánchez, J. I. (2020, November 13). “Así hice el mapa de los códigos
 postales de España con SIG y datos abiertos.” NoSoloSIG.
 &lt;a href=&quot;https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos&quot;&gt;https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;Hernangómez, D. (2026). Códigos postales de España [Dataset].
-&lt;a href=&quot;https://doi.org/10.5281/zenodo.23698418&quot;&gt;https://doi.org/10.5281/zenodo.23698418&lt;/a&gt;.
+  &lt;li&gt;Hernangómez, D. (2026). Códigos postales de España (version 1.0.0) [Dataset].
+Zenodo. &lt;a href=&quot;https://doi.org/10.5281/zenodo.23698418&quot;&gt;https://doi.org/10.5281/zenodo.23698418&lt;/a&gt;.
 &lt;a href=&quot;https://dieghernan.github.io/codigospostales/&quot;&gt;https://dieghernan.github.io/codigospostales/&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1646,8 +1646,8 @@ development and SEO optimization. For example, I optimized all the images on
 this blog using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;resmush_dir()&lt;/code&gt;, which is a shorthand for optimizing all files
 in a specific folder.&lt;/p&gt;
 
-&lt;p&gt;There are other alternatives that I discuss &lt;a href=&quot;#other-alternatives&quot;&gt;at the end of this
-post&lt;/a&gt;, but briefly, the reSmush.it API works quickly
+&lt;p&gt;There are other alternatives that I discuss &lt;a href=&quot;https://dieghernan.github.io/202402_optimize-images-r/#other-alternatives&quot;&gt;at the end of this
+post&lt;/a&gt;, but briefly, the &lt;strong&gt;reSmush.it&lt;/strong&gt; API works quickly
 with minimal configuration for a wide range of formats without needing an API
 key.&lt;/p&gt;
 
@@ -1676,7 +1676,7 @@ a large plot with &lt;strong&gt;ggplot2&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;img src=&quot;https://dieghernan.github.io/assets/img/samples/cyl.png&quot; alt=&quot;Satellite map of Castile and Leon with a translucent regional boundary overlay, before image optimization.&quot; width=&quot;100%&quot; /&gt;
 &lt;p class=&quot;caption&quot;&gt;
-Original file
+Original satellite image before optimization.
 &lt;/p&gt;
 
 &lt;/div&gt;
@@ -1705,7 +1705,7 @@ reduce it:&lt;/p&gt;
 
 &lt;img src=&quot;https://dieghernan.github.io/assets/img/samples/cyl_resmush.png&quot; alt=&quot;Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization.&quot; width=&quot;100%&quot; /&gt;
 &lt;p class=&quot;caption&quot;&gt;
-Optimized file
+Satellite image after optimization with resmush_file().
 &lt;/p&gt;
 
 &lt;/div&gt;
@@ -1724,8 +1724,8 @@ parameter. Now, the optimized file (&lt;code class=&quot;language-plaintext high
 &lt;img src=&quot;https://dieghernan.github.io/assets/img/samples/cyl_resmush.png&quot; alt=&quot;Satellite map of Castile and Leon with a translucent regional boundary overlay, after image optimization.&quot; /&gt;
 &lt;/a&gt;
 &lt;p class=&quot;caption&quot;&gt;
-Original picture (left/top): 1.7 MB. Optimized picture (right/bottom): 762.2 kB.
-(55.46% reduction in file size). Click on the images to enlarge.
+The original image (left/top) is 1.7 MB. The optimized image (right/bottom) is
+762.2 kB, a 55.46% reduction in file size. Click either image to enlarge.
 &lt;/p&gt;
 &lt;/div&gt;
 
@@ -1824,8 +1824,8 @@ disk. In this example, I demonstrate a feature of all the functions in
 &lt;/a&gt;
 &lt;p class=&quot;caption&quot;&gt;
 
-Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
-(26.63% reduction in file size). Click on the images to enlarge.
+The original image (left/top) is 1.3 MB. The optimized image (right/bottom) is
+985 kB, a 26.63% reduction in file size. Click either image to enlarge.
 
 &lt;/p&gt;
 
@@ -1846,8 +1846,8 @@ Original picture (left/top): 1.3 MB. Optimized picture (right/bottom): 985 kB.
 &lt;p&gt;
   Yihui is the developer of &lt;strong&gt;knitr&lt;/strong&gt;, &lt;strong&gt;markdown&lt;/strong&gt;,
   &lt;strong&gt;blogdown&lt;/strong&gt; and &lt;strong&gt;bookdown&lt;/strong&gt;, among others, and he
-  has been one of the key contributors (if not the most) to the reproducible
-  research space with &lt;strong&gt;R&lt;/strong&gt; through his libraries.
+  has been one of the key contributors (if not the most important) to the
+  reproducible research space with &lt;strong&gt;R&lt;/strong&gt; through his libraries.
 &lt;/p&gt;
 &lt;p&gt;
   If you have ever used and enjoyed his packages, consider sponsoring him on
@@ -2037,10 +2037,10 @@ your work.&lt;/p&gt;
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp&#39; &gt;
 			
 	&lt;p&gt;8 min.&lt;/p&gt;
-			&lt;p&gt;Recently the &lt;a href=&quot;https://r-graph-gallery.com/&quot;&gt;R Graph Gallery&lt;/a&gt; has incorporated a
+			&lt;p&gt;Recently, the &lt;a href=&quot;https://r-graph-gallery.com/&quot;&gt;R Graph Gallery&lt;/a&gt; published a
 new post by &lt;a href=&quot;https://twitter.com/BjnNowak&quot;&gt;Benjamin Nowak&lt;/a&gt; showing how to create
 a dot density map based on the work of the French cartographer &lt;a href=&quot;https://en.wikipedia.org/wiki/Jacques_Bertin&quot;&gt;Jacques
-Bertin&lt;/a&gt; (1918 - 2010):&lt;/p&gt;
+Bertin&lt;/a&gt; (1918–2010):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/misc/bertin.png&quot; alt=&quot;Dot map of France from Jacques Bertin&#39;s Semiologie graphique. Dots of different sizes depict population concentrations.&quot; /&gt;&lt;/p&gt;
 
@@ -2489,7 +2489,7 @@ Frohn&lt;/a&gt;. As Kim Fitter pointed out in
 &lt;a href=&quot;https://kimnewzealand.github.io/2019/02/21/celestial-maps/&quot;&gt;his post&lt;/a&gt;, these
 data files present the problem (experienced by &lt;a href=&quot;https://stackoverflow.com/search?q=%5Bsf%5D+dateline&quot;&gt;almost any &lt;strong&gt;sf&lt;/strong&gt;
 user&lt;/a&gt;) of lines crossing
-the international date line (longitude 180º). I also found that some files are
+the international date line (longitude 180°). I also found that some files are
 not valid as per &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf::st_make_valid()&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Solution? I processed and fixed almost every file, including the files
@@ -2533,7 +2533,7 @@ specific directory &lt;code class=&quot;language-plaintext highlighter-rouge&quo
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pretty_lonlat()&lt;/code&gt; is a labeler that returns a decimal longitude or latitude
-coordinate in the format degrees/minutes/seconds (e.g., a &lt;strong&gt;latitude
+coordinate in the format degrees/minutes/seconds (e.g., a &lt;strong&gt;latitude of
 34.72782&lt;/strong&gt; would be converted into &lt;strong&gt;34° 43’ 40.15” N&lt;/strong&gt;).&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -2698,7 +2698,7 @@ that for us.&lt;/p&gt;
     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;the_crs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
   &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# If it is not POINT filter by valid and non-empty&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# This if for performance&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# This is for performance&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geomtype&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POINT&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# If any is GEOMETRYCOLLECTION extract the right value&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;the_cut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;GEOMETRYCOLLECTION&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -2802,10 +2802,10 @@ this script:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;This means that those shops are really creating the map at
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YYYY-MM-DD 22:00:00 UTC&lt;/code&gt;. If you want to exactly replicate that (even though
-that night sky is not accurate, think that in New Zealand the local time at that
-moment would be 10:00 hence no stars are visible) you would need to adjust
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;desired_date_tz&lt;/code&gt; as:&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YYYY-MM-DD 22:00:00 UTC&lt;/code&gt;. If you want to replicate that exactly (even though
+the resulting night sky is not accurate—for example, in New Zealand the local
+time at that moment would be 10:00, so no stars would be visible), you would
+need to adjust &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;desired_date_tz&lt;/code&gt; as follows:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;as_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;desired_date_tz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;22:00:00&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tz&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UTC&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;2015-09-22 22:00:00 UTC&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -2845,8 +2845,8 @@ so we are going to replicate that as well:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target_crs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;+proj=airy +x_0=0 +y_0=0 +lon_0=23.1589164999314 +lat_0=40.4167047&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# We need to flip celestial objects to get the impression of see from the Earth&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# to the sky, instead of from the sky to the Earth&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Flip celestial objects to give the impression of viewing the sky from Earth,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# rather than viewing the Earth from the sky.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# https://stackoverflow.com/a/75064359/7877917&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Flip matrix for affine transformation&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -3130,7 +3130,7 @@ instead I converted my lines (the constellations) to coordinates and applied
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp&quot; alt=&quot;Circular star map for Madrid with constellation lines, stars sized by brightness and the Milky Way on a dark background.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Voilà! I checked several times the results with the results provided by
+&lt;p&gt;Voilà! I checked the results several times against those provided by
 d3-celestial.js on the &lt;a href=&quot;https://ofrohn.github.io/celestial-demo/location.html&quot;&gt;location
 demo&lt;/a&gt; and the underlying
 calculations in JavaScript, and everything seems to be up and running.&lt;/p&gt;
@@ -3482,7 +3482,7 @@ hillshade, which we will reuse later:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector_cols&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pal_greys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Need to avoid resampling&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# and dont use aes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# and don&#39;t use aes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Base hill plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hill_plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4327,7 +4327,7 @@ and the number of cells are the same.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vector_cols&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pal_greys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Need to avoid resampling&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# and dont use aes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# and don&#39;t use aes&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hill_plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_spatraster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4416,7 +4416,7 @@ touch rounding up and down the range of values to the nearest 500.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r_limits&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1]    0 2500&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Now lets have some fun with scales from tidyterra&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Now let&#39;s have some fun with scales from tidyterra&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elevt_test&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_spatraster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -5573,7 +5573,7 @@ applied to &lt;strong&gt;ggplot2&lt;/strong&gt; objects.&lt;/p&gt;
 
 &lt;h2 id=&quot;update-on-mapsf&quot;&gt;Update: On &lt;strong&gt;mapsf&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://rgeomatic.hypotheses.org/&quot;&gt;Timotheé Giraud&lt;/a&gt; (AKA
+&lt;p&gt;&lt;a href=&quot;https://rgeomatic.hypotheses.org/&quot;&gt;Timothée Giraud&lt;/a&gt; (AKA
 &lt;a href=&quot;https://twitter.com/rgeomatic&quot;&gt;\@rgeomatic&lt;/a&gt;), the developer of &lt;strong&gt;mapsf&lt;/strong&gt;, also
 shared how to create inset maps using that package:&lt;/p&gt;
 
@@ -6357,7 +6357,7 @@ revalidated against current package versions.&lt;/p&gt;
 
 &lt;h2 id=&quot;hatched-map&quot;&gt;Hatched map&lt;/h2&gt;
 
-&lt;p&gt;Version of typology/choropleth maps using a hatched filling. This is
+&lt;p&gt;This is a way to create typology or choropleth maps using hatching. It is
 particularly useful for maps that need to be printed in black and white, such
 as academic papers. These maps are also useful for representing overlapping
 dimensions.&lt;/p&gt;
@@ -6851,7 +6851,7 @@ revalidated against current package versions.&lt;/p&gt;
 in &lt;strong&gt;cartography&lt;/strong&gt; &amp;gt;v.2.4.0 through the &lt;a href=&quot;http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hatchedLayer&lt;/code&gt;&lt;/a&gt;
 and &lt;a href=&quot;https://riatelab.github.io/cartography/docs/reference/legendHatched.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;legendHatched&lt;/code&gt;&lt;/a&gt;
 functions. Just install it via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install.packages(&quot;cartography&quot;)&lt;/code&gt;. A dedicated
-blog post with examples is available at this &lt;a href=&quot;../202002_cartography1&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+blog post with examples is available in this &lt;a href=&quot;https://dieghernan.github.io/202002_cartography1/&quot;&gt;post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;required-r-packages&quot;&gt;Required &lt;strong&gt;R&lt;/strong&gt; packages&lt;/h2&gt;
 
@@ -7467,7 +7467,7 @@ one of my favorites, &lt;strong&gt;cartography&lt;/strong&gt;:&lt;/p&gt;
 			&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated 29 December 2020&lt;/strong&gt;: All these pieces of work are already available
 in &lt;strong&gt;cartography&lt;/strong&gt; &amp;gt;v.2.4.0 in the &lt;a href=&quot;http://riatelab.github.io/cartography/docs/reference/getPngLayer.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getPngLayer&lt;/code&gt;&lt;/a&gt;
 function. Just install it via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install.packages(&quot;cartography&quot;)&lt;/code&gt;. A dedicated
-blog post with examples is available at this &lt;a href=&quot;../202002_cartography1&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;
+blog post with examples is available in this &lt;a href=&quot;https://dieghernan.github.io/202002_cartography1/&quot;&gt;post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated 25 January 2023&lt;/strong&gt;: &lt;strong&gt;cartography&lt;/strong&gt; is in maintenance mode. You can use
 &lt;strong&gt;rasterpic&lt;/strong&gt; + &lt;strong&gt;tidyterra&lt;/strong&gt; to achieve the same result, see &lt;a href=&quot;https://dieghernan.github.io/202201_maps-flags/&quot;&gt;link1&lt;/a&gt;
@@ -8205,7 +8205,7 @@ widget id (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;7a
 
 &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;style=&quot;width:100%; height:216px;&lt;/code&gt; part controls the actual size of
 the leaflet widget. In this case, the map will adapt to the width of
-the page with a fixed height of 216px. I put &lt;a href=&quot;#extra&quot;&gt;some examples&lt;/a&gt; of
+the page with a fixed height of 216px. I put &lt;a href=&quot;https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra&quot;&gt;some examples&lt;/a&gt; of
 different size options at the end of the post so you can have a look and see
 which one is more suitable for your needs.&lt;/p&gt;
 
@@ -8312,7 +8312,7 @@ remote theme that I created.&lt;/p&gt;
 		&lt;h3&gt;User-defined function using the &lt;strong&gt;sf&lt;/strong&gt; package&lt;/h3&gt;
 		
   		
-			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog//20190505_benchmarkfunction-1.webp&#39; &gt;
+			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp&#39; &gt;
 			
 	&lt;p&gt;3 min.&lt;/p&gt;
 			&lt;p&gt;This post introduces a user-defined function for casting &lt;strong&gt;sf&lt;/strong&gt; objects of class

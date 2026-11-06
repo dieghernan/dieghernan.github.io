@@ -658,7 +658,7 @@ and the number of cells are the same.</p>
 </span><span class="n">vector_cols</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pal_greys</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="w">
 
 </span><span class="c1"># Need to avoid resampling</span><span class="w">
-</span><span class="c1"># and dont use aes</span><span class="w">
+</span><span class="c1"># and don't use aes</span><span class="w">
 
 </span><span class="n">hill_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="w">
@@ -733,7 +733,7 @@ touch rounding up and down the range of values to the nearest 500.</p>
 </span><span class="n">r_limits</span><span class="w">
 </span><span class="c1">#&gt; [1]    0 2500</span><span class="w">
 
-</span><span class="c1"># Now lets have some fun with scales from tidyterra</span><span class="w">
+</span><span class="c1"># Now let's have some fun with scales from tidyterra</span><span class="w">
 
 </span><span class="n">elevt_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w">

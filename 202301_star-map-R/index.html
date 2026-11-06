@@ -142,6 +142,10 @@
     <meta property="og:description" content="A couple of weeks ago I was doing my daily check on Stack Overflow when I found a question by Benjamin Smith that blew my mind: Creating Star Map Visualizations Based on Location and Date !!" >
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" >
+    <meta property="og:image:alt" content="Circular star map with white constellation lines, stars and a coordinate grid on a dark background." >
+    <meta property="og:image:width" content="1300" >
+    <meta property="og:image:height" content="857" >
+    <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="A couple of weeks ago I was doing my daily check on Stack Overflow when I found a question by Benjamin Smith that blew my mind: Creating Star Map Visualizations Based on Location and Date !!">
@@ -447,7 +451,7 @@
 </nav>
 			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
   <a class="u-url d-none" href="https://dieghernan.github.io/202301_star-map-R/">Invisible link to canonical for Microformats</a>
-    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" alt="Star map with R">
+    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" alt="Circular star map with white constellation lines, stars and a coordinate grid on a dark background.">
   <a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans"></a>
  <main class="d-flex flex-column flex-fill">
 <header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp')">
@@ -539,7 +543,7 @@ Frohn</a>. As Kim Fitter pointed out in
 <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">his post</a>, these
 data files present the problem (experienced by <a href="https://stackoverflow.com/search?q=%5Bsf%5D+dateline">almost any <strong>sf</strong>
 user</a>) of lines crossing
-the international date line (longitude 180º). I also found that some files are
+the international date line (longitude 180°). I also found that some files are
 not valid as per <code class="language-plaintext highlighter-rouge">sf::st_make_valid()</code>.</p>
 <p>Solution? I processed and fixed almost every file, including the files
 corresponding to the Milky Way and the lines for Chinese constellations, manually,
@@ -576,7 +580,7 @@ specific directory <code class="language-plaintext highlighter-rouge">cachedir</
  </li>
  <li>
    <p><code class="language-plaintext highlighter-rouge">pretty_lonlat()</code> is a labeler that returns a decimal longitude or latitude
-coordinate in the format degrees/minutes/seconds (e.g., a <strong>latitude
+coordinate in the format degrees/minutes/seconds (e.g., a <strong>latitude of
 34.72782</strong> would be converted into <strong>34° 43’ 40.15” N</strong>).</p>
  </li>
 </ul>
@@ -727,7 +731,7 @@ that for us.</p>
     </span><span class="n">sf</span><span class="o">::</span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the_crs</span><span class="p">)</span><span class="w">
 
   </span><span class="c1"># If it is not POINT filter by valid and non-empty</span><span class="w">
-  </span><span class="c1"># This if for performance</span><span class="w">
+  </span><span class="c1"># This is for performance</span><span class="w">
   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">geomtype</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="c1"># If any is GEOMETRYCOLLECTION extract the right value</span><span class="w">
     </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">any</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">the_cut</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"GEOMETRYCOLLECTION"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -820,10 +824,10 @@ this script:</p>
 ...
 </code></pre></div></div>
 <p>This means that those shops are really creating the map at
-<code class="language-plaintext highlighter-rouge">YYYY-MM-DD 22:00:00 UTC</code>. If you want to exactly replicate that (even though
-that night sky is not accurate, think that in New Zealand the local time at that
-moment would be 10:00 hence no stars are visible) you would need to adjust
-<code class="language-plaintext highlighter-rouge">desired_date_tz</code> as:</p>
+<code class="language-plaintext highlighter-rouge">YYYY-MM-DD 22:00:00 UTC</code>. If you want to replicate that exactly (even though
+the resulting night sky is not accurate—for example, in New Zealand the local
+time at that moment would be 10:00, so no stars would be visible), you would
+need to adjust <code class="language-plaintext highlighter-rouge">desired_date_tz</code> as follows:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">as_datetime</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">as.Date</span><span class="p">(</span><span class="n">desired_date_tz</span><span class="p">),</span><span class="w"> </span><span class="s2">"22:00:00"</span><span class="p">),</span><span class="w"> </span><span class="n">tz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTC"</span><span class="p">)</span><span class="w">
 </span><span class="c1">#&gt; [1] "2015-09-22 22:00:00 UTC"</span><span class="w">
 
@@ -858,8 +862,8 @@ so we are going to replicate that as well:</p>
 </span><span class="n">target_crs</span><span class="w">
 </span><span class="c1">#&gt; [1] "+proj=airy +x_0=0 +y_0=0 +lon_0=23.1589164999314 +lat_0=40.4167047"</span><span class="w">
 
-</span><span class="c1"># We need to flip celestial objects to get the impression of see from the Earth</span><span class="w">
-</span><span class="c1"># to the sky, instead of from the sky to the Earth</span><span class="w">
+</span><span class="c1"># Flip celestial objects to give the impression of viewing the sky from Earth,</span><span class="w">
+</span><span class="c1"># rather than viewing the Earth from the sky.</span><span class="w">
 </span><span class="c1"># https://stackoverflow.com/a/75064359/7877917</span><span class="w">
 </span><span class="c1"># Flip matrix for affine transformation</span><span class="w">
 
@@ -1111,7 +1115,7 @@ instead I converted my lines (the constellations) to coordinates and applied
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_celestial_map-1.webp" alt="Circular star map for Madrid with constellation lines, stars sized by brightness and the Milky Way on a dark background." width="100%" /></p>
-<p>Voilà! I checked several times the results with the results provided by
+<p>Voilà! I checked the results several times against those provided by
 d3-celestial.js on the <a href="https://ofrohn.github.io/celestial-demo/location.html">location
 demo</a> and the underlying
 calculations in JavaScript, and everything seems to be up and running.</p>
