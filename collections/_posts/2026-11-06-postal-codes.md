@@ -135,7 +135,7 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-toy-example-1.webp" alt="Five labeled sites in a square: A and B below, C and D above, and E at the&#10;center, surrounded by its own bounded Voronoi cell.&#10;" width="100%" />
 
-Five points, five cells. The new point E at `(5, 5)` has a bounded cell
+Five points, five cells. The point E at `(5, 5)` has a bounded cell
 surrounded by the other four. The outer cells extend beyond the square and are
 clipped to its edges. `st_union()` collects the points into one geometry,
 `st_voronoi()` builds the diagram and `st_intersection()` clips it to our

@@ -156,7 +156,7 @@ ggplot() +
   )
 ```
 
-Five points, five cells. The new point E at `(5, 5)` has a bounded cell
+Five points, five cells. The point E at `(5, 5)` has a bounded cell
 surrounded by the other four. The outer cells extend beyond the square and are
 clipped to its edges. `st_union()` collects the points into one geometry,
 `st_voronoi()` builds the diagram and `st_intersection()` clips it to our
