@@ -32,16 +32,16 @@ og_image_type: "image/webp"
 og_image_alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
 ---
 
-Recently, the [R Graph Gallery](https://r-graph-gallery.com/) published a
-new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
-a dot density map based on the work of the French cartographer [Jacques
-Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010):
+Recently, the [R Graph Gallery](https://r-graph-gallery.com/) published a new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create a map inspired by the work of French cartographer [Jacques Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010), particularly his *Sémiologie graphique* (Bertin, 1967):
 
 ![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
-In this post, I create a similar map for Iberia and also show how to create a
-variation using a hexagonal grid instead of a rectangular one. This is the fifth
-issue of the series
+
+In this post, I create a similar map for Iberia using graduated symbols to
+represent population density. Unlike conventional dot density maps, where dots
+represent a fixed number of individuals, symbol sizes here indicate density classes.
+I also explore a variation using a hexagonal grid instead of a rectangular one.
+This is the fifth issue of the series
 [Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
@@ -427,8 +427,9 @@ And that's it! Which one do you like the most? Let me know in the comments.
 
 ## References
 
-- Bertin, J. (1967). _Sémiologie graphique. Les diagrammes. Les réseaux. Les
-  cartes_. Gauthier-Villars, Paris.
+- Bertin, J. (1967). _Sémiologie graphique : les diagrammes, les réseaux, les
+  cartes_. Paris: Mouton & Gauthier-Villars. [Bibliothèque nationale de 
+  France](https://catalogue.bnf.fr/ark:/12148/cb41605817s).
 - European Commission. Joint Research Centre. (2023). _GHSL data package 2023._
   Publications Office, LU <https://doi.org/10.2760/098587>.
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
