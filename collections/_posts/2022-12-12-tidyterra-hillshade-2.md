@@ -1,6 +1,7 @@
 ---
 last_modified_at: 2026-10-25
-title: "Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)"
+title: >-
+  Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)
 subtitle: "The rain in Spain does not stay mainly in the plain"
 excerpt: "Add marginal plots to a SpatRaster map on ggplot2"
 syndication:
@@ -19,15 +20,19 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
-description: "Map precipitation in Spain with hillshade and marginal profiles using terra, tidyterra and ggplot2."
-schema_image:
-  - https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
-  - https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp
-og_image_width: 2100
-og_image_height: 2100
+header_img: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp"
+description: >-
+  Map precipitation in Spain with hillshade and marginal profiles using terra,
+  tidyterra and ggplot2.
+schema_image: ["https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp", "https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp"]
+og_image: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp"
+og_image_width: 1991
+og_image_height: 1933
 og_image_type: "image/webp"
-og_image_alt: "Map of average yearly precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages."
+og_image_alt: >-
+  Map of average yearly precipitation in Spain with hillshade and marginal bar
+  profiles above and to the right. Colors encode rainfall; the profiles
+  summarize east-west and north-south averages.
 seo_title: "Precipitation maps with tidyterra and marginal plots: One World"
 og_title: "Precipitation maps with tidyterra and marginal plots"
 ---
@@ -104,6 +109,23 @@ library(ggplot2)
 library(scales)
 library(cowplot)
 library(colorspace)
+library(ggblend)
+
+# Define a common theme for the maps.
+background <- "#faf8f2"
+ink <- "#203b47"
+
+theme_set(
+  theme_void() +
+    theme(
+      plot.background = element_rect(fill = background, colour = NA),
+      panel.background = element_rect(fill = background, colour = NA),
+      plot.title = element_text(face = "bold", colour = ink),
+      plot.subtitle = element_text(colour = ink),
+      plot.caption = element_text(colour = "grey40", hjust = 0),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ## The plain in Spain
@@ -191,7 +213,14 @@ hillshade, which we will reuse later:
 
 slope <- terrain(r, "slope", unit = "radians")
 aspect <- terrain(r, "aspect", unit = "radians")
-hill <- shade(slope, aspect, 30, 45)
+
+# Multi-shadow
+hill <- shade(slope, aspect, 45, direction = c(225, 270, 315, 360)) |> mean()
+
+# Stretching
+q <- as.numeric(quantile(values(hill), c(0.05, 0.95), na.rm = TRUE))
+
+hill <- clamp((hill - q[1]) / diff(q), 0, 1)
 
 # normalize names
 names(hill) <- "shades"
@@ -249,7 +278,7 @@ blend_hillshade <- function(data, fill_scale) {
     (list(
       geom_spatraster(data = data, fill = thematic_fill, maxcell = Inf),
       geom_spatraster(
-        data = hill, fill = vector_cols, alpha = 0.85, maxcell = Inf
+        data = hill, fill = vector_cols, maxcell = Inf
       )
     ) |>
       ggblend::blend("multiply"))
