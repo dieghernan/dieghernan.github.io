@@ -26,13 +26,13 @@ description: >-
   tidyterra and ggplot2.
 schema_image: ["https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp", "https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp"]
 og_image: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp"
-og_image_width: 1991
-og_image_height: 1933
+og_image_width: 2100
+og_image_height: 2010
 og_image_type: "image/webp"
 og_image_alt: >-
-  Map of average yearly precipitation in Spain with hillshade and marginal bar
+  Map of mean annual precipitation in Spain with hillshade and marginal bar
   profiles above and to the right. Colors encode rainfall; the profiles
-  summarize east-west and north-south averages.
+  summarize east-west and north-south means.
 seo_title: "Precipitation maps with tidyterra and marginal plots: One World"
 og_title: "Precipitation maps with tidyterra and marginal plots"
 ---
@@ -83,7 +83,7 @@ Rex Harrison and Stanley Holloway. But as a Spaniard, I can tell you it is
 The rain in Spain stays mainly in the north, most notably in Galicia. And I can
 prove it!
 
-In this post, I overlay a SpatRaster showing average precipitation data
+In this post, I overlay a SpatRaster showing mean precipitation data
 with an extra set of plots on the margin to identify where the rain in Spain
 stays (mainly).
 
@@ -112,26 +112,26 @@ library(colorspace)
 library(ggblend)
 
 # Define a common theme for the maps.
-background <- "#faf8f2"
-ink <- "#203b47"
+background <- "#f8f8ff"
+ink <- "grey10"
 
 theme_set(
-  theme_void() +
-    theme(
-      plot.background = element_rect(fill = background, colour = NA),
-      panel.background = element_rect(fill = background, colour = NA),
-      plot.title = element_text(face = "bold", colour = ink),
-      plot.subtitle = element_text(colour = ink),
-      plot.caption = element_text(colour = "grey40", hjust = 0),
-      plot.margin = margin(10, 10, 10, 10)
-    )
+  theme(
+    plot.background = element_rect(fill = background, colour = NA),
+    panel.background = element_rect(fill = background, colour = NA),
+    plot.title = element_text(face = "bold", colour = ink),
+    plot.subtitle = element_text(colour = ink, margin = margin(t = 5, b = 5)),
+    plot.caption = element_text(colour = "grey40", hjust = 0),
+    plot.margin = margin(10, 10, 10, 10),
+    legend.background = element_blank()
+  )
 )
 ```
 
 ## The plain in Spain
 
 The plain (or as we call it, _La Meseta Central_) covers a large area of
-inland Spain, with an average altitude of 650 meters above sea level.
+inland Spain, with an mean altitude of 650 meters above sea level.
 
 I didn't find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
@@ -197,7 +197,8 @@ r_plain <- r_plain |>
   # And convert to lines
   as.lines()
 
-autoplot(r_plain)
+ggplot(r_plain) +
+  geom_spatvector(color = "red")
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="Map of plateau outlines in Spain, extracted from terrain between 600 and 1,100 meters above sea level." width="100%" />
@@ -255,7 +256,7 @@ hill_plot
 As in the updated first post, we resolve the thematic raster's colors before
 combining it with the hillshade. This helper keeps the original scale underneath
 the blend to generate the legend. The opaque thematic layer inside the blend
-covers it, and the hillshade adds texture with an opacity of 0.85. The legend
+covers it, and the hillshade adds texture. The legend
 shows the palette before shading. We use **ragg** to render these compositing
 groups.
 
@@ -285,8 +286,8 @@ blend_hillshade <- function(data, fill_scale) {
 }
 ```
 
-And finally we blend the altitude with the hillshade and draw the outline of
-the plain above both layers.
+And finally we blend the altitude with the hillshade. The plain should be quite
+visible even without plotting the outline.
 
 
 ``` r
@@ -317,11 +318,6 @@ alt_scale <- scale_fill_hypso_tint_c(
 )
 
 plot_esp <- blend_hillshade(r, alt_scale) +
-  geom_spatvector(
-    data = r_plain,
-    color = alpha("black", 0.7),
-    linewidth = 0.15
-  ) +
   guides(fill = guide_legend(
     title = "   m.",
     title.position = "top",
@@ -331,11 +327,10 @@ plot_esp <- blend_hillshade(r, alt_scale) +
   )) +
   labs(
     title = "Elevation of Spain",
-    subtitle = "The plain represented with black line"
+    subtitle = "The plain in green"
   ) +
-  theme_minimal(base_family = "serif") +
   theme(
-    plot.background = element_rect(fill = "white", color = "white"),
+    text = element_text(family = "serif"),
     plot.title = element_text(
       face = "bold", size = base_text_size * 1.5,
       hjust = 0.5
@@ -348,6 +343,10 @@ plot_esp <- blend_hillshade(r, alt_scale) +
       margin = margin(t = base_text_size * 3),
       face = "italic"
     ),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
     legend.key = element_rect("grey50"),
     legend.text = element_text(hjust = 0),
     legend.position = "left"
@@ -361,7 +360,7 @@ plot_esp
 ## The rain in Spain
 
 Let's check now whether the rain falls mainly in the plain or not. We use here
-`geodata::worldclim_country()` to get the average precipitation by month from
+`geodata::worldclim_country()` to get the mean monthly precipitation by from
 [WorldClim](https://www.worldclim.org/):
 
 
@@ -384,7 +383,7 @@ precip
 ```
 
 We have now a SpatRaster with 12 layers representing the value of each month. So
-we now just add the values by cell to get the annual average. Note that we also
+we now just add the values by cell to get the annual mean. Note that we also
 need to normalize the SpatRaster to the projection, extent and resolution of our
 `hill` object:
 
@@ -421,7 +420,7 @@ compare_spatrasters(precip_avg_mask, hill)
 autoplot(precip_avg_mask)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="Map of average yearly precipitation in mainland Spain and the Balearic Islands. Higher values occur along the northern coast and lower values in the southeast." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_precip-1.webp" alt="Map of mean annual precipitation in mainland Spain and the Balearic Islands. Higher values occur along the northern coast and lower values in the southeast." width="100%" />
 
 ### Creating a modified palette
 
@@ -478,12 +477,11 @@ meteo_plot <- blend_hillshade(precip_avg_mask, precip_scale) +
     override.aes = list(alpha = 1)
   )) +
   labs(
-    title = "Average yearly precipitation of Spain",
+    title = "Mean annual precipitation of Spain",
     subtitle = "The rain in Spain does not stay mainly in the plain"
   ) +
-  theme_minimal(base_family = "serif") +
   theme(
-    plot.background = element_rect(fill = "white", color = "white"),
+    text = element_text(family = "serif"),
     plot.title = element_text(
       face = "bold", size = base_text_size * 1.5,
       hjust = 0.5
@@ -503,7 +501,7 @@ meteo_plot <- blend_hillshade(precip_avg_mask, precip_scale) +
 meteo_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="Map of average yearly precipitation in Spain with hillshade beneath the color layer. Wetter northern and northwestern areas contrast with the drier southeast." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp" alt="Map of mean annual precipitation in Spain with hillshade beneath the color layer. Wetter northern and northwestern areas contrast with the drier southeast." width="100%" />
 
 We can now see that the rain in Spain falls mainly on the Atlantic coast
 (northern Spain) and specifically in Galicia. That's why in Spanish the lyrics
@@ -519,12 +517,12 @@ featuring very hot and dry summers.
 ## Marginal plots (finally)
 
 We can now start profiling our final plot. The idea is to create two bar charts,
-representing the value to be plotted (in this case, average annual
+representing the value to be plotted (in this case, mean annual
 precipitation) by longitude and latitude.
 
 The map and both profiles use `precip_scale`, with the same opaque colors and
 explicit limits. Hillshade changes the map's brightness, while the profiles
-show the unshaded palette. The averages are calculated from the precipitation
+show the unshaded palette. The means are calculated from the precipitation
 values, before any color mapping or blending.
 
 But first we add some additional margins and axis titles to the main plot, so we
@@ -547,7 +545,7 @@ plot_main <- meteo_plot +
   theme(
     axis.title.x = element_text(
       margin = margin(t = base_text_size),
-      size = base_text_size * 0.9, face = "italic"
+      size = base_text_size * 1.2, face = "italic"
     ),
     axis.title.y = element_text(
       angle = 270,
@@ -555,14 +553,14 @@ plot_main <- meteo_plot +
         l = base_text_size,
         t = base_text_size
       ),
-      size = base_text_size * 0.9, face = "italic"
+      size = base_text_size * 1.2, face = "italic"
     )
   )
 
 plot_main
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="Map of average yearly precipitation in Spain prepared for adding marginal profiles. Colors distinguish the wetter north from the drier southeast." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="Map of mean annual precipitation in Spain prepared for adding marginal profiles. Colors distinguish the wetter north from the drier southeast." width="100%" />
 
 ### Profiling marginal plots
 
@@ -623,7 +621,7 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="Bar profile of average yearly precipitation by east-west position in Spain. Bar height and color encode rainfall in millimeters, with the highest averages toward the west." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="Bar profile of mean annual precipitation by east-west position in Spain. Bar height and color encode rainfall in millimeters, with the highest averages toward the west." width="100%" />
 
 ``` r
 
@@ -653,7 +651,7 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="Horizontal bar profile of average yearly precipitation by north-south position in Spain. Bar length and color encode rainfall in millimeters, with higher averages in the north." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="Horizontal bar profile of mean annual precipitation by north-south position in Spain. Bar length and color encode rainfall in millimeters, with higher averages in the north." width="100%" />
 
 ### Putting all the pieces together
 
@@ -695,7 +693,7 @@ plot_x <- axis_canvas(plot_main, axis = "x") +
 plot_x
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="Bar profile of average yearly precipitation from west to east in Spain, formatted for placement above the map. Height and color encode rainfall in millimeters." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="Bar profile of mean annual precipitation from west to east in Spain, formatted for placement above the map. Height and color encode rainfall in millimeters." width="100%" />
 
 ``` r
 
@@ -730,7 +728,7 @@ plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
 plot_y
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="Horizontal bar profile of average yearly precipitation from south to north in Spain, formatted for placement beside the map. Length and color encode rainfall in millimeters." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-2.webp" alt="Horizontal bar profile of mean annual precipitation from south to north in Spain, formatted for placement beside the map. Length and color encode rainfall in millimeters." width="100%" />
 
 And insert everything in the main plot. See the final result:
 
@@ -752,7 +750,7 @@ gg_final <- ggdraw(plot_final)
 gg_final
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="Map of average yearly precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="Map of mean annual precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages." width="100%" />
 
 And with a bit of effort we got it.
 
@@ -834,7 +832,7 @@ blend_hillshade <- function(data, fill_scale) {
     (list(
       geom_spatraster(data = data, fill = thematic_fill, maxcell = Inf),
       geom_spatraster(
-        data = hill, fill = vector_cols, alpha = 0.85, maxcell = Inf
+        data = hill, fill = vector_cols, maxcell = Inf
       )
     ) |>
       ggblend::blend("multiply"))
@@ -863,7 +861,8 @@ precip_scale <- scale_fill_gradientn(
   limits = p_range
 )
 base_plot <- blend_hillshade(precip_end, precip_scale) +
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.background = element_rect(fill = "#F0FFFF"))
 
 # Marginal plots
 # Data
