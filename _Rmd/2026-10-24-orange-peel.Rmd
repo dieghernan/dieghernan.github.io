@@ -13,6 +13,7 @@ tags:
   - sf
   - giscoR
 header_img: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
+og_image: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
 og_image_width: 2000
 og_image_height: 1100
 og_image_type: "image/webp"
@@ -60,6 +61,7 @@ coastlines and draw the outline, following the cuts between the lobes.
 library(sf)
 library(ggplot2)
 library(giscoR)
+library(showtext)
 
 world <- gisco_get_coastal_lines(resolution = 10)
 goode_crs <- "+proj=igh"
@@ -117,11 +119,15 @@ and keeps the edges of our peel tidy.
 #| label: map
 #| fig-cap: ""
 #| fig-alt: "World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel."
+font_add_google("Coiny", family = "coiny")
+
+showtext_auto()
+
 ggplot() +
   geom_sf(data = outline, fill = "#FFF0D9", colour = NA) +
   geom_sf(data = world, fill = "#F9B566", colour = "#B34D08", linewidth = 0.25) +
   geom_sf(data = grat, fill = NA, colour = "#E8A45B", linewidth = 0.25) +
-  geom_sf(data = mask, fill = "white", colour = NA) +
+  geom_sf(data = mask, fill = "#fcf1e7", colour = NA) +
   geom_sf(data = outline, fill = NA, colour = "#E87516", linewidth = 0.4) +
   coord_sf(
     crs = goode_crs,
@@ -132,8 +138,17 @@ ggplot() +
   ) +
   theme_void() +
   theme(
-    plot.background = element_rect(fill = "white", colour = NA),
-    plot.title = element_text(color = "#E87516", face = "bold")
+    text = element_text(family = "coiny"),
+    plot.background = element_rect(fill = "#fcf1e7", colour = NA),
+    plot.title = element_text(
+      color = "#E87516", face = "bold", size = rel(3),
+      margin = margin(b = 10)
+    ),
+    plot.margin = margin(10, 10, 10, 10),
+    plot.caption = element_text(
+      color = "#E87516", size = rel(1.5),
+      margin = margin(t = 10)
+    )
   ) +
   labs(
     title = "Let's peel the world",
