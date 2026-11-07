@@ -142,8 +142,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" >
     <meta property="og:image:alt" content="Map of average yearly precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages." >
-    <meta property="og:image:width" content="2100" >
-    <meta property="og:image:height" content="2100" >
+    <meta property="og:image:width" content="1991" >
+    <meta property="og:image:height" content="1933" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -602,6 +602,23 @@ stays (mainly).</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">cowplot</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">colorspace</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggblend</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Define a common theme for the maps.</span><span class="w">
+</span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#faf8f2"</span><span class="w">
+</span><span class="n">ink</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#203b47"</span><span class="w">
+
+</span><span class="n">theme_set</span><span class="p">(</span><span class="w">
+  </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme</span><span class="p">(</span><span class="w">
+      </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
+      </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey40"</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="the-plain-in-spain">The plain in Spain</h2>
 <p>The plain (or as we call it, <em>La Meseta Central</em>) covers a large area of
@@ -678,7 +695,14 @@ hillshade, which we will reuse later:</p>
 
 </span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"slope"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
 </span><span class="n">aspect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"aspect"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
-</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Multi-shadow</span><span class="w">
+</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">225</span><span class="p">,</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w"> </span><span class="m">315</span><span class="p">,</span><span class="w"> </span><span class="m">360</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">mean</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Stretching</span><span class="w">
+</span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">quantile</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">hill</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">),</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+
+</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">clamp</span><span class="p">((</span><span class="n">hill</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">diff</span><span class="p">(</span><span class="n">q</span><span class="p">),</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># normalize names</span><span class="w">
 </span><span class="nf">names</span><span class="p">(</span><span class="n">hill</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"shades"</span><span class="w">
@@ -731,7 +755,7 @@ groups.</p>
     </span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="w">
       </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thematic_fill</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">),</span><span class="w">
       </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="w">
-        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_cols</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.85</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="w">
+        </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_cols</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="w">
       </span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
       </span><span class="n">ggblend</span><span class="o">::</span><span class="n">blend</span><span class="p">(</span><span class="s2">"multiply"</span><span class="p">))</span><span class="w">
