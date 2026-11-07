@@ -40,6 +40,8 @@ The project combines exports from MITECO's General Forest Fire Statistics
 information and reconciliation notes so that users can trace how records
 were selected, grouped and located.
 
+![Large forest fires in Spain, 2010–2026. Dark map with orange circles sized by forest area burned.](https://dieghernan.github.io/gifs/gif_spain.png)
+
 ## Two related data products
 
 The collection currently provides two complementary views:
