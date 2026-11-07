@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/atom.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-07T22:09:03+01:00</updated>
+	<updated>2026-11-07T22:22:15+01:00</updated>
 	<id>https://dieghernan.github.io/atom.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -3418,16 +3418,15 @@ your work.&lt;/p&gt;
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp&#39; &gt;
 			
 	&lt;p&gt;8 min.&lt;/p&gt;
-			&lt;p&gt;Recently, the &lt;a href=&quot;https://r-graph-gallery.com/&quot;&gt;R Graph Gallery&lt;/a&gt; published a
-new post by &lt;a href=&quot;https://twitter.com/BjnNowak&quot;&gt;Benjamin Nowak&lt;/a&gt; showing how to create
-a dot density map based on the work of the French cartographer &lt;a href=&quot;https://en.wikipedia.org/wiki/Jacques_Bertin&quot;&gt;Jacques
-Bertin&lt;/a&gt; (1918–2010):&lt;/p&gt;
+			&lt;p&gt;Recently, the &lt;a href=&quot;https://r-graph-gallery.com/&quot;&gt;R Graph Gallery&lt;/a&gt; published a new post by &lt;a href=&quot;https://twitter.com/BjnNowak&quot;&gt;Benjamin Nowak&lt;/a&gt; showing how to create a map inspired by the work of French cartographer &lt;a href=&quot;https://en.wikipedia.org/wiki/Jacques_Bertin&quot;&gt;Jacques Bertin&lt;/a&gt; (1918–2010), particularly his &lt;em&gt;Sémiologie graphique&lt;/em&gt; (Bertin, 1967):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/misc/bertin.png&quot; alt=&quot;Dot map of France from Jacques Bertin&#39;s Semiologie graphique. Dots of different sizes depict population concentrations.&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;In this post, I create a similar map for Iberia and also show how to create a
-variation using a hexagonal grid instead of a rectangular one. This is the fifth
-issue of the series
+&lt;p&gt;In this post, I create a similar map for Iberia using graduated symbols to
+represent population density. Unlike conventional dot density maps, where dots
+represent a fixed number of individuals, symbol sizes here indicate density classes.
+I also explore a variation using a hexagonal grid instead of a rectangular one.
+This is the fifth issue of the series
 &lt;a href=&quot;https://dieghernan.github.io/tags#beautiful_maps&quot;&gt;Beautiful Maps with R&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;libraries&quot;&gt;Libraries&lt;/h2&gt;
@@ -3806,8 +3805,9 @@ the aggregated cells:&lt;/p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Bertin, J. (1967). &lt;em&gt;Sémiologie graphique. Les diagrammes. Les réseaux. Les
-cartes&lt;/em&gt;. Gauthier-Villars, Paris.&lt;/li&gt;
+  &lt;li&gt;Bertin, J. (1967). &lt;em&gt;Sémiologie graphique : les diagrammes, les réseaux, les
+cartes&lt;/em&gt;. Paris: Mouton &amp;amp; Gauthier-Villars. &lt;a href=&quot;https://catalogue.bnf.fr/ark:/12148/cb41605817s&quot;&gt;Bibliothèque nationale de 
+France&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;European Commission. Joint Research Centre. (2023). &lt;em&gt;GHSL data package 2023.&lt;/em&gt;
 Publications Office, LU &lt;a href=&quot;https://doi.org/10.2760/098587&quot;&gt;https://doi.org/10.2760/098587&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
