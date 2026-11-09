@@ -3,8 +3,13 @@ source("_Rmd/renderblog_v2.R")
 
 draft <- diegpost_draft_v2("never-trust-a-map.Rmd")
 
-
 markdown <- readLines(draft, warn = FALSE, encoding = "UTF-8")
+markdown <- sub(
+  'src="https://dieghernan.github.io/assets/img/drafts/',
+  'src="/assets/img/drafts/',
+  markdown,
+  fixed = TRUE
+)
 # Cropping changes the social image dimensions, so measure the final WebP.
 metadata <- rmarkdown::yaml_front_matter(draft)
 image_path <- sub("^https://dhhdevblog[.]netlify[.]app/", "", metadata$og_image)

@@ -4,14 +4,14 @@ subtitle: "All of them are dirty liars."
 description: >-
   Put the same circles on twelve world maps and see what each projection
   does to them.
-og_image: https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og.jpg
-og_image_width: 1200
-og_image_height: 630
-og_image_type: image/jpeg
+header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
+og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
+og_image_width: 1400
+og_image_height: 725
+og_image_type: image/webp
 og_image_alt: >-
-  Never trust a map. Red circles grow toward the poles in Web Mercator,
-  stretch into equal-area ellipses in Equal Earth and change size and shape
-  in Winkel Tripel.
+  Equal Earth world map with red ellipses of roughly equal area that become
+  flatter toward high latitudes.
 tags:
   - rstats
   - rspatial
@@ -25,6 +25,8 @@ output:
     variant: gfm
     preserve_yaml: true
 ---
+
+<!-- TODO: Add the r_bloggers tag when this post is published. -->
 
 All maps lie. Some lie more than others, and some are deliberately
 designed to mislead us. Mark Monmonier wrote a whole book about it.
@@ -43,18 +45,19 @@ does](https://www.esri.com/about/newsroom/arcuser/better-breaks-define-your-maps
 
 But even the most honest maps lie.
 
-The Earth is (approximately) a sphere, and there’s no way to flatten it
-without distorting something. A projection can preserve some properties,
-such as area or local angles, at the expense of others.
+The Earth is (approximately) spherical, and there’s no way to represent
+its curved surface on a flat map without distorting something. A
+projection can preserve some properties, such as area or local angles,
+at the expense of others.
 
 Fortunately, we have a lie detector.
 
 ## Meet Tissot’s indicatrices
 
-Imagine placing tiny, identical circles all over the globe. Flatten the
-globe and those circles can change size, shape or both. The area of each
+Imagine covering the globe with identical small circles. Flatten the
+Earth and those circles can change size, shape or both. The area of each
 ellipse shows how much the projection enlarges or shrinks the area
-there. Its shape shows whether the projection stretches more in one
+there. Its shape tells us whether the projection stretches more in one
 direction than another.
 
 ### A quick technical note
@@ -73,6 +76,8 @@ draw a circle with a radius of 500 km at each one. The red shapes show
 what happens to those circles when we change the projection.
 
 ## Three ways to handle distortion
+
+Each approach makes a different trade-off.
 
 - **Conformal.** These projections preserve local angles and shapes, so
   tiny circles stay round even when their size changes. Mercator is
@@ -100,8 +105,8 @@ gets to look so big.
 
 ## Equal Earth
 
-Equal Earth is an **equal-area** projection. Look at what happens to the
-circles when area stays in proportion.
+Equal Earth is an **equal-area** projection. What happens to the circles
+when we preserve area?
 
 <img src="never-trust-a-map_files/figure-gfm/equal-earth-1.png" alt="Equal Earth world map with red ellipses of roughly equal area that become flatter toward high latitudes." width="100%" />
 
@@ -134,14 +139,18 @@ world](https://dieghernan.github.io/202610_orange-peel/)
 Find the red circle over Greenland and follow it from map to map. The
 orthographic view, centered over North Africa, looks like a globe from
 space. It shows only the circles that fit entirely on the visible side,
-including a bonus circle at the North Pole. Each map is scaled to fit
-its panel, so compare the shapes and relative sizes of the red circles
-within each map.
+including a bonus circle at the North Pole.
+
+<i class="fa-solid fa-exclamation"></i> Since each map is scaled
+independently, compare circle sizes within each panel. {: .alert
+.alert-warning .p-3 .mx-2 .mb-3}
 
 <img src="never-trust-a-map_files/figure-gfm/projection-gallery-1.png" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. Goode splits the map into lobes, while the orthographic map shows a round hemisphere with an extra indicatrix at the North Pole." width="100%" />
 
-So, which map should you trust? Depends on what you’re asking it to
-show.
+So which map should you trust? It depends on what you’re asking it to
+show. Choose an equal-area map to compare areas, a conformal one when
+local angles matter or a compromise for an overall view. The question is
+whether the lie helps you see what you’re looking for.
 
 ## How we drew it
 
@@ -328,6 +337,7 @@ draw_map <- function(title) {
     labs(title = title) +
     theme_void(base_family = map_family) +
     theme(
+      plot.title =  element_text(face = "bold"),
       plot.margin = margin(10, 10, 10, 10),
       plot.background = element_rect(fill = map_background, color = NA),
       panel.background = element_rect(fill = map_background, color = NA)
@@ -360,8 +370,8 @@ grid::pushViewport(grid::viewport(
   width = 0.92,
   height = 0.92,
   layout = grid::grid.layout(
-    6, 3,
-    heights = grid::unit(c(2, 1.5, 10, 10, 10, 10), "null")
+    7, 3,
+    heights = grid::unit(c(2, 1.5, 1, 10, 10, 10, 10), "null")
   )
 ))
 grid::grid.text(
@@ -380,7 +390,7 @@ grid::grid.text(
 for (index in seq_along(gallery_order)) {
   title <- gallery_order[[index]]
   grid::pushViewport(grid::viewport(
-    layout.pos.row = (index - 1) %/% 3 + 3,
+    layout.pos.row = (index - 1) %/% 3 + 4,
     layout.pos.col = (index - 1) %% 3 + 1,
     layout = grid::grid.layout(2, 1, heights = grid::unit(c(1, 9), "null"))
   ))
@@ -400,3 +410,12 @@ grid::popViewport()
 ```
 
 </details>
+
+## References
+
+- Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of
+  Chicago Press.
+- Snyder, J. P. (1987). *Map projections–A working manual*. U.S.
+  Geological Survey. <https://doi.org/10.3133/pp1395>
+- Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et
+  les projections des cartes géographiques*. Gauthier-Villars.

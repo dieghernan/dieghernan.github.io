@@ -4,15 +4,14 @@ subtitle: "All of them are dirty liars."
 description: >-
   Put the same circles on twelve world maps and see what each projection
   does to them.
-header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-equal-earth-1.webp" 
-og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-equal-earth-1.webp"
+header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
+og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
 og_image_width: 1400
-og_image_height: 774
-og_image_type: image/jpeg
+og_image_height: 725
+og_image_type: image/webp
 og_image_alt: >-
-  Never trust a map. Red circles grow toward the poles in Web Mercator,
-  stretch into equal-area ellipses in Equal Earth and change size and shape
-  in Winkel Tripel.
+  Equal Earth world map with red ellipses of roughly equal area that become
+  flatter toward high latitudes.
 tags:
   - rstats
   - rspatial
@@ -27,6 +26,8 @@ output:
     preserve_yaml: true
 ---
 
+<!-- TODO: Add the r_bloggers tag when this post is published. -->
+
 
 
 
@@ -35,10 +36,9 @@ All maps lie. Some lie more than others, and some are deliberately designed to
 mislead us. Mark Monmonier wrote a whole book about it. [*How to Lie with
 Maps*](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html)
 
-Take election maps. [Land doesn't vote. People
-do.](https://www.landdoesntvote.com/) Yet a vast, sparsely populated region can
-dominate a map, while a densely populated city barely gets noticed. [See the
-same election mapped several
+Take election maps. Land doesn't vote. People do. Yet a vast, sparsely populated
+region can dominate a map, while a densely populated city barely gets noticed.
+[See the same election mapped several
 ways](https://www.esri.com/about/newsroom/arcwatch/explore-a-map-of-election-results)
 
 Change the color scale or the class breaks on a choropleth and the same data can
@@ -47,17 +47,18 @@ does](https://www.esri.com/about/newsroom/arcuser/better-breaks-define-your-maps
 
 But even the most honest maps lie.
 
-The Earth is (approximately) a sphere, and there's no way to flatten it without
-distorting something. A projection can preserve some properties, such as area or
-local angles, at the expense of others.
+The Earth is (approximately) spherical, and there’s no way to represent its
+curved surface on a flat map without distorting something. A projection can
+preserve some properties, such as area or local angles, at the expense of
+others.
 
 Fortunately, we have a lie detector.
 
 ## Meet Tissot’s indicatrices
 
-Imagine placing tiny, identical circles all over the globe. Flatten the globe
-and those circles can change size, shape or both. The area of each ellipse shows
-how much the projection enlarges or shrinks the area there. Its shape shows
+Imagine covering the globe with identical small circles. Flatten the Earth and
+those circles can change size, shape or both. The area of each ellipse shows
+how much the projection enlarges or shrinks the area there. Its shape tells us
 whether the projection stretches more in one direction than another.
 
 ### A quick technical note
@@ -81,6 +82,8 @@ those circles when we change the projection.
 
 ## Three ways to handle distortion
 
+Each approach makes a different trade-off.
+
 - **Conformal.** These projections preserve local angles and shapes, so tiny
   circles stay round even when their size changes. Mercator is useful for
   navigation because a constant compass bearing follows a straight line.
@@ -95,7 +98,7 @@ those circles when we change the projection.
 
 If the circles are still circles, where's the lie?
 
-<img src="https://dieghernan.github.io/assets/img/drafts/never-trust-a-map-web-mercator-1.webp" alt="Web Mercator world map with red circles that grow from the equator toward the top and bottom of the map." width="100%" />
+<img src="/assets/img/drafts/never-trust-a-map-web-mercator-1.webp" alt="Web Mercator world map with red circles that grow from the equator toward the top and bottom of the map." width="100%" />
 
 Web Mercator shows the familiar **conformal** pattern. Compare the middle row
 with the top and bottom rows. The circles stay roughly round, but they take up
@@ -103,10 +106,10 @@ much more room at high latitudes. That's how Greenland gets to look so big.
 
 ## Equal Earth
 
-Equal Earth is an **equal-area** projection. Look at what happens to the circles
-when area stays in proportion.
+Equal Earth is an **equal-area** projection. What happens to the circles when
+we preserve area?
 
-<img src="https://dieghernan.github.io/assets/img/drafts/never-trust-a-map-equal-earth-1.webp" alt="Equal Earth world map with red ellipses of roughly equal area that become flatter toward high latitudes." width="100%" />
+<img src="/assets/img/drafts/never-trust-a-map-equal-earth-1.webp" alt="Equal Earth world map with red ellipses of roughly equal area that become flatter toward high latitudes." width="100%" />
 
 The shapes give the game away. The circles flatten toward the top and bottom,
 but their areas stay roughly the same.
@@ -116,7 +119,7 @@ but their areas stay roughly the same.
 Winkel Tripel is a **compromise** projection. What happens when we let both
 shape and area change?
 
-<img src="https://dieghernan.github.io/assets/img/drafts/never-trust-a-map-winkel-tripel-1.webp" alt="Winkel Tripel world map with red indicatrices that vary in size and become more elongated away from the center." width="100%" />
+<img src="/assets/img/drafts/never-trust-a-map-winkel-tripel-1.webp" alt="Winkel Tripel world map with red indicatrices that vary in size and become more elongated away from the center." width="100%" />
 
 Follow the 50° N row from the central meridian toward either edge and watch the
 ellipses stretch and tilt. Compare them with the equatorial row and you'll see
@@ -137,16 +140,22 @@ world](https://dieghernan.github.io/202610_orange-peel/)
 Find the red circle over Greenland and follow it from map to map. The
 orthographic view, centered over North Africa, looks like a globe from space. It
 shows only the circles that fit entirely on the visible side, including a bonus
-circle at the North Pole. Each map is scaled to fit its panel, so compare the
-shapes and relative sizes of the red circles within each map.
+circle at the North Pole.
 
-<img src="https://dieghernan.github.io/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. Goode splits the map into lobes, while the orthographic map shows a round hemisphere with an extra indicatrix at the North Pole." width="100%" />
+<i class="fa-solid fa-exclamation"></i> Since each map is scaled independently,
+compare circle sizes within each panel.
+{: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
-So, which map should you trust? Depends on what you're asking it to show.
+<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. Goode splits the map into lobes, while the orthographic map shows a round hemisphere with an extra indicatrix at the North Pole." width="100%" />
+
+So which map should you trust? It depends on what you're asking it to show.
+Choose an equal-area map to compare areas, a conformal one when local angles
+matter or a compromise for an overall view. The question is whether the lie
+helps you see what you're looking for.
 
 ## How we drew it
 
-<details class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show the R code</summary>
 
@@ -345,7 +354,7 @@ draw_map("Winkel Tripel")
 
 </details>
 
-<details class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show the gallery code</summary>
 
@@ -360,8 +369,8 @@ grid::pushViewport(grid::viewport(
   width = 0.92,
   height = 0.92,
   layout = grid::grid.layout(
-    6, 3,
-    heights = grid::unit(c(2, 1.5, 10, 10, 10, 10), "null")
+    7, 3,
+    heights = grid::unit(c(2, 1.5, 1, 10, 10, 10, 10), "null")
   )
 ))
 grid::grid.text(
@@ -380,7 +389,7 @@ grid::grid.text(
 for (index in seq_along(gallery_order)) {
   title <- gallery_order[[index]]
   grid::pushViewport(grid::viewport(
-    layout.pos.row = (index - 1) %/% 3 + 3,
+    layout.pos.row = (index - 1) %/% 3 + 4,
     layout.pos.col = (index - 1) %% 3 + 1,
     layout = grid::grid.layout(2, 1, heights = grid::unit(c(1, 9), "null"))
   ))
@@ -401,8 +410,13 @@ grid::popViewport()
 
 </details>
 
+
+
 ## References
 
 - Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of Chicago
   Press.
-  [https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html?utm_source=chatgpt.com)
+- Snyder, J. P. (1987). *Map projections--A working manual*. U.S. Geological
+  Survey. <https://doi.org/10.3133/pp1395>
+- Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et les
+  projections des cartes géographiques*. Gauthier-Villars.
