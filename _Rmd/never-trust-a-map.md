@@ -33,9 +33,11 @@ designed to mislead us. Mark Monmonier wrote a whole book about it.
 [*How to Lie with
 Maps*](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html)
 
-Take election maps. Land doesn’t vote. People do. Yet a vast, sparsely
-populated region can dominate a map, while a densely populated city
-barely gets noticed. [See the same election mapped several
+Take election maps. [Land doesn’t vote. People
+do.](https://storymaps.arcgis.com/stories/0e636a652d44484b9457f953994b212b)
+Yet a vast, sparsely populated region can dominate a map, while a
+densely populated city barely gets noticed. [See the same election
+mapped several
 ways](https://www.esri.com/about/newsroom/arcwatch/explore-a-map-of-election-results)
 
 Change the color scale or the class breaks on a choropleth and the same
