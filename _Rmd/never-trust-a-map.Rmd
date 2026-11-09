@@ -69,18 +69,15 @@ does](https://www.esri.com/about/newsroom/arcuser/better-breaks-define-your-maps
 
 But even the most honest maps lie.
 
-The Earth is (approximately) a sphere, and there's no way to flatten it without
-distorting something. A projection can preserve some properties, such as area or
-local angles, at the expense of others.
+The Earth is (approximately) spherical, and there’s no way to represent its curved
+surface on a flat map without distorting something. A projection can preserve some
+properties, such as area or local angles, at the expense of others.
 
-Fortunately, we have a lie detector.
+Fortunately, we have a lie detector: Tissot’s indicatrices.
 
 ## Meet Tissot’s indicatrices
 
-Imagine placing tiny, identical circles all over the globe. Flatten the globe
-and those circles can change size, shape or both. The area of each ellipse shows
-how much the projection enlarges or shrinks the area there. Its shape shows
-whether the projection stretches more in one direction than another.
+Imagine covering the globe with identical small circles. When you flatten the Earth, those circles no longer look the same: they can change size, shape, or both. The area of each resulting ellipse tells you how much the projection enlarges or shrinks space at that location. Its shape reveals whether the projection stretches more in one direction than another.
 
 ### A quick technical note
 
@@ -280,6 +277,8 @@ draw_map <- function(title) {
 
 ## Three ways to handle distortion
 
+Map projections deal with distortion in three main ways:
+
 - **Conformal.** These projections preserve local angles and shapes, so tiny
   circles stay round even when their size changes. Mercator is useful for
   navigation because a constant compass bearing follows a straight line.
@@ -363,6 +362,9 @@ shows only the circles that fit entirely on the visible side, including a bonus
 circle at the North Pole. Each map is scaled to fit its panel, so compare the
 shapes and relative sizes of the red circles within each map.
 
+<i class="fa-solid fa-exclamation"></i> Since each map is scaled independently, don't compare the absolute sizes of circles across panels.
+{: .alert .alert-warning .p-3 .mx-2 .mb-3}
+
 ```{r}
 #| label: projection-gallery
 #| fig-width: 12
@@ -424,7 +426,9 @@ for (index in seq_along(gallery_order)) {
 grid::popViewport()
 ```
 
-So, which map should you trust? Depends on what you're asking it to show.
+So which map should you trust?
+It depends on the question you are asking. If you need to compare areas, choose an equal-area projection. If local shapes and angles matter (as in navigation), prefer a conformal one. For a general-purpose world map, a well-designed compromise projection is usually the most useful.
+In every case, remember that the map is still a carefully constructed lie. The only real question is whether it is lying in a way that helps or hinders what you are trying to see.
 
 ## How we drew it
 
@@ -471,6 +475,6 @@ orthographic horizon.
 
 ## References
 
-- Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of Chicago
-  Press.
-  [https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html?utm_source=chatgpt.com)
+- Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of Chicago Press.
+- Snyder, J. P. (1987). *Map projections--A working manual*. U.S. Geological Survey. <https://doi.org/10.3133/pp1395>
+- Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et les projections des cartes géographiques*. Gauthier-Villars.
