@@ -127,16 +127,6 @@ Follow the 50° N row from the central meridian toward either edge and
 watch the ellipses stretch and tilt. Compare them with the equatorial
 row and you’ll see their areas change too.
 
-## What if we cut the map?
-
-Goode’s interrupted homolosine preserves area too. It splits the world
-into lobes, which helps keep shapes closer to what we’d see on a globe.
-
-Imagine dropping our red circles onto the pieces of an orange peel. A
-circle that straddles a cut would show up in two pieces, so we leave it
-out of the gallery. [Let’s peel the
-world](https://dieghernan.github.io/202610_orange-peel/)
-
 ## Twelve ways to flatten the world
 
 Find the red circle over Greenland and follow it from map to map. The
