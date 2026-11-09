@@ -199,7 +199,7 @@ frame <- st_linestring(rbind(
   st_cast("POLYGON") |>
   st_sfc(crs = 4326)
 
-world <- giscoR::gisco_get_countries(epsg = 4326, resolution = 10)
+world <- giscoR::gisco_get_countries(epsg = 4326, resolution = 3)
 graticule <- st_graticule(frame, lon = meridians, lat = parallels)
 
 goode_lat <- c(90:-90, rep(c(-90:0, 0:-90), 3), -90:90, 90:0, 0:90, 90)
