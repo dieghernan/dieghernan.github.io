@@ -6,8 +6,8 @@ description: >-
   does to them.
 header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
 og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
-og_image_width: 1400
-og_image_height: 725
+og_image_width: 1200
+og_image_height: 630
 og_image_type: image/webp
 og_image_alt: >-
   Equal Earth world map with red ellipses of roughly equal area that become
