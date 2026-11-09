@@ -19,7 +19,23 @@ directions <- c(270, 15, 60, 330)
 directional <- lapply(directions, function(direction) {
   shade(slope, aspect, angle = 45, direction = direction, normalize = TRUE)
 })
-# Averaging preserves the 0-255 range without stretching each map separately.
+multi <- mean(rast(directional))
+# Stretch the averaged hillshade, then encode it for the shared RGB scale.
+stretch_limits <- as.numeric(quantile(
+  values(multi),
+  c(0.05, 0.95),
+  na.rm = TRUE
+))
+stopifnot(all(is.finite(stretch_limits)), diff(stretch_limits) > 0)
+multi_stretched <- clamp(
+  (multi - stretch_limits[1]) / diff(stretch_limits),
+  lower = 0,
+  upper = 1
+) *
+  255
+stopifnot(all(
+  global(multi_stretched, c("min", "max"), na.rm = TRUE) == c(0, 255)
+))
 hillshades <- list(
   baseline = shade(
     slope,
@@ -29,12 +45,14 @@ hillshades <- list(
     normalize = TRUE
   ),
   single = shade(slope, aspect, angle = 45, direction = 300, normalize = TRUE),
-  multi = mean(rast(directional))
+  multi = multi,
+  multi_stretched = multi_stretched
 )
 subtitles <- c(
   baseline = "Single direction: 270\u00b0 | Light altitude: 30\u00b0",
   single = "Single direction: 300\u00b0 | Light altitude: 45\u00b0",
-  multi = "Four directions: 270\u00b0, 15\u00b0, 60\u00b0, 330\u00b0 | Light altitude: 45\u00b0"
+  multi = "Four directions: 270\u00b0, 15\u00b0, 60\u00b0, 330\u00b0 | Light altitude: 45\u00b0",
+  multi_stretched = "Same four directions | Contrast stretch: 5th-95th percentiles"
 )
 limits <- c(0, 8000)
 palette_stops <- subset(hypsometric_tints_db, pal == "pakistan")
@@ -135,7 +153,8 @@ writeLines(
     "Multidirectional mean: verified against cell-wise arithmetic",
     "All raster grids and plotting cell counts: matched",
     "All maps: one elevation fill scale with identical limits",
-    "RGB: fixed 0-255 range, no individual contrast stretching",
+    "RGB: fixed 0-255 range for all variants",
+    "Multidirectional stretch: 5th and 95th percentiles mapped to 0 and 255",
     "Raster interpolation: disabled"
   ),
   file.path(output_dir, "validation.txt")
