@@ -32,17 +32,18 @@ notices sometimes add `.lead` and `.text-center`. Reuse the appropriate existing
 convention without adding inline styles or a new alert component. Icons are
 optional, and must use the Font Awesome version configured by the site.
 
-Posts use images with alt text and no visible figure caption:
+An author's own figure in a post uses alt text without a visible caption:
 
 ```markdown
 ![Five generating sites and their Voronoi cells.](https://dieghernan.github.io/assets/img/blog/example.webp)
 ```
 
 The URL illustrates the shape only. Use an actual existing/generated asset.
-Keep relevant explanation and source attribution in ordinary surrounding prose
-or references. Do not add a `.caption` paragraph, HTML caption element or
-nonempty `fig-cap` for a post. Existing project pages still require alt text
-and descriptive captions, using their current markup.
+Figures produced by others may include an optional caption for credit or
+context. Use the existing Kramdown `.caption` or HTML caption markup and keep
+the alt text descriptive. Source attribution can also appear in the surrounding
+prose or references. Project pages still require alt text and descriptive
+captions, using their current markup.
 
 ## Reference style
 

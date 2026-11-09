@@ -76,15 +76,15 @@ images, screenshots and header/featured images. Keep `fig-alt`, generated
 `<img alt>` and social-preview `og_image_alt` consistent with the actual image.
 Alt text conveys the important visual relationships or result.
 
-Posts must not have visible figure captions. Do not add `fig-cap` text,
-`<figcaption>`, `<p class="caption">` or Kramdown `.caption` paragraphs to a
-post. Use `fig-cap: ""` where needed to override an inherited caption. Do not
-report absent post captions as an accessibility defect. Put necessary context,
-units, credits and limitations in the surrounding prose or references, so
-removing a caption does not remove attribution. Do not redraw plots or remove
-source credits embedded inside their pixels during a style-only task.
+In posts, leave figures produced by the author without visible captions. Use
+`fig-cap: ""` where needed to override an inherited caption. When a post includes
+a figure produced by someone else, a visible caption is optional and can give
+the source, credit or context. Keep meaningful alt text in either case and
+preserve necessary attribution in the caption, surrounding prose or references.
+Do not redraw plots or remove credits embedded in the image during a style-only
+task.
 
-The no-caption change applies to posts. Project pages retain the earlier
+The caption rule above applies to posts. Project pages retain the earlier
 requirement for a descriptive visible caption alongside alt text until the user
 changes that requirement too. Keep caption text distinct from alt text, using
 the existing theme support rather than adding new theme code.

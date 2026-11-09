@@ -1,6 +1,8 @@
 ---
-title: Using the CountryCodes database and <strong>sf</strong> package
-subtitle: Vignette of the CountryCodes project
+title: >-
+  Using the <strong>CountryCodes</strong> database and <strong>sf</strong>
+  package
+subtitle: "Vignette of the <strong>CountryCodes</strong> project"
 tags:
   - r_bloggers
   - rstats

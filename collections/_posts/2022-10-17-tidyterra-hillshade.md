@@ -28,7 +28,7 @@ description: >-
   terra, tidyterra and ggplot2.
 schema_image: ["https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"]
 og_image_width: 2100
-og_image_height: 2100
+og_image_height: 1978
 og_image_type: "image/webp"
 og_image: "https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"
 og_image_alt: >-
@@ -59,7 +59,7 @@ Using shadow effects on relief maps is a very common technique that helps
 produce informative yet beautiful maps. If you are interested in this topic and
 you work with **R**, you have probably seen this map:
 
-![swissmap](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
+![Map of Swiss municipalities over shaded relief. A nine-color legend combines average income and income inequality, measured by the Gini coefficient.](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)

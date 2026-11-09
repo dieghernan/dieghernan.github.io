@@ -1,6 +1,6 @@
 ---
 title: Where in the world?
-subtitle: A leaflet map with the places I have flown
+subtitle: "A <strong>leaflet</strong> map with the places I have flown"
 tags:
   - rstats
   - rspatial

@@ -43,7 +43,7 @@ section automatically when the page opens.
 
 Mentions and replies appear as a numbered list of links and authors. Likes
 and reposts have their own counts and rows of overlapping avatars. The
-content stays on its original site; each link takes you to the conversation.
+content stays on its original site. Each link takes you to the conversation.
 The existing GitHub comments are still available, too.
 
 ## A small addition to a static blog
@@ -57,8 +57,8 @@ I tried it with the [geobounds post]({% post_url 2026-02-12-geobounds %}),
 which already had mentions, and with a recent post that had none. Both cases
 matter: an empty section should still explain how to join in.
 
-Social reactions need a bridge that sends them as Webmentions; they do not
-appear automatically just because a link was shared on a social network.
+Sharing a link on a social network only brings reactions here if a bridge sends
+them as Webmentions.
 
 ## Send a link
 

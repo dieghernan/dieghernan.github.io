@@ -1,5 +1,5 @@
 ---
-title: "Unknown pleasures with R"
+title: "Unknown pleasures with <strong>R</strong>"
 subtitle: Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong>
 excerpt:
   Create ridgelines (AKA joyplots) of territories using elevation data with

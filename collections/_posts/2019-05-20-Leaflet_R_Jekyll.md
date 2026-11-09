@@ -1,5 +1,7 @@
 ---
-title: Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
+title: >-
+  <strong>Leaflet</strong>, <strong>R</strong>, Markdown,
+  <strong>Jekyll</strong> and GitHub
 subtitle: Make it work in 6 steps - A short tutorial
 tags:
   - r_bloggers
@@ -193,7 +195,7 @@ Now you just need to paste this piece of code before that chunk:
 ```html
 <!--html_preserve-->
 <div id="htmlwidget-7ab57412f7b1df4d5773" style="width:100%;height:216px;" class="leaflet html-widget"></div>
-  <script type="application/json"data-for="htmlwidget-7ab57412f7b1df4d5773">
+  <script type="application/json" data-for="htmlwidget-7ab57412f7b1df4d5773">
   ...
 ```
 
@@ -202,7 +204,7 @@ widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
 `<div>` and in the `<script>` part. If not, your map would not load.
 {: .alert .alert-warning .p-3 .mx-2 .my-3}
 
-The `style="width:100%; height:216px;` part controls the actual size of
+The `style="width:100%; height:216px;"` part controls the actual size of
 the leaflet widget. In this case, the map will adapt to the width of
 the page with a fixed height of 216px. I put [some examples](https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra) of
 different size options at the end of the post so you can have a look and see

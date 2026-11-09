@@ -12,9 +12,9 @@ From the active postal-code drafting conversation:
   plot text, alt text and captions. Original source titles remain accurate.
 - Use absolute web links in posts/projects, bold software/package names,
   Chulapa alerts, relevant tags and consistent references.
-- Every image needs alt text. The initial request for captions on every image
-  was superseded for posts: posts must have no visible figure captions.
-  Project pages retain the earlier caption requirement.
+- Every image needs alt text. The author leaves their own figures in posts
+  without visible captions and explicitly allows optional captions for figures
+  produced by others. Project pages retain the earlier caption requirement.
 - Reference formatting follows the hillshade post of 2022-10-17, explicitly
   chosen by the user over the newer template. Use plain article titles,
   italic journal/publication details and visible DOI/URL autolinks.

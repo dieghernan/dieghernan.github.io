@@ -10,9 +10,10 @@ Read [site-style](../skills/site-style/SKILL.md) before working.
 Apply this repository's publication conventions to the requested posts, projects
 and matching R Markdown sources. Cover absolute URLs, product names, Chulapa
 alerts, tags, accessible figures, reference formatting and YAML chunk options.
-Posts require alt text but no visible figure captions. Follow the hillshade
-post's bibliography style. Preserve the author's voice, technical meaning and
-working edits.
+Posts require alt text for every image. Leave the author's own figures without
+visible captions. Figures by others may include a caption for attribution or
+context. Follow the hillshade post's bibliography style. Preserve the author's
+voice, technical meaning and working edits.
 
 Require project-wide R formatting: use `air` for R scripts and
 `styler::style_file()` or `styler::style_dir()` for Rmd sources, preserving code

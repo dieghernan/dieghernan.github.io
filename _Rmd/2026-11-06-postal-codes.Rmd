@@ -31,9 +31,8 @@ og_image_width: 2348
 og_image_height: 2100
 og_image_type: image/webp
 og_image_alt: >-
-  Map of Slovenia showing estimated postal areas for the 20 municipalities
-  processed in this draft. Colors identify postal prefixes, dark gray marks
-  unassigned components and light gray shows the remaining municipal background.
+  Map of Slovenia with estimated postal areas clipped to municipal boundaries.
+  Colors identify postal code groups and dark gray marks unassigned areas.
 ---
 
 ```{r}
@@ -603,9 +602,8 @@ with their own legend entry.
 #| label: slovenia-postal-codes
 #| fig-height: 7
 #| fig-alt: >-
-#|   Map of Slovenia showing estimated postal areas for the 20 municipalities
-#|   processed in this draft. Colors identify postal prefixes, dark gray marks
-#|   unassigned components and light gray shows the remaining municipal background.
+#|   Map of Slovenia with estimated postal areas clipped to municipal boundaries.
+#|   Colors identify postal code groups and dark gray marks unassigned areas.
 #| fig-cap: ""
 postal_colours <- c(
   "1" = "#007F7F", "2" = "#E87500", "3" = "#3B6FB6", "4" = "#A64E9A",

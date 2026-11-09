@@ -1,7 +1,7 @@
 ---
 giscus_discussion: 32
-title: "Beautiful maps with R (V): Point densities"
-subtitle: "Bertin's dot density maps with R and GHSL"
+title: "Beautiful maps with <strong>R</strong> (V): Point densities"
+subtitle: "Bertin's dot density maps with <strong>R</strong> and GHSL"
 excerpt: Another way to represent demographics on a map.
 syndication:
   - https://www.r-bloggers.com/2023/12/beautiful-maps-with-r-v-point-densities/
@@ -39,10 +39,11 @@ Recently, the [R Graph Gallery](https://r-graph-gallery.com/) published a new po
 
 In this post, I create a similar map for Iberia using graduated symbols to
 represent population density. Unlike conventional dot density maps, where dots
-represent a fixed number of individuals, symbol sizes here indicate density classes.
+represent a fixed number of individuals, symbol sizes here indicate density
+classes.
 I also explore a variation using a hexagonal grid instead of a rectangular one.
 This is the fifth issue of the series
-[Beautiful Maps with R](https://dieghernan.github.io/tags#beautiful_maps).
+[Beautiful Maps with **R**](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
 
@@ -428,8 +429,8 @@ And that's it! Which one do you like the most? Let me know in the comments.
 ## References
 
 - Bertin, J. (1967). _Sémiologie graphique : les diagrammes, les réseaux, les
-  cartes_. Paris: Mouton & Gauthier-Villars. [Bibliothèque nationale de 
-  France](https://catalogue.bnf.fr/ark:/12148/cb41605817s).
+  cartes_. Paris: Mouton & Gauthier-Villars.
+  <https://catalogue.bnf.fr/ark:/12148/cb41605817s>.
 - European Commission. Joint Research Centre. (2023). _GHSL data package 2023._
   Publications Office, LU <https://doi.org/10.2760/098587>.
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra

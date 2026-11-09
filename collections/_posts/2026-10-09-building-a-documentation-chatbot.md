@@ -76,13 +76,13 @@ The model currently configured is **Gemma**, using the identifier
 `@cf/google/gemma-4-26b-a4b-it`. The Worker accesses it through an `AI` binding:
 a connection configured in Cloudflare that lets the Worker call **Workers AI**.
 That connection stays on the server side, so visitors do not receive an API key.
-**Codex** helped me build and test the implementation; **Gemma** is the model
+**Codex** helped me build and test the implementation. **Gemma** is the model
 that answers visitors' questions.
 
 There is no automatic document retrieval in this implementation. The context is
 a Markdown file maintained alongside the code. Adding a documentation URL or the
-RSS feed URL gives the model a reference to share; it does not make the Worker
-download that page or discover new posts.
+RSS feed URL gives the model a reference to share. The Worker still relies on
+the maintained context file for page content and new posts.
 
 That was an intentional starting point. I can inspect exactly which facts the
 assistant receives, and updating it does not require a vector database or a
@@ -192,7 +192,7 @@ was useful, but it did not reproduce all of those behaviors.
 
 The input now uses a mobile-friendly text size, and the panel follows the
 space actually visible on screen when the keyboard opens. That available area
-is called the visual viewport; using it helps the panel fit above the keyboard.
+is called the visual viewport. Using it helps the panel fit above the keyboard.
 Opening the chat on mobile does not automatically focus the input and summon
 the keyboard.
 
@@ -227,7 +227,7 @@ location, meaning a Cloudflare data center, in its [Rate Limiting API
 documentation](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/).
 It is useful protection, not an exact global usage counter.
 
-The per-IP limit controls how often a visitor can send questions; the account's
+The per-IP limit controls how often a visitor can send questions. The account's
 quota limits total AI usage. I kept the account on the Free plan without
 configuring a paid alternative to continue answering when its allowance runs
 out. The current allowances are listed in
@@ -244,9 +244,9 @@ npm test
 npx wrangler deploy
 ```
 
-These commands build, test and deploy the existing Worker; they are not a
-complete installation guide for a new chatbot. A **GitHub Pages** deployment
-publishes the documentation, while `wrangler deploy` updates the assistant.
+These commands build, test and deploy the existing Worker. A new chatbot needs
+additional setup. A **GitHub Pages** deployment publishes the documentation,
+while `wrangler deploy` updates the assistant.
 Changes to the context reach the live model only after rebuilding and deploying
 the Worker.
 
