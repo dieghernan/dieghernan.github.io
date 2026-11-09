@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/rbloggers.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-09T16:57:24+01:00</updated>
+	<updated>2026-11-09T17:15:52+01:00</updated>
 	<id>https://dieghernan.github.io/rbloggers.xml</id>
 	<title>One World | R packages, maps and open-source projects - R Project</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -615,7 +615,7 @@ with their own legend entry.&lt;/p&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp&quot; alt=&quot;Map of Slovenia showing estimated postal areas for the 20 municipalities processed in this draft. Colors identify postal prefixes, dark gray marks unassigned components and light gray shows the remaining municipal background.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp&quot; alt=&quot;Map of Slovenia with estimated postal areas clipped to municipal boundaries. Colors identify postal code groups and dark gray marks unassigned areas.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;checking-the-result&quot;&gt;Checking the result&lt;/h2&gt;
 
@@ -1586,7 +1586,7 @@ Valentine’s Day!&lt;/p&gt;
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="ggplot2"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
 	</entry><entry>
-		<title type="html">Optimize your images with R and reSmush.it</title>
+		<title type="html">Optimize your images with &lt;strong&gt;R&lt;/strong&gt; and &lt;strong&gt;reSmush.it&lt;/strong&gt;</title>
 		<link href="https://dieghernan.github.io/202402_optimize-images-r/" rel="alternate" type="text/html" title="Optimize your images with R and reSmush.it"/>
 		<published>2024-02-05T00:00:00+01:00</published>
 		<updated>2024-02-05T00:00:00+01:00</updated>
@@ -2038,14 +2038,14 @@ your work.&lt;/p&gt;
 		<category term="posts"/>
 		<category term="r_bloggers"/><category term="r_package"/><category term="resmush"/><category term="rstats"/>
 	</entry><entry>
-		<title type="html">Beautiful maps with R (V): Point densities</title>
+		<title type="html">Beautiful maps with &lt;strong&gt;R&lt;/strong&gt; (V): Point densities</title>
 		<link href="https://dieghernan.github.io/202312_bertin_dots/" rel="alternate" type="text/html" title="Beautiful maps with R (V): Point densities"/>
 		<published>2023-12-16T00:00:00+01:00</published>
 		<updated>2023-12-16T00:00:00+01:00</updated>
 		<id>https://dieghernan.github.io/202312_bertin_dots/</id>
 		<content type="html" xml:base="https://dieghernan.github.io/202312_bertin_dots/">
 		
-		&lt;h3&gt;Bertin’s dot density maps with R and GHSL&lt;/h3&gt;
+		&lt;h3&gt;Bertin’s dot density maps with &lt;strong&gt;R&lt;/strong&gt; and GHSL&lt;/h3&gt;
 		
   		
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp&#39; &gt;
@@ -2057,10 +2057,11 @@ your work.&lt;/p&gt;
 
 &lt;p&gt;In this post, I create a similar map for Iberia using graduated symbols to
 represent population density. Unlike conventional dot density maps, where dots
-represent a fixed number of individuals, symbol sizes here indicate density classes.
+represent a fixed number of individuals, symbol sizes here indicate density
+classes.
 I also explore a variation using a hexagonal grid instead of a rectangular one.
 This is the fifth issue of the series
-&lt;a href=&quot;https://dieghernan.github.io/tags#beautiful_maps&quot;&gt;Beautiful Maps with R&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&quot;https://dieghernan.github.io/tags#beautiful_maps&quot;&gt;Beautiful Maps with &lt;strong&gt;R&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;libraries&quot;&gt;Libraries&lt;/h2&gt;
 
@@ -2439,8 +2440,8 @@ the aggregated cells:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Bertin, J. (1967). &lt;em&gt;Sémiologie graphique : les diagrammes, les réseaux, les
-cartes&lt;/em&gt;. Paris: Mouton &amp;amp; Gauthier-Villars. &lt;a href=&quot;https://catalogue.bnf.fr/ark:/12148/cb41605817s&quot;&gt;Bibliothèque nationale de 
-France&lt;/a&gt;.&lt;/li&gt;
+cartes&lt;/em&gt;. Paris: Mouton &amp;amp; Gauthier-Villars.
+&lt;a href=&quot;https://catalogue.bnf.fr/ark:/12148/cb41605817s&quot;&gt;https://catalogue.bnf.fr/ark:/12148/cb41605817s&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;European Commission. Joint Research Centre. (2023). &lt;em&gt;GHSL data package 2023.&lt;/em&gt;
 Publications Office, LU &lt;a href=&quot;https://doi.org/10.2760/098587&quot;&gt;https://doi.org/10.2760/098587&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
@@ -2460,7 +2461,7 @@ data.” &lt;a href=&quot;https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0E
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="ggplot2"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="terra"/><category term="tidyterra"/>
 	</entry><entry>
-		<title type="html">Star map with R</title>
+		<title type="html">Star map with &lt;strong&gt;R&lt;/strong&gt;</title>
 		<link href="https://dieghernan.github.io/202301_star-map-R/" rel="alternate" type="text/html" title="Star map with R"/>
 		<published>2023-01-25T00:00:00+01:00</published>
 		<updated>2023-01-25T00:00:00+01:00</updated>
@@ -4221,7 +4222,7 @@ See the second post
 produce informative yet beautiful maps. If you are interested in this topic and
 you work with &lt;strong&gt;R&lt;/strong&gt;, you have probably seen this map:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png&quot; alt=&quot;swissmap&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png&quot; alt=&quot;Map of Swiss municipalities over shaded relief. A nine-color legend combines average income and income inequality, measured by the Gini coefficient.&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The production of this map by &lt;a href=&quot;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&quot;&gt;Timo
 Grossenbacher&lt;/a&gt;
@@ -4949,7 +4950,7 @@ how to load it and check the plotting possibilities of &lt;strong&gt;tidyterra&l
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="maps"/><category term="maptiles"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/><category term="terra"/><category term="tidyterra"/>
 	</entry><entry>
-		<title type="html">Unknown pleasures with R</title>
+		<title type="html">Unknown pleasures with &lt;strong&gt;R&lt;/strong&gt;</title>
 		<link href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" rel="alternate" type="text/html" title="Unknown pleasures with R"/>
 		<published>2022-05-01T00:00:00+02:00</published>
 		<updated>2022-05-01T00:00:00+02:00</updated>
@@ -5667,7 +5668,7 @@ shared how to create inset maps using that package:&lt;/p&gt;
 		<category term="posts"/>
 		<category term="ggplot2"/><category term="inset"/><category term="mapSpain"/><category term="maps"/><category term="mapsf"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/><category term="tmap"/>
 	</entry><entry>
-		<title type="html">Beautiful maps with R (IV): Fun with flags revisited</title>
+		<title type="html">Beautiful maps with &lt;strong&gt;R&lt;/strong&gt; (IV): Fun with flags revisited</title>
 		<link href="https://dieghernan.github.io/202201_maps-flags/" rel="alternate" type="text/html" title="Beautiful maps with R (IV): Fun with flags revisited"/>
 		<published>2022-01-28T00:00:00+01:00</published>
 		<updated>2022-01-28T00:00:00+01:00</updated>
@@ -6896,7 +6897,7 @@ terms.&lt;/p&gt;
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="maps"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
 	</entry><entry>
-		<title type="html">Beautiful maps with R (III): Patterns and hatched maps</title>
+		<title type="html">Beautiful maps with &lt;strong&gt;R&lt;/strong&gt; (III): Patterns and hatched maps</title>
 		<link href="https://dieghernan.github.io/201912_Beautiful3/" rel="alternate" type="text/html" title="Beautiful maps with R (III): Patterns and hatched maps"/>
 		<published>2019-12-12T00:00:00+01:00</published>
 		<updated>2026-10-07T00:00:00+02:00</updated>
@@ -7101,7 +7102,7 @@ variable.&lt;/p&gt;
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="function"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="r_package"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
 	</entry><entry>
-		<title type="html">Quick R: Inset maps</title>
+		<title type="html">Quick &lt;strong&gt;R&lt;/strong&gt;: Inset maps</title>
 		<link href="https://dieghernan.github.io/201911_QuickR/" rel="alternate" type="text/html" title="Quick R: Inset maps"/>
 		<published>2019-11-07T00:00:00+01:00</published>
 		<updated>2019-11-07T00:00:00+01:00</updated>
@@ -7521,7 +7522,7 @@ one of my favorites, &lt;strong&gt;cartography&lt;/strong&gt;:&lt;/p&gt;
 		<category term="posts"/>
 		<category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
 	</entry><entry>
-		<title type="html">Beautiful maps with R (II): Fun with flags</title>
+		<title type="html">Beautiful maps with &lt;strong&gt;R&lt;/strong&gt; (II): Fun with flags</title>
 		<link href="https://dieghernan.github.io/201906_Beautiful2/" rel="alternate" type="text/html" title="Beautiful maps with R (II): Fun with flags"/>
 		<published>2019-06-18T00:00:00+02:00</published>
 		<updated>2023-01-23T00:00:00+01:00</updated>
@@ -7726,7 +7727,7 @@ if you enjoyed the post, you can share it on your preferred social network.&lt;/
 		<id>https://dieghernan.github.io/201906_Beautiful1/</id>
 		<content type="html" xml:base="https://dieghernan.github.io/201906_Beautiful1/">
 		
-		&lt;h3&gt;Simplified maps with R&lt;/h3&gt;
+		&lt;h3&gt;Simplified maps with &lt;strong&gt;R&lt;/strong&gt;&lt;/h3&gt;
 		
   		
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/20190602_imgpost-1.webp&#39; &gt;
@@ -8089,7 +8090,7 @@ of very interesting pieces of work).&lt;/p&gt;
 		<category term="posts"/>
 		<category term="beautiful_maps"/><category term="giscoR"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
 	</entry><entry>
-		<title type="html">Leaflet, &lt;strong&gt;R&lt;/strong&gt;, Markdown, Jekyll and GitHub</title>
+		<title type="html">&lt;strong&gt;Leaflet&lt;/strong&gt;, &lt;strong&gt;R&lt;/strong&gt;, Markdown, &lt;strong&gt;Jekyll&lt;/strong&gt; and GitHub</title>
 		<link href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" rel="alternate" type="text/html" title="Leaflet, R, Markdown, Jekyll and GitHub"/>
 		<published>2019-05-20T00:00:00+02:00</published>
 		<updated>2021-05-30T00:00:00+02:00</updated>
@@ -8265,7 +8266,7 @@ but we will solve that later.&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!--html_preserve--&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;htmlwidget-7ab57412f7b1df4d5773&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width:100%;height:216px;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;leaflet html-widget&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;data-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;htmlwidget-7ab57412f7b1df4d5773&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;data-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;htmlwidget-7ab57412f7b1df4d5773&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -8273,7 +8274,7 @@ but we will solve that later.&lt;/p&gt;
 widget id (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;7ab57412f7b1df4d5773&lt;/code&gt; in the example) is the same in the
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; and in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&lt;/code&gt; part. If not, your map would not load.&lt;/p&gt;
 
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;style=&quot;width:100%; height:216px;&lt;/code&gt; part controls the actual size of
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;style=&quot;width:100%; height:216px;&quot;&lt;/code&gt; part controls the actual size of
 the leaflet widget. In this case, the map will adapt to the width of
 the page with a fixed height of 216px. I put &lt;a href=&quot;https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra&quot;&gt;some examples&lt;/a&gt; of
 different size options at the end of the post so you can have a look and see
@@ -8372,7 +8373,7 @@ remote theme that I created.&lt;/p&gt;
 		<category term="posts"/>
 		<category term="html"/><category term="jekyll"/><category term="leaflet"/><category term="maps"/><category term="r_bloggers"/><category term="rspatial"/><category term="rstats"/>
 	</entry><entry>
-		<title type="html">Cast a line to subsegments in R</title>
+		<title type="html">Cast a line to subsegments in &lt;strong&gt;R&lt;/strong&gt;</title>
 		<link href="https://dieghernan.github.io/201905_Cast-to-subsegments/" rel="alternate" type="text/html" title="Cast a line to subsegments in R"/>
 		<published>2019-05-05T00:00:00+02:00</published>
 		<updated>2019-05-05T00:00:00+02:00</updated>
@@ -8588,14 +8589,14 @@ this solution may work well in most cases.&lt;/p&gt;
 		<category term="posts"/>
 		<category term="function"/><category term="r_bloggers"/><category term="rnaturalearth"/><category term="rspatial"/><category term="rstats"/><category term="sf"/>
 	</entry><entry>
-		<title type="html">Using the CountryCodes database and &lt;strong&gt;sf&lt;/strong&gt; package</title>
+		<title type="html">Using the &lt;strong&gt;CountryCodes&lt;/strong&gt; database and &lt;strong&gt;sf&lt;/strong&gt; package</title>
 		<link href="https://dieghernan.github.io/201904_Using-CountryCodes/" rel="alternate" type="text/html" title="Using the CountryCodes database and sf package"/>
 		<published>2019-04-27T00:00:00+02:00</published>
 		<updated>2019-04-27T00:00:00+02:00</updated>
 		<id>https://dieghernan.github.io/201904_Using-CountryCodes/</id>
 		<content type="html" xml:base="https://dieghernan.github.io/201904_Using-CountryCodes/">
 		
-		&lt;h3&gt;Vignette of the CountryCodes project&lt;/h3&gt;
+		&lt;h3&gt;Vignette of the &lt;strong&gt;CountryCodes&lt;/strong&gt; project&lt;/h3&gt;
 		
   		
 			&lt;img src=&#39;https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp&#39; &gt;

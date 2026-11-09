@@ -547,12 +547,12 @@ answer to the browser.</p>
 <code class="language-plaintext highlighter-rouge">@cf/google/gemma-4-26b-a4b-it</code>. The Worker accesses it through an <code class="language-plaintext highlighter-rouge">AI</code> binding:
 a connection configured in Cloudflare that lets the Worker call <strong>Workers AI</strong>.
 That connection stays on the server side, so visitors do not receive an API key.
-<strong>Codex</strong> helped me build and test the implementation; <strong>Gemma</strong> is the model
+<strong>Codex</strong> helped me build and test the implementation. <strong>Gemma</strong> is the model
 that answers visitors’ questions.</p>
 <p>There is no automatic document retrieval in this implementation. The context is
 a Markdown file maintained alongside the code. Adding a documentation URL or the
-RSS feed URL gives the model a reference to share; it does not make the Worker
-download that page or discover new posts.</p>
+RSS feed URL gives the model a reference to share. The Worker still relies on
+the maintained context file for page content and new posts.</p>
 <p>That was an intentional starting point. I can inspect exactly which facts the
 assistant receives, and updating it does not require a vector database or a
 document indexing pipeline. The tradeoff is that I have to keep that summary
@@ -640,7 +640,7 @@ the available space even smaller. A desktop browser resized to a narrow width
 was useful, but it did not reproduce all of those behaviors.</p>
 <p>The input now uses a mobile-friendly text size, and the panel follows the
 space actually visible on screen when the keyboard opens. That available area
-is called the visual viewport; using it helps the panel fit above the keyboard.
+is called the visual viewport. Using it helps the panel fit above the keyboard.
 Opening the chat on mobile does not automatically focus the input and summon
 the keyboard.</p>
 <p>Long conversations revealed another bug: a second scrollbar appeared on the
@@ -669,7 +669,7 @@ request. Cloudflare describes this limiter as approximate and local to each
 location, meaning a Cloudflare data center, in its <a href="https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/">Rate Limiting API
 documentation</a>.
 It is useful protection, not an exact global usage counter.</p>
-<p>The per-IP limit controls how often a visitor can send questions; the account’s
+<p>The per-IP limit controls how often a visitor can send questions. The account’s
 quota limits total AI usage. I kept the account on the Free plan without
 configuring a paid alternative to continue answering when its allowance runs
 out. The current allowances are listed in
@@ -682,9 +682,9 @@ npm run build
 npm <span class="nb">test
 </span>npx wrangler deploy
 </code></pre></div></div>
-<p>These commands build, test and deploy the existing Worker; they are not a
-complete installation guide for a new chatbot. A <strong>GitHub Pages</strong> deployment
-publishes the documentation, while <code class="language-plaintext highlighter-rouge">wrangler deploy</code> updates the assistant.
+<p>These commands build, test and deploy the existing Worker. A new chatbot needs
+additional setup. A <strong>GitHub Pages</strong> deployment publishes the documentation,
+while <code class="language-plaintext highlighter-rouge">wrangler deploy</code> updates the assistant.
 Changes to the context reach the live model only after rebuilding and deploying
 the Worker.</p>
 <p>I also added an <code class="language-plaintext highlighter-rouge">AGENTS.md</code> file with repository instructions for <strong>Codex</strong> and
@@ -835,7 +835,7 @@ illustration was also generated with AI.</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" class="chulapa-text-body-color">
-              Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
+              <strong>Leaflet</strong>, <strong>R</strong>, Markdown, <strong>Jekyll</strong> and GitHub
             </a>
          </p>
            <p class="card-text">

@@ -7,8 +7,8 @@
 		<description>R packages, spatial data, maps and open-source projects by dieghernan</description>
 		<language>en-US</language>
 		<copyright>(c) 2026, Diego HH</copyright>
-		<pubDate>Mon, 09 Nov 2026 16:57:24 +0100</pubDate>
-		<lastBuildDate>Mon, 09 Nov 2026 16:57:24 +0100</lastBuildDate>
+		<pubDate>Mon, 09 Nov 2026 17:15:52 +0100</pubDate>
+		<lastBuildDate>Mon, 09 Nov 2026 17:15:52 +0100</lastBuildDate>
 		<category>blog</category>
 		<ttl>60</ttl>
 		<atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -613,7 +613,7 @@ with their own legend entry.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" alt="Map of Slovenia showing estimated postal areas for the 20 municipalities processed in this draft. Colors identify postal prefixes, dark gray marks unassigned components and light gray shows the remaining municipal background." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" alt="Map of Slovenia with estimated postal areas clipped to municipal boundaries. Colors identify postal code groups and dark gray marks unassigned areas." width="100%" /></p>
 
 <h2 id="checking-the-result">Checking the result</h2>
 
@@ -1130,7 +1130,7 @@ section automatically when the page opens.</p>
 
 <p>Mentions and replies appear as a numbered list of links and authors. Likes
 and reposts have their own counts and rows of overlapping avatars. The
-content stays on its original site; each link takes you to the conversation.
+content stays on its original site. Each link takes you to the conversation.
 The existing GitHub comments are still available, too.</p>
 
 <h2 id="a-small-addition-to-a-static-blog">A small addition to a static blog</h2>
@@ -1144,8 +1144,8 @@ loads the results through its public API.</p>
 which already had mentions, and with a recent post that had none. Both cases
 matter: an empty section should still explain how to join in.</p>
 
-<p>Social reactions need a bridge that sends them as Webmentions; they do not
-appear automatically just because a link was shared on a social network.</p>
+<p>Sharing a link on a social network only brings reactions here if a bridge sends
+them as Webmentions.</p>
 
 <h2 id="send-a-link">Send a link</h2>
 
@@ -1242,13 +1242,13 @@ answer to the browser.</p>
 <code class="language-plaintext highlighter-rouge">@cf/google/gemma-4-26b-a4b-it</code>. The Worker accesses it through an <code class="language-plaintext highlighter-rouge">AI</code> binding:
 a connection configured in Cloudflare that lets the Worker call <strong>Workers AI</strong>.
 That connection stays on the server side, so visitors do not receive an API key.
-<strong>Codex</strong> helped me build and test the implementation; <strong>Gemma</strong> is the model
+<strong>Codex</strong> helped me build and test the implementation. <strong>Gemma</strong> is the model
 that answers visitors’ questions.</p>
 
 <p>There is no automatic document retrieval in this implementation. The context is
 a Markdown file maintained alongside the code. Adding a documentation URL or the
-RSS feed URL gives the model a reference to share; it does not make the Worker
-download that page or discover new posts.</p>
+RSS feed URL gives the model a reference to share. The Worker still relies on
+the maintained context file for page content and new posts.</p>
 
 <p>That was an intentional starting point. I can inspect exactly which facts the
 assistant receives, and updating it does not require a vector database or a
@@ -1357,7 +1357,7 @@ was useful, but it did not reproduce all of those behaviors.</p>
 
 <p>The input now uses a mobile-friendly text size, and the panel follows the
 space actually visible on screen when the keyboard opens. That available area
-is called the visual viewport; using it helps the panel fit above the keyboard.
+is called the visual viewport. Using it helps the panel fit above the keyboard.
 Opening the chat on mobile does not automatically focus the input and summon
 the keyboard.</p>
 
@@ -1392,7 +1392,7 @@ location, meaning a Cloudflare data center, in its <a href="https://developers.c
 documentation</a>.
 It is useful protection, not an exact global usage counter.</p>
 
-<p>The per-IP limit controls how often a visitor can send questions; the account’s
+<p>The per-IP limit controls how often a visitor can send questions. The account’s
 quota limits total AI usage. I kept the account on the Free plan without
 configuring a paid alternative to continue answering when its allowance runs
 out. The current allowances are listed in
@@ -1408,9 +1408,9 @@ npm <span class="nb">test
 </span>npx wrangler deploy
 </code></pre></div></div>
 
-<p>These commands build, test and deploy the existing Worker; they are not a
-complete installation guide for a new chatbot. A <strong>GitHub Pages</strong> deployment
-publishes the documentation, while <code class="language-plaintext highlighter-rouge">wrangler deploy</code> updates the assistant.
+<p>These commands build, test and deploy the existing Worker. A new chatbot needs
+additional setup. A <strong>GitHub Pages</strong> deployment publishes the documentation,
+while <code class="language-plaintext highlighter-rouge">wrangler deploy</code> updates the assistant.
 Changes to the context reach the live model only after rebuilding and deploying
 the Worker.</p>
 
@@ -3299,7 +3299,7 @@ your work.</p>
 			</description>
 			<link>https://dieghernan.github.io/202402_optimize-images-r/</link>
 			<category>posts</category>
-		    <category>r_bloggers</category><category>r_package</category><category>resmush</category><category>rstats</category><media:title type="html"><![CDATA[Optimize your images with R and reSmush.it ]]></media:title>
+		    <category>r_bloggers</category><category>r_package</category><category>resmush</category><category>rstats</category><media:title type="html"><![CDATA[Optimize your images with <strong>R</strong> and <strong>reSmush.it</strong> ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/misc/compress-img.png" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/misc/compress-img.png" /><guid isPermaLink="true">https://dieghernan.github.io/202402_optimize-images-r/</guid>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0100</pubDate>
@@ -3309,7 +3309,7 @@ your work.</p>
 			<title>Beautiful maps with R (V): Point densities</title>
 			<description>
 				<![CDATA[	
- 				<h3>Bertin’s dot density maps with R and GHSL</h3>
+ 				<h3>Bertin’s dot density maps with <strong>R</strong> and GHSL</h3>
     		<p>8 min.</p>
 				<div><p>Recently, the <a href="https://r-graph-gallery.com/">R Graph Gallery</a> published a new post by <a href="https://twitter.com/BjnNowak">Benjamin Nowak</a> showing how to create a map inspired by the work of French cartographer <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques Bertin</a> (1918–2010), particularly his <em>Sémiologie graphique</em> (Bertin, 1967):</p>
 
@@ -3317,10 +3317,11 @@ your work.</p>
 
 <p>In this post, I create a similar map for Iberia using graduated symbols to
 represent population density. Unlike conventional dot density maps, where dots
-represent a fixed number of individuals, symbol sizes here indicate density classes.
+represent a fixed number of individuals, symbol sizes here indicate density
+classes.
 I also explore a variation using a hexagonal grid instead of a rectangular one.
 This is the fifth issue of the series
-<a href="https://dieghernan.github.io/tags#beautiful_maps">Beautiful Maps with R</a>.</p>
+<a href="https://dieghernan.github.io/tags#beautiful_maps">Beautiful Maps with <strong>R</strong></a>.</p>
 
 <h2 id="libraries">Libraries</h2>
 
@@ -3699,8 +3700,8 @@ the aggregated cells:</p>
 
 <ul>
   <li>Bertin, J. (1967). <em>Sémiologie graphique : les diagrammes, les réseaux, les
-cartes</em>. Paris: Mouton &amp; Gauthier-Villars. <a href="https://catalogue.bnf.fr/ark:/12148/cb41605817s">Bibliothèque nationale de 
-France</a>.</li>
+cartes</em>. Paris: Mouton &amp; Gauthier-Villars.
+<a href="https://catalogue.bnf.fr/ark:/12148/cb41605817s">https://catalogue.bnf.fr/ark:/12148/cb41605817s</a>.</li>
   <li>European Commission. Joint Research Centre. (2023). <em>GHSL data package 2023.</em>
 Publications Office, LU <a href="https://doi.org/10.2760/098587">https://doi.org/10.2760/098587</a>.</li>
   <li>Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
@@ -3715,7 +3716,7 @@ data.” <a href="https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30">
 			</description>
 			<link>https://dieghernan.github.io/202312_bertin_dots/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>ggplot2</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Beautiful maps with R (V): Point densities ]]></media:title>
+		    <category>beautiful_maps</category><category>ggplot2</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>sf</category><category>terra</category><category>tidyterra</category><media:title type="html"><![CDATA[Beautiful maps with <strong>R</strong> (V): Point densities ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202312_bertin_dots/</guid>
       <pubDate>Sat, 16 Dec 2023 00:00:00 +0100</pubDate>
@@ -4509,7 +4510,7 @@ repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a>
 			</description>
 			<link>https://dieghernan.github.io/202301_star-map-R/</link>
 			<category>posts</category>
-		    <category>astronomy</category><category>celestial</category><category>geojson</category><category>ggplot2</category><category>gpkg</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>s2</category><category>sf</category><media:title type="html"><![CDATA[Star map with R ]]></media:title>
+		    <category>astronomy</category><category>celestial</category><category>geojson</category><category>ggplot2</category><category>gpkg</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>s2</category><category>sf</category><media:title type="html"><![CDATA[Star map with <strong>R</strong> ]]></media:title>
       <media:content url="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202301_star-map-R/</guid>
       <pubDate>Wed, 25 Jan 2023 00:00:00 +0100</pubDate>
@@ -5631,7 +5632,7 @@ See the second post
 produce informative yet beautiful maps. If you are interested in this topic and
 you work with <strong>R</strong>, you have probably seen this map:</p>
 
-<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="swissmap" /></p>
+<p><img src="https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png" alt="Map of Swiss municipalities over shaded relief. A nine-color legend combines average income and income inequality, measured by the Gini coefficient." /></p>
 
 <p>The production of this map by <a href="https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/">Timo
 Grossenbacher</a>
@@ -6817,7 +6818,7 @@ Unknown Pleasures Album Art. <em>Cartographic Perspectives</em>, (92), 65–78.
 			</description>
 			<link>https://dieghernan.github.io/202205_Unknown-pleasures-R/</link>
 			<category>posts</category>
-		    <category>ggplot2</category><category>ggridges</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><media:title type="html"><![CDATA[Unknown pleasures with R ]]></media:title>
+		    <category>ggplot2</category><category>ggridges</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><category>terra</category><media:title type="html"><![CDATA[Unknown pleasures with <strong>R</strong> ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202205_Unknown-pleasures-R/</guid>
       <pubDate>Sun, 01 May 2022 00:00:00 +0200</pubDate>
@@ -7209,7 +7210,7 @@ The flags will be extracted from the GitHub repository
 			</description>
 			<link>https://dieghernan.github.io/202201_maps-flags/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>flags</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rasterpic</category><category>rspatial</category><category>rstats</category><category>terra</category><media:title type="html"><![CDATA[Beautiful maps with R (IV): Fun with flags revisited ]]></media:title>
+		    <category>beautiful_maps</category><category>flags</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>rasterpic</category><category>rspatial</category><category>rstats</category><category>terra</category><media:title type="html"><![CDATA[Beautiful maps with <strong>R</strong> (IV): Fun with flags revisited ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/202201_maps-flags/</guid>
       <pubDate>Fri, 28 Jan 2022 00:00:00 +0100</pubDate>
@@ -8774,7 +8775,7 @@ variable.</p>
 			</description>
 			<link>https://dieghernan.github.io/201912_Beautiful3/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>function</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>r_package</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful maps with R (III): Patterns and hatched maps ]]></media:title>
+		    <category>beautiful_maps</category><category>function</category><category>giscoR</category><category>maps</category><category>r_bloggers</category><category>r_package</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Beautiful maps with <strong>R</strong> (III): Patterns and hatched maps ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201912_Beautiful3/</guid>
       <pubDate>Thu, 12 Dec 2019 00:00:00 +0100</pubDate>
@@ -8968,7 +8969,7 @@ the right side.</p>
 			</description>
 			<link>https://dieghernan.github.io/201911_QuickR/</link>
 			<category>posts</category>
-		    <category>flags</category><category>inset</category><category>maps</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Quick R: Inset maps ]]></media:title>
+		    <category>flags</category><category>inset</category><category>maps</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Quick <strong>R</strong>: Inset maps ]]></media:title>
       <media:content url="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/3840px-Population_density_by_NUTS_3_region_%282017%29.svg.png" medium="image"/>
       <media:thumbnail url="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Population_density_by_NUTS_3_region_%282017%29.svg/3840px-Population_density_by_NUTS_3_region_%282017%29.svg.png" /><guid isPermaLink="true">https://dieghernan.github.io/201911_QuickR/</guid>
       <pubDate>Thu, 07 Nov 2019 00:00:00 +0100</pubDate>
@@ -9369,7 +9370,7 @@ if you enjoyed the post, you can share it on your preferred social network.</p>
 			</description>
 			<link>https://dieghernan.github.io/201906_Beautiful2/</link>
 			<category>posts</category>
-		    <category>beautiful_maps</category><category>flags</category><category>function</category><category>giscoR</category><category>mapSpain</category><category>maps</category><category>r_bloggers</category><category>raster</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Beautiful maps with R (II): Fun with flags ]]></media:title>
+		    <category>beautiful_maps</category><category>flags</category><category>function</category><category>giscoR</category><category>mapSpain</category><category>maps</category><category>r_bloggers</category><category>raster</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Beautiful maps with <strong>R</strong> (II): Fun with flags ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201906_Beautiful2/</guid>
       <pubDate>Tue, 18 Jun 2019 00:00:00 +0200</pubDate>
@@ -9379,7 +9380,7 @@ if you enjoyed the post, you can share it on your preferred social network.</p>
 			<title>Beautiful maps with R (I): Fishnets, honeycombs and pixels</title>
 			<description>
 				<![CDATA[	
- 				<h3>Simplified maps with R</h3>
+ 				<h3>Simplified maps with <strong>R</strong></h3>
     		<p>5 min.</p>
 				<div><p>Sometimes you want to produce maps with special layouts. I especially like
 maps with modified geometries, e.g. simplifying the original shapes to squares
@@ -9901,7 +9902,7 @@ but we will solve that later.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--html_preserve--&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"htmlwidget-7ab57412f7b1df4d5773"</span> <span class="na">style=</span><span class="s">"width:100%;height:216px;"</span> <span class="na">class=</span><span class="s">"leaflet html-widget"</span><span class="nt">&gt;&lt;/div&gt;</span>
-  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/json"</span><span class="na">data-for=</span><span class="s">"htmlwidget-7ab57412f7b1df4d5773"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"application/json"</span> <span class="na">data-for=</span><span class="s">"htmlwidget-7ab57412f7b1df4d5773"</span><span class="nt">&gt;</span>
   <span class="p">...</span>
 </code></pre></div></div>
 
@@ -9909,7 +9910,7 @@ but we will solve that later.</p>
 widget id (<code class="language-plaintext highlighter-rouge">7ab57412f7b1df4d5773</code> in the example) is the same in the
 <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code> and in the <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> part. If not, your map would not load.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">style="width:100%; height:216px;</code> part controls the actual size of
+<p>The <code class="language-plaintext highlighter-rouge">style="width:100%; height:216px;"</code> part controls the actual size of
 the leaflet widget. In this case, the map will adapt to the width of
 the page with a fixed height of 216px. I put <a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra">some examples</a> of
 different size options at the end of the post so you can have a look and see
@@ -9996,7 +9997,7 @@ screen, no matter what device you are using.</p>
 			</description>
 			<link>https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</link>
 			<category>posts</category>
-		    <category>html</category><category>jekyll</category><category>leaflet</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub ]]></media:title>
+		    <category>html</category><category>jekyll</category><category>leaflet</category><category>maps</category><category>r_bloggers</category><category>rspatial</category><category>rstats</category><media:title type="html"><![CDATA[<strong>Leaflet</strong>, <strong>R</strong>, Markdown, <strong>Jekyll</strong> and GitHub ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Leaflet_R_Jekyll/</guid>
       <pubDate>Mon, 20 May 2019 00:00:00 +0200</pubDate>
@@ -10006,7 +10007,7 @@ screen, no matter what device you are using.</p>
 			<title>Where in the world?</title>
 			<description>
 				<![CDATA[	
- 				<h3>A leaflet map with the places I have flown</h3>
+ 				<h3>A <strong>leaflet</strong> map with the places I have flown</h3>
     		<p>1 min.</p>
 				<div><p>This is a very personal post, where I just show the map of all the places I have
 traveled to by plane.</p>
@@ -10370,7 +10371,7 @@ this solution may work well in most cases.</p>
 			</description>
 			<link>https://dieghernan.github.io/201905_Cast-to-subsegments/</link>
 			<category>posts</category>
-		    <category>function</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Cast a line to subsegments in R ]]></media:title>
+		    <category>function</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Cast a line to subsegments in <strong>R</strong> ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201905_Cast-to-subsegments/</guid>
       <pubDate>Sun, 05 May 2019 00:00:00 +0200</pubDate>
@@ -10380,7 +10381,7 @@ this solution may work well in most cases.</p>
 			<title>Using the CountryCodes database and sf package</title>
 			<description>
 				<![CDATA[	
- 				<h3>Vignette of the CountryCodes project</h3>
+ 				<h3>Vignette of the <strong>CountryCodes</strong> project</h3>
     		<p>2 min.</p>
 				<div><p>This vignette shows how to use the database provided in the GitHub project
 <a href="https://dieghernan.github.io/projects/countrycodes/">Country Codes and International Organizations &amp; Groups</a>
@@ -10675,7 +10676,7 @@ since it is the one used in the example.</p>
 			</description>
 			<link>https://dieghernan.github.io/201904_Using-CountryCodes/</link>
 			<category>posts</category>
-		    <category>maps</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Using the CountryCodes database and <strong>sf</strong> package ]]></media:title>
+		    <category>maps</category><category>r_bloggers</category><category>rnaturalearth</category><category>rspatial</category><category>rstats</category><category>sf</category><media:title type="html"><![CDATA[Using the <strong>CountryCodes</strong> database and <strong>sf</strong> package ]]></media:title>
       <media:content url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" medium="image"/>
       <media:thumbnail url="https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp" /><guid isPermaLink="true">https://dieghernan.github.io/201904_Using-CountryCodes/</guid>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0200</pubDate>

@@ -518,7 +518,7 @@ requests the public mentions for each post’s canonical URL and builds the
 section automatically when the page opens.</p>
 <p>Mentions and replies appear as a numbered list of links and authors. Likes
 and reposts have their own counts and rows of overlapping avatars. The
-content stays on its original site; each link takes you to the conversation.
+content stays on its original site. Each link takes you to the conversation.
 The existing GitHub comments are still available, too.</p>
 <h2 id="a-small-addition-to-a-static-blog">A small addition to a static blog</h2>
 <p>The implementation uses a Jekyll include, a stylesheet and plain JavaScript.
@@ -528,8 +528,8 @@ loads the results through its public API.</p>
 <p>I tried it with the <a href="/202602_geobounds/">geobounds post</a>,
 which already had mentions, and with a recent post that had none. Both cases
 matter: an empty section should still explain how to join in.</p>
-<p>Social reactions need a bridge that sends them as Webmentions; they do not
-appear automatically just because a link was shared on a social network.</p>
+<p>Sharing a link on a social network only brings reactions here if a bridge sends
+them as Webmentions.</p>
 <h2 id="send-a-link">Send a link</h2>
 <p>Written something that links to this post? Open <strong>Shared your thoughts on this
 post? Drop your link here!</strong> below and submit your page’s URL. The form works
@@ -669,7 +669,7 @@ also generated with AI.</p>
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/201905_Leaflet_R_Jekyll/" class="chulapa-text-body-color">
-              Leaflet, <strong>R</strong>, Markdown, Jekyll and GitHub
+              <strong>Leaflet</strong>, <strong>R</strong>, Markdown, <strong>Jekyll</strong> and GitHub
             </a>
          </p>
            <p class="card-text">
