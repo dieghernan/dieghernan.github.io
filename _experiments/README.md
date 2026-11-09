@@ -19,6 +19,7 @@ repository root; its README describes the dependencies, data cache and outputs.
 | [Switzerland multidirectional hillshade](switzerland-multidirectional/README.md) | Compare single-direction and multidirectional RGB lighting inspired by Dominic Royé. |
 | [China RGB hillshade](china-rgb-hillshade/README.md) | Test one-band RGB hillshade with a normal elevation legend on a large raster. |
 | [Waterman world map](waterman/README.md) | Render D3's polyhedral Waterman projection from R through V8. |
+| [Local equal-area silhouettes](local-laea/README.md) | Compare five world projections against the same locally projected land shapes. |
 
 The hillshade and RGB overlay scripts blend graphical layers through
 **ggblend**.
