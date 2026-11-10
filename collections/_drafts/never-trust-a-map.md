@@ -159,17 +159,34 @@ its panel. Compare circle sizes **within** each map. You can compare shapes
 across panels.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
-<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. The final two panels compare a vertical perspective and an orthographic view centered over North Africa, both with an extra indicatrix at the North Pole." width="100%" />
 
-The outlines can fool you, too. Equal Earth and the heart-shaped Bonne look
-quite different, yet both preserve area. Here's one way to group the twelve
-projections shown in the poster.
+```
+#> Warning in CPL_transform(x, crs, aoi, pipeline, reverse, desired_accuracy, :
+#> GDAL Error 1: PROJ: pipeline: Pipeline: Inverse operation for vandg4 is not
+#> available
+```
+
+<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Van der Grinten IV has an apple-shaped outline and strong distortion near its outer meridians." width="100%" />
+
+The outlines can fool you, too. Compare the two rectangles in the first
+column. In Web Mercator, the circles stay roughly round and grow toward the
+poles. In Gall–Peters, their areas stay roughly constant within the panel.
+They stretch vertically near the equator and flatten at high latitudes.
+
+On the second row, compare Robinson with the apple-shaped Van der Grinten IV.
+Look toward the outer meridians at high latitudes to see where Van der Grinten
+IV distorts area the most.
+
+The third row puts Mollweide and Sinusoidal next to Goode homolosine, which
+uses Sinusoidal near the equator and Mollweide at higher latitudes.
+
+Here's one way to group the twelve projections in the poster.
 
 - **Conformal pattern.** Web Mercator.
-- **Equal-area.** Equal Earth, Mollweide, Sinusoidal, Hammer, Bonne and Goode
-  homolosine.
+- **Equal-area.** Equal Earth, Gall–Peters, Mollweide, Sinusoidal, Bonne and
+  Goode homolosine.
 - **Compromise.** Winkel Tripel and Robinson.
-- **Equidistant along meridians.** Plate carrée.
+- **Globular.** Van der Grinten IV.
 - **Perspective views.** Vertical perspective and Orthographic.
 
 So which map should you trust? It depends on what you're asking it to show.
@@ -179,6 +196,10 @@ helps you see what you're looking for.
 
 ## How we drew it
 
+For more projection examples with **sf** and **ggplot2**, see Nabil-Fareed
+Alikhan's [*Variations on map projections in
+R*](https://happykhan.com/posts/map-projections-in-r).
+
 <details class="my-4" markdown="1">
 
 <summary>Show the R code</summary>
@@ -187,7 +208,9 @@ In **R**, we get country boundaries from **giscoR**, build the grid with **sf**
 and draw the maps with **ggplot2** and **crstools**. The setup also loads Inter
 Tight for the map titles. `draw_map()` handles Goode's cuts and the horizons of
 the two perspective views. It also accepts an optional raster basemap through
-`tile`, which it reprojects and clips to the map outline.
+`tile`, which it reprojects and clips to the map outline. For Van der
+Grinten IV, the function builds the same geographic buffers with **sf** and
+projects them directly because PROJ only provides the forward transform.
 
 
 ``` r
@@ -229,16 +252,16 @@ perspective_height <- 10000000
 view_center <- "+lat_0=30 +lon_0=10"
 
 projections <- c(
-  setNames("EPSG:4326", "Plate carr\u00e9e"),
+  "Gall-Peters" = "+proj=cea +lat_ts=45 +R=6371007.181",
   "Web Mercator" = "EPSG:3857",
   "Robinson" = "+proj=robin",
+  "Van der Grinten IV" = "+proj=vandg4 +R=6371007.181",
   "Winkel Tripel" = "+proj=wintri",
   "Mollweide" = "ESRI:54009",
   "Sinusoidal" = "ESRI:54008",
   "Equal Earth" = "+proj=eqearth +datum=WGS84",
-  "Hammer" = "+proj=hammer +R=6371007.181",
-  "Bonne" = "ESRI:54024",
   "Goode homolosine" = "+proj=igh +R=6371007.181",
+  "Bonne" = "ESRI:54024",
   "Vertical perspective" = sprintf(
     "+proj=nsper %s +R=%.3f +h=%.0f", view_center, earth_radius, perspective_height
   ),
@@ -314,7 +337,19 @@ indicatrices <- function(lng, lat, palette) {
 draw_map <- function(title, palette = light_palette, tile = NULL) {
   projection <- projections[[title]]
   grid <- graticule
-  circles <- indicatrices(meridians, parallels, palette)
+  if (title == "Van der Grinten IV") {
+    # PROJ provides only a forward transform for this projection.
+    buffers <- expand.grid(lng = meridians, lat = parallels) |>
+      st_as_sf(coords = c("lng", "lat"), crs = 4326) |>
+      st_buffer(units::as_units(buffer_km, "km")) |>
+      st_transform(projection)
+    circles <- geom_sf(
+      data = buffers, fill = palette$circle, color = palette$circle_outline,
+      alpha = 0.78
+    )
+  } else {
+    circles <- indicatrices(meridians, parallels, palette)
+  }
   if (is.null(tile)) {
     land <- st_geometry(world)
   }
