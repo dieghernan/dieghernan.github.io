@@ -182,8 +182,9 @@ helps you see what you're looking for.
 
 In **R**, we get country boundaries from **giscoR**, build the grid with **sf**
 and draw the maps with **ggplot2** and **crstools**. The setup also loads Inter
-Tight for the map titles. The drawing function handles Goode's cuts and the
-horizons of the two perspective views.
+Tight for the map titles. `draw_map()` handles Goode's cuts and the horizons of
+the two perspective views. It also accepts an optional raster basemap through
+`tile`, which it reprojects and clips to the map outline.
 
 
 ``` r
@@ -199,7 +200,28 @@ meridians <- seq(-150, 150, 30)
 parallels <- seq(-75, 75, length.out = 9)
 earth_radius <- 6371007.181
 buffer_km <- 350
-map_background <- "grey90"
+light_palette <- list(
+  background = "#FAF8F2",
+  ocean = "#FFFEFC",
+  land = "#D9D4CA",
+  graticule = "#99948B",
+  outline = "#A6A097",
+  circle = "#C52E43",
+  circle_outline = "#982035",
+  text = "#252320",
+  muted_text = "#504A43"
+)
+
+dark_palette <- list(
+  background = "#535c64",
+  ocean = "#2c353c",
+  land = "#0e0e0e",
+  graticule = "#82909B",
+  outline = "grey50",
+  circle = "#F15B66",
+  circle_outline = "#F78A92",
+  text = "#F3F5F7"
+)
 perspective_height <- 10000000
 view_center <- "+lat_0=30 +lon_0=10"
 
@@ -275,22 +297,24 @@ goode_grid <- st_sfc(
 
 
 ``` r
-indicatrices <- function(lng, lat) {
+indicatrices <- function(lng, lat, palette) {
   geom_tissot(
     data = world,
     radius = units::as_units(buffer_km, "km"),
-    fill = "#E63946",
-    color = "#A4161A",
-    alpha = 0.65,
+    fill = palette$circle,
+    color = palette$circle_outline,
+    alpha = 0.78,
     centres = list(lng = lng, lat = lat)
   )
 }
 
-draw_map <- function(title) {
+draw_map <- function(title, palette = light_palette, tile = NULL) {
   projection <- projections[[title]]
   grid <- graticule
-  circles <- indicatrices(meridians, parallels)
-  land <- st_geometry(world)
+  circles <- indicatrices(meridians, parallels, palette)
+  if (is.null(tile)) {
+    land <- st_geometry(world)
+  }
   radians <- pi / 180
   buffer_limit <- sin(buffer_km * 1000 / earth_radius)
 
@@ -302,7 +326,7 @@ draw_map <- function(title) {
       longitude_gap <- abs((outer(meridians, cuts, "-") + 180) %% 360 - 180)
       distance <- sin(pmin(longitude_gap, 90) * radians) * cos(lat * radians)
       visible <- meridians[apply(distance, 1, min) > buffer_limit]
-      indicatrices(visible, lat)
+      indicatrices(visible, lat, palette)
     })
   } else if (title %in% c("Vertical perspective", "Orthographic")) {
     height <- if (title == "Vertical perspective") perspective_height else Inf
@@ -315,9 +339,11 @@ draw_map <- function(title) {
     distance_crs <- sprintf("+proj=aeqd %s +R=%.3f", view_center, earth_radius)
     visible_cap <- st_sfc(st_point(c(0, 0)), crs = distance_crs) |>
       st_buffer(horizon * earth_radius - 1, nQuadSegs = 180)
-    land <- st_transform(land, distance_crs, partial = TRUE) |>
-      st_make_valid() |>
-      st_intersection(visible_cap)
+    if (is.null(tile)) {
+      land <- st_transform(land, distance_crs, partial = TRUE) |>
+        st_make_valid() |>
+        st_intersection(visible_cap)
+    }
 
     if (title == "Vertical perspective") {
       grid <- st_geometry(grid) |>
@@ -333,36 +359,54 @@ draw_map <- function(title) {
         cos(lat * radians) * cos(30 * radians) *
           cos((meridians - 10) * radians)
       visible <- meridians[cosine > buffer_cutoff]
-      if (length(visible)) indicatrices(visible, lat)
+      if (length(visible)) indicatrices(visible, lat, palette)
     })
     # All meridians meet at the pole, so draw one circle there.
-    circles <- c(circles, list(indicatrices(10, 90)))
+    circles <- c(circles, list(indicatrices(10, 90, palette)))
   } else {
     outline <- st_transform(frame, projection, partial = TRUE)
   }
 
   limits <- st_bbox(outline)
-  land <- st_transform(land, projection, partial = TRUE)
-  if (st_is_longlat(land)) {
-    # Clip the longitude-latitude panel in its display coordinates.
-    land <- st_set_crs(land, NA) |>
-      st_make_valid() |>
-      st_intersection(st_set_crs(outline, NA)) |>
-      st_set_crs(projection)
+
+  lwd_outline <- 0.15
+
+  if (is.null(tile)) {
+    land <- st_transform(land, projection, partial = TRUE)
+    if (st_is_longlat(land)) {
+      # Clip the longitude-latitude panel in its display coordinates.
+      land <- st_set_crs(land, NA) |>
+        st_make_valid() |>
+        st_intersection(st_set_crs(outline, NA)) |>
+        st_set_crs(projection)
+    } else {
+      land <- st_intersection(st_make_valid(land), st_make_valid(outline))
+    }
+    basemap <- geom_sf(
+      data = land, fill = palette$land, color = palette$land, linewidth = 0.15
+    )
   } else {
-    land <- st_intersection(st_make_valid(land), st_make_valid(outline))
+    mask <- terra::vect(outline)
+    imagery <- terra::project(tile, projection, method = "bilinear") |>
+      terra::crop(mask, mask = TRUE)
+    basemap <- tidyterra::geom_spatraster_rgb(data = imagery, maxcell = Inf)
+    palette$outline <- "black"
+    lwd_outline <- 0.25
   }
 
   ggplot() +
-    geom_sf(data = outline, fill = "white", color = NA) +
-    geom_sf(data = land, fill = "grey70", color = "grey70", linewidth = 0.15) +
+    geom_sf(data = outline, fill = palette$ocean, color = NA) +
+    basemap +
     geom_sf(
       data = grid,
-      color = "grey40",
-      alpha = 0.45,
+      color = palette$graticule,
+      alpha = 0.4,
       linewidth = 0.3
     ) +
-    geom_sf(data = outline, fill = NA, color = "grey30", linewidth = 0.75) +
+    geom_sf(
+      data = outline, fill = NA, color = palette$outline,
+      linewidth = lwd_outline
+    ) +
     circles +
     coord_sf(
       crs = projection,
@@ -373,10 +417,11 @@ draw_map <- function(title) {
     labs(title = title) +
     theme_void(base_family = map_family) +
     theme(
+      text = element_text(colour = palette$text),
       plot.title = element_text(face = "bold"),
       plot.margin = margin(10, 10, 10, 10),
-      plot.background = element_rect(fill = map_background, color = NA),
-      panel.background = element_rect(fill = map_background, color = NA)
+      plot.background = element_rect(fill = palette$background, color = NA),
+      panel.background = element_rect(fill = palette$background, color = NA)
     )
 }
 ```
@@ -386,6 +431,21 @@ draw_map <- function(title) {
 draw_map("Web Mercator")
 draw_map("Equal Earth")
 draw_map("Winkel Tripel")
+```
+
+For example, here's how to try Esri World Imagery on the vertical perspective
+map. The figures in this post use vector basemaps.
+
+
+``` r
+cover_tile <- maptiles::get_tiles(
+  st_transform(world, 3857),
+  provider = "Esri.WorldImagery",
+  zoom = 2,
+  crop = FALSE,
+  cachedir = tools::R_user_dir("maptiles", "cache")
+)
+draw_map("Vertical perspective", dark_palette, tile = cover_tile)
 ```
 
 </details>
@@ -400,7 +460,7 @@ featured <- c("Web Mercator", "Equal Earth", "Winkel Tripel")
 gallery_order <- c(featured, setdiff(names(projections), featured))
 
 grid::grid.newpage()
-grid::grid.rect(gp = grid::gpar(fill = map_background, col = NA))
+grid::grid.rect(gp = grid::gpar(fill = light_palette$background, col = NA))
 grid::pushViewport(grid::viewport(
   width = 0.92,
   height = 0.92,
@@ -412,13 +472,13 @@ grid::pushViewport(grid::viewport(
 grid::grid.text(
   "One Earth, twelve projections",
   gp = grid::gpar(
-    fontfamily = map_family, fontsize = 25, fontface = "bold", col = "grey15"
+    fontfamily = map_family, fontsize = 25, fontface = "bold", col = light_palette$text
   ),
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1:3)
 )
 grid::grid.text(
   "Each red shape starts as a circle with a radius of 350 km",
-  gp = grid::gpar(fontfamily = map_family, fontsize = 14, col = "grey25"),
+  gp = grid::gpar(fontfamily = map_family, fontsize = 14, col = light_palette$muted_text),
   vp = grid::viewport(layout.pos.row = 2, layout.pos.col = 1:3)
 )
 
@@ -432,7 +492,7 @@ for (index in seq_along(gallery_order)) {
   grid::grid.text(
     title,
     gp = grid::gpar(
-      fontfamily = map_family, fontsize = 14, fontface = "bold", col = "grey15"
+      fontfamily = map_family, fontsize = 14, fontface = "bold", col = light_palette$text
     ),
     vp = grid::viewport(layout.pos.row = 1)
   )
