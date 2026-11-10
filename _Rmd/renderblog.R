@@ -45,6 +45,7 @@ render_blog <- function(file, draft = FALSE, root = .renderblog_root) {
 
   knitr::opts_knit$set(root.dir = root, base.dir = root)
   knitr::opts_chunk$set(
+    tidy = "styler",
     fig.path = paste0(image_dir, name, "-"),
     dev = "ragg_png",
     dpi = 200

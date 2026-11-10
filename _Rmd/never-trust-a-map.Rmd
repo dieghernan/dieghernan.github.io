@@ -37,12 +37,11 @@ output:
 #| include: false
 
 knitr::opts_chunk$set(
+  tidy = "styler",
   collapse = TRUE,
   comment = "#>",
   message = FALSE,
   dev = "ragg_png",
-  # fig.width = 10,
-  # fig.height = 5.5,
   out.width = "100%",
   fig.cap = ""
 )
