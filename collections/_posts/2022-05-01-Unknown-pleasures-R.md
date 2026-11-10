@@ -64,16 +64,6 @@ Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-
 by [Jen
 Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Unknown Pleasures by Joy Division on Spotify"
-  src="https://open.spotify.com/embed/album/5Dgqy4bBg09Rdw7CQM545s?utm_source=generator&si=12e3c6b3c41940fb"
-  height="352"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
-
 Since then, these kinds of plots have become very popular, known as **ridge
 plots** or **joyplots**, in honor of Joy Division. In this post, I produce
 "joyplots" with **R** for specific regions of the world using elevation data for
@@ -308,6 +298,16 @@ ggplot() +
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Unknown Pleasures by Joy Division on Spotify"
+  src="https://open.spotify.com/embed/album/5Dgqy4bBg09Rdw7CQM545s?utm_source=generator&si=12e3c6b3c41940fb"
+  height="352"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 ## Variations
 

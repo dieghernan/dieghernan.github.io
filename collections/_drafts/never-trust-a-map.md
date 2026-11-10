@@ -187,6 +187,16 @@ Choose an equal-area map to compare areas, a conformal one when local angles
 matter or a compromise for an overall view. The question is whether the lie
 helps you see what you're looking for.
 
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Little Lies by Fleetwood Mac on Spotify"
+  src="https://open.spotify.com/embed/track/08o75xMKmGrKny6GsXrNJW?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
+
 ## How we drew it
 
 For more projection examples with **sf** and **ggplot2**, see Nabil-Fareed
@@ -544,16 +554,6 @@ grid::popViewport()
 </details>
 
 
-
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Little Lies by Fleetwood Mac on Spotify"
-  src="https://open.spotify.com/embed/track/08o75xMKmGrKny6GsXrNJW?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
 
 ## References
 
