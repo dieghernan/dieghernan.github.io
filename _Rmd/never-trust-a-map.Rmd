@@ -58,17 +58,19 @@ All maps lie. Some lie more than others, and some are deliberately designed to
 mislead us. Mark Monmonier wrote a whole book about it. [*How to Lie with
 Maps*](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html)
 
-Take election maps. [Land doesn't vote. People do.](https://storymaps.arcgis.com/stories/0e636a652d44484b9457f953994b212b)
-Yet a vast, sparsely populated
-region can dominate a map, while a densely populated city barely gets noticed.
-[See the same election mapped several
+Take election maps. [Land doesn't vote. People
+do.](https://storymaps.arcgis.com/stories/0e636a652d44484b9457f953994b212b) Yet
+a vast, sparsely populated region can dominate a map, while a densely populated
+city barely gets noticed. [See the same election mapped several
 ways](https://www.esri.com/about/newsroom/arcwatch/explore-a-map-of-election-results)
 
 Change the color scale or the class breaks on a choropleth and the same data can
-tell a very different story.
-[See what changing the class breaks does](https://www.esri.com/about/newsroom/arcuser/better-breaks-define-your-maps-purpose).
-For a worked example with municipal income data from Spain, see
-[Cómo (no) mentir con la visualización](https://cdr-book.github.io/datos-espaciales.html#no-mentir) (in Spanish).
+tell a very different story. [See what changing the class breaks
+does](https://www.esri.com/about/newsroom/arcuser/better-breaks-define-your-maps-purpose).
+For a worked example with municipal income data from Spain, see [Cómo (no)
+mentir con la
+visualización](https://cdr-book.github.io/datos-espaciales.html#no-mentir) (in
+Spanish).
 
 But even the most honest maps lie.
 
@@ -81,32 +83,35 @@ Fortunately, we have a lie detector.
 
 ## Meet Tissot’s indicatrices
 
-Imagine covering the globe with identical small circles. When you flatten
-the Earth, those circles can change size, shape or both. The area of each
-resulting ellipse shows how much the projection enlarges or shrinks the area
-at that location. Its shape reveals whether the projection stretches more in
-one direction than another.
+Imagine covering the globe with identical small circles. When you flatten the
+Earth, those circles can change size, shape or both. The area of each resulting
+ellipse shows how much the projection enlarges or shrinks the area at that
+location. Its shape reveals whether the projection stretches more in one
+direction than another.
 
 ### A quick technical note
 
-We'll make the maps in **R**. There are two approaches worth knowing about.
+I'll make the maps in **R**. There are two approaches worth knowing about.
 
 - **tissot** uses PROJ to calculate local distortion factors at each point.
-  It draws the ellipses from those factors, which describe what happens to
-  infinitesimally small circles.
+  Those factors describe what happens to infinitesimally small circles and can
+  be used to draw the ellipses.
 - `geom_tissot()` from **crstools** projects geographic buffers of a fixed
   radius. That gives us a visual approximation we can add as a **ggplot2**
   layer.
 
-We'll use `geom_tissot()` for the maps below.
+I tried both approaches on all twelve projections. After accounting for the
+local scale in each direction, the maps looked much the same. I'll use
+`geom_tissot()` below to keep the **ggplot2** code short. **tissot** comes in
+handy when we want to report or compare the distortion factors themselves.
 
 Let's put some maps to the test.
 
 ## Same circles, different maps
 
-We start with the same grid for all twelve projections. That's 99 points in
-nine rows and eleven columns, with a circle of 350 km radius at each point.
-The red shapes show what happens to those circles when we change the projection.
+We start with the same grid for all twelve projections. That's 99 points in nine
+rows and eleven columns, with a circle of 350 km radius at each point. The red
+shapes show what happens to those circles when we change the projection.
 
 ```{r}
 #| label: map-data
@@ -318,6 +323,9 @@ Each approach makes a different trade-off.
   area and shape can change. Robinson and Winkel Tripel are useful for
   general-purpose world maps and atlases, where the overall view matters.
 
+Dominic Royé discusses these trade-offs in more depth in his
+[practical guide to map projections](https://dominicroye.github.io/blog/map-projections/).
+
 ## Web Mercator
 
 If the circles are still circles, where's the lie?
@@ -339,8 +347,8 @@ looking so big.
 
 ## Equal Earth
 
-Equal Earth is an **equal-area** projection. What happens to the circles when
-we preserve area?
+Equal Earth is an **equal-area** projection. What happens to the circles when we
+preserve area?
 
 ```{r}
 #| label: equal-earth
@@ -370,9 +378,9 @@ shape and area change?
 draw_map("Winkel Tripel")
 ```
 
-Follow the second row from the top, east across Russia, and watch the
-ellipses stretch and tilt. Then compare them with the equatorial row to see
-how their areas change as well.
+Follow the second row from the top, east across Russia, and watch the ellipses
+stretch and tilt. Then compare them with the equatorial row to see how their
+areas change as well.
 
 ## Twelve ways to flatten the world
 
@@ -381,9 +389,9 @@ views share a center over North Africa. The vertical perspective shows less of
 the globe because its viewpoint is only 10,000 km above the surface. Both views
 include a bonus circle at the North Pole.
 
-<i class="fa-solid fa-exclamation"></i> Each map is scaled independently to
-fit its panel. Compare circle sizes **within** each map. You can compare
-shapes across panels.
+<i class="fa-solid fa-exclamation"></i> Each map is scaled independently to fit
+its panel. Compare circle sizes **within** each map. You can compare shapes
+across panels.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
 ```{r}
@@ -525,11 +533,21 @@ draw_map("Vertical perspective") +
 ## References
 
 - Fernández-Avilés, G. (2024). Trabajando con datos espaciales. In G.
-  Fernández-Avilés & J.-M. Montero (Eds.), *Fundamentos de ciencia de datos
-  con R* (Chapter 40). McGraw Hill. <https://cdr-book.github.io/datos-espaciales.html>.
+  Fernández-Avilés & J.-M. Montero (Eds.), *Fundamentos de ciencia de datos con
+  R* (Chapter 40). McGraw Hill.
+  <https://cdr-book.github.io/datos-espaciales.html>.
+- Manica A, Pozzi A, Padilla-Iglesias C, Carter E, Leonardi M, Fatima A, Pelanek
+  O, Stephenson N, Colucci M, Jud D, Gunasekaram C (2026). *crstools: Tools to
+  Work with Projections*. <https://doi.org/10.32614/CRAN.package.crstools>. R
+  package version 1.0.0, <https://CRAN.R-project.org/package=crstools>.
 - Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of Chicago
   Press.
+- Royé, Dominic. 2026. “Map Projections: A Practical Guide to Common Mistakes
+  and How to Fix Them.” May 3. <https://dominicroye.github.io/blog/map-projections/>.
 - Snyder, J. P. (1987). *Map projections--A working manual*. U.S. Geological
   Survey. <https://doi.org/10.3133/pp1395>
+- Sumner M, Huber B (2026). *tissot: Tissot Indicatrix for Map Projection
+  Distortion*. <https://doi.org/10.32614/CRAN.package.tissot>. R package version
+  0.3.0, <https://CRAN.R-project.org/package=tissot>.
 - Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et les
   projections des cartes géographiques*. Gauthier-Villars.
