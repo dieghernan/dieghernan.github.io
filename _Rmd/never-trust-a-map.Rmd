@@ -89,10 +89,16 @@ one direction than another.
 
 ### A quick technical note
 
-The `geom_tissot()` function in **crstools** approximates Tissot's infinitesimal
-circles by projecting geographic buffers of a fixed radius. For point-by-point
-measurements, the **tissot** package calculates local distortion factors with
-PROJ.
+We'll make the maps in **R**. There are two approaches worth knowing about.
+
+- **tissot** uses PROJ to calculate local distortion factors at each point.
+  It draws the ellipses from those factors, which describe what happens to
+  infinitesimally small circles.
+- `geom_tissot()` from **crstools** projects geographic buffers of a fixed
+  radius. That gives us a visual approximation we can add as a **ggplot2**
+  layer.
+
+We'll use `geom_tissot()` for the maps below.
 
 Let's put some maps to the test.
 
