@@ -21,7 +21,7 @@
         "description": "User-defined function using the sf package - Split a line into its individual segments with a small sf function in R.",
         "inLanguage": "en-US",
         "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
-        "keywords": ["r_bloggers","rstats","rspatial","sf","function","rnaturalearth"],
+        "keywords": ["music","r_bloggers","rstats","rspatial","sf","function","rnaturalearth"],
         "headline": "Cast a line to subsegments in R",
         "image": ["https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp"],
         "datePublished": "2019-05-05T00:00:00+02:00",
@@ -128,6 +128,7 @@
     <meta property="og:type" content="article" >
     <meta property="article:published_time" content="2019-05-05T00:00:00+02:00">
     <meta property="article:author" content="https://dieghernan.github.io/">
+    <meta property="article:tag" content="music">
     <meta property="article:tag" content="r_bloggers">
     <meta property="article:tag" content="rstats">
     <meta property="article:tag" content="rspatial">
@@ -466,8 +467,8 @@
             <time datetime="2019-05-05T00:00:00+02:00" class="dt-published" >05 may 2019</time>
         </div></div>
          <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
-            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/201905_Cast-to-subsegments/&text=Cast+a+line+to+subsegments+in+R&via=dhernangomez&hashtags=r_bloggers,rstats,rspatial,sf,function,rnaturalearth" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
-            <a href="https://bsky.app/intent/compose?text=Cast%20a%20line%20to%20subsegments%20in%20R%20https://dieghernan.github.io/201905_Cast-to-subsegments/%20%23r_bloggers%20%23rstats%20%23rspatial%20%23sf%20%23function%20%23rnaturalearth" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/201905_Cast-to-subsegments/&text=Cast+a+line+to+subsegments+in+R&via=dhernangomez&hashtags=music,r_bloggers,rstats,rspatial,sf,function,rnaturalearth" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Cast%20a%20line%20to%20subsegments%20in%20R%20https://dieghernan.github.io/201905_Cast-to-subsegments/%20%23music%20%23r_bloggers%20%23rstats%20%23rspatial%20%23sf%20%23function%20%23rnaturalearth" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
             <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/201905_Cast-to-subsegments/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
              <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Cast+a+line+to+subsegments+in+R%20https://dieghernan.github.io/201905_Cast-to-subsegments/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
          <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/201905_Cast-to-subsegments/&title=Cast+a+line+to+subsegments+in+R" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
@@ -525,6 +526,8 @@ a powerful function that transforms geometries into other types of geometries
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> was the possibility of breaking
 <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." /></p>
+<iframe class="d-block w-100 border-0 rounded my-3" title="Hold the Line by Toto on Spotify" src="https://open.spotify.com/embed/track/2UasQGaawqY6ncetMd2LNw?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="">
+</iframe>
 <h2 id="an-approach">An approach</h2>
 <p>One possible solution is to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive
 pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects across the original geometry. Let’s check it:</p>
@@ -738,6 +741,7 @@ this solution may work well in most cases.</p>
  <div class="row">
    <div class="col-lg-8 offset-lg-2 col">
       <i class="fas fa-tag mr-1 fa-xs" aria-hidden="true"></i>
+      <a href="https://dieghernan.github.io/tags#music" class="badge chulapa-pill-bg-primary p-category" rel="tag" >music</a>
       <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary p-category" rel="tag" >r_bloggers</a>
       <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
       <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
@@ -756,18 +760,18 @@ this solution may work well in most cases.</p>
              <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201912_Beautiful3/" class="chulapa-text-body-color">
-              Beautiful maps with <strong>R</strong> (III): Patterns and hatched maps
+            <a href="https://dieghernan.github.io/202611_postal-codes/" class="chulapa-text-body-color">
+              Postal codes and tessellations
             </a>
          </p>
            <p class="card-text">
-              <small>A solution for black-and-white and academic maps</small>
+              <small>From postal points to areas using Voronoi polygons</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-12-12T00:00:00+01:00">
-                december 12, 2019
+              <time datetime="2026-11-06T00:00:00+01:00">
+                november 06, 2026
               </time>
             </small>
        </div>
@@ -775,18 +779,18 @@ this solution may work well in most cases.</p>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201911_QuickR/" class="chulapa-text-body-color">
-              Quick <strong>R</strong>: Inset maps
+            <a href="https://dieghernan.github.io/202610_orange-peel/" class="chulapa-text-body-color">
+              Let’s peel the world
             </a>
          </p>
            <p class="card-text">
-              <small>An alternative using plot()</small>
+              <small>Do you know the interrupted Goode homolosine projection?</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-11-07T00:00:00+01:00">
-                november 07, 2019
+              <time datetime="2026-10-24T00:00:00+02:00">
+                october 24, 2026
               </time>
             </small>
        </div>
@@ -794,18 +798,18 @@ this solution may work well in most cases.</p>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/201904_Using-CountryCodes/" class="chulapa-text-body-color">
-              Using the <strong>CountryCodes</strong> database and <strong>sf</strong> package
+            <a href="https://dieghernan.github.io/202301_star-map-R/" class="chulapa-text-body-color">
+              Star map with <strong>R</strong>
             </a>
          </p>
            <p class="card-text">
-              <small>Vignette of the <strong>CountryCodes</strong> project</small>
+              <small>Creating Star Map Visualizations Based on Location and Date</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2019-04-27T00:00:00+02:00">
-                april 27, 2019
+              <time datetime="2023-01-25T00:00:00+01:00">
+                january 25, 2023
               </time>
             </small>
        </div>
