@@ -6,6 +6,7 @@ excerpt: tidyterra provides tidyverse methods for terra objects and geom
 syndication:
   - https://www.r-bloggers.com/2022/05/introducing-tidyterra/
 tags:
+  - music
   - r_bloggers
   - rstats
   - rspatial
@@ -301,3 +302,13 @@ ggtile +
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" />
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Eruption by Van Halen on Spotify"
+  src="https://open.spotify.com/embed/track/4USM2iFc7ICK65ODvZAd0w?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>

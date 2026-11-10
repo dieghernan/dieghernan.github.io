@@ -3,6 +3,7 @@ title: "Cast a line to subsegments in <strong>R</strong>"
 excerpt: "Split a line into its individual segments with a small sf function in R."
 subtitle: User-defined function using the <strong>sf</strong> package
 tags:
+  - music
   - r_bloggers
   - rstats
   - rspatial
@@ -55,6 +56,16 @@ What I missed when using `st_cast` was the possibility of breaking
 `LINESTRING` objects into subsegments:
 
 ![Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments.](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Hold the Line by Toto on Spotify"
+  src="https://open.spotify.com/embed/track/2UasQGaawqY6ncetMd2LNw?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 ## An approach
 
