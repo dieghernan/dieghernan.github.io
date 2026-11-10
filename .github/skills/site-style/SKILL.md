@@ -103,7 +103,13 @@ the final file.
 - Require relevant tags on every post and project, matching the existing
   vocabulary and exact spelling. Select by content, not a fixed universal list.
   Keep the Rmd and Markdown tag lists aligned.
-- Check title, subtitle, description, excerpt, image paths and alt metadata.
+- Require explicit, nonempty `excerpt` and `description` fields in the front
+  matter of every post, draft and project page. Write `excerpt` as a reader-facing
+  teaser for Chulapa's listing cards and `description` as a concise summary for
+  search and social metadata. The wording can differ to suit each purpose.
+  Keep each field synchronized between the Rmd source and its generated
+  Markdown counterpart.
+- Check title, subtitle, image paths and alt metadata.
   Measure dimensions if authorized, otherwise flag stale values. Do not invent
   syndication URLs, project dates, dataset versions or publication status.
 - Use Chulapa/Kramdown alert markup, not Quarto callouts, GitHub admonitions or

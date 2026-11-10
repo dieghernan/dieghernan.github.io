@@ -1,5 +1,6 @@
 ---
 title: Where in the world?
+excerpt: "Explore the places I've flown to on an interactive Leaflet map."
 subtitle: "A <strong>leaflet</strong> map with the places I have flown"
 tags:
   - rstats

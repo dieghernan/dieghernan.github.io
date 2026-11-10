@@ -2,6 +2,7 @@
 title: >-
   <strong>Leaflet</strong>, <strong>R</strong>, Markdown,
   <strong>Jekyll</strong> and GitHub
+excerpt: "Get a Leaflet map made in R onto a Jekyll site in six steps."
 subtitle: Make it work in 6 steps - A short tutorial
 tags:
   - r_bloggers

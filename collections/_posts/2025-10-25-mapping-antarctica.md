@@ -1,5 +1,6 @@
 ---
 title: "Mapping Antarctica"
+excerpt: "Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R."
 subtitle: "Cool maps from the South Pole"
 syndication:
   - https://www.r-bloggers.com/2025/10/mapping-antarctica/

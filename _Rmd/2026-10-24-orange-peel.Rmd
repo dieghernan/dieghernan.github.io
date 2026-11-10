@@ -1,5 +1,6 @@
 ---
 title: "Let's peel the world"
+excerpt: "Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R."
 subtitle: "Do you know the interrupted Goode homolosine projection?"
 syndication:
   - https://www.r-bloggers.com/2026/10/lets-peel-the-world/

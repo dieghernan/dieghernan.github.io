@@ -2,6 +2,7 @@
 title: >-
   Using the <strong>CountryCodes</strong> database and <strong>sf</strong>
   package
+excerpt: "Use CountryCodes and sf to match country identifiers and put your data on a map in R."
 subtitle: "Vignette of the <strong>CountryCodes</strong> project"
 tags:
   - r_bloggers

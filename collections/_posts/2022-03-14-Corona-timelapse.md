@@ -1,5 +1,6 @@
 ---
 title: Corona timelapse
+excerpt: "Follow how COVID-19 travel restrictions changed over time for travelers from Germany."
 subtitle: Travel restrictions amidst the COVID crisis across time - A German perspective
 tags:
   - discontinued
