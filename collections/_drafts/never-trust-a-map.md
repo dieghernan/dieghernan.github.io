@@ -112,8 +112,8 @@ Each approach makes a different trade-off.
   area and shape can change. Robinson and Winkel Tripel are useful for
   general-purpose world maps and atlases, where the overall view matters.
 
-Dominic Royé discusses these trade-offs in more depth in his
-[practical guide to map projections](https://dominicroye.github.io/blog/map-projections/).
+Dominic Royé discusses these trade-offs in more depth in his [practical guide to
+map projections](https://dominicroye.github.io/blog/map-projections/).
 
 ## Web Mercator
 
@@ -154,25 +154,23 @@ views share a center over North Africa. The vertical perspective shows less of
 the globe because its viewpoint is only 10,000 km above the surface. Both views
 include a bonus circle at the North Pole.
 
-<i class="fa-solid fa-exclamation"></i> Each map is scaled independently to fit
-its panel. Compare circle sizes **within** each map. You can compare shapes
-across panels.
-{: .alert .alert-warning .p-3 .mx-2 .mb-3}
-
+Each map is scaled independently to fit its panel. Compare circle sizes 
+**within** each map. You can compare shapes across panels. 
+{: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Van der Grinten IV has an apple-shaped outline and strong distortion near its outer meridians." width="100%" />
 
-The outlines can fool you, too. Compare the two rectangles in the first
-column. In Web Mercator, the circles stay roughly round and grow toward the
-poles. In Gall–Peters, their areas stay roughly constant within the panel.
-They stretch vertically near the equator and flatten at high latitudes.
+The outlines can fool you, too. Compare the two rectangles in the first column.
+In Web Mercator, the circles stay roughly round and grow toward the poles. In
+Gall–Peters, their areas stay roughly constant within the panel. They stretch
+vertically near the equator and flatten at high latitudes.
 
 On the second row, compare Robinson with the apple-shaped Van der Grinten IV.
 Look toward the outer meridians at high latitudes to see where Van der Grinten
 IV distorts area the most.
 
-The third row puts Mollweide and Sinusoidal next to Goode homolosine, which
-uses Sinusoidal near the equator and Mollweide at higher latitudes.
+The third row puts Mollweide and Sinusoidal next to Goode homolosine, which uses
+Sinusoidal near the equator and Mollweide at higher latitudes.
 
 Here's one way to group the twelve projections in the poster.
 
@@ -202,9 +200,9 @@ In **R**, we get country boundaries from **giscoR**, build the grid with **sf**
 and draw the maps with **ggplot2** and **crstools**. The setup also loads Inter
 Tight for the map titles. `draw_map()` handles Goode's cuts and the horizons of
 the two perspective views. It also accepts an optional raster basemap through
-`tile`, which it reprojects and clips to the map outline. For Van der
-Grinten IV, the function builds the same geographic buffers with **sf** and
-projects them directly because PROJ only provides the forward transform.
+`tile`, which it reprojects and clips to the map outline. For Van der Grinten
+IV, the function builds the same geographic buffers with **sf** and projects
+them directly because PROJ only provides the forward transform.
 
 
 ``` r
@@ -465,8 +463,9 @@ draw_map("Equal Earth")
 draw_map("Winkel Tripel")
 ```
 
-Here's the Goode homolosine projection with Esri World Imagery. The tile replaces the
-vector land layer. The graticule and red indicatrices are drawn over it.
+Here's the Goode homolosine projection with Esri World Imagery. The tile
+replaces the vector land layer. The graticule and red indicatrices are drawn
+over it.
 
 
 ``` r
@@ -547,6 +546,8 @@ grid::popViewport()
 
 ## References
 
+- Alikhan, N.-F. (2022, May 20). Variations on map projections in R.
+  *Happykhan*. <https://happykhan.com/posts/map-projections-in-r>.
 - Fernández-Avilés, G. (2024). Trabajando con datos espaciales. In G.
   Fernández-Avilés & J.-M. Montero (Eds.), *Fundamentos de ciencia de datos con
   R* (Chapter 40). McGraw Hill.
@@ -558,7 +559,8 @@ grid::popViewport()
 - Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of Chicago
   Press.
 - Royé, Dominic. 2026. “Map Projections: A Practical Guide to Common Mistakes
-  and How to Fix Them.” May 3. <https://dominicroye.github.io/blog/map-projections/>.
+  and How to Fix Them.” May 3.
+  <https://dominicroye.github.io/blog/map-projections/>.
 - Snyder, J. P. (1987). *Map projections--A working manual*. U.S. Geological
   Survey. <https://doi.org/10.3133/pp1395>
 - Sumner M, Huber B (2026). *tissot: Tissot Indicatrix for Map Projection
@@ -566,5 +568,3 @@ grid::popViewport()
   0.3.0, <https://CRAN.R-project.org/package=tissot>.
 - Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et les
   projections des cartes géographiques*. Gauthier-Villars.
-- Alikhan, N.-F. (2022, May 20). Variations on map projections in R. *Happykhan*.
-  <https://happykhan.com/posts/map-projections-in-r>.
