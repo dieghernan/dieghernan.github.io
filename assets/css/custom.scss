@@ -39,6 +39,11 @@ pre code {
   max-width: 100%;
 }
 
+// Match Spotify's document color scheme so the browser keeps its corners transparent.
+iframe[src^="https://open.spotify.com/embed/"] {
+  color-scheme: light;
+}
+
 .kofi-support {
   border-top: 1px solid currentColor;
 }
