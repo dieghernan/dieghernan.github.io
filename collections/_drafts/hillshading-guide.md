@@ -10,7 +10,7 @@ description: >-
 header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/hillshading-guide-final-map-with-stretched-hillshade-1.webp"
 og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/hillshading-guide-final-map-with-stretched-hillshade-1.webp"
 og_image_width: 1400
-og_image_height: 1084
+og_image_height: 1074
 og_image_type: image/webp
 og_image_alt: >-
   Shaded relief of Andalusia in greens and ochres with blue bathymetry
@@ -54,7 +54,7 @@ In this post, I'm using an elevation grid for the area around Andalusia in
 southern Spain. I get the boundary from **mapSpain**, use its bounding box to
 download the elevation data with **elevatr** and put the raster in the same
 coordinate reference system as the boundary. Every map uses the same grid
-at zoom level 7, and every color map uses **tidyterra**'s `etopo1` elevation
+at zoom level 8, and every color map uses **tidyterra**'s `etopo1` elevation
 palette.
 
 The terrain tiles include elevations on land and depths below sea level, so the
@@ -95,7 +95,7 @@ theme_set(
 andalusia <- esp_get_ccaa("Andalucia", epsg = 3857)
 dem <- get_elev_raster(
   andalusia,
-  z = 7,
+  z = 8,
   clip = "bbox",
   tmp_dir = tools::R_user_dir("elvatr", "cache")
 ) |>
@@ -419,13 +419,16 @@ sierra_view <- coord_sf(
   expand = FALSE,
   datum = NA
 )
-detail_theme <- theme(legend.position = "none")
+detail_theme <- theme(
+  legend.position = "none",
+  plot.margin = margin(4, 5, 4, 5)
+)
 
 grid::grid.newpage()
 grid::grid.rect(gp = grid::gpar(fill = map_background, col = NA))
 grid::pushViewport(grid::viewport(
-  width = 0.92,
-  height = 0.92,
+  width = 0.97,
+  height = 0.97,
   layout = grid::grid.layout(2, 2)
 ))
 print(
@@ -464,7 +467,7 @@ elevation_guide <- elevation_guide$grobs[[
 poster_theme <- theme(
   plot.title = element_blank(),
   legend.position = "none",
-  plot.margin = margin(7, 12, 7, 12)
+  plot.margin = margin(5, 8, 5, 8)
 )
 heading_style <- grid::gpar(
   fontfamily = map_family,
@@ -476,13 +479,13 @@ heading_style <- grid::gpar(
 grid::grid.newpage()
 grid::grid.rect(gp = grid::gpar(fill = map_background, col = NA))
 grid::pushViewport(grid::viewport(
-  width = 0.92,
-  height = 0.92,
+  width = 0.97,
+  height = 0.97,
   layout = grid::grid.layout(
     8,
     3,
     widths = grid::unit(c(0.16, 1, 1), "null"),
-    heights = grid::unit(c(0.45, 0.24, rep(1, 5), 0.4), "null")
+    heights = grid::unit(c(0.31, 0.18, rep(1, 5), 0.3), "null")
   )
 ))
 

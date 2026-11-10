@@ -146,7 +146,7 @@ map_multiply <- ggplot() +
       labels = scales::label_comma()
     )
   ) |>
-    blend("multiply") +
+  blend("multiply") +
   guides(
     alpha = "none",
     fill = guide_legend(
@@ -193,7 +193,7 @@ map_multi <- ggplot() +
       labels = scales::label_comma()
     )
   ) |>
-    blend("multiply") +
+  blend("multiply") +
   guides(
     alpha = "none",
     fill = guide_legend(
@@ -248,7 +248,7 @@ map_final <- ggplot() +
       labels = scales::label_comma()
     )
   ) |>
-    blend("multiply") +
+  blend("multiply") +
   guides(
     alpha = "none",
     fill = guide_legend(
