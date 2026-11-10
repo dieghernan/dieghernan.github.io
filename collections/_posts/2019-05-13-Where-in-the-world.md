@@ -3,6 +3,7 @@ title: Where in the world?
 excerpt: "Explore the places I've flown to on an interactive Leaflet map."
 subtitle: "A <strong>leaflet</strong> map with the places I have flown"
 tags:
+  - music
   - rstats
   - rspatial
   - maps
@@ -28,6 +29,16 @@ traveled to by plane.
 
 **✈️ 255,622.0 km flown so far.**
 {: .alert .alert-info .p-3 .mx-2 .my-3 .lead}
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Around the World by Daft Punk on Spotify"
+  src="https://open.spotify.com/embed/track/1pKYYY0dkg23sQQXi0Q5zN?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 ## Top cities
 

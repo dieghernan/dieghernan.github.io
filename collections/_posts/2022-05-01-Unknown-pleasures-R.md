@@ -65,11 +65,10 @@ by [Jen
 Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
 
 <iframe
-  data-testid="embed-iframe"
   class="d-block w-100 border-0 rounded my-3"
   title="Unknown Pleasures by Joy Division on Spotify"
   src="https://open.spotify.com/embed/album/5Dgqy4bBg09Rdw7CQM545s?utm_source=generator&si=12e3c6b3c41940fb"
-  height="152"
+  height="352"
   loading="lazy"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
   allowfullscreen>

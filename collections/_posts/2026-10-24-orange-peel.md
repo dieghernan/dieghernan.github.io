@@ -5,6 +5,7 @@ subtitle: "Do you know the interrupted Goode homolosine projection?"
 syndication:
   - https://www.r-bloggers.com/2026/10/lets-peel-the-world/
 tags:
+  - music
   - r_bloggers
   - beautiful_maps
   - rstats
@@ -136,6 +137,16 @@ ggplot() +
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp" alt="World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel." width="100%" />
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Heal the World by Michael Jackson on Spotify"
+  src="https://open.spotify.com/embed/track/7woW97CfcWaKtuC6W5BP2K?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 ## References
 

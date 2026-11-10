@@ -671,11 +671,10 @@ built, one step at a time.
 The title is a nod to Muse's album _Black Holes and Revelations_.
 
 <iframe
-  data-testid="embed-iframe"
   class="d-block w-100 border-0 rounded my-3"
   title="Black Holes and Revelations by Muse on Spotify"
   src="https://open.spotify.com/embed/album/0lw68yx3MhKflWFqCsGkIs?utm_source=generator&theme=0&si=015f4c7acc5c4f8a"
-  height="152"
+  height="352"
   loading="lazy"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
   allowfullscreen>
