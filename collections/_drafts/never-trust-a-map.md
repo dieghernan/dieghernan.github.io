@@ -4,14 +4,14 @@ subtitle: "All of them are dirty liars."
 description: >-
   Put the same circles on twelve world maps and see what each projection
   does to them.
-header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
-og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-image-1.webp"
+header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-perspective-1.webp"
+og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-perspective-1.webp"
 og_image_width: 1200
 og_image_height: 630
 og_image_type: image/webp
 og_image_alt: >-
-  Equal Earth world map with red ellipses of roughly equal area that become
-  flatter toward high latitudes.
+  A vertical perspective of Earth above North Africa, with red indicatrices
+  that flatten toward the horizon.
 tags:
   - rstats
   - rspatial
@@ -130,16 +130,23 @@ to see how their areas change too.
 
 ## Twelve ways to flatten the world
 
-Pick a red circle near Greenland and follow it from map to map. The
-orthographic view, centered over North Africa, looks like a globe from space. It
-shows only the circles that fit entirely on the visible side, including a bonus
-circle at the North Pole.
+Pick a red circle near Greenland and follow it from map to map. The last two
+views share a center over North Africa. The vertical perspective shows less of
+the globe because its viewpoint is only 10,000 km above the surface. Both views
+include a bonus circle at the North Pole.
 
 <i class="fa-solid fa-exclamation"></i> Since each map is scaled independently,
 compare circle sizes within each panel.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
-<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. Goode splits the map into lobes, while the orthographic map shows a round hemisphere with an extra indicatrix at the North Pole." width="100%" />
+<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. The final two panels compare a vertical perspective and an orthographic view centered over North Africa, both with an extra indicatrix at the North Pole." width="100%" />
+
+- **Conformal pattern.** Web Mercator.
+- **Equal-area.** Equal Earth, Mollweide, Sinusoidal, Hammer, Bonne and Goode
+  homolosine.
+- **Compromise.** Winkel Tripel and Robinson.
+- **Equidistant along meridians.** Plate carrée.
+- **Perspective views.** Vertical perspective and Orthographic.
 
 So which map should you trust? It depends on what you're asking it to show.
 Choose an equal-area map to compare areas, a conformal one when local angles
@@ -155,7 +162,7 @@ helps you see what you're looking for.
 In **R**, we get country boundaries from **giscoR**, build the grid with **sf**
 and draw the maps with **ggplot2** and **crstools**. The setup also loads Inter
 Tight for the map titles. The drawing function handles Goode's cuts and the
-orthographic horizon.
+horizons of the two perspective views.
 
 
 ``` r
@@ -172,6 +179,8 @@ parallels <- seq(-75, 75, length.out = 9)
 earth_radius <- 6371007.181
 buffer_km <- 350
 map_background <- "grey90"
+perspective_height <- 10000000
+view_center <- "+lat_0=30 +lon_0=10"
 
 projections <- c(
   setNames("EPSG:4326", "Plate carr\u00e9e"),
@@ -184,8 +193,10 @@ projections <- c(
   "Hammer" = "+proj=hammer +R=6371007.181",
   "Bonne" = "ESRI:54024",
   "Goode homolosine" = "+proj=igh +R=6371007.181",
-  "Van der Grinten" = "ESRI:54029",
-  "Orthographic" = "+proj=ortho +lat_0=30 +lon_0=10 +R=6371007.181"
+  "Vertical perspective" = sprintf(
+    "+proj=nsper %s +R=%.3f +h=%.0f", view_center, earth_radius, perspective_height
+  ),
+  "Orthographic" = sprintf("+proj=ortho %s +R=%.3f", view_center, earth_radius)
 )
 
 frame <- st_linestring(rbind(
@@ -272,24 +283,35 @@ draw_map <- function(title) {
       visible <- meridians[apply(distance, 1, min) > buffer_limit]
       indicatrices(visible, lat)
     })
-  } else if (title == "Orthographic") {
+  } else if (title %in% c("Vertical perspective", "Orthographic")) {
+    height <- if (title == "Vertical perspective") perspective_height else Inf
+    horizon <- acos(earth_radius / (earth_radius + height))
+    disk_radius <- earth_radius / sqrt(1 + 2 * earth_radius / height)
     outline <- st_sfc(st_point(c(0, 0)), crs = projection) |>
-      st_buffer(earth_radius, nQuadSegs = 180)
+      st_buffer(disk_radius, nQuadSegs = 180)
 
     # Clip land just inside the horizon in a distance-preserving projection.
-    distance_crs <- sub("+proj=ortho", "+proj=aeqd", projection, fixed = TRUE)
-    hemisphere <- st_sfc(st_point(c(0, 0)), crs = distance_crs) |>
-      st_buffer(pi * earth_radius / 2 - 1, nQuadSegs = 180)
+    distance_crs <- sprintf("+proj=aeqd %s +R=%.3f", view_center, earth_radius)
+    visible_cap <- st_sfc(st_point(c(0, 0)), crs = distance_crs) |>
+      st_buffer(horizon * earth_radius - 1, nQuadSegs = 180)
     land <- st_transform(land, distance_crs, partial = TRUE) |>
       st_make_valid() |>
-      st_intersection(hemisphere)
+      st_intersection(visible_cap)
 
-    # Keep circles whose entire buffer fits on the visible hemisphere.
+    if (title == "Vertical perspective") {
+      grid <- st_geometry(grid) |>
+        st_transform(distance_crs) |>
+        st_intersection(visible_cap) |>
+        st_transform(projection, partial = FALSE)
+    }
+
+    # Keep circles whose entire buffer fits inside the horizon.
+    buffer_cutoff <- cos(horizon - buffer_km * 1000 / earth_radius)
     circles <- lapply(parallels, function(lat) {
       cosine <- sin(lat * radians) * sin(30 * radians) +
         cos(lat * radians) * cos(30 * radians) *
           cos((meridians - 10) * radians)
-      visible <- meridians[cosine > buffer_limit]
+      visible <- meridians[cosine > buffer_cutoff]
       if (length(visible)) indicatrices(visible, lat)
     })
     # All meridians meet at the pole, so draw one circle there.
@@ -330,7 +352,7 @@ draw_map <- function(title) {
     labs(title = title) +
     theme_void(base_family = map_family) +
     theme(
-      plot.title =  element_text(face = "bold"),
+      plot.title = element_text(face = "bold"),
       plot.margin = margin(10, 10, 10, 10),
       plot.background = element_rect(fill = map_background, color = NA),
       panel.background = element_rect(fill = map_background, color = NA)
