@@ -59,10 +59,11 @@ Fortunately, we have a lie detector.
 
 ## Meet Tissot’s indicatrices
 
-Imagine covering the globe with identical small circles. Flatten the Earth and
-those circles can change size, shape or both. The area of each ellipse shows
-how much the projection enlarges or shrinks the area there. Its shape tells us
-whether the projection stretches more in one direction than another.
+Imagine covering the globe with identical small circles. When you flatten
+the Earth, those circles can change size, shape or both. The area of each
+resulting ellipse shows how much the projection enlarges or shrinks the area
+at that location. Its shape reveals whether the projection stretches more in
+one direction than another.
 
 ### A quick technical note
 
@@ -103,9 +104,10 @@ If the circles are still circles, where's the lie?
 
 <img src="/assets/img/drafts/never-trust-a-map-web-mercator-1.webp" alt="Web Mercator world map with red circles that grow from the equator toward the top and bottom of the map." width="100%" />
 
-Web Mercator comes close to the **conformal** pattern. Compare the middle row
-with the top and bottom rows. The circles stay roughly round, but they take up
-much more room at high latitudes. That's how Greenland gets to look so big.
+Web Mercator comes close to the classic **conformal** pattern. Compare the
+middle row with the rows above and below. The circles stay roughly round, but
+they grow much larger toward high latitudes. That's how Greenland ends up
+looking so big.
 
 ## Equal Earth
 
@@ -124,9 +126,9 @@ shape and area change?
 
 <img src="/assets/img/drafts/never-trust-a-map-winkel-tripel-1.webp" alt="Winkel Tripel world map with red indicatrices that vary in size and become more elongated away from the center." width="100%" />
 
-Follow the second row from the top, east across Russia.
-Watch the ellipses stretch and tilt, then compare them with the equatorial row
-to see how their areas change too.
+Follow the second row from the top, east across Russia, and watch the
+ellipses stretch and tilt. Then compare them with the equatorial row to see
+how their areas change as well.
 
 ## Twelve ways to flatten the world
 
@@ -135,15 +137,16 @@ views share a center over North Africa. The vertical perspective shows less of
 the globe because its viewpoint is only 10,000 km above the surface. Both views
 include a bonus circle at the North Pole.
 
-<i class="fa-solid fa-exclamation"></i> Since each map is scaled independently,
-compare circle sizes within each panel.
+<i class="fa-solid fa-exclamation"></i> Each map is scaled independently to
+fit its panel. Compare circle sizes **within** each map. You can compare
+shapes across panels.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. The final two panels compare a vertical perspective and an orthographic view centered over North Africa, both with an extra indicatrix at the North Pole." width="100%" />
 
 The outlines can fool you, too. Equal Earth and the heart-shaped Bonne look
-quite different, yet both preserve area. Here's how we can group the twelve
-projections in the poster.
+quite different, yet both preserve area. Here's one way to group the twelve
+projections shown in the poster.
 
 - **Conformal pattern.** Web Mercator.
 - **Equal-area.** Equal Earth, Mollweide, Sinusoidal, Hammer, Bonne and Goode
