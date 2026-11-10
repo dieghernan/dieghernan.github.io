@@ -1,6 +1,7 @@
 # Run from the repository root. Preview with bundle exec jekyll serve --drafts.
 source("_Rmd/renderblog_v2.R")
 
+styler::style_dir()
 draft <- diegpost_draft_v2("never-trust-a-map.Rmd")
 
 markdown <- readLines(draft, warn = FALSE, encoding = "UTF-8")

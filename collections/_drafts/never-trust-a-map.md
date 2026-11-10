@@ -1,6 +1,9 @@
 ---
 title: "Never trust a map"
 subtitle: "All of them are dirty liars."
+excerpt: >-
+  Some maps lie more than others. Fortunately, we have a lie detector:
+  Tissot’s indicatrices.
 description: >-
   Put the same circles on twelve world maps and see what each projection
   does to them.
@@ -433,20 +436,25 @@ draw_map("Equal Earth")
 draw_map("Winkel Tripel")
 ```
 
-For example, here's how to try Esri World Imagery on the vertical perspective
-map. The figures in this post use vector basemaps.
+Here's the Goode homolosine projection with Esri World Imagery. The tile replaces the
+vector land layer. The graticule and red indicatrices are drawn over it.
 
 
 ``` r
-cover_tile <- maptiles::get_tiles(
+world_tile <- maptiles::get_tiles(
   st_transform(world, 3857),
   provider = "Esri.WorldImagery",
   zoom = 2,
   crop = FALSE,
   cachedir = tools::R_user_dir("maptiles", "cache")
 )
-draw_map("Vertical perspective", dark_palette, tile = cover_tile)
+draw_map("Goode homolosine", tile = world_tile)
 ```
+
+<img src="/assets/img/drafts/never-trust-a-map-goode-imagery-1.webp" alt="Goode homolosine world map with satellite imagery and a grid of red indicatrices. The ellipses are rounder near the center and flatten toward the poles." width="100%" />
+
+*Imagery from Esri World Imagery. Source: Esri, Vantor, Earthstar Geographics
+and the GIS User Community.*
 
 </details>
 
