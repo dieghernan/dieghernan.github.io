@@ -20,6 +20,7 @@ tags:
   - rstats
   - rspatial
   - maps
+  - hillshading
   - ggplot2
   - tidyterra
   - terra
@@ -534,7 +535,7 @@ grid::pushViewport(grid::viewport(
   layout = grid::grid.layout(
     8,
     3,
-    widths = grid::unit(c(0.58, 1, 1), "null"),
+    widths = grid::unit(c(0.16, 1, 1), "null"),
     heights = grid::unit(c(0.45, 0.24, rep(1, 5), 0.4), "null")
   )
 ))
@@ -559,6 +560,7 @@ grid::grid.text(
 
 grid::grid.text(
   "Fixed alpha",
+  rot = 90,
   vp = grid::viewport(layout.pos.row = 3, layout.pos.col = 1),
   gp = heading_style
 )
@@ -567,6 +569,7 @@ print(map_alpha + poster_theme, vp = grid::viewport(layout.pos.row = 3, layout.p
 
 grid::grid.text(
   "metR",
+  rot = 90,
   vp = grid::viewport(layout.pos.row = 4, layout.pos.col = 1),
   gp = heading_style
 )
@@ -575,6 +578,7 @@ print(map_metr + poster_theme, vp = grid::viewport(layout.pos.row = 4, layout.po
 
 grid::grid.text(
   "Multiply",
+  rot = 90,
   vp = grid::viewport(layout.pos.row = 5, layout.pos.col = 1),
   gp = heading_style
 )
@@ -583,6 +587,7 @@ print(map_multiply + poster_theme, vp = grid::viewport(layout.pos.row = 5, layou
 
 grid::grid.text(
   "Multidirectional",
+  rot = 90,
   vp = grid::viewport(layout.pos.row = 6, layout.pos.col = 1),
   gp = heading_style
 )
@@ -591,6 +596,7 @@ print(map_multi + poster_theme, vp = grid::viewport(layout.pos.row = 6, layout.p
 
 grid::grid.text(
   "Stretched",
+  rot = 90,
   vp = grid::viewport(layout.pos.row = 7, layout.pos.col = 1),
   gp = heading_style
 )

@@ -12,6 +12,7 @@ tags:
   - rstats
   - rspatial
   - maps
+  - hillshading
   - ggplot2
   - tidyterra
   - terra
