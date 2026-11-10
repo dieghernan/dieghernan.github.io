@@ -5,6 +5,7 @@ subtitle: "Do you know the Bonne projection?"
 syndication:
   - https://www.r-bloggers.com/2025/02/happy-valentines-day-2/
 tags:
+  - music
   - r_bloggers
   - beautiful_maps
   - rstats
@@ -79,3 +80,13 @@ ggplot() +
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Can't Take My Eyes Off You by Frankie Valli on Spotify"
+  src="https://open.spotify.com/embed/track/7o8t2oSKI5eIBDlOHQH99F?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
