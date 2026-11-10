@@ -10,6 +10,7 @@ excerpt: >-
 syndication:
   - https://www.r-bloggers.com/2026/11/postal-codes-and-tessellations/
 tags:
+  - music
   - r_bloggers
   - rstats
   - rspatial
@@ -694,6 +695,18 @@ Slovenia. Before using them for analysis, we would need to review coverage,
 coordinates, the relationship with municipalities and sensitivity to the
 margins. For now, we have a working example that shows how the polygons are
 built, one step at a time.
+
+The title is a nod to Muse's album _Black Holes and Revelations_.
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  src="https://open.spotify.com/embed/album/0lw68yx3MhKflWFqCsGkIs"
+  title="Black Holes and Revelations by Muse on Spotify"
+  height="352"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 ## References
 
