@@ -25,7 +25,11 @@ header_img: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.w
 description: >-
   Map precipitation in Spain with hillshade and marginal profiles using terra,
   tidyterra and ggplot2.
-schema_image: ["https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp", "https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp"]
+schema_image:
+  [
+    "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp",
+    "https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp",
+  ]
 og_image: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp"
 og_image_width: 2100
 og_image_height: 2010
@@ -37,8 +41,6 @@ og_image_alt: >-
 seo_title: "Precipitation maps with tidyterra and marginal plots: One World"
 og_title: "Precipitation maps with tidyterra and marginal plots"
 ---
-
-
 
 **Updated on October 25, 2026:** The elevation and precipitation maps now use
 **ggblend** to multiply their colors with the hillshade, following
@@ -92,8 +94,7 @@ stays (mainly).
 
 In this post, we will use the following libraries:
 
-
-``` r
+```r
 ## Libraries
 
 # Data manipulation
@@ -139,8 +140,7 @@ for this case I would approximate it using a mixture of political borders
 (historically the _Meseta_ is associated with Castile and Madrid) and elevation
 data to get a rough shape.
 
-
-``` r
+```r
 # Using mapSpain
 the_plain <- esp_get_prov(
   c(
@@ -209,8 +209,7 @@ post](https://dieghernan.github.io/202210_tidyterra-hillshade/) to identify the
 plain. First, I create a base layer with a representation of the
 hillshade, which we will reuse later:
 
-
-``` r
+```r
 # Creating hillshade
 
 slope <- terrain(r, "slope", unit = "radians")
@@ -261,8 +260,7 @@ covers it, and the hillshade adds texture. The legend
 shows the palette before shading. We use **ragg** to render these compositing
 groups.
 
-
-``` r
+```r
 # Blend a thematic raster with the fixed hillshade colors
 blend_hillshade <- function(data, fill_scale) {
   stopifnot(compareGeom(data, hill))
@@ -290,8 +288,7 @@ blend_hillshade <- function(data, fill_scale) {
 And finally we blend the altitude with the hillshade. The plain should be quite
 visible even without plotting the outline.
 
-
-``` r
+```r
 # Overlaying and theming
 
 # Aware of limits of the raster
@@ -364,8 +361,7 @@ Let's check now whether the rain falls mainly in the plain or not. We use here
 `geodata::worldclim_country()` to get the mean monthly precipitation by from
 [WorldClim](https://www.worldclim.org/):
 
-
-``` r
+```r
 # Precipitation of Spain
 
 # Get precip data
@@ -388,8 +384,7 @@ we now just add the values by cell to get the annual mean. Note that we also
 need to normalize the SpatRaster to the projection, extent and resolution of our
 `hill` object:
 
-
-``` r
+```r
 # Sum all layers
 precip_avg <- sum(precip)
 
@@ -428,8 +423,7 @@ autoplot(precip_avg_mask)
 We can now start representing our precipitation map. I chose here to create a
 custom palette with **colorspace** to better highlight the differences:
 
-
-``` r
+```r
 mypal <- sequential_hcl(
   n = 16,
   h = c(320, 80),
@@ -446,8 +440,7 @@ show_col(mypal)
 And now we can create the final map showing if _the rain in Spain stays mainly
 in the plain_:
 
-
-``` r
+```r
 # Precipitation limits, rounded to 100
 prec_limits <- floor(as.vector(minmax(precip_avg_mask)) / 100) * 100 + c(0, 100)
 
@@ -516,9 +509,10 @@ Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7)) has circa 50 rainy days per year
 featuring very hot and dry summers.
 
 <iframe
+  data-testid="embed-iframe"
   class="d-block w-100 border-0 rounded my-3"
-  src="https://open.spotify.com/embed/track/6E5hMCINTY7eAQdcMzCTgY"
   title="The Rain in Spain from My Fair Lady on Spotify"
+  src="https://open.spotify.com/embed/track/6E5hMCINTY7eAQdcMzCTgY?utm_source=generator&theme=0&si=20cfedcfe6d74ee0"
   height="152"
   loading="lazy"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -539,8 +533,7 @@ values, before any color mapping or blending.
 But first we add some additional margins and axis titles to the main plot, so we
 can insert those marginal plots easily on our main plot:
 
-
-``` r
+```r
 # Now we can add titles on the secondary axis
 
 plot_main <- meteo_plot +
@@ -578,8 +571,7 @@ plot_main
 In the following code, I am drafting what the marginal plots would look
 like, so we can have a preview of the final result:
 
-
-``` r
+```r
 # Profiling marginal plots
 
 # Getting averages by x,y
@@ -634,7 +626,7 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="Bar profile of mean annual precipitation by east-west position in Spain. Bar height and color encode rainfall in millimeters, with the highest averages toward the west." width="100%" />
 
-``` r
+```r
 
 ggplot() +
   geom_col(
@@ -669,8 +661,7 @@ ggplot() +
 Finally, we use `cowplot::axis_canvas()` to create the marginal plots as
 we want:
 
-
-``` r
+```r
 # Last step: We combine plots
 
 # Marginal plots
@@ -706,7 +697,7 @@ plot_x
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="Bar profile of mean annual precipitation from west to east in Spain, formatted for placement above the map. Height and color encode rainfall in millimeters." width="100%" />
 
-``` r
+```r
 
 plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
   geom_col(
@@ -743,8 +734,7 @@ plot_y
 
 And insert everything in the main plot. See the final result:
 
-
-``` r
+```r
 # Combine all plots into one
 sizes_axis <- grid::unit(.3, "null")
 
@@ -773,8 +763,7 @@ plot. Here you can find a simplified version:
 <details markdown="1">
 <summary>Simplified version</summary>
 
-
-``` r
+```r
 # Libraries
 # Data manipulation
 library(terra)

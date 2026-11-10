@@ -2,10 +2,10 @@
 title: "Postal codes and tessellations"
 subtitle: "From postal points to areas using Voronoi polygons"
 description: >-
-  Build Voronoi polygons with R, then estimate postal code areas in Slovenia 
+  Build Voronoi polygons with R, then estimate postal code areas in Slovenia
   using giscoR and sf, with checks and a discussion of the data limitations.
 excerpt: >-
-  From five imaginary points to a map of Slovenia: postal code areas with 
+  From five imaginary points to a map of Slovenia: postal code areas with
   Voronoi, giscoR and sf.
 syndication:
   - https://www.r-bloggers.com/2026/11/postal-codes-and-tessellations/
@@ -35,8 +35,6 @@ og_image_alt: >-
   Map of Slovenia with estimated postal areas clipped to municipal boundaries.
   Colors identify postal code groups and dark gray marks unassigned areas.
 ---
-
-
 
 I recently published my project [Postal codes of
 Spain](https://dieghernan.github.io/codigospostales/), with estimated postal
@@ -79,8 +77,7 @@ Let's start with five points in an imaginary square, including one at its
 center, using just **sf** and **ggplot2**. The coordinates have arbitrary units
 and no geographical coordinate reference system.
 
-
-``` r
+```r
 library(sf)
 library(ggplot2)
 
@@ -178,8 +175,7 @@ not validate the GISCO postal data.
 First, let's get the municipal boundaries and postal points. We use the 2024
 release of both datasets.
 
-
-``` r
+```r
 library(giscoR)
 library(sf)
 library(dplyr)
@@ -202,8 +198,7 @@ distances. The projection does not preserve every distance exactly either.
 
 Before we start drawing, what have we actually downloaded?
 
-
-``` r
+```r
 postal_points <- raw_points |>
   mutate(POSTCODE = trimws(as.character(POSTCODE))) |>
   filter(!is.na(POSTCODE), POSTCODE != "") |>
@@ -225,17 +220,13 @@ knitr::kable(data.frame(
 ))
 ```
 
-
-
-|Indicator                      | Value|
-|:------------------------------|-----:|
-|Municipalities                 |   212|
-|Downloaded points              |   557|
-|Points with a postal code      |   557|
-|Distinct postal codes          |   557|
-|Codes represented by one point |   557|
-
-
+| Indicator                      | Value |
+| :----------------------------- | ----: |
+| Municipalities                 |   212 |
+| Downloaded points              |   557 |
+| Points with a postal code      |   557 |
+| Distinct postal codes          |   557 |
+| Codes represented by one point |   557 |
 
 These counts give us a first look at the file, but they are not a quality check.
 They do not establish whether every code is present or whether the coordinates
@@ -248,8 +239,7 @@ the original workflow. This is a reproducible tie-breaking rule, not evidence
 that the retained code is correct. The counts below show how many records we
 remove and how many locations have conflicting codes.
 
-
-``` r
+```r
 postal_points <- postal_points |> arrange(POSTCODE)
 
 conflicts <- postal_points |>
@@ -265,16 +255,12 @@ knitr::kable(data.frame(
 ))
 ```
 
+| Indicator                        | Value |
+| :------------------------------- | ----: |
+| Duplicate locations removed      |    79 |
+| Locations with conflicting codes |    16 |
 
-
-|Indicator                        | Value|
-|:--------------------------------|-----:|
-|Duplicate locations removed      |    79|
-|Locations with conflicting codes |    16|
-
-
-
-``` r
+```r
 
 postal_points <- postal_points[!duplicates, ]
 ```
@@ -285,8 +271,7 @@ Let's pick Ljubljana and keep the points inside it. We use `st_within()` so that
 a point exactly on a shared boundary is not assigned to both neighboring
 municipalities.
 
-
-``` r
+```r
 city <- municipalities |> filter(LAU_NAME == "Ljubljana")
 
 city_points <- st_filter(postal_points, city, .predicate = st_within)
@@ -314,8 +299,7 @@ any other point. Cell boundaries occur where distances to two points are equal.
 For this first demonstration, we keep all interior points, without the margins used in
 the national workflow.
 
-
-``` r
+```r
 cells <- city_points |>
   st_union() |>
   st_voronoi(envelope = st_as_sfc(st_bbox(city))) |>
@@ -345,8 +329,7 @@ but we should not rely on that. Instead, we recover each cell's code with a
 spatial relationship before clipping. Each cell must contain exactly one
 generating point.
 
-
-``` r
+```r
 point_matches <- st_intersects(cells, city_points)
 
 cells$POSTCODE <- city_points$POSTCODE[unlist(point_matches)]
@@ -411,8 +394,7 @@ without automatically extending a code to a piece with no points.
 The municipality ID and name apply to every component, so we mark those
 attributes as spatially constant before splitting the geometries.
 
-
-``` r
+```r
 components <- municipalities |>
   st_set_agr("constant") |>
   st_cast("MULTIPOLYGON") |>
@@ -432,8 +414,7 @@ margin. The 200 m and 50 m choices come from my implementation. We keep them
 here to explain that workflow, although sparse postal points make it easier to
 exclude useful information. Comparing other margins would be a useful next step.
 
-
-``` r
+```r
 select_points <- function(component, postal_points) {
   for (margin in c(200, 50)) {
     interior <- st_buffer(st_geometry(component), -margin)
@@ -465,8 +446,7 @@ assign `NA`. If all selected points share a code, we assign it to the whole
 component. We only need Voronoi when several codes are present: no need to split
 an area that already has a single assignment.
 
-
-``` r
+```r
 build_areas <- function(component, postal_points) {
   selected_points <- select_points(component, postal_points)
 
@@ -523,8 +503,7 @@ if the municipality has **one distinct recovered code**. This is an imputation
 from the available data, not proof that the municipality really has just one
 code.
 
-
-``` r
+```r
 unique_codes <- result |>
   st_drop_geometry() |>
   filter(!is.na(POSTCODE)) |>
@@ -546,8 +525,7 @@ surfaces. Repairs can produce collections containing residual lines or points,
 which do not belong in an area layer. Dissolving by postal code also removes
 municipal boundaries between areas sharing that code.
 
-
-``` r
+```r
 keep_surfaces <- function(x) {
   geometry <- st_make_valid(st_geometry(x))
 
@@ -589,8 +567,7 @@ code. This keeps the map readable, without claiming that we have validated a
 classification of postal regions. Gray is reserved for unassigned components,
 with their own legend entry.
 
-
-``` r
+```r
 postal_colours <- c(
   "1" = "#007F7F", "2" = "#E87500", "3" = "#3B6FB6", "4" = "#A64E9A",
   "5" = "#649A32", "6" = "#D9AF00", "8" = "#B94350", "9" = "#6255A4",
@@ -634,8 +611,7 @@ polygons valid? Do assigned and unassigned areas cover the territory? Are there
 any appreciable overlaps? We allow one square meter for numerical differences in
 the geometry operations.
 
-
-``` r
+```r
 territory <- st_union(st_geometry(municipalities))
 
 coverage <- st_union(c(st_geometry(postal_areas), st_geometry(unassigned)))
@@ -660,18 +636,14 @@ knitr::kable(data.frame(
 ))
 ```
 
-
-
-|Indicator                                 |    Value|
-|:-----------------------------------------|--------:|
-|Codes with an estimated area              | 468.0000|
-|Components assigned by municipal recovery |   4.0000|
-|Unassigned records                        |   6.0000|
-|Unassigned area (km²)                     | 150.2033|
-|Coverage difference (m²)                  |   0.0000|
-|Overlap (m²)                              |  -0.0002|
-
-
+| Indicator                                 |    Value |
+| :---------------------------------------- | -------: |
+| Codes with an estimated area              | 468.0000 |
+| Components assigned by municipal recovery |   4.0000 |
+| Unassigned records                        |   6.0000 |
+| Unassigned area (km²)                     | 150.2033 |
+| Coverage difference (m²)                  |   0.0000 |
+| Overlap (m²)                              |  -0.0002 |
 
 These checks verify the geometry, **not postal accuracy**. We could cover an
 entire country with valid polygons and still have a poor approximation of its
@@ -699,10 +671,11 @@ built, one step at a time.
 The title is a nod to Muse's album _Black Holes and Revelations_.
 
 <iframe
+  data-testid="embed-iframe"
   class="d-block w-100 border-0 rounded my-3"
-  src="https://open.spotify.com/embed/album/0lw68yx3MhKflWFqCsGkIs"
   title="Black Holes and Revelations by Muse on Spotify"
-  height="352"
+  src="https://open.spotify.com/embed/album/0lw68yx3MhKflWFqCsGkIs?utm_source=generator&theme=0&si=015f4c7acc5c4f8a"
+  height="152"
   loading="lazy"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
   allowfullscreen>
