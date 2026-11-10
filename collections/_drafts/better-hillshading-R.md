@@ -1,5 +1,5 @@
 ---
-title: 'Hillshading with R: The definitive guide'
+title: 'Better hillshading with R'
 subtitle: Level up your maps
 excerpt: >-
   Build a shaded relief map step by step, from a transparent color overlay
@@ -7,14 +7,14 @@ excerpt: >-
 description: >-
   Compare hillshading with terra and metR, then combine elevation colors
   with multidirectional hillshade and contrast stretching using ggblend.
-header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/hillshading-guide-final-map-with-stretched-hillshade-1.webp"
-og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/hillshading-guide-final-map-with-stretched-hillshade-1.webp"
+header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp"
+og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp"
 og_image_width: 1400
-og_image_height: 1074
+og_image_height: 1272
 og_image_type: image/webp
 og_image_alt: >-
-  Shaded relief of Andalusia in greens and ochres with blue bathymetry
-  around the Strait of Gibraltar.
+  Shaded relief of the Strait of Gibraltar in greens and ochres with blue 
+  bathymetry.
 tags:
   - music
   - rstats
@@ -36,29 +36,29 @@ output:
 Lately, I've been revisiting my
 [earlier](https://dieghernan.github.io/202210_tidyterra-hillshade/)
 [posts](https://dieghernan.github.io/202212_tidyterra-hillshade-2/) on
-hillshading and the [**tidyterra**
-FAQ](https://dieghernan.github.io/tidyterra/articles/faqs.html). I wanted to
+hillshading and the [tidyterra
+FAQs](https://dieghernan.github.io/tidyterra/articles/faqs.html). I wanted to
 understand why two maps made from the same elevation grid could look so
-different. How much of that comes from the hillshade, and how much comes from
-the way we combine it with the elevation colors?
+different. How much of that comes from the hillshade, and how much from the way
+we combine it with the elevation colors?
 
 I started with the [alpha
 hack](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/) I used
-in my earlier maps. While working on the **tidyterra** FAQ, I discovered
+in my earlier maps. While working on the **tidyterra** FAQs, I discovered
 `metR::geom_relief()` and gave it a try. To my surprise, I liked the **metR**
 map better!
 
 ## Data and setup
 
-In this post, I'm using an elevation grid for the area around Andalusia in
-southern Spain. I get the boundary from **mapSpain**, use its bounding box to
-download the elevation data with **elevatr** and put the raster in the same
-coordinate reference system as the boundary. Every map uses the same grid
-at zoom level 8, and every color map uses **tidyterra**'s `etopo1` elevation
-palette.
+In this post, I'm using an elevation grid for the area around the Strait of
+Gibraltar in southern Spain. I get the boundary from **mapSpain**, use its
+bounding box to download the elevation data with **elevatr** and put the raster
+in the same coordinate reference system as the boundary. Every map uses the same
+grid at zoom level 8, and every color map uses **tidyterra**'s `etopo1`
+elevation palette.
 
 The terrain tiles include elevations on land and depths below sea level, so the
-map also shows the seabed around the Strait of Gibraltar.
+map also shows the seabed around the Strait.
 
 
 ``` r
@@ -92,32 +92,40 @@ theme_set(
 )
 
 # The data
-andalusia <- esp_get_ccaa("Andalucia", epsg = 3857)
+
+# Use Andalusia and Melilla to get the bbox.
+the_strait <- esp_get_ccaa(c("Andalucia", "Melilla"), epsg = 3857)
+
+# Create the cache directory if needed.
+
+if (!dir.exists(tools::R_user_dir("elevatr", "cache"))) {
+  dir.create(tools::R_user_dir("elevatr", "cache"), recursive = TRUE, )
+}
+
 dem <- get_elev_raster(
-  andalusia,
+  the_strait,
   z = 8,
   clip = "bbox",
-  tmp_dir = tools::R_user_dir("elvatr", "cache")
+  tmp_dir = tools::R_user_dir("elevatr", "cache")
 ) |>
   rast()
 
-dem <- project(dem, pull_crs(andalusia))
+dem <- project(dem, pull_crs(the_strait))
 names(dem) <- "elevation"
 ```
 
 ## Hillshade with the alpha hack
 
-For my first try, I followed the example in the **terra** help. It
-calculates slope and aspect from the elevation grid, creates a hillshade with a
-single light direction and draws a semitransparent elevation layer on top. I do
-the same in **ggplot2** and set the elevation colors to 40% opacity with
+For my first try, I followed the example in the **terra** help. It calculates
+slope and aspect from the elevation grid, creates a hillshade with a single
+light direction and draws a semi-transparent elevation layer on top. I do the
+same in **ggplot2** and set the elevation colors to 40% opacity with
 `alpha = 0.4`.
 
 I set the sun 40° above the horizon, with light coming from the west (270°). For
 the alpha hack, I draw the hillshade in grayscale, then extract the colors with
-`layer_data()` and pass those colors directly to the hillshade
-layer. That leaves the `fill` scale free for the elevation palette and its
-legend.
+`layer_data()` and pass those colors directly to the hillshade layer. That
+leaves the `fill` scale free for the elevation palette and its legend.
 
 
 ``` r
@@ -140,7 +148,7 @@ gghill_1 <- ggplot() +
 print(gghill_1)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-single-direction-hillshade-1.webp" alt="Grayscale relief map of Andalusia. West-facing slopes catch the light, outlining ridges in the east while the Guadalquivir lowlands stay mostly smooth." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-single-direction-hillshade-1.webp" alt="Grayscale relief map of the Strait of Gibraltar. West-facing slopes catch the light, outlining ridges in the east while the Guadalquivir lowlands stay mostly smooth." width="100%" />
 
 ``` r
 
@@ -183,14 +191,14 @@ map_alpha <- ggplot() +
 print(map_alpha)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-transparent-color-overlay-1.webp" alt="Relief map with muted greens in the lowlands, ochres in the mountains and blue offshore. The west-lit ridges show through the pale colors." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-transparent-color-overlay-1.webp" alt="Relief map with muted greens in the lowlands, ochres in the mountains and blue offshore. The west-lit ridges show through the pale colors." width="100%" />
 
 ## Shaded relief with metR
 
-Enter **metR**. This is the approach I tried in the **tidyterra** FAQ using
+Enter **metR**. This is the approach I tried in the **tidyterra** FAQs using
 `metR::geom_relief()`. Here I draw the hillshade directly from the elevation
-grid and draw the elevation colors on top. This time I map `alpha` to
-elevation, so more of the hillshade shows through in the mountains.
+grid and draw the elevation colors on top. This time I map `alpha` to elevation,
+so more of the hillshade shows through in the mountains.
 
 
 ``` r
@@ -202,7 +210,7 @@ hill_metr <- ggplot(dem, aes(x, y)) +
 print(hill_metr)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-metr-hillshade-1.webp" alt="High-contrast grayscale relief map. Alternating dark and light slopes define the eastern mountains and trace ridges on the seabed south of the coast." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-metr-hillshade-1.webp" alt="High-contrast grayscale relief map. Alternating dark and light slopes define the eastern mountains and trace ridges on the seabed south of the coast." width="100%" />
 
 
 ``` r
@@ -217,7 +225,6 @@ map_metr <- ggplot(dem, aes(x, y)) +
   scale_alpha(range = c(1, 0.25)) +
   scale_fill_hypso_tint_c(
     "etopo1",
-    alpha = 0.4,
     breaks = plot_brks,
     labels = scales::label_comma()
   ) +
@@ -228,12 +235,11 @@ map_metr <- ggplot(dem, aes(x, y)) +
 print(map_metr)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-metr-relief-map-1.webp" alt="Relief map with pale ochre mountains, green lowlands and blue water. High-contrast shading is most visible in the eastern ranges, where the elevation colors are more transparent." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-metr-relief-map-1.webp" alt="Relief map with pale ochre mountains, green lowlands and blue water. High-contrast shading is most visible in the eastern ranges, where the elevation colors are more transparent." width="100%" />
 
-
-
-This is where I started to prefer the **metR** map. Look at the mountains in
-the east! The ridges stand out more clearly, and the colors look less washed out.
+This is the point where I started preferring the **metR** map. Look at the
+mountains in the east! The ridges stand out more clearly, and the colors look
+less washed out.
 
 Could I get a similar result by changing how I combined the hillshade and the
 elevation colors?
@@ -268,7 +274,7 @@ map_multiply <- ggplot() +
 print(map_multiply)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-multiply-single-direction-hillshade-1.webp" alt="Relief map with deeper greens and blues than the transparent overlay. Dark slopes add texture to the ochre mountains while the western lowlands remain mostly smooth." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multiply-single-direction-hillshade-1.webp" alt="Relief map with deeper greens and blues than the transparent overlay. Dark slopes add texture to the ochre mountains while the western lowlands remain mostly smooth." width="100%" />
 
 Definitely better than the first one, but I wanted more hillshading!
 
@@ -279,9 +285,10 @@ Royé](https://dominicroye.github.io/blog/hillshade-effect/#multidirectional-sha
 shows what happens when you light the terrain from four directions. He keeps the
 sun at the same angle above the horizon and adds the four hillshades together.
 
-So let's add multidirectional shadows to our map. I keep the multiply blend and
-the 40° sun angle. For this map, I average the hillshades from 225°, 270°, 315°
-and 360°.
+So let's add multidirectional shadows to our map. I'll keep the multiply blend
+and the 40° sun angle, but average the hillshades from 225°, 270°, 315° and 360°
+rather than sum them as Royé does. This preserves the original scale of the
+hillshade values.
 
 
 ``` r
@@ -298,7 +305,7 @@ gghill_2 <- ggplot() +
 print(gghill_2)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-multidirectional-hillshade-1.webp" alt="Grayscale relief map. Highlights pick out ridges running in several directions across the eastern mountains, with softer shadows on adjacent slopes." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multidirectional-hillshade-1.webp" alt="Grayscale relief map. Highlights pick out ridges running in several directions across the eastern mountains, with softer shadows on adjacent slopes." width="100%" />
 
 ``` r
 
@@ -326,23 +333,30 @@ map_multi <- ggplot() +
 print(map_multi)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-multiply-multidirectional-hillshade-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas where the seabed texture remains visible." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multiply-multidirectional-hillshade-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas where the seabed texture remains visible." width="100%" />
 
 Better, but I still preferred the **metR** map. What was going on?
 
 ## Jackpot! Stretching the hillshade
 
-An earlier experiment comparing **metR** and **terra** on a Swiss elevation grid
-gave me one more thing to try. The calculation behind `geom_relief()` puts its
-shade values on a 0–1 scale. In that experiment, the **terra** values covered
-a narrower range.
+An earlier experiment comparing **metR** and **terra** on Swiss elevation data
+gave me one more idea to try. The calculation behind `geom_relief()` puts its
+shade values on a 0–1 scale. In that experiment, the **terra** values covered a
+narrower range.
 
-**What if I stretched the hillshade before blending it with the elevation
+**What if I stretch the hillshade before blending it with the elevation
 colors?**
 
-I map the 5th percentile of the multidirectional hillshade to 0 and
-the 95th to 1. Values in between are rescaled linearly, and anything beyond
-those percentiles is clipped to 0 or 1.
+I map the 5th percentile of the multidirectional hillshade to 0 and the 95th
+to 1. Values in between are rescaled linearly, and anything beyond those
+percentiles is clipped to 0 or 1.
+
+This is a visual adjustment, not a new hillshading method. It increases contrast
+and makes subtle terrain features easier to see, but it does not add any terrain
+information.
+
+I also wanted a brighter result, closer to the **metR** map. Let's see what
+happens when I stretch the hillshade and use a lighter grayscale ramp.
 
 
 ``` r
@@ -353,10 +367,9 @@ hill_3 <- clamp((hill_2 - q[1]) / diff(q), 0, 1)
 
 gghill_3 <- ggplot() +
   geom_spatraster(data = hill_3, maxcell = Inf, show.legend = FALSE) +
-  scale_fill_gradient2(
+  scale_fill_gradient(
     high = "white",
-    mid = "gray80",
-    low = "gray20",
+    low = "gray80",
     na.value = "transparent"
   ) +
   coord_sf(expand = FALSE) +
@@ -366,7 +379,7 @@ gghill_3 <- ggplot() +
 print(gghill_3)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-stretch-multidirectional-hillshade-1.webp" alt="Grayscale relief map with a pale background and sharper gray shadows along the eastern mountain ridges and the slopes of the seabed." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-stretch-multidirectional-hillshade-1.webp" alt="Grayscale relief map with a pale background and sharper gray shadows along the eastern mountain ridges and the slopes of the seabed." width="100%" />
 
 ``` r
 
@@ -374,8 +387,7 @@ print(gghill_3)
 pal_3 <- layer_data(gghill_3) |> dplyr::pull(fill)
 ```
 
-I also wanted a brighter result, closer to the **metR** map. Let's see what
-happens when I stretch the hillshade and use a lighter grayscale ramp.
+And now let's check the result:
 
 
 ``` r
@@ -397,11 +409,11 @@ map_final <- ggplot() +
 print(map_final)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-final-map-with-stretched-hillshade-1.webp" alt="Relief map of Andalusia with bright blue bathymetry, green lowlands and ochre mountains. Fine shadows define the eastern ridges and the seabed around the Strait of Gibraltar." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp" alt="Relief map of the Strait of Gibraltar with bright blue bathymetry, green lowlands and ochre mountains. Fine shadows define the eastern ridges and the seabed." width="100%" />
 
-The devil is in the details. Here's the same part of Sierra Nevada with
-**metR** alongside three versions of the multiply blend. The last panel
-shows the combined effect of the stretch and the lighter gray ramp.
+The devil is in the details. Here's the same part of Sierra Nevada with **metR**
+alongside three versions of the multiply blend. The last panel shows the
+combined effect of the stretch and the lighter gray ramp.
 
 
 ``` r
@@ -450,7 +462,7 @@ print(
 grid::popViewport()
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-sierra-nevada-detail-1.webp" alt="Four close-ups of Sierra Nevada in a two-by-two grid. The top row shows metR and the west-lit multiply blend. The bottom row shows the multidirectional and stretched versions. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-sierra-nevada-detail-1.webp" alt="Four close-ups of Sierra Nevada in a two-by-two grid. The top row shows metR and the west-lit multiply blend. The bottom row shows the multidirectional and stretched versions. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
 
 ## Comparing the maps
 
@@ -490,7 +502,7 @@ grid::pushViewport(grid::viewport(
 ))
 
 grid::grid.text(
-  "Five ways to shade Andalusia",
+  "Five ways to shade the Strait of Gibraltar",
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1:3),
   gp = grid::gpar(
     fontfamily = map_family, fontface = "bold", fontsize = 24, col = "#203b47"
@@ -557,13 +569,33 @@ grid::grid.draw(elevation_guide)
 grid::popViewport(2)
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-hillshade-comparison-poster-1.webp" alt="Five rows pair grayscale hillshades with colored elevation maps. The first and third rows share a hillshade, and multiply blending in the third row gives deeper colors. The metR row has the strongest grayscale contrast. The last row brings out fine ridges on a brighter map." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp" alt="Five rows pair grayscale hillshades with colored elevation maps. The first and third rows share a hillshade, and multiply blending in the third row gives deeper colors. The metR row has the strongest grayscale contrast. The last row brings out fine ridges on a brighter map." width="100%" />
 
 Look at the coast in the first and third rows. With multiply, the greens along
 the coast and the blues offshore are stronger, even though both maps use the
 same hillshade. In the last row, the stretch and lighter gray ramp give the
-seabed around the Strait of Gibraltar a brighter look, and I can still pick out
-its ridges. That's the version I'd use for this map.
+seabed a brighter look, and I can still pick out its ridges. That's the version
+I'd use for this map.
+
+## What I learned
+
+After all these experiments, my main takeaway is that **how we display a
+hillshade can matter just as much as how we calculate it**.
+
+Overlaying semi-transparent elevation colors works, but blending modes give us
+more control over how the colors and hillshade interact.
+
+Multidirectional hillshading can reveal terrain features that might be less
+visible with a single light source. However, it doesn't necessarily produce a
+better-looking map.
+
+And finally, stretching the hillshade turned out to be the missing piece. By
+expanding its tonal range, we can bring out subtle terrain features without
+changing the underlying elevation data or the hillshading algorithm.
+
+**There is no single recipe for a perfect hillshade.** Sometimes, the biggest
+improvement comes not from changing how we calculate the shadows, but from
+changing how we draw them.
 
 <iframe class="d-block w-100 border-0 rounded my-3" title="In the Shadows by The Rasmus on Spotify" src="https://open.spotify.com/embed/track/31RLtLXs4hZsxzLMpe7gl5?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen>
 
@@ -571,18 +603,16 @@ its ridges. That's the version I'd use for this map.
 
 ## References
 
+- Grossenbacher, T. (2019, April 19). *Bivariate maps with ggplot2 and sf*.
+  <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
+- Harris, B. (2026, January 27). *My ggplot2 blending adventure*. Reproducible
+  Ruins. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
+- Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
+  package. *Journal of Open Source Software, 8*(91), Article 5751.
+  <https://doi.org/10.21105/joss.05751>
 - Horn, B. K. P. (1981). Hill shading and the reflectance map. *Proceedings of
-  the IEEE*, *69*(1), 14–47. <https://doi.org/10.1109/PROC.1981.11918>.
-- Harris, B. (2026). My ggplot2 blending adventure. *Reproducible Ruins*.
-  <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>.
-- Grossenbacher, T. (2016). "Beautiful thematic maps with ggplot2 (only)." The
-  original article now redirects to the author's 2019 tutorial, "Bivariate maps
-  with ggplot2 and sf."
-  <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>.
-- Mapzen. Terrain Tiles. *Registry of Open Data on AWS*.
-  <https://registry.opendata.aws/terrain-tiles/>.
-- Royé, Dominic. 2022. “Hillshade Effects.” July 20.
-  <https://dominicroye.github.io/blog/hillshade-effect/>.
-- Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
-  package. *Journal of Open Source Software*, *8*(91), 5751.
-  <https://doi.org/10.21105/joss.05751>.
+  the IEEE, 69*(1), 14–47. <https://doi.org/10.1109/PROC.1981.11918>
+- Mapzen. (n.d.). *Terrain tiles*. Registry of Open Data on AWS.
+  <https://registry.opendata.aws/terrain-tiles/>
+- Royé, D. (2022, July 20). *Hillshade effects*.
+  <https://dominicroye.github.io/blog/hillshade-effect/>
