@@ -1,5 +1,5 @@
 ---
-title: 'Hillshading with R: The Definitive Guide'
+title: 'Hillshading with R: The definitive guide'
 subtitle: Level up your maps
 excerpt: >-
   Build a shaded relief map step by step, from a transparent color overlay
@@ -32,7 +32,7 @@ output:
 
 
 
-Lately I've been revisiting my
+Lately, I've been revisiting my
 [earlier](https://dieghernan.github.io/202210_tidyterra-hillshade/)
 [posts](https://dieghernan.github.io/202212_tidyterra-hillshade-2/) on
 hillshading and the [**tidyterra**
@@ -361,17 +361,9 @@ print(map_multi)
 
 ## Jackpot! Stretching the hillshade
 
-I kept coming back to the **metR** map. In an earlier experiment with a Swiss
-elevation grid, I worked through the calculation behind `geom_relief()` and
-compared it with `terra::shade()`. The **metR** calculation in that experiment
-uses the direction of the local gradient, while **terra** takes both slope and
-aspect as inputs. That got me looking at how the shade values were distributed.
-What if I stretched the hillshade before blending it with the elevation colors?
-
-<!-- FIXME: Add the numerical comparison from the Swiss experiment if it is
-needed here. The calculation is in _experiments/switzerland-hillshade/. -->
-
-
+An earlier experiment comparing **metR** and **terra** on a Swiss elevation
+grid gave me one more thing to try. What if I stretched the hillshade before
+blending it with the elevation colors?
 
 I map the 5th percentile of the multidirectional hillshade to 0 and the 95th
 to 1. Values in between are rescaled linearly, and anything beyond those
@@ -488,7 +480,11 @@ detail_theme <- theme(legend.position = "none")
 
 grid::grid.newpage()
 grid::grid.rect(gp = grid::gpar(fill = map_background, col = NA))
-grid::pushViewport(grid::viewport(layout = grid::grid.layout(1, 3)))
+grid::pushViewport(grid::viewport(
+  width = 0.92,
+  height = 0.92,
+  layout = grid::grid.layout(1, 3)
+))
 print(
   map_multiply + sierra_view + detail_theme + labs(title = "West light"),
   vp = grid::viewport(layout.pos.col = 1)
@@ -504,7 +500,7 @@ print(
 grid::popViewport()
 ```
 
-<img src="/assets/img/drafts/hillshading-guide-sierra-nevada-detail-1.webp" alt="Three close-ups of Sierra Nevada compare light from the west, light from four directions and the final hillshade. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
+<img src="/assets/img/drafts/hillshading-guide-sierra-nevada-detail-1.webp" alt="Three close-ups of Sierra Nevada compare a west-lit hillshade, a multidirectional hillshade and a stretched hillshade. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
 
 ## Comparing the maps
 
@@ -639,5 +635,5 @@ its ridges. That's the version I'd use for this map.
 - Royé, Dominic. 2022. “Hillshade Effects.” July 20.
   <https://dominicroye.github.io/blog/hillshade-effect/>.
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
-  package. *Journal of Open Source Software*, *8*(91), 5751,
+  package. *Journal of Open Source Software*, *8*(91), 5751.
   <https://doi.org/10.21105/joss.05751>.
