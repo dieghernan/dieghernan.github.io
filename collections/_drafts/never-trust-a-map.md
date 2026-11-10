@@ -103,7 +103,7 @@ If the circles are still circles, where's the lie?
 
 <img src="/assets/img/drafts/never-trust-a-map-web-mercator-1.webp" alt="Web Mercator world map with red circles that grow from the equator toward the top and bottom of the map." width="100%" />
 
-Web Mercator shows the familiar **conformal** pattern. Compare the middle row
+Web Mercator comes close to the **conformal** pattern. Compare the middle row
 with the top and bottom rows. The circles stay roughly round, but they take up
 much more room at high latitudes. That's how Greenland gets to look so big.
 
@@ -124,7 +124,7 @@ shape and area change?
 
 <img src="/assets/img/drafts/never-trust-a-map-winkel-tripel-1.webp" alt="Winkel Tripel world map with red indicatrices that vary in size and become more elongated away from the center." width="100%" />
 
-Follow the row at 56.25° N from the central meridian east across Russia.
+Follow the second row from the top, east across Russia.
 Watch the ellipses stretch and tilt, then compare them with the equatorial row
 to see how their areas change too.
 
@@ -140,6 +140,10 @@ compare circle sizes within each panel.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices vary in area and shape across projections. The final two panels compare a vertical perspective and an orthographic view centered over North Africa, both with an extra indicatrix at the North Pole." width="100%" />
+
+The outlines can fool you, too. Equal Earth and the heart-shaped Bonne look
+quite different, yet both preserve area. Here's how we can group the twelve
+projections in the poster.
 
 - **Conformal pattern.** Web Mercator.
 - **Equal-area.** Equal Earth, Mollweide, Sinusoidal, Hammer, Bonne and Goode

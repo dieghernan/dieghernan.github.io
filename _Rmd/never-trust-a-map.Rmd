@@ -325,7 +325,7 @@ If the circles are still circles, where's the lie?
 draw_map("Web Mercator")
 ```
 
-Web Mercator shows the familiar **conformal** pattern. Compare the middle row
+Web Mercator comes close to the **conformal** pattern. Compare the middle row
 with the top and bottom rows. The circles stay roughly round, but they take up
 much more room at high latitudes. That's how Greenland gets to look so big.
 
@@ -362,7 +362,7 @@ shape and area change?
 draw_map("Winkel Tripel")
 ```
 
-Follow the row at 56.25° N from the central meridian east across Russia.
+Follow the second row from the top, east across Russia.
 Watch the ellipses stretch and tilt, then compare them with the equatorial row
 to see how their areas change too.
 
@@ -437,6 +437,10 @@ for (index in seq_along(gallery_order)) {
 }
 grid::popViewport()
 ```
+
+The outlines can fool you, too. Equal Earth and the heart-shaped Bonne look
+quite different, yet both preserve area. Here's how we can group the twelve
+projections in the poster.
 
 - **Conformal pattern.** Web Mercator.
 - **Equal-area.** Equal Earth, Mollweide, Sinusoidal, Hammer, Bonne and Goode
