@@ -160,12 +160,6 @@ across panels.
 {: .alert .alert-warning .p-3 .mx-2 .mb-3}
 
 
-```
-#> Warning in CPL_transform(x, crs, aoi, pipeline, reverse, desired_accuracy, :
-#> GDAL Error 1: PROJ: pipeline: Pipeline: Inverse operation for vandg4 is not
-#> available
-```
-
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Van der Grinten IV has an apple-shaped outline and strong distortion near its outer meridians." width="100%" />
 
 The outlines can fool you, too. Compare the two rectangles in the first
@@ -572,3 +566,5 @@ grid::popViewport()
   0.3.0, <https://CRAN.R-project.org/package=tissot>.
 - Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et les
   projections des cartes géographiques*. Gauthier-Villars.
+- Alikhan, N.-F. (2022, May 20). Variations on map projections in R. *Happykhan*.
+  <https://happykhan.com/posts/map-projections-in-r>.
