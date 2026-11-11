@@ -239,9 +239,8 @@ print(map_metr)
 
 <img src="/assets/img/drafts/better-hillshading-R-metr-relief-map-1.webp" alt="Relief map with pale ochre mountains, green lowlands and blue water. High-contrast shading is most visible in the eastern ranges, where the elevation colors are more transparent." width="100%" />
 
-This is the point where I started preferring the **metR** map. Look at the
-mountains in the east! The ridges stand out more clearly, and the colors look
-less washed out.
+Look at the mountains in the east! The ridges stand out more clearly, and
+the colors look less washed out.
 
 Could I get a similar result by changing how I combined the hillshade and the
 elevation colors?
@@ -287,7 +286,7 @@ So far, my **terra** hillshade has used a single light source from the west.
 [Dominic
 Royé](https://dominicroye.github.io/blog/hillshade-effect/#multidirectional-shadows)
 shows what happens when you light the terrain from four directions. He keeps the
-sun at the same angle above the horizon and adds the four hillshades together.
+sun at the same angle above the horizon.
 
 So let's add multidirectional shadows to our map. I'll keep the multiply blend
 and the light 40° above the horizon. Royé sums his four hillshades. I average
@@ -390,8 +389,6 @@ print(gghill_3)
 # Get colors
 pal_3 <- layer_data(gghill_3) |> dplyr::pull(fill)
 ```
-
-And now let's check the result:
 
 
 ``` r
@@ -603,8 +600,10 @@ intensity from 0 to 1.
 I can get the same calculation on a regular grid with base **R** and
 **terra**. I use three-point differences, centered in the interior and
 one-sided at the edges. Raster rows run north to south, so the vertical
-step is negative. This loads the raster into memory and needs at least three
-rows and columns. I keep the original CRS and prefer a projected grid so both
+step is negative.
+
+The function loads the raster into memory and needs at least three rows and
+three columns. It keeps the original CRS. I prefer a projected grid so both
 axes measure distance in the same units.
 
 
@@ -689,13 +688,11 @@ grid::popViewport()
 
 <img src="/assets/img/drafts/better-hillshading-R-recreated-metr-relief-1.webp" alt="Two grayscale maps of the Strait of Gibraltar compare metR with a base R and terra recreation. Both show similar bands of light and dark on mountain ridges and across the seabed." width="100%" />
 
-The intensities matched
-on a complete test grid with equally scaled axes. **metR** takes derivatives
-after **ggplot2** transforms the coordinates, so scaling the axes differently
-can change the result. I use the raster coordinates. The centered difference
-skips the center cell, so I explicitly keep missing elevations blank. Gaps
-can also leave neighboring cells unshaded, while **metR** can calculate
-across them.
+The two versions matched on a complete test grid with equally scaled axes.
+I calculate the shade in raster coordinates, while **metR** uses the
+coordinates transformed by **ggplot2**, so scaling the axes differently can
+change the result. Around gaps, my version can leave a few extra cells blank
+because **metR** can calculate across missing observations.
 
 ## What I learned
 
