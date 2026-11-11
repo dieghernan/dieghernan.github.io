@@ -38,7 +38,7 @@ mathjax: true
 Lately, I've been revisiting my
 [earlier](https://dieghernan.github.io/202210_tidyterra-hillshade/)
 [posts](https://dieghernan.github.io/202212_tidyterra-hillshade-2/) on
-hillshading and the [tidyterra
+hillshading and the [**tidyterra**
 FAQs](https://dieghernan.github.io/tidyterra/articles/faqs.html). I wanted to
 understand why two maps made from the same digital elevation model (DEM) could
 look so different. How much of that comes from the hillshade, and how much from
@@ -262,7 +262,7 @@ hillshade with the elevation colors?**
 
 As I discovered later, `geom_relief()` shades slopes mainly by the direction
 they face. In mountainous terrain, this can make ridges and valleys stand out
-strongly. I'll come back to how that works in [the bonus
+strongly. I'll come back to how that works in [the extra
 section](#bonus-recreating-metrs-relief-shading-from-scratch).
 
 </details>
@@ -408,7 +408,7 @@ hillshade itself mattered too.
 
 An earlier experiment comparing **metR** and **terra** on Swiss elevation data
 suggested a possible explanation. The calculation behind `geom_relief()`
-produces shade values between 0 and 1, as I explain in [the bonus
+produces shade values between 0 and 1, as I explain in [the extra
 section](#bonus-recreating-metrs-relief-shading-from-scratch). In that test,
 the **terra** hillshade covered a noticeably narrower range.
 
@@ -478,7 +478,7 @@ print(map_final)
 
 <img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp" alt="Relief map of the Strait of Gibraltar with bright blue bathymetry, green lowlands and ochre mountains. Fine shadows define the eastern ridges and the seabed." width="100%" />
 
-The full map looks promising, but I wanted to check whether the finer mountain ridges benefited too. The devil is in the details. For this closer look at Sierra Nevada, I downloaded
+The full map looks promising, but I wanted to check whether the finer mountain ridges benefited too. The devil is in the details. For this closer look at [Sierra Nevada (Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I downloaded
 a separate DEM and used it for all four maps. Look at the same ridges in the two
 bottom panels to see what the stretch and lighter gray ramp change.
 
@@ -739,7 +739,7 @@ same hillshade. In the last row, the stretch and lighter gray ramp give the
 seabed a brighter look, and I can still pick out its ridges. That's the version
 I'd use for this map.
 
-## Bonus: Recreating metR's relief shading from scratch {#bonus-recreating-metrs-relief-shading-from-scratch}
+## Extra ball: Recreating metR's relief shading {#bonus-recreating-metrs-relief-shading-from-scratch}
 
 The stretched hillshade got me closer to the look I liked in the **metR** map.
 But I still wanted to know what `geom_relief()` was doing differently. So I took
