@@ -271,6 +271,8 @@ section](#bonus-recreating-metrs-relief-shading-from-scratch).
 
 ## Introducing ggblend
 
+Before changing how I calculated the shadows, I wanted to test the other half of the problem: how the hillshade interacts with the elevation colors. Could a different blend get me closer to the **metR** result without changing the underlying shade?
+
 [Barney Harris](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/)
 noticed that the colors in the first version of my Romania map looked a bit
 washed out when I made the elevation colors transparent. He showed what happens
@@ -302,8 +304,7 @@ print(map_multiply)
 
 <img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multiply-single-direction-hillshade-1.webp" alt="Relief map with deeper greens and blues than the transparent overlay. Dark slopes add texture to the ochre mountains while the western lowlands remain mostly smooth." width="100%" />
 
-The colors looked better, but **I still wanted to see what I was losing** by
-using a single light direction.
+The colors looked better without changing the hillshade itself. That answered part of my question about blending, but left another open: **what was I losing by using a single light direction?**
 
 ## Enhancing the hillshading
 
@@ -362,7 +363,7 @@ print(map_multi)
 
 <img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multiply-multidirectional-hillshade-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas where the seabed texture remains visible." width="100%" />
 
-Better, but I still preferred the **metR** map. **What was going on?**
+The extra light directions revealed more of the terrain, but I still preferred the **metR** map. Maybe the remaining difference wasn't the lighting alone, but how strongly the shadows affected the colors.
 
 ## One more trick: the alpha hack
 
@@ -400,7 +401,7 @@ plot(map_multi_alpha)
 
 <img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multiply-multidirectional-alpha-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas. Colors are lighter than when using ggblend" width="100%" />
 
-Almost there! But I still didn't get the **drama** of **metR**.
+Almost there! The colors were brighter, but I still didn't get the **drama** of **metR**. Changing the blend and the opacity hadn't been enough; perhaps the range of shade values mattered too.
 
 ## Jackpot! Stretching the hillshade
 
@@ -423,16 +424,7 @@ to 1. I rescale the values in between linearly and clip the rest to 0 or 1.
 Stretching makes subtle terrain features easier to see by increasing contrast.
 The underlying elevation data stay the same.
 
-<div class="alert alert-success p-3 mx-2 mb-3" markdown="1">
-
-On this map, stretching the hillshade and using a lighter gray ramp made a
-bigger difference than adding more light directions.
-
-</div>
-
-
-I also wanted a brighter result, closer to the **metR** map. Let's see what
-happens when I stretch the hillshade and use a lighter grayscale ramp.
+I also wanted a brighter result, closer to the **metR** map. Let's see what happens when I stretch the hillshade and use a lighter grayscale ramp.
 
 
 ``` r
@@ -485,7 +477,7 @@ print(map_final)
 
 <img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp" alt="Relief map of the Strait of Gibraltar with bright blue bathymetry, green lowlands and ochre mountains. Fine shadows define the eastern ridges and the seabed." width="100%" />
 
-The devil is in the details. For this closer look at Sierra Nevada, I downloaded
+The full map looks promising, but I wanted to check whether the finer mountain ridges benefited too. The devil is in the details. For this closer look at Sierra Nevada, I downloaded
 a separate DEM and used it for all four maps. Look at the same ridges in the two
 bottom panels to see what the stretch and lighter gray ramp change.
 
@@ -617,7 +609,7 @@ grid::popViewport()
 
 ## Comparing the maps
 
-I put all six versions side by side. The first and third rows use the same
+The Sierra Nevada close-up helps show what happens to fine ridges. To return to the original question about the whole map, I put all six versions side by side. The first and third rows use the same
 single-direction hillshade, with different ways of combining the layers. The
 fourth and fifth rows use the same multidirectional hillshade, so you can
 compare the multiply blend with the alpha hack.
