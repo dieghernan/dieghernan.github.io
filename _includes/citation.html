@@ -37,18 +37,19 @@
 
   <details class="mt-3">
     <summary class="text-muted">BibTeX</summary>
-    <div class="language-bibtex highlighter-rouge">
-      <div class="highlight">
-    <pre class="highlight"><code>@misc{<escape>{{ bibkey }}</escape>,
-  author = {<escape>{{ bib_author | escape }}</escape>},
-  title = {<escape>{{ citation_title | escape }}</escape>},
-  year = {<escape>{{ page.date | date: "%Y" }}</escape>},
-  month = {<escape>{{ page.date | date: "%m" }}</escape>},
-  day = {<escape>{{ page.date | date: "%d" }}</escape>},
-  howpublished = {<escape>{{ citation_site | escape }}</escape>},
-  url = {<escape>{{ citation_url | escape }}</escape>}
-}</code></pre>
-</div>
-</div>
+      <div class="language-bibtex highlighter-rouge">
+        <div class="highlight">
+          <pre class="highlight"><code><span class="nc">@misc</span><span class="p">{</span><span class="nl"><escape>{{ bibkey }}</escape></span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{<escape>{{ bib_author | escape }}</escape>}</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{<escape>{{ citation_title | escape }}</escape>}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{<escape>{{ page.date | date: "%Y" }}</escape>}</span><span class="p">,</span>
+  <span class="na">month</span> <span class="p">=</span> <span class="s">{<escape>{{ page.date | date: "%m" }}</escape>}</span><span class="p">,</span>
+  <span class="na">day</span> <span class="p">=</span> <span class="s">{<escape>{{ page.date | date: "%d" }}</escape>}</span><span class="p">,</span>
+  <span class="na">howpublished</span> <span class="p">=</span> <span class="s">{<escape>{{ citation_site | escape }}</escape>}</span><span class="p">,</span>
+  <span class="na">url</span> <span class="p">=</span> <span class="s">{<escape>{{ citation_url | escape }}</escape>}</span>
+<span class="p">}</span>
+          </code></pre>
+        </div>
+      </div>
   </details>
 </footer>
