@@ -914,8 +914,7 @@ donana <- sf::st_bbox(donana_area)
 # Download beyond the frame so the edge cells have neighbors.
 donana_dem <- get_elev_raster(
   sf::st_as_sf(sf::st_buffer(donana_area, dist = 1000)),
-  # z = 9,
-  z = 2,
+  z = 9,
   clip = "bbox",
   tmp_dir = tools::R_user_dir("elevatr", "cache")
 ) |>
