@@ -32,4 +32,8 @@
 
     <!-- end custom head snippets -->
 
+{% if page.date and page.show_citation %}
+{% include citation-scholar.html %}
+{% endif %}
+
 {% include custom/structured_data/page.html %}
