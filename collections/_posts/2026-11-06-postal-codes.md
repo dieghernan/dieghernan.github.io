@@ -9,6 +9,7 @@ excerpt: >-
   Voronoi, giscoR and sf.
 syndication:
   - https://www.r-bloggers.com/2026/11/postal-codes-and-tessellations/
+  - https://dev.to/dieghernan/postal-codes-and-tessellations-4ll3
 tags:
   - music
   - r_bloggers
