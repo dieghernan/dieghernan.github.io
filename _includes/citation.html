@@ -12,7 +12,7 @@
 {%- assign citation_site = site.title | default: "One World" -%}
 {%- assign bib_author = page.bib_author
   | default: site.bib_author
-  | default: citation_author -%}
+  | default: "Hernangómez, Diego" -%}
 {%- assign bibkey = page.date | date: "%Y"
   | prepend: "post"
   | append: "-"
