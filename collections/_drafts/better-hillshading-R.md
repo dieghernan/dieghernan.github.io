@@ -29,6 +29,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
+mathjax: true
 ---
 
 
@@ -38,9 +39,9 @@ Lately, I've been revisiting my
 [posts](https://dieghernan.github.io/202212_tidyterra-hillshade-2/) on
 hillshading and the [tidyterra
 FAQs](https://dieghernan.github.io/tidyterra/articles/faqs.html). I wanted to
-understand why two maps made from the same elevation grid could look so
-different. How much of that comes from the hillshade, and how much from the way
-we combine it with the elevation colors?
+understand why two maps made from the same digital elevation model (DEM)
+could look so different. How much of that comes from the hillshade, and how
+much from the way we combine it with the elevation colors?
 
 I started with the [alpha
 hack](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/) I used
@@ -50,12 +51,13 @@ map better!
 
 ## Data and setup
 
-In this post, I'm using an elevation grid for the area around the Strait of
-Gibraltar in southern Spain. I get the boundary from **mapSpain**, use its
-bounding box to download the elevation data with **elevatr** and put the raster
-in the same coordinate reference system as the boundary. Every map uses the same
-grid at zoom level 8, and every color map uses **tidyterra**'s `etopo1`
-elevation palette.
+<!-- TODO: Restore the elevation tile zoom to 8 before publishing. -->
+
+In this post, I'm using a DEM for the area around the Strait of
+Gibraltar in southern Spain. I get the boundary from **mapSpain** and use its
+bounding box to download the elevation tiles at zoom level 7 with **elevatr**.
+Then I reproject the DEM to match the boundary. All the maps use that same DEM,
+and every color map uses **tidyterra**'s `etopo1` elevation palette.
 
 The terrain tiles include elevations on land and depths below sea level, so the
 map also shows the seabed around the Strait.
@@ -104,7 +106,7 @@ if (!dir.exists(tools::R_user_dir("elevatr", "cache"))) {
 
 dem <- get_elev_raster(
   the_strait,
-  z = 8,
+  z = 7,
   clip = "bbox",
   tmp_dir = tools::R_user_dir("elevatr", "cache")
 ) |>
@@ -117,7 +119,7 @@ names(dem) <- "elevation"
 ## Hillshade with the alpha hack
 
 For my first try, I followed the example in the **terra** help. It calculates
-slope and aspect from the elevation grid, creates a hillshade with a single
+slope and aspect from the DEM, creates a hillshade with a single
 light direction and draws a semi-transparent elevation layer on top. I do the
 same in **ggplot2** and set the elevation colors to 40% opacity with
 `alpha = 0.4`.
@@ -196,8 +198,8 @@ print(map_alpha)
 ## Shaded relief with metR
 
 Enter **metR**. This is the approach I tried in the **tidyterra** FAQs using
-`metR::geom_relief()`. Here I draw the hillshade directly from the elevation
-grid and draw the elevation colors on top. This time I map `alpha` to elevation,
+`metR::geom_relief()`. Here I draw the hillshade directly from the DEM
+and draw the elevation colors on top. This time I map `alpha` to elevation,
 so more of the hillshade shows through in the mountains.
 
 
@@ -276,19 +278,21 @@ print(map_multiply)
 
 <img src="/assets/img/drafts/better-hillshading-R-multiply-single-direction-hillshade-1.webp" alt="Relief map with deeper greens and blues than the transparent overlay. Dark slopes add texture to the ochre mountains while the western lowlands remain mostly smooth." width="100%" />
 
-Definitely better than the first one, but I wanted more hillshading!
+The colors looked better, but I still wanted to see what a single light
+direction was missing.
 
 ## Enhancing the hillshading
 
-So far, the light has come from the west. [Dominic
+So far, my **terra** hillshade has used a single light source from the west.
+[Dominic
 Royé](https://dominicroye.github.io/blog/hillshade-effect/#multidirectional-shadows)
 shows what happens when you light the terrain from four directions. He keeps the
 sun at the same angle above the horizon and adds the four hillshades together.
 
 So let's add multidirectional shadows to our map. I'll keep the multiply blend
-and the 40° sun angle, but average the hillshades from 225°, 270°, 315° and 360°
-rather than sum them as Royé does. This preserves the original scale of the
-hillshade values.
+and the light 40° above the horizon. Royé sums his four hillshades. I average
+mine (225°, 270°, 315° and 360°) to keep the values on the same scale as a
+single hillshade.
 
 
 ``` r
@@ -340,9 +344,9 @@ Better, but I still preferred the **metR** map. What was going on?
 ## Jackpot! Stretching the hillshade
 
 An earlier experiment comparing **metR** and **terra** on Swiss elevation data
-gave me one more idea to try. The calculation behind `geom_relief()` puts its
-shade values on a 0–1 scale. In that experiment, the **terra** values covered a
-narrower range.
+gave me one more idea to try. The calculation behind `geom_relief()` produces
+shade values between 0 and 1, as I explain in [the bonus section](#bonus-recreating-metrs-relief-shading-from-scratch).
+In that experiment, the **terra** values covered a narrower range.
 
 **What if I stretch the hillshade before blending it with the elevation
 colors?**
@@ -577,10 +581,126 @@ same hillshade. In the last row, the stretch and lighter gray ramp give the
 seabed a brighter look, and I can still pick out its ridges. That's the version
 I'd use for this map.
 
+## Bonus: Recreating metR’s relief shading from scratch
+
+The stretched hillshade got me closer to the look I liked in the **metR** map.
+But I still wanted to know what `geom_relief()` was doing differently. So I
+took a look under the hood. Conventional hillshading uses both slope and
+aspect. [The **metR** calculation](https://github.com/eliocamp/metR/blob/main/R/geom_relief.R)
+uses just the downhill direction. A gentle slope and a steep slope facing the
+same way can get exactly the same shade.
+
+$$
+I = \frac{1 + \cos(\theta - \alpha)}{2}
+$$
+
+Here $$\theta$$ is the downhill angle, computed with `atan2(-dy, -dx)`, and
+$$\alpha$$ is the light direction, converted to radians from `sun.angle + 90`.
+At `sun.angle = 0`, slopes that descend toward the north get the brightest
+shade. Positive angles turn the light counterclockwise. The cosine gives an
+intensity from 0 to 1.
+
+I can get the same calculation on a regular grid with base **R** and
+**terra**. I use three-point differences, centered in the interior and
+one-sided at the edges. Raster rows run north to south, so the vertical
+step is negative. This loads the raster into memory and needs at least three
+rows and columns. I keep the original CRS and prefer a projected grid so both
+axes measure distance in the same units.
+
+
+``` r
+relief <- function(x, sun.angle = 60) {
+  stopifnot(
+    inherits(x, "SpatRaster"), terra::nlyr(x) == 1L,
+    nrow(x) >= 3L, ncol(x) >= 3L
+  )
+  z <- terra::as.matrix(x, wide = TRUE)
+  spacing <- terra::res(x)
+
+  deriv <- function(z, h) {
+    n <- length(z)
+    c(
+      (-3 * z[1] + 4 * z[2] - z[3]) / (2 * h),
+      (z[3:n] - z[1:(n - 2)]) / (2 * h),
+      (3 * z[n] - 4 * z[n - 1] + z[n - 2]) / (2 * h)
+    )
+  }
+
+  dx <- t(apply(z, 1, deriv, h = spacing[1]))
+  dy <- apply(z, 2, deriv, h = -spacing[2])
+  angle <- (sun.angle + 90) * pi / 180
+  shade <- (1 + cos(atan2(-dy, -dx) - angle)) / 2
+  shade[is.na(z)] <- NA_real_
+
+  out <- terra::rast(x)
+  terra::values(out) <- as.vector(t(shade))
+  names(out) <- "relief"
+  out
+}
+```
+
+Here are the two versions side by side. Both use the same DEM, map extent and
+light direction (`sun.angle = 60`), with intensities from 0 to 1 mapped to
+the same gray20-to-white ramp.
+
+
+``` r
+light_direction <- 60
+dark <- "gray20"
+light <- "white"
+hill_recreated <- relief(dem, sun.angle = light_direction)
+
+map_view <- coord_sf(
+  crs = terra::crs(dem),
+  xlim = c(xmin(dem), xmax(dem)),
+  ylim = c(ymin(dem), ymax(dem)),
+  expand = FALSE
+)
+
+relief_metr <- ggplot(dem, aes(x, y)) +
+  geom_relief(
+    aes(z = elevation),
+    sun.angle = light_direction, dark = dark, light = light,
+    interpolate = FALSE
+  ) +
+  map_view +
+  labs(title = "metR", x = NULL, y = NULL)
+
+relief_terra <- ggplot() +
+  geom_spatraster(
+    data = hill_recreated, maxcell = Inf, interpolate = FALSE,
+    show.legend = FALSE
+  ) +
+  scale_fill_gradient(low = dark, high = light, limits = c(0, 1), na.value = NA) +
+  map_view +
+  labs(title = "Base R and terra", x = NULL, y = NULL)
+
+grid::grid.newpage()
+grid::grid.rect(gp = grid::gpar(fill = map_background, col = NA))
+grid::pushViewport(grid::viewport(
+  width = 0.97,
+  height = 0.97,
+  layout = grid::grid.layout(1, 2)
+))
+print(relief_metr, vp = grid::viewport(layout.pos.col = 1))
+print(relief_terra, vp = grid::viewport(layout.pos.col = 2))
+grid::popViewport()
+```
+
+<img src="/assets/img/drafts/better-hillshading-R-recreated-metr-relief-1.webp" alt="Two grayscale maps of the Strait of Gibraltar compare metR with a base R and terra recreation. Both show similar bands of light and dark on mountain ridges and across the seabed." width="100%" />
+
+The intensities matched
+on a complete test grid with equally scaled axes. **metR** takes derivatives
+after **ggplot2** transforms the coordinates, so scaling the axes differently
+can change the result. I use the raster coordinates. The centered difference
+skips the center cell, so I explicitly keep missing elevations blank. Gaps
+can also leave neighboring cells unshaded, while **metR** can calculate
+across them.
+
 ## What I learned
 
-After all these experiments, my main takeaway is that **how we display a
-hillshade can matter just as much as how we calculate it**.
+For me, **how we display a hillshade can matter just as much as how we
+calculate it**.
 
 Overlaying semi-transparent elevation colors works, but blending modes give us
 more control over how the colors and hillshade interact.
@@ -589,13 +709,9 @@ Multidirectional hillshading can reveal terrain features that might be less
 visible with a single light source. However, it doesn't necessarily produce a
 better-looking map.
 
-And finally, stretching the hillshade turned out to be the missing piece. By
-expanding its tonal range, we can bring out subtle terrain features without
+For the map I'd use here, stretching the hillshade was the missing piece.
+By expanding its tonal range, we can bring out subtle terrain features without
 changing the underlying elevation data or the hillshading algorithm.
-
-**There is no single recipe for a perfect hillshade.** Sometimes, the biggest
-improvement comes not from changing how we calculate the shadows, but from
-changing how we draw them.
 
 <iframe class="d-block w-100 border-0 rounded my-3" title="In the Shadows by The Rasmus on Spotify" src="https://open.spotify.com/embed/track/31RLtLXs4hZsxzLMpe7gl5?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen>
 
@@ -603,16 +719,16 @@ changing how we draw them.
 
 ## References
 
-- Grossenbacher, T. (2019, April 19). *Bivariate maps with ggplot2 and sf*.
-  <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
-- Harris, B. (2026, January 27). *My ggplot2 blending adventure*. Reproducible
-  Ruins. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
+- Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf.
+  *Timo Grossenbacher*. <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
+- Harris, B. (2026, January 27). My ggplot2 blending adventure.
+  *Reproducible Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
   package. *Journal of Open Source Software, 8*(91), Article 5751.
   <https://doi.org/10.21105/joss.05751>
 - Horn, B. K. P. (1981). Hill shading and the reflectance map. *Proceedings of
   the IEEE, 69*(1), 14–47. <https://doi.org/10.1109/PROC.1981.11918>
-- Mapzen. (n.d.). *Terrain tiles*. Registry of Open Data on AWS.
+- Mapzen. (n.d.). *Terrain tiles* [Data set]. Registry of Open Data on AWS.
   <https://registry.opendata.aws/terrain-tiles/>
-- Royé, D. (2022, July 20). *Hillshade effects*.
+- Royé, D. (2022, July 20). Hillshade effects. *Dr Dominic Royé*.
   <https://dominicroye.github.io/blog/hillshade-effect/>
