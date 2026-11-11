@@ -1,6 +1,9 @@
 
 {%- assign citation_date = page.date | date: "%Y, %B %-d" -%}
-{%- assign citation_title = page.title | strip_html -%}
+{%- assign citation_title = page.title
+  | markdownify
+  | strip_html
+  | normalize_whitespace -%}
 {%- assign citation_url = page.url | absolute_url -%}
 {%- assign citation_author = page.citation_author
   | default: site.citation_author
