@@ -1,7 +1,7 @@
 ---
 title: 'Better hillshading with R: the display matters'
 subtitle: >-
-  What I learned about blending, lighting and contrast
+  Same terrain, different shadows
 excerpt: >-
   Build a shaded relief map step by step, from a transparent color overlay
   to multidirectional lighting with stretched contrast.
@@ -978,19 +978,14 @@ grid::popViewport()
 
 ## What I learned
 
-If I were building another terrain map tomorrow, here's what I'd try first:
+After all these experiments, here are my main takeaways:
 
-- I'd try **multiply** first. On this map, it kept the elevation colors
-  stronger.
-- I'd compare **one light direction with several**. Lighting from different
-  directions brought out different slopes, and I'd choose by looking at the map.
-- I'd **check the range of the hillshade values**. If they bunch up, a stretch
-  like the one here can bring out more contrast.
-- I'd **choose the shading to suit the terrain**. I liked the aspect-based
-  shading in Sierra Nevada. In Doñana, I preferred the quieter result of the
-  stretched hillshade.
+- **Blending matters.** I started by changing the hillshading method, but how I combined the shadows with the elevation colors turned out to be just as important.
+- **More light directions aren't always better.** Multidirectional hillshading revealed more terrain features, but it wasn't the improvement I was looking for on its own.
+- **Don't underestimate contrast.** Stretching the hillshade and using a lighter gray ramp made the biggest visual difference in my map. Sometimes the answer is simpler than a new algorithm.
+- **Choose the shading to suit the terrain.** For mountainous areas, I'd consider aspect-based shading, whether with **metR** or my own implementation. For flatter landscapes, I prefer the more restrained look of conventional hillshading.
 
-**How we display a hillshade can matter just as much as how we calculate it.**
+In the end, I didn't find a universally better hillshading method. I found a combination that works better for the map I wanted to make.
 
 <iframe class="d-block w-100 border-0 rounded my-3" title="In the Shadows by The Rasmus on Spotify" src="https://open.spotify.com/embed/track/31RLtLXs4hZsxzLMpe7gl5?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen>
 
