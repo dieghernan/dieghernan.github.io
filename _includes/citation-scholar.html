@@ -4,8 +4,9 @@
   | normalize_whitespace -%}
 {%- assign citation_url = page.url | absolute_url -%}
 {%- assign citation_author = page.bib_author
+  | default: page.author.name
   | default: site.bib_author
-  | default: "Hernangómez, Diego" -%}
+  | default: site.author.name -%}
 <meta name="citation_title" content="{{ citation_title | escape }}">
 <meta name="citation_author" content="{{ citation_author | escape }}">
 <meta name="citation_publication_date" content="{{ page.date | date: '%Y/%m/%d' }}">
