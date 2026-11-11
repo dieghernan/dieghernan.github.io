@@ -428,14 +428,18 @@ And that's it! Which one do you like the most? Let me know in the comments.
 
 ## References
 
-- Bertin, J. (1967). _Sémiologie graphique : les diagrammes, les réseaux, les
-  cartes_. Paris and The Hague: Mouton & Gauthier-Villars.
-  <https://catalogue.bnf.fr/ark:/12148/cb41605817s>.
-- European Commission. Joint Research Centre. (2023). _GHSL data package 2023._
-  Publications Office, LU <https://doi.org/10.2760/098587>.
-- Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
-  package. _Journal of Open Source Software_, _8_(91), 5751,
-  <https://doi.org/10.21105/joss.05751>.
-- Pesaresi, M. & Politis, P. (2023). "GHS-BUILT-C R2023A - GHS Settlement
-  Characteristics, derived from Sentinel2 composite (2018) and other GHS R2023A
-  data." <https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30>.
+- Bertin, J. (1967). *Sémiologie graphique : Les diagrammes, les réseaux, les
+  cartes*. Mouton; Gauthier-Villars.
+  <https://catalogue.bnf.fr/ark:/12148/cb41605817s>
+- Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
+  package. *Journal of Open Source Software, 8*(91), Article 5751.
+  <https://doi.org/10.21105/joss.05751>
+- Pesaresi, M., & Politis, P. (2023). *GHS-BUILT-C R2023A – GHS settlement
+  characteristics, derived from Sentinel2 composite (2018) and other GHS R2023A
+  data* [Data set]. European Commission, Joint Research Centre.
+  [DOI](https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30)
+- Schiavina, M., Melchiorri, M., Pesaresi, M., Politis, P., Carneiro Freire,
+  S. M., Maffenini, L., Florio, P., Ehrlich, D., Goch, K., Carioli, A.,
+  Uhl, J., Tommasi, P., & Kemper, T. (2023). *GHSL data package 2023*
+  (JRC133256). Publications Office of the European Union.
+  <https://doi.org/10.2760/098587>

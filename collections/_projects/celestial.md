@@ -170,7 +170,8 @@ A BibTeX entry:
 
 ## References
 
-- <span id="ref-frohn2015"></span> Frohn, O. (2015). "d3-celestial." <https://github.com/ofrohn/d3-celestial/>.
-- <span id="ref-pebesma2018"></span> Pebesma, E. (2018). "Simple features for R: Standardized support for spatial
-  vector data." _The R Journal_, 10(1), 439–446.
-  <https://doi.org/10.32614/RJ-2018-009>.
+- <span id="ref-frohn2015"></span> Frohn, O. (2015). *d3-celestial* [Computer software]. GitHub.
+  <https://github.com/ofrohn/d3-celestial/>
+- <span id="ref-pebesma2018"></span> Pebesma, E. (2018). Simple features
+  for R: Standardized support for spatial vector data. *The R Journal, 10*(1),
+  439–446. <https://doi.org/10.32614/RJ-2018-009>

@@ -151,12 +151,19 @@ ISO_memcol = function(df, #Input dataframe
 
 ## D. Data sources
 
-- Wikipedia, the free encyclopedia
-  - [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
-  - [NUTS](https://es.wikipedia.org/wiki/Nomenclatura_de_las_Unidades_Territoriales_Estad%C3%ADsticas)
-- The World Factbook - CIA (historical source used for this dataset)
-- [United Nations Statistical Division](https://unstats.un.org/unsd/methodology/m49/overview/)
-- [geonames](https://www.geonames.org/)
-- [REST COUNTRIES](https://restcountries.com/)
-- [Unicode Common Locale Data Repository (CLDR) Project](https://github.com/unicode-cldr)
-- <http://www.statoids.com/>
+- Central Intelligence Agency. (n.d.). *The world factbook* [Historical
+  reference work]. [Archived editions](https://web.archive.org/web/20260203124934/https://www.cia.gov/the-world-factbook/about/archives/)
+- GeoNames. (n.d.). *GeoNames geographical database* [Data set].
+  <https://www.geonames.org/>
+- ISO 3166-1. (n.d.). In *Wikipedia*. <https://en.wikipedia.org/wiki/ISO_3166-1>
+- Law, G. (n.d.). *Administrative divisions of countries (Statoids)*.
+  <https://www.statoids.com/>
+- Nomenclatura de las unidades territoriales estadísticas. (n.d.). In
+  *Wikipedia*. [Article](https://es.wikipedia.org/wiki/Nomenclatura_de_las_Unidades_Territoriales_Estad%C3%ADsticas)
+- REST Countries. (n.d.). *REST Countries* [Data API].
+  <https://restcountries.com/>
+- Unicode Consortium. (n.d.). *Unicode Common Locale Data Repository*
+  [Archived data]. GitHub. <https://github.com/unicode-cldr>
+- United Nations Statistics Division. (n.d.). *Standard country or area codes
+  for statistical use (M49)*.
+  <https://unstats.un.org/unsd/methodology/m49/overview/>

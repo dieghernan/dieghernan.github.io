@@ -475,16 +475,17 @@ ggplot() +
 
 ## References
 
-- Craft, H. D., Jr. (1970). _Radio observations of the pulse profiles and
-  dispersion measures of twelve pulsars._ Cornell University.
-- Mitton, S. (1977). _The Cambridge encyclopaedia of astronomy._ Prentice-Hall
-  of Canada.
-- Lipez, Z. (2019, June 14). "How Joy Division's 'Unknown Pleasures' image went
-  from underground album cover to a piece of cultural ubiquity" _The Washington
-  Post_.
-  <https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html>.
-- White, T. M. (2019). Cartographic Pleasures: Maps Inspired by Joy Division's
-  Unknown Pleasures Album Art. _Cartographic Perspectives_, (92), 65–78.
-  <https://doi.org/10.14714/CP92.1536>.
-- Redondo, D. (2020, January 25). "Mapas estilo Joy Division con QGIS y R."
-  <https://danielredondo.com/blog/2020-01-25-joy_division/>.
+- Craft, H. D., Jr. (1970). *Radio observations of the pulse profiles and
+  dispersion measures of twelve pulsars* [Doctoral dissertation, Cornell
+  University]. <https://books.google.com/books?id=bdxYAAAAYAAJ>
+- Lipez, Z. (2019, June 14). How Joy Division’s ‘Unknown Pleasures’ image
+  went from underground album cover to a piece of cultural ubiquity.
+  *The Washington Post*.
+  [Article](https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-a-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html)
+- Mitton, S. (Ed.). (1977). *The Cambridge encyclopaedia of astronomy*.
+  Prentice-Hall of Canada.
+- Redondo, D. (2020, January 25). Mapas estilo Joy Division con QGIS y R.
+  *Daniel Redondo*. <https://danielredondo.com/blog/2020-01-25-joy_division/>
+- White, T. M. (2019). Cartographic pleasures: Maps inspired by Joy
+  Division’s *Unknown Pleasures* album art. *Cartographic Perspectives*,
+  (92), 65–78. <https://doi.org/10.14714/CP92.1536>

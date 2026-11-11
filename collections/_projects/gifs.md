@@ -123,5 +123,5 @@ is independent and does not imply MITECO participation or endorsement.
 
 ## References
 
-- Royé, Dominic. 2021. “Firefly Cartography.” June 1.
-  <https://dominicroye.github.io/blog/firefly-maps/>.
+- Royé, D. (2021, June 1). Firefly cartography. *Dr Dominic Royé*.
+  <https://dominicroye.github.io/blog/firefly-maps/>

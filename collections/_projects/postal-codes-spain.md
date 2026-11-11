@@ -99,27 +99,24 @@ methodology, limitations and steps to reproduce the data.
 
 ## References
 
-- Instituto Geográfico Nacional / Centro Nacional de Información Geográfica
-  (IGN/CNIG). (n.d.). CartoCiudad [Dataset].
-  <https://www.cartociudad.es/web/portal/>.
-- Instituto Geográfico Nacional / Centro Nacional de Información Geográfica
-  (IGN/CNIG). (n.d.). Servicios de visualización de CartoCiudad: direcciones y
-  códigos postales [WMS documentation].
-  <https://www.cartociudad.es/web/portal/directorio-de-servicios/visualizacion>.
-- Correos. (n.d.). Base de datos de códigos postales y capa cartográfica
-  [Product information].
-  <https://www.correos.es/es/es/empresas/marketing/identifica-a-tus-clientes-potenciales/base-de-datos-de-codigos-postales>.
-- Goerlich, F. J. (2022). Elaboración de un mapa de códigos postales de España
-  con recursos libres. Cómo evitar pagar por disponer de información de
-  referencia. _Working Papers Ivie_, no. 2022-3. València: Ivie.
-  <https://doi.org/10.12842/WPIVIE_0322>.
-  Updated online version: <https://www.uv.es/goerlich/Ivie/CodPost.html>.
-- Goerlich, F. J. & Pérez Vázquez, P. (2025). Base de datos histórica de
-  contornos municipales de España –LAU2boundaries4Spain– (version v2) [Dataset].
-  Zenodo. <https://doi.org/10.5281/zenodo.15345101>.
-- Hernangómez, D. (2026). Códigos postales de España (version 1.0.0) [Dataset].
-  Zenodo. <https://doi.org/10.5281/zenodo.23698418>.
-  <https://dieghernan.github.io/codigospostales/>.
-- Sánchez, J. I. (2020, November 13). “Así hice el mapa de los códigos
-  postales de España con SIG y datos abiertos.” NoSoloSIG.
-  <https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos>.
+- Centro Nacional de Información Geográfica. (n.d.). *CartoCiudad*
+  [Data set]. <https://www.cartociudad.es/web/portal/>
+- Correos. (n.d.). *Base de datos de códigos postales y capa cartográfica*
+  [Product information]. [Product page](https://www.correos.es/es/es/empresas/marketing/identifica-a-tus-clientes-potenciales/base-de-datos-de-codigos-postales)
+- Goerlich, F. J. (2022). *Elaboración de un mapa de códigos postales de España
+  con recursos libres: Cómo evitar pagar por disponer de información de
+  referencia* (Working Paper No. 2022-3). Ivie.
+  <https://doi.org/10.12842/WPIVIE_0322>
+  ([Updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html))
+- Goerlich, F. J., & Pérez Vázquez, P. (2025). *Base de datos histórica de
+  contornos municipales de España –LAU2boundaries4Spain–* (Version 2)
+  [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.15345101>
+- Hernangómez, D. (2026). *Códigos postales de España* (Version 1.0.0)
+  [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.23698418>
+  ([Project documentation](https://dieghernan.github.io/codigospostales/))
+- Instituto Geográfico Nacional. (n.d.). *Servicios de visualización de
+  CartoCiudad: Direcciones y códigos postales* [WMS documentation].
+  [Service documentation](https://www.cartociudad.es/web/portal/directorio-de-servicios/visualizacion)
+- Sánchez, J. I. (2020, November 13). Así hice el mapa de los códigos
+  postales de España con SIG y datos abiertos. *Nosolosig*.
+  [Article](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos)
