@@ -35,7 +35,7 @@ permalink: ./atomtext.xml
 	{%- assign words = document.content | strip_html | number_of_words -%}   	
 		{%- assign minutes = words | divided_by: wpm | ceil | at_least: 1 -%}
 	<entry>
-		<title type="text">{{ document.title | markdownify | strip_html | normalize_whitespace | strip | cgi_unescape | xml_escape }}</title>
+		<title type="text">{{ document.title | markdownify | strip_html | normalize_whitespace | strip | replace: '&amp;', '&' | xml_escape }}</title>
 		<link href="{{ canonical_url | escape }}" rel="alternate" type="text/html" title="{{ document.title | markdownify | strip_html | normalize_whitespace | strip | replace: '&amp;', '&' | xml_escape }}"/>
 		<published>{{ document.date | date_to_xmlschema }}</published>
 		<updated>{{ document.last_modified_at | default: document.date | date_to_xmlschema }}</updated>
