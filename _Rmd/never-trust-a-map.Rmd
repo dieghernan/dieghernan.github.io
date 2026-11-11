@@ -58,7 +58,7 @@ showtext::showtext_auto()
 ```
 
 All maps lie. Some lie more than others, and some are deliberately designed to
-mislead us. Mark Monmonier wrote a whole book about it. [*How to Lie with
+mislead us. Mark Monmonier even wrote a whole book about it: [*How to Lie with
 Maps*](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html)
 
 Take election maps. [Land doesn't vote. People
@@ -75,12 +75,10 @@ mentir con la
 visualización](https://cdr-book.github.io/datos-espaciales.html#no-mentir) (in
 Spanish).
 
-But even the most honest maps lie.
-
-The Earth is (approximately) spherical, and there’s no way to represent its
-curved surface on a flat map without distorting something. A projection can
-preserve some properties, such as area or local angles, at the expense of
-others.
+But even the most honest maps lie. Not because someone wants to mislead us,
+but because there's no way to flatten the (approximately) spherical Earth
+without distorting something. A projection can preserve some properties, such
+as area or local angles, at the expense of others.
 
 Fortunately, we have a lie detector.
 
@@ -88,8 +86,8 @@ Fortunately, we have a lie detector.
 
 Imagine covering the globe with identical small circles. When you flatten the
 Earth, those circles can change size, shape or both. The area of each resulting
-ellipse shows how much the projection enlarges or shrinks the area at that
-location. Its shape reveals whether the projection stretches more in one
+shape gives us an idea of how much the projection enlarges or shrinks the area
+around that location. Its shape reveals whether the projection stretches more in one
 direction than another.
 
 ### A quick technical note
@@ -108,7 +106,8 @@ local scale in each direction, the maps looked much the same. I'll use
 `geom_tissot()` below to keep the **ggplot2** code short. **tissot** comes in
 handy when we want to report or compare the distortion factors themselves.
 
-Let's put some maps to the test.
+For now, I'm more interested in what those distortions look like. Let's put
+some maps to the test.
 
 ## Same circles, different maps
 
@@ -370,7 +369,8 @@ draw_map <- function(title, palette = light_palette, tile = NULL) {
 
 ## Three ways to handle distortion
 
-Each approach makes a different trade-off.
+Before looking at the results, there's one thing worth knowing: different
+projections preserve different properties.
 
 - **Conformal.** These projections preserve local angles and shapes, so tiny
   circles stay round even when their size changes. Mercator is useful for
@@ -443,8 +443,10 @@ areas change as well.
 
 ## Twelve ways to flatten the world
 
-Pick a red circle near Greenland and follow it from map to map. The last two
-views share a center over North Africa. The vertical perspective shows less of
+Pick a red circle near Greenland and follow it from map to map. Watch how its
+size and shape change.
+
+The last two views share a center over North Africa. The vertical perspective shows less of
 the globe because its viewpoint is only 10,000 km above the surface. Both views
 include a bonus circle at the North Pole.
 
@@ -527,7 +529,8 @@ IV distorts area the most.
 The third row puts Mollweide and Sinusoidal next to Goode homolosine, which uses
 Sinusoidal near the equator and Mollweide at higher latitudes.
 
-Here's one way to group the twelve projections in the poster.
+Here's a quick guide to the twelve projections, grouped by their properties or
+construction.
 
 - **Conformal pattern.** Web Mercator.
 - **Equal-area.** Equal Earth, Gall–Peters, Mollweide, Sinusoidal, Bonne and
@@ -538,8 +541,9 @@ Here's one way to group the twelve projections in the poster.
 
 So which map should you trust? It depends on what you're asking it to show.
 Choose an equal-area map to compare areas, a conformal one when local angles
-matter or a compromise for an overall view. The question is whether the lie
-helps you see what you're looking for.
+matter or a compromise for an overall view.
+
+**The question is whether the lie helps you see what you're looking for.**
 
 <iframe
   class="d-block w-100 border-0 rounded my-3"
