@@ -58,21 +58,19 @@ understand why two maps made from the same digital elevation model (DEM) could
 look so different. How much of that comes from the hillshade, and how much from
 the way we combine it with the elevation colors?
 
-I ended up testing six different ways to combine hillshade and elevation colors.
-Here's how the six versions turned out.
+I ended up testing six different approaches to hillshading and blending. Here's how they compare.
 
 ![Six versions of the Strait of Gibraltar pair grayscale hillshades with color
 maps, including two ways to combine the same multidirectional hillshade with
 elevation
 colors.](/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp)
 
-There are actually three separate choices here: **how we calculate the shade,
-how we transform its tonal range and how we blend it with elevation colors**.
+Looking at these results, three decisions turned out to matter most: **how we calculate the hillshade, how we transform its tonal range and how we blend it with the elevation colors**.
 
-I started with the basic alpha approach that I used in my earlier maps. While
+I started with the basic alpha approach I had used in earlier maps. While
 working on the **tidyterra** FAQs, I discovered `metR::geom_relief()` and gave
-it a try. To my surprise, I liked the
-[**metR**](https://eliocamp.github.io/metR/) map better!
+it a try. To my surprise, I preferred the
+[**metR**](https://eliocamp.github.io/metR/) result.
 
 ## Data and setup
 
@@ -278,20 +276,20 @@ map_metr <- ggplot(dem, aes(x, y)) +
 print(map_metr)
 ```
 
-Look at the mountains in the east! I liked the clearer ridges and stronger
-colors, but I'd changed two things at once: the hillshade and the way the colors
-sit on top of it.
+Look at the mountains in the east. The ridges stood out more clearly and the
+colors felt less washed out, but I'd changed two things at once: the hillshade
+itself and how I combined it with the elevation colors.
 
 **Could I get closer to the metR map just by changing how I blended the
-hillshade and the elevation colors?**
+hillshade with the elevation colors?**
 
 <details markdown="1">
 
-<summary><strong>Spoiler alert!</strong></summary>
+<summary><strong>A quick note on what metR is doing</strong></summary>
 
-As I discovered later, `geom_relief()` shades slopes by the direction they face.
-In mountainous terrain, that can make ridges and valleys stand out. I'll come
-back to how that works in [the bonus
+As I discovered later, `geom_relief()` shades slopes mainly by the direction
+they face. In mountainous terrain, this can make ridges and valleys stand out
+strongly. I'll come back to how that works in [the bonus
 section](#bonus-recreating-metrs-relief-shading-from-scratch).
 
 </details>
@@ -441,15 +439,18 @@ map_multi_alpha <- ggplot() +
 plot(map_multi_alpha)
 ```
 
-Almost there! The colors were brighter, but I still didn't get the **drama** of **metR**. Changing the blend and the opacity hadn't been enough; perhaps the range of shade values mattered too.
+Almost there. The colors were brighter, but the result still lacked the contrast
+and definition I liked in the **metR** map. Changing the blend mode and opacity
+had helped, yet something was still missing. Perhaps the tonal range of the
+hillshade itself mattered too.
 
 ## Jackpot! Stretching the hillshade
 
 An earlier experiment comparing **metR** and **terra** on Swiss elevation data
-gave me one more idea to try. The calculation behind `geom_relief()` produces
-shade values between 0 and 1, as I explain in [the bonus
-section](#bonus-recreating-metrs-relief-shading-from-scratch). In that
-experiment, the **terra** values covered a narrower range...
+suggested a possible explanation. The calculation behind `geom_relief()`
+produces shade values between 0 and 1, as I explain in [the bonus
+section](#bonus-recreating-metrs-relief-shading-from-scratch). In that test,
+the **terra** hillshade covered a noticeably narrower range.
 
 <div class="alert alert-success p-3 mx-2 mb-3" markdown="1">
 
