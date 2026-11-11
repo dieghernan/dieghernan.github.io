@@ -44,14 +44,17 @@ understand why two maps made from the same digital elevation model (DEM) could
 look so different. How much of that comes from the hillshade, and how much from
 the way we combine it with the elevation colors?
 
-I ended up testing six different approaches to hillshading and blending. Here's how they compare.
+I ended up testing six different approaches to hillshading and blending. Here's
+how they compare.
 
 ![Six versions of the Strait of Gibraltar pair grayscale hillshades with color
 maps, including two ways to combine the same multidirectional hillshade with
 elevation
 colors.](/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp)
 
-Looking at these results, three decisions turned out to matter most: **how we calculate the hillshade, how we transform its tonal range and how we blend it with the elevation colors**.
+Looking at these results, three decisions turned out to matter most: **how we
+calculate the hillshade, how we transform its tonal range and how we blend it
+with the elevation colors**.
 
 I started with the basic alpha approach I had used in earlier maps. While
 working on the **tidyterra** FAQs, I discovered `metR::geom_relief()` and gave
@@ -158,7 +161,7 @@ gghill_1 <- ggplot() +
 print(gghill_1)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-single-direction-hillshade-1.webp" alt="Grayscale relief map of the Strait of Gibraltar. Slopes facing west-northwest catch the light, outlining ridges in the east while the Guadalquivir lowlands stay mostly smooth." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-single-direction-hillshade-1.webp" alt="Grayscale relief map of the Strait of Gibraltar. Slopes facing west-northwest catch the light, outlining ridges in the east while the Guadalquivir lowlands stay mostly smooth." width="100%" />
 
 ``` r
 
@@ -201,7 +204,7 @@ map_alpha <- ggplot() +
 print(map_alpha)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-transparent-color-overlay-1.webp" alt="Relief map with muted greens in the lowlands, ochres in the mountains and blue offshore. Ridges lit from the west-northwest show through the pale colors." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-transparent-color-overlay-1.webp" alt="Relief map with muted greens in the lowlands, ochres in the mountains and blue offshore. Ridges lit from the west-northwest show through the pale colors." width="100%" />
 
 ## Shaded relief with metR {#shaded-relief-with-metr}
 
@@ -222,7 +225,7 @@ hill_metr <- ggplot(dem, aes(x, y)) +
 print(hill_metr)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-metr-hillshade-1.webp" alt="High-contrast grayscale relief map. Alternating dark and light slopes define the eastern mountains and trace ridges on the seabed south of the coast." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-metr-hillshade-1.webp" alt="High-contrast grayscale relief map. Alternating dark and light slopes define the eastern mountains and trace ridges on the seabed south of the coast." width="100%" />
 
 
 ``` r
@@ -247,7 +250,7 @@ map_metr <- ggplot(dem, aes(x, y)) +
 print(map_metr)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-metr-relief-map-1.webp" alt="Relief map with pale ochre mountains, green lowlands and blue water. High-contrast shading is most visible in the eastern ranges, where the elevation colors are more transparent." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-metr-relief-map-1.webp" alt="Relief map with pale ochre mountains, green lowlands and blue water. High-contrast shading is most visible in the eastern ranges, where the elevation colors are more transparent." width="100%" />
 
 Look at the mountains in the east. The ridges stood out more clearly and the
 colors felt less washed out, but I'd changed two things at once: the hillshade
@@ -262,14 +265,11 @@ hillshade with the elevation colors?**
 
 As I discovered later, `geom_relief()` shades slopes mainly by the direction
 they face. In mountainous terrain, this can make ridges and valleys stand out
-strongly. I'll come back to how that works in [the extra
-section](#bonus-recreating-metrs-relief-shading-from-scratch).
+strongly. I'll come back to how that works in [the extra section](#extra-ball).
 
 </details>
 
 ## Introducing ggblend
-
-Before changing how I calculated the shadows, I wanted to test the other half of the problem: how the hillshade interacts with the elevation colors. Could a different blend get me closer to the **metR** result without changing the underlying shade?
 
 [Barney Harris](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/)
 noticed that the colors in the first version of my Romania map looked a bit
@@ -300,9 +300,10 @@ map_multiply <- ggplot() +
 print(map_multiply)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multiply-single-direction-hillshade-1.webp" alt="Relief map with deeper greens and blues than the transparent overlay. Dark slopes add texture to the ochre mountains while the western lowlands remain mostly smooth." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multiply-single-direction-hillshade-1.webp" alt="Relief map with deeper greens and blues than the transparent overlay. Dark slopes add texture to the ochre mountains while the western lowlands remain mostly smooth." width="100%" />
 
-The colors looked better without changing the hillshade itself. That answered part of my question about blending, but left another open: **what was I losing by using a single light direction?**
+The colors looked better without changing the hillshade itself. But **what was I
+losing by using a single light direction?**
 
 ## Enhancing the hillshading
 
@@ -331,7 +332,7 @@ gghill_2 <- ggplot() +
 print(gghill_2)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multidirectional-hillshade-1.webp" alt="Grayscale relief map. Highlights pick out ridges running in several directions across the eastern mountains, with softer shadows on adjacent slopes." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multidirectional-hillshade-1.webp" alt="Grayscale relief map. Highlights pick out ridges running in several directions across the eastern mountains, with softer shadows on adjacent slopes." width="100%" />
 
 ``` r
 
@@ -359,9 +360,11 @@ map_multi <- ggplot() +
 print(map_multi)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multiply-multidirectional-hillshade-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas where the seabed texture remains visible." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multiply-multidirectional-hillshade-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas where the seabed texture remains visible." width="100%" />
 
-The extra light directions revealed more of the terrain, but I still preferred the **metR** map. Maybe the remaining difference wasn't the lighting alone, but how strongly the shadows affected the colors.
+The extra light directions revealed more of the terrain, but I still preferred
+the **metR** map. Maybe the remaining difference wasn't the lighting alone, but
+how strongly the shadows affected the colors.
 
 ## One more trick: the alpha hack
 
@@ -397,7 +400,7 @@ map_multi_alpha <- ggplot() +
 plot(map_multi_alpha)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-multiply-multidirectional-alpha-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas. Colors are lighter than when using ggblend" width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-multiply-multidirectional-alpha-1.webp" alt="Relief map with textured ochre mountain ridges, deep green lowlands in the west and blue offshore areas. Colors are lighter than when using ggblend" width="100%" />
 
 Almost there. The colors were brighter, but the result still lacked the contrast
 and definition I liked in the **metR** map. Changing the blend mode and opacity
@@ -409,8 +412,8 @@ hillshade itself mattered too.
 An earlier experiment comparing **metR** and **terra** on Swiss elevation data
 suggested a possible explanation. The calculation behind `geom_relief()`
 produces shade values between 0 and 1, as I explain in [the extra
-section](#bonus-recreating-metrs-relief-shading-from-scratch). In that test,
-the **terra** hillshade covered a noticeably narrower range.
+section](#extra-ball). In that test, the **terra** hillshade covered a
+noticeably narrower range.
 
 <div class="alert alert-success p-3 mx-2 mb-3" markdown="1">
 
@@ -425,7 +428,8 @@ to 1. I rescale the values in between linearly and clip the rest to 0 or 1.
 Stretching makes subtle terrain features easier to see by increasing contrast.
 The underlying elevation data stay the same.
 
-I also wanted a brighter result, closer to the **metR** map. Let's see what happens when I stretch the hillshade and use a lighter grayscale ramp.
+I also wanted a brighter result, closer to the **metR** map. Let's see what
+happens when I stretch the hillshade and use a lighter grayscale ramp.
 
 
 ``` r
@@ -448,7 +452,7 @@ gghill_3 <- ggplot() +
 print(gghill_3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-stretch-multidirectional-hillshade-1.webp" alt="Grayscale relief map with a pale background and sharper gray shadows along the eastern mountain ridges and the slopes of the seabed." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-stretch-multidirectional-hillshade-1.webp" alt="Grayscale relief map with a pale background and sharper gray shadows along the eastern mountain ridges and the slopes of the seabed." width="100%" />
 
 ``` r
 
@@ -476,13 +480,17 @@ map_final <- ggplot() +
 print(map_final)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp" alt="Relief map of the Strait of Gibraltar with bright blue bathymetry, green lowlands and ochre mountains. Fine shadows define the eastern ridges and the seabed." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp" alt="Relief map of the Strait of Gibraltar with bright blue bathymetry, green lowlands and ochre mountains. Fine shadows define the eastern ridges and the seabed." width="100%" />
 
-The full map looks promising, but I wanted to check whether the finer mountain ridges benefited too. The devil is in the details. For this closer look at [Sierra Nevada (Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I downloaded
-a separate DEM and used it for all four maps. Look at the same ridges in the two
-bottom panels to see what the stretch and lighter gray ramp change.
+**That's much closer to what I was looking for!**
 
-<details markdown="1" class="my-4">
+The full map looks promising, but I wanted to check whether the finer mountain
+ridges benefited too. The devil is in the details. For this closer look at
+[Sierra Nevada (Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I
+downloaded a separate DEM and used it for all four maps. Look at the same ridges
+in the two bottom panels to see what the stretch and lighter gray ramp change.
+
+<details class="my-4" markdown="1">
 
 <summary>Show the Sierra Nevada code</summary>
 
@@ -542,7 +550,10 @@ sierra_blend <- function(hillshade, gray_ramp) {
 
   ggplot() +
     list(
-      geom_spatraster(data = hillshade, fill = hillshade_colors, maxcell = Inf),
+      geom_spatraster(
+        data = hillshade, fill = hillshade_colors,
+        maxcell = Inf
+      ),
       geom_spatraster(data = sierra_dem, maxcell = Inf),
       scale_fill_hypso_tint_c("etopo1")
     ) |>
@@ -590,15 +601,24 @@ print(
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1)
 )
 print(
-  sierra_blend(sierra_single, pal_greys) + sierra_view + detail_theme + labs(title = "West-northwest light"),
+  sierra_blend(sierra_single, pal_greys) +
+    sierra_view +
+    detail_theme +
+    labs(title = "West-northwest light"),
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 2)
 )
 print(
-  sierra_multi_alpha(sierra_multi, pal_greys) + sierra_view + detail_theme + labs(title = "Multidirectional + alpha hack"),
+  sierra_multi_alpha(sierra_multi, pal_greys) +
+    sierra_view +
+    detail_theme +
+    labs(title = "Multidirectional + alpha hack"),
   vp = grid::viewport(layout.pos.row = 2, layout.pos.col = 1)
 )
 print(
-  sierra_blend(sierra_stretched, c("gray80", "white")) + sierra_view + detail_theme + labs(title = "Stretched hillshade"),
+  sierra_blend(sierra_stretched, c("gray80", "white")) +
+    sierra_view +
+    detail_theme +
+    labs(title = "Stretched hillshade"),
   vp = grid::viewport(layout.pos.row = 2, layout.pos.col = 2)
 )
 grid::popViewport()
@@ -606,16 +626,17 @@ grid::popViewport()
 
 </details>
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-sierra-nevada-detail-1.webp" alt="Four close-ups of Sierra Nevada in a two-by-two grid. The top row shows metR and the multiply blend lit from the west-northwest. The bottom row shows the multidirectional with alpha-hack and stretched versions. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-sierra-nevada-detail-1.webp" alt="Four close-ups of Sierra Nevada in a two-by-two grid. The top row shows metR and the multiply blend lit from the west-northwest. The bottom row shows the multidirectional with alpha-hack and stretched versions. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
 
 ## Comparing the maps
 
-The Sierra Nevada close-up helps show what happens to fine ridges. To return to the original question about the whole map, I put all six versions side by side. The first and third rows use the same
-single-direction hillshade, with different ways of combining the layers. The
-fourth and fifth rows use the same multidirectional hillshade, so you can
-compare the multiply blend with the alpha hack.
+Let's go back to the Strait of Gibraltar and compare the six versions side by
+side. The first and third rows use the same single-direction hillshade, with
+different ways of combining the layers. The fourth and fifth rows use the same
+multidirectional hillshade, so you can compare the multiply blend with the alpha
+hack.
 
-<details markdown="1" class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show the poster code</summary>
 
@@ -655,7 +676,8 @@ grid::grid.text(
   "Six ways to shade the Strait of Gibraltar",
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1:3),
   gp = grid::gpar(
-    fontfamily = map_family, fontface = "bold", fontsize = 24, col = "#203b47"
+    fontfamily = map_family, fontface = "bold",
+    fontsize = 24, col = "#203b47"
   )
 )
 grid::grid.text(
@@ -675,8 +697,12 @@ grid::grid.text(
   vp = grid::viewport(layout.pos.row = 3, layout.pos.col = 1),
   gp = heading_style
 )
-print(gghill_1 + poster_theme, vp = grid::viewport(layout.pos.row = 3, layout.pos.col = 2))
-print(map_alpha + poster_theme, vp = grid::viewport(layout.pos.row = 3, layout.pos.col = 3))
+print(gghill_1 + poster_theme,
+  vp = grid::viewport(layout.pos.row = 3, layout.pos.col = 2)
+)
+print(map_alpha + poster_theme,
+  vp = grid::viewport(layout.pos.row = 3, layout.pos.col = 3)
+)
 
 grid::grid.text(
   "metR",
@@ -684,8 +710,12 @@ grid::grid.text(
   vp = grid::viewport(layout.pos.row = 4, layout.pos.col = 1),
   gp = heading_style
 )
-print(hill_metr + poster_theme, vp = grid::viewport(layout.pos.row = 4, layout.pos.col = 2))
-print(map_metr + poster_theme, vp = grid::viewport(layout.pos.row = 4, layout.pos.col = 3))
+print(hill_metr + poster_theme,
+  vp = grid::viewport(layout.pos.row = 4, layout.pos.col = 2)
+)
+print(map_metr + poster_theme,
+  vp = grid::viewport(layout.pos.row = 4, layout.pos.col = 3)
+)
 
 grid::grid.text(
   "Multiply",
@@ -693,8 +723,12 @@ grid::grid.text(
   vp = grid::viewport(layout.pos.row = 5, layout.pos.col = 1),
   gp = heading_style
 )
-print(gghill_1 + poster_theme, vp = grid::viewport(layout.pos.row = 5, layout.pos.col = 2))
-print(map_multiply + poster_theme, vp = grid::viewport(layout.pos.row = 5, layout.pos.col = 3))
+print(gghill_1 + poster_theme,
+  vp = grid::viewport(layout.pos.row = 5, layout.pos.col = 2)
+)
+print(map_multiply + poster_theme,
+  vp = grid::viewport(layout.pos.row = 5, layout.pos.col = 3)
+)
 
 grid::grid.text(
   "Multi + multiply",
@@ -702,8 +736,12 @@ grid::grid.text(
   vp = grid::viewport(layout.pos.row = 6, layout.pos.col = 1),
   gp = heading_style
 )
-print(gghill_2 + poster_theme, vp = grid::viewport(layout.pos.row = 6, layout.pos.col = 2))
-print(map_multi + poster_theme, vp = grid::viewport(layout.pos.row = 6, layout.pos.col = 3))
+print(gghill_2 + poster_theme,
+  vp = grid::viewport(layout.pos.row = 6, layout.pos.col = 2)
+)
+print(map_multi + poster_theme,
+  vp = grid::viewport(layout.pos.row = 6, layout.pos.col = 3)
+)
 
 grid::grid.text(
   "Multi + alpha hack",
@@ -711,8 +749,12 @@ grid::grid.text(
   vp = grid::viewport(layout.pos.row = 7, layout.pos.col = 1),
   gp = heading_style
 )
-print(gghill_2 + poster_theme, vp = grid::viewport(layout.pos.row = 7, layout.pos.col = 2))
-print(map_multi_alpha + poster_theme, vp = grid::viewport(layout.pos.row = 7, layout.pos.col = 3))
+print(gghill_2 + poster_theme,
+  vp = grid::viewport(layout.pos.row = 7, layout.pos.col = 2)
+)
+print(map_multi_alpha + poster_theme,
+  vp = grid::viewport(layout.pos.row = 7, layout.pos.col = 3)
+)
 
 grid::grid.text(
   "Stretched",
@@ -720,8 +762,12 @@ grid::grid.text(
   vp = grid::viewport(layout.pos.row = 8, layout.pos.col = 1),
   gp = heading_style
 )
-print(gghill_3 + poster_theme, vp = grid::viewport(layout.pos.row = 8, layout.pos.col = 2))
-print(map_final + poster_theme, vp = grid::viewport(layout.pos.row = 8, layout.pos.col = 3))
+print(gghill_3 + poster_theme,
+  vp = grid::viewport(layout.pos.row = 8, layout.pos.col = 2)
+)
+print(map_final + poster_theme,
+  vp = grid::viewport(layout.pos.row = 8, layout.pos.col = 3)
+)
 
 grid::pushViewport(grid::viewport(layout.pos.row = 9, layout.pos.col = 2:3))
 grid::grid.draw(elevation_guide)
@@ -730,8 +776,7 @@ grid::popViewport(2)
 
 </details>
 
-
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp" alt="Six rows pair grayscale hillshades with color maps of the Strait of Gibraltar. The fourth and fifth rows compare multiply blending and the alpha hack using the same multidirectional hillshade." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp" alt="Six rows pair grayscale hillshades with color maps of the Strait of Gibraltar. The fourth and fifth rows compare multiply blending and the alpha hack using the same multidirectional hillshade." width="100%" />
 
 Look at the coast in the first and third rows. With multiply, the greens along
 the coast and the blues offshore are stronger, even though both maps use the
@@ -739,7 +784,7 @@ same hillshade. In the last row, the stretch and lighter gray ramp give the
 seabed a brighter look, and I can still pick out its ridges. That's the version
 I'd use for this map.
 
-## Extra ball: Recreating metR's relief shading {#bonus-recreating-metrs-relief-shading-from-scratch}
+## Extra ball: Recreating metR's relief shading {#extra-ball}
 
 The stretched hillshade got me closer to the look I liked in the **metR** map.
 But I still wanted to know what `geom_relief()` was doing differently. So I took
@@ -842,7 +887,11 @@ relief_terra <- ggplot() +
     data = hill_recreated, maxcell = Inf, interpolate = FALSE,
     show.legend = FALSE
   ) +
-  scale_fill_gradient(low = dark, high = light, limits = c(0, 1), na.value = NA) +
+  scale_fill_gradient(
+    low = dark, high = light,
+    limits = c(0, 1),
+    na.value = NA
+  ) +
   map_view +
   labs(title = "Base R and terra", x = NULL, y = NULL)
 
@@ -858,7 +907,7 @@ print(relief_terra, vp = grid::viewport(layout.pos.col = 2))
 grid::popViewport()
 ```
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-recreated-metr-relief-1.webp" alt="Two grayscale maps of Sierra Nevada compare metR with a base R and terra recreation. Both show similar bands of light and dark on mountain ridges and across valleys." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-recreated-metr-relief-1.webp" alt="Two grayscale maps of Sierra Nevada compare metR with a base R and terra recreation. Both show similar bands of light and dark on mountain ridges and across valleys." width="100%" />
 
 The two versions matched on a complete test grid with equally scaled axes. I
 calculate the shade in raster coordinates, while **metR** uses the coordinates
@@ -874,7 +923,7 @@ different direction. In the left panel, that can make the lowlands look rougher
 than I want. I prefer the quieter result on the right, where I use the stretched
 hillshade with multiply blending.
 
-<details markdown="1" class="my-4">
+<details class="my-4" markdown="1">
 
 <summary>Show the Doñana code</summary>
 
@@ -934,7 +983,10 @@ donana_blend <- function(hillshade, gray_ramp) {
 
   ggplot() +
     list(
-      geom_spatraster(data = hillshade, fill = hillshade_colors, maxcell = Inf),
+      geom_spatraster(
+        data = hillshade,
+        fill = hillshade_colors, maxcell = Inf
+      ),
       geom_spatraster(data = donana_dem, maxcell = Inf),
       scale_fill_hypso_tint_c("etopo1")
     ) |>
@@ -975,16 +1027,25 @@ grid::popViewport()
 
 </details>
 
-<img src="https://dieghernan.github.io/assets/img/drafts/better-hillshading-R-metr-donana-1.webp" alt="Two maps of Doñana compare metR with a stretched hillshade blended with elevation colors. The metR map shows stronger light and dark patterns across the lowlands." width="100%" />
+<img src="/assets/img/drafts/better-hillshading-R-metr-donana-1.webp" alt="Two maps of Doñana compare metR with a stretched hillshade blended with elevation colors. The metR map shows stronger light and dark patterns across the lowlands." width="100%" />
 
 ## What I learned
 
 After all these experiments, here are my main takeaways:
 
-- **Blending matters.** I started by changing the hillshading method, but how I combined the shadows with the elevation colors turned out to be just as important.
-- **More light directions aren't always better.** Multidirectional hillshading revealed more terrain features, but it wasn't the improvement I was looking for on its own.
-- **Don't underestimate contrast.** Stretching the hillshade and using a lighter gray ramp made the biggest visual difference in my map. Sometimes the answer is simpler than a new algorithm.
-- **Choose the shading to suit the terrain.** For mountainous areas, I'd consider aspect-based shading, whether with **metR** or my own implementation. For flatter landscapes, I prefer the more restrained look of conventional hillshading.
+- **Blending matters.** I tried different hillshading methods, but how I
+  combined the shadows with the elevation colors turned out to be just as
+  important.
+- **More light directions aren't always better.** Multidirectional hillshading
+  revealed more terrain features, but it wasn't the improvement I was looking
+  for on its own.
+- **Don't underestimate contrast.** Stretching the hillshade and using a lighter
+  gray ramp made the biggest visual difference in my map. Sometimes the answer
+  is simpler than a new algorithm.
+- **Choose the shading to suit the terrain.** For mountainous areas, I'd
+  consider aspect-based shading, whether with **metR** or my own implementation.
+  For flatter landscapes, I prefer the more restrained look of conventional
+  hillshading.
 
 **How we display a hillshade can matter just as much as how we calculate it.**
 
