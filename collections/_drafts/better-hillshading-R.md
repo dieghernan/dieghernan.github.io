@@ -3,11 +3,11 @@ title: 'Better hillshading with R: the display matters'
 subtitle: >-
   Same terrain, different shadows
 excerpt: >-
-  Build a shaded relief map step by step, from a transparent color overlay
-  to multidirectional lighting with stretched contrast.
+  How you display a hillshade can matter as much as how you calculate it. 
+  A step-by-step comparison of blending, lighting and contrast stretching in R.
 description: >-
-  Compare hillshading with terra and metR, then combine elevation colors
-  with multidirectional hillshade and contrast stretching using ggblend.
+  Compare alpha overlays, metR relief, multiply blending and stretched 
+  multidirectional hillshades with terra, tidyterra and ggblend.
 header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp"
 og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp"
 og_image_width: 1400
@@ -47,10 +47,9 @@ the way we combine it with the elevation colors?
 I ended up testing six different approaches to hillshading and blending. Here's
 how they compare.
 
-![Six versions of the Strait of Gibraltar pair grayscale hillshades with color
-maps, including two ways to combine the same multidirectional hillshade with
-elevation
-colors.](/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp)
+![Comparison of six hillshading approaches for the Strait of Gibraltar, showing
+grayscale hillshades alongside elevation maps with different blending
+methods.](/assets/img/drafts/better-hillshading-R-hillshade-comparison-poster-1.webp)
 
 Looking at these results, three decisions turned out to matter most: **how we
 calculate the hillshade, how we transform its tonal range and how we blend it
@@ -261,7 +260,7 @@ hillshade with the elevation colors?**
 
 <details markdown="1">
 
-<summary><strong>A quick note on what metR is doing</strong></summary>
+<summary><strong>Spoiler alert!</strong></summary>
 
 As I discovered later, `geom_relief()` shades slopes mainly by the direction
 they face. In mountainous terrain, this can make ridges and valleys stand out
@@ -409,11 +408,10 @@ hillshade itself mattered too.
 
 ## Jackpot! Stretching the hillshade
 
-An earlier experiment comparing **metR** and **terra** on Swiss elevation data
-suggested a possible explanation. The calculation behind `geom_relief()`
-produces shade values between 0 and 1, as I explain in [the extra
-section](#extra-ball). In that test, the **terra** hillshade covered a
-noticeably narrower range.
+In an earlier experiment with Swiss elevation data, I noticed that the **terra** 
+hillshade used a narrower range of values than the aspect-based shading from 
+**metR**. That made me wonder whether contrast, rather than the shading method 
+itself, could explain part of the difference.
 
 <div class="alert alert-success p-3 mx-2 mb-3" markdown="1">
 
@@ -425,11 +423,8 @@ blending it with the elevation colors?**
 I map the 5th percentile of the multidirectional hillshade to 0 and the 95th
 to 1. I rescale the values in between linearly and clip the rest to 0 or 1.
 
-Stretching makes subtle terrain features easier to see by increasing contrast.
-The underlying elevation data stay the same.
-
-I also wanted a brighter result, closer to the **metR** map. Let's see what
-happens when I stretch the hillshade and use a lighter grayscale ramp.
+I also switched to a lighter grayscale ramp to get closer to the **metR** look.
+Here's the result.
 
 
 ``` r
@@ -484,9 +479,8 @@ print(map_final)
 
 **That's much closer to what I was looking for!**
 
-The full map looks promising, but I wanted to check whether the finer mountain
-ridges benefited too. The devil is in the details. For this closer look at
-[Sierra Nevada (Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I
+But the devil is in the details. For a closer look at [Sierra 
+Nevada (Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I 
 downloaded a separate DEM and used it for all four maps. Look at the same ridges
 in the two bottom panels to see what the stretch and lighter gray ramp change.
 
