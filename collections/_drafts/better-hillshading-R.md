@@ -986,7 +986,7 @@ After all these experiments, here are my main takeaways:
 - **Don't underestimate contrast.** Stretching the hillshade and using a lighter gray ramp made the biggest visual difference in my map. Sometimes the answer is simpler than a new algorithm.
 - **Choose the shading to suit the terrain.** For mountainous areas, I'd consider aspect-based shading, whether with **metR** or my own implementation. For flatter landscapes, I prefer the more restrained look of conventional hillshading.
 
-In the end, I didn't find a universally better hillshading method. I found a combination that works better for the map I wanted to make.
+**How we display a hillshade can matter just as much as how we calculate it.**
 
 <iframe class="d-block w-100 border-0 rounded my-3" title="In the Shadows by The Rasmus on Spotify" src="https://open.spotify.com/embed/track/31RLtLXs4hZsxzLMpe7gl5?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen>
 
