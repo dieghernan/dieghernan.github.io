@@ -6,13 +6,15 @@
   | normalize_whitespace -%}
 {%- assign citation_url = page.url | absolute_url -%}
 {%- assign citation_author = page.citation_author
+  | default: page.author.name
   | default: site.citation_author
   | default: site.author.name
   | default: "Missing author" -%}
 {%- assign citation_site = site.title | default: "One World" -%}
 {%- assign bib_author = page.bib_author
+  | default: page.author.name
   | default: site.bib_author
-  | default: "Hernangómez, Diego" -%}
+  | default: site.author.name -%}
 {%- assign bibkey = page.date | date: "%Y"
   | prepend: "post"
   | append: "-"
