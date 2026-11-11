@@ -289,7 +289,8 @@ hillshade and the elevation colors?**
 
 <summary><strong>Spoiler alert!</strong></summary>
 
-As I discovered later, `geom_relief()` shades slopes by the direction they face.
+As I discovered later, `geom_relief()` shades slopes by the direction they
+face. In mountainous terrain, that can make ridges and valleys stand out.
 I'll come back to how that works in [the bonus
 section](#bonus-recreating-metrs-relief-shading-from-scratch).
 
@@ -873,6 +874,128 @@ transformed by **ggplot2**, so scaling the axes differently can change the
 result. Around gaps, my version can leave a few extra cells blank because
 **metR** can calculate across missing observations.
 
+In mostly flat terrain like [Doñana National Park](https://en.wikipedia.org/wiki/Do%C3%B1ana_National_Park),
+even a slight change in aspect can produce a strong change in shade. That
+can make gentle terrain look rougher than I want.
+
+<details class="my-4" markdown="1">
+
+<summary>Show the Doñana code</summary>
+
+```{r}
+#| label: show-donana-code
+#| ref.label: metr-donana
+#| eval: false
+```
+
+</details>
+
+```{r}
+#| label: metr-donana
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.8
+#| fig-crop: false
+#| fig-cap: ""
+#| fig-alt: >-
+#|   Two maps of Doñana compare metR with a stretched hillshade blended
+#|   with elevation colors. The metR map shows stronger light and dark
+#|   patterns across the lowlands.
+
+donana_area <- sf::st_bbox(
+  c(xmin = -7.14, ymin = 36.80, xmax = -5.96, ymax = 37.40),
+  crs = sf::st_crs(4326)
+) |>
+  sf::st_as_sfc() |>
+  sf::st_transform(sf::st_crs(terra::crs(dem)))
+
+donana <- sf::st_bbox(donana_area)
+
+# Download beyond the frame so the edge cells have neighbors.
+donana_dem <- get_elev_raster(
+  sf::st_as_sf(sf::st_buffer(donana_area, dist = 1000)),
+  # z = 9,
+  z = 2,
+  clip = "bbox",
+  tmp_dir = tools::R_user_dir("elevatr", "cache")
+) |>
+  rast()
+
+names(donana_dem) <- "elevation"
+
+donana_slope <- terrain(donana_dem, "slope", unit = "radians")
+donana_aspect <- terrain(donana_dem, "aspect", unit = "radians")
+donana_multi <- shade(
+  donana_slope, donana_aspect, 40,
+  direction = c(220, 320, 10, 280)
+) |>
+  mean()
+
+donana_q <- quantile(
+  values(crop(donana_multi, vect(donana_area))),
+  c(0.05, 0.95),
+  na.rm = TRUE
+)
+donana_stretched <- clamp((donana_multi - donana_q[1]) / diff(donana_q), 0, 1)
+
+donana_metr <- ggplot(donana_dem, aes(x, y)) +
+  geom_relief(aes(z = elevation), sun.angle = 60) +
+  geom_spatraster(
+    data = donana_dem,
+    inherit.aes = FALSE,
+    aes(alpha = after_stat(value)),
+    maxcell = Inf
+  ) +
+  scale_alpha(range = c(1, 0.25)) +
+  scale_fill_hypso_tint_c("etopo1")
+
+donana_blend <- function(hillshade, gray_ramp) {
+  hillshade_plot <- ggplot() +
+    geom_spatraster(data = hillshade, maxcell = Inf) +
+    scale_fill_gradientn(colors = gray_ramp, na.value = NA)
+  hillshade_colors <- layer_data(hillshade_plot)$fill
+
+  ggplot() +
+    list(
+      geom_spatraster(data = hillshade, fill = hillshade_colors, maxcell = Inf),
+      geom_spatraster(data = donana_dem, maxcell = Inf),
+      scale_fill_hypso_tint_c("etopo1")
+    ) |>
+    blend("multiply")
+}
+
+donana_view <- coord_sf(
+  xlim = unname(donana[c("xmin", "xmax")]),
+  ylim = unname(donana[c("ymin", "ymax")]),
+  expand = FALSE,
+  crs = terra::crs(donana_dem),
+  datum = NA
+)
+donana_theme <- theme(
+  legend.position = "none",
+  axis.title = element_blank(),
+  plot.margin = margin(4, 5, 4, 5)
+)
+
+grid::grid.newpage()
+grid::grid.rect(gp = grid::gpar(fill = map_background, col = NA))
+grid::pushViewport(grid::viewport(
+  width = 0.97,
+  height = 0.97,
+  layout = grid::grid.layout(1, 2)
+))
+print(
+  donana_metr + donana_view + donana_theme + labs(title = "metR"),
+  vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1)
+)
+print(
+  donana_blend(donana_stretched, c("gray80", "white")) +
+    donana_view + donana_theme + labs(title = "Stretched hillshade"),
+  vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 2)
+)
+grid::popViewport()
+```
+
 ## What I learned
 
 If I were building another terrain map tomorrow, here's what I'd try first:
@@ -882,6 +1005,9 @@ If I were building another terrain map tomorrow, here's what I'd try first:
   directions brought out different slopes, and I'd choose by looking at the map.
 - I'd **check the range of the hillshade values**. If they bunch up, a stretch
   like the one here can bring out more contrast.
+- I'd **choose the shading to suit the terrain**. I liked the aspect-based
+  shading in Sierra Nevada. In Doñana, I preferred the quieter result of the
+  stretched hillshade.
 
 **How we display a hillshade can matter just as much as how we calculate it.**
 
