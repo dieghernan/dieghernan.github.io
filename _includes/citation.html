@@ -1,0 +1,49 @@
+
+{%- assign citation_date = page.date | date: "%Y, %B %-d" -%}
+{%- assign citation_title = page.title | strip_html -%}
+{%- assign citation_url = page.url | absolute_url -%}
+{%- assign citation_author = page.citation_author
+  | default: site.citation_author
+  | default: site.author.name
+  | default: "Missing author" -%}
+{%- assign citation_site = site.title | default: "One World" -%}
+{%- assign bib_author = page.bib_author
+  | default: site.bib_author
+  | default: citation_author -%}
+{%- assign bibkey = page.date | date: "%Y"
+  | prepend: "post"
+  | append: "-"
+  | append: page.slug
+  | slugify -%}
+
+<footer class="post-citation mt-5 border-left border-secondary pl-3 small"
+        aria-label="Citation">
+  <p class="font-weight-bold mb-2">How to cite this post</p>
+  <p class="text-muted mb-2">
+    For attribution, please cite this work as:
+  </p>
+  <p class="citation-text pl-3 mb-0">
+    {{ citation_author | escape }}
+    ({{ citation_date }}).
+    {{ citation_title | escape }}.
+    <em>{{ citation_site | escape }}</em>.
+    <a href="{{ citation_url }}">{{ citation_url }}</a>
+  </p>
+
+  <details class="mt-3">
+    <summary class="text-muted">BibTeX</summary>
+    <div class="language-bibtex highlighter-rouge">
+      <div class="highlight">
+    <pre class="highlight"><code>@misc{<escape>{{ bibkey }}</escape>,
+  author = {<escape>{{ bib_author | escape }}</escape>},
+  title = {<escape>{{ citation_title | escape }}</escape>},
+  year = {<escape>{{ page.date | date: "%Y" }}</escape>},
+  month = {<escape>{{ page.date | date: "%m" }}</escape>},
+  day = {<escape>{{ page.date | date: "%d" }}</escape>},
+  howpublished = {<escape>{{ citation_site | escape }}</escape>},
+  url = {<escape>{{ citation_url | escape }}</escape>}
+}</code></pre>
+</div>
+</div>
+  </details>
+</footer>

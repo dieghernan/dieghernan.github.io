@@ -56,6 +56,9 @@ header_in_content: true
         {% unless is_feed %}<div class="e-content">{% endunless %}
         {{- content -}}
         {% unless is_feed %}</div>{% endunless %}
+        {% if page.date and page.show_citation %}
+          {% include citation.html %}
+        {% endif %}
         {% if page.show_kofi %}
           {% include custom/kofi.html %}
         {% endif %}
