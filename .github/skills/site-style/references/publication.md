@@ -47,44 +47,32 @@ captions, using their current markup.
 
 ## Reference style
 
-The user's explicit model is the `References` section of
-`collections/_posts/2022-10-17-tidyterra-hillshade.md`, mirrored in
-`_Rmd/2022-10-17-tidyterra-hillshade.Rmd`. Read that section when matching
-references. It supersedes the earlier template based on recent project pages.
+Use APA 7 for each reference and alphabetize by the first author's surname
+or by the group author. Keep Markdown bullets with continuation indentation
+and preserve inline links in the article. Use the APA template for each
+source type: journal articles, blog posts, reports, books, datasets or software.
+Use sentence case where APA calls for it and preserve official names, accents,
+citation anchors and the version actually used.
 
-Use Markdown bullets with a hanging continuation indent. Ordinary entries use
-surname and initials, `&` before the final author and year in parentheses.
-Article titles are plain text, not automatically italicized. Journal titles
-and volume numbers use italics where shown in the model. Use visible absolute
-DOI or web autolinks, `<https://...>`, rather than labels such as `[doi:...]`,
-`[Article]` or `[Data portal]`. Preserve official title spelling and casing.
+Match existing entries by DOI or canonical URL across posts, projects and
+drafts. Reuse the same bibliographic text for the same work and version, and
+keep corresponding Rmd and Markdown reference sections identical. Keep
+documented exceptions, including the requested wording for Goerlich's
+working paper. Consult `_maintenance/references-audit.md` for legacy decisions.
 
-Examples copied from the model:
+Confirm metadata with publishers and repositories. Cross-check DOI and
+bibliographic fields through Crossref, DataCite and OpenAlex as appropriate.
+Check DOI resolution directly when a registry has no record. Use verified
+ISSNs and ISBNs to disambiguate publications and editions. APA entries omit
+these identifiers unless the source type requires them.
 
-```markdown
-- Patterson, T. & Jenny, B. (2011). The Development and Rationale of
-  Cross-blended Hypsometric Tints. _Cartographic Perspectives_, (69), 31–46.
-  <https://doi.org/10.14714/CP69.20>.
-- Royé, Dominic. 2022. “Hillshade Effects.” July 20.
-  <https://dominicroye.github.io/blog/hillshade-effect/>.
-- Hernangómez, D. (2023). Using the tidyverse with terra objects: the tidyterra
-  package. _Journal of Open Source Software_, _8_(91), 5751,
-  <https://doi.org/10.21105/joss.05751>.
-```
+Prefer a DOI to a duplicate landing-page URL. Use absolute DOI resolver
+links and omit terminal punctuation after URLs. Use `[DOI](https://doi.org/...)`
+for long CRAN DOIs that could overflow on mobile. Use a short descriptive
+link for similarly long non-DOI URLs. Keep supplemental links when they
+point to a distinct updated version or documentation.
 
-The model intentionally accommodates author-recommended citations, such as
-Royé's own wording, instead of forcing all entries into one rigid template.
-Web titles may be quoted, as in the Grossenbacher entry. Explain a relevant
-redirect or updated version in the entry without silently replacing the
-historical work. Keep bibliographic URLs absolute and prefer the DOI resolver
-when available. For datasets, retain known versions, type and repository
-without inventing missing fields. Do not rename original non-English titles.
-
-Do not impose alphabetical ordering just because a review is requested.
-Preserve citation anchors and keep reference sections matched in Rmd and
-Markdown. Goerlich's working-paper wording has an explicit preservation
-request. Consult `_maintenance/references-audit.md` before changing it. Link
-failures alone do not invalidate a reference.
+See [APA 7 reference examples](https://apastyle.apa.org/style-grammar-guidelines/references/examples).
 
 ## YAML chunk headers with knitr
 

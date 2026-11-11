@@ -114,14 +114,11 @@ the final file.
   syndication URLs, project dates, dataset versions or publication status.
 - Use Chulapa/Kramdown alert markup, not Quarto callouts, GitHub admonitions or
   custom CSS. Match severity to the message. See the publication reference.
-- Use a `## References` section following the hillshade post
-  (`collections/_posts/2022-10-17-tidyterra-hillshade.md`) as the reference
-  model: Markdown bullets, plain article titles, italic journal/publication
-  names and visible absolute DOI/URL autolinks in angle brackets. Keep matching
-  references identical in Rmd and Markdown. Preserve citation anchors, original
-  titles, data versions actually used and explicit user exceptions. Follow the
-  author's recommended citation when available, keeping the site's bullet
-  presentation.
+- Use APA 7 for bibliographic entries and alphabetize by author in a
+  `## References` section. Keep Markdown bullets and inline links in the
+  article. Keep matching references identical in Rmd and Markdown and reuse
+  the same entry across posts, projects and drafts for the same work and version.
+  See the publication reference for identifier checks and mobile-friendly links.
 - A 403, timeout or crawler failure is not proof of a dead link. Do not remove
   an attribution or silently replace a historical source with a newer edition.
   See the existing `_maintenance/` audits before reopening settled decisions.

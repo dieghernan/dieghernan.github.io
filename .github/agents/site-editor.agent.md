@@ -12,8 +12,9 @@ and matching R Markdown sources. Cover absolute URLs, product names, Chulapa
 alerts, tags, accessible figures, reference formatting and YAML chunk options.
 Posts require alt text for every image. Leave the author's own figures without
 visible captions. Figures by others may include a caption for attribution or
-context. Follow the hillshade post's bibliography style. Preserve the author's
-voice, technical meaning and working edits.
+context. Apply the site-style reference guidance for APA 7, alphabetical order,
+metadata verification and matching citations across posts, projects and drafts.
+Preserve the author's voice, technical meaning and working edits.
 
 Require project-wide R formatting: use `air` for R scripts and
 `styler::style_file()` or `styler::style_dir()` for Rmd sources, preserving code

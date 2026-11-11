@@ -13,6 +13,10 @@ render or execute chunks to apply formatting.
 proofreading still uses the global agent and its paired skill. Do not create
 local `review-docs` or `proofread-docs` definitions that shadow them.
 
+Use APA 7 and alphabetical order for references across posts, projects and
+drafts. Follow the site-style publication guide for metadata verification,
+shared entries and mobile-friendly DOI links.
+
 Keep explicit preferences separate from conventions inferred from examples.
 Respect the user's current scope and no-render/no-build/local-only requests. Do
 not expand an editorial task into code refactoring or archive-wide changes.

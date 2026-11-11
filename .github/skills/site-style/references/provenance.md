@@ -15,7 +15,7 @@ From the active postal-code drafting conversation:
 - Every image needs alt text. The author leaves their own figures in posts
   without visible captions and explicitly allows optional captions for figures
   produced by others. Project pages retain the earlier caption requirement.
-- Reference formatting follows the hillshade post of 2022-10-17, explicitly
+- The previous reference style followed the hillshade post of 2022-10-17, explicitly
   chosen by the user over the newer template. Use plain article titles,
   italic journal/publication details and visible DOI/URL autolinks.
 - Use YAML `#|` chunk options and the knitr conversion helper.
@@ -77,9 +77,11 @@ The tag vocabulary is drawn from `collections/_posts/` and
 `_Rmd/2026-02-12-geobounds.Rmd`. Their light hooks, practical transitions and
 step-by-step explanations are style guidance, not mandatory formulas.
 
-Ordinary reference formatting follows the user-selected hillshade post,
-rather than the earlier template inferred from recent project bibliographies.
-This is a default for consistency, not authority to rewrite an author-requested
-citation. Legacy relative links and incomplete figure
+The user later adopted APA 7 for bibliographic entries and alphabetical
+ordering across posts, projects and drafts, with Markdown bullets and
+inline links retained. That decision supersedes the earlier hillshade
+post as the reference formatting model. Keep explicit citation exceptions.
+
+Legacy relative links and incomplete figure
 metadata are issues to fix within scope, not counterexamples overriding the
 user's explicit newer requirements.
