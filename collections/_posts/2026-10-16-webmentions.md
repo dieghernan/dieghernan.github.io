@@ -7,8 +7,6 @@ tags:
   - html
   - chulapa
   - indieweb
-syndication:
-  - https://dev.to/dieghernan/conversations-across-the-web-with-webmentions-28d0
 header_img: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 schema_image: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 og_image_width: 1727

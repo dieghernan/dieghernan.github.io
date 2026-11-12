@@ -4,7 +4,7 @@ excerpt: "Peel the world like an orange with the interrupted Goode homolosine pr
 subtitle: "Do you know the interrupted Goode homolosine projection?"
 syndication:
   - https://www.r-bloggers.com/2026/10/lets-peel-the-world/
-  - https://dev.to/dieghernan/lets-peel-the-world-d6g
+  - https://oneworldwithr.substack.com/p/202610_orange-peel
 tags:
   - music
   - r_bloggers
@@ -29,8 +29,6 @@ output:
     preserve_yaml: true
 ---
 
-
-
 What would happen if we peeled the Earth like an orange? The
 [interrupted Goode homolosine projection](https://proj.org/en/stable/operations/projections/igh.html)
 gives us something close to that! This equal-area projection preserves relative
@@ -40,8 +38,7 @@ our world is ready to peel.
 Let's make it with **sf**, **giscoR** and **ggplot2**. First, we get the
 coastlines and draw the outline, following the cuts between the lobes.
 
-
-``` r
+```r
 library(sf)
 library(ggplot2)
 library(giscoR)
@@ -66,8 +63,7 @@ mask <- st_difference(rectangle, outline)
 Next, we draw the meridians and parallels within each lobe so that they do not
 connect across the cuts.
 
-
-``` r
+```r
 lobes <- list(
   c(-180, -40, 0, 90), c(-40, 180, 0, 90),
   c(-180, -100, -90, 0), c(-100, -20, -90, 0),
@@ -98,8 +94,7 @@ grat <- st_sfc(do.call(c, lines), crs = 4326) |>
 Finally, we add the orange palette. The mask hides anything outside the outline
 and keeps the edges of our peel tidy.
 
-
-``` r
+```r
 font_add_google("Coiny", family = "coiny")
 
 showtext_auto()
@@ -152,8 +147,8 @@ ggplot() +
 ## References
 
 - Panaïotis, T. (2026, September 29). Projections cartographiques : Le guide
-  pour ne pas y laisser sa santé mentale. *Pyranhia*.
+  pour ne pas y laisser sa santé mentale. _Pyranhia_.
   [Article](https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html)
-- Wilke, C. O. (n.d.). *Interrupted Goode homolosine*. practicalgg.
+- Wilke, C. O. (n.d.). _Interrupted Goode homolosine_. practicalgg.
   <https://wilkelab.org/practicalgg/articles/goode.html>
   (Source for the outline and masking approach.)

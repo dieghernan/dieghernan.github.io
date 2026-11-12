@@ -9,7 +9,7 @@ excerpt: >-
   Voronoi, giscoR and sf.
 syndication:
   - https://www.r-bloggers.com/2026/11/postal-codes-and-tessellations/
-  - https://dev.to/dieghernan/postal-codes-and-tessellations-4ll3
+  - https://oneworldwithr.substack.com/p/202611_postal-codes
 tags:
   - music
   - r_bloggers
@@ -683,17 +683,17 @@ The title is a nod to Muse's album _Black Holes and Revelations_.
 
 ## References
 
-- Goerlich, F. J. (2022). *Elaboración de un mapa de códigos postales de España
+- Goerlich, F. J. (2022). _Elaboración de un mapa de códigos postales de España
   con recursos libres: Cómo evitar pagar por disponer de información de
-  referencia* (Working Paper No. 2022-3). Ivie.
+  referencia_ (Working Paper No. 2022-3). Ivie.
   <https://doi.org/10.12842/WPIVIE_0322>
   ([Updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html))
-- Hernangómez, D. (2026). *Códigos postales de España* (Version 1.0.0)
+- Hernangómez, D. (2026). _Códigos postales de España_ (Version 1.0.0)
   [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.23698418>
   ([Project documentation](https://dieghernan.github.io/codigospostales/))
 - Pokojski, W., & Pokojska, P. (2018). Voronoi diagrams – Inventor, method,
-  applications. *Polish Cartographical Review, 50*(3), 141–150.
+  applications. _Polish Cartographical Review, 50_(3), 141–150.
   <https://doi.org/10.2478/pcr-2018-0009>
 - Sánchez, J. I. (2020, November 13). Así hice el mapa de los códigos
-  postales de España con SIG y datos abiertos. *Nosolosig*.
+  postales de España con SIG y datos abiertos. _Nosolosig_.
   [Article](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos)
