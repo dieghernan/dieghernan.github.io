@@ -23,6 +23,9 @@ project_links:
     icon: fab fa-github
     label: See on GitHub
 og_image_alt: "Map of stars and constellations from the Celestial Data collection."
+syndication:
+  - https://dev.to/dieghernan/celestial-data-5h79
+
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7561601.svg)](https://doi.org/10.5281/zenodo.7561601)
