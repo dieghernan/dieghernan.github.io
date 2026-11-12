@@ -4,6 +4,7 @@ excerpt: "Peel the world like an orange with the interrupted Goode homolosine pr
 subtitle: "Do you know the interrupted Goode homolosine projection?"
 syndication:
   - https://www.r-bloggers.com/2026/10/lets-peel-the-world/
+  - https://dev.to/dieghernan/lets-peel-the-world-d6g
 tags:
   - music
   - r_bloggers
