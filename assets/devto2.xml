@@ -31,6 +31,11 @@ permalink: ./devto2.xml
 			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines }}</description>
 			{% endif %}
 			<content:encoded><![CDATA[
+			{% if document.subtitle %}
+				{%- assign thesub = document.subtitle | markdownify -%}
+				{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
+				{{ "<p>" | append: thesub | append: "</p>" }}
+			{% endif %}
 			{%- if ogimage -%}
 				{{ "<p><img src='" | append: entryimg | append: "' ></p>"  }}
 			{%- endif -%}

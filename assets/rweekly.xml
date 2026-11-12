@@ -28,13 +28,11 @@ permalink: ./rweekly.xml
 	{%- assign wpm = words_per_minute | default: 200 -%}
 	{%- assign  alldocs = 	site.documents |
 	            where_exp: "item", "item.include_on_feed == true" |
-							where_exp: "item", "item.date != nil" | 
+							where_exp: "item", "item.date != nil" |
 							where_exp: "item", "item.tags contains 'r_bloggers'" |
 							sort: 'date' | reverse -%}
 	{%- for document in alldocs  -%}
 	{%- assign entryimg =  document.og_image | default: document.header_img | absolute_url -%}
-	{%- assign words = document.content | strip_html | number_of_words -%}   	
-		{%- assign minutes = words | divided_by: wpm | ceil | at_least: 1 -%}
 	<entry>
 		<title type="html">{{ document.title | markdownify | remove: "<p>" | remove: "</p>" | strip_newlines | strip | escape }}</title>
 		<link href="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}" rel="alternate" type="text/html" title="{{ document.title | markdownify | strip_html | strip_newlines | strip | escape | xml_escape | escape }}"/>
@@ -45,14 +43,12 @@ permalink: ./rweekly.xml
 		{% if document.subtitle %}
 			{%- assign thesub = document.subtitle | markdownify -%}
 			{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
-		{{ '<h3>' | append: thesub | 
+		{{ '<h3>' | append: thesub |
 	         append: '</h3>' | escape }}
 		{% endif %}
   		{% if entryimg %}
 			{{ "<img src='" | append: entryimg | append: "' >" | escape }}
 			{% endif %}
-	{{ "<p>" | append: minutes | 
-	         append: " min.</p>" | escape }}
 	         {% assign paragraphs = document.content | split:'</p>' %}
 	         {% for paragraph in paragraphs limit: 1  %}
 	           {{ paragraph | append: '</p>' | markdownify | escape }}
@@ -72,5 +68,5 @@ permalink: ./rweekly.xml
 		<category term="{{ tag }}"/>
 		  {%- endfor %}
 	</entry>
-    {%- endfor -%}	
+    {%- endfor -%}
 </feed>
