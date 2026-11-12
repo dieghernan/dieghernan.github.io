@@ -20,6 +20,9 @@ og_image_width: 1082
 og_image_height: 577
 og_image_type: "image/png"
 og_image_alt: "Map of Spain illustrating Leaflet-providersESP cartographic layers."
+syndication:
+  - https://dev.to/dieghernan/leaflet-providersesp-36g5
+
 ---
 
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that

@@ -5,6 +5,8 @@ description: "Retrieve administrative boundaries as ready-to-use sf objects in R
 excerpt: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds."
 syndication:
   - https://www.r-bloggers.com/2026/02/introducing-geoboundaries/
+  - https://dev.to/dieghernan/introducing-geobounds-3gi0
+  - https://oneworldwithr.substack.com/p/202602_geobounds
 tags:
   - r_bloggers
   - rstats

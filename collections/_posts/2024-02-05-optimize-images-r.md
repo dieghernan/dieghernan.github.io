@@ -6,6 +6,7 @@ subtitle: "Introducing the <strong>resmush</strong> package"
 excerpt: Compress the size of your images with R, resmush and reSmush.it
 syndication:
   - https://www.r-bloggers.com/2024/02/optimize-your-images-with-r-and-resmush-it/
+  - https://dev.to/dieghernan/optimize-your-images-with-r-and-resmushit-5c42
 tags:
   - r_bloggers
   - r_package

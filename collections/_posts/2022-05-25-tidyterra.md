@@ -5,6 +5,8 @@ excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
 syndication:
   - https://www.r-bloggers.com/2022/05/introducing-tidyterra/
+  - https://dev.to/dieghernan/introducing-tidyterra-24d1
+  - https://oneworldwithr.substack.com/p/202205_tidyterra
 tags:
   - music
   - r_bloggers

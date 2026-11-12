@@ -4,6 +4,8 @@ excerpt: "Give the world a heart shape with the Bonne projection and draw it in 
 subtitle: "Do you know the Bonne projection?"
 syndication:
   - https://www.r-bloggers.com/2025/02/happy-valentines-day-2/
+  - https://dev.to/dieghernan/happy-valentines-day-2ap0
+  - https://oneworldwithr.substack.com/p/202502_st_valentine
 tags:
   - music
   - r_bloggers

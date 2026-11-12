@@ -10,6 +10,7 @@ excerpt: >-
 syndication:
   - https://www.r-bloggers.com/2026/11/postal-codes-and-tessellations/
   - https://oneworldwithr.substack.com/p/202611_postal-codes
+  - https://dev.to/dieghernan/postal-codes-and-tessellations-5e53
 tags:
   - music
   - r_bloggers

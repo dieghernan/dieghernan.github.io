@@ -19,6 +19,9 @@ og_image_width: 400
 og_image_height: 500
 og_image_type: "image/webp"
 og_image_alt: "Map of South America with country boundaries split into short segments, illustrated with alternating colors."
+syndication:
+  - https://dev.to/dieghernan/cast-a-line-to-subsegments-in-r-5cfc
+
 ---
 
 This post introduces a user-defined function for casting **sf** objects of class
