@@ -8,6 +8,8 @@ excerpt: Using shadow effects on relief maps is a very common technique,
   which produces informative yet beautiful maps.
 syndication:
   - https://www.r-bloggers.com/2022/10/hillshade-colors-and-marginal-plots-with-tidyterra-i/
+  - https://dev.to/dieghernan/hillshade-colors-and-marginal-plots-with-tidyterra-i-11j5
+  - https://oneworldwithr.substack.com/p/202210_tidyterra-hillshade
 tags:
   - music
   - r_bloggers
