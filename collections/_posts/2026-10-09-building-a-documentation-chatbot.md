@@ -12,6 +12,9 @@ og_image_width: 1730
 og_image_height: 909
 og_image_type: "image/webp"
 og_image_alt: "Paper collage of an open notebook with code-like marks, floating conversation shapes and golden sparkles beside a window overlooking Madrid."
+syndication:
+  - https://dev.to/dieghernan/building-a-documentation-chatbot-for-chulapa-4h84
+
 ---
 
 This website uses my **Jekyll** theme,
