@@ -34,13 +34,13 @@ permalink: ./devto2.xml
 			{% if document.subtitle %}
 				{%- assign thesub = document.subtitle | markdownify -%}
 				{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
-				{{ "<p>" | append: thesub | append: "</p>" }}
+{{ "<p>" | append: thesub | append: "</p>" }}
 			{% endif %}
 			{% if ogimage %}
-				{{ "<p><img src='" | append: entryimg | append: "' ></p>"  }}
-			{% endif %}
+{{ "<p><img src='" | append: ogimage | append: "' ></p>"  }}
+			{% endif -%}
 
-			{{ document.content | markdownify }}
+{{ document.content | markdownify }}
 			]]></content:encoded>
 			<pubDate>{{ document.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
 			{% if document.tags.size > 0 -%}
