@@ -11,7 +11,7 @@ ai_disclosure_level: no_ai
 Has alerts? TRUE
 Has Spotify? TRUE
 Has iframe? TRUE
-Has details_summary? FALSE
+Has details_summary? TRUE
 Has math? FALSE
 
 **Updated on October 25, 2026:** The elevation and precipitation maps now use **ggblend** to multiply their colors with the hillshade, following [Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The map and marginal profiles now share the same precipitation palette and limits. Dominic Royé also demonstrates how to use **ggblend** in [Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/). {: .alert .alert-info .p-3 .mx-2 .mb-3}

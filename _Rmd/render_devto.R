@@ -52,11 +52,17 @@ convert_to_devto <- function(input) {
   pp <- capture.output(cat(yaml::as.yaml(new_meta)))
   body <- readLines(output, warn = FALSE, encoding = "UTF-8")
 
-  al <- paste0("Has alerts? ", any(grepl(".alert|alert-", body)))
-  spot <- paste0("Has Spotify? ", any(grepl("spotify", body)))
-  ifram <- paste0("Has iframe? ", any(grepl("iframe", body)))
-  det <- paste0("Has details_summary? ", any(grepl("<details>", body)))
-  math <- paste0("Has math? ", any(grepl("math", body)))
+  alerts <- any(grepl("\\.alert|alert-", body))
+  spotify <- any(grepl("spotify", body, ignore.case = TRUE))
+  iframe <- any(grepl("<iframe\\b", body, ignore.case = TRUE))
+  details <- any(grepl("<details\\b", body, ignore.case = TRUE))
+  math <- any(grepl("math", body, ignore.case = TRUE))
+
+  al <- paste0("Has alerts? ", alerts)
+  spot <- paste0("Has Spotify? ", spotify)
+  ifram <- paste0("Has iframe? ", iframe)
+  det <- paste0("Has details_summary? ", details)
+  math <- paste0("Has math? ", math)
 
   writeLines(
     c("---", pp, "---", "", al, spot, ifram, det, math, "", body),
