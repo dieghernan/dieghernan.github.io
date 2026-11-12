@@ -6,6 +6,8 @@ subtitle: "The rain in Spain does not stay mainly in the plain"
 excerpt: "Add marginal plots to a SpatRaster map on ggplot2"
 syndication:
   - https://www.r-bloggers.com/2022/12/hillshade-colors-and-marginal-plots-with-tidyterra-ii/
+  - https://dev.to/dieghernan/hillshade-colors-and-marginal-plots-with-tidyterra-ii-h9g
+  - https://oneworldwithr.substack.com/p/202212_tidyterra-hillshade-2
 tags:
   - music
   - r_bloggers
