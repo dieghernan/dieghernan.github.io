@@ -1,0 +1,185 @@
+---
+review: always
+tags_choose_4: rstats,function,music,r_bloggers,rnaturalearth,rspatial,sf
+description: User-defined function using the <strong>sf</strong> package
+cover_image: https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp
+cover_image_bk: ~
+series: review
+ai_disclosure_level: no_ai
+---
+
+Has alerts? FALSE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
+This post introduces a user-defined function for casting **sf** objects of class `LINESTRING` or `POLYGON` into substrings.
+
+## Required **R** packages
+
+``` r
+library(sf)
+library(rnaturalearth)
+library(dplyr)
+```
+
+## The problem
+
+The **sf** package includes [`st_cast`](https://r-spatial.github.io/sf/reference/st_cast.html), a powerful function that transforms geometries into other types of geometries (i.e. `LINESTRING` to `POLYGON`, etc.).
+
+``` r
+italy <- ne_countries(country = "italy", returnclass = "sf")
+italy_pol <- italy %>% st_cast("POLYGON")
+italy_lin <- italy_pol %>% st_cast("LINESTRING")
+italy_pt <- italy_lin %>% st_cast("POINT")
+par(mfrow = c(2, 2), mar = c(1, 1, 1, 1), bg = NA)
+plot(st_geometry(italy), col = c("red", "yellow", "blue"), main = "MULTIPOLYGON")
+plot(st_geometry(italy_pol), col = c("red", "yellow", "blue"), main = "POLYGON")
+plot(st_geometry(italy_lin), col = c("red", "yellow", "blue"), main = "LINE")
+plot(st_geometry(italy_pt), col = c("red", "yellow", "blue"), main = "POINT")
+```
+
+![Four maps of Italy comparing multipolygon, polygon, line and point representations. Separate polygons and boundary vertices become visible as the geometry is converted.](https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp)
+
+What I missed when using `st_cast` was the possibility of breaking `LINESTRING` objects into subsegments:
+
+![Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments.](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
+
+<iframe
+  class="d-block w-100 border-0 rounded my-3"
+  title="Hold the Line by Toto on Spotify"
+  src="https://open.spotify.com/embed/track/2UasQGaawqY6ncetMd2LNw?theme=0"
+  height="152"
+  loading="lazy"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  allowfullscreen>
+</iframe>
+
+## An approach
+
+One possible solution is to create `LINESTRING` objects for each consecutive pair of `POINT` objects across the original geometry. Let's check it:
+
+``` r
+par(mfrow = c(1, 2), mar = c(1, 1, 1, 1))
+test <- ne_countries(country = "spain", returnclass = "sf") %>%
+  st_cast("POLYGON") %>%
+  st_cast("LINESTRING")
+plot(st_geometry(test), col = c("red", "yellow", "blue"), main = "LINESTRING")
+
+geom <- lapply(
+  1:(length(st_coordinates(test)[, 1]) - 1),
+  function(i) {
+    rbind(
+      as.numeric(st_coordinates(test)[i, 1:2]),
+      as.numeric(st_coordinates(test)[i + 1, 1:2])
+    )
+  }
+) %>%
+  st_multilinestring() %>%
+  st_sfc(crs = st_crs(test)) %>%
+  st_cast("LINESTRING")
+plot(st_geometry(geom), col = c("red", "yellow", "blue"), main = "AFTER FUNCTION")
+```
+
+![Two outlines of Spain comparing the original boundary with a version split into short, individually colored segments.](https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp)
+
+## The function `stdh_cast_substring`
+
+Finally, I wrapped the solution into a function and extended it a little bit:
+
+- When the input is not a `LINESTRING` or a `POLYGON`, it returns an error and stops.
+
+- The function accepts **sf** objects with several rows or `sfc` objects with several geometries, and returns the same class as the input. In the case of **sf** objects, the input `data.frame` is added.
+
+- By default, the output is a `MULTILINESTRING` geometry. This has the benefit that the output has the same number of geometries as the input. This can be modified by setting the `to` parameter to `LINESTRING`, which only casts the `MULTILINESTRING` object into `LINESTRING`.
+
+``` r
+stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
+  ggg <- st_geometry(x)
+
+  if (!unique(st_geometry_type(ggg)) %in% c("POLYGON", "LINESTRING")) {
+    stop("Input should be LINESTRING or POLYGON")
+  }
+  for (k in 1:length(st_geometry(ggg))) {
+    sub <- ggg[k]
+    geom <- lapply(
+      1:(length(st_coordinates(sub)[, 1]) - 1),
+      function(i) {
+        rbind(
+          as.numeric(st_coordinates(sub)[i, 1:2]),
+          as.numeric(st_coordinates(sub)[i + 1, 1:2])
+        )
+      }
+    ) %>%
+      st_multilinestring() %>%
+      st_sfc()
+
+    if (k == 1) {
+      endgeom <- geom
+    }
+    else {
+      endgeom <- rbind(endgeom, geom)
+    }
+  }
+  endgeom <- endgeom %>% st_sfc(crs = st_crs(x))
+  if (class(x)[1] == "sf") {
+    endgeom <- st_set_geometry(x, endgeom)
+  }
+
+  if (to == "LINESTRING") {
+    endgeom <- endgeom %>% st_cast("LINESTRING")
+  }
+  return(endgeom)
+}
+```
+
+The function could be improved in terms of performance. Given that it works at the coordinate level, high-resolution objects introduce some delay.
+
+``` r
+test100 <- ne_countries(
+  continent = "south america",
+  returnclass = "sf"
+) %>%
+  st_cast("POLYGON")
+
+test50 <- ne_countries(50,
+  continent = "south america",
+  returnclass = "sf"
+) %>%
+  st_cast("POLYGON")
+
+
+
+init <- Sys.time()
+t1 <- stdh_cast_substring(test100, "LINESTRING")
+end <- Sys.time()
+kable(end - init, format = "markdown")
+```
+
+| x              |
+|:---------------|
+| 0.1729319 secs |
+
+``` r
+init <- Sys.time()
+t2 <- stdh_cast_substring(test50, "LINESTRING")
+end <- Sys.time()
+kable(end - init, format = "markdown")
+```
+
+| x             |
+|:--------------|
+| 2.288558 secs |
+
+``` r
+par(mfrow = c(1, 1), mar = c(0, 0, 0, 0))
+plot(st_geometry(test50), col = NA, bg = "#C6ECFF")
+plot(st_geometry(ne_countries(50, returnclass = "sf")), col = "#F6E1B9", border = "#646464", add = T)
+plot(st_geometry(test50), col = "#FEFEE9", border = "#646464", add = T)
+plot(st_geometry(t2), col = c("red", "yellow", "blue"), add = T, lwd = 0.5)
+```
+
+![Map of South America with country boundaries split into short segments, illustrated with alternating colors.](https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp)
+
+There is a difference in performance: `test100` has 15 polygons decomposed into 914 substrings, while `test50` has 80 polygons decomposed into 8,414 substrings. In that sense, the original `st_cast` is much faster, although this solution may work well in most cases.

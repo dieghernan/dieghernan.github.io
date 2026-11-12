@@ -22,7 +22,7 @@ You can install **resmush** from [**CRAN**](https://CRAN.R-project.org/package=r
 install.packages("resmush")
 ```
 
-This post was featured in [episode 152 of R Weekly Highlights](https://rweekly.fireside.fm/152?t=80).
+This post was featured in [episode 152 of R Weekly Highlights](https://rweekly.fireside.fm/152?t=705).
 
 <iframe src="https://player.fireside.fm/v3/87RSVeFz+jIaHRwHf?theme=dark&amp;t=705" width="100%" height="200" frameborder="0" scrolling="no"></iframe>
 
