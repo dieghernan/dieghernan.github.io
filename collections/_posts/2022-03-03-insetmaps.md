@@ -253,7 +253,7 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" />
 
-## Update: On **mapsf**
+## Update: on **mapsf**
 
 [Timothée Giraud](https://rgeomatic.hypotheses.org/) (AKA
 [\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also

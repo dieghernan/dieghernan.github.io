@@ -3,7 +3,7 @@ title: Corona timelapse
 citation_author: "Hernangómez, R."
 bib_author: "Hernangómez, Rodrigo"
 excerpt: "Follow how COVID-19 travel restrictions changed over time for travelers from Germany."
-subtitle: Travel restrictions amidst the COVID crisis across time - A German perspective
+subtitle: Travel restrictions amidst the COVID crisis across time - a German perspective
 tags:
   - discontinued
   - project
