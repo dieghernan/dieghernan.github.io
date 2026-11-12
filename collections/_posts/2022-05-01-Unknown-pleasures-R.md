@@ -6,6 +6,8 @@ excerpt:
   R, sf, terra and ggridges.
 syndication:
   - https://www.r-bloggers.com/2022/04/unknown-pleasures-with-r/
+  - https://dev.to/dieghernan/unknown-pleasures-with-r-1idb
+  - https://oneworldwithr.substack.com/p/202205_unknown-pleasures-r
 tags:
   - music
   - r_bloggers
