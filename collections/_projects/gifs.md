@@ -25,6 +25,10 @@ project_links:
   - url: https://github.com/dieghernan/gifs
     icon: fab fa-github
     label: See on GitHub
+syndication:
+  - https://dev.to/dieghernan/large-forest-fires-in-spain-3f4o
+  - https://oneworldwithr.substack.com/p/gifs
+
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932940.svg)](https://doi.org/10.5281/zenodo.23932940)
