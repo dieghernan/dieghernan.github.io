@@ -1,5 +1,7 @@
 {%- capture syndication_links -%}
-{%- assign sorted_syndication = page.syndication | sort -%}
+{%- if page.syndication and page.syndication.size > 0 -%}
+{%- assign sorted_syndication = page.syndication | sort | uniq -%}
+{%- endif -%}
 {%- for value in sorted_syndication -%}
 {%- assign syndication_url = value | strip -%}
 {%- assign prefix = syndication_url | downcase | slice: 0, 8 -%}
