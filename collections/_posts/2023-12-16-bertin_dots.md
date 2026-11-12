@@ -5,6 +5,8 @@ subtitle: "Bertin's dot density maps with <strong>R</strong> and GHSL"
 excerpt: Another way to represent demographics on a map.
 syndication:
   - https://www.r-bloggers.com/2023/12/beautiful-maps-with-r-v-point-densities/
+  - https://dev.to/dieghernan/beautiful-maps-with-r-v-point-densities-3g7o
+  - https://oneworldwithr.substack.com/p/202312_bertin_dots
 tags:
   - r_bloggers
   - beautiful_maps
