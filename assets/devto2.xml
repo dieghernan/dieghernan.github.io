@@ -38,7 +38,7 @@ permalink: ./devto2.xml
 			{% endif %}
 			{% if ogimage %}
 {{ "<p><img src='" | append: ogimage | append: "' ></p>"  }}
-			{% endif -%}
+			{% endif %}
 
 {{ document.content | markdownify }}
 			]]></content:encoded>
