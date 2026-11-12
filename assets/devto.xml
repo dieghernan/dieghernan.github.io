@@ -29,7 +29,7 @@ permalink: ./devto.xml
 	            where_exp: "item", "item.include_on_feed == true" |
 	            where_exp: "item", "item.date != nil" |
 	            sort: 'date' | reverse -%}
-	{%- for document in alldocs limit: 10 -%}
+	{%- for document in alldocs limit: 5 -%}
 {%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
 	{%- assign entryimg = document.og_image | default: document.header_img | absolute_url -%}
 	{%- assign words = document.content | strip_html | number_of_words -%}
@@ -46,17 +46,11 @@ permalink: ./devto.xml
 		{%- assign thesub = document.subtitle | markdownify -%}
 		{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
 
-		{{ '<h3>' | append: thesub |
-	         append: '</h3>' | escape }}
+		{{ '<p>' | append: thesub |
+	         append: '</p>' | escape }}
+	         <p>Go to content</p>
 		{% endif %}
-		{% if entryimg %}
-			{{ "<img src='" | append: entryimg | append: "' >" | escape }}
-		{% endif %}
-		{{ "<p>" | append: minutes |
-	         append: " min.</p>" | escape }}
-		{{ document.content | markdownify | escape }}
 		</content>
-		{% include snippets/author-identity.html author=document.author %}
 		<author>
 			<name>{{ identity_name | xml_escape }}</name>
 			{% if identity_url != empty %}<uri>{{ identity_url | absolute_url | xml_escape }}</uri>{% endif %}
