@@ -11,7 +11,7 @@ first | split: '#' | first -%}
 {%- if host and host != empty -%}
 {%- if prefix == 'https://' or short_prefix == 'http://' -%}
 <li class="list-inline-item"><a class="u-syndication text-break"
-    rel="syndication" href="{{ syndication_url | escape }}">{{ host | escape
+    rel="syndication" href="{{ syndication_url | escape }}">{{ host | remove: 'www.'| escape
     }}</a></li>
 {%- endif -%}
 {%- endif -%}
