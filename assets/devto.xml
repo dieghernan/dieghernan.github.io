@@ -3,67 +3,58 @@ layout: null
 permalink: ./devto.xml
 ---
 {%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url | absolute_url -%}
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" >
-	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
-	<link href="{{ page.url | absolute_url }}" rel="self" type="application/atom+xml" />
-	<link href="{{  ""  | absolute_url }}" rel="alternate" type="text/html" />
-	<updated>{{ site.time | date_to_xmlschema }}</updated>
-	<id>{{ page.url | absolute_url }}</id>
-	<title>{{ site.title | strip_html  }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html }}{% endif %}</title>
-	{% if site.subtitle -%}
-	<subtitle>{{- site.subtitle | strip_html -}}</subtitle>
-	{%- endif %}
-	{% include snippets/author-identity.html %}
-	<author>
-		<name>{{ identity_name | xml_escape }}</name>
-		{% if identity_url != empty %}<uri>{{ identity_url | absolute_url | xml_escape }}</uri>{% endif %}
-	</author>
-	<rights>(c) {{ site.time | date: '%Y' }}, {{  site.author.name | default: site.github.owner_name | xml_escape }}</rights>
-	{% if site.navbar.brand.img -%}
-	<icon>{{- site.navbar.brand.img | absolute_url -}}</icon>
-	{%- endif %}
-	<logo>{{- og_image -}}</logo>
-	{%- assign alldocs = site.documents |
-							where_exp: "item", "item.include_on_feed == true" |
-							where_exp: "item", "item.date != nil" |
-							sort: 'date' | reverse -%}
-	{%- for document in alldocs limit: 5 -%}
-		{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
-		{%- assign entryimg = document.og_image | default: document.header_img | absolute_url -%}
-		<entry>
-			<title type="text">{{ document.title | markdownify | strip_html | normalize_whitespace | strip | replace: '&amp;', '&' | xml_escape }}</title>
-			<link href="{{ canonical_url | escape }}" rel="alternate" type="text/html" title="{{ document.title | markdownify | strip_html | normalize_whitespace | strip | replace: '&amp;', '&' | xml_escape }}"/>
-			<published>{{ document.date | date_to_xmlschema }}</published>
-			<updated>{{ document.last_modified_at | default: document.date | date_to_xmlschema }}</updated>
-			<id>{{ canonical_url | escape }}</id>
-			<content type="html" xml:base="{{ canonical_path | absolute_url | uri_escape | escape }}">
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+		<title>{{ site.title | append: " | " | append: site.subtitle | xml_escape  }}</title>
+		<generator>(c) Chulapa Jekyll Theme RSS generator</generator>
+		<link>{{  ""  | absolute_url }}</link>
+		<description>{{ site.description | xml_escape }}</description>
+		<language>{{- site.locale | default: 'en-US' -}}</language>
+		<lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
+		<atom:link href="{{ page.url | absolute_url }}" rel="self" type="application/rss+xml" />
+		{%- assign  alldocs = site.documents |
+				where_exp: "item", "item.include_on_feed == true" |
+				where_exp: "item", "item.date != nil" |
+				sort: 'date' | reverse -%}
+		{%- for document in alldocs limit: 10 -%}
+			{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
+			{%- assign ogimage = document.og_image | default: document.header_img | default: site.og_image | absolute_url -%}
+			{% include snippets/author-identity.html author=document.author %}
+		<item>
+			<title>{{ document.title | markdownify | strip_html | normalize_whitespace | strip | replace: '&amp;', '&' | xml_escape }}</title>
+			<link>{{ canonical_url | escape }}</link>
+			<guid isPermaLink="true">{{ document.url | absolute_url }}</guid>
 			{% if document.subtitle %}
-
-			{%- assign thesub = document.subtitle | markdownify -%}
-			{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
-			{{ '<p>' | append: thesub | append: '</p>' | escape }}
+			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines }}</description>
+			{% endif %}
+			<content:encoded><![CDATA[
+			{% if document.subtitle %}
+				{%- assign thesub = document.subtitle | markdownify -%}
+				{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
+{{ "<p>" | append: thesub | append: "</p>" }}
+			{% endif %}
+			{% if ogimage %}
+{{ "<p><img src='" | append: ogimage | append: "' ></p>"  }}
 			{% endif %}
 
-			{% if entryimg %}
-			{{ "<img src='" | append: entryimg | append: "' >" | escape }}
-			{% endif %}
-			{{ "<p>Go to content</p>" | escape }}
-
-			{{ document.content | markdownify | escape }}
-			</content>
-			<author>
-				<name>{{ identity_name | xml_escape }}</name>
-				{% if identity_url != empty %}
-				<uri>{{ identity_url | absolute_url | xml_escape }}</uri>
-				{% endif %}
-			</author>
-			<summary type="html">{{ document.excerpt | escape }}</summary>
-			<category term="{{ document.collection }}"/>
-			{% assign tagrss = document.tags | join: ',' | split: ',' | sort -%}
-			{% for tag in tagrss -%}
-			<category term="{{ tag }}"/>
-			{%- endfor %}
-		</entry>
+{{ document.content | markdownify }}
+			]]></content:encoded>
+			<pubDate>{{ document.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+			{% if document.tags.size > 0 -%}
+				{%- assign tagrss = document.tags | join: ','  | split: ',' | sort | where_exp: "tag","tag != document.layout "   -%}
+				{% for tag in tagrss  -%}
+			<category>{{ tag }}</category>
+				{%- endfor %}
+			{%- endif %}
+			{% if ogimage -%}
+			{%- assign ext = og_image | split: "?" | first | split: "." | last | downcase -%}
+			{%- assign mime = ext | replace: "jpg", "jpeg" | prepend: "image/" -%}
+			<enclosure url="{{- ogimage -}}" type="{{- mime -}}" length="0" />
+			{%- endif -%}
+		</item>
 	{%- endfor -%}
-</feed>
+  </channel>
+</rss>
