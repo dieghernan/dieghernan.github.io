@@ -32,7 +32,7 @@ permalink: ./devto2.xml
 			{% endif %}
 			<content:encoded><![CDATA[
 			{%- if ogimage -%}
-				{{ "<p><img src='" | append: entryimg | append: "' ></p>" | escape }}
+				{{ "<p><img src='" | append: entryimg | append: "' ></p>"  }}
 			{%- endif -%}
 
 			{{ document.content | markdownify }}
@@ -44,8 +44,10 @@ permalink: ./devto2.xml
 			<category>{{ tag }}</category>
 				{%- endfor %}
 			{%- endif %}
-			{%- if ogimage -%}
-			<enclosure url="{{- ogimage -}}" length="0" />
+			{% if ogimage -%}
+			{%- assign ext = og_image | split: "?" | first | split: "." | last | downcase -%}
+			{%- assign mime = ext | replace: "jpg", "jpeg" | prepend: "image/" -%}
+			<enclosure url="{{- ogimage -}}" type="{{- mime -}}" length="0" />
 			{%- endif -%}
 		</item>
 	{%- endfor -%}
