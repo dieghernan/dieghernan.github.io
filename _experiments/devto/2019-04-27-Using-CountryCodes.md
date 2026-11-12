@@ -1,0 +1,211 @@
+---
+review: always
+description: Vignette of the <strong>CountryCodes</strong> project
+cover_image: https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp
+cover_image_bk: ~
+series: review
+ai_disclosure_level: no_ai
+---
+This vignette shows how to use the database provided in the GitHub project [Country Codes and International Organizations & Groups](https://dieghernan.github.io/projects/countrycodes/) with the **sf** package in **R**.
+
+## Required **R** packages
+
+``` r
+library(sf)
+library(jsonlite)
+library(rnaturalearth)
+library(dplyr)
+```
+
+## Reading the data
+
+The first step is to read the provided database (in this example, the `json` file) and extract one international organization. In this example, we will plot the [Commonwealth of Nations](https://en.wikipedia.org/wiki/Commonwealth_of_Nations).
+
+``` r
+df <- fromJSON("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodesfull.json")
+# Identify Commonwealth acronym
+orgsdb <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/CountrycodesOrgs.csv") %>%
+  distinct(org_id, org_name)
+
+kable(orgsdb[grep("Common", orgsdb$org_name), ], format = "markdown")
+```
+
+|     | org_name                                      | org_id   |
+|:----|:----------------------------------------------|:---------|
+| 25  | Commonwealth                                  | C        |
+| 26  | Central American Common Market                | CACM     |
+| 30  | Caribbean Community and Common Market         | CARICOM  |
+| 42  | Commonwealth of Independent States            | CIS      |
+| 43  | Common Market for Eastern and Southern Africa | COMESA   |
+| 115 | Southern Cone Common Market                   | MERCOSUR |
+
+In our case, the value to search for is `C`. A function that extracts the membership from the `json` database is also provided:
+
+``` r
+ISO_memcol <- function(df,
+                       orgtosearch) {
+  ind <- match(orgtosearch, unlist(df[1, "org_id"]))
+  or <- lapply(1:nrow(df), function(x) {
+    unlist(df[x, "org_member"])[ind]
+  })
+  or <- data.frame(matrix(unlist(or)), stringsAsFactors = F)
+  names(or) <- orgtosearch
+  df2 <- as.data.frame(cbind(df, or, stringsAsFactors = F))
+  return(df2)
+}
+df_org <- ISO_memcol(df, "C")
+```
+
+Now `df_org` has a new column, named `C`, containing the membership status of each country.
+
+``` r
+df_org %>%
+  count(C) %>%
+  kable(format = "markdown")
+```
+
+| C      |   n |
+|:-------|----:|
+| member |  53 |
+| NA     | 222 |
+
+``` r
+df_org %>%
+  filter(!is.na(C)) %>%
+  select(
+    ISO_3166_3,
+    NAME.EN,
+    C
+  ) %>%
+  head() %>%
+  kable(format = "markdown")
+```
+
+| ISO_3166_3 | NAME.EN           | C      |
+|:-----------|:------------------|:-------|
+| ATG        | Antigua & Barbuda | member |
+| AUS        | Australia         | member |
+| BHS        | Bahamas           | member |
+| BGD        | Bangladesh        | member |
+| BRB        | Barbados          | member |
+| BLZ        | Belize            | member |
+
+## Replacing the data on a map
+
+In this example the **rnaturalearth** package is used for retrieving an `sf` object. The code below replaces the `data.frame` part of the `sf` object with the dedicated database.
+
+``` r
+testmap <- ne_countries(50,
+  "countries",
+  returnclass = "sf"
+) %>%
+  select(ISO_3166_3 = adm0_a3) %>%
+  full_join(df_org)
+
+# We also add tiny countries
+tiny <- ne_countries(50,
+  "tiny_countries",
+  returnclass = "sf"
+) %>%
+  select(ISO_3166_3 = adm0_a3) %>%
+  full_join(df_org)
+
+# Identify dependencies
+ISOCommon <- df_org %>%
+  filter(!is.na(C)) %>%
+  select(
+    ISO_3166_3.sov = ISO_3166_3,
+    C_sov = C
+  )
+tiny <- left_join(tiny, ISOCommon)
+tiny$C <- coalesce(tiny$C, tiny$C_sov)
+```
+
+## Plotting a map: Wikipedia style
+
+Now we will try to plot a map resembling the one presented in the [Wikipedia page](https://en.wikipedia.org/wiki/Commonwealth_of_Nations) for the Commonwealth.
+
+![World map highlighting member states of the Commonwealth of Nations.](https://upload.wikimedia.org/wikipedia/commons/e/e2/Member_states_of_the_Commonwealth_of_Nations.svg)
+
+The map we will generate is presented in a Robinson projection, and the color palette will be based on the [Wikipedia convention for Orthographic Maps](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Maps/Conventions/Orthographic_maps), since it is the one used in the example.
+
+``` r
+# Projecting the map
+testmap_rob <- st_transform(testmap, "+proj=robin")
+tiny_rob <- st_transform(tiny, "+proj=robin")
+
+# Bounding box
+bbox <- st_linestring(rbind(
+  c(-180, 90),
+  c(180, 90),
+  c(180, -90),
+  c(-180, -90),
+  c(-180, 90)
+)) %>%
+  st_segmentize(5) %>%
+  st_cast("POLYGON") %>%
+  st_sfc(crs = 4326) %>%
+  st_transform(crs = "+proj=robin")
+
+# Plotting
+par(mar = c(0, 0, 0, 0), bg = NA)
+plot(bbox,
+  col = "#FFFFFF",
+  border = "#AAAAAA",
+  lwd = 1.5
+)
+plot(
+  st_geometry(testmap_rob),
+  col = "#B9B9B9",
+  border = "#FFFFFF",
+  lwd = 0.1,
+  add = T
+)
+
+plot(
+  st_geometry(testmap_rob %>%
+    filter(!is.na(C))),
+  col = "#346733",
+  border = "#FFFFFF",
+  lwd = 0.1,
+  add = T
+)
+
+# Finally, add tiny countries
+# All
+plot(
+  st_geometry(tiny_rob),
+  col = "#000000",
+  bg = "#B9B9B9",
+  add = T,
+  pch = 21
+)
+# Dependencies
+plot(
+  st_geometry(tiny_rob %>%
+    filter(!is.na(C)) %>%
+    filter(!is.na(ISO_3166_3.sov))),
+  bg = "#C6DEBD",
+  col = "#000000",
+  pch = 21,
+  add = T
+)
+# Independent
+plot(
+  st_geometry(tiny_rob %>%
+    filter(!is.na(C)) %>%
+    filter(is.na(ISO_3166_3.sov))),
+  bg = "#346733",
+  col = "#000000",
+  pch = 21,
+  add = T
+)
+plot(bbox,
+  col = NA,
+  border = "#AAAAAA",
+  lwd = 1.5,
+  add = T
+)
+```
+
+![World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles.](https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp)

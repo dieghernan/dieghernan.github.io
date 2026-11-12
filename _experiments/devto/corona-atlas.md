@@ -1,0 +1,24 @@
+---
+review: always
+description: Historical international COVID-19 risk areas designated by German authorities
+cover_image: https://dieghernan.github.io/corona-atlas.de/assets/img/og_corona_atlas.png
+cover_image_bk: Historical map of international COVID-19 risk areas designated by
+  German authorities.
+series: review
+ai_disclosure_level: no_ai
+---
+<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the descriptions below refer to its period of operation. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
+
+<img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="Corona Atlas logo" style="width: 25%;">
+
+Visit <https://dieghernan.github.io/corona-atlas.de/>
+
+Interactive map of the international COVID-19 risk areas as designated by the German authorities.
+
+During the project, data was updated periodically from the website of the [Robert Koch Institute](https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Risikogebiete_neu.html).
+
+Data scraping is performed in **Python** with [**scrapy**](https://scrapy.org/). The scraper also uses [**pandas**](https://pandas.pydata.org/) and [**pycountry**](https://pypi.org/project/pycountry/).
+
+For the prototype version, map visualization was created with **R** and generated via [**rmarkdown**](https://rmarkdown.rstudio.com/) using [**leaflet**](http://rstudio.github.io/leaflet/), [**giscoR**](https://dieghernan.github.io/giscoR/) and some packages included in the [tidyverse](https://www.tidyverse.org/). For the deployment, map logic has moved to JavaScript to support multiple languages.
+
+[Read more in this post](https://dieghernan.github.io/202203_Corona-timelapse/)

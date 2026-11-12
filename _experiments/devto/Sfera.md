@@ -1,0 +1,97 @@
+---
+review: always
+description: A Pebble <i class="fas fa-skull-crossbones"></i> project
+cover_image: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png
+cover_image_bk: Sfera watch face on a Pebble Time Round.
+series: review
+ai_disclosure_level: no_ai
+---
+**Project discontinued** due to the shutdown of Pebble. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+
+**Sfera** for Pebble Time Round is a highly customizable watch face that gets the most out of the smartwatch's capabilities. Set your preferences and enjoy this beautifully designed watch face.
+
+![Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png)
+
+<p class="caption">Users can choose analog, digital, dual or mixed clock modes.</p>
+
+<div class="text-center">
+<a class="btn btn-primary my-3 text-white" href="https://apps.rebble.io/en_US/application/58c2f7110dfc32a52a00081f?native=false&query=Sfera&section=watchfaces">Download from Rebble Appstore</a>
+</div>
+
+## Features
+
+- Clock mode:
+  - Analog: Classic analog watch face
+  - Digital: Centered hour and minute display based on analog movement
+  - Dual: Analog and digital, all in one
+  - Mix: Digital hour and analog minute
+- Autodetection of 12h/24h mode based on your watch settings
+
+## Take your pick
+
+- Date - Get the weekday based on the language set on your Pebble.
+- Dots as minute markers - choose your color
+- Battery level displayed beautifully as an arc near the bezel. Choose your color and, below 20%, it turns red!
+- Weather: Current conditions in °C or °F.
+- Choose your weather provider:
+  - [Yahoo.com](https://www.yahoo.com/?ilc=401) *No API key required at this moment*
+  - [Wunderground](https://www.wunderground.com/?apiref=fb6856330e74c168)
+  - [OpenWeatherMap](https://openweathermap.org/)
+- Historical integration with Master Key (pmkey.xyz)
+- Location based on your selected weather provider
+- Night theme displayed between sunset and sunrise
+
+## Internationalization
+
+Automatic weekday translation is supported for:
+
+- English
+- Spanish
+- German
+- French
+- Portuguese
+- Italian
+
+## Future developments
+
+- [x] 12/24h mode
+- [x] Night theme
+- [x] Several weather providers available
+- [x] Master Key (pmkey.xyz) was implemented for easy API key management
+
+## Screenshots
+
+![Animated Sfera watch face on Pebble Time Round.](https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaGif.gif)
+
+<p class="caption">The face also offers a battery arc, weather and an automatic night theme.</p>
+
+## Attributions
+
+### Fonts
+
+- [Weather Icons](https://erikflowers.github.io/weather-icons) by Eric Flowers, modified and fitted to the regular alphabet instead of Unicode values.
+- Custom font for icons created via **Fontastic** downloaded from [fontsgeek.com](http://fontsgeek.com)
+
+### Weather providers
+
+<div class="row">
+<div class="col">
+<a href="https://www.yahoo.com/?ilc=401"><img src="https://poweredby.yahoo.com/purple.png" alt="Powered by Yahoo"></a>
+</div>
+<div class="col">
+<a href="https://www.wunderground.com/?apiref=fb6856330e74c168"><img src="https://icons.wxug.com/logos/PNG/wundergroundLogo_4c.png" width="120" alt="Weather Underground"></a>
+</div>
+<div class="col">
+<a href="https://openweathermap.org/"><img src="https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/icons/logo_60x60.png" width="60" alt="OpenWeatherMap"></a>
+</div>
+</div>
+
+### Others
+
+Master Key (pmkey.xyz) was a service for Pebble users that managed API keys through a unique PIN.
+
+## License
+
+Licensed under the [MIT license](https://raw.githubusercontent.com/dieghernan/Sfera/master/LICENSE).
+
+**Made in Madrid, Spain ❤️**
