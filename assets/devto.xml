@@ -48,7 +48,7 @@ permalink: ./devto.xml
 
 		{{ '<p>' | append: thesub |
 	         append: '</p>' | escape }}
-	         <p>Go to content</p>
+        {{ "<p>Go to content</p>" | escape }}
 		{% endif %}
 		</content>
 		<author>
