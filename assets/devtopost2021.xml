@@ -26,14 +26,14 @@ permalink: ./devtopost2021.xml
 	{%- endif %}
 	<logo>{{- og_image -}}</logo>
 	{%- assign wpm = words_per_minute | default: 200 -%}
-	{%- assign cutoff = "2022-01-01" | date: "%s" | plus: 0 -%}
-	{%- assign alldocs = site.posts |
+	{%- assign alldocs = site.documents |
 	            where_exp: "item", "item.include_on_feed == true" |
-				where_exp: "item", "item.date != nil" |
-				sort: 'date' | reverse -%}
+	            where_exp: "item", "item.date != nil" |
+	            where_exp: "item", "item.collection == 'posts'" |
+	            sort: 'date' | reverse -%}
 	{%- for document in alldocs -%}
-	{%- assign post_timestamp = document.date | date: "%s" | plus: 0 -%}
-	{%- if post_timestamp < cutoff -%}
+	{%- assign post_year = document.date | date: '%Y' | plus: 0 -%}
+	{%- if post_year < 2022 -%}
 {%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
 	{%- assign entryimg = document.og_image | default: document.header_img | absolute_url -%}
 	{%- assign words = document.content | strip_html | number_of_words -%}
