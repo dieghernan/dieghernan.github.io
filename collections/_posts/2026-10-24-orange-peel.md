@@ -5,6 +5,7 @@ subtitle: "Do you know the interrupted Goode homolosine projection?"
 syndication:
   - https://www.r-bloggers.com/2026/10/lets-peel-the-world/
   - https://oneworldwithr.substack.com/p/202610_orange-peel
+  - https://dev.to/dieghernan/lets-peel-the-world-oe9
 tags:
   - music
   - r_bloggers
