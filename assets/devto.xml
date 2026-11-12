@@ -19,7 +19,7 @@ permalink: ./devto.xml
 				where_exp: "item", "item.include_on_feed == true" |
 				where_exp: "item", "item.date != nil" |
 				sort: 'date' | reverse -%}
-		{%- for document in alldocs limit: 10 -%}
+		{%- for document in alldocs limit: 20 -%}
 			{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
 			{%- assign ogimage = document.og_image | default: document.header_img | default: site.og_image | absolute_url -%}
 			{% include snippets/author-identity.html author=document.author %}
