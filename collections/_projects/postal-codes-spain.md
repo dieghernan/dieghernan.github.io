@@ -25,6 +25,10 @@ og_image_width: 1200
 og_image_height: 800
 og_image_type: "image/jpeg"
 og_image_alt: "Map of estimated postal code areas in Spain with prefix 28."
+syndication:
+  - https://dev.to/dieghernan/postal-codes-of-spain-4g3j
+  - https://oneworldwithr.substack.com/p/postal-codes-spain
+
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698418.svg)](https://doi.org/10.5281/zenodo.23698418)
