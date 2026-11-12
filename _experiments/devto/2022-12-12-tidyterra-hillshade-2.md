@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,ggplot2,hillshading,inset,maps,mapSpain,music,r_bloggers,rspatial,terra,tidyterra
 description: The rain in Spain does not stay mainly in the plain
 cover_image: https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
 cover_image_bk: https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Updated on October 25, 2026:** The elevation and precipitation maps now use **ggblend** to multiply their colors with the hillshade, following [Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The map and marginal profiles now share the same precipitation palette and limits. Dominic Royé also demonstrates how to use **ggblend** in [Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/). {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 *This is the second post of the series "Hillshade, colors and marginal plots with **tidyterra**". In this post, I explore an approach for annotating marginal plots on a **ggplot2** map of a SpatRaster, including information about the values by longitude and latitude. See the first post of the series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/).*

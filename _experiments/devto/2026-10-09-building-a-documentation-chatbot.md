@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,chulapa,html,jekyll
 description: 'A development diary: context, small screens and useful answers'
 cover_image: https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 This website uses my **Jekyll** theme, [<span class="chulapa">Chulapa</span>](https://dieghernan.github.io/chulapa). Some time ago, I started wondering whether I could add a chatbot to its documentation. The docs already explain the settings, layouts and snippets, but you sometimes need to know what a feature is called before finding it. Could I make that a little easier?
 
 The idea was simple: ask a question, get a useful example and follow a link to the original docs. With [**Codex**](https://learn.chatgpt.com/learn/codex), OpenAI's coding agent, I had an initial version working on the page in **less than an hour**: I could open the widget, send a question and read its answer. That was the prototype, though. Checking its answers and making it behave properly on a phone took quite a few more rounds.

@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,C,discontinued,javascript,pebble,project,watchface
 description: A Pebble <i class="fas fa-skull-crossbones"></i> project
 cover_image: https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png
 cover_image_bk: Bzel watch face showing minutes around the bezel of Pebble watches.
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Project discontinued** due to the shutdown of Pebble. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 **Bzel** integrates the bezel into your watch face. Display minutes as digits, as a moving dot or as a fill in the bezel.

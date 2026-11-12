@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,csv,dataset,geojson,maps,project,rspatial
 description: EGIF reports, reconciled fire records and cartography with R
 cover_image: https://dieghernan.github.io/assets/img/misc/gifs-social.jpg
 cover_image_bk: https://dieghernan.github.io/assets/img/misc/gifs-social.jpg
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932940.svg)](https://doi.org/10.5281/zenodo.23932940)
 
 **GIFs** brings together structured data on large forest fires in Spain and **R** code for an infographic inspired by [Dominic Royé's firefly cartography](https://dominicroye.github.io/blog/firefly-maps/). Here, GIF means *gran incendio forestal*: a fire with at least 500 hectares of forest area burned.

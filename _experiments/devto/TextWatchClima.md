@@ -1,5 +1,6 @@
 ---
 review: always
+tags_choose_4: rstats,C,discontinued,javascript,pebble,project,watchface
 description: A Pebble <i class="fas fa-skull-crossbones"></i> project
 cover_image: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
 cover_image_bk: TextWatch Clima watch face displaying the time in words on Pebble
@@ -7,6 +8,13 @@ cover_image_bk: TextWatch Clima watch face displaying the time in words on Pebbl
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Project discontinued** due to the shutdown of Pebble. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 **TextWatch Clima** upgrades the classic TextWatch watch face by adding a set of new capabilities.

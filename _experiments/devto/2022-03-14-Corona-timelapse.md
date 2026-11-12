@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,COVID19,discontinued,guest-author,leaflet,maps,project,python
 description: Travel restrictions amidst the COVID crisis across time - A German perspective
 cover_image: https://raw.githubusercontent.com/dieghernan/corona-atlas.de/master/timelapse/frames/D2021-04-16.png
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This post reflects the situation in March 2022 and is preserved as a historical account, not current travel information. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 ![Animated map tracking the spread of COVID-19 over time.](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)

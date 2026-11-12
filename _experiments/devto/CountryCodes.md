@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,csv,dataset,project
 description: A database with geocodes
 cover_image: https://dieghernan.github.io/assets/img/misc/countrycodes.png
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 Complete database of countries and territories, their different country codes under common standards (ISO-3166, GEC *(formerly FIPS)*, M49 (*UN*), STANAG (*NATO*), NUTS (*EU*), etc.) and their membership in different international organizations.
 
 <sup>*Note that blanks are presented as* `""` *instead of* `NA` *since ISO-3166-ALPHA 2 for Namibia is* **NA**.</sup>

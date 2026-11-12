@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,beautiful_maps,ggplot2,giscoR,maps,r_bloggers,rspatial,sf,terra,tidyterra
 description: Bertin's dot density maps with <strong>R</strong> and GHSL
 cover_image: https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? TRUE
+
 Recently, the [R Graph Gallery](https://r-graph-gallery.com/) published a new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create a map inspired by the work of French cartographer [Jacques Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010), particularly his *Sémiologie graphique* (Bertin, 1967):
 
 ![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)

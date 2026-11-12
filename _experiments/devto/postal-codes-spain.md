@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,dataset,gpkg,leaflet,maps,project,rspatial,sf
 description: Estimated postal code areas from open data
 cover_image: https://dieghernan.github.io/assets/img/misc/postal-codes-spain.webp
 cover_image_bk: https://dieghernan.github.io/assets/img/misc/postal-codes-spain.jpg
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698418.svg)](https://doi.org/10.5281/zenodo.23698418)
 
 **Códigos postales de España** provides estimated postal code areas for Spain, built from open address data from [CartoCiudad](https://www.cartociudad.es/web/portal/) and administrative boundaries. Explore the results on interactive maps and download the data for use in **R**, **Python** or **QGIS**.

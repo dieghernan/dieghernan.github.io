@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,ggplot2,maps,maptiles,music,r_bloggers,r_package,rspatial,terra,tidyterra
 description: Easily work with and plot SpatRasters
 cover_image: https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 If you have been playing around with **R** for a while, you are probably familiar with the `volcano` dataset:
 
 ``` r

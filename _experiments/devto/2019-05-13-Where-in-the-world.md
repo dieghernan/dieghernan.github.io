@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,leaflet,maps,music,rspatial
 description: A <strong>leaflet</strong> map with the places I have flown
 cover_image: https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 This is a very personal post, where I just show the map of all the places I have traveled to by plane.
 
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-da93ff56d02bb57b98a0" style="width:672px;height:480px;"></div>

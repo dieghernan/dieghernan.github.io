@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,classInt,r_bloggers,r_package,rspatial
 description: ~
 cover_image: https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? TRUE
+
 <blockquote class="blockquote">
   <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
   <footer class="blockquote-footer text-right">Jiang (2013)</footer>

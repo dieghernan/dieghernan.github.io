@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,beautiful_maps,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf
 description: Do you know the Bonne projection?
 cover_image: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 Do you know the [Bonne Projection](https://en.wikipedia.org/wiki/Bonne_projection)? This is a very special one, as it produces this result when used to map the whole world. Happy Valentine’s Day!
 
 ``` r

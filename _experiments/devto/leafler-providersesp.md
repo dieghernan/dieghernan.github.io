@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,leaflet,maps,project
 description: Plugin for Leaflet.js
 cover_image: https://dieghernan.github.io/assets/img/misc/leaflet-providersesp.png
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that contains configurations for various tile layers provided by public agencies in Spain.
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4318010.svg)](https://doi.org/10.5281/zenodo.4318010)

@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,beautiful_maps,flags,giscoR,maps,r_bloggers,rasterpic,rspatial,terra
 description: Any picture as a basemap
 cover_image: https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 On 27 Jan. 2022 my package **rasterpic** was accepted on [CRAN](https://cran.r-project.org/package=rasterpic) (Hooray!). This package geotags images, using a spatial object (from **sf** or **terra**) as a geographic reference.
 
 I tweeted about that, and it seems to have received good feedback from the [\#rspatial](https://twitter.com/hashtag/rspatial) community:

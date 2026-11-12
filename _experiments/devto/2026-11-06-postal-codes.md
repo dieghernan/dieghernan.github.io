@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,dataset,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf
 description: From postal points to areas using Voronoi polygons
 cover_image: https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp
 cover_image_bk: https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 I recently published my project [Postal codes of Spain](https://dieghernan.github.io/codigospostales/), with estimated postal areas, an interactive map and GeoPackage downloads. But there is something we have not looked at yet: how do those address points become polygons? The answer is... **Voronoi polygons**.
 
 ## What is a Voronoi polygon?

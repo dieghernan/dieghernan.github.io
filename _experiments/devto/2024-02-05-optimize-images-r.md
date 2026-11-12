@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,r_bloggers,r_package,resmush
 description: Introducing the <strong>resmush</strong> package
 cover_image: https://dieghernan.github.io/assets/img/misc/compress-img.png
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 The **resmush** package has recently been accepted on [CRAN](https://cran.r-project.org/package=resmush)! This small utility package allows for the optimization (i.e., compression) of local and online images using [reSmush.it](https://resmush.it/).
 
 You can install **resmush** from [**CRAN**](https://CRAN.R-project.org/package=resmush) with:

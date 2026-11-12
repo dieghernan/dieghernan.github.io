@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,beautiful_maps,maps,r_bloggers,r_package,rspatial,sf
 description: Vignette of the package expansion
 cover_image: https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 ## Introduction
 
 This document describes the new features added to **cartography** in version `2.4.0` by [dieghernan](https://github.com/dieghernan/) and already available on **CRAN**.

@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,maps,r_bloggers,rnaturalearth,rspatial,sf
 description: Vignette of the <strong>CountryCodes</strong> project
 cover_image: https://dieghernan.github.io/assets/img/blog/20190427_mapfin-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 This vignette shows how to use the database provided in the GitHub project [Country Codes and International Organizations & Groups](https://dieghernan.github.io/projects/countrycodes/) with the **sf** package in **R**.
 
 ## Required **R** packages

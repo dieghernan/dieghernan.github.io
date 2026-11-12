@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,chulapa,function,html,jekyll,liquid
 description: See the magic happening
 cover_image: https://dieghernan.github.io/assets/img/blog/og_jekyll.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? TRUE
+Has math? FALSE
+
 [Liquid](https://shopify.github.io/liquid/) is a template language used by [**Jekyll**](https://jekyllrb.com/), the static site generator behind this website and my theme, <span class="chulapa">Chulapa</span> ([link](https://dieghernan.github.io/chulapa)).
 
 Some time ago, [@cargocultprogramming](https://github.com/cargocultprogramming) reported a broken theme component in [dieghernan/chulapa#29](https://github.com/dieghernan/chulapa/issues/29). The problem appeared with Jekyll 4.1.0 and was also reported in [jekyll/jekyll#8214](https://github.com/jekyll/jekyll/issues/8214).

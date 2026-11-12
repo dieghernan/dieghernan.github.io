@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,discontinued,maps,mapSpain,project,rspatial,tmap,twitter
 description: An archive of maps generated with R
 cover_image: https://dieghernan.github.io/spain-munic-bot/assets/img/sample.png
 cover_image_bk: Map of buildings in Málaga colored by construction period.
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the descriptions below refer to its period of operation. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 ## 🤖 Twitter bot: random municipalities of Spain 🇪🇸 with **mapSpain**, posted with **rtweet** via a GitHub Action

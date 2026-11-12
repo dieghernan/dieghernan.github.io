@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,beautiful_maps,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf
 description: Do you know the interrupted Goode homolosine projection?
 cover_image: https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp
 cover_image_bk: https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 What would happen if we peeled the Earth like an orange? The [interrupted Goode homolosine projection](https://proj.org/en/stable/operations/projections/igh.html) gives us something close to that! This equal-area projection preserves relative areas while splitting the world map into lobes. Add a few shades of orange and our world is ready to peel.
 
 Let's make it with **sf**, **giscoR** and **ggplot2**. First, we get the coastlines and draw the outline, following the cuts between the lobes.

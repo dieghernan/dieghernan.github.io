@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,C,discontinued,javascript,pebble,project,watchface
 description: A Pebble <i class="fas fa-skull-crossbones"></i> project
 cover_image: https://raw.githubusercontent.com/dieghernan/Sfera/master/assets/SferaBanner.png
 cover_image_bk: Sfera watch face on a Pebble Time Round.
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Project discontinued** due to the shutdown of Pebble. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 **Sfera** for Pebble Time Round is a highly customizable watch face that gets the most out of the smartwatch's capabilities. Set your preferences and enjoy this beautifully designed watch face.

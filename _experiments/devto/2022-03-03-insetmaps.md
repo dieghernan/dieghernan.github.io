@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,ggplot2,inset,maps,mapsf,mapSpain,r_bloggers,rspatial,sf,tmap
 description: A map on a map
 cover_image: https://dieghernan.github.io/assets/img/blog/20220303_inset.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 *This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [@dr_xeo](https://twitter.com/dr_xeo)*
 
 A common challenge when creating maps is how to include an inset map in your visualization. An inset map is nothing more than a smaller map usually included in a corner that may provide additional context to the overall map. It is also useful for representing spatial units that may form part of a country but whose geographical location would result in an imperfect visualization, or for including small units that would otherwise not be shown on the map.

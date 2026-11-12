@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,html,jekyll,leaflet,maps,r_bloggers,rspatial
 description: Make it work in 6 steps - A short tutorial
 cover_image: https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 Recently, I have been struggling when trying to embed a [leaflet](https://rstudio.github.io/leaflet) map created with **RStudio** on my blog, hosted on GitHub via [Jekyll](https://jekyllrb.com) (**Spoiler**: [I succeeded <i class="fa fa-thumbs-up"></i>](https://dieghernan.github.io/201905_Where-in-the-world/)). In my case, I use the [<span
 class="chulapa">Chulapa</span>](https://dieghernan.github.io/chulapa/) remote theme that I created.
 

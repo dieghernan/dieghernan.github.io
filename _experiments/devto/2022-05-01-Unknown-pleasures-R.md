@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,ggplot2,ggridges,giscoR,maps,music,r_bloggers,rspatial,terra
 description: Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong>
 cover_image: https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 In 1970, Harold D. Craft Jr. published his Ph.D. thesis *"Radio observations of the pulse profiles and dispersion measures of twelve pulsars".* The thesis (337 pages) includes on pages 214 to 216 the following depictions of successive pulses of some pulsars:
 
 ![Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses.](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)

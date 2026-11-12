@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,beautiful_maps,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf
 description: Cool maps from the South Pole
 cover_image: https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 Creating maps with **R** is usually straightforward, but representations that cross the [International Date Line](https://en.wikipedia.org/wiki/International_Date_Line) or that use polar projections can be tricky.
 
 Different spatial-data providers use different conventions: some break geometries at certain longitudes (for example, cutting the Chukchi Peninsula), while others omit portions of the data. These inconsistencies can produce awkward artifacts near the poles.

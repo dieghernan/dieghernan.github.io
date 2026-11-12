@@ -1,5 +1,6 @@
 ---
 review: always
+tags_choose_4: rstats,C,discontinued,javascript,pebble,project,watchface
 description: A Pebble <i class="fas fa-skull-crossbones"></i> project
 cover_image: https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png
 cover_image_bk: 7egment watch face showing a seven-segment time display on Pebble
@@ -7,6 +8,13 @@ cover_image_bk: 7egment watch face showing a seven-segment time display on Pebbl
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Project discontinued** due to the shutdown of Pebble. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
 
 **7egment** is a customizable watch face based on the classic 7-segment display that adds your location and current weather information in the language used on your watch and smartphone.

@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,chulapa,html,indieweb,jekyll
 description: Bringing mentions, likes and reposts back to the blog
 cover_image: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 Conversations about a blog post often happen somewhere else. Someone shares a link, replies on their own site or reacts to a post on social media. I wanted to bring some of that activity back here.
 
 This implementation was directly inspired by **Matt Hobbs's** article, [Implementing Webmentions on this blog](https://nooshu.com/blog/2019/11/18/implementing-webmentions/), published on **Nooshu**.

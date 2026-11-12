@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,dataset,geobounds,ggplot2,maps,r_bloggers,r_package,rspatial,sf
 description: Easy access to administrative boundaries from geoBoundaries
 cover_image: https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 If you've ever worked with spatial data in **R**, this may ring a bell...
 
 - Search for boundary data

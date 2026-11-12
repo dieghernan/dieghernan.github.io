@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,astronomy,celestial,csv,dataset,geojson,gpkg,maps,project
 description: A compilation of celestial data files
 cover_image: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
 cover_image_bk: Map of stars and constellations from the Celestial Data collection.
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? FALSE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? TRUE
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7561601.svg)](https://doi.org/10.5281/zenodo.7561601)
 
 This project provides several datasets of celestial objects as of the J2000 epoch in GeoJSON and GeoPackage formats.

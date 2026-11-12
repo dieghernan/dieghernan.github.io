@@ -1,5 +1,6 @@
 ---
 review: always
+tags_choose_4: rstats,COVID19,discontinued,giscoR,javascript,leaflet,maps,project,python,rspatial
 description: Historical international COVID-19 risk areas designated by German authorities
 cover_image: https://dieghernan.github.io/corona-atlas.de/assets/img/og_corona_atlas.png
 cover_image_bk: Historical map of international COVID-19 risk areas designated by
@@ -7,6 +8,13 @@ cover_image_bk: Historical map of international COVID-19 risk areas designated b
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? FALSE
+Has iframe? FALSE
+Has details_summary? FALSE
+Has math? FALSE
+
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the descriptions below refer to its period of operation. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
 
 <img src="https://dieghernan.github.io/corona-atlas.de/assets/img/corona-atlas-icon.png" alt="Corona Atlas logo" style="width: 25%;">

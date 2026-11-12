@@ -1,11 +1,19 @@
 ---
 review: always
+tags_choose_4: rstats,ggplot2,hillshading,maps,music,r_bloggers,rspatial,terra,tidyterra
 description: How to overlay SpatRasters
 cover_image: https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 cover_image_bk: https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 series: review
 ai_disclosure_level: no_ai
 ---
+
+Has alerts? TRUE
+Has Spotify? TRUE
+Has iframe? TRUE
+Has details_summary? FALSE
+Has math? FALSE
+
 **Updated on October 25, 2026:** This post now uses **ggblend** to combine hillshade and elevation colors with a multiply blend, following [Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The final map replaces the original overlay with reduced opacity. Dominic Royé also demonstrates how to use **ggblend** in [Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/). {: .alert .alert-info .p-3 .mx-2 .mb-3}
 
 *This is the first post of a series of two, showing how to overlay a SpatRaster on top of a hillshade background. The next post shows how to add marginal plots including information about the values of the raster by longitude and latitude. See the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/).*
