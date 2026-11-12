@@ -3,7 +3,7 @@
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="https://dieghernan.github.io/devto.xml" rel="self" type="application/atom+xml" />
 	<link href="https://dieghernan.github.io/" rel="alternate" type="text/html" />
-	<updated>2026-11-12T07:56:24+01:00</updated>
+	<updated>2026-11-12T09:48:13+01:00</updated>
 	<id>https://dieghernan.github.io/devto.xml</id>
 	<title>One World | R packages, maps and open-source projects</title>
 	<subtitle>R packages, maps and open-source projects</subtitle>
@@ -20,12 +20,674 @@
 		<published>2026-11-06T00:00:00+01:00</published>
 		<updated>2026-11-06T00:00:00+01:00</updated>
 		<id>https://dieghernan.github.io/202611_postal-codes/</id>
-		<content type="html" xml:base="https://dieghernan.github.io/202611_postal-codes/">
+		<content type="text">
 		
 
 		&lt;p&gt;From postal points to areas using Voronoi polygons&lt;/p&gt;
         &lt;p&gt;Go to content&lt;/p&gt;
+        			
 		
+		I recently published my project [Postal codes of
+Spain](https://dieghernan.github.io/codigospostales/), with estimated postal
+areas, an interactive map and GeoPackage downloads. But there is something we
+have not looked at yet: how do those address points become polygons? The answer
+is... **Voronoi polygons**.
+
+## What is a Voronoi polygon?
+
+Imagine a few shops on a flat map. Which one is closest to your house? Ask that
+question for every location and give each shop its own color. The result is a
+**Voronoi diagram**, also known as a **Voronoi tessellation**, **Voronoi
+decomposition**, **Voronoi partition** or **Dirichlet tessellation**. This
+technique divides a plane into regions based on the distance to a given set of
+points.
+
+In our example, each shop is a **site**, or generating point. Its **Voronoi
+cell**, also called a **Thiessen polygon**, contains the locations at least as
+close to that site as to any other. Along a shared edge, two sites are
+equally close. Where several cells meet, there may be a tie between more sites.
+With ordinary straight-line distance, the edges follow perpendicular bisectors
+between sites. Some cells extend indefinitely, so maps usually show them clipped
+to a study area.
+
+The name honors Georgy Voronoi, who studied these partitions in the early
+twentieth century. The idea has earlier roots, including Dirichlet&apos;s
+nineteenth-century work (hence the name Dirichlet tessellation). [Pokojski and
+Pokojska (2018)](https://doi.org/10.2478/pcr-2018-0009) review the history and
+geographical applications.
+
+These partitions are useful for exploring proximity to shops or public services,
+assigning areas to weather stations and studying spatial patterns. For example,
+Thiessen polygons can supply area weights when estimating rainfall from rain
+gauges. The underlying question is always about the chosen distance: the nearest
+hospital in a straight line may not be the quickest one to reach.
+
+### A tiny example in **R**
+
+Let&apos;s start with five points in an imaginary square, including one at its
+center, using just **sf** and **ggplot2**. The coordinates have arbitrary units
+and no geographical coordinate reference system.
+
+```r
+library(sf)
+library(ggplot2)
+
+# Define a common theme for the maps.
+background &lt;- &quot;#faf8f2&quot;
+ink &lt;- &quot;#203b47&quot;
+
+theme_set(
+  theme_void() +
+    theme(
+      plot.background = element_rect(fill = background, colour = NA),
+      panel.background = element_rect(fill = background, colour = NA),
+      plot.title = element_text(face = &quot;bold&quot;, colour = ink),
+      plot.subtitle = element_text(colour = ink),
+      plot.caption = element_text(colour = &quot;grey40&quot;, hjust = 0),
+      legend.position = &quot;bottom&quot;,
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
+
+sites &lt;- data.frame(
+  site = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;),
+  x = c(2, 7, 3, 8, 5),
+  y = c(2, 3, 8, 7, 5)
+)
+
+toy_points &lt;- st_as_sf(sites, coords = c(&quot;x&quot;, &quot;y&quot;))
+
+study_area &lt;- st_as_sfc(st_bbox(c(xmin = 0, ymin = 0, xmax = 10, ymax = 10)))
+
+toy_cells &lt;- toy_points |&gt;
+  st_union() |&gt;
+  st_voronoi(envelope = study_area) |&gt;
+  st_collection_extract(&quot;POLYGON&quot;) |&gt;
+  st_intersection(study_area)
+
+ggplot() +
+  geom_sf(
+    data = toy_cells,
+    fill = c(&quot;#a8dadc&quot;, &quot;#f4c89a&quot;, &quot;#c6b8df&quot;, &quot;#bfd59b&quot;, &quot;#f2b5c4&quot;),
+    colour = &quot;white&quot;, linewidth = 1
+  ) +
+  geom_sf(data = toy_points, colour = &quot;#203b47&quot;, size = 3) +
+  geom_text(
+    data = sites, aes(x, y, label = site),
+    nudge_y = 0.5, colour = &quot;#203b47&quot;, fontface = &quot;bold&quot;
+  ) +
+  coord_sf(datum = NA) +
+  labs(
+    title = &quot;Five points, five Voronoi cells&quot;,
+    subtitle = &quot;Each location belongs to the closest site&quot;
+  )
+```
+
+&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-toy-example-1.webp&quot; alt=&quot;Five labeled sites in a square: A and B below, C and D above, and E at the&amp;#10;center, surrounded by its own bounded Voronoi cell.&amp;#10;&quot; width=&quot;100%&quot; /&gt;
+
+Five points, five cells. The point E at `(5, 5)` has a bounded cell
+surrounded by the other four. The outer cells extend beyond the square and are
+clipped to its edges. `st_union()` collects the points into one geometry,
+`st_voronoi()` builds the diagram and `st_intersection()` clips it to our
+square. The colors help us tell the cells apart. We have not assigned any postal
+codes yet.
+
+The diagram knows nothing about roads, rivers or administrative boundaries. As
+we move to postal points, we will need to make our choices about those
+boundaries explicit.
+
+## Before we start: what are we estimating?
+
+The Spanish project uses CartoCiudad address points with their postal codes. It
+follows [Goerlich (2022)](https://doi.org/10.12842/WPIVIE_0322), who develops an
+idea presented by [Sánchez
+(2020)](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos).
+The [updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html)
+describes the method in detail.
+
+For Slovenia, we will use GISCO&apos;s postal points, retrieved with **giscoR**.
+There is an important difference here: a representative point for a code tells
+us much less than thousands of addresses with that code. Detailed addresses help
+the partition follow their distribution more closely, although proximity alone
+still cannot reproduce postal delivery decisions.
+
+We have not established that Slovenian postal areas should follow municipal
+boundaries. Imposing those boundaries is a modeling choice for this exercise,
+inspired by the Spanish workflow, rather than a verified property of the
+Slovenian postal system.
+
+&lt;i class=&quot;fa fa-exclamation-triangle&quot;&gt;&lt;/i&gt; This post explains the workflow. The
+polygons we create are not official postal boundaries, and this exercise does
+not validate the GISCO postal data.
+{: .alert .alert-warning .p-3 .mx-2 .mb-3}
+
+## Getting the data
+
+First, let&apos;s get the municipal boundaries and postal points. We use the 2024
+release of both datasets.
+
+```r
+library(giscoR)
+library(sf)
+library(dplyr)
+
+municipalities &lt;- gisco_get_lau(
+  year = 2024, country = &quot;SI&quot;, epsg = 3035
+) |&gt;
+  select(GISCO_ID, LAU_NAME) |&gt;
+  st_make_valid()
+
+raw_points &lt;- gisco_get_postalcodes(
+  year = 2024, country = &quot;SI&quot;, epsg = 3035
+)
+```
+
+We work in **ETRS89 / LAEA Europe (EPSG:3035)**, a projected coordinate system
+with coordinates in meters. This makes the 200 m and 50 m margins used later
+meaningful. Voronoi uses Euclidean distances in this plane, rather than road
+distances. The projection does not preserve every distance exactly either.
+
+Before we start drawing, what have we actually downloaded?
+
+```r
+postal_points &lt;- raw_points |&gt;
+  mutate(POSTCODE = trimws(as.character(POSTCODE))) |&gt;
+  filter(!is.na(POSTCODE), POSTCODE != &quot;&quot;) |&gt;
+  select(POSTCODE)
+
+code_counts &lt;- postal_points |&gt;
+  st_drop_geometry() |&gt;
+  count(POSTCODE, name = &quot;points_per_code&quot;)
+
+knitr::kable(data.frame(
+  Indicator = c(
+    &quot;Municipalities&quot;, &quot;Downloaded points&quot;, &quot;Points with a postal code&quot;,
+    &quot;Distinct postal codes&quot;, &quot;Codes represented by one point&quot;
+  ),
+  Value = c(
+    nrow(municipalities), nrow(raw_points), nrow(postal_points),
+    nrow(code_counts), sum(code_counts$points_per_code == 1)
+  )
+))
+```
+
+| Indicator                      | Value |
+| :----------------------------- | ----: |
+| Municipalities                 |   212 |
+| Downloaded points              |   557 |
+| Points with a postal code      |   557 |
+| Distinct postal codes          |   557 |
+| Codes represented by one point |   557 |
+
+These counts give us a first look at the file, but they are not a quality check.
+They do not establish whether every code is present or whether the coordinates
+are correct. With one point per code, we will be drawing areas around
+representatives rather than estimating them from individual addresses.
+
+Two points at exactly the same coordinates cannot generate separate Voronoi
+cells. We sort by postal code and keep the first point at each location, as in
+the original workflow. This is a reproducible tie-breaking rule, not evidence
+that the retained code is correct. The counts below show how many records we
+remove and how many locations have conflicting codes.
+
+```r
+postal_points &lt;- postal_points |&gt; arrange(POSTCODE)
+
+conflicts &lt;- postal_points |&gt;
+  group_by(geometry) |&gt;
+  summarise(codes = n_distinct(POSTCODE), .groups = &quot;drop&quot;) |&gt;
+  filter(codes &gt; 1)
+
+duplicates &lt;- duplicated(postal_points$geometry)
+
+knitr::kable(data.frame(
+  Indicator = c(&quot;Duplicate locations removed&quot;, &quot;Locations with conflicting codes&quot;),
+  Value = c(sum(duplicates), nrow(conflicts))
+))
+```
+
+| Indicator                        | Value |
+| :------------------------------- | ----: |
+| Duplicate locations removed      |    79 |
+| Locations with conflicting codes |    16 |
+
+```r
+
+postal_points &lt;- postal_points[!duplicates, ]
+```
+
+## Starting with Ljubljana
+
+Let&apos;s pick Ljubljana and keep the points inside it. We use `st_within()` so that
+a point exactly on a shared boundary is not assigned to both neighboring
+municipalities.
+
+```r
+city &lt;- municipalities |&gt; filter(LAU_NAME == &quot;Ljubljana&quot;)
+
+city_points &lt;- st_filter(postal_points, city, .predicate = st_within)
+
+base_map &lt;- ggplot() +
+  geom_sf(data = city, fill = &quot;#e8e4d8&quot;, colour = ink, linewidth = 0.4)
+
+gisco_attr &lt;- gisco_attributions()
+
+base_map +
+  geom_sf(data = city_points, colour = &quot;#bd5137&quot;, size = 2) +
+  labs(
+    title = &quot;Ljubljana: the starting point&quot;,
+    subtitle = &quot;A municipal boundary and points with postal codes&quot;,
+    caption = gisco_attr
+  )
+```
+
+&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-ljubljana-1.webp&quot; alt=&quot;Outline of Ljubljana municipality with six postal point locations marked&amp;#10;inside it.&amp;#10;&quot; width=&quot;100%&quot; /&gt;
+
+### Building the cells
+
+Each cell contains locations at least as close to its generating point as to
+any other point. Cell boundaries occur where distances to two points are equal.
+For this first demonstration, we keep all interior points, without the margins used in
+the national workflow.
+
+```r
+cells &lt;- city_points |&gt;
+  st_union() |&gt;
+  st_voronoi(envelope = st_as_sfc(st_bbox(city))) |&gt;
+  st_collection_extract(&quot;POLYGON&quot;) |&gt;
+  st_sf(geometry = _)
+
+base_map +
+  geom_sf(data = cells, fill = NA, colour = &quot;#bd5137&quot;, linewidth = 0.5) +
+  geom_sf(data = city_points, colour = ink, size = 2) +
+  labs(
+    title = &quot;An area of proximity for every point&quot;,
+    subtitle = &quot;Cells still extend beyond the municipal boundary&quot;,
+    caption = &quot;Own elaboration using data from Eurostat / GISCO, 2024&quot;
+  )
+```
+
+&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-1.webp&quot; alt=&quot;Unclipped Voronoi cells outlined around six postal points, extending beyond&amp;#10;the shaded Ljubljana municipal boundary.&amp;#10;&quot; width=&quot;100%&quot; /&gt;
+
+`st_union()` gathers the points so we build one diagram. One detail to keep in
+mind: `envelope` supplies a working extent, but **does not clip** the cells to
+the municipality. We need an intersection for that.
+
+### Clipping and recovering postal codes
+
+It would be convenient if cells came out in the same order as the input points,
+but we should not rely on that. Instead, we recover each cell&apos;s code with a
+spatial relationship before clipping. Each cell must contain exactly one
+generating point.
+
+```r
+point_matches &lt;- st_intersects(cells, city_points)
+
+cells$POSTCODE &lt;- city_points$POSTCODE[unlist(point_matches)]
+
+clipped_geometry &lt;- st_intersection(st_geometry(cells), st_geometry(city))
+
+city_cells &lt;- st_sf(
+  POSTCODE = cells$POSTCODE[attr(clipped_geometry, &quot;idx&quot;)[, 1]],
+  geometry = clipped_geometry
+)
+
+city_areas &lt;- city_cells |&gt;
+  group_by(POSTCODE) |&gt;
+  summarise(.groups = &quot;drop&quot;) |&gt;
+  st_make_valid()
+
+city_colours &lt;- setNames(
+  hcl.colors(nrow(city_areas), palette = &quot;Dark 3&quot;),
+  sort(city_areas$POSTCODE)
+)
+city_labels &lt;- st_sf(
+  POSTCODE = city_areas$POSTCODE,
+  geometry = st_point_on_surface(st_geometry(city_areas))
+)
+
+ggplot(city_areas) +
+  geom_sf(aes(fill = POSTCODE), colour = background, linewidth = 0.6) +
+  geom_sf(
+    data = city_points, shape = 21, fill = ink,
+    colour = background, size = 2.4
+  ) +
+  geom_sf_text(
+    data = city_labels,
+    aes(label = POSTCODE), colour = ink, fontface = &quot;bold&quot;, size = 3.5
+  ) +
+  scale_fill_manual(values = city_colours, guide = &quot;none&quot;) +
+  coord_sf(datum = NA) +
+  labs(
+    title = &quot;From points to estimated areas&quot;,
+    subtitle = &quot;Cells clipped and merged by postal code&quot;,
+    caption = &quot;Teaching example · Not official postal boundaries&quot;
+  )
+```
+
+&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp&quot; alt=&quot;Six colored areas clipped to Ljubljana, labeled 1000, 1210, 1211, 1231, 1260&amp;#10;and 1261, with their generating postal points marked.&amp;#10;&quot; width=&quot;100%&quot; /&gt;
+
+We intersect the geometry columns, then use the intersection&apos;s `idx` matrix to
+recover each cell&apos;s postal code. This keeps the attribute assignment explicit.
+Label positions are also calculated from geometries alone.
+
+Grouping by postal code with `summarise()` merges the geometries. With many
+addresses sharing a code, their cells would dissolve into one geometry, possibly
+with several separate parts.
+
+## From one municipality to the whole country
+
+Ljubljana is done. Now let&apos;s repeat the operation for each component of each
+municipality. Municipalities can have separate pieces: normalizing to
+`MULTIPOLYGON` and then casting to `POLYGON` lets us handle them independently,
+without automatically extending a code to a piece with no points.
+
+The municipality ID and name apply to every component, so we mark those
+attributes as spatially constant before splitting the geometries.
+
+```r
+components &lt;- municipalities |&gt;
+  st_set_agr(&quot;constant&quot;) |&gt;
+  st_cast(&quot;MULTIPOLYGON&quot;) |&gt;
+  st_cast(&quot;POLYGON&quot;) |&gt;
+  mutate(component_id = row_number())
+```
+
+### Why use an inward margin?
+
+In the Spanish project, we first select addresses within an inward margin of
+**200 m**. If none are found, we try **50 m**. This reduces the influence of
+points close to a boundary, where small mismatches between layers may affect
+their assignment.
+
+There is no universal rule behind these numbers. Goerlich describes a 20 m
+margin. The 200 m and 50 m choices come from my implementation. We keep them
+here to explain that workflow, although sparse postal points make it easier to
+exclude useful information. Comparing other margins would be a useful next step.
+
+```r
+select_points &lt;- function(component, postal_points) {
+  for (margin in c(200, 50)) {
+    interior &lt;- st_buffer(st_geometry(component), -margin)
+
+    if (all(st_is_empty(interior))) next
+
+    selected_points &lt;- st_filter(postal_points, interior,
+      .predicate = st_within
+    )
+
+    if (nrow(selected_points) &gt; 0) {
+      return(selected_points)
+    }
+  }
+
+  postal_points[0, ]
+}
+```
+
+The margin only selects points: the resulting areas cover the **original**
+component, not the smaller buffered geometry. If both attempts fail, we leave
+the component unassigned. We do not borrow the nearest point from outside the
+municipality.
+
+### Three cases, one function
+
+There are three cases to handle. With no points, we keep the component and
+assign `NA`. If all selected points share a code, we assign it to the whole
+component. We only need Voronoi when several codes are present: no need to split
+an area that already has a single assignment.
+
+```r
+build_areas &lt;- function(component, postal_points) {
+  selected_points &lt;- select_points(component, postal_points)
+
+  codes &lt;- unique(selected_points$POSTCODE)
+
+  if (length(codes) &lt;= 1L) {
+    component$POSTCODE &lt;- if (length(codes)) codes else NA_character_
+    return(component)
+  }
+
+  cells &lt;- selected_points |&gt;
+    st_union() |&gt;
+    st_voronoi(envelope = st_as_sfc(st_bbox(component))) |&gt;
+    st_collection_extract(&quot;POLYGON&quot;) |&gt;
+    st_sf(geometry = _)
+
+  point_matches &lt;- st_intersects(cells, selected_points)
+
+  cells$POSTCODE &lt;- selected_points$POSTCODE[unlist(point_matches)]
+
+  clipped_geometry &lt;- st_intersection(
+    st_geometry(cells),
+    st_geometry(component)
+  )
+
+  result &lt;- st_sf(
+    POSTCODE = cells$POSTCODE[attr(clipped_geometry, &quot;idx&quot;)[, 1]],
+    geometry = clipped_geometry
+  ) |&gt;
+    group_by(POSTCODE) |&gt;
+    summarise(.groups = &quot;drop&quot;) |&gt;
+    st_make_valid()
+
+  result$GISCO_ID &lt;- component$GISCO_ID
+
+  result$LAU_NAME &lt;- component$LAU_NAME
+
+  result$component_id &lt;- component$component_id
+
+  result
+}
+
+result &lt;- lapply(seq_len(nrow(components)), function(i) {
+  build_areas(components[i, ], postal_points)
+}) |&gt;
+  bind_rows()
+```
+
+### Handling unassigned areas
+
+Can we fill any of the gaps? A component without points may belong to a
+municipality whose other components have information. We recover its code only
+if the municipality has **one distinct recovered code**. This is an imputation
+from the available data, not proof that the municipality really has just one
+code.
+
+```r
+unique_codes &lt;- result |&gt;
+  st_drop_geometry() |&gt;
+  filter(!is.na(POSTCODE)) |&gt;
+  distinct(GISCO_ID, POSTCODE) |&gt;
+  add_count(GISCO_ID) |&gt;
+  filter(n == 1)
+
+unassigned_before &lt;- sum(is.na(result$POSTCODE))
+
+index &lt;- match(result$GISCO_ID, unique_codes$GISCO_ID)
+
+recoverable &lt;- is.na(result$POSTCODE) &amp; !is.na(index)
+
+result$POSTCODE[recoverable] &lt;- unique_codes$POSTCODE[index[recoverable]]
+```
+
+Before drawing the final map, let&apos;s tidy up the geometries and keep only
+surfaces. Repairs can produce collections containing residual lines or points,
+which do not belong in an area layer. Dissolving by postal code also removes
+municipal boundaries between areas sharing that code.
+
+```r
+keep_surfaces &lt;- function(x) {
+  geometry &lt;- st_make_valid(st_geometry(x))
+
+  geometry &lt;- lapply(geometry, function(part) {
+    if (!inherits(part, c(&quot;POLYGON&quot;, &quot;MULTIPOLYGON&quot;, &quot;GEOMETRYCOLLECTION&quot;))) {
+      return(st_multipolygon())
+    }
+
+    surfaces &lt;- suppressWarnings(st_collection_extract(st_sfc(part), &quot;POLYGON&quot;))
+
+    if (length(surfaces) == 0L || all(st_is_empty(surfaces))) {
+      return(st_multipolygon())
+    }
+
+    st_cast(st_union(surfaces), &quot;MULTIPOLYGON&quot;, warn = FALSE)[[1]]
+  })
+
+  st_geometry(x) &lt;- st_sfc(geometry, crs = st_crs(x))
+
+  x[!st_is_empty(x), ]
+}
+
+unassigned &lt;- result |&gt;
+  filter(is.na(POSTCODE)) |&gt;
+  keep_surfaces()
+
+postal_areas &lt;- result |&gt;
+  filter(!is.na(POSTCODE)) |&gt;
+  group_by(POSTCODE) |&gt;
+  summarise(.groups = &quot;drop&quot;) |&gt;
+  keep_surfaces() |&gt;
+  st_cast(&quot;MULTIPOLYGON&quot;)
+```
+
+## The complete map
+
+For the national overview, let&apos;s color the areas by the first digit of their
+code. This keeps the map readable, without claiming that we have validated a
+classification of postal regions. Gray is reserved for unassigned components,
+with their own legend entry.
+
+```r
+postal_colours &lt;- c(
+  &quot;1&quot; = &quot;#007F7F&quot;, &quot;2&quot; = &quot;#E87500&quot;, &quot;3&quot; = &quot;#3B6FB6&quot;, &quot;4&quot; = &quot;#A64E9A&quot;,
+  &quot;5&quot; = &quot;#649A32&quot;, &quot;6&quot; = &quot;#D9AF00&quot;, &quot;8&quot; = &quot;#B94350&quot;, &quot;9&quot; = &quot;#6255A4&quot;,
+  &quot;Unassigned&quot; = &quot;#727A80&quot;
+)
+
+postal_groups &lt;- sort(unique(substr(postal_areas$POSTCODE, 1, 1)))
+
+ggplot() +
+  geom_sf(data = municipalities, fill = &quot;#d5d2ca&quot;, colour = NA) +
+  geom_sf(
+    data = postal_areas,
+    aes(fill = substr(POSTCODE, 1, 1)), colour = background, linewidth = 0.15
+  ) +
+  geom_sf(
+    data = unassigned, aes(fill = &quot;Unassigned&quot;),
+    colour = background, linewidth = 0.15
+  ) +
+  scale_fill_manual(
+    values = postal_colours, name = &quot;Postal code group&quot;,
+    breaks = c(postal_groups, &quot;Unassigned&quot;),
+    labels = c(paste0(postal_groups, &quot;xxx&quot;), &quot;Unassigned&quot;)
+  ) +
+  coord_sf(datum = NA) +
+  labs(
+    title = &quot;Slovenia, point by point&quot;,
+    subtitle = &quot;Proximity areas clipped to municipal boundaries&quot;,
+    caption = paste(&quot;Eurostat / GISCO, 2024 · Own elaboration&quot;,
+      &quot;Dark grey: unassigned areas · Estimated boundaries, not official&quot;,
+      sep = &quot;\n&quot;
+    )
+  )
+```
+
+&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp&quot; alt=&quot;Map of Slovenia with estimated postal areas clipped to municipal boundaries. Colors identify postal code groups and dark gray marks unassigned areas.&quot; width=&quot;100%&quot; /&gt;
+
+## Checking the result
+
+The map is ready, but let&apos;s check the geometry before going further. Are the
+polygons valid? Do assigned and unassigned areas cover the territory? Are there
+any appreciable overlaps? We allow one square meter for numerical differences in
+the geometry operations.
+
+```r
+territory &lt;- st_union(st_geometry(municipalities))
+
+coverage &lt;- st_union(c(st_geometry(postal_areas), st_geometry(unassigned)))
+
+difference_m2 &lt;- as.numeric(sum(st_area(st_sym_difference(territory, coverage))))
+
+overlap_m2 &lt;- as.numeric(
+  sum(st_area(postal_areas)) + sum(st_area(unassigned)) - sum(st_area(coverage))
+)
+
+knitr::kable(data.frame(
+  Indicator = c(
+    &quot;Codes with an estimated area&quot;, &quot;Components assigned by municipal recovery&quot;,
+    &quot;Unassigned records&quot;, &quot;Unassigned area (km²)&quot;,
+    &quot;Coverage difference (m²)&quot;, &quot;Overlap (m²)&quot;
+  ),
+  Value = round(c(
+    nrow(postal_areas), sum(recoverable), nrow(unassigned),
+    as.numeric(sum(st_area(unassigned))) / 1e6, difference_m2,
+    overlap_m2
+  ), 4)
+))
+```
+
+| Indicator                                 |    Value |
+| :---------------------------------------- | -------: |
+| Codes with an estimated area              | 468.0000 |
+| Components assigned by municipal recovery |   4.0000 |
+| Unassigned records                        |   6.0000 |
+| Unassigned area (km²)                     | 150.2033 |
+| Coverage difference (m²)                  |   0.0000 |
+| Overlap (m²)                              |  -0.0002 |
+
+These checks verify the geometry, **not postal accuracy**. We could cover an
+entire country with valid polygons and still have a poor approximation of its
+delivery areas.
+
+## Back to Spain
+
+We now have the full sequence: points, proximity areas, clipping and merging by
+postal code. The same steps work with much more detailed addresses, such as the
+CartoCiudad data in my [Spanish postal codes
+project](https://dieghernan.github.io/projects/postal-codes-spain).
+
+The input data matters as much as the algorithm. With one representative point
+per code, Voronoi mainly maps distances between representatives. With address
+points, it can better approximate where each code&apos;s addresses are concentrated.
+It still knows nothing about delivery routes, physical barriers or official
+boundaries.
+
+We have not compared these results with an independent postal source for
+Slovenia. Before using them for analysis, we would need to review coverage,
+coordinates, the relationship with municipalities and sensitivity to the
+margins. For now, we have a working example that shows how the polygons are
+built, one step at a time.
+
+The title is a nod to Muse&apos;s album _Black Holes and Revelations_.
+
+&lt;iframe
+  class=&quot;d-block w-100 border-0 rounded my-3&quot;
+  title=&quot;Black Holes and Revelations by Muse on Spotify&quot;
+  src=&quot;https://open.spotify.com/embed/album/0lw68yx3MhKflWFqCsGkIs?utm_source=generator&amp;theme=0&amp;si=015f4c7acc5c4f8a&quot;
+  height=&quot;352&quot;
+  loading=&quot;lazy&quot;
+  allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;
+  allowfullscreen&gt;
+&lt;/iframe&gt;
+
+## References
+
+- Goerlich, F. J. (2022). *Elaboración de un mapa de códigos postales de España
+  con recursos libres: Cómo evitar pagar por disponer de información de
+  referencia* (Working Paper No. 2022-3). Ivie.
+  &lt;https://doi.org/10.12842/WPIVIE_0322&gt;
+  ([Updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html))
+- Hernangómez, D. (2026). *Códigos postales de España* (Version 1.0.0)
+  [Data set]. Zenodo. &lt;https://doi.org/10.5281/zenodo.23698418&gt;
+  ([Project documentation](https://dieghernan.github.io/codigospostales/))
+- Pokojski, W., &amp; Pokojska, P. (2018). Voronoi diagrams – Inventor, method,
+  applications. *Polish Cartographical Review, 50*(3), 141–150.
+  &lt;https://doi.org/10.2478/pcr-2018-0009&gt;
+- Sánchez, J. I. (2020, November 13). Así hice el mapa de los códigos
+  postales de España con SIG y datos abiertos. *Nosolosig*.
+  [Article](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos)
+
 		</content>
 		<author>
 			<name>Diego HH</name>
@@ -40,12 +702,107 @@
 		<published>2026-11-03T00:00:00+01:00</published>
 		<updated>2026-11-03T00:00:00+01:00</updated>
 		<id>https://dieghernan.github.io/projects/postal-codes-spain</id>
-		<content type="html" xml:base="https://dieghernan.github.io/projects/postal-codes-spain">
+		<content type="text">
 		
 
 		&lt;p&gt;Estimated postal code areas from open data&lt;/p&gt;
         &lt;p&gt;Go to content&lt;/p&gt;
+        			
 		
+		[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698418.svg)](https://doi.org/10.5281/zenodo.23698418)
+
+**Códigos postales de España** provides estimated postal code areas for Spain,
+built from open address data from [CartoCiudad](https://www.cartociudad.es/web/portal/)
+and administrative boundaries. Explore the results on interactive maps and
+download the data for use in **R**, **Python** or **QGIS**.
+
+## Background
+
+Postal code polygons are useful for linking addresses and statistics to areas
+on a map. According to [Goerlich (2022)](https://doi.org/10.12842/WPIVIE_0322),
+the Correos polygons available through CartoCiudad stopped being offered for
+download in early 2017. This project explores a reproducible alternative based
+on open address data.
+
+An early reference is José Ignacio Sánchez&apos;s
+[2020 article in NoSoloSIG](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos),
+which describes how to estimate postal areas from CartoCiudad addresses using
+GIS tools. This project applies the approach developed in
+[Francisco José Goerlich&apos;s 2022 work](https://www.uv.es/goerlich/Ivie/CodPost.html),
+with its own choices for selecting addresses and handling areas without an
+assignment.
+
+## Maps and data
+
+The [project website](https://dieghernan.github.io/codigospostales/) includes
+interactive maps and two GeoPackage downloads: a full version for spatial
+analysis and a simplified version for visualization. Both include postal code
+areas and administrative areas pending assignment.
+
+The data is shared under a
+[Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/).
+
+### Interactive map
+
+Search for a postal code or address, select a two-digit prefix and compare the
+estimated areas with CartoCiudad. The viewer uses the simplified data and does
+not display areas pending assignment. Its controls are in Spanish.
+
+&lt;p class=&quot;d-flex flex-wrap&quot;&gt;
+  &lt;a class=&quot;btn btn-primary mr-2 mb-2&quot; href=&quot;https://dieghernan.github.io/codigospostales/visor/mapa/#prefix=28&quot;&gt;Open the map in a full window&lt;/a&gt;
+  &lt;a class=&quot;btn btn-outline-primary mb-2&quot; href=&quot;https://dieghernan.github.io/codigospostales/visor/&quot;&gt;Viewer guide&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;div class=&quot;embed-responsive embed-responsive-4by3 my-2 chulapa-rounded-lg border border-primary&quot;&gt;
+  &lt;iframe class=&quot;embed-responsive-item&quot; title=&quot;Interactive map of estimated postal code areas in Spain&quot; src=&quot;https://dieghernan.github.io/codigospostales/visor/mapa/#prefix=28&quot; allowfullscreen loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+## Methodology
+
+Following Goerlich&apos;s approach, the workflow treats each separate component of
+an administrative area independently. When the selected addresses share a
+single postal code, it assigns that code to the whole component. When several
+codes are present, it builds Voronoi polygons around the address locations,
+clips them to the administrative boundary and merges areas with the same code.
+The final polygons are dissolved by postal code across provinces.
+
+This implementation selects addresses using an inward buffer of 200 m, with a
+second attempt at 50 m if none are found, rather than the 20 m described by
+Goerlich. Components without selected addresses remain unassigned unless the
+municipality has a single postal code recovered from its other components.
+The administrative boundaries come from
+[LAU2boundaries4Spain](https://doi.org/10.5281/zenodo.15345101), by Francisco José
+Goerlich and Pedro Pérez Vázquez.
+
+These are estimated areas, not official postal boundaries. Coverage depends on
+the source addresses and some areas remain unassigned. The
+[repository](https://github.com/dieghernan/codigospostales) documents the sources,
+methodology, limitations and steps to reproduce the data.
+
+## References
+
+- Centro Nacional de Información Geográfica. (n.d.). *CartoCiudad*
+  [Data set]. &lt;https://www.cartociudad.es/web/portal/&gt;
+- Correos. (n.d.). *Base de datos de códigos postales y capa cartográfica*
+  [Product information]. [Product page](https://www.correos.es/es/es/empresas/marketing/identifica-a-tus-clientes-potenciales/base-de-datos-de-codigos-postales)
+- Goerlich, F. J. (2022). *Elaboración de un mapa de códigos postales de España
+  con recursos libres: Cómo evitar pagar por disponer de información de
+  referencia* (Working Paper No. 2022-3). Ivie.
+  &lt;https://doi.org/10.12842/WPIVIE_0322&gt;
+  ([Updated online version](https://www.uv.es/goerlich/Ivie/CodPost.html))
+- Goerlich, F. J., &amp; Pérez Vázquez, P. (2025). *Base de datos histórica de
+  contornos municipales de España –LAU2boundaries4Spain–* (Version 2)
+  [Data set]. Zenodo. &lt;https://doi.org/10.5281/zenodo.15345101&gt;
+- Hernangómez, D. (2026). *Códigos postales de España* (Version 1.0.0)
+  [Data set]. Zenodo. &lt;https://doi.org/10.5281/zenodo.23698418&gt;
+  ([Project documentation](https://dieghernan.github.io/codigospostales/))
+- Instituto Geográfico Nacional. (n.d.). *Servicios de visualización de
+  CartoCiudad: Direcciones y códigos postales* [WMS documentation].
+  [Service documentation](https://www.cartociudad.es/web/portal/directorio-de-servicios/visualizacion)
+- Sánchez, J. I. (2020, November 13). Así hice el mapa de los códigos
+  postales de España con SIG y datos abiertos. *Nosolosig*.
+  [Article](https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos)
+
 		</content>
 		<author>
 			<name>Diego HH</name>
@@ -60,12 +817,112 @@
 		<published>2026-11-03T00:00:00+01:00</published>
 		<updated>2026-11-03T00:00:00+01:00</updated>
 		<id>https://dieghernan.github.io/projects/gifs/</id>
-		<content type="html" xml:base="https://dieghernan.github.io/projects/gifs/">
+		<content type="text">
 		
 
 		&lt;p&gt;EGIF reports, reconciled fire records and cartography with R&lt;/p&gt;
         &lt;p&gt;Go to content&lt;/p&gt;
+        			
 		
+		[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932940.svg)](https://doi.org/10.5281/zenodo.23932940)
+
+**GIFs** brings together structured data on large forest fires in Spain and
+**R** code for an infographic inspired by
+[Dominic Royé&apos;s firefly cartography](https://dominicroye.github.io/blog/firefly-maps/).
+Here, GIF means *gran incendio forestal*: a fire with at least 500 hectares
+of forest area burned.
+
+The project combines exports from MITECO&apos;s General Forest Fire Statistics
+(EGIF) with its annual reports and provisional updates. It preserves source
+information and reconciliation notes so that users can trace how records
+were selected, grouped and located.
+
+![Large forest fires in Spain, 2010–2026. Dark map with orange circles sized by forest area burned.](https://dieghernan.github.io/gifs/gif_spain.png)
+
+## Two related data products
+
+The collection currently provides two complementary views:
+
+- **EGIF reports:** 329 selected reports from 2010–2023. Each row has a unique
+  `egif_part_id` and includes source fields, burned areas, cause, provenance,
+  notes and coordinates where they can be interpreted.
+- **Reconciled fires:** 455 fire records from 2010–2026, used by the
+  infographic. Each fire has a stable `fire_id`; a fire may bring together
+  several EGIF reports.
+
+These are different units of observation. Do not add the two tables&apos; row
+counts or burned areas together. The 500-hectare threshold is applied after
+explicitly documented groupings of reports belonging to the same fire.
+
+EGIF takes priority when a documented match exists. Records without a match
+retain their original MITECO annual report or provisional update. Reports
+awaiting reconciliation keep an empty `fire_id` and are not automatically
+added as new fires, which helps avoid double counting.
+
+## Coverage and limitations
+
+The fire-level records span February 27, 2010 to September 26, 2026. These
+are the first and last dates in the file, not evidence of complete annual
+coverage. The project is not a real-time monitoring service.
+
+The documented reconciliation still has nine earlier fire records and eight
+selected EGIF reports awaiting a match. Two additional records retain their
+provisional source because their province has no reports in the 2023 EGIF
+export. That export contains no records for seven provinces, so an absence
+from these files should not be interpreted as an absence of fires.
+
+The [methodology](https://github.com/dieghernan/gifs/blob/main/METODOLOGIA.md)
+explains source priority, explicit groupings and unresolved cases. The
+[data guide](https://github.com/dieghernan/gifs/blob/main/data-raw/README.md)
+documents the source exports and processing. The original ZIP files are
+preserved with SHA-256 checksums.
+
+## Coordinates and the infographic
+
+Geographic coordinates use EPSG:4326, keeping the Canary Islands in their
+actual location. EGIF coordinates are transformed only when their coordinate
+system can be interpreted. Missing coordinates or an unknown datum leave the
+geographic coordinates empty rather than producing an invented point.
+
+The fire-level view uses interpretable EGIF coordinates where available and
+an identified municipal reference location otherwise. `location_method`
+distinguishes these sources. For fires with several reports, the view records
+which report supplies its reference point. Declared municipality codes and
+municipalities obtained through a spatial join are retained separately.
+
+The points are reference locations, not fire perimeters. Municipal reference
+locations come from IGN through SIANE and **mapSpain**. The infographic reads
+the reconciled fire view and uses circle sizes to show forest area burned.
+
+## Downloads, citation and reuse
+
+Both products are available in **CSV**, **JSON** and **GeoJSON** from the
+[project website](https://dieghernan.github.io/gifs/). Read identifiers and
+municipality codes as text to preserve their representation. JSON supplies
+explicit types and null values; GeoJSON retains records without usable
+coordinates with `geometry: null`.
+
+Machine-readable field descriptions are provided separately in the
+[EGIF report Croissant metadata](https://dieghernan.github.io/gifs/croissant/parts.json)
+and the [fire-level Croissant metadata](https://dieghernan.github.io/gifs/croissant/fires.json).
+
+For reproducible analyses, cite the DOI of the version used. The collection&apos;s
+[version 2.0.0 DOI](https://doi.org/10.5281/zenodo.23932940) identifies the
+archived release; the [general DOI](https://doi.org/10.5281/zenodo.23929996)
+groups the project&apos;s releases.
+
+Data reuse follows the
+[MITECO legal notice](https://www.miteco.gob.es/es/atencion-al-ciudadano/aviso-legal.html),
+including attribution and preservation of the original conditions and metadata.
+The municipal cartography credits CartoBase ANE 2006–2024, CC BY 4.0, IGN.
+The repository&apos;s MIT license applies to code and documentation. The project
+is independent and does not imply MITECO participation or endorsement.
+
+## References
+
+- Royé, D. (2021, June 1). Firefly cartography. *Dr Dominic Royé*.
+  &lt;https://dominicroye.github.io/blog/firefly-maps/&gt;
+
 		</content>
 		<author>
 			<name>Diego HH</name>
@@ -80,12 +937,140 @@
 		<published>2026-10-24T00:00:00+02:00</published>
 		<updated>2026-10-24T00:00:00+02:00</updated>
 		<id>https://dieghernan.github.io/202610_orange-peel/</id>
-		<content type="html" xml:base="https://dieghernan.github.io/202610_orange-peel/">
+		<content type="text">
 		
 
 		&lt;p&gt;Do you know the interrupted Goode homolosine projection?&lt;/p&gt;
         &lt;p&gt;Go to content&lt;/p&gt;
+        			
 		
+		What would happen if we peeled the Earth like an orange? The
+[interrupted Goode homolosine projection](https://proj.org/en/stable/operations/projections/igh.html)
+gives us something close to that! This equal-area projection preserves relative
+areas while splitting the world map into lobes. Add a few shades of orange and
+our world is ready to peel.
+
+Let&apos;s make it with **sf**, **giscoR** and **ggplot2**. First, we get the
+coastlines and draw the outline, following the cuts between the lobes.
+
+
+``` r
+library(sf)
+library(ggplot2)
+library(giscoR)
+library(showtext)
+
+world &lt;- gisco_get_coastal_lines(resolution = 10)
+goode_crs &lt;- &quot;+proj=igh&quot;
+lat &lt;- c(90:-90, rep(c(-90:0, 0:-90), 3), -90:90, 90:0, 0:90, 90)
+lon &lt;- c(
+  rep(180, 181),
+  rep(c(80.01, 79.99, -19.99, -20.01, -99.99, -100.01), each = 91),
+  rep(-180, 181),
+  rep(c(-40.01, -39.99), each = 91),
+  180
+)
+outline &lt;- st_sfc(st_polygon(list(cbind(lon, lat))), crs = 4326) |&gt;
+  st_transform(goode_crs)
+rectangle &lt;- st_as_sfc(st_bbox(outline) * 1.1)
+mask &lt;- st_difference(rectangle, outline)
+```
+
+Next, we draw the meridians and parallels within each lobe so that they do not
+connect across the cuts.
+
+
+``` r
+lobes &lt;- list(
+  c(-180, -40, 0, 90), c(-40, 180, 0, 90),
+  c(-180, -100, -90, 0), c(-100, -20, -90, 0),
+  c(-20, 80, -90, 0), c(80, 180, -90, 0)
+)
+lines &lt;- lapply(lobes, function(b) {
+  west &lt;- b[1] + 0.01
+  east &lt;- b[2] - 0.01
+  south &lt;- max(b[3], -89.99)
+  north &lt;- min(b[4], 89.99)
+  meridians &lt;- seq(-180, 180, 30)
+  meridians &lt;- meridians[meridians &gt; west &amp; meridians &lt; east]
+  parallels &lt;- seq(-60, 60, 30)
+  parallels &lt;- parallels[parallels &gt;= south &amp; parallels &lt;= north]
+  c(
+    lapply(meridians, function(x) {
+      st_linestring(cbind(x, seq(south, north, length.out = 181)))
+    }),
+    lapply(parallels, function(y) {
+      st_linestring(cbind(seq(west, east, length.out = 361), y))
+    })
+  )
+})
+grat &lt;- st_sfc(do.call(c, lines), crs = 4326) |&gt;
+  st_transform(goode_crs)
+```
+
+Finally, we add the orange palette. The mask hides anything outside the outline
+and keeps the edges of our peel tidy.
+
+
+``` r
+font_add_google(&quot;Coiny&quot;, family = &quot;coiny&quot;)
+
+showtext_auto()
+
+ggplot() +
+  geom_sf(data = outline, fill = &quot;#FFF0D9&quot;, colour = NA) +
+  geom_sf(data = world, fill = &quot;#F9B566&quot;, colour = &quot;#B34D08&quot;, linewidth = 0.25) +
+  geom_sf(data = grat, fill = NA, colour = &quot;#E8A45B&quot;, linewidth = 0.25) +
+  geom_sf(data = mask, fill = &quot;#fcf1e7&quot;, colour = NA) +
+  geom_sf(data = outline, fill = NA, colour = &quot;#E87516&quot;, linewidth = 0.4) +
+  coord_sf(
+    crs = goode_crs,
+    xlim = st_bbox(outline)[c(&quot;xmin&quot;, &quot;xmax&quot;)],
+    ylim = st_bbox(outline)[c(&quot;ymin&quot;, &quot;ymax&quot;)],
+    expand = FALSE,
+    datum = NA
+  ) +
+  theme_void() +
+  theme(
+    text = element_text(family = &quot;coiny&quot;),
+    plot.background = element_rect(fill = &quot;#fcf1e7&quot;, colour = NA),
+    plot.title = element_text(
+      color = &quot;#E87516&quot;, face = &quot;bold&quot;, size = rel(3),
+      margin = margin(b = 10)
+    ),
+    plot.margin = margin(10, 10, 10, 10),
+    plot.caption = element_text(
+      color = &quot;#E87516&quot;, size = rel(1.5),
+      margin = margin(t = 10)
+    )
+  ) +
+  labs(
+    title = &quot;Let&apos;s peel the world&quot;,
+    caption = &quot;Interrupted Goode homolosine projection&quot;
+  )
+```
+
+&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp&quot; alt=&quot;World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel.&quot; width=&quot;100%&quot; /&gt;
+
+&lt;iframe
+  class=&quot;d-block w-100 border-0 rounded my-3&quot;
+  title=&quot;Heal the World by Michael Jackson on Spotify&quot;
+  src=&quot;https://open.spotify.com/embed/track/7woW97CfcWaKtuC6W5BP2K?theme=0&quot;
+  height=&quot;152&quot;
+  loading=&quot;lazy&quot;
+  allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;
+  allowfullscreen&gt;
+&lt;/iframe&gt;
+
+## References
+
+- Panaïotis, T. (2026, September 29). Projections cartographiques : Le guide
+  pour ne pas y laisser sa santé mentale. *Pyranhia*.
+  [Article](https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html)
+- Wilke, C. O. (n.d.). *Interrupted Goode homolosine*. practicalgg.
+  &lt;https://wilkelab.org/practicalgg/articles/goode.html&gt;
+  (Source for the outline and masking approach.)
+
 		</content>
 		<author>
 			<name>Diego HH</name>
@@ -100,12 +1085,75 @@
 		<published>2026-10-16T00:00:00+02:00</published>
 		<updated>2026-10-16T00:00:00+02:00</updated>
 		<id>https://dieghernan.github.io/202610_webmentions/</id>
-		<content type="html" xml:base="https://dieghernan.github.io/202610_webmentions/">
+		<content type="text">
 		
 
 		&lt;p&gt;Bringing mentions, likes and reposts back to the blog&lt;/p&gt;
         &lt;p&gt;Go to content&lt;/p&gt;
+        			
 		
+		Conversations about a blog post often happen somewhere else. Someone shares a
+link, replies on their own site or reacts to a post on social media. I wanted
+to bring some of that activity back here.
+
+This implementation was directly inspired by **Matt Hobbs&apos;s** article,
+[Implementing Webmentions on this blog](https://nooshu.com/blog/2019/11/18/implementing-webmentions/),
+published on **Nooshu**.
+
+I liked its simple presentation: links to mentions and replies,
+followed by small groups of avatars for likes and reposts. So I added a
+similar section to this blog, using the typography, colors and buttons from
+[&lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt;](https://dieghernan.github.io/chulapa).
+
+## How it works
+
+A [Webmention](https://www.w3.org/TR/webmention/) is a notification that one
+page links to another. If you write
+about one of my posts on your own site, you can send its URL so the link can
+appear below the original article.
+
+This blog already advertised a [**Webmention.io**](https://webmention.io/)
+endpoint. The missing piece
+was displaying the mentions it had collected. A small JavaScript file now
+requests the public mentions for each post&apos;s canonical URL and builds the
+section automatically when the page opens.
+
+Mentions and replies appear as a numbered list of links and authors. Likes
+and reposts have their own counts and rows of overlapping avatars. The
+content stays on its original site. Each link takes you to the conversation.
+The existing GitHub comments are still available, too.
+
+## A small addition to a static blog
+
+The implementation uses a Jekyll include, a stylesheet and plain JavaScript.
+There is no extra Jekyll plugin or change to the deployment workflow.
+**Webmention.io** handles receiving and verifying links, while the browser
+loads the results through its public API.
+
+I tried it with the [geobounds post]({% post_url 2026-02-12-geobounds %}),
+which already had mentions, and with a recent post that had none. Both cases
+matter: an empty section should still explain how to join in.
+
+Sharing a link on a social network only brings reactions here if a bridge sends
+them as Webmentions.
+
+## Send a link
+
+Written something that links to this post? Open **Shared your thoughts on this
+post? Drop your link here!** below and submit your page&apos;s URL. The form works
+without JavaScript, although displaying existing mentions requires it.
+
+Thanks to **Matt Hobbs** for the inspiration and for sharing his
+[implementation](https://gist.github.com/Nooshu/121e5bf7f3d5c6528413c57db257894f).
+It is a nice way to let a static blog take part in a wider conversation.
+
+&lt;div class=&quot;alert alert-info p-3 mx-2 mb-3&quot; role=&quot;note&quot;&gt;
+&lt;p&gt;&lt;strong&gt;AI assistance:&lt;/strong&gt; I wrote this post with help from
+&lt;strong&gt;Codex&lt;/strong&gt;, including drafting and editing the text. Codex also
+helped implement and test the Webmentions section. The header image was
+also generated with AI.&lt;/p&gt;
+&lt;/div&gt;
+
 		</content>
 		<author>
 			<name>Diego HH</name>
