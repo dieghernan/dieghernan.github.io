@@ -23,6 +23,10 @@ project_links:
     label: See on GitHub
 last_modified_at: 2026-10-07
 og_image_alt: "Map of buildings in Málaga colored by construction period."
+syndication:
+  - https://dev.to/dieghernan/spain-munic-bot-37m3
+  - https://oneworldwithr.substack.com/p/spain-munic-bot
+
 ---
 
 <i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the
