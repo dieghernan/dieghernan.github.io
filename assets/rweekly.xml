@@ -56,14 +56,16 @@ permalink: ./rweekly.xml
   {%- assign entry_tags = document.tags | sort -%}
   {%- assign entry_id = document.url | replace: "index.html", "" | absolute_url | uri_escape -%}
   {%- assign entry_base = entry_id -%}
+  {%- assign entry_html = document.content | markdownify -%}
+  {%- include snippets/one-world-first-paragraph.html html=entry_html -%}
   {%- capture item_html -%}
     {%- if document.subtitle -%}
-      {{ document.subtitle | markdownify | strip }}
+      <h2>{{ document.subtitle | markdownify | remove_first: '<p>' | remove_first: '</p>' | strip }}</h2>
     {%- endif -%}
     {%- if entry_image -%}
       <img src="{{ entry_image | absolute_url | escape }}" alt="">
     {%- endif -%}
-    {{ document.content | markdownify | first_html_paragraph }}
+    {{ first_paragraph }}
   {%- endcapture %}
   <entry>
     <title type="text">{{ feed_plain_text | xml_escape }}</title>

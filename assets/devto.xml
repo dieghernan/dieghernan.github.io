@@ -46,7 +46,8 @@ permalink: ./devto.xml
 		{%- assign title_html = document.title | markdownify -%}
 		{%- include snippets/feed-plain-text.html html=title_html -%}
 		{%- assign entry_image = document.og_image | default: document.header_img | default: site.og_image -%}
-		{%- assign first_paragraph = document.content | markdownify | first_html_paragraph -%}
+		{%- assign entry_html = document.content | markdownify -%}
+		{%- include snippets/one-world-first-paragraph.html html=entry_html -%}
 		<item>
 			{% if identity_name != empty -%}
 			<dc:creator>{{ identity_name | xml_escape }}</dc:creator>

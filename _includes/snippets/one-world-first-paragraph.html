@@ -1,0 +1,12 @@
+{%- assign first_paragraph = '' -%}
+{%- assign paragraph_candidates = include.html | split: '<p' -%}
+{%- for candidate in paragraph_candidates offset: 1 -%}
+  {%- assign opening_boundary = candidate | slice: 0, 1 -%}
+  {%- assign stripped_boundary = opening_boundary | strip -%}
+  {%- if opening_boundary == '>' or stripped_boundary == empty -%}
+    {%- if candidate contains '</p>' -%}
+      {%- assign first_paragraph = candidate | split: '</p>' | first | prepend: '<p' | append: '</p>' -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

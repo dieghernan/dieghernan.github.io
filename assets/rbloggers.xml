@@ -3,79 +3,84 @@ layout: null
 permalink: ./rbloggers.xml
 ---
 {%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url -%}
+{%- include snippets/feed-entries.html -%}
+{%- assign alldocs = alldocs | where_exp: "item", "item.tags contains 'r_bloggers'" -%}
+{%- include snippets/feed-updated.html -%}
+{%- assign feed_title_html = site.title | default: site.github.repository_name | default: "Recent entries" | markdownify -%}
+{%- include snippets/feed-plain-text.html html=feed_title_html -%}
+{%- assign feed_title = feed_plain_text -%}
+{%- assign feed_subtitle_html = site.subtitle | markdownify -%}
+{%- include snippets/feed-plain-text.html html=feed_subtitle_html -%}
+{%- assign feed_subtitle = feed_plain_text -%}
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.locale | default: 'en-US' | replace: '_', '-' | xml_escape }}">
-	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
-	<link href="{{ page.url | absolute_url }}" rel="self" type="application/atom+xml" />
-	<link href="{{  ""  | absolute_url }}" rel="alternate" type="text/html" />
-	<id>{{ page.url | absolute_url }}</id>
-	<title>{{ site.title | strip_html | xml_escape }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html | xml_escape }}{% endif %} - R Project</title>
-	{% if site.subtitle -%}
-	<subtitle>{{- site.subtitle | strip_html | xml_escape -}}</subtitle>
-	{%- endif %}
-	<author>
-		<name>{{ site.author.name | default: site.github.owner_name | xml_escape }}</name>
-		{% assign authorlink = site.author.links | where_exp: "item", "item.url contains 'http'" | first -%}
-		{% assign authorurl = site.author.url | default: authorlink.url -%}
-		{% if authorurl %}<uri>{{ authorurl | absolute_url | xml_escape }}</uri>{% endif %}
-	</author>
-	<rights>(c) {{ site.time | date: '%Y' }}, {{  site.author.name | default: site.github.owner_name | xml_escape }}</rights>
-	{% if site.navbar.brand.img -%}
-	<icon>{{- site.navbar.brand.img | absolute_url | xml_escape -}}</icon>
-	{%- endif %}
-	{% if og_image %}<logo>{{ og_image | absolute_url | xml_escape }}</logo>{% endif %}
-	{%- assign  alldocs = 	site.documents |
-	            where_exp: "item", "item.include_on_feed == true" |
-							where_exp: "item", "item.date != nil" |
-							where_exp: "item", "item.tags contains 'r_bloggers'" |
-							sort: 'date' | reverse -%}
-  {%- assign feed_updated = alldocs.first.date | default: site.time -%}
-  {%- assign feed_epoch = feed_updated | date: "%s" | plus: 0 -%}
-  {%- for entry in alldocs -%}
-    {%- assign entry_updated = entry.last_modified_at | default: entry.date -%}
-    {%- assign entry_epoch = entry_updated | date: "%s" | plus: 0 -%}
-    {%- if entry_epoch > feed_epoch -%}
-      {%- assign feed_updated = entry_updated -%}
-      {%- assign feed_epoch = entry_epoch -%}
-    {%- endif -%}
-  {%- endfor %}
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ feed_language | xml_escape }}">
+  <generator uri="https://dieghernan.github.io/chulapa">Chulapa</generator>
+  <link href="{{ page.url | absolute_url | xml_escape }}" rel="self" type="application/atom+xml" />
+  <link href="{{ "" | absolute_url | xml_escape }}" rel="alternate" type="text/html" />
   <updated>{{ feed_updated | date_to_xmlschema }}</updated>
-	{%- for document in alldocs  -%}
-	{%- assign entryimg =  document.og_image | default: document.header_img -%}
-    {%- assign feed_title_html = document.title | markdownify -%}
-    {%- include snippets/one-world-feed-plain-text.html html=feed_title_html -%}
-	<entry>
-		<title type="html">{{ document.title | markdownify | remove: "<p>" | remove: "</p>" | strip_newlines | strip | escape }}</title>
-		<link href="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape | xml_escape }}" rel="alternate" type="text/html" title="{{ feed_plain_text | xml_escape }}"/>
-		<published>{{ document.date | date_to_xmlschema }}</published>
-		<updated>{{ document.last_modified_at | default: document.date | date_to_xmlschema }}</updated>
-		<id>{{ document.url | replace: "index.html", "" | absolute_url | uri_escape | xml_escape }}</id>
-		<content type="html" xml:base="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape | xml_escape }}">
-		{% if document.subtitle %}
-			{%- assign thesub = document.subtitle | markdownify -%}
-			{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
-		{{ '<h3>' | append: thesub |
-	         append: '</h3>' | escape }}
-		{% endif %}
-  		{% if entryimg %}
-{%- assign entryimg_url = entryimg | absolute_url | escape -%}
-			{{ "<img src='" | append: entryimg_url | append: "' alt=''>" | escape }}
-			{% endif %}
-			{{ document.content | markdownify | escape }}
-		</content>
-		{% assign entryauthor = document.author | default: site.author %}
-		<author>
-			<name>{{ entryauthor.name | default: site.github.owner_name | xml_escape }}</name>
-			{%- assign authorlink = entryauthor.links | where_exp: "item", "item.url contains 'http'" | first -%}
-			{%- assign authorurl = entryauthor.url | default: authorlink.url -%}
-			{% if authorurl %}<uri>{{ authorurl | absolute_url | xml_escape }}</uri>{% endif %}
-		</author>
-		<summary type="html">{{ document.excerpt | escape }}</summary>
-		<category term="{{ document.collection | xml_escape }}"/>
-		{% assign tagrss = document.tags | sort -%}
-		  {% for tag in tagrss  -%}
-		<category term="{{ tag | xml_escape }}"/>
-		  {%- endfor %}
-	</entry>
-    {%- endfor -%}
+  <id>{{ page.url | absolute_url | xml_escape }}</id>
+  <title type="text">{{ feed_title | xml_escape }}{% if feed_subtitle != empty %}{{ " | " | append: feed_subtitle | xml_escape }}{% endif %} - R Project</title>
+  {% if feed_subtitle != empty -%}
+  <subtitle type="text">{{ feed_subtitle | xml_escape }}</subtitle>
+  {% endif -%}
+  {%- include snippets/author-identity.html %}
+  {% if identity_name != empty -%}
+  <author>
+    <name>{{ identity_name | xml_escape }}</name>
+    {% if identity_url != empty -%}
+    <uri>{{ identity_url | absolute_url | xml_escape }}</uri>
+    {%- endif %}
+  </author>
+  {% endif -%}
+  <rights>(c) {{ site.time | date: '%Y' }}, {{ site.author.name | default: site.github.owner_name | xml_escape }}</rights>
+  {% if site.navbar.brand.img -%}
+  <icon>{{ site.navbar.brand.img | absolute_url | xml_escape }}</icon>
+  {% endif -%}
+  {% if og_image -%}
+  <logo>{{ og_image | absolute_url | xml_escape }}</logo>
+  {% endif -%}
+  {% for document in alldocs %}
+  {%- include snippets/author-identity.html author=document.author -%}
+  {%- assign entry_author_name = identity_name -%}
+  {%- if entry_author_name == empty -%}
+    {%- if document.author -%}
+      {%- assign entry_author_name = "Guest author" -%}
+    {%- else -%}
+      {%- assign entry_author_name = "Unknown author" -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign title_html = document.title | markdownify -%}
+  {%- include snippets/feed-plain-text.html html=title_html -%}
+  {%- assign entry_image = document.og_image | default: document.header_img -%}
+  {%- assign entry_tags = document.tags | sort -%}
+  {%- assign entry_url = document.url | replace: "index.html", "" | absolute_url | uri_escape -%}
+  {%- capture item_html -%}
+    {%- if document.subtitle -%}
+      <h2>{{ document.subtitle | markdownify | remove_first: '<p>' | remove_first: '</p>' | strip }}</h2>
+    {%- endif -%}
+    {%- if entry_image -%}
+      <img src="{{ entry_image | absolute_url | escape }}" alt="">
+    {%- endif -%}
+    {{ document.content | markdownify }}
+  {%- endcapture %}
+  <entry>
+    <title type="text">{{ feed_plain_text | xml_escape }}</title>
+    <link href="{{ entry_url | xml_escape }}" rel="alternate" type="text/html" title="{{ feed_plain_text | xml_escape }}" />
+    <published>{{ document.date | date_to_xmlschema }}</published>
+    <updated>{{ document.last_modified_at | default: document.date | date_to_xmlschema }}</updated>
+    <id>{{ entry_url | xml_escape }}</id>
+    <content type="html" xml:base="{{ entry_url | xml_escape }}">{{ item_html | xml_escape }}</content>
+    <author>
+      <name>{{ entry_author_name | xml_escape }}</name>
+      {% if identity_url != empty -%}
+      <uri>{{ identity_url | absolute_url | xml_escape }}</uri>
+      {%- endif %}
+    </author>
+    <summary type="html">{{ document.excerpt | xml_escape }}</summary>
+    <category term="{{ document.collection | xml_escape }}" />
+    {% for tag in entry_tags -%}
+    <category term="{{ tag | xml_escape }}" />
+    {% endfor -%}
+  </entry>
+  {%- endfor %}
 </feed>
