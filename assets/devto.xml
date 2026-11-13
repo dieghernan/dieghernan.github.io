@@ -2,56 +2,91 @@
 layout: null
 permalink: ./devto.xml
 ---
+{%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url -%}
+{%- include snippets/feed-entries.html -%}
+{%- assign feed_title_html = site.title | default: site.github.repository_name | default: "Recent entries" | markdownify -%}
+{%- include snippets/feed-plain-text.html html=feed_title_html -%}
+{%- assign feed_title = feed_plain_text -%}
+{%- assign feed_subtitle_html = site.subtitle | markdownify -%}
+{%- include snippets/feed-plain-text.html html=feed_subtitle_html -%}
+{%- assign feed_subtitle = feed_plain_text -%}
+{%- if feed_subtitle != empty -%}
+  {%- assign feed_title = feed_title | append: " | " | append: feed_subtitle -%}
+{%- endif -%}
+{%- assign image_description_html = site.description | default: site.github.project_tagline | markdownify -%}
+{%- include snippets/feed-plain-text.html html=image_description_html -%}
+{%- assign image_description = feed_plain_text -%}
+{%- assign channel_description_html = site.description | default: site.github.project_tagline | default: site.subtitle | default: site.title | default: "Recent entries" | markdownify -%}
+{%- include snippets/feed-plain-text.html html=channel_description_html -%}
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
-  xmlns:atom="http://www.w3.org/2005/Atom"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-		<title>{{ site.title | append: " | " | append: site.subtitle | xml_escape  }}</title>
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:media="http://search.yahoo.com/mrss/">
+	<channel>
+		<title>{{ feed_title | xml_escape }}</title>
 		<generator>(c) Chulapa Jekyll Theme RSS generator</generator>
-		<link>{{  ""  | absolute_url }}</link>
-		<description>{{ site.description | xml_escape }}</description>
-		<language>{{- site.locale | default: 'en-US' -}}</language>
-		<lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
-		<atom:link href="{{ page.url | absolute_url }}" rel="self" type="application/rss+xml" />
-		{%- assign  alldocs = site.documents |
-				where_exp: "item", "item.include_on_feed == true" |
-				where_exp: "item", "item.date != nil" |
-				sort: 'date' | reverse -%}
-		{%- for document in alldocs limit: 10 -%}
-			{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
-			{%- assign ogimage = document.og_image | default: document.header_img | default: site.og_image -%}
+		<link>{{ "" | absolute_url | xml_escape }}</link>
+		<description>{{ feed_plain_text | xml_escape }}</description>
+		<language>{{ feed_language | xml_escape }}</language>
+		<copyright>(c) {{ site.time | date: '%Y' }}, {{ site.author.name | default: site.github.owner_name | xml_escape }}</copyright>
+		{% if alldocs.first -%}
+		<pubDate>{{ alldocs.first.date | date_to_rfc822 }}</pubDate>
+		{% endif -%}
+		<lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+		<category>blog</category>
+		<ttl>60</ttl>
+		<atom:link href="{{ page.url | absolute_url | xml_escape }}" rel="self" type="application/rss+xml" />
+		<!-- Simplified version -->
+		{% for document in alldocs %}
+		{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
+		{%- include snippets/author-identity.html author=document.author -%}
+		{%- include snippets/feed-reading-time.html html=document.content -%}
+		{%- assign title_html = document.title | markdownify -%}
+		{%- include snippets/feed-plain-text.html html=title_html -%}
+		{%- assign entry_image = document.og_image | default: document.header_img | default: site.og_image -%}
+		{%- assign entry_tags = document.tags | sort -%}
+		{%- assign entry_excerpt = document.excerpt | strip -%}
+		{% assign paragraphs = document.content | split:'</p>' %}
+    {%- capture item_html -%}
+			{%- if document.subtitle -%}
+				{{ document.subtitle | markdownify | strip }}
+			{%- endif -%}
+			{% for paragraph in paragraphs limit: 1  %}
+				<div>{{ paragraph | markdownify | escape }}</p></div>
+			{% endfor %}
+		{%- endcapture %}
 		<item>
-    {%- assign feed_title_html = document.title | markdownify -%}
-    {%- include snippets/one-world-feed-plain-text.html html=feed_title_html -%}
+			{% if identity_name != empty -%}
+			<dc:creator>{{ identity_name | xml_escape }}</dc:creator>
+			{% endif -%}
 			<title>{{ feed_plain_text | xml_escape }}</title>
-			<link>{{ canonical_url | escape }}</link>
-			<guid isPermaLink="true">{{ document.url | absolute_url | xml_escape }}</guid>
-			{% if document.subtitle %}
+			{% if entry_excerpt != empty -%}
 			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines | xml_escape }}</description>
-			{% endif %}
-			{% capture entry_html %}
-			{% if document.subtitle %}
-				{%- assign thesub = document.subtitle | markdownify -%}
-				{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
-{{ "<p>" | append: thesub | append: "</p>" }}
-			{% endif %}
-			{% if ogimage %}
-{%- assign ogimage_url = ogimage | absolute_url | escape -%}
-{{ "<p><img src='" | append: ogimage_url | append: "' alt=''></p>"  }}
-			{% endif %}
-
-{{ document.content | markdownify }}
-			{% endcapture %}
-			<content:encoded>{{ entry_html | xml_escape }}</content:encoded>
-			<pubDate>{{ document.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-			{% if document.tags.size > 0 -%}
-				{%- assign tagrss = document.tags | where_exp: "tag", "tag != document.layout" -%}
-				{% for tag in tagrss  -%}
+			<content:encoded>{{ item_html | xml_escape }}</content:encoded>
+			{% else -%}
+			<description>{{ item_html | xml_escape }}</description>
+			{% endif -%}
+			<link>{{ canonical_url | xml_escape }}</link>
+			{% for tag in entry_tags -%}
+			{% if tag != document.layout -%}
 			<category>{{ tag | xml_escape }}</category>
-				{%- endfor %}
-			{%- endif %}
+			{% endif -%}
+			{% endfor -%}
+			{% if entry_image -%}
+			{%- assign entry_image_url = entry_image | absolute_url | xml_escape -%}
+			<media:title type="plain">{{ feed_plain_text | xml_escape }}</media:title>
+			<media:content url="{{ entry_image_url }}" medium="image" />
+			<media:thumbnail url="{{ entry_image_url }}" />
+			{% endif -%}
+			<guid isPermaLink="true">{{ document.url | absolute_url | xml_escape }}</guid>
+			<pubDate>{{ document.date | date_to_rfc822 }}</pubDate>
+			{% if document.last_modified_at -%}
+			<dcterms:modified>{{ document.last_modified_at | date_to_xmlschema }}</dcterms:modified>
+			{% endif -%}
 		</item>
-	{%- endfor -%}
-  </channel>
-</rss>
+		{%- endfor %}
+	</channel>
+	</rss>
