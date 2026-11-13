@@ -2,7 +2,6 @@
 layout: null
 permalink: ./devto.xml
 ---
-{%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url | absolute_url -%}
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
   xmlns:atom="http://www.w3.org/2005/Atom"
@@ -19,7 +18,7 @@ permalink: ./devto.xml
 				where_exp: "item", "item.include_on_feed == true" |
 				where_exp: "item", "item.date != nil" |
 				sort: 'date' | reverse -%}
-		{%- for document in alldocs limit: 20 -%}
+		{%- for document in alldocs limit: 10 -%}
 			{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
 			{%- assign ogimage = document.og_image | default: document.header_img | default: site.og_image | absolute_url -%}
 			{% include snippets/author-identity.html author=document.author %}
@@ -28,7 +27,7 @@ permalink: ./devto.xml
 			<link>{{ canonical_url | escape }}</link>
 			<guid isPermaLink="true">{{ document.url | absolute_url }}</guid>
 			{% if document.subtitle %}
-			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines }}</description>
+			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines | xml_escape }}</description>
 			{% endif %}
 			<content:encoded><![CDATA[
 			{% if document.subtitle %}
@@ -44,16 +43,11 @@ permalink: ./devto.xml
 			]]></content:encoded>
 			<pubDate>{{ document.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
 			{% if document.tags.size > 0 -%}
-				{%- assign tagrss = document.tags | join: ','  | split: ',' | sort | where_exp: "tag","tag != document.layout "   -%}
+				{%- assign tagrss = document.tags | where_exp: "tag", "tag != document.layout" -%}
 				{% for tag in tagrss  -%}
-			<category>{{ tag }}</category>
+			<category>{{ tag | xml_escape }}</category>
 				{%- endfor %}
 			{%- endif %}
-			{% if ogimage -%}
-			{%- assign ext = og_image | split: "?" | first | split: "." | last | downcase -%}
-			{%- assign mime = ext | replace: "jpg", "jpeg" | prepend: "image/" -%}
-			<enclosure url="{{- ogimage -}}" type="{{- mime -}}" length="0" />
-			{%- endif -%}
 		</item>
 	{%- endfor -%}
   </channel>

@@ -55,7 +55,7 @@ There is no extra Jekyll plugin or change to the deployment workflow.
 **Webmention.io** handles receiving and verifying links, while the browser
 loads the results through its public API.
 
-I tried it with the [geobounds post]({% post_url 2026-02-12-geobounds %}),
+I tried it with the [geobounds post](https://dieghernan.github.io/202602_geobounds/),
 which already had mentions, and with a recent post that had none. Both cases
 matter: an empty section should still explain how to join in.
 

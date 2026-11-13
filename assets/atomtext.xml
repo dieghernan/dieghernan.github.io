@@ -10,9 +10,9 @@ permalink: ./atomtext.xml
 	<link href="{{  ""  | absolute_url }}" rel="alternate" type="text/html" />
 	<updated>{{ site.time | date_to_xmlschema }}</updated>
 	<id>{{ page.url | absolute_url }}</id>
-	<title>{{ site.title | strip_html  }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html }}{% endif %}</title>
+	<title>{{ site.title | strip_html | xml_escape }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html | xml_escape }}{% endif %}</title>
 	{% if site.subtitle -%}
-	<subtitle>{{- site.subtitle | strip_html -}}</subtitle>
+	<subtitle>{{- site.subtitle | strip_html | xml_escape -}}</subtitle>
 	{%- endif %}
 	{% include snippets/author-identity.html %}
 	<author>
@@ -58,7 +58,7 @@ permalink: ./atomtext.xml
 		<category term="{{ document.collection }}"/>
 		{% assign tagrss = document.tags | join: ','  | split: ',' | sort -%}
 		  {% for tag in tagrss  -%}
-		<category term="{{ tag }}"/>
+		<category term="{{ tag | xml_escape }}"/>
 		  {%- endfor %}
 	</entry>
     {%- endfor -%}

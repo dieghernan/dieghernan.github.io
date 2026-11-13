@@ -10,9 +10,9 @@ permalink: ./rweekly.xml
 	<link href="{{  ""  | absolute_url }}" rel="alternate" type="text/html" />
 	<updated>{{ site.time | date_to_xmlschema }}</updated>
 	<id>{{ page.url | absolute_url }}</id>
-	<title>{{ site.title | strip_html  }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html }}{% endif %} - R Project</title>
+	<title>{{ site.title | strip_html | xml_escape }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html | xml_escape }}{% endif %} - R Project</title>
 	{% if site.subtitle -%}
-	<subtitle>{{- site.subtitle | strip_html -}}</subtitle>
+	<subtitle>{{- site.subtitle | strip_html | xml_escape -}}</subtitle>
 	{%- endif %}
 	<author>
 		<name>{{ site.author.name | default: site.github.owner_name | xml_escape }}</name>
@@ -25,7 +25,6 @@ permalink: ./rweekly.xml
 	<icon>{{- site.navbar.brand.img | absolute_url -}}</icon>
 	{%- endif %}
 	<logo>{{- og_image -}}</logo>
-	{%- assign wpm = words_per_minute | default: 200 -%}
 	{%- assign  alldocs = 	site.documents |
 	            where_exp: "item", "item.include_on_feed == true" |
 							where_exp: "item", "item.date != nil" |
@@ -35,7 +34,7 @@ permalink: ./rweekly.xml
 	{%- assign entryimg =  document.og_image | default: document.header_img | absolute_url -%}
 	<entry>
 		<title type="html">{{ document.title | markdownify | remove: "<p>" | remove: "</p>" | strip_newlines | strip | escape }}</title>
-		<link href="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}" rel="alternate" type="text/html" title="{{ document.title | markdownify | strip_html | strip_newlines | strip | escape | xml_escape | escape }}"/>
+		<link href="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}" rel="alternate" type="text/html" title="{{ document.title | markdownify | strip_html | strip_newlines | strip | replace: '&amp;', '&' | xml_escape }}"/>
 		<published>{{ document.date | date_to_xmlschema }}</published>
 		<updated>{{ document.last_modified_at | default: document.date | date_to_xmlschema }}</updated>
 		<id>{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}</id>
@@ -65,7 +64,7 @@ permalink: ./rweekly.xml
 		<category term="{{ document.collection }}"/>
 		{% assign tagrss = document.tags | join: ','  | split: ',' | sort -%}
 		  {% for tag in tagrss  -%}
-		<category term="{{ tag }}"/>
+		<category term="{{ tag | xml_escape }}"/>
 		  {%- endfor %}
 	</entry>
     {%- endfor -%}

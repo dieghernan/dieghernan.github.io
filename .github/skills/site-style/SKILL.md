@@ -30,8 +30,13 @@ requested.
 
 - Write posts and project descriptions in US English. Preserve official names,
   original publication titles and accurate quoted material in their language.
-- Use sentence case for headings, no Oxford comma and no semicolons in prose. Do
-  not alter semicolons needed in executable code or exact quotations.
+- Use sentence case for titles, subtitles, section headings and reader-facing
+  metadata, including SEO and social titles, excerpts and descriptions. Keep
+  the established capitalization of proper names, official titles, acronyms,
+  package names and code identifiers. Use lowercase after a dash or colon
+  when the phrase continues the same thought, as in `Gallery: size of a map`.
+- Omit the Oxford comma and avoid semicolons in prose. Preserve semicolons
+  needed in executable code or exact quotations.
 - Keep explanations concise, approachable and practical. Explain what each
   important step does and why. Preserve natural questions, occasional cultural
   references and light humor when they fit the user's draft. Avoid adding a joke
@@ -132,6 +137,12 @@ Keep titles, prose, tags, links, references and accessibility text consistent
 across existing source/output pairs. When no render is allowed, synchronize safe
 editorial changes directly where feasible and identify stale results. Never
 hand-edit computed outputs to suggest unexecuted code has run.
+
+When reconciling editorial differences in an existing published post, use the
+published Markdown as the source of truth. Apply approved wording and
+capitalization to the matching Rmd while preserving its executable chunks.
+When asked to propagate those edits to DEV, update the corresponding copy
+and preserve its publication status and DEV-specific formatting.
 
 Keep all project R scripts formatted with **air** and the R code in Rmd sources
 formatted with **styler**, using `styler::style_file()` or
