@@ -20,27 +20,30 @@ permalink: ./devto.xml
 				sort: 'date' | reverse -%}
 		{%- for document in alldocs limit: 10 -%}
 			{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
-			{%- assign ogimage = document.og_image | default: document.header_img | default: site.og_image | absolute_url -%}
-			{% include snippets/author-identity.html author=document.author %}
+			{%- assign ogimage = document.og_image | default: document.header_img | default: site.og_image -%}
 		<item>
-			<title>{{ document.title | markdownify | strip_html | normalize_whitespace | strip | replace: '&amp;', '&' | xml_escape }}</title>
+    {%- assign feed_title_html = document.title | markdownify -%}
+    {%- include snippets/one-world-feed-plain-text.html html=feed_title_html -%}
+			<title>{{ feed_plain_text | xml_escape }}</title>
 			<link>{{ canonical_url | escape }}</link>
-			<guid isPermaLink="true">{{ document.url | absolute_url }}</guid>
+			<guid isPermaLink="true">{{ document.url | absolute_url | xml_escape }}</guid>
 			{% if document.subtitle %}
 			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines | xml_escape }}</description>
 			{% endif %}
-			<content:encoded><![CDATA[
+			{% capture entry_html %}
 			{% if document.subtitle %}
 				{%- assign thesub = document.subtitle | markdownify -%}
 				{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
 {{ "<p>" | append: thesub | append: "</p>" }}
 			{% endif %}
 			{% if ogimage %}
-{{ "<p><img src='" | append: ogimage | append: "' ></p>"  }}
+{%- assign ogimage_url = ogimage | absolute_url | escape -%}
+{{ "<p><img src='" | append: ogimage_url | append: "' alt=''></p>"  }}
 			{% endif %}
 
 {{ document.content | markdownify }}
-			]]></content:encoded>
+			{% endcapture %}
+			<content:encoded>{{ entry_html | xml_escape }}</content:encoded>
 			<pubDate>{{ document.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
 			{% if document.tags.size > 0 -%}
 				{%- assign tagrss = document.tags | where_exp: "tag", "tag != document.layout" -%}

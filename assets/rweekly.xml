@@ -2,13 +2,12 @@
 layout: null
 permalink: ./rweekly.xml
 ---
-{%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url | absolute_url -%}
+{%- assign og_image = site.og_image | default: site.author.avatar | default: site.github.owner_gravatar_url -%}
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" >
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.locale | default: 'en-US' | replace: '_', '-' | xml_escape }}">
 	<generator uri="https://dieghernan.github.io/chulapa" version="1.0.0">Chulapa</generator>
 	<link href="{{ page.url | absolute_url }}" rel="self" type="application/atom+xml" />
 	<link href="{{  ""  | absolute_url }}" rel="alternate" type="text/html" />
-	<updated>{{ site.time | date_to_xmlschema }}</updated>
 	<id>{{ page.url | absolute_url }}</id>
 	<title>{{ site.title | strip_html | xml_escape }}{% if site.subtitle %}{{ " | " | append: site.subtitle | strip_html | xml_escape }}{% endif %} - R Project</title>
 	{% if site.subtitle -%}
@@ -20,25 +19,38 @@ permalink: ./rweekly.xml
 		{% assign authorurl = site.author.url | default: authorlink.url -%}
 		{% if authorurl %}<uri>{{ authorurl | absolute_url | xml_escape }}</uri>{% endif %}
 	</author>
-	<rights>(c) {{ site.time | date: '%Y' }}, {{  site.author.name | default: site.github.owner_name }}</rights>
+	<rights>(c) {{ site.time | date: '%Y' }}, {{  site.author.name | default: site.github.owner_name | xml_escape }}</rights>
 	{% if site.navbar.brand.img -%}
-	<icon>{{- site.navbar.brand.img | absolute_url -}}</icon>
+	<icon>{{- site.navbar.brand.img | absolute_url | xml_escape -}}</icon>
 	{%- endif %}
-	<logo>{{- og_image -}}</logo>
+	{% if og_image %}<logo>{{ og_image | absolute_url | xml_escape }}</logo>{% endif %}
 	{%- assign  alldocs = 	site.documents |
 	            where_exp: "item", "item.include_on_feed == true" |
 							where_exp: "item", "item.date != nil" |
 							where_exp: "item", "item.tags contains 'r_bloggers'" |
 							sort: 'date' | reverse -%}
+  {%- assign feed_updated = alldocs.first.date | default: site.time -%}
+  {%- assign feed_epoch = feed_updated | date: "%s" | plus: 0 -%}
+  {%- for entry in alldocs -%}
+    {%- assign entry_updated = entry.last_modified_at | default: entry.date -%}
+    {%- assign entry_epoch = entry_updated | date: "%s" | plus: 0 -%}
+    {%- if entry_epoch > feed_epoch -%}
+      {%- assign feed_updated = entry_updated -%}
+      {%- assign feed_epoch = entry_epoch -%}
+    {%- endif -%}
+  {%- endfor %}
+  <updated>{{ feed_updated | date_to_xmlschema }}</updated>
 	{%- for document in alldocs  -%}
-	{%- assign entryimg =  document.og_image | default: document.header_img | absolute_url -%}
+	{%- assign entryimg =  document.og_image | default: document.header_img -%}
+    {%- assign feed_title_html = document.title | markdownify -%}
+    {%- include snippets/one-world-feed-plain-text.html html=feed_title_html -%}
 	<entry>
 		<title type="html">{{ document.title | markdownify | remove: "<p>" | remove: "</p>" | strip_newlines | strip | escape }}</title>
-		<link href="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}" rel="alternate" type="text/html" title="{{ document.title | markdownify | strip_html | strip_newlines | strip | replace: '&amp;', '&' | xml_escape }}"/>
+		<link href="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape | xml_escape }}" rel="alternate" type="text/html" title="{{ feed_plain_text | xml_escape }}"/>
 		<published>{{ document.date | date_to_xmlschema }}</published>
 		<updated>{{ document.last_modified_at | default: document.date | date_to_xmlschema }}</updated>
-		<id>{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}</id>
-		<content type="html" xml:base="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape }}">
+		<id>{{ document.url | replace: "index.html", "" | absolute_url | uri_escape | xml_escape }}</id>
+		<content type="html" xml:base="{{ document.url | replace: "index.html", "" | absolute_url | uri_escape | xml_escape }}">
 		{% if document.subtitle %}
 			{%- assign thesub = document.subtitle | markdownify -%}
 			{%- assign thesub = thesub | remove: '<p>' | remove: '</p>' | strip | strip_newlines %}
@@ -46,7 +58,8 @@ permalink: ./rweekly.xml
 	         append: '</h3>' | escape }}
 		{% endif %}
   		{% if entryimg %}
-			{{ "<img src='" | append: entryimg | append: "' >" | escape }}
+{%- assign entryimg_url = entryimg | absolute_url | escape -%}
+			{{ "<img src='" | append: entryimg_url | append: "' alt=''>" | escape }}
 			{% endif %}
 	         {% assign paragraphs = document.content | split:'</p>' %}
 	         {% for paragraph in paragraphs limit: 1  %}
@@ -61,8 +74,8 @@ permalink: ./rweekly.xml
 			{% if authorurl %}<uri>{{ authorurl | absolute_url | xml_escape }}</uri>{% endif %}
 		</author>
 		<summary type="html">{{ document.excerpt | escape }}</summary>
-		<category term="{{ document.collection }}"/>
-		{% assign tagrss = document.tags | join: ','  | split: ',' | sort -%}
+		<category term="{{ document.collection | xml_escape }}"/>
+		{% assign tagrss = document.tags | sort -%}
 		  {% for tag in tagrss  -%}
 		<category term="{{ tag | xml_escape }}"/>
 		  {%- endfor %}
