@@ -1,7 +1,7 @@
-<link rel="describedby" type="text/plain" href="{{ '/llms.txt' | relative_url }}">
+    <link rel="describedby" type="text/plain" href="{{ '/llms.txt' | relative_url }}">
 {% assign standard_site_document = site.data.standard_site_documents[page.url] %}
 {% if standard_site_document %}
-<link rel="site.standard.document" href="{{ standard_site_document | escape }}">
+    <link rel="site.standard.document" href="{{ standard_site_document | escape }}">
 {% endif %}
 {% if page.profile_page %}
 {% include custom/profile-page.html %}
@@ -29,7 +29,7 @@
     <meta name="msapplication-TileImage" content="{{ '/assets/img/favicons/mstile-144x144.png' | relative_url }}">
     <meta name="msapplication-config" content="{{ '/assets/img/favicons/browserconfig.xml' | relative_url }}">
     <meta name="theme-color" content="#000000">
-    <meta name="follow.it-verification-code" content="pQEJ5nNhCNfeV1pq9UBP"/>
+    <meta name="follow.it-verification-code" content="pQEJ5nNhCNfeV1pq9UBP">
     <!-- end custom head snippets -->
 
 {% include custom/structured_data/page.html %}
