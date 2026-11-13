@@ -41,7 +41,7 @@ remote theme that I created.
 **Index**
 
 1. The generated ToC will be an ordered list
-   {:toc}
+{:toc}
 
 Ready? Let’s go!
 
