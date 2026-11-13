@@ -1,4 +1,7 @@
 ---
+series:
+  - id: hillshade
+    order: 3
 title: 'Better hillshading with R: the display matters'
 subtitle: >-
   Same terrain, different shadows

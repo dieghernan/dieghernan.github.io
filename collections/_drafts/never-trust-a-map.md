@@ -1,4 +1,7 @@
 ---
+series:
+  - id: map-projections
+    order: 3
 title: "Never trust a map"
 subtitle: "All of them are dirty liars."
 excerpt: >-

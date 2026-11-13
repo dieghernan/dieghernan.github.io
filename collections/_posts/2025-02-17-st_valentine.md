@@ -1,4 +1,7 @@
 ---
+series:
+  - id: map-projections
+    order: 1
 title: "Happy Valentine's Day"
 excerpt: "Give the world a heart shape with the Bonne projection and draw it in R."
 subtitle: "Do you know the Bonne projection?"
