@@ -19,7 +19,7 @@ permalink: ./rbloggers.xml
   <link href="{{ "" | absolute_url | xml_escape }}" rel="alternate" type="text/html" />
   <updated>{{ feed_updated | date_to_xmlschema }}</updated>
   <id>{{ page.url | absolute_url | xml_escape }}</id>
-  <title type="text">{{ feed_title | xml_escape }}{% if feed_subtitle != empty %}{{ " | " | append: feed_subtitle | xml_escape }}{% endif %} - R Project</title>
+  <title type="text">{{ feed_title | xml_escape }}{% if feed_subtitle != empty %}{{ " | " | append: feed_subtitle | xml_escape }}{% endif %}</title>
   {% if feed_subtitle != empty -%}
   <subtitle type="text">{{ feed_subtitle | xml_escape }}</subtitle>
   {% endif -%}
