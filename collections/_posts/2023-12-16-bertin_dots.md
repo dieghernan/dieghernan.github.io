@@ -1,4 +1,7 @@
 ---
+series:
+  - id: beautiful-maps
+    order: 5
 giscus_discussion: 32
 title: "Beautiful maps with <strong>R</strong> (V): Point densities"
 subtitle: "Bertin's dot density maps with <strong>R</strong> and GHSL"

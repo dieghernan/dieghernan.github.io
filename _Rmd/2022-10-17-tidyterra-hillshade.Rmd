@@ -1,4 +1,7 @@
 ---
+series:
+  - id: hillshade
+    order: 1
 last_modified_at: 2026-10-25
 giscus_discussion: 36
 title: >-

@@ -1,4 +1,7 @@
 ---
+series:
+  - id: beautiful-maps
+    order: 4
 title: "Beautiful maps with <strong>R</strong> (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
 excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This package geotags images, using a spatial object (from sf or terra) as a geographic reference.

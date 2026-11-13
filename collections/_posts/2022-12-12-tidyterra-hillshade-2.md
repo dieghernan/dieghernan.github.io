@@ -1,4 +1,7 @@
 ---
+series:
+  - id: hillshade
+    order: 2
 last_modified_at: 2026-10-25
 title: >-
   Hillshade, colors and marginal plots with <strong>tidyterra</strong> (II)

@@ -1,4 +1,7 @@
 ---
+series:
+  - id: chulapa-and-jekyll
+    order: 4
 title: "Conversations across the web with Webmentions"
 subtitle: "Bringing mentions, likes and reposts back to the blog"
 excerpt: "A small addition to my Jekyll blog, inspired by Matt Hobbs: Webmentions with a Chulapa look."

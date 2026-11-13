@@ -1,4 +1,7 @@
 ---
+series:
+  - id: inset-maps
+    order: 2
 title: "Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!"
 subtitle: "A map on a map"
 excerpt: A common challenge when creating maps is how to include an inset map in

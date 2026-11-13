@@ -1,4 +1,7 @@
 ---
+series:
+  - id: postal-codes-spain
+    order: 1
 title: Postal codes of Spain
 subtitle: Estimated postal code areas from open data
 excerpt: Explore estimated postal code areas for Spain and download GeoPackage files for R, Python and QGIS.

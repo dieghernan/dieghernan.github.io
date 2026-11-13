@@ -1,4 +1,7 @@
 ---
+series:
+  - id: chulapa-and-jekyll
+    order: 3
 title: 'Building a documentation chatbot for <span class="chulapa">Chulapa</span>'
 subtitle: "A development diary: context, small screens and useful answers"
 excerpt: "How I built an AI assistant for my theme's documentation, and what happened when I started asking it real questions."

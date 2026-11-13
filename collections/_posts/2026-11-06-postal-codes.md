@@ -1,4 +1,7 @@
 ---
+series:
+  - id: postal-codes-spain
+    order: 2
 title: "Postal codes and tessellations"
 subtitle: "From postal points to areas using Voronoi polygons"
 description: >-

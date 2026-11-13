@@ -1,4 +1,7 @@
 ---
+series:
+  - id: celestial-maps
+    order: 1
 title: Celestial data
 subtitle: A compilation of celestial data files
 excerpt: This project provides several datasets of celestial objects as of the J2000 epoch in GeoJSON and GeoPackage formats.

@@ -1,4 +1,7 @@
 ---
+series:
+  - id: chulapa-and-jekyll
+    order: 1
 title: >-
   <strong>Leaflet</strong>, <strong>R</strong>, Markdown,
   <strong>Jekyll</strong> and GitHub
