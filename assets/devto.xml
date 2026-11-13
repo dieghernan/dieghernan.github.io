@@ -40,37 +40,26 @@ permalink: ./devto.xml
 		<ttl>60</ttl>
 		<atom:link href="{{ page.url | absolute_url | xml_escape }}" rel="self" type="application/rss+xml" />
 		<!-- Simplified version -->
-		{% for document in alldocs %}
+		{% for document in alldocs limit: 10 %}
 		{%- include snippets/canonical-url.html url=document.url canonical=document.canonical_url -%}
 		{%- include snippets/author-identity.html author=document.author -%}
-		{%- include snippets/feed-reading-time.html html=document.content -%}
 		{%- assign title_html = document.title | markdownify -%}
 		{%- include snippets/feed-plain-text.html html=title_html -%}
 		{%- assign entry_image = document.og_image | default: document.header_img | default: site.og_image -%}
-		{%- assign entry_tags = document.tags | sort -%}
-		{%- assign entry_excerpt = document.excerpt | strip -%}
-		{% assign paragraphs = document.content | split:'</p>' %}
-    {%- capture item_html -%}
-			{%- if document.subtitle -%}
-				{{ document.subtitle | markdownify | strip }}
-			{%- endif -%}
-			{% for paragraph in paragraphs limit: 1  %}
-				<div>{{ paragraph | markdownify | escape }}</p></div>
-			{% endfor %}
-		{%- endcapture %}
+		{%- assign first_paragraph = document.content | markdownify | first_html_paragraph -%}
 		<item>
 			{% if identity_name != empty -%}
 			<dc:creator>{{ identity_name | xml_escape }}</dc:creator>
 			{% endif -%}
 			<title>{{ feed_plain_text | xml_escape }}</title>
-			{% if entry_excerpt != empty -%}
+			{% if document.subtitle -%}
 			<description>{{ document.subtitle | markdownify | remove: '<p>' | remove: '</p>' | strip | strip_newlines | xml_escape }}</description>
-			<content:encoded>{{ item_html | xml_escape }}</content:encoded>
-			{% else -%}
-			<description>{{ item_html | xml_escape }}</description>
+			{% endif -%}
+			{% if first_paragraph != empty -%}
+			<content:encoded>{{ first_paragraph | xml_escape }}</content:encoded>
 			{% endif -%}
 			<link>{{ canonical_url | xml_escape }}</link>
-			{% for tag in entry_tags -%}
+			{% for tag in document.tags -%}
 			{% if tag != document.layout -%}
 			<category>{{ tag | xml_escape }}</category>
 			{% endif -%}
