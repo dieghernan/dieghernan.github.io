@@ -53,8 +53,7 @@ p_load(
   geosphere,
   leaflet,
   leaflet.extras,
-  sf,
-  mapSpain
+  sf
 )
 
 
@@ -171,9 +170,24 @@ data <- st_sf(connect, st_geometry(linessf))
 kms <- sum((as.numeric(st_length(data)) * data$n) / 1000)
 outline <- ndots[chull(ndots$long, ndots$lat), ]
 # Leaflet-----
+carto_key <- Sys.getenv("CARTO_BASEMAPS_API_KEY")
+if (!nzchar(carto_key)) {
+  stop("Set CARTO_BASEMAPS_API_KEY before rendering this post.", call. = FALSE)
+}
+
+carto_url <- paste0(
+  "https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png?key=",
+  carto_key
+)
+carto_attribution <- paste(
+  "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
+  "&copy; <a href='https://carto.com/attributions'>CARTO</a>"
+)
+
 map <- leaflet(options = leafletOptions(minZoom = 1.5)) %>%
-  addProviderEspTiles("IDErioja.Oscuro",
-    options = list(detectRetina = TRUE)
+  addTiles(
+    urlTemplate = carto_url,
+    attribution = carto_attribution
   ) %>%
   setView(-3.56948, 40.49181, zoom = 3) %>%
   setMaxBounds(-180, -90, 180, 90) %>%
