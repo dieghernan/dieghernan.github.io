@@ -24,32 +24,51 @@ If you've ever worked with spatial data in **R**, this may ring a bell...
 - Fix projections
 - Repeat
 
-While searching for new data sources, I found the excellent [geoBoundaries](https://www.geoboundaries.org/) database. However, accessing the data can be tedious since it's provided as zipped shapefiles, and as any GIS professional knows, [shapefiles should die!](http://switchfromshapefile.org/)
+While searching for new data sources, I found the excellent [geoBoundaries](https://www.geoboundaries.org/) database. However, accessing the data can be tedious because it comes in zipped shapefiles. As any GIS professional knows, [shapefiles should die!](http://switchfromshapefile.org/)
 
 Previously, the **rgeoboundaries** package was on CRAN and allowed access to the geoBoundaries API, but it was archived. So I decided to create my own version, and **geobounds** was born.
 
 - Source code: <https://github.com/dieghernan/geobounds>
 - **pkgdown** website: <https://dieghernan.github.io/geobounds/>
 
-It connects directly to the excellent [geoBoundaries](https://www.geoboundaries.org/) database and returns clean, ready-to-use **sf** objects with a single function call. No manual downloads and no shapefile handling.
+**geobounds** connects directly to geoBoundaries and returns clean, ready-to-use **sf** objects with a single function call. No manual downloads and no shapefile handling.
 
 This is how it works.
 
 ## Installation
 
-**geobounds** was recently accepted on [CRAN](https://cran.r-project.org/package=geobounds), so just install it with:
+Install **geobounds** from [CRAN](https://cran.r-project.org/package=geobounds):
 
 ``` r
 install.packages("geobounds")
 ```
 
-Load the package and other complementary packages:
+Load **geobounds** and the packages used in the examples:
 
 ``` r
 library(geobounds)
 library(sf)
 library(ggplot2)
 library(dplyr)
+
+# Define a common theme for the maps.
+background <- "#F5F5F5"
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_grey(
+    base_family = "inter-tight", paper = background,
+    base_size = 8
+  ) +
+    theme(
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ## Getting administrative levels (ADM)
@@ -85,9 +104,9 @@ gb_get(country = "Panama", adm_lvl = "all", simplified = TRUE) |>
 
 <img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3." width="100%" />
 
-## Global Composite Boundaries (CGAZ)
+## Composite Global Administrative Zones (CGAZ)
 
-When you download individual country files, each country reflects its own view of borders. This results in:
+Individual country files can reflect different views of where borders lie. When you combine them, you may see:
 
 - Overlapping boundaries
 - Geographic gaps
@@ -155,7 +174,6 @@ norway_all <- bind_rows(norway, norway_simp)
 ggplot(norway_all) +
   geom_sf(fill = "#BA0C2F", color = "#00205B") +
   facet_wrap(vars(res)) +
-  theme_minimal() +
   labs(caption = "Source: www.geoboundaries.org")
 ```
 
@@ -182,7 +200,7 @@ Use **geobounds** when:
 - You need reliable global administrative boundaries
 - You want reproducible workflows
 - You prefer code over manual downloads
-- You're building maps, dashboards or spatial analyses
+- You're creating maps or dashboards or conducting spatial analyses
 
 ## Related packages
 

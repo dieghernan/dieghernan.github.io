@@ -1,6 +1,6 @@
 ---
 review: always
-tags_choose_4: rstats,chulapa,html,indieweb,jekyll
+tags_choose_4: rstats,chulapa,html,indieweb,jekyll,webmentions
 description: Bringing mentions, likes and reposts back to the blog
 cover_image: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 cover_image_bk: ~
@@ -32,7 +32,7 @@ Mentions and replies appear as a numbered list of links and authors. Likes and r
 
 The implementation uses a Jekyll include, a stylesheet and plain JavaScript. There is no extra Jekyll plugin or change to the deployment workflow. **Webmention.io** handles receiving and verifying links, while the browser loads the results through its public API.
 
-I tried it with the \[geobounds post\]({% post_url 2026-02-12-geobounds %}), which already had mentions, and with a recent post that had none. Both cases matter: an empty section should still explain how to join in.
+I tried it with the [geobounds post](https://dieghernan.github.io/202602_geobounds/), which already had mentions, and with a recent post that had none. Both cases matter: an empty section should still explain how to join in.
 
 Sharing a link on a social network only brings reactions here if a bridge sends them as Webmentions.
 
@@ -42,7 +42,7 @@ Written something that links to this post? Open **Shared your thoughts on this p
 
 Thanks to **Matt Hobbs** for the inspiration and for sharing his [implementation](https://gist.github.com/Nooshu/121e5bf7f3d5c6528413c57db257894f). It is a nice way to let a static blog take part in a wider conversation.
 
-<div class="alert alert-info p-3 mx-2 mb-3" role="note">
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
 <p><strong>AI assistance:</strong> I wrote this post with help from
 <strong>Codex</strong>, including drafting and editing the text. Codex also
 helped implement and test the Webmentions section. The header image was

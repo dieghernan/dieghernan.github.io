@@ -1,6 +1,6 @@
 ---
 review: always
-tags_choose_4: rstats,chulapa,html,jekyll
+tags_choose_4: rstats,chulapa,cloudflareworkers,html,jekyll
 description: 'A development diary: context, small screens and useful answers'
 cover_image: https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp
 cover_image_bk: ~
@@ -117,7 +117,7 @@ You can try it on the [<span class="chulapa">Chulapa</span> documentation site](
 
 The most useful part of the process was trying the assistant with questions I already knew how to answer. It made the gaps easy to spot: an answer could sound reasonable and still leave me without the setting or example I needed. That is what I want to keep checking as the documentation grows.
 
-<div class="alert alert-info p-3 mx-2 mb-3" role="note">
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
 <p><strong>AI assistance:</strong> I wrote this post with help from
 <strong>Codex</strong>, including drafting and editing the text. I reviewed it
 against the implementation and my experience building the chatbot. The header

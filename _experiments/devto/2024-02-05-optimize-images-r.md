@@ -1,6 +1,6 @@
 ---
 review: always
-tags_choose_4: rstats,r_bloggers,r_package,resmush
+tags_choose_4: rstats,imageoptimization,r_bloggers,r_package,resmush
 description: Introducing the <strong>resmush</strong> package
 cover_image: https://dieghernan.github.io/assets/img/misc/compress-img.png
 cover_image_bk: ~
@@ -192,8 +192,7 @@ The original image (left/top) is 1.3 MB. The optimized image (right/bottom) is 9
 
 There are other alternatives for optimizing images with **R**, but first…
 
-<div class="alert alert-info p-3 mx-2 mb-3">
-
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
 <p>
   <a href="https://yihui.org/">Yihui Xie</a>, one of the most prominent figures
   in the <strong>R</strong> community, was recently laid off from his position

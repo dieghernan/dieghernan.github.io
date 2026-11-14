@@ -1,7 +1,7 @@
 ---
 review: always
 tags_choose_4: rstats,html,jekyll,leaflet,maps,r_bloggers,rspatial
-description: Make it work in 6 steps - A short tutorial
+description: Make it work in 6 steps - a short tutorial
 cover_image: https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp
 cover_image_bk: ~
 series: review
@@ -81,7 +81,12 @@ This is a little more complicated, depending on the structure of your Jekyll tem
 
 So now you just have to paste the code that you got in step 1 into the `<head>`.
 
-<i class="fa fa-star"></i> **Pro tip:** For a better performance of the site, include these libraries only when you need them. In my case, I added a custom variable in my YAML front matter for those posts with a leaflet map, `leafletmap: true`. Go to step 4 for a working example. {: .alert .alert-info .p-3 .mx-2 .mb-3}
+<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
+For a better performance of the
+site, include these libraries only when you need them. In my case, I added
+a custom variable in my YAML front matter for those posts with a leaflet
+map, `leafletmap: true`. Go to step 4 for a working example.
+</div>
 
 ### The RStudio part
 
@@ -149,7 +154,11 @@ Now you just need to paste this piece of code before that chunk:
   ...
 ```
 
-<i class="fa fa-exclamation-triangle"></i> **Warning:** Be sure that the widget id (`7ab57412f7b1df4d5773` in the example) is the same in the `<div>` and in the `<script>` part. If not, your map would not load. {: .alert .alert-warning .p-3 .mx-2 .my-3}
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+Be sure that the
+widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
+`<div>` and in the `<script>` part. If not, your map would not load.
+</div>
 
 The `style="width:100%; height:216px;"` part controls the actual size of the leaflet widget. In this case, the map will adapt to the width of the page with a fixed height of 216px. I put [some examples](https://dieghernan.github.io/201905_Leaflet_R_Jekyll/#extra) of different size options at the end of the post so you can have a look and see which one is more suitable for your needs.
 
@@ -160,9 +169,13 @@ Now you just have to publish your post as usual! If everything has been properly
 <div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 
-<i class="fa fa-exclamation-triangle"></i> **Warning:** Have you checked the YAML front matter of your `.md` file? Have another look, especially if you have followed my Pro tip. {: .alert .alert-warning .p-3 .mx-2 .my-3}
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+Have you checked
+the YAML front matter of your `.md` file? Have another look, especially
+if you have followed my Pro tip.
+</div>
 
-### Gallery: Size of a leaflet map <a name="extra"></a>
+### Gallery: size of a leaflet map <a name="extra"></a>
 
 **A note:** For a complete understanding of this section, it is recommended to access it on multiple devices, so you can see the different behavior on different screens. Google Chrome allows you to simulate different devices [(more info here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
 

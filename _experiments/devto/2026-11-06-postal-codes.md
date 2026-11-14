@@ -1,6 +1,6 @@
 ---
 review: always
-tags_choose_4: rstats,dataset,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf
+tags_choose_4: rstats,dataset,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf,voronoi
 description: From postal points to areas using Voronoi polygons
 cover_image: https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp
 cover_image_bk: https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp
@@ -99,7 +99,11 @@ For Slovenia, we will use GISCO's postal points, retrieved with **giscoR**. Ther
 
 We have not established that Slovenian postal areas should follow municipal boundaries. Imposing those boundaries is a modeling choice for this exercise, inspired by the Spanish workflow, rather than a verified property of the Slovenian postal system.
 
-<i class="fa fa-exclamation-triangle"></i> This post explains the workflow. The polygons we create are not official postal boundaries, and this exercise does not validate the GISCO postal data. {: .alert .alert-warning .p-3 .mx-2 .mb-3}
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+This post explains the workflow. The
+polygons we create are not official postal boundaries, and this exercise does
+not validate the GISCO postal data.
+</div>
 
 ## Getting the data
 

@@ -15,7 +15,9 @@ Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
-**Project discontinued** due to the shutdown of Pebble. {: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+**Project discontinued.** Development ended when Pebble shut down.
+</div>
 
 **7egment** is a customizable watch face based on the classic 7-segment display that adds your location and current weather information in the language used on your watch and smartphone.
 

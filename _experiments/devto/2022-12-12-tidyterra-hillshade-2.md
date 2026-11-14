@@ -14,7 +14,14 @@ Has iframe? TRUE
 Has details_summary? TRUE
 Has math? FALSE
 
-**Updated on October 25, 2026:** The elevation and precipitation maps now use **ggblend** to multiply their colors with the hillshade, following [Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The map and marginal profiles now share the same precipitation palette and limits. Dominic Royé also demonstrates how to use **ggblend** in [Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/). {: .alert .alert-info .p-3 .mx-2 .mb-3}
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
+**Updated on October 25, 2026:** The elevation and precipitation maps now use
+**ggblend** to multiply their colors with the hillshade, following
+[Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/).
+The map and marginal profiles now share the same precipitation palette and limits.
+Dominic Royé also demonstrates how to use **ggblend** in
+[Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/).
+</div>
 
 *This is the second post of the series "Hillshade, colors and marginal plots with **tidyterra**". In this post, I explore an approach for annotating marginal plots on a **ggplot2** map of a SpatRaster, including information about the values by longitude and latitude. See the first post of the series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/).*
 
