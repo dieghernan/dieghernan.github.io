@@ -21,6 +21,7 @@ tags:
   - rspatial
   - rstats
   - r_bloggers
+last_modified_at: 2026-11-14
 output:
   html_document:
   md_document:
@@ -104,6 +105,24 @@ library(geobounds)
 library(sf)
 library(ggplot2)
 library(dplyr)
+
+# Define a common theme for the maps.
+background <- "#F5F5F5"
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme(
+    text = element_text(family = "inter-tight"),
+    plot.background = element_rect(fill = background, colour = NA),
+    panel.background = element_rect(fill = background, colour = NA),
+    plot.title = element_text(face = "bold"),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+)
 ```
 
 ## Getting administrative levels (ADM)
@@ -220,7 +239,6 @@ norway_all <- bind_rows(norway, norway_simp)
 ggplot(norway_all) +
   geom_sf(fill = "#BA0C2F", color = "#00205B") +
   facet_wrap(vars(res)) +
-  theme_minimal() +
   labs(caption = "Source: www.geoboundaries.org")
 ```
 

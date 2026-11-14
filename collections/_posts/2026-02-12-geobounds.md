@@ -1,8 +1,12 @@
 ---
 title: "Introducing <strong>geobounds</strong>"
 subtitle: "Easy access to administrative boundaries from geoBoundaries"
-description: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds, including simplified and harmonized datasets."
-excerpt: "Retrieve administrative boundaries as ready-to-use sf objects in R with geobounds."
+description: >-
+  Retrieve administrative boundaries as ready-to-use sf objects in R with
+  geobounds, including simplified and harmonized datasets.
+excerpt: >-
+  Retrieve administrative boundaries as ready-to-use sf objects in R with
+  geobounds.
 syndication:
   - https://www.r-bloggers.com/2026/02/introducing-geoboundaries/
   - https://dev.to/dieghernan/introducing-geobounds-3gi0
@@ -17,21 +21,23 @@ tags:
   - rspatial
   - rstats
   - r_bloggers
+last_modified_at: 2026-11-14
 output:
   html_document:
   md_document:
     variant: gfm
     preserve_yaml: true
-header_img: https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
-schema_image:
-  - https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
-  - https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp
-  - https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp
-og_image_width: 2028
-og_image_height: 1700
+header_img: "https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp"
+schema_image: ["https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp"]
+og_image_width: 2100
+og_image_height: 1730
 og_image_type: "image/webp"
-og_image_alt: "Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims."
+og_image_alt: >-
+  Map of India and Pakistan with translucent country fills. Overlapping
+  boundaries in Kashmir reveal conflicting territorial claims.
 ---
+
+
 
 If you've ever worked with spatial data in **R**, this may ring a bell...
 
@@ -67,24 +73,45 @@ This is how it works.
 **geobounds** was recently accepted on
 [CRAN](https://cran.r-project.org/package=geobounds), so just install it with:
 
-```r
+
+``` r
 install.packages("geobounds")
 ```
 
 Load the package and other complementary packages:
 
-```r
+
+``` r
 library(geobounds)
 library(sf)
 library(ggplot2)
 library(dplyr)
+
+# Define a common theme for the maps.
+background <- "#F5F5F5"
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme(
+    text = element_text(family = "inter-tight"),
+    plot.background = element_rect(fill = background, colour = NA),
+    panel.background = element_rect(fill = background, colour = NA),
+    plot.title = element_text(face = "bold"),
+    plot.margin = margin(10, 10, 10, 10)
+  )
+)
 ```
 
 ## Getting administrative levels (ADM)
 
 Administrative level 0 (ADM0) corresponds to countries:
 
-```r
+
+``` r
 # Panama
 
 gb_get_adm0(country = "Panama") |>
@@ -97,7 +124,8 @@ gb_get_adm0(country = "Panama") |>
 
 You can also retrieve multiple administrative levels at once. For example:
 
-```r
+
+``` r
 # Simplified files
 gb_get(country = "Panama", adm_lvl = "all", simplified = TRUE) |>
   ggplot() +
@@ -127,7 +155,8 @@ Administrative Zones (CGAZ) dataset that can be accessed with `gb_get_world()`.
 
 Here's an example with country-level files:
 
-```r
+
+``` r
 # Using individual (gb_get_adm) shapefiles
 gb_get_adm0(country = c("India", "Pakistan")) |>
   # Disputed area: Kashmir
@@ -146,7 +175,8 @@ gb_get_adm0(country = c("India", "Pakistan")) |>
 
 And here's the same comparison using CGAZ with `gb_get_world()`:
 
-```r
+
+``` r
 gb_get_world(c("India", "Pakistan")) |>
   ggplot() +
   geom_sf(aes(fill = shapeName), alpha = 0.5) +
@@ -171,7 +201,8 @@ This precision comes at a cost: some files can be large and take longer to
 download. For visualization and general mapping, we recommend using simplified
 datasets by setting `simplified = TRUE`.
 
-```r
+
+``` r
 # Different resolutions
 norway <- gb_get_adm0("NOR") |>
   mutate(res = "Full resolution")
@@ -189,7 +220,6 @@ norway_all <- bind_rows(norway, norway_simp)
 ggplot(norway_all) +
   geom_sf(fill = "#BA0C2F", color = "#00205B") +
   facet_wrap(vars(res)) +
-  theme_minimal() +
   labs(caption = "Source: www.geoboundaries.org")
 ```
 
@@ -205,7 +235,8 @@ Downloaded files are cached locally. That means:
 
 You can set the cache directory with:
 
-```r
+
+``` r
 gb_set_cache_dir("a/path/to/a/folder")
 ```
 
