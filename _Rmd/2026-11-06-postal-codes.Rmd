@@ -15,15 +15,16 @@ syndication:
   - https://oneworldwithr.substack.com/p/202611_postal-codes
   - https://dev.to/dieghernan/postal-codes-and-tessellations-5e53
 tags:
+  - voronoi
+  - sf
+  - maps
+  - dataset
+  - ggplot2
+  - giscoR
+  - rspatial
+  - rstats
   - music
   - r_bloggers
-  - rstats
-  - rspatial
-  - maps
-  - ggplot2
-  - sf
-  - giscoR
-  - dataset
 output:
   md_document:
     variant: gfm

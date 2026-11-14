@@ -19,13 +19,13 @@ og_image_alt: >-
   A vertical perspective of Earth above North Africa, with red indicatrices
   that flatten toward the horizon.
 tags:
-  - music
-  - rstats
-  - rspatial
   - maps
-  - ggplot2
   - sf
   - giscoR
+  - ggplot2
+  - rspatial
+  - rstats
+  - music
 output:
   html_document: default
   md_document:

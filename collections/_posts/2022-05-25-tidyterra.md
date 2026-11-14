@@ -8,16 +8,16 @@ syndication:
   - https://dev.to/dieghernan/introducing-tidyterra-24d1
   - https://oneworldwithr.substack.com/p/202205_tidyterra
 tags:
-  - music
-  - r_bloggers
-  - rstats
-  - rspatial
-  - maps
-  - ggplot2
   - tidyterra
   - terra
+  - ggplot2
+  - maps
   - maptiles
   - r_package
+  - rspatial
+  - rstats
+  - music
+  - r_bloggers
 output:
   html_document:
     df_print: paged

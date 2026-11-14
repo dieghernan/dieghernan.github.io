@@ -9,15 +9,15 @@ syndication:
   - https://www.r-bloggers.com/2022/01/beautiful-maps-with-r-iv-fun-with-flags-revisited/
   - https://dev.to/dieghernan/beautiful-maps-with-r-iv-fun-with-flags-revisited-41ai
 tags:
-  - r_bloggers
-  - rstats
-  - rspatial
+  - flags
   - beautiful_maps
+  - rasterpic
   - maps
   - terra
-  - flags
-  - rasterpic
   - giscoR
+  - rspatial
+  - rstats
+  - r_bloggers
 header_img: https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp
 redirect_from:
   - /202101_maps-flags/

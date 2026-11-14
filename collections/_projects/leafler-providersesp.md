@@ -3,9 +3,9 @@ title: Leaflet-providersESP
 subtitle: Plugin for Leaflet.js
 excerpt: Leaflet plugin for adding WMS/WMTS provided by public agencies in Spain.
 tags:
-  - project
-  - maps
   - leaflet
+  - maps
+  - project
 date: 2020-10-26
 header_img: https://dieghernan.github.io/assets/img/misc/leaflet-providersesp.png
 permalink: /projects/leaflet-providersESP/

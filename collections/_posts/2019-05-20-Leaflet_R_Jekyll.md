@@ -8,13 +8,13 @@ title: >-
 excerpt: "Get a Leaflet map made in R onto a Jekyll site in six steps."
 subtitle: Make it work in 6 steps - a short tutorial
 tags:
-  - r_bloggers
-  - rstats
-  - rspatial
   - leaflet
   - jekyll
-  - html
   - maps
+  - html
+  - rspatial
+  - rstats
+  - r_bloggers
 header_img: https://dieghernan.github.io/assets/img/blog/20190520_imgpost.webp
 leafletmap: true
 always_allow_html: yes

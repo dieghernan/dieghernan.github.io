@@ -10,15 +10,15 @@ syndication:
   - https://oneworldwithr.substack.com/p/202610_orange-peel
   - https://dev.to/dieghernan/lets-peel-the-world-oe9
 tags:
+  - maps
+  - beautiful_maps
+  - sf
+  - ggplot2
+  - giscoR
+  - rspatial
+  - rstats
   - music
   - r_bloggers
-  - beautiful_maps
-  - rstats
-  - rspatial
-  - maps
-  - ggplot2
-  - sf
-  - giscoR
 header_img: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
 og_image: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
 og_image_width: 2000

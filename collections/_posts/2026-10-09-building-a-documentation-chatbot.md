@@ -6,9 +6,10 @@ title: 'Building a documentation chatbot for <span class="chulapa">Chulapa</span
 subtitle: "A development diary: context, small screens and useful answers"
 excerpt: "How I built an AI assistant for my theme's documentation, and what happened when I started asking it real questions."
 tags:
+  - chulapa
+  - cloudflareworkers
   - jekyll
   - html
-  - chulapa
 header_img: https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp
 schema_image: https://dieghernan.github.io/assets/img/blog/202610-chatbot-header.webp
 og_image_width: 1730

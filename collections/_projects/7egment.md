@@ -3,12 +3,12 @@ title: 7egment
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 excerpt: 7egment is a customizable watch face based on the classic 7-segment display that adds your location and current weather information in the language used on your watch and smartphone.
 tags:
-  - discontinued
-  - project
-  - pebble
   - watchface
-  - javascript
+  - pebble
   - C
+  - javascript
+  - project
+  - discontinued
 header_img: https://raw.githubusercontent.com/dieghernan/7egment/master/store/Banner.png
 date: 2017-05-17
 permalink: /projects/7egment/

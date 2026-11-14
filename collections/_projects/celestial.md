@@ -6,14 +6,14 @@ title: Celestial data
 subtitle: A compilation of celestial data files
 excerpt: This project provides several datasets of celestial objects as of the J2000 epoch in GeoJSON and GeoPackage formats.
 tags:
-  - project
-  - maps
-  - astronomy
   - celestial
+  - astronomy
   - dataset
+  - maps
   - csv
   - geojson
   - gpkg
+  - project
 header_img: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
 date: 2023-01-23
 permalink: /projects/celestial-data/

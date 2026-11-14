@@ -3,11 +3,11 @@ title: Where in the world?
 excerpt: "Explore the places I've flown to on an interactive Leaflet map."
 subtitle: "A <strong>leaflet</strong> map with the places I have flown"
 tags:
-  - music
-  - rstats
-  - rspatial
-  - maps
   - leaflet
+  - maps
+  - rspatial
+  - rstats
+  - music
 header_img: https://dieghernan.github.io/assets/img/blog/201905_Where-in-the-world.webp
 leafletmap: true
 always_allow_html: true

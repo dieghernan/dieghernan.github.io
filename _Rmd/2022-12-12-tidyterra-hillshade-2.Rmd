@@ -12,17 +12,17 @@ syndication:
   - https://dev.to/dieghernan/hillshade-colors-and-marginal-plots-with-tidyterra-ii-h9g
   - https://oneworldwithr.substack.com/p/202212_tidyterra-hillshade-2
 tags:
-  - music
-  - r_bloggers
-  - rstats
-  - rspatial
-  - maps
   - hillshading
-  - ggplot2
   - tidyterra
   - terra
+  - maps
+  - ggplot2
   - inset
   - mapSpain
+  - rspatial
+  - rstats
+  - music
+  - r_bloggers
 output:
   md_document:
     variant: gfm

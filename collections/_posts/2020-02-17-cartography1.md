@@ -2,13 +2,13 @@
 title: "New features in the <strong>cartography</strong> package"
 subtitle: "Vignette of the package expansion"
 tags:
-  - r_bloggers
-  - rstats
-  - rspatial
-  - beautiful_maps
+  - r_package
   - maps
   - sf
-  - r_package
+  - beautiful_maps
+  - rspatial
+  - rstats
+  - r_bloggers
 header_img: https://dieghernan.github.io/assets/img/blog/20200217_wordcloud2-1.webp
 header_type: "splash"
 show_toc: true

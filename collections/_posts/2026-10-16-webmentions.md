@@ -8,10 +8,11 @@ excerpt: "A small addition to my Jekyll blog, inspired by Matt Hobbs: Webmention
 syndication:
   - https://dev.to/dieghernan/conversations-across-the-web-with-webmentions-6ln
 tags:
+  - webmentions
+  - indieweb
+  - chulapa
   - jekyll
   - html
-  - chulapa
-  - indieweb
 header_img: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 schema_image: https://dieghernan.github.io/assets/img/blog/202610-webmentions-header.webp
 og_image_width: 1727

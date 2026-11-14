@@ -3,12 +3,12 @@ title: TextWatch Clima
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 excerpt: TextWatch Clima upgrades the classic TextWatch watch face by adding a set of new capabilities.
 tags:
-  - discontinued
-  - project
-  - pebble
   - watchface
-  - javascript
+  - pebble
   - C
+  - javascript
+  - project
+  - discontinued
 date: 2017-02-16
 header_img: https://raw.githubusercontent.com/dieghernan/TextWatchClima/master/store/BannerRound.png
 project_links:

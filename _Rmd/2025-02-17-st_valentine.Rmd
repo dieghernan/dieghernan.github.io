@@ -10,15 +10,15 @@ syndication:
   - https://dev.to/dieghernan/happy-valentines-day-2ap0
   - https://oneworldwithr.substack.com/p/202502_st_valentine
 tags:
-  - music
-  - r_bloggers
   - beautiful_maps
-  - rstats
-  - rspatial
   - maps
   - ggplot2
   - sf
   - giscoR
+  - rspatial
+  - rstats
+  - music
+  - r_bloggers
 redirect_from:
   - /202402_st_valentine/
 output:

@@ -11,16 +11,16 @@ syndication:
   - https://dev.to/dieghernan/beautiful-maps-with-r-v-point-densities-3g7o
   - https://oneworldwithr.substack.com/p/202312_bertin_dots
 tags:
-  - r_bloggers
   - beautiful_maps
-  - rstats
-  - rspatial
   - maps
   - ggplot2
   - sf
   - terra
   - tidyterra
   - giscoR
+  - rspatial
+  - rstats
+  - r_bloggers
 output:
   html_document:
   md_document:

@@ -8,10 +8,11 @@ syndication:
   - https://www.r-bloggers.com/2024/02/optimize-your-images-with-r-and-resmush-it/
   - https://dev.to/dieghernan/optimize-your-images-with-r-and-resmushit-5c42
 tags:
-  - r_bloggers
-  - r_package
+  - imageoptimization
   - resmush
+  - r_package
   - rstats
+  - r_bloggers
 output:
   md_document:
     variant: gfm

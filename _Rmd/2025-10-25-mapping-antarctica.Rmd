@@ -7,15 +7,16 @@ syndication:
   - https://dev.to/dieghernan/mapping-antarctica-4chp
   - https://oneworldwithr.substack.com/p/202510_mapping-antarctica
 tags:
+  - polar
+  - maps
+  - beautiful_maps
+  - sf
+  - ggplot2
+  - giscoR
+  - rspatial
+  - rstats
   - music
   - r_bloggers
-  - beautiful_maps
-  - rstats
-  - rspatial
-  - maps
-  - ggplot2
-  - sf
-  - giscoR
 output:
   html_document:
   md_document:

@@ -11,9 +11,9 @@ excerpt: |
 tags:
   - liquid
   - jekyll
+  - chulapa
   - html
   - function
-  - chulapa
 output:
   html_document:
   md_document:

@@ -3,12 +3,12 @@ title: Bzel
 subtitle: A Pebble <i class="fas fa-skull-crossbones"></i> project
 excerpt: Bzel integrates the bezel into your watch face. Display minutes as digits, as a moving dot or as a fill in the bezel.
 tags:
-  - discontinued
-  - project
-  - pebble
   - watchface
-  - javascript
+  - pebble
   - C
+  - javascript
+  - project
+  - discontinued
 header_img: https://raw.githubusercontent.com/dieghernan/Bzel/master/store/BannerBzel.png
 date: 2017-05-25
 permalink: /projects/Bzel/

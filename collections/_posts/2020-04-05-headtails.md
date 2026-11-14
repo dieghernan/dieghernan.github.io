@@ -1,11 +1,11 @@
 ---
 title: "Head/tail breaks in the <strong>classInt</strong> package"
 tags:
-  - r_bloggers
-  - rstats
-  - rspatial
   - classInt
   - r_package
+  - rspatial
+  - rstats
+  - r_bloggers
 header_type: "splash"
 header_img: https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp
 show_toc: true

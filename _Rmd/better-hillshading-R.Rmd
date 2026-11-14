@@ -20,14 +20,14 @@ og_image_alt: >-
   Shaded relief of the Strait of Gibraltar in greens and ochres with blue 
   bathymetry.
 tags:
-  - music
-  - rstats
-  - rspatial
-  - maps
   - hillshading
-  - ggplot2
   - tidyterra
   - terra
+  - maps
+  - ggplot2
+  - rspatial
+  - rstats
+  - music
 output:
   html_document: default
   md_document:

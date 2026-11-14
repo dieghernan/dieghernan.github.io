@@ -3,14 +3,14 @@ title: spain-munic-bot
 subtitle: An archive of maps generated with R
 excerpt: Archived maps of buildings and urban growth in Spanish municipalities, generated with R. Automated posting is disabled.
 tags:
-  - discontinued
-  - project
-  - rstats
-  - maps
   - twitter
-  - rspatial
+  - maps
   - mapSpain
   - tmap
+  - rspatial
+  - rstats
+  - project
+  - discontinued
 header_img: "https://dieghernan.github.io/spain-munic-bot/assets/img/sample.png"
 date: 2021-01-29
 permalink: /projects/spain-munic-bot/

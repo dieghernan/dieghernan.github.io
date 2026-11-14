@@ -3,12 +3,12 @@ title: COVID19 microsite
 subtitle: Historical maps of COVID-19 in Spain by region
 excerpt: Historical maps and charts of processed COVID-19 data for Spain, preserved as an archive of the discontinued project.
 tags:
-  - discontinued
-  - project
-  - rstats
+  - COVID19
   - maps
   - sf
-  - COVID19
+  - rstats
+  - project
+  - discontinued
 header_img: https://dieghernan.github.io/COVID19/assets/img/header.png
 permalink: /projects/COVID19
 project_links:

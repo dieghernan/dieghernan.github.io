@@ -3,13 +3,13 @@ title: "Cast a line to subsegments in <strong>R</strong>"
 excerpt: "Split a line into its individual segments with a small sf function in R."
 subtitle: User-defined function using the <strong>sf</strong> package
 tags:
-  - music
-  - r_bloggers
-  - rstats
-  - rspatial
   - sf
   - function
   - rnaturalearth
+  - rspatial
+  - rstats
+  - music
+  - r_bloggers
 header_img: https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp
 output:
   md_document:

@@ -6,14 +6,14 @@ title: Postal codes of Spain
 subtitle: Estimated postal code areas from open data
 excerpt: Explore estimated postal code areas for Spain and download GeoPackage files for R, Python and QGIS.
 tags:
-  - project
-  - rstats
-  - rspatial
-  - maps
   - dataset
-  - sf
   - gpkg
   - leaflet
+  - maps
+  - sf
+  - rspatial
+  - rstats
+  - project
 header_img: https://dieghernan.github.io/assets/img/misc/postal-codes-spain.webp
 og_image: https://dieghernan.github.io/assets/img/misc/postal-codes-spain.jpg
 date: 2026-11-03

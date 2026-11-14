@@ -3,10 +3,10 @@ title: Country codes & organizations
 subtitle: A database with geocodes
 excerpt: Country and territory codes under different standards, with membership in international organizations.
 tags:
-  - project
-  - rstats
   - dataset
   - csv
+  - rstats
+  - project
 header_img: https://dieghernan.github.io/assets/img/misc/countrycodes.png
 permalink: /projects/Country-Codes-and-International-Organizations/
 redirect_from:

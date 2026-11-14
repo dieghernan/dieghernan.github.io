@@ -5,13 +5,13 @@ excerpt: Explore EGIF reports and reconciled records of large forest fires in Sp
 date: 2026-11-03
 permalink: /projects/gifs/
 tags:
-  - project
-  - rstats
-  - rspatial
-  - maps
   - dataset
-  - csv
+  - maps
   - geojson
+  - csv
+  - rspatial
+  - rstats
+  - project
 header_img: https://dieghernan.github.io/assets/img/misc/gifs-social.jpg
 og_image: https://dieghernan.github.io/assets/img/misc/gifs-social.jpg
 og_image_width: 1200
