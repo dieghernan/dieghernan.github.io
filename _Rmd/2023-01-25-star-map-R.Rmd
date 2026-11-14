@@ -117,6 +117,18 @@ library(lutz)
 library(ggplot2)
 library(ggfx)
 library(ggshadow)
+
+
+# Define a common theme for the maps.
+background <- "#FAF9F6"
+
+theme_set(
+  theme_grey(paper = background) +
+    theme(
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ### Helper functions

@@ -30,7 +30,7 @@ output:
 header_img: "https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp"
 schema_image: ["https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp"]
 og_image_width: 2100
-og_image_height: 1730
+og_image_height: 1778
 og_image_type: "image/webp"
 og_image_alt: >-
   Map of India and Pakistan with translucent country fills. Overlapping
@@ -96,13 +96,14 @@ showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme(
-    text = element_text(family = "inter-tight"),
-    plot.background = element_rect(fill = background, colour = NA),
-    panel.background = element_rect(fill = background, colour = NA),
-    plot.title = element_text(face = "bold"),
-    plot.margin = margin(10, 10, 10, 10)
-  )
+  theme_grey(
+    base_family = "inter-tight", paper = background,
+    base_size = 8
+  ) +
+    theme(
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
 )
 ```
 

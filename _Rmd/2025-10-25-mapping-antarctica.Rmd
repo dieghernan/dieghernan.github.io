@@ -13,6 +13,7 @@ tags:
   - sf
   - ggplot2
   - giscoR
+  - voronoi
   - rspatial
   - rstats
   - music
@@ -23,6 +24,7 @@ output:
     variant: gfm
     preserve_yaml: true
 header_img: "https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp"
+last_modified_at: 2026-11-14
 og_image_width: 2053
 og_image_height: 1786
 og_image_type: "image/webp"
@@ -73,6 +75,23 @@ library(sf)
 library(giscoR)
 library(ggrepel)
 library(rmapshaper)
+
+# Define a common theme for the maps.
+background <- "#E2ECF2"
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_grey(paper = background) +
+    theme(
+      text = element_text(family = map_family),
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ## Fixing the geometry
@@ -83,7 +102,7 @@ orthographic projection centered on the South Pole.
 ```{r}
 #| label: 202510_init
 #| fig-cap: ""
-#| fig-alt: "South Pole-centered map of Antarctica with a narrow lollipop-shaped gap extending from the coast toward the pole, caused by a polygon artifact."
+#| fig-alt: "South Pole-centered map of Antarctica with a gap extending from the coast toward the pole, caused by a polygon artifact."
 antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") %>%
   select(NAME = NAME_ENGL) |>
   # Ortho proj centered in the South Pole
@@ -93,120 +112,23 @@ ggplot(antarct) +
   geom_sf(fill = "lightblue")
 ```
 
-The shapefile contains a visible "lollipop" cut that looks unnatural in an
-orthographic projection. I correct it manually with these steps:
-
-1.  Identify the polygon that represents the main Antarctic landmass.
-2.  Convert that polygon to a sequence of coordinates (points).
-3.  Remove the small sequence of points that create the artifact.
-4.  Rebuild the polygon from the cleaned coordinates and replace the broken
-    geometry with the corrected one.
-
-We convert polygons to point coordinates and inspect them to find the offending
-sequence:
-
-```{r}
-#| label: 202510_init_ant
-#| fig-cap: ""
-#| fig-alt: "Coordinate plot of the Antarctic coastline with numbered vertices. A line and loop extending into the interior identify the polygon artifact."
-# Identify the max
-ant_explode <- antarct |>
-  st_cast("POLYGON")
-
-nrow(ant_explode)
-
-# Max polygon
-
-ant_max <- ant_explode[which.max(st_area(ant_explode)), ]
-
-coords <- st_coordinates(ant_max) |>
-  as_tibble() |>
-  # Add id for points
-  mutate(np = row_number())
-
-
-ggplot(coords, aes(X, Y)) +
-  geom_point(size = 0.05, color = "darkblue") +
-  geom_text(aes(label = np), check_overlap = TRUE) +
-  coord_equal()
-```
-
-From the plotted indices, we can see the problematic points fall roughly in the
-range 8200–9200. We inspect that interval in detail to select the exact indices
-to remove.
-
-```{r}
-#| label: 202510_test_points
-#| fig-cap: ""
-#| fig-alt: "Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact."
-test <- coords |>
-  filter(np %in% seq(8200, 9200))
-
-test |>
-  ggplot(aes(X, Y)) +
-  geom_point(size = 0.05, color = "darkblue") +
-  geom_text(aes(label = np), check_overlap = TRUE)
-```
-
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
-This cleaning is tailored to this specific shapefile and may need to be
-repeated for other shapefiles. The approach is straightforward but depends on
-the particular geometry and projection.
+**Updated 14 November 2026**: The initial version of this post described a 
+manual approach for fixing the geometry. This section has been updated
+showing an alternative method.
 </div>
 
-```{r}
-#| label: 202510_final_sol
-#| out-width: 50%
-#| fig-show: hold
-#| fig-cap: ""
-#| fig-alt: ["Coordinate plot of vertices 8289 through 9130 selected for removal. They form the unwanted loop and stem.", "Coordinate plot of the vertices retained from the inspected interval. They trace a section of the Antarctic coastline."]
-# Final solution after some iterations...
+The shapefile contains a visible cut that looks unnatural in an orthographic 
+projection. I correct by applying a small buffer of 2 meters:
 
-test |>
-  filter(np %in% seq(8289, 9130)) |>
-  ggplot(aes(X, Y)) +
-  geom_point(color = "darkblue") +
-  labs(title = "To remove")
-
-
-test |>
-  filter(!np %in% seq(8289, 9130)) |>
-  ggplot(aes(X, Y)) +
-  geom_point(color = "darkblue") +
-  labs(title = "To keep")
-```
-
-After removing the offending points, we rebuild the polygon and reconstitute the
-full Antarctica shape from the corrected piece plus the remaining polygons.
 
 ```{r}
 #| label: 202510_good_pol
 #| fig-cap: ""
 #| fig-alt: "South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area."
-# From coordinates to polygon
-newpol <- coords |>
-  as.data.frame() |>
-  filter(!np %in% seq(8289, 9130)) |> # Removing offending points
-  select(X, Y) |>
-  as.matrix() |>
-  list() |>
-  st_polygon() |>
-  st_sfc() |>
-  st_set_crs(st_crs(ant_max))
-
-ant_max_fixed <- st_sf(st_drop_geometry(ant_max), geometry = newpol)
 
 # Regenerate initial shape
-antarctica_fixed <- bind_rows(
-  ant_max_fixed,
-  ant_explode[-which.max(st_area(ant_explode)), ]
-) |>
-  group_by(NAME) |>
-  summarise(m = 1) |>
-  select(-m) |>
-  st_make_valid()
-
-antarctica_fixed
+antarctica_fixed <- st_buffer(antarct, 2)
 
 ggplot(antarctica_fixed) +
   geom_sf(fill = "lightblue")
@@ -360,20 +282,18 @@ procedure:
 #| fig-alt: ["Map of Antarctica filled with randomly distributed blue points inside the continent boundary.", "Antarctic flag variation with the continental silhouette formed by scattered white points on a blue background."]
 # Maximum chunk of Antarctica, the one that we fixed
 
-ant_max_fixed
-
 set.seed(2024)
 # Sample, Voronoi and negative buffer
-plastics <- st_sample(ant_max_fixed, 3000) |>
+plastics <- st_sample(antarctica_fixed, 3000) |>
   st_union() |>
-  st_voronoi(envelope = st_geometry(ant_max_fixed)) |>
+  st_voronoi(envelope = st_geometry(antarctica_fixed)) |>
   st_collection_extract() |>
   st_buffer(dist = -10000)
 
 
 # Keep only those properly included in the outline
 
-toinc <- st_contains_properly(ant_max_fixed, plastics, sparse = FALSE) |>
+toinc <- st_contains_properly(antarctica_fixed, plastics, sparse = FALSE) |>
   as.vector()
 
 # Select random chunks
@@ -397,7 +317,7 @@ plastic_end$fill <- ifelse(plastic_end$area > quantile(plastic_end$area, probs =
 
 bbox2 <- st_bbox(plastic_end)
 ggplot() +
-  geom_sf(data = plastic_end, aes(fill = fill), color = NA) +
+  geom_sf(data = plastic_end, aes(fill = fill), color = NA, linewidth = 0) +
   scale_fill_identity() +
   theme(
     panel.background = element_rect(fill = "#009fdc"),

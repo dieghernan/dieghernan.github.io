@@ -115,13 +115,14 @@ showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme(
-    text = element_text(family = "inter-tight"),
-    plot.background = element_rect(fill = background, colour = NA),
-    panel.background = element_rect(fill = background, colour = NA),
-    plot.title = element_text(face = "bold"),
-    plot.margin = margin(10, 10, 10, 10)
-  )
+  theme_grey(
+    base_family = "inter-tight", paper = background,
+    base_size = 8
+  ) +
+    theme(
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
 )
 ```
 
