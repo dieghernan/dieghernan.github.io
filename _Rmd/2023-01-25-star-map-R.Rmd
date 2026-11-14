@@ -53,23 +53,21 @@ knitr::opts_chunk$set(
 rm(list = ls())
 ```
 
-A couple of weeks ago I was doing my daily check on
+A couple of weeks ago, I was browsing
 [Stack Overflow](https://stackoverflow.com/questions/tagged/sf) when I found a
 question by [Benjamin Smith](https://bensstats.wordpress.com/) that blew my
 mind: [Creating Star Map Visualizations Based on Location and
-Date](https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date)
-!!
+Date](https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date)!
 
-Oh my! Can we do this with **R**? The answer is: Of course! In fact, [Kim
-Fitter](https://kimnewzealand.github.io/) already worked on this two years earlier,
-see his [Celestial
-Maps](https://kimnewzealand.github.io/2019/02/21/celestial-maps/). So I decided
+Oh my! Can we do this with **R**? Of course! In fact, [Kim
+Fitter](https://kimnewzealand.github.io/) had already explored this in his
+[Celestial Maps](https://kimnewzealand.github.io/2019/02/21/celestial-maps/). So I decided
 to put some work into this.
 
 Since then, I have also learned that Benjamin and I have been working in parallel
 on the same topic. He is preparing an **R** package named
-[**starBliss**](https://github.com/benyamindsmith/starBliss) and hopefully this
-post will be of some help.
+[**starBliss**](https://github.com/benyamindsmith/starBliss), and I hope this
+post will help.
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
 I have very little knowledge of this topic, so if you find errors or
@@ -85,17 +83,16 @@ Frohn](http://armchairastronautics.blogspot.com/). As Kim Fitter pointed out in
 [his post](https://kimnewzealand.github.io/2019/02/21/celestial-maps/), these
 data files present the problem (experienced by [almost any **sf**
 user](https://stackoverflow.com/search?q=%5Bsf%5D+dateline)) of lines crossing
-the international date line (longitude 180°). I also found that some files are
-not valid as per `sf::st_make_valid()`.
+the International Date Line (longitude 180°). I also found that some files are
+geometrically invalid.
 
-Solution? I processed and fixed almost every file, including the files
-corresponding to the Milky Way and the lines for Chinese constellations, manually,
-to provide a set of files. That is the origin of my project [Celestial
+I manually repaired almost every file, including the Milky Way data and the
+lines for Chinese constellations. That is the origin of my project [Celestial
 Data](https://dieghernan.github.io/celestial_data/), which provides all these
 files in several spatial formats. Please [check out the
 repo](https://github.com/dieghernan/celestial_data) to learn more about it.
 
-## Creating a star map with **R**
+## Creating a star map with R
 
 The first step is to load libraries that will help us with this cosmic
 task:
@@ -108,7 +105,7 @@ library(sf)
 library(s2)
 library(nominatimlite)
 
-## Wrange data and dates
+## Work with dates and time zones
 library(dplyr)
 library(lubridate)
 library(lutz)
@@ -144,11 +141,8 @@ Now we prepare some helper functions:
   coordinate in the format degrees/minutes/seconds (e.g., a **latitude of
   34.72782** would be converted into **34° 43' 40.15" N**).
 
-[^1]: In fact, the download is performed via the
-    [jsDelivr](https://www.jsdelivr.com/), which distributes files hosted on
-    [GitHub via CDN.](https://www.jsdelivr.com/github) This is supposed to
-    improve performance, but in any case the underlying data source is the
-    GitHub repo.
+[^1]: [jsDelivr](https://www.jsdelivr.com/) serves the files from GitHub
+    through a [content delivery network](https://www.jsdelivr.com/github).
 
 <details class="my-4" markdown="1">
 
@@ -212,7 +206,7 @@ pretty_lonlat <- function(x, type, accuracy = 2) {
 Additionally, you may notice that on this [d3-celestial
 demo](https://ofrohn.github.io/celestial-demo/location.html) there is some
 degree of rotation depending on the location and the time. I found how this is
-done on the **d3-celestial plugin** and I found the function
+done in the **d3-celestial** plugin and found the function
 [`getMST(dt, lng)`](https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250),
 which I ported to **R** (`get_mst()`). The function uses Meeus's (1998) formula
 for Greenwich mean sidereal time, adds the observer's east-positive longitude
@@ -293,7 +287,7 @@ that for us.
 ```{r}
 #| label: sf_spherical_cut
 #| fig-cap: ""
-# Cut a sf object with a buffer using spherical s2 geoms
+# Cut an sf object with a buffer using spherical s2 geoms
 # Optionally, project and flip
 
 sf_spherical_cut <- function(x, the_buff, the_crs = sf::st_crs(x), flip = NULL) {
@@ -357,7 +351,7 @@ Now we are ready to start creating our visualization. We need only two inputs:
 # Inputs
 desired_place <- "Madrid, Spain"
 
-# We are not using yet the timezone
+# Set the local time zone later
 desired_date <- make_datetime(
   year = 2015,
   month = 9,
@@ -380,10 +374,8 @@ desired_loc <- desired_place_geo %>%
 desired_loc
 ```
 
-With respect to our object `desired_date`, it is quite relevant for accurate
-plotting to specify the correct time zone. Since we already know the latitude and
-longitude of our desired location, we can easily get that with the **lutz**
-package:
+To plot the sky at the correct local time, use the latitude and longitude
+to look up the time zone with **lutz**:
 
 ```{r}
 #| label: get_tz
@@ -520,7 +512,7 @@ ggplot(mw_end) +
   scale_fill_identity()
 ```
 
-Now it is the turn of the constellations:
+Next, we add the constellations:
 
 ```{r}
 #| label: 20230125_const
@@ -547,7 +539,7 @@ ggplot(const_end) +
   coord_sf(expand = FALSE)
 ```
 
-And finally the stars:
+Finally, we add the stars:
 
 ```{r}
 #| label: 20230125_stars
@@ -614,8 +606,8 @@ ggplot(grat_end) +
 
 ## Visualization with **ggplot2**
 
-We are almost set! For preparing the final map, first we are going to create the
-corresponding labels, which will be included as `caption` on the **ggplot2** map:
+To prepare the final map, we first create the labels for the **ggplot2**
+caption:
 
 ```{r}
 #| label: map_labs
@@ -655,9 +647,8 @@ cat(caption)
 
 We can enhance the visualization by applying some interesting effects:
 
-- We want the Milky Way to appear a bit blurry instead of as a Well-Known
-  geometry. With this effect we can mimic how we really see it from the Earth.
-  So we can use `ggfx::with_blur()` to get this effect.
+- We use `ggfx::with_blur()` to soften the edges of the Milky Way and mimic
+  how it appears from Earth.
 
 - We can also add a glowing effect to our stars and constellations (have a
   look at Dominic Royé's post [Firefly

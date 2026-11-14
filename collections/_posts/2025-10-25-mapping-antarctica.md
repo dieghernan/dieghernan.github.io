@@ -1,4 +1,7 @@
 ---
+series:
+  - id: map-projections
+    order: 4
 title: "Mapping Antarctica"
 excerpt: "Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R."
 subtitle: "Cool maps from the South Pole"
@@ -33,8 +36,6 @@ og_image_alt: >-
   The landmass is continuous across the previously affected area.
 ---
 
-
-
 Creating maps with **R** is usually straightforward, but representations that
 cross the [International Date
 Line](https://en.wikipedia.org/wiki/International_Date_Line) or that use polar
@@ -45,7 +46,7 @@ geometries at certain longitudes (for example, cutting the Chukchi Peninsula),
 while others omit portions of the data. These inconsistencies can produce
 awkward artifacts near the poles.
 
-In this post I fix the [GISCO (European
+In this post, I fix the [GISCO (European
 Commission)](https://ec.europa.eu/eurostat/web/gisco) shapefile for Antarctica
 and produce clean orthographic maps.
 
@@ -78,7 +79,7 @@ theme_set(
 
 ## Fixing the geometry
 
-First, we obtain the GISCO Antarctica polygon and transform it to an
+First, we retrieve the Antarctic geometry from GISCO and transform it to an
 orthographic projection centered on the South Pole.
 
 
@@ -95,13 +96,12 @@ ggplot(antarct) +
 <img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" alt="South Pole-centered map of Antarctica with a gap extending from the coast toward the pole, caused by a polygon artifact." width="100%" />
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
-**Updated 14 November 2026**: The initial version of this post described a 
-manual approach for fixing the geometry. This section has been updated
-showing an alternative method.
+**Updated November 14, 2026.** The original post showed how to repair the
+geometry by editing vertices manually. This version uses a buffer.
 </div>
 
-The shapefile contains a visible cut that looks unnatural in an orthographic 
-projection. I correct it by applying a small buffer of 2 meters:
+In the orthographic projection, a narrow gap runs inland from the coast.
+I close it by applying a 2-meter buffer:
 
 
 
@@ -117,7 +117,7 @@ ggplot(antarctica_fixed) +
 
 ## Plotting examples
 
-With the corrected shape we can produce maps. Below are a few examples based on
+With the corrected geometry, we can draw the maps. Below are a few examples based on
 proposed Antarctic flag designs.
 
 ### Graham Bartram's proposal (1996)
@@ -234,7 +234,7 @@ antarctica_simp |>
 
 <img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" alt="Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background." width="100%" />
 
-### Antarctica flag redesigned
+### Bartram's redesigned Antarctic flag
 
 In 2024, Graham Bartram revealed a new version of his original flag as part of
 a global campaign to raise awareness about the growing problem of microplastic
@@ -254,11 +254,11 @@ procedure:
     to create gaps.
 3.  Randomly sample the resulting polygons to increase visual noise.
 4.  Color polygons so larger areas remain white while smaller polygons use
-    magenta/pink tones.
+    shades of pink and magenta.
 
 
 ``` r
-# Maximum chunk of Antarctica, the one that we fixed
+# Use the repaired Antarctic geometry
 
 set.seed(2024)
 # Sample, Voronoi and negative buffer
