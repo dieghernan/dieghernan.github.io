@@ -21,11 +21,11 @@
         "description": "Cool maps from the South Pole - Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R.",
         "inLanguage": "en-US",
         "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
-        "keywords": ["polar","maps","beautiful_maps","sf","ggplot2","giscoR","rspatial","rstats","music","r_bloggers"],
+        "keywords": ["polar","maps","beautiful_maps","sf","ggplot2","giscoR","voronoi","rspatial","rstats","music","r_bloggers"],
         "headline": "Mapping Antarctica",
         "image": ["https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp"],
         "datePublished": "2025-10-25T00:00:00+02:00",
-        "dateModified": "2025-10-25T00:00:00+02:00",
+        "dateModified": "2026-11-14T00:00:00+01:00",
         "author": {"@id": "https://dieghernan.github.io/#author"},
         "publisher": {
           "@type": "Person",
@@ -128,6 +128,7 @@
     <meta property="og:url" content="https://dieghernan.github.io/202510_mapping-antarctica/" >
     <meta property="og:type" content="article" >
     <meta property="article:published_time" content="2025-10-25T00:00:00+02:00">
+    <meta property="article:modified_time" content="2026-11-14T00:00:00+01:00">
     <meta property="article:author" content="https://dieghernan.github.io/">
     <meta property="article:tag" content="polar">
     <meta property="article:tag" content="maps">
@@ -135,6 +136,7 @@
     <meta property="article:tag" content="sf">
     <meta property="article:tag" content="ggplot2">
     <meta property="article:tag" content="giscoR">
+    <meta property="article:tag" content="voronoi">
     <meta property="article:tag" content="rspatial">
     <meta property="article:tag" content="rstats">
     <meta property="article:tag" content="music">
@@ -143,8 +145,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" >
     <meta property="og:image:alt" content="South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area." >
-    <meta property="og:image:width" content="2053" >
-    <meta property="og:image:height" content="1786" >
+    <meta property="og:image:width" content="2100" >
+    <meta property="og:image:height" content="1846" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -477,11 +479,14 @@
  </ol>
  </nav>
  <div class="chulapaDateSocial">
-            <time datetime="2025-10-25T00:00:00+02:00" class="dt-published" >25 oct 2025</time>
+            <time class="dt-updated" datetime="2026-11-14T00:00:00+01:00">14 nov 2026</time> 
+            <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
+            <br>
+            <time class="dt-published font-weight-light chulapa-text-line-through" datetime="2025-10-25T00:00:00+02:00">25 oct 2025</time>
         </div></div>
          <div class="col-lg-3 col-sm-4 col-3 text-right lead chulapaDateSocial">
-            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202510_mapping-antarctica/&text=Mapping+Antarctica&via=dhernangomez&hashtags=polar,maps,beautiful_maps,sf,ggplot2,giscoR,rspatial,rstats,music,r_bloggers" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
-            <a href="https://bsky.app/intent/compose?text=Mapping%20Antarctica%20https://dieghernan.github.io/202510_mapping-antarctica/%20%23polar%20%23maps%20%23beautiful_maps%20%23sf%20%23ggplot2%20%23giscoR%20%23rspatial%20%23rstats%20%23music%20%23r_bloggers" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
+            <a  href="https://twitter.com/intent/tweet?url=https://dieghernan.github.io/202510_mapping-antarctica/&text=Mapping+Antarctica&via=dhernangomez&hashtags=polar,maps,beautiful_maps,sf,ggplot2,giscoR,voronoi,rspatial,rstats,music,r_bloggers" title="Share on X" aria-label="Share on X" ><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
+            <a href="https://bsky.app/intent/compose?text=Mapping%20Antarctica%20https://dieghernan.github.io/202510_mapping-antarctica/%20%23polar%20%23maps%20%23beautiful_maps%20%23sf%20%23ggplot2%20%23giscoR%20%23voronoi%20%23rspatial%20%23rstats%20%23music%20%23r_bloggers" title="Share on Bluesky" aria-label="Share on Bluesky"><i class="fa-brands fa-square-bluesky fa-lg" aria-hidden="true"></i></a>
             <a  class="d-none d-sm-inline" href="https://www.facebook.com/sharer.php?u=https://dieghernan.github.io/202510_mapping-antarctica/" title="Share on Facebook" aria-label="Share on Facebook" ><i class="fab fa-facebook-square fa-lg" aria-hidden="true"></i></a>
              <a  class="d-none d-sm-inline" href="https://api.whatsapp.com/send?&text=Mapping+Antarctica%20https://dieghernan.github.io/202510_mapping-antarctica/" title="Share on Whatsapp" aria-label="Share on Whatsapp" ><i class="fab fa-whatsapp-square fa-lg" aria-hidden="true"></i></a>
          <a  class="d-none d-sm-inline" href="https://www.linkedin.com/shareArticle?url=https://dieghernan.github.io/202510_mapping-antarctica/&title=Mapping+Antarctica" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
@@ -524,14 +529,30 @@ while others omit portions of the data. These inconsistencies can produce
 awkward artifacts near the poles.</p>
 <p>In this post I fix the <a href="https://ec.europa.eu/eurostat/web/gisco">GISCO (European
 Commission)</a> shapefile for Antarctica
-and produce clean orthographic maps. I walk through the manual corrections and
-then create a few example maps.</p>
+and produce clean orthographic maps.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggrepel</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rmapshaper</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Define a common theme for the maps.</span><span class="w">
+</span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#E2ECF2"</span><span class="w">
+
+</span><span class="n">map_family</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">)</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
+
+</span><span class="n">theme_set</span><span class="p">(</span><span class="w">
+  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme</span><span class="p">(</span><span class="w">
+      </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="fixing-the-geometry">Fixing the geometry</h2>
 <p>First, we obtain the GISCO Antarctica polygon and transform it to an
@@ -544,111 +565,16 @@ orthographic projection centered on the South Pole.</p>
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarct</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" alt="South Pole-centered map of Antarctica with a narrow lollipop-shaped gap extending from the coast toward the pole, caused by a polygon artifact." width="100%" /></p>
-<p>The shapefile contains a visible “lollipop” cut that looks unnatural in an
-orthographic projection. I correct it manually with these steps:</p>
-<ol>
- <li>Identify the polygon that represents the main Antarctic landmass.</li>
- <li>Convert that polygon to a sequence of coordinates (points).</li>
- <li>Remove the small sequence of points that create the artifact.</li>
- <li>Rebuild the polygon from the cleaned coordinates and replace the broken
-geometry with the corrected one.</li>
-</ol>
-<p>We convert polygons to point coordinates and inspect them to find the offending
-sequence:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Identify the largest polygon</span><span class="w">
-</span><span class="n">ant_explode</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">antarct</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
-
-</span><span class="n">nrow</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt; [1] 778</span><span class="w">
-
-</span><span class="c1"># Largest polygon</span><span class="w">
-
-</span><span class="n">ant_max</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ant_explode</span><span class="p">[</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
-
-</span><span class="n">coords</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">ant_max</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">as_tibble</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="c1"># Add an ID for the points</span><span class="w">
-  </span><span class="n">mutate</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
-
-
-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">coord_equal</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init_ant-1.webp" alt="Coordinate plot of the Antarctic coastline with numbered vertices. A line and loop extending into the interior identify the polygon artifact." width="100%" /></p>
-<p>From the plotted indices, we can see the problematic points fall roughly in the
-range 8200–9200. We inspect that interval in detail to select the exact indices
-to remove.</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">filter</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8200</span><span class="p">,</span><span class="w"> </span><span class="m">9200</span><span class="p">))</span><span class="w">
-
-</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" alt="Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" alt="South Pole-centered map of Antarctica with a gap extending from the coast toward the pole, caused by a polygon artifact." width="100%" /></p>
 <div role="note" aria-label="Note" class="callout-note">
- <p>This cleaning is tailored to this specific shapefile and may need to be
-repeated for other shapefiles. The approach is straightforward but depends on
-the particular geometry and projection.</p>
+ <p><strong>Updated 14 November 2026</strong>: The initial version of this post described a 
+manual approach for fixing the geometry. This section has been updated
+showing an alternative method.</p>
 </div>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Final solution after some iterations...</span><span class="w">
-
-</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">filter</span><span class="p">(</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"To remove"</span><span class="p">)</span><span class="w">
-
-
-</span><span class="n">test</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"darkblue"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"To keep"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<div class="figure row no-gutters">
-<img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-1.webp" alt="Coordinate plot of vertices 8289 through 9130 selected for removal. They form the unwanted loop and stem." width="50%" /><img src="https://dieghernan.github.io/assets/img/blog/202510_final_sol-2.webp" alt="Coordinate plot of the vertices retained from the inspected interval. They trace a section of the Antarctic coastline." width="50%" />
-After removing the offending points, we rebuild the polygon and reconstitute the
-full Antarctica shape from the corrected piece plus the remaining polygons.
-</div>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># From coordinates to polygon</span><span class="w">
-</span><span class="n">newpol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">np</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">8289</span><span class="p">,</span><span class="w"> </span><span class="m">9130</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="c1"># Removing offending points</span><span class="w">
-  </span><span class="n">select</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">as.matrix</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="nf">list</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">st_polygon</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">st_sfc</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">st_set_crs</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">ant_max</span><span class="p">))</span><span class="w">
-
-</span><span class="n">ant_max_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">st_drop_geometry</span><span class="p">(</span><span class="n">ant_max</span><span class="p">),</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newpol</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># Regenerate initial shape</span><span class="w">
-</span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
-  </span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w">
-  </span><span class="n">ant_explode</span><span class="p">[</span><span class="o">-</span><span class="n">which.max</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">ant_explode</span><span class="p">)),</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">group_by</span><span class="p">(</span><span class="n">NAME</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">summarise</span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">st_make_valid</span><span class="p">()</span><span class="w">
-
-</span><span class="n">antarctica_fixed</span><span class="w">
-</span><span class="c1">#&gt; Simple feature collection with 1 feature and 1 field</span><span class="w">
-</span><span class="c1">#&gt; Geometry type: MULTIPOLYGON</span><span class="w">
-</span><span class="c1">#&gt; Dimension:     XY</span><span class="w">
-</span><span class="c1">#&gt; Bounding box:  xmin: -2583099 ymin: -2458296 xmax: 2690846 ymax: 2233395</span><span class="w">
-</span><span class="c1">#&gt; Projected CRS: +proj=ortho +lat_0=-90 +lon_0=0</span><span class="w">
-</span><span class="c1">#&gt; # A tibble: 1 × 2</span><span class="w">
-</span><span class="c1">#&gt;   NAME                                                                     geometry</span><span class="w">
-</span><span class="c1">#&gt; * &lt;chr&gt;                                                          &lt;MULTIPOLYGON [m]&gt;</span><span class="w">
-</span><span class="c1">#&gt; 1 Antarctica (((-2456385 1179033, -2456141 1178965, -2456464 1178341, -2456563 117…</span><span class="w">
+<p>The shapefile contains a visible cut that looks unnatural in an orthographic 
+projection. I correct it by applying a small buffer of 2 meters:</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Regenerate initial shape</span><span class="w">
+</span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">antarct</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lightblue"</span><span class="p">)</span><span class="w">
@@ -771,27 +697,18 @@ magenta/pink tones.</li>
 </ol>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Maximum chunk of Antarctica, the one that we fixed</span><span class="w">
 
-</span><span class="n">ant_max_fixed</span><span class="w">
-</span><span class="c1">#&gt; Simple feature collection with 1 feature and 1 field</span><span class="w">
-</span><span class="c1">#&gt; Geometry type: POLYGON</span><span class="w">
-</span><span class="c1">#&gt; Dimension:     XY</span><span class="w">
-</span><span class="c1">#&gt; Bounding box:  xmin: -2447764 ymin: -2125910 xmax: 2690846 ymax: 2233395</span><span class="w">
-</span><span class="c1">#&gt; Projected CRS: +proj=ortho +lat_0=-90 +lon_0=0</span><span class="w">
-</span><span class="c1">#&gt;         NAME                       geometry</span><span class="w">
-</span><span class="c1">#&gt; 1 Antarctica POLYGON ((-2423737 1557908,...</span><span class="w">
-
 </span><span class="n">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span><span class="w">
 </span><span class="c1"># Sample, Voronoi and negative buffer</span><span class="w">
-</span><span class="n">plastics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">3000</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+</span><span class="n">plastics</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_sample</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">,</span><span class="w"> </span><span class="m">3000</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_collection_extract</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-10000</span><span class="p">)</span><span class="w">
 
 
 </span><span class="c1"># Keep only those properly included in the outline</span><span class="w">
 
-</span><span class="n">toinc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_contains_properly</span><span class="p">(</span><span class="n">ant_max_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">plastics</span><span class="p">,</span><span class="w"> </span><span class="n">sparse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+</span><span class="n">toinc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_contains_properly</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">,</span><span class="w"> </span><span class="n">plastics</span><span class="p">,</span><span class="w"> </span><span class="n">sparse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">as.vector</span><span class="p">()</span><span class="w">
 
 </span><span class="c1"># Select random chunks</span><span class="w">
@@ -817,7 +734,7 @@ magenta/pink tones.</li>
 
 </span><span class="n">bbox2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plastic_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plastic_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
     </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#009fdc"</span><span class="p">),</span><span class="w">
@@ -946,6 +863,7 @@ magenta/pink tones.</li>
       <a href="https://dieghernan.github.io/tags#sf" class="badge chulapa-pill-bg-primary p-category" rel="tag" >sf</a>
       <a href="https://dieghernan.github.io/tags#ggplot2" class="badge chulapa-pill-bg-primary p-category" rel="tag" >ggplot2</a>
       <a href="https://dieghernan.github.io/tags#giscoR" class="badge chulapa-pill-bg-primary p-category" rel="tag" >giscoR</a>
+      <a href="https://dieghernan.github.io/tags#voronoi" class="badge chulapa-pill-bg-primary p-category" rel="tag" >voronoi</a>
       <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rspatial</a>
       <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary p-category" rel="tag" >rstats</a>
       <a href="https://dieghernan.github.io/tags#music" class="badge chulapa-pill-bg-primary p-category" rel="tag" >music</a>
@@ -960,6 +878,25 @@ magenta/pink tones.</li>
              <hr>
                <h2 class="h5">Related posts</h2>
              <nav class="card-group" aria-label="related-articles"><div class="card  border chulapa-related">
+       <div class="card-body">
+         <p class="card-title chulapa-headingfont">
+            <a href="https://dieghernan.github.io/202611_postal-codes/" class="chulapa-text-body-color">
+              Postal codes and tessellations
+            </a>
+         </p>
+           <p class="card-text">
+              <small>From postal points to areas using Voronoi polygons</small>
+           </p></div>
+       <div class="card-footer bg-transparent">
+            <small>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-11-06T00:00:00+01:00">
+                november 06, 2026
+              </time>
+            </small>
+       </div>
+     </div>
+     <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
             <a href="https://dieghernan.github.io/202610_orange-peel/" class="chulapa-text-body-color">
@@ -993,25 +930,6 @@ magenta/pink tones.</li>
               <i class="far fa-calendar" aria-hidden="true"></i>
               <time datetime="2025-02-17T00:00:00+01:00">
                 february 17, 2025
-              </time>
-            </small>
-       </div>
-     </div>
-     <div class="card ml-sm-1 border chulapa-related">
-       <div class="card-body">
-         <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202611_postal-codes/" class="chulapa-text-body-color">
-              Postal codes and tessellations
-            </a>
-         </p>
-           <p class="card-text">
-              <small>From postal points to areas using Voronoi polygons</small>
-           </p></div>
-       <div class="card-footer bg-transparent">
-            <small>
-              <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2026-11-06T00:00:00+01:00">
-                november 06, 2026
               </time>
             </small>
        </div>
