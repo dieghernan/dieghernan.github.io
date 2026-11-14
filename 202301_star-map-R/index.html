@@ -546,21 +546,19 @@
 </details>
 </div>
 </div>
-       <div class="e-content"><p>A couple of weeks ago I was doing my daily check on
+       <div class="e-content"><p>A couple of weeks ago, I was browsing
 <a href="https://stackoverflow.com/questions/tagged/sf">Stack Overflow</a> when I found a
 question by <a href="https://bensstats.wordpress.com/">Benjamin Smith</a> that blew my
 mind: <a href="https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date">Creating Star Map Visualizations Based on Location and
-Date</a>
-!!</p>
-<p>Oh my! Can we do this with <strong>R</strong>? The answer is: Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
-Fitter</a> already worked on this two years earlier,
-see his <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial
-Maps</a>. So I decided
+Date</a>!</p>
+<p>Oh my! Can we do this with <strong>R</strong>? Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
+Fitter</a> had already explored this in his
+<a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial Maps</a>. So I decided
 to put some work into this.</p>
 <p>Since then, I have also learned that Benjamin and I have been working in parallel
 on the same topic. He is preparing an <strong>R</strong> package named
-<a href="https://github.com/benyamindsmith/starBliss"><strong>starBliss</strong></a> and hopefully this
-post will be of some help.</p>
+<a href="https://github.com/benyamindsmith/starBliss"><strong>starBliss</strong></a>, and I hope this
+post will help.</p>
 <div role="note" aria-label="Note" class="callout-note">
  <p>I have very little knowledge of this topic, so if you find errors or
 have any suggestions, please let me know in the comments section below.</p>
@@ -573,11 +571,10 @@ Frohn</a>. As Kim Fitter pointed out in
 <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">his post</a>, these
 data files present the problem (experienced by <a href="https://stackoverflow.com/search?q=%5Bsf%5D+dateline">almost any <strong>sf</strong>
 user</a>) of lines crossing
-the international date line (longitude 180°). I also found that some files are
-not valid as per <code class="language-plaintext highlighter-rouge">sf::st_make_valid()</code>.</p>
-<p>Solution? I processed and fixed almost every file, including the files
-corresponding to the Milky Way and the lines for Chinese constellations, manually,
-to provide a set of files. That is the origin of my project <a href="https://dieghernan.github.io/celestial_data/">Celestial
+the International Date Line (longitude 180°). I also found that some files are
+geometrically invalid.</p>
+<p>I manually repaired almost every file, including the Milky Way data and the
+lines for Chinese constellations. That is the origin of my project <a href="https://dieghernan.github.io/celestial_data/">Celestial
 Data</a>, which provides all these
 files in several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
 repo</a> to learn more about it.</p>
@@ -681,7 +678,7 @@ coordinate in the format degrees/minutes/seconds (e.g., a <strong>latitude of
 <p>Additionally, you may notice that on this <a href="https://ofrohn.github.io/celestial-demo/location.html">d3-celestial
 demo</a> there is some
 degree of rotation depending on the location and the time. I found how this is
-done on the <strong>d3-celestial plugin</strong> and I found the function
+done in the <strong>d3-celestial</strong> plugin and found the function
 <a href="https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250"><code class="language-plaintext highlighter-rouge">getMST(dt, lng)</code></a>,
 which I ported to <strong>R</strong> (<code class="language-plaintext highlighter-rouge">get_mst()</code>). The function uses Meeus’s (1998) formula
 for Greenwich mean sidereal time, adds the observer’s east-positive longitude
@@ -747,7 +744,7 @@ as <code class="language-plaintext highlighter-rouge">GEOMETRYCOLLECTION</code> 
 that for us.</p>
 <details class="my-4">
   <summary>Show <code>sf_spherical_cut()</code></summary>
- <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut a sf object with a buffer using spherical s2 geoms</span><span class="w">
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut an sf object with a buffer using spherical s2 geoms</span><span class="w">
 </span><span class="c1"># Optionally, project and flip</span><span class="w">
 
 </span><span class="n">sf_spherical_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -808,7 +805,7 @@ that for us.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Inputs</span><span class="w">
 </span><span class="n">desired_place</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Madrid, Spain"</span><span class="w">
 
-</span><span class="c1"># We are not using yet the timezone</span><span class="w">
+</span><span class="c1"># Set the local time zone later</span><span class="w">
 </span><span class="n">desired_date</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">make_datetime</span><span class="p">(</span><span class="w">
   </span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2015</span><span class="p">,</span><span class="w">
   </span><span class="n">month</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">9</span><span class="p">,</span><span class="w">
@@ -836,10 +833,8 @@ that for us.</p>
 </span><span class="c1">#&gt;       lat       lon </span><span class="w">
 </span><span class="c1">#&gt; 40.416782 -3.703507</span><span class="w">
 </span></code></pre></div></div>
-<p>With respect to our object <code class="language-plaintext highlighter-rouge">desired_date</code>, it is quite relevant for accurate
-plotting to specify the correct time zone. Since we already know the latitude and
-longitude of our desired location, we can easily get that with the <strong>lutz</strong>
-package:</p>
+<p>To plot the sky at the correct local time, use the latitude and longitude
+to look up the time zone with <strong>lutz</strong>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">desired_date</span><span class="w">
 </span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 UTC"</span><span class="w">
 
@@ -960,7 +955,7 @@ visualization.</p>
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="Milky Way bands clipped and projected to the selected viewing hemisphere." width="100%" /></p>
-<p>Now it is the turn of the constellations:</p>
+<p>Next, we add the constellations:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">const</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"constellations.lines.min.geojson"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">const</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -984,7 +979,7 @@ visualization.</p>
   </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="Constellation lines clipped and projected to the selected circular viewing hemisphere." width="100%" /></p>
-<p>And finally the stars:</p>
+<p>Finally, we add the stars:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stars</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">load_celestial</span><span class="p">(</span><span class="s2">"stars.6.min.geojson"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">stars</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1043,8 +1038,8 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="Coordinate grid projected to the selected hemisphere. Curved latitude lines and converging longitude lines reveal the pole." width="100%" /></p>
 <h2 id="visualization-with-ggplot2">Visualization with <strong>ggplot2</strong></h2>
-<p>We are almost set! For preparing the final map, first we are going to create the
-corresponding labels, which will be included as <code class="language-plaintext highlighter-rouge">caption</code> on the <strong>ggplot2</strong> map:</p>
+<p>To prepare the final map, we first create the labels for the <strong>ggplot2</strong>
+caption:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lat_lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pretty_lonlat</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lat"</span><span class="p">)</span><span class="w">
 </span><span class="n">lon_lab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">pretty_lonlat</span><span class="p">(</span><span class="n">desired_loc</span><span class="p">[</span><span class="m">2</span><span class="p">],</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lon"</span><span class="p">)</span><span class="w">
 
@@ -1086,9 +1081,8 @@ corresponding labels, which will be included as <code class="language-plaintext 
 <p>We can enhance the visualization by applying some interesting effects:</p>
 <ul>
  <li>
-   <p>We want the Milky Way to appear a bit blurry instead of as a Well-Known
-geometry. With this effect we can mimic how we really see it from the Earth.
-So we can use <code class="language-plaintext highlighter-rouge">ggfx::with_blur()</code> to get this effect.</p>
+   <p>We use <code class="language-plaintext highlighter-rouge">ggfx::with_blur()</code> to soften the edges of the Milky Way and mimic
+how it appears from Earth.</p>
  </li>
  <li>
    <p>We can also add a glowing effect to our stars and constellations (have a
@@ -1250,11 +1244,8 @@ no longer flat. <em>r-spatial</em>. <a href="https://r-spatial.org/r/2020/06/17/
 <div class="footnotes" role="doc-endnotes">
  <ol>
    <li id="fn:1">
-     <p>In fact, the download is performed via the
-<a href="https://www.jsdelivr.com/">jsDelivr</a>, which distributes files hosted on
-<a href="https://www.jsdelivr.com/github">GitHub via CDN.</a> This is supposed to
-improve performance, but in any case the underlying data source is the
-GitHub repo. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+     <p><a href="https://www.jsdelivr.com/">jsDelivr</a> serves the files from GitHub
+through a <a href="https://www.jsdelivr.com/github">content delivery network</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
    </li>
  </ol>
 </div>

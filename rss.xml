@@ -13,7 +13,7 @@
     <language>en-US</language>
     <copyright>(c) 2026, Diego HH</copyright>
     <pubDate>Fri, 06 Nov 2026 00:00:00 +0100</pubDate>
-    <lastBuildDate>Sat, 14 Nov 2026 16:59:03 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 14 Nov 2026 18:04:10 +0100</lastBuildDate>
     <category>blog</category>
     <ttl>60</ttl>
     <atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -1515,7 +1515,7 @@ illustration was also generated with AI.&lt;/p&gt;
 
 &lt;p&gt;While searching for new data sources, I found the excellent
 &lt;a href=&quot;https://www.geoboundaries.org/&quot;&gt;geoBoundaries&lt;/a&gt; database. However, accessing the
-data can be tedious since it’s provided as zipped shapefiles, and as any GIS
+data can be tedious because it comes in zipped shapefiles. As any GIS
 professional knows, &lt;a href=&quot;http://switchfromshapefile.org/&quot;&gt;shapefiles should die!&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Previously, the &lt;strong&gt;rgeoboundaries&lt;/strong&gt; package was on CRAN and allowed access to
@@ -1527,22 +1527,20 @@ version, and &lt;strong&gt;geobounds&lt;/strong&gt; was born.&lt;/p&gt;
   &lt;li&gt;&lt;strong&gt;pkgdown&lt;/strong&gt; website: &lt;a href=&quot;https://dieghernan.github.io/geobounds/&quot;&gt;https://dieghernan.github.io/geobounds/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;It connects directly to the excellent
-&lt;a href=&quot;https://www.geoboundaries.org/&quot;&gt;geoBoundaries&lt;/a&gt; database and returns clean,
-ready-to-use &lt;strong&gt;sf&lt;/strong&gt; objects with a single function call. No manual downloads and
+&lt;p&gt;&lt;strong&gt;geobounds&lt;/strong&gt; connects directly to geoBoundaries and returns clean, ready-to-use
+&lt;strong&gt;sf&lt;/strong&gt; objects with a single function call. No manual downloads and
 no shapefile handling.&lt;/p&gt;
 
 &lt;p&gt;This is how it works.&lt;/p&gt;
 
 &lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;geobounds&lt;/strong&gt; was recently accepted on
-&lt;a href=&quot;https://cran.r-project.org/package=geobounds&quot;&gt;CRAN&lt;/a&gt;, so just install it with:&lt;/p&gt;
+&lt;p&gt;Install &lt;strong&gt;geobounds&lt;/strong&gt; from &lt;a href=&quot;https://cran.r-project.org/package=geobounds&quot;&gt;CRAN&lt;/a&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;install.packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;geobounds&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Load the package and other complementary packages:&lt;/p&gt;
+&lt;p&gt;Load &lt;strong&gt;geobounds&lt;/strong&gt; and the packages used in the examples:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geobounds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1600,10 +1598,10 @@ no shapefile handling.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp&quot; alt=&quot;Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;global-composite-boundaries-cgaz&quot;&gt;Global Composite Boundaries (CGAZ)&lt;/h2&gt;
+&lt;h2 id=&quot;composite-global-administrative-zones-cgaz&quot;&gt;Composite Global Administrative Zones (CGAZ)&lt;/h2&gt;
 
-&lt;p&gt;When you download individual country files, each country reflects its own view
-of borders. This results in:&lt;/p&gt;
+&lt;p&gt;Individual country files can reflect different views of where borders lie.
+When you combine them, you may see:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Overlapping boundaries&lt;/li&gt;
@@ -1703,7 +1701,7 @@ datasets by setting &lt;code class=&quot;language-plaintext highlighter-rouge&qu
   &lt;li&gt;You need reliable global administrative boundaries&lt;/li&gt;
   &lt;li&gt;You want reproducible workflows&lt;/li&gt;
   &lt;li&gt;You prefer code over manual downloads&lt;/li&gt;
-  &lt;li&gt;You’re building maps, dashboards or spatial analyses&lt;/li&gt;
+  &lt;li&gt;You’re creating maps or dashboards or conducting spatial analyses&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;related-packages&quot;&gt;Related packages&lt;/h2&gt;
@@ -1771,7 +1769,7 @@ geometries at certain longitudes (for example, cutting the Chukchi Peninsula),
 while others omit portions of the data. These inconsistencies can produce
 awkward artifacts near the poles.&lt;/p&gt;
 
-&lt;p&gt;In this post I fix the &lt;a href=&quot;https://ec.europa.eu/eurostat/web/gisco&quot;&gt;GISCO (European
+&lt;p&gt;In this post, I fix the &lt;a href=&quot;https://ec.europa.eu/eurostat/web/gisco&quot;&gt;GISCO (European
 Commission)&lt;/a&gt; shapefile for Antarctica
 and produce clean orthographic maps.&lt;/p&gt;
 
@@ -1802,7 +1800,7 @@ and produce clean orthographic maps.&lt;/p&gt;
 
 &lt;h2 id=&quot;fixing-the-geometry&quot;&gt;Fixing the geometry&lt;/h2&gt;
 
-&lt;p&gt;First, we obtain the GISCO Antarctica polygon and transform it to an
+&lt;p&gt;First, we retrieve the Antarctic geometry from GISCO and transform it to an
 orthographic projection centered on the South Pole.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;antarct&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gisco_get_countries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resolution&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ATA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1817,13 +1815,12 @@ orthographic projection centered on the South Pole.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202510_init-1.webp&quot; alt=&quot;South Pole-centered map of Antarctica with a gap extending from the coast toward the pole, caused by a polygon artifact.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
-  &lt;p&gt;&lt;strong&gt;Updated 14 November 2026&lt;/strong&gt;: The initial version of this post described a 
-manual approach for fixing the geometry. This section has been updated
-showing an alternative method.&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Updated November 14, 2026.&lt;/strong&gt; The original post showed how to repair the
+geometry by editing vertices manually. This version uses a buffer.&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The shapefile contains a visible cut that looks unnatural in an orthographic 
-projection. I correct it by applying a small buffer of 2 meters:&lt;/p&gt;
+&lt;p&gt;In the orthographic projection, a narrow gap runs inland from the coast.
+I close it by applying a 2-meter buffer:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Regenerate initial shape&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;antarctica_fixed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;antarct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1836,7 +1833,7 @@ projection. I correct it by applying a small buffer of 2 meters:&lt;/p&gt;
 
 &lt;h2 id=&quot;plotting-examples&quot;&gt;Plotting examples&lt;/h2&gt;
 
-&lt;p&gt;With the corrected shape we can produce maps. Below are a few examples based on
+&lt;p&gt;With the corrected geometry, we can draw the maps. Below are a few examples based on
 proposed Antarctic flag designs.&lt;/p&gt;
 
 &lt;h3 id=&quot;graham-bartrams-proposal-1996&quot;&gt;Graham Bartram’s proposal (1996)&lt;/h3&gt;
@@ -1945,7 +1942,7 @@ pattern.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp&quot; alt=&quot;Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;antarctica-flag-redesigned&quot;&gt;Antarctica flag redesigned&lt;/h3&gt;
+&lt;h3 id=&quot;bartrams-redesigned-antarctic-flag&quot;&gt;Bartram’s redesigned Antarctic flag&lt;/h3&gt;
 
 &lt;p&gt;In 2024, Graham Bartram revealed a new version of his original flag as part of
 a global campaign to raise awareness about the growing problem of microplastic
@@ -1966,10 +1963,10 @@ procedure:&lt;/p&gt;
 to create gaps.&lt;/li&gt;
   &lt;li&gt;Randomly sample the resulting polygons to increase visual noise.&lt;/li&gt;
   &lt;li&gt;Color polygons so larger areas remain white while smaller polygons use
-magenta/pink tones.&lt;/li&gt;
+shades of pink and magenta.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Maximum chunk of Antarctica, the one that we fixed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Use the repaired Antarctic geometry&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set.seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Sample, Voronoi and negative buffer&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -3803,23 +3800,21 @@ Uhl, J., Tommasi, P., &amp;amp; Kemper, T. (2023). &lt;em&gt;GHSL data package 2
       <title>Star map with R</title>
       <description>Make a star map in R for a place and date of your choice.</description>
       <content:encoded>&lt;p&gt;Creating star map visualizations based on location and date&lt;/p&gt;&lt;p&gt;14 min.&lt;/p&gt;
-      &lt;div&gt;&lt;p&gt;A couple of weeks ago I was doing my daily check on
+      &lt;div&gt;&lt;p&gt;A couple of weeks ago, I was browsing
 &lt;a href=&quot;https://stackoverflow.com/questions/tagged/sf&quot;&gt;Stack Overflow&lt;/a&gt; when I found a
 question by &lt;a href=&quot;https://bensstats.wordpress.com/&quot;&gt;Benjamin Smith&lt;/a&gt; that blew my
 mind: &lt;a href=&quot;https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date&quot;&gt;Creating Star Map Visualizations Based on Location and
-Date&lt;/a&gt;
-!!&lt;/p&gt;
+Date&lt;/a&gt;!&lt;/p&gt;
 
-&lt;p&gt;Oh my! Can we do this with &lt;strong&gt;R&lt;/strong&gt;? The answer is: Of course! In fact, &lt;a href=&quot;https://kimnewzealand.github.io/&quot;&gt;Kim
-Fitter&lt;/a&gt; already worked on this two years earlier,
-see his &lt;a href=&quot;https://kimnewzealand.github.io/2019/02/21/celestial-maps/&quot;&gt;Celestial
-Maps&lt;/a&gt;. So I decided
+&lt;p&gt;Oh my! Can we do this with &lt;strong&gt;R&lt;/strong&gt;? Of course! In fact, &lt;a href=&quot;https://kimnewzealand.github.io/&quot;&gt;Kim
+Fitter&lt;/a&gt; had already explored this in his
+&lt;a href=&quot;https://kimnewzealand.github.io/2019/02/21/celestial-maps/&quot;&gt;Celestial Maps&lt;/a&gt;. So I decided
 to put some work into this.&lt;/p&gt;
 
 &lt;p&gt;Since then, I have also learned that Benjamin and I have been working in parallel
 on the same topic. He is preparing an &lt;strong&gt;R&lt;/strong&gt; package named
-&lt;a href=&quot;https://github.com/benyamindsmith/starBliss&quot;&gt;&lt;strong&gt;starBliss&lt;/strong&gt;&lt;/a&gt; and hopefully this
-post will be of some help.&lt;/p&gt;
+&lt;a href=&quot;https://github.com/benyamindsmith/starBliss&quot;&gt;&lt;strong&gt;starBliss&lt;/strong&gt;&lt;/a&gt;, and I hope this
+post will help.&lt;/p&gt;
 
 &lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
   &lt;p&gt;I have very little knowledge of this topic, so if you find errors or
@@ -3835,12 +3830,11 @@ Frohn&lt;/a&gt;. As Kim Fitter pointed out in
 &lt;a href=&quot;https://kimnewzealand.github.io/2019/02/21/celestial-maps/&quot;&gt;his post&lt;/a&gt;, these
 data files present the problem (experienced by &lt;a href=&quot;https://stackoverflow.com/search?q=%5Bsf%5D+dateline&quot;&gt;almost any &lt;strong&gt;sf&lt;/strong&gt;
 user&lt;/a&gt;) of lines crossing
-the international date line (longitude 180°). I also found that some files are
-not valid as per &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf::st_make_valid()&lt;/code&gt;.&lt;/p&gt;
+the International Date Line (longitude 180°). I also found that some files are
+geometrically invalid.&lt;/p&gt;
 
-&lt;p&gt;Solution? I processed and fixed almost every file, including the files
-corresponding to the Milky Way and the lines for Chinese constellations, manually,
-to provide a set of files. That is the origin of my project &lt;a href=&quot;https://dieghernan.github.io/celestial_data/&quot;&gt;Celestial
+&lt;p&gt;I manually repaired almost every file, including the Milky Way data and the
+lines for Chinese constellations. That is the origin of my project &lt;a href=&quot;https://dieghernan.github.io/celestial_data/&quot;&gt;Celestial
 Data&lt;/a&gt;, which provides all these
 files in several spatial formats. Please &lt;a href=&quot;https://github.com/dieghernan/celestial_data&quot;&gt;check out the
 repo&lt;/a&gt; to learn more about it.&lt;/p&gt;
@@ -3955,7 +3949,7 @@ coordinate in the format degrees/minutes/seconds (e.g., a &lt;strong&gt;latitude
 &lt;p&gt;Additionally, you may notice that on this &lt;a href=&quot;https://ofrohn.github.io/celestial-demo/location.html&quot;&gt;d3-celestial
 demo&lt;/a&gt; there is some
 degree of rotation depending on the location and the time. I found how this is
-done on the &lt;strong&gt;d3-celestial plugin&lt;/strong&gt; and I found the function
+done in the &lt;strong&gt;d3-celestial&lt;/strong&gt; plugin and found the function
 &lt;a href=&quot;https://github.com/ofrohn/d3-celestial/blob/7e720a3de062059d4c5400a379146a601d9010e0/celestial.js#L1215-L1250&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getMST(dt, lng)&lt;/code&gt;&lt;/a&gt;,
 which I ported to &lt;strong&gt;R&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get_mst()&lt;/code&gt;). The function uses Meeus’s (1998) formula
 for Greenwich mean sidereal time, adds the observer’s east-positive longitude
@@ -4030,7 +4024,7 @@ that for us.&lt;/p&gt;
 
   &lt;summary&gt;Show &lt;code&gt;sf_spherical_cut()&lt;/code&gt;&lt;/summary&gt;
 
-  &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Cut a sf object with a buffer using spherical s2 geoms&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Cut an sf object with a buffer using spherical s2 geoms&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Optionally, project and flip&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf_spherical_cut&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;the_buff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;the_crs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_crs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flip&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4096,7 +4090,7 @@ that for us.&lt;/p&gt;
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Inputs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;desired_place&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Madrid, Spain&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# We are not using yet the timezone&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Set the local time zone later&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;desired_date&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make_datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;year&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2015&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;month&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4125,10 +4119,8 @@ that for us.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; 40.416782 -3.703507&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;With respect to our object &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;desired_date&lt;/code&gt;, it is quite relevant for accurate
-plotting to specify the correct time zone. Since we already know the latitude and
-longitude of our desired location, we can easily get that with the &lt;strong&gt;lutz&lt;/strong&gt;
-package:&lt;/p&gt;
+&lt;p&gt;To plot the sky at the correct local time, use the latitude and longitude
+to look up the time zone with &lt;strong&gt;lutz&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;desired_date&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;2015-09-22 03:45:00 UTC&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4267,7 +4259,7 @@ visualization.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp&quot; alt=&quot;Milky Way bands clipped and projected to the selected viewing hemisphere.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Now it is the turn of the constellations:&lt;/p&gt;
+&lt;p&gt;Next, we add the constellations:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;const&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_celestial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;constellations.lines.min.geojson&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -4296,7 +4288,7 @@ visualization.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp&quot; alt=&quot;Constellation lines clipped and projected to the selected circular viewing hemisphere.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;And finally the stars:&lt;/p&gt;
+&lt;p&gt;Finally, we add the stars:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stars&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_celestial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;stars.6.min.geojson&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -4367,8 +4359,8 @@ parameter of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;
 
 &lt;h2 id=&quot;visualization-with-ggplot2&quot;&gt;Visualization with &lt;strong&gt;ggplot2&lt;/strong&gt;&lt;/h2&gt;
 
-&lt;p&gt;We are almost set! For preparing the final map, first we are going to create the
-corresponding labels, which will be included as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;caption&lt;/code&gt; on the &lt;strong&gt;ggplot2&lt;/strong&gt; map:&lt;/p&gt;
+&lt;p&gt;To prepare the final map, we first create the labels for the &lt;strong&gt;ggplot2&lt;/strong&gt;
+caption:&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;lat_lab&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pretty_lonlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;desired_loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lat&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lon_lab&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pretty_lonlat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;desired_loc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lon&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -4413,9 +4405,8 @@ corresponding labels, which will be included as &lt;code class=&quot;language-pl
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;We want the Milky Way to appear a bit blurry instead of as a Well-Known
-geometry. With this effect we can mimic how we really see it from the Earth.
-So we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggfx::with_blur()&lt;/code&gt; to get this effect.&lt;/p&gt;
+    &lt;p&gt;We use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ggfx::with_blur()&lt;/code&gt; to soften the edges of the Milky Way and mimic
+how it appears from Earth.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;We can also add a glowing effect to our stars and constellations (have a
@@ -4588,11 +4579,8 @@ no longer flat. &lt;em&gt;r-spatial&lt;/em&gt;. &lt;a href=&quot;https://r-spati
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:1&quot;&gt;
-      &lt;p&gt;In fact, the download is performed via the
-&lt;a href=&quot;https://www.jsdelivr.com/&quot;&gt;jsDelivr&lt;/a&gt;, which distributes files hosted on
-&lt;a href=&quot;https://www.jsdelivr.com/github&quot;&gt;GitHub via CDN.&lt;/a&gt; This is supposed to
-improve performance, but in any case the underlying data source is the
-GitHub repo. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;uarr;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.jsdelivr.com/&quot;&gt;jsDelivr&lt;/a&gt; serves the files from GitHub
+through a &lt;a href=&quot;https://www.jsdelivr.com/github&quot;&gt;content delivery network&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;uarr;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;

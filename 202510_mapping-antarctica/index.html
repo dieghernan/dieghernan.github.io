@@ -516,9 +516,24 @@
 		</p>
 		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
 		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Mapping Antarctica</a></p>
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#fixing-the-geometry" class="nav-link">Fixing the geometry</a></li><li class="nav-item nav d-block"><a href="#plotting-examples" class="nav-link">Plotting examples</a><ul><li class="nav-item nav d-block"><a href="#graham-bartrams-proposal-1996" class="nav-link">Graham Bartram’s proposal (1996)</a></li><li class="nav-item nav d-block"><a href="#emblem-of-the-antarctic-treaty" class="nav-link">Emblem of the Antarctic Treaty</a></li><li class="nav-item nav d-block"><a href="#antarctica-flag-redesigned" class="nav-link">Antarctica flag redesigned</a></li></ul></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#fixing-the-geometry" class="nav-link">Fixing the geometry</a></li><li class="nav-item nav d-block"><a href="#plotting-examples" class="nav-link">Plotting examples</a><ul><li class="nav-item nav d-block"><a href="#graham-bartrams-proposal-1996" class="nav-link">Graham Bartram’s proposal (1996)</a></li><li class="nav-item nav d-block"><a href="#emblem-of-the-antarctic-treaty" class="nav-link">Emblem of the Antarctic Treaty</a></li><li class="nav-item nav d-block"><a href="#bartrams-redesigned-antarctic-flag" class="nav-link">Bartram’s redesigned Antarctic flag</a></li></ul></li></ul>
 		</nav>   
 	</div>
+         <div class="chulapa-series-indices chulapa-series-columns-1 small mb-3">
+<div class="chulapa-series">
+<div class="font-weight-bold">Map projections with R<br> <span class="chulapa-series-position">Issue 3 of 3</span></div>
+<div class="chulapa-series-controls">
+ <progress class="chulapa-series-progress" value="3" max="3" aria-label="Map projections with R progress, Issue 3 of 3">3 of 3</progress>
+ <nav aria-label="Map projections with R previous and next" class="d-flex flex-wrap align-items-center"><a class="btn btn-sm chulapa-series-link mr-1" href="/202610_orange-peel/" title="Let’s peel the world"><i class="fa fa-chevron-left mr-1" aria-hidden="true"></i>Previous<span class="sr-only">: Let’s peel the world</span></a><button type="button" class="btn btn-sm chulapa-series-link" disabled>Next<i class="fa fa-chevron-right ml-1" aria-hidden="true"></i></button></nav>
+</div>
+<details class="chulapa-series-index mt-1">
+  <summary>Issues<span class="sr-only">: Map projections with R</span></summary>
+ <nav aria-label="Map projections with R">
+   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/202502_st_valentine/">Happy Valentine’s Day</a></li><li><a class="chulapa-series-item" href="/202610_orange-peel/">Let’s peel the world</a></li><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Mapping Antarctica <i class="fas fa-arrow-left" aria-hidden="true"></i></span></li></ol>
+ </nav>
+</details>
+</div>
+</div>
        <div class="e-content"><p>Creating maps with <strong>R</strong> is usually straightforward, but representations that
 cross the <a href="https://en.wikipedia.org/wiki/International_Date_Line">International Date
 Line</a> or that use polar
@@ -527,7 +542,7 @@ projections can be tricky.</p>
 geometries at certain longitudes (for example, cutting the Chukchi Peninsula),
 while others omit portions of the data. These inconsistencies can produce
 awkward artifacts near the poles.</p>
-<p>In this post I fix the <a href="https://ec.europa.eu/eurostat/web/gisco">GISCO (European
+<p>In this post, I fix the <a href="https://ec.europa.eu/eurostat/web/gisco">GISCO (European
 Commission)</a> shapefile for Antarctica
 and produce clean orthographic maps.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
@@ -555,7 +570,7 @@ and produce clean orthographic maps.</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="fixing-the-geometry">Fixing the geometry</h2>
-<p>First, we obtain the GISCO Antarctica polygon and transform it to an
+<p>First, we retrieve the Antarctic geometry from GISCO and transform it to an
 orthographic projection centered on the South Pole.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">antarct</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ATA"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">select</span><span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NAME_ENGL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
@@ -567,12 +582,11 @@ orthographic projection centered on the South Pole.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_init-1.webp" alt="South Pole-centered map of Antarctica with a gap extending from the coast toward the pole, caused by a polygon artifact." width="100%" /></p>
 <div role="note" aria-label="Note" class="callout-note">
- <p><strong>Updated 14 November 2026</strong>: The initial version of this post described a 
-manual approach for fixing the geometry. This section has been updated
-showing an alternative method.</p>
+ <p><strong>Updated November 14, 2026.</strong> The original post showed how to repair the
+geometry by editing vertices manually. This version uses a buffer.</p>
 </div>
-<p>The shapefile contains a visible cut that looks unnatural in an orthographic 
-projection. I correct it by applying a small buffer of 2 meters:</p>
+<p>In the orthographic projection, a narrow gap runs inland from the coast.
+I close it by applying a 2-meter buffer:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Regenerate initial shape</span><span class="w">
 </span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">antarct</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
 
@@ -581,7 +595,7 @@ projection. I correct it by applying a small buffer of 2 meters:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" alt="South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area." width="100%" /></p>
 <h2 id="plotting-examples">Plotting examples</h2>
-<p>With the corrected shape we can produce maps. Below are a few examples based on
+<p>With the corrected geometry, we can draw the maps. Below are a few examples based on
 proposed Antarctic flag designs.</p>
 <h3 id="graham-bartrams-proposal-1996">Graham Bartram’s proposal (1996)</h3>
 <p>A simple rendition of Bartram’s original concept:</p>
@@ -676,7 +690,7 @@ pattern.</p>
   </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Emblem of the Antarctic Treaty"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" alt="Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background." width="100%" /></p>
-<h3 id="antarctica-flag-redesigned">Antarctica flag redesigned</h3>
+<h3 id="bartrams-redesigned-antarctic-flag">Bartram’s redesigned Antarctic flag</h3>
 <p>In 2024, Graham Bartram revealed a new version of his original flag as part of
 a global campaign to raise awareness about the growing problem of microplastic
 pollution. The new design keeps the familiar white outline of Antarctica but
@@ -693,9 +707,9 @@ procedure:</p>
 to create gaps.</li>
  <li>Randomly sample the resulting polygons to increase visual noise.</li>
  <li>Color polygons so larger areas remain white while smaller polygons use
-magenta/pink tones.</li>
+shades of pink and magenta.</li>
 </ol>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Maximum chunk of Antarctica, the one that we fixed</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Use the repaired Antarctic geometry</span><span class="w">
 
 </span><span class="n">set.seed</span><span class="p">(</span><span class="m">2024</span><span class="p">)</span><span class="w">
 </span><span class="c1"># Sample, Voronoi and negative buffer</span><span class="w">

@@ -530,7 +530,7 @@
 		</p>
 		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
 		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Introducing <strong>geobounds</strong></a></p>
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#installation" class="nav-link">Installation</a></li><li class="nav-item nav d-block"><a href="#getting-administrative-levels-adm" class="nav-link">Getting administrative levels (ADM)</a></li><li class="nav-item nav d-block"><a href="#global-composite-boundaries-cgaz" class="nav-link">Global Composite Boundaries (CGAZ)</a></li><li class="nav-item nav d-block"><a href="#understanding-the-data" class="nav-link">Understanding the data</a></li><li class="nav-item nav d-block"><a href="#caching" class="nav-link">Caching</a></li><li class="nav-item nav d-block"><a href="#when-should-you-use-geobounds" class="nav-link">When should you use <strong>geobounds</strong>?</a></li><li class="nav-item nav d-block"><a href="#related-packages" class="nav-link">Related packages</a><ul><li class="nav-item nav d-block"><a href="#rnaturalearth" class="nav-link"><strong>rnaturalearth</strong></a></li><li class="nav-item nav d-block"><a href="#giscor" class="nav-link"><strong>giscoR</strong></a></li><li class="nav-item nav d-block"><a href="#osmdata" class="nav-link"><strong>osmdata</strong></a></li></ul></li><li class="nav-item nav d-block"><a href="#bottom-line" class="nav-link">Bottom line</a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#installation" class="nav-link">Installation</a></li><li class="nav-item nav d-block"><a href="#getting-administrative-levels-adm" class="nav-link">Getting administrative levels (ADM)</a></li><li class="nav-item nav d-block"><a href="#composite-global-administrative-zones-cgaz" class="nav-link">Composite Global Administrative Zones (CGAZ)</a></li><li class="nav-item nav d-block"><a href="#understanding-the-data" class="nav-link">Understanding the data</a></li><li class="nav-item nav d-block"><a href="#caching" class="nav-link">Caching</a></li><li class="nav-item nav d-block"><a href="#when-should-you-use-geobounds" class="nav-link">When should you use <strong>geobounds</strong>?</a></li><li class="nav-item nav d-block"><a href="#related-packages" class="nav-link">Related packages</a><ul><li class="nav-item nav d-block"><a href="#rnaturalearth" class="nav-link"><strong>rnaturalearth</strong></a></li><li class="nav-item nav d-block"><a href="#giscor" class="nav-link"><strong>giscoR</strong></a></li><li class="nav-item nav d-block"><a href="#osmdata" class="nav-link"><strong>osmdata</strong></a></li></ul></li><li class="nav-item nav d-block"><a href="#bottom-line" class="nav-link">Bottom line</a></li></ul>
 		</nav>   
 	</div>
        <div class="e-content"><p>If you’ve ever worked with spatial data in <strong>R</strong>, this may ring a bell…</p>
@@ -545,7 +545,7 @@
 </ul>
 <p>While searching for new data sources, I found the excellent
 <a href="https://www.geoboundaries.org/">geoBoundaries</a> database. However, accessing the
-data can be tedious since it’s provided as zipped shapefiles, and as any GIS
+data can be tedious because it comes in zipped shapefiles. As any GIS
 professional knows, <a href="http://switchfromshapefile.org/">shapefiles should die!</a></p>
 <p>Previously, the <strong>rgeoboundaries</strong> package was on CRAN and allowed access to
 the geoBoundaries API, but it was archived. So I decided to create my own
@@ -554,17 +554,15 @@ version, and <strong>geobounds</strong> was born.</p>
  <li>Source code: <a href="https://github.com/dieghernan/geobounds">https://github.com/dieghernan/geobounds</a></li>
  <li><strong>pkgdown</strong> website: <a href="https://dieghernan.github.io/geobounds/">https://dieghernan.github.io/geobounds/</a></li>
 </ul>
-<p>It connects directly to the excellent
-<a href="https://www.geoboundaries.org/">geoBoundaries</a> database and returns clean,
-ready-to-use <strong>sf</strong> objects with a single function call. No manual downloads and
+<p><strong>geobounds</strong> connects directly to geoBoundaries and returns clean, ready-to-use
+<strong>sf</strong> objects with a single function call. No manual downloads and
 no shapefile handling.</p>
 <p>This is how it works.</p>
 <h2 id="installation">Installation</h2>
-<p><strong>geobounds</strong> was recently accepted on
-<a href="https://cran.r-project.org/package=geobounds">CRAN</a>, so just install it with:</p>
+<p>Install <strong>geobounds</strong> from <a href="https://cran.r-project.org/package=geobounds">CRAN</a>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"geobounds"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Load the package and other complementary packages:</p>
+<p>Load <strong>geobounds</strong> and the packages used in the examples:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">geobounds</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
@@ -613,9 +611,9 @@ no shapefile handling.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3." width="100%" /></p>
-<h2 id="global-composite-boundaries-cgaz">Global Composite Boundaries (CGAZ)</h2>
-<p>When you download individual country files, each country reflects its own view
-of borders. This results in:</p>
+<h2 id="composite-global-administrative-zones-cgaz">Composite Global Administrative Zones (CGAZ)</h2>
+<p>Individual country files can reflect different views of where borders lie.
+When you combine them, you may see:</p>
 <ul>
  <li>Overlapping boundaries</li>
  <li>Geographic gaps</li>
@@ -694,7 +692,7 @@ datasets by setting <code class="language-plaintext highlighter-rouge">simplifie
  <li>You need reliable global administrative boundaries</li>
  <li>You want reproducible workflows</li>
  <li>You prefer code over manual downloads</li>
- <li>You’re building maps, dashboards or spatial analyses</li>
+ <li>You’re creating maps or dashboards or conducting spatial analyses</li>
 </ul>
 <h2 id="related-packages">Related packages</h2>
 <p><strong>geobounds</strong> is not alone in this space. Depending on your needs, you might
