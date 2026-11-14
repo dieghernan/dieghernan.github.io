@@ -29,9 +29,9 @@ syndication:
 
 ---
 
-<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This page documents a historical project; the
-descriptions below refer to its period of operation.
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+**Project discontinued.** This page describes the project as it operated.
+</div>
 
 ## 🤖 Twitter bot: random municipalities of Spain 🇪🇸 with **mapSpain**, posted with **rtweet** via a GitHub Action
 

@@ -457,11 +457,9 @@ hillshade used a narrower range of values than the aspect-based shading from
 **metR**. That made me wonder whether contrast, rather than the shading method 
 itself, could explain part of the difference.
 
-<div class="alert alert-success p-3 mx-2 mb-3" markdown="1">
-
-<i class="fa-solid fa-lightbulb"></i> **What if I stretch the hillshade before
+<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
+**What if I stretch the hillshade before
 blending it with the elevation colors?**
-
 </div>
 
 I map the 5th percentile of the multidirectional hillshade to 0 and the 95th

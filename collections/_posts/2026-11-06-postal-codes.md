@@ -170,10 +170,11 @@ boundaries. Imposing those boundaries is a modeling choice for this exercise,
 inspired by the Spanish workflow, rather than a verified property of the
 Slovenian postal system.
 
-<i class="fa fa-exclamation-triangle"></i> This post explains the workflow. The
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+This post explains the workflow. The
 polygons we create are not official postal boundaries, and this exercise does
 not validate the GISCO postal data.
-{: .alert .alert-warning .p-3 .mx-2 .mb-3}
+</div>
 
 ## Getting the data
 

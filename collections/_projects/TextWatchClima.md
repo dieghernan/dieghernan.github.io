@@ -22,8 +22,9 @@ permalink: /projects/TextWatchClima/
 og_image_alt: "TextWatch Clima watch face displaying the time in words on Pebble Time Round."
 ---
 
-**Project discontinued** due to the shutdown of Pebble.
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+**Project discontinued.** Development ended when Pebble shut down.
+</div>
 
 **TextWatch Clima** upgrades the classic TextWatch watch face by adding a set of
 new capabilities.

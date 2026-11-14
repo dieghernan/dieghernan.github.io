@@ -33,11 +33,12 @@ This document describes the new features added to **cartography** in version
 `2.4.0` by
 [dieghernan](https://github.com/dieghernan/) and already available on **CRAN**.
 
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
 **Historical example:** The mapping examples use **cartography**, which is now
 in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
 for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.
-{: .alert .alert-info .p-3 .mx-2 .mb-3 }
+</div>
 
 Those new features are:
 

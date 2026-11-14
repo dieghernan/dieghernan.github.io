@@ -16,21 +16,21 @@ Project summaries and their structured data must agree with the original
 project website, which is the source of truth. Do not copy its full catalog
 into the blog or modify JSON-LD templates during a style-only task.
 
-## Chulapa alerts and captions
+## Chulapa callouts and captions
 
-Attach Kramdown attributes immediately below the message paragraph:
+Wrap the message in a [Chulapa callout](https://dieghernan.github.io/chulapa/docs/components#callouts):
 
 ```markdown
-<i class="fa fa-exclamation-triangle"></i> **Warning:** These are estimated
-areas, not official postal boundaries.
-{: .alert .alert-warning .p-3 .mx-2 .mb-3}
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+These are estimated areas. Use official postal boundaries when available.
+</div>
 ```
 
-Use `alert-info` for information/tips, `alert-warning` for limitations and
-`alert-danger` for serious warnings or discontinued projects. Existing project
-notices sometimes add `.lead` and `.text-center`. Reuse the appropriate existing
-convention without adding inline styles or a new alert component. Icons are
-optional, and must use the Font Awesome version configured by the site.
+Use `callout-note` for context and updates, `callout-tip` for practical advice,
+`callout-important` for significant notices such as discontinued projects,
+`callout-warning` for limitations and `callout-caution` for serious warnings.
+Match the accessible label to the theme's title. Chulapa supplies the title and
+icon. Keep the markup synchronized between Rmd and Markdown.
 
 An author's own figure in a post uses alt text without a visible caption:
 

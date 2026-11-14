@@ -123,12 +123,10 @@ test |>
 
 <img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" alt="Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact." width="100%" />
 
-<div class="alert alert-warning p-3 mx-2 mb-3">
-
-Note: This cleaning is tailored to this specific shapefile and may need to be
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
+This cleaning is tailored to this specific shapefile and may need to be
 repeated for other shapefiles. The approach is straightforward but depends on
 the particular geometry and projection.
-
 </div>
 
 ```r

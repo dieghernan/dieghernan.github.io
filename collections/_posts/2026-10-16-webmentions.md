@@ -75,7 +75,7 @@ Thanks to **Matt Hobbs** for the inspiration and for sharing his
 [implementation](https://gist.github.com/Nooshu/121e5bf7f3d5c6528413c57db257894f).
 It is a nice way to let a static blog take part in a wider conversation.
 
-<div class="alert alert-info p-3 mx-2 mb-3" role="note">
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
 <p><strong>AI assistance:</strong> I wrote this post with help from
 <strong>Codex</strong>, including drafting and editing the text. Codex also
 helped implement and test the Webmentions section. The header image was

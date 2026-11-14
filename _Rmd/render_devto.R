@@ -52,7 +52,7 @@ convert_to_devto <- function(input) {
   pp <- capture.output(cat(yaml::as.yaml(new_meta)))
   body <- readLines(output, warn = FALSE, encoding = "UTF-8")
 
-  alerts <- any(grepl("\\.alert|alert-", body))
+  alerts <- any(grepl("\\.alert|alert-|callout-", body))
   spotify <- any(grepl("spotify", body, ignore.case = TRUE))
   iframe <- any(grepl("<iframe\\b", body, ignore.case = TRUE))
   details <- any(grepl("<details\\b", body, ignore.case = TRUE))

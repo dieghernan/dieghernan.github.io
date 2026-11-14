@@ -54,9 +54,10 @@ output:
     preserve_yaml: true
 ---
 
-<i class="fas fa-skull-crossbones"></i> **Project discontinued.** This post reflects the situation in March 2022 and
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+**Project discontinued.** This post reflects the situation in March 2022 and
 is preserved as a historical account, not current travel information.
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead .text-center}
+</div>
 
 ![Animated map tracking the spread of COVID-19 over time.](https://dieghernan.github.io/corona-atlas.de/assets/img/corona_atlas_timelapse.gif)
 

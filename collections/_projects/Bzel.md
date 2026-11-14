@@ -22,8 +22,9 @@ project_links:
 og_image_alt: "Bzel watch face showing minutes around the bezel of Pebble watches."
 ---
 
-**Project discontinued** due to the shutdown of Pebble.
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+**Project discontinued.** Development ended when Pebble shut down.
+</div>
 
 **Bzel** integrates the bezel into your watch face. Display minutes as digits,
 as a moving dot or as a fill in the bezel.

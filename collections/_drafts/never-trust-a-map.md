@@ -160,9 +160,10 @@ The last two views share a center over North Africa. The vertical perspective sh
 the globe because its viewpoint is only 10,000 km above the surface. Both views
 include a bonus circle at the North Pole.
 
+<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
 Each map is scaled independently to fit its panel. Compare circle sizes 
 **within** each map. You can compare shapes across panels. 
-{: .alert .alert-info .p-3 .mx-2 .mb-3}
+</div>
 
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Van der Grinten IV has an apple-shaped outline and strong distortion near its outer meridians." width="100%" />
 

@@ -278,7 +278,7 @@ already knew how to answer. It made the gaps easy to spot: an answer could sound
 reasonable and still leave me without the setting or example I needed. That is
 what I want to keep checking as the documentation grows.
 
-<div class="alert alert-info p-3 mx-2 mb-3" role="note">
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
 <p><strong>AI assistance:</strong> I wrote this post with help from
 <strong>Codex</strong>, including drafting and editing the text. I reviewed it
 against the implementation and my experience building the chatbot. The header

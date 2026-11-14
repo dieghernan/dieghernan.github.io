@@ -22,8 +22,9 @@ project_links:
 og_image_alt: "Sfera watch face on a Pebble Time Round."
 ---
 
-**Project discontinued** due to the shutdown of Pebble.
-{: .alert .alert-danger .p-3 .mx-2 .mb-3 .lead}
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+**Project discontinued.** Development ended when Pebble shut down.
+</div>
 
 **Sfera** for Pebble Time Round is a highly customizable watch face that gets
 the most out of the smartwatch's capabilities. Set your preferences and enjoy this

@@ -9,7 +9,7 @@ Read [site-style](../skills/site-style/SKILL.md) before working.
 
 Apply this repository's publication conventions to the requested posts, projects
 and matching R Markdown sources. Cover absolute URLs, product names, Chulapa
-alerts, tags, accessible figures, reference formatting and YAML chunk options.
+callouts, tags, accessible figures, reference formatting and YAML chunk options.
 Posts require alt text for every image. Leave the author's own figures without
 visible captions. Figures by others may include a caption for attribution or
 context. Apply the site-style reference guidance for APA 7, alphabetical order,

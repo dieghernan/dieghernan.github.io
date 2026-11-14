@@ -131,11 +131,12 @@ case of <span class="chulapa"><strong>Chulapa</strong></span> it is on
 So now you just have to paste the code that you got in step 1 into the
 `<head>`.
 
-<i class="fa fa-star"></i> **Pro tip:** For a better performance of the
+<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
+For a better performance of the
 site, include these libraries only when you need them. In my case, I added
 a custom variable in my YAML front matter for those posts with a **leaflet**
 map, `leafletmap: true`. Go to step 4 for a working example.
-{: .alert .alert-info .p-3 .mx-2 .mb-3}
+</div>
 
 ### The **RStudio** part
 
@@ -218,10 +219,11 @@ Now you just need to paste this piece of code before that chunk:
   ...
 ```
 
-<i class="fa fa-exclamation-triangle"></i> **Warning:** Be sure that the
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+Be sure that the
 widget id (`7ab57412f7b1df4d5773` in the example) is the same in the
 `<div>` and in the `<script>` part. If not, your map would not load.
-{: .alert .alert-warning .p-3 .mx-2 .my-3}
+</div>
 
 The `style="width:100%; height:216px;"` part controls the actual size of
 the **leaflet** widget. In this case, the map will adapt to the width of
@@ -250,10 +252,11 @@ m <- leaflet() %>%
 m # Print the map
 ```
 
-<i class="fa fa-exclamation-triangle"></i> **Warning:** Have you checked
+<div role="note" aria-label="Warning" class="callout-warning" markdown="1">
+Have you checked
 the YAML front matter of your `.md` file? Have another look, especially
 if you have followed my Pro tip.
-{: .alert .alert-warning .p-3 .mx-2 .my-3}
+</div>
 
 ### Gallery: size of a **leaflet** map <a name="extra"></a>
 

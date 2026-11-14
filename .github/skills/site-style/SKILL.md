@@ -1,6 +1,6 @@
 ---
 name: site-style
-description: Apply One World's house style to Jekyll posts, project pages and their Rmd sources, including absolute links, Chulapa alerts, tags, accessible figures, references and YAML chunk options. Complements generic proofreading rather than replacing it.
+description: Apply One World's house style to Jekyll posts, project pages and their Rmd sources, including absolute links, Chulapa callouts, tags, accessible figures, references and YAML chunk options. Complements generic proofreading rather than replacing it.
 ---
 
 # One World house style
@@ -103,7 +103,7 @@ legends. If image processing is authorized, crop outer blank margins before
 conversion without stretching the plot, and measure social-image dimensions on
 the final file.
 
-## Front matter, alerts and references
+## Front matter, callouts and references
 
 - Require relevant tags on every post and project, matching the existing
   vocabulary and exact spelling. Select by content, not a fixed universal list.
@@ -117,8 +117,8 @@ the final file.
 - Check title, subtitle, image paths and alt metadata.
   Measure dimensions if authorized, otherwise flag stale values. Do not invent
   syndication URLs, project dates, dataset versions or publication status.
-- Use Chulapa/Kramdown alert markup, not Quarto callouts, GitHub admonitions or
-  custom CSS. Match severity to the message. See the publication reference.
+- Use native Chulapa callouts with Kramdown markup. Match the callout type to
+  the message. See the publication reference.
 - Use APA 7 for bibliographic entries and alphabetize by author in a
   `## References` section. Keep Markdown bullets and inline links in the
   article. Keep matching references identical in Rmd and Markdown and reuse
