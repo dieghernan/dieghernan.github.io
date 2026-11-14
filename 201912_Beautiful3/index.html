@@ -527,22 +527,26 @@
 <details class="chulapa-series-index mt-1">
   <summary>Series index<span class="sr-only">: Beautiful maps with R</span></summary>
  <nav aria-label="Beautiful maps with R">
-   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/201906_Beautiful1/">Beautiful maps with R (I): Fishnets, honeycombs and pixels</a></li><li><a class="chulapa-series-item" href="/201906_Beautiful2/">Beautiful maps with R (II): Fun with flags</a></li><li><span aria-current="page" class="chulapa-series-item font-weight-bold">Beautiful maps with R (III): Patterns and hatched maps <span class="chulapa-series-current">You are here</span></span></li><li><a class="chulapa-series-item" href="/202201_maps-flags/">Beautiful maps with R (IV): Fun with flags revisited</a></li><li><a class="chulapa-series-item" href="/202312_bertin_dots/">Beautiful maps with R (V): Point densities</a></li></ol>
+   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/201906_Beautiful1/">Beautiful maps with R (I): Fishnets, honeycombs and pixels</a></li><li><a class="chulapa-series-item" href="/201906_Beautiful2/">Beautiful maps with R (II): Fun with flags</a></li><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Beautiful maps with R (III): Patterns and hatched maps <i class="fas fa-dot-circle" aria-hidden="true"></i></span></li><li><a class="chulapa-series-item" href="/202201_maps-flags/">Beautiful maps with R (IV): Fun with flags revisited</a></li><li><a class="chulapa-series-item" href="/202312_bertin_dots/">Beautiful maps with R (V): Point densities</a></li></ol>
  </nav>
 </details>
 </div>
 </div>
        <div class="e-content"><p>In this post, I show how to produce different filling patterns that can be added
 over your shapefiles with the <strong>cartography</strong> package.</p>
-<p class="alert alert-info p-3 mx-2 mb-3"><strong>Historical example:</strong> The mapping examples use <strong>cartography</strong>, which is now
+<div role="note" aria-label="Note" class="callout-note">
+ <p><strong>Historical example:</strong> The mapping examples use <strong>cartography</strong>, which is now
 in maintenance mode. Its maintainers recommend <a href="https://riatelab.github.io/mapsf/"><strong>mapsf</strong></a>
 for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.</p>
-<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 17 February 2020</strong>: All these pieces of work are already available
+</div>
+<div role="note" aria-label="Note" class="callout-note">
+ <p><strong>Updated 17 February 2020</strong>: All these pieces of work are already available
 in <strong>cartography</strong> &gt;v.2.4.0 through the <a href="http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html"><code class="language-plaintext highlighter-rouge">hatchedLayer</code></a>
 and <a href="https://riatelab.github.io/cartography/docs/reference/legendHatched.html"><code class="language-plaintext highlighter-rouge">legendHatched</code></a>
 functions. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated
 blog post with examples is available in this <a href="https://dieghernan.github.io/202002_cartography1/">post</a>.</p>
+</div>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">

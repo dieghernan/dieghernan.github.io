@@ -521,7 +521,7 @@
 <details class="chulapa-series-index mt-1">
   <summary>Series index<span class="sr-only">: Beautiful maps with R</span></summary>
  <nav aria-label="Beautiful maps with R">
-   <ol class="mb-0 pl-4"><li><span aria-current="page" class="chulapa-series-item font-weight-bold">Beautiful maps with R (I): Fishnets, honeycombs and pixels <span class="chulapa-series-current">You are here</span></span></li><li><a class="chulapa-series-item" href="/201906_Beautiful2/">Beautiful maps with R (II): Fun with flags</a></li><li><a class="chulapa-series-item" href="/201912_Beautiful3/">Beautiful maps with R (III): Patterns and hatched maps</a></li><li><a class="chulapa-series-item" href="/202201_maps-flags/">Beautiful maps with R (IV): Fun with flags revisited</a></li><li><a class="chulapa-series-item" href="/202312_bertin_dots/">Beautiful maps with R (V): Point densities</a></li></ol>
+   <ol class="mb-0 pl-4"><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Beautiful maps with R (I): Fishnets, honeycombs and pixels <i class="fas fa-dot-circle" aria-hidden="true"></i></span></li><li><a class="chulapa-series-item" href="/201906_Beautiful2/">Beautiful maps with R (II): Fun with flags</a></li><li><a class="chulapa-series-item" href="/201912_Beautiful3/">Beautiful maps with R (III): Patterns and hatched maps</a></li><li><a class="chulapa-series-item" href="/202201_maps-flags/">Beautiful maps with R (IV): Fun with flags revisited</a></li><li><a class="chulapa-series-item" href="/202312_bertin_dots/">Beautiful maps with R (V): Point densities</a></li></ol>
  </nav>
 </details>
 </div>
@@ -603,10 +603,12 @@ So basically I produced five variations of the map:</p>
 </span><span class="c1"># Create my own color palette</span><span class="w">
 </span><span class="n">mypal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">colorRampPalette</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#F3F8F8"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#008080"</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
-<p class="alert alert-danger p-3 mx-2 mb-3"><i class="fas fa-exclamation-triangle"></i> <strong>Warning:</strong> The <code class="language-plaintext highlighter-rouge">cellsize</code> should
+<div role="note" aria-label="Caution" class="callout-caution">
+ <p>The <code class="language-plaintext highlighter-rouge">cellsize</code> should
 be set in the same unit as the projection (in this case, meters). Pay special
 attention to this because if the parameter is too small, meaning that the grid
 is too dense, <strong>R</strong> could crash easily.</p>
+</div>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grid</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_make_grid</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w">
   </span><span class="m">50</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span><span class="w">
   </span><span class="c1"># Kms</span><span class="w">

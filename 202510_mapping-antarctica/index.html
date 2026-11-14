@@ -590,10 +590,10 @@ to remove.</p>
   </span><span class="n">geom_text</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">),</span><span class="w"> </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp" alt="Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact." width="100%" /></p>
-<div class="alert alert-warning p-3 mx-2 mb-3">
-Note: This cleaning is tailored to this specific shapefile and may need to be
+<div role="note" aria-label="Note" class="callout-note">
+ <p>This cleaning is tailored to this specific shapefile and may need to be
 repeated for other shapefiles. The approach is straightforward but depends on
-the particular geometry and projection.
+the particular geometry and projection.</p>
 </div>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Final solution after some iterations...</span><span class="w">
 

@@ -150,9 +150,11 @@ boundaries. Imposing those boundaries is a modeling choice for this exercise,
 inspired by the Spanish workflow, rather than a verified property of the
 Slovenian postal system.&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-warning p-3 mx-2 mb-3&quot;&gt;&lt;i class=&quot;fa fa-exclamation-triangle&quot;&gt;&lt;/i&gt; This post explains the workflow. The
+&lt;div role=&quot;note&quot; aria-label=&quot;Warning&quot; class=&quot;callout-warning&quot;&gt;
+  &lt;p&gt;This post explains the workflow. The
 polygons we create are not official postal boundaries, and this exercise does
 not validate the GISCO postal data.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;getting-the-data&quot;&gt;Getting the data&lt;/h2&gt;
 
@@ -1219,12 +1221,10 @@ to remove.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/202510_test_points-1.webp&quot; alt=&quot;Close-up coordinate plot of Antarctic vertices 8200 through 9200. The points form a loop and stem corresponding to the lollipop artifact.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;div class=&quot;alert alert-warning p-3 mx-2 mb-3&quot;&gt;
-
-Note: This cleaning is tailored to this specific shapefile and may need to be
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;This cleaning is tailored to this specific shapefile and may need to be
 repeated for other shapefiles. The approach is straightforward but depends on
-the particular geometry and projection.
-
+the particular geometry and projection.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Final solution after some iterations...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -1845,31 +1845,29 @@ The original image (left/top) is 1.3 MB. The optimized image (right/bottom) is
 
 &lt;p&gt;There are other alternatives for optimizing images with &lt;strong&gt;R&lt;/strong&gt;, but first…&lt;/p&gt;
 
-&lt;div class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;
-
-&lt;p&gt;
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;
   &lt;a href=&quot;https://yihui.org/&quot;&gt;Yihui Xie&lt;/a&gt;, one of the most prominent figures
   in the &lt;strong&gt;R&lt;/strong&gt; community, was recently laid off from his position
   at Posit PBC (formerly RStudio)
   (&lt;a href=&quot;https://yihui.org/en/2024/01/bye-rstudio/&quot;&gt;more info here&lt;/a&gt;).
 &lt;/p&gt;
-&lt;p&gt;
+  &lt;p&gt;
   Yihui is the developer of &lt;strong&gt;knitr&lt;/strong&gt;, &lt;strong&gt;markdown&lt;/strong&gt;,
   &lt;strong&gt;blogdown&lt;/strong&gt; and &lt;strong&gt;bookdown&lt;/strong&gt;, among others, and he
   has been one of the key contributors (if not the most important) to the
   reproducible research space with &lt;strong&gt;R&lt;/strong&gt; through his libraries.
 &lt;/p&gt;
-&lt;p&gt;
+  &lt;p&gt;
   If you have ever used and enjoyed his packages, consider sponsoring him on
   GitHub.
 &lt;/p&gt;
 
-&lt;div class=&quot;text-center my-3&quot;&gt;
+  &lt;div class=&quot;text-center my-3&quot;&gt;
 
       &lt;a class=&quot;btn btn-light border border-dark&quot; aria-label=&quot;Sponsor @yihui&quot; target=&quot;_top&quot; href=&quot;https://github.com/sponsors/yihui?o=esb&quot;&gt;
       &lt;i class=&quot;fa-regular fa-heart fa-lg mr-2&quot; aria-hidden=&quot;true&quot; style=&quot;color: #bf3989;&quot;&gt;&lt;/i&gt;&lt;span class=&quot;font-weight-bold&quot;&gt;Sponsor Yihui Xie&lt;/span&gt;
       &lt;/a&gt;
-
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -2488,8 +2486,10 @@ on the same topic. He is preparing an &lt;strong&gt;R&lt;/strong&gt; package nam
 &lt;a href=&quot;https://github.com/benyamindsmith/starBliss&quot;&gt;&lt;strong&gt;starBliss&lt;/strong&gt;&lt;/a&gt; and hopefully this
 post will be of some help.&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;I have very little knowledge of this topic, so if you find errors or
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;I have very little knowledge of this topic, so if you find errors or
 have any suggestions, please let me know in the comments section below.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;first-things-first-the-data&quot;&gt;First things first: the data&lt;/h2&gt;
 
@@ -3276,12 +3276,14 @@ repo. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&q
     <published>2022-12-12T00:00:00+01:00</published>
     <updated>2026-10-25T00:00:00+02:00</updated>
     <id>https://dieghernan.github.io/202212_tidyterra-hillshade-2/</id>
-    <content type="html" xml:base="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">&lt;h2&gt;The rain in Spain does not stay mainly in the plain&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp&quot; alt=&quot;&quot;&gt;&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated on October 25, 2026:&lt;/strong&gt; The elevation and precipitation maps now use
+    <content type="html" xml:base="https://dieghernan.github.io/202212_tidyterra-hillshade-2/">&lt;h2&gt;The rain in Spain does not stay mainly in the plain&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp&quot; alt=&quot;&quot;&gt;&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Updated on October 25, 2026:&lt;/strong&gt; The elevation and precipitation maps now use
 &lt;strong&gt;ggblend&lt;/strong&gt; to multiply their colors with the hillshade, following
 &lt;a href=&quot;https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/&quot;&gt;Barney Harris’s blending adventure&lt;/a&gt;.
 The map and marginal profiles now share the same precipitation palette and limits.
 Dominic Royé also demonstrates how to use &lt;strong&gt;ggblend&lt;/strong&gt; in
 &lt;a href=&quot;https://dominicroye.github.io/blog/hillshade-effect/&quot;&gt;Hillshade effects&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;This is the second post of the series “Hillshade, colors and
 marginal plots with &lt;strong&gt;tidyterra&lt;/strong&gt;”. In this post, I explore an approach for
@@ -4205,13 +4207,15 @@ plot. Here you can find a simplified version:&lt;/p&gt;
     <published>2022-10-17T00:00:00+02:00</published>
     <updated>2026-10-25T00:00:00+02:00</updated>
     <id>https://dieghernan.github.io/202210_tidyterra-hillshade/</id>
-    <content type="html" xml:base="https://dieghernan.github.io/202210_tidyterra-hillshade/">&lt;h2&gt;How to overlay SpatRasters&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp&quot; alt=&quot;&quot;&gt;&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated on October 25, 2026:&lt;/strong&gt; This post now uses &lt;strong&gt;ggblend&lt;/strong&gt; to combine
+    <content type="html" xml:base="https://dieghernan.github.io/202210_tidyterra-hillshade/">&lt;h2&gt;How to overlay SpatRasters&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp&quot; alt=&quot;&quot;&gt;&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Updated on October 25, 2026:&lt;/strong&gt; This post now uses &lt;strong&gt;ggblend&lt;/strong&gt; to combine
 hillshade and elevation colors with a multiply blend, following &lt;a href=&quot;https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/&quot;&gt;Barney Harris’s
 blending
 adventure&lt;/a&gt;. The
 final map replaces the original overlay with reduced opacity. Dominic Royé also
 demonstrates how to use &lt;strong&gt;ggblend&lt;/strong&gt; in &lt;a href=&quot;https://dominicroye.github.io/blog/hillshade-effect/&quot;&gt;Hillshade
 effects&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;em&gt;This is the first post of a series of two, showing how to overlay a SpatRaster
 on top of a hillshade background. The next post shows how to add marginal plots
@@ -5824,10 +5828,12 @@ A step-by-step example is presented to clarify the method. A case study using
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;spData::afcon&lt;/code&gt; is also included, making use of additional packages such as
 &lt;strong&gt;sf&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
 in maintenance mode. Its maintainers recommend &lt;a href=&quot;https://riatelab.github.io/mapsf/&quot;&gt;&lt;strong&gt;mapsf&lt;/strong&gt;&lt;/a&gt;
 for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
@@ -6416,10 +6422,12 @@ Penguin.&lt;/li&gt;
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2.4.0&lt;/code&gt; by
 &lt;a href=&quot;https://github.com/dieghernan/&quot;&gt;dieghernan&lt;/a&gt; and already available on &lt;strong&gt;CRAN&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
 in maintenance mode. Its maintainers recommend &lt;a href=&quot;https://riatelab.github.io/mapsf/&quot;&gt;&lt;strong&gt;mapsf&lt;/strong&gt;&lt;/a&gt;
 for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Those new features are:&lt;/p&gt;
 
@@ -6924,16 +6932,20 @@ terms.&lt;/p&gt;
     <content type="html" xml:base="https://dieghernan.github.io/201912_Beautiful3/">&lt;h2&gt;A solution for black-and-white and academic maps&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191212_imgpost-1.webp&quot; alt=&quot;&quot;&gt;&lt;p&gt;In this post, I show how to produce different filling patterns that can be added
 over your shapefiles with the &lt;strong&gt;cartography&lt;/strong&gt; package.&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
 in maintenance mode. Its maintainers recommend &lt;a href=&quot;https://riatelab.github.io/mapsf/&quot;&gt;&lt;strong&gt;mapsf&lt;/strong&gt;&lt;/a&gt;
 for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated 17 February 2020&lt;/strong&gt;: All these pieces of work are already available
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Updated 17 February 2020&lt;/strong&gt;: All these pieces of work are already available
 in &lt;strong&gt;cartography&lt;/strong&gt; &amp;gt;v.2.4.0 through the &lt;a href=&quot;http://riatelab.github.io/cartography/docs/reference/hatchedLayer.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hatchedLayer&lt;/code&gt;&lt;/a&gt;
 and &lt;a href=&quot;https://riatelab.github.io/cartography/docs/reference/legendHatched.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;legendHatched&lt;/code&gt;&lt;/a&gt;
 functions. Just install it via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install.packages(&quot;cartography&quot;)&lt;/code&gt;. A dedicated
 blog post with examples is available in this &lt;a href=&quot;https://dieghernan.github.io/202002_cartography1/&quot;&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;required-r-packages&quot;&gt;Required &lt;strong&gt;R&lt;/strong&gt; packages&lt;/h2&gt;
 
@@ -7332,10 +7344,12 @@ In this case, I have chosen to plot the
 retrieved on February 10, 2019, although the data refers to 2017 (source:
 &lt;a href=&quot;http://www.irodat.org/?p=database&quot;&gt;IRODaT&lt;/a&gt;).&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
 in maintenance mode. Its maintainers recommend &lt;a href=&quot;https://riatelab.github.io/mapsf/&quot;&gt;&lt;strong&gt;mapsf&lt;/strong&gt;&lt;/a&gt;
 for new work. The original code and outputs are preserved and have not been
 revalidated against current package versions.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;web-scraping&quot;&gt;Web scraping&lt;/h2&gt;
 
@@ -7516,7 +7530,9 @@ one of my favorites, &lt;strong&gt;cartography&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20191016_imgpost.webp&quot; alt=&quot;World choropleth map of organ donors per million people in 2017. Darker blue indicates higher donor rates and gray indicates missing data.&quot; /&gt;&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Update&lt;/strong&gt;: The map is already part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary&quot;&gt;Wikipedia article&lt;/a&gt;.&lt;/p&gt;
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: The map is already part of the &lt;a href=&quot;https://en.wikipedia.org/wiki/International_organ_donor_rates#Global_Summary&quot;&gt;Wikipedia article&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 </content>
     <author>
       <name>Diego HH</name>
@@ -7537,14 +7553,18 @@ one of my favorites, &lt;strong&gt;cartography&lt;/strong&gt;:&lt;/p&gt;
     <published>2019-06-18T00:00:00+02:00</published>
     <updated>2023-01-23T00:00:00+01:00</updated>
     <id>https://dieghernan.github.io/201906_Beautiful2/</id>
-    <content type="html" xml:base="https://dieghernan.github.io/201906_Beautiful2/">&lt;h2&gt;Put a picture on your map&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp&quot; alt=&quot;&quot;&gt;&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated 29 December 2020&lt;/strong&gt;: All these pieces of work are already available
+    <content type="html" xml:base="https://dieghernan.github.io/201906_Beautiful2/">&lt;h2&gt;Put a picture on your map&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190618_imgpost-1.webp&quot; alt=&quot;&quot;&gt;&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Updated 29 December 2020&lt;/strong&gt;: All these pieces of work are already available
 in &lt;strong&gt;cartography&lt;/strong&gt; &amp;gt;v.2.4.0 in the &lt;a href=&quot;http://riatelab.github.io/cartography/docs/reference/getPngLayer.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getPngLayer&lt;/code&gt;&lt;/a&gt;
 function. Just install it via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install.packages(&quot;cartography&quot;)&lt;/code&gt;. A dedicated
 blog post with examples is available in this &lt;a href=&quot;https://dieghernan.github.io/202002_cartography1/&quot;&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;strong&gt;Updated 25 January 2023&lt;/strong&gt;: &lt;strong&gt;cartography&lt;/strong&gt; is in maintenance mode. You can use
+&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
+  &lt;p&gt;&lt;strong&gt;Updated 25 January 2023&lt;/strong&gt;: &lt;strong&gt;cartography&lt;/strong&gt; is in maintenance mode. You can use
 &lt;strong&gt;rasterpic&lt;/strong&gt; + &lt;strong&gt;tidyterra&lt;/strong&gt; to achieve the same result, see &lt;a href=&quot;https://dieghernan.github.io/202201_maps-flags/&quot;&gt;link1&lt;/a&gt;
 and &lt;a href=&quot;https://dieghernan.github.io/202205_tidyterra/&quot;&gt;link2&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Want to use a flag (or any &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.png&lt;/code&gt; file) as a background for your map? You are
 in the right place. I am aware that there are some &lt;strong&gt;R&lt;/strong&gt; packages out
@@ -7641,8 +7661,10 @@ Asturias to crop the flag.&lt;/p&gt;
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;par&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;opar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt; &lt;strong&gt;Pro tip:&lt;/strong&gt; Use high-quality &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.png&lt;/code&gt; files,
+&lt;div role=&quot;note&quot; aria-label=&quot;Tip&quot; class=&quot;callout-tip&quot;&gt;
+  &lt;p&gt;Use high-quality &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*.png&lt;/code&gt; files,
 otherwise the plot will look quite poor. Here I show an extreme example.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;MURshp&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Spain&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ccaa.shortname.es&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Murcia&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MURLow&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getPngLayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -7826,10 +7848,12 @@ So basically I produced five variations of the map:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mypal&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colorRampPalette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#F3F8F8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#008080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p class=&quot;alert alert-danger p-3 mx-2 mb-3&quot;&gt;&lt;i class=&quot;fas fa-exclamation-triangle&quot;&gt;&lt;/i&gt; &lt;strong&gt;Warning:&lt;/strong&gt; The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cellsize&lt;/code&gt; should
+&lt;div role=&quot;note&quot; aria-label=&quot;Caution&quot; class=&quot;callout-caution&quot;&gt;
+  &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cellsize&lt;/code&gt; should
 be set in the same unit as the projection (in this case, meters). Pay special
 attention to this because if the parameter is too small, meaning that the grid
 is too dense, &lt;strong&gt;R&lt;/strong&gt; could crash easily.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;grid&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_make_grid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -8212,10 +8236,12 @@ case of &lt;span class=&quot;chulapa&quot;&gt;Chulapa&lt;/span&gt; it is on
 &lt;p&gt;So now you just have to paste the code that you got in step 1 into the
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p class=&quot;alert alert-info p-3 mx-2 mb-3&quot;&gt;&lt;i class=&quot;fa fa-star&quot;&gt;&lt;/i&gt; &lt;strong&gt;Pro tip:&lt;/strong&gt; For a better performance of the
+&lt;div role=&quot;note&quot; aria-label=&quot;Tip&quot; class=&quot;callout-tip&quot;&gt;
+  &lt;p&gt;For a better performance of the
 site, include these libraries only when you need them. In my case, I added
 a custom variable in my YAML front matter for those posts with a leaflet
 map, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;leafletmap: true&lt;/code&gt;. Go to step 4 for a working example.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;the-rstudio-part&quot;&gt;The RStudio part&lt;/h3&gt;
 
@@ -8294,9 +8320,11 @@ but we will solve that later.&lt;/p&gt;
   &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p class=&quot;alert alert-warning p-3 mx-2 my-3&quot;&gt;&lt;i class=&quot;fa fa-exclamation-triangle&quot;&gt;&lt;/i&gt; &lt;strong&gt;Warning:&lt;/strong&gt; Be sure that the
+&lt;div role=&quot;note&quot; aria-label=&quot;Warning&quot; class=&quot;callout-warning&quot;&gt;
+  &lt;p&gt;Be sure that the
 widget id (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;7ab57412f7b1df4d5773&lt;/code&gt; in the example) is the same in the
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; and in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;script&amp;gt;&lt;/code&gt; part. If not, your map would not load.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;style=&quot;width:100%; height:216px;&quot;&lt;/code&gt; part controls the actual size of
 the leaflet widget. In this case, the map will adapt to the width of
@@ -8313,9 +8341,11 @@ libraries in the header and make the magic happen, just like this:&lt;/p&gt;
 &lt;div id=&quot;htmlwidget-60e5339b540855d29db4&quot; style=&quot;width:672px;height:480px;&quot; class=&quot;leaflet html-widget&quot;&gt;&lt;/div&gt;
 &lt;script type=&quot;application/json&quot; data-for=&quot;htmlwidget-60e5339b540855d29db4&quot;&gt;{&quot;x&quot;:{&quot;options&quot;:{&quot;crs&quot;:{&quot;crsClass&quot;:&quot;L.CRS.EPSG3857&quot;,&quot;code&quot;:null,&quot;proj4def&quot;:null,&quot;projectedBounds&quot;:null,&quot;options&quot;:{}}},&quot;calls&quot;:[{&quot;method&quot;:&quot;addTiles&quot;,&quot;args&quot;:[&quot;//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,null,null,{&quot;minZoom&quot;:0,&quot;maxZoom&quot;:18,&quot;tileSize&quot;:256,&quot;subdomains&quot;:&quot;abc&quot;,&quot;errorTileUrl&quot;:&quot;&quot;,&quot;tms&quot;:false,&quot;noWrap&quot;:false,&quot;zoomOffset&quot;:0,&quot;zoomReverse&quot;:false,&quot;opacity&quot;:1,&quot;zIndex&quot;:1,&quot;detectRetina&quot;:false,&quot;attribution&quot;:&quot;&amp;copy; &lt;a href=\&quot;http://openstreetmap.org\&quot;&gt;OpenStreetMap&lt;\/a&gt; contributors, &lt;a href=\&quot;http://creativecommons.org/licenses/by-sa/2.0/\&quot;&gt;CC-BY-SA&lt;\/a&gt;&quot;}]},{&quot;method&quot;:&quot;addMarkers&quot;,&quot;args&quot;:[-36.852,174.768,null,null,null,{&quot;interactive&quot;:true,&quot;draggable&quot;:false,&quot;keyboard&quot;:true,&quot;title&quot;:&quot;&quot;,&quot;alt&quot;:&quot;&quot;,&quot;zIndexOffset&quot;:0,&quot;opacity&quot;:1,&quot;riseOnHover&quot;:false,&quot;riseOffset&quot;:250},&quot;The birthplace of R&quot;,null,null,null,null,{&quot;interactive&quot;:false,&quot;permanent&quot;:false,&quot;direction&quot;:&quot;auto&quot;,&quot;opacity&quot;:1,&quot;offset&quot;:[0,0],&quot;textsize&quot;:&quot;10px&quot;,&quot;textOnly&quot;:false,&quot;className&quot;:&quot;&quot;,&quot;sticky&quot;:true},null]}],&quot;limits&quot;:{&quot;lat&quot;:[-36.852,-36.852],&quot;lng&quot;:[174.768,174.768]}},&quot;evals&quot;:[],&quot;jsHooks&quot;:[]}&lt;/script&gt;
 
-&lt;p class=&quot;alert alert-warning p-3 mx-2 my-3&quot;&gt;&lt;i class=&quot;fa fa-exclamation-triangle&quot;&gt;&lt;/i&gt; &lt;strong&gt;Warning:&lt;/strong&gt; Have you checked
+&lt;div role=&quot;note&quot; aria-label=&quot;Warning&quot; class=&quot;callout-warning&quot;&gt;
+  &lt;p&gt;Have you checked
 the YAML front matter of your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.md&lt;/code&gt; file? Have another look, especially
 if you have followed my Pro tip.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;gallery-size-of-a-leaflet-map-&quot;&gt;Gallery: size of a leaflet map &lt;a name=&quot;extra&quot;&gt;&lt;/a&gt;&lt;/h3&gt;
 

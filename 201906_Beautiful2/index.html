@@ -529,18 +529,22 @@
 <details class="chulapa-series-index mt-1">
   <summary>Series index<span class="sr-only">: Beautiful maps with R</span></summary>
  <nav aria-label="Beautiful maps with R">
-   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/201906_Beautiful1/">Beautiful maps with R (I): Fishnets, honeycombs and pixels</a></li><li><span aria-current="page" class="chulapa-series-item font-weight-bold">Beautiful maps with R (II): Fun with flags <span class="chulapa-series-current">You are here</span></span></li><li><a class="chulapa-series-item" href="/201912_Beautiful3/">Beautiful maps with R (III): Patterns and hatched maps</a></li><li><a class="chulapa-series-item" href="/202201_maps-flags/">Beautiful maps with R (IV): Fun with flags revisited</a></li><li><a class="chulapa-series-item" href="/202312_bertin_dots/">Beautiful maps with R (V): Point densities</a></li></ol>
+   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/201906_Beautiful1/">Beautiful maps with R (I): Fishnets, honeycombs and pixels</a></li><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Beautiful maps with R (II): Fun with flags <i class="fas fa-dot-circle" aria-hidden="true"></i></span></li><li><a class="chulapa-series-item" href="/201912_Beautiful3/">Beautiful maps with R (III): Patterns and hatched maps</a></li><li><a class="chulapa-series-item" href="/202201_maps-flags/">Beautiful maps with R (IV): Fun with flags revisited</a></li><li><a class="chulapa-series-item" href="/202312_bertin_dots/">Beautiful maps with R (V): Point densities</a></li></ol>
  </nav>
 </details>
 </div>
 </div>
-       <div class="e-content"><p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 29 December 2020</strong>: All these pieces of work are already available
+       <div class="e-content"><div role="note" aria-label="Note" class="callout-note">
+ <p><strong>Updated 29 December 2020</strong>: All these pieces of work are already available
 in <strong>cartography</strong> &gt;v.2.4.0 in the <a href="http://riatelab.github.io/cartography/docs/reference/getPngLayer.html"><code class="language-plaintext highlighter-rouge">getPngLayer</code></a>
 function. Just install it via <code class="language-plaintext highlighter-rouge">install.packages("cartography")</code>. A dedicated
 blog post with examples is available in this <a href="https://dieghernan.github.io/202002_cartography1/">post</a>.</p>
-<p class="alert alert-info p-3 mx-2 mb-3"><strong>Updated 25 January 2023</strong>: <strong>cartography</strong> is in maintenance mode. You can use
+</div>
+<div role="note" aria-label="Note" class="callout-note">
+ <p><strong>Updated 25 January 2023</strong>: <strong>cartography</strong> is in maintenance mode. You can use
 <strong>rasterpic</strong> + <strong>tidyterra</strong> to achieve the same result, see <a href="https://dieghernan.github.io/202201_maps-flags/">link1</a>
 and <a href="https://dieghernan.github.io/202205_tidyterra/">link2</a>.</p>
+</div>
 <p>Want to use a flag (or any <code class="language-plaintext highlighter-rouge">*.png</code> file) as a background for your map? You are
 in the right place. I am aware that there are some <strong>R</strong> packages out
 <a href="https://github.com/RobertMyles/flagfillr">there</a>, but we focus here on the
@@ -622,8 +626,10 @@ Asturias to crop the flag.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190618_Asturias-1.webp" alt="Two maps comparing the rectangular flag of Asturias with the same flag clipped to the boundary of Asturias." /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">opar</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p class="alert alert-info p-3 mx-2 mb-3"><i class="fa fa-star"></i> <strong>Pro tip:</strong> Use high-quality <code class="language-plaintext highlighter-rouge">*.png</code> files,
+<div role="note" aria-label="Tip" class="callout-tip">
+ <p>Use high-quality <code class="language-plaintext highlighter-rouge">*.png</code> files,
 otherwise the plot will look quite poor. Here I show an extreme example.</p>
+</div>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MURshp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Spain</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">ccaa.shortname.es</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Murcia"</span><span class="p">)</span><span class="w">
 </span><span class="n">MURLow</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">getPngLayer</span><span class="p">(</span><span class="w">
   </span><span class="n">MURshp</span><span class="p">,</span><span class="w">

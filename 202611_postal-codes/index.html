@@ -524,7 +524,7 @@
 <details class="chulapa-series-index mt-1">
   <summary>Series index<span class="sr-only">: Postal codes of Spain</span></summary>
  <nav aria-label="Postal codes of Spain">
-   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/projects/postal-codes-spain">Postal codes of Spain</a></li><li><span aria-current="page" class="chulapa-series-item font-weight-bold">Postal codes and tessellations <span class="chulapa-series-current">You are here</span></span></li></ol>
+   <ol class="mb-0 pl-4"><li><a class="chulapa-series-item" href="/projects/postal-codes-spain">Postal codes of Spain</a></li><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Postal codes and tessellations <i class="fas fa-dot-circle" aria-hidden="true"></i></span></li></ol>
  </nav>
 </details>
 </div>
@@ -641,9 +641,11 @@ still cannot reproduce postal delivery decisions.</p>
 boundaries. Imposing those boundaries is a modeling choice for this exercise,
 inspired by the Spanish workflow, rather than a verified property of the
 Slovenian postal system.</p>
-<p class="alert alert-warning p-3 mx-2 mb-3"><i class="fa fa-exclamation-triangle"></i> This post explains the workflow. The
+<div role="note" aria-label="Warning" class="callout-warning">
+ <p>This post explains the workflow. The
 polygons we create are not official postal boundaries, and this exercise does
 not validate the GISCO postal data.</p>
+</div>
 <h2 id="getting-the-data">Getting the data</h2>
 <p>First, let’s get the municipal boundaries and postal points. We use the 2024
 release of both datasets.</p>
