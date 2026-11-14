@@ -18,7 +18,9 @@ og_title: "One World: R packages, maps and open-source projects"
 ## <a href="./blog" class="text-body">Recent posts</a>
 {: .mb-5 }
 
-{% include_cached components/indexcards.html cacheddocs=site.posts cachedlimit=3 %}
+<div class="blog-listing-cards">
+  {% include_cached components/indexcards.html cacheddocs=site.posts cachedlimit=3 %}
+</div>
 
 <div class="text-right mx-3">
   <a href="./blog/" class="btn btn-primary border-0">Blog <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i><span class="sr-only">Go</span></a>

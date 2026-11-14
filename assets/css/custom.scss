@@ -85,3 +85,55 @@ h1,h2,h3,h4,h5,h6 {
 .series-card summary {
   cursor: pointer;
 }
+
+.blog-listing-cards .card-footer .p-category[href$="#r_bloggers"],
+.blog-listing-cards .card-footer :nth-child(n+4 of .p-category:not([href$="#r_bloggers"])) {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .blog-listing-cards .chulapa-card-img {
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .blog-listing-header .hero-chulapa-image {
+    min-height: 0;
+  }
+
+  .blog-listing-header .chulapa-subtitle {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .compact-mobile-author .p-author {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .25rem 1rem;
+  }
+
+  .compact-mobile-author .p-author > .row {
+    margin: 0 !important;
+  }
+
+  .compact-mobile-author .p-author .u-photo {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0 !important;
+  }
+
+  .compact-mobile-author .p-author .p-name {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    padding: 0 0 0 .5rem;
+  }
+
+  .compact-mobile-author .p-author > .row > .col {
+    padding: 0;
+  }
+}

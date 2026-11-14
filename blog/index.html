@@ -14,12 +14,14 @@ og_image_type: "image/png"
 og_image_alt: "Raster map with irregular areas in magenta, orange, yellow and turquoise."
 ---
 <!-- Chulapa template for pagination -->
-{%- include components/headers.html headertype=page.header_type imghero=page.header_img -%}
+<div class="blog-listing-header">
+  {%- include components/headers.html headertype=page.header_type imghero=page.header_img -%}
+</div>
 <main class="h-feed container-lg pb-3 flex-fill">
   <a class="p-name u-url d-none" href="{{ page.url | absolute_url | escape }}">{{ page.title | escape }}</a>
   {% include snippets/author-microformats.html author=page.author %}
   {%- include components/breadcrumbdatesocial.html -%}
-  <div class="row pt-2 mt-3">
+  <div class="blog-listing-cards row pt-2 mt-3">
     <div class="col-md-8 offset-md-2">
       {% include_cached components/indexcards.html cacheddocs=paginator.posts cachedlimit=site.paginate %}
     </div>
