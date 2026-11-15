@@ -55,6 +55,7 @@
                         {%- assign page_author_id = page_author_url | append: '#author' -%}
                       {%- endif %}
                   {
+                    "position": {{ forloop.parentloop.index }},
                     {% if chapter.collection == "posts" %}
                     "@type": "BlogPosting",
                     "@id": {% assign jsonld_value = chapter.url | absolute_url | append: '#article' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
@@ -72,8 +73,7 @@
                       "@id": {% include snippets/jsonld-string.html value=page_author_id decode_html=false %},
                       "name": {% include snippets/jsonld-string.html value=person_name %}{% if person_url != empty %},
                       "url": {% assign person_url = person_url | absolute_url %}{% include snippets/jsonld-string.html value=person_url decode_html=false %}{% endif %}
-                      },
-                    "position": {{ forloop.parentloop.index }}
+                      }
                   }{%- unless forloop.parentloop.last -%},{%- endunless -%}
                      {% endfor %}
                   {% endfor %}
