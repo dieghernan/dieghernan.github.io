@@ -42,15 +42,7 @@
               {%- assign emitted_chapters = emitted_chapters | plus: 1 -%}
               {%- assign chapter_url = chapter.url | absolute_url -%}
               {
-                {%- if chapter.collection == "posts" %}
-                "@type": "BlogPosting",
-                "@id": {% assign jsonld_value = chapter_url | append: '#article' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
-                "headline": {% assign jsonld_value = chapter.title | markdownify | strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %}
-                {%- else %}
-                "@type": "WebPage",
-                "@id": {% include snippets/jsonld-string.html value=chapter_url decode_html=false %},
-                "name": {% assign jsonld_value = chapter.title | markdownify | strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %}
-                {%- endif %}
+                "@id": {% if chapter.collection == "posts" %}{% assign jsonld_value = chapter_url | append: '#article' %}{% else %}{% assign jsonld_value = chapter_url %}{% endif %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %}
               }
             {%- endfor -%}
           {%- endfor %}
