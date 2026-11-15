@@ -1,7 +1,7 @@
 ---
 series:
   - id: map-projections
-    order: 4
+    order: 2
 title: "Mapping Antarctica"
 excerpt: "Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R."
 subtitle: "Cool maps from the South Pole"
