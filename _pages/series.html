@@ -5,6 +5,7 @@ permalink: /series/
 show_header: false
 excerpt: Explore multipart tutorials on cartography, R and building sites with Chulapa and Jekyll.
 description: Browse One World series on maps, spatial data, R, Chulapa and Jekyll.
+series_page: true
 ---
 
 {%- assign series_documents = site.pages -%}
@@ -46,7 +47,7 @@ description: Browse One World series on maps, spatial data, R, Chulapa and Jekyl
               alt="{{ cover.og_image_alt | escape }}" decoding="async"{% if forloop.index > 3 %} loading="lazy"{% endif %}>
           {% endif %}
           <div class="card-body">
-            <h2 class="card-title h4 mb-2">{{ series.label | escape }}</h2>
+            <h2 class="card-title h4 mb-2" id="{{ series_id }}">{{ series.label | escape }}</h2>
             <details>
               <summary>{{ chapters.size }} parts<span class="sr-only"> in {{ series.label | escape }}</span></summary>
               <ol class="pl-4 mb-0 mt-2">

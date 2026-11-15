@@ -1,0 +1,65 @@
+{%- include snippets/canonical-url.html url=page.url canonical=page.canonical_url -%}
+{%- assign series_documents = site.pages -%}
+{%- assign published_collections = site.collections | where: "output", true -%}
+{%- for collection in published_collections -%}
+  {%- assign series_documents = series_documents | concat: collection.docs -%}
+{%- endfor -%}
+{%- assign series_documents = series_documents | where_exp: "document", "document.series" | where_exp: "document", "document.published != false" %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": {% include snippets/jsonld-string.html value=canonical_url decode_html=false %},
+        "name": "Series",
+        "mainEntity": {
+          "@type": "ItemList",
+          "@id": {% assign jsonld_value = canonical_url | append: '#itemlist' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
+          "itemListOrder": "https://schema.org/ItemListUnordered",
+          "numberOfItems": {{ site.series | size }},
+          "itemListElement": [
+          {%- for entry in site.series -%}
+            {%- unless forloop.first -%},{%- endunless -%}
+            {% assign series_id = entry[0] %}
+            {% assign series = entry[1] %}
+            {% assign chapters = "" | split: "," %}
+            {% for document in series_documents %}
+              {% if document.collection and document.date and site.future != true %}
+                {% assign document_time = document.date | date: "%s" | plus: 0 %}
+                {% if document_time > build_time %}{% continue %}{% endif %}
+              {% endif %}
+              {% assign membership = document.series | where: "id", series_id | first %}
+              {% if membership.order %}
+                {% assign chapters = chapters | push: document %}
+              {% endif %}
+            {% endfor %}
+            {% if chapters.size < 2 %}{% continue %}{% endif %}
+            {% assign chapter_groups = chapters | group_by_exp: "document", "document.series | where: 'id', series_id | map: 'order' | first" | sort: "name" %}
+            
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "item": {
+                "@type": "CreativeWorkSeries",
+                "@id": {% assign jsonld_value = canonical_url | append: '#' | append: series_id %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
+                "name": {% assign jsonld_value = series.label | default: '---' | markdownify | strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %},
+                "hasPart": [
+                  {% for group in chapter_groups %}
+                    {% assign ordered_chapters = group.items | sort: "url" %}
+                    {% for chapter in ordered_chapters %}
+                  {
+                    "@type": "BlogPosting",
+                    "@id": {% assign jsonld_value = chapter.url | absolute_url | append: '#article' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
+                    "url": {% assign jsonld_value = chapter.url | absolute_url %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
+                    "name": {% assign jsonld_value = chapter.title |strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %},
+                    "position": {{ forloop.parentloop.index }}
+                  }{%- unless forloop.parentloop.last -%},{%- endunless -%}
+                     {% endfor %}
+                  {% endfor %}
+                ]
+              }
+            }
+          {%- endfor -%}
+          ]
+        }
+      }
+    </script>
