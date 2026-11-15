@@ -46,11 +46,33 @@
                   {% for group in chapter_groups %}
                     {% assign ordered_chapters = group.items | sort: "url" %}
                     {% for chapter in ordered_chapters %}
+                      {%- assign page_image_source = chapter.og_image | default: chapter.header_img | strip -%}
+                      {%- assign site_author_id = home_url | append: '#author' -%}
+                      {%- assign page_author_id = site_author_id -%}
+                      {%- if chapter.author -%}
+                        {%- include snippets/person-data.html author=chapter.author -%}
+                        {%- assign page_author_url = person_url | default: canonical_url | absolute_url | split: '#' | first -%}
+                        {%- assign page_author_id = page_author_url | append: '#author' -%}
+                      {%- endif %}
                   {
+                    {% if chapter.collection == "posts" %}
                     "@type": "BlogPosting",
                     "@id": {% assign jsonld_value = chapter.url | absolute_url | append: '#article' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
                     "url": {% assign jsonld_value = chapter.url | absolute_url %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
                     "headline": {% assign jsonld_value = chapter.title |strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %},
+                    {% if page_image_source %}
+                    "image": "{{ page_image_source | absolute_url }}",
+                    {% endif %}
+                    {% else %}
+                    "@type": "WebPage",
+                    "@id": {% assign jsonld_value = chapter.url | absolute_url | append: '#article' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
+                     "name": {% assign jsonld_value = chapter.title |strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %},
+                    {% endif %}
+                    "author": {
+                      "@id": {% include snippets/jsonld-string.html value=page_author_id decode_html=false %},
+                      "name": {% include snippets/jsonld-string.html value=person_name %}{% if person_url != empty %},
+                      "url": {% assign person_url = person_url | absolute_url %}{% include snippets/jsonld-string.html value=person_url decode_html=false %}{% endif %}
+                      },
                     "position": {{ forloop.parentloop.index }}
                   }{%- unless forloop.parentloop.last -%},{%- endunless -%}
                      {% endfor %}
