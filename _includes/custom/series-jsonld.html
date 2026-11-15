@@ -50,7 +50,7 @@
                     "@type": "BlogPosting",
                     "@id": {% assign jsonld_value = chapter.url | absolute_url | append: '#article' %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
                     "url": {% assign jsonld_value = chapter.url | absolute_url %}{% include snippets/jsonld-string.html value=jsonld_value decode_html=false %},
-                    "name": {% assign jsonld_value = chapter.title |strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %},
+                    "headline": {% assign jsonld_value = chapter.title |strip_html | strip %}{% include snippets/jsonld-string.html value=jsonld_value %},
                     "position": {{ forloop.parentloop.index }}
                   }{%- unless forloop.parentloop.last -%},{%- endunless -%}
                      {% endfor %}
