@@ -577,7 +577,7 @@ grid::popViewport()
   (Version 1.0.0) [Computer software]. Comprehensive R Archive Network.
   [DOI](https://doi.org/10.32614/CRAN.package.crstools)
 - Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of
-  Chicago Press. <https://doi.org/10.7208/chicago/9780226436081.001.0001>
+  Chicago Press. [DOI](https://doi.org/10.7208/chicago/9780226436081.001.0001)
 - Royé, D. (2026, May 3). Map projections: A practical guide to common
   mistakes and how to fix them. *Dr Dominic Royé*.
   <https://dominicroye.github.io/blog/map-projections/>
