@@ -13,7 +13,7 @@
     <language>en-US</language>
     <copyright>(c) 2026, Diego HH</copyright>
     <pubDate>Fri, 06 Nov 2026 00:00:00 +0100</pubDate>
-    <lastBuildDate>Mon, 16 Nov 2026 22:17:04 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 22:32:58 +0100</lastBuildDate>
     <category>blog</category>
     <ttl>60</ttl>
     <atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -3370,7 +3370,7 @@ your work.&lt;/p&gt;
       <dc:creator>Diego HH</dc:creator>
       <title>Beautiful maps with R (V): Point densities</title>
       <description>Another way to represent demographics on a map.</description>
-      <content:encoded>&lt;p&gt;Bertin’s dot density maps with &lt;strong&gt;R&lt;/strong&gt; and GHSL&lt;/p&gt;&lt;p&gt;10 min.&lt;/p&gt;
+      <content:encoded>&lt;p&gt;Bertin’s dot density maps with &lt;strong&gt;R&lt;/strong&gt; and GHSL&lt;/p&gt;&lt;p&gt;9 min.&lt;/p&gt;
       &lt;div&gt;&lt;p&gt;Recently, the &lt;a href=&quot;https://r-graph-gallery.com/&quot;&gt;R Graph Gallery&lt;/a&gt; published a new post by &lt;a href=&quot;https://twitter.com/BjnNowak&quot;&gt;Benjamin Nowak&lt;/a&gt; showing how to create a map inspired by the work of French cartographer &lt;a href=&quot;https://en.wikipedia.org/wiki/Jacques_Bertin&quot;&gt;Jacques Bertin&lt;/a&gt; (1918–2010), particularly his &lt;em&gt;Sémiologie graphique&lt;/em&gt; (Bertin, 1967):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/misc/bertin.png&quot; alt=&quot;Dot map of France from Jacques Bertin&apos;s Semiologie graphique. Dots of different sizes depict population concentrations.&quot; /&gt;&lt;/p&gt;
@@ -3762,20 +3762,18 @@ the aggregated cells:&lt;/p&gt;
   &lt;li&gt;Bertin, J. (1967). &lt;em&gt;Sémiologie graphique : Les diagrammes, les réseaux, les
 cartes&lt;/em&gt;. Mouton; Gauthier-Villars.
 &lt;a href=&quot;https://catalogue.bnf.fr/ark:/12148/cb41605817s&quot;&gt;https://catalogue.bnf.fr/ark:/12148/cb41605817s&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;European Commission. (2023). &lt;em&gt;GHSL data package 2023&lt;/em&gt; (JRC133256).
+Publications Office of the European Union.
+&lt;a href=&quot;https://doi.org/10.2760/098587&quot;&gt;https://doi.org/10.2760/098587&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
 package. &lt;em&gt;Journal of Open Source Software, 8&lt;/em&gt;(91), Article 5751.
 &lt;a href=&quot;https://doi.org/10.21105/joss.05751&quot;&gt;https://doi.org/10.21105/joss.05751&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Nowak, B. (n.d.). &lt;em&gt;Jacques Bertin’s valued points map with R&lt;/em&gt;. The R Graph
-Gallery. &lt;a href=&quot;https://r-graph-gallery.com/web-valued-dots-map-bertin.html&quot;&gt;https://r-graph-gallery.com/web-valued-dots-map-bertin.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Nowak, B. (2023, November 21). &lt;em&gt;Jacques Bertin’s valued points map with R&lt;/em&gt;.
+The R Graph Gallery. &lt;a href=&quot;https://r-graph-gallery.com/web-valued-dots-map-bertin.html&quot;&gt;https://r-graph-gallery.com/web-valued-dots-map-bertin.html&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Pesaresi, M., &amp;amp; Politis, P. (2023). &lt;em&gt;GHS-BUILT-C R2023A – GHS settlement
 characteristics, derived from Sentinel2 composite (2018) and other GHS R2023A
 data&lt;/em&gt; [Data set]. European Commission, Joint Research Centre.
 &lt;a href=&quot;https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30&quot;&gt;DOI&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Schiavina, M., Melchiorri, M., Pesaresi, M., Politis, P., Carneiro Freire,
-S. M., Maffenini, L., Florio, P., Ehrlich, D., Goch, K., Carioli, A.,
-Uhl, J., Tommasi, P., &amp;amp; Kemper, T. (2023). &lt;em&gt;GHSL data package 2023&lt;/em&gt;
-(JRC133256). Publications Office of the European Union.
-&lt;a href=&quot;https://doi.org/10.2760/098587&quot;&gt;https://doi.org/10.2760/098587&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;</content:encoded>
       <link>https://dieghernan.github.io/202312_bertin_dots/</link>
@@ -5762,10 +5760,11 @@ you work with &lt;strong&gt;R&lt;/strong&gt;, you have probably seen this map:&l
 
 &lt;p&gt;The production of this map by &lt;a href=&quot;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&quot;&gt;Timo
 Grossenbacher&lt;/a&gt;
-has been a reference for years. However, recent developments in the &lt;strong&gt;R&lt;/strong&gt;
-package ecosystem (&lt;strong&gt;terra&lt;/strong&gt;, &lt;strong&gt;sf&lt;/strong&gt; and support of both classes on &lt;strong&gt;ggplot2&lt;/strong&gt;,
-development of &lt;strong&gt;ggnewscale&lt;/strong&gt;, etc.) can make it even easier to produce these
-types of maps.&lt;/p&gt;
+has been a reference for years. The 2016 article &lt;em&gt;Beautiful thematic maps with
+ggplot2 (only)&lt;/em&gt; now redirects to the 2019 tutorial. However, recent developments
+in the &lt;strong&gt;R&lt;/strong&gt; package ecosystem (&lt;strong&gt;terra&lt;/strong&gt;, &lt;strong&gt;sf&lt;/strong&gt; and support of both classes on
+&lt;strong&gt;ggplot2&lt;/strong&gt;, development of &lt;strong&gt;ggnewscale&lt;/strong&gt;, etc.) can make it even easier to
+produce these types of maps.&lt;/p&gt;
 
 &lt;p&gt;In fact, Dominic Royé recently wrote a very detailed
 &lt;a href=&quot;https://dominicroye.github.io/blog/hillshade-effect/&quot;&gt;post&lt;/a&gt; on creating shadow
@@ -6195,8 +6194,8 @@ and fall back to the system serif font otherwise:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf.
-&lt;em&gt;Timo Grossenbacher&lt;/em&gt;. &lt;a href=&quot;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&quot;&gt;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&lt;/a&gt;
-(The 2016 article &lt;em&gt;Beautiful thematic maps with ggplot2 (only)&lt;/em&gt; redirects here.)&lt;/li&gt;
+&lt;em&gt;Timo Grossenbacher&lt;/em&gt;.
+&lt;a href=&quot;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&quot;&gt;https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Harris, B. (2026, January 27). My ggplot2 blending adventure. &lt;em&gt;Reproducible
 Ruins&lt;/em&gt;. &lt;a href=&quot;https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/&quot;&gt;https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
@@ -7012,8 +7011,8 @@ German bureaucracy.&lt;/p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Sangaline, E. (2017, April 5). &lt;em&gt;Internet archaeology: Scraping time series
-data from Archive.org&lt;/em&gt;. sangaline.com.
+  &lt;li&gt;Sangaline, E. (2017, April 5). Internet archaeology: Scraping time series
+data from Archive.org. &lt;em&gt;sangaline.com&lt;/em&gt;.
 &lt;a href=&quot;https://sangaline.com/post/wayback-machine-scraper/&quot;&gt;https://sangaline.com/post/wayback-machine-scraper/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -9217,8 +9216,8 @@ the right side.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;DataCamp. (n.d.). &lt;em&gt;Combining plots in R&lt;/em&gt;.
 &lt;a href=&quot;https://www.datacamp.com/doc/r/combining-plots&quot;&gt;https://www.datacamp.com/doc/r/combining-plots&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Moreno, M., &amp;amp; Basille, M. (2018, October 25). &lt;em&gt;Drawing beautiful maps
-programmatically with R, sf and ggplot2 — Part 3: Layouts&lt;/em&gt;. r-spatial.
+  &lt;li&gt;Moreno, M., &amp;amp; Basille, M. (2018, October 25). Drawing beautiful maps
+programmatically with R, sf and ggplot2 — Part 3: Layouts. &lt;em&gt;r-spatial&lt;/em&gt;.
 &lt;a href=&quot;https://r-spatial.org/r/2018/10/25/ggplot2-sf-3.html&quot;&gt;https://r-spatial.org/r/2018/10/25/ggplot2-sf-3.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;</content:encoded>
@@ -9448,7 +9447,7 @@ one of my favorites, &lt;strong&gt;cartography&lt;/strong&gt;:&lt;/p&gt;
 selecting colour schemes for maps. &lt;em&gt;The Cartographic Journal, 40&lt;/em&gt;(1), 27–37.
 &lt;a href=&quot;https://doi.org/10.1179/000870403235002042&quot;&gt;https://doi.org/10.1179/000870403235002042&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;International Registry in Organ Donation and Transplantation. (2018,
-December). &lt;em&gt;2017 final numbers&lt;/em&gt;.
+December). &lt;em&gt;Final numbers 2017&lt;/em&gt;.
 &lt;a href=&quot;https://www.irodat.org/img/database/pdf/IRODaT%20Newsletter%202017.pdf&quot;&gt;IRODaT newsletter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;</content:encoded>
@@ -10035,8 +10034,8 @@ is computed so that the shortest dimension has 40 cells.&lt;/p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Strimas-Mackey, M. (2016, January 14). &lt;em&gt;Fishnets and honeycomb: Square vs.
-hexagonal spatial grids&lt;/em&gt;. &lt;a href=&quot;https://strimas.com/post/hexagonal-grids/&quot;&gt;https://strimas.com/post/hexagonal-grids/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Strimas-Mackey, M. (2016, January 14). Fishnets and honeycomb: Square vs.
+hexagonal spatial grids. &lt;em&gt;Matt Strimas-Mackey&lt;/em&gt;. &lt;a href=&quot;https://strimas.com/post/hexagonal-grids/&quot;&gt;https://strimas.com/post/hexagonal-grids/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;</content:encoded>
       <link>https://dieghernan.github.io/201906_Beautiful1/</link>
@@ -11298,7 +11297,7 @@ combines the previous files:&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;d-data-sources&quot;&gt;D. Data sources&lt;/h2&gt;
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Central Intelligence Agency. (n.d.). &lt;em&gt;The world factbook&lt;/em&gt; [Historical
