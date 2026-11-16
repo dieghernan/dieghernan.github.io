@@ -6,7 +6,7 @@
     <!-- MIT License -->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-11-15 -->
+    <!-- Page build 2026-11-16 -->
     <!-- Jekyll Version 4.4.1 -->
     <!-- Google structured data -->
     <script type="application/ld+json">
@@ -20,7 +20,16 @@
         },
         "description": "User-defined function using the sf package - Split a line into its individual segments with a small sf function in R.",
         "inLanguage": "en-US",
-        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
+        "isPartOf": [
+          {
+            "@id": "https://dieghernan.github.io/#website"
+          },
+          {
+            "@type": "CreativeWorkSeries",
+            "@id": "https://dieghernan.github.io/series/#quick-r",
+            "name": "Quick R"
+          }
+        ],
         "keywords": ["sf","function","rnaturalearth","rspatial","rstats","music","r_bloggers"],
         "headline": "Cast a line to subsegments in R",
         "image": ["https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp"],
@@ -511,6 +520,21 @@
 			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#the-problem" class="nav-link">The problem</a></li><li class="nav-item nav d-block"><a href="#an-approach" class="nav-link">An approach</a></li><li class="nav-item nav d-block"><a href="#the-function-stdh_cast_substring" class="nav-link">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></a></li></ul>
 		</nav>   
 	</div>
+         <div class="chulapa-series-indices chulapa-series-columns-1 small mb-3">
+<div class="chulapa-series">
+<div class="font-weight-bold">Quick R<br> <span class="chulapa-series-position">Issue 1 of 3</span></div>
+<div class="chulapa-series-controls">
+ <progress class="chulapa-series-progress" value="1" max="3" aria-label="Quick R progress, Issue 1 of 3">1 of 3</progress>
+ <nav aria-label="Quick R previous and next" class="d-flex flex-wrap align-items-center"><button type="button" class="btn btn-sm chulapa-series-link mr-1" disabled><i class="fa fa-chevron-left mr-1" aria-hidden="true"></i>Previous</button><a class="btn btn-sm chulapa-series-link" href="/201911_QuickR/" title="Quick R: Inset maps">Next<i class="fa fa-chevron-right ml-1" aria-hidden="true"></i><span class="sr-only">: Quick R: Inset maps</span></a></nav>
+</div>
+<details class="chulapa-series-index mt-1">
+  <summary>Issues<span class="sr-only">: Quick R</span></summary>
+ <nav aria-label="Quick R">
+   <ol class="mb-0 pl-4"><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Cast a line to subsegments in R <i class="fas fa-arrow-left" aria-hidden="true"></i></span></li><li><a class="chulapa-series-item" href="/201911_QuickR/">Quick R: Inset maps</a></li><li><a class="chulapa-series-item" href="/202002_Brexit/">We’ll miss you, UK</a></li></ol>
+ </nav>
+</details>
+</div>
+</div>
        <div class="e-content"><p>This post introduces a user-defined function for casting <strong>sf</strong> objects of class
 <code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into substrings.</p>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
@@ -536,7 +560,7 @@ a powerful function that transforms geometries into other types of geometries
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> was the possibility of breaking
 <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." /></p>
-<iframe class="d-block w-100 border-0 rounded my-3" title="Hold the Line by Toto on Spotify" src="https://open.spotify.com/embed/track/2UasQGaawqY6ncetMd2LNw?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="">
+<iframe class="d-block w-100 border-0 rounded my-3" title="Hold the Line by Toto on Spotify" src="https://open.spotify.com/embed/track/4aVuWgvD0X63hcOCnZtNFA?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="">
 </iframe>
 <h2 id="an-approach">An approach</h2>
 <p>One possible solution is to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive
