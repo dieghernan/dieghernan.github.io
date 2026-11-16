@@ -51,7 +51,7 @@ series_page: true
             <h2 class="card-title h6 mb-2" id="{{ series_id }}">{{ series.label }}</h2>
             <div class="card-text">
               <details class="small">
-                <summary>{{ chapters.size }} {{ series.index_label | downcase }}<span class="sr-only"> in {{ series.label | escape }}</span></summary>
+                <summary>{{ chapters.size }} {{ series.index_label }}<span class="sr-only"> in {{ series.label | escape }}</span></summary>
                 <ol class="pl-4 mb-0 mt-2">
                   {% for group in chapter_groups %}
                     {% assign ordered_chapters = group.items | sort: "url" %}
