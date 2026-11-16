@@ -23,6 +23,7 @@ series_page: true
     {% for entry in site.series %}
       {% assign series_id = entry[0] %}
       {% assign series = entry[1] %}
+      {% assign series_accessible_name = series.label | strip_html | strip | escape_once %}
       {% assign chapters = "" | split: "," %}
       {% for document in series_documents %}
         {% if document.collection and document.date and site.future != true %}
@@ -51,7 +52,7 @@ series_page: true
             <h2 class="card-title h6 mb-2" id="{{ series_id }}">{{ series.label }}</h2>
             <div class="card-text">
               <details class="small">
-                <summary>{{ chapters.size }} {{ series.index_label }}<span class="sr-only"> in {{ series.label | escape }}</span></summary>
+                <summary>{{ chapters.size }} {{ series.index_label }}<span class="sr-only"> in {{ series_accessible_name }}</span></summary>
                 <ol class="pl-4 mb-0 mt-2">
                   {% for group in chapter_groups %}
                     {% assign ordered_chapters = group.items | sort: "url" %}
@@ -64,7 +65,7 @@ series_page: true
             </div>
           </div>
           <div class="card-footer bg-transparent">
-            <a class="btn btn-sm btn-outline-primary" href="{{ first_chapter.url | relative_url | escape }}">Start reading<span class="sr-only"> {{ series.label | escape }}</span></a>
+            <a class="btn btn-sm btn-outline-primary" href="{{ first_chapter.url | relative_url | escape }}">Start reading<span class="sr-only"> {{ series_accessible_name }}</span></a>
           </div>
         </article>
       </div>
