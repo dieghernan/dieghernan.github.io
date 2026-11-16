@@ -29,6 +29,12 @@ To compensate for this, we have put all the pieces together to produce a chronol
 
 After all, we hope that [corona-atlas](https://dieghernan.github.io/corona-atlas.de/en) remains boring and that our world map remains green. Now it is finally time for quite some **Wanderlust**!
 
+## References
+
+- Sangaline, E. (2017, April 5). *Internet archaeology: Scraping time series
+  data from Archive.org*. sangaline.com.
+  <https://sangaline.com/post/wayback-machine-scraper/>
+
 ## Links
 
 - [Read more on this site](https://dieghernan.github.io/projects/corona-atlas/)

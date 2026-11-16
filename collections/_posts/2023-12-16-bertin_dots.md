@@ -439,6 +439,8 @@ And that's it! Which one do you like the most? Let me know in the comments.
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
   package. *Journal of Open Source Software, 8*(91), Article 5751.
   <https://doi.org/10.21105/joss.05751>
+- Nowak, B. (n.d.). *Jacques Bertin’s valued points map with R*. The R Graph
+  Gallery. <https://r-graph-gallery.com/web-valued-dots-map-bertin.html>
 - Pesaresi, M., & Politis, P. (2023). *GHS-BUILT-C R2023A – GHS settlement
   characteristics, derived from Sentinel2 composite (2018) and other GHS R2023A
   data* [Data set]. European Commission, Joint Research Centre.

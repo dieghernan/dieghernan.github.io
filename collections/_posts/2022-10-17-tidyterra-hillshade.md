@@ -532,6 +532,8 @@ base_plot +
 - Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf.
   *Timo Grossenbacher*. <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
   (The 2016 article *Beautiful thematic maps with ggplot2 (only)* redirects here.)
+- Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible
+  Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
   package. *Journal of Open Source Software, 8*(91), Article 5751.
   <https://doi.org/10.21105/joss.05751>

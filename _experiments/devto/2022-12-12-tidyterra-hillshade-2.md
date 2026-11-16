@@ -842,3 +842,13 @@ gg_final_simp
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_simplified-1.webp" alt="Simplified precipitation map of Spain with marginal bar profiles above and to the right. Colors encode rainfall, with higher averages in the north and west." width="100%" />
 
 </details>
+
+## References
+
+- Fick, S. E., & Hijmans, R. J. (2017). WorldClim 2: New 1-km spatial
+  resolution climate surfaces for global land areas. *International Journal
+  of Climatology, 37*(12), 4302–4315. <https://doi.org/10.1002/joc.5086>
+- Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible
+  Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
+- Royé, D. (2022, July 20). Hillshade effects. *Dr Dominic Royé*.
+  <https://dominicroye.github.io/blog/hillshade-effect/>

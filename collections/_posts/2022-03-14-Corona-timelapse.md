@@ -74,6 +74,12 @@ German bureaucracy.
 
 After all, we hope that [corona-atlas] remains boring and that our world map remains green. Now it is finally time for quite some **Wanderlust**!
 
+## References
+
+- Sangaline, E. (2017, April 5). *Internet archaeology: Scraping time series
+  data from Archive.org*. sangaline.com.
+  <https://sangaline.com/post/wayback-machine-scraper/>
+
 ## Links
 
 - [Read more on this site](https://dieghernan.github.io/projects/corona-atlas/)
