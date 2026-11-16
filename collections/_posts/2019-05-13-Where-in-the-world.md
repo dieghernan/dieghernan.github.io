@@ -35,36 +35,36 @@ traveled to by plane.
 
 | City              | Country        |   N |
 | :---------------- | :------------- | --: |
-| Bilbao            | Spain          |  66 |
-| London            | United Kingdom |  23 |
-| Edinburgh         | United Kingdom |  21 |
-| Barcelona         | Spain          |  16 |
-| Brussels          | Belgium        |   8 |
-| Berlin            | Germany        |   6 |
-| Munich            | Germany        |   6 |
-| Palma de Mallorca | Spain          |   6 |
-| Amsterdam         | Netherlands    |   4 |
-| Frankfurt         | Germany        |   4 |
+| Bilbao            | Spain          |  33 |
+| London            | United Kingdom |  12 |
+| Edinburgh         | United Kingdom |  10 |
+| Barcelona         | Spain          |   8 |
+| Brussels          | Belgium        |   4 |
+| Berlin            | Germany        |   3 |
+| Munich            | Germany        |   3 |
+| Palma de Mallorca | Spain          |   3 |
+| Amsterdam         | Netherlands    |   2 |
+| Auckland          | New Zealand    |   2 |
 
 ## Top countries
 
 | Country        | Continent |   N |
 | :------------- | :-------- | --: |
-| Spain          | Europe    | 101 |
-| United Kingdom | Europe    |  46 |
-| Germany        | Europe    |  18 |
-| Belgium        | Europe    |   8 |
-| France         | Europe    |   6 |
+| Spain          | Europe    |  51 |
+| United Kingdom | Europe    |  23 |
+| Germany        | Europe    |   9 |
+| Belgium        | Europe    |   4 |
+| France         | Europe    |   3 |
 
 ## Top continents
 
 | Continent     | Region           |   N |
 | :------------ | :--------------- | --: |
-| Europe        | Southern Europe  | 105 |
-| Europe        | Northern Europe  |  52 |
-| Europe        | Western Europe   |  38 |
-| Asia          | Western Asia     |   6 |
-| North America | Northern America |   6 |
+| Europe        | Southern Europe  |  53 |
+| Europe        | Northern Europe  |  26 |
+| Europe        | Western Europe   |  19 |
+| Asia          | Western Asia     |   3 |
+| North America | Northern America |   3 |
 
 <iframe
   class="d-block w-100 border-0 rounded my-3"

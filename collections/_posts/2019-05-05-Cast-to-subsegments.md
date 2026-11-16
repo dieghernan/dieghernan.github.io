@@ -21,7 +21,9 @@ og_image_type: "image/webp"
 og_image_alt: "Map of South America with country boundaries split into short segments, illustrated with alternating colors."
 syndication:
   - https://dev.to/dieghernan/cast-a-line-to-subsegments-in-r-5cfc
-
+series:
+  - id: quick-r
+    order: 1
 ---
 
 This post introduces a user-defined function for casting **sf** objects of class
@@ -63,7 +65,7 @@ What I missed when using `st_cast` was the possibility of breaking
 <iframe
   class="d-block w-100 border-0 rounded my-3"
   title="Hold the Line by Toto on Spotify"
-  src="https://open.spotify.com/embed/track/2UasQGaawqY6ncetMd2LNw?theme=0"
+  src="https://open.spotify.com/embed/track/4aVuWgvD0X63hcOCnZtNFA?theme=0"
   height="152"
   loading="lazy"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

@@ -13,7 +13,7 @@ leafletmap: true
 always_allow_html: true
 output:
   html_document:
-    
+
   md_document:
     variant: gfm
     preserve_yaml: true
@@ -261,8 +261,20 @@ map
 #| message: false
 #| tidy: styler
 #| fig-cap: ""
+top_cities <- myflights |>
+  select(end) |>
+  count(end, sort = TRUE) |>
+  mutate(
+    name = end,
+    toloc = end,
+    tofun = gsub(" ", "+", toloc),
+    tofun = ifelse(toloc == "San Sebastian", "san+sebastian+es", tofun),
+    tofun = ifelse(toloc == "Lyon", "Lyon+fr", tofun)
+  ) |>
+  left_join(final)
+
 names <- read.csv("https://raw.githubusercontent.com/dieghernan/Country-Codes-and-International-Organizations/master/outputs/Countrycodes.csv")
-Cities <- inner_join(ndots %>%
+Cities <- inner_join(top_cities %>%
   select(
     City = name,
     countryCode,
