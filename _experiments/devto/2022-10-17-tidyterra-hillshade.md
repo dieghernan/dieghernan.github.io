@@ -30,7 +30,7 @@ Using shadow effects on relief maps is a very common technique that helps produc
 
 ![Map of Swiss municipalities over shaded relief. A nine-color legend combines average income and income inequality, measured by the Gini coefficient.](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
-The production of this map by [Timo Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/) has been a reference for years. However, recent developments in the **R** package ecosystem (**terra**, **sf** and support of both classes on **ggplot2**, development of **ggnewscale**, etc.) can make it even easier to produce these types of maps.
+The production of this map by [Timo Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/) has been a reference for years. The 2016 article *Beautiful thematic maps with ggplot2 (only)* now redirects to the 2019 tutorial. However, recent developments in the **R** package ecosystem (**terra**, **sf** and support of both classes on **ggplot2**, development of **ggnewscale**, etc.) can make it even easier to produce these types of maps.
 
 In fact, Dominic Royé recently wrote a very detailed [post](https://dominicroye.github.io/blog/hillshade-effect/) on creating shadow effects on map reliefs. In this first post of the series, I replicate that technique with a slight variation (e.g. not making use of **ggnewscale**) and discuss the potential choice of a color palette for this kind of map.
 
@@ -409,7 +409,7 @@ base_plot +
 
 ## References
 
-- Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf. *Timo Grossenbacher*. <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/> (The 2016 article *Beautiful thematic maps with ggplot2 (only)* redirects here.)
+- Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf. *Timo Grossenbacher*. <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
 - Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible
   Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra package. *Journal of Open Source Software, 8*(91), Article 5751. <https://doi.org/10.21105/joss.05751>

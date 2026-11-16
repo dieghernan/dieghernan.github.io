@@ -149,7 +149,7 @@ ISO_memcol = function(df, #Input dataframe
 }
 ```
 
-## D. Data sources
+## References
 
 - Central Intelligence Agency. (n.d.). *The world factbook* [Historical
   reference work]. [Archived editions](https://web.archive.org/web/20260203124934/https://www.cia.gov/the-world-factbook/about/archives/)

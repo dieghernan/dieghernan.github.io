@@ -151,8 +151,8 @@ ggplot() +
 ## References
 
 - Panaïotis, T. (2026, September 29). Projections cartographiques : Le guide
-  pour ne pas y laisser sa santé mentale. _Pyranhia_.
+  pour ne pas y laisser sa santé mentale. *Pyranhia*.
   [Article](https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html)
-- Wilke, C. O. (n.d.). _Interrupted Goode homolosine_. practicalgg.
+- Wilke, C. O. (n.d.). *Interrupted Goode homolosine*. practicalgg.
   <https://wilkelab.org/practicalgg/articles/goode.html>
   (Source for the outline and masking approach.)

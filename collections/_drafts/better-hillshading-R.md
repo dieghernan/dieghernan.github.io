@@ -1053,9 +1053,9 @@ After all these experiments, here are my main takeaways:
 - Campitelli, E. (2018, February 4). How to make a shaded relief in R. *Código
   R*.
   <https://eliocamp.github.io/codigo-r/2018/02/how-to-make-shaded-relief-in-r/>
-- Campitelli, E. (2026). *metR: Tools for easier analysis of meteorological
-  fields* (Version 0.19.0) [Computer software]. Zenodo.
-  <https://doi.org/10.5281/zenodo.23231796>
+- Campitelli, E. (2021). *metR: Tools for easier analysis of meteorological
+  fields* (Version 0.19.0) [Computer software].
+  <https://doi.org/10.5281/zenodo.2593516>
 - Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf. *Timo
   Grossenbacher*.
   <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
