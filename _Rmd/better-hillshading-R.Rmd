@@ -860,13 +860,13 @@ But I still wanted to know what `geom_relief()` was doing differently. So I took
 a look under the hood.
 
 Luckily, Elio Campitelli, the developer of **metR**, wrote a post back in 2018
-[explaining how he built
+[explaining how they built
 `geom_relief()`](https://eliocamp.github.io/codigo-r/2018/02/how-to-make-shaded-relief-in-r/).
-He stumbled on a simple way to shade terrain and later learned that
+They stumbled on a simple way to shade terrain and later learned that
 cartographers call it [*aspect-based
-shading*](https://ikgrelief.ethz.ch/analytical/shading-methods/). He was happy
-with the result, though he also said it wasn't the best method and wanted to try
-others.
+shading*](https://ikgrelief.ethz.ch/analytical/shading-methods/). They were happy
+with the result, though they also said it wasn't the best method and wanted to
+try others.
 
 Let's take a closer look using the current implementation of
 [`metR::geom_relief()`](https://github.com/eliocamp/metR/blob/main/R/geom_relief.R).
