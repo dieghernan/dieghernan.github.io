@@ -116,7 +116,7 @@ case of <span class="chulapa">Chulapa</span> it is on
 So now you just have to paste the code that you got in step 1 into the
 `<head>`.
 
-<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
+<div role="note" aria-label="Tip" class="callout-tip" markdown="1" id="pro-tip">
 For a better performance of the
 site, include these libraries only when you need them. In my case, I added
 a custom variable in my YAML front matter for those posts with a leaflet
@@ -175,8 +175,12 @@ We are almost there! Now “Knit” your code and get the corresponding
 
 #### ~~5. Modifying the `.md` file~~
 
-**Update: This is no longer needed. I have kept it here for reference.
-You can skip to the next section.**
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
+
+**Update**: This is no longer needed. I have kept it here for reference.
+You can skip to the next section.
+
+</div>
 
 Have a look at the `.md` code that you have just created. Although not
 displayed in the preview, you can see in the file itself a chunk that
@@ -225,19 +229,20 @@ libraries in the header and make the magic happen, just like this:
 <div id="htmlwidget-60e5339b540855d29db4" style="width:672px;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-60e5339b540855d29db4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[-36.852,174.768,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"The birthplace of R",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-36.852,-36.852],"lng":[174.768,174.768]}},"evals":[],"jsHooks":[]}</script>
 
-<div role="note" aria-label="Warning" class="callout-warning mt-2" markdown="1">
-Have you checked
-the YAML front matter of your `.md` file? Have another look, especially
-if you have followed my Pro tip.
+<div role="note" aria-label="Warning" class="callout-warning mt-4" markdown="1">
+Have you checked the YAML front matter of your `.md` file? Have another look,
+especially if you have followed my [tip](/#pro-tip).
 </div>
 
 ### Gallery: size of a leaflet map <a name="extra"></a>
 
-**A note:** For a complete understanding of this section, it is
+For a complete understanding of this section, it is
 recommended to access it on multiple devices, so you can see the
 different behavior on different screens. Google Chrome allows you to
 simulate different devices [(more info
 here)](https://developers.google.com/web/tools/chrome-devtools/device-mode/).
+{: .callout-caution role="note" aria-label="Note"}
+
 
 #### Fixed size
 
