@@ -9,20 +9,21 @@
 {%- assign host = syndication_url | split: '/' | slice: 2 | first | split: '?' |
 first | split: '#' | first -%}
 {%- if host and host != empty -%}
-{%- if prefix == 'https://' or short_prefix == 'http://' -%}
-<li class="list-inline-item"><a class="u-syndication text-break"
-    rel="syndication" href="{{ syndication_url | escape }}">{{ host | remove: 'www.'| escape
-    }}</a></li>
-{%- endif -%}
+{%- if prefix == 'https://' or short_prefix == 'http://' %}
+<li class="list-inline-item">
+  <a class="u-syndication text-break" rel="syndication" href="{{ syndication_url | escape }}">{{ host | remove: 'www.'| escape }}</a>
+</li>
+{% endif -%}
 {%- endif -%}
 {%- endfor -%}
 {%- endcapture -%}
 {%- if syndication_links != empty %}
 <div class="row">
-  <footer class="col-lg-8 offset-lg-2 mt-3 small"
-    aria-label="Syndicated copies">
+  <footer class="col-lg-8 offset-lg-2 mt-3 small" aria-label="Syndicated copies">
     <p class="mb-1">Also published on</p>
-    <ul class="list-inline mb-0">{{ syndication_links }}</ul>
+    <ul class="list-inline mb-0 d-inline-flex flex-column flex-sm-row">
+      {{ syndication_links }}
+    </ul>
   </footer>
 </div>
-{%- endif %}
+{% endif %}
