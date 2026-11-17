@@ -231,7 +231,7 @@ libraries in the header and make the magic happen, just like this:
 
 <div role="note" aria-label="Warning" class="callout-warning mt-4" markdown="1">
 Have you checked the YAML front matter of your `.md` file? Have another look,
-especially if you have followed my [tip](/#pro-tip).
+especially if you have followed my [tip](https://dieghernan.github.io/201905_Leaflet_R_Jekyll//#pro-tip).
 </div>
 
 ### Gallery: size of a leaflet map <a name="extra"></a>
