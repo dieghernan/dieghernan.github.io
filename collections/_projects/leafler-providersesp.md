@@ -22,7 +22,7 @@ og_image_type: "image/png"
 og_image_alt: "Map of Spain illustrating Leaflet-providersESP cartographic layers."
 syndication:
   - https://dev.to/dieghernan/leaflet-providersesp-36g5
-
+  - https://oneworldwithr.substack.com/p/leaflet-providersesp
 ---
 
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that

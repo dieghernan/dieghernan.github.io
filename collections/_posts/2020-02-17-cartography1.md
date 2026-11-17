@@ -22,9 +22,6 @@ og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
 og_image_alt: "Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently."
-syndication:
-  - https://oneworldwithr.substack.com/p/202002_cartography1
-
 ---
 
 ## Introduction

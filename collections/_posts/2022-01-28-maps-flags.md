@@ -8,6 +8,7 @@ excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). Th
 syndication:
   - https://www.r-bloggers.com/2022/01/beautiful-maps-with-r-iv-fun-with-flags-revisited/
   - https://dev.to/dieghernan/beautiful-maps-with-r-iv-fun-with-flags-revisited-41ai
+  - https://oneworldwithr.substack.com/p/202201_maps-flags
 tags:
   - flags
   - beautiful_maps
