@@ -309,6 +309,11 @@ draw_map <- function(title, palette = light_palette, tile = NULL) {
     })
     # All meridians meet at the pole, so draw one circle there.
     circles <- c(circles, list(indicatrices(10, 90, palette)))
+
+    # In Orthographic the circle on 75, 180 is visible
+    if (title == "Orthographic") {
+      circles <- c(circles, list(indicatrices(180, 75, palette)))
+    }
   } else if (title == "Lambert Conformal Conic") {
     land <- land |>
       st_set_crs(NA) |>
