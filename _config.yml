@@ -127,7 +127,7 @@ search:
 algolia:
   application_id: KOIKA5PDQO
   index_name: blog
-  nodes_to_index: 'p,h2,h3,h4,h5,h6'
+  nodes_to_index: 'p,h2,h3,h4'
   search_only_api_key: 7f1fe42bef3f03458cb3a911ebc7e0ac
   files_to_exclude:
   - _layouts/*.html
@@ -142,19 +142,20 @@ algolia:
   extensions_to_index:
   - html
   - md
-  searchableAttributes:
-  - title
-  - headings
-  - unordered(content)
-  - unordered(subtitle)
-  - unordered(categories)
-  - unordered(collection)
-  - unordered(tags)
-  customRanking:
-  - desc(include_on_search)
-  - desc(title)
-  - desc(content)
-  - desc(subtitle)
+  settings:
+    searchableAttributes:
+      - title
+      - headings
+      - unordered(content)
+      - unordered(subtitle)
+      - unordered(categories)
+      - unordered(collection)
+      - unordered(tags)
+    customRanking:
+      - desc(include_on_search)
+      - desc(title)
+      - desc(content)
+      - desc(subtitle)
 
 # A.5. Comments
 comments:
