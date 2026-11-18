@@ -93,9 +93,10 @@ some maps to the test.
 
 ## Same circles, different maps
 
-We start with the same grid for all twelve projections. That's 99 points in nine
-rows and eleven columns, with a circle of 350 km radius at each point. The red
-shapes show what happens to those circles when we change the projection.
+We start with a common grid of 99 points in nine rows and eleven columns, with a
+circle of 350 km radius at each point. Some projections require us to omit 
+circles outside the area shown. The red shapes reveal what happens to the 
+remaining circles when we change the projection.
 
 
 
@@ -108,7 +109,9 @@ projections preserve different properties.
 
 - **Conformal.** These projections preserve local angles and shapes, so tiny
   circles stay round even when their size changes. Mercator is useful for
-  navigation because a constant compass bearing follows a straight line.
+  navigation because a constant compass bearing follows a straight line. Lambert
+  Conformal Conic is another example, particularly useful for mapping regions 
+  in the middle latitudes.
 - **Equal-area.** These projections keep areas in proportion, even when shapes
   stretch. Equal Earth works well for thematic world maps, where readers may
   want to compare how much land different regions or categories cover.
@@ -162,19 +165,22 @@ include a bonus circle at the North Pole.
 
 <div role="note" aria-label="Tip" class="callout-tip" markdown="1">
 Each map is scaled independently to fit its panel. Compare circle sizes 
-**within** each map. You can compare shapes across panels. 
+**within** each map. You can compare shapes across panels. Some projections, 
+such as Lambert Conformal Conic, are designed for particular regions rather than
+the whole world. Their extreme distortions elsewhere are part of the story.
 </div>
 
-<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Van der Grinten IV has an apple-shaped outline and strong distortion near its outer meridians." width="100%" />
+<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Lambert Conformal Conic has a fan-shaped outline, with circular indicatrices that grow larger toward the outer edges of the map." width="100%" />
 
 The outlines can fool you, too. Compare the two rectangles in the first column.
 In Web Mercator, the circles stay roughly round and grow toward the poles. In
 Gall–Peters, their areas stay roughly constant within the panel. They stretch
 vertically near the equator and flatten at high latitudes.
 
-On the second row, compare Robinson with the apple-shaped Van der Grinten IV.
-Look toward the outer meridians at high latitudes to see where Van der Grinten
-IV distorts area the most.
+On the second row, compare Robinson with Lambert Conformal Conic. Lambert keeps
+the circles round, but their sizes change dramatically across the map. Designed 
+for mid-latitude regions, it shows how a projection that works well locally can
+become increasingly distorted when extended to the whole world.
 
 The third row puts Mollweide and Sinusoidal next to Goode homolosine, which uses
 Sinusoidal near the equator and Mollweide at higher latitudes.
@@ -182,11 +188,10 @@ Sinusoidal near the equator and Mollweide at higher latitudes.
 Here's a quick guide to the twelve projections, grouped by their properties or
 construction.
 
-- **Conformal pattern.** Web Mercator.
+- **Conformal pattern.** Web Mercator and Lambert Conformal Conic.
 - **Equal-area.** Equal Earth, Gall–Peters, Mollweide, Sinusoidal, Bonne and
   Goode homolosine.
 - **Compromise.** Winkel Tripel and Robinson.
-- **Globular.** Van der Grinten IV.
 - **Perspective views.** Vertical perspective and Orthographic.
 
 So which map should you trust? It depends on what you're asking it to show.
@@ -219,9 +224,7 @@ In **R**, we get country boundaries from **giscoR**, build the grid with **sf**
 and draw the maps with **ggplot2** and **crstools**. The setup also loads Inter
 Tight for the map titles. `draw_map()` handles Goode's cuts and the horizons of
 the two perspective views. It also accepts an optional raster basemap through
-`tile`, which it reprojects and clips to the map outline. For Van der Grinten
-IV, the function builds the same geographic buffers with **sf** and projects
-them directly because PROJ only provides the forward transform.
+`tile`, which it reprojects and clips to the map outline.
 
 
 ``` r
@@ -266,7 +269,7 @@ projections <- c(
   "Gall-Peters" = "+proj=cea +lat_ts=45 +R=6371007.181",
   "Web Mercator" = "EPSG:3857",
   "Robinson" = "+proj=robin",
-  "Van der Grinten IV" = "+proj=vandg4 +R=6371007.181",
+  "Lambert Conformal Conic" = "+proj=lcc +lat_1=15 +lat_2=45 +R=6371007.181",
   "Winkel Tripel" = "+proj=wintri",
   "Mollweide" = "ESRI:54009",
   "Sinusoidal" = "ESRI:54008",
@@ -284,6 +287,18 @@ frame <- st_linestring(rbind(
   c(175, 85),
   c(175, -85),
   c(-175, -85),
+  c(-175, 85)
+)) |>
+  st_segmentize(5) |>
+  st_cast("POLYGON") |>
+  st_sfc(crs = 4326)
+
+# lcc extends toward infinity southward and so has been cut off at 60°S
+frame_lcc <- st_linestring(rbind(
+  c(-175, 85),
+  c(175, 85),
+  c(175, -60),
+  c(-175, -60),
   c(-175, 85)
 )) |>
   st_segmentize(5) |>
@@ -348,19 +363,8 @@ indicatrices <- function(lng, lat, palette) {
 draw_map <- function(title, palette = light_palette, tile = NULL) {
   projection <- projections[[title]]
   grid <- graticule
-  if (title == "Van der Grinten IV") {
-    # PROJ provides only a forward transform for this projection.
-    buffers <- expand.grid(lng = meridians, lat = parallels) |>
-      st_as_sf(coords = c("lng", "lat"), crs = 4326) |>
-      st_buffer(units::as_units(buffer_km, "km")) |>
-      st_transform(projection)
-    circles <- geom_sf(
-      data = buffers, fill = palette$circle, color = palette$circle_outline,
-      alpha = 0.78
-    )
-  } else {
-    circles <- indicatrices(meridians, parallels, palette)
-  }
+  circles <- indicatrices(meridians, parallels, palette)
+
   if (is.null(tile)) {
     land <- st_geometry(world)
   }
@@ -412,6 +416,22 @@ draw_map <- function(title, palette = light_palette, tile = NULL) {
     })
     # All meridians meet at the pole, so draw one circle there.
     circles <- c(circles, list(indicatrices(10, 90, palette)))
+  } else if (title == "Lambert Conformal Conic") {
+    land <- land |>
+      st_set_crs(NA) |>
+      st_crop(st_set_crs(frame_lcc, NA)) |>
+      st_set_crs(st_crs(land)) |>
+      st_make_valid()
+
+    grid <- grid |>
+      st_geometry() |>
+      st_set_crs(NA) |>
+      st_crop(st_set_crs(frame_lcc, NA)) |>
+      st_set_crs(st_crs(graticule)) |>
+      st_make_valid()
+
+    circles <- indicatrices(meridians, parallels[parallels > -60], palette)
+    outline <- st_transform(frame_lcc, projection, partial = TRUE)
   } else {
     outline <- st_transform(frame, projection, partial = TRUE)
   }
