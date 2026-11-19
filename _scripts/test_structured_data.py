@@ -80,8 +80,11 @@ class StructuredDataTests(unittest.TestCase):
                     self.assertTrue(entity["creator"])
                 else:
                     self.assertEqual(entity["license"], "https://opensource.org/licenses/MIT")
-                for field in ("datePublished", "dateModified", "version", "distribution"):
-                    self.assertNotIn(field, entity)
+                # Release metadata is allowed on the GIFs canonical summary; other
+                # project pages stay free of datePublished/dateModified/version/distribution.
+                if key != "gifs":
+                    for field in ("datePublished", "dateModified", "version", "distribution"):
+                        self.assertNotIn(field, entity)
 
     def test_postal_areas_reuse_the_canonical_dataset_identity(self):
         html, blocks = page("/projects/postal-codes-spain")
@@ -132,8 +135,10 @@ class StructuredDataTests(unittest.TestCase):
             with self.subTest(url=url):
                 _, blocks = page(url)
                 watch, = [item for item in blocks if item.get("@type") == "SoftwareSourceCode"]
-                self.assertEqual(watch["author"]["name"], "dieghernan")
-                self.assertEqual(watch["author"]["url"], "https://github.com/dieghernan")
+                self.assertEqual(watch["author"]["@id"], "https://dieghernan.github.io/#author")
+                self.assertEqual(watch["author"]["name"], "Diego Hernangómez")
+                self.assertEqual(watch["author"]["url"], "https://dieghernan.github.io/")
+                self.assertEqual(watch["author"]["sameAs"], "https://orcid.org/0000-0001-8457-4658")
 
     def test_article_relations_reuse_the_published_article_identity(self):
         urls = set(DATA["article_relations"]) | set(DATA["package_articles"])
