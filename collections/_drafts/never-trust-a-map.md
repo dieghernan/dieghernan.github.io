@@ -10,14 +10,15 @@ excerpt: >-
 description: >-
   Put the same circles on twelve world maps and see what each projection
   does to them.
-header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-perspective-1.webp"
-og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/never-trust-a-map-og-perspective-1.webp"
+header_img: "https://dieghernan.github.io/assets/img/drafts/never-trust-a-map-og-lcc-1.webp"
+og_image: "https://dieghernan.github.io/assets/img/drafts/never-trust-a-map-og-lcc-1.webp"
 og_image_width: 1200
 og_image_height: 630
 og_image_type: image/webp
 og_image_alt: >-
-  A vertical perspective of Earth above North Africa, with red indicatrices
-  that flatten toward the horizon.
+  A map of the world using the Lambert Conformal Conic projection, with red
+  indicatrices that grow toward the South Pole. The map has been cut off at the
+  60th parallel south, so Antarctica is not shown.
 tags:
   - maps
   - sf
@@ -57,10 +58,10 @@ mentir con la
 visualización](https://cdr-book.github.io/datos-espaciales.html#no-mentir) (in
 Spanish).
 
-But even the most honest maps lie. Not because someone wants to mislead us,
-but because there's no way to flatten the (approximately) spherical Earth
-without distorting something. A projection can preserve some properties, such
-as area or local angles, at the expense of others.
+But even the most honest maps lie. Not because someone wants to mislead us, but
+because there's no way to flatten the (approximately) spherical Earth without
+distorting something. A projection can preserve some properties, such as area or
+local angles, at the expense of others.
 
 Fortunately, we have a lie detector.
 
@@ -69,8 +70,8 @@ Fortunately, we have a lie detector.
 Imagine covering the globe with identical small circles. When you flatten the
 Earth, those circles can change size, shape or both. The area of each resulting
 shape gives us an idea of how much the projection enlarges or shrinks the area
-around that location. Its shape reveals whether the projection stretches more in one
-direction than another.
+around that location. Its shape reveals whether the projection stretches more in
+one direction than another.
 
 ### A quick technical note
 
@@ -88,14 +89,14 @@ local scale in each direction, the maps looked much the same. I'll use
 `geom_tissot()` below to keep the **ggplot2** code short. **tissot** comes in
 handy when we want to report or compare the distortion factors themselves.
 
-For now, I'm more interested in what those distortions look like. Let's put
-some maps to the test.
+For now, I'm more interested in what those distortions look like. Let's put some
+maps to the test.
 
 ## Same circles, different maps
 
 We start with a common grid of 99 points in nine rows and eleven columns, with a
-circle of 350 km radius at each point. Some projections require us to omit 
-circles outside the area shown. The red shapes reveal what happens to the 
+circle of 350 km radius at each point. Some projections require us to omit
+circles outside the area shown. The red shapes reveal what happens to the
 remaining circles when we change the projection.
 
 
@@ -104,14 +105,14 @@ remaining circles when we change the projection.
 
 ## Three ways to handle distortion
 
-Before looking at the results, there's one thing worth knowing: different
-projections preserve different properties.
+Before looking at the results, it's worth remembering that different projections
+preserve different properties.
 
 - **Conformal.** These projections preserve local angles and shapes, so tiny
   circles stay round even when their size changes. Mercator is useful for
   navigation because a constant compass bearing follows a straight line. Lambert
-  Conformal Conic is another example, particularly useful for mapping regions 
-  in the middle latitudes.
+  Conformal Conic is another example, particularly useful for mapping regions in
+  the middle latitudes.
 - **Equal-area.** These projections keep areas in proportion, even when shapes
   stretch. Equal Earth works well for thematic world maps, where readers may
   want to compare how much land different regions or categories cover.
@@ -159,15 +160,16 @@ areas change as well.
 Pick a red circle near Greenland and follow it from map to map. Watch how its
 size and shape change.
 
-The last two views share a center over North Africa. The vertical perspective shows less of
-the globe because its viewpoint is only 10,000 km above the surface. Both views
-include a bonus circle at the North Pole.
+The last two views share a center over North Africa. The vertical perspective
+shows less of the globe because its viewpoint is only 10,000 km above the
+surface. Both views include a bonus circle at the North Pole.
 
-<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
-Each map is scaled independently to fit its panel. Compare circle sizes 
-**within** each map. You can compare shapes across panels. Some projections, 
+<div class="callout-tip" role="note" aria-label="Tip" markdown="1">
+Each map is scaled independently to fit its panel. Compare circle sizes
+**within** each map. You can compare shapes across panels. Some projections,
 such as Lambert Conformal Conic, are designed for particular regions rather than
-the whole world. Their extreme distortions elsewhere are part of the story.
+the whole world. When forced to cover the globe, their extreme distortions
+become part of the lesson.
 </div>
 
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Lambert Conformal Conic has a fan-shaped outline, with circular indicatrices that grow larger toward the outer edges of the map." width="100%" />
@@ -178,9 +180,9 @@ Gall–Peters, their areas stay roughly constant within the panel. They stretch
 vertically near the equator and flatten at high latitudes.
 
 On the second row, compare Robinson with Lambert Conformal Conic. Lambert keeps
-the circles round, but their sizes change dramatically across the map. Designed 
+the circles round, but their sizes change dramatically across the map. Designed
 for mid-latitude regions, it shows how a projection that works well locally can
-become increasingly distorted when extended to the whole world.
+become highly distorted when stretched to the whole world.
 
 The third row puts Mollweide and Sinusoidal next to Goode homolosine, which uses
 Sinusoidal near the equator and Mollweide at higher latitudes.
@@ -195,19 +197,13 @@ construction.
 - **Perspective views.** Vertical perspective and Orthographic.
 
 So which map should you trust? It depends on what you're asking it to show.
-Choose an equal-area map to compare areas, a conformal one when local angles
-matter or a compromise for an overall view.
+Choose an equal-area map when you need to compare areas, a conformal one when
+local angles matter, or a compromise projection for an overall view.
 
 **The question is whether the lie helps you see what you're looking for.**
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Little Lies by Fleetwood Mac on Spotify"
-  src="https://open.spotify.com/embed/track/08o75xMKmGrKny6GsXrNJW?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
+<iframe class="d-block w-100 border-0 rounded my-3" title="Little Lies by Fleetwood Mac on Spotify" src="https://open.spotify.com/embed/track/08o75xMKmGrKny6GsXrNJW?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen>
+
 </iframe>
 
 ## How we drew it
@@ -277,7 +273,8 @@ projections <- c(
   "Goode homolosine" = "+proj=igh +R=6371007.181",
   "Bonne" = "ESRI:54024",
   "Vertical perspective" = sprintf(
-    "+proj=nsper %s +R=%.3f +h=%.0f", view_center, earth_radius, perspective_height
+    "+proj=nsper %s +R=%.3f +h=%.0f", view_center,
+    earth_radius, perspective_height
   ),
   "Orthographic" = sprintf("+proj=ortho %s +R=%.3f", view_center, earth_radius)
 )
@@ -316,7 +313,9 @@ goode_lon <- c(
   rep(c(-40.01, -39.99), each = 91),
   180
 )
-goode_frame <- st_sfc(st_polygon(list(cbind(goode_lon, goode_lat))), crs = 4326)
+goode_frame <- st_sfc(st_polygon(list(cbind(goode_lon, goode_lat))),
+  crs = 4326
+)
 
 goode_lobes <- rbind(
   c(-180, -40, 0, 90),
@@ -525,8 +524,9 @@ draw_map("Goode homolosine", tile = world_tile)
 
 <img src="/assets/img/drafts/never-trust-a-map-goode-imagery-1.webp" alt="Goode homolosine world map with satellite imagery and a grid of red indicatrices. The ellipses are rounder near the center and flatten toward the poles." width="100%" />
 
-*Imagery from Esri World Imagery. Source: Esri, Vantor, Earthstar Geographics
-and the GIS User Community.*
+Imagery from Esri World Imagery. Source: Esri, Vantor, Earthstar Geographics and
+the GIS User Community. 
+{: .caption}
 
 </details>
 
@@ -552,13 +552,17 @@ grid::pushViewport(grid::viewport(
 grid::grid.text(
   "One Earth, twelve projections",
   gp = grid::gpar(
-    fontfamily = map_family, fontsize = 25, fontface = "bold", col = light_palette$text
+    fontfamily = map_family, fontsize = 25, fontface = "bold",
+    col = light_palette$text
   ),
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1:3)
 )
 grid::grid.text(
   "Each red shape starts as a circle with a radius of 350 km",
-  gp = grid::gpar(fontfamily = map_family, fontsize = 14, col = light_palette$muted_text),
+  gp = grid::gpar(
+    fontfamily = map_family, fontsize = 14,
+    col = light_palette$muted_text
+  ),
   vp = grid::viewport(layout.pos.row = 2, layout.pos.col = 1:3)
 )
 
@@ -572,7 +576,8 @@ for (index in seq_along(gallery_order)) {
   grid::grid.text(
     title,
     gp = grid::gpar(
-      fontfamily = map_family, fontsize = 14, fontface = "bold", col = light_palette$text
+      fontfamily = map_family, fontsize = 14, fontface = "bold",
+      col = light_palette$text
     ),
     vp = grid::viewport(layout.pos.row = 1)
   )
@@ -592,26 +597,25 @@ grid::popViewport()
 
 - Alikhan, N.-F. (2022, May 20). Variations on map projections in R.
   *Happykhan*. <https://happykhan.com/posts/map-projections-in-r>
-- Fernández-Avilés, G. (2024). Trabajando con datos espaciales. In
-  G. Fernández-Avilés & J. M. Montero (Eds.), *Fundamentos de ciencia de datos
-  con R* (Chapter 40). McGraw Hill.
+- Fernández-Avilés, G. (2024). Trabajando con datos espaciales. In G.
+  Fernández-Avilés & J. M. Montero (Eds.), *Fundamentos de ciencia de datos con
+  R* (Chapter 40). McGraw Hill.
   <https://cdr-book.github.io/datos-espaciales.html>
-- Manica, A., Pozzi, A., Padilla-Iglesias, C., Carter, E., Leonardi, M.,
-  Fatima, A., Pelanek, O., Stephenson, N., Colucci, M., Jud, D., &
-  Gunasekaram, C. (2026). *crstools: Tools to work with projections*
-  (Version 1.0.0) [Computer software]. Comprehensive R Archive Network.
+- Manica, A., Pozzi, A., Padilla-Iglesias, C., Carter, E., Leonardi, M., Fatima,
+  A., Pelanek, O., Stephenson, N., Colucci, M., Jud, D., & Gunasekaram, C.
+  (2026). *crstools: Tools to work with projections* (Version 1.0.0) [Computer
+  software]. Comprehensive R Archive Network.
   [DOI](https://doi.org/10.32614/CRAN.package.crstools)
-- Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of
-  Chicago Press. [DOI](https://doi.org/10.7208/chicago/9780226436081.001.0001)
-- Royé, D. (2026, May 3). Map projections: A practical guide to common
-  mistakes and how to fix them. *Dr Dominic Royé*.
+- Monmonier, M. (2018). *How to lie with maps* (3rd ed.). University of Chicago
+  Press. [DOI](https://doi.org/10.7208/chicago/9780226436081.001.0001)
+- Royé, D. (2026, May 3). Map projections: A practical guide to common mistakes
+  and how to fix them. *Dr Dominic Royé*.
   <https://dominicroye.github.io/blog/map-projections/>
-- Snyder, J. P. (1987). *Map projections—A working manual* (Professional
-  Paper 1395). U.S. Geological Survey. <https://doi.org/10.3133/pp1395>
-- Sumner, M., & Huber, B. (2026). *tissot: Tissot indicatrix for map
-  projection distortion* (Version 0.3.0) [Computer software].
-  Comprehensive R Archive Network.
-  [DOI](https://doi.org/10.32614/CRAN.package.tissot)
+- Snyder, J. P. (1987). *Map projections—A working manual* (Professional Paper
+  1395). U.S. Geological Survey. <https://doi.org/10.3133/pp1395>
+- Sumner, M., & Huber, B. (2026). *tissot: Tissot indicatrix for map projection
+  distortion* (Version 0.3.0) [Computer software]. Comprehensive R Archive
+  Network. [DOI](https://doi.org/10.32614/CRAN.package.tissot)
 - Tissot, N. A. (1881). *Mémoire sur la représentation des surfaces et les
   projections des cartes géographiques*. Gauthier-Villars.
   <https://books.google.com/books?id=a5YOAAAAYAAJ>
