@@ -156,6 +156,21 @@ algolia:
       - desc(title)
       - desc(content)
       - desc(subtitle)
+    ignorePlurals:
+    - en
+    removeStopWords:
+    - en
+    unretrievableAttributes:
+    - custom_ranking
+    queryLanguages:
+    - en
+    alternativesAsExact:
+    - ignorePlurals
+    - singleWordSynonym
+    indexLanguages:
+    - en
+
+
 
 # A.5. Comments
 comments:
