@@ -562,8 +562,8 @@ a powerful function that transforms geometries into other types of geometries
 <p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> was the possibility of breaking
 <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." /></p>
-<iframe class="d-block w-100 border-0 rounded my-3" title="Hold the Line by Toto on Spotify" src="https://open.spotify.com/embed/track/4aVuWgvD0X63hcOCnZtNFA?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen="">
-</iframe>
+<iframe class="chulapa-spotify d-block w-100 border-0 my-3 chulapa-rounded-lg" title="Hold the Line by Toto on Spotify" src="https://open.spotify.com/embed/track/4aVuWgvD0X63hcOCnZtNFA" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<p class="chulapa-spotify-link"><a class="text-reset" href="https://open.spotify.com/track/4aVuWgvD0X63hcOCnZtNFA">Open Hold the Line by Toto on Spotify</a></p>
 <h2 id="an-approach">An approach</h2>
 <p>One possible solution is to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive
 pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects across the original geometry. Let’s check it:</p>
