@@ -5,8 +5,8 @@ series:
 title: "How to center a world map on the Pacific"
 subtitle: "One ocean, eight projections"
 excerpt: >-
-  Put the Pacific in the middle of your world map and see what happens
-  when the cut moves to Greenwich.
+  Move the cut to Greenwich, put the Pacific in the middle, and draw
+  the same world in eight different projections with sf and ggplot2.
 description: >-
   Use sf, giscoR and ggplot2 to cut world polygons at a new meridian and
   draw eight Pacific-centered map projections.
@@ -214,9 +214,12 @@ draw_map_grid <- function(plots, columns) {
 ```
 
 On a world map centered on Greenwich, Japan and California sit near opposite
-edges. Put the Pacific in the middle and the two coasts face each other. I tried
-this with Robinson in **R**. The middle map shows what happens when you change
-the center and leave the polygons as they are.
+edges. Shift the center to the Pacific and the two coasts face each other
+across one continuous ocean. That view is useful for maps of the Pacific Rim,
+trade routes, marine biodiversity or simply a less Europe-centric world.
+
+I tried this with Robinson in **R**. The middle map shows what happens when
+you change the center and leave the polygons as they are.
 
 ```{r}
 #| label: compare
@@ -356,6 +359,8 @@ draw_map_grid(panels, columns = 2)
 You can move the center again. Try
 `project_world(world, "+proj=robin", lon_0 = -90)` to center the map at 90° W
 and put the cut at 90° E.
+
+**Cut first, project second**. That’s the whole trick.
 
 ```{r}
 #| label: cover
