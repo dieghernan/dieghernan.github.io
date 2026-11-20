@@ -11,14 +11,14 @@ excerpt: >-
 description: >-
   Compare alpha overlays, metR relief, multiply blending and stretched 
   multidirectional hillshades with terra, tidyterra and ggblend.
-header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp"
-og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-final-map-with-stretched-hillshade-1.webp"
-og_image_width: 1400
-og_image_height: 1272
+header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-og-image-1.webp"
+og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-og-image-1.webp"
+og_image_width: 1200
+og_image_height: 630
 og_image_type: image/webp
 og_image_alt: >-
-  Shaded relief of the Strait of Gibraltar in greens and ochres with blue 
-  bathymetry.
+  Ochre shaded relief of Sierra Nevada in southern Spain, with pale ridges
+  and deep, narrow valleys.
 tags:
   - hillshading
   - tidyterra
@@ -35,6 +35,8 @@ output:
     preserve_yaml: true
 mathjax: true
 ---
+
+<!-- TODO: Add the r_bloggers tag when this post is published. -->
 
 
 
@@ -71,11 +73,12 @@ download the elevation tiles with **elevatr**. Then I reproject the DEM to match
 the boundary. The Strait maps share that DEM, and every color map uses
 **tidyterra**'s `etopo1` elevation palette.
 
-The DEM comes from [Mapzen Terrain Tiles](https://registry.opendata.aws/terrain-tiles/).
-The [source guide](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md#what-is-sourced-at-what-zooms)
-lists SRTM data from the U.S. Geological Survey for land at zoom 7 and Copernicus
-EU-DEM among the sources at zoom 9 in Europe. NOAA's ETOPO1 supplies the ocean
-depths shown around the Strait.
+The DEM comes from [Mapzen Terrain
+Tiles](https://registry.opendata.aws/terrain-tiles/). The [source
+guide](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md#what-is-sourced-at-what-zooms)
+lists SRTM data from the U.S. Geological Survey for land at zoom 7 and
+Copernicus EU-DEM among the sources at zoom 9 in Europe. NOAA's ETOPO1 supplies
+the ocean depths shown around the Strait.
 
 
 ``` r
@@ -412,14 +415,14 @@ hillshade itself mattered too.
 
 ## Jackpot! Stretching the hillshade
 
-In an earlier experiment with Swiss elevation data, I noticed that the **terra** 
-hillshade used a narrower range of values than the aspect-based shading from 
-**metR**. That made me wonder whether contrast, rather than the shading method 
+In an earlier experiment with Swiss elevation data, I noticed that the **terra**
+hillshade used a narrower range of values than the aspect-based shading from
+**metR**. That made me wonder whether contrast, rather than the shading method
 itself, could explain part of the difference.
 
 <div role="note" aria-label="Tip" class="callout-tip" markdown="1">
-**What if I stretch the hillshade before
-blending it with the elevation colors?**
+**What if I stretch the hillshade before blending it with the elevation
+colors?**
 </div>
 
 I map the 5th percentile of the multidirectional hillshade to 0 and the 95th
@@ -481,10 +484,10 @@ print(map_final)
 
 **That's much closer to what I was looking for!**
 
-But the devil is in the details. For a closer look at [Sierra 
-Nevada (Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I 
-downloaded a separate DEM and used it for all four maps. Look at the same ridges
-in the two bottom panels to see what the stretch and lighter gray ramp change.
+But the devil is in the details. For a closer look at [Sierra Nevada
+(Spain)](https://en.wikipedia.org/wiki/Sierra_Nevada_(Spain)), I downloaded a
+separate DEM and used it for all four maps. Look at the same ridges in the two
+bottom panels to see what the stretch and lighter gray ramp change.
 
 <details class="my-4" markdown="1">
 
@@ -623,6 +626,8 @@ grid::popViewport()
 </details>
 
 <img src="/assets/img/drafts/better-hillshading-R-sierra-nevada-detail-1.webp" alt="Four close-ups of Sierra Nevada in a two-by-two grid. The top row shows metR and the multiply blend lit from the west-northwest. The bottom row shows the multidirectional with alpha-hack and stretched versions. The last panel is brighter, with fine ridges visible across the mountain range." width="100%" />
+
+
 
 ## Comparing the maps
 
@@ -791,9 +796,9 @@ Luckily, Elio Campitelli, the developer of **metR**, wrote a post back in 2018
 `geom_relief()`](https://eliocamp.github.io/codigo-r/2018/02/how-to-make-shaded-relief-in-r/).
 They stumbled on a simple way to shade terrain and later learned that
 cartographers call it [*aspect-based
-shading*](https://ikgrelief.ethz.ch/analytical/shading-methods/). They were happy
-with the result, though they also said it wasn't the best method and wanted to
-try others.
+shading*](https://ikgrelief.ethz.ch/analytical/shading-methods/). They were
+happy with the result, though they also said it wasn't the best method and
+wanted to try others.
 
 Let's take a closer look using the current implementation of
 [`metR::geom_relief()`](https://github.com/eliocamp/metR/blob/main/R/geom_relief.R).

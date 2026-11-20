@@ -1,0 +1,382 @@
+---
+series:
+  - id: quick-r
+    order: 4
+title: "How to center a world map on the Pacific"
+subtitle: "One ocean, eight projections"
+excerpt: >-
+  Put the Pacific in the middle of your world map and see what happens
+  when the cut moves to Greenwich.
+description: >-
+  Use sf, giscoR and ggplot2 to cut world polygons at a new meridian and
+  draw eight Pacific-centered map projections.
+header_img: "https://dieghernan.github.io/assets/img/drafts/pacific-centered-world-maps-cover-1.webp"
+og_image: "https://dieghernan.github.io/assets/img/drafts/pacific-centered-world-maps-cover-1.webp"
+og_image_width: 1200
+og_image_height: 630
+og_image_type: image/webp
+og_image_alt: >-
+  An Equal Earth map with the blue Pacific in the middle, ivory land on
+  either side, Asia and Oceania on the left and the Americas on the right.
+tags:
+  - maps
+  - sf
+  - giscoR
+  - ggplot2
+  - rspatial
+  - rstats
+output:
+  md_document:
+    variant: gfm
+    preserve_yaml: true
+---
+
+<!-- TODO: Add the r_bloggers tag when this post is published. -->
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE,
+  dev = "ragg_png",
+  fig.crop = FALSE,
+  out.width = "100%",
+  fig.cap = ""
+)
+
+plot_hook <- knitr::knit_hooks$get("plot")
+knitr::knit_hooks$set(plot = function(path, options) {
+  output <- plot_hook(path, options)
+  if (identical(options$label, "cover")) "" else output
+})
+```
+
+```{r}
+#| label: prepare-world
+#| include: false
+
+library(giscoR)
+library(sf)
+library(ggplot2)
+
+
+countries <- gisco_get_countries(year = 2024, resolution = "03", epsg = 3857)
+south_limit <- -80
+north_limit <- 85
+
+world <- countries |>
+  st_geometry() |>
+  st_transform(4326) |>
+  st_set_crs(NA) |>
+  st_make_valid() |>
+  st_crop(c(xmin = -180, ymin = south_limit, xmax = 180, ymax = north_limit)) |>
+  st_set_crs(st_crs(4326))
+```
+
+```{r}
+#| label: map-theme
+#| include: false
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+map_palette <- list(
+  background = "#EEF3F7",
+  ocean = "#83B4D2",
+  land = "#EDE2C9",
+  borders = "#AC9A7B",
+  graticule = "#4F6776",
+  outline = "#52778C",
+  text = "#243746"
+)
+
+map_theme <- theme_void(base_family = map_family) +
+  theme(
+    plot.margin = margin(8, 10, 8, 10),
+    plot.background = element_rect(fill = map_palette$background, color = NA)
+  )
+```
+
+```{r}
+#| label: project-world
+#| include: false
+
+project_world <- function(world, projection, lon_0 = 180) {
+  crs <- paste0(projection, " +lon_0=", lon_0)
+
+  world |>
+    sf::st_break_antimeridian(lon_0 = lon_0) |>
+    sf::st_transform(crs) |>
+    sf::st_make_valid()
+}
+
+pacific <- project_world(world, "+proj=robin")
+```
+
+```{r}
+#| label: map-style
+#| include: false
+
+frame_path <- function(lon, lat) {
+  cbind((lon + 180) %% 360 - 180, lat)
+}
+
+draw_map <- function(land, lon_0) {
+  crs <- st_crs(land)
+  # Keep each side of the frame just inside the cut.
+  left <- lon_0 - 179.9999
+  right <- lon_0 + 179.9999
+  lon <- seq(left, right, length.out = 361)
+  lat <- seq(south_limit, north_limit, by = 1)
+  ring <- rbind(
+    frame_path(lon, south_limit),
+    frame_path(right, lat[-1]),
+    frame_path(rev(lon)[-1], north_limit),
+    frame_path(left, rev(lat)[-1])
+  )
+
+  frame <- st_sfc(st_polygon(list(ring)), crs = 4326) |>
+    st_transform(crs)
+
+  meridians <- lapply(seq(-150, 150, 30) + lon_0, function(x) {
+    st_linestring(frame_path(x, lat))
+  })
+  parallels <- lapply(c(-75, seq(-60, 60, 30), 75), function(y) {
+    st_linestring(frame_path(lon, y))
+  })
+  grid <- st_sfc(c(meridians, parallels), crs = 4326) |>
+    st_transform(crs)
+
+  ggplot() +
+    geom_sf(data = frame, fill = map_palette$ocean, color = NA) +
+    geom_sf(
+      data = land, fill = map_palette$land, color = map_palette$borders,
+      linewidth = 0.05
+    ) +
+    geom_sf(
+      data = grid, color = map_palette$graticule, alpha = 0.45,
+      linewidth = 0.2
+    ) +
+    geom_sf(
+      data = frame, fill = NA, color = map_palette$outline,
+      linewidth = 0.2
+    ) +
+    coord_sf(crs = crs, datum = NA, expand = FALSE) +
+    map_theme
+}
+```
+
+```{r}
+#| label: map-grid
+#| include: false
+
+draw_map_grid <- function(plots, columns) {
+  rows <- ceiling(length(plots) / columns)
+  titles <- names(plots)
+  plot_rows <- seq_len(rows)
+  heights <- grid::unit(rep(1, rows), "null")
+  if (!is.null(titles)) {
+    plot_rows <- 2 * plot_rows
+    heights <- grid::unit(rep(c(22, 1), rows), rep(c("pt", "null"), rows))
+  }
+
+  grid::grid.newpage()
+  grid::grid.rect(gp = grid::gpar(fill = map_palette$background, col = NA))
+  grid::pushViewport(grid::viewport(
+    layout = grid::grid.layout(length(heights), columns, heights = heights)
+  ))
+  on.exit(grid::popViewport())
+
+  for (index in seq_along(plots)) {
+    row <- plot_rows[(index - 1) %/% columns + 1]
+    column <- (index - 1) %% columns + 1
+    if (!is.null(titles)) {
+      grid::grid.text(
+        titles[[index]],
+        gp = grid::gpar(
+          fontfamily = map_family, fontface = "bold", fontsize = 14,
+          col = map_palette$text
+        ),
+        vp = grid::viewport(layout.pos.row = row - 1, layout.pos.col = column)
+      )
+    }
+    print(
+      plots[[index]],
+      vp = grid::viewport(layout.pos.row = row, layout.pos.col = column)
+    )
+  }
+}
+```
+
+On a world map centered on Greenwich, Japan and California sit near opposite
+edges. Put the Pacific in the middle and the two coasts face each other. I tried
+this with Robinson in **R**. The middle map shows what happens when you change
+the center and leave the polygons as they are.
+
+```{r}
+#| label: compare
+#| echo: false
+#| fig-keep: last
+#| fig-width: 10.5
+#| fig-height: 2.25
+#| fig-alt: >-
+#|   Three Robinson maps. The Greenwich-centered map has the Pacific at the
+#|   edges. The Pacific-centered map has horizontal stripes before cutting
+#|   and a clear ocean after cutting.
+
+greenwich <- project_world(world, "+proj=robin", lon_0 = 0)
+uncut <- st_transform(world, "+proj=robin +lon_0=180")
+
+comparison <- list(
+  "Greenwich at the center" = draw_map(greenwich, 0),
+  "Pacific center, before cutting" = draw_map(uncut, 180),
+  "Pacific center, after cutting" = draw_map(pacific, 180)
+)
+draw_map_grid(comparison, columns = 3)
+```
+
+## Cut first, project second
+
+With the Pacific at 180°, Greenwich becomes the edge of the map. If a country
+polygon crosses Greenwich, its vertices can end up on opposite edges and still
+be joined by a line. That's where the stripes come from. I pass the same
+`lon_0` to [`st_break_antimeridian()`](https://r-spatial.github.io/sf/reference/st_break_antimeridian.html)
+and to the projection so the polygons are split at the new edge before
+**PROJ** transforms them.
+
+I'm using the 2024 country boundaries from **giscoR**. I convert them from
+Web Mercator to longitude and latitude, then crop the map from 80° S to 85° N.
+That keeps all of Greenland in view and trims Antarctica in Web Mercator.
+For that crop, I temporarily remove the CRS so the bounds are treated as a
+rectangle in degrees.
+
+```{r}
+#| label: show-data
+#| ref.label: prepare-world
+#| eval: false
+```
+
+Once `world` is ready, `project_world()` does the cutting and projecting.
+The final `st_make_valid()` repairs any polygon rings that became invalid
+during projection.
+
+<div role="note" aria-label="Important" class="callout-important" markdown="1">
+
+Pass `projection` as a [PROJ string](https://proj.org/en/stable/usage/quickstart.html)
+such as `"+proj=robin"`. `project_world()` appends `+lon_0` to that string.
+An Esri CRS code such as `"ESRI:54030"` (World Robinson) won't work in its place.
+
+</div>
+
+```{r}
+#| label: show-project-world
+#| ref.label: project-world
+#| eval: false
+```
+
+A quick plot in **ggplot2** shows the result.
+
+```r
+ggplot() + geom_sf(data = pacific)
+```
+
+<details class="my-4" markdown="1">
+
+<summary>Show the code for the Robinson map</summary>
+
+I drew the frame and graticule in longitude and latitude, then projected both
+to the same CRS as the land. Here's the code for the colors, frame and grid.
+
+```{r}
+#| label: show-map-theme
+#| ref.label: map-theme
+#| eval: false
+```
+
+```{r}
+#| label: show-robinson-map
+#| ref.label: map-style
+#| eval: false
+```
+
+```r
+draw_map(pacific, lon_0 = 180)
+```
+
+</details>
+
+## Same center, eight projections
+
+Let's keep the Pacific in the middle and change the projection. Look at
+Greenland in Web Mercator and Equal Earth, or at the outline of the Sinusoidal
+map. The center stays put even as the shapes change.
+
+```{r}
+#| label: projection-list
+
+projections <- c(
+  "Web Mercator" = "+proj=webmerc +datum=WGS84",
+  "Gall–Peters" = "+proj=cea +lat_ts=45 +R=6371007.181",
+  "Sinusoidal" = "+proj=sinu",
+  "Mollweide" = "+proj=moll",
+  "Equal Earth" = "+proj=eqearth +datum=WGS84",
+  "Eckert IV" = "+proj=eck4",
+  "Robinson" = "+proj=robin",
+  "Winkel Tripel" = "+proj=wintri"
+)
+
+maps <- lapply(projections, function(projection) {
+  project_world(world, projection, lon_0 = 180)
+})
+```
+
+```{r}
+#| label: gallery
+#| echo: false
+#| fig-keep: last
+#| fig-width: 8
+#| fig-height: 10
+#| fig-alt: >-
+#|   Eight Pacific-centered maps in two columns. Web Mercator and Gall–Peters
+#|   are rectangular, while the other six have curved sides. Greenland looks
+#|   much larger in Web Mercator than in Equal Earth.
+
+panels <- lapply(maps, draw_map, lon_0 = 180)
+draw_map_grid(panels, columns = 2)
+```
+
+You can move the center again. Try
+`project_world(world, "+proj=robin", lon_0 = -90)` to center the map at 90° W
+and put the cut at 90° E.
+
+```{r}
+#| label: cover
+#| echo: false
+#| fig-keep: last
+#| fig-width: 6
+#| fig-height: 3.15
+#| fig-alt: >-
+#|   An Equal Earth map with the blue Pacific in the middle, ivory land on
+#|   either side, Asia and Oceania on the left and the Americas on the right.
+
+draw_map_grid(list(draw_map(maps[["Equal Earth"]], 180)), columns = 1)
+```
+
+© EuroGeographics for the administrative boundaries
+{: .caption }
+
+## References
+
+- Eurostat. (2024). *Countries* (2024 release, 1:3 million) [Data set].
+  [GISCO](https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries)
+- L Tyrone. (2024, February 5). [Answer to the question *Closed boundaries on a
+  map when using geom_sf to cross dateline*]. Stack Overflow.
+  [Answer](https://stackoverflow.com/questions/77943481/closed-boundaries-on-a-map-when-using-geom-sf-to-cross-dateline)
+- PanfengZhang. (2022, August 11). *st_transform does not transform map
+  projection correcttly in some situations* (Issue No. 1983). GitHub.
+  [Issue](https://github.com/r-spatial/sf/issues/1983)
