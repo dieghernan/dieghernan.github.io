@@ -233,22 +233,13 @@ maps <- lapply(projections, function(projection) {
 
 <img src="/assets/img/drafts/pacific-centered-world-maps-gallery-1.webp" alt="Eight Pacific-centered maps in two columns. Web Mercator and Gall–Peters are rectangular, while the other six have curved sides. Greenland looks much larger in Web Mercator than in Equal Earth." width="100%" />
 
+© EuroGeographics for the administrative boundaries
+{: .caption }
+
 You can move the center again. Try
 `project_world(world, "+proj=robin", lon_0 = -90)` to center the map at 90° W
 and put the cut at 90° E.
 
 
 
-© EuroGeographics for the administrative boundaries
-{: .caption }
-
-## References
-
-- Eurostat. (2024). *Countries* (2024 release, 1:3 million) [Data set].
-  [GISCO](https://ec.europa.eu/eurostat/web/gisco/geodata/administrative-units/countries)
-- L Tyrone. (2024, February 5). [Answer to the question *Closed boundaries on a
-  map when using geom_sf to cross dateline*]. Stack Overflow.
-  [Answer](https://stackoverflow.com/questions/77943481/closed-boundaries-on-a-map-when-using-geom-sf-to-cross-dateline)
-- PanfengZhang. (2022, August 11). *st_transform does not transform map
-  projection correcttly in some situations* (Issue No. 1983). GitHub.
-  [Issue](https://github.com/r-spatial/sf/issues/1983)
+<!-- No references needed in this post. -->
