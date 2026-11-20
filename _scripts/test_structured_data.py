@@ -67,7 +67,7 @@ class StructuredDataTests(unittest.TestCase):
                              and "mainEntity" in item]), 1)
 
     def test_project_entities_reference_the_existing_pages(self):
-        self.assertEqual(len(DATA["project_pages"]), 12)
+        self.assertEqual(len(DATA["project_pages"]), 7)
         for url, key in DATA["project_pages"].items():
             with self.subTest(url=url):
                 _, blocks = page(url)
@@ -80,11 +80,8 @@ class StructuredDataTests(unittest.TestCase):
                     self.assertTrue(entity["creator"])
                 else:
                     self.assertEqual(entity["license"], "https://opensource.org/licenses/MIT")
-                # Release metadata is allowed on the GIFs canonical summary; other
-                # project pages stay free of datePublished/dateModified/version/distribution.
-                if key != "gifs":
-                    for field in ("datePublished", "dateModified", "version", "distribution"):
-                        self.assertNotIn(field, entity)
+                for field in ("distribution", "hasPart"):
+                    self.assertNotIn(field, entity)
 
     def test_postal_areas_reuse_the_canonical_dataset_identity(self):
         html, blocks = page("/projects/postal-codes-spain")
@@ -126,23 +123,58 @@ class StructuredDataTests(unittest.TestCase):
         self.assertEqual(dataset["temporalCoverage"], "2020-02-20/2020-04-08")
         self.assertNotIn("license", dataset)
 
-    def test_repository_only_projects_keep_verified_authorship(self):
+    def test_corona_atlas_keeps_upstream_authorship(self):
         _, blocks = page("/projects/corona-atlas/")
         software, = [item for item in blocks if item.get("@type") == "SoftwareSourceCode"]
         self.assertEqual([author["name"] for author in software["author"]],
                          ["Diego Hernangómez", "Rodrigo Hernangómez"])
-        for url in ("/projects/7egment/", "/projects/Bzel/", "/projects/Sfera/", "/projects/TextWatchClima/"):
+        self.assertEqual([author["@id"] for author in software["author"]], [
+            "https://orcid.org/0000-0001-8457-4658", "https://orcid.org/0000-0002-1284-4951"])
+
+    def test_forest_fire_summary_matches_upstream_metadata(self):
+        _, blocks = page("/projects/gifs/")
+        dataset, = [item for item in blocks if item.get("@type") == "Dataset"]
+        self.assertEqual(dataset["@id"], "https://dieghernan.github.io/gifs/#collection")
+        self.assertEqual(dataset["identifier"], "https://doi.org/10.5281/zenodo.23932940")
+        self.assertEqual(dataset["sameAs"], dataset["identifier"])
+        self.assertEqual(dataset["isPartOf"], "https://doi.org/10.5281/zenodo.23929996")
+        self.assertEqual(dataset["version"], "2.0.0")
+        self.assertEqual(dataset["datePublished"], "2025-02-21")
+        self.assertEqual(dataset["dateModified"], "2026-11-03")
+        self.assertIs(dataset["isAccessibleForFree"], True)
+        self.assertEqual(dataset["temporalCoverage"], "2010-02-27/2026-09-26")
+        self.assertEqual(dataset["spatialCoverage"], {
+            "@type": "Place",
+            "name": "España",
+            "geo": {
+                "@type": "GeoShape",
+                "box": "-17.9896594 27.9282566760271 3.0381681 43.5444539",
+                "description": (
+                    "Extensión de los puntos con coordenadas disponibles; "
+                    "no representa los perímetros quemados ni implica cobertura territorial completa."
+                ),
+            },
+        })
+        self.assertEqual(dataset["creator"]["@id"], "https://dieghernan.github.io/gifs/#author")
+        self.assertEqual(dataset["creator"]["name"], "Diego Hernangómez")
+        self.assertEqual(dataset["creator"]["sameAs"], "https://orcid.org/0000-0001-8457-4658")
+
+    def test_pages_without_upstream_project_markup_keep_their_page_markup(self):
+        for url in (
+                "/projects/7egment/", "/projects/Bzel/", "/projects/Sfera/",
+                "/projects/TextWatchClima/",
+                "/projects/Country-Codes-and-International-Organizations/",
+                "/201904_Using-CountryCodes/"):
             with self.subTest(url=url):
                 _, blocks = page(url)
-                watch, = [item for item in blocks if item.get("@type") == "SoftwareSourceCode"]
-                self.assertEqual(watch["author"]["@id"], "https://dieghernan.github.io/#author")
-                self.assertEqual(watch["author"]["name"], "Diego Hernangómez")
-                self.assertEqual(watch["author"]["url"], "https://dieghernan.github.io/")
-                self.assertEqual(watch["author"]["sameAs"], "https://orcid.org/0000-0001-8457-4658")
+                expected_type = "WebPage" if url.startswith("/projects/") else "BlogPosting"
+                types = {item.get("@type") for item in blocks}
+                self.assertIn(expected_type, types)
+                self.assertTrue(types.isdisjoint({"Dataset", "SoftwareSourceCode"}))
 
     def test_article_relations_reuse_the_published_article_identity(self):
         urls = set(DATA["article_relations"]) | set(DATA["package_articles"])
-        self.assertEqual(len(urls), 8)
+        self.assertEqual(len(urls), 7)
         for url in urls:
             with self.subTest(url=url):
                 _, blocks = page(url)

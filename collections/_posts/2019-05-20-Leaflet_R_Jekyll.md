@@ -144,7 +144,9 @@ It is assumed that you are [creating a post with
 **RStudio**](https://rmarkdown.rstudio.com/authoring_quick_tour.html#rendering_output),
 so the code presented above should be embedded in an `.Rmd` file.
 
-#### 4. Set up the YAML front matter <a name="step4"></a>
+<div id="step4"><span id="4-set-up-the-yaml-front-matter-"></span></div>
+
+#### 4. Set up the YAML front matter
 
 Before knitting your `.Rmd`, you have to set up the [YAML front
 matter](https://bookdown.org/yihui/rmarkdown/markdown-document.html).
@@ -234,7 +236,9 @@ Have you checked the YAML front matter of your `.md` file? Have another look,
 especially if you have followed my [tip](https://dieghernan.github.io/201905_Leaflet_R_Jekyll//#pro-tip).
 </div>
 
-### Gallery: size of a leaflet map <a name="extra"></a>
+<div id="extra"><span id="gallery-size-of-a-leaflet-map-"></span></div>
+
+### Gallery: size of a leaflet map
 
 For a complete understanding of this section, it is
 recommended to access it on multiple devices, so you can see the

@@ -167,9 +167,8 @@ surface. Both views include a bonus circle at the North Pole.
 <div class="callout-tip" role="note" aria-label="Tip" markdown="1">
 Each map is scaled independently to fit its panel. Compare circle sizes
 **within** each map. You can compare shapes across panels. Some projections,
-such as Lambert Conformal Conic, are designed for particular regions rather than
-the whole world. When forced to cover the globe, their extreme distortions
-become part of the lesson.
+such as Lambert Conformal Conic, are designed for particular regions. Their
+distortions become more pronounced when you map a much larger area.
 </div>
 
 <img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Lambert Conformal Conic has a fan-shaped outline, with circular indicatrices that grow larger toward the outer edges of the map." width="100%" />
@@ -180,9 +179,9 @@ Gall–Peters, their areas stay roughly constant within the panel. They stretch
 vertically near the equator and flatten at high latitudes.
 
 On the second row, compare Robinson with Lambert Conformal Conic. Lambert keeps
-the circles round, but their sizes change dramatically across the map. Designed
-for mid-latitude regions, it shows how a projection that works well locally can
-become highly distorted when stretched to the whole world.
+the circles nearly round, but they grow sharply toward the southern edge. With
+the standard parallels used here, the projection stretches toward infinity at
+the South Pole, so I cropped this panel at 60° S.
 
 The third row puts Mollweide and Sinusoidal next to Goode homolosine, which uses
 Sinusoidal near the equator and Mollweide at higher latitudes.

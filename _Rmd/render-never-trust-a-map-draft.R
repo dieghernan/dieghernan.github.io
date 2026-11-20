@@ -13,7 +13,11 @@ markdown <- sub(
 )
 # Cropping changes the social image dimensions, so measure the final WebP.
 metadata <- rmarkdown::yaml_front_matter(draft)
-image_path <- sub("^https://dhhdevblog[.]netlify[.]app/", "", metadata$og_image)
+image_path <- sub(
+  "^https://(dieghernan[.]github[.]io|dhhdevblog[.]netlify[.]app)/",
+  "",
+  metadata$og_image
+)
 image_path <- sub("^/", "", image_path)
 image_size <- dim(webp::read_webp(image_path))
 markdown <- sub(

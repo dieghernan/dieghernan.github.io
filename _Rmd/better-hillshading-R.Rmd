@@ -79,16 +79,17 @@ it a try. To my surprise, I preferred the
 
 ## Data and setup
 
-<!-- TODO: Use elevation tile zoom 7 for the final render (zoom 4 is for iteration). -->
-
 In this post, I'm using a DEM for the area around the Strait of Gibraltar in
 southern Spain. I get the boundary from **mapSpain** and use its bounding box to
 download the elevation tiles with **elevatr**. Then I reproject the DEM to match
 the boundary. The Strait maps share that DEM, and every color map uses
 **tidyterra**'s `etopo1` elevation palette.
 
-The terrain tiles include elevations on land and depths below sea level, so the
-map also shows the seabed around the Strait.
+The DEM comes from [Mapzen Terrain Tiles](https://registry.opendata.aws/terrain-tiles/).
+The [source guide](https://github.com/tilezen/joerd/blob/master/docs/data-sources.md#what-is-sourced-at-what-zooms)
+lists SRTM data from the U.S. Geological Survey for land at zoom 7 and Copernicus
+EU-DEM among the sources at zoom 9 in Europe. NOAA's ETOPO1 supplies the ocean
+depths shown around the Strait.
 
 ```{r}
 #| label: setup-and-elevation-data
