@@ -317,12 +317,4 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" alt="Antarctic flag variation with the continental silhouette formed by scattered white points on a blue background." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Cold Heart (PNAU Remix) by Elton John and Dua Lipa on Spotify"
-  src="https://open.spotify.com/embed/track/5PERfEjDBWImbO3W8m7f0w?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="5PERfEjDBWImbO3W8m7f0w" title="Cold Heart (PNAU Remix) by Elton John and Dua Lipa on Spotify" %}

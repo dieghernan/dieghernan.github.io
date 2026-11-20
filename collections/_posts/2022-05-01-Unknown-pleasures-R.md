@@ -301,15 +301,7 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Unknown Pleasures by Joy Division on Spotify"
-  src="https://open.spotify.com/embed/album/5Dgqy4bBg09Rdw7CQM545s?utm_source=generator&si=12e3c6b3c41940fb"
-  height="352"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html type="album" id="5Dgqy4bBg09Rdw7CQM545s" title="Unknown Pleasures by Joy Division on Spotify" %}
 
 ## Variations
 

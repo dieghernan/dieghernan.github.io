@@ -518,15 +518,7 @@ base_plot +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="High by Lighthouse Family on Spotify"
-  src="https://open.spotify.com/embed/track/1KP6ieHBqTmEjqLy75gAEn?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="1KP6ieHBqTmEjqLy75gAEn" title="High by Lighthouse Family on Spotify" %}
 
 ## References
 

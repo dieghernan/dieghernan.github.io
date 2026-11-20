@@ -1050,9 +1050,7 @@ After all these experiments, here are my main takeaways:
 
 **How we display a hillshade can matter just as much as how we calculate it.**
 
-<iframe class="d-block w-100 border-0 rounded my-3" title="In the Shadows by The Rasmus on Spotify" src="https://open.spotify.com/embed/track/31RLtLXs4hZsxzLMpe7gl5?theme=0" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen>
-
-</iframe>
+{% include snippets/spotify.html id="31RLtLXs4hZsxzLMpe7gl5" title="In the Shadows by The Rasmus on Spotify" %}
 
 ## References
 

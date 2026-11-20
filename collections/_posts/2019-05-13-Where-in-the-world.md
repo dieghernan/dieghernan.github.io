@@ -66,12 +66,4 @@ traveled to by plane.
 | Asia          | Western Asia     |   3 |
 | North America | Northern America |   3 |
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Around the World by Daft Punk on Spotify"
-  src="https://open.spotify.com/embed/track/1pKYYY0dkg23sQQXi0Q5zN?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="1pKYYY0dkg23sQQXi0Q5zN" title="Around the World by Daft Punk on Spotify" %}
