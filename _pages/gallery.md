@@ -34,6 +34,6 @@ https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Population_per_km2_in_S
 
 ## Blog
 
-Plots used on my posts.
+Featured plots used on my posts.
 
-{% include_cached snippets/carousel.html internal="imgblog" random="true" controls="true" indicators="true" interval=2000 photoswipe=true %}
+{% include_cached snippets/masonry.html internal="featured" index_sort="basename" index_sort_asc=true photoswipe=true %}
