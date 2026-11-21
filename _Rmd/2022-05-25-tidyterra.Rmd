@@ -24,12 +24,15 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp"
+header_img:
+  https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
 description: >-
   Use tidyterra to manipulate terra spatial objects with tidyverse methods and
   plot SpatRasters with ggplot2.
-schema_image: ["https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp", "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp"]
-og_image_width: 2100
+schema_image:
+  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
+  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp
+og_image_width: 2056
 og_image_height: 2100
 og_image_type: "image/webp"
 og_image_alt: >-
@@ -48,12 +51,10 @@ knitr::opts_chunk$set(
   message = FALSE,
   dpi = 300,
   dev = "ragg_png",
-  fig.path = "assets/img/blog/",
-  fig.width = 7,
-  fig.height = 7,
   fig.cap = "",
   tidy = "styler",
-  out.width = "100%"
+  out.width = "100%",
+  fig.path = "assets/img/blog/"
 )
 rm(list = ls())
 ```
@@ -67,8 +68,27 @@ familiar with the `volcano` dataset:
 #|   Elevation heatmap of Maungawhau in Auckland from the volcano dataset.
 #|   Colors indicate altitude and reveal the crater surrounded by higher ground.
 #| fig-cap: ""
+# Share the paper color and fonts across base graphics and ggplot2.
+background <- "#FEFDFD"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+with_map_style <- function(plot) {
+  previous <- par(
+    bg = background, family = map_regular,
+    fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
+  )
+  on.exit(par(previous))
+  invisible(force(plot))
+}
+
 data("volcano")
-image(volcano, col = terrain.colors(256, rev = TRUE))
+with_map_style(image(volcano, col = terrain.colors(256, rev = TRUE)))
 ```
 
 This represents the topographic information about one of the volcanoes of
@@ -92,19 +112,12 @@ library(tidyterra)
 library(maptiles)
 library(sf)
 
-# Define a common theme for the maps.
-background <- "#FEFDFD"
-
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
-showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
-showtext::showtext_auto()
-
 theme_set(
-  theme_grey(paper = background) +
+  theme_grey(paper = background, base_family = map_regular) +
     theme(
-      text = element_text(family = map_family),
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -158,13 +171,15 @@ SpatRaster:
 
 ```{r}
 #| label: 20220525_volcano_raster
-#| fig-alt: !expr c("Elevation raster of Maungawhau before orientation correction. The
-#|   crater appears near the top of the map.", "Elevation raster of Maungawhau after
-#|   reversing rows and columns. The crater now appears near the bottom of the map.")
+#| fig-alt:
+#|   - Elevation raster of Maungawhau before orientation correction. The crater
+#|     appears near the top of the map.
+#|   - Elevation raster of Maungawhau after reversing rows and columns. The
+#|     crater now appears near the bottom of the map.
 #| fig-cap: ""
 volcano_rast <- rast(volcano)
 
-terra::plot(volcano_rast, bg = background)
+with_map_style(terra::plot(volcano_rast, background = background))
 
 # Wait, it is flipped!
 volcano_rast_ok <- rast(volcano[
@@ -173,7 +188,7 @@ volcano_rast_ok <- rast(volcano[
 ])
 
 # Much better!
-terra::plot(volcano_rast_ok, bg = background)
+with_map_style(terra::plot(volcano_rast_ok, background = background))
 
 volcano_rast_ok
 ```
@@ -217,10 +232,11 @@ template:
 
 ```{r}
 #| label: 20220525_create_volcano2
-#| fig-alt: !expr c("Georeferenced elevation map of Maungawhau. Projected coordinates
-#|   locate the terrain and colors represent altitude from 94 to 195 meters.", "Street
-#|   map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain
-#|   with the crater and surrounding streets.")
+#| fig-alt:
+#|   - Georeferenced elevation map of Maungawhau. Projected coordinates locate
+#|     the terrain and colors represent altitude from 94 to 195 meters.
+#|   - Street map of Maungawhau overlaid with a translucent elevation raster,
+#|     aligning the terrain with the crater and surrounding streets.
 #| fig-cap: ""
 # Use tidyterra to pull the values of one raster
 # and create a new layer
@@ -231,7 +247,7 @@ volcano2 <- template %>%
 
 volcano2
 
-terra::plot(volcano2, bg = background)
+with_map_style(terra::plot(volcano2, background = background))
 
 # And plot it
 ggtile +
@@ -250,13 +266,15 @@ how to load it and check the plotting possibilities of **tidyterra**:
 
 ```{r}
 #| label: 20220525_easteregg
-#| fig-alt: !expr c("Elevation map of Maungawhau derived from LiDAR data, showing the
-#|   crater and surrounding terrain at 5-meter resolution.", "Street map of Maungawhau
-#|   with an elevation overlay restricted to terrain above 130 meters. Lower ground remains
-#|   visible on the base map.", "Street map of Maungawhau overlaid with elevation contours
-#|   at 10-meter intervals. Nested contours outline the crater and its rim.", "Street
-#|   map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and
-#|   contour lines at 2.5-meter intervals.")
+#| fig-alt:
+#|   - Elevation map of Maungawhau derived from LiDAR data, showing the crater
+#|     and surrounding terrain at 5-meter resolution.
+#|   - Street map of Maungawhau with an elevation overlay restricted to terrain
+#|     above 130 meters. Lower ground remains visible on the base map.
+#|   - Street map of Maungawhau overlaid with elevation contours at 10-meter
+#|     intervals. Nested contours outline the crater and its rim.
+#|   - Street map of Maungawhau overlaid with colored elevation bands at
+#|     20-meter intervals and contour lines at 2.5-meter intervals.
 #| fig-cap: ""
 # Load out Easter Egg
 
@@ -265,7 +283,7 @@ volcano2_easter <- rast(system.file("extdata/volcano2.tif",
 ))
 
 volcano2_easter
-terra::plot(volcano2_easter)
+with_map_style(terra::plot(volcano2_easter, background = background))
 
 
 # Only altitudes of more than 130m

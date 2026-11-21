@@ -3,7 +3,11 @@ series:
   - id: map-projections
     order: 1
 title: "Happy Valentine's Day"
-excerpt: "Give the world a heart shape with the Bonne projection and draw it in R."
+excerpt: >-
+  Give the world a heart shape with the Bonne projection and draw it in R.
+description: >-
+  Draw a heart-shaped world map for Valentine's Day with the Bonne projection
+  in R using sf, giscoR and ggplot2.
 subtitle: "Do you know the Bonne projection?"
 syndication:
   - https://www.r-bloggers.com/2025/02/happy-valentines-day-2/
@@ -26,9 +30,9 @@ output:
     variant: gfm
     preserve_yaml: yes
   html_document:
-header_img: "https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp"
-og_image_width: 3000
-og_image_height: 3000
+header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
+og_image_width: 1834
+og_image_height: 2100
 og_image_type: "image/webp"
 og_image_alt: >-
   World map in a heart-shaped Bonne projection, with a Valentine greeting
@@ -44,10 +48,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   warning = FALSE,
   message = FALSE,
-  dev = "ragg_png",
   dpi = 300,
+  dev = "ragg_png",
+  fig.cap = "",
   tidy = "styler",
-  out.width = "100%"
+  out.width = "100%",
+  fig.path = "assets/img/blog/"
 )
 rm(list = ls())
 ```
@@ -58,9 +64,11 @@ special one, as it produces this result when used to map the whole world. Happy
 Valentine’s Day!
 
 ```{r}
-#| label: happval
+#| label: 202402_bonne_proj
 #| fig-cap: ""
-#| fig-alt: "World map in a heart-shaped Bonne projection, with a Valentine greeting above it."
+#| fig-alt: >-
+#|   World map in a heart-shaped Bonne projection, with a Valentine greeting
+#|   above it.
 library(sf)
 library(dplyr)
 library(giscoR)

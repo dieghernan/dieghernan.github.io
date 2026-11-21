@@ -84,16 +84,20 @@ library(exactextractr)
 # Define a common theme for the maps.
 background <- "#FEFDFD"
 
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme_grey(paper = background) +
+  theme_grey(paper = background, base_family = map_regular) +
     theme(
-      text = element_text(family = map_family),
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -111,7 +115,7 @@ global file with a resolution of 1 km in the Mollweide projection (ESRI:54009).
 
 
 ``` r
-# Create observation window based the Iberian Peninsula and surroundings
+# Create an observation window around the Iberian Peninsula
 # We create a buffered circle
 owin <- gisco_get_countries(
   country = c("ES", "PT"),
@@ -146,16 +150,20 @@ base_gg
 
 <img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window." width="100%" />
 
-That is our base map. Now we download the GHSL data programmatically and check
-that everything is correct. At this point, it is interesting to use the `win`
+That is our base map. Now we download the 2030 population projection from
+GHS-POP R2023A (Schiavina et al., 2023). At this point, we can use the `win`
 argument when reading the raster with `terra::rast()`, as this allows us to load
 only the desired area with the subsequent improvement in terms of performance.
 
 
 ``` r
 # Download data
-# We need the following file (download 305Mb)
-url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
+# We need the following file (about 305 MB)
+url <- paste0(
+  "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/",
+  "GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/",
+  "GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
+)
 
 # This is where I store the file, you need to modify the folder
 fname <- file.path("~/R/mapslib/GHS", basename(url)) |> path.expand()
@@ -164,11 +172,16 @@ if (!file.exists(fname)) {
 }
 zip_content <- unzip(fname, list = TRUE)
 zip_content
-#>                                                 Name    Length                Date
-#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307 2023-04-28 21:11:00
-#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532 2023-04-28 21:11:00
-#> 3                         GHSL_Data_Package_2023.pdf  15139500 2024-09-24 10:40:00
-#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963 2023-04-30 10:42:00
+#>                                                 Name    Length
+#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307
+#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532
+#> 3                         GHSL_Data_Package_2023.pdf  15139500
+#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963
+#>                  Date
+#> 1 2023-04-28 21:11:00
+#> 2 2023-04-28 21:11:00
+#> 3 2024-09-24 10:40:00
+#> 4 2023-04-30 10:42:00
 
 # Unzip
 unzip(fname, exdir = "~/R/mapslib/GHS", junkpaths = TRUE, overwrite = FALSE)
@@ -246,7 +259,7 @@ pop_points <- pop_agg |>
 
 ## Final plot
 
-And finally, the map. In this case, I save it as a high-resolution square map.
+And finally, the map. I save it as a high-resolution WebP.
 
 
 ``` r
@@ -474,7 +487,7 @@ And that's it! Which one do you like the most? Let me know in the comments.
 - Nowak, B. (2023, November 21). *Jacques Bertin’s valued points map with R*.
   The R Graph Gallery.
   <https://r-graph-gallery.com/web-valued-dots-map-bertin.html>
-- Pesaresi, M., & Politis, P. (2023). *GHS-BUILT-C R2023A – GHS settlement
-  characteristics, derived from Sentinel2 composite (2018) and other GHS R2023A
-  data* [Data set]. European Commission, Joint Research Centre.
-  [DOI](https://doi.org/10.2905/3C60DDF6-0586-4190-854B-F6AA0EDC2A30)
+- Schiavina, M., Freire, S., Carioli, A., & MacManus, K. (2023). *GHS-POP
+  R2023A – GHS population grid multitemporal (1975–2030)* [Data set]. European
+  Commission, Joint Research Centre.
+  [DOI](https://doi.org/10.2905/2FF68A52-5B5B-4A22-8F40-C41DA8332CFE)

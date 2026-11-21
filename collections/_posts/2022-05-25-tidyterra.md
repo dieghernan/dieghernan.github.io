@@ -24,12 +24,15 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp"
+header_img:
+  https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
 description: >-
   Use tidyterra to manipulate terra spatial objects with tidyverse methods and
   plot SpatRasters with ggplot2.
-schema_image: ["https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp", "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp"]
-og_image_width: 2022
+schema_image:
+  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
+  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp
+og_image_width: 2056
 og_image_height: 2100
 og_image_type: "image/webp"
 og_image_alt: >-
@@ -44,8 +47,27 @@ familiar with the `volcano` dataset:
 
 
 ``` r
+# Share the paper color and fonts across base graphics and ggplot2.
+background <- "#FEFDFD"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+with_map_style <- function(plot) {
+  previous <- par(
+    bg = background, family = map_regular,
+    fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
+  )
+  on.exit(par(previous))
+  invisible(force(plot))
+}
+
 data("volcano")
-image(volcano, col = terrain.colors(256, rev = TRUE))
+with_map_style(image(volcano, col = terrain.colors(256, rev = TRUE)))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" />
@@ -70,19 +92,12 @@ library(tidyterra)
 library(maptiles)
 library(sf)
 
-# Define a common theme for the maps.
-background <- "#FEFDFD"
-
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
-showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
-showtext::showtext_auto()
-
 theme_set(
-  theme_grey(paper = background) +
+  theme_grey(paper = background, base_family = map_regular) +
     theme(
-      text = element_text(family = map_family),
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -136,7 +151,7 @@ SpatRaster:
 ``` r
 volcano_rast <- rast(volcano)
 
-terra::plot(volcano_rast, bg = background)
+with_map_style(terra::plot(volcano_rast, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" />
@@ -150,7 +165,7 @@ volcano_rast_ok <- rast(volcano[
 ])
 
 # Much better!
-terra::plot(volcano_rast_ok, bg = background)
+with_map_style(terra::plot(volcano_rast_ok, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" />
@@ -230,7 +245,7 @@ volcano2
 #> min value   :        94
 #> max value   :       195
 
-terra::plot(volcano2, bg = background)
+with_map_style(terra::plot(volcano2, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" />
@@ -272,7 +287,7 @@ volcano2_easter
 #> name        :  elevation
 #> min value   :  76.262222
 #> max value   : 195.554199
-terra::plot(volcano2_easter)
+with_map_style(terra::plot(volcano2_easter, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" />

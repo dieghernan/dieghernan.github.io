@@ -3,7 +3,12 @@ series:
   - id: map-projections
     order: 3
 title: "Let's peel the world"
-excerpt: "Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R."
+excerpt: >-
+  Peel the world like an orange with the interrupted Goode homolosine projection
+  and draw it in R.
+description: >-
+  Use sf and ggplot2 to draw a world map with the interrupted Goode homolosine
+  projection, including coastlines and a graticule split at the lobe boundaries.
 subtitle: "Do you know the interrupted Goode homolosine projection?"
 syndication:
   - https://www.r-bloggers.com/2026/10/lets-peel-the-world/
@@ -19,10 +24,10 @@ tags:
   - rstats
   - music
   - r_bloggers
-header_img: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
-og_image: "https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp"
-og_image_width: 2000
-og_image_height: 1016
+header_img: https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp
+og_image: https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp
+og_image_width: 2100
+og_image_height: 1136
 og_image_type: "image/webp"
 og_image_alt: >-
   World map with orange coastlines and graticules in the interrupted Goode
@@ -38,27 +43,25 @@ output:
 #| include: false
 #| fig-cap: ""
 knitr::opts_chunk$set(
-  tidy = "styler",
   collapse = TRUE,
   comment = "#>",
   warning = FALSE,
   message = FALSE,
+  dpi = 300,
   dev = "ragg_png",
-  dpi = 200,
-  fig.width = 10,
-  fig.height = 5.5,
-  fig.path = "assets/img/blog/202610_goode-",
-  out.width = "100%",
   fig.cap = "",
-  fig.alt = "World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel."
+  tidy = "styler",
+  out.width = "100%",
+  fig.path = "assets/img/blog/202610_goode-"
 )
 ```
 
-What would happen if we peeled the Earth like an orange? The
-[interrupted Goode homolosine projection](https://proj.org/en/stable/operations/projections/igh.html)
-gives us something close to that! This equal-area projection preserves relative
-areas while splitting the world map into lobes. Add a few shades of orange and
-our world is ready to peel.
+What would happen if we peeled the Earth like an orange? The [interrupted Goode
+homolosine
+projection](https://proj.org/en/stable/operations/projections/igh.html) gives us
+something close to that! This equal-area projection preserves relative areas
+while splitting the world map into lobes. Add a few shades of orange and our
+world is ready to peel.
 
 Let's make it with **sf**, **giscoR** and **ggplot2**. First, we get the
 coastlines and draw the outline, following the cuts between the lobes.
@@ -126,14 +129,18 @@ and keeps the edges of our peel tidy.
 ```{r}
 #| label: map
 #| fig-cap: ""
-#| fig-alt: "World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel."
+#| fig-alt: >-
+#|   World map with orange coastlines and graticules in the interrupted Goode
+#|   homolosine projection, resembling a flattened orange peel.
 font_add_google("Coiny", family = "coiny")
 
 showtext_auto()
 
 ggplot() +
   geom_sf(data = outline, fill = "#FFF0D9", colour = NA) +
-  geom_sf(data = world, fill = "#F9B566", colour = "#B34D08", linewidth = 0.25) +
+  geom_sf(
+    data = world, fill = "#F9B566", colour = "#B34D08", linewidth = 0.25
+  ) +
   geom_sf(data = grat, fill = NA, colour = "#E8A45B", linewidth = 0.25) +
   geom_sf(data = mask, fill = "#fcf1e7", colour = NA) +
   geom_sf(data = outline, fill = NA, colour = "#E87516", linewidth = 0.4) +
@@ -149,12 +156,12 @@ ggplot() +
     text = element_text(family = "coiny"),
     plot.background = element_rect(fill = "#fcf1e7", colour = NA),
     plot.title = element_text(
-      color = "#E87516", face = "bold", size = rel(3),
+      color = "#E87516", face = "bold", size = rel(1.5),
       margin = margin(b = 10)
     ),
     plot.margin = margin(10, 10, 10, 10),
     plot.caption = element_text(
-      color = "#E87516", size = rel(1.5),
+      color = "#E87516", size = rel(0.75),
       margin = margin(t = 10)
     )
   ) +
@@ -172,5 +179,5 @@ ggplot() +
   pour ne pas y laisser sa santé mentale. *Pyranhia*.
   [Article](https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html)
 - Wilke, C. O. (n.d.). *Interrupted Goode homolosine*. practicalgg.
-  <https://wilkelab.org/practicalgg/articles/goode.html>
-  (Source for the outline and masking approach.)
+  [URL](https://wilkelab.org/practicalgg/articles/goode.html) (Source for the
+  outline and masking approach.)

@@ -27,15 +27,20 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
-header_img: "https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp"
-schema_image: ["https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp", "https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp"]
+header_img: https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
+schema_image:
+  - https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp
+  - https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp
+  - https://dieghernan.github.io/assets/img/blog/202602-simpl-1.webp
 og_image_width: 2100
-og_image_height: 1778
+og_image_height: 1766
 og_image_type: "image/webp"
 og_image_alt: >-
   Map of India and Pakistan with translucent country fills. Overlapping
   boundaries in Kashmir reveal conflicting territorial claims.
 ---
+
+
 
 If you've ever worked with spatial data in **R**, this may ring a bell...
 
@@ -52,16 +57,16 @@ While searching for new data sources, I found the excellent
 data can be tedious because it comes in zipped shapefiles. As any GIS
 professional knows, [shapefiles should die!](http://switchfromshapefile.org/)
 
-Previously, the **rgeoboundaries** package was on CRAN and allowed access to
-the geoBoundaries API, but it was archived. So I decided to create my own
-version, and **geobounds** was born.
+Previously, the **rgeoboundaries** package was on CRAN and allowed access to the
+geoBoundaries API, but it was archived. So I decided to create my own version,
+and **geobounds** was born.
 
 - Source code: <https://github.com/dieghernan/geobounds>
 - **pkgdown** website: <https://dieghernan.github.io/geobounds/>
 
 **geobounds** connects directly to geoBoundaries and returns clean, ready-to-use
-**sf** objects with a single function call. No manual downloads and
-no shapefile handling.
+**sf** objects with a single function call. No manual downloads and no shapefile
+handling.
 
 This is how it works.
 
@@ -86,18 +91,23 @@ library(dplyr)
 # Define a common theme for the maps.
 background <- "#F5F5F5"
 
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
   theme_grey(
-    base_family = "inter-tight", paper = background,
+    base_family = map_regular, paper = background,
     base_size = 8
   ) +
     theme(
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -140,8 +150,8 @@ gb_get(country = "Panama", adm_lvl = "all", simplified = TRUE) |>
 
 ## Composite Global Administrative Zones (CGAZ)
 
-Individual country files can reflect different views of where borders lie.
-When you combine them, you may see:
+Individual country files can reflect different views of where borders lie. When
+you combine them, you may see:
 
 - Overlapping boundaries
 - Geographic gaps
@@ -253,8 +263,8 @@ also want to look at:
 
 ### **rnaturalearth**
 
-A very popular package to access Natural Earth datasets directly from **R**. It's
-lightweight and great for quick global maps, especially at small scales.
+A very popular package to access Natural Earth datasets directly from **R**.
+It's lightweight and great for quick global maps, especially at small scales.
 
 If you need physical layers (rivers, coastlines, elevation) alongside political
 boundaries, this is often a good choice.

@@ -3,7 +3,12 @@ series:
   - id: map-projections
     order: 2
 title: "Mapping Antarctica"
-excerpt: "Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R."
+excerpt: >-
+  Fix a polygon artifact in the GISCO data and draw Antarctica from the South
+  Pole in R.
+description: >-
+  Repair a gap in Antarctica's GISCO boundary with a two-meter buffer, then
+  use the corrected map to recreate Antarctic flag designs in R.
 subtitle: "Cool maps from the South Pole"
 syndication:
   - https://www.r-bloggers.com/2025/10/mapping-antarctica/
@@ -26,15 +31,17 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
-header_img: "https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp"
+header_img: https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp
 last_modified_at: 2026-11-14
 og_image_width: 2100
-og_image_height: 1846
+og_image_height: 1840
 og_image_type: "image/webp"
 og_image_alt: >-
   South Pole-centered map of Antarctica after removing the polygon artifact.
   The landmass is continuous across the previously affected area.
 ---
+
+
 
 Creating maps with **R** is usually straightforward, but representations that
 cross the [International Date
@@ -62,16 +69,21 @@ library(rmapshaper)
 # Define a common theme for the maps.
 background <- "#E2ECF2"
 
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme_grey(paper = background) +
+  theme_grey(paper = background, base_family = map_regular) +
     theme(
-      text = element_text(family = map_family),
-      plot.title = element_text(face = "bold"),
+      text = element_text(family = map_regular),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -84,9 +96,9 @@ orthographic projection centered on the South Pole.
 
 
 ``` r
-antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") %>%
+antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") |>
   select(NAME = NAME_ENGL) |>
-  # Orthographic projection centered on the South Pole
+  # Ortho proj centered in the South Pole
   st_transform(crs = "+proj=ortho +lat_0=-90 +lon_0=0")
 
 ggplot(antarct) +
@@ -100,9 +112,8 @@ ggplot(antarct) +
 geometry by editing vertices manually. This version uses a buffer.
 </div>
 
-In the orthographic projection, a narrow gap runs inland from the coast.
-I close it by applying a 2-meter buffer:
-
+In the orthographic projection, a narrow gap runs inland from the coast. I close
+it by applying a 2-meter buffer:
 
 
 ``` r
@@ -117,8 +128,8 @@ ggplot(antarctica_fixed) +
 
 ## Plotting examples
 
-With the corrected geometry, we can draw the maps. Below are a few examples based on
-proposed Antarctic flag designs.
+With the corrected geometry, we can draw the maps. Below are a few examples
+based on proposed Antarctic flag designs.
 
 ### Graham Bartram's proposal (1996)
 
@@ -236,15 +247,17 @@ antarctica_simp |>
 
 ### Bartram's redesigned Antarctic flag
 
-In 2024, Graham Bartram revealed a new version of his original flag as part of
-a global campaign to raise awareness about the growing problem of microplastic
+In 2024, Graham Bartram revealed a new version of his original flag as part of a
+global campaign to raise awareness about the growing problem of microplastic
 pollution. The new design keeps the familiar white outline of Antarctica but
 swaps the plain blue background for one filled with countless tiny, colorful
 dots. These dots represent the microscopic bits of plastic that have been
 discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.
 
-![Antarctic flag variation with the white continental silhouette formed by scattered marks on a blue background.](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png)
+![Antarctic flag variation with the white continental silhouette formed by
+scattered marks on a blue
+background.](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png)
 
 Because the design relies on randomness, we approximate it using the following
 procedure:
@@ -292,15 +305,22 @@ ggplot(plastic_end) +
 
 plastic_end$area <- st_area(plastic_end) |> as.double()
 
-plastic_end$fill <- sample(c("#ff00ec", "#9e00ec"), nrow(plastic_end), replace = TRUE)
-plastic_end$fill <- ifelse(plastic_end$area > quantile(plastic_end$area, probs = 0.4),
+plastic_end$fill <- sample(c("#ff00ec", "#9e00ec"),
+  nrow(plastic_end),
+  replace = TRUE
+)
+plastic_end$fill <- ifelse(
+  plastic_end$area > quantile(plastic_end$area, probs = 0.4),
   "white",
   plastic_end$fill
 )
 
 bbox2 <- st_bbox(plastic_end)
 ggplot() +
-  geom_sf(data = plastic_end, aes(fill = fill), color = NA, linewidth = 0) +
+  geom_sf(
+    data = plastic_end, aes(fill = fill),
+    color = NA, linewidth = 0
+  ) +
   scale_fill_identity() +
   theme(
     panel.background = element_rect(fill = "#009fdc"),
