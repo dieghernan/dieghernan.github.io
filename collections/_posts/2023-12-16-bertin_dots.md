@@ -32,7 +32,7 @@ bibliography: bertin.bib
 description: >-
   Create Bertin-style dot density maps in R using Global Human Settlement
   Layer population data.
-og_image_width: 1928
+og_image_width: 1870
 og_image_height: 2400
 og_image_type: "image/webp"
 og_image_alt: >-
@@ -164,16 +164,11 @@ if (!file.exists(fname)) {
 }
 zip_content <- unzip(fname, list = TRUE)
 zip_content
-#>                                                 Name    Length
-#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307
-#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532
-#> 3                         GHSL_Data_Package_2023.pdf  15139500
-#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963
-#>                  Date
-#> 1 2023-04-28 21:11:00
-#> 2 2023-04-28 21:11:00
-#> 3 2024-09-24 10:40:00
-#> 4 2023-04-30 10:42:00
+#>                                                 Name    Length                Date
+#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307 2023-04-28 21:11:00
+#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532 2023-04-28 21:11:00
+#> 3                         GHSL_Data_Package_2023.pdf  15139500 2024-09-24 10:40:00
+#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963 2023-04-30 10:42:00
 
 # Unzip
 unzip(fname, exdir = "~/R/mapslib/GHS", junkpaths = TRUE, overwrite = FALSE)
@@ -256,6 +251,24 @@ And finally, the map. In this case, I save it as a high-resolution square map.
 
 ``` r
 # Final plot
+
+theme_bertin <- theme(
+  legend.position = "bottom",
+  legend.margin = margin(r = 20, unit = "pt"),
+  legend.title = element_markdown(colour = "grey50"),
+  legend.key.width = unit(50, "pt"),
+  plot.title = element_markdown(hjust = 0.5, size = 20),
+  plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
+  plot.caption = element_markdown(
+    color = "grey20", hjust = .5, size = 8, margin = margin(t = 20)
+  ),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.text = element_blank(),
+  panel.grid = element_blank(),
+  panel.background = element_rect(fill = background),
+)
+
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
   geom_spatvector(
@@ -285,20 +298,7 @@ final_plot <- base_gg +
   ) +
   # This CRS for representation only
   coord_sf(expand = TRUE, crs = 3035) +
-  theme(
-    legend.position = "bottom",
-    legend.margin = margin(r = 20, unit = "pt"),
-    legend.title = element_markdown(colour = "grey20"),
-    legend.key.width = unit(50, "pt"),
-    plot.title = element_markdown(hjust = 0.5, size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
-    plot.caption = element_markdown(color = "grey20", hjust = .5),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    axis.text = element_blank(),
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = background),
-  )
+  theme_bertin
 
 final_plot
 ```
@@ -452,20 +452,8 @@ final_plot_hex <- base_gg +
   ) +
   # This CRS for representation only
   coord_sf(expand = TRUE, crs = 3035) +
-  theme(
-    legend.position = "bottom",
-    legend.margin = margin(r = 20, unit = "pt"),
-    legend.title = element_markdown(colour = "grey20"),
-    legend.key.width = unit(50, "pt"),
-    plot.title = element_markdown(hjust = 0.5, size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
-    plot.caption = element_markdown(color = "grey20", hjust = .5),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    axis.text = element_blank(),
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = background),
-  )
+  theme_bertin
+
 final_plot_hex
 ```
 

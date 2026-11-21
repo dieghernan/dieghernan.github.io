@@ -273,6 +273,24 @@ And finally, the map. In this case, I save it as a high-resolution square map.
 #| fig-height: 8
 
 # Final plot
+
+theme_bertin <- theme(
+  legend.position = "bottom",
+  legend.margin = margin(r = 20, unit = "pt"),
+  legend.title = element_markdown(colour = "grey50"),
+  legend.key.width = unit(50, "pt"),
+  plot.title = element_markdown(hjust = 0.5, size = 20),
+  plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
+  plot.caption = element_markdown(
+    color = "grey20", hjust = .5, size = 8, margin = margin(t = 20)
+  ),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.text = element_blank(),
+  panel.grid = element_blank(),
+  panel.background = element_rect(fill = background),
+)
+
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
   geom_spatvector(
@@ -302,20 +320,7 @@ final_plot <- base_gg +
   ) +
   # This CRS for representation only
   coord_sf(expand = TRUE, crs = 3035) +
-  theme(
-    legend.position = "bottom",
-    legend.margin = margin(r = 20, unit = "pt"),
-    legend.title = element_markdown(colour = "grey20"),
-    legend.key.width = unit(50, "pt"),
-    plot.title = element_markdown(hjust = 0.5, size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
-    plot.caption = element_markdown(color = "grey20", hjust = .5),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    axis.text = element_blank(),
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = background),
-  )
+  theme_bertin
 
 final_plot
 ```
@@ -468,20 +473,8 @@ final_plot_hex <- base_gg +
   ) +
   # This CRS for representation only
   coord_sf(expand = TRUE, crs = 3035) +
-  theme(
-    legend.position = "bottom",
-    legend.margin = margin(r = 20, unit = "pt"),
-    legend.title = element_markdown(colour = "grey20"),
-    legend.key.width = unit(50, "pt"),
-    plot.title = element_markdown(hjust = 0.5, size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
-    plot.caption = element_markdown(color = "grey20", hjust = .5),
-    axis.line = element_blank(),
-    axis.ticks = element_blank(),
-    axis.text = element_blank(),
-    panel.grid = element_blank(),
-    panel.background = element_rect(fill = background),
-  )
+  theme_bertin
+
 final_plot_hex
 ```
 
