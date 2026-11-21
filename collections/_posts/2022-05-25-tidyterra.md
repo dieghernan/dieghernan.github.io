@@ -1,6 +1,6 @@
 ---
 title: "Introducing <strong>tidyterra</strong>"
-subtitle: Easily work with and plot SpatRasters
+subtitle: "Easily work with and plot SpatRasters"
 excerpt: tidyterra provides tidyverse methods for terra objects and geom
   functions for plotting with ggplot2.
 syndication:
@@ -24,15 +24,17 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
-description: "Use tidyterra to manipulate terra spatial objects with tidyverse methods and plot SpatRasters with ggplot2."
-schema_image:
-  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp
-  - https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp
-og_image_width: 2100
+header_img: "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp"
+description: >-
+  Use tidyterra to manipulate terra spatial objects with tidyverse methods and
+  plot SpatRasters with ggplot2.
+schema_image: ["https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp", "https://dieghernan.github.io/assets/img/blog/20220525_easteregg-3.webp"]
+og_image_width: 2022
 og_image_height: 2100
 og_image_type: "image/webp"
-og_image_alt: "Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map."
+og_image_alt: >-
+  Street map of Maungawhau with an elevation overlay restricted to terrain
+  above 130 meters. Lower ground remains visible on the base map.
 ---
 
 
@@ -48,8 +50,8 @@ image(volcano, col = terrain.colors(256, rev = TRUE))
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" />
 
-This represents the topographic information about one of the volcanoes of Auckland
-(New Zealand), specifically [Maungawhau / Mount
+This represents the topographic information about one of the volcanoes of
+Auckland (New Zealand), specifically [Maungawhau / Mount
 Eden](https://en.wikipedia.org/wiki/Maungawhau_/_Mount_Eden). But **do you know
 that this map is flipped?**
 
@@ -67,6 +69,23 @@ library(ggplot2)
 library(tidyterra)
 library(maptiles)
 library(sf)
+
+# Define a common theme for the maps.
+background <- "#FEFDFD"
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_grey(paper = background) +
+    theme(
+      text = element_text(family = map_family),
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ## Wait, `volcano` is flipped?
@@ -104,9 +123,9 @@ ggtile
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_tile-1.webp" alt="Street map of Maungawhau in Auckland, showing the crater, surrounding paths and nearby streets." width="100%" />
 
-Here we have a crisp RGB tile of Maungawhau. Now, the next
-question is how to match the `volcano` dataset (a matrix) with this tile (a
-geotagged map tile)? Let's check it out.
+Here we have a crisp RGB tile of Maungawhau. Now, the next question is how to
+match the `volcano` dataset (a matrix) with this tile (a geotagged map tile)?
+Let's check it out.
 
 ## Working with SpatRasters
 
@@ -117,7 +136,7 @@ SpatRaster:
 ``` r
 volcano_rast <- rast(volcano)
 
-terra::plot(volcano_rast)
+terra::plot(volcano_rast, bg = background)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" />
@@ -131,7 +150,7 @@ volcano_rast_ok <- rast(volcano[
 ])
 
 # Much better!
-terra::plot(volcano_rast_ok)
+terra::plot(volcano_rast_ok, bg = background)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" />
@@ -143,7 +162,7 @@ volcano_rast_ok
 #> size        : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 1, 1  (x, y)
 #> extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)
-#> coord. ref. :
+#> coord. ref. : 
 #> source(s)   : memory
 #> name        : lyr.1
 #> min value   :    94
@@ -154,7 +173,8 @@ Nice! Now we have a raster of `volcano`, but still without geotagged
 information. Thanks to this article by Tomislav Hengl
 ([\@tom_hengl](https://twitter.com/tom_hengl)) we can check the basic geographic
 parameters of `volcano` (see [Volcano
-Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)), which are:
+Maungawhau](https://www.geomorphometry.org/2009/08/20/volcano-maungawhau/)),
+which are:
 
 - **CRS**: EPSG:27200
 - **xllcorner**: 2667400
@@ -210,7 +230,7 @@ volcano2
 #> min value   :        94
 #> max value   :       195
 
-terra::plot(volcano2)
+terra::plot(volcano2, bg = background)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" />
