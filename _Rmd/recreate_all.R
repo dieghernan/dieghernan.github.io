@@ -3,7 +3,7 @@ source("_Rmd/renderblog_v2.R")
 
 posts <- commandArgs(trailingOnly = TRUE)
 if (!length(posts)) {
-  posts <- "2022-05-01-Unknown-pleasures-R.Rmd"
+  posts <- "2022-03-03-insetmaps.Rmd"
 }
 
 for (post in posts) {
