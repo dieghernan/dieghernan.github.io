@@ -72,6 +72,16 @@ tattoos, clothing, merchandise, video games and even 3-D sculptures:
 signal traces on a black
 background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
+Peter Saville explains how he turned a pulsar plot into the cover of
+*Unknown Pleasures* in this short film by Eric Klotz and Volkert Besseling.
+
+{% include snippets/video.html id="reEQye0EOAw" provider="youtube" video_res="hqdefault"
+   name="Data Visualization Reinterpreted: The Story of Joy Division's “Unknown Pleasures” Album Design"
+   thumbnail_url="https://i.ytimg.com/vi/reEQye0EOAw/hqdefault.jpg"
+   upload_date="2012-10-17T09:34:35-07:00"
+   description="Graphic designer Peter Saville explains how a plot of radio pulses became the cover of Joy Division's Unknown Pleasures."
+   duration="PT3M40S" %}
+
 If you are interested in learning more about this fascinating history of science
 and design, you can read [Pop Culture Pulsar: Origin Story of Joy Division's
 Unknown Pleasures Album
