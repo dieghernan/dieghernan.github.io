@@ -27,18 +27,17 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp"
+header_img:
+  https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
 description: >-
   Map precipitation in Spain with hillshade and marginal profiles using terra,
   tidyterra and ggplot2.
 schema_image:
-  [
-    "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp",
-    "https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp",
-  ]
-og_image: "https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp"
+  - https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
+  - https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp
+og_image: https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
 og_image_width: 2100
-og_image_height: 2010
+og_image_height: 2004
 og_image_type: "image/webp"
 og_image_alt: >-
   Map of mean annual precipitation in Spain with hillshade and marginal bar
@@ -48,23 +47,26 @@ seo_title: "Precipitation maps with tidyterra and marginal plots: One World"
 og_title: "Precipitation maps with tidyterra and marginal plots"
 ---
 
+
+
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
 **Updated on October 25, 2026:** The elevation and precipitation maps now use
-**ggblend** to multiply their colors with the hillshade, following
-[Barney Harris's blending adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/).
-The map and marginal profiles now share the same precipitation palette and limits.
-Dominic Royé also demonstrates how to use **ggblend** in
-[Hillshade effects](https://dominicroye.github.io/blog/hillshade-effect/).
+**ggblend** to multiply their colors with the hillshade, following [Barney
+Harris's blending
+adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The
+map and marginal profiles now share the same precipitation palette and limits.
+Dominic Royé also demonstrates how to use **ggblend** in [Hillshade
+effects](https://dominicroye.github.io/blog/hillshade-effect/).
 </div>
 
-_This is the second post of the series "Hillshade, colors and
-marginal plots with **tidyterra**". In this post, I explore an approach for
-annotating marginal plots on a **ggplot2** map of a SpatRaster, including
-information about the values by longitude and latitude. See the first post of the
-series [here](https://dieghernan.github.io/202210_tidyterra-hillshade/)._
+*This is the second post of the series "Hillshade, colors and marginal plots
+with **tidyterra**". In this post, I explore an approach for annotating marginal
+plots on a **ggplot2** map of a SpatRaster, including information about the
+values by longitude and latitude. See the first post of the series
+[here](https://dieghernan.github.io/202210_tidyterra-hillshade/).*
 
-If you love watching classic movies, especially from Hollywood's Golden Age,
-you may recognize the following lyrics:
+If you love watching classic movies, especially from Hollywood's Golden Age, you
+may recognize the following lyrics:
 
 > The rain in Spain stays mainly in the plain!
 >
@@ -85,23 +87,24 @@ you may recognize the following lyrics:
    description="The Rain in Spain musical scene from My Fair Lady (1964), featuring Audrey Hepburn, Rex Harrison and Stanley Holloway."
    duration="PT2M36S" %}
 
-This emphatic statement is made in [_My Fair Lady
-(1964)_](<https://en.wikipedia.org/wiki/My_Fair_Lady_(film)>) by Audrey Hepburn,
+This emphatic statement is made in [*My Fair Lady
+(1964)*](https://en.wikipedia.org/wiki/My_Fair_Lady_(film)) by Audrey Hepburn,
 Rex Harrison and Stanley Holloway. But as a Spaniard, I can tell you it is
 **completely false**.
 
 The rain in Spain stays mainly in the north, most notably in Galicia. And I can
 prove it!
 
-In this post, I overlay a SpatRaster showing mean precipitation data
-with an extra set of plots on the margin to identify where the rain in Spain
-stays (mainly).
+In this post, I overlay a SpatRaster showing mean precipitation data with an
+extra set of plots on the margin to identify where the rain in Spain stays
+(mainly).
 
 ## Libraries
 
 In this post, we will use the following libraries:
 
-```r
+
+``` r
 ## Libraries
 
 # Data manipulation
@@ -123,12 +126,28 @@ library(ggblend)
 # Define a common theme for the maps.
 background <- "#f8f8ff"
 ink <- "grey10"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+# Let cowplot measure the registered fonts when assembling the panels.
+cowplot::set_null_device(function(width, height) {
+  cowplot::agg_null_device(width, height)
+  grid::grid.newpage()
+})
 
 theme_set(
   theme(
+    text = element_text(family = map_regular),
     plot.background = element_rect(fill = background, colour = NA),
     panel.background = element_rect(fill = background, colour = NA),
-    plot.title = element_text(face = "bold", colour = ink),
+    plot.title = element_text(family = map_title, face = "bold", colour = ink),
+    legend.title = element_text(family = map_title, face = "bold"),
+    strip.text = element_text(family = map_title, face = "bold"),
     plot.subtitle = element_text(colour = ink, margin = margin(t = 5, b = 5)),
     plot.caption = element_text(colour = "grey40", hjust = 0),
     plot.margin = margin(10, 10, 10, 10),
@@ -139,15 +158,16 @@ theme_set(
 
 ## The plain in Spain
 
-The plain (or as we call it, _La Meseta Central_) covers a large area of
-inland Spain, with an mean altitude of 650 meters above sea level.
+The plain (or as we call it, *La Meseta Central*) covers a large area of inland
+Spain, with a mean altitude of 650 meters above sea level.
 
 I didn't find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
-(historically the _Meseta_ is associated with Castile and Madrid) and elevation
+(historically the *Meseta* is associated with Castile and Madrid) and elevation
 data to get a rough shape.
 
-```r
+
+``` r
 # Using mapSpain
 the_plain <- esp_get_prov(
   c(
@@ -213,17 +233,19 @@ ggplot(r_plain) +
 
 We can create a new plot similar to the one produced in the [previous
 post](https://dieghernan.github.io/202210_tidyterra-hillshade/) to identify the
-plain. First, I create a base layer with a representation of the
-hillshade, which we will reuse later:
+plain. First, I create a base layer with a representation of the hillshade,
+which we will reuse later:
 
-```r
+
+``` r
 # Creating hillshade
 
 slope <- terrain(r, "slope", unit = "radians")
 aspect <- terrain(r, "aspect", unit = "radians")
 
 # Multi-shadow
-hill <- shade(slope, aspect, 45, direction = c(225, 270, 315, 360)) |> mean()
+hill <- shade(slope, aspect, 45, direction = c(225, 270, 315, 360)) |>
+  mean(na.rm = TRUE)
 
 # Stretching
 q <- as.numeric(quantile(values(hill), c(0.05, 0.95), na.rm = TRUE))
@@ -263,11 +285,11 @@ hill_plot
 As in the updated first post, we resolve the thematic raster's colors before
 combining it with the hillshade. This helper keeps the original scale underneath
 the blend to generate the legend. The opaque thematic layer inside the blend
-covers it, and the hillshade adds texture. The legend
-shows the palette before shading. We use **ragg** to render these compositing
-groups.
+covers it, and the hillshade adds texture. The legend shows the palette before
+shading. We use **ragg** to render these compositing groups.
 
-```r
+
+``` r
 # Blend a thematic raster with the fixed hillshade colors
 blend_hillshade <- function(data, fill_scale) {
   stopifnot(compareGeom(data, hill))
@@ -295,7 +317,8 @@ blend_hillshade <- function(data, fill_scale) {
 And finally we blend the altitude with the hillshade. The plain should be quite
 visible even without plotting the outline.
 
-```r
+
+``` r
 # Overlaying and theming
 
 # Aware of limits of the raster
@@ -335,9 +358,8 @@ plot_esp <- blend_hillshade(r, alt_scale) +
     subtitle = "The plain in green"
   ) +
   theme(
-    text = element_text(family = "serif"),
     plot.title = element_text(
-      face = "bold", size = base_text_size * 1.5,
+      family = map_title, face = "bold", size = base_text_size * 1.5,
       hjust = 0.5
     ),
     plot.subtitle = element_text(
@@ -368,7 +390,8 @@ Let's check now whether the rain falls mainly in the plain or not. We use here
 `geodata::worldclim_country()` to get the mean monthly precipitation by from
 [WorldClim](https://www.worldclim.org/):
 
-```r
+
+``` r
 # Precipitation of Spain
 
 # Get precip data
@@ -391,7 +414,8 @@ we now just add the values by cell to get the annual mean. Note that we also
 need to normalize the SpatRaster to the projection, extent and resolution of our
 `hill` object:
 
-```r
+
+``` r
 # Sum all layers
 precip_avg <- sum(precip)
 
@@ -430,7 +454,8 @@ autoplot(precip_avg_mask)
 We can now start representing our precipitation map. I chose here to create a
 custom palette with **colorspace** to better highlight the differences:
 
-```r
+
+``` r
 mypal <- sequential_hcl(
   n = 16,
   h = c(320, 80),
@@ -439,15 +464,16 @@ mypal <- sequential_hcl(
   rev = TRUE
 )
 
-show_col(mypal)
+withr::with_par(list(family = map_regular), show_col(mypal))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="Grid of 16 color swatches with hexadecimal labels, forming a precipitation palette from pale yellow through green and blue to purple." width="100%" />
 
-And now we can create the final map showing if _the rain in Spain stays mainly
-in the plain_:
+And now we can create the final map showing if *the rain in Spain stays mainly
+in the plain*:
 
-```r
+
+``` r
 # Precipitation limits, rounded to 100
 prec_limits <- floor(as.vector(minmax(precip_avg_mask)) / 100) * 100 + c(0, 100)
 
@@ -482,9 +508,8 @@ meteo_plot <- blend_hillshade(precip_avg_mask, precip_scale) +
     subtitle = "The rain in Spain does not stay mainly in the plain"
   ) +
   theme(
-    text = element_text(family = "serif"),
     plot.title = element_text(
-      face = "bold", size = base_text_size * 1.5,
+      family = map_title, face = "bold", size = base_text_size * 1.5,
       hjust = 0.5
     ),
     plot.subtitle = element_text(
@@ -506,32 +531,33 @@ meteo_plot
 
 We can now see that the rain in Spain falls mainly on the Atlantic coast
 (northern Spain) and specifically in Galicia. That's why in Spanish the lyrics
-_The rain in Spain stays mainly in the plain_ were translated into:
+*The rain in Spain stays mainly in the plain* were translated into:
 
 > La lluvia en Sevilla es una pura maravilla.
 
-That can be translated as _"The rain in Seville is a true marvel"_. And it is,
+That can be translated as *"The rain in Seville is a true marvel"*. And it is,
 indeed. Seville (located in the south on the [Guadalquivir
-Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7)) has circa 50 rainy days per year,
-featuring very hot and dry summers.
+Valley](https://goo.gl/maps/V8ZrDjrA74CTknYb7)) has circa 50 rainy days per
+year, featuring very hot and dry summers.
 
 {% include snippets/spotify.html id="6E5hMCINTY7eAQdcMzCTgY" title="The Rain in Spain from My Fair Lady on Spotify" %}
 
 ## Marginal plots (finally)
 
 We can now start profiling our final plot. The idea is to create two bar charts,
-representing the value to be plotted (in this case, mean annual
-precipitation) by longitude and latitude.
+representing the value to be plotted (in this case, mean annual precipitation)
+by longitude and latitude.
 
 The map and both profiles use `precip_scale`, with the same opaque colors and
-explicit limits. Hillshade changes the map's brightness, while the profiles
-show the unshaded palette. The means are calculated from the precipitation
-values, before any color mapping or blending.
+explicit limits. Hillshade changes the map's brightness, while the profiles show
+the unshaded palette. The means are calculated from the precipitation values,
+before any color mapping or blending.
 
 But first we add some additional margins and axis titles to the main plot, so we
 can insert those marginal plots easily on our main plot:
 
-```r
+
+``` r
 # Now we can add titles on the secondary axis
 
 plot_main <- meteo_plot +
@@ -547,7 +573,7 @@ plot_main <- meteo_plot +
   theme(
     axis.title.x = element_text(
       margin = margin(t = base_text_size),
-      size = base_text_size * 1.2, face = "italic"
+      size = base_text_size * 0.75, face = "italic"
     ),
     axis.title.y = element_text(
       angle = 270,
@@ -555,7 +581,7 @@ plot_main <- meteo_plot +
         l = base_text_size,
         t = base_text_size
       ),
-      size = base_text_size * 1.2, face = "italic"
+      size = base_text_size * 0.75, face = "italic"
     )
   )
 
@@ -566,10 +592,11 @@ plot_main
 
 ### Profiling marginal plots
 
-In the following code, I am drafting what the marginal plots would look
-like, so we can have a preview of the final result:
+In the following code, I am drafting what the marginal plots would look like, so
+we can have a preview of the final result:
 
-```r
+
+``` r
 # Profiling marginal plots
 
 # Getting averages by x,y
@@ -577,13 +604,13 @@ marg_x <- precip_avg_mask |>
   as_tibble(xy = TRUE) |>
   drop_na() |>
   group_by(x) |>
-  summarise(avg = mean(prec))
+  summarise(avg = mean(prec, na.rm = TRUE))
 
 marg_y <- precip_avg_mask |>
   as_tibble(xy = TRUE) |>
   drop_na() |>
   group_by(y) |>
-  summarise(avg = mean(prec))
+  summarise(avg = mean(prec, na.rm = TRUE))
 
 # Cowplot would delete axis, we create an axis at 1000 and 2000
 br_4marginal <- c(1000, 2000)
@@ -608,6 +635,7 @@ ggplot() +
   geom_text(
     data = labs, aes(x = for_x, y = y, label = labs),
     nudge_y = 100,
+    family = map_regular,
     size = 3
   ) +
   precip_scale +
@@ -624,7 +652,7 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-1.webp" alt="Bar profile of mean annual precipitation by east-west position in Spain. Bar height and color encode rainfall in millimeters, with the highest averages toward the west." width="100%" />
 
-```r
+``` r
 
 ggplot() +
   geom_col(
@@ -637,6 +665,7 @@ ggplot() +
     data = labs, aes(x = for_y, y = y, label = labs),
     nudge_y = 100,
     angle = 270,
+    family = map_regular,
     size = 3
   ) +
   precip_scale +
@@ -656,10 +685,11 @@ ggplot() +
 
 ### Putting all the pieces together
 
-Finally, we use `cowplot::axis_canvas()` to create the marginal plots as
-we want:
+Finally, we use `cowplot::axis_canvas()` to create the marginal plots as we
+want:
 
-```r
+
+``` r
 # Last step: We combine plots
 
 # Marginal plots
@@ -674,7 +704,7 @@ plot_x <- axis_canvas(plot_main, axis = "x") +
     data = labs, aes(x = for_x, y = y, label = labs),
     # Adjust the position of the labels
     nudge_y = 300,
-    family = "serif",
+    family = map_regular,
     fontface = "italic",
     size = base_text_size * 0.2
   ) +
@@ -695,7 +725,7 @@ plot_x
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221212_prepare_axis-1.webp" alt="Bar profile of mean annual precipitation from west to east in Spain, formatted for placement above the map. Height and color encode rainfall in millimeters." width="100%" />
 
-```r
+``` r
 
 plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
   geom_col(
@@ -709,7 +739,7 @@ plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
     # Adjust the position of the labels
     nudge_y = 300,
     angle = 270,
-    family = "serif",
+    family = map_regular,
     fontface = "italic",
     size = base_text_size * 0.2
   ) +
@@ -732,7 +762,8 @@ plot_y
 
 And insert everything in the main plot. See the final result:
 
-```r
+
+``` r
 # Combine all plots into one
 sizes_axis <- grid::unit(.3, "null")
 
@@ -755,13 +786,15 @@ And with a bit of effort we got it.
 
 ## Recap
 
-Much of the code we have created relates to the theming and labels of the
-plot. Here you can find a simplified version:
+Much of the code we have created relates to the theming and labels of the plot.
+Here you can find a simplified version:
 
 <details markdown="1">
+
 <summary>Simplified version</summary>
 
-```r
+
+``` r
 # Libraries
 # Data manipulation
 library(terra)
@@ -811,7 +844,7 @@ hill_plot <- ggplot() +
     data = hill, fill = vector_cols, maxcell = Inf,
     alpha = 1
   ) +
-  theme_minimal()
+  theme_minimal(base_family = map_regular)
 
 # Blend a thematic raster with the fixed hillshade colors
 blend_hillshade <- function(data, fill_scale) {
@@ -859,7 +892,7 @@ precip_scale <- scale_fill_gradientn(
   limits = p_range
 )
 base_plot <- blend_hillshade(precip_end, precip_scale) +
-  theme_minimal() +
+  theme_minimal(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "#F0FFFF"))
 
 # Marginal plots
@@ -868,13 +901,13 @@ marg_x <- precip_end |>
   as_tibble(xy = TRUE) |>
   drop_na() |>
   group_by(x) |>
-  summarise(avg = mean(prec))
+  summarise(avg = mean(prec, na.rm = TRUE))
 
 marg_y <- precip_end |>
   as_tibble(xy = TRUE) |>
   drop_na() |>
   group_by(y) |>
-  summarise(avg = mean(prec))
+  summarise(avg = mean(prec, na.rm = TRUE))
 
 # Adding marginal plots
 
@@ -921,9 +954,9 @@ gg_final_simp
 
 ## References
 
-- Fick, S. E., & Hijmans, R. J. (2017). WorldClim 2: New 1-km spatial
-  resolution climate surfaces for global land areas. *International Journal
-  of Climatology, 37*(12), 4302–4315. <https://doi.org/10.1002/joc.5086>
+- Fick, S. E., & Hijmans, R. J. (2017). WorldClim 2: New 1-km spatial resolution
+  climate surfaces for global land areas. *International Journal of Climatology,
+  37*(12), 4302–4315. <https://doi.org/10.1002/joc.5086>
 - Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible
   Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
 - Royé, D. (2022, July 20). Hillshade effects. *Dr Dominic Royé*.

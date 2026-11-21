@@ -1,11 +1,20 @@
 # Run from the repository root. Pass Rmd filenames to select posts.
 source("_Rmd/renderblog_v2.R")
 
-posts <- commandArgs(trailingOnly = TRUE)
-if (!length(posts)) {
-  posts <- "2022-05-25-tidyterra.Rmd"
-}
+# posts <- commandArgs(trailingOnly = TRUE)
+# if (!length(posts)) {
+#   posts <- "2022-05-25-tidyterra.Rmd"
+# }
+#
+posts <- c(
+  # "2023-01-25-star-map-R.Rmd",
+  # "2022-10-17-tidyterra-hillshade.Rmd",
+  # "2022-12-12-tidyterra-hillshade-2.Rmd"
+  "2022-05-01-Unknown-pleasures-R.Rmd"
+)
 
+
+# posts <- "2022-12-12-tidyterra-hillshade-2.Rmd"
 for (post in posts) {
   input <- file.path("_Rmd", post)
   styler::style_file(input)
@@ -14,6 +23,13 @@ for (post in posts) {
   # Cropping changes the social image dimensions, so measure the final WebP.
   metadata <- rmarkdown::yaml_front_matter(output)
   image_url <- c(metadata$og_image, metadata$header_img)[1]
+  if (
+    !length(image_url) ||
+      is.na(image_url) ||
+      !startsWith(image_url, "https://dieghernan.github.io/assets/")
+  ) {
+    next
+  }
   image_path <- sub("^https://dieghernan[.]github[.]io/", "", image_url)
   image_size <- dim(webp::read_webp(image_path))
 

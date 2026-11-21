@@ -40,7 +40,7 @@ og_title: "Inset maps with ggplot2, tmap and mapsf"
 
 
 
-_This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [\@dr_xeo](https://twitter.com/dr_xeo)_
+_This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [@dr_xeo](https://twitter.com/dr_xeo)_
 
 A common challenge when creating maps is how to include an inset map in your
 visualization. An inset map is nothing more than a smaller map usually included
@@ -259,7 +259,7 @@ ggdraw() +
 ## Update: on **mapsf**
 
 [Timothée Giraud](https://rgeomatic.hypotheses.org/) (AKA
-[\@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
+[@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also
 shared how to create inset maps using that package:
 
 

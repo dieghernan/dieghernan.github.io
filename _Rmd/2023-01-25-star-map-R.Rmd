@@ -4,6 +4,9 @@ series:
     order: 2
 title: "Star map with <strong>R</strong>"
 excerpt: "Make a star map in R for a place and date of your choice."
+description: >-
+  Use celestial data and R to map the stars, constellations and Milky Way
+  visible from a given place and time.
 subtitle: Creating star map visualizations based on location and date
 syndication:
   - https://www.r-bloggers.com/2023/01/star-map-with-r/
@@ -27,7 +30,7 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: "https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp"
+header_img: https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp
 og_image_width: 1300
 og_image_height: 857
 og_image_type: "image/webp"
@@ -45,33 +48,35 @@ knitr::opts_chunk$set(
   comment = "#>",
   warning = FALSE,
   message = FALSE,
-  dev = "ragg_png",
   dpi = 300,
+  dev = "ragg_png",
+  fig.cap = "",
   tidy = "styler",
-  out.width = "100%"
+  out.width = "100%",
+  fig.path = "assets/img/blog/"
 )
 rm(list = ls())
 ```
 
-A couple of weeks ago, I was browsing
-[Stack Overflow](https://stackoverflow.com/questions/tagged/sf) when I found a
-question by [Benjamin Smith](https://bensstats.wordpress.com/) that blew my
-mind: [Creating Star Map Visualizations Based on Location and
+A couple of weeks ago, I was browsing [Stack
+Overflow](https://stackoverflow.com/questions/tagged/sf) when I found a question
+by [Benjamin Smith](https://bensstats.wordpress.com/) that blew my mind:
+[Creating Star Map Visualizations Based on Location and
 Date](https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date)!
 
 Oh my! Can we do this with **R**? Of course! In fact, [Kim
 Fitter](https://kimnewzealand.github.io/) had already explored this in his
-[Celestial Maps](https://kimnewzealand.github.io/2019/02/21/celestial-maps/). So I decided
-to put some work into this.
+[Celestial Maps](https://kimnewzealand.github.io/2019/02/21/celestial-maps/). So
+I decided to put some work into this.
 
-Since then, I have also learned that Benjamin and I have been working in parallel
-on the same topic. He is preparing an **R** package named
+Since then, I have also learned that Benjamin and I have been working in
+parallel on the same topic. He is preparing an **R** package named
 [**starBliss**](https://github.com/benyamindsmith/starBliss), and I hope this
 post will help.
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
-I have very little knowledge of this topic, so if you find errors or
-have any suggestions, please let me know in the comments section below.
+I have very little knowledge of this topic, so if you find errors or have any
+suggestions, please let me know in the comments section below.
 </div>
 
 ## First things first: the data
@@ -94,8 +99,7 @@ repo](https://github.com/dieghernan/celestial_data) to learn more about it.
 
 ## Creating a star map with R
 
-The first step is to load libraries that will help us with this cosmic
-task:
+The first step is to load libraries that will help us with this cosmic task:
 
 ```{r}
 #| label: libraries
@@ -118,13 +122,28 @@ library(ggshadow)
 
 # Define a common theme for the maps.
 background <- "#FAF9F6"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
 
 theme_set(
-  theme_grey(paper = background) +
+  theme_grey(paper = background, base_family = map_regular) +
     theme(
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
+)
+
+# The projected previews have no meaningful axis labels.
+projected_theme <- theme(
+  axis.text = element_blank(),
+  axis.ticks = element_blank()
 )
 ```
 
@@ -141,9 +160,6 @@ Now we prepare some helper functions:
   coordinate in the format degrees/minutes/seconds (e.g., a **latitude of
   34.72782** would be converted into **34° 43' 40.15" N**).
 
-[^1]: [jsDelivr](https://www.jsdelivr.com/) serves the files from GitHub
-    through a [content delivery network](https://www.jsdelivr.com/github).
-
 <details class="my-4" markdown="1">
 
 <summary>Show <code>load_celestial</code> and
@@ -152,9 +168,14 @@ Now we prepare some helper functions:
 ```{r}
 #| label: helper_funs1
 #| fig-cap: ""
-load_celestial <- function(filename,
-                           url = "https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/",
-                           cachedir = tempdir()) {
+load_celestial <- function(
+  filename,
+  url = paste0(
+    "https://cdn.jsdelivr.net/gh/dieghernan/",
+    "celestial_data@main/data/"
+  ),
+  cachedir = tempdir()
+) {
   if (!dir.exists(cachedir)) {
     stop(
       "Please create ",
@@ -272,9 +293,9 @@ get_mst <- function(dt, lng) {
 
 The final result would have a spherical outline. That means that we would need
 to perform a spherical cut. Did you know that [in r-spatial the Earth is no
-longer flat](https://r-spatial.org/r/2020/06/17/s2.html)? Thanks to **s2** we can
-overcome this issue. Additionally, we would get rid of [artifacts derived from
-the changes on the
+longer flat](https://r-spatial.org/r/2020/06/17/s2.html)? Thanks to **s2** we
+can overcome this issue. Additionally, we would get rid of [artifacts derived
+from the changes on the
 projection](https://stackoverflow.com/questions/75205747/how-to-remove-random-diagonal-lines-from-star-map-vizualizations-produced-by-geo/75212722#75212722).
 This also includes some refinements to avoid empty/non-valid geometries as well
 as `GEOMETRYCOLLECTION` handling. The function `sf_spherical_cut()` would do
@@ -290,7 +311,9 @@ that for us.
 # Cut an sf object with a buffer using spherical s2 geoms
 # Optionally, project and flip
 
-sf_spherical_cut <- function(x, the_buff, the_crs = sf::st_crs(x), flip = NULL) {
+sf_spherical_cut <- function(
+  x, the_buff, the_crs = sf::st_crs(x), flip = NULL
+) {
   # Get geometry type
   geomtype <- unique(gsub("MULTI", "", sf::st_geometry_type(x)))[1]
 
@@ -374,8 +397,8 @@ desired_loc <- desired_place_geo %>%
 desired_loc
 ```
 
-To plot the sky at the correct local time, use the latitude and longitude
-to look up the time zone with **lutz**:
+To plot the sky at the correct local time, use the latitude and longitude to
+look up the time zone with **lutz**:
 
 ```{r}
 #| label: get_tz
@@ -395,15 +418,17 @@ desired_date_tz
 
 #### About time zones
 
-Some online shops that create this kind of map (I won't post links) include
-this script:
+Some online shops that create this kind of map (I won't post links) include this
+script:
 
-    ... 
+```
+...
 
-    'selectedHour': '22',
-    'selectedMinute': '00',
+'selectedHour': '22',
+'selectedMinute': '00',
 
-    ...
+...
+```
 
 This means that those shops are really creating the map at
 `YYYY-MM-DD 22:00:00 UTC`. If you want to replicate that exactly (even though
@@ -445,7 +470,9 @@ c(lon_prj, lat_prj)
 
 # Create proj4string w/ Airy projection
 
-target_crs <- paste0("+proj=airy +x_0=0 +y_0=0 +lon_0=", lon_prj, " +lat_0=", lat_prj)
+target_crs <- paste0(
+  "+proj=airy +x_0=0 +y_0=0 +lon_0=", lon_prj, " +lat_0=", lat_prj
+)
 
 
 target_crs
@@ -485,7 +512,10 @@ visualization.
 ```{r}
 #| label: 20230125_mw
 #| fig-cap: ""
-#| fig-alt: ["Full-sky map of the Milky Way in longitude and latitude coordinates. Filled bands trace its curved extent across the sky.", "Milky Way bands clipped and projected to the selected viewing hemisphere."]
+#| fig-alt:
+#|   - Full-sky map of the Milky Way in longitude and latitude coordinates.
+#|     Filled bands trace its curved extent across the sky.
+#|   - Milky Way bands clipped and projected to the selected viewing hemisphere.
 mw <- load_celestial("mw.min.geojson")
 
 # Add colors to MW to use on fill
@@ -509,7 +539,8 @@ mw_end <- sf_spherical_cut(mw,
 
 ggplot(mw_end) +
   geom_sf(aes(fill = fill)) +
-  scale_fill_identity()
+  scale_fill_identity() +
+  projected_theme
 ```
 
 Next, we add the constellations:
@@ -517,7 +548,12 @@ Next, we add the constellations:
 ```{r}
 #| label: 20230125_const
 #| fig-cap: ""
-#| fig-alt: ["Full-sky map of constellation lines in longitude and latitude coordinates, with line segments connecting stars into constellation outlines.", "Constellation lines clipped and projected to the selected circular viewing hemisphere."]
+#| fig-alt:
+#|   - Full-sky map of constellation lines in longitude and latitude
+#|     coordinates, with line segments connecting stars into constellation
+#|     outlines.
+#|   - Constellation lines clipped and projected to the selected circular
+#|     viewing hemisphere.
 const <- load_celestial("constellations.lines.min.geojson")
 
 ggplot(const) +
@@ -536,7 +572,8 @@ const_end <- sf_spherical_cut(const,
 
 ggplot(const_end) +
   geom_sf() +
-  coord_sf(expand = FALSE)
+  coord_sf(expand = FALSE) +
+  projected_theme
 ```
 
 Finally, we add the stars:
@@ -544,7 +581,11 @@ Finally, we add the stars:
 ```{r}
 #| label: 20230125_stars
 #| fig-cap: ""
-#| fig-alt: ["Full-sky map of stars in longitude and latitude coordinates. Larger and more opaque points represent brighter stars.", "Star map clipped and projected to the selected circular viewing hemisphere. Larger and more opaque points represent brighter stars."]
+#| fig-alt:
+#|   - Full-sky map of stars in longitude and latitude coordinates. Larger and
+#|     more opaque points represent brighter stars.
+#|   - Star map clipped and projected to the selected circular viewing
+#|     hemisphere. Larger and more opaque points represent brighter stars.
 stars <- load_celestial("stars.6.min.geojson")
 
 ggplot(stars) +
@@ -567,7 +608,8 @@ ggplot(stars_end) +
   # We use relative brightness (br) as aes
   geom_sf(aes(size = br, alpha = br), shape = 16) +
   scale_size_continuous(range = c(0.5, 6)) +
-  scale_alpha_continuous(range = c(0.1, 0.8))
+  scale_alpha_continuous(range = c(0.1, 0.8)) +
+  projected_theme
 ```
 
 ### Graticules
@@ -579,7 +621,11 @@ parameter of `sf_spherical_cut()` needs to be set as `NULL`.
 ```{r}
 #| label: 20230125_grat
 #| fig-cap: ""
-#| fig-alt: ["Rectangular coordinate grid with latitude lines every 10 degrees and longitude lines every 30 degrees.", "Coordinate grid projected to the selected hemisphere. Curved latitude lines and converging longitude lines reveal the pole."]
+#| fig-alt:
+#|   - Rectangular coordinate grid with latitude lines every 10 degrees and
+#|     longitude lines every 30 degrees.
+#|   - Coordinate grid projected to the selected hemisphere. Curved latitude
+#|     lines and converging longitude lines reveal the pole.
 grat <- st_graticule(
   ndiscr = 5000,
   lat = seq(-90, 90, 10),
@@ -590,7 +636,7 @@ ggplot(grat) +
   geom_sf() +
   coord_sf(expand = FALSE)
 
-# Cut to buffer, we dont flip this one (it is not an object of the space)
+# Cut the graticule to the buffer without flipping it.
 grat_end <- sf_spherical_cut(
   x = grat,
   the_buff = hemisphere_s2,
@@ -601,7 +647,8 @@ grat_end <- sf_spherical_cut(
 
 ggplot(grat_end) +
   geom_sf() +
-  coord_sf(expand = FALSE)
+  coord_sf(expand = FALSE) +
+  projected_theme
 ```
 
 ## Visualization with **ggplot2**
@@ -647,11 +694,11 @@ cat(caption)
 
 We can enhance the visualization by applying some interesting effects:
 
-- We use `ggfx::with_blur()` to soften the edges of the Milky Way and mimic
-  how it appears from Earth.
+- We use `ggfx::with_blur()` to soften the edges of the Milky Way and mimic how
+  it appears from Earth.
 
-- We can also add a glowing effect to our stars and constellations (have a
-  look at Dominic Royé's post [Firefly
+- We can also add a glowing effect to our stars and constellations (have a look
+  at Dominic Royé's post [Firefly
   Cartography](https://dominicroye.github.io/blog/firefly-maps/index.html) to
   know more about this). The only drawback is that I was not able to use
   **ggshadow** with `LINESTRING` (Dominic shows how to do it with `POINT`), so
@@ -663,7 +710,9 @@ So we are ready now to create the final visualization:
 ```{r}
 #| label: 20230125_celestial_map
 #| fig-cap: ""
-#| fig-alt: "Circular star map for Madrid with constellation lines, stars sized by brightness and the Milky Way on a dark background."
+#| fig-alt: >-
+#|   Circular star map for Madrid with constellation lines, stars sized by
+#|   brightness and the Milky Way on a dark background.
 # Prepare MULTILINESTRING
 
 const_end_lines <- const_end %>%
@@ -697,7 +746,8 @@ ggplot() +
   # Glowing constellations
   geom_glowpath(
     data = const_end_lines, aes(X, Y, group = interaction(L1, L2)),
-    color = "white", size = 0.5, alpha = 0.8, shadowsize = 0.4, shadowalpha = 0.01,
+    color = "white", size = 0.5, alpha = 0.8,
+    shadowsize = 0.4, shadowalpha = 0.01,
     shadowcolor = "white", linejoin = "round", lineend = "round"
   ) +
   # Border of the sphere
@@ -707,7 +757,7 @@ ggplot() +
   # And end with theming
   theme_void() +
   theme(
-    text = element_text(colour = "white"),
+    text = element_text(family = map_regular, colour = "white"),
     panel.border = element_blank(),
     plot.background = element_rect(fill = "#191d29", color = "#191d29"),
     plot.margin = margin(20, 20, 20, 20),
@@ -736,7 +786,9 @@ this entirely different set of geometries:
 ```{r}
 #| label: 20230125_celestial_map_cn
 #| fig-cap: ""
-#| fig-alt: "Circular star map for Madrid using Chinese constellation lines, with stars sized by brightness and the Milky Way on a dark background."
+#| fig-alt: >-
+#|   Circular star map for Madrid using Chinese constellation lines, with stars
+#|   sized by brightness and the Milky Way on a dark background.
 const_cn <- load_celestial("constellations.lines.cn.min.geojson")
 
 # Cut and prepare for geom_glowpath() on a single step
@@ -777,7 +829,8 @@ ggplot() +
   # Glowing constellations
   geom_glowpath(
     data = const_cn_end_lines, aes(X, Y, group = interaction(L1, L2)),
-    color = "white", size = 0.5, alpha = 0.8, shadowsize = 0.4, shadowalpha = 0.01,
+    color = "white", size = 0.5, alpha = 0.8,
+    shadowsize = 0.4, shadowalpha = 0.01,
     shadowcolor = "white", linejoin = "round", lineend = "round"
   ) +
   # Border of the sphere
@@ -787,7 +840,7 @@ ggplot() +
   # And end with theming
   theme_void() +
   theme(
-    text = element_text(colour = "white"),
+    text = element_text(family = map_regular, colour = "white"),
     panel.border = element_blank(),
     plot.background = element_rect(fill = "#191d29", color = "#191d29"),
     plot.margin = margin(20, 20, 20, 20),
@@ -806,13 +859,16 @@ ggplot() +
   <https://kimnewzealand.github.io/2019/02/21/celestial-maps/>
 - Frohn, O. (2015). *d3-celestial* [Computer software]. GitHub.
   <https://github.com/ofrohn/d3-celestial/>
-- Frohn, O., & Hernangómez, D. (2023). *Celestial data* (Version 1.0.1)
-  [Data set]. Zenodo. <https://doi.org/10.5281/zenodo.7561601>
-  ([Project documentation](https://dieghernan.github.io/celestial_data/))
+- Frohn, O., & Hernangómez, D. (2023). *Celestial data* (Version 1.0.1) [Data
+  set]. Zenodo. <https://doi.org/10.5281/zenodo.7561601> ([Project
+  documentation](https://dieghernan.github.io/celestial_data/))
 - Meeus, J. (1998). *Astronomical algorithms* (2nd ed.). Willmann-Bell.
-- Pebesma, E., & Dunnington, D. (2020, June 17). In r-spatial, the Earth is
-  no longer flat. *r-spatial*. <https://r-spatial.org/r/2020/06/17/s2.html>
+- Pebesma, E., & Dunnington, D. (2020, June 17). In r-spatial, the Earth is no
+  longer flat. *r-spatial*. <https://r-spatial.org/r/2020/06/17/s2.html>
 - Royé, D. (2021, June 1). Firefly cartography. *Dr Dominic Royé*.
   <https://dominicroye.github.io/blog/firefly-maps/>
-- Still, J. (2020, March 22). Astronomical calculations: Sidereal time.
-  *James Still*. <https://squarewidget.com/astronomical-calculations-sidereal-time/>
+- Still, J. (2020, March 22). Astronomical calculations: Sidereal time. *James
+  Still*. <https://squarewidget.com/astronomical-calculations-sidereal-time/>
+
+[^1]: [jsDelivr](https://www.jsdelivr.com/) serves the files from GitHub through
+    a [content delivery network](https://www.jsdelivr.com/github).

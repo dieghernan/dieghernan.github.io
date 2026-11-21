@@ -1,9 +1,14 @@
 ---
 title: "Unknown pleasures with <strong>R</strong>"
-subtitle: Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong>
+subtitle: >-
+  Joyplot elevation maps with <strong>ggridges</strong> and
+  <strong>terra</strong>
 excerpt:
   Create ridgelines (AKA joyplots) of territories using elevation data with
   R, sf, terra and ggridges.
+description: >-
+  Turn elevation data into Joy Division-inspired ridgeline maps of Andalusia
+  using R, terra and ggridges.
 syndication:
   - https://www.r-bloggers.com/2022/04/unknown-pleasures-with-r/
   - https://dev.to/dieghernan/unknown-pleasures-with-r-1idb
@@ -24,19 +29,25 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp
-og_image_width: 4200
-og_image_height: 4200
+header_img: "https://dieghernan.github.io/assets/img/blog/20220501_joyplots-1.webp"
+og_image_width: 2286
+og_image_height: 2400
 og_image_type: "image/webp"
-og_image_alt: "Black poster with white elevation ridgelines forming the outline of Spain and the words Spain and Unknown Pleasures."
+og_image_alt: >-
+  Black poster with white elevation ridgelines forming the outline of Spain
+  and the words Spain and Unknown Pleasures.
 ---
 
-In 1970, Harold D. Craft Jr. published his Ph.D. thesis _"Radio observations of
-the pulse profiles and dispersion measures of twelve pulsars"._ The thesis (337
+
+
+In 1970, Harold D. Craft Jr. published his Ph.D. thesis *"Radio observations of
+the pulse profiles and dispersion measures of twelve pulsars".* The thesis (337
 pages) includes on pages 214 to 216 the following depictions of successive
 pulses of some pulsars:
 
-![Three stacked-line diagrams of successive pulsar signals from Harold D. Craft Jr.'s thesis. Peaks in each trace represent recorded pulses.](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)
+![Three stacked-line diagrams of successive pulsar signals from Harold D. Craft
+Jr.'s thesis. Peaks in each trace represent recorded
+pulses.](https://dieghernan.github.io/assets/img/misc/pulsar_trio.webp)
 
 From "Radio Observations of the Pulse Profiles and Dispersion Measures of Twelve
 Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
@@ -46,22 +57,24 @@ Pulsars" by Harold D. Craft, Jr. (September 1970). Original source:
 Nine years later, a young graphic designer named Peter Saville had a new
 project. He had to design the cover of the debut album of a young British rock
 band, named Joy Division. At some point in the process, Bernard Sumner (lead
-guitarist of Joy Division)[^1] found the following image in _The Cambridge
-Encyclopaedia of Astronomy_ (1977 edition):
+guitarist of Joy Division)[^1] found the following image in *The Cambridge
+Encyclopaedia of Astronomy* (1977 edition):
 
-[^1]: Other versions of the story credit drummer Stephen Morris for finding it.
-
-![Page from The Cambridge Encyclopaedia of Astronomy with stacked signal traces from pulsar CP 1919, forming a central cluster of peaks.](https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg)
+![Page from The Cambridge Encyclopaedia of Astronomy with stacked signal traces
+from pulsar CP 1919, forming a central cluster of
+peaks.](https://dieghernan.github.io/assets/img/misc/cp1919-joy-division.jpg)
 
 Saville presented a black-and-white version, producing a cover that reached
 iconic status in the '80s. This cover has been reproduced in the form of
 tattoos, clothing, merchandise, video games and even 3-D sculptures:
 
-![Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
+![Unknown Pleasures album cover by Joy Division, with stacked white pulsar
+signal traces on a black
+background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
 If you are interested in learning more about this fascinating history of science
-and design, you can read [Pop Culture Pulsar: Origin Story of Joy
-Division's Unknown Pleasures Album
+and design, you can read [Pop Culture Pulsar: Origin Story of Joy Division's
+Unknown Pleasures Album
 Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/)
 by [Jen
 Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
@@ -77,28 +90,26 @@ This topic has already been covered by other authors, such as [Daniel
 Redondo](https://danielredondo.com/blog/2020-01-25-joy_division/) (Spanish) and
 [Travis M.
 White](https://cartographicperspectives.org/index.php/journal/article/view/1536/1726).
-However, they both use QGIS, while in this post I work completely in
-**R**.
+However, they both use **QGIS**, while in this post I work completely in **R**.
 
 Some initial considerations we may need to bear in mind:
 
-- In this post I will use `geom_ridgeline()` instead of
-  `geom_density_ridges()`. This gives us more control over the
-  final plot, but there is a caveat: **both the coordinates and the
-  elevation should be in the same unit** ([See
-  why](https://wilkelab.org/ggridges/reference/geom_ridgeline.html)).
-  Therefore, we should project both the raster and the base `sf` object to a
-  suitable CRS defined in meters (in this case).
+- In this post I will use `geom_ridgeline()` instead of `geom_density_ridges()`.
+  This gives us more control over the final plot, but there is a caveat: **both
+  the coordinates and the elevation should be in the same unit** ([See
+  why](https://wilkelab.org/ggridges/reference/geom_ridgeline.html)). Therefore,
+  we should project both the raster and the base `sf` object to a suitable CRS
+  defined in meters (in this case).
 
-- Joyplots are much cooler when only a few lines are displayed. This is
-  directly related to the number of rows in our raster. A very detailed
-  raster (e.g. lots of rows) would produce a much more detailed plot but it may not
-  suit our needs.
+- Joyplots are much cooler when only a few lines are displayed. This is directly
+  related to the number of rows in our raster. A very detailed raster (e.g. lots
+  of rows) would produce a much more detailed plot but it may not suit our
+  needs.
 
 Now, let's start with the required libraries:
 
-```r
 
+``` r
 # Libraries
 
 # Spatial
@@ -111,18 +122,47 @@ library(elevatr)
 library(ggplot2)
 library(dplyr)
 library(ggridges)
+
+background <- "#FEFDFD"
+
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+
+with_map_style <- function(plot) {
+  previous <- par(
+    bg = background, family = map_regular,
+    fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
+  )
+  on.exit(par(previous))
+  invisible(force(plot))
+}
+
+theme_set(
+  theme_grey(paper = background, base_family = map_regular) +
+    theme(
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 The first step consists of selecting our region of interest (`sf` object) and
 extracting the elevation data. We can achieve that with **giscoR** and
-**elevatr**.
-In this post, I create a joyplot of
+**elevatr**. In this post, I create a joyplot of
 [Andalusia](https://en.wikipedia.org/wiki/Andalusia). Note that, given we are
-creating just a visualization, the resolution of the `sf` object is not very
+creating just a visualization, the resolution of the **sf** object is not very
 relevant.
 
-```r
 
+``` r
 # Select a Spanish Region: Andalucia
 region <- gisco_get_nuts(nuts_id = "ES61") %>%
   # And project data
@@ -130,12 +170,15 @@ region <- gisco_get_nuts(nuts_id = "ES61") %>%
 ```
 
 Now we need to extract the elevation using **elevatr**. We can also adjust the
-zoom level as needed. You can find guidance on zoom levels in the
-[OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
+zoom level as needed. You can find guidance on zoom levels in the [OpenStreetMap
+wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
 
-```r
 
-dem <- get_elev_raster(region, z = 7, clip = "bbox", expand = 10000) %>%
+``` r
+dem <- get_elev_raster(region,
+  z = 7, clip = "bbox", expand = 10000,
+  tmp_dir = tools::R_user_dir("elevatr", "cache")
+) %>%
   # And convert to terra
   rast() %>%
   # Mask to the shape
@@ -147,18 +190,18 @@ names(dem) <- "elev"
 nrow(dem)
 #> [1] 698
 
-terra::plot(dem)
+with_map_style(terra::plot(dem, background = background))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" />
 
 We already have our elevation raster. Now the next step is to adjust the number
 of rows of our raster to a lower number. We can then aggregate the raster (i.e.
-reduce the number of cells or increase their size) using a scaling
-factor that would reduce the number of rows to our desired target (in this case
-90 rows):
+reduce the number of cells or increase their size) using a scaling factor that
+would reduce the number of rows to our desired target (in this case 90 rows):
 
-```r
+
+``` r
 # Approx
 factor <- round(nrow(dem) / 90)
 
@@ -167,10 +210,10 @@ dem_agg <- aggregate(dem, factor)
 nrow(dem_agg)
 #> [1] 88
 
-terra::plot(dem_agg)
+with_map_style(terra::plot(dem_agg, background = background))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" />
 
 We can check how the number of rows has decreased. Also, the plot shows that we
 now have fewer cells.
@@ -180,22 +223,21 @@ raster:
 
 - We need to ensure that all valid values are greater than or equal to zero.
 
-- We will replace the `NA` values produced when masking the raster with zeros. We
-  will use this later to decide whether to remove some parts of the
-  plot.
+- We will replace the `NA` values produced when masking the raster with zeros.
+  We will use this later to decide whether to remove some parts of the plot.
 
-After that, we create a data frame with the information needed for
-creating the joyplot.
+After that, we create a data frame with the information needed for creating the
+joyplot.
 
-```r
 
+``` r
 dem_agg[dem_agg < 0] <- 0
 dem_agg[is.na(dem_agg)] <- 0
 
 dem_df <- as.data.frame(dem_agg, xy = TRUE, na.rm = FALSE)
 
 as_tibble(dem_df)
-#> # A tibble: 12,848 x 3
+#> # A tibble: 12,848 × 3
 #>          x        y  elev
 #>      <dbl>    <dbl> <dbl>
 #>  1  77184. 4306315.     0
@@ -208,15 +250,15 @@ as_tibble(dem_df)
 #>  8 104240. 4306315.     0
 #>  9 108105. 4306315.     0
 #> 10 111970. 4306315.     0
-#> # ... with 12,838 more rows
+#> # ℹ 12,838 more rows
 ```
 
 Now is a good moment to adjust the units of the coordinates and the elevation if
 needed. In this case both are in meters, but I will show you how to perform
 those adjustments with the **units** package:
 
-```r
 
+``` r
 library(units)
 
 # Units of DEM projection
@@ -239,7 +281,7 @@ dem_miles <- dem_df %>%
   )
 
 as_tibble(dem_miles)
-#> # A tibble: 12,848 x 6
+#> # A tibble: 12,848 × 6
 #>          x        y elev x_mile y_mile elev_mile
 #>        [m]      [m]  [m]   [mi]   [mi]      [mi]
 #>  1  77184. 4306315.    0   48.0  2676.         0
@@ -252,7 +294,7 @@ as_tibble(dem_miles)
 #>  8 104240. 4306315.    0   64.8  2676.         0
 #>  9 108105. 4306315.    0   67.2  2676.         0
 #> 10 111970. 4306315.    0   69.6  2676.         0
-#> # ... with 12,838 more rows
+#> # ℹ 12,838 more rows
 ```
 
 Finally, we can create our joyplot. Note that we can "train" the scales of our
@@ -260,8 +302,8 @@ Finally, we can create our joyplot. Note that we can "train" the scales of our
 the plot. The relative height of the ridges is controlled via the `scale`
 parameter:
 
-```r
 
+``` r
 ggplot() +
   # Just for the scales, pass with NA arguments so it is not shown
   geom_sf(data = region, color = NA, fill = NA) +
@@ -273,15 +315,15 @@ ggplot() +
     ),
     scale = 25
   ) +
-  theme_ridges()
+  labs(x = "", y = "")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" />
 
 The last step is to provide a black theme, resembling the cover of the album:
 
-```r
 
+``` r
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_ridgeline(
@@ -292,14 +334,14 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
 
 {% include snippets/spotify.html type="album" id="5Dgqy4bBg09Rdw7CQM545s" title="Unknown Pleasures by Joy Division on Spotify" %}
 
@@ -313,8 +355,8 @@ other artifacts.
 We can use `geom_density_ridges()` with `stat="identity"` instead of
 `geom_ridgeline()` for creating a similar map:
 
-```r
 
+``` r
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_density_ridges(
@@ -326,14 +368,14 @@ ggplot() +
     stat = "identity",
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" />
 
 ### Land only
 
@@ -346,7 +388,8 @@ maximum height.
 This is the main reason why we replaced the `NA` values with zeros, so those
 parts of the string can be easily removed.
 
-```r
+
+``` r
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_ridgeline(
@@ -357,23 +400,23 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25,
     min_height = 0.1
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" />
 
 ### With colors
 
 We can apply different colors to the plot. Note that **ggridges** only accepts
 different `aes` by row, not by column:
 
-```r
 
+``` r
 # Classify on three different bands
 
 dem_df <- dem_df %>%
@@ -393,7 +436,7 @@ ggplot() +
     size = .5,
     show.legend = FALSE
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black")) +
   scale_color_manual(values = alpha(
     c(
@@ -405,14 +448,14 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" />
 
 ### Combine with another object
 
 For example, using an `sf` object:
 
-```r
 
+``` r
 highres <- gisco_get_nuts(
   nuts_id = "ES61",
   resolution = 1
@@ -431,20 +474,20 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25,
     min_height = 0.1
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" />
 
 Or adding a frame to the plot:
 
-```r
 
+``` r
 frame <- as.polygons(dem_agg, extent = TRUE) %>%
   st_as_sf()
 
@@ -458,28 +501,34 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" />
+
+
+
+
 
 ## References
 
 - Craft, H. D., Jr. (1970). *Radio observations of the pulse profiles and
   dispersion measures of twelve pulsars* [Doctoral dissertation, Cornell
   University]. <https://books.google.com/books?id=bdxYAAAAYAAJ>
-- Lipez, Z. (2019, June 14). How Joy Division’s ‘Unknown Pleasures’ image
-  went from underground album cover to a piece of cultural ubiquity.
-  *The Washington Post*.
+- Lipez, Z. (2019, June 14). How Joy Division’s ‘Unknown Pleasures’ image went
+  from underground album cover to a piece of cultural ubiquity. *The Washington
+  Post*.
   [Article](https://www.washingtonpost.com/entertainment/music/how-joy-divisions-unknown-pleasures-image-went-from-underground-album-cover-to-a-piece-of-cultural-ubiquity/2019/06/14/26e75338-8c76-11e9-adf3-f70f78c156e8_story.html)
 - Mitton, S. (Ed.). (1977). *The Cambridge encyclopaedia of astronomy*.
   Prentice-Hall of Canada.
 - Redondo, D. (2020, January 25). Mapas estilo Joy Division con QGIS y R.
   *Daniel Redondo*. <https://danielredondo.com/blog/2020-01-25-joy_division/>
-- White, T. M. (2019). Cartographic pleasures: Maps inspired by Joy
-  Division’s *Unknown Pleasures* album art. *Cartographic Perspectives*,
-  (92), 65–78. <https://doi.org/10.14714/CP92.1536>
+- White, T. M. (2019). Cartographic pleasures: Maps inspired by Joy Division’s
+  *Unknown Pleasures* album art. *Cartographic Perspectives*, (92), 65–78.
+  <https://doi.org/10.14714/CP92.1536>
+
+[^1]: Other versions of the story credit drummer Stephen Morris for finding it.

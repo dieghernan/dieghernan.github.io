@@ -29,15 +29,18 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: "https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"
+header_img:
+  https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 description: >-
   Create relief maps in R by combining hillshade and elevation colors with
   terra, tidyterra and ggplot2.
-schema_image: ["https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"]
+schema_image:
+  - https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 og_image_width: 2100
-og_image_height: 1978
+og_image_height: 1968
 og_image_type: "image/webp"
-og_image: "https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp"
+og_image:
+  https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp
 og_image_alt: >-
   Relief map of Romania with elevation colors and hillshade highlighting the
   Carpathian arc, accompanied by an altitude legend.
@@ -54,7 +57,7 @@ blending
 adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The
 final map replaces the original overlay with reduced opacity. Dominic Royé also
 demonstrates how to use **ggblend** in [Hillshade
-effects](https://dominicroye.github.io/blog/hillshade-effect/). 
+effects](https://dominicroye.github.io/blog/hillshade-effect/).
 </div>
 
 *This is the first post of a series of two, showing how to overlay a SpatRaster
@@ -67,7 +70,9 @@ Using shadow effects on relief maps is a very common technique that helps
 produce informative yet beautiful maps. If you are interested in this topic and
 you work with **R**, you have probably seen this map:
 
-![Map of Swiss municipalities over shaded relief. A nine-color legend combines average income and income inequality, measured by the Gini coefficient.](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
+![Map of Swiss municipalities over shaded relief. A nine-color legend combines
+average income and income inequality, measured by the Gini
+coefficient.](https://timogrossenbacher.ch/content/images/size/w2000/2023/07/bm-thematic-bivariate-map-with-legend-1-2.png)
 
 The production of this map by [Timo
 Grossenbacher](https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/)
@@ -103,18 +108,39 @@ library(geodata)
 # Define a common theme for the maps.
 background <- "#faf8f2"
 ink <- "#203b47"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
 
 theme_set(
-  theme_void() +
+  theme_void(base_family = map_regular) +
     theme(
       plot.background = element_rect(fill = background, colour = NA),
       panel.background = element_rect(fill = background, colour = NA),
-      plot.title = element_text(face = "bold", colour = ink),
+      plot.title = element_text(
+        family = map_title, face = "bold", colour = ink
+      ),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.subtitle = element_text(colour = ink),
       plot.caption = element_text(colour = "grey40", hjust = 0),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
+
+example_theme <- theme_minimal(base_family = map_regular, paper = background) +
+  theme(
+    plot.title = element_text(
+      family = map_title, face = "bold", colour = ink
+    ),
+    legend.title = element_text(family = map_title, face = "bold"),
+    strip.text = element_text(family = map_title, face = "bold"),
+    plot.margin = margin(10, 10, 10, 10)
+  )
 ```
 
 ## Get the data
@@ -169,7 +195,7 @@ We can now have a quick look at the plot with `tidyterra::autoplot()`:
 autoplot(r) +
   scale_fill_terrain_c(na.value = NA) +
   facet_wrap(vars(lyr)) +
-  theme_minimal()
+  example_theme
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains." width="100%" />
@@ -363,7 +389,7 @@ plot_pal_test <- function(pal) {
       palette = pal
     ) +
     ggtitle(pal) +
-    theme_minimal()
+    example_theme
 }
 
 plot_pal_test("etopo1_hypso")
@@ -443,30 +469,7 @@ underneath, which supplies the legend. The legend shows the elevation palette
 before shading. We render with **ragg**, which supports the compositing groups
 used by **ggblend**.
 
-For the final map, we use Noto Serif when its font files are available locally
-and fall back to the system serif font otherwise:
-
-
-``` r
-font_dir <- path.expand("~/R/googlefonts")
-font_files <- file.path(
-  font_dir,
-  paste0("NotoSerif-", c("Regular", "Bold", "Italic", "BoldItalic"), ".ttf")
-)
-font_family <- "serif"
-if (all(file.exists(font_files))) {
-  systemfonts::register_font(
-    "notoserif",
-    plain = font_files[1],
-    bold = font_files[2],
-    italic = font_files[3],
-    bolditalic = font_files[4]
-  )
-  font_family <- "notoserif"
-}
-```
-
-And now we theme it:
+For the final map, we use Inter Tight for the title and Inter for the labels:
 
 
 ``` r
@@ -497,19 +500,21 @@ base_plot +
       " Data: Shuttle Radar Topography Mission (SRTM)"
     )
   ) +
-  theme_minimal(base_family = font_family) +
+  theme_minimal(base_family = map_regular) +
   theme(
     plot.background = element_rect("grey97", colour = NA),
     plot.margin = margin(20, 20, 20, 20),
     plot.caption = element_text(size = base_text_size * 0.5),
-    plot.title = element_text(face = "bold", size = base_text_size * 1.4),
+    plot.title = element_text(
+      family = map_title, face = "bold", size = base_text_size * 1.4
+    ),
     plot.subtitle = element_text(
       margin = margin(b = 10),
       size = base_text_size
     ),
     axis.text = element_text(size = base_text_size * 0.7),
     legend.position = "bottom",
-    legend.title = element_text(size = 8),
+    legend.title = element_text(family = map_title, size = 8),
     legend.text = element_text(size = 8),
     legend.key = element_rect("grey50"),
     legend.key.spacing.x = unit(0, "pt")
@@ -522,8 +527,8 @@ base_plot +
 
 ## References
 
-- Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf.
-  *Timo Grossenbacher*.
+- Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf. *Timo
+  Grossenbacher*.
   <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
 - Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible
   Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
