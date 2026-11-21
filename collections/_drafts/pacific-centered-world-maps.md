@@ -77,13 +77,11 @@ library(giscoR)
 library(sf)
 library(ggplot2)
 
-
 countries <- gisco_get_countries(year = 2024, resolution = "03", epsg = 3857)
 south_limit <- -80
 north_limit <- 85
 
 world <- countries |>
-  st_geometry() |>
   st_transform(4326) |>
   st_set_crs(NA) |>
   st_make_valid() |>
@@ -91,9 +89,11 @@ world <- countries |>
   st_set_crs(st_crs(4326))
 ```
 
-Once `world` is ready, `project_world()` does the cutting and projecting. The
-final `st_make_valid()` repairs any polygon rings that became invalid during
-projection.
+Once `world` is ready, `project_world()` cuts the polygons at Greenwich and
+projects them. That puts the 180° meridian in the middle of the map, where the
+original split in the **giscoR** boundaries can leave gaps in Antarctica and
+eastern Russia. After projecting, I regroup the pieces by country and use small
+buffers to close gaps along that seam.
 
 <div class="callout-important" role="note" aria-label="Important" markdown="1">
 Pass `projection` as a [PROJ
@@ -106,11 +106,35 @@ code such as `"ESRI:54030"` (World Robinson) won't work in its place.
 ``` r
 project_world <- function(world, projection, lon_0 = 180) {
   crs <- paste0(projection, " +lon_0=", lon_0)
+  parts <- st_sf(source_row = seq_len(nrow(world)), geometry = st_geometry(world)) |>
+    st_break_antimeridian(lon_0 = lon_0) |>
+    st_transform(crs) |>
+    st_make_valid()
 
-  world |>
-    sf::st_break_antimeridian(lon_0 = lon_0) |>
-    sf::st_transform(crs) |>
-    sf::st_make_valid()
+  # Reassemble the pieces and restore each country's original attributes.
+  grouped <- aggregate(parts, list(row = parts$source_row), FUN = min)
+  geometry <- st_geometry(grouped)
+
+  if (lon_0 == 180) {
+    # Fill gaps in the GISCO boundaries only along the interior seam.
+    bounds <- st_bbox(world)
+    lat <- seq(bounds[["ymin"]], bounds[["ymax"]], length.out = 1801)
+    seam <- st_linestring(cbind(180, lat)) |>
+      st_sfc(crs = 4326) |>
+      st_transform(crs) |>
+      st_buffer(30)
+
+    repair <- which(world$ISO3_CODE[grouped$row] %in% c("ATA", "RUS"))
+    for (i in repair) {
+      closed <- geometry[i] |>
+        st_buffer(10) |>
+        st_buffer(-10)
+      patch <- st_intersection(closed, seam)
+      geometry[i] <- st_union(c(geometry[i], patch))
+    }
+  }
+
+  st_set_geometry(world[grouped$row, ], geometry)
 }
 
 pacific <- project_world(world, "+proj=robin")
@@ -118,21 +142,45 @@ pacific <- project_world(world, "+proj=robin")
 
 A quick plot in **ggplot2** shows the result.
 
+
 ``` r
-ggplot() + geom_sf(data = pacific)
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+ggplot() +
+  geom_sf(data = pacific) +
+  coord_sf(expand = FALSE) +
+  theme(
+    text = element_text(family = map_regular),
+    plot.title = element_text(family = map_title, face = "bold"),
+    plot.background = element_rect(fill = "#FEFDFD"),
+    plot.margin = margin(t = 10, b = 10, l = 10, r = 10)
+  ) +
+  labs(
+    title = "Robinson projection",
+    subtitle = "Centered on the Pacific",
+    caption = giscoR::gisco_attributions()
+  )
 ```
+
+<img src="/assets/img/drafts/pacific-centered-world-maps-quick-pacific-1.webp" alt="A Pacific-centered world map using the Robinson projection." width="100%" />
 
 <details class="my-4" markdown="1">
 
-<summary>Show the code for the Robinson map</summary>
+<summary>Show the code for the styled Robinson map</summary>
 
 I drew the frame and graticule in longitude and latitude, then projected both to
 the same CRS as the land. Here's the code for the colors, frame and grid.
 
 
 ``` r
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_title)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
@@ -146,7 +194,7 @@ map_palette <- list(
   text = "#243746"
 )
 
-map_theme <- theme_void(base_family = map_family) +
+map_theme <- theme_void(base_family = map_title) +
   theme(
     plot.margin = margin(8, 10, 8, 10),
     plot.background = element_rect(fill = map_palette$background, color = NA)
