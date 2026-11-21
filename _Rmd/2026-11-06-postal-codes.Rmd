@@ -117,9 +117,15 @@ library(ggplot2)
 background <- "#faf8f2"
 ink <- "#203b47"
 
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
 theme_set(
   theme_void() +
     theme(
+      text = element_text(family = map_family),
       plot.background = element_rect(fill = background, colour = NA),
       panel.background = element_rect(fill = background, colour = NA),
       plot.title = element_text(face = "bold", colour = ink),

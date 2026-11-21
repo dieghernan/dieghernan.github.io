@@ -26,36 +26,47 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: yes
-header_img: https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp"
 mathjax: true
 bibliography: bertin.bib
-nocite: "@*"
-description: "Create Bertin-style dot density maps in R using Global Human Settlement Layer population data."
-og_image_width: 2400
+description: >-
+  Create Bertin-style dot density maps in R using Global Human Settlement
+  Layer population data.
+og_image_width: 1928
 og_image_height: 2400
 og_image_type: "image/webp"
-og_image_alt: "Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."
+og_image_alt: >-
+  Dot density map of the Iberian Peninsula. Larger dots represent higher
+  population density, revealing dense urban clusters and sparsely populated
+  interiors.
+nocite: "@*"
 ---
 
-Recently, the [R Graph Gallery](https://r-graph-gallery.com/) published a new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create a map inspired by the work of French cartographer [Jacques Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010), particularly his *Sémiologie graphique* (Bertin, 1967):
 
-![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of different sizes depict population concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
+Recently, the [**R** Graph Gallery](https://r-graph-gallery.com/) published a
+new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create
+a dot density map based on the work of the French cartographer [Jacques
+Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010):
+
+![Dot map of France from Jacques Bertin's Semiologie graphique. Dots of
+different sizes depict population
+concentrations.](https://dieghernan.github.io/assets/img/misc/bertin.png)
 
 In this post, I create a similar map for Iberia using graduated symbols to
 represent population density. Unlike conventional dot density maps, where dots
 represent a fixed number of individuals, symbol sizes here indicate density
-classes.
-I also explore a variation using a hexagonal grid instead of a rectangular one.
-This is the fifth issue of the series
-[Beautiful Maps with **R**](https://dieghernan.github.io/tags#beautiful_maps).
+classes. I also explore a variation using a hexagonal grid instead of a
+rectangular one. This is the fifth issue of the series [Beautiful Maps with
+**R**](https://dieghernan.github.io/tags#beautiful_maps).
 
 ## Libraries
 
 I will use the following libraries for loading, manipulating and plotting
 spatial data (both raster and vector):
 
-```r
+
+``` r
 # Base spatial packages
 library(terra)
 library(sf)
@@ -69,6 +80,23 @@ library(ggtext)
 # Supporting for units and bridge raster to polygon
 library(units)
 library(exactextractr)
+
+# Define a common theme for the maps.
+background <- "#FEFDFD"
+
+map_family <- "inter-tight"
+sysfonts::font_add_google("Inter Tight", family = map_family)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_grey(paper = background) +
+    theme(
+      text = element_text(family = map_family),
+      plot.title = element_text(face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ## Get the data
@@ -77,34 +105,34 @@ The first step is always to get the data we need. My final map uses a circular
 layout with Iberia in the middle (that is our observation window), so we can get
 the corresponding shapes and create a buffer around it.
 
-After that, we extract the population spatial distribution from [GHSL -
-Global Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We
-use the global file with a resolution of 1 km in the Mollweide projection
-(ESRI:54009).
+After that, we extract the population spatial distribution from [GHSL - Global
+Human Settlement Layer](https://ghsl.jrc.ec.europa.eu/download.php). We use the
+global file with a resolution of 1 km in the Mollweide projection (ESRI:54009).
 
-```r
-# Create observation window based on the Iberian Peninsula and surroundings
+
+``` r
+# Create observation window based the Iberian Peninsula and surroundings
 # We create a buffered circle
 owin <- gisco_get_countries(
   country = c("ES", "PT"),
   # We buffer in 3035 since I want my final map on this projection
   epsg = 3035,
   resolution = 60
-) %>%
-  st_geometry() %>%
-  st_union() %>%
-  st_centroid(of_largest_polygon = TRUE) %>%
-  st_buffer(750000) %>%
+) |>
+  st_geometry() |>
+  st_union() |>
+  st_centroid(of_largest_polygon = TRUE) |>
+  st_buffer(750000) |>
   # But for extracting raster data we need this in Mollweide so far
   st_transform(crs = "ESRI:54009")
 
 # Get additional shapes and cut them to the owin
-regions <- gisco_get_nuts(resolution = 3, nuts_level = 2) %>%
-  st_transform(st_crs(owin)) %>%
+regions <- gisco_get_nuts(resolution = 3, nuts_level = 2) |>
+  st_transform(st_crs(owin)) |>
   st_intersection(owin)
 
-countries <- gisco_get_countries(resolution = 3) %>%
-  st_transform(st_crs(owin)) %>%
+countries <- gisco_get_countries(resolution = 3) |>
+  st_transform(st_crs(owin)) |>
   st_intersection(owin)
 
 # Base map
@@ -116,31 +144,36 @@ base_gg <- ggplot() +
 base_gg
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window."/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_basemap-1.webp" alt="Base map of the Iberian Peninsula with country and regional boundaries inside a circular plotting window." width="100%" />
 
 That is our base map. Now we download the GHSL data programmatically and check
-that everything is correct. At this point, it is interesting to
-use the `win` argument when reading the raster with `terra::rast()`, as this
-allows us to load only the desired area with the subsequent improvement in
-terms of performance.
+that everything is correct. At this point, it is interesting to use the `win`
+argument when reading the raster with `terra::rast()`, as this allows us to load
+only the desired area with the subsequent improvement in terms of performance.
 
-```r
+
+``` r
 # Download data
 # We need the following file (download 305Mb)
 url <- "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2030_GLOBE_R2023A_54009_1000/V1-0/GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.zip"
 
 # This is where I store the file, you need to modify the folder
-fname <- file.path("~/R/mapslib/GHS", basename(url))
+fname <- file.path("~/R/mapslib/GHS", basename(url)) |> path.expand()
 if (!file.exists(fname)) {
   download.file(url, fname)
 }
 zip_content <- unzip(fname, list = TRUE)
 zip_content
-#>                                                 Name    Length                Date
-#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307 2023-04-28 21:11:00
-#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532 2023-04-28 21:11:00
-#> 3                         GHSL_Data_Package_2023.pdf   9761851 2023-10-27 14:30:00
-#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963 2023-04-30 10:42:00
+#>                                                 Name    Length
+#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307
+#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532
+#> 3                         GHSL_Data_Package_2023.pdf  15139500
+#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963
+#>                  Date
+#> 1 2023-04-28 21:11:00
+#> 2 2023-04-28 21:11:00
+#> 3 2024-09-24 10:40:00
+#> 4 2023-04-30 10:42:00
 
 # Unzip
 unzip(fname, exdir = "~/R/mapslib/GHS", junkpaths = TRUE, overwrite = FALSE)
@@ -156,7 +189,7 @@ pop_init <- rast(global_tiff_path, win = as_spatvector(owin))
 names(pop_init) <- "population"
 
 ncell(pop_init)
-#> [1] 2255923
+#> [1] 2252920
 
 # And check with tidyterra
 base_gg +
@@ -164,28 +197,28 @@ base_gg +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="Population raster over the Iberian Peninsula with country and regional boundaries. Color represents population per raster cell."/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_base_raster-1.webp" alt="Population raster over the Iberian Peninsula with country and regional boundaries. Color represents population per raster cell." width="100%" />
 
 ## Data wrangling
 
-The GHSL information contains the estimated population in each cell. However, the
-file has a high resolution (more than 2 million cells), so for plotting
+The GHSL information contains the estimated population in each cell. However,
+the file has a high resolution (more than 2 million cells), so for plotting
 purposes we are going to reduce (i.e. aggregate) the number of cells so we can
-have a better dot visualization. Once we aggregate, we compute the
-area of each new aggregated cell and compute the corresponding population
-density.
+have a better dot visualization. Once we aggregate, we compute the area of each
+new aggregated cell and compute the corresponding population density.
 
 Instead of using the numeric range of densities, we use categories for the final
 map, so we classify the density into different groups:
 
-```r
+
+``` r
 # Reduce resolution for visualization
 # Compute factor to reduce raster to (aprox) 100 rows:
 nrow(pop_init)
-#> [1] 1511
+#> [1] 1510
 factor <- round(nrow(pop_init) / 100)
 
-# Each new cell contains the sum of population of the aggregated cells
+# Each new cell would contain the sum of population of the aggregated cells
 pop_agg <- terra::aggregate(pop_init,
   fact = factor, fun = "sum",
   na.rm = TRUE
@@ -196,14 +229,14 @@ pop_agg <- terra::aggregate(pop_init,
 pop_agg$area_km2 <- cellSize(pop_agg, unit = "km")
 
 # Compute densities, mask to owin, convert to points and create categories
-pop_points <- pop_agg %>%
+pop_points <- pop_agg |>
   # Compute density by cell
-  mutate(dens = population / area_km2) %>%
-  select(dens) %>%
+  mutate(dens = population / area_km2) |>
+  select(dens) |>
   # Mask to the countries shapes
-  mask(as_spatvector(countries), touches = FALSE) %>%
+  mask(as_spatvector(countries), touches = FALSE) |>
   # SpatVector as points
-  as.points() %>%
+  as.points() |>
   # Categorize
   mutate(cat = case_when(
     dens < 25 ~ "A",
@@ -218,10 +251,10 @@ pop_points <- pop_agg %>%
 
 ## Final plot
 
-And finally, the map. In this case, I save it as a high-resolution square
-map.
+And finally, the map. In this case, I save it as a high-resolution square map.
 
-```r
+
+``` r
 # Final plot
 final_plot <- base_gg +
   # Layer, this object is a SpatVector instead of sf object
@@ -229,7 +262,7 @@ final_plot <- base_gg +
     pop_points,
     mapping = aes(size = cat),
     # Use a point with a border AND a fill
-    pch = 21, color = "white", fill = "black", linewidth = 0.05
+    pch = 21, color = background, fill = "black", linewidth = 0.05
   ) +
   scale_size_manual(
     values = c(0.3, 1, 1.25, 1.5, 2, 2.5, 3.5),
@@ -247,43 +280,38 @@ final_plot <- base_gg +
   labs(
     title = "**Population density in Iberia**",
     subtitle = "in the way of Jacques Bertin",
-    size = "<span style='color:grey'>Inhabitants per km<sup>2</sup></span>",
+    size = "Inhabitants per km<sup>2</sup>",
     caption = "**Data** GHSL **| Plot** @dhernangomez based on @BjnNowak"
   ) +
-  theme_void() +
   # This CRS for representation only
   coord_sf(expand = TRUE, crs = 3035) +
   theme(
-    # plot.margin = margin(20,0,20,0,"cm"),
-    plot.background = element_rect(fill = "white", color = NA),
     legend.position = "bottom",
     legend.margin = margin(r = 20, unit = "pt"),
-    legend.title = element_markdown(),
+    legend.title = element_markdown(colour = "grey20"),
     legend.key.width = unit(50, "pt"),
     plot.title = element_markdown(hjust = 0.5, size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
-    plot.caption = element_markdown(
-      color = "grey20",
-      margin = margin(t = 20, b = 5, unit = "pt"),
-      hjust = .5
-    )
+    plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
+    plot.caption = element_markdown(color = "grey20", hjust = .5),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = background),
   )
 
-
-
-ggsave("202312_finalmap.png", dpi = 300, width = 8, height = 8)
+final_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors."/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." width="100%" />
 
 ## Alternative hexagonal grid
 
-The previous plot is based on the centroids of each cell of the raster, which is,
-by definition, a rectangular grid. I would also like to experiment with
+The previous plot is based on the centroids of each cell of the raster, which
+is, by definition, a rectangular grid. I would also like to experiment with
 hexagonal grids (i.e. a grid of hexagons) since I have the feeling that they
-look more "natural" than the rectangular ones, which present a regularity
-hardly seen in
-the wild.
+look more "natural" than the rectangular ones, which present a regularity hardly
+seen in the wild.
 
 The issue here is that **terra** does not produce this type of grid. However, it
 is possible to create them with `sf::st_make_grid()`, so the workflow for this
@@ -305,17 +333,18 @@ $$
 So we can extract $$d$$ from the previous expression knowing the area $$A$$ of
 the aggregated cells:
 
-```r
+
+``` r
 # Hex grid with sf ----
 
 # Avg size of the cells on the aggregated grid
-target_area <- cellSize(pop_agg, unit = "km") %>%
-  pull() %>%
-  mean() %>%
+target_area <- cellSize(pop_agg, unit = "km") |>
+  pull() |>
+  mean() |>
   as_units("km^2")
 
 target_area
-#> 224.7461 [km^2]
+#> 224.7457 [km^2]
 
 # Infer diam hex
 diam_hex <- sqrt(2 * target_area / sqrt(3))
@@ -327,8 +356,8 @@ length(pop_agg_sf)
 ncell(pop_agg)
 #> [1] 10100
 
-area_km2 <- st_area(pop_agg_sf) %>%
-  set_units("km^2") %>%
+area_km2 <- st_area(pop_agg_sf) |>
+  set_units("km^2") |>
   as.double()
 
 pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
@@ -336,7 +365,8 @@ pop_agg_sf <- st_sf(area_km2 = area_km2, geom = pop_agg_sf)
 
 Now, we use `exact_extract()` to extract the population in each hexagonal cell.
 
-```r
+
+``` r
 # Extract aggregated population by hex cell
 pop_agg_sf$population <- exact_extract(pop_init,
   y = pop_agg_sf,
@@ -347,25 +377,26 @@ pop_agg_sf$population <- exact_extract(pop_init,
 
 base_gg +
   geom_sf(
-    data = pop_agg_sf %>% filter(population > 0),
+    data = pop_agg_sf |> filter(population > 0),
     aes(fill = population), color = NA
   ) +
   scale_fill_viridis_c(na.value = "transparent", alpha = 0.3)
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="Map of the Iberian Peninsula with population totals aggregated into hexagonal cells. Color represents the population in each cell."/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_hexgrid_base-1.webp" alt="Map of the Iberian Peninsula with population totals aggregated into hexagonal cells. Color represents the population in each cell." width="100%" />
 
 Finally, we compute densities, create categories and produce the map:
 
-```r
+
+``` r
 # Mask and categorize
-pop_sf_points <- pop_agg_sf %>%
+pop_sf_points <- pop_agg_sf |>
   # Compute density by cell
-  mutate(dens = population / area_km2) %>%
-  select(dens) %>%
+  mutate(dens = population / area_km2) |>
+  select(dens) |>
   # To points and filter to country shape
-  st_centroid(of_largest_polygon = TRUE) %>%
-  st_filter(countries) %>%
+  st_centroid(of_largest_polygon = TRUE) |>
+  st_filter(countries) |>
   # Categorize
   mutate(cat = case_when(
     dens < 25 ~ "A",
@@ -377,6 +408,20 @@ pop_sf_points <- pop_agg_sf %>%
     TRUE ~ "G"
   ))
 
+
+pop_sf_points |>
+  st_drop_geometry() |>
+  count(cat)
+#>   cat    n
+#> 1   A 2099
+#> 2   B  545
+#> 3   C  450
+#> 4   D  443
+#> 5   E  157
+#> 6   F   93
+#> 7   G   42
+
+
 # Final plot
 final_plot_hex <- base_gg +
   # Layer, this object is a sf object
@@ -384,7 +429,7 @@ final_plot_hex <- base_gg +
     pop_sf_points,
     mapping = aes(size = cat),
     # Use a point with a border AND a fill
-    pch = 21, color = "white", fill = "black", linewidth = 0.05
+    pch = 21, color = background, fill = "black", linewidth = 0.05
   ) +
   scale_size_manual(
     values = c(0.3, 1, 1.25, 1.5, 2, 2.5, 3.5),
@@ -402,32 +447,29 @@ final_plot_hex <- base_gg +
   labs(
     title = "**Population density in Iberia**",
     subtitle = "in the way of Jacques Bertin",
-    size = "<span style='color:grey'>Inhabitants per km<sup>2</sup></span>",
+    size = "Inhabitants per km<sup>2</sup>",
     caption = "**Data** GHSL **| Plot** @dhernangomez based on @BjnNowak"
   ) +
-  theme_void() +
   # This CRS for representation only
   coord_sf(expand = TRUE, crs = 3035) +
   theme(
-    # plot.margin = margin(20,0,20,0,"cm"),
-    plot.background = element_rect(fill = "white", color = NA),
     legend.position = "bottom",
     legend.margin = margin(r = 20, unit = "pt"),
-    legend.title = element_markdown(),
+    legend.title = element_markdown(colour = "grey20"),
     legend.key.width = unit(50, "pt"),
     plot.title = element_markdown(hjust = 0.5, size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey40"),
-    plot.caption = element_markdown(
-      color = "grey20",
-      margin = margin(t = 20, b = 5, unit = "pt"),
-      hjust = .5
-    )
+    plot.subtitle = element_text(hjust = 0.5, color = "grey20"),
+    plot.caption = element_markdown(color = "grey20", hjust = .5),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    panel.background = element_rect(fill = background),
   )
-
-ggsave("202312_finalmap_hex.png", dpi = 300, width = 8, height = 8)
+final_plot_hex
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters."/>
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." width="100%" />
 
 And that's it! Which one do you like the most? Let me know in the comments.
 
@@ -437,13 +479,13 @@ And that's it! Which one do you like the most? Let me know in the comments.
   cartes*. Mouton; Gauthier-Villars.
   <https://catalogue.bnf.fr/ark:/12148/cb41605817s>
 - European Commission. (2023). *GHSL data package 2023* (JRC133256).
-  Publications Office of the European Union.
-  <https://doi.org/10.2760/098587>
+  Publications Office of the European Union. <https://doi.org/10.2760/098587>
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra
   package. *Journal of Open Source Software, 8*(91), Article 5751.
   <https://doi.org/10.21105/joss.05751>
 - Nowak, B. (2023, November 21). *Jacques Bertin’s valued points map with R*.
-  The R Graph Gallery. <https://r-graph-gallery.com/web-valued-dots-map-bertin.html>
+  The R Graph Gallery.
+  <https://r-graph-gallery.com/web-valued-dots-map-bertin.html>
 - Pesaresi, M., & Politis, P. (2023). *GHS-BUILT-C R2023A – GHS settlement
   characteristics, derived from Sentinel2 composite (2018) and other GHS R2023A
   data* [Data set]. European Commission, Joint Research Centre.
