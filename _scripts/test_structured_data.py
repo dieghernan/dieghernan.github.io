@@ -134,6 +134,14 @@ class StructuredDataTests(unittest.TestCase):
     def test_forest_fire_summary_matches_upstream_metadata(self):
         _, blocks = page("/projects/gifs/")
         dataset, = [item for item in blocks if item.get("@type") == "Dataset"]
+        context = dataset["@context"]
+        self.assertEqual(context["@vocab"], "https://schema.org/")
+        for term in ("sameAs", "isPartOf"):
+            with self.subTest(term=term):
+                self.assertEqual(context[term], {
+                    "@id": "https://schema.org/" + term,
+                    "@type": "@id",
+                })
         self.assertEqual(dataset["@id"], "https://dieghernan.github.io/gifs/#collection")
         self.assertEqual(dataset["identifier"], "https://doi.org/10.5281/zenodo.23932940")
         self.assertEqual(dataset["sameAs"], dataset["identifier"])
@@ -146,14 +154,6 @@ class StructuredDataTests(unittest.TestCase):
         self.assertEqual(dataset["spatialCoverage"], {
             "@type": "Place",
             "name": "España",
-            "geo": {
-                "@type": "GeoShape",
-                "box": "-17.9896594 27.9282566760271 3.0381681 43.5444539",
-                "description": (
-                    "Extensión de los puntos con coordenadas disponibles; "
-                    "no representa los perímetros quemados ni implica cobertura territorial completa."
-                ),
-            },
         })
         self.assertEqual(dataset["creator"]["@id"], "https://dieghernan.github.io/gifs/#author")
         self.assertEqual(dataset["creator"]["name"], "Diego Hernangómez")

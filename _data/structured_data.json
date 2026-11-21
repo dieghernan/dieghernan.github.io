@@ -160,6 +160,11 @@
       ]
     },
     "gifs": {
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "sameAs": {"@id": "https://schema.org/sameAs", "@type": "@id"},
+        "isPartOf": {"@id": "https://schema.org/isPartOf", "@type": "@id"}
+      },
       "@type": "Dataset",
       "@id": "https://dieghernan.github.io/gifs/#collection",
       "name": "Grandes incendios forestales en España",
@@ -183,12 +188,7 @@
       "temporalCoverage": "2010-02-27/2026-09-26",
       "spatialCoverage": {
         "@type": "Place",
-        "name": "España",
-        "geo": {
-          "@type": "GeoShape",
-          "box": "-17.9896594 27.9282566760271 3.0381681 43.5444539",
-          "description": "Extensión de los puntos con coordenadas disponibles; no representa los perímetros quemados ni implica cobertura territorial completa."
-        }
+        "name": "España"
       },
       "description": "Selected EGIF reports from 2010–2023 and a reconciled view of large forest fires in Spain from 2010–2026. MITECO reports and bulletins provide fallback data. Some matches remain unresolved and coverage is incomplete."
     }
