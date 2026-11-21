@@ -18,7 +18,7 @@
           "@type": "WebPage",
           "@id": "https://dieghernan.github.io/202301_star-map-R/"
         },
-        "description": "Creating star map visualizations based on location and date - Make a star map in R for a place and date of your choice.",
+        "description": "Use celestial data and R to map the stars, constellations and Milky Way visible from a given place and time.",
         "inLanguage": "en-US",
         "isPartOf": [
           {
@@ -82,7 +82,7 @@
         },
         "inLanguage": "en-US",
         "name": "Star map with R",
-        "description": "Creating star map visualizations based on location and date - Make a star map in R for a place and date of your choice."
+        "description": "Use celestial data and R to map the stars, constellations and Milky Way visible from a given place and time."
       }
     </script>
     <script type="application/ld+json">
@@ -127,7 +127,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Diego HH" >
     <meta name="copyright" content="Diego HH" >
-    <meta name="description" content="Creating star map visualizations based on location and date - Make a star map in R for a place and date of your choice.">
+    <meta name="description" content="Use celestial data and R to map the stars, constellations and Milky Way visible from a given place and time.">
     <meta name="thumbnail" content="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
@@ -149,7 +149,7 @@
     <meta property="article:tag" content="rstats">
     <meta property="article:tag" content="music">
     <meta property="article:tag" content="r_bloggers">
-    <meta property="og:description" content="Creating star map visualizations based on location and date - Make a star map in R for a place and date of your choice." >
+    <meta property="og:description" content="Use celestial data and R to map the stars, constellations and Milky Way visible from a given place and time." >
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/celestial_data/assets/img/ogimage.webp" >
     <meta property="og:image:alt" content="Circular star map with white constellation lines, stars and a coordinate grid on a dark background." >
@@ -158,7 +158,7 @@
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Creating star map visualizations based on location and date - Make a star map in R for a place and date of your choice.">
+    <meta name="twitter:description" content="Use celestial data and R to map the stars, constellations and Milky Way visible from a given place and time.">
     <meta name="twitter:site" content="@dhernangomez" >
     <meta name="twitter:creator" content="@dhernangomez" >
     <!-- CSS -->
@@ -557,22 +557,22 @@
 </details>
 </div>
 </div>
-       <div class="e-content"><p>A couple of weeks ago, I was browsing
-<a href="https://stackoverflow.com/questions/tagged/sf">Stack Overflow</a> when I found a
-question by <a href="https://bensstats.wordpress.com/">Benjamin Smith</a> that blew my
-mind: <a href="https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date">Creating Star Map Visualizations Based on Location and
+       <div class="e-content"><p>A couple of weeks ago, I was browsing <a href="https://stackoverflow.com/questions/tagged/sf">Stack
+Overflow</a> when I found a question
+by <a href="https://bensstats.wordpress.com/">Benjamin Smith</a> that blew my mind:
+<a href="https://stackoverflow.com/questions/75064069/creating-star-map-visualizations-based-on-location-and-date">Creating Star Map Visualizations Based on Location and
 Date</a>!</p>
 <p>Oh my! Can we do this with <strong>R</strong>? Of course! In fact, <a href="https://kimnewzealand.github.io/">Kim
 Fitter</a> had already explored this in his
-<a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial Maps</a>. So I decided
-to put some work into this.</p>
-<p>Since then, I have also learned that Benjamin and I have been working in parallel
-on the same topic. He is preparing an <strong>R</strong> package named
+<a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">Celestial Maps</a>. So
+I decided to put some work into this.</p>
+<p>Since then, I have also learned that Benjamin and I have been working in
+parallel on the same topic. He is preparing an <strong>R</strong> package named
 <a href="https://github.com/benyamindsmith/starBliss"><strong>starBliss</strong></a>, and I hope this
 post will help.</p>
 <div role="note" aria-label="Note" class="callout-note">
- <p>I have very little knowledge of this topic, so if you find errors or
-have any suggestions, please let me know in the comments section below.</p>
+ <p>I have very little knowledge of this topic, so if you find errors or have any
+suggestions, please let me know in the comments section below.</p>
 </div>
 <h2 id="first-things-first-the-data">First things first: the data</h2>
 <p>The initial data source for all these projects (Kim’s, Benjamin’s and mine) is
@@ -590,14 +590,13 @@ Data</a>, which provides all these
 files in several spatial formats. Please <a href="https://github.com/dieghernan/celestial_data">check out the
 repo</a> to learn more about it.</p>
 <h2 id="creating-a-star-map-with-r">Creating a star map with R</h2>
-<p>The first step is to load libraries that will help us with this cosmic
-task:</p>
+<p>The first step is to load libraries that will help us with this cosmic task:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Spatial manipulation</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">nominatimlite</span><span class="p">)</span><span class="w">
 
-</span><span class="c1">## Wrangling data and dates</span><span class="w">
+</span><span class="c1">## Work with dates and time zones</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">lutz</span><span class="p">)</span><span class="w">
@@ -610,13 +609,28 @@ task:</p>
 
 </span><span class="c1"># Define a common theme for the maps.</span><span class="w">
 </span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#FAF9F6"</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
 
 </span><span class="n">theme_set</span><span class="p">(</span><span class="w">
-  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
     </span><span class="n">theme</span><span class="p">(</span><span class="w">
-      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
       </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># The projected previews have no meaningful axis labels.</span><span class="w">
+</span><span class="n">projected_theme</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="w">
+  </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+  </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h3 id="helper-functions">Helper functions</h3>
@@ -637,9 +651,14 @@ coordinate in the format degrees/minutes/seconds (e.g., a <strong>latitude of
 <details class="my-4">
   <summary>Show <code>load_celestial</code> and
 <code>pretty_lonlat()</code></summary>
- <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">load_celestial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w">
-                           </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://cdn.jsdelivr.net/gh/dieghernan/celestial_data@main/data/"</span><span class="p">,</span><span class="w">
-                           </span><span class="n">cachedir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">
+ <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">load_celestial</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="w">
+  </span><span class="n">filename</span><span class="p">,</span><span class="w">
+  </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"https://cdn.jsdelivr.net/gh/dieghernan/"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"celestial_data@main/data/"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">cachedir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tempdir</span><span class="p">()</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">dir.exists</span><span class="p">(</span><span class="n">cachedir</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="n">stop</span><span class="p">(</span><span class="w">
       </span><span class="s2">"Please create "</span><span class="p">,</span><span class="w">
@@ -746,9 +765,9 @@ The example uses the returned angle to rotate the star map’s projection.</p>
 </details>
 <p>The final result would have a spherical outline. That means that we would need
 to perform a spherical cut. Did you know that <a href="https://r-spatial.org/r/2020/06/17/s2.html">in r-spatial the Earth is no
-longer flat</a>? Thanks to <strong>s2</strong> we can
-overcome this issue. Additionally, we would get rid of <a href="https://stackoverflow.com/questions/75205747/how-to-remove-random-diagonal-lines-from-star-map-vizualizations-produced-by-geo/75212722#75212722">artifacts derived from
-the changes on the
+longer flat</a>? Thanks to <strong>s2</strong> we
+can overcome this issue. Additionally, we would get rid of <a href="https://stackoverflow.com/questions/75205747/how-to-remove-random-diagonal-lines-from-star-map-vizualizations-produced-by-geo/75212722#75212722">artifacts derived
+from the changes on the
 projection</a>.
 This also includes some refinements to avoid empty/non-valid geometries as well
 as <code class="language-plaintext highlighter-rouge">GEOMETRYCOLLECTION</code> handling. The function <code class="language-plaintext highlighter-rouge">sf_spherical_cut()</code> would do
@@ -758,7 +777,9 @@ that for us.</p>
  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Cut an sf object with a buffer using spherical s2 geoms</span><span class="w">
 </span><span class="c1"># Optionally, project and flip</span><span class="w">
 
-</span><span class="n">sf_spherical_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="n">sf_spherical_cut</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">the_buff</span><span class="p">,</span><span class="w"> </span><span class="n">the_crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="c1"># Get geometry type</span><span class="w">
   </span><span class="n">geomtype</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"MULTI"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">x</span><span class="p">)))[</span><span class="m">1</span><span class="p">]</span><span class="w">
 
@@ -844,8 +865,8 @@ that for us.</p>
 </span><span class="c1">#&gt;       lat       lon </span><span class="w">
 </span><span class="c1">#&gt; 40.416782 -3.703507</span><span class="w">
 </span></code></pre></div></div>
-<p>To plot the sky at the correct local time, use the latitude and longitude
-to look up the time zone with <strong>lutz</strong>:</p>
+<p>To plot the sky at the correct local time, use the latitude and longitude to
+look up the time zone with <strong>lutz</strong>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">desired_date</span><span class="w">
 </span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 UTC"</span><span class="w">
 
@@ -862,9 +883,9 @@ to look up the time zone with <strong>lutz</strong>:</p>
 </span><span class="c1">#&gt; [1] "2015-09-22 03:45:00 CEST"</span><span class="w">
 </span></code></pre></div></div>
 <h4 id="about-time-zones">About time zones</h4>
-<p>Some online shops that create this kind of map (I won’t post links) include
-this script:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>... 
+<p>Some online shops that create this kind of map (I won’t post links) include this
+script:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 
 'selectedHour': '22',
 'selectedMinute': '00',
@@ -904,7 +925,9 @@ so we are going to replicate that as well:</p>
 
 </span><span class="c1"># Create proj4string w/ Airy projection</span><span class="w">
 
-</span><span class="n">target_crs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"+proj=airy +x_0=0 +y_0=0 +lon_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">" +lat_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="p">)</span><span class="w">
+</span><span class="n">target_crs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="w">
+  </span><span class="s2">"+proj=airy +x_0=0 +y_0=0 +lon_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lon_prj</span><span class="p">,</span><span class="w"> </span><span class="s2">" +lat_0="</span><span class="p">,</span><span class="w"> </span><span class="n">lat_prj</span><span class="w">
+</span><span class="p">)</span><span class="w">
 
 
 </span><span class="n">target_crs</span><span class="w">
@@ -963,7 +986,8 @@ visualization.</p>
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">mw_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">projected_theme</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_mw-2.webp" alt="Milky Way bands clipped and projected to the selected viewing hemisphere." width="100%" /></p>
 <p>Next, we add the constellations:</p>
@@ -987,7 +1011,8 @@ visualization.</p>
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">const_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">projected_theme</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_const-2.webp" alt="Constellation lines clipped and projected to the selected circular viewing hemisphere." width="100%" /></p>
 <p>Finally, we add the stars:</p>
@@ -1015,7 +1040,8 @@ visualization.</p>
   </span><span class="c1"># We use relative brightness (br) as aes</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">br</span><span class="p">),</span><span class="w"> </span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_size_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w">
+  </span><span class="n">scale_alpha_continuous</span><span class="p">(</span><span class="n">range</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.1</span><span class="p">,</span><span class="w"> </span><span class="m">0.8</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">projected_theme</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_stars-2.webp" alt="Star map clipped and projected to the selected circular viewing hemisphere. Larger and more opaque points represent brighter stars." width="100%" /></p>
 <h3 id="graticules">Graticules</h3>
@@ -1034,7 +1060,7 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-1.webp" alt="Rectangular coordinate grid with latitude lines every 10 degrees and longitude lines every 30 degrees." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="c1"># Cut to buffer; we don't flip this one (it is not an object of the space)</span><span class="w">
+</span><span class="c1"># Cut the graticule to the buffer without flipping it.</span><span class="w">
 </span><span class="n">grat_end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf_spherical_cut</span><span class="p">(</span><span class="w">
   </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat</span><span class="p">,</span><span class="w">
   </span><span class="n">the_buff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hemisphere_s2</span><span class="p">,</span><span class="w">
@@ -1045,7 +1071,8 @@ parameter of <code class="language-plaintext highlighter-rouge">sf_spherical_cut
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">grat_end</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">projected_theme</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20230125_grat-2.webp" alt="Coordinate grid projected to the selected hemisphere. Curved latitude lines and converging longitude lines reveal the pole." width="100%" /></p>
 <h2 id="visualization-with-ggplot2">Visualization with <strong>ggplot2</strong></h2>
@@ -1092,12 +1119,12 @@ caption:</p>
 <p>We can enhance the visualization by applying some interesting effects:</p>
 <ul>
  <li>
-   <p>We use <code class="language-plaintext highlighter-rouge">ggfx::with_blur()</code> to soften the edges of the Milky Way and mimic
-how it appears from Earth.</p>
+   <p>We use <code class="language-plaintext highlighter-rouge">ggfx::with_blur()</code> to soften the edges of the Milky Way and mimic how
+it appears from Earth.</p>
  </li>
  <li>
-   <p>We can also add a glowing effect to our stars and constellations (have a
-look at Dominic Royé’s post <a href="https://dominicroye.github.io/blog/firefly-maps/index.html">Firefly
+   <p>We can also add a glowing effect to our stars and constellations (have a look
+at Dominic Royé’s post <a href="https://dominicroye.github.io/blog/firefly-maps/index.html">Firefly
 Cartography</a> to
 know more about this). The only drawback is that I was not able to use
 <strong>ggshadow</strong> with <code class="language-plaintext highlighter-rouge">LINESTRING</code> (Dominic shows how to do it with <code class="language-plaintext highlighter-rouge">POINT</code>), so
@@ -1139,7 +1166,8 @@ instead I converted my lines (the constellations) to coordinates and applied
   </span><span class="c1"># Glowing constellations</span><span class="w">
   </span><span class="n">geom_glowpath</span><span class="p">(</span><span class="w">
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">const_end_lines</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interaction</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="w"> </span><span class="n">L2</span><span class="p">)),</span><span class="w">
-    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
     </span><span class="n">shadowcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linejoin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="p">,</span><span class="w"> </span><span class="n">lineend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="c1"># Border of the sphere</span><span class="w">
@@ -1149,7 +1177,7 @@ instead I converted my lines (the constellations) to coordinates and applied
   </span><span class="c1"># And end with theming</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
-    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
     </span><span class="n">panel.border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
@@ -1212,7 +1240,8 @@ this entirely different set of geometries:</p>
   </span><span class="c1"># Glowing constellations</span><span class="w">
   </span><span class="n">geom_glowpath</span><span class="p">(</span><span class="w">
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">const_cn_end_lines</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interaction</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="w"> </span><span class="n">L2</span><span class="p">)),</span><span class="w">
-    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w"> </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">,</span><span class="w">
+    </span><span class="n">shadowsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="n">shadowalpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.01</span><span class="p">,</span><span class="w">
     </span><span class="n">shadowcolor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">,</span><span class="w"> </span><span class="n">linejoin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="p">,</span><span class="w"> </span><span class="n">lineend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"round"</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="c1"># Border of the sphere</span><span class="w">
@@ -1222,7 +1251,7 @@ this entirely different set of geometries:</p>
   </span><span class="c1"># And end with theming</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
-    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"white"</span><span class="p">),</span><span class="w">
     </span><span class="n">panel.border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#191d29"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="m">20</span><span class="p">),</span><span class="w">
@@ -1241,22 +1270,22 @@ this entirely different set of geometries:</p>
 <a href="https://kimnewzealand.github.io/2019/02/21/celestial-maps/">https://kimnewzealand.github.io/2019/02/21/celestial-maps/</a></li>
  <li>Frohn, O. (2015). <em>d3-celestial</em> [Computer software]. GitHub.
 <a href="https://github.com/ofrohn/d3-celestial/">https://github.com/ofrohn/d3-celestial/</a></li>
- <li>Frohn, O., &amp; Hernangómez, D. (2023). <em>Celestial data</em> (Version 1.0.1)
-[Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.7561601">https://doi.org/10.5281/zenodo.7561601</a>
-(<a href="https://dieghernan.github.io/celestial_data/">Project documentation</a>)</li>
+ <li>Frohn, O., &amp; Hernangómez, D. (2023). <em>Celestial data</em> (Version 1.0.1) [Data
+set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.7561601">https://doi.org/10.5281/zenodo.7561601</a> (<a href="https://dieghernan.github.io/celestial_data/">Project
+documentation</a>)</li>
  <li>Meeus, J. (1998). <em>Astronomical algorithms</em> (2nd ed.). Willmann-Bell.</li>
- <li>Pebesma, E., &amp; Dunnington, D. (2020, June 17). In r-spatial, the Earth is
-no longer flat. <em>r-spatial</em>. <a href="https://r-spatial.org/r/2020/06/17/s2.html">https://r-spatial.org/r/2020/06/17/s2.html</a></li>
+ <li>Pebesma, E., &amp; Dunnington, D. (2020, June 17). In r-spatial, the Earth is no
+longer flat. <em>r-spatial</em>. <a href="https://r-spatial.org/r/2020/06/17/s2.html">https://r-spatial.org/r/2020/06/17/s2.html</a></li>
  <li>Royé, D. (2021, June 1). Firefly cartography. <em>Dr Dominic Royé</em>.
 <a href="https://dominicroye.github.io/blog/firefly-maps/">https://dominicroye.github.io/blog/firefly-maps/</a></li>
- <li>Still, J. (2020, March 22). Astronomical calculations: Sidereal time.
-<em>James Still</em>. <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">https://squarewidget.com/astronomical-calculations-sidereal-time/</a></li>
+ <li>Still, J. (2020, March 22). Astronomical calculations: Sidereal time. <em>James
+Still</em>. <a href="https://squarewidget.com/astronomical-calculations-sidereal-time/">https://squarewidget.com/astronomical-calculations-sidereal-time/</a></li>
 </ul>
 <div class="footnotes" role="doc-endnotes">
  <ol>
    <li id="fn:1">
-     <p><a href="https://www.jsdelivr.com/">jsDelivr</a> serves the files from GitHub
-through a <a href="https://www.jsdelivr.com/github">content delivery network</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+     <p><a href="https://www.jsdelivr.com/">jsDelivr</a> serves the files from GitHub through
+a <a href="https://www.jsdelivr.com/github">content delivery network</a>. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
    </li>
  </ol>
 </div>

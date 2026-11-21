@@ -155,7 +155,7 @@
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" >
     <meta property="og:image:alt" content="Map of mean annual precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south means." >
     <meta property="og:image:width" content="2100" >
-    <meta property="og:image:height" content="2010" >
+    <meta property="og:image:height" content="2004" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -564,19 +564,20 @@
 </div>
        <div class="e-content"><div role="note" aria-label="Note" class="callout-note">
  <p><strong>Updated on October 25, 2026:</strong> The elevation and precipitation maps now use
-<strong>ggblend</strong> to multiply their colors with the hillshade, following
-<a href="https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/">Barney Harris’s blending adventure</a>.
-The map and marginal profiles now share the same precipitation palette and limits.
-Dominic Royé also demonstrates how to use <strong>ggblend</strong> in
-<a href="https://dominicroye.github.io/blog/hillshade-effect/">Hillshade effects</a>.</p>
+<strong>ggblend</strong> to multiply their colors with the hillshade, following <a href="https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/">Barney
+Harris’s blending
+adventure</a>. The
+map and marginal profiles now share the same precipitation palette and limits.
+Dominic Royé also demonstrates how to use <strong>ggblend</strong> in <a href="https://dominicroye.github.io/blog/hillshade-effect/">Hillshade
+effects</a>.</p>
 </div>
-<p><em>This is the second post of the series “Hillshade, colors and
-marginal plots with <strong>tidyterra</strong>”. In this post, I explore an approach for
-annotating marginal plots on a <strong>ggplot2</strong> map of a SpatRaster, including
-information about the values by longitude and latitude. See the first post of the
-series <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">here</a>.</em></p>
-<p>If you love watching classic movies, especially from Hollywood’s Golden Age,
-you may recognize the following lyrics:</p>
+<p><em>This is the second post of the series “Hillshade, colors and marginal plots
+with <strong>tidyterra</strong>”. In this post, I explore an approach for annotating marginal
+plots on a <strong>ggplot2</strong> map of a SpatRaster, including information about the
+values by longitude and latitude. See the first post of the series
+<a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">here</a>.</em></p>
+<p>If you love watching classic movies, especially from Hollywood’s Golden Age, you
+may recognize the following lyrics:</p>
 <blockquote>
  <p>The rain in Spain stays mainly in the plain!</p>
  <p>By George, she’s got it! By George, she’s got it!</p>
@@ -624,9 +625,9 @@ Rex Harrison and Stanley Holloway. But as a Spaniard, I can tell you it is
 <strong>completely false</strong>.</p>
 <p>The rain in Spain stays mainly in the north, most notably in Galicia. And I can
 prove it!</p>
-<p>In this post, I overlay a SpatRaster showing mean precipitation data
-with an extra set of plots on the margin to identify where the rain in Spain
-stays (mainly).</p>
+<p>In this post, I overlay a SpatRaster showing mean precipitation data with an
+extra set of plots on the margin to identify where the rain in Spain stays
+(mainly).</p>
 <h2 id="libraries">Libraries</h2>
 <p>In this post, we will use the following libraries:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Libraries</span><span class="w">
@@ -650,12 +651,28 @@ stays (mainly).</p>
 </span><span class="c1"># Define a common theme for the maps.</span><span class="w">
 </span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#f8f8ff"</span><span class="w">
 </span><span class="n">ink</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"grey10"</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># Let cowplot measure the registered fonts when assembling the panels.</span><span class="w">
+</span><span class="n">cowplot</span><span class="o">::</span><span class="n">set_null_device</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">cowplot</span><span class="o">::</span><span class="n">agg_null_device</span><span class="p">(</span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="p">)</span><span class="w">
+  </span><span class="n">grid</span><span class="o">::</span><span class="n">grid.newpage</span><span class="p">()</span><span class="w">
+</span><span class="p">})</span><span class="w">
 
 </span><span class="n">theme_set</span><span class="p">(</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
     </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
-    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+    </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+    </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w"> </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)),</span><span class="w">
     </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey40"</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
@@ -664,8 +681,8 @@ stays (mainly).</p>
 </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="the-plain-in-spain">The plain in Spain</h2>
-<p>The plain (or as we call it, <em>La Meseta Central</em>) covers a large area of
-inland Spain, with an mean altitude of 650 meters above sea level.</p>
+<p>The plain (or as we call it, <em>La Meseta Central</em>) covers a large area of inland
+Spain, with a mean altitude of 650 meters above sea level.</p>
 <p>I didn’t find any accurate spatial data file with the bounds of the plain, so
 for this case I would approximate it using a mixture of political borders
 (historically the <em>Meseta</em> is associated with Castile and Madrid) and elevation
@@ -733,15 +750,16 @@ data to get a rough shape.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_plan_alt-1.webp" alt="Map of plateau outlines in Spain, extracted from terrain between 600 and 1,100 meters above sea level." width="100%" /></p>
 <p>We can create a new plot similar to the one produced in the <a href="https://dieghernan.github.io/202210_tidyterra-hillshade/">previous
 post</a> to identify the
-plain. First, I create a base layer with a representation of the
-hillshade, which we will reuse later:</p>
+plain. First, I create a base layer with a representation of the hillshade,
+which we will reuse later:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Creating hillshade</span><span class="w">
 
 </span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"slope"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
 </span><span class="n">aspect</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">terrain</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="s2">"aspect"</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"radians"</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Multi-shadow</span><span class="w">
-</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">225</span><span class="p">,</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w"> </span><span class="m">315</span><span class="p">,</span><span class="w"> </span><span class="m">360</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">mean</span><span class="p">()</span><span class="w">
+</span><span class="n">hill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">shade</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">aspect</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">225</span><span class="p">,</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w"> </span><span class="m">315</span><span class="p">,</span><span class="w"> </span><span class="m">360</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">mean</span><span class="p">(</span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Stretching</span><span class="w">
 </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">quantile</span><span class="p">(</span><span class="n">values</span><span class="p">(</span><span class="n">hill</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.05</span><span class="p">,</span><span class="w"> </span><span class="m">0.95</span><span class="p">),</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
@@ -779,9 +797,8 @@ hillshade, which we will reuse later:</p>
 <p>As in the updated first post, we resolve the thematic raster’s colors before
 combining it with the hillshade. This helper keeps the original scale underneath
 the blend to generate the legend. The opaque thematic layer inside the blend
-covers it, and the hillshade adds texture. The legend
-shows the palette before shading. We use <strong>ragg</strong> to render these compositing
-groups.</p>
+covers it, and the hillshade adds texture. The legend shows the palette before
+shading. We use <strong>ragg</strong> to render these compositing groups.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Blend a thematic raster with the fixed hillshade colors</span><span class="w">
 </span><span class="n">blend_hillshade</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">fill_scale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="n">stopifnot</span><span class="p">(</span><span class="n">compareGeom</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">hill</span><span class="p">))</span><span class="w">
@@ -846,9 +863,8 @@ visible even without plotting the outline.</p>
     </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The plain in green"</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
-    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
+      </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
       </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
     </span><span class="p">),</span><span class="w">
     </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
@@ -937,7 +953,7 @@ custom palette with <strong>colorspace</strong> to better highlight the differen
   </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
 </span><span class="p">)</span><span class="w">
 
-</span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">)</span><span class="w">
+</span><span class="n">withr</span><span class="o">::</span><span class="n">with_par</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">),</span><span class="w"> </span><span class="n">show_col</span><span class="p">(</span><span class="n">mypal</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_mypal-1.webp" alt="Grid of 16 color swatches with hexadecimal labels, forming a precipitation palette from pale yellow through green and blue to purple." width="100%" /></p>
 <p>And now we can create the final map showing if <em>the rain in Spain stays mainly
@@ -976,9 +992,8 @@ in the plain</em>:</p>
     </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The rain in Spain does not stay mainly in the plain"</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
-    </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
+      </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.5</span><span class="p">,</span><span class="w">
       </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="w">
     </span><span class="p">),</span><span class="w">
     </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
@@ -1004,18 +1019,18 @@ in the plain</em>:</p>
 </blockquote>
 <p>That can be translated as <em>“The rain in Seville is a true marvel”</em>. And it is,
 indeed. Seville (located in the south on the <a href="https://goo.gl/maps/V8ZrDjrA74CTknYb7">Guadalquivir
-Valley</a>) has circa 50 rainy days per year,
-featuring very hot and dry summers.</p>
+Valley</a>) has circa 50 rainy days per
+year, featuring very hot and dry summers.</p>
 <iframe class="chulapa-spotify d-block w-100 border-0 my-3 chulapa-rounded-lg" title="The Rain in Spain from My Fair Lady on Spotify" src="https://open.spotify.com/embed/track/6E5hMCINTY7eAQdcMzCTgY" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 <p class="chulapa-spotify-link"><a class="text-reset" href="https://open.spotify.com/track/6E5hMCINTY7eAQdcMzCTgY">Open The Rain in Spain from My Fair Lady on Spotify</a></p>
 <h2 id="marginal-plots-finally">Marginal plots (finally)</h2>
 <p>We can now start profiling our final plot. The idea is to create two bar charts,
-representing the value to be plotted (in this case, mean annual
-precipitation) by longitude and latitude.</p>
+representing the value to be plotted (in this case, mean annual precipitation)
+by longitude and latitude.</p>
 <p>The map and both profiles use <code class="language-plaintext highlighter-rouge">precip_scale</code>, with the same opaque colors and
-explicit limits. Hillshade changes the map’s brightness, while the profiles
-show the unshaded palette. The means are calculated from the precipitation
-values, before any color mapping or blending.</p>
+explicit limits. Hillshade changes the map’s brightness, while the profiles show
+the unshaded palette. The means are calculated from the precipitation values,
+before any color mapping or blending.</p>
 <p>But first we add some additional margins and axis titles to the main plot, so we
 can insert those marginal plots easily on our main plot:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Now we can add titles on the secondary axis</span><span class="w">
@@ -1033,7 +1048,7 @@ can insert those marginal plots easily on our main plot:</p>
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
     </span><span class="n">axis.title.x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
       </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">),</span><span class="w">
-      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
     </span><span class="p">),</span><span class="w">
     </span><span class="n">axis.title.y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
       </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
@@ -1041,7 +1056,7 @@ can insert those marginal plots easily on our main plot:</p>
         </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="p">,</span><span class="w">
         </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w">
       </span><span class="p">),</span><span class="w">
-      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
+      </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.75</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="w">
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
 
@@ -1049,8 +1064,8 @@ can insert those marginal plots easily on our main plot:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_precip_for_margin-1.webp" alt="Map of mean annual precipitation in Spain prepared for adding marginal profiles. Colors distinguish the wetter north from the drier southeast." width="100%" /></p>
 <h3 id="profiling-marginal-plots">Profiling marginal plots</h3>
-<p>In the following code, I am drafting what the marginal plots would look
-like, so we can have a preview of the final result:</p>
+<p>In the following code, I am drafting what the marginal plots would look like, so
+we can have a preview of the final result:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Profiling marginal plots</span><span class="w">
 
 </span><span class="c1"># Getting averages by x,y</span><span class="w">
@@ -1058,13 +1073,13 @@ like, so we can have a preview of the final result:</p>
   </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">group_by</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 
 </span><span class="n">marg_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_avg_mask</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">group_by</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 
 </span><span class="c1"># Cowplot would delete axis, we create an axis at 1000 and 2000</span><span class="w">
 </span><span class="n">br_4marginal</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span><span class="w"> </span><span class="m">2000</span><span class="p">)</span><span class="w">
@@ -1089,6 +1104,7 @@ like, so we can have a preview of the final result:</p>
   </span><span class="n">geom_text</span><span class="p">(</span><span class="w">
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
     </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">precip_scale</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1115,6 +1131,7 @@ like, so we can have a preview of the final result:</p>
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_y</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
     </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
     </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">precip_scale</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1131,8 +1148,8 @@ like, so we can have a preview of the final result:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_profile_marg-2.webp" alt="Horizontal bar profile of mean annual precipitation by north-south position in Spain. Bar length and color encode rainfall in millimeters, with higher averages in the north." width="100%" /></p>
 <h3 id="putting-all-the-pieces-together">Putting all the pieces together</h3>
-<p>Finally, we use <code class="language-plaintext highlighter-rouge">cowplot::axis_canvas()</code> to create the marginal plots as
-we want:</p>
+<p>Finally, we use <code class="language-plaintext highlighter-rouge">cowplot::axis_canvas()</code> to create the marginal plots as we
+want:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Last step: We combine plots</span><span class="w">
 
 </span><span class="c1"># Marginal plots</span><span class="w">
@@ -1147,7 +1164,7 @@ we want:</p>
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">for_x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labs</span><span class="p">),</span><span class="w">
     </span><span class="c1"># Adjust the position of the labels</span><span class="w">
     </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w">
-    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
     </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1179,7 +1196,7 @@ we want:</p>
     </span><span class="c1"># Adjust the position of the labels</span><span class="w">
     </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w">
     </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
-    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"serif"</span><span class="p">,</span><span class="w">
+    </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
     </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1217,8 +1234,8 @@ we want:</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp" alt="Map of mean annual precipitation in Spain with hillshade and marginal bar profiles above and to the right. Colors encode rainfall; the profiles summarize east-west and north-south averages." width="100%" /></p>
 <p>And with a bit of effort we got it.</p>
 <h2 id="recap">Recap</h2>
-<p>Much of the code we have created relates to the theming and labels of the
-plot. Here you can find a simplified version:</p>
+<p>Much of the code we have created relates to the theming and labels of the plot.
+Here you can find a simplified version:</p>
 <details>
   <summary>Simplified version</summary>
  <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Libraries</span><span class="w">
@@ -1270,7 +1287,7 @@ plot. Here you can find a simplified version:</p>
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hill</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vector_cols</span><span class="p">,</span><span class="w"> </span><span class="n">maxcell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w">
     </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
 
 </span><span class="c1"># Blend a thematic raster with the fixed hillshade colors</span><span class="w">
 </span><span class="n">blend_hillshade</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">fill_scale</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1318,7 +1335,7 @@ plot. Here you can find a simplified version:</p>
   </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p_range</span><span class="w">
 </span><span class="p">)</span><span class="w">
 </span><span class="n">base_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">blend_hillshade</span><span class="p">(</span><span class="n">precip_end</span><span class="p">,</span><span class="w"> </span><span class="n">precip_scale</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">theme_minimal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_minimal</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F0FFFF"</span><span class="p">))</span><span class="w">
 
 </span><span class="c1"># Marginal plots</span><span class="w">
@@ -1327,13 +1344,13 @@ plot. Here you can find a simplified version:</p>
   </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">group_by</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 
 </span><span class="n">marg_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">precip_end</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">as_tibble</span><span class="p">(</span><span class="n">xy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">drop_na</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">group_by</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span><span class="w">
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
 
 </span><span class="c1"># Adding marginal plots</span><span class="w">
 
@@ -1377,9 +1394,9 @@ plot. Here you can find a simplified version:</p>
 </details>
 <h2 id="references">References</h2>
 <ul>
- <li>Fick, S. E., &amp; Hijmans, R. J. (2017). WorldClim 2: New 1-km spatial
-resolution climate surfaces for global land areas. <em>International Journal
-of Climatology, 37</em>(12), 4302–4315. <a href="https://doi.org/10.1002/joc.5086">https://doi.org/10.1002/joc.5086</a></li>
+ <li>Fick, S. E., &amp; Hijmans, R. J. (2017). WorldClim 2: New 1-km spatial resolution
+climate surfaces for global land areas. <em>International Journal of Climatology,
+37</em>(12), 4302–4315. <a href="https://doi.org/10.1002/joc.5086">https://doi.org/10.1002/joc.5086</a></li>
  <li>Harris, B. (2026, January 27). My ggplot2 blending adventure. <em>Reproducible
 Ruins</em>. <a href="https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/">https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/</a></li>
  <li>Royé, D. (2022, July 20). Hillshade effects. <em>Dr Dominic Royé</em>.
