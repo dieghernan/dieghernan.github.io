@@ -304,6 +304,8 @@ and put the cut at 90° E.
 
 **Cut first, project second**. That’s the whole trick.
 
+You can change `lon_0` freely. If you run into polygons that break or gaps
+that don't close cleanly, I'd like to see them.
 
 
 <!-- No references needed in this post. -->
