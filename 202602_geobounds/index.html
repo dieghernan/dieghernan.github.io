@@ -144,7 +144,7 @@
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202602-overlaps-1.webp" >
     <meta property="og:image:alt" content="Map of India and Pakistan with translucent country fills. Overlapping boundaries in Kashmir reveal conflicting territorial claims." >
     <meta property="og:image:width" content="2100" >
-    <meta property="og:image:height" content="1778" >
+    <meta property="og:image:height" content="1766" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -547,16 +547,16 @@
 <a href="https://www.geoboundaries.org/">geoBoundaries</a> database. However, accessing the
 data can be tedious because it comes in zipped shapefiles. As any GIS
 professional knows, <a href="http://switchfromshapefile.org/">shapefiles should die!</a></p>
-<p>Previously, the <strong>rgeoboundaries</strong> package was on CRAN and allowed access to
-the geoBoundaries API, but it was archived. So I decided to create my own
-version, and <strong>geobounds</strong> was born.</p>
+<p>Previously, the <strong>rgeoboundaries</strong> package was on CRAN and allowed access to the
+geoBoundaries API, but it was archived. So I decided to create my own version,
+and <strong>geobounds</strong> was born.</p>
 <ul>
  <li>Source code: <a href="https://github.com/dieghernan/geobounds">https://github.com/dieghernan/geobounds</a></li>
  <li><strong>pkgdown</strong> website: <a href="https://dieghernan.github.io/geobounds/">https://dieghernan.github.io/geobounds/</a></li>
 </ul>
 <p><strong>geobounds</strong> connects directly to geoBoundaries and returns clean, ready-to-use
-<strong>sf</strong> objects with a single function call. No manual downloads and
-no shapefile handling.</p>
+<strong>sf</strong> objects with a single function call. No manual downloads and no shapefile
+handling.</p>
 <p>This is how it works.</p>
 <h2 id="installation">Installation</h2>
 <p>Install <strong>geobounds</strong> from <a href="https://cran.r-project.org/package=geobounds">CRAN</a>:</p>
@@ -571,18 +571,23 @@ no shapefile handling.</p>
 </span><span class="c1"># Define a common theme for the maps.</span><span class="w">
 </span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#F5F5F5"</span><span class="w">
 
-</span><span class="n">map_family</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
-</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">)</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
 
 </span><span class="n">theme_set</span><span class="p">(</span><span class="w">
   </span><span class="n">theme_grey</span><span class="p">(</span><span class="w">
-    </span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="p">,</span><span class="w"> </span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w">
+    </span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w"> </span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w">
     </span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
     </span><span class="n">theme</span><span class="p">(</span><span class="w">
-      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
       </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w">
@@ -612,8 +617,8 @@ no shapefile handling.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202602-all-levs-1.webp" alt="Four maps of Panama comparing national, provincial and finer administrative boundaries at levels ADM0 through ADM3." width="100%" /></p>
 <h2 id="composite-global-administrative-zones-cgaz">Composite Global Administrative Zones (CGAZ)</h2>
-<p>Individual country files can reflect different views of where borders lie.
-When you combine them, you may see:</p>
+<p>Individual country files can reflect different views of where borders lie. When
+you combine them, you may see:</p>
 <ul>
  <li>Overlapping boundaries</li>
  <li>Geographic gaps</li>
@@ -698,8 +703,8 @@ datasets by setting <code class="language-plaintext highlighter-rouge">simplifie
 <p><strong>geobounds</strong> is not alone in this space. Depending on your needs, you might
 also want to look at:</p>
 <h3 id="rnaturalearth"><strong>rnaturalearth</strong></h3>
-<p>A very popular package to access Natural Earth datasets directly from <strong>R</strong>. It’s
-lightweight and great for quick global maps, especially at small scales.</p>
+<p>A very popular package to access Natural Earth datasets directly from <strong>R</strong>.
+It’s lightweight and great for quick global maps, especially at small scales.</p>
 <p>If you need physical layers (rivers, coastlines, elevation) alongside political
 boundaries, this is often a good choice.</p>
 <h3 id="giscor"><strong>giscoR</strong></h3>

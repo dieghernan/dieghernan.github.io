@@ -18,7 +18,7 @@
           "@type": "WebPage",
           "@id": "https://dieghernan.github.io/202510_mapping-antarctica/"
         },
-        "description": "Cool maps from the South Pole - Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R.",
+        "description": "Repair a gap in Antarctica’s GISCO boundary with a two-meter buffer, then use the corrected map to recreate Antarctic flag designs in R.",
         "inLanguage": "en-US",
         "isPartOf": [
           {
@@ -83,7 +83,7 @@
         },
         "inLanguage": "en-US",
         "name": "Mapping Antarctica",
-        "description": "Cool maps from the South Pole - Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R."
+        "description": "Repair a gap in Antarctica’s GISCO boundary with a two-meter buffer, then use the corrected map to recreate Antarctic flag designs in R."
       }
     </script>
     <script type="application/ld+json">
@@ -128,7 +128,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Diego HH" >
     <meta name="copyright" content="Diego HH" >
-    <meta name="description" content="Cool maps from the South Pole - Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R.">
+    <meta name="description" content="Repair a gap in Antarctica’s GISCO boundary with a two-meter buffer, then use the corrected map to recreate Antarctic flag designs in R.">
     <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
@@ -150,16 +150,16 @@
     <meta property="article:tag" content="rstats">
     <meta property="article:tag" content="music">
     <meta property="article:tag" content="r_bloggers">
-    <meta property="og:description" content="Cool maps from the South Pole - Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R." >
+    <meta property="og:description" content="Repair a gap in Antarctica’s GISCO boundary with a two-meter buffer, then use the corrected map to recreate Antarctic flag designs in R." >
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" >
     <meta property="og:image:alt" content="South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area." >
     <meta property="og:image:width" content="2100" >
-    <meta property="og:image:height" content="1846" >
+    <meta property="og:image:height" content="1840" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Cool maps from the South Pole - Fix a polygon artifact in the GISCO data and draw Antarctica from the South Pole in R.">
+    <meta name="twitter:description" content="Repair a gap in Antarctica’s GISCO boundary with a two-meter buffer, then use the corrected map to recreate Antarctic flag designs in R.">
     <meta name="twitter:site" content="@dhernangomez" >
     <meta name="twitter:creator" content="@dhernangomez" >
     <!-- CSS -->
@@ -567,16 +567,21 @@ and produce clean orthographic maps.</p>
 </span><span class="c1"># Define a common theme for the maps.</span><span class="w">
 </span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#E2ECF2"</span><span class="w">
 
-</span><span class="n">map_family</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
-</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">)</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
 
 </span><span class="n">theme_set</span><span class="p">(</span><span class="w">
-  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
     </span><span class="n">theme</span><span class="p">(</span><span class="w">
-      </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">),</span><span class="w">
-      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
       </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w">
@@ -584,9 +589,9 @@ and produce clean orthographic maps.</p>
 <h2 id="fixing-the-geometry">Fixing the geometry</h2>
 <p>First, we retrieve the Antarctic geometry from GISCO and transform it to an
 orthographic projection centered on the South Pole.</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">antarct</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ATA"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">antarct</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gisco_get_countries</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2024</span><span class="p">,</span><span class="w"> </span><span class="n">resolution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ATA"</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">select</span><span class="p">(</span><span class="n">NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NAME_ENGL</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
-  </span><span class="c1"># Orthographic projection centered on the South Pole</span><span class="w">
+  </span><span class="c1"># Ortho proj centered in the South Pole</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"+proj=ortho +lat_0=-90 +lon_0=0"</span><span class="p">)</span><span class="w">
 
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">antarct</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -597,8 +602,8 @@ orthographic projection centered on the South Pole.</p>
  <p><strong>Updated November 14, 2026.</strong> The original post showed how to repair the
 geometry by editing vertices manually. This version uses a buffer.</p>
 </div>
-<p>In the orthographic projection, a narrow gap runs inland from the coast.
-I close it by applying a 2-meter buffer:</p>
+<p>In the orthographic projection, a narrow gap runs inland from the coast. I close
+it by applying a 2-meter buffer:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Regenerate initial shape</span><span class="w">
 </span><span class="n">antarctica_fixed</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_buffer</span><span class="p">(</span><span class="n">antarct</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
 
@@ -607,8 +612,8 @@ I close it by applying a 2-meter buffer:</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_good_pol-1.webp" alt="South Pole-centered map of Antarctica after removing the polygon artifact. The landmass is continuous across the previously affected area." width="100%" /></p>
 <h2 id="plotting-examples">Plotting examples</h2>
-<p>With the corrected geometry, we can draw the maps. Below are a few examples based on
-proposed Antarctic flag designs.</p>
+<p>With the corrected geometry, we can draw the maps. Below are a few examples
+based on proposed Antarctic flag designs.</p>
 <h3 id="graham-bartrams-proposal-1996">Graham Bartram’s proposal (1996)</h3>
 <p>A simple rendition of Bartram’s original concept:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bbox</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">antarctica_fixed</span><span class="p">)</span><span class="w"> </span><span class="c1"># For limits on the panel</span><span class="w">
@@ -703,14 +708,16 @@ pattern.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/202510_treaty2-1.webp" alt="Antarctic Treaty emblem with a white Antarctic silhouette and polar coordinate grid on a dark blue background." width="100%" /></p>
 <h3 id="bartrams-redesigned-antarctic-flag">Bartram’s redesigned Antarctic flag</h3>
-<p>In 2024, Graham Bartram revealed a new version of his original flag as part of
-a global campaign to raise awareness about the growing problem of microplastic
+<p>In 2024, Graham Bartram revealed a new version of his original flag as part of a
+global campaign to raise awareness about the growing problem of microplastic
 pollution. The new design keeps the familiar white outline of Antarctica but
 swaps the plain blue background for one filled with countless tiny, colorful
 dots. These dots represent the microscopic bits of plastic that have been
 discovered even in the planet’s most untouched places, including the Antarctic
 ice and its surrounding oceans.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" alt="Antarctic flag variation with the white continental silhouette formed by scattered marks on a blue background." /></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Antarctica_Flag_Redesigned_by_Graham_Bartram.png/960px-Antarctica_Flag_Redesigned_by_Graham_Bartram.png" alt="Antarctic flag variation with the white continental silhouette formed by
+scattered marks on a blue
+background." /></p>
 <p>Because the design relies on randomness, we approximate it using the following
 procedure:</p>
 <ol>
@@ -752,15 +759,22 @@ shades of pink and magenta.</li>
 
 </span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">as.double</span><span class="p">()</span><span class="w">
 
-</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ff00ec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#9e00ec"</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">),</span><span class="w"> </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">),</span><span class="w">
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"#ff00ec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#9e00ec"</span><span class="p">),</span><span class="w">
+  </span><span class="n">nrow</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">),</span><span class="w">
+  </span><span class="n">replace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="w">
+  </span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">quantile</span><span class="p">(</span><span class="n">plastic_end</span><span class="o">$</span><span class="n">area</span><span class="p">,</span><span class="w"> </span><span class="n">probs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">),</span><span class="w">
   </span><span class="s2">"white"</span><span class="p">,</span><span class="w">
   </span><span class="n">plastic_end</span><span class="o">$</span><span class="n">fill</span><span class="w">
 </span><span class="p">)</span><span class="w">
 
 </span><span class="n">bbox2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_bbox</span><span class="p">(</span><span class="n">plastic_end</span><span class="p">)</span><span class="w">
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plastic_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plastic_end</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fill</span><span class="p">),</span><span class="w">
+    </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="w">
     </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#009fdc"</span><span class="p">),</span><span class="w">

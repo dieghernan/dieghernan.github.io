@@ -142,7 +142,7 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-2.webp" >
     <meta property="og:image:alt" content="Street map of Maungawhau with an elevation overlay restricted to terrain above 130 meters. Lower ground remains visible on the base map." >
-    <meta property="og:image:width" content="2022" >
+    <meta property="og:image:width" content="2056" >
     <meta property="og:image:height" content="2100" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
@@ -531,8 +531,27 @@
 	</div>
        <div class="e-content"><p>If you have been playing around with <strong>R</strong> for a while, you are probably
 familiar with the <code class="language-plaintext highlighter-rouge">volcano</code> dataset:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
-</span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Share the paper color and fonts across base graphics and ggplot2.</span><span class="w">
+</span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#FEFDFD"</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
+
+</span><span class="n">with_map_style</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">previous</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="w">
+    </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
+    </span><span class="n">fg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#333333"</span><span class="p">,</span><span class="w"> </span><span class="n">col.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#4D4D4D"</span><span class="p">,</span><span class="w"> </span><span class="n">col.lab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#333333"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="nf">on.exit</span><span class="p">(</span><span class="n">par</span><span class="p">(</span><span class="n">previous</span><span class="p">))</span><span class="w">
+  </span><span class="nf">invisible</span><span class="p">(</span><span class="n">force</span><span class="p">(</span><span class="n">plot</span><span class="p">))</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"volcano"</span><span class="p">)</span><span class="w">
+</span><span class="n">with_map_style</span><span class="p">(</span><span class="n">image</span><span class="p">(</span><span class="n">volcano</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terrain.colors</span><span class="p">(</span><span class="m">256</span><span class="p">,</span><span class="w"> </span><span class="n">rev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" /></p>
 <p>This represents the topographic information about one of the volcanoes of
@@ -551,19 +570,12 @@ functions of <strong>tidyterra</strong>.</p>
 </span><span class="n">library</span><span class="p">(</span><span class="n">maptiles</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Define a common theme for the maps.</span><span class="w">
-</span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#FEFDFD"</span><span class="w">
-
-</span><span class="n">map_family</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
-</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">)</span><span class="w">
-</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
-</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
-
 </span><span class="n">theme_set</span><span class="p">(</span><span class="w">
-  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
     </span><span class="n">theme</span><span class="p">(</span><span class="w">
-      </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">),</span><span class="w">
-      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
       </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
 </span><span class="p">)</span><span class="w">
@@ -605,7 +617,7 @@ Let’s check it out.</p>
 SpatRaster:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">volcano_rast</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rast</span><span class="p">(</span><span class="n">volcano</span><span class="p">)</span><span class="w">
 
-</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w">
+</span><span class="n">with_map_style</span><span class="p">(</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast</span><span class="p">,</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -616,7 +628,7 @@ SpatRaster:</p>
 </span><span class="p">])</span><span class="w">
 
 </span><span class="c1"># Much better!</span><span class="w">
-</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w">
+</span><span class="n">with_map_style</span><span class="p">(</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano_rast_ok</span><span class="p">,</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -685,7 +697,7 @@ template:</p>
 </span><span class="c1">#&gt; min value   :        94</span><span class="w">
 </span><span class="c1">#&gt; max value   :       195</span><span class="w">
 
-</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">)</span><span class="w">
+</span><span class="n">with_map_style</span><span class="p">(</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2</span><span class="p">,</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
@@ -718,7 +730,7 @@ how to load it and check the plotting possibilities of <strong>tidyterra</strong
 </span><span class="c1">#&gt; name        :  elevation</span><span class="w">
 </span><span class="c1">#&gt; min value   :  76.262222</span><span class="w">
 </span><span class="c1">#&gt; max value   : 195.554199</span><span class="w">
-</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">)</span><span class="w">
+</span><span class="n">with_map_style</span><span class="p">(</span><span class="n">terra</span><span class="o">::</span><span class="n">plot</span><span class="p">(</span><span class="n">volcano2_easter</span><span class="p">,</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">

@@ -151,8 +151,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-slovenia-postal-codes-1.webp" >
     <meta property="og:image:alt" content="Map of Slovenia with estimated postal areas clipped to municipal boundaries. Colors identify postal code groups and dark gray marks unassigned areas." >
-    <meta property="og:image:width" content="2340" >
-    <meta property="og:image:height" content="2100" >
+    <meta property="og:image:width" content="2100" >
+    <meta property="og:image:height" content="1930" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -555,9 +555,9 @@ technique divides a plane into regions based on the distance to a given set of
 points.</p>
 <p>In our example, each shop is a <strong>site</strong>, or generating point. Its <strong>Voronoi
 cell</strong>, also called a <strong>Thiessen polygon</strong>, contains the locations at least as
-close to that site as to any other. Along a shared edge, two sites are
-equally close. Where several cells meet, there may be a tie between more sites.
-With ordinary straight-line distance, the edges follow perpendicular bisectors
+close to that site as to any other. Along a shared edge, two sites are equally
+close. Where several cells meet, there may be a tie between more sites. With
+ordinary straight-line distance, the edges follow perpendicular bisectors
 between sites. Some cells extend indefinitely, so maps usually show them clipped
 to a study area.</p>
 <p>The name honors Georgy Voronoi, who studied these partitions in the early
@@ -581,20 +581,30 @@ and no geographical coordinate reference system.</p>
 </span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#faf8f2"</span><span class="w">
 </span><span class="n">ink</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#203b47"</span><span class="w">
 
-</span><span class="n">map_family</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
-</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">)</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
 </span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
 
 </span><span class="n">theme_set</span><span class="p">(</span><span class="w">
   </span><span class="n">theme_void</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
     </span><span class="n">theme</span><span class="p">(</span><span class="w">
-      </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_family</span><span class="p">),</span><span class="w">
+      </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">),</span><span class="w">
       </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
       </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
-      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+        </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w">
+        </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="w">
+      </span><span class="p">),</span><span class="w">
       </span><span class="n">plot.subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">),</span><span class="w">
       </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey40"</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
+        </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w">
+        </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="w">
+      </span><span class="p">),</span><span class="w">
       </span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bottom"</span><span class="p">,</span><span class="w">
       </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
@@ -634,12 +644,11 @@ and no geographical coordinate reference system.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-voronoi-toy-example-1.webp" alt="Five labeled sites in a square: A and B below, C and D above, and E at the&#10;center, surrounded by its own bounded Voronoi cell.&#10;" width="100%" /></p>
-<p>Five points, five cells. The point E at <code class="language-plaintext highlighter-rouge">(5, 5)</code> has a bounded cell
-surrounded by the other four. The outer cells extend beyond the square and are
-clipped to its edges. <code class="language-plaintext highlighter-rouge">st_union()</code> collects the points into one geometry,
-<code class="language-plaintext highlighter-rouge">st_voronoi()</code> builds the diagram and <code class="language-plaintext highlighter-rouge">st_intersection()</code> clips it to our
-square. The colors help us tell the cells apart. We have not assigned any postal
-codes yet.</p>
+<p>Five points, five cells. The point E at <code class="language-plaintext highlighter-rouge">(5, 5)</code> has a bounded cell surrounded
+by the other four. The outer cells extend beyond the square and are clipped to
+its edges. <code class="language-plaintext highlighter-rouge">st_union()</code> collects the points into one geometry, <code class="language-plaintext highlighter-rouge">st_voronoi()</code>
+builds the diagram and <code class="language-plaintext highlighter-rouge">st_intersection()</code> clips it to our square. The colors
+help us tell the cells apart. We have not assigned any postal codes yet.</p>
 <p>The diagram knows nothing about roads, rivers or administrative boundaries. As
 we move to postal points, we will need to make our choices about those
 boundaries explicit.</p>
@@ -755,7 +764,10 @@ remove and how many locations have conflicting codes.</p>
 </span><span class="n">duplicates</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">duplicated</span><span class="p">(</span><span class="n">postal_points</span><span class="o">$</span><span class="n">geometry</span><span class="p">)</span><span class="w">
 
 </span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="w">
-  </span><span class="n">Indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Duplicate locations removed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Locations with conflicting codes"</span><span class="p">),</span><span class="w">
+  </span><span class="n">Indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
+    </span><span class="s2">"Duplicate locations removed"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Locations with conflicting codes"</span><span class="w">
+  </span><span class="p">),</span><span class="w">
   </span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">duplicates</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">conflicts</span><span class="p">))</span><span class="w">
 </span><span class="p">))</span><span class="w">
 </span></code></pre></div></div>
@@ -803,10 +815,10 @@ municipalities.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-ljubljana-1.webp" alt="Outline of Ljubljana municipality with six postal point locations marked&#10;inside it.&#10;" width="100%" /></p>
 <h3 id="building-the-cells">Building the cells</h3>
-<p>Each cell contains locations at least as close to its generating point as to
-any other point. Cell boundaries occur where distances to two points are equal.
-For this first demonstration, we keep all interior points, without the margins used in
-the national workflow.</p>
+<p>Each cell contains locations at least as close to its generating point as to any
+other point. Cell boundaries occur where distances to two points are equal. For
+this first demonstration, we keep all interior points, without the margins used
+in the national workflow.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cells</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">city_points</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_union</span><span class="p">()</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_voronoi</span><span class="p">(</span><span class="n">envelope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_as_sfc</span><span class="p">(</span><span class="n">st_bbox</span><span class="p">(</span><span class="n">city</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
@@ -874,7 +886,7 @@ generating point.</p>
     </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Teaching example · Not official postal boundaries"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp" alt="Six colored areas clipped to Ljubljana, labeled 1000, 1210, 1211, 1231, 1260&#10;and 1261, with their generating postal points marked.&#10;" width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp" alt="Six colored areas clipped to Ljubljana, labeled 1000, 1210, 1211, 1231,&#10;1260 and 1261, with their generating postal points marked.&#10;" width="100%" /></p>
 <p>We intersect the geometry columns, then use the intersection’s <code class="language-plaintext highlighter-rouge">idx</code> matrix to
 recover each cell’s postal code. This keeps the attribute assignment explicit.
 Label positions are also calculated from geometries alone.</p>
@@ -1077,17 +1089,22 @@ with their own legend entry.</p>
 <h2 id="checking-the-result">Checking the result</h2>
 <p>The map is ready, but let’s check the geometry before going further. Are the
 polygons valid? Do assigned and unassigned areas cover the territory? Are there
-any appreciable overlaps? We allow one square meter for numerical differences in
-the geometry operations.</p>
+any appreciable overlaps? The table reports overlaps within one square meter
+of zero as zero to account for numerical differences in the geometry operations.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">territory</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_union</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">municipalities</span><span class="p">))</span><span class="w">
 
 </span><span class="n">coverage</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_union</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">postal_areas</span><span class="p">),</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">unassigned</span><span class="p">)))</span><span class="w">
 
-</span><span class="n">difference_m2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">st_sym_difference</span><span class="p">(</span><span class="n">territory</span><span class="p">,</span><span class="w"> </span><span class="n">coverage</span><span class="p">))))</span><span class="w">
+</span><span class="n">difference_m2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="w">
+  </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">st_sym_difference</span><span class="p">(</span><span class="n">territory</span><span class="p">,</span><span class="w"> </span><span class="n">coverage</span><span class="p">)))</span><span class="w">
+</span><span class="p">)</span><span class="w">
 
 </span><span class="n">overlap_m2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="w">
   </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">postal_areas</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">unassigned</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">st_area</span><span class="p">(</span><span class="n">coverage</span><span class="p">))</span><span class="w">
 </span><span class="p">)</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">overlap_m2</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">overlap_m2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
 </span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="w">
   </span><span class="n">Indicator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="w">
@@ -1132,7 +1149,7 @@ the geometry operations.</p>
    </tr>
    <tr>
      <td style="text-align: left">Overlap (m²)</td>
-     <td style="text-align: right">-0.0002</td>
+     <td style="text-align: right">0.0000</td>
    </tr>
  </tbody>
 </table>
@@ -1162,16 +1179,16 @@ built, one step at a time.</p>
  <li>Goerlich, F. J. (2022). <em>Elaboración de un mapa de códigos postales de España
 con recursos libres: Cómo evitar pagar por disponer de información de
 referencia</em> (Working Paper No. 2022-3). Ivie.
-<a href="https://doi.org/10.12842/WPIVIE_0322">https://doi.org/10.12842/WPIVIE_0322</a>
-(<a href="https://www.uv.es/goerlich/Ivie/CodPost.html">Updated online version</a>)</li>
- <li>Hernangómez, D. (2026). <em>Códigos postales de España</em> (Version 1.0.0)
-[Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23698418">https://doi.org/10.5281/zenodo.23698418</a>
-(<a href="https://dieghernan.github.io/codigospostales/">Project documentation</a>)</li>
+<a href="https://doi.org/10.12842/WPIVIE_0322">https://doi.org/10.12842/WPIVIE_0322</a> (<a href="https://www.uv.es/goerlich/Ivie/CodPost.html">Updated online
+version</a>)</li>
+ <li>Hernangómez, D. (2026). <em>Códigos postales de España</em> (Version 1.0.0) [Data
+set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23698418">https://doi.org/10.5281/zenodo.23698418</a> (<a href="https://dieghernan.github.io/codigospostales/">Project
+documentation</a>)</li>
  <li>Pokojski, W., &amp; Pokojska, P. (2018). Voronoi diagrams – Inventor, method,
 applications. <em>Polish Cartographical Review, 50</em>(3), 141–150.
 <a href="https://doi.org/10.2478/pcr-2018-0009">https://doi.org/10.2478/pcr-2018-0009</a></li>
- <li>Sánchez, J. I. (2020, November 13). Así hice el mapa de los códigos
-postales de España con SIG y datos abiertos. <em>Nosolosig</em>.
+ <li>Sánchez, J. I. (2020, November 13). Así hice el mapa de los códigos postales
+de España con SIG y datos abiertos. <em>Nosolosig</em>.
 <a href="https://www.nosolosig.com/articulos/asi-hice-el-mapa-de-los-codigos-postales-de-espana-con-sig-y-datos-abiertos">Article</a></li>
 </ul>
 </div><section class="post-citation mt-5 border-left border-secondary pl-3 small" lang="en" aria-labelledby="chulapa-citation-label">

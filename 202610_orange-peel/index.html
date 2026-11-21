@@ -18,7 +18,7 @@
           "@type": "WebPage",
           "@id": "https://dieghernan.github.io/202610_orange-peel/"
         },
-        "description": "Do you know the interrupted Goode homolosine projection? - Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R.",
+        "description": "Use sf and ggplot2 to draw a world map with the interrupted Goode homolosine projection, including coastlines and a graticule split at the lobe boundaries.",
         "inLanguage": "en-US",
         "isPartOf": [
           {
@@ -82,7 +82,7 @@
         },
         "inLanguage": "en-US",
         "name": "Let’s peel the world",
-        "description": "Do you know the interrupted Goode homolosine projection? - Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R."
+        "description": "Use sf and ggplot2 to draw a world map with the interrupted Goode homolosine projection, including coastlines and a graticule split at the lobe boundaries."
       }
     </script>
     <script type="application/ld+json">
@@ -127,7 +127,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Diego HH" >
     <meta name="copyright" content="Diego HH" >
-    <meta name="description" content="Do you know the interrupted Goode homolosine projection? - Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R.">
+    <meta name="description" content="Use sf and ggplot2 to draw a world map with the interrupted Goode homolosine projection, including coastlines and a graticule split at the lobe boundaries.">
     <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
@@ -146,16 +146,16 @@
     <meta property="article:tag" content="rstats">
     <meta property="article:tag" content="music">
     <meta property="article:tag" content="r_bloggers">
-    <meta property="og:description" content="Do you know the interrupted Goode homolosine projection? - Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R." >
+    <meta property="og:description" content="Use sf and ggplot2 to draw a world map with the interrupted Goode homolosine projection, including coastlines and a graticule split at the lobe boundaries." >
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp" >
     <meta property="og:image:alt" content="World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel." >
-    <meta property="og:image:width" content="2000" >
-    <meta property="og:image:height" content="1016" >
+    <meta property="og:image:width" content="2100" >
+    <meta property="og:image:height" content="1136" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Do you know the interrupted Goode homolosine projection? - Peel the world like an orange with the interrupted Goode homolosine projection and draw it in R.">
+    <meta name="twitter:description" content="Use sf and ggplot2 to draw a world map with the interrupted Goode homolosine projection, including coastlines and a graticule split at the lobe boundaries.">
     <meta name="twitter:site" content="@dhernangomez" >
     <meta name="twitter:creator" content="@dhernangomez" >
     <!-- CSS -->
@@ -540,11 +540,12 @@
 </details>
 </div>
 </div>
-       <div class="e-content"><p>What would happen if we peeled the Earth like an orange? The
-<a href="https://proj.org/en/stable/operations/projections/igh.html">interrupted Goode homolosine projection</a>
-gives us something close to that! This equal-area projection preserves relative
-areas while splitting the world map into lobes. Add a few shades of orange and
-our world is ready to peel.</p>
+       <div class="e-content"><p>What would happen if we peeled the Earth like an orange? The <a href="https://proj.org/en/stable/operations/projections/igh.html">interrupted Goode
+homolosine
+projection</a> gives us
+something close to that! This equal-area projection preserves relative areas
+while splitting the world map into lobes. Add a few shades of orange and our
+world is ready to peel.</p>
 <p>Let’s make it with <strong>sf</strong>, <strong>giscoR</strong> and <strong>ggplot2</strong>. First, we get the
 coastlines and draw the outline, following the cuts between the lobes.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
@@ -603,7 +604,9 @@ and keeps the edges of our peel tidy.</p>
 
 </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outline</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FFF0D9"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">world</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F9B566"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#B34D08"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">world</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F9B566"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#B34D08"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grat</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E8A45B"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.25</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mask</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#fcf1e7"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outline</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E87516"</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -619,12 +622,12 @@ and keeps the edges of our peel tidy.</p>
     </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"coiny"</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#fcf1e7"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E87516"</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">3</span><span class="p">),</span><span class="w">
+      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E87516"</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1.5</span><span class="p">),</span><span class="w">
       </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">),</span><span class="w">
     </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">),</span><span class="w">
     </span><span class="n">plot.caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="w">
-      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E87516"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">1.5</span><span class="p">),</span><span class="w">
+      </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E87516"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rel</span><span class="p">(</span><span class="m">0.75</span><span class="p">),</span><span class="w">
       </span><span class="n">margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -642,8 +645,8 @@ and keeps the edges of our peel tidy.</p>
 pour ne pas y laisser sa santé mentale. <em>Pyranhia</em>.
 <a href="https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html">Article</a></li>
  <li>Wilke, C. O. (n.d.). <em>Interrupted Goode homolosine</em>. practicalgg.
-<a href="https://wilkelab.org/practicalgg/articles/goode.html">https://wilkelab.org/practicalgg/articles/goode.html</a>
-(Source for the outline and masking approach.)</li>
+<a href="https://wilkelab.org/practicalgg/articles/goode.html">URL</a> (Source for the
+outline and masking approach.)</li>
 </ul>
 </div><section class="post-citation mt-5 border-left border-secondary pl-3 small" lang="en" aria-labelledby="chulapa-citation-label">
    <p id="chulapa-citation-label" class="font-weight-bold mb-2">How to cite this post</p>
