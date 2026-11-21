@@ -111,30 +111,40 @@ map_theme <- theme_void(base_family = map_title) +
 project_world <- function(world, projection, lon_0 = 180) {
   crs <- paste0(projection, " +lon_0=", lon_0)
   parts <- st_sf(source_row = seq_len(nrow(world)), geometry = st_geometry(world)) |>
-    st_break_antimeridian(lon_0 = lon_0) |>
+    st_break_antimeridian(lon_0 = lon_0)
+
+  projected <- parts |>
     st_transform(crs) |>
     st_make_valid()
 
   # Reassemble the pieces and restore each country's original attributes.
-  grouped <- aggregate(parts, list(row = parts$source_row), FUN = min)
+  grouped <- aggregate(projected, list(row = projected$source_row), FUN = min)
   geometry <- st_geometry(grouped)
 
-  if (lon_0 == 180) {
-    # Fill gaps in the GISCO boundaries only along the interior seam.
+  if (lon_0 != 0) {
+    # Put the map cut at ±180° in a temporary geographic CRS.
+    rotated_crs <- paste0("+proj=longlat +datum=WGS84 +pm=", lon_0)
+    seam_lon <- (360 - lon_0) %% 360 - 180
     bounds <- st_bbox(world)
-    lat <- seq(bounds[["ymin"]], bounds[["ymax"]], length.out = 1801)
-    seam <- st_linestring(cbind(180, lat)) |>
-      st_sfc(crs = 4326) |>
-      st_transform(crs) |>
-      st_buffer(30)
+    bounds[c("xmin", "xmax")] <- seam_lon + c(-0.0003, 0.0003)
+    seam <- st_as_sfc(bounds) |> st_set_crs(NA)
 
-    repair <- which(world$ISO3_CODE[grouped$row] %in% c("ATA", "RUS"))
+    repair <- which(world$ISO3_CODE[grouped$row] %in% c("ATA", "FJI", "RUS"))
     for (i in repair) {
-      closed <- geometry[i] |>
-        st_buffer(10) |>
-        st_buffer(-10)
+      # Repair the original seam while it is still a straight meridian.
+      land <- st_geometry(parts)[parts$source_row == grouped$row[i]] |>
+        st_transform(rotated_crs) |>
+        st_set_crs(NA) |>
+        st_make_valid() |>
+        st_union()
+      closed <- land |>
+        st_buffer(0.0001) |>
+        st_buffer(-0.0001)
       patch <- st_intersection(closed, seam)
-      geometry[i] <- st_union(c(geometry[i], patch))
+      geometry[i] <- st_union(c(land, patch)) |>
+        st_set_crs(rotated_crs) |>
+        st_transform(crs) |>
+        st_make_valid()
     }
   }
 
@@ -291,11 +301,12 @@ degrees.
 #| eval: false
 ```
 
-Once `world` is ready, `project_world()` cuts the polygons at Greenwich and
-projects them. That puts the 180° meridian in the middle of the map, where the
-original split in the **giscoR** boundaries can leave gaps in Antarctica and
-eastern Russia. After projecting, I regroup the pieces by country and use small
-buffers to close gaps along that seam.
+Once `world` is ready, `project_world()` cuts the polygons opposite `lon_0` and
+projects them. When `lon_0` is 0°, the 180° meridian is at the map's edge. For
+other centers, it falls inside the map, where the original split in the
+**giscoR** boundaries can leave gaps in Antarctica, Fiji and eastern Russia.
+I regroup the pieces by country and use small buffers to close gaps along that
+interior seam in geographic coordinates, while it is still a straight line.
 
 <div class="callout-important" role="note" aria-label="Important" markdown="1">
 Pass `projection` as a [PROJ
