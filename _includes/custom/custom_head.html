@@ -1,14 +1,10 @@
     <link rel="describedby" type="text/plain" href="{{ '/llms.txt' | relative_url }}">
-{% assign standard_site_document = site.data.standard_site_documents[page.url] %}
-{% if standard_site_document %}
+{%- assign standard_site_document = site.data.standard_site_documents[page.url] -%}
+{%- if standard_site_document %}
     <link rel="site.standard.document" href="{{ standard_site_document | escape }}">
-{% endif %}
-{% if page.profile_page %}
-{% include custom/profile-page.html %}
-{% endif %}
-{% if page.series_page %}
-{% include custom/series-jsonld.html %}
-{% endif %}
+{%- endif %}
+{% if page.profile_page %}{% include custom/profile-page.html %}{% endif %}
+{% if page.series_page %}{% include custom/series-jsonld.html %}{% endif %}
     <!-- start custom head snippets -->
     <link rel="webmention" href="https://webmention.io/dieghernan.github.io/webmention">
     <link rel="indieauth-metadata" href="https://indiekey.id/.well-known/oauth-authorization-server/s/j35a2ja6eg5casc2">
@@ -34,5 +30,4 @@
     <meta name="theme-color" content="#000000">
     <meta name="follow.it-verification-code" content="pQEJ5nNhCNfeV1pq9UBP">
     <!-- end custom head snippets -->
-
 {% include custom/structured_data/page.html %}

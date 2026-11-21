@@ -1,3 +1,2 @@
-    <script type="application/ld+json">
-{% include custom/structured_data/profile.html %}
-    </script>
+{%- capture profile_json -%}{%- include custom/structured_data/profile.html -%}{%- endcapture %}
+{% include custom/structured_data/script.html json=profile_json %}

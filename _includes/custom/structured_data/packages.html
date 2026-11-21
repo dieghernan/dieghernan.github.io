@@ -7,7 +7,8 @@
   "numberOfItems": {{ page.featured_packages.size }},
   "itemListElement": [
     {% for package in page.featured_packages %}
-    {% include custom/structured_data/package.html package=package %}{% unless forloop.last %},{% endunless %}
+    {%- capture package_json -%}{%- include custom/structured_data/package.html package=package -%}{%- endcapture %}
+    {% include snippets/indent-fragment.html html=package_json prefix='    ' %}{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ]
 }

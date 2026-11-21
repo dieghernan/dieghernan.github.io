@@ -1,0 +1,8 @@
+{%- comment -%}The caller indents the first line. The prefix indents the remaining lines.{%- endcomment -%}
+{%- capture fragment_newline %}
+{% endcapture -%}
+{%- assign fragment_separator = fragment_newline | append: include.prefix -%}
+{%- assign fragment = include.html | strip -%}
+{%- unless fragment == empty -%}
+  {{- fragment | split: fragment_newline | join: fragment_separator -}}
+{%- endunless -%}
