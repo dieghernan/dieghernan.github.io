@@ -1,9 +1,11 @@
 """Validate the blog-specific JSON-LD after a complete Jekyll build."""
 
+from html import unescape
 import json
 from pathlib import Path
 import re
 import unittest
+from urllib.parse import unquote, urldefrag, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "_site"
@@ -20,6 +22,48 @@ def page(url):
 
 
 class StructuredDataTests(unittest.TestCase):
+    def test_series_catalog_follows_the_visible_chapter_order(self):
+        catalog_path = "/series/"
+        html, blocks = page(catalog_path)
+        catalog, = [item for item in blocks if item.get("@type") == "CollectionPage"]
+        baseurl = urlsplit(catalog["@id"]).path.removesuffix(catalog_path)
+        listing = catalog["mainEntity"]
+        cards = re.findall(r'<article class="card series-card[^"]*">(.*?)</article>', html, re.S)
+        self.assertTrue(cards)
+        self.assertEqual(listing["numberOfItems"], len(cards))
+        self.assertEqual(len(listing["itemListElement"]), len(cards))
+
+        for card, entry in zip(cards, listing["itemListElement"]):
+            series = entry["item"]
+            anchor = unescape(re.search(r'<div class="card-title[^"]*" id="([^"]+)"', card)[1])
+            with self.subTest(series=anchor):
+                self.assertEqual(series["@type"], ["CreativeWorkSeries", "ItemList"])
+                series_url, fragment = urldefrag(series["url"])
+                self.assertEqual(series_url, catalog["@id"])
+                self.assertEqual(unquote(fragment), anchor)
+                self.assertEqual(series["itemListOrder"], "https://schema.org/ItemListOrderAscending")
+
+                ordered_list = re.search(r'<ol[^>]*>(.*?)</ol>', card, re.S)[1]
+                links = re.findall(r'<a href="([^"]+)"', ordered_list)
+                chapter_refs = []
+                for link in links:
+                    chapter_path = urlsplit(unescape(link)).path
+                    self.assertTrue(chapter_path.startswith(f"{baseurl}/"), chapter_path)
+                    _, chapter_blocks = page(chapter_path.removeprefix(baseurl))
+                    chapter, = [
+                        node for node in chapter_blocks
+                        if isinstance(node.get("isPartOf"), list)
+                        and any(parent.get("@id") == series["@id"] for parent in node["isPartOf"])
+                    ]
+                    chapter_refs.append({"@id": chapter["@id"]})
+
+                self.assertEqual(series["hasPart"], chapter_refs)
+                self.assertEqual(series["numberOfItems"], len(chapter_refs))
+                self.assertEqual(series["itemListElement"], [
+                    {"@type": "ListItem", "position": position, "item": chapter}
+                    for position, chapter in enumerate(chapter_refs, 1)
+                ])
+
     def test_standard_site_documents_link_from_the_matching_page_head(self):
         documents = json.loads((ROOT / "_data/standard_site_documents.json").read_text(encoding="utf-8"))
         for url, uri in documents.items():
