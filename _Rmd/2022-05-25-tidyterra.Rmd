@@ -54,7 +54,8 @@ knitr::opts_chunk$set(
   fig.cap = "",
   tidy = "styler",
   out.width = "100%",
-  fig.path = "assets/img/blog/"
+  fig.path = "assets/img/blog/",
+  fig.crop = FALSE
 )
 rm(list = ls())
 ```
@@ -80,7 +81,7 @@ showtext::showtext_auto()
 
 with_map_style <- function(plot) {
   previous <- par(
-    bg = background, family = map_regular,
+    bg = background, family = map_regular, mar = c(3, 3, 3, 3),
     fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
   )
   on.exit(par(previous))
@@ -151,7 +152,10 @@ box <- box %>%
   # To crs for NZGD49
   st_transform(27200)
 
-tile <- get_tiles(box, crop = TRUE, zoom = 16)
+tile <- get_tiles(box,
+  crop = TRUE, zoom = 16,
+  cachedir = tools::R_user_dir("maptiles", "cache")
+)
 
 
 ggtile <- ggplot() +
@@ -252,7 +256,7 @@ with_map_style(terra::plot(volcano2, background = background))
 # And plot it
 ggtile +
   geom_spatraster(data = volcano2) +
-  scale_fill_terrain_c(alpha = 0.75)
+  scale_fill_viridis_c(alpha = 0.75)
 ```
 
 ## An Easter egg
@@ -276,6 +280,7 @@ how to load it and check the plotting possibilities of **tidyterra**:
 #|   - Street map of Maungawhau overlaid with colored elevation bands at
 #|     20-meter intervals and contour lines at 2.5-meter intervals.
 #| fig-cap: ""
+#| fig-crop: true
 # Load out Easter Egg
 
 volcano2_easter <- rast(system.file("extdata/volcano2.tif",

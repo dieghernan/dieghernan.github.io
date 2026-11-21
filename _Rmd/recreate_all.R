@@ -10,6 +10,7 @@ posts <- c(
   # "2023-01-25-star-map-R.Rmd",
   # "2022-10-17-tidyterra-hillshade.Rmd",
   # "2022-12-12-tidyterra-hillshade-2.Rmd"
+  # "2022-05-25-tidyterra.Rmd"
   "2022-05-01-Unknown-pleasures-R.Rmd"
 )
 

@@ -11,8 +11,8 @@ excerpt: >-
 description: >-
   Compare alpha overlays, metR relief, multiply blending and stretched 
   multidirectional hillshades with terra, tidyterra and ggblend.
-header_img: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-og-image-1.webp"
-og_image: "https://dhhdevblog.netlify.app/assets/img/drafts/better-hillshading-R-og-image-1.webp"
+header_img: "https://dieghernan.github.io//assets/img/drafts/better-hillshading-R-og-image-1.webp"
+og_image: "https://dieghernan.github.io//assets/img/drafts/better-hillshading-R-og-image-1.webp"
 og_image_width: 1200
 og_image_height: 630
 og_image_type: image/webp
@@ -71,7 +71,7 @@ In this post, I'm using a DEM for the area around the Strait of Gibraltar in
 southern Spain. I get the boundary from **mapSpain** and use its bounding box to
 download the elevation tiles with **elevatr**. Then I reproject the DEM to match
 the boundary. The Strait maps share that DEM, and every color map uses
-**tidyterra**'s `etopo1` elevation palette.
+**tidyterra**'s `wiki-2.0` elevation palette.
 
 The DEM comes from [Mapzen Terrain
 Tiles](https://registry.opendata.aws/terrain-tiles/). The [source
@@ -90,20 +90,26 @@ library(ggplot2)
 library(tidyterra)
 library(ggblend)
 
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 map_background <- "#faf8f2"
 theme_set(
-  theme_minimal(base_family = map_family) +
+  theme_minimal(base_family = map_regular) +
     theme(
       plot.background = element_rect(fill = map_background, colour = NA),
       panel.background = element_rect(fill = map_background, colour = NA),
       plot.margin = margin(20, 20, 20, 20),
       panel.grid = element_blank(),
-      plot.title = element_text(face = "bold", colour = "#203b47"),
+      plot.title = element_text(
+        family = map_title, face = "bold", colour = "#203b47"
+      ),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       axis.text = element_text(colour = "#203b47"),
       legend.position = "bottom",
       legend.key = element_rect(fill = map_background, colour = NA),
@@ -198,7 +204,7 @@ map_alpha <- ggplot() +
   geom_spatraster(data = hill_1, fill = pal_1, maxcell = Inf) +
   geom_spatraster(data = dem, maxcell = Inf) +
   scale_fill_hypso_tint_c(
-    "etopo1",
+    "wiki-2.0",
     alpha = 0.4,
     breaks = plot_brks,
     labels = scales::label_comma()
@@ -245,7 +251,7 @@ map_metr <- ggplot(dem, aes(x, y)) +
   ) +
   scale_alpha(range = c(1, 0.25)) +
   scale_fill_hypso_tint_c(
-    "etopo1",
+    "wiki-2.0",
     breaks = plot_brks,
     labels = scales::label_comma()
   ) +
@@ -292,7 +298,7 @@ map_multiply <- ggplot() +
   list(
     geom_spatraster(data = dem, maxcell = Inf),
     scale_fill_hypso_tint_c(
-      "etopo1",
+      "wiki-2.0",
       breaks = plot_brks,
       labels = scales::label_comma()
     ),
@@ -352,7 +358,7 @@ map_multi <- ggplot() +
   list(
     geom_spatraster(data = dem, maxcell = Inf),
     scale_fill_hypso_tint_c(
-      "etopo1",
+      "wiki-2.0",
       breaks = plot_brks,
       labels = scales::label_comma()
     ),
@@ -394,7 +400,7 @@ map_multi_alpha <- ggplot() +
     aes(alpha = after_stat(value))
   ) +
   scale_fill_hypso_tint_c(
-    "etopo1",
+    "wiki-2.0",
     breaks = plot_brks,
     labels = scales::label_comma()
   ) +
@@ -467,7 +473,7 @@ map_final <- ggplot() +
     geom_spatraster(data = hill_3, fill = pal_3, maxcell = Inf),
     geom_spatraster(data = dem, maxcell = Inf),
     scale_fill_hypso_tint_c(
-      "etopo1",
+      "wiki-2.0",
       breaks = plot_brks,
       labels = scales::label_comma()
     )
@@ -539,7 +545,7 @@ sierra_metr <- ggplot(sierra_dem, aes(x, y)) +
     maxcell = Inf
   ) +
   scale_alpha(range = c(1, 0.25)) +
-  scale_fill_hypso_tint_c("etopo1")
+  scale_fill_hypso_tint_c("wiki-2.0")
 
 sierra_blend <- function(hillshade, gray_ramp) {
   hillshade_plot <- ggplot() +
@@ -554,7 +560,7 @@ sierra_blend <- function(hillshade, gray_ramp) {
         maxcell = Inf
       ),
       geom_spatraster(data = sierra_dem, maxcell = Inf),
-      scale_fill_hypso_tint_c("etopo1")
+      scale_fill_hypso_tint_c("wiki-2.0")
     ) |>
     blend("multiply")
 }
@@ -572,7 +578,7 @@ sierra_multi_alpha <- function(hillshade, gray_ramp) {
       aes(alpha = after_stat(value))
     ) +
     scale_alpha(range = c(0.6, 0)) +
-    scale_fill_hypso_tint_c("etopo1")
+    scale_fill_hypso_tint_c("wiki-2.0")
 }
 
 sierra_view <- coord_sf(
@@ -654,7 +660,7 @@ poster_theme <- theme(
   plot.margin = margin(5, 8, 5, 8)
 )
 heading_style <- grid::gpar(
-  fontfamily = map_family,
+  fontfamily = map_title,
   fontface = "bold",
   fontsize = 14,
   col = "#203b47"
@@ -677,7 +683,7 @@ grid::grid.text(
   "Six ways to shade the Strait of Gibraltar",
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1:3),
   gp = grid::gpar(
-    fontfamily = map_family, fontface = "bold",
+    fontfamily = map_title, fontface = "bold",
     fontsize = 24, col = "#203b47"
   )
 )
@@ -974,7 +980,7 @@ donana_metr <- ggplot(donana_dem, aes(x, y)) +
     maxcell = Inf
   ) +
   scale_alpha(range = c(1, 0.25)) +
-  scale_fill_hypso_tint_c("etopo1")
+  scale_fill_hypso_tint_c("wiki-2.0")
 
 donana_blend <- function(hillshade, gray_ramp) {
   hillshade_plot <- ggplot() +
@@ -989,7 +995,7 @@ donana_blend <- function(hillshade, gray_ramp) {
         fill = hillshade_colors, maxcell = Inf
       ),
       geom_spatraster(data = donana_dem, maxcell = Inf),
-      scale_fill_hypso_tint_c("etopo1")
+      scale_fill_hypso_tint_c("wiki-2.0")
     ) |>
     blend("multiply")
 }

@@ -136,7 +136,7 @@ showtext::showtext_auto()
 
 with_map_style <- function(plot) {
   previous <- par(
-    bg = background, family = map_regular,
+    bg = background, family = map_regular, mar = c(1, 1, 1, 1),
     fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
   )
   on.exit(par(previous))
@@ -222,7 +222,6 @@ Now, we may need to perform additional manipulations on the values of the
 raster:
 
 - We need to ensure that all valid values are greater than or equal to zero.
-
 - We will replace the `NA` values produced when masking the raster with zeros.
   We will use this later to decide whether to remove some parts of the plot.
 

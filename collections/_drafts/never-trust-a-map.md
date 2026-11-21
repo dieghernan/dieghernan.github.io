@@ -221,8 +221,10 @@ the two perspective views. It also accepts an optional raster basemap through
 
 
 ``` r
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 library(crstools)
@@ -485,10 +487,10 @@ draw_map <- function(title, palette = light_palette, tile = NULL) {
       datum = NA
     ) +
     labs(title = title) +
-    theme_void(base_family = map_family) +
+    theme_void(base_family = map_regular) +
     theme(
       text = element_text(colour = palette$text),
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10),
       plot.background = element_rect(fill = palette$background, color = NA),
       panel.background = element_rect(fill = palette$background, color = NA)
@@ -549,7 +551,7 @@ grid::pushViewport(grid::viewport(
 grid::grid.text(
   "One Earth, twelve projections",
   gp = grid::gpar(
-    fontfamily = map_family, fontsize = 25, fontface = "bold",
+    fontfamily = map_title, fontsize = 25, fontface = "bold",
     col = light_palette$text
   ),
   vp = grid::viewport(layout.pos.row = 1, layout.pos.col = 1:3)
@@ -557,7 +559,7 @@ grid::grid.text(
 grid::grid.text(
   "Each red shape starts as a circle with a radius of 350 km",
   gp = grid::gpar(
-    fontfamily = map_family, fontsize = 14,
+    fontfamily = map_regular, fontsize = 14,
     col = light_palette$muted_text
   ),
   vp = grid::viewport(layout.pos.row = 2, layout.pos.col = 1:3)
@@ -573,7 +575,7 @@ for (index in seq_along(gallery_order)) {
   grid::grid.text(
     title,
     gp = grid::gpar(
-      fontfamily = map_family, fontsize = 14, fontface = "bold",
+      fontfamily = map_title, fontsize = 14, fontface = "bold",
       col = light_palette$text
     ),
     vp = grid::viewport(layout.pos.row = 1)

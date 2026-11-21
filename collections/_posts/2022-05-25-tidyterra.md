@@ -59,7 +59,7 @@ showtext::showtext_auto()
 
 with_map_style <- function(plot) {
   previous <- par(
-    bg = background, family = map_regular,
+    bg = background, family = map_regular, mar = c(3, 3, 3, 3),
     fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
   )
   on.exit(par(previous))
@@ -127,7 +127,10 @@ box <- box %>%
   # To crs for NZGD49
   st_transform(27200)
 
-tile <- get_tiles(box, crop = TRUE, zoom = 16)
+tile <- get_tiles(box,
+  crop = TRUE, zoom = 16,
+  cachedir = tools::R_user_dir("maptiles", "cache")
+)
 
 
 ggtile <- ggplot() +
@@ -255,7 +258,7 @@ with_map_style(terra::plot(volcano2, background = background))
 # And plot it
 ggtile +
   geom_spatraster(data = volcano2) +
-  scale_fill_terrain_c(alpha = 0.75)
+  scale_fill_viridis_c(alpha = 0.75)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" />

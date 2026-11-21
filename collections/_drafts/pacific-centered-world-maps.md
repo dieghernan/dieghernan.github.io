@@ -46,12 +46,12 @@ output:
 
 
 On a world map centered on Greenwich, Japan and California sit near opposite
-edges. Shift the center to the Pacific and the two coasts face each other
-across one continuous ocean. That view is useful for maps of the Pacific Rim,
-trade routes, marine biodiversity or simply a less Europe-centric world.
+edges. Shift the center to the Pacific and the two coasts face each other across
+one continuous ocean. That view is useful for maps of the Pacific Rim, trade
+routes, marine biodiversity or simply a less Europe-centric world.
 
-I tried this with Robinson in **R**. The middle map shows what happens when
-you change the center and leave the polygons as they are.
+I tried this with Robinson in **R**. The middle map shows what happens when you
+change the center and leave the polygons as they are.
 
 <img src="/assets/img/drafts/pacific-centered-world-maps-compare-1.webp" alt="Three Robinson maps. The Greenwich-centered map has the Pacific at the edges. The Pacific-centered map has horizontal stripes before cutting and a clear ocean after cutting." width="100%" />
 
@@ -59,16 +59,17 @@ you change the center and leave the polygons as they are.
 
 With the Pacific at 180°, Greenwich becomes the edge of the map. If a country
 polygon crosses Greenwich, its vertices can end up on opposite edges and still
-be joined by a line. That's where the stripes come from. I pass the same
-`lon_0` to [`st_break_antimeridian()`](https://r-spatial.github.io/sf/reference/st_break_antimeridian.html)
-and to the projection so the polygons are split at the new edge before
-**PROJ** transforms them.
+be joined by a line. That's where the stripes come from. I pass the same `lon_0`
+to
+[`st_break_antimeridian()`](https://r-spatial.github.io/sf/reference/st_break_antimeridian.html)
+and to the projection so the polygons are split at the new edge before **PROJ**
+transforms them.
 
-I'm using the 2024 country boundaries from **giscoR**. I convert them from
-Web Mercator to longitude and latitude, then crop the map from 80° S to 85° N.
-That keeps all of Greenland in view and trims Antarctica in Web Mercator.
-For that crop, I temporarily remove the CRS so the bounds are treated as a
-rectangle in degrees.
+I'm using the 2024 country boundaries from **giscoR**. I convert them from Web
+Mercator to longitude and latitude, then crop the map from 80° S to 85° N. That
+keeps all of Greenland in view and trims Antarctica in Web Mercator. For that
+crop, I temporarily remove the CRS so the bounds are treated as a rectangle in
+degrees.
 
 
 ``` r
@@ -90,16 +91,15 @@ world <- countries |>
   st_set_crs(st_crs(4326))
 ```
 
-Once `world` is ready, `project_world()` does the cutting and projecting.
-The final `st_make_valid()` repairs any polygon rings that became invalid
-during projection.
+Once `world` is ready, `project_world()` does the cutting and projecting. The
+final `st_make_valid()` repairs any polygon rings that became invalid during
+projection.
 
-<div role="note" aria-label="Important" class="callout-important" markdown="1">
-
-Pass `projection` as a [PROJ string](https://proj.org/en/stable/usage/quickstart.html)
-such as `"+proj=robin"`. `project_world()` appends `+lon_0` to that string.
-An Esri CRS code such as `"ESRI:54030"` (World Robinson) won't work in its place.
-
+<div class="callout-important" role="note" aria-label="Important" markdown="1">
+Pass `projection` as a [PROJ
+string](https://proj.org/en/stable/usage/quickstart.html) such as
+`"+proj=robin"`. `project_world()` appends `+lon_0` to that string. An Esri CRS
+code such as `"ESRI:54030"` (World Robinson) won't work in its place.
 </div>
 
 
@@ -118,7 +118,7 @@ pacific <- project_world(world, "+proj=robin")
 
 A quick plot in **ggplot2** shows the result.
 
-```r
+``` r
 ggplot() + geom_sf(data = pacific)
 ```
 
@@ -126,8 +126,8 @@ ggplot() + geom_sf(data = pacific)
 
 <summary>Show the code for the Robinson map</summary>
 
-I drew the frame and graticule in longitude and latitude, then projected both
-to the same CRS as the land. Here's the code for the colors, frame and grid.
+I drew the frame and graticule in longitude and latitude, then projected both to
+the same CRS as the land. Here's the code for the colors, frame and grid.
 
 
 ``` r
@@ -204,7 +204,7 @@ draw_map <- function(land, lon_0) {
 }
 ```
 
-```r
+``` r
 draw_map(pacific, lon_0 = 180)
 ```
 

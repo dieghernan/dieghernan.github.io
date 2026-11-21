@@ -155,7 +155,7 @@ showtext::showtext_auto()
 
 with_map_style <- function(plot) {
   previous <- par(
-    bg = background, family = map_regular,
+    bg = background, family = map_regular, mar = c(1, 1, 1, 1),
     fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
   )
   on.exit(par(previous))
@@ -196,6 +196,7 @@ wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
 ```{r}
 #| label: 20220501_andalucia_dem
 #| fig-cap: ""
+#| fig-crop: false
 #| fig-alt: >-
 #|   Elevation map of Andalusia. Colors represent altitude in meters, with
 #|   higher terrain concentrated in the east.
@@ -224,6 +225,7 @@ would reduce the number of rows to our desired target (in this case 90 rows):
 ```{r}
 #| label: 20220501_andalucia_dem_agg
 #| fig-cap: ""
+#| fig-crop: false
 #| fig-alt: >-
 #|   Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain
 #|   the broad pattern of higher terrain in the east.
@@ -244,7 +246,6 @@ Now, we may need to perform additional manipulations on the values of the
 raster:
 
 - We need to ensure that all valid values are greater than or equal to zero.
-
 - We will replace the `NA` values produced when masking the raster with zeros.
   We will use this later to decide whether to remove some parts of the plot.
 
@@ -525,8 +526,8 @@ ggplot() +
 ```{r}
 #| label: 20220501_joyplots
 #| include: false
-#| fig.height: 8
-#| fig.width: 8
+#| fig-height: 8
+#| fig-width: 8
 
 spain <- mapSpain::esp_get_ccaa() %>%
   filter(!codauto %in% c("04", "05", "18", "19")) %>%
