@@ -2,6 +2,8 @@ on:
   workflow_dispatch:
 
 name: jekyll-profile
+permissions:
+  contents: read
 jobs:
   jekyll-profile:
     runs-on: ubuntu-latest
