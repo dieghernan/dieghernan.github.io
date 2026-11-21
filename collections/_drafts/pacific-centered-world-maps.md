@@ -296,3 +296,8 @@ and put the cut at 90° E.
 
 
 <!-- No references needed in this post. -->
+
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
+I used AI to draft and revise this post and to help develop parts of the
+**R** code.
+</div>
