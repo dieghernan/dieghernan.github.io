@@ -596,7 +596,7 @@ needs.</p>
 
 </span><span class="n">with_map_style</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="n">previous</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="w">
-    </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
+    </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
     </span><span class="n">fg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#333333"</span><span class="p">,</span><span class="w"> </span><span class="n">col.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#4D4D4D"</span><span class="p">,</span><span class="w"> </span><span class="n">col.lab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#333333"</span><span class="w">
   </span><span class="p">)</span><span class="w">
   </span><span class="nf">on.exit</span><span class="p">(</span><span class="n">par</span><span class="p">(</span><span class="n">previous</span><span class="p">))</span><span class="w">
@@ -665,13 +665,9 @@ now have fewer cells.</p>
 <p>Now, we may need to perform additional manipulations on the values of the
 raster:</p>
 <ul>
- <li>
-   <p>We need to ensure that all valid values are greater than or equal to zero.</p>
- </li>
- <li>
-   <p>We will replace the <code class="language-plaintext highlighter-rouge">NA</code> values produced when masking the raster with zeros.
-We will use this later to decide whether to remove some parts of the plot.</p>
- </li>
+ <li>We need to ensure that all valid values are greater than or equal to zero.</li>
+ <li>We will replace the <code class="language-plaintext highlighter-rouge">NA</code> values produced when masking the raster with zeros.
+We will use this later to decide whether to remove some parts of the plot.</li>
 </ul>
 <p>After that, we create a data frame with the information needed for creating the
 joyplot.</p>

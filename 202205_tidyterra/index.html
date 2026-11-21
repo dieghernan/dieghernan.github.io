@@ -543,7 +543,7 @@ familiar with the <code class="language-plaintext highlighter-rouge">volcano</co
 
 </span><span class="n">with_map_style</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">plot</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
   </span><span class="n">previous</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="w">
-    </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
+    </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w">
     </span><span class="n">fg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#333333"</span><span class="p">,</span><span class="w"> </span><span class="n">col.axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#4D4D4D"</span><span class="p">,</span><span class="w"> </span><span class="n">col.lab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#333333"</span><span class="w">
   </span><span class="p">)</span><span class="w">
   </span><span class="nf">on.exit</span><span class="p">(</span><span class="n">par</span><span class="p">(</span><span class="n">previous</span><span class="p">))</span><span class="w">
@@ -600,7 +600,10 @@ the location of Maungawhau using map tiles, as in Google Maps. We will use
   </span><span class="c1"># To crs for NZGD49</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="m">27200</span><span class="p">)</span><span class="w">
 
-</span><span class="n">tile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_tiles</span><span class="p">(</span><span class="n">box</span><span class="p">,</span><span class="w"> </span><span class="n">crop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">)</span><span class="w">
+</span><span class="n">tile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_tiles</span><span class="p">(</span><span class="n">box</span><span class="p">,</span><span class="w">
+  </span><span class="n">crop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w">
+  </span><span class="n">cachedir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tools</span><span class="o">::</span><span class="n">R_user_dir</span><span class="p">(</span><span class="s2">"maptiles"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cache"</span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
 
 
 </span><span class="n">ggtile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -704,7 +707,7 @@ template:</p>
 </span><span class="c1"># And plot it</span><span class="w">
 </span><span class="n">ggtile</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_spatraster</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">volcano2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">scale_fill_terrain_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
+  </span><span class="n">scale_fill_viridis_c</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.75</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" /></p>
 <h2 id="an-easter-egg">An Easter egg</h2>
