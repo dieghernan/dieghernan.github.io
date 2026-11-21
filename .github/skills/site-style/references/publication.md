@@ -112,10 +112,17 @@ function does not knit or execute analysis code. It does not by itself add
 missing labels or alt text, and leaves existing in-body option blocks
 alone when no inline header parameters exist. Inspect those separately.
 
-The implementation converts dotted option names to dashes, uses YAML booleans
-such as `false` and tags R expressions with `!expr`. Preserve those expressions
-as expressions. Do not quote them into inert strings. Do not assume that the
-`width` argument controls YAML wrapping, as it applies to the other modes.
+The implementation converts dotted option names to dashes and uses YAML
+booleans such as `false`. Replace a literal `!expr c(...)` in `fig-alt` with
+a YAML list in figure order. Use a folded scalar for a single description.
+Preserve expressions that genuinely need R evaluation. The `width` argument
+applies to the other conversion modes.
+
+```yaml
+#| fig-alt:
+#|   - Elevation map before orientation correction.
+#|   - Elevation map after reversing rows and columns.
+```
 
 Compare executable code before and after, using static extraction if useful:
 
@@ -139,15 +146,52 @@ Primary documentation:
 ## Render integration
 
 Inspect `_Rmd/renderblog_v2.R` and the current post-specific wrapper before
-changing a rendering workflow. Do not assume a helper's filename determines
-whether it publishes drafts: read the actual function call. Sources are in
-`_Rmd/`, article outputs in `collections/_posts/` or `collections/_drafts/`
-and images in `assets/img/blog/` or `assets/img/drafts/` respectively.
+changing a rendering workflow. Check which function the wrapper calls.
+Sources are in `_Rmd/`, article outputs in `collections/_posts/` or
+`collections/_drafts/` and images in `assets/img/blog/` or
+`assets/img/drafts/` respectively.
 
-Use the existing WebP conversion. Preserve the figure dimensions chosen by the
-source and chunk. The current helper supports cropping outer margins before
-WebP conversion with `fig.crop = TRUE`, and opt-out with `fig.crop = FALSE`.
-Do not stretch images to enforce a universal aspect ratio or delete diagnostic
-PNGs the user deliberately keeps. Measure metadata on the final converted
-image. Avoid parallel image folders under `collections/` and unwanted output
-files in the repository root.
+Use `_Rmd/recreate_all.R` for selected published posts and
+`_Rmd/recreate_drafts.R` for drafts. Pass the Rmd filenames from the repository
+root. The hidden `setup` chunk for an ordinary published post uses the
+following defaults.
+
+```r
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE,
+  error = FALSE,
+  dpi = 300,
+  dev = "ragg_png",
+  fig.cap = "",
+  tidy = "styler",
+  out.width = "100%"
+)
+```
+
+Use 200 dpi for drafts with the existing draft renderer. Keep the figure
+prefixes that the drafts use. In published posts with dated chunk labels,
+`fig.path = "assets/img/blog/"` preserves the public filenames. Keep custom
+prefixes, per-chunk dimensions and crop settings where the article uses them.
+`out.width` controls the display width in the article.
+
+Use the existing WebP conversion. Crop expendable outer whitespace with
+`fig.crop = TRUE`. Keep the full canvas with `#| fig-crop: false` when a base
+plot, inset or poster relies on that space. For cropped maps with a neutral
+palette, a tinted background such as `#FEFDFD` prevents the PNG from becoming
+grayscale, which the WebP writer cannot accept directly. Preserve diagnostic
+PNGs the user deliberately keeps. Measure the social image after conversion
+and synchronize the width and height in the Rmd and Markdown.
+
+### Map style references
+
+- [tidyterra](../../../../_Rmd/2022-05-25-tidyterra.Rmd) shows shared typography
+  and paper color across **ggplot2** and base graphics. Its `with_map_style()`
+  restores `par()` after drawing.
+- [Bertín](../../../../_Rmd/2023-12-16-bertin_dots.Rmd) shows the common
+  **ggplot2** theme alongside a custom composition with rich-text labels.
+- [Unknown Pleasures](../../../../_Rmd/2022-05-01-Unknown-pleasures-R.Rmd) is
+  the reference for opting out of cropping in individual `terra::plot()`
+  chunks and retaining the separate dark poster design.

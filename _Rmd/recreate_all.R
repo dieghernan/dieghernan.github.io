@@ -1,21 +1,11 @@
 # Run from the repository root. Pass Rmd filenames to select posts.
 source("_Rmd/renderblog_v2.R")
 
-# posts <- commandArgs(trailingOnly = TRUE)
-# if (!length(posts)) {
-#   posts <- "2022-05-25-tidyterra.Rmd"
-# }
-#
-posts <- c(
-  # "2023-01-25-star-map-R.Rmd",
-  # "2022-10-17-tidyterra-hillshade.Rmd",
-  # "2022-12-12-tidyterra-hillshade-2.Rmd"
-  # "2022-05-25-tidyterra.Rmd"
-  "2022-05-01-Unknown-pleasures-R.Rmd"
-)
+posts <- commandArgs(trailingOnly = TRUE)
+if (!length(posts)) {
+  posts <- "2022-05-01-Unknown-pleasures-R.Rmd"
+}
 
-
-# posts <- "2022-12-12-tidyterra-hillshade-2.Rmd"
 for (post in posts) {
   input <- file.path("_Rmd", post)
   styler::style_file(input)

@@ -4,7 +4,10 @@ series:
     order: 4
 title: "Beautiful maps with <strong>R</strong> (IV): Fun with flags revisited"
 subtitle: "Any picture as a basemap"
-excerpt: On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This package geotags images, using a spatial object (from sf or terra) as a geographic reference.
+excerpt: >-
+  On 27 Jan. 2022 my package rasterpic was accepted on CRAN (hooray!). This
+  package geotags images, using a spatial object (from sf or terra) as a
+  geographic reference.
 syndication:
   - https://www.r-bloggers.com/2022/01/beautiful-maps-with-r-iv-fun-with-flags-revisited/
   - https://dev.to/dieghernan/beautiful-maps-with-r-iv-fun-with-flags-revisited-41ai
@@ -19,19 +22,24 @@ tags:
   - rspatial
   - rstats
   - r_bloggers
-header_img: https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp"
 redirect_from:
   - /202101_maps-flags/
 output:
   md_document:
     variant: gfm
     preserve_yaml: true
-description: "Use rasterpic to georeference flags and other images and turn them into basemaps in R."
+description: >-
+  Use rasterpic to georeference flags and other images and turn them into
+  basemaps in R.
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
-og_image_alt: "Map of Africa with national flags clipped to each country boundary."
+og_image_alt: >-
+  Map of Africa with national flags clipped to each country boundary.
 ---
+
+
 
 On 27 Jan. 2022 my package **rasterpic** was accepted on
 [CRAN](https://cran.r-project.org/package=rasterpic) (Hooray!). This package
@@ -41,13 +49,15 @@ geographic reference.
 I tweeted about that, and it seems to have received good feedback from the
 [#rspatial](https://twitter.com/hashtag/rspatial) community:
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {rasterpic} 📦 is now on CRAN, and we can convert our pngs to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/rspatial?src=hash&amp;ref_src=twsrc%5Etfw">#rspatial</a> Do we need a package for using our own pictures as base maps? I don’t know, but anyway we have it! {**rasterpic**} 📦 is now on CRAN, and we can convert our pngs to spatial rasters like this <a href="https://t.co/fpoollARoN">https://t.co/fpoollARoN</a> <a href="https://t.co/l9o7rQwdgX">pic.twitter.com/l9o7rQwdgX</a></p>&mdash; dieghernan ن (@dhernangomez) <a href="https://twitter.com/dhernangomez/status/1486666356544225281?ref_src=twsrc%5Etfw">January 27, 2022</a></blockquote>
+
 
 I also received an interesting reply to this from **Hefin Ioan Rhys**
 [@HRJ21](https://twitter.com/HRJ21):
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ooh I think a map with countries filled with their own flag would be poppin&#39;.</p>&mdash; Hefin Ioan Rhys (@HRJ21) <a href="https://twitter.com/HRJ21/status/1486976368936116225?ref_src=twsrc%5Etfw">January 28, 2022</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 That reminds me of a [previous
 post](https://dieghernan.github.io/202002_cartography1/#png-layer) that I wrote
@@ -62,11 +72,12 @@ will use newer packages, such as
 [**giscoR**](https://cran.r-project.org/package=giscoR), and the development
 version of [**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92)
 (not released yet), which adds support for `SpatRaster` objects in **ggplot2**.
-The flags will be extracted from the GitHub repository
-<https://github.com/hampusborgos/country-flags>.
+The flags come from [country-flags](https://github.com/hampusborgos/country-flags).
+We download the 250-pixel-wide PNGs from version 1.2.10 of
+`svg-country-flags` via jsDelivr.
 
-```r
 
+``` r
 # Development version of ggspatial
 # devtools::install_github("paleolimbot/ggspatial")
 library(ggspatial)
@@ -78,14 +89,28 @@ library(rasterpic)
 # For country names
 library(countrycode)
 
+background <- "#FEFDFD"
+map_title <- "inter-tight"
+map_regular <- "inter"
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
 world <- gisco_get_countries(epsg = 3857)
 africa <- gisco_get_countries(region = "Africa", epsg = 3857)
 
 # Base map of Africa
 plot <- ggplot(world) +
   geom_sf(fill = "grey90") +
-  theme_minimal() +
-  theme(panel.background = element_rect(fill = "lightblue"))
+  theme_minimal(base_family = map_regular, paper = background) +
+  theme(
+    plot.title = element_text(family = map_title, face = "bold"),
+    legend.title = element_text(family = map_title, face = "bold"),
+    strip.text = element_text(family = map_title, face = "bold"),
+    plot.margin = margin(10, 10, 10, 10),
+    panel.background = element_rect(fill = "lightblue")
+  )
 
 plot +
   # Zoom on Africa
@@ -95,17 +120,17 @@ plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" title="plot of chunk 20220128_africa" alt="Map of Africa with national borders and neighboring countries shown for context." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220128_africa-1.webp" alt="Map of Africa with national borders and neighboring countries shown for context." width="100%" />
 
 Now, let's add the flags with a loop:
 
-```r
 
+``` r
 # We paste the ISO2 code to each African country
 africa$iso2 <- countrycode(africa$ISO3_CODE, "iso3c", "iso2c")
 
 # Get flags from repo - low quality to speed up the code
-flagrepo <- "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/"
+flagrepo <- "https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png250px/"
 
 # Loop and add
 for (iso in africa$iso2) {
@@ -129,4 +154,4 @@ plot +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" title="plot of chunk 20220128_flag" alt="Map of Africa with national flags clipped to each country boundary." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" alt="Map of Africa with national flags clipped to each country boundary." width="100%" />

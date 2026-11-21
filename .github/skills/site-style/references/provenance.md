@@ -62,6 +62,12 @@ but are not required to run this portable skill.
 
 ## Repository evidence and editorial defaults
 
+For the map refresh, the user approved Inter Tight and Inter, with typography
+as the scope of changes to custom posters. The user set the 80-column limit
+for YAML, Markdown and R, exempted HTML and Liquid, and asked to keep URLs on
+one line. The user named tidyterra, Bertín and Unknown Pleasures as references
+and singled out the base-graphics crop exception in Unknown Pleasures.
+
 The user explicitly requires project-wide formatting with **air** for R
 scripts and **styler** for R code in Rmd sources. This is a formatting rule,
 not permission to refactor code or execute analyses.

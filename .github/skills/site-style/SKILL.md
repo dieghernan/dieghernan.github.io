@@ -41,10 +41,11 @@ requested.
   important step does and why. Preserve natural questions, occasional cultural
   references and light humor when they fit the user's draft. Avoid adding a joke
   or an elaborate metaphor to every transition.
-- Prefer short paragraphs and wrap prose near 80 columns. Preserve URLs, code,
-  tables, YAML structure and significant Markdown spacing. Remove accidental
-  double spaces, identical consecutive prose/comment lines and excess blank
-  lines without damaging lists or chunk/front-matter boundaries.
+- Keep editable YAML, Markdown and R within 80 columns. Keep URLs intact on
+  one line, even in YAML. HTML, Liquid and verbatim generated console output
+  may exceed the limit. Preserve tables, YAML structure and significant
+  Markdown spacing. Remove accidental double spaces, identical consecutive
+  lines and excess blank lines without damaging lists or chunk boundaries.
 - In prose, bold software and R package names: **R**, **Python**, **QGIS**,
   **Jekyll**, **Chulapa**, **sf**, **giscoR**, **ggplot2**. A linked name is
   `[**giscoR**](https://ropengov.github.io/giscoR/)`. Preserve exact casing. Use
@@ -99,9 +100,31 @@ counts, alt texts, project captions and metadata. Reserve any stated
 missing-data color for missing data. Do not change a palette during a prose-only
 review, but flag ambiguities. Prefer WebP for generated raster maps using the
 existing helper. Preserve aspect ratios, explicit chunk dimensions, titles and
-legends. If image processing is authorized, crop outer blank margins before
-conversion without stretching the plot, and measure social-image dimensions on
-the final file.
+legends. Crop only expendable outer whitespace and measure social-image
+dimensions on the final WebP.
+
+## Map typography and rendering
+
+- Use Inter Tight for map titles, facet headings and legend titles. Use Inter
+  for subtitles, axis labels, legend values and other supporting text. Match
+  `showtext` to the chunk DPI. Keep the established palettes, map geometry and
+  layout. For custom posters, limit visual changes to typography and retain
+  display fonts that are part of the design, such as Coiny or Emilys Candy.
+- Apply the background and font to base graphics with scoped `par()` settings.
+  Use `#| fig-crop: false` for base plots whose axes, frame or margins need to
+  survive the WebP conversion. When cropping a neutral map, use a subtly
+  tinted paper color such as `#FEFDFD` to keep the cropped PNG in RGB. Preserve
+  any explicit crop exception for a custom layout or social image.
+- Check the initial `setup` chunk first. Follow the shared **knitr** options
+  in the [rendering reference](references/publication.md#render-integration).
+  The usual DPI is 300 for published posts and 200 for drafts. Preserve
+  intentional DPI, dimensions, chunk labels and figure paths from existing
+  figures to keep their public URLs stable.
+- Compare regenerated figures with the existing images. Check titles, legends,
+  margins, insets and poster composition. Verify image links, alt text and
+  social metadata after generation. Follow the
+  [map style references](references/publication.md#map-style-references) in
+  tidyterra, Bertín and Unknown Pleasures.
 
 ## Front matter, callouts and references
 

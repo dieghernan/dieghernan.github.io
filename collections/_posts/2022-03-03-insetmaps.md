@@ -2,7 +2,9 @@
 series:
   - id: inset-maps
     order: 2
-title: "Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!"
+title: >-
+  Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and
+  <strong>mapsf</strong>!
 subtitle: "A map on a map"
 excerpt: A common challenge when creating maps is how to include an inset map in
   your visualization. An inset map is a smaller map usually included in a corner
@@ -24,18 +26,22 @@ tags:
   - rstats
   - r_bloggers
 last_modified_at: 2022-03-03
-header_img: https://dieghernan.github.io/assets/img/blog/20220303_inset.webp
+header_img: "https://dieghernan.github.io/assets/img/blog/20220303_inset.webp"
 output:
   md_document:
     variant: gfm
     preserve_yaml: true
-description: "Create inset maps in R with ggplot2, tmap and mapsf to show geographic context and outlying regions."
+description: >-
+  Create inset maps in R with ggplot2, tmap and mapsf to show geographic
+  context and outlying regions.
 og_image_width: 2100
 og_image_height: 2100
 og_image_type: "image/webp"
-og_image_alt: "Map of Brazil highlighted in red, with a world inset locating Brazil in South America."
 seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
 og_title: "Inset maps with ggplot2, tmap and mapsf"
+og_image_alt: >-
+  Map of Brazil highlighted in red, with a world inset locating Brazil in
+  South America.
 ---
 
 
@@ -67,6 +73,24 @@ library(mapSpain)
 library(sf)
 library(ggplot2)
 library(dplyr)
+
+background <- "#FEFDFD"
+map_title <- "inter-tight"
+map_regular <- "inter"
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_grey(paper = background, base_family = map_regular) +
+    theme(
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 
 regions <- esp_get_ccaa(moveCAN = FALSE)
 
@@ -105,8 +129,8 @@ ggplot(island) +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-2.webp" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" />
 
-So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing and
-matching!
+So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing
+and matching!
 
 ## On **ggplot2**
 
@@ -123,9 +147,9 @@ with insets we will:
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(
-    plot.background = element_rect(fill = "grey85", colour = NA),
+    plot.background = element_rect(fill = "#DAD9D9", colour = NA),
     # Add a bit of margin on the bottom left
     # We will place the inset there
     plot.margin = margin(l = 80, b = 80)
@@ -134,22 +158,28 @@ main_gg <- ggplot(main) +
 # Sub plot
 sub_gg <- ggplot(island) +
   geom_sf() +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   # Add a border to the inset
   theme(
     panel.border = element_rect(fill = NA, colour = "black"),
-    plot.background = element_rect(fill = "grey95")
+    plot.background = element_rect(fill = "#F3F2F2")
   )
 ```
 
-We have our objects in place, and now is when the magic happens! With **cowplot**,
-we can combine both maps into a single one. You may need to play a bit with the
-parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve the
-placement:
+We have our objects in place, and now is when the magic happens! With
+**cowplot**, we can combine both maps into a single one. You may need to play a
+bit with the parameters `x`, `y`, `hjust` and `vjust` of the subplot to
+improve the placement:
 
 
 ``` r
 library(cowplot)
+
+# Use the same font metrics when arranging plots off screen.
+cowplot::set_null_device(function(width, height) {
+  cowplot::agg_null_device(width, height)
+  grid::grid.newpage()
+})
 
 ggdraw() +
   draw_plot(main_gg) +
@@ -186,7 +216,8 @@ mass_flipper <- ggplot(
     size = 3,
     alpha = 0.8
   ) +
-  theme_minimal() +
+  theme_minimal(base_family = map_regular, paper = background) +
+  theme(legend.title = element_text(family = map_title, face = "bold")) +
   scale_color_manual(values = c("darkorange", "purple", "cyan4"))
 
 flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
@@ -196,7 +227,7 @@ flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
     show.legend = FALSE
   ) +
   scale_fill_manual(values = c("darkorange", "purple", "cyan4")) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "white"))
 
 
@@ -227,14 +258,17 @@ main_tmap <- tm_shape(main) +
   tm_polygons() +
   tm_layout(
     inner.margins = c(.3, .3, 0, 0),
-    frame = FALSE
+    frame = FALSE,
+    bg.color = background,
+    text.fontfamily = map_regular
   )
 
 
 main_tmap <- tmap_grob(main_tmap)
 
 sub_tmap <- tm_shape(island) +
-  tm_polygons()
+  tm_polygons() +
+  tm_layout(bg.color = background, text.fontfamily = map_regular)
 
 sub_tmap <- tmap_grob(sub_tmap)
 ```
@@ -266,11 +300,16 @@ shared how to create inset maps using that package:
 ``` r
 library(mapsf)
 
-mf_map(main)
-mf_inset_on(island, pos = "bottomright", cex = .3)
-mf_map(island)
-box(lwd = .5)
-mf_inset_off()
+local({
+  withr::local_options(list(mapsf.background = background))
+  withr::local_par(list(bg = background, family = map_regular))
+
+  mf_map(main)
+  mf_inset_on(island, pos = "bottomright", cex = .3)
+  mf_map(island)
+  box(lwd = .5)
+  mf_inset_off()
+})
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insetmapsf-1.webp" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" />
