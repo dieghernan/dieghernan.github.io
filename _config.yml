@@ -187,26 +187,26 @@ navbar:
   nav:
   - title: Blog
     url: "/blog/"
-  - title: Series
-    url: "/series/"
   - title: Projects
     url: "/projects"
-  - title: About
-    url: "/about"
+  - title: Series
+    url: "/series/"
+  - title: Resources
+    child:
+    - title: <i class="fas fa-images mr-1"></i>Gallery
+      url: "/gallery"
+    - title: <i class="fas fa-headphones mr-1"></i>Music
+      url: "/music"
+    - title: <i class="fab fa-github mr-1">GitHub
+      url: "https://github.com/dieghernan/dieghernan.github.io"
   - title: Archives
     child:
     - title: By date
       url: "/archive"
     - title: By tags
       url: "/tags"
-  - title: Gallery
-    url: "/gallery"
-  - title: <i class="fas fa-headphones mr-1" aria-hidden="true"></i><span class="d-lg-none" aria-hidden="true">Music</span><span class="sr-only">Music</span>
-    url: "/music"
-  - title: <i class="fab fa-github mr-1" aria-hidden="true"></i><span class="d-lg-none">GitHub</span><span class="sr-only">GitHub repo of this project</span>
-    url: https://github.com/dieghernan/dieghernan.github.io
-  - title: <i class="icon-r-bloggers mr-1" aria-hidden="true"></i><span class="d-lg-none" aria-hidden="true">R-bloggers</span><span class="sr-only">R-bloggers</span>
-    url: https://www.r-bloggers.com/
+  - title: About
+    url: "/about"
 
 # B.2. Footer
 footer:
