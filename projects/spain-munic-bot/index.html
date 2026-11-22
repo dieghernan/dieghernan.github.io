@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
     <meta charset="utf-8">
-    <!-- Chulapa Jekyll Theme - v2.3.0 -->
+    <!-- Chulapa Jekyll Theme - v2.3.1.dev -->
     <!-- MIT License -->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
@@ -381,15 +381,33 @@
         "subjectOf": {"@id": "https://dieghernan.github.io/projects/spain-munic-bot/"}
       }
     </script>
+    <noscript><style>.navbar-chulapa { --chulapa-classic-fallback-delay: 0s; }</style></noscript>
 </head>
 <body class="d-flex flex-column" id="body">
 	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<nav class="navbar navbar-expand-lg sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
-			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+			<a class="navbar-brand font-weight-bold" href="https://dieghernan.github.io/"><img src="https://dieghernan.github.io/assets/img/favicons/android-chrome-72x72.png" width="30" height="30" class="d-inline-block align-top rounded-lg mr-1" alt="NavbarLogo">One World</a><details class="chulapa-classic-fallback">
+				<summary class="navbar-toggler" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon" aria-hidden="true"></span>
+				</summary>
+				<ul class="navbar-nav flex-column">
+   <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/blog/">Blog</a></li>
+   <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/series/">Series</a></li>
+   <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/projects">Projects</a></li>
+   <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/about">About</a></li>
+     <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/archive">By date</a></li>
+     <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/tags">By tags</a></li>
+   <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/gallery">Gallery</a></li>
+   <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/music"><i class="fas fa-headphones mr-1" aria-hidden="true"></i><span class="d-lg-none" aria-hidden="true">Music</span><span class="sr-only">Music</span></a></li>
+   <li class="nav-item"><a class="nav-link" href="https://github.com/dieghernan/dieghernan.github.io"><i class="fab fa-github mr-1" aria-hidden="true"></i><span class="d-lg-none">GitHub</span><span class="sr-only">GitHub repo of this project</span></a></li>
+   <li class="nav-item"><a class="nav-link" href="https://www.r-bloggers.com/"><i class="icon-r-bloggers mr-1" aria-hidden="true"></i><span class="d-lg-none" aria-hidden="true">R-bloggers</span><span class="sr-only">R-bloggers</span></a></li>
+ <li class="nav-item"><a class="nav-link" href="https://dieghernan.github.io/search">Search</a></li>
+</ul>
+			</details><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" data-classic-nav-control aria-hidden="true" inert>
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarToggler">
+			<div class="collapse navbar-collapse" id="navbarToggler" data-classic-nav-control aria-hidden="true" inert>
 				<ul class="navbar-nav ml-auto"><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/blog/">Blog</a>
 					</li><li class="nav-item">
@@ -589,18 +607,18 @@ municipalities, base polygons, coordinates and imagery.</li>
              <nav class="card-group" aria-label="random -articles"><div class="card  border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202602_geobounds/" class="chulapa-text-body-color">
-              Introducing <strong>geobounds</strong>
+            <a href="https://dieghernan.github.io/202205_Unknown-pleasures-R/" class="chulapa-text-body-color">
+              Unknown pleasures with <strong>R</strong>
             </a>
          </p>
            <p class="card-text">
-              <small>Easy access to administrative boundaries from geoBoundaries</small>
+              <small>Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong></small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2026-02-12T00:00:00+01:00">
-                february 12, 2026
+              <time datetime="2022-05-01T00:00:00+02:00">
+                may 01, 2022
               </time>
             </small>
        </div>
@@ -608,18 +626,18 @@ municipalities, base polygons, coordinates and imagery.</li>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/projects/gifs/" class="chulapa-text-body-color">
-              Large forest fires in Spain
+            <a href="https://dieghernan.github.io/projects/celestial-data/" class="chulapa-text-body-color">
+              Celestial data
             </a>
          </p>
            <p class="card-text">
-              <small>EGIF reports, reconciled fire records and cartography with R</small>
+              <small>A compilation of celestial data files</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2026-11-03T00:00:00+01:00">
-                november 03, 2026
+              <time datetime="2023-01-23T00:00:00+01:00">
+                january 23, 2023
               </time>
             </small>
        </div>
@@ -627,18 +645,18 @@ municipalities, base polygons, coordinates and imagery.</li>
      <div class="card ml-sm-1 border chulapa-related">
        <div class="card-body">
          <p class="card-title chulapa-headingfont">
-            <a href="https://dieghernan.github.io/202002_Brexit/" class="chulapa-text-body-color">
-              We’ll miss you, UK
+            <a href="https://dieghernan.github.io/202301_star-map-R/" class="chulapa-text-body-color">
+              Star map with <strong>R</strong>
             </a>
          </p>
            <p class="card-text">
-              <small>Brexit and the consequences</small>
+              <small>Creating star map visualizations based on location and date</small>
            </p></div>
        <div class="card-footer bg-transparent">
             <small>
               <i class="far fa-calendar" aria-hidden="true"></i>
-              <time datetime="2020-02-06T00:00:00+01:00">
-                february 06, 2020
+              <time datetime="2023-01-25T00:00:00+01:00">
+                january 25, 2023
               </time>
             </small>
        </div>
@@ -701,6 +719,7 @@ municipalities, base polygons, coordinates and imagery.</li>
 	  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+  <script src="/assets/js/chulapa_navigation.js"></script>
 	<script src="/assets/js/chulapa_script.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
 <script>
