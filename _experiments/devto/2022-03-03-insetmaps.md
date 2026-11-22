@@ -2,7 +2,7 @@
 review: always
 tags_choose_4: rstats,ggplot2,inset,maps,mapsf,mapSpain,r_bloggers,rspatial,sf,tmap
 description: A map on a map
-cover_image: https://dieghernan.github.io/assets/img/blog/20220303_inset.webp
+cover_image: https://dieghernan.github.io/assets/img/blog/20220303_inset-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
@@ -31,6 +31,24 @@ library(mapSpain)
 library(sf)
 library(ggplot2)
 library(dplyr)
+
+background <- "#FEFDFD"
+map_title <- "inter-tight"
+map_regular <- "inter"
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_grey(paper = background, base_family = map_regular) +
+    theme(
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 
 regions <- esp_get_ccaa(moveCAN = FALSE)
 
@@ -80,9 +98,9 @@ We have already created two quick maps with **ggplot2**. Now, to produce our map
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(
-    plot.background = element_rect(fill = "grey85", colour = NA),
+    plot.background = element_rect(fill = "#DAD9D9", colour = NA),
     # Add a bit of margin on the bottom left
     # We will place the inset there
     plot.margin = margin(l = 80, b = 80)
@@ -91,11 +109,11 @@ main_gg <- ggplot(main) +
 # Sub plot
 sub_gg <- ggplot(island) +
   geom_sf() +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   # Add a border to the inset
   theme(
     panel.border = element_rect(fill = NA, colour = "black"),
-    plot.background = element_rect(fill = "grey95")
+    plot.background = element_rect(fill = "#F3F2F2")
   )
 ```
 
@@ -103,6 +121,12 @@ We have our objects in place, and now is when the magic happens! With **cowplot*
 
 ``` r
 library(cowplot)
+
+# Use the same font metrics when arranging plots off screen.
+cowplot::set_null_device(function(width, height) {
+  cowplot::agg_null_device(width, height)
+  grid::grid.newpage()
+})
 
 ggdraw() +
   draw_plot(main_gg) +
@@ -136,7 +160,8 @@ mass_flipper <- ggplot(
     size = 3,
     alpha = 0.8
   ) +
-  theme_minimal() +
+  theme_minimal(base_family = map_regular, paper = background) +
+  theme(legend.title = element_text(family = map_title, face = "bold")) +
   scale_color_manual(values = c("darkorange", "purple", "cyan4"))
 
 flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
@@ -146,7 +171,7 @@ flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
     show.legend = FALSE
   ) +
   scale_fill_manual(values = c("darkorange", "purple", "cyan4")) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "white"))
 
 
@@ -173,14 +198,17 @@ main_tmap <- tm_shape(main) +
   tm_polygons() +
   tm_layout(
     inner.margins = c(.3, .3, 0, 0),
-    frame = FALSE
+    frame = FALSE,
+    bg.color = background,
+    text.fontfamily = map_regular
   )
 
 
 main_tmap <- tmap_grob(main_tmap)
 
 sub_tmap <- tm_shape(island) +
-  tm_polygons()
+  tm_polygons() +
+  tm_layout(bg.color = background, text.fontfamily = map_regular)
 
 sub_tmap <- tmap_grob(sub_tmap)
 ```
@@ -205,11 +233,16 @@ ggdraw() +
 ``` r
 library(mapsf)
 
-mf_map(main)
-mf_inset_on(island, pos = "bottomright", cex = .3)
-mf_map(island)
-box(lwd = .5)
-mf_inset_off()
+local({
+  withr::local_options(list(mapsf.background = background))
+  withr::local_par(list(bg = background, family = map_regular))
+
+  mf_map(main)
+  mf_inset_on(island, pos = "bottomright", cex = .3)
+  mf_map(island)
+  box(lwd = .5)
+  mf_inset_off()
+})
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insetmapsf-1.webp" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" />

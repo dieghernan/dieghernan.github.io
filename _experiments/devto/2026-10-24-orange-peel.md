@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? FALSE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -79,7 +79,9 @@ showtext_auto()
 
 ggplot() +
   geom_sf(data = outline, fill = "#FFF0D9", colour = NA) +
-  geom_sf(data = world, fill = "#F9B566", colour = "#B34D08", linewidth = 0.25) +
+  geom_sf(
+    data = world, fill = "#F9B566", colour = "#B34D08", linewidth = 0.25
+  ) +
   geom_sf(data = grat, fill = NA, colour = "#E8A45B", linewidth = 0.25) +
   geom_sf(data = mask, fill = "#fcf1e7", colour = NA) +
   geom_sf(data = outline, fill = NA, colour = "#E87516", linewidth = 0.4) +
@@ -95,12 +97,12 @@ ggplot() +
     text = element_text(family = "coiny"),
     plot.background = element_rect(fill = "#fcf1e7", colour = NA),
     plot.title = element_text(
-      color = "#E87516", face = "bold", size = rel(3),
+      color = "#E87516", face = "bold", size = rel(1.5),
       margin = margin(b = 10)
     ),
     plot.margin = margin(10, 10, 10, 10),
     plot.caption = element_text(
-      color = "#E87516", size = rel(1.5),
+      color = "#E87516", size = rel(0.75),
       margin = margin(t = 10)
     )
   ) +
@@ -112,17 +114,9 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/202610_goode-map-1.webp" alt="World map with orange coastlines and graticules in the interrupted Goode homolosine projection, resembling a flattened orange peel." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Heal the World by Michael Jackson on Spotify"
-  src="https://open.spotify.com/embed/track/7woW97CfcWaKtuC6W5BP2K?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="7woW97CfcWaKtuC6W5BP2K" title="Heal the World by Michael Jackson on Spotify" %}
 
 ## References
 
 - Panaïotis, T. (2026, September 29). Projections cartographiques : Le guide pour ne pas y laisser sa santé mentale. *Pyranhia*. [Article](https://pyranhia.eu/posts/202609-carto-proj-avancees/carto-proj-avancees.html)
-- Wilke, C. O. (n.d.). *Interrupted Goode homolosine*. practicalgg. <https://wilkelab.org/practicalgg/articles/goode.html> (Source for the outline and masking approach.)
+- Wilke, C. O. (n.d.). *Interrupted Goode homolosine*. practicalgg. [URL](https://wilkelab.org/practicalgg/articles/goode.html) (Source for the outline and masking approach.)

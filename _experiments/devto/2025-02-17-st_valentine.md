@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? FALSE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -64,12 +64,4 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Can't Take My Eyes Off You by Frankie Valli on Spotify"
-  src="https://open.spotify.com/embed/track/7o8t2oSKI5eIBDlOHQH99F?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="7o8t2oSKI5eIBDlOHQH99F" title="Can't Take My Eyes Off You by Frankie Valli on Spotify" %}

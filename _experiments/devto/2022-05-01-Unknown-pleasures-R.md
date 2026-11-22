@@ -2,7 +2,7 @@
 review: always
 tags_choose_4: rstats,ggplot2,ggridges,giscoR,maps,music,r_bloggers,rspatial,terra
 description: Joyplot elevation maps with <strong>ggridges</strong> and <strong>terra</strong>
-cover_image: https://dieghernan.github.io/assets/img/blog/20220501_joyplots.webp
+cover_image: https://dieghernan.github.io/assets/img/blog/20220501_joyplots-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? FALSE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -28,13 +28,17 @@ Saville presented a black-and-white version, producing a cover that reached icon
 
 ![Unknown Pleasures album cover by Joy Division, with stacked white pulsar signal traces on a black background.](https://dieghernan.github.io/assets/img/misc/unknown_pleasures-cover.jpg)
 
+Peter Saville explains how he turned a pulsar plot into the cover of *Unknown Pleasures* in this short film by Eric Klotz and Volkert Besseling.
+
+{% include snippets/video.html id="reEQye0EOAw" provider="youtube" video_res="hqdefault" name="Data Visualization Reinterpreted: The Story of Joy Division's “Unknown Pleasures” Album Design" thumbnail_url="https://i.ytimg.com/vi/reEQye0EOAw/hqdefault.jpg" upload_date="2012-10-17T09:34:35-07:00" description="Graphic designer Peter Saville explains how a plot of radio pulses became the cover of Joy Division's Unknown Pleasures." duration="PT3M40S" %}
+
 If you are interested in learning more about this fascinating history of science and design, you can read [Pop Culture Pulsar: Origin Story of Joy Division's Unknown Pleasures Album Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/) by [Jen Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
 
 Since then, these kinds of plots have become very popular, known as **ridge plots** or **joyplots**, in honor of Joy Division. In this post, I produce "joyplots" with **R** for specific regions of the world using elevation data for creating the ridges.
 
 ## Creating joyplot maps with **R**
 
-This topic has already been covered by other authors, such as [Daniel Redondo](https://danielredondo.com/blog/2020-01-25-joy_division/) (Spanish) and [Travis M. White](https://cartographicperspectives.org/index.php/journal/article/view/1536/1726). However, they both use QGIS, while in this post I work completely in **R**.
+This topic has already been covered by other authors, such as [Daniel Redondo](https://danielredondo.com/blog/2020-01-25-joy_division/) (Spanish) and [Travis M. White](https://cartographicperspectives.org/index.php/journal/article/view/1536/1726). However, they both use **QGIS**, while in this post I work completely in **R**.
 
 Some initial considerations we may need to bear in mind:
 
@@ -45,7 +49,6 @@ Some initial considerations we may need to bear in mind:
 Now, let's start with the required libraries:
 
 ``` r
-
 # Libraries
 
 # Spatial
@@ -58,12 +61,41 @@ library(elevatr)
 library(ggplot2)
 library(dplyr)
 library(ggridges)
+
+background <- "#FEFDFD"
+
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+
+with_map_style <- function(plot) {
+  previous <- par(
+    bg = background, family = map_regular, mar = c(1, 1, 1, 1),
+    fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
+  )
+  on.exit(par(previous))
+  invisible(force(plot))
+}
+
+theme_set(
+  theme_grey(paper = background, base_family = map_regular) +
+    theme(
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
-The first step consists of selecting our region of interest (`sf` object) and extracting the elevation data. We can achieve that with **giscoR** and **elevatr**. In this post, I create a joyplot of [Andalusia](https://en.wikipedia.org/wiki/Andalusia). Note that, given we are creating just a visualization, the resolution of the `sf` object is not very relevant.
+The first step consists of selecting our region of interest (`sf` object) and extracting the elevation data. We can achieve that with **giscoR** and **elevatr**. In this post, I create a joyplot of [Andalusia](https://en.wikipedia.org/wiki/Andalusia). Note that, given we are creating just a visualization, the resolution of the **sf** object is not very relevant.
 
 ``` r
-
 # Select a Spanish Region: Andalucia
 region <- gisco_get_nuts(nuts_id = "ES61") %>%
   # And project data
@@ -73,8 +105,10 @@ region <- gisco_get_nuts(nuts_id = "ES61") %>%
 Now we need to extract the elevation using **elevatr**. We can also adjust the zoom level as needed. You can find guidance on zoom levels in the [OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/Zoom_levels).
 
 ``` r
-
-dem <- get_elev_raster(region, z = 7, clip = "bbox", expand = 10000) %>%
+dem <- get_elev_raster(region,
+  z = 7, clip = "bbox", expand = 10000,
+  tmp_dir = tools::R_user_dir("elevatr", "cache")
+) %>%
   # And convert to terra
   rast() %>%
   # Mask to the shape
@@ -86,10 +120,10 @@ names(dem) <- "elev"
 nrow(dem)
 #> [1] 698
 
-terra::plot(dem)
+with_map_style(terra::plot(dem, background = background))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" title="plot of chunk 20220501_andalucia_dem" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" />
 
 We already have our elevation raster. Now the next step is to adjust the number of rows of our raster to a lower number. We can then aggregate the raster (i.e. reduce the number of cells or increase their size) using a scaling factor that would reduce the number of rows to our desired target (in this case 90 rows):
 
@@ -102,30 +136,28 @@ dem_agg <- aggregate(dem, factor)
 nrow(dem_agg)
 #> [1] 88
 
-terra::plot(dem_agg)
+with_map_style(terra::plot(dem_agg, background = background))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" title="plot of chunk 20220501_andalucia_dem_agg" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" />
 
 We can check how the number of rows has decreased. Also, the plot shows that we now have fewer cells.
 
 Now, we may need to perform additional manipulations on the values of the raster:
 
 - We need to ensure that all valid values are greater than or equal to zero.
-
 - We will replace the `NA` values produced when masking the raster with zeros. We will use this later to decide whether to remove some parts of the plot.
 
 After that, we create a data frame with the information needed for creating the joyplot.
 
 ``` r
-
 dem_agg[dem_agg < 0] <- 0
 dem_agg[is.na(dem_agg)] <- 0
 
 dem_df <- as.data.frame(dem_agg, xy = TRUE, na.rm = FALSE)
 
 as_tibble(dem_df)
-#> # A tibble: 12,848 x 3
+#> # A tibble: 12,848 × 3
 #>          x        y  elev
 #>      <dbl>    <dbl> <dbl>
 #>  1  77184. 4306315.     0
@@ -138,13 +170,12 @@ as_tibble(dem_df)
 #>  8 104240. 4306315.     0
 #>  9 108105. 4306315.     0
 #> 10 111970. 4306315.     0
-#> # ... with 12,838 more rows
+#> # ℹ 12,838 more rows
 ```
 
 Now is a good moment to adjust the units of the coordinates and the elevation if needed. In this case both are in meters, but I will show you how to perform those adjustments with the **units** package:
 
 ``` r
-
 library(units)
 
 # Units of DEM projection
@@ -167,7 +198,7 @@ dem_miles <- dem_df %>%
   )
 
 as_tibble(dem_miles)
-#> # A tibble: 12,848 x 6
+#> # A tibble: 12,848 × 6
 #>          x        y elev x_mile y_mile elev_mile
 #>        [m]      [m]  [m]   [mi]   [mi]      [mi]
 #>  1  77184. 4306315.    0   48.0  2676.         0
@@ -180,13 +211,12 @@ as_tibble(dem_miles)
 #>  8 104240. 4306315.    0   64.8  2676.         0
 #>  9 108105. 4306315.    0   67.2  2676.         0
 #> 10 111970. 4306315.    0   69.6  2676.         0
-#> # ... with 12,838 more rows
+#> # ℹ 12,838 more rows
 ```
 
 Finally, we can create our joyplot. Note that we can "train" the scales of our `ggplot` to a spatial object automatically if we pass our `region` object into the plot. The relative height of the ridges is controlled via the `scale` parameter:
 
 ``` r
-
 ggplot() +
   # Just for the scales, pass with NA arguments so it is not shown
   geom_sf(data = region, color = NA, fill = NA) +
@@ -198,15 +228,14 @@ ggplot() +
     ),
     scale = 25
   ) +
-  theme_ridges()
+  labs(x = "", y = "")
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" title="plot of chunk 20220501_andalucia_ridges" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges-1.webp" alt="Ridgeline map of Andalusia with longitude horizontally and latitude vertically. Each ridge traces an elevation profile, with taller peaks in the east." width="100%" />
 
 The last step is to provide a black theme, resembling the cover of the album:
 
 ``` r
-
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_ridgeline(
@@ -217,24 +246,16 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" title="plot of chunk 20220501_andalucia_joyplot" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_joyplot-1.webp" alt="Ridgeline map of Andalusia with elevation profiles drawn as light lines on a dark background, resembling the Unknown Pleasures album cover." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Unknown Pleasures by Joy Division on Spotify"
-  src="https://open.spotify.com/embed/album/5Dgqy4bBg09Rdw7CQM545s?utm_source=generator&si=12e3c6b3c41940fb"
-  height="352"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html type="album" id="5Dgqy4bBg09Rdw7CQM545s" title="Unknown Pleasures by Joy Division on Spotify" %}
 
 ## Variations
 
@@ -245,7 +266,6 @@ We can produce some variations of the same map using several parameters and othe
 We can use `geom_density_ridges()` with `stat="identity"` instead of `geom_ridgeline()` for creating a similar map:
 
 ``` r
-
 ggplot() +
   geom_sf(data = region, color = NA, fill = NA) +
   geom_density_ridges(
@@ -257,14 +277,14 @@ ggplot() +
     stat = "identity",
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" title="plot of chunk 20220501_andalucia_ridges_dens" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_ridges_dens-1.webp" alt="Ridgeline map of Andalusia with more closely spaced elevation profiles, revealing finer terrain detail." width="100%" />
 
 ### Land only
 
@@ -283,22 +303,21 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25,
     min_height = 0.1
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" title="plot of chunk 20220501_andalucia_landonly" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" />
 
 ### With colors
 
 We can apply different colors to the plot. Note that **ggridges** only accepts different `aes` by row, not by column:
 
 ``` r
-
 # Classify on three different bands
 
 dem_df <- dem_df %>%
@@ -318,7 +337,7 @@ ggplot() +
     size = .5,
     show.legend = FALSE
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black")) +
   scale_color_manual(values = alpha(
     c(
@@ -330,14 +349,13 @@ ggplot() +
   ))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" title="plot of chunk 20220501_andalucia_colors" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_colors-1.webp" alt="Ridgeline map of Andalusia with white elevation profiles over alternating green and white horizontal bands." width="100%" />
 
 ### Combine with another object
 
 For example, using an `sf` object:
 
 ``` r
-
 highres <- gisco_get_nuts(
   nuts_id = "ES61",
   resolution = 1
@@ -356,20 +374,19 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25,
     min_height = 0.1
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" title="plot of chunk 20220501_andalucia_combine" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_combine-1.webp" alt="Ridgeline map of Andalusia with green shading on the lower western terrain and white profiles over the higher eastern mountains." width="100%" />
 
 Or adding a frame to the plot:
 
 ``` r
-
 frame <- as.polygons(dem_agg, extent = TRUE) %>%
   st_as_sf()
 
@@ -383,14 +400,14 @@ ggplot() +
     ),
     scale = 25,
     fill = "black",
-    color = "white",
+    color = background,
     size = .25
   ) +
-  theme_void() +
+  theme_void(base_family = map_regular) +
   theme(plot.background = element_rect(fill = "black"))
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" title="plot of chunk 20220501_andalucia_frame" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_frame-1.webp" alt="Ridgeline map of Andalusia with light elevation profiles on a dark background, enclosed by a rectangular frame." width="100%" />
 
 ## References
 

@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? TRUE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -21,7 +21,7 @@ blending
 adventure](https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/). The
 final map replaces the original overlay with reduced opacity. Dominic Royé also
 demonstrates how to use **ggblend** in [Hillshade
-effects](https://dominicroye.github.io/blog/hillshade-effect/). 
+effects](https://dominicroye.github.io/blog/hillshade-effect/).
 </div>
 
 *This is the first post of a series of two, showing how to overlay a SpatRaster on top of a hillshade background. The next post shows how to add marginal plots including information about the values of the raster by longitude and latitude. See the second post [here](https://dieghernan.github.io/202212_tidyterra-hillshade-2/).*
@@ -53,18 +53,39 @@ library(geodata)
 # Define a common theme for the maps.
 background <- "#faf8f2"
 ink <- "#203b47"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
 
 theme_set(
-  theme_void() +
+  theme_void(base_family = map_regular) +
     theme(
       plot.background = element_rect(fill = background, colour = NA),
       panel.background = element_rect(fill = background, colour = NA),
-      plot.title = element_text(face = "bold", colour = ink),
+      plot.title = element_text(
+        family = map_title, face = "bold", colour = ink
+      ),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.subtitle = element_text(colour = ink),
       plot.caption = element_text(colour = "grey40", hjust = 0),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
+
+example_theme <- theme_minimal(base_family = map_regular, paper = background) +
+  theme(
+    plot.title = element_text(
+      family = map_title, face = "bold", colour = ink
+    ),
+    legend.title = element_text(family = map_title, face = "bold"),
+    strip.text = element_text(family = map_title, face = "bold"),
+    plot.margin = margin(10, 10, 10, 10)
+  )
 ```
 
 ## Get the data
@@ -114,7 +135,7 @@ We can now have a quick look at the plot with `tidyterra::autoplot()`:
 autoplot(r) +
   scale_fill_terrain_c(na.value = NA) +
   facet_wrap(vars(lyr)) +
-  theme_minimal()
+  example_theme
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-1-autoplot-1.webp" alt="Elevation map of Romania. Colors represent altitude and highlight the arc of the Carpathian Mountains." width="100%" />
@@ -258,7 +279,7 @@ plot_pal_test <- function(pal) {
       palette = pal
     ) +
     ggtitle(pal) +
-    theme_minimal()
+    example_theme
 }
 
 plot_pal_test("etopo1_hypso")
@@ -325,28 +346,7 @@ base_plot
 
 The opaque elevation layer inside the blend covers the scale-trained layer underneath, which supplies the legend. The legend shows the elevation palette before shading. We render with **ragg**, which supports the compositing groups used by **ggblend**.
 
-For the final map, we use Noto Serif when its font files are available locally and fall back to the system serif font otherwise:
-
-``` r
-font_dir <- path.expand("~/R/googlefonts")
-font_files <- file.path(
-  font_dir,
-  paste0("NotoSerif-", c("Regular", "Bold", "Italic", "BoldItalic"), ".ttf")
-)
-font_family <- "serif"
-if (all(file.exists(font_files))) {
-  systemfonts::register_font(
-    "notoserif",
-    plain = font_files[1],
-    bold = font_files[2],
-    italic = font_files[3],
-    bolditalic = font_files[4]
-  )
-  font_family <- "notoserif"
-}
-```
-
-And now we theme it:
+For the final map, we use Inter Tight for the title and Inter for the labels:
 
 ``` r
 # Theming
@@ -376,19 +376,21 @@ base_plot +
       " Data: Shuttle Radar Topography Mission (SRTM)"
     )
   ) +
-  theme_minimal(base_family = font_family) +
+  theme_minimal(base_family = map_regular) +
   theme(
     plot.background = element_rect("grey97", colour = NA),
     plot.margin = margin(20, 20, 20, 20),
     plot.caption = element_text(size = base_text_size * 0.5),
-    plot.title = element_text(face = "bold", size = base_text_size * 1.4),
+    plot.title = element_text(
+      family = map_title, face = "bold", size = base_text_size * 1.4
+    ),
     plot.subtitle = element_text(
       margin = margin(b = 10),
       size = base_text_size
     ),
     axis.text = element_text(size = base_text_size * 0.7),
     legend.position = "bottom",
-    legend.title = element_text(size = 8),
+    legend.title = element_text(family = map_title, size = 8),
     legend.text = element_text(size = 8),
     legend.key = element_rect("grey50"),
     legend.key.spacing.x = unit(0, "pt")
@@ -397,21 +399,12 @@ base_plot +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20221017-6-finalplot-1.webp" alt="Relief map of Romania with elevation colors and hillshade highlighting the Carpathian arc, accompanied by an altitude legend." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="High by Lighthouse Family on Spotify"
-  src="https://open.spotify.com/embed/track/1KP6ieHBqTmEjqLy75gAEn?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="1KP6ieHBqTmEjqLy75gAEn" title="High by Lighthouse Family on Spotify" %}
 
 ## References
 
 - Grossenbacher, T. (2019, April 19). Bivariate maps with ggplot2 and sf. *Timo Grossenbacher*. <https://timogrossenbacher.ch/bivariate-maps-with-ggplot2-and-sf/>
-- Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible
-  Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
+- Harris, B. (2026, January 27). My ggplot2 blending adventure. *Reproducible Ruins*. <https://barney.fly.dev/2026/01/27/ggplot2-blending-adventure/>
 - Hernangómez, D. (2023). Using the tidyverse with terra objects: The tidyterra package. *Journal of Open Source Software, 8*(91), Article 5751. <https://doi.org/10.21105/joss.05751>
 - Patterson, T., & Jenny, B. (2011). The development and rationale of cross-blended hypsometric tints. *Cartographic Perspectives*, (69), 31–46. <https://doi.org/10.14714/CP69.20>
 - Royé, D. (2022, July 20). Hillshade effects. *Dr Dominic Royé*. <https://dominicroye.github.io/blog/hillshade-effect/>

@@ -31,9 +31,7 @@ After all, we hope that [corona-atlas](https://dieghernan.github.io/corona-atlas
 
 ## References
 
-- Sangaline, E. (2017, April 5). Internet archaeology: Scraping time series
-  data from Archive.org. *sangaline.com*.
-  <https://sangaline.com/post/wayback-machine-scraper/>
+- Sangaline, E. (2017, April 5). Internet archaeology: Scraping time series data from Archive.org. *sangaline.com*. <https://sangaline.com/post/wayback-machine-scraper/>
 
 ## Links
 

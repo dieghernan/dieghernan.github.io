@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? FALSE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -46,15 +46,7 @@ What I missed when using `st_cast` was the possibility of breaking `LINESTRING` 
 
 ![Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments.](https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp)
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Hold the Line by Toto on Spotify"
-  src="https://open.spotify.com/embed/track/2UasQGaawqY6ncetMd2LNw?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="4aVuWgvD0X63hcOCnZtNFA" title="Hold the Line by Toto on Spotify" %}
 
 ## An approach
 

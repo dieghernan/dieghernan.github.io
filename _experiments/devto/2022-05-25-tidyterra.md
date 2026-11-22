@@ -10,15 +10,34 @@ ai_disclosure_level: no_ai
 
 Has alerts? FALSE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
 If you have been playing around with **R** for a while, you are probably familiar with the `volcano` dataset:
 
 ``` r
+# Share the paper color and fonts across base graphics and ggplot2.
+background <- "#FEFDFD"
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+with_map_style <- function(plot) {
+  previous <- par(
+    bg = background, family = map_regular, mar = c(3, 3, 3, 3),
+    fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
+  )
+  on.exit(par(previous))
+  invisible(force(plot))
+}
+
 data("volcano")
-image(volcano, col = terrain.colors(256, rev = TRUE))
+with_map_style(image(volcano, col = terrain.colors(256, rev = TRUE)))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano-1.webp" alt="Elevation heatmap of Maungawhau in Auckland from the volcano dataset. Colors indicate altitude and reveal the crater surrounded by higher ground." width="100%" />
@@ -34,6 +53,16 @@ library(ggplot2)
 library(tidyterra)
 library(maptiles)
 library(sf)
+
+theme_set(
+  theme_grey(paper = background, base_family = map_regular) +
+    theme(
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 ```
 
 ## Wait, `volcano` is flipped?
@@ -57,7 +86,10 @@ box <- box %>%
   # To crs for NZGD49
   st_transform(27200)
 
-tile <- get_tiles(box, crop = TRUE, zoom = 16)
+tile <- get_tiles(box,
+  crop = TRUE, zoom = 16,
+  cachedir = tools::R_user_dir("maptiles", "cache")
+)
 
 
 ggtile <- ggplot() +
@@ -77,7 +109,7 @@ Thanks to the **terra** package we can start converting `volcano` into a SpatRas
 ``` r
 volcano_rast <- rast(volcano)
 
-terra::plot(volcano_rast)
+with_map_style(terra::plot(volcano_rast, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-1.webp" alt="Elevation raster of Maungawhau before orientation correction. The crater appears near the top of the map." width="100%" />
@@ -91,7 +123,7 @@ volcano_rast_ok <- rast(volcano[
 ])
 
 # Much better!
-terra::plot(volcano_rast_ok)
+with_map_style(terra::plot(volcano_rast_ok, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_volcano_raster-2.webp" alt="Elevation raster of Maungawhau after reversing rows and columns. The crater now appears near the bottom of the map." width="100%" />
@@ -103,7 +135,7 @@ volcano_rast_ok
 #> size        : 87, 61, 1  (nrow, ncol, nlyr)
 #> resolution  : 1, 1  (x, y)
 #> extent      : 0, 61, 0, 87  (xmin, xmax, ymin, ymax)
-#> coord. ref. :
+#> coord. ref. : 
 #> source(s)   : memory
 #> name        : lyr.1
 #> min value   :    94
@@ -163,7 +195,7 @@ volcano2
 #> min value   :        94
 #> max value   :       195
 
-terra::plot(volcano2)
+with_map_style(terra::plot(volcano2, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-1.webp" alt="Georeferenced elevation map of Maungawhau. Projected coordinates locate the terrain and colors represent altitude from 94 to 195 meters." width="100%" />
@@ -173,7 +205,7 @@ terra::plot(volcano2)
 # And plot it
 ggtile +
   geom_spatraster(data = volcano2) +
-  scale_fill_terrain_c(alpha = 0.75)
+  scale_fill_viridis_c(alpha = 0.75)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_create_volcano2-2.webp" alt="Street map of Maungawhau overlaid with a translucent elevation raster, aligning the terrain with the crater and surrounding streets." width="100%" />
@@ -199,7 +231,7 @@ volcano2_easter
 #> name        :  elevation
 #> min value   :  76.262222
 #> max value   : 195.554199
-terra::plot(volcano2_easter)
+with_map_style(terra::plot(volcano2_easter, background = background))
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-1.webp" alt="Elevation map of Maungawhau derived from LiDAR data, showing the crater and surrounding terrain at 5-meter resolution." width="100%" />
@@ -252,12 +284,4 @@ ggtile +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220525_easteregg-4.webp" alt="Street map of Maungawhau overlaid with colored elevation bands at 20-meter intervals and contour lines at 2.5-meter intervals." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Eruption by Van Halen on Spotify"
-  src="https://open.spotify.com/embed/track/4USM2iFc7ICK65ODvZAd0w?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="4USM2iFc7ICK65ODvZAd0w" title="Eruption by Van Halen on Spotify" %}

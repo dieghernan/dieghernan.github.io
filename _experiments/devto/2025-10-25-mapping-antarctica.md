@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? TRUE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -31,16 +31,21 @@ library(rmapshaper)
 # Define a common theme for the maps.
 background <- "#E2ECF2"
 
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme_grey(paper = background) +
+  theme_grey(paper = background, base_family = map_regular) +
     theme(
-      text = element_text(family = map_family),
-      plot.title = element_text(face = "bold"),
+      text = element_text(family = map_regular),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -51,9 +56,9 @@ theme_set(
 First, we retrieve the Antarctic geometry from GISCO and transform it to an orthographic projection centered on the South Pole.
 
 ``` r
-antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") %>%
+antarct <- gisco_get_countries(year = 2024, resolution = 1, country = "ATA") |>
   select(NAME = NAME_ENGL) |>
-  # Orthographic projection centered on the South Pole
+  # Ortho proj centered in the South Pole
   st_transform(crs = "+proj=ortho +lat_0=-90 +lon_0=0")
 
 ggplot(antarct) +
@@ -236,15 +241,22 @@ ggplot(plastic_end) +
 
 plastic_end$area <- st_area(plastic_end) |> as.double()
 
-plastic_end$fill <- sample(c("#ff00ec", "#9e00ec"), nrow(plastic_end), replace = TRUE)
-plastic_end$fill <- ifelse(plastic_end$area > quantile(plastic_end$area, probs = 0.4),
+plastic_end$fill <- sample(c("#ff00ec", "#9e00ec"),
+  nrow(plastic_end),
+  replace = TRUE
+)
+plastic_end$fill <- ifelse(
+  plastic_end$area > quantile(plastic_end$area, probs = 0.4),
   "white",
   plastic_end$fill
 )
 
 bbox2 <- st_bbox(plastic_end)
 ggplot() +
-  geom_sf(data = plastic_end, aes(fill = fill), color = NA, linewidth = 0) +
+  geom_sf(
+    data = plastic_end, aes(fill = fill),
+    color = NA, linewidth = 0
+  ) +
   scale_fill_identity() +
   theme(
     panel.background = element_rect(fill = "#009fdc"),
@@ -261,12 +273,4 @@ ggplot() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/202510_redesign-2.webp" alt="Antarctic flag variation with the continental silhouette formed by scattered white points on a blue background." width="100%" />
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Cold Heart (PNAU Remix) by Elton John and Dua Lipa on Spotify"
-  src="https://open.spotify.com/embed/track/5PERfEjDBWImbO3W8m7f0w?theme=0"
-  height="152"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html id="5PERfEjDBWImbO3W8m7f0w" title="Cold Heart (PNAU Remix) by Elton John and Dua Lipa on Spotify" %}

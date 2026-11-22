@@ -10,7 +10,7 @@ ai_disclosure_level: no_ai
 
 Has alerts? TRUE
 Has Spotify? TRUE
-Has iframe? TRUE
+Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
 
@@ -38,14 +38,30 @@ library(ggplot2)
 background <- "#faf8f2"
 ink <- "#203b47"
 
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
 theme_set(
   theme_void() +
     theme(
+      text = element_text(family = map_regular),
       plot.background = element_rect(fill = background, colour = NA),
       panel.background = element_rect(fill = background, colour = NA),
-      plot.title = element_text(face = "bold", colour = ink),
+      plot.title = element_text(
+        family = map_title, face = "bold",
+        colour = ink
+      ),
       plot.subtitle = element_text(colour = ink),
       plot.caption = element_text(colour = "grey40", hjust = 0),
+      legend.title = element_text(
+        family = map_title, face = "bold",
+        colour = ink
+      ),
       legend.position = "bottom",
       plot.margin = margin(10, 10, 10, 10)
     )
@@ -174,7 +190,10 @@ conflicts <- postal_points |>
 duplicates <- duplicated(postal_points$geometry)
 
 knitr::kable(data.frame(
-  Indicator = c("Duplicate locations removed", "Locations with conflicting codes"),
+  Indicator = c(
+    "Duplicate locations removed",
+    "Locations with conflicting codes"
+  ),
   Value = c(sum(duplicates), nrow(conflicts))
 ))
 ```
@@ -288,7 +307,7 @@ ggplot(city_areas) +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp" alt="Six colored areas clipped to Ljubljana, labeled 1000, 1210, 1211, 1231, 1260&#10;and 1261, with their generating postal points marked.&#10;" width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/2026-11-06-postal-codes-clip-cells-1.webp" alt="Six colored areas clipped to Ljubljana, labeled 1000, 1210, 1211, 1231,&#10;1260 and 1261, with their generating postal points marked.&#10;" width="100%" />
 
 We intersect the geometry columns, then use the intersection's `idx` matrix to recover each cell's postal code. This keeps the attribute assignment explicit. Label positions are also calculated from geometries alone.
 
@@ -490,18 +509,23 @@ ggplot() +
 
 ## Checking the result
 
-The map is ready, but let's check the geometry before going further. Are the polygons valid? Do assigned and unassigned areas cover the territory? Are there any appreciable overlaps? We allow one square meter for numerical differences in the geometry operations.
+The map is ready, but let's check the geometry before going further. Are the polygons valid? Do assigned and unassigned areas cover the territory? Are there any appreciable overlaps? The table reports overlaps within one square meter of zero as zero to account for numerical differences in the geometry operations.
 
 ``` r
 territory <- st_union(st_geometry(municipalities))
 
 coverage <- st_union(c(st_geometry(postal_areas), st_geometry(unassigned)))
 
-difference_m2 <- as.numeric(sum(st_area(st_sym_difference(territory, coverage))))
+difference_m2 <- as.numeric(
+  sum(st_area(st_sym_difference(territory, coverage)))
+)
 
 overlap_m2 <- as.numeric(
   sum(st_area(postal_areas)) + sum(st_area(unassigned)) - sum(st_area(coverage))
 )
+if (abs(overlap_m2) <= 1) {
+  overlap_m2 <- 0
+}
 
 knitr::kable(data.frame(
   Indicator = c(
@@ -524,7 +548,7 @@ knitr::kable(data.frame(
 | Unassigned records                        |   6.0000 |
 | Unassigned area (km²)                     | 150.2033 |
 | Coverage difference (m²)                  |   0.0000 |
-| Overlap (m²)                              |  -0.0002 |
+| Overlap (m²)                              |   0.0000 |
 
 These checks verify the geometry, **not postal accuracy**. We could cover an entire country with valid polygons and still have a poor approximation of its delivery areas.
 
@@ -538,15 +562,7 @@ We have not compared these results with an independent postal source for Sloveni
 
 The title is a nod to Muse's album *Black Holes and Revelations*.
 
-<iframe
-  class="d-block w-100 border-0 rounded my-3"
-  title="Black Holes and Revelations by Muse on Spotify"
-  src="https://open.spotify.com/embed/album/0lw68yx3MhKflWFqCsGkIs?utm_source=generator&theme=0&si=015f4c7acc5c4f8a"
-  height="352"
-  loading="lazy"
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  allowfullscreen>
-</iframe>
+{% include snippets/spotify.html type="album" id="0lw68yx3MhKflWFqCsGkIs" title="Black Holes and Revelations by Muse on Spotify" %}
 
 ## References
 

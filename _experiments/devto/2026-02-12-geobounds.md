@@ -54,18 +54,23 @@ library(dplyr)
 # Define a common theme for the maps.
 background <- "#F5F5F5"
 
-map_family <- "inter-tight"
-sysfonts::font_add_google("Inter Tight", family = map_family)
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
   theme_grey(
-    base_family = "inter-tight", paper = background,
+    base_family = map_regular, paper = background,
     base_size = 8
   ) +
     theme(
-      plot.title = element_text(face = "bold"),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
       plot.margin = margin(10, 10, 10, 10)
     )
 )
