@@ -26,7 +26,7 @@ tags:
   - rstats
   - r_bloggers
 last_modified_at: 2022-03-03
-header_img: "https://dieghernan.github.io/assets/img/blog/20220303_inset.webp"
+header_img: "https://dieghernan.github.io/assets/img/blog/20220303_inset-1.webp"
 output:
   md_document:
     variant: gfm
@@ -34,8 +34,8 @@ output:
 description: >-
   Create inset maps in R with ggplot2, tmap and mapsf to show geographic
   context and outlying regions.
-og_image_width: 1529
-og_image_height: 1150
+og_image_width: 2400
+og_image_height: 1840
 og_image_type: "image/webp"
 seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
 og_title: "Inset maps with ggplot2, tmap and mapsf"
@@ -313,3 +313,5 @@ local({
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insetmapsf-1.webp" alt="Map of Spain with regional boundaries and a boxed Canary Islands inset at the lower right." width="100%" />
+
+

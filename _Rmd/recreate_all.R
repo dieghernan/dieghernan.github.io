@@ -1,10 +1,7 @@
 # Run from the repository root. Pass Rmd filenames to select posts.
 source("_Rmd/renderblog_v2.R")
 
-posts <- commandArgs(trailingOnly = TRUE)
-if (!length(posts)) {
-  posts <- "2022-03-03-insetmaps.Rmd"
-}
+posts <- c("2022-03-03-insetmaps.Rmd", "2022-05-01-Unknown-pleasures-R.Rmd")
 
 for (post in posts) {
   input <- file.path("_Rmd", post)
@@ -22,6 +19,13 @@ for (post in posts) {
     next
   }
   image_path <- sub("^https://dieghernan[.]github[.]io/", "", image_url)
+
+  # Check and update old copies
+  alt <- sub("-1.webp", ".webp", image_path)
+  if (file.exists(alt)) {
+    tt <- file.copy(image_path, alt, overwrite = TRUE)
+  }
+
   image_size <- dim(webp::read_webp(image_path))
 
   for (path in c(input, output)) {

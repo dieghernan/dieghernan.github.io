@@ -26,7 +26,7 @@ tags:
   - rstats
   - r_bloggers
 last_modified_at: 2022-03-03
-header_img: "https://dieghernan.github.io/assets/img/blog/20220303_inset.webp"
+header_img: "https://dieghernan.github.io/assets/img/blog/20220303_inset-1.webp"
 output:
   md_document:
     variant: gfm
@@ -34,8 +34,8 @@ output:
 description: >-
   Create inset maps in R with ggplot2, tmap and mapsf to show geographic
   context and outlying regions.
-og_image_width: 1529
-og_image_height: 1150
+og_image_width: 2400
+og_image_height: 1840
 og_image_type: "image/webp"
 seo_title: "Inset maps with ggplot2, tmap and mapsf: One World"
 og_title: "Inset maps with ggplot2, tmap and mapsf"
@@ -372,4 +372,94 @@ local({
   box(lwd = .5)
   mf_inset_off()
 })
+```
+
+```{r}
+#| label: 20220303_inset
+#| include: false
+#| fig-height: 8
+#| fig-width: 8
+
+library(giscoR)
+library(tidyverse)
+library(sf)
+
+
+sa <- gisco_get_countries(resolution = 3)
+bra <- sa |>
+  filter(ISO3_CODE == "BRA")
+
+bra_map <- ggplot(sa) +
+  geom_sf(fill = "#DFDFDF", color = "#656565") +
+  scale_y_continuous(breaks = seq(-30, 0, 10)) +
+  annotate(
+    "text",
+    x = -28,
+    y = -15,
+    label = "Atlantic Sea",
+    family = map_title,
+    fontface = "bold",
+    color = "#1278AB",
+    size = 8
+  ) +
+  geom_sf(data = bra, fill = "#C12838", color = "#656565") +
+  coord_sf(ylim = c(-33, 7), xlim = c(-73, -19)) +
+  theme(
+    text = element_text(family = map_regular),
+    panel.background = element_rect(fill = "#C7E7FB"),
+    plot.background = element_rect(fill = "#FEFDFD")
+  )
+
+
+frame <- st_linestring(rbind(
+  c(-175, 85),
+  c(175, 85),
+  c(175, -85),
+  c(-175, -85),
+  c(-175, 85)
+)) |>
+  st_segmentize(5) |>
+  st_cast("POLYGON") |>
+  st_sfc(crs = 4326) |>
+  st_transform("+proj=robin")
+
+w <- gisco_get_countries(resolution = 3, epsg = 3857) |>
+  select(ISO3_CODE) |>
+  st_transform("+proj=robin") |>
+  st_intersection(frame)
+
+bra_w <- w |>
+  filter(ISO3_CODE == "BRA")
+
+ins <- ggplot(w) +
+  geom_sf(data = frame, fill = "white", color = NA) +
+  geom_sf(fill = "#DFDFDF", color = "#656565", linewidth = 0.1) +
+  geom_sf(data = bra_w, fill = "#C12838", color = "#656565", linewidth = 0.1) +
+  geom_sf(data = frame, fill = NA, color = "black", linewidth = 0.3) +
+  coord_sf(crs = "+proj=robin") +
+  theme_void()
+
+
+library(patchwork)
+
+bra_map +
+  inset_element(
+    ins,
+    left = 0.6,
+    bottom = 0.7,
+    right = 1,
+    top = 1,
+    align_to = "panel"
+  )
+
+# library(cowplot)
+# # Use the same font metrics when arranging plots off screen.
+# cowplot::set_null_device(function(width, height) {
+#   cowplot::agg_null_device(width, height)
+#   grid::grid.newpage()
+# })
+#
+# ggdraw() +
+#   draw_plot(bra_map) +
+#   draw_plot(ins, width = 0.37, x = 0.625, y = 0.27)
 ```
