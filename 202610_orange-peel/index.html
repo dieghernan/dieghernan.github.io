@@ -165,7 +165,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
-    <script defer src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.min.js" as="script" >
     <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
     <link rel="stylesheet" id="maincss" href="/assets/css/main.css">
@@ -727,33 +727,18 @@ outline and masking approach.)</li>
        </div>
      </div>
  </div>
- </main><nav aria-label="Navigation" class="container-lg chulapa-pagination  ">
- <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0 ">
-   <li class="page-item text-left mr-0 ">
-      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202610_webmentions/">
-	  <i class="fa fa-chevron-left" aria-hidden="true"></i><span class="sr-only">Previous</span>
-	  </a>
-   </li>
-   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-md-inline ">
-     <p class="page-link chulapa-label">Conversations across the we...</p>
-   </li>
-   <li class="page-item border-0 disabled text-left ml-0 mr-auto d-none d-sm-inline d-md-none ">
-     <p class="page-link chulapa-label">Conversations ...</p>
-   </li>
-	 <li class="page-item disabled mx-auto invisible">
-	  <p class="page-link">|</p>
-	 </li>	
-	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-sm-inline d-md-none ">
-	   <p class="page-link chulapa-label">Postal codes a...</p>
-	 </li>
-	 <li class="page-item border-0 disabled text-right mr-0 ml-auto d-none d-md-inline ">
-	   <p class="page-link chulapa-label">Postal codes and tessellations</p>
-	 </li>
-   <li class="page-item text-right ml-0 ">
-      <a class="page-link border-0 px-4" href="https://dieghernan.github.io/202611_postal-codes/">
-	  <i class="fa fa-chevron-right" aria-hidden="true"></i><span class="sr-only">Next</span></a>
-   </li>
- </ul>
+ </main><nav aria-label="Adjacent pages" class="container-lg chulapa-pagination chulapa-post-nav">
+ <ul class="col-lg-8 offset-lg-2 pagination chulapa-pagination-round px-0"><li class="page-item text-left">
+        <a class="page-link border-0" href="https://dieghernan.github.io/202610_webmentions/" rel="prev">
+          <span class="chulapa-post-nav-arrow" aria-hidden="true"></span>
+          <span class="chulapa-post-nav-title"><span class="sr-only">Previous: </span>Conversations across the web with Webmentions</span>
+        </a>
+     </li><li class="page-item chulapa-post-nav-next text-right">
+        <a class="page-link border-0" href="https://dieghernan.github.io/202611_postal-codes/" rel="next">
+          <span class="chulapa-post-nav-title"><span class="sr-only">Next: </span>Postal codes and tessellations</span>
+          <span class="chulapa-post-nav-arrow" aria-hidden="true"></span>
+        </a>
+     </li></ul>
 </nav>
 <div class="container-lg my-1">
  <div class="row">
