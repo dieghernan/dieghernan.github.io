@@ -3,16 +3,9 @@
 @charset "utf-8";
 // Your custom css /scss here.fa
 
-// Pre doesn't wrap anymore
-pre {
-  word-wrap: normal;
-  word-break: normal;
-}
-
 pre code {
   overflow: auto;
   word-wrap: normal;
-  white-space: pre;
 }
 
 .fa-orcid {
@@ -77,10 +70,6 @@ h1,h2,h3,h4,h5,h6 {
   object-fit: cover;
 }
 
-.series-card summary {
-  cursor: pointer;
-}
-
 @media (min-width: 768px) {
   .blog-listing-cards .chulapa-card-img {
     flex-basis: 25%;
@@ -98,45 +87,6 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 
-@media (max-width: 991.98px) {
-  aside.col-lg-2 > .p-author {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: .25rem 1rem;
-
-    > .row {
-      flex: 0 0 100%;
-      max-width: 100%;
-      margin: 0 !important;
-    }
-
-    .u-photo {
-      flex: 0 0 2rem;
-      width: 2rem;
-      height: 2rem;
-      margin-left: 0 !important;
-    }
-
-    .p-name {
-      flex: 0 1 auto;
-      width: auto;
-      min-width: 0;
-      max-width: 100%;
-      padding: 0 0 0 .5rem;
-      overflow-wrap: anywhere;
-    }
-
-    .u-photo + .p-name {
-      max-width: calc(100% - 2rem);
-    }
-
-    > .row > .col {
-      padding: 0;
-    }
-  }
-}
-
 @media (max-width: 767.98px) {
   .col:has(> .chulapa-breadcrumb) {
     min-width: 0;
@@ -149,7 +99,6 @@ h1,h2,h3,h4,h5,h6 {
 
   .chulapa-breadcrumb .breadcrumb-item.active {
     flex: 1 1 0;
-    min-width: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
