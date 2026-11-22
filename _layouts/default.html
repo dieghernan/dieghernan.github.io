@@ -22,7 +22,7 @@ header_in_content: true
     <img class="u-photo u-featured d-none" src="{{ featured_image | absolute_url | escape_once }}" alt="{{ featured_image_alt | default: page.title | escape }}">
     {% endif %}
   {% endunless %}
-  {% unless is_feed %}<a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans"></a>{% endunless %}
+  {% unless is_feed %}<a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans">Invisible link for fed.brid.gy</a>{% endunless %}
   <main class="d-flex flex-column flex-fill">
   {% include components/headers.html headertype=page.header_type
     imghero=page.header_img projects=page.project_links %}
