@@ -138,18 +138,17 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 @media (max-width: 767.98px) {
-  .breadcrumb-item.active {
-    max-width: min(50vw, 280px);
+  .col:has(> .chulapa-breadcrumb) {
     min-width: 0;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
   }
-}
 
-@media (max-width: 575.98px) {
-  .breadcrumb-item.active{
-    max-width: min(40vw, 240px);
+  .chulapa-breadcrumb .breadcrumb {
+    flex-wrap: nowrap;
+    padding-right: 0;
+  }
+
+  .chulapa-breadcrumb .breadcrumb-item.active {
+    flex: 1 1 0;
     min-width: 0;
     white-space: nowrap;
     text-overflow: ellipsis;
