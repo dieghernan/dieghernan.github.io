@@ -259,11 +259,19 @@ labels_df <- sum_table |>
   )
 
 iter_df |>
+  group_by(iter) |>
   ggplot(aes(x = value)) +
   geom_histogram(
     bins = 50,
     fill = "grey50",
     color = NA
+  ) +
+  # Areas
+  geom_rect(
+    aes(xmin = -Inf, xmax = mu, ymin = -Inf, ymax = Inf),
+    fill = "red",
+    alpha = 0.1,
+    data = ~ slice_head(.x, n = 1)
   ) +
   geom_vline(
     data = labels_df,
@@ -286,16 +294,20 @@ iter_df |>
     labeller = labeller(iter = ~ paste("Iteration", .x))
   ) +
   scale_x_continuous(labels = label_comma()) +
-  scale_y_continuous(labels = label_comma()) +
+  scale_y_continuous(
+    labels = label_comma(accuracy = 1),
+    breaks = breaks_extended(n = 3)
+  ) +
   labs(
     title = "Head/tail breaks: step by step",
     subtitle = "Recursive partitioning at the arithmetic mean",
     x = "Value",
-    y = "Count"
+    y = "Count",
+    caption = "Head areas highlighted in red"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms illustrating successive head/tail breaks iterations. Dashed red lines mark the mean at each step. The proportion of observations above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms illustrating successive head/tail breaks iterations. Red areas mark the head at each step. The proportion of observations above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" />
 
 The head proportion varies across iterations and reaches 50% in the fourth, which stops the loop. It does not increase monotonically.
 
@@ -345,12 +357,12 @@ breaks_df <- lapply(thresholds, function(thr) {
     ),
     n_classes = length(ci$brks) - 1
   ) |>
+    # Prepare rect
     group_by(threshold, n_classes, class) |>
     summarise(xmin = min(value), xmax = max(value), .groups = "drop_last") |>
-    mutate(ymin = -0.01, ymax = 1.1) |>
     mutate(
-      xmin = ifelse(row_number() == 1, xmin, lag(xmax)),
-      xmax = ifelse(row_number() == n(), xmax + 50, xmax)
+      xmin = ifelse(row_number() == 1, -Inf, lag(xmax)),
+      xmax = ifelse(row_number() == n(), Inf, xmax)
     ) |>
     ungroup()
 }) |>
@@ -393,10 +405,11 @@ ggplot(breaks_df, aes(fill = factor(class))) +
     size = 1.5,
     pad = FALSE
   ) +
-  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
+  # Areas
+  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf)) +
   facet_wrap(~threshold, scales = "free_x") +
-  scale_x_continuous(labels = label_comma(), breaks = seq(0, 500, 100)) +
-  scale_y_continuous(labels = label_percent(), breaks = seq(0, 1, .25)) +
+  scale_x_continuous(labels = label_comma()) +
+  scale_y_continuous(labels = label_percent()) +
   scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
   labs(
     title = "The effect of the threshold",
@@ -507,7 +520,8 @@ levels(afcon$headtails)
 #> [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"   "[3819.8,4998.5)"  
 #> [5] "[4998.5,5246]"
 levels(afcon$fisher)
-#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"  "[3942.5,5246]"
+#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)" 
+#> [5] "[3942.5,5246]"
 levels(afcon$quantile)
 #> [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)"
 #> [5] "[1877.4,5246]"
@@ -552,10 +566,8 @@ tibble(
   # Prepare rects
   group_by(id_breaks) |>
   mutate(
-    xmin = if_else(row_number() == 1, 0, b),
-    xmax = if_else(row_number() == n(), max(afcon$totcon) + 500, lead(b)),
-    ymin = 0,
-    ymax = 1.1
+    xmin = if_else(row_number() == 1, -Inf, b),
+    xmax = if_else(row_number() == n(), Inf, lead(b))
   ) |>
   ggplot() +
   stat_ecdf(
@@ -565,13 +577,14 @@ tibble(
     size = 1,
     pad = FALSE
   ) +
+  # Areas
   geom_rect(aes(
-    xmin = xmin, ymin = ymin, xmax = xmax,
-    ymax = ymax, fill = group
+    xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf,
+    fill = group
   )) +
   facet_wrap(vars(id_breaks), ncol = 1) +
   scale_x_continuous(labels = label_comma(accuracy = 1)) +
-  scale_y_continuous(labels = label_percent(), breaks = seq(0, 1, 0.25)) +
+  scale_y_continuous(labels = label_percent()) +
   scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
   guides(color = guide_legend(), fill = guide_legend(override.aes = list(alpha = 1))) +
   labs(
@@ -587,11 +600,13 @@ tibble(
 
 The top three classes of `headtails` contain five observations, whereas those of `fisher` contain 13. In this example, `headtails` gives more detail at the upper end of the distribution.
 
-The next plot compares density estimates of the rescaled `totcon` values and the class assignments from each method. The original values are rescaled to `[1, nclass]` and shifted by -0.5 for the visual comparison.
+The next plot compares density estimates of the rescaled `totcon` values and the class assignments from each method. The original values are rescaled to `[1, nclass]` and shifted by c(-0.4, 0.4) for the visual comparison.
 
 ``` r
 # Rescale values for visualization
-afcon$data <- rescale(afcon$totcon, to = range(afcon$headtails_br) + c(-0.5, 0.4)) |> round()
+afcon$data <- rescale(afcon$totcon,
+  to = range(afcon$headtails_br) + c(-0.4, 0.4)
+) |> round()
 
 afcon |>
   as_tibble() |>
