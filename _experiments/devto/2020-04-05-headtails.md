@@ -35,18 +35,13 @@ Jiang (2013)
 This vignette discusses the implementation of the "Head/tail breaks" style (Jiang (2013)) in the `classIntervals()` function from the **classInt** package. A step-by-step example is presented to clarify the method. A case study using `spData::afcon` is also included, making use of additional packages such as **sf**.
 
 <div class="callout-note" role="note" aria-label="Note" markdown="1">
-**Historical example:** The mapping examples use **cartography**, which is now
-in maintenance mode. Its maintainers recommend
-[**mapsf**](https://riatelab.github.io/mapsf/) for new work. The original code
-and outputs are preserved and have not been revalidated against current package
-versions.
-</div>
-
-<div class="callout-note" role="note" aria-label="Note" markdown="1">
 **Update (23 November 2026):** This post has been substantially revised with 
 updated **R** code, improved visualizations, clearer explanations of the 
 head/tail breaks algorithm, and a comparison with Fisher–Jenks and quantile 
 classification methods. The original publication date has been preserved.
+
+The package vignette is available at <https://r-spatial.github.io/classInt/articles/headtailsR.html>
+
 </div>
 
 ## Introduction
@@ -512,11 +507,9 @@ levels(afcon$headtails)
 #> [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"   "[3819.8,4998.5)"  
 #> [5] "[4998.5,5246]"
 levels(afcon$fisher)
-#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)" 
-#> [5] "[3942.5,5246]"
+#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"  "[3942.5,5246]"
 levels(afcon$quantile)
-#> [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)"
-#> [5] "[1877.4,5246]"
+#> [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)" "[1877.4,5246]"
 
 ht_breaks <- classIntervals(afcon$totcon, style = "headtails")$brks[seq_len(
   nclass
@@ -733,7 +726,7 @@ It is also important to note that `headtails` and `fisher` reveal different info
 ## References
 
 - Anselin, L., & O’Loughlin, J. (1992). Geography of international conflict and cooperation: Spatial dependence and regional context in Africa. In M. D. Ward (Ed.), *The new geopolitics* (pp. 39–75). Gordon and Breach Science Publishers.
-- Jiang, B. (2013). Head/tail breaks: A new classification scheme for data with a heavy-tailed distribution. *The Professional Geographer, 65*(3), 482–494. <https://doi.org/10.1080/00330124.2012.700499>
+- Jiang, B. (2013). Head/tail breaks: A new classification scheme for data with a heavy-tailed distribution. *The Professional Geographer, 65*(3), 482–494. [DOI](https://doi.org/10.1080/00330124.2012.700499)
 - Jiang, B. (2019). A recursive definition of goodness of space for bridging the concepts of space and place for sustainability. *Sustainability, 11*(15), Article 4091. <https://doi.org/10.3390/su11154091>
 - Jiang, B., Liu, X., & Jia, T. (2013). Scaling of geographic space as a universal rule for map generalization. *Annals of the Association of American Geographers, 103*(4), 844–855. [DOI](https://doi.org/10.1080/00045608.2013.765773)
 - Jiang, B., & Yin, J. (2014). Ht-index for quantifying the fractal or scaling structure of geographic features. *Annals of the Association of American Geographers, 104*(3), 530–540. [DOI](https://doi.org/10.1080/00045608.2013.834239)
