@@ -150,8 +150,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20220128_flag-1.webp" >
     <meta property="og:image:alt" content="Map of Africa with national flags clipped to each country boundary." >
-    <meta property="og:image:width" content="2100" >
-    <meta property="og:image:height" content="2100" >
+    <meta property="og:image:width" content="2400" >
+    <meta property="og:image:height" content="1200" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -613,7 +613,7 @@ will use newer packages, such as
 version of <a href="https://github.com/paleolimbot/ggspatial/pull/92"><strong>ggspatial</strong></a>
 (not released yet), which adds support for <code class="language-plaintext highlighter-rouge">SpatRaster</code> objects in <strong>ggplot2</strong>.
 The flags come from <a href="https://github.com/hampusborgos/country-flags">country-flags</a>.
-We download the 250-pixel-wide PNGs from version 1.2.10 of
+We download the 1000-pixel-wide PNGs from version 1.2.10 of
 <code class="language-plaintext highlighter-rouge">svg-country-flags</code> via jsDelivr.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Development version of ggspatial</span><span class="w">
 </span><span class="c1"># devtools::install_github("paleolimbot/ggspatial")</span><span class="w">
@@ -661,8 +661,8 @@ We download the 250-pixel-wide PNGs from version 1.2.10 of
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># We paste the ISO2 code to each African country</span><span class="w">
 </span><span class="n">africa</span><span class="o">$</span><span class="n">iso2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">countrycode</span><span class="p">(</span><span class="n">africa</span><span class="o">$</span><span class="n">ISO3_CODE</span><span class="p">,</span><span class="w"> </span><span class="s2">"iso3c"</span><span class="p">,</span><span class="w"> </span><span class="s2">"iso2c"</span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Get flags from repo - low quality to speed up the code</span><span class="w">
-</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png250px/"</span><span class="w">
+</span><span class="c1"># Get flags from repo</span><span class="w">
+</span><span class="n">flagrepo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png1000px/"</span><span class="w">
 
 </span><span class="c1"># Loop and add</span><span class="w">
 </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">iso</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">africa</span><span class="o">$</span><span class="n">iso2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
