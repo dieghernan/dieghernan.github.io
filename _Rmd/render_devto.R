@@ -3,7 +3,7 @@
 #   path.expand()
 
 all_files <- list.files("./collections/_posts", full.names = TRUE)
-input <- all_files[6]
+input <- all_files[16]
 
 convert_to_devto <- function(input) {
   metadata <- rmarkdown::yaml_front_matter(input)
@@ -57,15 +57,17 @@ convert_to_devto <- function(input) {
   iframe <- any(grepl("<iframe\\b", body, ignore.case = TRUE))
   details <- any(grepl("<details\\b", body, ignore.case = TRUE))
   math <- any(grepl("math", body, ignore.case = TRUE))
+  includes <- any(grepl("\\{\\% include", body))
 
   al <- paste0("Has alerts? ", alerts)
   spot <- paste0("Has Spotify? ", spotify)
   ifram <- paste0("Has iframe? ", iframe)
   det <- paste0("Has details_summary? ", details)
   math <- paste0("Has math? ", math)
+  incl <- paste0("Has includes? ", includes)
 
   writeLines(
-    c("---", pp, "---", "", al, spot, ifram, det, math, "", body),
+    c("---", pp, "---", "", al, spot, ifram, det, math, incl, "", body),
     output,
     useBytes = TRUE
   )

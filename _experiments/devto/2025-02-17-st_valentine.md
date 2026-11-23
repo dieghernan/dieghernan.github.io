@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 Do you know the [Bonne Projection](https://en.wikipedia.org/wiki/Bonne_projection)? This is a very special one, as it produces this result when used to map the whole world. Happy Valentine’s Day!
 

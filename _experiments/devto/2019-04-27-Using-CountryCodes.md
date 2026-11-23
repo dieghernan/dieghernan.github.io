@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 This vignette shows how to use the database provided in the GitHub project [Country Codes and International Organizations & Groups](https://dieghernan.github.io/projects/countrycodes/) with the **sf** package in **R**.
 

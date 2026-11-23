@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 On 27 Jan. 2022 my package **rasterpic** was accepted on [CRAN](https://cran.r-project.org/package=rasterpic) (Hooray!). This package geotags images, using a spatial object (from **sf** or **terra**) as a geographic reference.
 

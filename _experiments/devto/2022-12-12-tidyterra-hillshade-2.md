@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? TRUE
 Has math? FALSE
+Has includes? TRUE
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
 **Updated on October 25, 2026:** The elevation and precipitation maps now use

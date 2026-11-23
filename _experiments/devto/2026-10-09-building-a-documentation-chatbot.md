@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 This website uses my **Jekyll** theme, [<span class="chulapa">Chulapa</span>](https://dieghernan.github.io/chulapa). Some time ago, I started wondering whether I could add a chatbot to its documentation. The docs already explain the settings, layouts and snippets, but you sometimes need to know what a feature is called before finding it. Could I make that a little easier?
 

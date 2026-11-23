@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 This post introduces a user-defined function for casting **sf** objects of class `LINESTRING` or `POLYGON` into substrings.
 

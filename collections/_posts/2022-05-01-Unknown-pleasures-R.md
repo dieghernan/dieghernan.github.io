@@ -9,6 +9,7 @@ excerpt:
 description: >-
   Turn elevation data into Joy Division-inspired ridgeline maps of Andalusia
   using R, terra and ggridges.
+last_modified_at: 2026-11-24
 syndication:
   - https://www.r-bloggers.com/2022/04/unknown-pleasures-with-r/
   - https://dev.to/dieghernan/unknown-pleasures-with-r-1idb
@@ -127,6 +128,7 @@ library(sf)
 library(terra)
 library(giscoR) # Shapes
 library(elevatr)
+library(tidyterra)
 
 # Data viz and wrangling
 library(ggplot2)
@@ -142,16 +144,6 @@ sysfonts::font_add_google("Inter Tight", family = map_title)
 sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
-
-
-with_map_style <- function(plot) {
-  previous <- par(
-    bg = background, family = map_regular, mar = c(1, 1, 1, 1),
-    fg = "#333333", col.axis = "#4D4D4D", col.lab = "#333333"
-  )
-  on.exit(par(previous))
-  invisible(force(plot))
-}
 
 theme_set(
   theme_grey(paper = background, base_family = map_regular) +
@@ -200,7 +192,7 @@ names(dem) <- "elev"
 nrow(dem)
 #> [1] 698
 
-with_map_style(terra::plot(dem, background = background))
+tidyterra::autoplot(dem)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" />
@@ -220,7 +212,7 @@ dem_agg <- aggregate(dem, factor)
 nrow(dem_agg)
 #> [1] 88
 
-with_map_style(terra::plot(dem_agg, background = background))
+tidyterra::autoplot(dem_agg)
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" />

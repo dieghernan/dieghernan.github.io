@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? TRUE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that contains configurations for various tile layers provided by public agencies in Spain.
 

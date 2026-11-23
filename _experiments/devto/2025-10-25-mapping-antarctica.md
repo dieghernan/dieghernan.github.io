@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 Creating maps with **R** is usually straightforward, but representations that cross the [International Date Line](https://en.wikipedia.org/wiki/International_Date_Line) or that use polar projections can be tricky.
 

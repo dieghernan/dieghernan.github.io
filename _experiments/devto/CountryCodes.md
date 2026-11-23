@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 Complete database of countries and territories, their different country codes under common standards (ISO-3166, GEC *(formerly FIPS)*, M49 (*UN*), STANAG (*NATO*), NUTS (*EU*), etc.) and their membership in different international organizations.
 

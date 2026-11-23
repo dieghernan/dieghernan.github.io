@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 ## Introduction
 

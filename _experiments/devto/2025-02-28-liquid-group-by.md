@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? TRUE
 Has math? FALSE
+Has includes? FALSE
 
 [Liquid](https://shopify.github.io/liquid/) is a template language used by [**Jekyll**](https://jekyllrb.com/), the static site generator behind this website and my theme, <span class="chulapa">Chulapa</span> ([link](https://dieghernan.github.io/chulapa)).
 

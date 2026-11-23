@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 I recently published my project [Postal codes of Spain](https://dieghernan.github.io/codigospostales/), with estimated postal areas, an interactive map and GeoPackage downloads. But there is something we have not looked at yet: how do those address points become polygons? The answer is... **Voronoi polygons**.
 

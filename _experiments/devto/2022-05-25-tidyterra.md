@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 If you have been playing around with **R** for a while, you are probably familiar with the `volcano` dataset:
 

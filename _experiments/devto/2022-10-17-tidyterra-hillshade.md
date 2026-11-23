@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
 **Updated on October 25, 2026:** This post now uses **ggblend** to combine

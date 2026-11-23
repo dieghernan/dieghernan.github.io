@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? TRUE
+Has includes? FALSE
 
 Recently, the [**R** Graph Gallery](https://r-graph-gallery.com/) published a new post by [Benjamin Nowak](https://twitter.com/BjnNowak) showing how to create a dot density map based on the work of the French cartographer [Jacques Bertin](https://en.wikipedia.org/wiki/Jacques_Bertin) (1918–2010):
 

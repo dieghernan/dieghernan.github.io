@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? TRUE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 The **resmush** package has recently been accepted on [CRAN](https://cran.r-project.org/package=resmush)! This small utility package allows for the optimization (i.e., compression) of local and online images using [reSmush.it](https://resmush.it/).
 

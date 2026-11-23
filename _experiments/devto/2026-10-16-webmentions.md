@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 Conversations about a blog post often happen somewhere else. Someone shares a link, replies on their own site or reacts to a post on social media. I wanted to bring some of that activity back here.
 

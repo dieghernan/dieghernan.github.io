@@ -13,6 +13,7 @@ Has Spotify? TRUE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? TRUE
 
 What would happen if we peeled the Earth like an orange? The [interrupted Goode homolosine projection](https://proj.org/en/stable/operations/projections/igh.html) gives us something close to that! This equal-area projection preserves relative areas while splitting the world map into lobes. Add a few shades of orange and our world is ready to peel.
 

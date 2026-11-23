@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 *This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [@dr_xeo](https://twitter.com/dr_xeo)*
 

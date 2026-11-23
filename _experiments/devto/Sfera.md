@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? FALSE
+Has includes? FALSE
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">
 **Project discontinued.** Development ended when Pebble shut down.

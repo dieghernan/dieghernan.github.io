@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
 Has math? TRUE
+Has includes? FALSE
 
 <blockquote class="blockquote">
 

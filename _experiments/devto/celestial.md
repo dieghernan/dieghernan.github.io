@@ -13,6 +13,7 @@ Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? TRUE
 Has math? TRUE
+Has includes? FALSE
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7561601.svg)](https://doi.org/10.5281/zenodo.7561601)
 
