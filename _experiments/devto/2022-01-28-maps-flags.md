@@ -29,7 +29,7 @@ That reminds me of a [previous post](https://dieghernan.github.io/202002_cartogr
 
 With **rasterpic**, we now have an alternative tool for creating maps using images, and this quick post shows you how to do it.
 
-I will replicate the Africa map presented in my previous plot, but this time I will use newer packages, such as [**giscoR**](https://cran.r-project.org/package=giscoR), and the development version of [**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92) (not released yet), which adds support for `SpatRaster` objects in **ggplot2**. The flags come from [country-flags](https://github.com/hampusborgos/country-flags). We download the 250-pixel-wide PNGs from version 1.2.10 of `svg-country-flags` via jsDelivr.
+I will replicate the Africa map presented in my previous plot, but this time I will use newer packages, such as [**giscoR**](https://cran.r-project.org/package=giscoR), and the development version of [**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92) (not released yet), which adds support for `SpatRaster` objects in **ggplot2**. The flags come from [country-flags](https://github.com/hampusborgos/country-flags). We download the 1000-pixel-wide PNGs from version 1.2.10 of `svg-country-flags` via jsDelivr.
 
 ``` r
 # Development version of ggspatial
@@ -82,8 +82,8 @@ Now, let's add the flags with a loop:
 # We paste the ISO2 code to each African country
 africa$iso2 <- countrycode(africa$ISO3_CODE, "iso3c", "iso2c")
 
-# Get flags from repo - low quality to speed up the code
-flagrepo <- "https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png250px/"
+# Get flags from repo
+flagrepo <- "https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png1000px/"
 
 # Loop and add
 for (iso in africa$iso2) {

@@ -32,8 +32,8 @@ output:
 description: >-
   Use rasterpic to georeference flags and other images and turn them into
   basemaps in R.
-og_image_width: 2400
-og_image_height: 1200
+og_image_width: 2100
+og_image_height: 2100
 og_image_type: "image/webp"
 og_image_alt: >-
   Map of Africa with national flags clipped to each country boundary.

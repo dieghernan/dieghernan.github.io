@@ -2,7 +2,7 @@
 review: always
 tags_choose_4: rstats,classInt,r_bloggers,r_package,rspatial
 description: ~
-cover_image: https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp
+cover_image: https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
@@ -15,19 +15,38 @@ Has details_summary? FALSE
 Has math? TRUE
 
 <blockquote class="blockquote">
-  <p class="small font-italic">There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?</p>
-  <footer class="blockquote-footer text-right">Jiang (2013)</footer>
+
+<p class="small font-italic">
+
+There are far more ordinary people (say, 80 percent) than extraordinary people (say, 20 percent), and this is often characterized by the 80/20 principle, based on the observation made by the Italian economist Vilfredo Pareto in 1906 that 80% of land in Italy was owned by 20% of the population. A histogram of the data values for these phenomena would reveal a right-skewed or heavy-tailed distribution. How to map the data with the heavy-tailed distribution?
+
+</p>
+
+<footer class="blockquote-footer text-right">
+
+Jiang (2013)
+
+</footer>
+
 </blockquote>
 
 ## Abstract
 
 This vignette discusses the implementation of the "Head/tail breaks" style (Jiang (2013)) in the `classIntervals()` function from the **classInt** package. A step-by-step example is presented to clarify the method. A case study using `spData::afcon` is also included, making use of additional packages such as **sf**.
 
-<div role="note" aria-label="Note" class="callout-note" markdown="1">
+<div class="callout-note" role="note" aria-label="Note" markdown="1">
 **Historical example:** The mapping examples use **cartography**, which is now
-in maintenance mode. Its maintainers recommend [**mapsf**](https://riatelab.github.io/mapsf/)
-for new work. The original code and outputs are preserved and have not been
-revalidated against current package versions.
+in maintenance mode. Its maintainers recommend
+[**mapsf**](https://riatelab.github.io/mapsf/) for new work. The original code
+and outputs are preserved and have not been revalidated against current package
+versions.
+</div>
+
+<div class="callout-note" role="note" aria-label="Note" markdown="1">
+**Update (23 November 2026):** This post has been substantially revised with 
+updated **R** code, improved visualizations, clearer explanations of the 
+head/tail breaks algorithm, and a comparison with Fisher–Jenks and quantile 
+classification methods. The original publication date has been preserved.
 </div>
 
 ## Introduction
@@ -40,51 +59,80 @@ Power-law and lognormal distributions are examples of heavy-tailed distributions
 
 ``` r
 library(classInt)
+library(tidyverse)
+library(scales)
+
+# Define a common theme for the plots.
+background <- "#FEFDFD"
+
+map_title <- "inter-tight"
+map_regular <- "inter"
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+theme_set(
+  theme_bw(paper = background, base_family = map_regular) +
+    theme(
+      rect = element_rect(fill = background),
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      strip.text = element_text(family = map_title, face = "bold"),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+)
 
 # 1. Characterization of heavy-tail distributions----
 set.seed(1234)
 # Pareto distribution a=1 b=1.161 n=1000
-sample_par <- 1 / (1 - runif(1000))^(1 / 1.161)
-opar <- par(no.readonly = TRUE)
-par(mar = c(2, 4, 3, 1), cex = 0.8)
-plot(
-  sort(sample_par, decreasing = TRUE),
-  type = "l",
-  ylab = "F(x)",
-  xlab = "",
-  main = "80/20 principle"
-)
-abline(
-  h = quantile(sample_par, .8),
-  lty = 2,
-  col = "red3"
-)
-abline(
-  v = 0.2 * length(sample_par),
-  lty = 2,
-  col = "darkblue"
-)
-legend(
-  "topleft",
-  legend = c("F(x): p80", "x: Top 20%"),
-  col = c("red3", "darkblue"),
-  lty = 2,
-  cex = 0.8
-)
+sample_par <- (1 - runif(1000))^(-1 / (log(5) / log(4)))
 
-hist(
-  sample_par,
-  n = 100,
-  xlab = "",
-  main = "Histogram",
-  col = "grey50",
-  border = NA,
-  probability = TRUE
-)
-par(opar)
+sample_par_df <- tibble(x = sample_par) |>
+  arrange(desc(x)) |>
+  mutate(
+    prop = row_number() / n(),
+    cumulative = cumsum(x) / sum(x)
+  )
+
+ggplot(sample_par_df, aes(prop, cumulative)) +
+  geom_line() +
+  geom_vline(xintercept = 0.2, linetype = "dashed") +
+  geom_hline(yintercept = 0.8, linetype = "dashed") +
+  scale_x_continuous(labels = label_percent()) +
+  scale_y_continuous(labels = label_percent()) +
+  labs(
+    title = "The 80/20 principle",
+    subtitle = "An illustration using a Pareto distribution",
+    x = "Top proportion of observations",
+    y = "Cumulative share of total"
+  )
 ```
 
-![Ranked-value plot of a Pareto sample. Values fall steeply and then flatten, with reference lines marking the top 20 percent and the 80th percentile.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp)![Histogram of a Pareto sample. Most values are small, with a long tail of rare large values.](https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp)
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Cumulative share of a simulated Pareto sample, ordered from largest to smallest. The top 20% of observations accounts for approximately 73% of the total, below the theoretical 80% reference line." width="100%" />
+
+``` r
+
+# Histogram
+ggplot(sample_par_df, aes(x = x)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 100,
+    fill = "grey50",
+    color = NA
+  ) +
+  scale_x_continuous(labels = label_comma()) +
+  scale_y_continuous(labels = label_comma()) +
+  labs(
+    title = "A heavy-tailed distribution",
+    subtitle = "Histogram of a simulated Pareto sample",
+    x = "Value",
+    y = "Density"
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-2.webp" alt="Histogram of 1,000 simulated Pareto observations. Most values cluster near the lower end of the scale, while a long right tail extends beyond 500." width="100%" />
 
 ## Breaking method
 
@@ -161,79 +209,105 @@ We reproduce here the pseudo-code[^1] as per Jiang (2019):
      Head/tail Breaks (head);
     End Function
 
-The following **R** example uses `prop < thr`, whereas the pseudocode above uses `head <= 40%`. At exactly 40%, the R loop stops and the pseudocode continues. This distinction does not affect the example below.
+The following **R** example uses `prop < thr`, whereas the pseudocode above uses `head <= 40%`. At exactly 40%, the **R** loop stops and the pseudocode continues. This distinction does not affect the example below.
 
 ``` r
-opar <- par(no.readonly = TRUE)
-par(mar = c(2, 2, 3, 1), cex = 0.8)
 var <- sample_par
-thr <- .4
-brks <- c(min(var), max(var)) # Initialise with min and max
+thr <- 0.4
+brks <- range(var, na.rm = TRUE)
 
-sum_table <- data.frame(
-  iter = 0,
-  mu = NA,
-  prop = NA,
-  n_var = NA,
-  n_head = NA
-)
-# Pars for chart
-limchart <- brks
-# Iteration
-for (i in 1:10) {
+iterations <- list()
+summary_rows <- list()
+
+for (i in seq_len(10)) {
   mu <- mean(var)
+  head_values <- var[var > mu]
+  prop <- length(head_values) / length(var)
+
   brks <- sort(c(brks, mu))
-  head <- var[var > mu]
-  prop <- length(head) / length(var)
-  stopit <- prop < thr & length(head) > 1
-  sum_table <- rbind(
-    sum_table,
-    c(i, mu, prop, length(var), length(head))
+
+  iterations[[i]] <- tibble(
+    iter = i,
+    value = var,
+    mu = mu,
+    prop = prop
   )
-  hist(
-    var,
-    main = paste0("Iter ", i),
-    breaks = 50,
-    col = "grey50",
-    border = NA,
-    xlab = "",
-    xlim = limchart
+
+  summary_rows[[i]] <- tibble(
+    iter = i,
+    mu = mu,
+    prop = prop,
+    n_var = length(var),
+    n_head = length(head_values)
   )
-  abline(v = mu, col = "red3", lty = 2)
-  ylabel <- max(hist(var, breaks = 50, plot = FALSE)$counts)
-  labelplot <- paste0("PropHead: ", round(prop * 100, 2), "%")
-  text(
-    x = mu,
-    y = ylabel,
-    labels = labelplot,
-    cex = 0.8,
-    pos = 4
-  )
-  legend(
-    "right",
-    legend = paste0("mu", i),
-    col = c("red3"),
-    lty = 2,
-    cex = 0.8
-  )
-  if (isFALSE(stopit)) {
+
+  if (!(prop < thr && length(head_values) > 1)) {
     break
   }
-  var <- head
+
+  var <- head_values
 }
-par(opar)
+
+iter_df <- bind_rows(iterations) |>
+  mutate(iter = factor(iter, levels = unique(iter)))
+
+sum_table <- bind_rows(summary_rows)
+
+# Prepare plot
+labels_df <- sum_table |>
+  mutate(
+    iter = factor(iter, levels = levels(iter_df$iter)),
+    label = paste0(
+      "Share of observation\nin the head:\n",
+      label_percent(accuracy = 0.1)(prop)
+    )
+  )
+
+iter_df |>
+  ggplot(aes(x = value)) +
+  geom_histogram(
+    bins = 50,
+    fill = "grey50",
+    color = NA
+  ) +
+  geom_vline(
+    data = labels_df,
+    aes(xintercept = mu),
+    linetype = "dashed",
+    color = "red3"
+  ) +
+  geom_text(
+    data = labels_df,
+    aes(x = mu, y = Inf, label = label),
+    inherit.aes = FALSE,
+    position = position_nudge(x = 20),
+    hjust = 0,
+    vjust = 1.5,
+    size = 3
+  ) +
+  facet_wrap(
+    vars(iter),
+    scales = "free_y",
+    labeller = labeller(iter = ~ paste("Iteration", .x))
+  ) +
+  labs(
+    title = "Head/tail breaks: step by step",
+    subtitle = "Recursive partitioning at the arithmetic mean",
+    x = "Value",
+    y = "Count"
+  )
 ```
 
-![Histogram at step 1 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp)![Histogram at step 2 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-2.webp)![Histogram at step 3 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-3.webp)![Histogram at step 4 of head/tail classification of a Pareto sample. A vertical line marks the mean used to separate the head from the tail. Only values above the previous mean remain.](https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-4.webp)
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms illustrating successive head/tail breaks iterations. Dashed red lines mark the mean at each step. The proportion of observations above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" />
 
 The head proportion varies across iterations and reaches 50% in the fourth, which stops the loop. It does not increase monotonically.
 
 | iter |       mu | prop   | n_var | n_head |
 |-----:|---------:|:-------|------:|-------:|
-|    1 |   5.6755 | 14.5%  |  1000 |    145 |
-|    2 |  27.2369 | 21.38% |   145 |     31 |
-|    3 |  85.1766 | 19.35% |    31 |      6 |
-|    4 | 264.7126 | 50%    |     6 |      3 |
+|    1 |   5.6760 | 14.5%  |  1000 |    145 |
+|    2 |  27.2404 | 21.38% |   145 |     31 |
+|    3 |  85.1897 | 19.35% |    31 |      6 |
+|    4 | 264.7597 | 50%    |     6 |      3 |
 
 The break vector includes the original minimum and maximum, plus the means computed during the iterations. Here the original data are `sample_par`, since `var` is replaced by the head inside the loop.
 
@@ -242,53 +316,103 @@ The break vector includes the original minimum and maximum, plus the means compu
 The implementation in `classIntervals()` reproduces these results:
 
 ``` r
-ht_sample_par <- classIntervals(sample_par, style = "headtails")
-brks == ht_sample_par$brks
-```
+# Compare with classInt
+ht_sample_par <- classIntervals(
+  sample_par,
+  style = "headtails"
+)
 
-    ## [1] TRUE TRUE TRUE TRUE TRUE TRUE
+all.equal(brks, ht_sample_par$brks)
+#> [1] TRUE
+```
 
 As stated in Jiang (2013), the number of breaks is determined by the data. However, the `thr` parameter can help adjust the final number. A lower value of `thr` can yield fewer breaks, while a larger `thr` can increase the number if the underlying distribution follows the *"far more small things than large things"* principle.
 
 ``` r
-opar <- par(no.readonly = TRUE)
-par(mar = c(2, 2, 2, 1), cex = 0.8)
+thresholds <- c(0, 0.2, 0.4, 1)
 
-pal1 <- c("wheat1", "wheat2", "red3")
-# Minimum: single break
-print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails", thr = 0)$brks - 1)))
-plot(
-  classIntervals(sample_par, style = "headtails", thr = 0),
-  pal = pal1,
-  main = "thr = 0"
-)
+breaks_df <- lapply(thresholds, function(thr) {
+  ci <- classIntervals(
+    sample_par,
+    style = "headtails",
+    thr = thr
+  )
 
-# Two breaks
-print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails", thr = 0.2)$brks - 1)))
-plot(
-  classIntervals(sample_par, style = "headtails", thr = 0.2),
-  pal = pal1,
-  main = "thr = 0.2"
-)
+  tibble(
+    threshold = paste0("thr = ", thr),
+    value = sample_par,
+    class = findInterval(
+      sample_par,
+      ci$brks,
+      all.inside = TRUE
+    ),
+    n_classes = length(ci$brks) - 1
+  ) |>
+    group_by(threshold, n_classes, class) |>
+    summarise(xmin = min(value), xmax = max(value), .groups = "drop_last") |>
+    mutate(ymin = -0.05, ymax = 0) |>
+    mutate(xmin = ifelse(row_number() == 1, xmin, lag(xmax))) |>
+    ungroup()
+}) |>
+  bind_rows() |>
+  mutate(
+    threshold = factor(
+      threshold,
+      levels = paste0("thr = ", thresholds)
+    )
+  )
 
-# Default breaks: 0.4
-print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails")$brks - 1)))
-plot(classIntervals(sample_par, style = "headtails"),
-  pal = pal1,
-  main = "thr = Default"
-)
-
-# Maximum breaks
-print(paste("number of breaks", length(classIntervals(sample_par, style = "headtails", thr = 1)$brks - 1)))
-plot(
-  classIntervals(sample_par, style = "headtails", thr = 1),
-  pal = pal1,
-  main = "thr = 1"
-)
-par(opar)
+# Number of classes
+breaks_df |>
+  distinct(threshold, n_classes) |>
+  knitr::kable(row.names = FALSE)
 ```
 
-![Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp)![Cumulative distribution of a Pareto sample classified with a head/tail threshold of 0.2. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-2.webp)![Cumulative distribution of a Pareto sample classified with a head/tail threshold of the default value. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-3.webp)![Cumulative distribution of a Pareto sample classified with a head/tail threshold of 1. Vertical lines and a colored strip indicate the resulting class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-4.webp)
+| threshold | n_classes |
+|:----------|----------:|
+| thr = 0   |         2 |
+| thr = 0.2 |         3 |
+| thr = 0.4 |         5 |
+| thr = 1   |         6 |
+
+``` r
+
+# Distribution of observations across classes
+ggplot(breaks_df, aes(fill = factor(class))) +
+  stat_ecdf(
+    data = tibble(x = sample_par),
+    aes(x = x),
+    inherit.aes = FALSE,
+    linetype = "dashed"
+  ) +
+  geom_vline(
+    data = breaks_df,
+    aes(xintercept = xmax, color = factor(class)),
+    show.legend = FALSE
+  ) +
+  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
+  stat_ecdf(
+    data = tibble(x = sample_par),
+    aes(x = x),
+    inherit.aes = FALSE,
+    geom = "point",
+    size = 1.5,
+    pad = FALSE
+  ) +
+  facet_wrap(~threshold, scales = "free_x") +
+  scale_y_continuous(labels = label_percent()) +
+  scale_fill_viridis_d(option = "cividis") +
+  scale_color_viridis_d(option = "cividis") +
+  labs(
+    title = "The effect of the threshold",
+    subtitle = "Head/tail breaks with different stopping thresholds",
+    x = "Value",
+    y = "Cumulative proportion",
+    fill = "Class"
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="Four panels compare head/tail breaks thresholds of 0, 0.2, 0.4 and 1 against the empirical cumulative distribution of a Pareto sample. Higher thresholds produce more classes, with boundaries concentrated near the lower values." width="100%" />
 
 For this example, even `thr = 0` retains the mean as an internal break. The returned vector also contains the minimum and maximum, so this gives two classes, not one.
 
@@ -305,26 +429,59 @@ Let's have a look at the top 10 values and the distribution of the variable `tot
 
 ``` r
 # Top10
-knitr::kable(head(afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")], 10))
-
-opar <- par(no.readonly = TRUE)
-par(mar = c(4, 4, 3, 1), cex = 0.8)
-hist(afcon$totcon,
-  n = 20,
-  main = "Histogram",
-  xlab = "totcon",
-  col = "grey50",
-  border = NA,
-)
-plot(
-  density(afcon$totcon),
-  main = "Distribution",
-  xlab = "totcon",
-)
-par(opar)
+knitr::kable(head(
+  afcon[order(afcon$totcon, decreasing = TRUE), c("name", "totcon")],
+  10
+))
 ```
 
-![Histogram of total conflict counts in African countries from 1966 to 1978. Most countries have low counts, with a few much higher values.](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp)![Density curve of total conflict counts in African countries from 1966 to 1978, with a peak at low counts and a long right tail.](https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp)
+|     | name         | totcon |
+|:----|:-------------|-------:|
+| EG  | EGYPT        |   5246 |
+| SU  | SUDAN        |   4751 |
+| UG  | UGANDA       |   3134 |
+| CG  | ZAIRE        |   3087 |
+| TZ  | TANZANIA     |   2881 |
+| LY  | LIBYA        |   2355 |
+| KE  | KENYA        |   2273 |
+| SO  | SOMALIA      |   2122 |
+| ET  | ETHIOPIA     |   1878 |
+| SF  | SOUTH AFRICA |   1875 |
+
+``` r
+
+ggplot(afcon, aes(x = totcon)) +
+  geom_histogram(bins = 30) +
+  scale_x_continuous(labels = label_comma()) +
+  scale_y_continuous(labels = label_comma()) +
+  labs(
+    title = "Conflict distribution in Africa, 1966–1978",
+    subtitle = "Number of conflicts by country",
+    x = "Number of conflicts",
+    y = "Number of countries",
+    caption = "Data source: Anselin & O'Loughlin (1992)"
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of conflict counts across African countries from 1966 to 1978. Most countries have relatively low counts, while a few exceed 3,000 and reach approximately 5,200." width="100%" />
+
+``` r
+
+
+ggplot(afcon, aes(x = totcon)) +
+  geom_density() +
+  scale_x_continuous(labels = label_comma()) +
+  scale_y_continuous(labels = label_comma()) +
+  labs(
+    title = "A skewed distribution of conflicts",
+    subtitle = "Estimated density of conflict counts, 1966–1978",
+    x = "Number of conflicts",
+    y = "Density",
+    caption = "Data source: Anselin & O'Loughlin (1992)"
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Estimated density of conflict counts across African countries from 1966 to 1978. The distribution peaks below 1,000 conflicts and has a long right tail extending beyond 5,000." width="100%" />
 
 The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram shows a strongly right-skewed pattern with many small values and a few large ones.
 
@@ -333,95 +490,153 @@ In addition to `headtails` and `fisher`, we use `quantile` to compare the classi
 Applying the three aforementioned methods to break the data:
 
 ``` r
-brks_ht <- classIntervals(afcon$totcon, style = "headtails")
-print(brks_ht)
-# Same number of classes for "fisher"
-nclass <- length(brks_ht$brks) - 1
-brks_fisher <- classIntervals(afcon$totcon,
-  style = "fisher",
-  n = nclass
-)
-print(brks_fisher)
+afcon$headtails <- classify_intervals(afcon$totcon, style = "headtails")
+afcon$headtails_br <- as.numeric(afcon$headtails)
 
-brks_quantile <- classIntervals(afcon$totcon,
+# Record the number of classes to set the same
+
+nclass <- length(levels(afcon$headtails))
+
+# Same number of classes for "fisher"
+afcon$fisher <- classify_intervals(afcon$totcon, style = "fisher", n = nclass)
+afcon$fisher_br <- as.numeric(afcon$fisher)
+
+afcon$quantile <- classify_intervals(
+  afcon$totcon,
   style = "quantile",
   n = nclass
 )
-print(brks_quantile)
+afcon$quantile_br <- as.numeric(afcon$quantile)
 
-pal1 <- c("wheat1", "wheat2", "red3")
-opar <- par(no.readonly = TRUE)
-par(mar = c(2, 2, 2, 1), cex = 0.8)
-plot(brks_ht, pal = pal1, main = "headtails")
-plot(brks_fisher, pal = pal1, main = "fisher")
-plot(brks_quantile, pal = pal1, main = "quantile")
-par(opar)
+levels(afcon$headtails)
+#> [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"   "[3819.8,4998.5)"  
+#> [5] "[4998.5,5246]"
+levels(afcon$fisher)
+#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)" 
+#> [5] "[3942.5,5246]"
+levels(afcon$quantile)
+#> [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)"
+#> [5] "[1877.4,5246]"
+
+ht_breaks <- classIntervals(afcon$totcon, style = "headtails")$brks[seq_len(
+  nclass
+)]
+
+fisher_breaks <- classIntervals(
+  afcon$totcon,
+  style = "fisher",
+  n = nclass
+)$brks[seq_len(nclass)]
+
+
+q_breaks <- classIntervals(
+  afcon$totcon,
+  style = "quantile",
+  n = nclass
+)$brks[seq_len(nclass)]
+
+tibble(
+  id_breaks = "Head/tails",
+  b = ht_breaks,
+  group = as.factor(seq_along(ht_breaks))
+) |>
+  bind_rows(
+    tibble(
+      id_breaks = "Fisher",
+      b = fisher_breaks,
+      group = as.factor(seq_along(fisher_breaks))
+    )
+  ) |>
+  bind_rows(
+    tibble(
+      id_breaks = "Quantile",
+      b = q_breaks,
+      group = as.factor(seq_along(q_breaks))
+    )
+  ) |>
+  mutate(id_breaks = fct_inorder(id_breaks)) |>
+  # Prepare rects
+  group_by(id_breaks) |>
+  mutate(
+    xmin = if_else(group == 1, 0, b),
+    xmax = if_else(group == nclass, max(afcon$totcon) + 500, lead(b)),
+    ymin = 0,
+    ymax = 1.1
+  ) |>
+  ggplot() +
+  stat_ecdf(
+    data = afcon,
+    aes(x = totcon),
+    geom = "point",
+    size = 1,
+    pad = FALSE
+  ) +
+  geom_rect(aes(
+    xmin = xmin, ymin = ymin, xmax = xmax,
+    ymax = ymax, fill = group
+  )) +
+  guides(color = guide_legend()) +
+  facet_wrap(vars(id_breaks), ncol = 1) +
+  scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
+  scale_y_continuous(labels = label_percent(), breaks = seq(0, 1, 0.25)) +
+  scale_x_continuous(labels = label_comma()) +
+  guides(fill = guide_legend(override.aes = list(alpha = 1))) +
+  labs(
+    title = "Comparing classification methods",
+    subtitle = "Head/tail breaks, Fisher–Jenks and quantiles",
+    x = "Number of conflicts",
+    y = "Cumulative proportion",
+    fill = "Class"
+  )
 ```
 
-![Cumulative distribution of African conflict counts classified using head/tail breaks. Vertical lines and a colored strip identify the class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp)![Cumulative distribution of African conflict counts classified using Fisher breaks. Vertical lines and a colored strip identify the class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-2.webp)![Cumulative distribution of African conflict counts classified using quantile breaks. Vertical lines and a colored strip identify the class intervals.](https://dieghernan.github.io/assets/img/blog/20200405_breaksample-3.webp)
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Three panels compare head/tail breaks, Fisher–Jenks and quantile classifications of African conflict counts. Colored bands mark five classes over the empirical cumulative distribution, showing how the methods place boundaries at different values." width="100%" />
 
 The top three classes of `headtails` contain five observations, whereas those of `fisher` contain 13. In this example, `headtails` gives more detail at the upper end of the distribution.
 
 The next plot compares density estimates of the rescaled `totcon` values and the class assignments from each method. The original values are rescaled to `[1, nclass]` and shifted by -0.5 for the visual comparison.
 
 ``` r
-# Helper function to reescale values
-help_reescale <- function(x, min = 1, max = 10) {
-  r <- (x - min(x)) / (max(x) - min(x))
-  r <- r * (max - min) + min
-  return(r)
-}
-afcon$ecdf_class <- help_reescale(afcon$totcon,
-  min = 1 - 0.5,
-  max = nclass - 0.5
-)
-afcon$ht_breaks <- cut(afcon$totcon,
-  brks_ht$brks,
-  labels = FALSE,
-  include.lowest = TRUE
-)
+afcon$data <- scales::rescale(afcon$totcon, to = c(0.5, 4.5)) |> round()
 
-afcon$fisher_breaks <- cut(afcon$totcon,
-  brks_fisher$brks,
-  labels = FALSE,
-  include.lowest = TRUE
-)
-
-afcon$quantile_break <- cut(afcon$totcon,
-  brks_quantile$brks,
-  labels = FALSE,
-  include.lowest = TRUE
-)
-
-opar <- par(no.readonly = TRUE)
-par(mar = c(4, 4, 1, 1), cex = 0.8)
-plot(
-  density(afcon$ecdf_class),
-  ylim = c(0, 0.8),
-  lwd = 2,
-  main = "",
-  xlab = "class"
-)
-lines(density(afcon$ht_breaks), col = "darkblue", lty = 2)
-lines(density(afcon$fisher_breaks), col = "limegreen", lty = 2)
-lines(density(afcon$quantile_break),
-  col = "red3",
-  lty = 2
-)
-legend("topright",
-  legend = c(
-    "Continuous", "headtails",
-    "fisher", "quantile"
-  ),
-  col = c("black", "darkblue", "limegreen", "red3"),
-  lwd = c(2, 1, 1, 1),
-  lty = c(1, 2, 2, 2),
-  cex = 0.8
-)
-par(opar)
+afcon |>
+  as_tibble() |>
+  pivot_longer(
+    cols = c(data, headtails_br, fisher_br, quantile_br),
+    names_to = "class_name",
+    values_to = "class"
+  ) |>
+  mutate(
+    class_name = case_when(
+      class_name %in% c("data", "original") ~ "Original values (rescaled)",
+      class_name == "headtails_br" ~ "Head/tail breaks",
+      class_name == "fisher_br" ~ "Fisher–Jenks",
+      TRUE ~ "Quantiles"
+    )
+  ) |>
+  mutate(class_name = fct_inorder(class_name)) |>
+  ggplot() +
+  geom_density(
+    aes(x = class, color = class_name, linetype = class_name),
+    key_glyph = draw_key_path,
+    trim = TRUE,
+    adjust = .75,
+    linewidth = 0.8
+  ) +
+  scale_y_continuous(labels = label_comma()) +
+  scale_color_viridis_d() +
+  scale_linetype_manual(values = c("solid", "dashed", "dashed", "dashed")) +
+  labs(
+    title = "How classification methods distribute observations",
+    subtitle = "Smoothed distributions of class indices",
+    x = "Rescaled value / Class index",
+    y = "Estimated density",
+    color = "Classification method",
+    linetype = "Classification method"
+  )
 ```
 
-![Density curves comparing continuous African conflict counts with values classified using head/tail, Fisher and quantile breaks. The methods produce different distribution shapes.](https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp)
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_benchmarkbreaks-1.webp" alt="Smoothed distributions of class indices for original rescaled values, head/tail breaks, Fisher–Jenks and quantiles. Head/tail breaks concentrates observations in the lowest class, while quantiles distributes them approximately evenly across five classes." width="100%" />
 
 In this example, the class assignments from `headtails` retain more of the original imbalance. By contrast, `quantile` aims for similar numbers of observations per class, regardless of the gaps between values.
 
@@ -430,85 +645,86 @@ We now compare the methods using proportional-symbol maps. Symbol size represent
 The first map uses proportional symbols without class-based colors, providing a reference for the three classified maps.
 
 ``` r
-library(sf)
 library(giscoR)
-library(cartography)
+library(sf)
 
-opar <- par(no.readonly = TRUE)
+africa <- gisco_get_countries(
+  resolution = 60,
+  region = "Africa",
+  epsg = 3857
+) |>
+  st_transform("ESRI:102024")
 
-par(
-  mfrow = c(2, 2),
-  mar = c(1, 1, 1, 1),
-  bg = "white"
-)
-africa <- gisco_get_countries(resolution = 60, region = "Africa", epsg = 3857)
-
-afcon.sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y"))
-afcon.sf <- st_transform(afcon.sf, st_crs(africa))
-# afcon.sf <- st_join(africa[, "admin"], afcon.sf)
-afcon.sf <- afcon.sf[order(afcon.sf$totcon), ]
-
-
-
-# High granularity map
-plot(st_geometry(africa), col = "grey80", border = NA)
-propSymbolsLayer(
-  afcon.sf,
-  var = "totcon",
-  inches = 0.2,
-  col = adjustcolor("grey10", alpha.f = 0.5),
-  border = NA
-)
-title(main = "High granularity map")
-
-# Quantile
-
-pal <- hcl.colors(5, palette = "inferno", alpha = 0.6)
-plot(st_geometry(africa), col = "grey80", border = NA)
-propSymbolsTypoLayer(
-  afcon.sf,
-  var = "totcon",
-  inches = 0.2,
-  col = pal,
-  border = NA,
-  legend.var.pos = "n",
-  legend.var2.pos = "bottomleft",
-  var2 = "quantile_break"
-)
-title(main = "Quantile")
+africa_focus <- st_linestring(rbind(
+  c(-20, 40),
+  c(60, 40),
+  c(60, -40),
+  c(-20, -40),
+  c(-20, 40)
+)) |>
+  st_segmentize(5) |>
+  st_cast("POLYGON") |>
+  st_sfc(crs = 4326) |>
+  st_transform(st_crs(africa)) |>
+  st_bbox()
 
 
-# Fisher
-plot(st_geometry(africa), col = "grey80", border = NA)
-propSymbolsTypoLayer(
-  afcon.sf,
-  var = "totcon",
-  inches = 0.2,
-  col = pal,
-  border = NA,
-  legend.var.pos = "n",
-  legend.var2.pos = "bottomleft",
-  var2 = "fisher_breaks"
-)
-title(main = "Fisher")
+afcon_sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y")) |>
+  st_transform(st_crs(africa)) |>
+  arrange(desc(totcon))
 
-# Head Tails
-plot(st_geometry(africa), col = "grey80", border = NA)
-propSymbolsTypoLayer(
-  afcon.sf,
-  var = "totcon",
-  inches = 0.2,
-  col = pal,
-  border = NA,
-  legend.var.pos = "n",
-  legend.var2.pos = "bottomleft",
-  var2 = "ht_breaks"
-)
-title(main = "Head Tails")
-par(opar)
+
+afcon_sf |>
+  mutate(original = rescale(totcon, to = c(1, 5))) |>
+  pivot_longer(
+    cols = c(original, headtails_br, fisher_br, quantile_br),
+    names_to = "class_name",
+    values_to = "class"
+  ) |>
+  mutate(
+    class_name = case_when(
+      class_name %in% c("data", "original") ~ "Original values (rescaled)",
+      class_name == "headtails_br" ~ "Head/tail breaks",
+      class_name == "fisher_br" ~ "Fisher–Jenks",
+      TRUE ~ "Quantiles"
+    )
+  ) |>
+  mutate(class_name = fct_inorder(class_name)) |>
+  arrange(desc(totcon)) |>
+  ggplot() +
+  geom_sf(data = africa, color = "grey50", fill = "grey50") +
+  geom_sf(aes(size = class, color = class)) +
+  facet_wrap(~class_name) +
+  coord_sf(
+    xlim = c(africa_focus[c("xmin", "xmax")]),
+    ylim = c(africa_focus[c("ymin", "ymax")]),
+    expand = FALSE
+  ) +
+  guides(
+    color = guide_legend(reverse = TRUE),
+    size = guide_legend(reverse = TRUE)
+  ) +
+  scale_color_viridis_c(
+    option = "inferno",
+    direction = -1,
+    alpha = 0.75,
+    breaks = seq(1, 5, 1)
+  ) +
+  theme(
+    panel.grid = element_blank(),
+    axis.line = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  labs(
+    title = "Classification methods compared on a map",
+    subtitle = "Symbol sizes represent original values or assigned classes",
+    color = "Class index",
+    size = "Class index"
+  )
 ```
 
-![Four proportional-symbol maps of African conflict counts comparing the unclassified data with quantile, Fisher and head/tail classifications. Circle size represents conflict counts and colors distinguish classes.](https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp)
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four maps of Africa compare rescaled conflict counts with head/tail breaks, Fisher–Jenks and quantile classifications. Colored circles represent values or class indices from 1 to 5, revealing differences in the size and distribution of symbols across methods." width="100%" />
 
 Compared with the unclassified proportional-symbol map, `headtails` makes the most extreme values easier to distinguish. The `quantile` style groups observations by rank, while `fisher` provides an intermediate view in this example.
 
@@ -516,6 +732,7 @@ It is also important to note that `headtails` and `fisher` reveal different info
 
 ## References
 
+- Anselin, L., & O’Loughlin, J. (1992). Geography of international conflict and cooperation: Spatial dependence and regional context in Africa. In M. D. Ward (Ed.), *The new geopolitics* (pp. 39–75). Gordon and Breach Science Publishers.
 - Jiang, B. (2013). Head/tail breaks: A new classification scheme for data with a heavy-tailed distribution. *The Professional Geographer, 65*(3), 482–494. <https://doi.org/10.1080/00330124.2012.700499>
 - Jiang, B. (2019). A recursive definition of goodness of space for bridging the concepts of space and place for sustainability. *Sustainability, 11*(15), Article 4091. <https://doi.org/10.3390/su11154091>
 - Jiang, B., Liu, X., & Jia, T. (2013). Scaling of geographic space as a universal rule for map generalization. *Annals of the Association of American Geographers, 103*(4), 844–855. [DOI](https://doi.org/10.1080/00045608.2013.765773)

@@ -1,7 +1,11 @@
 # Run from the repository root. Pass Rmd filenames to select posts.
 source("_Rmd/renderblog_v2.R")
 
-posts <- c("2022-01-28-maps-flags.Rmd")
+posts <- c(
+  # "2022-01-28-maps-flags.Rmd"
+           "2020-04-05-headtails.Rmd"
+  
+  )
 
 for (post in posts) {
   input <- file.path("_Rmd", post)
