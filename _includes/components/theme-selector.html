@@ -6,9 +6,9 @@
     <span class="chulapa-theme-label">Light</span>
   </button>
   <div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="chulapa-theme-{{ include.selector_id | default: 'classic' }}">
-    <button type="button" class="dropdown-item" data-theme-mode="light" aria-pressed="true">{%- include snippets/svg-icons.html icon="sun" class="mr-2" -%}Light</button>
-    <button type="button" class="dropdown-item" data-theme-mode="dark" aria-pressed="false">{%- include snippets/svg-icons.html icon="moon" class="mr-2" -%}Dark</button>
-    <button type="button" class="dropdown-item" data-theme-mode="auto" aria-pressed="false">{%- include snippets/svg-icons.html icon="adjust" class="mr-2" -%}Auto</button>
+    <button type="button" class="dropdown-item" data-theme-mode="light" aria-pressed="true">{%- include snippets/svg-icons.html icon="sun" class="mr-1" -%}Light</button>
+    <button type="button" class="dropdown-item" data-theme-mode="dark" aria-pressed="false">{%- include snippets/svg-icons.html icon="moon" class="mr-1" -%}Dark</button>
+    <button type="button" class="dropdown-item" data-theme-mode="auto" aria-pressed="false">{%- include snippets/svg-icons.html icon="adjust" class="mr-1" -%}Auto</button>
   </div>
 </li>
 {% endif %}
