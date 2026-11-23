@@ -89,7 +89,6 @@ The "true" map of Spain is:
 
 ```{r}
 #| label: 20220303_truemap
-#| fig-crop: false
 #| fig-alt:
 #|   - Map of Spain with autonomous community boundaries and the Canary Islands
 #|     in their geographic position southwest of the mainland.
@@ -129,7 +128,6 @@ Islands I use REGCAN95 / UTM 28N ([EPSG:4083](https://epsg.io/4083)).
 
 ```{r}
 #| label: 20220303_mainsub
-#| fig-crop: false
 #| fig-alt:
 #|   - Map of mainland Spain and the Balearic Islands with autonomous community
 #|     boundaries, excluding the Canary Islands.
@@ -439,7 +437,7 @@ ins <- ggplot(w) +
   coord_sf(crs = "+proj=robin") +
   theme_void()
 
-
+# Even easier
 library(patchwork)
 
 bra_map +
@@ -451,15 +449,4 @@ bra_map +
     top = 1,
     align_to = "panel"
   )
-
-# library(cowplot)
-# # Use the same font metrics when arranging plots off screen.
-# cowplot::set_null_device(function(width, height) {
-#   cowplot::agg_null_device(width, height)
-#   grid::grid.newpage()
-# })
-#
-# ggdraw() +
-#   draw_plot(bra_map) +
-#   draw_plot(ins, width = 0.37, x = 0.625, y = 0.27)
 ```

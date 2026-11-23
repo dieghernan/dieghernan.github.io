@@ -3,7 +3,7 @@ source("_Rmd/renderblog_v2.R")
 
 posts <- c(
   # "2022-01-28-maps-flags.Rmd"
-  "2022-05-01-Unknown-pleasures-R.Rmd"
+  "2022-03-03-insetmaps.Rmd"
 )
 
 for (post in posts) {
