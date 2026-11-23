@@ -43,47 +43,6 @@ og_title: "One World: R packages, maps and open-source projects"
 
 {% include custom/kofi.html %}
 
-  {%- assign alldocs = site.documents -%}
-  {%- assign showcol = true -%}
-
-{% assign alldocs = alldocs | sort: 'date' | reverse %}
-{% assign alltags =  alldocs | map: 'tags' | join: ','  | split: ','  %}
-
-{%- assign single_tags =  alltags | uniq  -%}
-{% assign count_tags = '' | split: ',' %}
-{% assign n_tags = single_tags | size |  minus: 1 %}
-
-{%- for i in (0..n_tags) %}
-  {% assign count_this_tag = alltags | where_exp:"item", "item == single_tags[i]" | size %}
-  {% assign count_tags = count_tags | push: count_this_tag %}
-{%- endfor -%}
-
-{% assign items_max = count_tags | sort | last %}
-{% assign sorted_tags = '' | split: ',' %}
-{% assign sorted_count_tags = '' | split: ',' %}
-
-{% for i in (1..items_max) reversed %}
-  {% for j in (0..n_tags) %}
-    {% if count_tags[j] == i %}
-     {% assign sorted_tags = sorted_tags | push: single_tags[j] %}
-     {% assign sorted_count_tags = sorted_count_tags | push: i %}
-    {% endif %}
-  {% endfor %}
-{% endfor %}
-
-{% assign sorted_tags= sorted_tags | uniq %}
-
-{%- assign sizemax = sorted_count_tags | first -%}
-{% assign mid = sorted_count_tags | last | plus: sizemax | divided_by: 2  %}
-
-<div class="row g-0 pt-5" id="tags">
-<div class="col">
-	{%- for i in (0..n_tags)-%}
-	<a href="./tags#{{- sorted_tags[i] | replace: "demo", "dmo" | replace: " ", "-" -}}" class="btn btn-primary m-1" style="font-size: min(1.2rem , max(0.8rem , calc(1rem + 0.025*({{ sorted_count_tags[i] }}rem - {{ mid }}rem))));"><i class="fa fa-tag mr-2" aria-hidden="true"></i>{{- sorted_tags[i] -}}<span class="badge rounded-pill chulapa-pill-bg-primary ml-2">{{ sorted_count_tags[i]}}</span></a>
-	{%- endfor -%}
-	</div>
-</div>
-
 <!-- Verification -->
 
 <a href="https://github.com/dieghernan" rel="me" class="d-none">github.com/dieghernan</a>
