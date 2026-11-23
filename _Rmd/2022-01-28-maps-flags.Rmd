@@ -32,8 +32,8 @@ output:
 description: >-
   Use rasterpic to georeference flags and other images and turn them into
   basemaps in R.
-og_image_width: 2100
-og_image_height: 2100
+og_image_width: 2400
+og_image_height: 1200
 og_image_type: "image/webp"
 og_image_alt: >-
   Map of Africa with national flags clipped to each country boundary.
@@ -92,7 +92,7 @@ will use newer packages, such as
 version of [**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92)
 (not released yet), which adds support for `SpatRaster` objects in **ggplot2**.
 The flags come from [country-flags](https://github.com/hampusborgos/country-flags).
-We download the 250-pixel-wide PNGs from version 1.2.10 of
+We download the 1000-pixel-wide PNGs from version 1.2.10 of
 `svg-country-flags` via jsDelivr.
 
 ```{r}
@@ -153,8 +153,8 @@ Now, let's add the flags with a loop:
 # We paste the ISO2 code to each African country
 africa$iso2 <- countrycode(africa$ISO3_CODE, "iso3c", "iso2c")
 
-# Get flags from repo - low quality to speed up the code
-flagrepo <- "https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png250px/"
+# Get flags from repo
+flagrepo <- "https://cdn.jsdelivr.net/npm/svg-country-flags@1.2.10/png1000px/"
 
 # Loop and add
 for (iso in africa$iso2) {

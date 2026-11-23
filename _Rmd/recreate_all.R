@@ -1,7 +1,7 @@
 # Run from the repository root. Pass Rmd filenames to select posts.
 source("_Rmd/renderblog_v2.R")
 
-posts <- c("2022-03-03-insetmaps.Rmd", "2022-05-01-Unknown-pleasures-R.Rmd")
+posts <- c("2022-01-28-maps-flags.Rmd")
 
 for (post in posts) {
   input <- file.path("_Rmd", post)
@@ -43,3 +43,23 @@ for (post in posts) {
     writeLines(lines, path, useBytes = TRUE)
   }
 }
+
+# Update featured images
+feat_img <- list.files("assets/img/feat")
+all_imgs <- list.files("assets/img/blog", full.names = TRUE)
+
+vapply(
+  feat_img,
+  function(img) {
+    if (any(grepl(img, basename(all_imgs)))) {
+      file.copy(
+        all_imgs[basename(all_imgs) == img],
+        file.path(".", "assets", "img", "feat") |> path.expand(),
+        overwrite = TRUE
+      )
+    } else {
+      FALSE
+    }
+  },
+  FUN.VALUE = logical(1)
+)
