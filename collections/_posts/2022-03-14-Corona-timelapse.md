@@ -8,6 +8,7 @@ citation:
 excerpt: "Follow how COVID-19 travel restrictions changed over time for travelers from Germany."
 subtitle: Travel restrictions amidst the COVID crisis across time - a German perspective
 tags:
+  - discontinued
   - COVID19
   - maps
   - leaflet
@@ -15,7 +16,6 @@ tags:
   - rstats
   - project
   - guest-author
-  - discontinued
 header_img: https://raw.githubusercontent.com/dieghernan/corona-atlas.de/master/timelapse/frames/D2021-04-16.png
 og_image_width: 1000
 og_image_height: 1000

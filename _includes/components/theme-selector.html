@@ -2,7 +2,17 @@
 {% if dark_skin_enabled %}
 <li class="nav-item dropdown chulapa-theme-selector" hidden>
   <button type="button" class="nav-link dropdown-toggle chulapa-theme-toggle" id="chulapa-theme-{{ include.selector_id | default: 'classic' }}" data-toggle="dropdown" aria-expanded="false" aria-label="Color theme: Light" title="Color theme: Light">
-    {%- include snippets/svg-icons.html icon="sun" -%}
+<span class="chulapa-theme-icon" aria-hidden="true">
+      <span data-icon-mode="light">
+        {%- include snippets/svg-icons.html icon="sun" -%}
+      </span>
+      <span data-icon-mode="dark">
+        {%- include snippets/svg-icons.html icon="moon" -%}
+      </span>
+      <span data-icon-mode="auto">
+        {%- include snippets/svg-icons.html icon="adjust" -%}
+      </span>
+    </span>
     <span class="chulapa-theme-label">Light</span>
   </button>
   <div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="chulapa-theme-{{ include.selector_id | default: 'classic' }}">

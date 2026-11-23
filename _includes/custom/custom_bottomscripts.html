@@ -1,3 +1,31 @@
 <!-- start custom scripts to be placed at the bottom of the page -->
-
+  <script>
+  (function () {
+    'use strict';
+  
+    function updateDiscontinued() {
+      document.querySelectorAll('.badge, .btn, h5, h2.h5').forEach(function (el) {
+        if (!el.textContent.includes('discontinued')) return;
+  
+        if (el.classList.contains('badge')) {
+          el.classList.replace('chulapa-pill-bg-primary', 'chulapa-pill-bg-danger');
+        }
+  
+        if (el.classList.contains('btn')) {
+          el.classList.replace('btn-primary', 'btn-danger');
+        }
+  
+        if (el.matches('h5, h2.h5')) {
+          el.classList.add('text-danger');
+        }
+      });
+    }
+  
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateDiscontinued, { once: true });
+    } else {
+      updateDiscontinued();
+    }
+  })();
+  </script>
 <!-- end custom bottom scripts -->
