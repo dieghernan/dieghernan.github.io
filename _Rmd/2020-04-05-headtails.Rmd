@@ -324,6 +324,8 @@ iter_df |>
     scales = "free_y",
     labeller = labeller(iter = ~ paste("Iteration", .x))
   ) +
+  scale_x_continuous(labels = label_comma()) +
+  scale_y_continuous(labels = label_comma()) +
   labs(
     title = "Head/tail breaks: step by step",
     subtitle = "Recursive partitioning at the arithmetic mean",
@@ -406,8 +408,11 @@ breaks_df <- lapply(thresholds, function(thr) {
   ) |>
     group_by(threshold, n_classes, class) |>
     summarise(xmin = min(value), xmax = max(value), .groups = "drop_last") |>
-    mutate(ymin = -0.05, ymax = 0) |>
-    mutate(xmin = ifelse(row_number() == 1, xmin, lag(xmax))) |>
+    mutate(ymin = -0.01, ymax = 1.1) |>
+    mutate(
+      xmin = ifelse(row_number() == 1, xmin, lag(xmax)),
+      xmax = ifelse(row_number() == n(), xmax + 50, xmax)
+    ) |>
     ungroup()
 }) |>
   bind_rows() |>
@@ -431,12 +436,6 @@ ggplot(breaks_df, aes(fill = factor(class))) +
     inherit.aes = FALSE,
     linetype = "dashed"
   ) +
-  geom_vline(
-    data = breaks_df,
-    aes(xintercept = xmax, color = factor(class)),
-    show.legend = FALSE
-  ) +
-  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
   stat_ecdf(
     data = tibble(x = sample_par),
     aes(x = x),
@@ -445,10 +444,11 @@ ggplot(breaks_df, aes(fill = factor(class))) +
     size = 1.5,
     pad = FALSE
   ) +
+  geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax)) +
   facet_wrap(~threshold, scales = "free_x") +
-  scale_y_continuous(labels = label_percent()) +
-  scale_fill_viridis_d(option = "cividis") +
-  scale_color_viridis_d(option = "cividis") +
+  scale_x_continuous(labels = label_comma(), breaks = seq(0, 500, 100)) +
+  scale_y_continuous(labels = label_percent(), breaks = seq(0, 1, .25)) +
+  scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
   labs(
     title = "The effect of the threshold",
     subtitle = "Head/tail breaks with different stopping thresholds",
@@ -502,7 +502,7 @@ knitr::kable(head(
 
 ggplot(afcon, aes(x = totcon)) +
   geom_histogram(bins = 30) +
-  scale_x_continuous(labels = label_comma()) +
+  scale_x_continuous(labels = label_comma(accuracy = 1)) +
   scale_y_continuous(labels = label_comma()) +
   labs(
     title = "Conflict distribution in Africa, 1966–1978",
@@ -515,7 +515,7 @@ ggplot(afcon, aes(x = totcon)) +
 
 ggplot(afcon, aes(x = totcon)) +
   geom_density() +
-  scale_x_continuous(labels = label_comma()) +
+  scale_x_continuous(labels = label_comma(accuracy = 1)) +
   scale_y_continuous(labels = label_comma()) +
   labs(
     title = "A skewed distribution of conflicts",
@@ -609,8 +609,8 @@ tibble(
   # Prepare rects
   group_by(id_breaks) |>
   mutate(
-    xmin = if_else(group == 1, 0, b),
-    xmax = if_else(group == nclass, max(afcon$totcon) + 500, lead(b)),
+    xmin = if_else(row_number() == 1, 0, b),
+    xmax = if_else(row_number() == n(), max(afcon$totcon) + 500, lead(b)),
     ymin = 0,
     ymax = 1.1
   ) |>
@@ -626,12 +626,11 @@ tibble(
     xmin = xmin, ymin = ymin, xmax = xmax,
     ymax = ymax, fill = group
   )) +
-  guides(color = guide_legend()) +
   facet_wrap(vars(id_breaks), ncol = 1) +
-  scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
+  scale_x_continuous(labels = label_comma(accuracy = 1)) +
   scale_y_continuous(labels = label_percent(), breaks = seq(0, 1, 0.25)) +
-  scale_x_continuous(labels = label_comma()) +
-  guides(fill = guide_legend(override.aes = list(alpha = 1))) +
+  scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
+  guides(color = guide_legend(), fill = guide_legend(override.aes = list(alpha = 1))) +
   labs(
     title = "Comparing classification methods",
     subtitle = "Head/tail breaks, Fisher–Jenks and quantiles",
@@ -658,7 +657,8 @@ class assignments from each method. The original values are rescaled to
 #|   observations in the lowest class, while quantiles distributes them
 #|   approximately evenly across five classes.
 
-afcon$data <- scales::rescale(afcon$totcon, to = c(0.5, 4.5)) |> round()
+# Rescale values for visualization
+afcon$data <- rescale(afcon$totcon, to = range(afcon$headtails_br) + c(-0.5, 0.4)) |> round()
 
 afcon |>
   as_tibble() |>
@@ -678,22 +678,24 @@ afcon |>
   mutate(class_name = fct_inorder(class_name)) |>
   ggplot() +
   geom_density(
-    aes(x = class, color = class_name, linetype = class_name),
+    aes(x = class, color = class_name),
     key_glyph = draw_key_path,
     trim = TRUE,
     adjust = .75,
-    linewidth = 0.8
+    linewidth = 1
+  ) +
+  scale_x_continuous(
+    labels = label_comma(accuracy = 1),
+    breaks = seq(1, nclass, 1)
   ) +
   scale_y_continuous(labels = label_comma()) +
-  scale_color_viridis_d() +
-  scale_linetype_manual(values = c("solid", "dashed", "dashed", "dashed")) +
+  scale_color_viridis_d(option = "cividis") +
   labs(
     title = "How classification methods distribute observations",
     subtitle = "Smoothed distributions of class indices",
     x = "Rescaled value / Class index",
     y = "Estimated density",
-    color = "Classification method",
-    linetype = "Classification method"
+    color = "Classification method"
   )
 ```
 
@@ -703,9 +705,6 @@ observations per class, regardless of the gaps between values.
 
 We now compare the methods using proportional-symbol maps. Symbol size
 represents `totcon`, while color distinguishes the classes.
-
-The first map uses proportional symbols without class-based colors, providing a
-reference for the three classified maps.
 
 ```{r}
 #| label: 20200405_finalplot
@@ -765,21 +764,20 @@ afcon_sf |>
   mutate(class_name = fct_inorder(class_name)) |>
   arrange(desc(totcon)) |>
   ggplot() +
-  geom_sf(data = africa, color = "grey50", fill = "grey50") +
+  geom_sf(data = africa, color = "grey80", fill = "grey80") +
   geom_sf(aes(size = class, color = class)) +
-  facet_wrap(~class_name) +
   coord_sf(
     xlim = c(africa_focus[c("xmin", "xmax")]),
     ylim = c(africa_focus[c("ymin", "ymax")]),
     expand = FALSE
   ) +
+  facet_wrap(~class_name) +
   guides(
     color = guide_legend(reverse = TRUE),
     size = guide_legend(reverse = TRUE)
   ) +
   scale_color_viridis_c(
-    option = "inferno",
-    direction = -1,
+    option = "cividis",
     alpha = 0.75,
     breaks = seq(1, 5, 1)
   ) +
