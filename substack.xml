@@ -7881,18 +7881,12 @@ A step-by-step example is presented to clarify the method. A case study using
 &lt;strong&gt;sf&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;callout-note&quot; role=&quot;note&quot; aria-label=&quot;Note&quot;&gt;
-  &lt;p&gt;&lt;strong&gt;Historical example:&lt;/strong&gt; The mapping examples use &lt;strong&gt;cartography&lt;/strong&gt;, which is now
-in maintenance mode. Its maintainers recommend
-&lt;a href=&quot;https://riatelab.github.io/mapsf/&quot;&gt;&lt;strong&gt;mapsf&lt;/strong&gt;&lt;/a&gt; for new work. The original code
-and outputs are preserved and have not been revalidated against current package
-versions.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;callout-note&quot; role=&quot;note&quot; aria-label=&quot;Note&quot;&gt;
   &lt;p&gt;&lt;strong&gt;Update (23 November 2026):&lt;/strong&gt; This post has been substantially revised with 
 updated &lt;strong&gt;R&lt;/strong&gt; code, improved visualizations, clearer explanations of the 
 head/tail breaks algorithm, and a comparison with Fisher–Jenks and quantile 
 classification methods. The original publication date has been preserved.&lt;/p&gt;
+
+  &lt;p&gt;The package vignette is available at &lt;a href=&quot;https://r-spatial.github.io/classInt/articles/headtailsR.html&quot;&gt;https://r-spatial.github.io/classInt/articles/headtailsR.html&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
@@ -8451,11 +8445,9 @@ of the gaps between observations.&lt;/p&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;[147,1350.619)&quot;    &quot;[1350.619,2488.6)&quot; &quot;[2488.6,3819.8)&quot;   &quot;[3819.8,4998.5)&quot;  &lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [5] &quot;[4998.5,5246]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;levels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;afcon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fisher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;[147,693.5)&quot;    &quot;[693.5,1474.5)&quot; &quot;[1474.5,2618)&quot;  &quot;[2618,3942.5)&quot; &lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [5] &quot;[3942.5,5246]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;[147,693.5)&quot;    &quot;[693.5,1474.5)&quot; &quot;[1474.5,2618)&quot;  &quot;[2618,3942.5)&quot;  &quot;[3942.5,5246]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;levels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;afcon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;quantile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;[147,604)&quot;       &quot;[604,833.6)&quot;     &quot;[833.6,1137.2)&quot;  &quot;[1137.2,1877.4)&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [5] &quot;[1877.4,5246]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#&amp;gt; [1] &quot;[147,604)&quot;       &quot;[604,833.6)&quot;     &quot;[833.6,1137.2)&quot;  &quot;[1137.2,1877.4)&quot; &quot;[1877.4,5246]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ht_breaks&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classIntervals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;afcon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;totcon&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;headtails&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nclass&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -8695,7 +8687,7 @@ cooperation: Spatial dependence and regional context in Africa. In M. D. Ward
 Publishers.&lt;/li&gt;
   &lt;li&gt;Jiang, B. (2013). Head/tail breaks: A new classification scheme for data with
 a heavy-tailed distribution. &lt;em&gt;The Professional Geographer, 65&lt;/em&gt;(3), 482–494.
-&lt;a href=&quot;https://doi.org/10.1080/00330124.2012.700499&quot;&gt;https://doi.org/10.1080/00330124.2012.700499&lt;/a&gt;&lt;/li&gt;
+&lt;a href=&quot;https://doi.org/10.1080/00330124.2012.700499&quot;&gt;DOI&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Jiang, B. (2019). A recursive definition of goodness of space for bridging the
 concepts of space and place for sustainability. &lt;em&gt;Sustainability, 11&lt;/em&gt;(15),
 Article 4091. &lt;a href=&quot;https://doi.org/10.3390/su11154091&quot;&gt;https://doi.org/10.3390/su11154091&lt;/a&gt;&lt;/li&gt;

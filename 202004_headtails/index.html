@@ -589,17 +589,11 @@ A step-by-step example is presented to clarify the method. A case study using
 <code class="language-plaintext highlighter-rouge">spData::afcon</code> is also included, making use of additional packages such as
 <strong>sf</strong>.</p>
 <div class="callout-note" role="note" aria-label="Note">
- <p><strong>Historical example:</strong> The mapping examples use <strong>cartography</strong>, which is now
-in maintenance mode. Its maintainers recommend
-<a href="https://riatelab.github.io/mapsf/"><strong>mapsf</strong></a> for new work. The original code
-and outputs are preserved and have not been revalidated against current package
-versions.</p>
-</div>
-<div class="callout-note" role="note" aria-label="Note">
  <p><strong>Update (23 November 2026):</strong> This post has been substantially revised with 
 updated <strong>R</strong> code, improved visualizations, clearer explanations of the 
 head/tail breaks algorithm, and a comparison with Fisher–Jenks and quantile 
 classification methods. The original publication date has been preserved.</p>
+ <p>The package vignette is available at <a href="https://r-spatial.github.io/classInt/articles/headtailsR.html">https://r-spatial.github.io/classInt/articles/headtailsR.html</a></p>
 </div>
 <h2 id="introduction">Introduction</h2>
 <p><strong>Head/tail breaks</strong> is a classification scheme introduced by Jiang (2013) for
@@ -1111,11 +1105,9 @@ of the gaps between observations.</p>
 </span><span class="c1">#&gt; [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"   "[3819.8,4998.5)"  </span><span class="w">
 </span><span class="c1">#&gt; [5] "[4998.5,5246]"</span><span class="w">
 </span><span class="n">levels</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">fisher</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt; [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)" </span><span class="w">
-</span><span class="c1">#&gt; [5] "[3942.5,5246]"</span><span class="w">
+</span><span class="c1">#&gt; [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"  "[3942.5,5246]"</span><span class="w">
 </span><span class="n">levels</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt; [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)"</span><span class="w">
-</span><span class="c1">#&gt; [5] "[1877.4,5246]"</span><span class="w">
+</span><span class="c1">#&gt; [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)" "[1877.4,5246]"</span><span class="w">
 
 </span><span class="n">ht_breaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="p">[</span><span class="nf">seq_len</span><span class="p">(</span><span class="w">
   </span><span class="n">nclass</span><span class="w">
@@ -1341,7 +1333,7 @@ cooperation: Spatial dependence and regional context in Africa. In M. D. Ward
 Publishers.</li>
  <li>Jiang, B. (2013). Head/tail breaks: A new classification scheme for data with
 a heavy-tailed distribution. <em>The Professional Geographer, 65</em>(3), 482–494.
-<a href="https://doi.org/10.1080/00330124.2012.700499">https://doi.org/10.1080/00330124.2012.700499</a></li>
+<a href="https://doi.org/10.1080/00330124.2012.700499">DOI</a></li>
  <li>Jiang, B. (2019). A recursive definition of goodness of space for bridging the
 concepts of space and place for sustainability. <em>Sustainability, 11</em>(15),
 Article 4091. <a href="https://doi.org/10.3390/su11154091">https://doi.org/10.3390/su11154091</a></li>
