@@ -18,7 +18,7 @@
           "@type": "WebPage",
           "@id": "https://dieghernan.github.io/202004_headtails/"
         },
-        "description": "Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher-Jenks and quantile classifications through practical examples and maps.",
+        "description": "Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher–Jenks and quantile classifications through practical examples and maps.",
         "inLanguage": "en-US",
         "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
         "keywords": ["classInt","r_package","rspatial","rstats","r_bloggers"],
@@ -74,7 +74,7 @@
         },
         "inLanguage": "en-US",
         "name": "Head/tail breaks in the classInt package",
-        "description": "Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher-Jenks and quantile classifications through practical examples and maps."
+        "description": "Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher–Jenks and quantile classifications through practical examples and maps."
       }
     </script>
     <script type="application/ld+json">
@@ -119,7 +119,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Diego HH" >
     <meta name="copyright" content="Diego HH" >
-    <meta name="description" content="Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher-Jenks and quantile classifications through practical examples and maps.">
+    <meta name="description" content="Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher–Jenks and quantile classifications through practical examples and maps.">
     <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
@@ -135,16 +135,16 @@
     <meta property="article:tag" content="rspatial">
     <meta property="article:tag" content="rstats">
     <meta property="article:tag" content="r_bloggers">
-    <meta property="og:description" content="Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher-Jenks and quantile classifications through practical examples and maps." >
+    <meta property="og:description" content="Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher–Jenks and quantile classifications through practical examples and maps." >
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp" >
-    <meta property="og:image:alt" content="Close-up map of West and Central Africa showing colored proportional circles  over country boundaries. Circle sizes and colors vary across locations, with  several symbols overlapping in coastal areas." >
+    <meta property="og:image:alt" content="Close-up map of West and Central Africa showing colored proportional circles over country boundaries. Circle sizes and colors vary across locations, with several symbols overlapping in coastal areas." >
     <meta property="og:image:width" content="1144" >
     <meta property="og:image:height" content="372" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher-Jenks and quantile classifications through practical examples and maps.">
+    <meta name="twitter:description" content="Explore the head/tail breaks classification method for heavy-tailed distributions using R and the classInt package. Learn how the algorithm works and compare its results with Fisher–Jenks and quantile classifications through practical examples and maps.">
     <meta name="twitter:site" content="@dhernangomez" >
     <meta name="twitter:creator" content="@dhernangomez" >
     <!-- CSS -->
@@ -157,30 +157,6 @@
     <script src="https://kit.fontawesome.com/afe0d1dec9.js" crossorigin="anonymous"></script>
     <link rel="preload" href="/assets/js/chulapa_script.min.js" as="script" >
     <link rel="preload" href="/assets/fonts/Chulapa/Chulapa-Bold_vmod.otf" as="font" type="font/otf" crossorigin>
-    <style>
-      .chulapa-theme-icon {
-        display: inline-grid;
-        width: 1.25em;
-        height: 1.25em;
-        vertical-align: -0.3em;
-      }
-      .chulapa-theme-icon [data-icon-mode] {
-        display: none;
-        grid-area: 1 / 1;
-      }
-      html[data-theme-mode="light"] .chulapa-theme-icon [data-icon-mode="light"],
-      html[data-theme-mode="dark"] .chulapa-theme-icon [data-icon-mode="dark"],
-      html[data-theme-mode="auto"] .chulapa-theme-icon [data-icon-mode="auto"],
-      html:not([data-theme-mode]) .chulapa-theme-icon [data-icon-mode="light"] {
-        display: block;
-      }
-      .chulapa-theme-icon .chulapa-icon {
-        display: block;
-        width: 100%;
-        height: 100%;
-        vertical-align: baseline;
-      }
-    </style>
     <link rel="stylesheet" id="maincss" href="/assets/css/main.css">
     <link rel="stylesheet" id="csshigh" href="/assets/css/highlighter.css">
     <script>
@@ -285,12 +261,15 @@
       }
       function controls() {
         var names = {light: 'Light', dark: 'Dark', auto: 'Auto'};
+        var icons = {light: 'fas fa-sun', dark: 'fas fa-moon', auto: 'fa fa-adjust'};
         document.querySelectorAll('.chulapa-theme-selector').forEach(function (selector) {
           var button = selector.querySelector('.chulapa-theme-toggle');
           if (!button) { selector.hidden = true; return; }
           button.setAttribute('aria-label', 'Color theme: ' + names[mode]);
           button.title = 'Color theme: ' + names[mode];
+          var icon = button.querySelector('i');
           var label = button.querySelector('.chulapa-theme-label');
+          if (icon) icon.className = icons[mode];
           if (label) label.textContent = names[mode];
           selector.querySelectorAll('[data-theme-mode]').forEach(function (option) {
             var selected = option.dataset.themeMode === mode;
@@ -441,51 +420,54 @@
 					</li><li class="nav-item">
 						<a class="nav-link " href="https://dieghernan.github.io/search"><svg class="chulapa-icon"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z" />
-</svg><span class="d-lg-none" aria-hidden="true">Search</span><span class="sr-only">Search</span>
+</svg><span class="d-lg-none ml-1" aria-hidden="true">Search</span><span class="sr-only">Search</span>
 						</a>
 					</li>
 <li class="nav-item dropdown chulapa-theme-selector" hidden>
   <button type="button" class="nav-link dropdown-toggle chulapa-theme-toggle" id="chulapa-theme-classic" data-toggle="dropdown" aria-expanded="false" aria-label="Color theme: Light" title="Color theme: Light">
-<span class="chulapa-theme-icon" aria-hidden="true">
-      <span data-icon-mode="light"><svg class="chulapa-icon"
+    <span class="chulapa-theme-icon" aria-hidden="true"><svg class="chulapa-icon"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor" data-icon-mode="light"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M320 32C328.4 32 336.3 36.4 340.6 43.7L396.1 136.3L500.9 110C509.1 108 517.8 110.4 523.7 116.3C529.6 122.2 532 131 530 139.1L503.7 243.8L596.4 299.3C603.6 303.6 608.1 311.5 608.1 319.9C608.1 328.3 603.7 336.2 596.4 340.5L503.7 396.1L530 500.8C532 509 529.6 517.7 523.7 523.6C517.8 529.5 509 532 500.9 530L396.2 503.7L340.7 596.4C336.4 603.6 328.5 608.1 320.1 608.1C311.7 608.1 303.8 603.7 299.5 596.4L243.9 503.7L139.2 530C131 532 122.4 529.6 116.4 523.7C110.4 517.8 108 509 110 500.8L136.2 396.1L43.6 340.6C36.4 336.2 32 328.4 32 320C32 311.6 36.4 303.7 43.7 299.4L136.3 243.9L110 139.1C108 130.9 110.3 122.3 116.3 116.3C122.3 110.3 131 108 139.2 110L243.9 136.2L299.4 43.6L301.2 41C305.7 35.3 312.6 31.9 320 31.9zM320 176C240.5 176 176 240.5 176 320C176 399.5 240.5 464 320 464C399.5 464 464 399.5 464 320C464 240.5 399.5 176 320 176zM320 416C267 416 224 373 224 320C224 267 267 224 320 224C373 224 416 267 416 320C416 373 373 416 320 416z" />
-</svg></span>
-      <span data-icon-mode="dark"><svg class="chulapa-icon"
+</svg><svg class="chulapa-icon"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor" data-icon-mode="dark"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
-</svg></span>
-      <span data-icon-mode="auto"><svg class="chulapa-icon"
+</svg><svg class="chulapa-icon"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor" data-icon-mode="auto"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M512 320C512 214 426 128 320 128L320 512C426 512 512 426 512 320zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z" />
 </svg></span>
-    </span>
     <span class="chulapa-theme-label">Light</span>
   </button>
  <div class="dropdown-menu dropdown-menu-right" role="group" aria-labelledby="chulapa-theme-classic">
     <button type="button" class="dropdown-item" data-theme-mode="light" aria-pressed="true"><svg class="chulapa-icon mr-1"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M320 32C328.4 32 336.3 36.4 340.6 43.7L396.1 136.3L500.9 110C509.1 108 517.8 110.4 523.7 116.3C529.6 122.2 532 131 530 139.1L503.7 243.8L596.4 299.3C603.6 303.6 608.1 311.5 608.1 319.9C608.1 328.3 603.7 336.2 596.4 340.5L503.7 396.1L530 500.8C532 509 529.6 517.7 523.7 523.6C517.8 529.5 509 532 500.9 530L396.2 503.7L340.7 596.4C336.4 603.6 328.5 608.1 320.1 608.1C311.7 608.1 303.8 603.7 299.5 596.4L243.9 503.7L139.2 530C131 532 122.4 529.6 116.4 523.7C110.4 517.8 108 509 110 500.8L136.2 396.1L43.6 340.6C36.4 336.2 32 328.4 32 320C32 311.6 36.4 303.7 43.7 299.4L136.3 243.9L110 139.1C108 130.9 110.3 122.3 116.3 116.3C122.3 110.3 131 108 139.2 110L243.9 136.2L299.4 43.6L301.2 41C305.7 35.3 312.6 31.9 320 31.9zM320 176C240.5 176 176 240.5 176 320C176 399.5 240.5 464 320 464C399.5 464 464 399.5 464 320C464 240.5 399.5 176 320 176zM320 416C267 416 224 373 224 320C224 267 267 224 320 224C373 224 416 267 416 320C416 373 373 416 320 416z" />
 </svg>Light</button>
     <button type="button" class="dropdown-item" data-theme-mode="dark" aria-pressed="false"><svg class="chulapa-icon mr-1"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576C388.8 576 451.3 548.8 497.3 504.6C504.6 497.6 506.7 486.7 502.6 477.5C498.5 468.3 488.9 462.6 478.8 463.4C473.9 463.8 469 464 464 464C362.4 464 280 381.6 280 280C280 207.9 321.5 145.4 382.1 115.2C391.2 110.7 396.4 100.9 395.2 90.8C394 80.7 386.6 72.5 376.7 70.3C358.4 66.2 339.4 64 320 64z" />
 </svg>Dark</button>
     <button type="button" class="dropdown-item" data-theme-mode="auto" aria-pressed="false"><svg class="chulapa-icon mr-1"
      aria-hidden="true"
+     width="1.25em" height="1.25em" fill="currentColor"
      viewBox="0 0 640 640">
   <!--! Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2026 Fonticons, Inc. -->
  <path d="M512 320C512 214 426 128 320 128L320 512C426 512 512 426 512 320zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z" />
@@ -497,7 +479,7 @@
 </nav>
 			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
   <a class="u-url d-none" href="https://dieghernan.github.io/202004_headtails/">Invisible link to canonical for Microformats</a>
-    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp" alt="Close-up map of West and Central Africa showing colored proportional circles  over country boundaries. Circle sizes and colors vary across locations, with  several symbols overlapping in coastal areas.">
+    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp" alt="Close-up map of West and Central Africa showing colored proportional circles over country boundaries. Circle sizes and colors vary across locations, with several symbols overlapping in coastal areas.">
   <a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans">Invisible link for fed.brid.gy</a>
  <main class="d-flex flex-column flex-fill">
 <header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp')">
@@ -583,33 +565,30 @@ Jiang (2013)
 </footer>
 </blockquote>
 <h2 id="abstract">Abstract</h2>
-<p>This vignette discusses the implementation of the “Head/tail breaks” style
-(Jiang (2013)) in the <code class="language-plaintext highlighter-rouge">classIntervals()</code> function from the <strong>classInt</strong> package.
-A step-by-step example is presented to clarify the method. A case study using
-<code class="language-plaintext highlighter-rouge">spData::afcon</code> is also included, making use of additional packages such as
-<strong>sf</strong>.</p>
+<p>This article explains how <code class="language-plaintext highlighter-rouge">classIntervals()</code> in <strong>classInt</strong> implements
+head/tail breaks (Jiang, 2013). A worked example follows the algorithm one
+iteration at a time. The case study compares head/tail breaks, Fisher–Jenks
+and quantiles using the African conflict data in <code class="language-plaintext highlighter-rouge">spData::afcon</code>.</p>
 <div class="callout-note" role="note" aria-label="Note">
- <p><strong>Update (23 November 2026):</strong> This post has been substantially revised with 
-updated <strong>R</strong> code, improved visualizations, clearer explanations of the 
-head/tail breaks algorithm, and a comparison with Fisher–Jenks and quantile 
-classification methods. The original publication date has been preserved.</p>
- <p>The package vignette is available at the <a href="https://r-spatial.github.io/classInt/articles/headtailsR.html"><strong>classInt</strong> pkgdown 
-site</a>.</p>
+ <p><strong>Update (23 November 2026)</strong></p>
+ <p>This revision updates the <strong>R</strong> code and figures, clarifies the stopping rule
+and compares head/tail breaks with Fisher–Jenks and quantiles. The original
+publication date has been preserved.</p>
+ <p>See also the <a href="https://r-spatial.github.io/classInt/articles/headtailsR.html"><strong>classInt</strong> package
+vignette</a>.</p>
 </div>
 <h2 id="introduction">Introduction</h2>
 <p><strong>Head/tail breaks</strong> is a classification scheme introduced by Jiang (2013) for
 revealing hierarchies in data with many small values and a few large ones. The
-related <strong>ht-index</strong> measures the depth of this hierarchy, rather than being
-another name for the classification method.</p>
-<p>The distributions considered here are strongly right-skewed, with a minority of
-large values in the head and a majority of small values in the tail. This
-imbalance can be expressed as <em>“far more small things than large things”</em>.</p>
+related <strong>ht-index</strong> summarizes how deeply this pattern recurs across scales
+(Jiang &amp; Yin, 2014).</p>
+<p>In the examples below, the distributions are strongly right-skewed. A few
+large values form the head and many smaller values form the tail.</p>
 <p>Power-law and lognormal distributions are examples of heavy-tailed
-distributions. The head/tail breaks literature also considers exponential
-distributions under its broader description of this imbalance. Nature, society
-and finance (Vasicek (2002)) provide examples of rare and extreme events. Taleb
-(2008) discusses the impact of unexpected extreme events, offering another
-reason to pay attention to low-frequency observations.</p>
+distributions. The head/tail breaks literature also uses exponential
+distributions to illustrate the imbalance. Rare, large outcomes matter in
+applications such as portfolio credit risk (Vasicek, 2002) and in broader
+discussions of extreme events (Taleb, 2008).</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">classInt</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">scales</span><span class="p">)</span><span class="w">
@@ -655,13 +634,13 @@ reason to pay attention to low-frequency observations.</p>
   </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_percent</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_percent</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The 80/20 principle"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"An illustration using a Pareto distribution"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"How much of the total does the top 20% account for?"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cumulative share in a simulated Pareto sample"</span><span class="p">,</span><span class="w">
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Top proportion of observations"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cumulative share of total"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Cumulative share of a simulated Pareto sample, ordered from largest to smallest. The top 20% of observations accounts for approximately 73% of the total, below the theoretical 80% reference line." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Cumulative share of a simulated Pareto sample, ordered from largest to smallest. The top 20% of observations accounts for about 74% of the total, below the theoretical 80% reference line." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
 </span><span class="c1"># Histogram</span><span class="w">
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">sample_par_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -674,8 +653,8 @@ reason to pay attention to low-frequency observations.</p>
   </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A heavy-tailed distribution"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Histogram of a simulated Pareto sample"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A simulated Pareto sample"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Most observations are small, with a few large values"</span><span class="p">,</span><span class="w">
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Density"</span><span class="w">
   </span><span class="p">)</span><span class="w">
@@ -688,7 +667,7 @@ stopping condition is satisfied. Given a vector of values \(v = (a_1, a_2,
 <ol>
  <li>Compute the arithmetic mean, \(\mu = \frac{1}{n}\sum_{i=1}^{n} a_i\).</li>
  <li>Break \(v\) into the \(tail\) and the \(head\):
-\(tail = \{ a_x \in v | a_x \lt \mu \}\)
+\(tail = \{ a_x \in v | a_x \le \mu \}\)
 \(head = \{ a_x \in v | a_x \gt \mu \}\).</li>
  <li>Check whether the proportion of observations in the head is at most the
 chosen threshold: \(\frac{|head|}{|v|} \le threshold\)</li>
@@ -696,17 +675,15 @@ chosen threshold: \(\frac{|head|}{|v|} \le threshold\)</li>
 \(v\) with \(head\) and repeat. Otherwise, stop.</li>
 </ol>
 <p>Only values strictly above the mean enter the next iteration. Values equal to
-the mean are not part of the head. Stopping does not require an exact 50/50
-split.</p>
-<p>A threshold of 40% provides a practical stopping rule. It is not a statistical
-test for whether a distribution is heavy-tailed.</p>
-<p>The entire process can be summarized in the following flowchart. At each
-iteration, the arithmetic mean divides the sample into two groups: the head and
-the tail. If the proportion of observations in the head does not exceed the
-threshold, the process is repeated using only the head as the new sample.</p>
-<div class="mx-auto w-50">
- <pre><code class="language-mermaid">
+the mean stay in the tail.</p>
+<p>A threshold of 40% is a practical stopping rule (Jiang et al., 2013).
+It does not provide a statistical test for a heavy-tailed distribution.</p>
+<p>At each iteration, the arithmetic mean separates the head from the tail.
+Repeat with the head only if it contains at least two observations and its
+share of the sample is at or below the threshold.</p><pre><code class="language-mermaid">
 flowchart TD
+    accTitle: Head/tail breaks algorithm
+    accDescr: Compute the mean and keep values above it as the head. Repeat with the head only when it has at least two values and its share is at or below the threshold. Keep each mean as a break.
     A["$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$"]
     B["$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$"]
     C{"$$a_i &gt; \mu$$"}
@@ -715,6 +692,7 @@ flowchart TD
     F{"$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$"}
     G(("Stop"))
     H["$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$"]
+    I{"At least two values&lt;br/&gt;in the head?"}
 
     A --&gt; B
     B --&gt; C
@@ -725,17 +703,18 @@ flowchart TD
     E --&gt; F
 
     F -- FALSE --&gt; G
-    F -- TRUE --&gt; H
+    F -- TRUE --&gt; I
+    I -- FALSE --&gt; G
+    I -- TRUE --&gt; H
 
     H -.-&gt; B
 </code></pre>
-</div>
 <p>Each iteration produces a new break at the arithmetic mean of the current
 sample. Once the stopping condition is met, the final set of breaks is obtained
 by collecting the successive means computed throughout the process:</p>
 \[breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_k )\]
 <h2 id="step-by-step-example">Step-by-step example</h2>
-<p>We reproduce here the pseudo-code<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> as per Jiang (2019):</p>
+<p>Jiang (2019) summarizes the original procedure in this pseudocode<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Recursive function Head/tail Breaks:
  Rank the input data from the largest to the smallest
  Break the data into the head and the tail around the mean;
@@ -745,9 +724,9 @@ by collecting the successive means computed throughout the process:</p>
  Head/tail Breaks (head);
 End Function
 </code></pre></div></div>
-<p>The following <strong>R</strong> example uses <code class="language-plaintext highlighter-rouge">prop &lt; thr</code>, whereas the pseudocode above uses
-<code class="language-plaintext highlighter-rouge">head &lt;= 40%</code>. At exactly 40%, the <strong>R</strong> loop stops and the pseudocode
-continues. This distinction does not affect the example below.</p>
+<p>The <strong>R</strong> example continues only when <code class="language-plaintext highlighter-rouge">prop &lt; thr</code>. The pseudocode allows
+equality, so the two stop at different points if the head contains exactly
+40% of the observations. That case does not occur in this sample.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">var</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sample_par</span><span class="w">
 </span><span class="n">thr</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.4</span><span class="w">
 </span><span class="n">brks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
@@ -794,7 +773,7 @@ continues. This distinction does not affect the example below.</p>
   </span><span class="n">mutate</span><span class="p">(</span><span class="w">
     </span><span class="n">iter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">iter</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">levels</span><span class="p">(</span><span class="n">iter_df</span><span class="o">$</span><span class="n">iter</span><span class="p">)),</span><span class="w">
     </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="w">
-      </span><span class="s2">"Share of observation\nin the head:\n"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"Share of observations\nin the head:\n"</span><span class="p">,</span><span class="w">
       </span><span class="n">label_percent</span><span class="p">(</span><span class="n">accuracy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)(</span><span class="n">prop</span><span class="p">)</span><span class="w">
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w">
@@ -809,7 +788,7 @@ continues. This distinction does not affect the example below.</p>
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="c1"># Areas</span><span class="w">
   </span><span class="n">geom_rect</span><span class="p">(</span><span class="w">
-    </span><span class="n">aes</span><span class="p">(</span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">),</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">xmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">ymin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="kc">Inf</span><span class="p">,</span><span class="w"> </span><span class="n">ymax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">Inf</span><span class="p">),</span><span class="w">
     </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w">
     </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">,</span><span class="w">
     </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">slice_head</span><span class="p">(</span><span class="n">.x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
@@ -840,16 +819,15 @@ continues. This distinction does not affect the example below.</p>
     </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">breaks_extended</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head/tail breaks: step by step"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Recursive partitioning at the arithmetic mean"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head/tail breaks across four iterations"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Shading marks the head above the mean"</span><span class="p">,</span><span class="w">
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
-    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Count"</span><span class="p">,</span><span class="w">
-    </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head areas highlighted in red"</span><span class="w">
+    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Count"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms illustrating successive head/tail breaks iterations. Red areas mark the head at each step. The proportion of observations above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" /></p>
-<p>The head proportion varies across iterations and reaches 50% in the fourth,
-which stops the loop. It does not increase monotonically.</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms showing successive head/tail breaks iterations. The shaded area marks the head and the dashed line marks the mean. The share above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" /></p>
+<p>The head accounts for 50% of the remaining observations in the fourth
+iteration. That exceeds the 40% threshold and stops the loop.</p>
 <table>
 <thead>
    <tr>
@@ -905,11 +883,9 @@ computed during the iterations. Here the original data are <code class="language
 </span><span class="n">all.equal</span><span class="p">(</span><span class="n">brks</span><span class="p">,</span><span class="w"> </span><span class="n">ht_sample_par</span><span class="o">$</span><span class="n">brks</span><span class="p">)</span><span class="w">
 </span><span class="c1">#&gt; [1] TRUE</span><span class="w">
 </span></code></pre></div></div>
-<p>As stated in Jiang (2013), the number of breaks is determined by the data.
-However, the <code class="language-plaintext highlighter-rouge">thr</code> parameter can help adjust the final number. A lower value of
-<code class="language-plaintext highlighter-rouge">thr</code> can yield fewer breaks, while a larger <code class="language-plaintext highlighter-rouge">thr</code> can increase the number if
-the underlying distribution follows the <em>“far more small things than large
-things”</em> principle.</p>
+<p>The data determine the number of breaks (Jiang, 2013). The <code class="language-plaintext highlighter-rouge">thr</code> argument
+controls how large the head can be before recursion stops. In the next figure,
+higher thresholds let the algorithm continue for more iterations.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">thresholds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w">
 
 </span><span class="n">breaks_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">thresholds</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">thr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1001,31 +977,26 @@ things”</em> principle.</p>
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_percent</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_fill_viridis_d</span><span class="p">(</span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"cividis"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The effect of the threshold"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head/tail breaks with different stopping thresholds"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"How the stopping threshold affects the breaks"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Four thresholds applied to the same Pareto sample"</span><span class="p">,</span><span class="w">
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cumulative proportion"</span><span class="p">,</span><span class="w">
     </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Class"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="Four panels compare head/tail breaks thresholds of 0, 0.2, 0.4 and 1 against the empirical cumulative distribution of a Pareto sample. Higher thresholds produce more classes, with boundaries concentrated near the lower values." width="100%" /></p>
-<p>For this example, even <code class="language-plaintext highlighter-rouge">thr = 0</code> retains the mean as an internal break. The
-returned vector also contains the minimum and maximum, so this gives two
-classes, not one.</p>
+<p>Even at <code class="language-plaintext highlighter-rouge">thr = 0</code>, the algorithm makes the initial split at the mean.
+Together with the minimum and maximum, this gives two classes.</p>
 <h2 id="case-study">Case study</h2>
-<p>Jiang (2013) states that <em>“the new classification scheme is more natural than
-the natural breaks in finding the groupings or hierarchy for data with a
-heavy-tailed distribution.”</em> (p. 482), referring to Jenks’ natural breaks
-method. In this case study, we compare <code class="language-plaintext highlighter-rouge">headtails</code> vs. <code class="language-plaintext highlighter-rouge">fisher</code>, which is the
-alias for the Fisher-Jenks algorithm and is always preferred to the <code class="language-plaintext highlighter-rouge">jenks</code>
-style (see <code class="language-plaintext highlighter-rouge">?classIntervals</code>). For this example, we will use the <code class="language-plaintext highlighter-rouge">afcon</code> dataset
-from the <strong>spData</strong> package, plus some additional spatial information to create
-the data visualization.</p>
+<p>Jiang (2013) proposed head/tail breaks as a way to reveal the hierarchy in
+heavy-tailed data. Here we compare <code class="language-plaintext highlighter-rouge">headtails</code>, <code class="language-plaintext highlighter-rouge">fisher</code> (Fisher–Jenks) and
+<code class="language-plaintext highlighter-rouge">quantile</code> using <code class="language-plaintext highlighter-rouge">afcon</code> from <strong>spData</strong>. Each method uses the same number
+of classes as head/tail breaks.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">spData</span><span class="p">)</span><span class="w">
 </span><span class="n">data</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spData"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>Let’s have a look at the top 10 values and the distribution of the variable
-<code class="language-plaintext highlighter-rouge">totcon</code> (index of total conflict 1966-78):</p>
+<p>The variable <code class="language-plaintext highlighter-rouge">totcon</code> is an index of total conflict from 1966 to 1978.
+The table shows the 10 highest values.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Top10</span><span class="w">
 </span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">head</span><span class="p">(</span><span class="w">
   </span><span class="n">afcon</span><span class="p">[</span><span class="n">order</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"totcon"</span><span class="p">)],</span><span class="w">
@@ -1099,36 +1070,33 @@ the data visualization.</p>
   </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(</span><span class="n">accuracy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Conflict distribution in Africa, 1966–1978"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Number of conflicts by country"</span><span class="p">,</span><span class="w">
-    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Number of conflicts"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Distribution of the conflict index, 1966–1978"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"African countries grouped by index value"</span><span class="p">,</span><span class="w">
+    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Conflict index"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Number of countries"</span><span class="p">,</span><span class="w">
     </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Data source: Anselin &amp; O'Loughlin (1992)"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of conflict counts across African countries from 1966 to 1978. Most countries have relatively low counts, while a few exceed 3,000 and reach approximately 5,200." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of conflict index values for African countries, 1966–1978. Most countries have low index values. A few exceed 3,000, and the highest value is about 5,200." width="100%" /></p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-
 </span><span class="n">ggplot</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">totcon</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_density</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">(</span><span class="n">accuracy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"A skewed distribution of conflicts"</span><span class="p">,</span><span class="w">
-    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Estimated density of conflict counts, 1966–1978"</span><span class="p">,</span><span class="w">
-    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Number of conflicts"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"The conflict index is right-skewed"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Density estimate for African countries, 1966–1978"</span><span class="p">,</span><span class="w">
+    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Conflict index"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Density"</span><span class="p">,</span><span class="w">
     </span><span class="n">caption</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Data source: Anselin &amp; O'Loughlin (1992)"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Estimated density of conflict counts across African countries from 1966 to 1978. The distribution peaks below 1,000 conflicts and has a long right tail extending beyond 5,000." width="100%" /></p>
-<p>The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram
-shows a strongly right-skewed pattern with many small values and a few large
-ones.</p>
-<p>In addition to <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code>, we use <code class="language-plaintext highlighter-rouge">quantile</code> to compare the
-classification styles. Quantile breaks are based on ranks rather than the size
-of the gaps between observations.</p>
-<p>Applying the three aforementioned methods to break the data:</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Estimated density of the conflict index for African countries, 1966–1978. The curve peaks below 1,000 and extends beyond 5,000." width="100%" /></p>
+<p>Egypt and Sudan have the two highest index values. The histogram shows the
+same imbalance seen in the simulated sample: many lower values and a few
+much larger ones.</p>
+<p>Quantile breaks use ranks to put roughly the same number of observations in
+each class. The code below applies all three methods to the same data.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">afcon</span><span class="o">$</span><span class="n">headtails</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classify_intervals</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"headtails"</span><span class="p">)</span><span class="w">
 </span><span class="n">afcon</span><span class="o">$</span><span class="n">headtails_br</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">headtails</span><span class="p">)</span><span class="w">
 
@@ -1148,10 +1116,11 @@ of the gaps between observations.</p>
 </span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile_br</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile</span><span class="p">)</span><span class="w">
 
 </span><span class="n">levels</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">headtails</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt; [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"   "[3819.8,4998.5)"  </span><span class="w">
-</span><span class="c1">#&gt; [5] "[4998.5,5246]"</span><span class="w">
+</span><span class="c1">#&gt; [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"</span><span class="w">
+</span><span class="c1">#&gt; [4] "[3819.8,4998.5)"   "[4998.5,5246]"</span><span class="w">
 </span><span class="n">levels</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">fisher</span><span class="p">)</span><span class="w">
-</span><span class="c1">#&gt; [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"  "[3942.5,5246]"</span><span class="w">
+</span><span class="c1">#&gt; [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"</span><span class="w">
+</span><span class="c1">#&gt; [5] "[3942.5,5246]"</span><span class="w">
 </span><span class="n">levels</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">quantile</span><span class="p">)</span><span class="w">
 </span><span class="c1">#&gt; [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)"</span><span class="w">
 </span><span class="c1">#&gt; [5] "[1877.4,5246]"</span><span class="w">
@@ -1166,7 +1135,6 @@ of the gaps between observations.</p>
   </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nclass</span><span class="w">
 </span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="p">[</span><span class="nf">seq_len</span><span class="p">(</span><span class="n">nclass</span><span class="p">)]</span><span class="w">
 
-
 </span><span class="n">q_breaks</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">classIntervals</span><span class="p">(</span><span class="w">
   </span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
   </span><span class="n">style</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"quantile"</span><span class="p">,</span><span class="w">
@@ -1174,20 +1142,20 @@ of the gaps between observations.</p>
 </span><span class="p">)</span><span class="o">$</span><span class="n">brks</span><span class="p">[</span><span class="nf">seq_len</span><span class="p">(</span><span class="n">nclass</span><span class="p">)]</span><span class="w">
 
 </span><span class="n">tibble</span><span class="p">(</span><span class="w">
-  </span><span class="n">id_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head/tails"</span><span class="p">,</span><span class="w">
+  </span><span class="n">id_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head/tail breaks"</span><span class="p">,</span><span class="w">
   </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ht_breaks</span><span class="p">,</span><span class="w">
   </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.factor</span><span class="p">(</span><span class="nf">seq_along</span><span class="p">(</span><span class="n">ht_breaks</span><span class="p">))</span><span class="w">
 </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
     </span><span class="n">tibble</span><span class="p">(</span><span class="w">
-      </span><span class="n">id_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fisher"</span><span class="p">,</span><span class="w">
+      </span><span class="n">id_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Fisher–Jenks"</span><span class="p">,</span><span class="w">
       </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fisher_breaks</span><span class="p">,</span><span class="w">
       </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.factor</span><span class="p">(</span><span class="nf">seq_along</span><span class="p">(</span><span class="n">fisher_breaks</span><span class="p">))</span><span class="w">
     </span><span class="p">)</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
     </span><span class="n">tibble</span><span class="p">(</span><span class="w">
-      </span><span class="n">id_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Quantile"</span><span class="p">,</span><span class="w">
+      </span><span class="n">id_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Quantiles"</span><span class="p">,</span><span class="w">
       </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q_breaks</span><span class="p">,</span><span class="w">
       </span><span class="n">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.factor</span><span class="p">(</span><span class="nf">seq_along</span><span class="p">(</span><span class="n">q_breaks</span><span class="p">))</span><span class="w">
     </span><span class="p">)</span><span class="w">
@@ -1218,20 +1186,20 @@ of the gaps between observations.</p>
   </span><span class="n">scale_fill_viridis_d</span><span class="p">(</span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"cividis"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">guides</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">guide_legend</span><span class="p">(),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">guide_legend</span><span class="p">(</span><span class="n">override.aes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Comparing classification methods"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Where the three methods place their class breaks"</span><span class="p">,</span><span class="w">
     </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Head/tail breaks, Fisher–Jenks and quantiles"</span><span class="p">,</span><span class="w">
-    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Number of conflicts"</span><span class="p">,</span><span class="w">
+    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Conflict index"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Cumulative proportion"</span><span class="p">,</span><span class="w">
     </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Class"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Three panels compare head/tail breaks, Fisher–Jenks and quantile classifications of African conflict counts. Colored bands mark five classes over the empirical cumulative distribution, showing how the methods place boundaries at different values." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Three panels compare head/tail breaks, Fisher–Jenks and quantile classifications of African conflict index values. Colored bands mark five classes over the empirical cumulative distribution, showing how the methods place boundaries at different values." width="100%" /></p>
 <p>The top three classes of <code class="language-plaintext highlighter-rouge">headtails</code> contain five observations, whereas those of
 <code class="language-plaintext highlighter-rouge">fisher</code> contain 13. In this example, <code class="language-plaintext highlighter-rouge">headtails</code> gives more detail at the upper
 end of the distribution.</p>
-<p>The next plot compares density estimates of the rescaled <code class="language-plaintext highlighter-rouge">totcon</code> values and the
-class assignments from each method. The original values are rescaled to
-<code class="language-plaintext highlighter-rouge">[1, nclass]</code> and shifted by c(-0.4, 0.4) for the visual comparison.</p>
+<p>The next plot compares smoothed distributions across methods. For this
+comparison, the original <code class="language-plaintext highlighter-rouge">totcon</code> values are rescaled and rounded to the
+same five levels as the class indices.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Rescale values for visualization</span><span class="w">
 </span><span class="n">afcon</span><span class="o">$</span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rescale</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">totcon</span><span class="p">,</span><span class="w">
   </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">range</span><span class="p">(</span><span class="n">afcon</span><span class="o">$</span><span class="n">headtails_br</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-0.4</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w">
@@ -1268,7 +1236,7 @@ class assignments from each method. The original values are rescaled to
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label_comma</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_color_viridis_d</span><span class="p">(</span><span class="n">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"cividis"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"How classification methods distribute observations"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"How the methods distribute observations across classes"</span><span class="p">,</span><span class="w">
     </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Smoothed distributions of class indices"</span><span class="p">,</span><span class="w">
     </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Rescaled value / Class index"</span><span class="p">,</span><span class="w">
     </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Estimated density"</span><span class="p">,</span><span class="w">
@@ -1279,8 +1247,9 @@ class assignments from each method. The original values are rescaled to
 <p>In this example, the class assignments from <code class="language-plaintext highlighter-rouge">headtails</code> retain more of the
 original imbalance. By contrast, <code class="language-plaintext highlighter-rouge">quantile</code> aims for similar numbers of
 observations per class, regardless of the gaps between values.</p>
-<p>We now compare the methods using proportional-symbol maps. Symbol size
-represents <code class="language-plaintext highlighter-rouge">totcon</code>, while color distinguishes the classes.</p>
+<p>The maps show where these differences appear. Circle size and color encode
+the rescaled conflict index in the unclassified panel and the assigned class
+in each of the other three panels.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 
@@ -1304,11 +1273,9 @@ represents <code class="language-plaintext highlighter-rouge">totcon</code>, whi
   </span><span class="n">st_transform</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_bbox</span><span class="p">()</span><span class="w">
 
-
 </span><span class="n">afcon_sf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_as_sf</span><span class="p">(</span><span class="n">afcon</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4326</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"y"</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">st_transform</span><span class="p">(</span><span class="n">st_crs</span><span class="p">(</span><span class="n">africa</span><span class="p">))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">totcon</span><span class="p">))</span><span class="w">
-
 
 </span><span class="n">afcon_sf</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
   </span><span class="n">mutate</span><span class="p">(</span><span class="n">original</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rescale</span><span class="p">(</span><span class="n">totcon</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">5</span><span class="p">)))</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
@@ -1352,26 +1319,18 @@ represents <code class="language-plaintext highlighter-rouge">totcon</code>, whi
     </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">()</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">labs</span><span class="p">(</span><span class="w">
-    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Classification methods compared on a map"</span><span class="p">,</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"How classification changes the map"</span><span class="p">,</span><span class="w">
     </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Symbol sizes represent original values or assigned classes"</span><span class="p">,</span><span class="w">
     </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Class index"</span><span class="p">,</span><span class="w">
     </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Class index"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four maps of Africa compare rescaled conflict counts with head/tail breaks, Fisher–Jenks and quantile classifications. Colored circles represent values or class indices from 1 to 5, revealing differences in the size and distribution of symbols across methods." width="100%" /></p>
-<p>Compared with the unclassified proportional-symbol map, <code class="language-plaintext highlighter-rouge">headtails</code> makes the
-most extreme values easier to distinguish. The <code class="language-plaintext highlighter-rouge">quantile</code> style groups
-observations by rank, while <code class="language-plaintext highlighter-rouge">fisher</code> provides an intermediate view in this
-example.</p>
-<p>It is also important to note that <code class="language-plaintext highlighter-rouge">headtails</code> and <code class="language-plaintext highlighter-rouge">fisher</code> reveal different
-information that can be useful depending on the context. While <code class="language-plaintext highlighter-rouge">headtails</code>
-highlights the outliers, it fails to provide good clustering on the tail, while
-<code class="language-plaintext highlighter-rouge">fisher</code> seems to reflect these patterns better. This can be observed in the
-values of Western Africa and the Niger River Basin, where <code class="language-plaintext highlighter-rouge">headtails</code> does not
-highlight any special cluster of conflicts, while <code class="language-plaintext highlighter-rouge">fisher</code> suggests a potential
-cluster consistent with the unclassified map. This can be confirmed in the
-histogram generated previously, where a concentration of <code class="language-plaintext highlighter-rouge">totcon</code> around 1,000
-is visible.</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four maps of Africa compare the rescaled conflict index with head/tail breaks, Fisher–Jenks and quantiles. Circle size and color represent the rescaled index in the first map and the assigned class in the other three." width="100%" /></p>
+<p>Head/tail breaks separates the highest index values into smaller groups.
+Fisher–Jenks spreads the middle and lower values across more classes, which
+makes distinctions among countries in West Africa easier to see in this
+example. Quantiles keep class sizes similar. The choice depends on which part
+of the distribution the map needs to emphasize.</p>
 <h2 id="references">References</h2>
 <ul>
  <li>Anselin, L., &amp; O’Loughlin, J. (1992). Geography of international conflict and
@@ -1401,7 +1360,7 @@ Penguin.</li>
  <ol>
    <li id="fn:1">
      <p>The method implemented in <strong>classInt</strong> corresponds to head/tail breaks
-1.0, as named in this article. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
+1.0 in Jiang’s (2019) terminology. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&uarr;</a></p>
    </li>
  </ol>
 </div>
