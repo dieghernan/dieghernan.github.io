@@ -7866,7 +7866,7 @@ Leaflet-providersESP.&lt;/p&gt;
     <published>2020-04-05T00:00:00+02:00</published>
     <updated>2026-11-23T00:00:00+01:00</updated>
     <id>https://dieghernan.github.io/202004_headtails/</id>
-    <content type="html" xml:base="https://dieghernan.github.io/202004_headtails/">&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp&quot; alt=&quot;&quot;&gt;&lt;p&gt;15 min.&lt;/p&gt;
+    <content type="html" xml:base="https://dieghernan.github.io/202004_headtails/">&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20200405_og_africa-1.webp&quot; alt=&quot;&quot;&gt;&lt;p&gt;16 min.&lt;/p&gt;
     &lt;blockquote class=&quot;blockquote&quot;&gt;
 
 &lt;p class=&quot;small font-italic&quot;&gt;
@@ -8023,9 +8023,45 @@ split.&lt;/p&gt;
 &lt;p&gt;A threshold of 40% provides a practical stopping rule. It is not a statistical
 test for whether a distribution is heavy-tailed.&lt;/p&gt;
 
-&lt;p&gt;The final breaks are the vector of consecutive \(\mu\):&lt;/p&gt;
+&lt;p&gt;The entire process can be summarized in the following flowchart. At each
+iteration, the arithmetic mean divides the sample into two groups: the head and
+the tail. If the proportion of observations in the head does not exceed the
+threshold, the process is repeated using only the head as the new sample.&lt;/p&gt;
 
-&lt;p&gt;[breaks = (\mu_1, \mu_2, \mu_3, …, \mu_n )]&lt;/p&gt;
+&lt;div class=&quot;mx-auto w-50&quot;&gt;
+
+  &lt;pre&gt;&lt;code class=&quot;language-mermaid&quot;&gt;
+flowchart TD
+    A[&quot;$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$&quot;]
+    B[&quot;$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$&quot;]
+    C{&quot;$$a_i &amp;gt; \mu$$&quot;}
+    D[&quot;Tail&quot;]
+    E[&quot;Head&quot;]
+    F{&quot;$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$&quot;}
+    G((&quot;Stop&quot;))
+    H[&quot;$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$&quot;]
+
+    A --&amp;gt; B
+    B --&amp;gt; C
+
+    C -- FALSE --&amp;gt; D
+    C -- TRUE --&amp;gt; E
+
+    E --&amp;gt; F
+
+    F -- FALSE --&amp;gt; G
+    F -- TRUE --&amp;gt; H
+
+    H -.-&amp;gt; B
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Each iteration produces a new break at the arithmetic mean of the current
+sample. Once the stopping condition is met, the final set of breaks is obtained
+by collecting the successive means computed throughout the process:&lt;/p&gt;
+
+&lt;p&gt;[breaks = (\mu_1, \mu_2, \mu_3, …, \mu_k )]&lt;/p&gt;
 
 &lt;h2 id=&quot;step-by-step-example&quot;&gt;Step-by-step example&lt;/h2&gt;
 

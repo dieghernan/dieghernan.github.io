@@ -418,7 +418,7 @@
     <meta name="follow.it-verification-code" content="pQEJ5nNhCNfeV1pq9UBP">
     <!-- end custom head snippets -->
 </head>
-<body class="d-flex flex-column" id="body">
+<body data-mermaid="true" class="d-flex flex-column" id="body">
 	<a class="sr-only sr-only-focusable chulapa-skip-link" href="#chulapa-content">Skip to content</a>
 	<nav class="navbar navbar-expand-lg sticky-top navbar-chulapa" aria-label="primary-navigation">
 	<div class="container-fluid mx-md-2">
@@ -700,8 +700,40 @@ the mean are not part of the head. Stopping does not require an exact 50/50
 split.</p>
 <p>A threshold of 40% provides a practical stopping rule. It is not a statistical
 test for whether a distribution is heavy-tailed.</p>
-<p>The final breaks are the vector of consecutive \(\mu\):</p>
-\[breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_n )\]
+<p>The entire process can be summarized in the following flowchart. At each
+iteration, the arithmetic mean divides the sample into two groups: the head and
+the tail. If the proportion of observations in the head does not exceed the
+threshold, the process is repeated using only the head as the new sample.</p>
+<div class="mx-auto w-50">
+ <pre><code class="language-mermaid">
+flowchart TD
+    A["$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$"]
+    B["$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$"]
+    C{"$$a_i &gt; \mu$$"}
+    D["Tail"]
+    E["Head"]
+    F{"$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$"}
+    G(("Stop"))
+    H["$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$"]
+
+    A --&gt; B
+    B --&gt; C
+
+    C -- FALSE --&gt; D
+    C -- TRUE --&gt; E
+
+    E --&gt; F
+
+    F -- FALSE --&gt; G
+    F -- TRUE --&gt; H
+
+    H -.-&gt; B
+</code></pre>
+</div>
+<p>Each iteration produces a new break at the arithmetic mean of the current
+sample. Once the stopping condition is met, the final set of breaks is obtained
+by collecting the successive means computed throughout the process:</p>
+\[breaks = (\mu_1, \mu_2, \mu_3, ..., \mu_k )\]
 <h2 id="step-by-step-example">Step-by-step example</h2>
 <p>We reproduce here the pseudo-code<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> as per Jiang (2019):</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Recursive function Head/tail Breaks:
@@ -1603,6 +1635,7 @@ Penguin.</li>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
   <script src="/assets/js/chulapa_script.min.js"></script>
+	<script type="module" src="/assets/js/chulapa_mermaid.js"></script>
 	<!-- start custom scripts to be placed at the bottom of the page -->
   <script>
   (function () {
