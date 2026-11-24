@@ -4,7 +4,7 @@ source("_Rmd/renderblog_v2.R")
 drafts <- commandArgs(trailingOnly = TRUE)
 if (!length(drafts)) {
   drafts <- c(
-    "headtails.Rmd"
+    "pacific-centered-world-maps.Rmd"
     # "never-trust-a-map.Rmd",
     # "better-hillshading-R.Rmd"
   )

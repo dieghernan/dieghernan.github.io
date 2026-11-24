@@ -67,4 +67,3 @@ vapply(
   },
   FUN.VALUE = logical(1)
 )
-source("_Rmd/render_devto.R")

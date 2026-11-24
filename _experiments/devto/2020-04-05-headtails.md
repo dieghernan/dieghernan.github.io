@@ -33,25 +33,24 @@ Jiang (2013)
 
 ## Abstract
 
-This vignette discusses the implementation of the "Head/tail breaks" style (Jiang (2013)) in the `classIntervals()` function from the **classInt** package. A step-by-step example is presented to clarify the method. A case study using `spData::afcon` is also included, making use of additional packages such as **sf**.
+This article explains how `classIntervals()` in **classInt** implements head/tail breaks (Jiang, 2013). A worked example follows the algorithm one iteration at a time. The case study compares head/tail breaks, Fisher–Jenks and quantiles using the African conflict data in `spData::afcon`.
 
 <div class="callout-note" role="note" aria-label="Note" markdown="1">
-**Update (23 November 2026):** This post has been substantially revised with 
-updated **R** code, improved visualizations, clearer explanations of the 
-head/tail breaks algorithm, and a comparison with Fisher–Jenks and quantile 
-classification methods. The original publication date has been preserved.
+**Update (23 November 2026)**
 
-The package vignette is available at the [**classInt** pkgdown site](https://r-spatial.github.io/classInt/articles/headtailsR.html).
+This revision updates the **R** code and figures, clarifies the stopping rule and compares head/tail breaks with Fisher–Jenks and quantiles. The original publication date has been preserved.
+
+See also the [**classInt** package vignette](https://r-spatial.github.io/classInt/articles/headtailsR.html).
 
 </div>
 
 ## Introduction
 
-**Head/tail breaks** is a classification scheme introduced by Jiang (2013) for revealing hierarchies in data with many small values and a few large ones. The related **ht-index** measures the depth of this hierarchy, rather than being another name for the classification method.
+**Head/tail breaks** is a classification scheme introduced by Jiang (2013) for revealing hierarchies in data with many small values and a few large ones. The related **ht-index** summarizes how deeply this pattern recurs across scales (Jiang & Yin, 2014).
 
-The distributions considered here are strongly right-skewed, with a minority of large values in the head and a majority of small values in the tail. This imbalance can be expressed as *"far more small things than large things"*.
+In the examples below, the distributions are strongly right-skewed. A few large values form the head and many smaller values form the tail.
 
-Power-law and lognormal distributions are examples of heavy-tailed distributions. The head/tail breaks literature also considers exponential distributions under its broader description of this imbalance. Nature, society and finance (Vasicek (2002)) provide examples of rare and extreme events. Taleb (2008) discusses the impact of unexpected extreme events, offering another reason to pay attention to low-frequency observations.
+Power-law and lognormal distributions are examples of heavy-tailed distributions. The head/tail breaks literature also uses exponential distributions to illustrate the imbalance. Rare, large outcomes matter in applications such as portfolio credit risk (Vasicek, 2002) and in broader discussions of extreme events (Taleb, 2008).
 
 ``` r
 library(classInt)
@@ -99,14 +98,14 @@ ggplot(sample_par_df, aes(prop, cumulative)) +
   scale_x_continuous(labels = label_percent()) +
   scale_y_continuous(labels = label_percent()) +
   labs(
-    title = "The 80/20 principle",
-    subtitle = "An illustration using a Pareto distribution",
+    title = "How much of the total does the top 20% account for?",
+    subtitle = "Cumulative share in a simulated Pareto sample",
     x = "Top proportion of observations",
     y = "Cumulative share of total"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Cumulative share of a simulated Pareto sample, ordered from largest to smallest. The top 20% of observations accounts for approximately 73% of the total, below the theoretical 80% reference line." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_charheavytail-1.webp" alt="Cumulative share of a simulated Pareto sample, ordered from largest to smallest. The top 20% of observations accounts for about 74% of the total, below the theoretical 80% reference line." width="100%" />
 
 ``` r
 
@@ -121,8 +120,8 @@ ggplot(sample_par_df, aes(x = x)) +
   scale_x_continuous(labels = label_comma()) +
   scale_y_continuous(labels = label_comma()) +
   labs(
-    title = "A heavy-tailed distribution",
-    subtitle = "Histogram of a simulated Pareto sample",
+    title = "A simulated Pareto sample",
+    subtitle = "Most observations are small, with a few large values",
     x = "Value",
     y = "Density"
   )
@@ -158,7 +157,7 @@ v = (a_1, a_2,
     ```
     :
     ``` math
-    tail = \{ a_x \in v | a_x \lt \mu \} 
+    tail = \{ a_x \in v | a_x \le \mu \}
     ```
     ``` math
     head = \{ a_x \in v | a_x \gt \mu \} 
@@ -178,19 +177,19 @@ v = (a_1, a_2,
     ```
     and repeat. Otherwise, stop.
 
-Only values strictly above the mean enter the next iteration. Values equal to the mean are not part of the head. Stopping does not require an exact 50/50 split.
+Only values strictly above the mean enter the next iteration. Values equal to the mean stay in the tail.
 
-A threshold of 40% provides a practical stopping rule. It is not a statistical test for whether a distribution is heavy-tailed.
+A threshold of 40% is a practical stopping rule (Jiang et al., 2013). It does not provide a statistical test for a heavy-tailed distribution.
 
-The entire process can be summarized in the following flowchart. At each iteration, the arithmetic mean divides the sample into two groups: the head and the tail. If the proportion of observations in the head does not exceed the threshold, the process is repeated using only the head as the new sample.
-
-<div class="mx-auto w-50" markdown="1">
+At each iteration, the arithmetic mean separates the head from the tail. Repeat with the head only if it contains at least two observations and its share of the sample is at or below the threshold.
 
 {% raw %}
 
 ``` mermaid
 
 flowchart TD
+    accTitle: Head/tail breaks algorithm
+    accDescr: Compute the mean and keep values above it as the head. Repeat with the head only when it has at least two values and its share is at or below the threshold. Keep each mean as a break.
     A["$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$"]
     B["$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$"]
     C{"$$a_i > \mu$$"}
@@ -199,6 +198,7 @@ flowchart TD
     F{"$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$"}
     G(("Stop"))
     H["$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$"]
+    I{"At least two values<br/>in the head?"}
 
     A --> B
     B --> C
@@ -209,14 +209,14 @@ flowchart TD
     E --> F
 
     F -- FALSE --> G
-    F -- TRUE --> H
+    F -- TRUE --> I
+    I -- FALSE --> G
+    I -- TRUE --> H
 
     H -.-> B
 ```
 
 {% endraw %}
-
-</div>
 
 Each iteration produces a new break at the arithmetic mean of the current sample. Once the stopping condition is met, the final set of breaks is obtained by collecting the successive means computed throughout the process:
 
@@ -226,7 +226,7 @@ Each iteration produces a new break at the arithmetic mean of the current sample
 
 ## Step-by-step example
 
-We reproduce here the pseudo-code[^1] as per Jiang (2019):
+Jiang (2019) summarizes the original procedure in this pseudocode[^1]:
 
     Recursive function Head/tail Breaks:
      Rank the input data from the largest to the smallest
@@ -237,7 +237,7 @@ We reproduce here the pseudo-code[^1] as per Jiang (2019):
      Head/tail Breaks (head);
     End Function
 
-The following **R** example uses `prop < thr`, whereas the pseudocode above uses `head <= 40%`. At exactly 40%, the **R** loop stops and the pseudocode continues. This distinction does not affect the example below.
+The **R** example continues only when `prop < thr`. The pseudocode allows equality, so the two stop at different points if the head contains exactly 40% of the observations. That case does not occur in this sample.
 
 ``` r
 var <- sample_par
@@ -286,7 +286,7 @@ labels_df <- sum_table |>
   mutate(
     iter = factor(iter, levels = levels(iter_df$iter)),
     label = paste0(
-      "Share of observation\nin the head:\n",
+      "Share of observations\nin the head:\n",
       label_percent(accuracy = 0.1)(prop)
     )
   )
@@ -301,7 +301,7 @@ iter_df |>
   ) +
   # Areas
   geom_rect(
-    aes(xmin = -Inf, xmax = mu, ymin = -Inf, ymax = Inf),
+    aes(xmin = mu, xmax = Inf, ymin = -Inf, ymax = Inf),
     fill = "red",
     alpha = 0.1,
     data = ~ slice_head(.x, n = 1)
@@ -332,17 +332,16 @@ iter_df |>
     breaks = breaks_extended(n = 3)
   ) +
   labs(
-    title = "Head/tail breaks: step by step",
-    subtitle = "Recursive partitioning at the arithmetic mean",
+    title = "Head/tail breaks across four iterations",
+    subtitle = "Shading marks the head above the mean",
     x = "Value",
-    y = "Count",
-    caption = "Head areas highlighted in red"
+    y = "Count"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms illustrating successive head/tail breaks iterations. Red areas mark the head at each step. The proportion of observations above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_stepbystep-1.webp" alt="Four histograms showing successive head/tail breaks iterations. The shaded area marks the head and the dashed line marks the mean. The share above the mean is 14.5%, 21.4%, 19.4% and 50%, respectively." width="100%" />
 
-The head proportion varies across iterations and reaches 50% in the fourth, which stops the loop. It does not increase monotonically.
+The head accounts for 50% of the remaining observations in the fourth iteration. That exceeds the 40% threshold and stops the loop.
 
 | iter |       mu | prop   | n_var | n_head |
 |-----:|---------:|:-------|------:|-------:|
@@ -368,7 +367,7 @@ all.equal(brks, ht_sample_par$brks)
 #> [1] TRUE
 ```
 
-As stated in Jiang (2013), the number of breaks is determined by the data. However, the `thr` parameter can help adjust the final number. A lower value of `thr` can yield fewer breaks, while a larger `thr` can increase the number if the underlying distribution follows the *"far more small things than large things"* principle.
+The data determine the number of breaks (Jiang, 2013). The `thr` argument controls how large the head can be before recursion stops. In the next figure, higher thresholds let the algorithm continue for more iterations.
 
 ``` r
 thresholds <- c(0, 0.2, 0.4, 1)
@@ -445,8 +444,8 @@ ggplot(breaks_df, aes(fill = factor(class))) +
   scale_y_continuous(labels = label_percent()) +
   scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
   labs(
-    title = "The effect of the threshold",
-    subtitle = "Head/tail breaks with different stopping thresholds",
+    title = "How the stopping threshold affects the breaks",
+    subtitle = "Four thresholds applied to the same Pareto sample",
     x = "Value",
     y = "Cumulative proportion",
     fill = "Class"
@@ -455,18 +454,18 @@ ggplot(breaks_df, aes(fill = factor(class))) +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20200405_examplesimp-1.webp" alt="Four panels compare head/tail breaks thresholds of 0, 0.2, 0.4 and 1 against the empirical cumulative distribution of a Pareto sample. Higher thresholds produce more classes, with boundaries concentrated near the lower values." width="100%" />
 
-For this example, even `thr = 0` retains the mean as an internal break. The returned vector also contains the minimum and maximum, so this gives two classes, not one.
+Even at `thr = 0`, the algorithm makes the initial split at the mean. Together with the minimum and maximum, this gives two classes.
 
 ## Case study
 
-Jiang (2013) states that *"the new classification scheme is more natural than the natural breaks in finding the groupings or hierarchy for data with a heavy-tailed distribution."* (p. 482), referring to Jenks' natural breaks method. In this case study, we compare `headtails` vs. `fisher`, which is the alias for the Fisher-Jenks algorithm and is always preferred to the `jenks` style (see `?classIntervals`). For this example, we will use the `afcon` dataset from the **spData** package, plus some additional spatial information to create the data visualization.
+Jiang (2013) proposed head/tail breaks as a way to reveal the hierarchy in heavy-tailed data. Here we compare `headtails`, `fisher` (Fisher–Jenks) and `quantile` using `afcon` from **spData**. Each method uses the same number of classes as head/tail breaks.
 
 ``` r
 library(spData)
 data(afcon, package = "spData")
 ```
 
-Let's have a look at the top 10 values and the distribution of the variable `totcon` (index of total conflict 1966-78):
+The variable `totcon` is an index of total conflict from 1966 to 1978. The table shows the 10 highest values.
 
 ``` r
 # Top10
@@ -496,39 +495,36 @@ ggplot(afcon, aes(x = totcon)) +
   scale_x_continuous(labels = label_comma(accuracy = 1)) +
   scale_y_continuous(labels = label_comma()) +
   labs(
-    title = "Conflict distribution in Africa, 1966–1978",
-    subtitle = "Number of conflicts by country",
-    x = "Number of conflicts",
+    title = "Distribution of the conflict index, 1966–1978",
+    subtitle = "African countries grouped by index value",
+    x = "Conflict index",
     y = "Number of countries",
     caption = "Data source: Anselin & O'Loughlin (1992)"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of conflict counts across African countries from 1966 to 1978. Most countries have relatively low counts, while a few exceed 3,000 and reach approximately 5,200." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-1.webp" alt="Histogram of conflict index values for African countries, 1966–1978. Most countries have low index values. A few exceed 3,000, and the highest value is about 5,200." width="100%" />
 
 ``` r
-
 
 ggplot(afcon, aes(x = totcon)) +
   geom_density() +
   scale_x_continuous(labels = label_comma(accuracy = 1)) +
   scale_y_continuous(labels = label_comma()) +
   labs(
-    title = "A skewed distribution of conflicts",
-    subtitle = "Estimated density of conflict counts, 1966–1978",
-    x = "Number of conflicts",
+    title = "The conflict index is right-skewed",
+    subtitle = "Density estimate for African countries, 1966–1978",
+    x = "Conflict index",
     y = "Density",
     caption = "Data source: Anselin & O'Loughlin (1992)"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Estimated density of conflict counts across African countries from 1966 to 1978. The distribution peaks below 1,000 conflicts and has a long right tail extending beyond 5,000." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_summspdata-2.webp" alt="Estimated density of the conflict index for African countries, 1966–1978. The curve peaks below 1,000 and extends beyond 5,000." width="100%" />
 
-The values for Egypt (EG) and Sudan (SU) stand out from the rest. The histogram shows a strongly right-skewed pattern with many small values and a few large ones.
+Egypt and Sudan have the two highest index values. The histogram shows the same imbalance seen in the simulated sample: many lower values and a few much larger ones.
 
-In addition to `headtails` and `fisher`, we use `quantile` to compare the classification styles. Quantile breaks are based on ranks rather than the size of the gaps between observations.
-
-Applying the three aforementioned methods to break the data:
+Quantile breaks use ranks to put roughly the same number of observations in each class. The code below applies all three methods to the same data.
 
 ``` r
 afcon$headtails <- classify_intervals(afcon$totcon, style = "headtails")
@@ -550,10 +546,11 @@ afcon$quantile <- classify_intervals(
 afcon$quantile_br <- as.numeric(afcon$quantile)
 
 levels(afcon$headtails)
-#> [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"   "[3819.8,4998.5)"  
-#> [5] "[4998.5,5246]"
+#> [1] "[147,1350.619)"    "[1350.619,2488.6)" "[2488.6,3819.8)"
+#> [4] "[3819.8,4998.5)"   "[4998.5,5246]"
 levels(afcon$fisher)
-#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"  "[3942.5,5246]"
+#> [1] "[147,693.5)"    "[693.5,1474.5)" "[1474.5,2618)"  "[2618,3942.5)"
+#> [5] "[3942.5,5246]"
 levels(afcon$quantile)
 #> [1] "[147,604)"       "[604,833.6)"     "[833.6,1137.2)"  "[1137.2,1877.4)"
 #> [5] "[1877.4,5246]"
@@ -568,7 +565,6 @@ fisher_breaks <- classIntervals(
   n = nclass
 )$brks[seq_len(nclass)]
 
-
 q_breaks <- classIntervals(
   afcon$totcon,
   style = "quantile",
@@ -576,20 +572,20 @@ q_breaks <- classIntervals(
 )$brks[seq_len(nclass)]
 
 tibble(
-  id_breaks = "Head/tails",
+  id_breaks = "Head/tail breaks",
   b = ht_breaks,
   group = as.factor(seq_along(ht_breaks))
 ) |>
   bind_rows(
     tibble(
-      id_breaks = "Fisher",
+      id_breaks = "Fisher–Jenks",
       b = fisher_breaks,
       group = as.factor(seq_along(fisher_breaks))
     )
   ) |>
   bind_rows(
     tibble(
-      id_breaks = "Quantile",
+      id_breaks = "Quantiles",
       b = q_breaks,
       group = as.factor(seq_along(q_breaks))
     )
@@ -620,19 +616,19 @@ tibble(
   scale_fill_viridis_d(option = "cividis", alpha = 0.5) +
   guides(color = guide_legend(), fill = guide_legend(override.aes = list(alpha = 1))) +
   labs(
-    title = "Comparing classification methods",
+    title = "Where the three methods place their class breaks",
     subtitle = "Head/tail breaks, Fisher–Jenks and quantiles",
-    x = "Number of conflicts",
+    x = "Conflict index",
     y = "Cumulative proportion",
     fill = "Class"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Three panels compare head/tail breaks, Fisher–Jenks and quantile classifications of African conflict counts. Colored bands mark five classes over the empirical cumulative distribution, showing how the methods place boundaries at different values." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_breaksample-1.webp" alt="Three panels compare head/tail breaks, Fisher–Jenks and quantile classifications of African conflict index values. Colored bands mark five classes over the empirical cumulative distribution, showing how the methods place boundaries at different values." width="100%" />
 
 The top three classes of `headtails` contain five observations, whereas those of `fisher` contain 13. In this example, `headtails` gives more detail at the upper end of the distribution.
 
-The next plot compares density estimates of the rescaled `totcon` values and the class assignments from each method. The original values are rescaled to `[1, nclass]` and shifted by c(-0.4, 0.4) for the visual comparison.
+The next plot compares smoothed distributions across methods. For this comparison, the original `totcon` values are rescaled and rounded to the same five levels as the class indices.
 
 ``` r
 # Rescale values for visualization
@@ -671,7 +667,7 @@ afcon |>
   scale_y_continuous(labels = label_comma()) +
   scale_color_viridis_d(option = "cividis") +
   labs(
-    title = "How classification methods distribute observations",
+    title = "How the methods distribute observations across classes",
     subtitle = "Smoothed distributions of class indices",
     x = "Rescaled value / Class index",
     y = "Estimated density",
@@ -683,7 +679,7 @@ afcon |>
 
 In this example, the class assignments from `headtails` retain more of the original imbalance. By contrast, `quantile` aims for similar numbers of observations per class, regardless of the gaps between values.
 
-We now compare the methods using proportional-symbol maps. Symbol size represents `totcon`, while color distinguishes the classes.
+The maps show where these differences appear. Circle size and color encode the rescaled conflict index in the unclassified panel and the assigned class in each of the other three panels.
 
 ``` r
 library(giscoR)
@@ -709,11 +705,9 @@ africa_focus <- st_linestring(rbind(
   st_transform(st_crs(africa)) |>
   st_bbox()
 
-
 afcon_sf <- st_as_sf(afcon, crs = 4326, coords = c("x", "y")) |>
   st_transform(st_crs(africa)) |>
   arrange(desc(totcon))
-
 
 afcon_sf |>
   mutate(original = rescale(totcon, to = c(1, 5))) |>
@@ -757,18 +751,16 @@ afcon_sf |>
     axis.ticks = element_blank()
   ) +
   labs(
-    title = "Classification methods compared on a map",
+    title = "How classification changes the map",
     subtitle = "Symbol sizes represent original values or assigned classes",
     color = "Class index",
     size = "Class index"
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four maps of Africa compare rescaled conflict counts with head/tail breaks, Fisher–Jenks and quantile classifications. Colored circles represent values or class indices from 1 to 5, revealing differences in the size and distribution of symbols across methods." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/20200405_finalplot-1.webp" alt="Four maps of Africa compare the rescaled conflict index with head/tail breaks, Fisher–Jenks and quantiles. Circle size and color represent the rescaled index in the first map and the assigned class in the other three." width="100%" />
 
-Compared with the unclassified proportional-symbol map, `headtails` makes the most extreme values easier to distinguish. The `quantile` style groups observations by rank, while `fisher` provides an intermediate view in this example.
-
-It is also important to note that `headtails` and `fisher` reveal different information that can be useful depending on the context. While `headtails` highlights the outliers, it fails to provide good clustering on the tail, while `fisher` seems to reflect these patterns better. This can be observed in the values of Western Africa and the Niger River Basin, where `headtails` does not highlight any special cluster of conflicts, while `fisher` suggests a potential cluster consistent with the unclassified map. This can be confirmed in the histogram generated previously, where a concentration of `totcon` around 1,000 is visible.
+Head/tail breaks separates the highest index values into smaller groups. Fisher–Jenks spreads the middle and lower values across more classes, which makes distinctions among countries in West Africa easier to see in this example. Quantiles keep class sizes similar. The choice depends on which part of the distribution the map needs to emphasize.
 
 ## References
 
@@ -780,4 +772,4 @@ It is also important to note that `headtails` and `fisher` reveal different info
 - Taleb, N. N. (2008). *The black swan: The impact of the highly improbable*. Penguin.
 - Vasicek, O. (2002, December). Loan portfolio value. *Risk, 15*(12), 160–162. [Article](https://www.risk.net/risk-management/credit-risk/1530287/loan-portfolio-value)
 
-[^1]: The method implemented in **classInt** corresponds to head/tail breaks 1.0, as named in this article.
+[^1]: The method implemented in **classInt** corresponds to head/tail breaks 1.0 in Jiang’s (2019) terminology.
