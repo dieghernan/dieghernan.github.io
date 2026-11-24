@@ -3,7 +3,8 @@ source("_Rmd/renderblog_v2.R")
 
 posts <- c(
   # "2022-01-28-maps-flags.Rmd"
-  "2022-03-03-insetmaps.Rmd"
+  # "2022-03-03-insetmaps.Rmd",
+  "2020-04-05-headtails.Rmd"
 )
 
 for (post in posts) {
