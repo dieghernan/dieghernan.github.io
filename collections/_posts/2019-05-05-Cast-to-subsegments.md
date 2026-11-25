@@ -275,7 +275,7 @@ knitr::kable(end - init, format = "markdown", col.names = "Computation time")
 
 |Computation time |
 |:----------------|
-|0.1344578 secs   |
+|0.1483591 secs   |
 
 
 
@@ -292,7 +292,7 @@ knitr::kable(end - init, format = "markdown", col.names = "Computation time")
 
 |Computation time |
 |:----------------|
-|1.499534 secs    |
+|4.732829 secs    |
 
 
 

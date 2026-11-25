@@ -369,25 +369,7 @@ extra touch rounding up and down the range of values to the nearest 500.
 
 ```{r}
 #| label: 20221017-4-explorepals
-#| fig-alt:
-#|   - Relief map of Romania using the etopo1_hypso elevation palette over
-#|     hillshade. The Carpathian arc is visible against the surrounding
-#|     lowlands.
-#|   - Relief map of Romania using the dem_poster elevation palette over
-#|     hillshade. The Carpathian arc is visible against the surrounding
-#|     lowlands.
-#|   - Relief map of Romania using the spain elevation palette over hillshade.
-#|     The Carpathian arc is visible against the surrounding lowlands.
-#|   - Relief map of Romania using the pakistan elevation palette over
-#|     hillshade. The Carpathian arc is visible against the surrounding
-#|     lowlands.
-#|   - Relief map of Romania using the utah_1 elevation palette over hillshade.
-#|     The Carpathian arc is visible against the surrounding lowlands.
-#|   - Relief map of Romania using the wiki-2.0_hypso elevation palette over
-#|     hillshade. The Carpathian arc is visible against the surrounding
-#|     lowlands.
-#| fig-show: hold
-#| out-width: 50%
+#| fig-show: hide
 #| fig-cap: ""
 # Try some options, but we need to be aware of the values of our raster
 
@@ -429,6 +411,16 @@ plot_pal_test("pakistan")
 plot_pal_test("utah_1")
 plot_pal_test("wiki-2.0_hypso")
 ```
+
+{% assign externalgallery = "
+https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-1.webp,
+https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-2.webp,
+https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-3.webp,
+https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-4.webp,
+https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-5.webp,
+https://dieghernan.github.io/assets/img/blog/20221017-4-explorepals-6.webp" %}
+
+{% include_cached snippets/masonry.html external=externalgallery photoswipe=true %}
 
 I finally selected for my plot the `"dem_poster"` palette, but this is
 completely a personal choice. You should select the palette you feel more

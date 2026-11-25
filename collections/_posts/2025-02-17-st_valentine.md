@@ -30,7 +30,7 @@ output:
     variant: gfm
     preserve_yaml: yes
   html_document:
-header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
+header_img: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj-1.webp
 og_image_width: 1834
 og_image_height: 2100
 og_image_type: "image/webp"
@@ -93,6 +93,6 @@ ggplot() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj-1.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />
 
 {% include snippets/spotify.html id="7o8t2oSKI5eIBDlOHQH99F" title="Can't Take My Eyes Off You by Frankie Valli on Spotify" %}

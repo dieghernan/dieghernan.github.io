@@ -37,7 +37,7 @@ schema_image:
   - https://dieghernan.github.io/assets/img/blog/20221212_precip_end-1.webp
 og_image: https://dieghernan.github.io/assets/img/blog/20221212_finalplot-1.webp
 og_image_width: 2100
-og_image_height: 2004
+og_image_height: 2008
 og_image_type: "image/webp"
 og_image_alt: >-
   Map of mean annual precipitation in Spain with hillshade and marginal bar
