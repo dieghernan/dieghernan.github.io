@@ -688,7 +688,7 @@ So basically I produced five variations of the map:</p>
     </span><span class="n">str_detect</span><span class="p">(</span><span class="n">NUTS_NAME</span><span class="p">,</span><span class="w"> </span><span class="s2">"Wales|Scotland|Ireland"</span><span class="p">)</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">NUTS_NAME</span><span class="p">,</span><span class="w">
     </span><span class="kc">TRUE</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="s2">"England"</span><span class="w">
   </span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-  </span><span class="n">group_by</span><span class="p">(</span><span class="n">NAME_EN</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">NAME_EN</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">summarise</span><span class="p">(</span><span class="n">do_union</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="c1"># Iteration using indexes</span><span class="w">
   </span><span class="n">mutate</span><span class="p">(</span><span class="n">index_target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
@@ -960,7 +960,7 @@ region, then draw a circle with a radius set to 40% of the grid cell size.</p>
     </span><span class="n">Pixel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pix</span><span class="w">
   </span><span class="p">),</span><span class="w">
   </span><span class="n">.id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"method"</span><span class="w">
-</span><span class="p">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">mutate</span><span class="p">(</span><span class="w">
     </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="w">
       </span><span class="n">method</span><span class="p">,</span><span class="w">
