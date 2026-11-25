@@ -627,25 +627,23 @@ more than once. Tag comparisons are case-sensitive.</p>
 <p>To display the counts, iterate over the unique tags and use
 <code class="language-plaintext highlighter-rouge">forloop.index0</code> to retrieve the corresponding count. An empty input
 produces no table rows.</p>
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-&lt;table&gt;
-  &lt;caption&gt;Tag counts on this site&lt;/caption&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th scope="col"&gt;Tag&lt;/th&gt;
-      &lt;th scope="col"&gt;Count&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">tag</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">single_tags</span><span class="w"> </span><span class="cp">%}</span>
-      &lt;tr&gt;
-        &lt;td&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">tag</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">escape</span><span class="w"> </span><span class="cp">}}</span>&lt;/td&gt;
-        &lt;td&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">count_tags</span><span class="p">[</span><span class="nb">forloop.index0</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>&lt;/td&gt;
-      &lt;/tr&gt;
-    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>Tag counts on this site<span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;thead&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Tag<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Count<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/thead&gt;</span>
+  <span class="nt">&lt;tbody&gt;</span>
+    {% for tag in single_tags %}
+      <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span>{{ tag | escape }}<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>{{ count_tags[forloop.index0] }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+    {% endfor %}
+  <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
 </code></pre></div></div>
 <details>
   <summary>See results</summary>
@@ -908,25 +906,23 @@ new arrays. This approach is also used in
 The empty-input check avoids constructing index ranges or finding a maximum
 when there are no tags. Each unique tag is appended once, so a final <code class="language-plaintext highlighter-rouge">uniq</code>
 filter is unnecessary.</p>
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-&lt;table&gt;
-  &lt;caption&gt;Tag counts in descending order&lt;/caption&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th scope="col"&gt;Tag&lt;/th&gt;
-      &lt;th scope="col"&gt;Count&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    <span class="cp">{%</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nv">tag</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nv">sorted_tags</span><span class="w"> </span><span class="cp">%}</span>
-      &lt;tr&gt;
-        &lt;td&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">tag</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="nf">escape</span><span class="w"> </span><span class="cp">}}</span>&lt;/td&gt;
-        &lt;td&gt;<span class="cp">{{</span><span class="w"> </span><span class="nv">sorted_count_tags</span><span class="p">[</span><span class="nb">forloop.index0</span><span class="p">]</span><span class="w"> </span><span class="cp">}}</span>&lt;/td&gt;
-      &lt;/tr&gt;
-    <span class="cp">{%</span><span class="w"> </span><span class="nt">endfor</span><span class="w"> </span><span class="cp">%}</span>
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;table&gt;</span>
+  <span class="nt">&lt;caption&gt;</span>Tag counts in descending order<span class="nt">&lt;/caption&gt;</span>
+  <span class="nt">&lt;thead&gt;</span>
+    <span class="nt">&lt;tr&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Tag<span class="nt">&lt;/th&gt;</span>
+      <span class="nt">&lt;th</span> <span class="na">scope=</span><span class="s">"col"</span><span class="nt">&gt;</span>Count<span class="nt">&lt;/th&gt;</span>
+    <span class="nt">&lt;/tr&gt;</span>
+  <span class="nt">&lt;/thead&gt;</span>
+  <span class="nt">&lt;tbody&gt;</span>
+    {% for tag in sorted_tags %}
+      <span class="nt">&lt;tr&gt;</span>
+        <span class="nt">&lt;td&gt;</span>{{ tag | escape }}<span class="nt">&lt;/td&gt;</span>
+        <span class="nt">&lt;td&gt;</span>{{ sorted_count_tags[forloop.index0] }}<span class="nt">&lt;/td&gt;</span>
+      <span class="nt">&lt;/tr&gt;</span>
+    {% endfor %}
+  <span class="nt">&lt;/tbody&gt;</span>
+<span class="nt">&lt;/table&gt;</span>
 </code></pre></div></div>
 <details>
   <summary>See results</summary>
