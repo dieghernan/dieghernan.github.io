@@ -19,6 +19,9 @@ og_image_alt: "Paper collage of an open notebook with code-like marks, floating 
 syndication:
   - https://dev.to/dieghernan/building-a-documentation-chatbot-for-chulapa-4h84
 
+description: >-
+  How I built an AI assistant for my theme's documentation, and what happened
+  when I started asking it real questions.
 ---
 
 This website uses my **Jekyll** theme,

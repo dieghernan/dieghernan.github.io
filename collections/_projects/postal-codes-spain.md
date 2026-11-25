@@ -32,6 +32,9 @@ syndication:
   - https://dev.to/dieghernan/postal-codes-of-spain-4g3j
   - https://oneworldwithr.substack.com/p/postal-codes-spain
 
+description: >-
+  Explore estimated postal code areas for Spain and download GeoPackage files
+  for R, Python and QGIS.
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23698418.svg)](https://doi.org/10.5281/zenodo.23698418)

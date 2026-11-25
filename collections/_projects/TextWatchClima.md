@@ -20,6 +20,9 @@ project_links:
     label: See on GitHub
 permalink: /projects/TextWatchClima/
 og_image_alt: "TextWatch Clima watch face displaying the time in words on Pebble Time Round."
+description: >-
+  TextWatch Clima upgrades the classic TextWatch watch face by adding a set of
+  new capabilities.
 ---
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">

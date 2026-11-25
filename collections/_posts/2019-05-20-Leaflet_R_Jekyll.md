@@ -27,6 +27,8 @@ og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
 og_image_alt: "Street map of central Auckland with a blue location marker near the university."
+description: >-
+  Get a Leaflet map made in R onto a Jekyll site in six steps.
 ---
 
 Recently, I have been struggling when trying to embed a

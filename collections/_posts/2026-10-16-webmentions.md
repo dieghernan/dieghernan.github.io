@@ -19,6 +19,9 @@ og_image_width: 1727
 og_image_height: 911
 og_image_type: "image/webp"
 og_image_alt: "Paper collage of a blog page connected by threads to smaller pages, conversation bubbles and circular portraits."
+description: >-
+  A small addition to my Jekyll blog, inspired by Matt Hobbs: Webmentions with
+  a Chulapa look.
 ---
 
 Conversations about a blog post often happen somewhere else. Someone shares a

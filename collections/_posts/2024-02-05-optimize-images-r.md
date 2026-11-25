@@ -23,6 +23,8 @@ og_image_width: 1200
 og_image_height: 630
 og_image_type: "image/png"
 og_image_alt: "White image-compression icon over a multicolored polygon background."
+description: >-
+  Compress the size of your images with R, resmush and reSmush.it
 ---
 
 The **resmush** package has recently been accepted on

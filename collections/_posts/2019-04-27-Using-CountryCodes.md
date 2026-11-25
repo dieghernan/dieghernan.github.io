@@ -19,6 +19,9 @@ og_image_width: 853
 og_image_height: 433
 og_image_type: "image/webp"
 og_image_alt: "World map distinguishing Commonwealth member countries, their dependencies and other countries. Small island states are marked with circles."
+description: >-
+  Use CountryCodes and sf to match country identifiers and put your data on a
+  map in R.
 ---
 
 This vignette shows how to use the database provided in the GitHub project

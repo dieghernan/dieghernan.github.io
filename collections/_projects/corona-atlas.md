@@ -25,6 +25,9 @@ project_links:
     icon: fab fa-github
     label: See on GitHub
 og_image_alt: "Historical map of international COVID-19 risk areas designated by German authorities."
+description: >-
+  Historical interactive map of international COVID-19 risk areas, based on
+  assessments by the German authorities during the project’s operation.
 ---
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">

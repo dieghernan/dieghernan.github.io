@@ -52,6 +52,9 @@ output:
   md_document:
     variant: gfm
     preserve_yaml: true
+description: >-
+  Follow how COVID-19 travel restrictions changed over time for travelers from
+  Germany.
 ---
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">

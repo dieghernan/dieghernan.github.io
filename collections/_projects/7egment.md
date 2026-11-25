@@ -20,6 +20,10 @@ project_links:
     icon: fab fa-github
     label: See on GitHub
 og_image_alt: "7egment watch face showing a seven-segment time display on Pebble watches."
+description: >-
+  7egment is a customizable watch face based on the classic 7-segment display
+  that adds your location and current weather information in the language used
+  on your watch and smartphone.
 ---
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">

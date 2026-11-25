@@ -27,6 +27,9 @@ syndication:
   - https://dev.to/dieghernan/spain-munic-bot-37m3
   - https://oneworldwithr.substack.com/p/spain-munic-bot
 
+description: >-
+  Archived maps of buildings and urban growth in Spanish municipalities,
+  generated with R. Automated posting is disabled.
 ---
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">

@@ -27,6 +27,9 @@ og_image_alt: "White document-and-picture icon on an abstract multicolored geome
 syndication:
   - https://dev.to/dieghernan/implementing-groupby-count-in-liquid-2f4d
 
+description: >-
+  This post explains implementing group_by count in Liquid for Jekyll,
+  addressing issues with Jekyll 4.1.0 and providing a solution.
 ---
 
 [Liquid](https://shopify.github.io/liquid/) is a template language used by

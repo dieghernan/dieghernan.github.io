@@ -24,6 +24,8 @@ syndication:
 series:
   - id: quick-r
     order: 1
+description: >-
+  Split a line into its individual segments with a small sf function in R.
 ---
 
 This post introduces a user-defined function for casting **sf** objects of class

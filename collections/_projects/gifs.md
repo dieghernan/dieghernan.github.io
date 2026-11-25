@@ -29,6 +29,9 @@ syndication:
   - https://dev.to/dieghernan/large-forest-fires-in-spain-3f4o
   - https://oneworldwithr.substack.com/p/gifs
 
+description: >-
+  Explore EGIF reports and reconciled records of large forest fires in Spain,
+  with CSV, JSON and GeoJSON downloads and documented methodology.
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932940.svg)](https://doi.org/10.5281/zenodo.23932940)

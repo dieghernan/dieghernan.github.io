@@ -29,6 +29,9 @@ og_image_alt: "Map of stars and constellations from the Celestial Data collectio
 syndication:
   - https://dev.to/dieghernan/celestial-data-5h79
   - https://oneworldwithr.substack.com/p/celestial-data
+description: >-
+  This project provides several datasets of celestial objects as of the J2000
+  epoch in GeoJSON and GeoPackage formats.
 ---
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7561601.svg)](https://doi.org/10.5281/zenodo.7561601)

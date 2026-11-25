@@ -21,6 +21,9 @@ project_links:
 date: 2020-04-04
 last_modified_at: 2026-10-07
 og_image_alt: "Map of Spanish municipalities on a dark background for the historical COVID19 project."
+description: >-
+  Historical maps and charts of processed COVID-19 data for Spain, preserved as
+  an archive of the discontinued project.
 ---
 
 <div role="note" aria-label="Important" class="callout-important" markdown="1">

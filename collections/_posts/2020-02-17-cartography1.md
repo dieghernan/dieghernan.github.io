@@ -22,6 +22,8 @@ og_image_width: 504
 og_image_height: 504
 og_image_type: "image/webp"
 og_image_alt: "Word map of the United States with music genre names positioned geographically and sized by frequency. Rock and jazz appear prominently."
+description: >-
+  Examples of hatched maps, PNG layers and word clouds in cartography 2.4.0.
 ---
 
 ## Introduction

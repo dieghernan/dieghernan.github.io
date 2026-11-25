@@ -23,6 +23,8 @@ og_image_alt: "Map of Spain illustrating Leaflet-providersESP cartographic layer
 syndication:
   - https://dev.to/dieghernan/leaflet-providersesp-36g5
   - https://oneworldwithr.substack.com/p/leaflet-providersesp
+description: >-
+  Leaflet plugin for adding WMS/WMTS provided by public agencies in Spain.
 ---
 
 **Leaflet-providersESP** is a plugin for [Leaflet](https://leafletjs.com/) that
