@@ -12,10 +12,10 @@ posts <- c(
   # "2023-12-16-bertin_dots.Rmd",
   # "2023-01-25-star-map-R.Rmd",
   # "2022-12-12-tidyterra-hillshade-2.Rmd",
-  "2022-10-17-tidyterra-hillshade.Rmd"
+  # "2022-10-17-tidyterra-hillshade.Rmd"
   # "2022-05-25-tidyterra.Rmd",
   # "2022-05-01-Unknown-pleasures-R.Rmd",
-  # "2022-03-03-insetmaps.Rmd",
+  "2022-03-03-insetmaps.Rmd"
   # "2022-01-28-maps-flags.Rmd",
   # "2020-04-05-headtails.Rmd",
   # "2019-06-02-Beautiful1.Rmd",
