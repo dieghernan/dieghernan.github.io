@@ -198,14 +198,14 @@ share of the sample is at or below the threshold.
 flowchart TD
     accTitle: Head/tail breaks algorithm
     accDescr: Compute the mean and keep values above it as the head. Repeat with the head only when it has at least two values and its share is at or below the threshold. Keep each mean as a break.
-    A["$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$"]
-    B["$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$"]
-    C{"$$a_i > \mu$$"}
+    A["Sample vector&nbsp;$$v = (a_1, a_2, \ldots, a_n)$$"]
+    B["Compute arithmetic mean&nbsp;$$\mu = \frac{1}{n}\sum a_i$$"]
+    C{"Is&nbsp;$$a_i > \mu$$?"}
     D["Tail"]
     E["Head"]
-    F{"$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$"}
+    F{"Is&nbsp;$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$?"}
     G(("Stop"))
-    H["$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$"]
+    H["Replace sample&nbsp;$$v \leftarrow \text{head}$$"]
     I{"At least two values<br/>in the head?"}
 
     A --> B
