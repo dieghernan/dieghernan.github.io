@@ -12,6 +12,7 @@ tags:
   - beautiful_maps
   - maps
   - sf
+  - giscoR
   - rspatial
   - rstats
   - r_bloggers
@@ -21,7 +22,7 @@ output:
     variant: gfm
     preserve_yaml: true
 og_image_width: 2400
-og_image_height: 1486
+og_image_height: 1456
 og_image_type: "image/webp"
 og_image_alt: >-
   World map represented by cyan dots on a dark gray background.
@@ -92,36 +93,53 @@ So basically I produced five variations of the map:
 | **Hexbin**    |   Hexagon   |   Yes   |
 | **Pixel**     |     Dot     |   No    |
 
+
+<div role="note" aria-label="Tip" class="callout-tip" markdown="1">
+
+This technique works best with less detailed, simplified geometries.
+
+</div>
+
 ## Required **R** packages
 
 ```{r}
 #| label: libs
 
 library(sf)
-library(rnaturalearth)
+library(giscoR)
 library(dplyr)
 library(ggplot2)
-
+library(stringr)
 
 # Define a common theme for the maps.
 background <- "#FAF8F2"
 foreground <- "#203B47"
+
 map_title <- "inter-tight"
-map_facet <- "inter-tight-semibold"
 map_regular <- "inter"
 
 sysfonts::font_add_google("Inter Tight", family = map_title)
-sysfonts::font_add_google("Inter Tight", family = map_facet, regular.wt = 600)
+sysfonts::font_add_google("Inter", family = map_regular)
+showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
+showtext::showtext_auto()
+
+sysfonts::font_add_google("Inter Tight", family = map_title)
 sysfonts::font_add_google("Inter", family = map_regular)
 showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme_void(paper = background, base_family = map_regular, ink = foreground) +
+  theme_grey(paper = background, base_family = map_regular, ink = foreground) +
     theme(
-      plot.title = element_text(family = map_title, face = "bold", size = 17),
+      plot.title = element_text(family = map_title, face = "bold"),
       legend.title = element_text(family = map_title, face = "bold"),
-      strip.text = element_text(family = map_title, face = "bold", size = 16),
+      panel.background = element_rect(fill = background),
+      panel.grid = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      strip.background = element_rect(fill = background),
+      strip.text = element_text(family = map_title, face = "bold"),
+      strip.clip = "off",
       plot.margin = margin(10, 10, 10, 10)
     )
 )
@@ -134,18 +152,17 @@ Let's use the `square` option of `st_make_grid()` and play a bit with it.
 ```{r}
 #| label: 20190602_preparing
 #| fig-cap: ""
-uk <- rnaturalearth::ne_download(50,
-  type = "map_subunits",
-  returnclass = "sf",
-  destdir = tempdir()
+uk <- gisco_get_nuts(
+  year = 2021, country = "GBR", nuts_level = 1, epsg = 3857,
+  resolution = 20
 ) %>%
-  filter(CONTINENT == "Europe") %>%
-  filter(ADM0_A3 == "GBR") %>%
-  # Projecting and cleaning
-  st_transform(3857) %>%
-  select(NAME_EN, ADM0_A3)
-
-initial <- uk %>%
+  # # Group by nation
+  mutate(NAME_EN = case_when(
+    str_detect(NUTS_NAME, "Wales|Scotland|Ireland") ~ NUTS_NAME,
+    TRUE ~ "England"
+  )) %>%
+  group_by(NAME_EN) |>
+  summarise(do_union = TRUE) %>%
   # Iteration using indexes
   mutate(index_target = row_number())
 
@@ -170,10 +187,10 @@ meters). Smaller cells create denser grids and can use substantially more memory
 #|   merged into regional shapes. Colors distinguish regions.
 
 # Grid to sf
-grid <- initial %>%
+grid <- uk %>%
   st_make_grid(50 * 1000,
     # Kms
-    crs = st_crs(initial),
+    crs = st_crs(uk),
     what = "polygons",
     square = TRUE
   ) %>%
@@ -183,15 +200,15 @@ grid <- initial %>%
 # We identify the grids that belong to an entity by assessing the centroid
 cent_merge <- grid %>%
   st_centroid() %>%
-  st_filter(initial) %>%
-  st_join(initial)
+  st_filter(uk) %>%
+  st_join(uk)
 
 grid_new <- grid %>% inner_join(st_drop_geometry(cent_merge), by = "index")
 
 # Fishnet
 fish_geom <- grid_new %>%
   group_by(NAME_EN) %>%
-  summarise(n = n(), do_union = FALSE)
+  summarise(do_union = FALSE)
 
 
 # Now let's create the puzzle
@@ -199,7 +216,7 @@ puzzle_geom <- grid_new %>%
   # Avoid slivers
   st_buffer(0.5) %>%
   group_by(NAME_EN) %>%
-  summarise(n = n(), do_union = TRUE) # The only difference is do_union
+  summarise(do_union = TRUE) # The only difference is do_union
 
 # Plot
 
@@ -218,7 +235,13 @@ fish_geom %>%
     show.legend = FALSE
   ) +
   facet_wrap(~label) +
-  scale_fill_manual(values = uk_palette)
+  scale_fill_manual(values = uk_palette) +
+  theme(
+    strip.text = element_text(
+      size = rel(1.2), hjust = 0, vjust = 1,
+      margin = margin(b = 10)
+    )
+  )
 ```
 
 ## Going hex
@@ -234,10 +257,10 @@ Extremely easy. We just need to change the `square` parameter of
 #|   cells merged into regional shapes. Colors distinguish regions.
 
 # Grid to sf
-grid_hex <- initial %>%
+grid_hex <- uk %>%
   st_make_grid(50 * 1000,
     # Kms
-    crs = st_crs(initial),
+    crs = st_crs(uk),
     what = "polygons",
     square = FALSE # This is the only piece that changes!!!
   ) %>%
@@ -246,8 +269,8 @@ grid_hex <- initial %>%
 
 cent_merge_hex <- grid_hex %>%
   st_centroid() %>%
-  st_filter(initial) %>%
-  st_join(initial)
+  st_filter(uk) %>%
+  st_join(uk)
 
 grid_hex_new <- grid_hex %>%
   inner_join(st_drop_geometry(cent_merge_hex), by = "index")
@@ -255,7 +278,7 @@ grid_hex_new <- grid_hex %>%
 # Honeycomb
 honey_geom <- grid_hex_new %>%
   group_by(NAME_EN) %>%
-  summarise(n = n(), do_union = FALSE)
+  summarise(do_union = FALSE)
 
 
 # Now let's create the hexbin
@@ -263,7 +286,7 @@ hexbin_geom <- grid_hex_new %>%
   # Avoid slivers
   st_buffer(0.5) %>%
   group_by(NAME_EN) %>%
-  summarise(n = n(), do_union = TRUE) # The only difference is do_union
+  summarise(do_union = TRUE) # The only difference is do_union
 
 # Plot
 
@@ -282,7 +305,13 @@ honey_geom %>%
     show.legend = FALSE
   ) +
   facet_wrap(~label) +
-  scale_fill_manual(values = uk_palette)
+  scale_fill_manual(values = uk_palette) +
+  theme(
+    strip.text = element_text(
+      size = rel(1.2), hjust = 0, vjust = 1,
+      margin = margin(b = 10)
+    )
+  )
 ```
 
 ## Pixel it!
@@ -297,10 +326,10 @@ region, then draw a circle with a radius set to 40% of the grid cell size.
 #|   Map of the United Kingdom made of round dots, with color distinguishing
 #|   the four constituent countries.
 
-grid_pixels <- initial %>%
+grid_pixels <- uk %>%
   st_make_grid(50 * 1000,
     # Kms
-    crs = st_crs(initial),
+    crs = st_crs(uk),
     what = "centers",
     square = FALSE
   ) %>%
@@ -308,11 +337,11 @@ grid_pixels <- initial %>%
   mutate(index = row_number())
 
 pixels_geom <- grid_pixels %>%
-  st_join(initial, left = FALSE) %>%
+  st_join(uk, left = FALSE) %>%
   # We need to buffer the points to get polygons, based on the grid resolution
   st_buffer(50 * 1000 * 0.4) %>%
   group_by(NAME_EN) %>%
-  summarise(n = n(), do_union = FALSE)
+  summarise(do_union = FALSE)
 
 
 # Plot
@@ -428,8 +457,7 @@ pix <- stdh_gridpol(uk, to = "pixel", gridsize = 50 * 1000)
 
 ```{r}
 #| label: 20190602_functionex
-#| fig-crop: false
-#| dev-args: !expr list(background = "#FAF8F2")
+#| fig-crop: true
 #| fig-height: 7.75
 #| fig-width: 6
 #| fig-dpi: 300
@@ -440,7 +468,7 @@ pix <- stdh_gridpol(uk, to = "pixel", gridsize = 50 * 1000)
 
 grid_maps <- bind_rows(
   list(
-    Original = uk,
+    Map = uk,
     Fishnet = fish,
     Puzzle = puzz,
     Honeycomb = hon,
@@ -452,7 +480,7 @@ grid_maps <- bind_rows(
   mutate(
     method = factor(
       method,
-      levels = c("Original", "Fishnet", "Puzzle", "Honeycomb", "Hexbin", "Pixel")
+      levels = c("Map", "Fishnet", "Puzzle", "Honeycomb", "Hexbin", "Pixel")
     )
   )
 
@@ -468,14 +496,6 @@ ggplot(grid_maps) +
   labs(
     title = "Redrawing the United Kingdom",
     subtitle = "Original boundaries and five representations on a 50 km grid"
-  ) +
-  theme(
-    plot.title = element_text(size = 21),
-    plot.subtitle = element_text(size = 13, margin = margin(t = 3, b = 12)),
-    strip.text = element_text(
-      family = map_facet, face = "plain", size = 14, margin = margin(b = 4)
-    ),
-    panel.spacing = grid::unit(8, "pt")
   )
 ```
 
@@ -490,8 +510,8 @@ is computed so that the shortest dimension has 40 cells.
 #| fig-height: 5.3
 #| fig-width: 8
 #| fig-alt: "World map made of cyan dots on a dark gray background."
-world <- rnaturalearth::ne_countries(returnclass = "sf")
-world <- st_transform(world, "+proj=robin")
+world <- gisco_get_coastal_lines() %>%
+  st_transform("+proj=robin")
 world2 <- stdh_gridpol(world, "pixel", gridsize = 300000)
 
 
@@ -500,7 +520,7 @@ ggplot(world2) +
   theme_void() +
   theme(
     plot.background = element_rect(fill = "#505050"),
-    plot.margin = margin(10, 10, 10, 10)
+    plot.margin = margin(1, 1, 1, 1)
   )
 ```
 

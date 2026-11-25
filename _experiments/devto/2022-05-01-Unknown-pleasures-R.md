@@ -31,7 +31,7 @@ Saville presented a black-and-white version, producing a cover that reached icon
 
 Peter Saville explains how he turned a pulsar plot into the cover of *Unknown Pleasures* in this short film by Eric Klotz and Volkert Besseling.
 
-{% include snippets/video.html id="reEQye0EOAw" provider="youtube" video_res="hqdefault" name="Data Visualization Reinterpreted: The Story of Joy Division's “Unknown Pleasures” Album Design" thumbnail_url="https://i.ytimg.com/vi/reEQye0EOAw/hqdefault.jpg" upload_date="2012-10-17T09:34:35-07:00" description="Graphic designer Peter Saville explains how a plot of radio pulses became the cover of Joy Division's Unknown Pleasures." duration="PT3M40S" %}
+{% include snippets/video.html id="reEQye0EOAw" provider="youtube" video_res="hqdefault" name="Data Visualization Reinterpreted: The Story of Joy Division's “Unknown Pleasures” Album Design" thumbnail_url="<https://i.ytimg.com/vi/reEQye0EOAw/hqdefault.jpg>" upload_date="2012-10-17T09:34:35-07:00" description="Graphic designer Peter Saville explains how a plot of radio pulses became the cover of Joy Division's Unknown Pleasures." duration="PT3M40S" %}
 
 If you are interested in learning more about this fascinating history of science and design, you can read [Pop Culture Pulsar: Origin Story of Joy Division's Unknown Pleasures Album Cover](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/) by [Jen Christiansen](https://www.scientificamerican.com/author/jen-christiansen/).
 

@@ -157,7 +157,7 @@ v = (a_1, a_2,
     ```
     :
     ``` math
-    tail = \{ a_x \in v | a_x \le \mu \}
+    tail = \{ a_x \in v | a_x \le \mu \} 
     ```
     ``` math
     head = \{ a_x \in v | a_x \gt \mu \} 

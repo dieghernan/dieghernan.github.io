@@ -21,7 +21,7 @@ Some time ago, [@cargocultprogramming](https://github.com/cargocultprogramming) 
 
 The affected code used `group_by` to count repeated strings in an array:
 
-```
+``` liquid
 {% raw %}
 {% assign alldocs = site.exercises %}
 {% assign grouptag = alldocs | map: 'tags' | join: ',' | split: ',' | group_by: tag %}
@@ -39,7 +39,7 @@ The algorithm is implemented in <span class="chulapa">Chulapa</span>. The expand
 
 For a small example, an input array of `['ruby', 'jekyll', 'ruby']` gives these two parallel arrays:
 
-```
+``` text
 single_tags = ['ruby', 'jekyll']
 count_tags  = [2, 1]
 ```
@@ -48,7 +48,7 @@ There are two distinct tags. Each position in `count_tags` holds the number of o
 
 First, collect the tags from `site.documents`. Then keep the unique tags and count how often each appears in the full array:
 
-```
+``` liquid
 {% raw %}
 {% assign alldocs = site.documents %}
 {% assign alltags = alldocs | map: 'tags' | join: ',' | split: ',' %}
@@ -66,7 +66,7 @@ The `join` and `split` filters flatten the tag arrays using a comma as a separat
 
 To display the counts, iterate over the unique tags and use `forloop.index0` to retrieve the corresponding count. An empty input produces no table rows.
 
-```
+``` liquid
 {% raw %}
 <table>
   <caption>Tag counts on this site</caption>
@@ -119,7 +119,7 @@ To display the counts, iterate over the unique tags and use `forloop.index0` to 
 
 To sort by descending frequency, find the largest count and work down to one. For each frequency, append the matching tags and their counts to two new arrays. This approach is also used in [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes/blob/master/_includes/posts-taxonomy.html).
 
-```
+``` liquid
 {% raw %}
 {% assign sorted_tags = '' | split: ',' %}
 {% assign sorted_count_tags = '' | split: ',' %}
@@ -141,7 +141,7 @@ To sort by descending frequency, find the largest count and work down to one. Fo
 
 Tags with equal counts retain their order of first appearance in `alltags`. The empty-input check avoids constructing index ranges or finding a maximum when there are no tags. Each unique tag is appended once, so a final `uniq` filter is unnecessary.
 
-```
+``` liquid
 {% raw %}
 <table>
   <caption>Tag counts in descending order</caption>
@@ -196,7 +196,7 @@ The counting step scans all tag occurrences for each unique tag, requiring rough
 
 Here is the combined counting and sorting code. The resulting `sorted_tags` and `sorted_count_tags` arrays can be displayed with the table above.
 
-```
+``` liquid
 {% raw %}
 {% assign alldocs = site.documents %}
 {% assign alltags = alldocs | map: 'tags' | join: ',' | split: ',' %}
