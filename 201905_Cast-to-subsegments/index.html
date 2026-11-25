@@ -20,20 +20,12 @@
         },
         "description": "Split a line into its individual segments with a small sf function in R.",
         "inLanguage": "en-US",
-        "isPartOf": [
-          {
-            "@id": "https://dieghernan.github.io/#website"
-          },
-          {
-            "@type": "CreativeWorkSeries",
-            "@id": "https://dieghernan.github.io/#series-quick-r",
-            "name": "Quick R"
-          }
-        ],
+        "isPartOf": {"@id": "https://dieghernan.github.io/#website"},
         "keywords": ["sf","function","rnaturalearth","rspatial","rstats","music","r_bloggers"],
         "headline": "Cast a line to subsegments in R",
         "image": ["https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp"],
         "datePublished": "2019-05-05T00:00:00+02:00",
+        "dateModified": "2026-11-25T00:00:00+01:00",
         "author": {"@id": "https://dieghernan.github.io/#author"},
         "publisher": {
           "@type": "Person",
@@ -136,6 +128,7 @@
     <meta property="og:url" content="https://dieghernan.github.io/201905_Cast-to-subsegments/" >
     <meta property="og:type" content="article" >
     <meta property="article:published_time" content="2019-05-05T00:00:00+02:00">
+    <meta property="article:modified_time" content="2026-11-25T00:00:00+01:00">
     <meta property="article:author" content="https://dieghernan.github.io/">
     <meta property="article:tag" content="sf">
     <meta property="article:tag" content="function">
@@ -148,8 +141,8 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" >
     <meta property="og:image:alt" content="Map of South America with country boundaries split into short segments, illustrated with alternating colors." >
-    <meta property="og:image:width" content="400" >
-    <meta property="og:image:height" content="500" >
+    <meta property="og:image:width" content="1566" >
+    <meta property="og:image:height" content="2100" >
     <meta property="og:image:type" content="image/webp" >
     <!-- Twitter/X Cards -->
     <meta name="twitter:card" content="summary_large_image">
@@ -516,7 +509,10 @@
      </li>
  </ol>
  </nav>
- <div class="chulapaDateSocial"><time datetime="2019-05-05T00:00:00+02:00" class="dt-published" >05 may 2019</time>
+ <div class="chulapaDateSocial"><time class="dt-updated" datetime="2026-11-25T00:00:00+01:00">25 nov 2026</time>
+            <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
+            <br>
+            <time class="dt-published font-weight-light chulapa-text-line-through" datetime="2019-05-05T00:00:00+02:00">05 may 2019</time>
         </div></div>
          <div class="col-auto col-lg-3 lead chulapaDateSocial chulapa-share-links d-flex align-self-start flex-wrap justify-content-end mr-n1">
             <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fdieghernan.github.io%2F201905_Cast-to-subsegments%2F&amp;text=Cast+a+line+to+subsegments+in+R&amp;via=dhernangomez&amp;hashtags=sf%2Cfunction%2Crnaturalearth%2Crspatial%2Crstats%2Cmusic%2Cr_bloggers" title="Share on X" aria-label="Share on X"><i class="fab fa-square-x-twitter fa-lg" aria-hidden="true"></i></a>
@@ -550,79 +546,146 @@
 		</p>
 		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
 		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Cast a line to subsegments in <strong>R</strong></a></p>
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#the-problem" class="nav-link">The problem</a></li><li class="nav-item nav d-block"><a href="#an-approach" class="nav-link">An approach</a></li><li class="nav-item nav d-block"><a href="#the-function-stdh_cast_substring" class="nav-link">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#required-r-packages" class="nav-link">Required <strong>R</strong> packages</a></li><li class="nav-item nav d-block"><a href="#the-problem" class="nav-link">The problem</a></li><li class="nav-item nav d-block"><a href="#an-approach" class="nav-link">An approach</a></li><li class="nav-item nav d-block"><a href="#the-function-stdh_cast_substring" class="nav-link">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring()</code></a></li></ul>
 		</nav>   
 	</div>
-         <div class="chulapa-series-indices chulapa-series-columns-1 small mb-3">
-<div class="chulapa-series">
-<div class="font-weight-bold">
- <div>Quick R</div>
- <div class="chulapa-series-position">Issue 1 of 3</div>
+       <div class="e-content"><div role="note" aria-label="Note" class="callout-note">
+ <p><strong>Update (25 November 2026)</strong></p>
+ <p>The maps now use <strong>ggplot2</strong> and a shared palette to make the individual
+segments easier to follow.</p>
 </div>
-<div class="chulapa-series-controls">
- <progress class="chulapa-series-progress" value="1" max="3" aria-label="Quick R progress, Issue 1 of 3">1 of 3</progress>
- <nav aria-label="Quick R previous and next" class="d-flex flex-wrap align-items-center"><button type="button" class="btn btn-sm chulapa-series-link mr-1" disabled><i class="fa fa-chevron-left mr-1" aria-hidden="true"></i>Previous</button><a class="btn btn-sm chulapa-series-link" href="/201911_QuickR/" title="Quick R: Inset maps">Next<i class="fa fa-chevron-right ml-1" aria-hidden="true"></i><span class="sr-only">: Quick R: Inset maps</span></a></nav>
-</div>
-<details class="chulapa-series-index mt-1">
-  <summary>Issues<span class="sr-only">: Quick R</span></summary>
- <nav aria-label="Quick R">
-   <ol class="mb-0 pl-4"><li class="text-muted"><span aria-current="page" class="chulapa-series-item font-weight-bold">Cast a line to subsegments in R <i class="fas fa-arrow-left" aria-hidden="true"></i></span></li><li><a class="chulapa-series-item" href="/201911_QuickR/">Quick R: Inset maps</a></li><li><a class="chulapa-series-item" href="/202002_Brexit/">We’ll miss you, UK</a></li></ol>
- </nav>
-</details>
-</div>
-</div>
-       <div class="e-content"><p>This post introduces a user-defined function for casting <strong>sf</strong> objects of class
+<p>This post introduces a user-defined function for casting <strong>sf</strong> objects of class
 <code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into substrings.</p>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">background</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#FAF8F2"</span><span class="w">
+</span><span class="n">foreground</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"#203B47"</span><span class="w">
+</span><span class="n">map_title</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter-tight"</span><span class="w">
+</span><span class="n">map_regular</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"inter"</span><span class="w">
+</span><span class="n">segment_palette</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"#D7191C"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#D89C00"</span><span class="p">,</span><span class="w"> </span><span class="s2">"#0057B8"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter Tight"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">)</span><span class="w">
+</span><span class="n">sysfonts</span><span class="o">::</span><span class="n">font_add_google</span><span class="p">(</span><span class="s2">"Inter"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">)</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_opts</span><span class="p">(</span><span class="n">dpi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="n">get</span><span class="p">(</span><span class="s2">"dpi"</span><span class="p">))</span><span class="w">
+</span><span class="n">showtext</span><span class="o">::</span><span class="n">showtext_auto</span><span class="p">()</span><span class="w">
+
+</span><span class="n">theme_set</span><span class="p">(</span><span class="w">
+  </span><span class="n">theme_grey</span><span class="p">(</span><span class="n">paper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">,</span><span class="w"> </span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w"> </span><span class="n">ink</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foreground</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme</span><span class="p">(</span><span class="w">
+      </span><span class="n">plot.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">),</span><span class="w">
+      </span><span class="n">panel.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">),</span><span class="w">
+      </span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+      </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+      </span><span class="n">axis.ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">(),</span><span class="w">
+      </span><span class="n">strip.background</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="p">),</span><span class="w">
+      </span><span class="n">strip.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="n">lineheight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">22</span><span class="p">),</span><span class="w">
+      </span><span class="n">strip.clip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"off"</span><span class="p">,</span><span class="w">
+      </span><span class="n">plot.margin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">margin</span><span class="p">(</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <h2 id="the-problem">The problem</h2>
-<p>The <strong>sf</strong> package includes <a href="https://r-spatial.github.io/sf/reference/st_cast.html"><code class="language-plaintext highlighter-rouge">st_cast</code></a>,
-a powerful function that transforms geometries into other types of geometries
-(i.e. <code class="language-plaintext highlighter-rouge">LINESTRING</code> to <code class="language-plaintext highlighter-rouge">POLYGON</code>, etc.).</p>
+<p>The <strong>sf</strong> package includes
+<a href="https://r-spatial.github.io/sf/reference/st_cast.html">st_cast()</a>, a powerful
+function that transforms geometries into other types of geometries (i.e.
+<code class="language-plaintext highlighter-rouge">LINESTRING</code> to <code class="language-plaintext highlighter-rouge">POLYGON</code>, etc.).</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">italy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italy"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w">
-</span><span class="n">italy_pol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">italy</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
-</span><span class="n">italy_lin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">italy_pol</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
-</span><span class="n">italy_pt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">italy_lin</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
-</span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MULTIPOLYGON"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pol</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_lin</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LINE"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp" alt="Four maps of Italy comparing multipolygon, polygon, line and point representations. Separate polygons and boundary vertices become visible as the geometry is converted." /></p>
-<p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast</code> was the possibility of breaking
-<code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." /></p>
-<iframe class="chulapa-spotify d-block w-100 border-0 my-3 chulapa-rounded-lg" title="Hold the Line by Toto on Spotify" src="https://open.spotify.com/embed/track/4aVuWgvD0X63hcOCnZtNFA" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-<p class="chulapa-spotify-link"><a class="text-reset" href="https://open.spotify.com/track/4aVuWgvD0X63hcOCnZtNFA">Open Hold the Line by Toto on Spotify</a></p>
-<h2 id="an-approach">An approach</h2>
-<p>One possible solution is to create <code class="language-plaintext highlighter-rouge">LINESTRING</code> objects for each consecutive
-pair of <code class="language-plaintext highlighter-rouge">POINT</code> objects across the original geometry. Let’s check it:</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
-</span><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spain"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">test</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
+</span><span class="n">italy_pol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="n">italy</span><span class="p">,</span><span class="w"> </span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
+</span><span class="n">italy_lin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="n">italy_pol</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
+</span><span class="n">italy_pt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="n">italy_lin</span><span class="p">,</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)</span><span class="w">
 
+
+</span><span class="n">italy_stages</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
+  </span><span class="nf">list</span><span class="p">(</span><span class="w">
+    </span><span class="n">MULTIPOLYGON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+      </span><span class="n">part_colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rep_len</span><span class="p">(</span><span class="n">segment_palette</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">italy</span><span class="p">)),</span><span class="w">
+      </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy</span><span class="p">)</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">POLYGON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+      </span><span class="n">part_colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rep_len</span><span class="p">(</span><span class="n">segment_palette</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">italy_pol</span><span class="p">)),</span><span class="w">
+      </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pol</span><span class="p">)</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">LINESTRING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+      </span><span class="n">line_colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rep_len</span><span class="p">(</span><span class="n">segment_palette</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">italy_lin</span><span class="p">)),</span><span class="w">
+      </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_lin</span><span class="p">)</span><span class="w">
+    </span><span class="p">),</span><span class="w">
+    </span><span class="n">POINT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_sf</span><span class="p">(</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">italy_pt</span><span class="p">))</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">.id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"stage"</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">stage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">stage</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">italy_stages</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">italy_stages</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">stage</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">,</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">)),</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">part_colour</span><span class="p">),</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foreground</span><span class="p">,</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.35</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">italy_stages</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">),</span><span class="w">
+    </span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line_colour</span><span class="p">),</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">italy_stages</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"POINT"</span><span class="p">),</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">segment_palette</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w">
+  </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_colour_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">facet_wrap</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">stage</span><span class="p">),</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Italy by geometry type"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycast-1.webp" alt="Four maps of Italy show a single fill for the multipolygon, separate colors for its polygon parts, boundary lines and individual vertices." width="100%" /></p>
+<p>What I missed when using <code class="language-plaintext highlighter-rouge">st_cast()</code> was the possibility of breaking
+<code class="language-plaintext highlighter-rouge">LINESTRING</code> objects into subsegments:</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." width="100%" /></p>
+<iframe class="chulapa-spotify d-block w-100 border-0 my-3 chulapa-rounded-lg" title="Hold the
+Line by Toto on Spotify" src="https://open.spotify.com/embed/track/4aVuWgvD0X63hcOCnZtNFA" height="152" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<p class="chulapa-spotify-link"><a class="text-reset" href="https://open.spotify.com/track/4aVuWgvD0X63hcOCnZtNFA">Open Hold the
+Line by Toto on Spotify</a></p>
+<h2 id="an-approach">An approach</h2>
+<p>One way to split a line is to create a <code class="language-plaintext highlighter-rouge">LINESTRING</code> for each pair of consecutive
+vertices. Here is the outline of mainland Spain before and after splitting.</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ne_countries</span><span class="p">(</span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"spain"</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">slice_max</span><span class="p">(</span><span class="n">order_by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_area</span><span class="p">(</span><span class="n">geometry</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">with_ties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">coordinates</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">test</span><span class="p">)[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"X"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Y"</span><span class="p">)]</span><span class="w">
 </span><span class="n">geom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="w">
-  </span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">test</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
-  </span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">rbind</span><span class="p">(</span><span class="w">
-      </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">test</span><span class="p">)[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]),</span><span class="w">
-      </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">test</span><span class="p">)[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">])</span><span class="w">
-    </span><span class="p">)</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nf">seq_len</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
+  </span><span class="err">\</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">coordinates</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">drop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">]</span><span class="w">
 </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_multilinestring</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_sfc</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">test</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">geom</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"AFTER FUNCTION"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">spain_stages</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="w">
+  </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">stage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Original line"</span><span class="p">,</span><span class="w">
+    </span><span class="n">segment_colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foreground</span><span class="p">,</span><span class="w">
+    </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">test</span><span class="p">)</span><span class="w">
+  </span><span class="p">),</span><span class="w">
+  </span><span class="n">st_sf</span><span class="p">(</span><span class="w">
+    </span><span class="n">stage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Individual segments"</span><span class="p">,</span><span class="w">
+    </span><span class="n">segment_colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rep_len</span><span class="p">(</span><span class="n">segment_palette</span><span class="p">,</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">geom</span><span class="p">)),</span><span class="w">
+    </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geom</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">stage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">unique</span><span class="p">(</span><span class="n">stage</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">spain_stages</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">segment_colour</span><span class="p">),</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_colour_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">facet_wrap</span><span class="p">(</span><span class="n">vars</span><span class="p">(</span><span class="n">stage</span><span class="p">),</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"One boundary, many segments"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp" alt="Two outlines of Spain comparing the original boundary with a version split into short, individually colored segments." /></p>
-<h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring</code></h2>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_testspain-1.webp" alt="Two outlines of mainland Spain. The left panel shows a continuous line and the right panel uses alternating colors to reveal individual segments." width="100%" /></p>
+<h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring()</code></h2>
 <p>Finally, I wrapped the solution into a function and extended it a little bit:</p>
 <ul>
  <li>
@@ -663,8 +726,7 @@ modified by setting the <code class="language-plaintext highlighter-rouge">to</c
 
     </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geom</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rbind</span><span class="p">(</span><span class="n">endgeom</span><span class="p">,</span><span class="w"> </span><span class="n">geom</span><span class="p">)</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -694,52 +756,63 @@ the coordinate level, high-resolution objects introduce some delay.</p>
   </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">)</span><span class="w">
 
 
-
 </span><span class="n">init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.time</span><span class="p">()</span><span class="w">
 </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_cast_substring</span><span class="p">(</span><span class="n">test100</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
 </span><span class="n">end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.time</span><span class="p">()</span><span class="w">
-</span><span class="n">kable</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">)</span><span class="w">
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Computation time"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <table>
 <thead>
    <tr>
-     <th style="text-align: left">x</th>
+     <th style="text-align: left">Computation time</th>
    </tr>
  </thead>
  <tbody>
    <tr>
-     <td style="text-align: left">0.1729319 secs</td>
+     <td style="text-align: left">0.1344578 secs</td>
    </tr>
  </tbody>
 </table>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.time</span><span class="p">()</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="n">init</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.time</span><span class="p">()</span><span class="w">
 </span><span class="n">t2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">stdh_cast_substring</span><span class="p">(</span><span class="n">test50</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
 </span><span class="n">end</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Sys.time</span><span class="p">()</span><span class="w">
-</span><span class="n">kable</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">)</span><span class="w">
+</span><span class="n">knitr</span><span class="o">::</span><span class="n">kable</span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">init</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"markdown"</span><span class="p">,</span><span class="w"> </span><span class="n">col.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Computation time"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <table>
 <thead>
    <tr>
-     <th style="text-align: left">x</th>
+     <th style="text-align: left">Computation time</th>
    </tr>
  </thead>
  <tbody>
    <tr>
-     <td style="text-align: left">2.288558 secs</td>
+     <td style="text-align: left">1.499534 secs</td>
    </tr>
  </tbody>
 </table>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">mar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">test50</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">bg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#C6ECFF"</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">ne_countries</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">returnclass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#F6E1B9"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">test50</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#FEFEE9"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#646464"</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">),</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">T</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">t2</span><span class="o">$</span><span class="n">segment_colour</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rep_len</span><span class="p">(</span><span class="n">segment_palette</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test50</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"#E6ECE7"</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">segment_colour</span><span class="p">),</span><span class="w"> </span><span class="n">linewidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_colour_identity</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_sf</span><span class="p">(</span><span class="n">xlim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-94</span><span class="p">,</span><span class="w"> </span><span class="m">-32</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-58</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">),</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="w">
+    </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"South America in subsegments"</span><span class="p">,</span><span class="w">
+    </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Natural Earth boundaries at 1:50 million"</span><span class="w">
+  </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="Map of South America with country boundaries split into short segments, illustrated with alternating colors." /></p>
-<p>There is a difference in performance: <code class="language-plaintext highlighter-rouge">test100</code> has 15 polygons decomposed
-into 914 substrings, while <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons decomposed into 8,414
-substrings. In that sense, the original <code class="language-plaintext highlighter-rouge">st_cast</code> is much faster, although
-this solution may work well in most cases.</p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="Map of South America with country boundaries split into short segments, illustrated with alternating colors." width="100%" /></p>
+<p>There is a difference in performance: <code class="language-plaintext highlighter-rouge">test100</code> has
+15 polygons decomposed into
+914 substrings, while
+<code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons decomposed into
+8,414 substrings. The
+higher-resolution outlines take longer to split because they contain more
+vertices.</p>
 </div><section class="post-citation mt-5 border-left border-secondary pl-3 small" lang="en" aria-labelledby="chulapa-citation-label">
    <p id="chulapa-citation-label" class="font-weight-bold mb-2">How to cite this post</p>
    <p class="text-muted mb-2">For attribution, please cite this work as:</p>
