@@ -108,8 +108,8 @@ To display the counts, iterate over the unique tags and use
 `forloop.index0` to retrieve the corresponding count. An empty input
 produces no table rows.
 
-```liquid
 {% raw %}
+```html
 <table>
   <caption>Tag counts on this site</caption>
   <thead>
@@ -127,8 +127,8 @@ produces no table rows.
     {% endfor %}
   </tbody>
 </table>
-{% endraw %}
 ```
+{% endraw %}
 
 {% assign alldocs = site.documents %}
 {% assign alltags = alldocs | map: 'tags' | join: ',' | split: ',' %}
@@ -195,8 +195,8 @@ The empty-input check avoids constructing index ranges or finding a maximum
 when there are no tags. Each unique tag is appended once, so a final `uniq`
 filter is unnecessary.
 
-```liquid
 {% raw %}
+```html
 <table>
   <caption>Tag counts in descending order</caption>
   <thead>
@@ -214,8 +214,8 @@ filter is unnecessary.
     {% endfor %}
   </tbody>
 </table>
-{% endraw %}
 ```
+{% endraw %}
 
 {% assign sorted_tags = '' | split: ',' %}
 {% assign sorted_count_tags = '' | split: ',' %}
