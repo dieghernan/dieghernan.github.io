@@ -2,7 +2,7 @@
 review: always
 tags_choose_4: rstats,beautiful_maps,ggplot2,giscoR,maps,music,r_bloggers,rspatial,sf
 description: Do you know the Bonne projection?
-cover_image: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp
+cover_image: https://dieghernan.github.io/assets/img/blog/202402_bonne_proj-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
@@ -63,6 +63,6 @@ ggplot() +
   )
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202402_bonne_proj-1.webp" alt="World map in a heart-shaped Bonne projection, with a Valentine greeting above it." width="100%" />
 
 {% include snippets/spotify.html id="7o8t2oSKI5eIBDlOHQH99F" title="Can't Take My Eyes Off You by Frankie Valli on Spotify" %}

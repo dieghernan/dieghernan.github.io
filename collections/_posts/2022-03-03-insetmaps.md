@@ -10,6 +10,7 @@ excerpt: A common challenge when creating maps is how to include an inset map in
   your visualization. An inset map is a smaller map usually included in a corner
   that may provide additional context to the overall map, or may include map
   units that would not usually be represented properly.
+last_modified_at: 2026-11-26
 syndication:
   - https://www.r-bloggers.com/2022/03/insets-with-ggplot2-and-tmap-and-mapsf/
   - https://dev.to/dieghernan/insets-with-ggplot2-and-tmap-and-mapsf-1fo4
@@ -25,7 +26,6 @@ tags:
   - rspatial
   - rstats
   - r_bloggers
-last_modified_at: 2022-03-03
 header_img: "https://dieghernan.github.io/assets/img/blog/20220303_inset-1.webp"
 output:
   md_document:
@@ -46,7 +46,8 @@ og_image_alt: >-
 
 
 
-_This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA [@dr_xeo](https://twitter.com/dr_xeo)_
+*This post is dedicated to [Dominic Royé](https://dominicroye.github.io/), AKA
+[@dr_xeo](https://twitter.com/dr_xeo)*
 
 A common challenge when creating maps is how to include an inset map in your
 visualization. An inset map is nothing more than a smaller map usually included
@@ -55,10 +56,10 @@ useful for representing spatial units that may form part of a country but whose
 geographical location would result in an imperfect visualization, or for
 including small units that would otherwise not be shown on the map.
 
-I have already covered this
-[using the base `plot()` function](https://dieghernan.github.io//201911_QuickR/),
-but this time I show how to produce these insets using the **ggplot2** and
-**tmap** packages. In short: use the **cowplot** package.
+I have already covered this [using the base `plot()`
+function](https://dieghernan.github.io//201911_QuickR/), but this time I show
+how to produce these insets using the **ggplot2** and **tmap** packages. In
+short: use the **cowplot** package.
 
 ## Test case: Canary Islands as an inset
 
@@ -74,7 +75,7 @@ library(sf)
 library(ggplot2)
 library(dplyr)
 
-background <- "#fcfafa"
+background <- "#fcfcfb"
 map_title <- "inter-tight"
 map_regular <- "inter"
 sysfonts::font_add_google("Inter Tight", family = map_title)
@@ -145,7 +146,6 @@ with insets we will:
 
 1.  Produce two plots: the main plot and the subplot, providing a minimal style.
     We will store them as `ggplot` objects.
-
 2.  Combine both objects with **cowplot**.
 
 
@@ -182,8 +182,8 @@ sub_gg <- ggplot(island) +
 
 We have our objects in place, and now is when the magic happens! With
 **cowplot**, we can combine both maps into a single one. You may need to play a
-bit with the parameters `x`, `y`, `hjust` and `vjust` of the subplot to
-improve the placement:
+bit with the parameters `x`, `y`, `hjust` and `vjust` of the subplot to improve
+the placement:
 
 
 ``` r
@@ -261,7 +261,7 @@ flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
 # Nonsense plot!
 ggdraw() +
   draw_plot(mass_flipper) +
-  draw_plot_label("Example: Inset plot with with ggplot2 and cowplot",
+  draw_plot_label("Example: Inset plot with ggplot2 and cowplot",
     family = map_title, fontface = "bold",
     x = 0,
     hjust = 0
@@ -282,10 +282,27 @@ ggdraw() +
 
 ## On **tmap**
 
-We can follow a similar approach with **tmap**. In version 3.x.x (there is a
-new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)),
-we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to
-convert the `tmap` objects to the objects that **cowplot** can handle.
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
+
+**Update (25 November 2026)**
+
+**tmap** 4.x now includes native support for inset maps via
+[`tm_inset()`](https://r-tmap.github.io/tmap/reference/tm_inset.html) and
+[`tm_minimap()`](https://r-tmap.github.io/tmap/reference/tm_minimap.html). See 
+also the [vignette on inset maps and
+minimaps](https://r-tmap.github.io/tmap/articles/adv_inset_maps).
+
+The `tmap_grob()` + **cowplot** method shown here remains valid, but is no
+longer the recommended approach, please have a look to the [new section for 
+**tmap** 4.x](#update-on-tmap-4x).
+
+</div>
+
+We can follow a similar approach with **tmap**. In version 3.x.x (there is a new
+[revamped version under
+development](https://github.com/r-tmap/tmap/issues/599)), we can use
+[`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap`
+objects to the objects that **cowplot** can handle.
 
 
 ``` r
@@ -299,7 +316,6 @@ main_tmap <- tm_shape(main) +
     bg.color = background,
     text.fontfamily = map_regular
   )
-
 
 main_tmap <- tmap_grob(main_tmap)
 
@@ -332,7 +348,7 @@ ggdraw() +
     x = -0.3,
     y = -0.1
   ) +
-  # And we can theme it con ggplot2!
+  # And we can theme it with ggplot2!
   theme(
     plot.background = element_rect(fill = background),
     plot.margin = margin(10, 10, 10, 10)
@@ -340,6 +356,40 @@ ggdraw() +
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" />
+
+### Update: on **tmap** 4.x
+
+On **tmap** 4.x use `tm_inset()`:
+
+
+``` r
+sub_tmap_4 <- tm_shape(island) +
+  tm_polygons() +
+  tm_layout(
+    bg.color = background,
+    frame = FALSE
+  )
+
+tm_shape(main) +
+  tm_polygons() +
+  tm_layout(
+    inner.margins = c(.15, .3, 0, 0),
+    frame = FALSE,
+    bg.color = background,
+    outer.bg.color = background,
+    text.fontfamily = map_title,
+    text.fontface = "bold"
+  ) +
+  tm_inset(sub_tmap_4,
+    position = c("left", "bottom"), width = 13, height = 7,
+    bg.color = background
+  ) +
+  tm_title("Inset map with tmap 4.x",
+    fontfamily = map_title, fontface = "bold"
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap_4-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left using tmap 4.x." width="100%" />
 
 ## Update: on **mapsf**
 

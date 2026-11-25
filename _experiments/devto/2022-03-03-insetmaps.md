@@ -8,7 +8,7 @@ series: review
 ai_disclosure_level: no_ai
 ---
 
-Has alerts? FALSE
+Has alerts? TRUE
 Has Spotify? FALSE
 Has iframe? FALSE
 Has details_summary? FALSE
@@ -33,7 +33,7 @@ library(sf)
 library(ggplot2)
 library(dplyr)
 
-background <- "#FEFDFD"
+background <- "#fcfcfb"
 map_title <- "inter-tight"
 map_regular <- "inter"
 sysfonts::font_add_google("Inter Tight", family = map_title)
@@ -54,7 +54,8 @@ theme_set(
 regions <- esp_get_ccaa(moveCAN = FALSE)
 
 ggplot(regions) +
-  geom_sf()
+  geom_sf() +
+  labs(title = "Map of Spain and the Canary Islands")
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_truemap-1.webp" alt="Map of Spain with autonomous community boundaries and the Canary Islands in their geographic position southwest of the mainland." width="100%" />
@@ -67,7 +68,11 @@ main <- regions %>%
   st_transform(25830)
 
 ggplot(main) +
-  geom_sf()
+  geom_sf() +
+  labs(
+    title = "Map of mainland Spain",
+    subtitle = "Including the Balearic Islands"
+  )
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-1.webp" alt="Map of mainland Spain and the Balearic Islands with autonomous community boundaries, excluding the Canary Islands." width="100%" />
@@ -80,7 +85,8 @@ island <- regions %>%
   st_transform(4083)
 
 ggplot(island) +
-  geom_sf()
+  geom_sf() +
+  labs(title = "Map of the Canary Islands (Spain)")
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-2.webp" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" />
@@ -92,29 +98,36 @@ So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing an
 We have already created two quick maps with **ggplot2**. Now, to produce our map with insets we will:
 
 1.  Produce two plots: the main plot and the subplot, providing a minimal style. We will store them as `ggplot` objects.
-
 2.  Combine both objects with **cowplot**.
 
 ``` r
 # Main plot
 main_gg <- ggplot(main) +
   geom_sf() +
-  theme_void(base_family = map_regular) +
   theme(
-    plot.background = element_rect(fill = "#DAD9D9", colour = NA),
+    plot.background = element_rect(fill = background),
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
     # Add a bit of margin on the bottom left
     # We will place the inset there
-    plot.margin = margin(l = 80, b = 80)
+    plot.margin = margin(l = 80, b = 50, t = 10, r = 10)
   )
 
 # Sub plot
 sub_gg <- ggplot(island) +
   geom_sf() +
-  theme_void(base_family = map_regular) +
   # Add a border to the inset
   theme(
     panel.border = element_rect(fill = NA, colour = "black"),
-    plot.background = element_rect(fill = "#F3F2F2")
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
   )
 ```
 
@@ -131,10 +144,19 @@ cowplot::set_null_device(function(width, height) {
 
 ggdraw() +
   draw_plot(main_gg) +
+  draw_plot_label("Inset map with ggplot2 and cowplot",
+    family = map_title, fontface = "bold",
+    x = 0,
+    hjust = 0
+  ) +
   draw_plot(sub_gg,
     height = 0.2,
     x = -0.25,
-    y = 0.08
+    y = 0
+  ) +
+  theme(
+    plot.background = element_rect(fill = background),
+    plot.margin = margin(10, 10, 10, 10)
   )
 ```
 
@@ -162,7 +184,11 @@ mass_flipper <- ggplot(
     alpha = 0.8
   ) +
   theme_minimal(base_family = map_regular, paper = background) +
-  theme(legend.title = element_text(family = map_title, face = "bold")) +
+  theme(
+    legend.title = element_text(family = map_title, face = "bold"),
+    # Extra space on top for the title
+    plot.margin = margin(t = 50, b = 10, l = 10, r = 10)
+  ) +
   scale_color_manual(values = c("darkorange", "purple", "cyan4"))
 
 flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
@@ -173,22 +199,42 @@ flipper_hist <- ggplot(data = penguins, aes(x = flipper_length_mm)) +
   ) +
   scale_fill_manual(values = c("darkorange", "purple", "cyan4")) +
   theme_void(base_family = map_regular) +
-  theme(plot.background = element_rect(fill = "white"))
+  theme(plot.background = element_blank())
 
 
 # Nonsense plot!
 ggdraw() +
   draw_plot(mass_flipper) +
+  draw_plot_label("Example: Inset plot with ggplot2 and cowplot",
+    family = map_title, fontface = "bold",
+    x = 0,
+    hjust = 0
+  ) +
   draw_plot(flipper_hist,
     scale = 0.25,
-    y = 0.3,
+    y = 0.2,
     x = -0.2
+  ) +
+  theme(
+    plot.background = element_rect(fill = background),
+    plot.margin = margin(10, 10, 10, 10),
+    plot.title = element_text(margin = margin(10, 10, 20, 10))
   )
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot_nonsense-1.webp" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" />
 
 ## On **tmap**
+
+<div role="note" aria-label="Note" class="callout-note" markdown="1">
+
+**Update (25 November 2026)**
+
+**tmap** 4.x now includes native support for inset maps via [`tm_inset()`](https://r-tmap.github.io/tmap/reference/tm_inset.html) and [`tm_minimap()`](https://r-tmap.github.io/tmap/reference/tm_minimap.html). See also the [vignette on inset maps and minimaps](https://r-tmap.github.io/tmap/articles/adv_inset_maps).
+
+The `tmap_grob()` + **cowplot** method shown here remains valid, but is no longer the recommended approach, please have a look to the [new section for **tmap** 4.x](#update-on-tmap-4x).
+
+</div>
 
 We can follow a similar approach with **tmap**. In version 3.x.x (there is a new [revamped version under development](https://github.com/r-tmap/tmap/issues/599)), we can use [`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap` objects to the objects that **cowplot** can handle.
 
@@ -198,18 +244,20 @@ library(tmap)
 main_tmap <- tm_shape(main) +
   tm_polygons() +
   tm_layout(
-    inner.margins = c(.3, .3, 0, 0),
+    inner.margins = c(.1, .2, 0, 0),
     frame = FALSE,
     bg.color = background,
     text.fontfamily = map_regular
   )
 
-
 main_tmap <- tmap_grob(main_tmap)
 
 sub_tmap <- tm_shape(island) +
   tm_polygons() +
-  tm_layout(bg.color = background, text.fontfamily = map_regular)
+  tm_layout(
+    bg.color = background, text.fontfamily = map_regular,
+    inner.margins = 0.1
+  )
 
 sub_tmap <- tmap_grob(sub_tmap)
 ```
@@ -219,13 +267,57 @@ Once we have these new "grobs", we can use the same approach as the one we appli
 ``` r
 ggdraw() +
   draw_plot(main_tmap) +
+  draw_plot_label("Inset map with tmap and cowplot",
+    family = map_title, fontface = "bold",
+    x = 0,
+    hjust = 0
+  ) +
   draw_plot(sub_tmap,
-    height = 0.3,
-    x = -0.2
+    height = 0.4,
+    x = -0.3,
+    y = -0.1
+  ) +
+  # And we can theme it with ggplot2!
+  theme(
+    plot.background = element_rect(fill = background),
+    plot.margin = margin(10, 10, 10, 10)
   )
 ```
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" />
+
+### Update: on **tmap** 4.x
+
+On **tmap** 4.x use `tm_inset()`:
+
+``` r
+sub_tmap_4 <- tm_shape(island) +
+  tm_polygons() +
+  tm_layout(
+    bg.color = background,
+    frame = FALSE
+  )
+
+tm_shape(main) +
+  tm_polygons() +
+  tm_layout(
+    inner.margins = c(.15, .3, 0, 0),
+    frame = FALSE,
+    bg.color = background,
+    outer.bg.color = background,
+    text.fontfamily = map_title,
+    text.fontface = "bold"
+  ) +
+  tm_inset(sub_tmap_4,
+    position = c("left", "bottom"), width = 13, height = 7,
+    bg.color = background
+  ) +
+  tm_title("Inset map with tmap 4.x",
+    fontfamily = map_title, fontface = "bold"
+  )
+```
+
+<img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap_4-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left using tmap 4.x." width="100%" />
 
 ## Update: on **mapsf**
 
@@ -239,6 +331,10 @@ local({
   withr::local_par(list(bg = background, family = map_regular))
 
   mf_map(main)
+  mf_layout("Inset map with mapsf",
+    credits = "", scale = FALSE,
+    arrow = FALSE, frame = FALSE
+  )
   mf_inset_on(island, pos = "bottomright", cex = .3)
   mf_map(island)
   box(lwd = .5)

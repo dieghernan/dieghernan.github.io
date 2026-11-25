@@ -2,7 +2,7 @@
 review: always
 tags_choose_4: rstats,beautiful_maps,ggplot2,giscoR,maps,r_bloggers,rspatial,sf,terra,tidyterra
 description: Bertin's dot density maps with <strong>R</strong> and GHSL
-cover_image: https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp
+cover_image: https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp
 cover_image_bk: ~
 series: review
 ai_disclosure_level: no_ai
@@ -122,16 +122,11 @@ if (!file.exists(fname)) {
 }
 zip_content <- unzip(fname, list = TRUE)
 zip_content
-#>                                                 Name    Length
-#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307
-#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532
-#> 3                         GHSL_Data_Package_2023.pdf  15139500
-#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963
-#>                  Date
-#> 1 2023-04-28 21:11:00
-#> 2 2023-04-28 21:11:00
-#> 3 2024-09-24 10:40:00
-#> 4 2023-04-30 10:42:00
+#>                                                 Name    Length                Date
+#> 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307 2023-04-28 21:11:00
+#> 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532 2023-04-28 21:11:00
+#> 3                         GHSL_Data_Package_2023.pdf  15139500 2024-09-24 10:40:00
+#> 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963 2023-04-30 10:42:00
 
 # Unzip
 unzip(fname, exdir = "~/R/mapslib/GHS", junkpaths = TRUE, overwrite = FALSE)
@@ -259,7 +254,7 @@ final_plot <- base_gg +
 final_plot
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." width="100%" />
 
 ## Alternative hexagonal grid
 
@@ -408,7 +403,7 @@ final_plot_hex <- base_gg +
 final_plot_hex
 ```
 
-<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex-1.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." width="100%" />
 
 And that's it! Which one do you like the most? Let me know in the comments.
 

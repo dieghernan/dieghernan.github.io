@@ -41,7 +41,7 @@ If you love watching classic movies, especially from Hollywood's Golden Age, you
 >
 > The rain in Spain stays mainly in the plain!
 
-{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" video_res="hqdefault" name="My Fair Lady - The Rain In Spain" thumbnail_url="<https://i.ytimg.com/vi/uVmU3iANbgk/hqdefault.jpg>" upload_date="2008-08-06T02:46:17-07:00" description="The Rain in Spain musical scene from My Fair Lady (1964), featuring Audrey Hepburn, Rex Harrison and Stanley Holloway." duration="PT2M36S" %}
+{% include snippets/video.html id="uVmU3iANbgk" provider="youtube" video_res="hqdefault" name="My Fair Lady - The Rain In Spain" thumbnail_url="https://i.ytimg.com/vi/uVmU3iANbgk/hqdefault.jpg" upload_date="2008-08-06T02:46:17-07:00" description="The Rain in Spain musical scene from My Fair Lady (1964), featuring Audrey Hepburn, Rex Harrison and Stanley Holloway." duration="PT2M36S" %}
 
 This emphatic statement is made in [*My Fair Lady (1964)*](https://en.wikipedia.org/wiki/My_Fair_Lady_(film)) by Audrey Hepburn, Rex Harrison and Stanley Holloway. But as a Spaniard, I can tell you it is **completely false**.
 
