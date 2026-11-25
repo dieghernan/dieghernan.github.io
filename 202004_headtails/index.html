@@ -6,7 +6,7 @@
     <!-- MIT License -->
     <!-- Docs: https://dieghernan.github.io/chulapa -->
     <!-- Repo: https://github.com/dieghernan/chulapa -->
-    <!-- Page build 2026-11-24 -->
+    <!-- Page build 2026-11-25 -->
     <!-- Jekyll Version 4.4.1 -->
     <!-- Google structured data -->
     <script type="application/ld+json">
@@ -684,14 +684,14 @@ share of the sample is at or below the threshold.</p><pre><code class="language-
 flowchart TD
     accTitle: Head/tail breaks algorithm
     accDescr: Compute the mean and keep values above it as the head. Repeat with the head only when it has at least two values and its share is at or below the threshold. Keep each mean as a break.
-    A["$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$"]
-    B["$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$"]
-    C{"$$a_i &gt; \mu$$"}
+    A["Sample vector&amp;nbsp;$$v = (a_1, a_2, \ldots, a_n)$$"]
+    B["Compute arithmetic mean&amp;nbsp;$$\mu = \frac{1}{n}\sum a_i$$"]
+    C{"Is&amp;nbsp;$$a_i &gt; \mu$$?"}
     D["Tail"]
     E["Head"]
-    F{"$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$"}
+    F{"Is&amp;nbsp;$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$?"}
     G(("Stop"))
-    H["$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$"]
+    H["Replace sample&amp;nbsp;$$v \leftarrow \text{head}$$"]
     I{"At least two values&lt;br/&gt;in the head?"}
 
     A --&gt; B
@@ -1447,12 +1447,11 @@ Penguin.</li>
      <div>
         <i class="fas fa-tag mt-2 mr-1 fa-xs" aria-hidden="true"></i>
      </div>
-     <div>
-        <a href="https://dieghernan.github.io/tags#classInt" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >classInt</a>
-        <a href="https://dieghernan.github.io/tags#r_package" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >r_package</a>
-        <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >rspatial</a>
-        <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >rstats</a>
-        <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >r_bloggers</a>
+     <div><a href="https://dieghernan.github.io/tags#classInt" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >classInt</a>
+      <a href="https://dieghernan.github.io/tags#r_package" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >r_package</a>
+      <a href="https://dieghernan.github.io/tags#rspatial" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >rspatial</a>
+      <a href="https://dieghernan.github.io/tags#rstats" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >rstats</a>
+      <a href="https://dieghernan.github.io/tags#r_bloggers" class="badge chulapa-pill-bg-primary mt-1 p-category" rel="tag" >r_bloggers</a>
      </div>
    </div>
  </div>

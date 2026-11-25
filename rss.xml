@@ -13,7 +13,7 @@
     <language>en-US</language>
     <copyright>(c) 2026, Diego HH</copyright>
     <pubDate>Fri, 06 Nov 2026 00:00:00 +0100</pubDate>
-    <lastBuildDate>Tue, 24 Nov 2026 22:19:49 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 06:42:53 +0100</lastBuildDate>
     <category>blog</category>
     <ttl>60</ttl>
     <atom:link href="https://dieghernan.github.io/rss.xml" rel="self" type="application/rss+xml" />
@@ -8033,14 +8033,14 @@ share of the sample is at or below the threshold.&lt;/p&gt;
 flowchart TD
     accTitle: Head/tail breaks algorithm
     accDescr: Compute the mean and keep values above it as the head. Repeat with the head only when it has at least two values and its share is at or below the threshold. Keep each mean as a break.
-    A[&quot;$$\begin{array}{c} \text{Sample vector} \\ v = (a_1, a_2, \ldots, a_n) \end{array}$$&quot;]
-    B[&quot;$$\begin{array}{c} \text{Compute arithmetic mean} \\ \mu = \frac{1}{n}\sum a_i \end{array}$$&quot;]
-    C{&quot;$$a_i &amp;gt; \mu$$&quot;}
+    A[&quot;Sample vector&amp;amp;nbsp;$$v = (a_1, a_2, \ldots, a_n)$$&quot;]
+    B[&quot;Compute arithmetic mean&amp;amp;nbsp;$$\mu = \frac{1}{n}\sum a_i$$&quot;]
+    C{&quot;Is&amp;amp;nbsp;$$a_i &amp;gt; \mu$$?&quot;}
     D[&quot;Tail&quot;]
     E[&quot;Head&quot;]
-    F{&quot;$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$&quot;}
+    F{&quot;Is&amp;amp;nbsp;$$\frac{|\text{head}|}{|v|} \le \text{threshold}$$?&quot;}
     G((&quot;Stop&quot;))
-    H[&quot;$$\begin{array}{c} \text{Replace sample with head} \\ v \leftarrow \text{head} \end{array}$$&quot;]
+    H[&quot;Replace sample&amp;amp;nbsp;$$v \leftarrow \text{head}$$&quot;]
     I{&quot;At least two values&amp;lt;br/&amp;gt;in the head?&quot;}
 
     A --&amp;gt; B
