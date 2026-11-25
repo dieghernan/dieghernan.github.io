@@ -732,8 +732,8 @@ plot_x <- axis_canvas(plot_main, axis = "x") +
     # Adjust the position of the labels
     nudge_y = 300,
     family = map_regular,
-    fontface = "italic",
-    size = base_text_size * 0.2
+    colour = ink,
+    size = base_text_size * 0.72 / .pt
   ) +
   precip_scale +
   scale_y_continuous(
@@ -762,8 +762,8 @@ plot_y <- axis_canvas(plot_main, axis = "y", coord_flip = TRUE) +
     nudge_y = 300,
     angle = 270,
     family = map_regular,
-    fontface = "italic",
-    size = base_text_size * 0.2
+    colour = ink,
+    size = base_text_size * 0.72 / .pt
   ) +
   precip_scale +
   scale_y_continuous(
@@ -792,7 +792,15 @@ And insert everything in the main plot. See the final result:
 # Combine all plots into one
 sizes_axis <- grid::unit(.3, "null")
 
-plot_final <- insert_xaxis_grob(plot_main, plot_x,
+plot_main_final <- plot_main +
+  theme(
+    axis.title = element_text(colour = "grey30"),
+    axis.text = element_text(colour = "grey30", face = "plain"),
+    legend.title = element_text(size = base_text_size * 0.82),
+    legend.text = element_text(size = base_text_size * 0.82, colour = ink)
+  )
+
+plot_final <- insert_xaxis_grob(plot_main_final, plot_x,
   position = "top",
   height = sizes_axis
 )
