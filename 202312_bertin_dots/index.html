@@ -32,7 +32,7 @@
         ],
         "keywords": ["beautiful_maps","maps","ggplot2","sf","terra","tidyterra","giscoR","rspatial","rstats","r_bloggers"],
         "headline": "Beautiful maps with R (V): Point densities",
-        "image": ["https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp"],
+        "image": ["https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp"],
         "datePublished": "2023-12-16T00:00:00+01:00",
         "author": {"@id": "https://dieghernan.github.io/#author"},
         "publisher": {
@@ -78,7 +78,7 @@
         "primaryImageOfPage": {
           "@type": "ImageObject",
           "@id": "https://dieghernan.github.io/202312_bertin_dots/#primaryimage",
-          "url": "https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp"
+          "url": "https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp"
         },
         "inLanguage": "en-US",
         "name": "Beautiful maps with R (V): Point densities",
@@ -128,7 +128,7 @@
     <meta name="author" content="Diego HH" >
     <meta name="copyright" content="Diego HH" >
     <meta name="description" content="Create Bertin-style dot density maps in R using Global Human Settlement Layer population data.">
-    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" >
+    <meta name="thumbnail" content="https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp" >
     <meta name="robots" content="index, follow">
     <!-- OpenGraph -->
     <meta property="og:title" content="Beautiful maps with R (V): Point densities | One World" >
@@ -149,7 +149,7 @@
     <meta property="article:tag" content="r_bloggers">
     <meta property="og:description" content="Create Bertin-style dot density maps in R using Global Human Settlement Layer population data." >
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" >
+    <meta property="og:image" content="https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp" >
     <meta property="og:image:alt" content="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." >
     <meta property="og:image:width" content="1870" >
     <meta property="og:image:height" content="2400" >
@@ -491,10 +491,10 @@
 </nav>
 			<div id="chulapa-content" tabindex="-1"></div><div class="h-entry d-flex flex-column flex-fill">
   <a class="u-url d-none" href="https://dieghernan.github.io/202312_bertin_dots/">Invisible link to canonical for Microformats</a>
-    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors.">
+    <img class="u-photo u-featured d-none" src="https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors.">
   <a class="u-bridgy-fed d-none" href="https://fed.brid.gy/" hidden="from-humans">Invisible link for fed.brid.gy</a>
  <main class="d-flex flex-column flex-fill">
-<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp')">
+<header class="header-chulapa"><div class="container-fluid header-chulapa-img w-100" style="background-image: url('https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp')">
      </div><div class="container-lg mt-2">
        <div class="row">
            <div class="col-lg-8 offset-lg-2">
@@ -685,16 +685,11 @@ only the desired area with the subsequent improvement in terms of performance.</
 </span><span class="p">}</span><span class="w">
 </span><span class="n">zip_content</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unzip</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span><span class="n">zip_content</span><span class="w">
-</span><span class="c1">#&gt;                                                 Name    Length</span><span class="w">
-</span><span class="c1">#&gt; 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307</span><span class="w">
-</span><span class="c1">#&gt; 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532</span><span class="w">
-</span><span class="c1">#&gt; 3                         GHSL_Data_Package_2023.pdf  15139500</span><span class="w">
-</span><span class="c1">#&gt; 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963</span><span class="w">
-</span><span class="c1">#&gt;                  Date</span><span class="w">
-</span><span class="c1">#&gt; 1 2023-04-28 21:11:00</span><span class="w">
-</span><span class="c1">#&gt; 2 2023-04-28 21:11:00</span><span class="w">
-</span><span class="c1">#&gt; 3 2024-09-24 10:40:00</span><span class="w">
-</span><span class="c1">#&gt; 4 2023-04-30 10:42:00</span><span class="w">
+</span><span class="c1">#&gt;                                                 Name    Length                Date</span><span class="w">
+</span><span class="c1">#&gt; 1     GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif 263188307 2023-04-28 21:11:00</span><span class="w">
+</span><span class="c1">#&gt; 2 GHS_POP_E2030_GLOBE_R2023A_54009_1000_V1_0.tif.ovr  88461532 2023-04-28 21:11:00</span><span class="w">
+</span><span class="c1">#&gt; 3                         GHSL_Data_Package_2023.pdf  15139500 2024-09-24 10:40:00</span><span class="w">
+</span><span class="c1">#&gt; 4           GHS_POP_GLOBE_R2023A_input_metadata.xlsx    137963 2023-04-30 10:42:00</span><span class="w">
 
 </span><span class="c1"># Unzip</span><span class="w">
 </span><span class="n">unzip</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="w"> </span><span class="n">exdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"~/R/mapslib/GHS"</span><span class="p">,</span><span class="w"> </span><span class="n">junkpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
@@ -816,7 +811,7 @@ map, so we classify the density into different groups:</p>
 
 </span><span class="n">final_plot</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap-1.webp" alt="Dot density map of the Iberian Peninsula. Larger dots represent higher population density, revealing dense urban clusters and sparsely populated interiors." width="100%" /></p>
 <h2 id="alternative-hexagonal-grid">Alternative hexagonal grid</h2>
 <p>The previous plot is based on the centroids of each cell of the raster, which
 is, by definition, a rectangular grid. I would also like to experiment with
@@ -950,7 +945,7 @@ the aggregated cells:</p>
 
 </span><span class="n">final_plot_hex</span><span class="w">
 </span></code></pre></div></div>
-<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." width="100%" /></p>
+<p><img src="https://dieghernan.github.io/assets/img/blog/202312_finalmap_hex-1.webp" alt="Dot density map of the Iberian Peninsula based on a hexagonal grid. Larger dots represent higher population density, highlighting urban clusters." width="100%" /></p>
 <p>And that’s it! Which one do you like the most? Let me know in the comments.</p>
 <h2 id="references">References</h2>
 <ul>
