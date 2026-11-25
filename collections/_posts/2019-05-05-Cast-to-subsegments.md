@@ -1,4 +1,7 @@
 ---
+series:
+  - id: quick-r
+    order: 1
 title: "Cast a line to subsegments in <strong>R</strong>"
 excerpt: "Split a line into its individual segments with a small sf function in R."
 subtitle: "User-defined function using the <strong>sf</strong> package"
