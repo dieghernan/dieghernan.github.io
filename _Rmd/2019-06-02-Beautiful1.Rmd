@@ -211,7 +211,12 @@ fish_geom %>%
   ) %>%
   mutate(label = forcats::fct_inorder(label)) %>%
   ggplot() +
-  geom_sf(aes(fill = NAME_EN), show.legend = FALSE) +
+  geom_sf(
+    aes(fill = NAME_EN),
+    colour = background,
+    linewidth = 0.2,
+    show.legend = FALSE
+  ) +
   facet_wrap(~label) +
   scale_fill_manual(values = uk_palette)
 ```
@@ -270,7 +275,12 @@ honey_geom %>%
   ) %>%
   mutate(label = forcats::fct_inorder(label)) %>%
   ggplot() +
-  geom_sf(aes(fill = NAME_EN), show.legend = FALSE) +
+  geom_sf(
+    aes(fill = NAME_EN),
+    colour = background,
+    linewidth = 0.2,
+    show.legend = FALSE
+  ) +
   facet_wrap(~label) +
   scale_fill_manual(values = uk_palette)
 ```
@@ -307,7 +317,12 @@ pixels_geom <- grid_pixels %>%
 
 # Plot
 ggplot(pixels_geom) +
-  geom_sf(aes(fill = NAME_EN), show.legend = FALSE) +
+  geom_sf(
+    aes(fill = NAME_EN),
+    colour = background,
+    linewidth = 0.2,
+    show.legend = FALSE
+  ) +
   scale_fill_manual(values = uk_palette) +
   labs(title = "Pixel")
 ```
@@ -444,6 +459,8 @@ grid_maps <- bind_rows(
 ggplot(grid_maps) +
   geom_sf(
     aes(fill = NAME_EN),
+    colour = background,
+    linewidth = 0.2,
     show.legend = FALSE
   ) +
   scale_fill_manual(values = uk_palette) +
