@@ -6,6 +6,7 @@ title: >-
   Beautiful maps with <strong>R</strong> (I): Fishnets, honeycombs and pixels
 excerpt: "Turn a map into fishnets, honeycombs or pixels and see how each grid changes the result."
 subtitle: "Simplified maps with <strong>R</strong>"
+last_modified_at: 2026-11-25
 tags:
   - beautiful_maps
   - maps
@@ -43,6 +44,13 @@ knitr::opts_chunk$set(
 knitr::opts_knit$set(global.par = TRUE)
 rm(list = ls())
 ```
+
+<div class="callout-note" role="note" aria-label="Note" markdown="1">
+**Update (25 November 2026)**
+
+The final comparison now uses **ggplot2**. All six maps use the same extent so
+you can compare how each grid changes the original boundaries.
+</div>
 
 Sometimes you want to produce maps with special layouts. I especially like
 maps with modified geometries, e.g. simplifying the original shapes to squares
@@ -100,7 +108,7 @@ Let's use the `square` option of `st_make_grid` and play a bit with it.
 #| paged-print: false
 #| fig-dpi: 90
 #| fig-cap: ""
-GB <- ne_download(50,
+GB <- rnaturalearth::ne_download(50,
   type = "map_subunits",
   returnclass = "sf",
   destdir = tempdir()
@@ -408,23 +416,71 @@ pix <- stdh_gridpol(GB, to = "pixel", gridsize = 50 * 1000)
 
 ```{r}
 #| label: 20190602_functionex
-#| echo: false
 #| message: false
 #| warning: false
 #| tidy: styler
-#| dev-args: !expr list(bg = NA)
-#| fig-height: !expr 2 * 350/90
-#| fig-width: !expr 750/90
-#| fig-dpi: 90
+#| fig-crop: false
+#| dev-args: !expr list(background = "#FAF8F2")
+#| fig-height: 7.75
+#| fig-width: 6
+#| fig-dpi: 300
 #| fig-cap: ""
-#| fig-alt: "Grid of maps of Great Britain comparing square, hexagonal and pixel representations at different grid sizes."
-par(mfrow = c(2, 3), mar = c(1, 1, 1, 1), bg = NA)
-plot(st_geometry(GB), col = mypal(4), main = "Initial")
-plot(st_geometry(fish), col = mypal(4), main = "Fishnet")
-plot(st_geometry(puzz), col = mypal(4), main = "Puzzle")
-plot(st_geometry(hon), col = mypal(4), main = "Honeycomb")
-plot(st_geometry(hex), col = mypal(4), main = "Hexbin")
-plot(st_geometry(pix), col = mypal(4), main = "Pixel")
+#| fig-alt: >-
+#|   Six maps of the United Kingdom compare the original boundaries with square
+#|   cells, merged squares, hexagonal cells, merged hexagons and dots.
+library(ggplot2)
+
+sysfonts::font_add_google("Inter Tight", family = "inter-tight")
+sysfonts::font_add_google("Inter", family = "inter")
+showtext::showtext_opts(dpi = knitr::opts_current$get("dpi"))
+showtext::showtext_auto()
+
+grid_maps <- bind_rows(
+  list(
+    Original = GB,
+    Fishnet = fish,
+    Puzzle = puzz,
+    Honeycomb = hon,
+    Hexbin = hex,
+    Pixel = pix
+  ),
+  .id = "method"
+) |>
+  mutate(
+    method = factor(
+      method,
+      levels = c("Original", "Fishnet", "Puzzle", "Honeycomb", "Hexbin", "Pixel")
+    )
+  )
+
+ggplot(grid_maps) +
+  geom_sf(
+    aes(fill = NAME_EN),
+    colour = "#274749", linewidth = 0.18,
+    show.legend = FALSE
+  ) +
+  scale_fill_manual(values = setNames(mypal(4), GB$NAME_EN)) +
+  facet_wrap(vars(method), nrow = 2) +
+  labs(
+    title = "Redrawing the United Kingdom",
+    subtitle = "Original boundaries and five representations on a 50 km grid"
+  ) +
+  theme_void(base_family = "inter") +
+  theme(
+    plot.background = element_rect(fill = "#FAF8F2", colour = NA),
+    plot.margin = margin(12, 16, 12, 16),
+    plot.title = element_text(
+      family = "inter-tight", face = "bold", size = 21, colour = "#203B47"
+    ),
+    plot.subtitle = element_text(
+      size = 13, colour = "#203B47", margin = margin(t = 3, b = 12)
+    ),
+    strip.text = element_text(
+      family = "inter-tight", face = "bold", size = 12, colour = "#203B47",
+      margin = margin(b = 4)
+    ),
+    panel.spacing = grid::unit(8, "pt")
+  )
 ```
 
 And that's it! The function `stdh_gridpol` has some alert mechanisms, such as
@@ -441,7 +497,7 @@ is computed so that the shortest dimension has 40 cells.
 #| fig-format: png
 #| fig-cap: ""
 #| fig-alt: "World map represented by cyan hexagonal cells on a dark gray background."
-world <- ne_countries(returnclass = "sf")
+world <- rnaturalearth::ne_countries(returnclass = "sf")
 world <- st_transform(world, "+proj=robin")
 world2 <- stdh_gridpol(world, "pixel", gridsize = 300000)
 par(bg = NA, mar = c(0, 0, 0, 0), mfrow = c(1, 1))
