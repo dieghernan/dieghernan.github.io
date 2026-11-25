@@ -52,7 +52,7 @@ stdh_gridpol <- function(
   grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
   if (to == "pixel") {
     cent_merge <- st_join(grid, initial["index_target"], left = F)
-    grid_new <- st_buffer(cent_merge, gridsize / 2)
+    grid_new <- st_buffer(cent_merge, gridsize * 0.4)
   } else {
     cent_grid <- st_centroid(grid)
     cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
