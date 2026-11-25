@@ -1199,8 +1199,8 @@ want:</p>
     </span><span class="c1"># Adjust the position of the labels</span><span class="w">
     </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w">
     </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
-    </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
-    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.72</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">.pt</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">precip_scale</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="w">
@@ -1231,8 +1231,8 @@ want:</p>
     </span><span class="n">nudge_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w">
     </span><span class="n">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">270</span><span class="p">,</span><span class="w">
     </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_regular</span><span class="p">,</span><span class="w">
-    </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"italic"</span><span class="p">,</span><span class="w">
-    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+    </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">,</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.72</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">.pt</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">precip_scale</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="w">
@@ -1253,7 +1253,15 @@ want:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Combine all plots into one</span><span class="w">
 </span><span class="n">sizes_axis</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grid</span><span class="o">::</span><span class="n">unit</span><span class="p">(</span><span class="m">.3</span><span class="p">,</span><span class="w"> </span><span class="s2">"null"</span><span class="p">)</span><span class="w">
 
-</span><span class="n">plot_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">insert_xaxis_grob</span><span class="p">(</span><span class="n">plot_main</span><span class="p">,</span><span class="w"> </span><span class="n">plot_x</span><span class="p">,</span><span class="w">
+</span><span class="n">plot_main_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">plot_main</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="w">
+    </span><span class="n">axis.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey30"</span><span class="p">),</span><span class="w">
+    </span><span class="n">axis.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"grey30"</span><span class="p">,</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"plain"</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.82</span><span class="p">),</span><span class="w">
+    </span><span class="n">legend.text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base_text_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">0.82</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ink</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot_final</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">insert_xaxis_grob</span><span class="p">(</span><span class="n">plot_main_final</span><span class="p">,</span><span class="w"> </span><span class="n">plot_x</span><span class="p">,</span><span class="w">
   </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"top"</span><span class="p">,</span><span class="w">
   </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sizes_axis</span><span class="w">
 </span><span class="p">)</span><span class="w">
