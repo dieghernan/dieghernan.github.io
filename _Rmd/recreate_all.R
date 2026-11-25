@@ -5,6 +5,7 @@ posts <- c(
   # "2022-01-28-maps-flags.Rmd"
   # "2022-03-03-insetmaps.Rmd",
   "2019-06-02-Beautiful1.Rmd"
+  # "2019-05-05-Cast-to-subsegments.Rmd"
 )
 
 for (post in posts) {

@@ -28,12 +28,13 @@ description: >-
   Split a line into its individual segments with a small sf function in R.
 ---
 
-
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
+
 **Update (25 November 2026)**
 
 The maps now use **ggplot2** and a shared palette to make the individual
 segments easier to follow.
+
 </div>
 
 This post introduces a user-defined function for casting **sf** objects of class
@@ -45,28 +46,24 @@ This post introduces a user-defined function for casting **sf** objects of class
 #| fig-cap: ""
 knitr::opts_chunk$set(
   collapse = TRUE,
+  comment = "#>",
   warning = FALSE,
   message = FALSE,
   error = FALSE,
-  tidy = "styler",
-  echo = TRUE,
   dpi = 300,
   dev = "ragg_png",
-  dev.args = list(background = "#FAF8F2"),
-  fig.crop = FALSE,
+  fig.cap = "",
+  tidy = "styler",
   out.width = "100%",
   fig.path = "assets/img/blog/"
 )
-library(knitr)
+rm(list = ls())
 ```
 
 ## Required **R** packages
 
 ```{r}
 #| label: libs
-#| warning: false
-#| message: false
-#| fig-cap: ""
 library(sf)
 library(rnaturalearth)
 library(dplyr)
@@ -76,7 +73,7 @@ background <- "#FAF8F2"
 foreground <- "#203B47"
 map_title <- "inter-tight"
 map_regular <- "inter"
-segment_palette <- c("#335F83", "#A84742", "#287C70")
+segment_palette <- c("#D7191C", "#D89C00", "#0057B8")
 
 sysfonts::font_add_google("Inter Tight", family = map_title)
 sysfonts::font_add_google("Inter", family = map_regular)
@@ -84,83 +81,93 @@ showtext::showtext_opts(dpi = knitr::opts_chunk$get("dpi"))
 showtext::showtext_auto()
 
 theme_set(
-  theme_void(paper = background, base_family = map_regular, ink = foreground) +
+  theme_grey(paper = background, base_family = map_regular, ink = foreground) +
     theme(
-      plot.title = element_text(
-        family = map_title, face = "bold", size = 18, margin = margin(b = 4)
-      ),
-      plot.subtitle = element_text(size = 11, margin = margin(b = 8)),
-      strip.text = element_text(family = map_title, face = "bold", size = 13),
-      plot.margin = margin(12, 14, 12, 14)
+      plot.title = element_text(family = map_title, face = "bold"),
+      legend.title = element_text(family = map_title, face = "bold"),
+      panel.background = element_rect(fill = background),
+      panel.grid = element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      strip.background = element_rect(fill = background),
+      strip.text = element_text(family = map_title, face = "bold", rel = 0.7, lineheight = 22),
+      strip.clip = "off",
+      plot.margin = margin(10, 10, 10, 10)
     )
 )
 ```
 
 ## The problem
 
-The **sf** package includes [`st_cast`](https://r-spatial.github.io/sf/reference/st_cast.html),
-a powerful function that transforms geometries into other types of geometries
-(i.e. `LINESTRING` to `POLYGON`, etc.).
+The **sf** package includes
+[st_cast()](https://r-spatial.github.io/sf/reference/st_cast.html), a powerful
+function that transforms geometries into other types of geometries (i.e.
+`LINESTRING` to `POLYGON`, etc.).
 
 ```{r}
 #| label: 20190505_italycast
-#| warning: false
-#| message: false
-#| tidy: styler
-#| fig-width: 7
-#| fig-height: 7
 #| fig-cap: ""
 #| fig-alt: >-
-#|   Four maps of Italy show a single fill for the multipolygon, separate
-#|   colors for its polygon parts, boundary lines and individual vertices.
+#|   Four maps of Italy show a single fill for the multipolygon, separate colors
+#|   for its polygon parts, boundary lines and individual vertices.
+
 italy <- ne_countries(country = "italy", returnclass = "sf")
 italy_pol <- st_cast(italy, "POLYGON")
 italy_lin <- st_cast(italy_pol, "LINESTRING")
 italy_pt <- st_cast(italy_lin, "POINT")
 
+
 italy_stages <- bind_rows(
   list(
     MULTIPOLYGON = st_sf(
-      part_colour = "#D5E2DD", geometry = st_geometry(italy)
+      part_colour = rep_len(segment_palette, nrow(italy)),
+      geometry = st_geometry(italy)
     ),
     POLYGON = st_sf(
-      part_colour = rep_len(c("#A9BFCF", "#CEA897", "#8FB9AA"), nrow(italy_pol)),
+      part_colour = rep_len(segment_palette, nrow(italy_pol)),
       geometry = st_geometry(italy_pol)
     ),
-    LINESTRING = st_sf(geometry = st_geometry(italy_lin)),
+    LINESTRING = st_sf(
+      line_colour = rep_len(segment_palette, nrow(italy_lin)),
+      geometry = st_geometry(italy_lin)
+    ),
     POINT = st_sf(geometry = st_geometry(italy_pt))
   ),
   .id = "stage"
-) |>
+) %>%
   mutate(stage = factor(stage, levels = unique(stage)))
 
 ggplot(italy_stages) +
   geom_sf(
-    data = filter(italy_stages, stage != "POINT"),
+    data = filter(italy_stages, !stage %in% c("LINESTRING", "POINT")),
     aes(fill = part_colour),
     colour = foreground, linewidth = 0.35
   ) +
   geom_sf(
+    data = filter(italy_stages, stage == "LINESTRING"),
+    aes(colour = line_colour), linewidth = 1
+  ) +
+  geom_sf(
     data = filter(italy_stages, stage == "POINT"),
-    colour = foreground, size = 0.65
+    colour = segment_palette[1]
   ) +
   scale_fill_identity() +
+  scale_colour_identity() +
   facet_wrap(vars(stage), ncol = 2) +
   labs(title = "Italy by geometry type")
 ```
 
-What I missed when using `st_cast` was the possibility of breaking
+What I missed when using `st_cast()` was the possibility of breaking
 `LINESTRING` objects into subsegments:
 
 ```{r}
 #| label: 20190505_italycastsub
-#| warning: false
-#| tidy: styler
 #| echo: false
-#| fig-width: 5
-#| fig-height: 5
 #| fig-cap: ""
-#| fig-alt: "Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments."
+#| fig-alt: >-
+#|   Outline of Italy split into short line segments, with alternating colors
+#|   distinguishing adjacent segments.
+
 stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
   ggg <- st_geometry(x)
 
@@ -209,37 +216,31 @@ ggplot(italy_sub) +
   )
 ```
 
-{% include snippets/spotify.html id="4aVuWgvD0X63hcOCnZtNFA" title="Hold the Line by Toto on Spotify" %}
+{% include snippets/spotify.html id="4aVuWgvD0X63hcOCnZtNFA" title="Hold the
+Line by Toto on Spotify" %}
 
 ## An approach
 
-One way to split a line is to create a `LINESTRING` for each pair of
-consecutive vertices. Here is the outline of mainland Spain before and after
-splitting.
+One way to split a line is to create a `LINESTRING` for each pair of consecutive
+vertices. Here is the outline of mainland Spain before and after splitting.
 
 ```{r}
 #| label: 20190505_testspain
-#| warning: false
-#| message: false
-#| tidy: styler
-#| fig-width: 8
-#| fig-height: 4
-#| fig-cap: ""
 #| fig-alt: >-
 #|   Two outlines of mainland Spain. The left panel shows a continuous line
 #|   and the right panel uses alternating colors to reveal individual segments.
-test <- ne_countries(country = "spain", returnclass = "sf") |>
-  st_cast("POLYGON") |>
-  slice_max(order_by = st_area(geometry), n = 1, with_ties = FALSE) |>
+test <- ne_countries(country = "spain", returnclass = "sf") %>%
+  st_cast("POLYGON") %>%
+  slice_max(order_by = st_area(geometry), n = 1, with_ties = FALSE) %>%
   st_cast("LINESTRING")
 
 coordinates <- st_coordinates(test)[, c("X", "Y")]
 geom <- lapply(
   seq_len(nrow(coordinates) - 1),
   \(i) coordinates[c(i, i + 1), , drop = FALSE]
-) |>
-  st_multilinestring() |>
-  st_sfc(crs = st_crs(test)) |>
+) %>%
+  st_multilinestring() %>%
+  st_sfc(crs = st_crs(test)) %>%
   st_cast("LINESTRING")
 
 spain_stages <- bind_rows(
@@ -253,17 +254,17 @@ spain_stages <- bind_rows(
     segment_colour = rep_len(segment_palette, length(geom)),
     geometry = geom
   )
-) |>
+) %>%
   mutate(stage = factor(stage, levels = unique(stage)))
 
 ggplot(spain_stages) +
-  geom_sf(aes(colour = segment_colour), linewidth = 0.8) +
+  geom_sf(aes(colour = segment_colour), linewidth = 1) +
   scale_colour_identity() +
   facet_wrap(vars(stage), nrow = 1) +
   labs(title = "One boundary, many segments")
 ```
 
-## The function `stdh_cast_substring`
+## The function `stdh_cast_substring()`
 
 Finally, I wrapped the solution into a function and extended it a little bit:
 
@@ -281,9 +282,6 @@ Finally, I wrapped the solution into a function and extended it a little bit:
 
 ```{r}
 #| label: function
-#| warning: false
-#| message: false
-#| tidy: styler
 #| fig-cap: ""
 stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
   ggg <- st_geometry(x)
@@ -322,18 +320,15 @@ stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
   return(endgeom)
 }
 ```
+
 The function could be improved in terms of performance. Given that it works at
 the coordinate level, high-resolution objects introduce some delay.
 
 ```{r}
 #| label: 20190505_benchmarkfunction
-#| warning: false
-#| message: false
-#| tidy: styler
-#| fig-width: 5.6
-#| fig-height: 7
-#| fig-cap: ""
-#| fig-alt: "Map of South America with country boundaries split into short segments, illustrated with alternating colors."
+#| fig-alt: >-
+#|   Map of South America with country boundaries split into short segments,
+#|   illustrated with alternating colors.
 test100 <- ne_countries(
   continent = "south america",
   returnclass = "sf"
@@ -350,20 +345,19 @@ test50 <- ne_countries(50,
 init <- Sys.time()
 t1 <- stdh_cast_substring(test100, "LINESTRING")
 end <- Sys.time()
-kable(end - init, format = "markdown")
+knitr::kable(end - init, format = "markdown", col.names = "Computation time")
 
 
 init <- Sys.time()
 t2 <- stdh_cast_substring(test50, "LINESTRING")
 end <- Sys.time()
-kable(end - init, format = "markdown")
-
+knitr::kable(end - init, format = "markdown", col.names = "Computation time")
 
 t2$segment_colour <- rep_len(segment_palette, nrow(t2))
 
 ggplot() +
   geom_sf(data = test50, fill = "#E6ECE7", colour = NA) +
-  geom_sf(data = t2, aes(colour = segment_colour), linewidth = 0.55) +
+  geom_sf(data = t2, aes(colour = segment_colour), linewidth = 1) +
   scale_colour_identity() +
   coord_sf(xlim = c(-94, -32), ylim = c(-58, 15), expand = FALSE) +
   labs(
@@ -372,9 +366,10 @@ ggplot() +
   )
 ```
 
-There is a difference in performance: `test100` has `r length(st_geometry(test100))`
-polygons decomposed into `r format(length(st_geometry(t1)), nsmall=1, big.mark=",")`
-substrings, while `test50` has `r length(st_geometry(test50))` polygons
-decomposed into `r format(length(st_geometry(t2)), nsmall=1, big.mark=",")`
-substrings. The higher-resolution outlines take longer to split because they
-contain more vertices.
+There is a difference in performance: `test100` has
+`r length(st_geometry(test100))` polygons decomposed into
+`r format(length(st_geometry(t1)), nsmall=1, big.mark=",")` substrings, while
+`test50` has `r length(st_geometry(test50))` polygons decomposed into
+`r format(length(st_geometry(t2)), nsmall=1, big.mark=",")` substrings. The
+higher-resolution outlines take longer to split because they contain more
+vertices.

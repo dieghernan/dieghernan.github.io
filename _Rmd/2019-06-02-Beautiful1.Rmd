@@ -161,7 +161,7 @@ uk <- gisco_get_nuts(
     str_detect(NUTS_NAME, "Wales|Scotland|Ireland") ~ NUTS_NAME,
     TRUE ~ "England"
   )) %>%
-  group_by(NAME_EN) |>
+  group_by(NAME_EN) %>%
   summarise(do_union = TRUE) %>%
   # Iteration using indexes
   mutate(index_target = row_number())
@@ -476,7 +476,7 @@ grid_maps <- bind_rows(
     Pixel = pix
   ),
   .id = "method"
-) |>
+) %>%
   mutate(
     method = factor(
       method,
