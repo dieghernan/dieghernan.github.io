@@ -5298,10 +5298,8 @@ wiki&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp&quot; alt=&quot;Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;We already have our elevation raster. Now the next step is to adjust the number
-of rows of our raster to a lower number. We can then aggregate the raster (i.e.
-reduce the number of cells or increase their size) using a scaling factor that
-would reduce the number of rows to our desired target (in this case 90 rows):&lt;/p&gt;
+&lt;p&gt;Next, aggregate the elevation raster into larger cells. We aim for about
+90 rows so that the ridges remain distinct.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Approx&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;factor&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;90&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -5316,8 +5314,8 @@ would reduce the number of rows to our desired target (in this case 90 rows):&lt
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp&quot; alt=&quot;Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;We can check how the number of rows has decreased. Also, the plot shows that we
-now have fewer cells.&lt;/p&gt;
+&lt;p&gt;The aggregated raster has 88 rows. The larger cells still show the broad
+pattern of higher terrain in eastern Andalusia.&lt;/p&gt;
 
 &lt;p&gt;Now, we may need to perform additional manipulations on the values of the
 raster:&lt;/p&gt;
@@ -5447,8 +5445,8 @@ other artifacts.&lt;/p&gt;
 
 &lt;h3 id=&quot;using-geom_density_ridges&quot;&gt;Using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;geom_density_ridges()&lt;/code&gt;&lt;/h3&gt;
 
-&lt;p&gt;We can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;geom_density_ridges()&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stat=&quot;identity&quot;&lt;/code&gt; instead of
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;geom_ridgeline()&lt;/code&gt; for creating a similar map:&lt;/p&gt;
+&lt;p&gt;We can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;geom_density_ridges()&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stat = &quot;identity&quot;&lt;/code&gt; to draw a similar
+map with the supplied elevation values.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -5478,8 +5476,8 @@ plotted. I found this much more difficult when using &lt;code class=&quot;langua
 where the equivalent parameter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rel_min_height&lt;/code&gt; is relative to the overall
 maximum height.&lt;/p&gt;
 
-&lt;p&gt;This is the main reason why we replaced the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NA&lt;/code&gt; values with zeros, so those
-parts of the string can be easily removed.&lt;/p&gt;
+&lt;p&gt;We replaced the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NA&lt;/code&gt; values outside the land boundary with zeros so that
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;min_height&lt;/code&gt; can suppress those parts of the ridges.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_sf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -5503,8 +5501,8 @@ parts of the string can be easily removed.&lt;/p&gt;
 
 &lt;h3 id=&quot;with-colors&quot;&gt;With colors&lt;/h3&gt;
 
-&lt;p&gt;We can apply different colors to the plot. Note that &lt;strong&gt;ggridges&lt;/strong&gt; only accepts
-different &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aes&lt;/code&gt; by row, not by column:&lt;/p&gt;
+&lt;p&gt;To create horizontal bands, group the raster rows by their &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;y&lt;/code&gt; coordinates and
+assign a color to each band.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Classify on three different bands&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -5654,10 +5652,10 @@ useful for representing spatial units that may form part of a country but whose
 geographical location would result in an imperfect visualization, or for
 including small units that would otherwise not be shown on the map.&lt;/p&gt;
 
-&lt;p&gt;I have already covered this &lt;a href=&quot;https://dieghernan.github.io//201911_QuickR/&quot;&gt;using the base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot()&lt;/code&gt;
-function&lt;/a&gt;, but this time I show
-how to produce these insets using the &lt;strong&gt;ggplot2&lt;/strong&gt; and &lt;strong&gt;tmap&lt;/strong&gt; packages. In
-short: use the &lt;strong&gt;cowplot&lt;/strong&gt; package.&lt;/p&gt;
+&lt;p&gt;I have already covered this &lt;a href=&quot;https://dieghernan.github.io/201911_QuickR/&quot;&gt;using the base &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;plot()&lt;/code&gt;
+function&lt;/a&gt;. Here I use &lt;strong&gt;cowplot&lt;/strong&gt;
+with &lt;strong&gt;ggplot2&lt;/strong&gt; and &lt;strong&gt;tmap&lt;/strong&gt; 3.x, then show how to add insets directly in
+&lt;strong&gt;tmap&lt;/strong&gt; 4.x and &lt;strong&gt;mapsf&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;test-case-canary-islands-as-an-inset&quot;&gt;Test case: Canary Islands as an inset&lt;/h2&gt;
 
@@ -5877,21 +5875,16 @@ objects:&lt;/p&gt;
 
   &lt;p&gt;&lt;strong&gt;tmap&lt;/strong&gt; 4.x now includes native support for inset maps via
 &lt;a href=&quot;https://r-tmap.github.io/tmap/reference/tm_inset.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tm_inset()&lt;/code&gt;&lt;/a&gt; and
-&lt;a href=&quot;https://r-tmap.github.io/tmap/reference/tm_minimap.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tm_minimap()&lt;/code&gt;&lt;/a&gt;. See 
+&lt;a href=&quot;https://r-tmap.github.io/tmap/reference/tm_minimap.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tm_minimap()&lt;/code&gt;&lt;/a&gt;. See
 also the &lt;a href=&quot;https://r-tmap.github.io/tmap/articles/adv_inset_maps&quot;&gt;vignette on inset maps and
 minimaps&lt;/a&gt;.&lt;/p&gt;
 
-  &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap_grob()&lt;/code&gt; + &lt;strong&gt;cowplot&lt;/strong&gt; method shown here remains valid, but is no
-longer the recommended approach, please have a look at the &lt;a href=&quot;#update-tmap-4x&quot;&gt;new section for 
-&lt;strong&gt;tmap&lt;/strong&gt; 4.x&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;For new work, see the &lt;a href=&quot;https://dieghernan.github.io/202203_insetmaps/#update-tmap-4x&quot;&gt;&lt;strong&gt;tmap&lt;/strong&gt; 4.x example&lt;/a&gt;.&lt;/p&gt;
 
 &lt;/div&gt;
 
-&lt;p&gt;We can follow a similar approach with &lt;strong&gt;tmap&lt;/strong&gt;. In version 3.x.x (there is a new
-&lt;a href=&quot;https://github.com/r-tmap/tmap/issues/599&quot;&gt;revamped version under
-development&lt;/a&gt;), we can use
-&lt;a href=&quot;https://github.com/r-tmap/tmap/issues/541&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap_grob()&lt;/code&gt;&lt;/a&gt; to convert the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap&lt;/code&gt;
-objects to the objects that &lt;strong&gt;cowplot&lt;/strong&gt; can handle.&lt;/p&gt;
+&lt;p&gt;In &lt;strong&gt;tmap&lt;/strong&gt; 3.x, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap_grob()&lt;/code&gt; converts each map into a graphical object that
+&lt;strong&gt;cowplot&lt;/strong&gt; can combine with the other map.&lt;/p&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -5966,7 +5959,7 @@ applied to &lt;strong&gt;ggplot2&lt;/strong&gt; objects.&lt;/p&gt;
     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bg.color&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tm_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Inset map with tmap 4.x&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fontfamily&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fontface&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;bold&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.65&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fontfamily&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fontface&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;bold&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -6046,17 +6039,15 @@ the &lt;a href=&quot;https://cran.r-project.org/package=mapsf&quot;&gt;&lt;stron
 &lt;p&gt;With &lt;strong&gt;rasterpic&lt;/strong&gt;, we now have an alternative tool for creating maps using
 images, and this quick post shows you how to do it.&lt;/p&gt;
 
-&lt;p&gt;I will replicate the Africa map presented in my previous plot, but this time I
-will use newer packages, such as
-&lt;a href=&quot;https://cran.r-project.org/package=giscoR&quot;&gt;&lt;strong&gt;giscoR&lt;/strong&gt;&lt;/a&gt;, and the development
-version of &lt;a href=&quot;https://github.com/paleolimbot/ggspatial/pull/92&quot;&gt;&lt;strong&gt;ggspatial&lt;/strong&gt;&lt;/a&gt;
-(not released yet), which adds support for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SpatRaster&lt;/code&gt; objects in &lt;strong&gt;ggplot2&lt;/strong&gt;.
+&lt;p&gt;I will recreate the map of Africa from the earlier post using
+&lt;a href=&quot;https://cran.r-project.org/package=giscoR&quot;&gt;&lt;strong&gt;giscoR&lt;/strong&gt;&lt;/a&gt; and &lt;strong&gt;ggspatial&lt;/strong&gt;.
+Use &lt;a href=&quot;https://paleolimbot.github.io/ggspatial/news/index.html#ggspatial-116&quot;&gt;&lt;strong&gt;ggspatial&lt;/strong&gt; 1.1.6 or later&lt;/a&gt;
+to plot &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SpatRaster&lt;/code&gt; objects in &lt;strong&gt;ggplot2&lt;/strong&gt;.
 The flags come from &lt;a href=&quot;https://github.com/hampusborgos/country-flags&quot;&gt;country-flags&lt;/a&gt;.
 We download the 1000-pixel-wide PNGs from version 1.2.10 of
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;svg-country-flags&lt;/code&gt; via jsDelivr.&lt;/p&gt;
 
-&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Development version of ggspatial&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# devtools::install_github(&quot;paleolimbot/ggspatial&quot;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Requires ggspatial 1.1.6 or later.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggspatial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;giscoR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -9212,19 +9203,20 @@ screen, no matter what device you are using.&lt;/p&gt;
     <title type="text">Cast a line to subsegments in R</title>
     <link href="https://dieghernan.github.io/201905_Cast-to-subsegments/" rel="alternate" type="text/html" title="Cast a line to subsegments in R" />
     <published>2019-05-05T00:00:00+02:00</published>
-    <updated>2026-11-25T00:00:00+01:00</updated>
+    <updated>2026-11-26T00:00:00+01:00</updated>
     <id>https://dieghernan.github.io/201905_Cast-to-subsegments/</id>
     <content type="html" xml:base="https://dieghernan.github.io/201905_Cast-to-subsegments/">&lt;h2&gt;User-defined function using the &lt;strong&gt;sf&lt;/strong&gt; package&lt;/h2&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp&quot; alt=&quot;&quot;&gt;&lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
 
-  &lt;p&gt;&lt;strong&gt;Update (25 November 2026)&lt;/strong&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Update (26 November 2026)&lt;/strong&gt;&lt;/p&gt;
 
   &lt;p&gt;The maps now use &lt;strong&gt;ggplot2&lt;/strong&gt; and a shared palette to make the individual
-segments easier to follow.&lt;/p&gt;
+segments easier to follow. The function now handles mixed inputs and splits
+each polygon ring separately.&lt;/p&gt;
 
 &lt;/div&gt;
 
-&lt;p&gt;This post introduces a user-defined function for casting &lt;strong&gt;sf&lt;/strong&gt; objects of class
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POLYGON&lt;/code&gt; into substrings.&lt;/p&gt;
+&lt;p&gt;This post introduces a user-defined function that splits &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt; and
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POLYGON&lt;/code&gt; geometries into individual line segments.&lt;/p&gt;
 
 &lt;h2 id=&quot;required-r-packages&quot;&gt;Required &lt;strong&gt;R&lt;/strong&gt; packages&lt;/h2&gt;
 
@@ -9373,58 +9365,52 @@ vertices. Here is the outline of mainland Spain before and after splitting.&lt;/
 &lt;p&gt;Finally, I wrapped the solution into a function and extended it a little bit:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;When the input is not a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt; or a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POLYGON&lt;/code&gt;, it returns an error and
-stops.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The function accepts &lt;strong&gt;sf&lt;/strong&gt; objects with several rows or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sfc&lt;/code&gt; objects with
-several geometries, and returns the same class as the input. In the case of
-&lt;strong&gt;sf&lt;/strong&gt; objects, the input &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data.frame&lt;/code&gt; is added.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;By default, the output is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MULTILINESTRING&lt;/code&gt; geometry. This has the benefit
-that the output has the same number of geometries as the input. This can be
-modified by setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;to&lt;/code&gt; parameter to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt;, which only casts the
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MULTILINESTRING&lt;/code&gt; object into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;LINESTRING&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
+  &lt;li&gt;The input can be an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sfc&lt;/code&gt; object containing lines, polygons or both.
+The result is returned as the same kind of object.&lt;/li&gt;
+  &lt;li&gt;Polygon rings are split independently. This preserves the boundaries of any
+holes and avoids adding segments between rings.&lt;/li&gt;
+  &lt;li&gt;The default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MULTILINESTRING&lt;/code&gt; output keeps one geometry per input feature.
+Set &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;to = &quot;LINESTRING&quot;&lt;/code&gt; to return one geometry per segment. For an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sf&lt;/code&gt; input,
+each segment inherits the attributes of its original feature.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;stdh_cast_substring&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MULTILINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;match.arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;MULTILINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%in%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POLYGON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Input should be LINESTRING or POLYGON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%in%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POLYGON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Input must contain only LINESTRING or POLYGON geometries.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;call.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rbind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-          &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-          &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_multilinestring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_sfc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
-    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pieces&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inherits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POLYGON&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unclass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rbind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;unclass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_sfc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_crs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_set_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;segments&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;part&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;seq_len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;part&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;part&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;drop&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_multilinestring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unlist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;segments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recursive&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;feature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_sfc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pieces&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;crs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_crs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;precision&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_precision&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inherits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_set_geometry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
   &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;st_cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LINESTRING&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
   &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-  &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endgeom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -9458,7 +9444,7 @@ the coordinate level, high-resolution objects introduce some delay.&lt;/p&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0.1483591 secs&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;0.0363331 secs&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -9479,7 +9465,7 @@ the coordinate level, high-resolution objects introduce some delay.&lt;/p&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;4.732829 secs&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;0.1671259 secs&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -9502,9 +9488,9 @@ the coordinate level, high-resolution objects introduce some delay.&lt;/p&gt;
 
 &lt;p&gt;There is a difference in performance: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test100&lt;/code&gt; has
 15 polygons decomposed into
-914 substrings, while
+914 segments, while
 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test50&lt;/code&gt; has 80 polygons decomposed into
-8,414 substrings. The
+8,414 segments. The
 higher-resolution outlines take longer to split because they contain more
 vertices.&lt;/p&gt;
 </content>

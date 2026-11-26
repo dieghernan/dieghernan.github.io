@@ -710,10 +710,8 @@ wiki</a>.</p>
 </span><span class="n">tidyterra</span><span class="o">::</span><span class="n">autoplot</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem-1.webp" alt="Elevation map of Andalusia. Colors represent altitude in meters, with higher terrain concentrated in the east." width="100%" /></p>
-<p>We already have our elevation raster. Now the next step is to adjust the number
-of rows of our raster to a lower number. We can then aggregate the raster (i.e.
-reduce the number of cells or increase their size) using a scaling factor that
-would reduce the number of rows to our desired target (in this case 90 rows):</p>
+<p>Next, aggregate the elevation raster into larger cells. We aim for about
+90 rows so that the ridges remain distinct.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Approx</span><span class="w">
 </span><span class="n">factor</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">round</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">dem</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">90</span><span class="p">)</span><span class="w">
 
@@ -725,8 +723,8 @@ would reduce the number of rows to our desired target (in this case 90 rows):</p
 </span><span class="n">tidyterra</span><span class="o">::</span><span class="n">autoplot</span><span class="p">(</span><span class="n">dem_agg</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_dem_agg-1.webp" alt="Elevation map of Andalusia reduced to 88 raster rows. Larger cells retain the broad pattern of higher terrain in the east." width="100%" /></p>
-<p>We can check how the number of rows has decreased. Also, the plot shows that we
-now have fewer cells.</p>
+<p>The aggregated raster has 88 rows. The larger cells still show the broad
+pattern of higher terrain in eastern Andalusia.</p>
 <p>Now, we may need to perform additional manipulations on the values of the
 raster:</p>
 <ul>
@@ -839,8 +837,8 @@ parameter:</p>
 <p>We can produce some variations of the same map using several parameters and
 other artifacts.</p>
 <h3 id="using-geom_density_ridges">Using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code></h3>
-<p>We can use <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code> with <code class="language-plaintext highlighter-rouge">stat="identity"</code> instead of
-<code class="language-plaintext highlighter-rouge">geom_ridgeline()</code> for creating a similar map:</p>
+<p>We can use <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code> with <code class="language-plaintext highlighter-rouge">stat = "identity"</code> to draw a similar
+map with the supplied elevation values.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_density_ridges</span><span class="p">(</span><span class="w">
@@ -865,8 +863,8 @@ as the parameter <code class="language-plaintext highlighter-rouge">min_height</
 plotted. I found this much more difficult when using <code class="language-plaintext highlighter-rouge">geom_density_ridges()</code>,
 where the equivalent parameter <code class="language-plaintext highlighter-rouge">rel_min_height</code> is relative to the overall
 maximum height.</p>
-<p>This is the main reason why we replaced the <code class="language-plaintext highlighter-rouge">NA</code> values with zeros, so those
-parts of the string can be easily removed.</p>
+<p>We replaced the <code class="language-plaintext highlighter-rouge">NA</code> values outside the land boundary with zeros so that
+<code class="language-plaintext highlighter-rouge">min_height</code> can suppress those parts of the ridges.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_sf</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_ridgeline</span><span class="p">(</span><span class="w">
@@ -886,8 +884,8 @@ parts of the string can be easily removed.</p>
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220501_andalucia_landonly-1.webp" alt="Ridgeline map of Andalusia with lines outside the land boundary removed, leaving the regional outline visible against a black background." width="100%" /></p>
 <h3 id="with-colors">With colors</h3>
-<p>We can apply different colors to the plot. Note that <strong>ggridges</strong> only accepts
-different <code class="language-plaintext highlighter-rouge">aes</code> by row, not by column:</p>
+<p>To create horizontal bands, group the raster rows by their <code class="language-plaintext highlighter-rouge">y</code> coordinates and
+assign a color to each band.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Classify on three different bands</span><span class="w">
 
 </span><span class="n">dem_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dem_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">

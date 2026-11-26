@@ -34,7 +34,7 @@
         "headline": "Cast a line to subsegments in R",
         "image": ["https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp"],
         "datePublished": "2019-05-05T00:00:00+02:00",
-        "dateModified": "2026-11-25T00:00:00+01:00",
+        "dateModified": "2026-11-26T00:00:00+01:00",
         "author": {"@id": "https://dieghernan.github.io/#author"},
         "publisher": {
           "@type": "Person",
@@ -137,7 +137,7 @@
     <meta property="og:url" content="https://dieghernan.github.io/201905_Cast-to-subsegments/" >
     <meta property="og:type" content="article" >
     <meta property="article:published_time" content="2019-05-05T00:00:00+02:00">
-    <meta property="article:modified_time" content="2026-11-25T00:00:00+01:00">
+    <meta property="article:modified_time" content="2026-11-26T00:00:00+01:00">
     <meta property="article:author" content="https://dieghernan.github.io/">
     <meta property="article:tag" content="sf">
     <meta property="article:tag" content="function">
@@ -518,7 +518,7 @@
      </li>
  </ol>
  </nav>
- <div class="chulapaDateSocial"><time class="dt-updated" datetime="2026-11-25T00:00:00+01:00">25 nov 2026</time>
+ <div class="chulapaDateSocial"><time class="dt-updated" datetime="2026-11-26T00:00:00+01:00">26 nov 2026</time>
             <i class="fa fa-redo fa-xs" aria-hidden="true"></i>
             <br>
             <time class="dt-published font-weight-light chulapa-text-line-through" datetime="2019-05-05T00:00:00+02:00">05 may 2019</time>
@@ -577,12 +577,13 @@
 </div>
 </div>
        <div class="e-content"><div role="note" aria-label="Note" class="callout-note">
- <p><strong>Update (25 November 2026)</strong></p>
+ <p><strong>Update (26 November 2026)</strong></p>
  <p>The maps now use <strong>ggplot2</strong> and a shared palette to make the individual
-segments easier to follow.</p>
+segments easier to follow. The function now handles mixed inputs and splits
+each polygon ring separately.</p>
 </div>
-<p>This post introduces a user-defined function for casting <strong>sf</strong> objects of class
-<code class="language-plaintext highlighter-rouge">LINESTRING</code> or <code class="language-plaintext highlighter-rouge">POLYGON</code> into substrings.</p>
+<p>This post introduces a user-defined function that splits <code class="language-plaintext highlighter-rouge">LINESTRING</code> and
+<code class="language-plaintext highlighter-rouge">POLYGON</code> geometries into individual line segments.</p>
 <h2 id="required-r-packages">Required <strong>R</strong> packages</h2>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">rnaturalearth</span><span class="p">)</span><span class="w">
@@ -715,57 +716,51 @@ vertices. Here is the outline of mainland Spain before and after splitting.</p>
 <h2 id="the-function-stdh_cast_substring">The function <code class="language-plaintext highlighter-rouge">stdh_cast_substring()</code></h2>
 <p>Finally, I wrapped the solution into a function and extended it a little bit:</p>
 <ul>
- <li>
-   <p>When the input is not a <code class="language-plaintext highlighter-rouge">LINESTRING</code> or a <code class="language-plaintext highlighter-rouge">POLYGON</code>, it returns an error and
-stops.</p>
- </li>
- <li>
-   <p>The function accepts <strong>sf</strong> objects with several rows or <code class="language-plaintext highlighter-rouge">sfc</code> objects with
-several geometries, and returns the same class as the input. In the case of
-<strong>sf</strong> objects, the input <code class="language-plaintext highlighter-rouge">data.frame</code> is added.</p>
- </li>
- <li>
-   <p>By default, the output is a <code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> geometry. This has the benefit
-that the output has the same number of geometries as the input. This can be
-modified by setting the <code class="language-plaintext highlighter-rouge">to</code> parameter to <code class="language-plaintext highlighter-rouge">LINESTRING</code>, which only casts the
-<code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> object into <code class="language-plaintext highlighter-rouge">LINESTRING</code>.</p>
- </li>
+ <li>The input can be an <code class="language-plaintext highlighter-rouge">sf</code> or <code class="language-plaintext highlighter-rouge">sfc</code> object containing lines, polygons or both.
+The result is returned as the same kind of object.</li>
+ <li>Polygon rings are split independently. This preserves the boundaries of any
+holes and avoids adding segments between rings.</li>
+ <li>The default <code class="language-plaintext highlighter-rouge">MULTILINESTRING</code> output keeps one geometry per input feature.
+Set <code class="language-plaintext highlighter-rouge">to = "LINESTRING"</code> to return one geometry per segment. For an <code class="language-plaintext highlighter-rouge">sf</code> input,
+each segment inherits the attributes of its original feature.</li>
 </ul>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stdh_cast_substring</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MULTILINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="n">ggg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+  </span><span class="n">to</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">match.arg</span><span class="p">(</span><span class="n">to</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"MULTILINESTRING"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">))</span><span class="w">
+  </span><span class="n">geometry</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
 
-  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">unique</span><span class="p">(</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">ggg</span><span class="p">))</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"POLYGON"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">stop</span><span class="p">(</span><span class="s2">"Input should be LINESTRING or POLYGON"</span><span class="p">)</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nf">all</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">st_geometry_type</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">,</span><span class="w"> </span><span class="s2">"POLYGON"</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">stop</span><span class="p">(</span><span class="s2">"Input must contain only LINESTRING or POLYGON geometries."</span><span class="p">,</span><span class="w"> </span><span class="n">call.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
   </span><span class="p">}</span><span class="w">
-  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="nf">length</span><span class="p">(</span><span class="n">st_geometry</span><span class="p">(</span><span class="n">ggg</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">sub</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w">
-    </span><span class="n">geom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="w">
-      </span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">sub</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">])</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w">
-      </span><span class="k">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="n">rbind</span><span class="p">(</span><span class="w">
-          </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">sub</span><span class="p">)[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">]),</span><span class="w">
-          </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">st_coordinates</span><span class="p">(</span><span class="n">sub</span><span class="p">)[</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">])</span><span class="w">
-        </span><span class="p">)</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-      </span><span class="n">st_multilinestring</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
-      </span><span class="n">st_sfc</span><span class="p">()</span><span class="w">
 
-    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geom</span><span class="w">
+  </span><span class="n">pieces</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">parts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inherits</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="w"> </span><span class="s2">"POLYGON"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nf">unclass</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span><span class="w">
     </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rbind</span><span class="p">(</span><span class="n">endgeom</span><span class="p">,</span><span class="w"> </span><span class="n">geom</span><span class="p">)</span><span class="w">
+      </span><span class="nf">list</span><span class="p">(</span><span class="nf">unclass</span><span class="p">(</span><span class="n">feature</span><span class="p">))</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-  </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">endgeom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_sfc</span><span class="p">(</span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">st_crs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w">
-  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nf">class</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">st_set_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">endgeom</span><span class="p">)</span><span class="w">
+
+    </span><span class="n">segments</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">parts</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">part</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">lapply</span><span class="p">(</span><span class="nf">seq_len</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="m">0L</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">part</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1L</span><span class="p">)),</span><span class="w"> </span><span class="err">\</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="n">part</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1L</span><span class="p">),</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">drop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">]</span><span class="w">
+      </span><span class="p">})</span><span class="w">
+    </span><span class="p">})</span><span class="w">
+
+    </span><span class="n">sf</span><span class="o">::</span><span class="n">st_multilinestring</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span><span class="w"> </span><span class="n">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">class</span><span class="p">(</span><span class="n">feature</span><span class="p">)[</span><span class="m">1</span><span class="p">])</span><span class="w">
+  </span><span class="p">})</span><span class="w">
+
+  </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_sfc</span><span class="p">(</span><span class="w">
+    </span><span class="n">pieces</span><span class="p">,</span><span class="w">
+    </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_crs</span><span class="p">(</span><span class="n">geometry</span><span class="p">),</span><span class="w">
+    </span><span class="n">precision</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_precision</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inherits</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s2">"sf"</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_set_geometry</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">)</span><span class="w">
   </span><span class="p">}</span><span class="w">
 
   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">endgeom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">endgeom</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">st_cast</span><span class="p">(</span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
+    </span><span class="n">result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">sf</span><span class="o">::</span><span class="n">st_cast</span><span class="p">(</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="s2">"LINESTRING"</span><span class="p">)</span><span class="w">
   </span><span class="p">}</span><span class="w">
-  </span><span class="nf">return</span><span class="p">(</span><span class="n">endgeom</span><span class="p">)</span><span class="w">
+  </span><span class="n">result</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 <p>The function could be improved in terms of performance. Given that it works at
@@ -796,7 +791,7 @@ the coordinate level, high-resolution objects introduce some delay.</p>
  </thead>
  <tbody>
    <tr>
-     <td style="text-align: left">0.1483591 secs</td>
+     <td style="text-align: left">0.0363331 secs</td>
    </tr>
  </tbody>
 </table>
@@ -815,7 +810,7 @@ the coordinate level, high-resolution objects introduce some delay.</p>
  </thead>
  <tbody>
    <tr>
-     <td style="text-align: left">4.732829 secs</td>
+     <td style="text-align: left">0.1671259 secs</td>
    </tr>
  </tbody>
 </table>
@@ -835,9 +830,9 @@ the coordinate level, high-resolution objects introduce some delay.</p>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20190505_benchmarkfunction-1.webp" alt="Map of South America with country boundaries split into short segments, illustrated with alternating colors." width="100%" /></p>
 <p>There is a difference in performance: <code class="language-plaintext highlighter-rouge">test100</code> has
 15 polygons decomposed into
-914 substrings, while
+914 segments, while
 <code class="language-plaintext highlighter-rouge">test50</code> has 80 polygons decomposed into
-8,414 substrings. The
+8,414 segments. The
 higher-resolution outlines take longer to split because they contain more
 vertices.</p>
 </div><section class="post-citation mt-5 border-left border-secondary pl-3 small" lang="en" aria-labelledby="chulapa-citation-label">

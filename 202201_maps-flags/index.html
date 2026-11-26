@@ -589,16 +589,14 @@ when I added some new functions to the <strong>cartography</strong> package, now
 the <a href="https://cran.r-project.org/package=mapsf"><strong>mapsf</strong></a> package.</p>
 <p>With <strong>rasterpic</strong>, we now have an alternative tool for creating maps using
 images, and this quick post shows you how to do it.</p>
-<p>I will replicate the Africa map presented in my previous plot, but this time I
-will use newer packages, such as
-<a href="https://cran.r-project.org/package=giscoR"><strong>giscoR</strong></a>, and the development
-version of <a href="https://github.com/paleolimbot/ggspatial/pull/92"><strong>ggspatial</strong></a>
-(not released yet), which adds support for <code class="language-plaintext highlighter-rouge">SpatRaster</code> objects in <strong>ggplot2</strong>.
+<p>I will recreate the map of Africa from the earlier post using
+<a href="https://cran.r-project.org/package=giscoR"><strong>giscoR</strong></a> and <strong>ggspatial</strong>.
+Use <a href="https://paleolimbot.github.io/ggspatial/news/index.html#ggspatial-116"><strong>ggspatial</strong> 1.1.6 or later</a>
+to plot <code class="language-plaintext highlighter-rouge">SpatRaster</code> objects in <strong>ggplot2</strong>.
 The flags come from <a href="https://github.com/hampusborgos/country-flags">country-flags</a>.
 We download the 1000-pixel-wide PNGs from version 1.2.10 of
 <code class="language-plaintext highlighter-rouge">svg-country-flags</code> via jsDelivr.</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Development version of ggspatial</span><span class="w">
-</span><span class="c1"># devtools::install_github("paleolimbot/ggspatial")</span><span class="w">
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Requires ggspatial 1.1.6 or later.</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggspatial</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">giscoR</span><span class="p">)</span><span class="w">

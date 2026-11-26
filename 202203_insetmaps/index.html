@@ -587,10 +587,10 @@ in a corner that may provide additional context to the overall map. It is also
 useful for representing spatial units that may form part of a country but whose
 geographical location would result in an imperfect visualization, or for
 including small units that would otherwise not be shown on the map.</p>
-<p>I have already covered this <a href="https://dieghernan.github.io//201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code>
-function</a>, but this time I show
-how to produce these insets using the <strong>ggplot2</strong> and <strong>tmap</strong> packages. In
-short: use the <strong>cowplot</strong> package.</p>
+<p>I have already covered this <a href="https://dieghernan.github.io/201911_QuickR/">using the base <code class="language-plaintext highlighter-rouge">plot()</code>
+function</a>. Here I use <strong>cowplot</strong>
+with <strong>ggplot2</strong> and <strong>tmap</strong> 3.x, then show how to add insets directly in
+<strong>tmap</strong> 4.x and <strong>mapsf</strong>.</p>
 <h2 id="test-case-canary-islands-as-an-inset">Test case: Canary Islands as an inset</h2>
 <p>In this example, I create a map of Spain using <strong>mapSpain</strong> and an inset for the
 Canary Islands.</p>
@@ -785,18 +785,13 @@ objects:</p>
  <p><strong>Update (25 November 2026)</strong></p>
  <p><strong>tmap</strong> 4.x now includes native support for inset maps via
 <a href="https://r-tmap.github.io/tmap/reference/tm_inset.html"><code class="language-plaintext highlighter-rouge">tm_inset()</code></a> and
-<a href="https://r-tmap.github.io/tmap/reference/tm_minimap.html"><code class="language-plaintext highlighter-rouge">tm_minimap()</code></a>. See 
+<a href="https://r-tmap.github.io/tmap/reference/tm_minimap.html"><code class="language-plaintext highlighter-rouge">tm_minimap()</code></a>. See
 also the <a href="https://r-tmap.github.io/tmap/articles/adv_inset_maps">vignette on inset maps and
 minimaps</a>.</p>
- <p>The <code class="language-plaintext highlighter-rouge">tmap_grob()</code> + <strong>cowplot</strong> method shown here remains valid, but is no
-longer the recommended approach, please have a look at the <a href="#update-tmap-4x">new section for 
-<strong>tmap</strong> 4.x</a>.</p>
+ <p>For new work, see the <a href="https://dieghernan.github.io/202203_insetmaps/#update-tmap-4x"><strong>tmap</strong> 4.x example</a>.</p>
 </div>
-<p>We can follow a similar approach with <strong>tmap</strong>. In version 3.x.x (there is a new
-<a href="https://github.com/r-tmap/tmap/issues/599">revamped version under
-development</a>), we can use
-<a href="https://github.com/r-tmap/tmap/issues/541"><code class="language-plaintext highlighter-rouge">tmap_grob()</code></a> to convert the <code class="language-plaintext highlighter-rouge">tmap</code>
-objects to the objects that <strong>cowplot</strong> can handle.</p>
+<p>In <strong>tmap</strong> 3.x, <code class="language-plaintext highlighter-rouge">tmap_grob()</code> converts each map into a graphical object that
+<strong>cowplot</strong> can combine with the other map.</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tmap</span><span class="p">)</span><span class="w">
 
 </span><span class="n">main_tmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tm_shape</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -864,7 +859,7 @@ applied to <strong>ggplot2</strong> objects.</p>
     </span><span class="n">bg.color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">background</span><span class="w">
   </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">tm_title</span><span class="p">(</span><span class="s2">"Inset map with tmap 4.x"</span><span class="p">,</span><span class="w">
-    </span><span class="n">fontfamily</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="w">
+    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.65</span><span class="p">,</span><span class="w"> </span><span class="n">fontfamily</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_title</span><span class="p">,</span><span class="w"> </span><span class="n">fontface</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="w">
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap_4-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left using tmap 4.x." width="100%" /></p>
