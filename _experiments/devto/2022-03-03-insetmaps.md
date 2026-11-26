@@ -93,7 +93,7 @@ ggplot(island) +
 
 So that was easy! Just a couple of maps using **ggplot2**. Let's start mixing and matching!
 
-## On **ggplot2**
+## **ggplot2**
 
 We have already created two quick maps with **ggplot2**. Now, to produce our map with insets we will:
 
@@ -224,7 +224,7 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot_nonsense-1.webp" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" />
 
-## On **tmap**
+## **tmap** 3.x
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
 
@@ -232,7 +232,7 @@ ggdraw() +
 
 **tmap** 4.x now includes native support for inset maps via [`tm_inset()`](https://r-tmap.github.io/tmap/reference/tm_inset.html) and [`tm_minimap()`](https://r-tmap.github.io/tmap/reference/tm_minimap.html). See also the [vignette on inset maps and minimaps](https://r-tmap.github.io/tmap/articles/adv_inset_maps).
 
-The `tmap_grob()` + **cowplot** method shown here remains valid, but is no longer the recommended approach, please have a look to the [new section for **tmap** 4.x](#update-on-tmap-4x).
+The `tmap_grob()` + **cowplot** method shown here remains valid, but is no longer the recommended approach, please have a look at the [new section for **tmap** 4.x](#update-tmap-4x).
 
 </div>
 
@@ -286,7 +286,7 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" />
 
-### Update: on **tmap** 4.x
+### Update: **tmap** 4.x
 
 On **tmap** 4.x use `tm_inset()`:
 
@@ -319,7 +319,7 @@ tm_shape(main) +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap_4-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left using tmap 4.x." width="100%" />
 
-## Update: on **mapsf**
+## Update: **mapsf**
 
 [Timothée Giraud](https://rgeomatic.hypotheses.org/) (AKA [@rgeomatic](https://twitter.com/rgeomatic)), the developer of **mapsf**, also shared how to create inset maps using that package:
 
