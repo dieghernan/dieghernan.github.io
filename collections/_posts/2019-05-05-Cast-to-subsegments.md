@@ -5,7 +5,7 @@ series:
 title: "Cast a line to subsegments in <strong>R</strong>"
 excerpt: "Split a line into its individual segments with a small sf function in R."
 subtitle: "User-defined function using the <strong>sf</strong> package"
-last_modified_at: 2026-11-25
+last_modified_at: 2026-11-26
 tags:
   - sf
   - function
@@ -33,15 +33,16 @@ description: >-
 
 <div role="note" aria-label="Note" class="callout-note" markdown="1">
 
-**Update (25 November 2026)**
+**Update (26 November 2026)**
 
 The maps now use **ggplot2** and a shared palette to make the individual
-segments easier to follow.
+segments easier to follow. The function now handles mixed inputs and splits
+each polygon ring separately.
 
 </div>
 
-This post introduces a user-defined function for casting **sf** objects of class
-`LINESTRING` or `POLYGON` into substrings.
+This post introduces a user-defined function that splits `LINESTRING` and
+`POLYGON` geometries into individual line segments.
 
 
 
@@ -142,6 +143,8 @@ ggplot(italy_stages) +
 What I missed when using `st_cast()` was the possibility of breaking
 `LINESTRING` objects into subsegments:
 
+
+
 <img src="https://dieghernan.github.io/assets/img/blog/20190505_italycastsub-1.webp" alt="Outline of Italy split into short line segments, with alternating colors distinguishing adjacent segments." width="100%" />
 
 {% include snippets/spotify.html id="4aVuWgvD0X63hcOCnZtNFA" title="Hold the
@@ -195,55 +198,53 @@ ggplot(spain_stages) +
 
 Finally, I wrapped the solution into a function and extended it a little bit:
 
-- When the input is not a `LINESTRING` or a `POLYGON`, it returns an error and
-  stops.
-
-- The function accepts **sf** objects with several rows or `sfc` objects with
-  several geometries, and returns the same class as the input. In the case of
-  **sf** objects, the input `data.frame` is added.
-
-- By default, the output is a `MULTILINESTRING` geometry. This has the benefit
-  that the output has the same number of geometries as the input. This can be
-  modified by setting the `to` parameter to `LINESTRING`, which only casts the
-  `MULTILINESTRING` object into `LINESTRING`.
+- The input can be an `sf` or `sfc` object containing lines, polygons or both.
+  The result is returned as the same kind of object.
+- Polygon rings are split independently. This preserves the boundaries of any
+  holes and avoids adding segments between rings.
+- The default `MULTILINESTRING` output keeps one geometry per input feature.
+  Set `to = "LINESTRING"` to return one geometry per segment. For an `sf` input,
+  each segment inherits the attributes of its original feature.
 
 
 ``` r
 stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
-  ggg <- st_geometry(x)
+  to <- match.arg(to, c("MULTILINESTRING", "LINESTRING"))
+  geometry <- sf::st_geometry(x)
 
-  if (!unique(st_geometry_type(ggg)) %in% c("POLYGON", "LINESTRING")) {
-    stop("Input should be LINESTRING or POLYGON")
+  if (!all(sf::st_geometry_type(geometry) %in% c("LINESTRING", "POLYGON"))) {
+    stop("Input must contain only LINESTRING or POLYGON geometries.", call. = FALSE)
   }
-  for (k in 1:length(st_geometry(ggg))) {
-    sub <- ggg[k]
-    geom <- lapply(
-      1:(length(st_coordinates(sub)[, 1]) - 1),
-      function(i) {
-        rbind(
-          as.numeric(st_coordinates(sub)[i, 1:2]),
-          as.numeric(st_coordinates(sub)[i + 1, 1:2])
-        )
-      }
-    ) %>%
-      st_multilinestring() %>%
-      st_sfc()
 
-    if (k == 1) {
-      endgeom <- geom
+  pieces <- lapply(geometry, function(feature) {
+    parts <- if (inherits(feature, "POLYGON")) {
+      unclass(feature)
     } else {
-      endgeom <- rbind(endgeom, geom)
+      list(unclass(feature))
     }
-  }
-  endgeom <- endgeom %>% st_sfc(crs = st_crs(x))
-  if (class(x)[1] == "sf") {
-    endgeom <- st_set_geometry(x, endgeom)
+
+    segments <- lapply(parts, function(part) {
+      lapply(seq_len(max(0L, nrow(part) - 1L)), \(i) {
+        part[c(i, i + 1L), , drop = FALSE]
+      })
+    })
+
+    sf::st_multilinestring(unlist(segments, recursive = FALSE), dim = class(feature)[1])
+  })
+
+  result <- sf::st_sfc(
+    pieces,
+    crs = sf::st_crs(geometry),
+    precision = sf::st_precision(geometry)
+  )
+  if (inherits(x, "sf")) {
+    result <- sf::st_set_geometry(x, result)
   }
 
   if (to == "LINESTRING") {
-    endgeom <- endgeom %>% st_cast("LINESTRING")
+    result <- sf::st_cast(result, "LINESTRING")
   }
-  return(endgeom)
+  result
 }
 ```
 
@@ -275,7 +276,7 @@ knitr::kable(end - init, format = "markdown", col.names = "Computation time")
 
 |Computation time |
 |:----------------|
-|0.1483591 secs   |
+|0.0363331 secs   |
 
 
 
@@ -292,7 +293,7 @@ knitr::kable(end - init, format = "markdown", col.names = "Computation time")
 
 |Computation time |
 |:----------------|
-|4.732829 secs    |
+|0.1671259 secs   |
 
 
 
@@ -315,8 +316,8 @@ ggplot() +
 
 There is a difference in performance: `test100` has
 15 polygons decomposed into
-914 substrings, while
+914 segments, while
 `test50` has 80 polygons decomposed into
-8,414 substrings. The
+8,414 segments. The
 higher-resolution outlines take longer to split because they contain more
 vertices.

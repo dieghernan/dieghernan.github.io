@@ -86,11 +86,10 @@ the [**mapsf**](https://cran.r-project.org/package=mapsf) package.
 With **rasterpic**, we now have an alternative tool for creating maps using
 images, and this quick post shows you how to do it.
 
-I will replicate the Africa map presented in my previous plot, but this time I
-will use newer packages, such as
-[**giscoR**](https://cran.r-project.org/package=giscoR), and the development
-version of [**ggspatial**](https://github.com/paleolimbot/ggspatial/pull/92)
-(not released yet), which adds support for `SpatRaster` objects in **ggplot2**.
+I will recreate the map of Africa from the earlier post using
+[**giscoR**](https://cran.r-project.org/package=giscoR) and **ggspatial**.
+Use [**ggspatial** 1.1.6 or later](https://paleolimbot.github.io/ggspatial/news/index.html#ggspatial-116)
+to plot `SpatRaster` objects in **ggplot2**.
 The flags come from [country-flags](https://github.com/hampusborgos/country-flags).
 We download the 1000-pixel-wide PNGs from version 1.2.10 of
 `svg-country-flags` via jsDelivr.
@@ -101,8 +100,7 @@ We download the 1000-pixel-wide PNGs from version 1.2.10 of
 #| fig-alt: >-
 #|   Map of Africa with national borders and neighboring countries shown for
 #|   context.
-# Development version of ggspatial
-# devtools::install_github("paleolimbot/ggspatial")
+# Requires ggspatial 1.1.6 or later.
 library(ggspatial)
 library(ggplot2)
 library(giscoR)

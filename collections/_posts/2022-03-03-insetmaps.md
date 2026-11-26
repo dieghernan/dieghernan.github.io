@@ -57,9 +57,9 @@ geographical location would result in an imperfect visualization, or for
 including small units that would otherwise not be shown on the map.
 
 I have already covered this [using the base `plot()`
-function](https://dieghernan.github.io//201911_QuickR/), but this time I show
-how to produce these insets using the **ggplot2** and **tmap** packages. In
-short: use the **cowplot** package.
+function](https://dieghernan.github.io/201911_QuickR/). Here I use **cowplot**
+with **ggplot2** and **tmap** 3.x, then show how to add insets directly in
+**tmap** 4.x and **mapsf**.
 
 ## Test case: Canary Islands as an inset
 
@@ -288,21 +288,16 @@ ggdraw() +
 
 **tmap** 4.x now includes native support for inset maps via
 [`tm_inset()`](https://r-tmap.github.io/tmap/reference/tm_inset.html) and
-[`tm_minimap()`](https://r-tmap.github.io/tmap/reference/tm_minimap.html). See 
+[`tm_minimap()`](https://r-tmap.github.io/tmap/reference/tm_minimap.html). See
 also the [vignette on inset maps and
 minimaps](https://r-tmap.github.io/tmap/articles/adv_inset_maps).
 
-The `tmap_grob()` + **cowplot** method shown here remains valid, but is no
-longer the recommended approach, please have a look at the [new section for 
-**tmap** 4.x](#update-tmap-4x).
+For new work, see the [**tmap** 4.x example](https://dieghernan.github.io/202203_insetmaps/#update-tmap-4x).
 
 </div>
 
-We can follow a similar approach with **tmap**. In version 3.x.x (there is a new
-[revamped version under
-development](https://github.com/r-tmap/tmap/issues/599)), we can use
-[`tmap_grob()`](https://github.com/r-tmap/tmap/issues/541) to convert the `tmap`
-objects to the objects that **cowplot** can handle.
+In **tmap** 3.x, `tmap_grob()` converts each map into a graphical object that
+**cowplot** can combine with the other map.
 
 
 ``` r
@@ -357,7 +352,7 @@ ggdraw() +
 
 <img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" />
 
-### Update: **tmap** 4.x
+### Update: **tmap** 4.x {#update-tmap-4x}
 
 On **tmap** 4.x use `tm_inset()`:
 
@@ -385,7 +380,7 @@ tm_shape(main) +
     bg.color = background
   ) +
   tm_title("Inset map with tmap 4.x",
-    fontfamily = map_title, fontface = "bold"
+    size = 1.65, fontfamily = map_title, fontface = "bold"
   )
 ```
 

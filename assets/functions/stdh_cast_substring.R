@@ -1,33 +1,44 @@
 stdh_cast_substring <- function(x, to = "MULTILINESTRING") {
-  ggg <- st_geometry(x)
+  to <- match.arg(to, c("MULTILINESTRING", "LINESTRING"))
+  geometry <- sf::st_geometry(x)
 
-  if (!unique(st_geometry_type(ggg)) %in% c("POLYGON", "LINESTRING")) {
-    stop("Input should be  LINESTRING or POLYGON")
+  if (!all(sf::st_geometry_type(geometry) %in% c("LINESTRING", "POLYGON"))) {
+    stop(
+      "Input must contain only LINESTRING or POLYGON geometries.",
+      call. = FALSE
+    )
   }
-  for (k in 1:length(st_geometry(ggg))) {
-    sub <- ggg[k]
-    geom <- lapply(1:(length(st_coordinates(sub)[, 1]) - 1), function(i) {
-      rbind(
-        as.numeric(st_coordinates(sub)[i, 1:2]),
-        as.numeric(st_coordinates(sub)[i + 1, 1:2])
-      )
-    }) %>%
-      st_multilinestring() %>%
-      st_sfc()
 
-    if (k == 1) {
-      endgeom <- geom
+  pieces <- lapply(geometry, function(feature) {
+    parts <- if (inherits(feature, "POLYGON")) {
+      unclass(feature)
     } else {
-      endgeom <- rbind(endgeom, geom)
+      list(unclass(feature))
     }
-  }
-  endgeom <- endgeom %>% st_sfc(crs = st_crs(x))
-  if (class(x)[1] == "sf") {
-    endgeom <- st_set_geometry(x, endgeom)
+
+    segments <- lapply(parts, function(part) {
+      lapply(seq_len(max(0L, nrow(part) - 1L)), \(i) {
+        part[c(i, i + 1L), , drop = FALSE]
+      })
+    })
+
+    sf::st_multilinestring(
+      unlist(segments, recursive = FALSE),
+      dim = class(feature)[1]
+    )
+  })
+
+  result <- sf::st_sfc(
+    pieces,
+    crs = sf::st_crs(geometry),
+    precision = sf::st_precision(geometry)
+  )
+  if (inherits(x, "sf")) {
+    result <- sf::st_set_geometry(x, result)
   }
 
   if (to == "LINESTRING") {
-    endgeom <- endgeom %>% st_cast("LINESTRING")
+    result <- sf::st_cast(result, "LINESTRING")
   }
-  return(endgeom)
+  result
 }

@@ -218,10 +218,8 @@ nrow(dem)
 tidyterra::autoplot(dem)
 ```
 
-We already have our elevation raster. Now the next step is to adjust the number
-of rows of our raster to a lower number. We can then aggregate the raster (i.e.
-reduce the number of cells or increase their size) using a scaling factor that
-would reduce the number of rows to our desired target (in this case 90 rows):
+Next, aggregate the elevation raster into larger cells. We aim for about
+90 rows so that the ridges remain distinct.
 
 ```{r}
 #| label: 20220501_andalucia_dem_agg
@@ -239,8 +237,8 @@ nrow(dem_agg)
 tidyterra::autoplot(dem_agg)
 ```
 
-We can check how the number of rows has decreased. Also, the plot shows that we
-now have fewer cells.
+The aggregated raster has 88 rows. The larger cells still show the broad
+pattern of higher terrain in eastern Andalusia.
 
 Now, we may need to perform additional manipulations on the values of the
 raster:
@@ -353,8 +351,8 @@ other artifacts.
 
 ### Using `geom_density_ridges()`
 
-We can use `geom_density_ridges()` with `stat="identity"` instead of
-`geom_ridgeline()` for creating a similar map:
+We can use `geom_density_ridges()` with `stat = "identity"` to draw a similar
+map with the supplied elevation values.
 
 ```{r}
 #| label: 20220501_andalucia_ridges_dens
@@ -388,8 +386,8 @@ plotted. I found this much more difficult when using `geom_density_ridges()`,
 where the equivalent parameter `rel_min_height` is relative to the overall
 maximum height.
 
-This is the main reason why we replaced the `NA` values with zeros, so those
-parts of the string can be easily removed.
+We replaced the `NA` values outside the land boundary with zeros so that
+`min_height` can suppress those parts of the ridges.
 
 ```{r}
 #| label: 20220501_andalucia_landonly
@@ -417,8 +415,8 @@ ggplot() +
 
 ### With colors
 
-We can apply different colors to the plot. Note that **ggridges** only accepts
-different `aes` by row, not by column:
+To create horizontal bands, group the raster rows by their `y` coordinates and
+assign a color to each band.
 
 ```{r}
 #| label: 20220501_andalucia_colors
