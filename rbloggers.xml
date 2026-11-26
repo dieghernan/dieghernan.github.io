@@ -5732,7 +5732,7 @@ Islands I use REGCAN95 / UTM 28N (&lt;a href=&quot;https://epsg.io/4083&quot;&gt
 &lt;p&gt;So that was easy! Just a couple of maps using &lt;strong&gt;ggplot2&lt;/strong&gt;. Let’s start mixing
 and matching!&lt;/p&gt;
 
-&lt;h2 id=&quot;on-ggplot2&quot;&gt;On &lt;strong&gt;ggplot2&lt;/strong&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;ggplot2&quot;&gt;&lt;strong&gt;ggplot2&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;We have already created two quick maps with &lt;strong&gt;ggplot2&lt;/strong&gt;. Now, to produce our map
 with insets we will:&lt;/p&gt;
@@ -5869,7 +5869,7 @@ objects:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220303_insetggplot_nonsense-1.webp&quot; alt=&quot;Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;on-tmap&quot;&gt;On &lt;strong&gt;tmap&lt;/strong&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;tmap-3x&quot;&gt;&lt;strong&gt;tmap&lt;/strong&gt; 3.x&lt;/h2&gt;
 
 &lt;div role=&quot;note&quot; aria-label=&quot;Note&quot; class=&quot;callout-note&quot;&gt;
 
@@ -5882,7 +5882,7 @@ also the &lt;a href=&quot;https://r-tmap.github.io/tmap/articles/adv_inset_maps&
 minimaps&lt;/a&gt;.&lt;/p&gt;
 
   &lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tmap_grob()&lt;/code&gt; + &lt;strong&gt;cowplot&lt;/strong&gt; method shown here remains valid, but is no
-longer the recommended approach, please have a look to the &lt;a href=&quot;#update-on-tmap-4x&quot;&gt;new section for 
+longer the recommended approach, please have a look at the &lt;a href=&quot;#update-tmap-4x&quot;&gt;new section for 
 &lt;strong&gt;tmap&lt;/strong&gt; 4.x&lt;/a&gt;.&lt;/p&gt;
 
 &lt;/div&gt;
@@ -5940,7 +5940,7 @@ applied to &lt;strong&gt;ggplot2&lt;/strong&gt; objects.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp&quot; alt=&quot;Map of Spain with regional boundaries and a Canary Islands inset at the lower left.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;update-on-tmap-4x&quot;&gt;Update: on &lt;strong&gt;tmap&lt;/strong&gt; 4.x&lt;/h3&gt;
+&lt;h3 id=&quot;update-tmap-4x&quot;&gt;Update: &lt;strong&gt;tmap&lt;/strong&gt; 4.x&lt;/h3&gt;
 
 &lt;p&gt;On &lt;strong&gt;tmap&lt;/strong&gt; 4.x use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tm_inset()&lt;/code&gt;:&lt;/p&gt;
 
@@ -5972,7 +5972,7 @@ applied to &lt;strong&gt;ggplot2&lt;/strong&gt; objects.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://dieghernan.github.io/assets/img/blog/20220303_insettmap_4-1.webp&quot; alt=&quot;Map of Spain with regional boundaries and a Canary Islands inset at the lower left using tmap 4.x.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;update-on-mapsf&quot;&gt;Update: on &lt;strong&gt;mapsf&lt;/strong&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;update-mapsf&quot;&gt;Update: &lt;strong&gt;mapsf&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://rgeomatic.hypotheses.org/&quot;&gt;Timothée Giraud&lt;/a&gt; (AKA
 &lt;a href=&quot;https://twitter.com/rgeomatic&quot;&gt;@rgeomatic&lt;/a&gt;), the developer of &lt;strong&gt;mapsf&lt;/strong&gt;, also

@@ -558,7 +558,7 @@
 		</p>
 		<nav class="navbar-nav px-3 my-auto" aria-label="Sidebar table of contents">
 		 <p class="mb-2"><a class="nav-link font-weight-bold lead" href="#">Insets with <strong>ggplot2</strong> and <strong>tmap</strong> - and <strong>mapsf</strong>!</a></p>
-			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#test-case-canary-islands-as-an-inset" class="nav-link">Test case: Canary Islands as an inset</a></li><li class="nav-item nav d-block"><a href="#on-ggplot2" class="nav-link">On <strong>ggplot2</strong></a></li><li class="nav-item nav d-block"><a href="#on-tmap" class="nav-link">On <strong>tmap</strong></a><ul><li class="nav-item nav d-block"><a href="#update-on-tmap-4x" class="nav-link">Update: on <strong>tmap</strong> 4.x</a></li></ul></li><li class="nav-item nav d-block"><a href="#update-on-mapsf" class="nav-link">Update: on <strong>mapsf</strong></a></li></ul>
+			<ul class="nav flex-column" id="sidetoc"><li class="nav-item nav d-block"><a href="#test-case-canary-islands-as-an-inset" class="nav-link">Test case: Canary Islands as an inset</a></li><li class="nav-item nav d-block"><a href="#ggplot2" class="nav-link"><strong>ggplot2</strong></a></li><li class="nav-item nav d-block"><a href="#tmap-3x" class="nav-link"><strong>tmap</strong> 3.x</a><ul><li class="nav-item nav d-block"><a href="#update-tmap-4x" class="nav-link">Update: <strong>tmap</strong> 4.x</a></li></ul></li><li class="nav-item nav d-block"><a href="#update-mapsf" class="nav-link">Update: <strong>mapsf</strong></a></li></ul>
 		</nav>   
 	</div>
          <div class="chulapa-series-indices chulapa-series-columns-1 small mb-3">
@@ -653,7 +653,7 @@ Islands I use REGCAN95 / UTM 28N (<a href="https://epsg.io/4083">EPSG:4083</a>).
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220303_mainsub-2.webp" alt="Map of the Canary Islands in their local projected coordinate system." width="100%" /></p>
 <p>So that was easy! Just a couple of maps using <strong>ggplot2</strong>. Let’s start mixing
 and matching!</p>
-<h2 id="on-ggplot2">On <strong>ggplot2</strong></h2>
+<h2 id="ggplot2"><strong>ggplot2</strong></h2>
 <p>We have already created two quick maps with <strong>ggplot2</strong>. Now, to produce our map
 with insets we will:</p>
 <ol>
@@ -780,7 +780,7 @@ objects:</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insetggplot_nonsense-1.webp" alt="Scatter plot of penguin body mass against flipper length, colored by species, with an inset histogram of flipper length at the upper left." width="100%" /></p>
-<h2 id="on-tmap">On <strong>tmap</strong></h2>
+<h2 id="tmap-3x"><strong>tmap</strong> 3.x</h2>
 <div role="note" aria-label="Note" class="callout-note">
  <p><strong>Update (25 November 2026)</strong></p>
  <p><strong>tmap</strong> 4.x now includes native support for inset maps via
@@ -789,7 +789,7 @@ objects:</p>
 also the <a href="https://r-tmap.github.io/tmap/articles/adv_inset_maps">vignette on inset maps and
 minimaps</a>.</p>
  <p>The <code class="language-plaintext highlighter-rouge">tmap_grob()</code> + <strong>cowplot</strong> method shown here remains valid, but is no
-longer the recommended approach, please have a look to the <a href="#update-on-tmap-4x">new section for 
+longer the recommended approach, please have a look at the <a href="#update-tmap-4x">new section for 
 <strong>tmap</strong> 4.x</a>.</p>
 </div>
 <p>We can follow a similar approach with <strong>tmap</strong>. In version 3.x.x (there is a new
@@ -840,7 +840,7 @@ applied to <strong>ggplot2</strong> objects.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left." width="100%" /></p>
-<h3 id="update-on-tmap-4x">Update: on <strong>tmap</strong> 4.x</h3>
+<h3 id="update-tmap-4x">Update: <strong>tmap</strong> 4.x</h3>
 <p>On <strong>tmap</strong> 4.x use <code class="language-plaintext highlighter-rouge">tm_inset()</code>:</p>
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sub_tmap_4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tm_shape</span><span class="p">(</span><span class="n">island</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">tm_polygons</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -868,7 +868,7 @@ applied to <strong>ggplot2</strong> objects.</p>
   </span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p><img src="https://dieghernan.github.io/assets/img/blog/20220303_insettmap_4-1.webp" alt="Map of Spain with regional boundaries and a Canary Islands inset at the lower left using tmap 4.x." width="100%" /></p>
-<h2 id="update-on-mapsf">Update: on <strong>mapsf</strong></h2>
+<h2 id="update-mapsf">Update: <strong>mapsf</strong></h2>
 <p><a href="https://rgeomatic.hypotheses.org/">Timothée Giraud</a> (AKA
 <a href="https://twitter.com/rgeomatic">@rgeomatic</a>), the developer of <strong>mapsf</strong>, also
 shared how to create inset maps using that package:</p>
