@@ -107,9 +107,6 @@ circle of 350 km radius at each point. Some projections require us to omit
 circles outside the area shown. The red shapes reveal what happens to the
 remaining circles when we change the projection.
 
-<!-- FIXME: These are finite 350 km buffers, not infinitesimal indicatrices.
-Consider saying so, as they become asymmetric near the poles. -->
-
 
 
 
