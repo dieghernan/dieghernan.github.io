@@ -6,7 +6,7 @@ title: "Never trust a map"
 subtitle: "All of them are dirty liars."
 excerpt: >-
   Some maps lie more than others. Fortunately, we have a lie detector:
-  Tissot’s indicatrices.
+  Tissot's indicatrices.
 description: >-
   Put the same circles on twelve world maps and see what each projection
   does to them.
@@ -17,8 +17,9 @@ og_image_height: 630
 og_image_type: image/webp
 og_image_alt: >-
   A map of the world using the Lambert Conformal Conic projection, with red
-  indicatrices that grow toward the South Pole. The map has been cut off at the
-  60th parallel south, so Antarctica is not shown.
+  indicatrices that grow toward the edges of the fan, most sharply toward the
+  south. The map has been cut off at the 60th parallel south, so Antarctica is
+  not shown.
 tags:
   - maps
   - sf
@@ -42,13 +43,13 @@ output:
 
 All maps lie. Some lie more than others, and some are deliberately designed to
 mislead us. Mark Monmonier even wrote a whole book about it: [*How to Lie with
-Maps*](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html)
+Maps*](https://press.uchicago.edu/ucp/books/book/chicago/H/bo27400568.html).
 
 Take election maps. [Land doesn't vote. People
 do.](https://storymaps.arcgis.com/stories/0e636a652d44484b9457f953994b212b) Yet
 a vast, sparsely populated region can dominate a map, while a densely populated
 city barely gets noticed. [See the same election mapped several
-ways](https://www.esri.com/about/newsroom/arcwatch/explore-a-map-of-election-results)
+ways](https://www.esri.com/about/newsroom/arcwatch/explore-a-map-of-election-results).
 
 Change the color scale or the class breaks on a choropleth and the same data can
 tell a very different story. [See what changing the class breaks
@@ -65,43 +66,15 @@ local angles, at the expense of others.
 
 Fortunately, we have a lie detector.
 
-## Meet Tissot’s indicatrices
+## Meet Tissot's indicatrices
 
 Imagine covering the globe with identical small circles. When you flatten the
 Earth, those circles can change size, shape or both. The area of each resulting
 shape gives us an idea of how much the projection enlarges or shrinks the area
 around that location. Its shape reveals whether the projection stretches more in
-one direction than another.
-
-### A quick technical note
-
-I'll make the maps in **R**. There are two approaches worth knowing about.
-
-- **tissot** uses PROJ to calculate local distortion factors at each point.
-  Those factors describe what happens to infinitesimally small circles and can
-  be used to draw the ellipses.
-- `geom_tissot()` from **crstools** projects geographic buffers of a fixed
-  radius. That gives us a visual approximation we can add as a **ggplot2**
-  layer.
-
-I tried both approaches on all twelve projections. After accounting for the
-local scale in each direction, the maps looked much the same. I'll use
-`geom_tissot()` below to keep the **ggplot2** code short. **tissot** comes in
-handy when we want to report or compare the distortion factors themselves.
-
-For now, I'm more interested in what those distortions look like. Let's put some
-maps to the test.
-
-## Same circles, different maps
-
-We start with a common grid of 99 points in nine rows and eleven columns, with a
-circle of 350 km radius at each point. Some projections require us to omit
-circles outside the area shown. The red shapes reveal what happens to the
-remaining circles when we change the projection.
-
-
-
-
+one direction than another. Nicolas Auguste Tissot formalized this idea in his
+[1881 memoir](https://books.google.com/books?id=a5YOAAAAYAAJ) on map
+projections, and the resulting ellipses carry his name.
 
 ## Three ways to handle distortion
 
@@ -121,7 +94,25 @@ preserve different properties.
   general-purpose world maps and atlases, where the overall view matters.
 
 Dominic Royé discusses these trade-offs in more depth in his [practical guide to
-map projections](https://dominicroye.github.io/blog/map-projections/).
+map projections](https://dominicroye.github.io/blog/map-projections/). For
+the math behind each projection, John P. Snyder's [*Map projections—A working
+manual*](https://doi.org/10.3133/pp1395) remains the classic reference.
+
+Let's put some maps to the test.
+
+## Same circles, different maps
+
+We start with a common grid of 99 points in nine rows and eleven columns, with a
+circle of 350 km radius at each point. Some projections require us to omit
+circles outside the area shown. The red shapes reveal what happens to the
+remaining circles when we change the projection.
+
+<!-- FIXME: These are finite 350 km buffers, not infinitesimal indicatrices.
+Consider saying so, as they become asymmetric near the poles. -->
+
+
+
+
 
 ## Web Mercator
 
@@ -171,11 +162,11 @@ such as Lambert Conformal Conic, are designed for particular regions. Their
 distortions become more pronounced when you map a much larger area.
 </div>
 
-<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Lambert Conformal Conic has a fan-shaped outline, with circular indicatrices that grow larger toward the outer edges of the map." width="100%" />
+<img src="/assets/img/drafts/never-trust-a-map-projection-gallery-1.webp" alt="Twelve world maps in a four-row, three-column grid. Red indicatrices stay nearly round and grow toward the poles in Web Mercator. In Gall-Peters below it, they stretch vertically near the equator and flatten at high latitudes. Lambert Conformal Conic has a fan-shaped outline, with circular indicatrices that grow larger toward the outer edges of the map. Bonne has a heart-shaped outline with sheared ellipses near its edges. Goode homolosine splits the world into lobes. The two perspective views show a globe centered over North Africa, where the circles flatten toward the rim." width="100%" />
 
 The outlines can fool you, too. Compare the two rectangles in the first column.
 In Web Mercator, the circles stay roughly round and grow toward the poles. In
-Gall–Peters, their areas stay roughly constant within the panel. They stretch
+Gall-Peters, their areas stay roughly constant within the panel. They stretch
 vertically near the equator and flatten at high latitudes.
 
 On the second row, compare Robinson with Lambert Conformal Conic. Lambert keeps
@@ -186,11 +177,14 @@ the South Pole, so I cropped this panel at 60° S.
 The third row puts Mollweide and Sinusoidal next to Goode homolosine, which uses
 Sinusoidal near the equator and Mollweide at higher latitudes.
 
+Bonne, on the last row, is equal-area too. Its heart-shaped outline keeps the
+areas but shears the circles into tilted ellipses toward the edges.
+
 Here's a quick guide to the twelve projections, grouped by their properties or
 construction.
 
 - **Conformal pattern.** Web Mercator and Lambert Conformal Conic.
-- **Equal-area.** Equal Earth, Gall–Peters, Mollweide, Sinusoidal, Bonne and
+- **Equal-area.** Equal Earth, Gall-Peters, Mollweide, Sinusoidal, Bonne and
   Goode homolosine.
 - **Compromise.** Winkel Tripel and Robinson.
 - **Perspective views.** Vertical perspective and Orthographic.
@@ -203,7 +197,24 @@ local angles matter, or a compromise projection for an overall view.
 
 {% include snippets/spotify.html id="08o75xMKmGrKny6GsXrNJW" title="Little Lies by Fleetwood Mac on Spotify" %}
 
-## How we drew it
+## How I drew it
+
+I made the maps in **R**. There are two approaches worth knowing about.
+
+- **tissot** uses PROJ to calculate local distortion factors at each point.
+  Those factors describe what happens to infinitesimally small circles and can
+  be used to draw the ellipses.
+- `geom_tissot()` from **crstools** projects geographic buffers of a fixed
+  radius. That gives us a visual approximation we can add as a **ggplot2**
+  layer.
+
+I tried both approaches on all twelve projections. After accounting for the
+local scale in each direction, the maps looked much the same. I used
+`geom_tissot()` to keep the **ggplot2** code short. **tissot** comes in handy
+when we want to report or compare the distortion factors themselves.
+
+<!-- FIXME: Clarify what "after accounting for the local scale in each
+direction" means, or remove it. -->
 
 For more projection examples with **sf** and **ggplot2**, see Nabil-Fareed
 Alikhan's [*Variations on map projections in
@@ -213,8 +224,8 @@ R*](https://happykhan.com/posts/map-projections-in-r).
 
 <summary>Show the R code</summary>
 
-In **R**, we get country boundaries from **giscoR**, build the grid with **sf**
-and draw the maps with **ggplot2** and **crstools**. The setup also loads Inter
+I get country boundaries from **giscoR**, build the grid with **sf** and draw
+the maps with **ggplot2** and **crstools**. The setup also loads Inter
 Tight for the map titles. `draw_map()` handles Goode's cuts and the horizons of
 the two perspective views. It also accepts an optional raster basemap through
 `tile`, which it reprojects and clips to the map outline.
@@ -301,7 +312,7 @@ frame_lcc <- st_linestring(rbind(
   st_cast("POLYGON") |>
   st_sfc(crs = 4326)
 
-# This dataset includes the whole Antarctica in Web Mercator (projected)
+# Web Mercator layer, clipped near 85° N and S, keeps Antarctica whole here
 world <- giscoR::gisco_get_countries(epsg = 3857, resolution = 3)
 graticule <- st_graticule(frame, lon = meridians, lat = parallels)
 
@@ -527,7 +538,7 @@ draw_map("Goode homolosine", tile = world_tile)
 <img src="/assets/img/drafts/never-trust-a-map-goode-imagery-1.webp" alt="Goode homolosine world map with satellite imagery and a grid of red indicatrices. The ellipses are rounder near the center and flatten toward the poles." width="100%" />
 
 Imagery from Esri World Imagery. Source: Esri, Vantor, Earthstar Geographics and
-the GIS User Community. 
+the GIS User Community.
 {: .caption}
 
 </details>
@@ -603,6 +614,7 @@ grid::popViewport()
   Fernández-Avilés & J. M. Montero (Eds.), *Fundamentos de ciencia de datos con
   R* (Chapter 40). McGraw Hill.
   <https://cdr-book.github.io/datos-espaciales.html>
+  <!-- FIXME: Verify chapter authorship and chapter number online. -->
 - Manica, A., Pozzi, A., Padilla-Iglesias, C., Carter, E., Leonardi, M., Fatima,
   A., Pelanek, O., Stephenson, N., Colucci, M., Jud, D., & Gunasekaram, C.
   (2026). *crstools: Tools to work with projections* (Version 1.0.0) [Computer
