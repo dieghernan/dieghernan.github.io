@@ -601,13 +601,10 @@ I made the maps in **R**. There are two approaches worth knowing about.
   radius. That gives us a visual approximation we can add as a **ggplot2**
   layer.
 
-I tried both approaches on all twelve projections. After accounting for the
-local scale in each direction, the maps looked much the same. I used
-`geom_tissot()` to keep the **ggplot2** code short. **tissot** comes in handy
-when we want to report or compare the distortion factors themselves.
-
-<!-- FIXME: Clarify what "after accounting for the local scale in each
-direction" means, or remove it. -->
+I tried both approaches on all twelve projections, and the maps looked much the
+same. I used `geom_tissot()` to keep the **ggplot2** code short. **tissot**
+comes in handy when we want to report or compare the distortion factors
+themselves.
 
 For more projection examples with **sf** and **ggplot2**, see Nabil-Fareed
 Alikhan's [*Variations on map projections in
@@ -704,7 +701,6 @@ print(cover_map, newpage = FALSE)
   Fernández-Avilés & J. M. Montero (Eds.), *Fundamentos de ciencia de datos con
   R* (Chapter 40). McGraw Hill.
   <https://cdr-book.github.io/datos-espaciales.html>
-  <!-- FIXME: Verify chapter authorship and chapter number online. -->
 - Manica, A., Pozzi, A., Padilla-Iglesias, C., Carter, E., Leonardi, M., Fatima,
   A., Pelanek, O., Stephenson, N., Colucci, M., Jud, D., & Gunasekaram, C.
   (2026). *crstools: Tools to work with projections* (Version 1.0.0) [Computer
