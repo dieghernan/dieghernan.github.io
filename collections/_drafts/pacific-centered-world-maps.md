@@ -5,7 +5,7 @@ series:
 title: "How to center a world map on the Pacific"
 subtitle: "One ocean, eight projections"
 excerpt: >-
-  Move the cut to Greenwich, put the Pacific in the middle, and draw
+  Move the cut to Greenwich, put the Pacific in the middle and draw
   the same world in eight different projections with sf and ggplot2.
 description: >-
   Use sf, giscoR and ggplot2 to cut world polygons at a new meridian and
@@ -53,7 +53,7 @@ routes, marine biodiversity or simply a less Europe-centric world.
 I tried this with Robinson in **R**. The middle map shows what happens when you
 change the center and leave the polygons as they are.
 
-<img src="/assets/img/drafts/pacific-centered-world-maps-compare-1.webp" alt="Three Robinson maps. The Greenwich-centered map has the Pacific at the edges. The Pacific-centered map has horizontal stripes before cutting and a clear ocean after cutting." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/drafts/pacific-centered-world-maps-compare-1.webp" alt="Three Robinson maps side by side. The left map is centered on Greenwich and splits the Pacific between its edges. The middle map is centered on the Pacific before cutting. Horizontal stripes of land fill its northern half. The right map is cut first and shows one clear ocean in the middle." width="100%" />
 
 ## Cut first, project second
 
@@ -96,7 +96,7 @@ other centers, it falls inside the map, where the original split in the
 I regroup the pieces by country and use small buffers to close gaps along that
 interior seam in geographic coordinates, while it is still a straight line.
 
-<div class="callout-important" role="note" aria-label="Important" markdown="1">
+<div class="callout-warning" role="note" aria-label="Warning" markdown="1">
 Pass `projection` as a [PROJ
 string](https://proj.org/en/stable/usage/quickstart.html) such as
 `"+proj=robin"`. `project_world()` appends `+lon_0` to that string. An Esri CRS
@@ -107,7 +107,10 @@ code such as `"ESRI:54030"` (World Robinson) won't work in its place.
 ``` r
 project_world <- function(world, projection, lon_0 = 180) {
   crs <- paste0(projection, " +lon_0=", lon_0)
-  parts <- st_sf(source_row = seq_len(nrow(world)), geometry = st_geometry(world)) |>
+  parts <- st_sf(
+    source_row = seq_len(nrow(world)),
+    geometry = st_geometry(world)
+  ) |>
     st_break_antimeridian(lon_0 = lon_0)
 
   projected <- parts |>
@@ -179,7 +182,7 @@ ggplot() +
   )
 ```
 
-<img src="/assets/img/drafts/pacific-centered-world-maps-quick-pacific-1.webp" alt="A Pacific-centered world map using the Robinson projection." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/drafts/pacific-centered-world-maps-quick-pacific-1.webp" alt="A Pacific-centered Robinson world map in the default ggplot2 style. Light gray land with dark outlines sits on a gray panel with white graticule lines. Asia and Oceania are on the left, the Americas on the right and the 180° meridian runs down the middle. No stripes cross the ocean." width="100%" />
 
 <details class="my-4" markdown="1">
 
@@ -293,7 +296,7 @@ maps <- lapply(projections, function(projection) {
 })
 ```
 
-<img src="/assets/img/drafts/pacific-centered-world-maps-gallery-1.webp" alt="Eight Pacific-centered maps in two columns. Web Mercator and Gall–Peters are rectangular, while the other six have curved sides. Greenland looks much larger in Web Mercator than in Equal Earth." width="100%" />
+<img src="https://dieghernan.github.io/assets/img/drafts/pacific-centered-world-maps-gallery-1.webp" alt="Eight Pacific-centered maps in two columns. Web Mercator and Gall–Peters are rectangular, while the other six have curved sides. Greenland looks much larger in Web Mercator than in Equal Earth." width="100%" />
 
 © EuroGeographics for the administrative boundaries
 {: .caption }
@@ -302,10 +305,11 @@ You can move the center again. Try
 `project_world(world, "+proj=robin", lon_0 = -90)` to center the map at 90° W
 and put the cut at 90° E.
 
-**Cut first, project second**. That’s the whole trick.
+**Cut first, project second**. That's the whole trick.
 
 You can change `lon_0` freely. If you run into polygons that break or gaps
 that don't close cleanly, I'd like to see them.
+
 
 
 <!-- No references needed in this post. -->
